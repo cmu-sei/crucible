@@ -1,0 +1,21 @@
+{
+  "ApiUrl": "http://localhost:4300",
+  "OIDCSettings": {
+    "authority": "http://localhost:5000/",
+    "client_id": "s3.player.web",
+    "redirect_uri": "http://localhost:4301/auth-callback",
+    "post_logout_redirect_uri": "http://localhost:4301",
+    "response_type": "id_token token",
+    "scope": "openid profile s3",
+    "automaticSilentRenew": true,
+    "silent_redirect_uri": "http://localhost:4301/auth-callback-silent"
+  },
+  "NotificationsSettings": {
+    "url": "http://localhost:4300/notifications",
+    "number_to_display": 4
+  },
+  "AppTitle": "Crucible",
+  "AppTopBarText": "Crucible",
+  "AppTopBarHexColor": "#b00",
+  "UseLocalAuthStorage": true
+}

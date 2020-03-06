@@ -1,0 +1,19 @@
+# docker-compose up -d
+
+version: '3.2'
+networks:
+  steamfitter-network:
+    driver: bridge
+services:
+  steamfitter-web:
+    container_name:  steamfitter-web
+    image: steamfitter/web
+    ports:
+      - "4401:80"
+    restart: unless-stopped
+    #volumes:
+    #  - ./_config/settings.env.json:/usr/share/nginx/html/assets/config/settings.env.json
+    logging:
+      options:
+        max-size: "100m"
+        max-file: "5"

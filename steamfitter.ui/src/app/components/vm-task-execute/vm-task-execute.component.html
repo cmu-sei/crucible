@@ -1,0 +1,55 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div class="component-container mat-elevation-z8 scroll-container">
+
+  <div fxLayout="row" class="title">
+    <div fxFlex="10" fxLayoutAlign="start center">
+      <button title="Return to Task Status" mat-icon-button (click)="returnToMain()">
+        <mat-icon svgIcon="input_24px"></mat-icon>
+      </button>
+    </div>
+    <div fxFlex="90" fxLayoutAlign="start center">
+      <h4>Create a Dispatcher Task</h4>
+    </div>
+  </div>
+
+  <mat-dialog-content>
+    <mat-vertical-stepper [linear]="isLinear" #stepper (selectionChange)="onTaskStepChange($event)">
+
+      <ng-template matStepperIcon="edit">&#10004;</ng-template>
+      <ng-template matStepperIcon="done">&#10004;</ng-template>
+
+      <mat-step label="Choose Virtual Machines">
+        <div fxLayout="row" class="add-margin">
+          <div fxFlex>
+            <app-vm-list></app-vm-list>
+          </div>
+        </div>
+      </mat-step>
+
+
+      <mat-step label="Select Commands">
+        <div fxLayout="row" fxLayoutAlign="start">
+          <app-commands></app-commands>
+        </div>
+      </mat-step>
+
+
+      <mat-step label="Execute and Results">
+        <div fxLayout="row" fxLayoutAlign="end" class="top-button">
+          <app-execute-results></app-execute-results>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-dialog-content>
+
+</div>
+

@@ -1,0 +1,84 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<app-admin-user-edit fxFlex fxLayoutAlign="center" [hidden]="userToEdit === undefined" [user]="userToEdit" (editComplete)="refreshUsers()"></app-admin-user-edit>
+
+<div [hidden]="userToEdit !== undefined" class="user-list-container mat-elevation-z8">
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="sp-icon">
+        <img height="35" src="../../../assets/img/SP_Icon_User.png" alt="Users">
+        Users
+    </div>    
+    <mat-icon style="transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
+    <mat-form-field style="width: 320px;">
+      <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+    <button *ngIf="filterString != ''" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
+      title="Clear Search">
+      <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+    </button>
+  </div>
+
+  <mat-card *ngIf="isLoading" 
+    style="display: flex; justify-content: center; align-items: center">
+   <mat-progress-spinner 
+     color="primary" 
+     mode="indeterminate">
+   </mat-progress-spinner>
+  </mat-card>
+
+  <mat-accordion>
+    <mat-table #table [dataSource]="userDataSource" matSort>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell fxFlex="30" *matHeaderCellDef mat-sort-header>User Name</mat-header-cell>
+        <mat-cell fxFlex="30" *matCellDef="let element">
+          <button mat-icon-button ngxClipboard [cbContent]="element.id" title="Copy:  {{element.id}}"><mat-icon style="transform:scale(0.85);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+          <div *ngIf="element.name !== null">{{element.name}}</div>
+          <div *ngIf="element.name === null">{{element.id}}</div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="roleName">
+        <mat-header-cell fxFlex="70" *matHeaderCellDef mat-sort-header> Role / Permissions </mat-header-cell>
+        <mat-cell fxFlex="70" *matCellDef="let element; let i = index">
+          <div fxFlex="100">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title style="font-size: small;">
+
+                  <div fxLayout="column">
+                    <div [hidden]="!element.roleId">Role: {{element.roleName}}</div>
+                    <div fxLayout="row">
+                      <div [hidden]="!(element.permissions.length > 0)">
+                        {{permissionsString(element.permissions)}}
+                      </div>
+                    </div>
+                  </div>
+
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <app-roles-permissions-select [user]="element"></app-roles-permissions-select>
+            </mat-expansion-panel>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+  </mat-accordion>
+  <div *ngIf="userDataSource.filteredData.length === 0">No results found</div>
+  <mat-paginator #paginator [pageSize]="defaultPageSize" [pageSizeOptions]="[10, 20, 30]" [showFirstLastButtons]="true"
+    (page)="pageEvent = $event">
+  </mat-paginator>
+</div>

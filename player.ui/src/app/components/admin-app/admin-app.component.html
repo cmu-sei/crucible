@@ -1,0 +1,118 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<mat-sidenav-container class="appcontent-container" autosize>
+  <mat-sidenav class="appbarmenu-container" #sidenav mode="side" [(opened)]="opened">
+    
+    <mat-list class="appitems-container">
+      <mat-list-item class="appslist">
+        <a class="nolink" href="/">
+          <h4>
+            <b>Administration</b>
+          </h4>
+        </a>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="showhand" id="wrapper">
+          <div id="lefticon">
+            <img src="../../../../assets/img/exercise-player.png" alt="Exercises" (click)="adminGotoExercises()">
+          </div>
+    
+          <div id="content" (click)="adminGotoExercises()">{{exercisesText}}</div>
+    
+          <div class="pull-right" id="rightcontext">
+            <button mat-icon-button style="outline: none;" (click)="adminGotoExercises()">
+              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="showhand" id="wrapper">
+          <div id="lefticon">
+            <img class="admin-icon" src="../../../assets/img/SP_Icon_User.png" alt="Users" (click)="adminGotoUsers()">
+          </div>
+    
+          <div id="content" (click)="adminGotoUsers()">{{usersText}}</div>
+    
+          <div class="pull-right" id="rightcontext">
+            <button mat-icon-button style="outline: none;" (click)="adminGotoUsers()">
+              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="showhand" id="wrapper">
+          <div id="lefticon">
+            <img class="admin-icon" src="../../../assets/img/SP_Icon_Intel.png" alt="Users" (click)="adminGotoAppTemplates()">
+          </div>
+    
+          <div id="content" (click)="adminGotoAppTemplates()">{{appTemplatesText}}</div>
+    
+          <div class="pull-right" id="rightcontext">
+            <button mat-icon-button style="outline: none;" (click)="adminGotoAppTemplates()">
+              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="showhand" id="wrapper">
+          <div id="lefticon">
+            <img class="admin-icon" src="../../../assets/img/SP_Icon_Alert.png" alt="Users" (click)="adminGotoRolesPermissions()">
+          </div>
+    
+          <div id="content" (click)="adminGotoRolesPermissions()">{{rolesPermissionsText}}</div>
+    
+          <div class="pull-right" id="rightcontext">
+            <button mat-icon-button style="outline: none;" (click)="adminGotoRolesPermissions()">
+              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <img class="cmu-logo" src="/assets/img/cmu-red-gray.png">
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="bar-height" [ngStyle]="{'background-color': topBarColor}" fxLayout="row" fxLayoutAlign="start center">
+
+      <div fxFlex="30" fxFlexOffset="3" class="title-text"><h4>{{ showStatus }}</h4></div>
+      <div fxFlex="70" fxLayoutAlign="end center">
+        <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
+          <b>{{ username }}</b>
+          <mat-icon style="transform: translateY(-5px);" svgIcon="ic_expand_more_white_24px"></mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false">
+          <button mat-menu-item (click)="GotoMainPage()">Exit</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </div>
+
+    </div>
+
+    <div>
+      
+      <app-admin-exercise-search fxFlex fxLayoutAlign="center" 
+                                 [hidden]="showStatus != exercisesText"></app-admin-exercise-search>
+      
+      <app-admin-user-search fxFlex fxLayoutAlign="center" 
+                             [hidden]="showStatus != usersText"></app-admin-user-search>
+      
+      <app-admin-app-template-search fxFlex fxLayoutAlign="center" 
+                                     [hidden]="showStatus != appTemplatesText"></app-admin-app-template-search>
+      <app-admin-role-permission-search fxFlex fxLayoutAlign="center" 
+                                      [hidden]="showStatus != rolesPermissionsText"></app-admin-role-permission-search>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

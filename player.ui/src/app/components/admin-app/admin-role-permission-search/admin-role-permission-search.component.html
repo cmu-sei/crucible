@@ -1,0 +1,155 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div class="list-container mat-elevation-z8">
+  <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+    <mat-tab label="Roles">
+      <ng-template mat-tab-label>
+        <img class="icon-pad" width="30" src="../../../../assets/img/SP_Icon_User_Rights.png" alt="Roles">
+        Roles
+      </ng-template>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sp-icon">
+            <img width="30" src="../../../../assets/img/SP_Icon_User_Rights.png" alt="Exercises">
+            Roles
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="5">
+          <mat-icon style="transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
+          <mat-form-field style="width: 320px;">
+            <input matInput [(ngModel)]="filterRoleString" (keyup)="applyRoleFilter($event.target.value)" placeholder="Search">
+          </mat-form-field>
+          <button *ngIf="filterRoleString != ''" fxLayoutAlign="start center" mat-icon-button (click)="clearRoleFilter()" style="outline: none;"
+            title="Clear Search">
+            <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+          </button>
+          <div class="button-end">
+              <button mat-stroked-button (click)="addRole()">Add New Role</button>
+          </div>    
+        </div>
+      </div>
+    
+      <mat-table #table [dataSource]="roleDataSource" matSort>
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-button (click)="executeRoleAction('select', element)" style="color: blue;">{{element.name}}</button>
+          </mat-cell>
+        </ng-container>
+        <!-- Description Column -->
+        <ng-container matColumnDef="permissions">
+          <mat-header-cell *matHeaderCellDef> Permissions </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+              <li *ngFor="let permission of element.permissions">{{permission.key}}</li>
+            </ul>
+          </mat-cell>
+        </ng-container>
+        <!-- Action Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon title="Menu">
+                <img style="transform: scaleX(-1);" width="32" src="assets/img/SP_Icon_Collapse.png" />
+              </mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let action of roleActions" (click)="executeRoleAction(action.Value, element)">{{action.Text}}</button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="roleColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: roleColumns;"></mat-row>
+      </mat-table>
+      <div *ngIf="roleDataSource.filteredData.length === 0">No roles found</div>
+    </mat-tab>
+
+
+
+    <mat-tab label="Permissions">
+      <ng-template mat-tab-label>
+        <img class="icon-pad" width="30" src="../../../../assets/img/SP_ICON_Permission.png" alt="Permissions">
+        Permissions
+      </ng-template>
+  
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sp-icon">
+            <img width="30" src="../../../../assets/img/SP_ICON_Permission.png" alt="Exercises">
+            Permissions
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="5">
+          <mat-icon style="transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
+          <mat-form-field style="width: 320px;">
+            <input matInput [(ngModel)]="filterPermissionString" (keyup)="applyPermissionFilter($event.target.value)" placeholder="Search">
+          </mat-form-field>
+          <button *ngIf="filterPermissionString != ''" fxLayoutAlign="start center" mat-icon-button (click)="clearPermissionFilter()" style="outline: none;"
+            title="Clear Search">
+            <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+          </button>
+          <div class="button-end">
+              <button mat-stroked-button (click)="addPermission()">Add New Permission</button>
+          </div>    
+        </div>
+      </div>
+
+      <mat-table #table [dataSource]="permissionDataSource">
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        <!-- Name Column -->
+        <ng-container matColumnDef="key">
+          <mat-header-cell *matHeaderCellDef> Permission </mat-header-cell>
+          <mat-cell *matCellDef="let permission">
+            <label *ngIf="permission.readOnly">{{permission.key}}</label>
+            <button *ngIf="!permission.readOnly" mat-button (click)="executePermissionAction('edit', permission)" style="color: blue;">{{permission.key}}</button>
+          </mat-cell>
+        </ng-container>
+        <!-- Value Column -->
+        <ng-container matColumnDef="value">
+          <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+          <mat-cell *matCellDef="let permission">
+            <div>{{permission.value}}</div>
+          </mat-cell>
+        </ng-container>
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+          <mat-cell *matCellDef="let permission">
+            <div>{{permission.description}}</div>
+          </mat-cell>
+        </ng-container>
+        <!-- Action Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+          <mat-cell *matCellDef="let permission">
+            <label *ngIf="permission.readOnly">Read Only</label>
+            <div *ngIf="!permission.readOnly">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon title="Menu">
+                  <img style="transform: scaleX(-1);" width="32" src="assets/img/SP_Icon_Collapse.png" />
+                </mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let action of permissionActions" (click)="executePermissionAction(action.Value, permission)">{{action.Text}}</button>
+              </mat-menu>
+            </div>
+           </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="permissionColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: permissionColumns;"></mat-row>
+      </mat-table>
+      <div *ngIf="permissionDataSource.filteredData.length === 0">No permissions found</div>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stackstorm.Api.Client", "Stackstorm.Api.Client\Stackstorm.Api.Client.csproj", "{0C850809-F74A-41C3-9C36-E80F0004D444}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stackstorm.Api.Client.Test", "Stackstorm.Api.Client.Test\Stackstorm.Api.Client.Test.csproj", "{9DC4BFB7-336F-47FD-894B-4EC7D808563D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stackstorm.Connector", "Stackstorm.Connector\Stackstorm.Connector.csproj", "{A68AB09D-26AE-4824-A0A0-0F653BE743AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stackstorm.Connector.Test", "Stackstorm.Connector.Test\Stackstorm.Connector.Test.csproj", "{790778B8-5430-4834-9A99-E07065431DD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C850809-F74A-41C3-9C36-E80F0004D444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C850809-F74A-41C3-9C36-E80F0004D444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C850809-F74A-41C3-9C36-E80F0004D444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C850809-F74A-41C3-9C36-E80F0004D444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DC4BFB7-336F-47FD-894B-4EC7D808563D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DC4BFB7-336F-47FD-894B-4EC7D808563D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DC4BFB7-336F-47FD-894B-4EC7D808563D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DC4BFB7-336F-47FD-894B-4EC7D808563D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68AB09D-26AE-4824-A0A0-0F653BE743AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68AB09D-26AE-4824-A0A0-0F653BE743AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68AB09D-26AE-4824-A0A0-0F653BE743AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68AB09D-26AE-4824-A0A0-0F653BE743AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{790778B8-5430-4834-9A99-E07065431DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{790778B8-5430-4834-9A99-E07065431DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{790778B8-5430-4834-9A99-E07065431DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{790778B8-5430-4834-9A99-E07065431DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

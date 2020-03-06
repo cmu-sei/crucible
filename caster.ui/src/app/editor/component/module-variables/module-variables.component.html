@@ -1,0 +1,49 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div>
+  <mat-icon *ngIf="readOnly"class="mdi-24px" fontIcon="mdi-alert-octagon" matTooltip="Read-only because the current file is not in edit mode"></mat-icon>
+  <h1>{{ selectedModule.name }}</h1>
+</div>
+<div style="margin-top: -20px;">{{ selectedModule.path }}</div>
+<div style="margin-bottom: 20px;">{{ selectedModule.description }}</div>
+<mat-form-field>
+  <mat-label>Version</mat-label>
+  <mat-select [(ngModel)]="selectedVersion" name="selectedVersion" (ngModelChange)="setModuleValues()">
+    <mat-option *ngFor="let version of selectedModule.versions" [value]=version>
+      Version {{version.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div fxflex fxLayout="column" style="overflow-y: scroll; height: 400px;">
+  <mat-card>
+    <mat-form-field>
+      <mat-label>Name of this instance</mat-label>
+      <input [disabled]="readOnly" matInput placeholder="Name of this module instance" [(ngModel)]="newName">
+    </mat-form-field>
+  </mat-card>
+  <mat-card *ngFor="let moduleValue of moduleValues">
+    <mat-form-field [hintLabel]="moduleValue.isOptional ? '' : 'Required'">
+      <mat-label>{{moduleValue.name}}</mat-label>
+      <input [disabled]="readOnly" matInput placeholder="{{moduleValue.name}}" [(ngModel)]="moduleValue.value" matTooltip="{{moduleValue.description}}">
+    </mat-form-field>
+  </mat-card>
+</div>
+
+<div>
+  <button mat-button (click)="onClick(true)" [disabled]="readOnly" tabindex="1">
+    <span [matTooltip]="readOnly ? 'Can only submit in edit mode' : null">
+      Submit
+    </span>
+  </button>
+  <button mat-button (click)="onClick(false)" tabIndex="2">Cancel</button>
+<div>
+

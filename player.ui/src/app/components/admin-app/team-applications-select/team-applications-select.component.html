@@ -1,0 +1,64 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div fxLayout="row" fxLayoutAlign="end" class="top-button">
+  <button [hidden]="exerciseApplications === undefined || exerciseApplications.length === 0" mat-stroked-button [matMenuTriggerFor]="teamAppsMenu">Add Application</button>
+  <mat-menu #teamAppsMenu="matMenu">
+    <button mat-menu-item *ngFor="let a of exerciseApplications" (click)="addExerciseAppToTeam(a)">{{a.name}}</button>
+  </mat-menu>
+</div>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let app of applications; let i = index" [expanded]="currentApp !== undefined && app.id === currentApp.id"
+    (opened)="currentApp = app">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <img class="app-icon" src="{{app.icon}}"> {{app.name}}
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div>
+      <div fxLayout="column">
+        <div class="wrap"><b>{{app.url}}</b></div>
+        <mat-divider></mat-divider>
+        Embeddable: <b>{{app.embeddable}}</b>
+        <mat-divider></mat-divider>
+        Load In Background: <b>{{app.loadInBackground}}</b>
+      </div>
+    </div>
+
+    <div fxLayout="row" class="bottom-button">
+      <div fxflex fxLayoutAlign="space-between center">
+        Display order:&nbsp;&nbsp;<b>{{app.displayOrder}}</b>
+        <button [hidden]="app.displayOrder === 0" mat-icon-button title="Move Up" (click)="swapDisplayOrders(app, applications[i-1])">
+          <mat-icon svgIcon="ic_expand_more_black_24px" style="transform: rotate(180deg);"></mat-icon>
+        </button>
+        <button [hidden]="app.displayOrder > 0 " mat-icon-button title="Move Up" style="opacity: 0.3; filter: alpha(opacity=30);">
+          <mat-icon svgIcon="ic_expand_more_black_24px" style="transform: rotate(180deg);"></mat-icon>
+        </button>
+        <button [hidden]="app.displayOrder >= (applications.length - 1)" title="Move Down" mat-icon-button (click)="swapDisplayOrders(app, applications[i+1])">
+          <mat-icon svgIcon="ic_expand_more_black_24px"></mat-icon>
+        </button>
+        <button [hidden]="app.displayOrder < (applications.length - 1)" title="Move Down" mat-icon-button style="opacity: 0.3; filter: alpha(opacity=30);">
+          <mat-icon svgIcon="ic_expand_more_black_24px"></mat-icon>
+        </button>
+      </div>
+      <div fxFlex fxLayoutAlign="end">
+        <button [hidden]="subjectType !== objTypes.Exercise" mat-stroked-button (click)="deleteExerciseApplication(app)">Delete
+          Application
+        </button>
+        <button [hidden]="subjectType !== objTypes.Team" mat-stroked-button (click)="removeApplicationInstanceFromTeam(app)">Remove
+          Application</button>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,38 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div mat-dialog-title>
+  <label>Select the file to mount ...&nbsp;&nbsp;&nbsp;</label>
+  <mat-form-field>
+    <input name="vmSearch" matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+</div>
+<div style="overflow:scroll; height:350px;">
+  <mat-selection-list #selectedIsos>
+    <button mat-button (click)="showTeamIsos = !showTeamIsos;"><b>Team Files &gt;</b></button>
+    <span *ngIf="showTeamIsos">
+        <mat-list-option *ngFor="let iso of filteredTeamIsos" [selected]="iso === selectedIso" (click)=selectThisIso(iso)>
+            <h4 matLine>{{iso.filename}}</h4>
+          </mat-list-option>
+        </span>
+        <mat-divider></mat-divider>
+        <button mat-button (click)="showPublicIsos = !showPublicIsos;"><b>Public Files &gt;</b></button>
+    <span *ngIf="showPublicIsos" >
+      <mat-list-option *ngFor="let iso of filteredPublicIsos" [selected]="iso === selectedIso" (click)=selectThisIso(iso)>
+        <h4 matLine>{{iso.filename}}</h4>
+      </mat-list-option>
+    </span>
+  </mat-selection-list>
+</div>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+  <button mat-stroked-button (click)="close()" tabIndex="4">Cancel</button>
+  <button mat-stroked-button (click)="done()" tabindex="5">Mount</button>
+</mat-dialog-actions>
+

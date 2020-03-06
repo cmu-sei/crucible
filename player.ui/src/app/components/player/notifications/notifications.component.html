@@ -1,0 +1,88 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<mat-expansion-panel class="notifications-container" (opened)="showSystemNotifications = false" (closed)="showSystemNotifications = true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <b *ngIf="showSystemNotifications == false || notification == undefined">Notifications</b>
+      <div *ngIf="showSystemNotifications == true && notification != undefined">
+        <div id="wrapper">
+          <div id="title">
+            <b>Notifications:&nbsp;&nbsp;&nbsp;&nbsp;</b>
+          </div>
+          <div id="time" title="{{notification.broadcastTime | date:'MM/dd/yyyy HH:mm'}}" style="font-size: 100%">
+            <b>{{notification.broadcastTime | date:'HH:mm'}}</b>
+          </div>
+          <div id="from" style="font-size: 100%">
+            {{notification.fromName}}
+          </div>
+          <div id="link">
+            <a *ngIf="notification.link" href="{{notification.link}}" target="_blank" title="Goto:  {{notification.link}}">Open</a>
+          </div>
+          <div id="message">
+            {{notification.text}}
+          </div>
+        </div>
+      </div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div id="historywrapper">
+    <div id="navigation">
+      <div>
+        <button *ngIf="showUp" mat-icon-button (click)="showNotificationPage(1)">
+          <mat-icon svgIcon="ic_expand_more_black_24px" style="transform: rotate(180deg);"></mat-icon>
+        </button>
+        <button *ngIf="!showUp" mat-icon-button style="opacity: 0.3; filter: alpha(opacity=30);">
+            <mat-icon svgIcon="ic_expand_more_black_24px" style="transform: rotate(180deg);"></mat-icon>
+        </button>  
+      </div>
+      <div>
+        <button *ngIf="showDown" mat-icon-button (click)="showNotificationPage(-1)">
+          <mat-icon svgIcon="ic_expand_more_black_24px"></mat-icon>
+        </button>
+        <button *ngIf="!showDown" mat-icon-button style="opacity: 0.3; filter: alpha(opacity=30);">
+            <mat-icon svgIcon="ic_expand_more_black_24px"></mat-icon>
+          </button>
+        </div>
+    </div>
+    <div id="history">
+      <mat-list *ngIf="notificationsHistory != undefined" style="min-width: 500px; width: 100%;">
+        <mat-list-item *ngFor="let notif of notificationsHistory | slice:startIndex:endIndex">
+          <div id="wrapper">
+            <div id="time" title="{{notif.broadcastTime | date:'MM/dd/yyyy HH:mm'}}">
+              <b>{{notif.broadcastTime | date:'HH:mm'}}</b>
+            </div>
+            <div id="from">
+              {{notif.fromName}}
+            </div>
+            <div id="link">
+              <a *ngIf="notif.link" href="{{notif.link}}" target="_blank" title="Goto:  {{notif.link}}">Open</a>
+            </div>
+            <div id="message">
+              {{notif.text}}
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+  <div *ngIf="showSendMessage" class="send-message">
+    <form #notificationForm="ngForm" (ngSubmit)="sendMessage()">
+      <mat-form-field class="input-message">
+        <input matInput #msgtext type="text" placeholder="{{sendMessagePlaceholder}}" name="messageToSend" [(ngModel)]="messageToSend">
+        <mat-hint align="end">{{msgtext.value.length}} / 225</mat-hint>
+        <button mat-button type="submit" matSuffix mat-icon-button aria-label="Send" [disabled]="!notificationForm.form.valid">
+          <mat-icon>Send</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </div>
+</mat-expansion-panel>

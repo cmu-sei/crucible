@@ -1,0 +1,76 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <div class="sp-icon">
+    <img height="35" src="../../../assets/svg-icons/playlist_play-24px.svg" alt="Sessions">
+  </div>
+  <mat-icon style="margin-left: 50px; transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
+  <mat-form-field style="width: 320px;">
+    <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+  <div style="width: 50px;">
+    <button *ngIf="filterString != ''" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
+      title="Clear Search">
+      <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+    </button>
+  </div>
+  <div>
+    <button mat-stroked-button (click)="addNewSession()">Add Session</button>
+  </div>
+  <div style="width: 70px; margin-left: 40px;">
+    <input type="checkbox" [(ngModel)]="showActive" (change)="filterAndSort()"><span style="font-size: 0.8em;">Active</span><br/>
+    <input type="checkbox" [(ngModel)]="showEnded" (change)="filterAndSort()"><span style="font-size: 0.8em;">Ended</span><br/>
+    <input type="checkbox" [(ngModel)]="showReady" (change)="filterAndSort()"><span style="font-size: 0.8em;">Ready</span>
+  </div>
+  <div class="button-end">
+    <mat-paginator #paginator
+      [length]="totalRows$ | async"
+      [pageIndex]="0"
+      [pageSize]="20"
+      [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 100, 200]"
+    ></mat-paginator>
+  </div>
+</div>
+
+<mat-card *ngIf="isLoading"
+  style="display: flex; justify-content: center; align-items: center">
+ <mat-progress-spinner
+   color="primary"
+   mode="indeterminate">
+ </mat-progress-spinner>
+</mat-card>
+
+<mat-accordion displayMode="flat" multi class="mat-table">
+  <section matSort class="mat-elevation-z2 mat-header-row">
+    <span class="mat-header-cell" mat-sort-header="name">Name</span>
+    <span class="mat-header-cell" mat-sort-header="exercise">Exercise</span>
+    <span class="mat-header-cell" mat-sort-header="status">Status</span>
+    <span class="mat-header-cell" mat-sort-header="startDate">Start</span>
+    <span class="mat-header-cell" mat-sort-header="endDate">End</span>
+    <span class="mat-header-cell" mat-sort-header="description">Description</span>
+  </section>
+
+  <mat-expansion-panel *ngFor="let item of displayedRows$ | async">
+    <mat-expansion-panel-header class="mat-row">
+      <span class="mat-cell">{{item.name}}</span>
+      <span class="mat-cell">{{item.exerciseId}}</span>
+      <span class="mat-cell">{{item.status}}</span>
+      <span class="mat-cell">{{item.startDate | date: 'yyyy-MM-dd'}}</span>
+      <span class="mat-cell">{{item.endDate | date: 'yyyy-MM-dd'}}</span>
+      <span class="mat-cell">{{item.description}}</span>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <app-session-edit [session]="item" (editComplete)='refreshSessions()'></app-session-edit>
+    </ng-template>
+  </mat-expansion-panel>
+
+</mat-accordion>
+

@@ -1,0 +1,73 @@
+@import "~node_modules/bootstrap-scss/functions";
+@import "~node_modules/bootstrap-scss/variables";
+@import "~node_modules/bootstrap-scss/mixins";
+@import "~node_modules/bootstrap-scss/popover";
+@import '~angular-tree-component/dist/angular-tree-component.css';
+@import "~xterm/css/xterm.css";
+/* You can add global styles to this file, and also import other style files */
+$mdi-font-path: "~@mdi/font/fonts";
+@import "~@mdi/font/scss/materialdesignicons";
+
+@import "~@angular/material/theming";
+@include mat-core();
+@import "theme";
+@import "../app/sei-cwd-common/cwd-toolbar/theme/theme";
+
+@include angular-material-theme($theme);
+@include cwd-toolbar-theme($theme);
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+/* You can add global styles to this file, and also import other style files */
+@import "../assets/css/player-theme.css";
+
+
+/* The following overrides transparent select options after upgrading to Angular 7 */
+.mat-select-panel {
+    background: #fff;
+  }
+.mat-select-panel:not([class*=mat-elevation-z]) {
+box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+}
+
+
+@font-face {
+  font-family: 'open_sansregular';
+  src: url('/assets/fonts/opensans-regular.woff2') format('woff2'),
+       url('/assets/fonts/opensans-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sansbold';
+  src: url('/assets/fonts/opensans-bold.woff2') format('woff2'),
+       url('/assets/fonts/opensans-bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sansitalic';
+  src: url('/assets/fonts/opensans-italic.woff2') format('woff2'),
+       url('/assets/fonts/opensans-italic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'open_sansregular';
+}
+
+b {
+  font-family: 'open_sansbold';
+}
+
+i {
+  font-family: 'open_sansitalic';
+}
+
+

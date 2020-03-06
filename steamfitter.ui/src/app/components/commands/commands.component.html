@@ -1,0 +1,59 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div class="content" fxFlex fxLayout="column" fxLayoutAlign="space-around center">
+
+  <mat-form-field fxFlex fxFlexFill>
+    <mat-select placeholder="Select a Command" [(value)]="selectedCommand" (selectionChange)="onCommandChange()">
+      <mat-option *ngFor="let cmd of availableCommands" [value]="cmd">
+        {{cmd.api}} - {{cmd.display}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-card *ngIf="selectedCommand != undefined" style="width: 70%;">
+    <mat-card-header>
+      <h3>{{selectedCommand.display}}</h3>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxFlex fxLayout="column">
+        <form class="param-form">
+          <div *ngFor="let param of selectedCommand.parameters">
+            <div *ngIf="param.inputType === 'guid'">
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <b>Selected Virtual Machines:</b>
+                <div *ngFor="let vm of selectedVms">
+                    <mat-icon svgIcon="monitor"></mat-icon> {{vm.name}}
+                </div>
+              </div>
+            </div>
+            <mat-form-field class="param-full-width" *ngIf="param.inputType === 'text'">
+              <input matInput placeholder="{{param.display}}" [value]="param.value" (input)="param.value = $event.target.value" (change)="onCommandChange()">
+            </mat-form-field>
+            <mat-form-field class="param-full-width" *ngIf="param.inputType === 'password'">
+              <input matInput [type]="'password'" placeholder="{{param.display}}" [value]="param.value" (input)="param.value = $event.target.value" (change)="onCommandChange()">
+            </mat-form-field>
+            <mat-form-field class="param-full-width" *ngIf="param.inputType === 'select'">
+              <mat-label>{{param.display}}</mat-label>
+              <mat-select  [(ngModel)]="param.value" (selectionChange)="onCommandChange()" name="{{param.key}}">
+                <mat-option *ngFor="let choice of param.choices" [value]="choice.key">
+                  {{choice.display}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
+

@@ -1,0 +1,14 @@
+S3.VM.Api/bin/
+S3.VM.Api/obj/
+S3.VM.Api/player/
+*.user
+S3.VM.Api/s3_vm_api.db
+.vs/
+/S3.VM.Api/appsettings.Development.json
+S3.VM.Api.Migrations.PostgreSQL/obj/
+S3.VM.Api.Migrations.PostgreSQL/bin/
+S3.VM.Api.Migrations.Sqlite/obj/
+S3.VM.Api.Migrations.Sqlite/bin/
+S3.VM.Api.Data/bin/
+S3.VM.Api.Data/obj/
+.vscode/

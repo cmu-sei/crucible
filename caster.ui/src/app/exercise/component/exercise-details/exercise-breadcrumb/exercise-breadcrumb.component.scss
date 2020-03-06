@@ -1,0 +1,120 @@
+@import "theme";
+@import "~@angular/material/theming";
+
+$breadcrumb-line-height: 36px;
+$breadcrumb-top-and-bottom-padding: 5px;
+
+
+.breadcrumb-item {
+  position: relative;
+  background-color: mat-color($primary, lighter);
+  margin-left: 3px;
+  margin-right: 3px;
+  padding-left: 30px;
+
+  cursor: default;
+  padding-top: $breadcrumb-top-and-bottom-padding;
+  padding-bottom: $breadcrumb-top-and-bottom-padding;
+  line-height: $breadcrumb-line-height;
+}
+
+.breadcrumb-item:after {
+  content: " ";
+  height: 0;
+  position: absolute;
+  width: 0;
+  border: 18px solid transparent;
+  border-left-color: mat-color($primary, lighter);
+  left: 99%;
+  z-index: 1;
+}
+
+.breadcrumb-item:before {
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  border: 18px solid transparent;
+  border-left-color: white;
+  left: 0;
+  z-index: 0;
+}
+
+.breadcrumb-item-first {
+  position: relative;
+  background-color: mat-color($primary, lighter);
+  margin-left: 3px;
+  margin-right: 3px;
+  padding-left: 30px;
+
+  cursor: default;
+  padding-top: $breadcrumb-top-and-bottom-padding;
+  padding-bottom: $breadcrumb-top-and-bottom-padding;
+  line-height: $breadcrumb-line-height;
+}
+
+.breadcrumb-item-first:after {
+  content: " ";
+  height: 0;
+  position: absolute;
+  width: 0;
+  border: 18px solid transparent;
+  border-left-color: mat-color($primary, lighter);
+  left: 99%;
+  z-index: 1;
+}
+
+.breadcrumb-btn {
+  position: relative;
+  background-color: mat-color($primary, lighter);
+  margin-left: 3px;
+  margin-right: 3px;
+  padding-left: 30px;
+}
+
+.breadcrumb-btn:after {
+  content: " ";
+  height: 0;
+  position: absolute;
+  width: 0;
+  border: 18px solid transparent;
+  border-left-color: mat-color($primary, lighter);
+  left: 99%;
+  z-index: 1;
+}
+
+.breadcrumb-btn:before {
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  border: 18px solid transparent;
+  border-left-color: white;
+  left: 0;
+  z-index: 0;
+}
+
+.breadcrumb-btn-first {
+  position: relative;
+  background-color: mat-color($primary, lighter);
+  margin-left: 3px;
+  margin-right: 3px;
+  padding-left: 30px;
+}
+
+.breadcrumb-btn-first:after {
+  content: " ";
+  height: 0;
+  position: absolute;
+  width: 0;
+  border: 18px solid transparent;
+  border-left-color: mat-color($primary, lighter);
+  left: 99%;
+  z-index: 1;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+}

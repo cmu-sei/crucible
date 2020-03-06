@@ -1,0 +1,32 @@
+.module-heading {
+  width: 300px;
+}
+.module-search {
+  margin-bottom: -20px;
+}
+
+.search-input {
+  width: 70%;
+}
+
+.module-card {
+  width: 300px;
+  margin-top: 2px;
+}
+
+.module-name {
+  font-size: medium;
+}
+
+.module-path {
+  font-size: small;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.highlight:hover {
+  background-color: rgb(243, 243, 243);
+  cursor: pointer;
+}

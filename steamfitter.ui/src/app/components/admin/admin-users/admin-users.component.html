@@ -1,0 +1,101 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <div class="sp-icon">
+    <mat-icon class="mdi-24px" fontIcon="mdi-account-multiple"></mat-icon>
+  </div>
+  <mat-icon style="margin-left: 40px; transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
+  <mat-form-field style="width: 300px;">
+    <input matInput [formControl]="filterControl" placeholder="Search">
+  </mat-form-field>
+  <div style="width: 30px;">
+    <button fxLayoutAlign="start center" mat-icon-button (click)="applyFilter('')" style="outline: none;"
+      title="Clear Search">
+      <mat-icon class="mdi-24px" fontIcon="mdi-close-circle-outline"></mat-icon>
+    </button>
+  </div>
+  <div style="width: 100px;">
+      <button mat-stroked-button (click)="addingNewUser = true" >Add User</button>
+  </div>
+  <div class="button-end">
+    <mat-paginator #paginator
+      [length]="userList?.length"
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize "
+      [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 100, 200]"
+      (page)="paginatorEvent($event)"
+    ></mat-paginator>
+  </div>
+</div>
+
+<mat-accordion displayMode="flat" class="mat-table">
+  <section matSort (matSortChange)="sortChanged($event)" class="mat-elevation-z2 mat-header-row">
+    <span class="mat-header-cell" mat-sort-header="id">ID</span>
+    <span class="mat-header-cell" mat-sort-header="name">Name</span>
+    <span class="mat-header-cell">Permissions</span>
+  </section>
+
+  <mat-expansion-panel *ngIf="addingNewUser" [disabled]="true">
+    <mat-expansion-panel-header class="mat-row">
+      <span class="mat-cell">
+        <mat-form-field>
+          <input matInput placeholder="User ID" [(ngModel)]="newUser.id" matTooltip="Must be a valid Guid">
+        </mat-form-field>
+      </span>
+      <span class="mat-cell">
+        <mat-form-field>
+          <input matInput placeholder="User Name" [(ngModel)]="newUser.name" matTooltip="Must have a minimum of 4 characters">
+        </mat-form-field>
+      </span>
+      <span class="mat-cell">
+        <button mat-icon-button (click)="addUserRequest(true)" [disabled]="!newUser.id || !newUser.name || newUser.name.length < 4">
+          <mat-icon class="mdi-24px" fontIcon="mdi-account-plus" matTooltip="Add this user"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="addUserRequest(false)" matTooltip="Cancel">
+          <mat-icon class="mdi-24px" fontIcon="mdi-account-remove"></mat-icon>
+        </button>
+      </span>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel *ngFor="let user of paginateUsers(userList, pageIndex, pageSize)" [disabled]="true">
+    <mat-expansion-panel-header class="mat-row" *ngIf="!isLoading">
+      <span class="mat-cell">
+        <button mat-icon-button ngxClipboard [cbContent]="user.id" (click)="$event.stopPropagation();" title="Copy:  {{user.id}}"><mat-icon class="mdi-24px" fontIcon="mdi-content-copy"></mat-icon></button>
+        {{user.id}}
+      </span>
+      <span class="mat-cell">
+        {{user.name}}
+      </span>
+      <span class="mat-cell">
+        <div fxLayout="row">
+          <div *ngFor="let permission of permissionList">
+            <mat-checkbox [checked]="hasPermission(permission.id, user)" (change)="toggleUserPermission(user, permission.id)" style="margin-right: 20px;">{{permission.key}}</mat-checkbox>
+          </div>
+          <button mat-icon-button (click)="deleteUserRequest(user); $event.stopPropagation();" title="Delete User">
+            <mat-icon class="mdi-24px" fontIcon="mdi-delete-forever-outline"></mat-icon>
+          </button>
+        </div>
+      </span>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+</mat-accordion>
+
+<mat-card *ngIf="isLoading"
+  style="display: flex; justify-content: center; align-items: center">
+ <mat-progress-spinner
+   color="primary"
+   mode="indeterminate">
+ </mat-progress-spinner>
+</mat-card>
+
+

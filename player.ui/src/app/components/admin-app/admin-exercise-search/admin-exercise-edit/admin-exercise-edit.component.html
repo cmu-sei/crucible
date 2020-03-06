@@ -1,0 +1,163 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div *ngIf="exercise !== undefined" class="exercise-container mat-elevation-z8 scroll-container">
+
+  <div fxLayout="row" class="title">
+    <div fxFlex="10" fxLayoutAlign="start center">
+      <button title="Return to Exercise Search" mat-icon-button (click)="returnToExerciseSearch()">
+        <mat-icon svgIcon="ic_back_arrow"></mat-icon>
+      </button>
+    </div>
+    <div fxFlex="90" fxLayoutAlign="start center">
+      <h4>Edit Exercise: {{exercise.name}}</h4>
+    </div>
+  </div>
+
+  <mat-dialog-content>
+    <mat-vertical-stepper [linear]="isLinear" #stepper (selectionChange)="onExerciseStepChange($event)">
+
+      <ng-template matStepperIcon="edit">&#10004;</ng-template>
+      <ng-template matStepperIcon="done">&#10004;</ng-template>
+
+
+      <mat-step label="Exercise Information">
+        <div fxLayout="row" class="add-margin">
+          <div fxFlex fxFlexOffset="20">
+            <mat-form-field class="full-width">
+              <input type="text" matInput [formControl]="exerciseNameFormControl" placeholder="Name (required)" (change)="saveExercise()"
+                value="{{exercise.name}}" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="exerciseNameFormControl.hasError('minlength') && !exerciseNameFormControl.hasError('required')">
+                Must contain 4 or more characters
+              </mat-error>
+              <mat-error *ngIf="exerciseNameFormControl.hasError('required')">
+                Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row" class="add-margin">
+          <div fxFlex fxFlexOffset="20">
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Exercise Description (required)" [formControl]="descriptionFormControl"
+                (change)="saveExercise()" value="{{exercise.description}}" [errorStateMatcher]="matcher"></textarea>
+              <mat-error *ngIf="descriptionFormControl.hasError('required')">
+                Description is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row" class="add-margin">
+          <div fxFlex fxFlexOffset="20">
+            <mat-form-field>
+              <mat-select placeholder="Status" [(ngModel)]="exercise.status" name="exerciseStatus" (selectionChange)="saveExerciseStatus()">
+                <mat-option *ngFor="let status of exerciseStates" [value]="status">
+                  {{status}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxFlex fxLayoutAlign="end" class="delete-button">
+            <button mat-stroked-button (click)="deleteExercise()">Delete Exercise</button>
+          </div>
+        </div>
+      </mat-step>
+
+
+      <mat-step label="Applications">
+        <div fxLayout="row" fxLayoutAlign="end" class="top-button">
+          <button mat-stroked-button [matMenuTriggerFor]="exerciseAppsMenu">Add New Application</button>
+          <mat-menu #exerciseAppsMenu="matMenu">
+            <button mat-menu-item (click)="addExerciseApplication(BLANK_TEMPLATE)">Blank Application</button>
+            <button mat-menu-item [matMenuTriggerFor]="exerciseAppTemplates">Templates</button>
+          </mat-menu>
+          <mat-menu #exerciseAppTemplates="matMenu">
+            <button mat-menu-item *ngFor="let t of applicationTemplates" (click)="addExerciseApplication(t)">{{t.name}}</button>
+          </mat-menu>
+        </div>
+        <app-exercise-applications-select #exerciseAppSelect [exercise]="exercise"></app-exercise-applications-select>
+      </mat-step>
+
+
+      <mat-step label="Teams">
+        <mat-card *ngIf="isLoadingTeams" 
+          style="display: flex; justify-content: center; align-items: center">
+          <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+        </mat-card>
+        <mat-accordion *ngIf="!isLoadingTeams">
+          <div fxLayout="row" fxLayoutAlign="end" class="top-button">
+            <button mat-stroked-button (click)="addNewTeam()">Add New Team</button>
+          </div>
+          <mat-expansion-panel *ngFor="let teamContainer of teams" [expanded]="currentTeam !== undefined && teamContainer.team.id === currentTeam.team.id"
+            (opened)="currentTeam = currentTeam">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{teamContainer.name}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div fxLayout="row">
+              <div fxFlex="50" fxLayoutAlign="center">
+                <div fxLayout="column" fxLayoutAlign="space-between none">
+                  <div>
+                    <button mat-icon-button ngxClipboard [cbContent]="teamContainer.team.id" title="Copy:  {{teamContainer.team.id}}"><mat-icon style="transform:scale(0.85);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+                    <label style="font-size: xx-small">{{teamContainer.team.id}}</label>
+                  </div>
+                  <mat-form-field>
+                    <input id="teamName{{teamContainer.team.id}}" matInput [formControl]="teamNameFormControl"
+                      placeholder="Team Name" (change)="saveTeamName($event.target.value, teamContainer.team.id)" value="{{teamContainer.team.name}}"
+                      [errorStateMatcher]="matcher" autofocus>
+                    <mat-error *ngIf="teamNameFormControl.hasError('minlength') && !teamNameFormControl.hasError('required')">
+                      Must contain 3 or more characters
+                    </mat-error>
+                    <mat-error *ngIf="teamNameFormControl.hasError('required')">
+                      Name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <app-roles-permissions-select [team]="teamContainer.team"></app-roles-permissions-select>
+                  <div fxLayout="row" fxLayoutAlign="center">
+                    <button mat-button (click)="openUsersDialog(teamContainer.team)">
+                      <div matBadge="{{teamContainer.users.length}}" matBadgePosition="after" matBadgeColor="accent">
+                        <img class="left-icon" src="../../../../../assets/img/SP_Icon_User.png" alt="Users">
+                      </div>
+                      Users
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div fxFlex="50">
+                <app-team-applications-select [exercise]="exercise" [team]="teamContainer.team"></app-team-applications-select>
+              </div>
+            </div>
+
+            <div fxLayout="row">
+              <div fxFlex fxLayoutAlign="end" class="delete-button">
+                <button mat-stroked-button (click)="deleteTeam(teamContainer.team)">Delete Team</button>
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-dialog-content>
+
+  <div fxLayout="row" class="bottom-button">
+    <div fxFlex fxLayoutAlign="center center">
+      <button mat-stroked-button (click)="returnToExerciseSearch()">Done</button>
+    </div>
+  </div>
+  
+</div>

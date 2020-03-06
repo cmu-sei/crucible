@@ -1,0 +1,19 @@
+{
+  "ApiUrl": "http://localhost:4402",
+  "OIDCSettings": {
+    "authority": "http://localhost:5000/",
+    "client_id": "alloy.ui",
+    "redirect_uri": "http://localhost:4403/auth-callback",
+    "post_logout_redirect_uri": "http://localhost:4403",
+    "response_type": "id_token token",
+    "scope": "openid profile s3 s3-vm alloy steamfitter caster-api",
+    "automaticSilentRenew": true,
+    "silent_redirect_uri": "http://localhost:4403/auth-callback-silent"
+  },
+  "AppTitle": "Alloy",
+  "AppTopBarText": "Alloy",
+  "AppTopBarHexColor": "#0c918d",
+  "PlayerUIAddress": "http://localhost:4301",
+  "PollingIntervalMS": "3500",
+  "UseLocalAuthStorage": true
+}

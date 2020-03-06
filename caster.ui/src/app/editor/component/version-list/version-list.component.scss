@@ -1,0 +1,40 @@
+@import "theme";
+@import "~@angular/material/theming";
+
+.selected {
+  background-color: mat-color($accent);
+}
+.version-heading {
+  width: 300px;
+}
+.version-search {
+  margin-bottom: -20px;
+}
+
+.search-input {
+  width: 70%;
+}
+
+.version-card {
+  width: 300px;
+  margin-top: 2px;
+}
+
+.version-text {
+  font-size: small;
+  cursor: pointer;
+}
+
+.version-path {
+  font-size: smaller;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.highlight:hover {
+  background-color: rgb(243, 243, 243);
+  cursor: pointer;
+}
+

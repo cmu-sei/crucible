@@ -1,0 +1,16 @@
+{
+    "ApiUrl": "http://host.docker.internal:4400",
+    "VmApiUrl": "http://host.docker.internal:4302/api",
+    "ApiPlayerUrl": "http://host.docker.internal:4300",
+    "OIDCSettings": {
+        "authority": "http://host.docker.internal:5000/",
+        "client_id": "steamfitter.web",
+        "redirect_uri": "http://host.docker.internal:4401/auth-callback",
+        "post_logout_redirect_uri": "http://host.docker.internal:4401",
+        "response_type": "id_token token",
+        "scope": "openid profile s3 s3-vm steamfitter",
+        "automaticSilentRenew": true,
+        "silent_redirect_uri": "http://host.docker.internal:4401/auth-callback-silent"
+    },
+    "UseLocalAuthStorage": true
+}

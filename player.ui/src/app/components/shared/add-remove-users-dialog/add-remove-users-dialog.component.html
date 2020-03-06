@@ -1,0 +1,136 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div fxLayout="row" fxLayoutAlign="space-between none" >
+
+  <div class="user-list-container mat-elevation-z8">
+    <div class="sp-icon">
+      <img height="35" src="../../../assets/img/SP_Icon_User.png" alt="Users">
+      All Users
+    </div> 
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon style="transform:scale(0.85); margin-right: 5px; margin-left: 10px;" svgIcon="ic_magnify_search"></mat-icon>
+      <mat-form-field style="width: 220px;">
+        <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+      </mat-form-field>
+      <button *ngIf="filterString != ''" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
+        title="Clear Search">
+        <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+      </button>
+    </div>
+  
+    <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+     <mat-progress-spinner 
+       color="primary" 
+       mode="indeterminate">
+     </mat-progress-spinner>
+    </mat-card>
+  
+    <mat-table class="mat-table-all-users" #table [dataSource]="userDataSource" matSort>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>User Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div *ngIf="element.name !== null">{{element.name}}</div>
+          <div *ngIf="element.name === null">{{element.id}}</div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>&nbsp;</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div>
+            <button mat-stroked-button (click)="addUserToTeam(element)">Add User</button>
+          </div>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedUserColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedUserColumns;"></mat-row>
+    </mat-table>
+  
+    <div *ngIf="userDataSource.filteredData.length === 0">No results found</div>
+    <mat-paginator #paginator [pageSize]="defaultPageSize" [showFirstLastButtons]="true"
+      (page)="pageEvent = $event">
+    </mat-paginator>
+  
+
+  </div>
+
+
+  <div style="margin-left: 20px;">
+    <div class="team-list-container mat-elevation-z8">
+      <div class="sp-icon">
+        <img height="35" src="../../../assets/img/SP_Icon_Team.png" alt="Users">
+        Team Users
+      </div> 
+    
+      <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+       <mat-progress-spinner 
+         color="primary" 
+         mode="indeterminate">
+       </mat-progress-spinner>
+      </mat-card>
+    
+      <mat-table class="mat-table-team-users" #table [dataSource]="teamUserDataSource">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>User Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div *ngIf="element.user.name !== null">{{element.user.name}}</div>
+            <div *ngIf="element.user.name === null">{{element.user.id}}</div>          
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="teamMembership">
+          <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div fxLayout="row">
+              <div fxFlex fxLayoutAlign="center">
+                <mat-form-field>
+                  <mat-select placeholder="Role" 
+                      name="teamMembershipRole"
+                      [(ngModel)]="element.teamMembership.roleId"
+                      (selectionChange)="updateMembership(element)"
+                      [(value)]="element.teamMembership.roleId">
+                    <mat-option *ngFor="let role of roles" [value]="role.id">
+                      {{role.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                </div>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="user">
+          <mat-header-cell *matHeaderCellDef>&nbsp;</mat-header-cell>
+          <mat-cell style="margin-left: 20px;" *matCellDef="let element">
+            <div>
+              <button mat-stroked-button (click)="removeUserFromTeam(element)">Remove</button>
+            </div>
+          </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedTeamColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedTeamColumns;"></mat-row>
+      </mat-table>
+  
+    </div>
+  </div>
+</div>
+
+<div fxLayout="row">
+  <div fxFlex fxLayoutAlign="center">
+    <mat-dialog-actions>
+      <button mat-stroked-button (click)="done()">Done</button>
+    </mat-dialog-actions>  
+  </div>  
+</div>
+
+

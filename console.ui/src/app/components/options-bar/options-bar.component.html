@@ -1,0 +1,88 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div class="options-container" fxFlex fxLayoutAlign="start start">
+        <button mat-icon-button class="mat-small" [matMenuTriggerFor]='mainMenu'>
+                <mat-icon svgIcon="gear" alt="Gear"></mat-icon>
+        </button>
+        <mat-menu #mainMenu="matMenu">
+                <button *ngIf='!inFrame' mat-menu-item (click)='this.fullscreen()'>Fullscreen</button>
+                <button *ngIf='inFrame' mat-menu-item (click)='this.openInTab()'>Open In New Tab</button>
+                <button mat-menu-item (click)='this.reconnect()'>Reconnect</button>
+                <!-- Power -->
+                <button mat-menu-item [matMenuTriggerFor]="powerMenu" *ngIf='powerOptions'>Power</button>
+                <mat-menu #powerMenu="matMenu">
+                        <button mat-menu-item (click)="this.poweron()">Power On</button>
+                        <button mat-menu-item (click)="this.poweroff()">Power Off</button>
+                        <button mat-menu-item (click)="this.reboot()">Reboot</button>
+                </mat-menu>
+                <!-- Files -->
+                <input #file id="fileInput" type="file" multiple style="display: none;"
+                        (change)="uploadFileToVm(file)" />
+                <button mat-menu-item [matMenuTriggerFor]="fileMenu">Files</button>
+                <mat-menu #fileMenu="matMenu">
+                        <!-- send to VM -->
+                        <button mat-menu-item (click)="this.enableFileUpload('VM Send File Settings');"
+                                [disabled]="uploading">{{vmSettingsButtonLabel}}</button>
+                        <button mat-menu-item (click)="file.click();" [disabled]="!uploadEnabled || uploading">Send File
+                                to VM</button>
+                        <!-- mount DVD -->
+                        <button mat-menu-item [disabled]="retrievingIsos" (click)="this.startIsoMount();">Mount
+                                File to DVD</button>
+                </mat-menu>
+                <button mat-menu-item [matMenuTriggerFor]="keyboardMenu">Keyboard</button>
+                <mat-menu #keyboardMenu="matMenu">
+                        <!-- send ctrl-alt-del -->
+                        <button mat-menu-item (click)='this.cad()'>Send Ctrl-Alt-Del</button>
+                        <!-- paste text -->
+                        <button mat-menu-item (click)='this.sendInputString()'>Send Text</button>
+                </mat-menu>
+                <span *ngIf='vmService.model.networkCards'>
+                        <button *ngIf='vmService.model.canAccessNicConfiguration && vmService.model.networkCards.availableNetworks.length > 0'
+                                mat-menu-item [matMenuTriggerFor]="main_menu">Network Cards</button>
+                        <mat-menu #main_menu="matMenu">
+                                <ng-container
+                                        *ngFor="let mainItem of vmService.model.networkCards.currentNetworks | keys">
+                                        <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{ mainItem.key }}</button>
+                                        <mat-menu #sub_menu="matMenu">
+                                                <button *ngFor="let subItem of vmService.model.networkCards.availableNetworks"
+                                                        (click)="this.changeNic(mainItem.key, subItem)" mat-menu-item>
+                                                        <span *ngIf="mainItem.value==subItem">&#10004; </span>
+                                                        {{ subItem }}
+                                                </button>
+                                        </mat-menu>
+                                </ng-container>
+                        </mat-menu>
+                </span>
+                <!-- Clipboard -->
+                <button mat-menu-item [matMenuTriggerFor]="clipboardMenu">Clipboard</button>
+                <mat-menu #clipboardMenu="matMenu">
+                        <button mat-menu-item (click)="copyVmClipboard()">Copy</button>
+                        <button mat-menu-item (click)="pasteFromClipboard()">Paste</button>
+                </mat-menu>
+        </mat-menu>
+
+        <label class="vm-name">{{this.vmService.model.name}}</label>
+        <span *ngFor="let task of tasksInProgress">
+                <label class="vm-name" *ngIf="task.state !== 'success'">{{task.taskName}} ...
+                        {{task.progress}}%</label>
+        </span>
+
+        <div class="options-container" fxFlex fxLayoutAlign="center start">
+                <button mat-stroked-button class="mat-top-button" title="Copy from Virtual Machine's clipboard" (click)="copyVmClipboard()">Copy
+                        <mat-icon svgIcon="ic_clipboard_copy"></mat-icon>
+                </button>
+                <button mat-stroked-button class="mat-top-button" style="margin-left: 20px;" title="Paste into the Virtual Machine" (click)="pasteFromClipboard()">Paste
+                        <mat-icon svgIcon="ic_clipboard_paste"></mat-icon>
+                </button>
+        </div>
+
+
+</div>

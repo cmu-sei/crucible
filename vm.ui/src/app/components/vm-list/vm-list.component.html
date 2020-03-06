@@ -1,0 +1,72 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div class="page">
+  <div class="vm-list-container mat-elevation-z8" [style.visibility]="vmApiResponded ? 'visible' : 'hidden'">
+    <div fxLayout="column">
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sp-icon">
+            <img height="75" src="/assets/img/SP_Icon_Virtual.png" alt="Virtual Machines">
+        </div>    
+        <div>Virtual Machines</div>
+        <mat-icon style="transform:scale(0.85); margin-right: 5px; margin-left: 25px;" svgIcon="ic_magnify_search"></mat-icon>
+        <mat-form-field style="width: 320px;">
+          <input name="vmSearch" matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+        <button *ngIf="filterString != ''" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
+          title="Clear Search">
+          <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+        </button>
+        <div style="margin-top: 10px; margin-left: 200px;">
+          <button mat-stroked-button (click)="fileInput.click();" *ngIf='!uploading'>Upload File</button>
+          <button mat-stroked-button disabled *ngIf='uploading'>Uploading ... {{ uploadProgress }}%</button>
+          <input #fileInput type="file" multiple style="display: none;" (change)="uploadIso(fileInput)" />
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="flex-container" 
+        *ngFor="let vm of vmModelDataSource.filteredData | slice:(pageEvent.pageIndex*pageEvent.pageSize):((pageEvent.pageIndex+1)*pageEvent.pageSize); let i = index">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="none">
+          <button mat-icon-button (click)="openHere(vm.name, vm.url)">
+            <mat-progress-spinner *ngIf="vm.state === undefined" color="primary" mode="indeterminate" diameter="25"></mat-progress-spinner>
+            <mat-icon *ngIf="vm.state !== undefined && vm.state === 'error'" style="color: red;" svgIcon="monitor" title="Power state unknown"></mat-icon>
+            <mat-icon *ngIf="vm.state !== undefined && vm.state === 'on'" style="color: black;" svgIcon="monitor"></mat-icon>
+            <mat-icon *ngIf="vm.state !== undefined && vm.state === 'off'"style="color: red;" svgIcon="power_icon" title="Powered Off"></mat-icon>
+          </button>
+        </div>
+        <div fxFlex class="content">
+          <label class="vm-link" (click)="openHere(vm.name, vm.url)">{{vm.name}}</label>
+        </div>
+        <div class="open-tab-icon">
+          <button mat-icon-button style="outline: none;" (click)="openInTab(vm.url)" title="Open in Browser Tab">
+            <mat-icon class="tab-icon" svgIcon="ic_open_tab"></mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <mat-paginator #paginator 
+              [pageSize]="defaultPageSize" 
+              [pageSizeOptions]="[25, 50, 100, vmModelDataSource.filteredData.length]" 
+              [showFirstLastButtons]="true" (page)="pageEvent = $event">
+    </mat-paginator>
+
+
+  </div>
+  <div class="vm-list-container mat-elevation-z8" [style.visibility]="vmApiResponded ? 'hidden' : 'visible'">
+    <label>The VM API is not currently reachable.</label>
+  </div>
+</div>
+

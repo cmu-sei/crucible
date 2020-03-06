@@ -1,0 +1,55 @@
+// so for any workload, 
+//    for each job in jobs
+//        if the rules pass and IsRunnable
+//            RunSomeJob(job)
+//                add results and timestamp back to original job
+
+public class Workload
+    {
+        public Guid Id { get; set; }
+        
+        public IList<Job> Jobs { get; set; }
+        public DateTime CreatedUtc { get; set; }
+        
+        public Workload()
+        {
+            this.CreatedUtc = DateTime.UtcNow;
+            this.Jobs = new List<Job>();
+        }
+
+        public class Job
+        {
+            public JobRule Rule { get; set; }
+            public JobDetail Detail { get; set; }
+
+            public Job()
+            {
+                this.Rule = new JobRule();
+                this.Detail = new JobDetail();
+            }
+        }
+
+        public class JobRule
+        {
+            public bool IsRunnable = true;
+        }
+        
+        public class JobDetail
+        {
+            public string Handler { get; set; }
+            public string Command { get; set; }
+            public IList<object> CommandArgs { get; set; }
+            public object Result { get; set; }
+            public DateTime CompletedUtc { get; set; }
+
+            public JobDetail()
+            {
+                this.CommandArgs = new List<object>();
+            }
+            
+            public IEnumerable<string> CommandArgsAsStrings()
+            {
+                return this.CommandArgs.Select(o => o.ToString()).ToList();
+            }
+        }
+    }

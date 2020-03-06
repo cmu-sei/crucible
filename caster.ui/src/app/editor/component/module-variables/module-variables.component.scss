@@ -1,0 +1,15 @@
+.code-editor {
+  border: 2px solid lightgray;
+  height: calc(100vh - 100px);
+  min-height: calc(100vh - 300px);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  .editor-container {
+    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
+  }
+}
+
+h1 {
+  display: inline-block;
+}

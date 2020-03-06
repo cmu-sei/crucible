@@ -1,0 +1,92 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div *ngIf="definition !== undefined">
+  <div fxLayout="row" class="add-margin">
+    <div fxFlex fxFlexOffset="10">
+      <mat-form-field class="full-width">
+        <input type="text" matInput [formControl]="definitionNameFormControl" placeholder="Name (required)" (blur)="saveDefinition('name')"
+          value="{{definition.name}}" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="definitionNameFormControl.hasError('minlength') && !definitionNameFormControl.hasError('required')">
+          Must contain 4 or more characters
+        </mat-error>
+        <mat-error *ngIf="definitionNameFormControl.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="add-margin">
+    <div fxFlex fxFlexOffset="10">
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="Definition Description" [formControl]="descriptionFormControl"
+          (blur)="saveDefinition('description')" value="{{definition.description}}" [errorStateMatcher]="matcher"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="add-margin">
+    <div fxFlex fxFlexOffset="10">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Duration Hours" [formControl]="durationHoursFormControl" (blur)="saveDefinition('durationHours')"
+          value="{{definition.durationHours}}" [errorStateMatcher]="notAnIntegerErrorState">
+        <mat-error *ngIf="durationHoursFormControl.hasError('notAnInteger')">
+          Duration Hours must be an <strong>integer</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="add-margin">
+    <div fxFlex fxFlexOffset="10">
+      <mat-form-field class="full-width">
+        <button mat-icon-button matPrefix ngxClipboard [cbContent]="definition.exerciseId" title="Copy:  {{definition.exerciseId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <input matInput [formControl]="exerciseIdFormControl" placeholder="Exercise ID" (blur)="saveDefinition('exerciseId')"
+          value="{{definition.exerciseId}}">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="add-margin">
+    <div fxFlex fxFlexOffset="10">
+      <mat-form-field class="full-width">
+        <button mat-icon-button matPrefix ngxClipboard [cbContent]="definition.directoryId" title="Copy:  {{definition.directoryId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <input type="text" matInput [formControl]="directoryIdFormControl" placeholder="Directory ID" (blur)="saveDefinition('directoryId')"
+          value="{{definition.directoryId}}">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="add-margin">
+    <div fxFlex fxFlexOffset="10">
+      <mat-form-field class="full-width">
+        <button mat-icon-button matPrefix ngxClipboard [cbContent]="definition.scenarioId" title="Copy:  {{definition.scenarioId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <input type="text" matInput [formControl]="scenarioIdFormControl" placeholder="Scenario ID" (blur)="saveDefinition('scenarioId')"
+          value="{{definition.scenarioId}}">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="bottom-button">
+    <div fxFlex fxLayoutAlign="left" class="delete-button">
+      <button mat-stroked-button (click)="cloneDefinition()" style="margin-left: 40px;">Clone this Definition</button>
+    </div>
+    <div fxFlex fxLayoutAlign="center" class="delete-button">
+      <button mat-stroked-button (click)="closePanel.emit(true)">Done</button>
+    </div>
+    <div fxFlex fxLayoutAlign="end" class="delete-button">
+      <button mat-stroked-button (click)="deleteDefinition()">Delete this Definition</button>
+    </div>
+  </div>
+  <div>&nbsp;</div>
+
+</div>
+

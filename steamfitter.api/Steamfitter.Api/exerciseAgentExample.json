@@ -1,0 +1,50 @@
+{
+    "MachineName": "MBP",
+    "FQDN": "MBP.local",
+    "GuestIp": "192.168.1.174",
+    "VmWareUuid": "27a8cd66-0dda-4c0e-8131-3b7b61e5c80d",
+    "AgentName": "Bond",
+    "AgentVersion": "1.0.0.0",
+    "AgentInstalledPath": "file:/Users/dustin/Projects/BT/Bond/Bond/bin/Debug/netcoreapp2.2",
+    "UserSim": {
+        "Name": "ghosts.exe",
+        "IsRunning": false,
+        "Version": "2.3.4.0"
+    },
+    "LocalUsers": [
+        {
+            "Username": "Dustin",
+            "Domain": "local",
+            "IsCurrent": true
+        }
+    ],
+    "OperatingSystem": {
+        "Platform": 4,
+        "ServicePack": "",
+        "Version": {
+            "Major": 18,
+            "Minor": 2,
+            "Build": 0,
+            "Revision": 0,
+            "MajorRevision": 0,
+            "MinorRevision": 0
+        },
+        "VersionString": "Unix 18.2.0.0"
+    },
+    "SshPorts": [{
+        "Server": "127.0.0.1",
+        "ServerPort": 35389,
+        "Guest": "127.0.0.1",
+        "GuestPort": 8887
+    }, {
+        "Server": "127.0.0.1",
+        "ServerPort": 33791,
+        "Guest": "127.0.0.1",
+        "GuestPort": 8888
+    }, {
+        "Server": "127.0.0.1",
+        "ServerPort": 41177,
+        "Guest": "127.0.0.1",
+        "GuestPort": 8889
+    }]
+}

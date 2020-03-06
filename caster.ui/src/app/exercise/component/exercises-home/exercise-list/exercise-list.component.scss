@@ -1,0 +1,32 @@
+@import "../../../../../styles/theme";
+
+.exercise-list-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  margin-top: 40px;
+  max-height: 100vh;
+  width: 800px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 700px;
+}
+
+.mat-column-actions {
+  justify-content: space-evenly;
+  padding: 5px 5px 5px 5px;
+  width: 5vw;
+  flex: 0 1 5vw;
+}
+
+.selected {
+  background-color: mat-color($accent);
+}
+
+.exercise-text {
+  margin-left: 20px;
+  color: blue; 
+  cursor: pointer;
+}

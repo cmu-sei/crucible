@@ -1,0 +1,62 @@
+@import "theme";
+@import "~@angular/material/theming";
+
+.mat-button-toggle-checked {
+  background-color: mat-color($accent);
+}
+
+.code-editor {
+  border: 2px solid lightgray;
+  min-height: calc(100vh - 127px);
+  overflow: hidden;
+}
+
+.editor-toolbar {
+  max-height: 35px;
+  min-height: 35px;
+}
+
+.version-toolbar {
+  max-height: 20px;
+  min-height: 20px;
+}
+
+.left-version-text {
+  margin-left: 75px;
+  font-size: small;
+}
+
+.right-version-text {
+  margin-right: 75px;
+  font-size: small;
+}
+
+mat-button-toggle-group {
+  width:100%
+}
+
+mat-button-toggle {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}
+
+.mat-button-toggle {
+  line-height: 34px;
+  height: 30px;
+}
+
+.mat-sidenav {
+  overflow-x: hidden;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.breadcrumb-bar {
+  font-size: 14px;
+  color: rgba(90, 90, 90);
+}

@@ -1,0 +1,16 @@
+{
+  "ApiUrl": "<url-of-api>",
+  "OIDCSettings": {
+    "authority": "<url-identity-server>",
+    "client_id": "<identity-client-id>",
+    "redirect_uri": "<url-auth-callback>",
+    "post_logout_redirect_uri": "<url-logout>",
+    "response_type": "<identity-response-types>",
+    "scope": "<idenity-scope>",
+    "automaticSilentRenew": true,
+    "silent_redirect_uri": "<url-auth-silent-callback>"
+  },
+  "Ui": {
+    "title": "<title-of-application>"
+  }
+}

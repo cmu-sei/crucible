@@ -1,0 +1,137 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div fxLayout="column" fxLayoutAlign="center space-between">
+  <mat-toolbar class="editor-toolbar" fxFlex="0 1 auto">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <div class="breadcrumb-bar">
+        {{breadcrumbString}}
+      </div>
+      <div class="spacer"></div>
+      <mat-button-toggle-group #sidebar="matButtonToggleGroup" [value]="workspaceView$ | async" fxLayout="row"
+                               fxLayoutAlign="center space-around"
+                               (valueChange)="viewChangedFn($event)">
+        <mat-button-toggle value="runs" aria-label="modules">
+          <div>
+            <mat-icon class="mdi-24px" fontIcon="mdi-view-list"
+                      matTooltip="Runs View"></mat-icon>
+          </div>
+        </mat-button-toggle>
+        <mat-button-toggle value="state" aria-label="versions">
+          <div>
+            <mat-icon class="mdi-24px" fontIcon="mdi-monitor-multiple"
+                      matTooltip="State View"></mat-icon>
+          </div>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <ng-container [ngSwitch]="workspaceView$ | async">
+    <!-- Runs Table -->
+    <ng-container *ngSwitchCase="'runs'">
+      <cwd-table
+                 [items]="workspaceRuns$ | async"
+                 [loading]="this.loading$ | async"
+                 [displayedColumns]="['createdAt', 'isDestroy', 'status', 'actions']"
+                 [expandedItems]="expandedRunIds$ | async"
+                 [getRowStyle]="setRowStyle"
+                 [trackByPropertyName]="'id'"
+                 (expand)="expandRun($event)">
+        <div *cwdTableAction fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+          <button mat-flat-button color="primary"
+                  [disabled]="!enablePlanApply()"
+                  (click)="plan($event)">
+            Plan
+          </button>
+          <button mat-flat-button color="primary"
+                  [disabled]="!enablePlanApply()"
+                  (click)="destroy($event)">
+            Destroy
+          </button>
+        </div>
+        <div *cwdTableItemAction="let item" fxLayout="row no-wrap" fxLayoutAlign="start space-between"
+             fxLayoutGap="10px">
+          <button mat-flat-button color="primary"
+                  [disabled]="!hasPlan(item)"
+                  (click)="apply($event, item)">
+            Apply
+          </button>
+          <button mat-flat-button color="primary"
+                  [disabled]="!hasPlan(item)"
+                  (click)="reject($event, item)">
+            Reject
+          </button>
+        </div>
+        <div *cwdTableItemContent="let item">
+          <ng-container *ngIf="(expandedRunIds$ | async).includes(item.id)">
+            <cas-run
+              [run]="item"
+              (planOutput)="planOutput($event, item)"
+              (applyOutput)="applyOutput($event, item)">
+            </cas-run>
+          </ng-container>
+        </div>
+      </cwd-table>
+    </ng-container>
+
+    <!-- Resources Table -->
+    <ng-container *ngSwitchCase="'state'">
+      <cwd-table
+                 [items]="workspaceResources$ | async"
+                 [loading]="loading$ | async"
+                 [displayedColumns]="['name', 'type', 'address', 'actions']"
+                 [excludedAttributes]="['attributes']"
+                 [expandedItems]="expandedResourceIds$ | async"
+                 [getRowStyle]="setRowStyle"
+                 (expand)="expandResource($event)">
+        <div *cwdTableAction fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+          <button mat-flat-button color="primary"
+                  [disabled]="loading$ | async"
+                  (click)="refreshResources()" matTooltip="Refreshes deployed resources and their properties">
+            Refresh
+          </button>
+        </div>
+        <div *cwdTableItemAction="let item" fxLayout="row no-wrap" fxLayoutAlign="start space-between"
+             fxLayoutGap="10px">
+          <button mat-flat-button color="primary"
+                  [ngSwitch]="(resourceActionIds$ | async).includes(item.id) && !item.tainted"
+                  [fxShow]="!item.tainted"
+                  [disabled]="item.tainted"
+                  (click)="taint($event, item)">
+            <mat-progress-spinner *ngSwitchCase="true"
+                                  color="accent"
+                                  diameter="35"
+                                  mode="indeterminate">
+            </mat-progress-spinner>
+            <span *ngSwitchDefault>Taint</span>
+          </button>
+          <button mat-flat-button color="primary"
+                  [ngSwitch]="(resourceActionIds$ | async).includes(item.id) && item.tainted"
+                  [fxShow]="item.tainted"
+                  [disabled]="!item.tainted"
+                  (click)="untaint($event, item)">
+            <mat-progress-spinner *ngSwitchCase="true"
+                                  color="accent"
+                                  diameter="35"
+                                  mode="indeterminate">
+            </mat-progress-spinner>
+            <span *ngSwitchDefault>Untaint</span>
+          </button>
+        </div>
+        <div *cwdTableItemContent="let item">
+          <ng-container *ngIf="(expandedResourceIds$ | async).includes(item.id)">
+            <pre>{{ item | json }}</pre>
+          </ng-container>
+        </div>
+      </cwd-table>
+    </ng-container>
+  </ng-container>
+</div>
+

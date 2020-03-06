@@ -1,0 +1,187 @@
+{
+    "availableCommands": [
+        {
+            "api": "stackstorm",
+            "action": "guest_file_read",
+            "display": "Read a file from a guest VM",
+            "parameters": [
+                {
+                    "key": "Moid",
+                    "display": "VM",
+                    "hint": "Select a VM",
+                    "inputType": "guid"
+                },
+                {
+                    "key": "Username",
+                    "display": "Username",
+                    "hint": "Username for the guest VM user to execute the action",
+                    "inputType": "text"
+                },
+                {
+                    "key": "Password",
+                    "display": "Password",
+                    "hint": "Password for the guest VM user to execute the action",
+                    "inputType": "password"
+                },
+                {
+                    "key": "GuestFilePath",
+                    "display": "File Path on the Guest",
+                    "hint": "Path to the file to be read (i.e. C:\\Users\\Developer\\testFile.txt).",
+                    "inputType": "text"
+                }
+            ]
+        },
+        {
+            "api": "stackstorm",
+            "action": "guest_process_run",
+            "display": "Run a command on the guest VM",
+            "parameters": [
+                {
+                    "key": "Moid",
+                    "display": "VM",
+                    "hint": "Select a VM",
+                    "inputType": "guid"
+                },
+                {
+                    "key": "Username",
+                    "display": "Username",
+                    "hint": "Username for the guest VM user to execute the action",
+                    "inputType": "text"
+                },
+                {
+                    "key": "Password",
+                    "display": "Password",
+                    "hint": "Password for the guest VM user to execute the action",
+                    "inputType": "password"
+                },
+                {
+                    "key": "CommandText",
+                    "display": "Command",
+                    "hint": "The command to execute on the guest VM.",
+                    "inputType": "text"
+                },
+                {
+                    "key": "CommandArgs",
+                    "display": "Arguments",
+                    "hint": "The arguments to pass to the command on the guest VM.",
+                    "inputType": "text"
+                }
+            ]
+        },
+        {
+            "api": "stackstorm",
+            "action": "vm_create_from_template",
+            "display": "Create a VM from a Template",
+            "parameters": [
+                {
+                    "key": "TemplateMoid",
+                    "display": "VM Template",
+                    "hint": "Select a VM Template",
+                    "inputType": "select",
+                    "choices": [
+                        {
+                            
+                            "key": "vm-1881",  
+                            "display": "Caster.Win10"
+                        },
+                        {
+                            "key": "vm-322",
+                            "display": "demo-template"
+                        }
+                
+                    ]
+                },
+                {
+                    "key": "Name",
+                    "display": "VM Name",
+                    "hint": "Name of the new VM",
+                    "inputType": "text"
+                },
+                {
+                    "key": "DataCenter",
+                    "display": "Data Center",
+                    "hint": "Enter the Data Center (i.e. datacenter-2) the new VM should use",
+                    "inputType": "select",
+                    "choices": [
+                        {
+                            "key": "datacenter-2",
+                            "display": "CIC1315"
+                        }
+                    ]
+                },
+                {
+                    "key": "DataStore",
+                    "display": "Data Store",
+                    "hint": "Enter the Data Store (i.e. datastore-30) the new VM should use",
+                    "inputType": "select",
+                    "choices": [
+                        {
+                            "key": "datastore-30",
+                            "display": "local-a7"
+                        },
+                        {
+                            "key": "datastore-41",
+                            "display": "local-a8"
+                        }
+                    ]
+                },
+                {
+                    "key": "ResourcePool",
+                    "display": "Resource Pool",
+                    "hint": "Enter the Resource Pool (i.e. resgroup-92) the new VM should use",
+                    "inputType": "select",
+                    "choices": [
+                        {
+                            "key": "resgroup-10",
+                            "display": "Gamespace"
+                        },
+                        {
+                            "key": "resgroup-92",
+                            "display": "S3"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "api": "stackstorm",
+            "action": "vm_hw_power_on",
+            "display": "Power on a VM",
+            "parameters": [
+                {
+                    "key": "Moid",
+                    "display": "VM",
+                    "hint": "Select a VM",
+                    "inputType": "guid"
+                }
+            ]
+        },
+        {
+            "api": "stackstorm",
+            "action": "vm_hw_power_off",
+            "display": "Power off a VM",
+            "parameters": [
+                {
+                    "key": "Moid",
+                    "display": "VM",
+                    "hint": "Select a VM",
+                    "inputType": "guid"
+                }
+            ]
+        },
+        {
+            "api": "stackstorm",
+            "action": "vm_hw_remove",
+            "display": "Remove a VM",
+            "parameters": [
+                {
+                    "key": "Moid",
+                    "display": "VM",
+                    "hint": "Select a VM",
+                    "inputType": "guid"
+                }
+            ]
+        }
+    ]
+}
+    

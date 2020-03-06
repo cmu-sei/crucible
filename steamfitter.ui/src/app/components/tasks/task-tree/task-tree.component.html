@@ -1,0 +1,93 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div fxLayout="row" class="add-margin">
+  <div fxFlex="100" fxLayoutAlign="start">
+    <div>
+      <b>Dispatch Tasks:</b>
+    </div>
+  </div>
+</div>
+<div fxLayout="row" class="add-margin">
+  <div fxFlex="100" fxLayoutAlign="start">
+    <div>
+      <button mat-icon-button (click)="executeDispatchTaskAction('addTop', '');">
+        <mat-icon class="left-icon" svgIcon="ic_plus_circle_outline_48px"></mat-icon>
+        <mat-label>Add Independent Task</mat-label>
+      </button>
+    </div>
+  </div>
+</div>
+<div fxLayout="row" class="add-margin">
+  <div fxFlex="100" fxLayoutAlign="start">
+    <mat-card *ngIf="loading" style="display: flex; justify-content: center; align-items: center; width:100%">
+      <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
+    </mat-card>
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" *ngIf="!loading">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding style="margin-top: 5px;">
+        <button mat-icon-button disabled *ngIf="!node.expandable"></button>
+        <button mat-icon-button matTreeNodeToggle *ngIf="!!node.expandable"
+          [matTreeNodeToggleRecursive]="false"
+          [attr.aria-label]="'toggle ' + node.dispatchTask.name">
+          <mat-icon svgIcon="ic_chevron_down_black_24px" *ngIf="treeControl.isExpanded(node)"></mat-icon>
+          <mat-icon svgIcon="ic_chevron_right_black_24px" *ngIf="!treeControl.isExpanded(node)"></mat-icon>
+        </button>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div fxLayout="row" fxLayoutAlign="space-around center">
+                <span *ngIf="!isExecuted(node.dispatchTask.id)">
+                  <button mat-icon-button (click)="executeDispatchTaskAction('edit', node.dispatchTask.id); $event.stopPropagation();" title="Edit Task"
+                    aria-label="edit task">
+                    <mat-icon class="action-button" svgIcon="ic_square_edit_outline_48px"></mat-icon>
+                    <!-- <mat-label>Edit</mat-label> -->
+                  </button>
+                  <button mat-icon-button (click)="deleteDispatchTask(node); $event.stopPropagation();" title="Delete Task"
+                  aria-label="delete task">
+                    <mat-icon class="action-button" svgIcon="ic_trash_can"></mat-icon>
+                    <!-- <mat-label>Delete</mat-label> -->
+                  </button>
+                  <button mat-icon-button (click)="executeDispatchTaskAction('addDependent', node.dispatchTask.id); $event.stopPropagation();" title="Add Dependent Task"
+                  aria-label="add dependent task">
+                    <mat-icon class="action-button" svgIcon="ic_plus_circle_outline_48px"></mat-icon>
+                    <!-- <mat-label>Add A Dependent</mat-label> -->
+                  </button>
+                  <button *ngIf="isExecutableTask(node.dispatchTask)" mat-icon-button (click)="executeDispatchTaskAction('execute', node.dispatchTask.id); $event.stopPropagation();" title="Execute Task"
+                  aria-label="execute task">
+                    <mat-icon class="action-button" svgIcon="play_circle_outline_24px"></mat-icon>
+                  </button>
+                </span>
+                <img src="assets/img/{{ node.dispatchTask.triggerCondition.toLowerCase() }}.png" class="icon16" matTooltip="Runs on {{ node.dispatchTask.triggerCondition }}" />
+                <mat-label>{{node.dispatchTask.name}}</mat-label>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="dispatchTaskText">
+          </div>
+          <div class="dispatchTaskText"><b>Description:</b> {{node.dispatchTask.description}}</div>
+          <div class="dispatchTaskText"><b>Input:</b> {{node.dispatchTask.inputString}}</div>
+          <div class="dispatchTaskText"><b>Expected Output:</b> {{node.dispatchTask.expectedOutput}}</div>
+          <div class="dispatchTaskText"><b>Delay (seconds):</b> {{node.dispatchTask.delaySeconds}}</div>
+          <div class="dispatchTaskText"><b>Iterations:</b> {{node.dispatchTask.iterations}}</div>
+          <div class="dispatchTaskText"><b>Iteration Interval (seconds):</b> {{node.dispatchTask.intervalSeconds}}</div>
+          <div class="dispatchTaskText"><b>Expiration (seconds):</b> {{node.dispatchTask.experationSeconds}}</div>
+          <div class="dispatchTaskText" *ngIf="!!node.results && node.results.length > 0">
+            <b>Results:</b>
+            <div class="dispatchTaskText" style="margin-left: 80px;" *ngFor="let result of sortedResults(node.results, 'vmName', false)">
+                <img src="assets/img/{{ result.status }}.png" class="icon16" title="{{ result.status }}" /> {{result.statusDate | date: 'yyyy-MM-dd hh:mm.ss'}}&nbsp;&nbsp;<b>{{result.vmName}}</b>({{result.vmId}}):&nbsp; {{result.actualOutput}}
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+</div>
+
+

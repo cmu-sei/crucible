@@ -1,0 +1,53 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+
+  <div fxLayout="column" *ngIf="!!dataSource && !!dataSource.data && dataSource.data.length > 0">
+    <mat-card class="module-heading" fxFlex="1 1 auto" fxFill>
+      <span><b>MODULES</b></span>
+      <div class="module-search">
+        <mat-icon class="mdi-24px" fontIcon="mdi-magnify" style="margin-right: 5px;"></mat-icon>
+        <mat-form-field class="search-input">
+          <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+        <button *ngIf="filterString != ''"
+          matTooltip="Clear Search"
+          mat-icon-button
+          (click)="clearFilter()"
+          style="outline: none;">
+          <mat-icon class="mdi-18px" fontIcon="mdi-close-circle"></mat-icon>
+        </button>
+      </div>
+    </mat-card>
+    <mat-card *ngFor="let module of dataSource.filteredData" fxFlex="1 1 auto" fxFill
+        class="clickable highlight module-card" (click)="selectModuleFn(module)">
+      <mat-card-title fxLayout="column">
+        <div>
+          <span class="module-name"><b>{{module.name}}</b></span>
+        </div>
+        <div>
+          <span class="module-path">{{module.path}}</span>
+        </div>
+      </mat-card-title>
+      <mat-card-content>
+        {{module.description}}
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Variables Dialog -->
+  <ng-template #variablesDialog>
+    <cas-module-variables
+      [selectedModule]="selectedModule"
+      [readOnly]="!isEditing"
+      (variablesSelected)="variablesSelected($event)">
+    </cas-module-variables>
+  </ng-template>
+

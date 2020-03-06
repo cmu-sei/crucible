@@ -1,0 +1,62 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <div class="sp-icon">
+    <img height="35" src="../../../assets/svg-icons/build-24px.svg" alt="Definitions">
+  </div>
+  <mat-icon style="margin-left: 40px; transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
+  <mat-form-field style="width: 300px;">
+    <input matInput type="text" [formControl]="searchControl" placeholder="Search">
+  </mat-form-field>
+  <div style="width: 30px;">
+    <button *ngIf="searchControl.value !== ''" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
+      title="Clear Search">
+      <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+    </button>
+  </div>
+  <div style="width: 100px;">
+    <button mat-stroked-button (click)="addNewDefinition()">Add New Definition</button>
+  </div>
+</div>
+
+
+<mat-card *ngIf="isLoading"
+  style="display: flex; justify-content: center; align-items: center">
+ <mat-progress-spinner
+   color="primary"
+   mode="indeterminate">
+ </mat-progress-spinner>
+</mat-card>
+
+<mat-accordion *ngIf="!isLoading" displayMode="flat" multi class="mat-table">
+  <section matSort class="mat-elevation-z2 mat-header-row" (matSortChange)="sortData($event)">
+    <span class="mat-header-cell" mat-sort-header="name">Name</span>
+    <span class="mat-header-cell">Description</span>
+    <span class="mat-header-cell">Duration</span>
+    <span class="mat-header-cell" mat-sort-header="dateCreated">Created</span>
+  </section>
+
+  <mat-expansion-panel *ngFor="let item of definitions" [expanded]="item.id === definitionsService.selectedDefinitionId">
+    <mat-expansion-panel-header class="mat-row" (click)="togglePanel(item)">
+      <span class="mat-cell">
+        <button mat-icon-button ngxClipboard [cbContent]="item.id" (click)="$event.stopPropagation();" title="Copy:  {{item.id}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        {{item.name}}
+      </span>
+      <span class="mat-cell">{{item.description}}</span>
+      <span class="mat-cell">{{item.durationHours}}</span>
+      <span class="mat-cell">{{item.dateCreated | date: 'yyyy-MM-dd'}}</span>
+    </mat-expansion-panel-header>
+    <app-definition-edit [definition]="item" (updateList)="updateList($event)">
+    </app-definition-edit>
+  </mat-expansion-panel>
+
+</mat-accordion>
+

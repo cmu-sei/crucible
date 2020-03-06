@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin cwd-toolbar-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  .cwd-action-row {
+    background: #b00;
+    max-height: 32px;
+  }
+}
