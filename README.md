@@ -19,4 +19,4 @@ Within the Crucible stack are the following applications:
 <!--- What do you think of something like this: The Crucible Stack was built by the development team within the SEI's Mod/Sim and Exercises (MSE) Initiative. Contact them at: [crucible-devs@sei.cmu.edu](mailto:crucible-devs@sei.cmu.edu). I made that alias up. --->
 
 ## License
-Copyright 2020 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/master/alloy.api/license.txt) file for details.
+Copyright 2020 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/master/license.md) file for details.
