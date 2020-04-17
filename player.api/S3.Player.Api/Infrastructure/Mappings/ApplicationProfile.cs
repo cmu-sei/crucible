@@ -1,10 +1,10 @@
-/*
+ï»¿/*
 Crucible
 Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -29,10 +29,12 @@ namespace S3.Player.Api.Infrastructure.Mappings
             CreateMap<ApplicationInstanceEntity, ApplicationInstance>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src =>
                     (src.Application.Name ?? src.Application.Template.Name ?? string.Empty)
+                        .Replace("{viewId}", src.Application.ExerciseId.ToString())
+                        .Replace("{viewName}", src.Application.Exercise.Name ?? string.Empty)
                         .Replace("{exerciseId}", src.Application.ExerciseId.ToString())
                         .Replace("{exerciseName}", src.Application.Exercise.Name ?? string.Empty)
                         .Replace("{teamId}", src.TeamId.ToString())
-                        .Replace("{teamName}", src.Team.Name ?? string.Empty)))                         
+                        .Replace("{teamName}", src.Team.Name ?? string.Empty)))
 
                 .ForMember(dest => dest.Icon, opt => opt.MapFrom(src =>
                     src.Application.Icon ?? (src.Application.Template != null ? src.Application.Template.Icon: string.Empty)))
@@ -45,6 +47,8 @@ namespace S3.Player.Api.Infrastructure.Mappings
 
                 .ForMember(dest => dest.Url, opt => opt.MapFrom(src =>
                     (src.Application.Url ?? src.Application.Template.Url ?? string.Empty)
+                        .Replace("{viewId}", src.Application.ExerciseId.ToString())
+                        .Replace("{viewName}", src.Application.Exercise.Name != null ? WebUtility.UrlEncode(src.Application.Exercise.Name) : string.Empty)
                         .Replace("{exerciseId}", src.Application.ExerciseId.ToString())
                         .Replace("{exerciseName}", src.Application.Exercise.Name != null ? WebUtility.UrlEncode(src.Application.Exercise.Name) : string.Empty)
                         .Replace("{teamId}", src.TeamId.ToString())
@@ -55,4 +59,3 @@ namespace S3.Player.Api.Infrastructure.Mappings
         }
     }
 }
-

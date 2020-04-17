@@ -24,5 +24,5 @@ ENV ASPNETCORE_URLS=http://*:80
 CMD [ "dotnet", "Caster.Api.dll" ]
 
 #Install git
-RUN apt-get update
-RUN apt-get install -y git
+RUN apt-get update && \
+	apt-get install -y git jq

@@ -4,17 +4,19 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort, MatDialog, MatDialogConfig } from '@angular/material';
+import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort, MatDialog } from '@angular/material';
 import { HttpEventType } from '@angular/common/http';
-import { Scenario, ScenarioService, Session } from 'src/app/swagger-codegen/dispatcher.api';
+import { Scenario } from 'src/app/data/scenario/scenario.store';
+import { View } from 'src/app/services/data/player-data-service';
+import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { ScenarioEditComponent } from 'src/app/components/scenarios/scenario-edit/scenario-edit.component';
 import { ScenarioEditDialogComponent } from 'src/app/components/scenarios/scenario-edit-dialog/scenario-edit-dialog.component';
-import { SessionEditDialogComponent } from 'src/app/components/sessions/session-edit-dialog/session-edit-dialog.component';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
 import {Subject} from 'rxjs/Subject';
 import { Observable  } from 'rxjs/Observable';
@@ -34,116 +36,166 @@ export interface Action {
 })
 export class ScenarioListComponent implements OnInit {
 
-  public displayedColumns: string[] = ['name', 'description', 'durationHours'];
-  public filterString: string;
+  @Input() scenarioList: Scenario[];
+  @Input() selectedScenario: Scenario;
+  @Input() pageSize: number;
+  @Input() pageIndex: number;
+  @Input() isLoading: boolean;
+  @Input() filterControl: FormControl;
+  @Input() filterString: string;
+  @Input() views: Observable<View[]>;
+  @Input() statuses: string;
+  @Output() saveScenario = new EventEmitter<Scenario>();
+  @Output() setActive = new EventEmitter<string>();
+  @Output() sortChange = new EventEmitter<Sort>();
+  @Output() pageChange = new EventEmitter<PageEvent>();
+  @Output() filterStatusChange = new EventEmitter<any>();
 
-  public editScenarioText = 'Edit Scenario';
-  public scenarioToEditId = '';
-  public scenarioDataSource = new MatTableDataSource<Scenario>(new Array<Scenario>());
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(ScenarioEditComponent) scenarioEditComponent: ScenarioEditComponent;
 
+  displayedColumns: string[] = ['name', 'view', 'status', 'startDate', 'endDate', 'description'];
+  showStatus = { active: true, ready: true, ended: false };
+  editScenarioText = 'Edit Scenario';
+  scenarioToEdit: Scenario;
+  scenarioDataSource = new MatTableDataSource<Scenario>(new Array<Scenario>());
 
   // MatPaginator Output
-  public defaultPageSize = 10;
-  public pageEvent: PageEvent;
-  public isLoading: Boolean;
+  defaultPageSize = 10;
+  pageEvent: PageEvent;
   displayedRows$: Observable<Scenario[]>;
   totalRows$: Observable<number>;
   sortEvents$: Observable<Sort>;
   pageEvents$: Observable<PageEvent>;
 
-  @Input() refresh: Subject<boolean>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(ScenarioEditComponent) scenarioEditComponent: ScenarioEditComponent;
-
   constructor(
-    private scenarioService: ScenarioService,
+    private scenarioDataService: ScenarioDataService,
     public dialogService: DialogService,
     private dialog: MatDialog
   ) { }
 
-  /**
-   * Initialization
-   */
   ngOnInit() {
-    this.sortEvents$ = fromMatSort(this.sort);
-    this.pageEvents$ = fromMatPaginator(this.paginator);
-    this.refresh.subscribe(shouldRefresh => {
-      if (shouldRefresh) {
-        this.refreshScenarios();
-      }
-    });
-    this.refreshScenarios();
+    this.showStatus.active = this.statuses.indexOf('active') > -1;
+    this.showStatus.ended = this.statuses.indexOf('ended') > -1;
+    this.showStatus.ready = this.statuses.indexOf('ready') > -1;
+    this.filterControl.setValue(this.filterString);
   }
 
-  /**
-     * Called by UI to add a filter to the exerciseDataSource
-     * @param filterValue
-     */
-  applyFilter(filterValue: string) {
-    this.filterString = filterValue;
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.scenarioDataSource.filter = filterValue;
-    this.filterAndSort();
-  }
-
-  /**
-   * Clears the search string
-   */
   clearFilter() {
-    this.applyFilter('');
+    this.filterControl.setValue('');
   }
 
   /**
-   * Refreshes the scenarios list and updates the mat table control
+   * Edits or adds a scenario
    */
-  public refreshScenarios() {
-    this.isLoading = true;
-    this.scenarioService.getScenarios().subscribe(scenarios => {
-      this.scenarioDataSource.data = scenarios;
-      this.filterAndSort();
-      this.isLoading = false;
+  editScenario(scenarioToEdit: Scenario) {
+    let scenario: Scenario;
+    if (!scenarioToEdit) {
+      const startDate = new Date();
+      startDate.setHours(startDate.getHours() + 1);
+      const endDate = new Date(startDate);
+      endDate.setHours(endDate.getHours() + 4);
+      scenario = {
+        name: '',
+        description: '',
+        startDate: startDate,
+        endDate: endDate,
+        status: 'ready'
+      };
+    } else {
+      scenario = {...scenarioToEdit};
+    }
+    const dialogRef = this.dialog.open(ScenarioEditDialogComponent, {
+      width: '800px',
+      data: {scenario: scenario, views: this.views}
     });
+    dialogRef.componentInstance.editComplete.subscribe(result => {
+      if (result.saveChanges && result.scenario) {
+        this.saveScenario.emit(result.scenario);
+      }
+      dialogRef.close();
+    });
+  }
+
+  /**
+   * Delete a scenario after confirmation
+   */
+  deleteScenario(scenario: Scenario): void {
+    this.dialogService.confirm('Delete Scenario', 'Are you sure that you want to delete scenario ' + scenario.name + '?')
+      .subscribe(result => {
+        if (result['confirm']) {
+          this.scenarioDataService.delete(scenario.id);
+        }
+      });
+  }
+
+  /**
+   * Copy a scenario after confirmation
+   */
+  copyScenario(scenario: Scenario): void {
+    this.dialogService.confirm('Copy Scenario', 'Are you sure that you want to copy scenario ' + scenario.name + '?')
+      .subscribe(result => {
+        if (result['confirm']) {
+          this.scenarioDataService.copyScenario(scenario.id);
+        }
+      });
+  }
+
+  /**
+   * Start a scenario
+   */
+  startScenario(scenario: Scenario): void {
+    this.dialogService.confirm('Start Scenario Now', 'Are you sure that you want to start scenario ' + scenario.name + '?')
+      .subscribe(result => {
+        if (result['confirm']) {
+          this.scenarioDataService.start(scenario.id);
+        }
+      });
+  }
+
+  /**
+   * End a scenario
+   */
+  endScenario(scenario: Scenario): void {
+    this.dialogService.confirm('End Scenario Now', 'Are you sure that you want to end scenario ' + scenario.name + '?')
+      .subscribe(result => {
+        if (result['confirm']) {
+          this.scenarioDataService.end(scenario.id);
+        }
+      });
   }
 
   /**
    * filters and sorts the displayed rows
    */
-  filterAndSort() {
-    const rows$ = of(this.scenarioDataSource.filteredData);
-    this.totalRows$ = rows$.pipe(map(rows => rows.length));
-    this.displayedRows$ = rows$.pipe(sortRows(this.sortEvents$), paginateRows(this.pageEvents$));
+  filterStatus() {
+    this.filterStatusChange.emit(this.showStatus);
   }
 
-  /**
-   * Adds a new scenario
-   */
-  addNewScenario() {
-    const scenario = <Scenario>{name: 'New Scenario', description: 'Add description'};
-    this.scenarioService.createScenario(scenario).subscribe(newScenario => {
-      this.refreshScenarios();
-      const dialogRef = this.dialog.open(ScenarioEditDialogComponent, {
-        width: '800px',
-        data: { scenario: newScenario }
-      });
-      dialogRef.componentInstance.editComplete.subscribe(result => {
-        this.refreshScenarios();
-        dialogRef.close();
-      });
-    });
+  selectScenario(scenarioId: string) {
+    if (!!this.selectedScenario && scenarioId === this.selectedScenario.id) {
+      this.setActive.emit('');
+    } else {
+      this.setActive.emit(scenarioId);
+    }
   }
 
-  /**
-   * Edit the Session created from a Scenario
-   */
-  editNewSession(session: Session) {
-    const dialogRef = this.dialog.open(SessionEditDialogComponent, {
-      width: '800px',
-      data: { scenario: session }
-    });
-    dialogRef.componentInstance.editComplete.subscribe((newSession) => {
-      dialogRef.close();
-    });
+  paginateScenarios(scenarios: Scenario[], pageIndex: number, pageSize: number) {
+    if (!scenarios) {
+      return [];
+    }
+    const startIndex = pageIndex * pageSize;
+    const copy = scenarios.slice();
+    return copy.splice(startIndex, pageSize);
+  }
+
+  paginatorEvent(page: PageEvent) {
+    this.pageChange.emit(page);
+  }
+
+  sortChanged(sort: Sort) {
+    this.sortChange.emit(sort);
   }
 
 }

@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stackstorm.Api.Client", "Stackstorm.Api.Client\Stackstorm.Api.Client.csproj", "{0C850809-F74A-41C3-9C36-E80F0004D444}"
 EndProject

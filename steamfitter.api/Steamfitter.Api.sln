@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steamfitter.Api", "Steamfitter.Api\Steamfitter.Api.csproj", "{F4047D97-1F7B-4B2D-8751-02C5AACF20FE}"
 EndProject

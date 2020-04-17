@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellonï¿½ and CERTï¿½ are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -27,6 +27,9 @@ using Alloy.Api.Infrastructure.Authorization;
 using Alloy.Api.Infrastructure.Exceptions;
 using Alloy.Api.Infrastructure.Options;
 using Alloy.Api.ViewModels;
+using Alloy.Api.Infrastructure.Extensions;
+using Caster.Api;
+using System.Net.Http;
 
 namespace Alloy.Api.Services
 {
@@ -35,12 +38,14 @@ namespace Alloy.Api.Services
         Task<IEnumerable<Implementation>> GetAsync(CancellationToken ct);
         Task<IEnumerable<Implementation>> GetDefinitionImplementationsAsync(Guid definitionId, CancellationToken ct);
         Task<IEnumerable<Implementation>> GetMyDefinitionImplementationsAsync(Guid definitionId, CancellationToken ct);
+        Task<IEnumerable<Implementation>> GetMyExerciseImplementationsAsync(Guid exerciseId, CancellationToken ct);
         Task<Implementation> GetAsync(Guid id, CancellationToken ct);
         Task<Implementation> CreateAsync(Implementation implementation, CancellationToken ct);
         Task<Implementation> LaunchImplementationFromDefinitionAsync(Guid definitionId, CancellationToken ct);
         Task<Implementation> UpdateAsync(Guid id, Implementation implementation, CancellationToken ct);
         Task<bool> DeleteAsync(Guid id, CancellationToken ct);
         Task<Implementation> EndAsync(Guid implementationId, CancellationToken ct);
+        Task<Implementation> RedeployAsync(Guid implementationId, CancellationToken ct);
     }
 
     public class ImplementationService : IImplementationService
@@ -56,6 +61,9 @@ namespace Alloy.Api.Services
         private readonly ILogger<ImplementationService> _logger;
         private readonly IOptionsMonitor<ResourceOptions> _resourceOptions;
         private readonly IUserClaimsService _claimsService;
+        private readonly ResourceOwnerAuthorizationOptions _resourceOwnerAuthorizationOptions;
+        private readonly ClientOptions _clientOptions;
+        private readonly IHttpClientFactory _httpClientFactory;
 
         public ImplementationService(
             AlloyContext context,
@@ -64,11 +72,14 @@ namespace Alloy.Api.Services
             IMapper mapper,
             IPlayerService playerService,
             ISteamfitterService steamfitterService,
-            ICasterService casterService, 
+            ICasterService casterService,
             IAlloyImplementationQueue alloyBackgroundService,
             ILogger<ImplementationService> logger,
             IOptionsMonitor<ResourceOptions> resourceOptions,
-            IUserClaimsService claimsService)
+            IUserClaimsService claimsService,
+            ResourceOwnerAuthorizationOptions resourceOwnerAuthorizationOptions,
+            ClientOptions clientOptions,
+            IHttpClientFactory httpClientFactory)
         {
             _context = context;
             _authorizationService = authorizationService;
@@ -81,6 +92,9 @@ namespace Alloy.Api.Services
             _logger = logger;
             _resourceOptions = resourceOptions;
             _claimsService = claimsService;
+            _resourceOwnerAuthorizationOptions = resourceOwnerAuthorizationOptions;
+            _clientOptions = clientOptions;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task<IEnumerable<Implementation>> GetAsync(CancellationToken ct)
@@ -99,7 +113,7 @@ namespace Alloy.Api.Services
             {
                 items = await _context.Implementations.Where(x => x.CreatedBy == user.GetId()).ToListAsync(ct);
             }
-            
+
             return _mapper.Map<IEnumerable<Implementation>>(items);
         }
 
@@ -115,8 +129,8 @@ namespace Alloy.Api.Services
 
             var items = await _context.Implementations
                 .Where(x => x.DefinitionId == definitionId)
-                .ToListAsync(ct);         
-            
+                .ToListAsync(ct);
+
             return _mapper.Map<IEnumerable<Implementation>>(items);
         }
 
@@ -129,7 +143,20 @@ namespace Alloy.Api.Services
             var items = await _context.Implementations
                 .Where(x => x.UserId == user.GetId() && x.DefinitionId == definitionId)
                 .ToListAsync(ct);
-            
+
+            return _mapper.Map<IEnumerable<Implementation>>(items);
+        }
+
+        public async Task<IEnumerable<Implementation>> GetMyExerciseImplementationsAsync(Guid exerciseId, CancellationToken ct)
+        {
+            var user = await _claimsService.GetClaimsPrincipal(_user.GetId(), true);
+            if (!(await _authorizationService.AuthorizeAsync(user, null, new BasicRightsRequirement())).Succeeded)
+                throw new ForbiddenException();
+
+            var items = await _context.Implementations
+                .Where(x => x.UserId == user.GetId() && x.ExerciseId == exerciseId)
+                .ToListAsync(ct);
+
             return _mapper.Map<IEnumerable<Implementation>>(items);
         }
 
@@ -166,6 +193,13 @@ namespace Alloy.Api.Services
             {
                 throw new Exception($"The appropriate resources are not available to create an implementation from the Definition {definitionId}.");
             }
+            // make sure the user can launch from the specified definition
+            var definition = await _context.Definitions.SingleOrDefaultAsync(o => o.Id == definitionId, ct);
+            if (!definition.IsPublished &&
+                !(  (await _authorizationService.AuthorizeAsync(user, null, new ContentDeveloperRightsRequirement())).Succeeded ||
+                    (await _authorizationService.AuthorizeAsync(user, null, new SystemAdminRightsRequirement())).Succeeded))
+                throw new ForbiddenException();
+
             // create the implementation from the definition
             var implementationEntity = await CreateImplementationEntityAsync(definitionId, ct);
             // add the implementation to the implementation queue for AlloyBackgrounsService to process.
@@ -208,6 +242,47 @@ namespace Alloy.Api.Services
                 implementationEntity.EndDate = DateTime.UtcNow;
                 implementationEntity.Status = ImplementationStatus.Ending;
                 implementationEntity.InternalStatus = InternalImplementationStatus.EndQueued;
+                await _context.SaveChangesAsync(ct);
+                // add the implementation to the implementation queue for AlloyBackgrounsService to process the caster destroy.
+                _alloyImplementationQueue.Add(implementationEntity);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error ending Implementation {implementationId}.", ex);
+                throw;
+            }
+
+            return await GetAsync(implementationId, ct);
+        }
+
+        public async Task<Implementation> RedeployAsync(Guid implementationId, CancellationToken ct)
+        {
+            try
+            {
+                var implementationEntity = await GetTheImplementationAsync(implementationId, true, false, ct);
+                if (implementationEntity.Status != ImplementationStatus.Active)
+                {
+                    var msg = $"Only an Active Implementation can be redeployed";
+                    _logger.LogError(msg);
+                    throw new Exception(msg);
+                }
+
+                var tokenResponse = await ApiClientsExtensions.RequestTokenAsync(_resourceOwnerAuthorizationOptions);
+                var casterApiClient = CasterApiExtensions.GetCasterApiClient(_httpClientFactory, _clientOptions.urls.casterApi, tokenResponse);
+
+                var resources = await casterApiClient.TaintResourcesAsync(
+                    implementationEntity.WorkspaceId.Value,
+                    new Caster.Api.Models.TaintResourcesCommand { SelectAll = true },
+                    ct);
+
+                if (resources.Any(r => r.Tainted == false)) {
+                    var msg = $"Taint failed";
+                    _logger.LogError(msg);
+                    throw new Exception(msg);
+                }
+
+                implementationEntity.Status = ImplementationStatus.Planning;
+                implementationEntity.InternalStatus = InternalImplementationStatus.PlanningRedeploy;
                 await _context.SaveChangesAsync(ct);
                 // add the implementation to the implementation queue for AlloyBackgrounsService to process the caster destroy.
                 _alloyImplementationQueue.Add(implementationEntity);
@@ -307,4 +382,3 @@ namespace Alloy.Api.Services
 
     }
 }
-

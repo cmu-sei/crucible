@@ -26,3 +26,6 @@ ENV ASPNETCORE_URLS=http://*:80
 EXPOSE 80
 
 CMD ["dotnet", "S3.Vm.Console.dll"]
+
+RUN apt-get update && \
+	apt-get install -y jq

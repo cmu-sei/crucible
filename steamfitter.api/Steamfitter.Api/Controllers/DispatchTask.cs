@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -207,6 +207,26 @@ namespace Steamfitter.Api.Controllers
         }
 
         /// <summary>
+        /// Copies a DispatchTask
+        /// </summary>
+        /// <remarks>
+        /// Copies a DispatchTask to the location specified
+        /// <para />
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified DispatchTask
+        /// </remarks>  
+        /// <param name="id">The Id of the DispatchTask to copy</param>
+        /// <param name="newLocation">The Id and type of the new location</param>
+        /// <param name="ct"></param>
+        [HttpPost("DispatchTasks/{id}/copy")]
+        [ProducesResponseType(typeof(DispatchTask[]), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(operationId: "copyDispatchTask")]
+        public async Task<IActionResult> Copy([FromRoute] Guid id, [FromBody] NewLocation newLocation, CancellationToken ct)
+        {
+            var taskWithSubtasks = await _DispatchTaskService.CopyAsync(id, newLocation.Id, newLocation.LocationType, ct);
+            return Ok(taskWithSubtasks);
+        }
+
+        /// <summary>
         /// Creates a new DispatchTask and executes it
         /// </summary>
         /// <remarks>
@@ -266,6 +286,26 @@ namespace Steamfitter.Api.Controllers
         }
 
         /// <summary>
+        /// Moves a DispatchTask
+        /// </summary>
+        /// <remarks>
+        /// Moves a DispatchTask to the location specified
+        /// <para />
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified DispatchTask
+        /// </remarks>  
+        /// <param name="id">The Id of the DispatchTask to move</param>
+        /// <param name="newLocation">The Id and type of the new location</param>
+        /// <param name="ct"></param>
+        [HttpPut("DispatchTasks/{id}/move")]
+        [ProducesResponseType(typeof(DispatchTask[]), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(operationId: "moveDispatchTask")]
+        public async Task<IActionResult> Move([FromRoute] Guid id, [FromBody] NewLocation newLocation, CancellationToken ct)
+        {
+            var taskWithSubtasks = await _DispatchTaskService.MoveAsync(id, newLocation.Id, newLocation.LocationType, ct);
+            return Ok(taskWithSubtasks);
+        }
+
+        /// <summary>
         /// Deletes a DispatchTask
         /// </summary>
         /// <remarks>
@@ -299,6 +339,12 @@ namespace Steamfitter.Api.Controllers
             return Ok(System.IO.File.ReadAllText(@"availableCommands.json"));
         }
 
+    }
+
+    public class NewLocation
+    {
+        public Guid Id { get; set; }
+        public string LocationType { get; set; }
     }
 }
 

@@ -4,13 +4,14 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -43,6 +44,20 @@ namespace Caster.Api.Features.Files
         {
             var result = await _mediator.Send(new Get.Query { Id = id });
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Export a single file.
+        /// </summary>
+        /// <param name="id">ID of a file.</param>
+        /// <returns></returns>
+        [HttpGet("files/{id}/actions/export")]
+        [ProducesResponseType(typeof(FileResult), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "ExportFile")]
+        public async Task<IActionResult> Export([FromRoute] Guid id)
+        {
+            var result = await _mediator.Send(new Get.Query { Id = id });
+            return File(Encoding.ASCII.GetBytes(result.Content), "text/plain", result.Name);
         }
 
         /// <summary>
@@ -246,4 +261,3 @@ namespace Caster.Api.Features.Files
         }
     }
 }
-

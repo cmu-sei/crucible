@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "swagger:gen": "curl --insecure http://localhost:4402/swagger/v1/swagger.json --output swagger.json && node_modules/@openapitools/openapi-generator-cli/bin/openapi-generator generate -i ./swagger.json -g typescript-angular -o src/app/generated/alloy.api --additional-properties ngVersion=9.0.2 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original --type-mappings=DateTime=Date",
+    "swagger:gen-win": "docker run --rm -v %CD%:/local openapitools/openapi-generator-cli:v4.3.0 generate -i http://host.docker.internal:4402/swagger/v1/swagger.json?format=openapi -g typescript-angular -o /local/src/app/generated/alloy.api --additional-properties ngVersion=9.0.2 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original --type-mappings=DateTime=Date"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,79 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<mat-sidenav-container class="appcontent-container" [hasBackdrop]="false" autosize>
+  <mat-sidenav class="appbarmenu-container" #sidenav mode="side" mwlResizable
+               [style.min-width.px]="leftSidebarWidth"
+               [style.max-width.px]="leftSidebarWidth"
+               [resizeCursorPrecision]="30"
+               [resizeEdges]="{right: true}"
+               (resizing)="resizingFn($event)"
+               (resizeEnd)="resizeEndFn($event)"
+               [opened]="leftSidebarOpen"
+               (openedChange)="leftSidebarOpenFn($event)">
+    <div fxLayout="column" fxLayoutAlign="start start">
+      <div fxFill fxLayout="row" fxLayoutAlign="end center">
+        <button (click)="sidenav.toggle()" mat-icon-button>
+          <mat-icon title="Close">
+            <img width="32" alt="collapse" src="/assets/img/SP_Icon_Collapse.png" />
+          </mat-icon>
+        </button>
+      </div>
+      <h2 style="margin-left: 10px;"><a [routerLink]="['/']">{{ titleText }}</a></h2>
+      <mat-divider></mat-divider>
+      <cas-project-navigation></cas-project-navigation>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content fxLayout="column" *ngIf="project">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="bar-height topBarColor">
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div [hidden]="opened">
+          <button color="primary" (click)="sidenav.toggle()" mat-icon-button>
+            <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-chevron-left" title="Open"></mat-icon>
+          </button>
+        </div>
+
+        <div class="project-text">
+          {{project.name}}
+        </div>
+      </div>
+
+      <div fxFlex class="team-text" fxLayoutAlign="end center" *ngIf="currentUser$ | async as currentUser">
+        <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
+          <strong>{{ currentUser.name }}</strong>
+          <mat-icon color="primary" fontSet="fas" class="fa-lg" fontIcon="fa-caret-down" style="transform: translateY(1px);"></mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false">
+          <button *ngIf="currentUser.isSuperUser" [routerLink]="['/admin']" mat-menu-item>Administration</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center stretch" fxFlex="0 1 auto">
+      <div fxFill>
+        <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="50px">
+          <cas-project fxFlex="1 2 auto"
+                       [loading]="loading$ | async"
+                       [project]="project$ | async"
+                       [projectUI]="projectUI$ | async"
+                       (closeTab)="closeTab($event)"
+                       (tabChanged)="tabChangedFn($event)"
+                       (breadcrumbClicked)="breadcrumbClickedFn($event)">
+          </cas-project>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

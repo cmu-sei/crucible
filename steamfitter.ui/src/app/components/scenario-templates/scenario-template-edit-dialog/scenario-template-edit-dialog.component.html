@@ -1,0 +1,57 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div mat-dialog-content *ngIf="!!data && data.scenarioTemplate !== undefined && data.scenarioTemplate !== null">
+
+  <div fxLayout="row" class="add-margin">
+    <div fxFlex fxFlexOffset="10">
+      <mat-form-field class="full-width">
+        <input type="text" matInput [formControl]="scenarioTemplateNameFormControl" placeholder="Name (required)"
+          value="{{data.scenarioTemplate.name}}" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="scenarioTemplateNameFormControl.hasError('required') || scenarioTemplateNameFormControl.hasError('minlength')">
+          Name is <strong>required</strong> and must contain 4 or more characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="add-margin">
+    <div fxFlex fxFlexOffset="10">
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="ScenarioTemplate Description (required)" [formControl]="descriptionFormControl"
+          value="{{data.scenarioTemplate.description}}" [errorStateMatcher]="matcher" (focus)="trimInitialDescription()"></textarea>
+        <mat-error *ngIf="descriptionFormControl.hasError('required') || descriptionFormControl.hasError('minlength')">
+          Description is <strong>required</strong> and must contain 4 or more characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="add-margin">
+    <div fxFlex fxFlexOffset="10">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Duration Hours (required)" [formControl]="durationHoursFormControl"
+          value="{{data.scenarioTemplate.durationHours}}" [errorStateMatcher]="notAnIntegerErrorState">
+        <mat-error *ngIf="durationHoursFormControl.hasError('required') || durationHoursFormControl.hasError('notAnInteger')">
+          Duration Hours must be an <strong>integer greater than 0</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="bottom-button">
+    <div fxFlex fxLayoutAlign="left" class="delete-button">
+      <button mat-stroked-button (click)="handleEditComplete(true)" [disabled]="!errorFree()" style="margin-left: 40px;">Save</button>
+    </div>
+    <div fxFlex fxLayoutAlign="end" class="delete-button">
+      <button mat-stroked-button (click)="handleEditComplete(false)">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,7 @@
     "redirect_uri": "http://localhost:4403/auth-callback",
     "post_logout_redirect_uri": "http://localhost:4403",
     "response_type": "id_token token",
-    "scope": "openid profile s3 s3-vm alloy steamfitter caster-api",
+    "scope": "openid profile s3 s3-vm alloy caster steamfitter",
     "automaticSilentRenew": true,
     "silent_redirect_uri": "http://localhost:4403/auth-callback-silent"
   },

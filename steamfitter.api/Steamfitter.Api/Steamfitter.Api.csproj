@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -41,7 +41,7 @@
     <PackageReference Include="s3.player.api.client" Version="1.0.0" />
     <PackageReference Include="s3.vm.api.client" Version="1.0.0" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
-    <PackageReference Include="Stackstorm.Connector" Version="1.0.2" />
+    <PackageReference Include="Stackstorm.Connector" Version="1.0.5" />
   </ItemGroup>
 
   <ItemGroup>

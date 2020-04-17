@@ -4,75 +4,25 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
 
-<div *ngIf="scenario !== undefined">
+<span *ngIf="scenario !== undefined && scenario !== null">
 
-  <div fxLayout="row" class="add-margin">
+  <div fxLayout="row" class="add-margin" (click)="$event.stopPropagation();">
     <div fxFlex fxFlexOffset="10">
-      <mat-form-field class="full-width">
-        <input type="text" matInput [formControl]="scenarioNameFormControl" placeholder="Name (required)" (blur)="saveScenario('name')"
-          value="{{scenario.name}}" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="scenarioNameFormControl.hasError('minlength') && !scenarioNameFormControl.hasError('required')">
-          Must contain 4 or more characters
-        </mat-error>
-        <mat-error *ngIf="scenarioNameFormControl.hasError('required')">
-          Name is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
+      <app-tasks
+        [taskList]="taskList"
+        [taskResultList]="taskResultList"
+        [scenarioId]="scenario.id"
+        [isEditable]="scenario.status === 'ready' || scenario.status === 'active'"
+        [isExecutable]="scenario.status === 'active'"
+        (taskListChanged)="refreshTaskList()"
+        (deleteTaskRequested)="deleteTask($event)"
+      ></app-tasks>
     </div>
   </div>
 
-  <div fxLayout="row" class="add-margin">
-    <div fxFlex fxFlexOffset="10">
-      <mat-form-field class="full-width">
-        <textarea matInput placeholder="Scenario Description (required)" [formControl]="descriptionFormControl"
-          (blur)="saveScenario('description')" value="{{scenario.description}}" [errorStateMatcher]="matcher"></textarea>
-        <mat-error *ngIf="descriptionFormControl.hasError('required')">
-          Description is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div fxLayout="row" class="add-margin">
-    <div fxFlex fxFlexOffset="10">
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Duration Hours" [formControl]="durationHoursFormControl" (blur)="saveScenario('durationHours')"
-          value="{{scenario.durationHours}}" [errorStateMatcher]="notAnIntegerErrorState">
-        <mat-error *ngIf="durationHoursFormControl.hasError('notAnInteger')">
-          Duration Hours must be an <strong>integer</strong>
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div fxLayout="row" class="add-margin">
-    <div fxFlex fxFlexOffset="10">
-      <app-tasks [dispatchTaskSource]="dispatchTaskSource"></app-tasks>
-    </div>
-  </div>
-
-  <div *ngIf="openedAsDialog" fxLayout="row" class="bottom-button">
-    <div fxFlex fxLayoutAlign="left" class="delete-button">
-      <button mat-stroked-button (click)="returnToScenarioList()" style="margin-left: 40px;">Done</button>
-    </div>
-    <div fxFlex fxLayoutAlign="end" class="delete-button">
-      <button mat-stroked-button (click)="deleteScenario()">Delete</button>
-    </div>
-  </div>
-  <div *ngIf="!openedAsDialog"  fxLayout="row" class="bottom-button">
-    <div fxFlex fxLayoutAlign="left" class="delete-button">
-      <button mat-stroked-button (click)="createSession()" style="margin-left: 40px;">Create a Session</button>
-      <button mat-stroked-button (click)="copyScenario()" style="margin-left: 40px;">Copy Scenario</button>
-    </div>
-    <div fxFlex fxLayoutAlign="end" class="delete-button">
-      <button mat-stroked-button (click)="deleteScenario()">Delete Scenario</button>
-    </div>
-  </div>
-  <div>&nbsp;</div>
-
-</div>
+</span>
 

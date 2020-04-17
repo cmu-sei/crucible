@@ -1,4 +1,4 @@
-# Alloy
+# Alloy UI Readme
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 
@@ -22,6 +22,10 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Further help on Angular CLI
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Alloy documentation
+
+In addition to the [Alloy API Readme](https://github.com/cmu-sei/crucible/blob/master/alloy.api/README.md) and **Alloy UI Readme** found in their respective repositories, Alloy documentation can be found in the Crucible wiki. Get started with Alloy [here](https://github.com/cmu-sei/crucible/wiki/Alloy-Quick-Start).

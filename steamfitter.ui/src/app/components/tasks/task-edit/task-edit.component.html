@@ -4,75 +4,79 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
+<div mat-dialog-content>
+  <div fxFlex  fxLayout="column" class=" content">
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Name" [value]="data.task.name" (input)="data.task.name = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Description" [value]="data.task.description" (input)="data.task.description = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Expected Output" [value]="data.task.expectedOutput" (input)="data.task.expectedOutput = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <mat-label>Trigger Condition</mat-label>
+      <mat-select  [(ngModel)]="data.task.triggerCondition" name="triggerCondition">
+        <mat-option *ngFor="let choice of triggerConditions" [value]="choice">
+          {{choice}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="VM Mask (VM name includes this text)" [value]="data.task.vmMask" (input)="data.task.vmMask = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Delay (in seconds) Before Executing This Task" [value]="data.task.delaySeconds" (input)="data.task.delaySeconds = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Number of Iterations" [value]="data.task.iterations" (input)="data.task.iterations = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Interval (in seconds) Between Iterations" [value]="data.task.intervalSeconds" (input)="data.task.intervalSeconds = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Expiration Timeout (in seconds)" [value]="data.task.expirationSeconds" (input)="data.task.expirationSeconds = $event.target.value">
+    </mat-form-field>
 
-<div fxFlex  fxLayout="column" class=" content">
-  <mat-form-field class="param-full-width">
-    <input matInput placeholder="Name" [value]="dispatchTask.name" (input)="dispatchTask.name = $event.target.value" (change)="onDataChange()">
-  </mat-form-field>
-  <mat-form-field class="param-full-width">
-    <input matInput placeholder="Description" [value]="dispatchTask.description" (input)="dispatchTask.description = $event.target.value" (change)="onDataChange()">
-  </mat-form-field>
-  <mat-form-field class="param-full-width">
-    <input matInput placeholder="Expected Output" [value]="dispatchTask.expectedOutput" (input)="dispatchTask.expectedOutput = $event.target.value" (change)="onDataChange()">
-  </mat-form-field>
-  <mat-form-field class="param-full-width">
-    <mat-label>Trigger Condition</mat-label>
-    <mat-select  [(ngModel)]="dispatchTask.triggerCondition" (selectionChange)="onDataChange()" name="triggerCondition">
-      <mat-option *ngFor="let choice of triggerConditions" [value]="choice">
-        {{choice}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="param-full-width">
-    <input matInput placeholder="VM Mask (VM name includes this text)" [value]="dispatchTask.vmMask" (input)="dispatchTask.vmMask = $event.target.value" (change)="onDataChange()">
-  </mat-form-field>
-  <mat-form-field class="param-full-width">
-    <input matInput placeholder="Delay (in seconds) Before Executing This Task" [value]="dispatchTask.delaySeconds" (input)="dispatchTask.delaySeconds = $event.target.value" (change)="onDataChange()">
-  </mat-form-field>
-  <mat-form-field class="param-full-width">
-    <input matInput placeholder="Number of Iterations" [value]="dispatchTask.iterations" (input)="dispatchTask.iterations = $event.target.value" (change)="onDataChange()">
-  </mat-form-field>
-  <mat-form-field class="param-full-width">
-    <input matInput placeholder="Interval (in seconds) Between Iterations" [value]="dispatchTask.intervalSeconds" (input)="dispatchTask.intervalSeconds = $event.target.value" (change)="onDataChange()">
-  </mat-form-field>
-  <mat-form-field class="param-full-width">
-    <input matInput placeholder="Expiration Timeout (in seconds)" [value]="dispatchTask.expirationSeconds" (input)="dispatchTask.expirationSeconds = $event.target.value" (change)="onDataChange()">
-  </mat-form-field>
+    <mat-form-field fxFlex fxFlexFill>
+      <mat-select placeholder="Select a Command" [(value)]="selectedCommand" (selectionChange)="onCommandChange()">
+        <mat-option *ngFor="let cmd of availableCommands" [value]="cmd">
+          {{cmd.api}} - {{cmd.display}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field fxFlex fxFlexFill>
-    <mat-select placeholder="Select a Command" [(value)]="selectedCommand" (selectionChange)="onCommandChange()">
-      <mat-option *ngFor="let cmd of availableCommands" [value]="cmd">
-        {{cmd.api}} - {{cmd.display}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <div fxFlex fxLayout="column" *ngIf="selectedCommand != undefined" class="content">
-    <form class="param-form">
-      <div *ngFor="let param of selectedCommand.parameters" class="param-indent">
-        <mat-form-field class="param-full-width" *ngIf="param.inputType === 'text'">
-          <input matInput placeholder="{{param.display}}" [value]="param.value" (input)="param.value = $event.target.value" (change)="onCommandChange()">
-        </mat-form-field>
-        <mat-form-field class="param-full-width" *ngIf="param.inputType === 'password'">
-          <input matInput [type]="'password'" placeholder="{{param.display}}" [value]="param.value" (input)="param.value = $event.target.value" (change)="onCommandChange()">
-        </mat-form-field>
-        <mat-form-field class="param-full-width" *ngIf="param.inputType === 'select'">
-          <mat-label>{{param.display}}</mat-label>
-          <mat-select  [(ngModel)]="param.value" (selectionChange)="onCommandChange()" name="{{param.key}}">
-            <mat-option *ngFor="let choice of param.choices" [value]="choice.key">
-              {{choice.display}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+    <div fxFlex fxLayout="column" *ngIf="selectedCommand != undefined" class="content">
+      <form class="param-form">
+        <div *ngFor="let param of selectedCommand.parameters" class="param-indent">
+          <mat-form-field class="param-full-width" *ngIf="param.inputType === 'text'">
+            <input matInput placeholder="{{param.display}}" [value]="param.value" (input)="param.value = $event.target.value" (change)="onCommandChange()">
+          </mat-form-field>
+          <mat-form-field class="param-full-width" *ngIf="param.inputType === 'password'">
+            <input matInput [type]="'password'" placeholder="{{param.display}}" [value]="param.value" (input)="param.value = $event.target.value" (change)="onCommandChange()">
+          </mat-form-field>
+          <mat-form-field class="param-full-width" *ngIf="param.inputType === 'select'">
+            <mat-label>{{param.display}}</mat-label>
+            <mat-select  [(ngModel)]="param.value" (selectionChange)="onCommandChange()" name="{{param.key}}">
+              <mat-option *ngFor="let choice of param.choices" [value]="choice.key">
+                {{choice.display}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+    <div fxLayout="row" class="bottom-button">
+      <div fxFlex fxLayoutAlign="left" class="delete-button">
+        <button mat-stroked-button (click)="handleEditComplete(true)" [disabled]="!errorFree()" style="margin-left: 40px;">Save</button>
       </div>
-    </form>
+      <div fxFlex fxLayoutAlign="end" class="delete-button">
+        <button mat-stroked-button (click)="handleEditComplete(false)">Cancel</button>
+      </div>
+    </div>
   </div>
-  <div fxFlex fxLayout="column" fxLayoutAlign="space-around center">
-    <button mat-stroked-button class="bottom-button" (click)="dialogRef.close()">Done</button>
-  </div>
-
 </div>
-

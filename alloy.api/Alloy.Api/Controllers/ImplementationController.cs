@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellonï¿½ and CERTï¿½ are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -40,7 +40,7 @@ namespace Alloy.Api.Controllers
         /// Returns a list of all of the Implementations in the system.
         /// <para />
         /// Only accessible to a SuperUser
-        /// </remarks>       
+        /// </remarks>
         /// <returns></returns>
         [HttpGet("implementations")]
         [ProducesResponseType(typeof(IEnumerable<Implementation>), (int)HttpStatusCode.OK)]
@@ -56,7 +56,7 @@ namespace Alloy.Api.Controllers
         /// </summary>
         /// <remarks>
         /// Returns a list of all of the Implementations for the Definition.
-        /// </remarks>       
+        /// </remarks>
         /// <returns></returns>
         [HttpGet("definitions/{definitionId}/implementations")]
         [ProducesResponseType(typeof(IEnumerable<Implementation>), (int)HttpStatusCode.OK)]
@@ -72,7 +72,7 @@ namespace Alloy.Api.Controllers
         /// </summary>
         /// <remarks>
         /// Returns a list of the user's Implementations for the Definition.
-        /// </remarks>       
+        /// </remarks>
         /// <returns></returns>
         [HttpGet("definitions/{definitionId}/implementations/mine")]
         [ProducesResponseType(typeof(IEnumerable<Implementation>), (int)HttpStatusCode.OK)]
@@ -80,6 +80,22 @@ namespace Alloy.Api.Controllers
         public async Task<IActionResult> GetMyDefinitionImplementations(string definitionId, CancellationToken ct)
         {
             var list = await _implementationService.GetMyDefinitionImplementationsAsync(Guid.Parse(definitionId), ct);
+            return Ok(list);
+        }
+
+        /// <summary>
+        /// Gets the user's Implementations for the indicated Player Exercise Id
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of the user's Implementations for the Exercise.
+        /// </remarks>
+        /// <returns></returns>
+        [HttpGet("exercises/{exerciseId}/implementations/mine")]
+        [ProducesResponseType(typeof(IEnumerable<Implementation>), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(operationId: "getMyExerciseImplementations")]
+        public async Task<IActionResult> GetMyExerciseImplementations(string exerciseId, CancellationToken ct)
+        {
+            var list = await _implementationService.GetMyExerciseImplementationsAsync(Guid.Parse(exerciseId), ct);
             return Ok(list);
         }
 
@@ -114,7 +130,7 @@ namespace Alloy.Api.Controllers
         /// Creates a new Implementation with the attributes specified
         /// <para />
         /// Accessible only to a SuperUser or an Administrator
-        /// </remarks>    
+        /// </remarks>
         /// <param name="implementation">The data to create the Implementation with</param>
         /// <param name="ct"></param>
         [HttpPost("implementations")]
@@ -131,7 +147,7 @@ namespace Alloy.Api.Controllers
         /// </summary>
         /// <remarks>
         /// Creates a new Implementation from the specified definition
-        /// </remarks>    
+        /// </remarks>
         /// <param name="definitionId">The ID of the Definition to use to create the Implementation</param>
         /// <param name="ct"></param>
         [HttpPost("definitions/{definitionId}/implementations")]
@@ -150,7 +166,7 @@ namespace Alloy.Api.Controllers
         /// Updates an Implementation with the attributes specified
         /// <para />
         /// Accessible only to a SuperUser or a User on an Admin Team within the specified Implementation
-        /// </remarks>  
+        /// </remarks>
         /// <param name="id">The Id of the Exericse to update</param>
         /// <param name="implementation">The updated Implementation values</param>
         /// <param name="ct"></param>
@@ -170,7 +186,7 @@ namespace Alloy.Api.Controllers
         /// Deletes an Implementation with the specified id
         /// <para />
         /// Accessible only to a SuperUser or a User on an Admin Team within the specified Implementation
-        /// </remarks>    
+        /// </remarks>
         /// <param name="id">The id of the Implementation to delete</param>
         /// <param name="ct"></param>
         [HttpDelete("implementations/{id}")]
@@ -189,7 +205,7 @@ namespace Alloy.Api.Controllers
         /// Ends an Implementation with the specified id
         /// <para />
         /// Accessible only to a SuperUser or a User on an Admin Team within the specified Implementation
-        /// </remarks>    
+        /// </remarks>
         /// <param name="id">The id of the Implementation to end</param>
         /// <param name="ct"></param>
         [HttpDelete("implementations/{id}/end")]
@@ -201,6 +217,24 @@ namespace Alloy.Api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Redeploys the Caster Workspace of an Implementation
+        /// </summary>
+        /// <remarks>
+        /// Redeploys the Caster Workspace for the Implementation with the specified id
+        /// <para />
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Implementation
+        /// </remarks>
+        /// <param name="id">The id of the Implementation to redeploy</param>
+        /// <param name="ct"></param>
+        [HttpPost("implementations/{id}/redeploy")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [SwaggerOperation(operationId: "redeployImplementation")]
+        public async Task<IActionResult> Redeploy(Guid id, CancellationToken ct)
+        {
+            await _implementationService.RedeployAsync(id, ct);
+            return NoContent();
+        }
+
     }
 }
-

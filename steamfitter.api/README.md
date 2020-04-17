@@ -1,4 +1,4 @@
-﻿# steamfitter.api
+# steamfitter.api
 
 This project provides a restful api for steamfitter functionality in the Sketch/Scenario Player ecosystem.
 

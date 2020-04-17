@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <RootNamespace>stackstorm.connector</RootNamespace>
 
         <PackageId>Stackstorm.Connector</PackageId>
-        <Version>1.0.2</Version>
+        <Version>0.0.0</Version>
         <Authors>CERT.CWD</Authors>
         <Company>CMU.SEI</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -14,7 +14,7 @@
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-      <PackageReference Include="Stackstorm.Api.Client" Version="1.0.2" />
+      <PackageReference Include="Stackstorm.Api.Client" />
     </ItemGroup>
 
 </Project>

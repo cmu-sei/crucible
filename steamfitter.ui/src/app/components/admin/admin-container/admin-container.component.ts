@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -29,9 +29,10 @@ export class AdminContainerComponent implements OnDestroy {
   usersText = 'Users';
   showSection: Observable<string>;
   isSidebarOpen = true;
-  isSuperUser = this.adminUsersService.isSuperUser();
+  isSuperUser = false;
   userList: Observable<User[]>;
   filterControl: FormControl = this.adminUsersService.filterControl;
+  filterString: Observable<string>;
   permissionList: Observable<Permission[]>;
   pageSize: Observable<number>;
   pageIndex: Observable<number>;
@@ -44,8 +45,17 @@ export class AdminContainerComponent implements OnDestroy {
     private permissionService: PermissionService,
     private userPermissionService: UserPermissionService
   ) {
+    this.adminUsersService.isSuperUser.pipe(takeUntil(this.unsubscribe$)).subscribe(result => {
+      this.isSuperUser = result;
+      if (!result) {
+        router.navigate(['/']);
+      }
+    });
     this.userList = this.adminUsersService.userList;
     this.permissionList = this.permissionService.getPermissions();
+    this.filterString = activatedRoute.queryParamMap.pipe(
+      map(params => (params.get('filter') || ''))
+    );
     this.pageSize = activatedRoute.queryParamMap.pipe(
       map(params => (parseInt(params.get('pagesize') || '20', 10)))
     );

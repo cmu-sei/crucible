@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -32,14 +32,14 @@ import { VmListComponent } from './components/vm-list/vm-list.component';
 import { SystemMessageService } from './services/system-message/system-message.service';
 import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
 import { VmTaskExecuteComponent } from './components/vm-task-execute/vm-task-execute.component';
+import { ScenarioTemplatesComponent } from './components/scenario-templates/scenario-templates.component';
+import { ScenarioTemplateEditComponent } from './components/scenario-templates/scenario-template-edit/scenario-template-edit.component';
+import { ScenarioTemplateEditDialogComponent } from './components/scenario-templates/scenario-template-edit-dialog/scenario-template-edit-dialog.component';
+import { ScenarioTemplateListComponent } from './components/scenario-templates/scenario-template-list/scenario-template-list.component';
 import { ScenariosComponent } from './components/scenarios/scenarios.component';
 import { ScenarioEditComponent } from './components/scenarios/scenario-edit/scenario-edit.component';
 import { ScenarioEditDialogComponent } from './components/scenarios/scenario-edit-dialog/scenario-edit-dialog.component';
 import { ScenarioListComponent } from './components/scenarios/scenario-list/scenario-list.component';
-import { SessionsComponent } from './components/sessions/sessions.component';
-import { SessionEditComponent } from './components/sessions/session-edit/session-edit.component';
-import { SessionEditDialogComponent } from './components/sessions/session-edit-dialog/session-edit-dialog.component';
-import { SessionListComponent } from './components/sessions/session-list/session-list.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { CommandsComponent } from './components/commands/commands.component';
@@ -49,7 +49,6 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { ClipboardModule } from 'ngx-clipboard';
 import { AdminContainerComponent } from './components/admin/admin-container/admin-container.component';
 import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
-
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -93,6 +92,8 @@ import { TaskHistoryComponent } from './components/task-history/task-history.com
 import { TaskTreeComponent } from './components/tasks/task-tree/task-tree.component';
 import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
+import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
 
 @NgModule({
   declarations: [
@@ -104,14 +105,14 @@ import { TasksComponent } from './components/tasks/tasks.component';
     VmListComponent,
     SystemMessageComponent,
     VmTaskExecuteComponent,
+    ScenarioTemplatesComponent,
+    ScenarioTemplateEditComponent,
+    ScenarioTemplateEditDialogComponent,
+    ScenarioTemplateListComponent,
     ScenariosComponent,
     ScenarioEditComponent,
     ScenarioEditDialogComponent,
     ScenarioListComponent,
-    SessionsComponent,
-    SessionEditComponent,
-    SessionEditDialogComponent,
-    SessionListComponent,
     CommandsComponent,
     ExecuteResultsComponent,
     ConfirmDialogComponent,
@@ -123,6 +124,8 @@ import { TasksComponent } from './components/tasks/tasks.component';
     AdminUsersComponent
   ],
   imports: [
+    AkitaNgDevtools.forRoot(),
+    AkitaNgRouterStoreModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -198,18 +201,18 @@ import { TasksComponent } from './components/tasks/tasks.component';
       useFactory: getBasePath,
       deps: [SettingsService],
       multi: true
-    },
-    {
-      provide: ErrorHandler,
-      useClass: ErrorService
+    // },
+    // {
+    //   provide: ErrorHandler,
+    //   useClass: ErrorService
     }
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     SystemMessageComponent,
     ConfirmDialogComponent,
+    ScenarioTemplateEditDialogComponent,
     ScenarioEditDialogComponent,
-    SessionEditDialogComponent,
     TaskEditComponent
   ]
 })

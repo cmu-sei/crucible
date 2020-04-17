@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellonï¿½ and CERTï¿½ are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -33,19 +33,19 @@ namespace Alloy.Api.Infrastructure.Extensions
             apiClient.BaseUri = client.BaseAddress;
             return apiClient;
         }
-        
-        public static async Task<Guid?> CreateCasterWorkspaceAsync(CasterApiClient casterApiClient, ImplementationEntity implementationEntity, Guid directoryId, string varsFileContent, CancellationToken ct)
+
+        public static async Task<Guid?> CreateCasterWorkspaceAsync(CasterApiClient casterApiClient, ImplementationEntity implementationEntity, Guid directoryId, string varsFileContent, bool useDynamicHost, CancellationToken ct)
         {
             try
             {
                 // remove special characters from the user name, use lower case and replace spaces with underscores
                 var userName = Regex.Replace(implementationEntity.Username.ToLower().Replace(" ", "_"), "[@&'(\\s)<>#]", "", RegexOptions.None);
                 // create the new workspace
-                var workspaceCommand = new CreateWorkspaceCommand() 
+                var workspaceCommand = new CreateWorkspaceCommand()
                 {
                     Name = $"{userName}-{implementationEntity.UserId.ToString()}",
                     DirectoryId = directoryId,
-                    DynamicHost = true
+                    DynamicHost = useDynamicHost
                 };
                 var workspaceId = (await casterApiClient.CreateWorkspaceAsync(workspaceCommand, ct)).Id;
                 // create the workspace variable file
@@ -71,7 +71,9 @@ namespace Alloy.Api.Infrastructure.Extensions
             {
                 var varsFileContent = "";
                 var exercise = (await playerApiClient.GetExerciseAsync((Guid)implementationEntity.ExerciseId, ct)) as S3.Player.Api.Models.Exercise;
-                varsFileContent = $"exercise_id = \"{exercise.Id}\"\r\nuser_id = \"{implementationEntity.UserId}\"\r\nusername = \"{implementationEntity.Username}\"\r\n";
+
+                // TODO: exercise_id is deprecated. Remove when no longer in use
+                varsFileContent = $"view_id = \"{exercise.Id}\"\r\nexercise_id = \"{exercise.Id}\"\r\nuser_id = \"{implementationEntity.UserId}\"\r\nusername = \"{implementationEntity.Username}\"\r\n";
                 var teams = (await playerApiClient.GetExerciseTeamsAsync((Guid)exercise.Id, ct)) as IEnumerable<Team>;
 
                 foreach (var team in teams)
@@ -94,7 +96,7 @@ namespace Alloy.Api.Infrastructure.Extensions
             bool isDestroy,
             CancellationToken ct)
         {
-            var runCommand = new CreateRunCommand() 
+            var runCommand = new CreateRunCommand()
             {
                 WorkspaceId = implementationEntity.WorkspaceId,
                 IsDestroy = isDestroy
@@ -161,7 +163,7 @@ namespace Alloy.Api.Infrastructure.Extensions
             }
         }
 
-        public static async Task<bool> DeleteCasterWorkspaceAsync(ImplementationEntity implementationEntity, 
+        public static async Task<bool> DeleteCasterWorkspaceAsync(ImplementationEntity implementationEntity,
             CasterApiClient casterApiClient, TokenResponse tokenResponse, CancellationToken ct)
         {
             try
@@ -210,5 +212,3 @@ namespace Alloy.Api.Infrastructure.Extensions
 
     }
 }
-
-
