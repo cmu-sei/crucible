@@ -1,0 +1,162 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div *ngIf="parentDirectory !== undefined">
+    <mat-accordion *ngIf="parentDirectoryUI$ | async as parentDirectoryUI">
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="parentDirectoryUI.isExpanded">
+            <mat-expansion-panel-header (click)="toggleIsExpanded(parentDirectoryUI)" (contextmenu)="onContextMenu($event, parentDirectory, ProjectObjectType.DIRECTORY)">
+                <mat-panel-title>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="mdi-18px" fontIcon="mdi-folder"></mat-icon>
+                        <strong>{{parentDirectory.name}}</strong>
+                    </div>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="parentDirectoryUI.isFilesExpanded">
+                    <mat-expansion-panel-header (click)="toggleIsFilesExpanded(parentDirectoryUI)">
+                        <mat-panel-title>
+                            <span MatBadgeSize="small" matBadge="{{(parentFiles$ | async).length}}"
+                                matBadgeOverlap="false" class="panel-header"><strong>FILES</strong></span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-list>
+                        <mat-list-item *ngFor="let obj of files$ | async | filesFilter" (contextmenu)="onContextMenu($event, obj, ProjectObjectType.FILE)">
+                            <div *ngIf="obj.lockedById === null && !obj.administrativelyLocked" class="highlight" fxLayout="row" fxLayoutAlign="start center" fxFill fxFlexOffset="2">
+                                <mat-icon class="mdi-18px show-pointer" fontIcon="mdi-file" (click)="openFile(obj)"></mat-icon>
+                                <a class="link-text" (click)="openFile(obj)">{{obj.name}}</a>
+                            </div>
+                            <div *ngIf="obj.lockedById !== null && !obj.administrativelyLocked" class="highlight" fxLayout="row" fxLayoutAlign="start center" fxFill fxFill fxFlexOffset="2">
+                                <mat-icon class="mdi-18px show-pointer" fontIcon="mdi-file-hidden" (click)="openFile(obj)"></mat-icon>
+                                <a class="link-locked-text" (click)="openFile(obj)" matTooltip="{{obj.lockedByName}} is editing this file">{{obj.name}}</a>
+                            </div>
+                            <div *ngIf="obj.administrativelyLocked" class="highlight" fxLayout="row" fxLayoutAlign="start center" fxFill fxFill fxFlexOffset="2">
+                                <mat-icon class="mdi-18px show-pointer" fontIcon="mdi-file-lock" (click)="openFile(obj)"></mat-icon>
+                                <a class="link-admin-locked-text" (click)="openFile(obj)" matTooltip="Administratively locked">{{obj.name}}</a>
+                            </div>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="2">
+                                <mat-icon (click)="createFile(parentDirectory.id)" matTooltip="Add New File to {{parentDirectory.name}}"
+                                    class="icon-space mdi-18px" fontIcon="mdi-file-plus-outline"></mat-icon>
+                                <a class="add-link-text" matTooltip="Add New File to {{parentDirectory.name}}" (click)="createFile(parentDirectory.id)">
+                                    Add File
+                                </a>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <mat-divider></mat-divider>
+
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="parentDirectoryUI.isWorkspacesExpanded">
+                    <mat-expansion-panel-header (click)="toggleIsWorkspacesExpanded(parentDirectoryUI)">
+                        <mat-panel-title>
+                            <span MatBadgeSize="small" matBadge="{{(workspaces$ | async).length}}"
+                                matBadgeOverlap="false" class="panel-header"><strong>WORKSPACES</strong></span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-accordion multi="true">
+                        <mat-expansion-panel class="mat-elevation-z0"
+                            *ngFor="let obj of workspaces$ | async" [expanded]="isWorkspaceExpanded(obj.id)">
+                            <mat-expansion-panel-header (click)="toggleIsWorkspaceExpanded(obj.id)" (contextmenu)="onContextMenu($event, obj, ProjectObjectType.WORKSPACE)">
+                                <mat-panel-title>
+                                    <mat-icon class="icon-space mdi-18px" (click)="$event.stopPropagation(); openWorkspace(obj)" fontIcon="mdi-briefcase"></mat-icon>
+                                    <a class="link-text" (click)="$event.stopPropagation(); openWorkspace(obj)">{{obj.name}}</a>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-list>
+                                <mat-list-item *ngFor="let file of files$ | async | filesFilter: obj.id" (contextmenu)="onContextMenu($event, file, ProjectObjectType.FILE)">
+                                    <div *ngIf="file.lockedById === null && !file.administrativelyLocked" class="highlight" fxLayout="row" fxLayoutAlign="start center" fxFill fxFlexOffset="10">
+                                        <mat-icon class="mdi-18px" fontIcon="mdi-file"></mat-icon>
+                                        <a class="link-text" (click)="openFile(file)">{{file.name}}</a>
+                                    </div>
+                                    <div *ngIf="file.lockedById !== null && !file.administrativelyLocked" class="highlight" fxLayout="row" fxLayoutAlign="start center" fxFill fxFlexOffset="10">
+                                        <mat-icon class="mdi-18px" fontIcon="mdi-file-lock"></mat-icon>
+                                        <a class="link-locked-text" (click)="openFile(file)" matTooltip="{{file.lockedByName}} is editing this file">{{file.name}}</a>
+                                    </div>
+                                    <div *ngIf="file.administrativelyLocked" class="highlight" fxLayout="row" fxLayoutAlign="start center" fxFill fxFlexOffset="10">
+                                        <mat-icon class="mdi-18px" fontIcon="mdi-file-hidden"></mat-icon>
+                                        <a class="link-admin-locked-text" (click)="openFile(file)" matTooltip="Adminstratively locked">{{file.name}}</a>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="10">
+                                        <mat-icon (click)="createFile(parentDirectory.id, obj.id)"
+                                            title="Add New File to workspace {{obj.name}}" class="icon-space mdi-18px"
+                                            fontIcon="mdi-file-plus-outline" matTooltip="Add New File to Workspace {{obj.name}}"></mat-icon>
+                                        <a class="add-link-text" matTooltip="Add New File to Workspace {{obj.name}}" (click)="createFile(parentDirectory.id, obj.id)">Add Workspace File</a>
+                                    </div>
+                                </mat-list-item>
+                            </mat-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <div class="add-new-text" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon (click)="createWorkspace()" title="Add New Workspace to {{parentDirectory.name}}"
+                            class="icon-space mdi-18px" fontIcon="mdi-plus-box-outline" matTooltip="Add New Workspace to {{parentDirectory.name}}"></mat-icon>
+                        <a class="add-link-text" matTooltip="Add New Workspace to {{parentDirectory.name}}" (click)="createWorkspace()">Add Workspace</a>
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <mat-divider></mat-divider>
+
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="parentDirectoryUI.isDirectoriesExpanded">
+                    <mat-expansion-panel-header (click)="toggleIsDirectoriesExpanded(parentDirectoryUI)">
+                        <mat-panel-title>
+                            <span MatBadgeSize="small" matBadge="{{(directories$ | async).length}}"
+                                matBadgeOverlap="false" class="panel-header"><strong>DIRECTORIES</strong></span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <cas-directory-panel *ngFor="let obj of directories$ | async" [parentDirectory]="obj">
+                    </cas-directory-panel>
+                    <div class="add-new-text" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon (click)="createNewDirectory(parentDirectory.id)"
+                            title="Add New Directory to {{parentDirectory.name}}" class="icon-space mdi-18px"
+                            fontIcon="mdi-folder-plus-outline" matTooltip="Add New Directory to {{parentDirectory.name}}"></mat-icon>
+                        <a class="add-link-text" (click)="createNewDirectory(parentDirectory.id)" matTooltip="Add New Directory to {{parentDirectory.name}}">Add Directory</a>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+<div style="visibility: hidden; position: fixed"
+    [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y"
+    [matMenuTriggerFor]="contextMenu">
+</div>
+
+<mat-menu #contextMenu="matMenu">
+    <ng-template matMenuContent let-item="item">
+        <button mat-menu-item (click)="onContextRename(item)" fxLayout="row">Rename</button>
+        <button mat-menu-item (click)="onContextDelete(item)" fxLayout="row">Delete</button>
+        <button *ngIf="isExportable(item)"
+            mat-menu-item (click)="onContextExport(item)" fxLayout="row">Export
+        </button>
+    </ng-template>
+</mat-menu>
+
+<ng-template #exportDialog>
+    <cas-project-export
+        [id]="exportId"
+        [type]="exportObjectType"
+        [name]="exportName"
+        (exportComplete)="onExportComplete()">
+    </cas-project-export>
+</ng-template>

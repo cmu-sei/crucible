@@ -4,19 +4,21 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
 import { DirectoryStore } from './directory.store';
 import { Injectable } from '@angular/core';
-import { DirectoriesService, Directory, Workspace, ModelFile } from '../../generated/caster-api';
+import { DirectoriesService, Directory, Workspace, ModelFile, ArchiveType } from '../../generated/caster-api';
 import { DirectoryUI } from './directory.model';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { DirectoryQuery } from './directory.query';
 import { FileService } from 'src/app/files/state';
 import { WorkspaceService } from 'src/app/workspace/state';
+import HttpHeaderUtils from 'src/app/shared/utilities/http-header-utils';
+import { FileDownload } from 'src/app/shared/models/file-download';
 
 
 @Injectable({
@@ -103,6 +105,14 @@ export class DirectoryService {
     this.directoryStore.ui.upsert(directoryUI.id, d => ({ isDirectoriesExpanded: !d.isDirectoriesExpanded}));
   }
 
-
+  export(id: string, archiveType: ArchiveType, includeIds: boolean): Observable<FileDownload> {
+    return this.directoriesService.exportDirectory(id, archiveType, includeIds, 'response').pipe(
+      map(response => {
+        return {
+          blob: response.body,
+          filename: HttpHeaderUtils.getFilename(response.headers)
+        };
+      })
+    );
+  }
 }
-

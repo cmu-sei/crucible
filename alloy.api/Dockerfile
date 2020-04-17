@@ -25,3 +25,6 @@ ENV ASPNETCORE_URLS=http://*:80
 EXPOSE 80
 
 CMD ["dotnet", "Alloy.Api.dll"]
+
+RUN apt-get update && \
+	apt-get install -y jq

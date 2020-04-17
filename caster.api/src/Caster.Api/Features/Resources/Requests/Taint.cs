@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -47,7 +47,13 @@ namespace Caster.Api.Features.Resources
             public bool Untaint { get; set;}
 
             /// <summary>
-            /// List of Resource addresses to Taint
+            /// Perform the chosen operation on all Resources in the Workspace if true.
+            /// </summary>
+            [DataMember]
+            public bool SelectAll { get; set;}
+
+            /// <summary>
+            /// List of Resource addresses to Taint or Untaint. Ignored if SelectAll is true.
             /// </summary>
             [DataMember]
             public string[] ResourceAddresses { get; set; }
@@ -78,10 +84,16 @@ namespace Caster.Api.Features.Resources
 
                 if (workspace == null) throw new EntityNotFoundException<Workspace>();
 
+                string[] addresses = request.ResourceAddresses;
+
+                if (request.SelectAll) {
+                    addresses = workspace.GetState().GetResources().Select(r => r.Address).ToArray();
+                }
+
                 workspace = await base.PerformOperation(
                     workspace,
                     request.Untaint ? ResourceOperation.untaint : ResourceOperation.taint,
-                    request.ResourceAddresses);
+                    addresses);
 
                 return _mapper.Map<Resource[]>(workspace.GetState().GetResources(), opts => opts.ExcludeMembers(nameof(Resource.Attributes)));
             }

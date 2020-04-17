@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -48,6 +48,17 @@ namespace Caster.Api.Domain.Models
 
         public virtual ICollection<FileVersion> FileVersions { get; private set; } = new HashSet<FileVersion>();
 
+        public string Path
+        {
+            get
+            {
+                var workspacePath = this.Workspace == null ? "" : $"__Workspaces__/{this.Workspace.Name}/";
+                var directoryPath = this.Directory.GetPathNames();
+
+                return $"{directoryPath}{workspacePath}{this.Name}";
+            }
+        }
+
         public void Tag(string tag, Guid userId, DateTime dateTagged)
         {
             var fileVersion = new FileVersion(this);
@@ -58,9 +69,9 @@ namespace Caster.Api.Domain.Models
             this.FileVersions.Add(fileVersion);
         }
 
-        public void Save(Guid userId, bool isAdmin, bool created = false)
+        public void Save(Guid userId, bool isAdmin, bool bypassLock = false)
         {
-            if (!created)
+            if (!bypassLock)
             {
                 if (this.AdministrativelyLocked && !isAdmin)
                     throw new FileAdminLockedException();
@@ -113,6 +124,28 @@ namespace Caster.Api.Domain.Models
             this.AdministrativelyLocked = false;
         }
 
+        public bool CanLock(Guid userId, bool isAdmin)
+        {
+            if (this.LockedById.HasValue)
+            {
+                if (this.LockedById.Value == userId)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            if (this.AdministrativelyLocked && !isAdmin)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         private void VerifyLock(Guid userId, bool invalidOnUnlocked = true)
         {
             bool verified = true;
@@ -149,4 +182,3 @@ namespace Caster.Api.Domain.Models
         }
     }
 }
-

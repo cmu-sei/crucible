@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
 
@@ -49,38 +49,38 @@ DM20-0181
             {{breadcrumbString}}
           </div>
           <div class="spacer"></div>
-          <button mat-icon-button fxFlexAlign="center" *ngIf="file && !file.administrativelyLocked"
+          <button mat-icon-button color="primary" fxFlexAlign="center" *ngIf="file && !file.administrativelyLocked"
                   [disabled]="!isSuperUser"
                   (click)="adminLockFile()">
-            <mat-icon class="mdi-24px" fontIcon="mdi-lock-open-outline"
+            <mat-icon class="fa-lg" fontSet="fas" fontIcon="fa-unlock"
                       matTooltip="Not administratively locked"></mat-icon>
           </button>
           <button mat-icon-button fxFlexAlign="center" *ngIf="file && file.administrativelyLocked"
                   [disabled]="!isSuperUser"
                   (click)="adminUnlockFile()">
-            <mat-icon class="mdi-24px" fontIcon="mdi-lock-outline" matTooltip="Administratively locked"></mat-icon>
+            <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-lock" matTooltip="Administratively locked"></mat-icon>
           </button>
-          <button mat-icon-button fxFlexAlign="center" [disabled]="isSaved$ | async"
+          <button mat-icon-button color="primary" fxFlexAlign="center" [disabled]="isSaved$ | async"
                   (click)="saveFile()">
-            <mat-icon class="mdi-24px" fontIcon="mdi-content-save" matTooltip="Save Changes"></mat-icon>
+            <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-save" matTooltip="Save Changes"></mat-icon>
           </button>
-          <button mat-icon-button fxFlexAlign="center" [disabled]="file && file.editorContent === file.content"
+          <button mat-icon-button color="primary" fxFlexAlign="center" [disabled]="file && file.editorContent === file.content"
                   (click)="discardFileChanges()">
-            <mat-icon class="mdi-24px" fontIcon="mdi-undo-variant" matTooltip="Discard Changes"></mat-icon>
+            <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-undo-alt" matTooltip="Discard Changes"></mat-icon>
           </button>
-          <button mat-icon-button fxFlexAlign="center"
+          <button mat-icon-button color="primary" fxFlexAlign="center"
                   *ngIf="file && file.lockedById && file.lockedById !== currentUserId"
                   matTooltip="This file is being edited by {{file.lockedByName}}">
-            <mat-icon class="mdi-24px" fontIcon="mdi-lock"></mat-icon>
+            <mat-icon fontSet="fas" class="fa-lg" fontIcon="mdi-lock"></mat-icon>
           </button>
-          <button mat-icon-button fxFlexAlign="center" *ngIf="file && !file.lockedById"
+          <button mat-icon-button color="primary" fxFlexAlign="center" *ngIf="file && !file.lockedById"
                   (click)="lockFile()" matTooltip="Edit this file. Only one person can edit a file at a time">
-            <mat-icon class="mdi-24px" fontIcon="mdi-pencil-box-outline"></mat-icon>
+            <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-edit"></mat-icon>
           </button>
           <button mat-icon-button fxFlexAlign="center" *ngIf="file && file.lockedById === currentUserId"
                   [disabled]="file.editorContent !== file.content"
                   (click)="unlockFile()" matTooltip="Finish editing and allow someone else to edit this file">
-            <mat-icon class="mdi-24px" fontIcon="mdi-pencil-box"></mat-icon>
+            <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-edit"></mat-icon>
           </button>
           <mat-divider vertical style="height: 100%;"></mat-divider>
           <div *ngIf="filename.endsWith('.tf')">
@@ -89,13 +89,13 @@ DM20-0181
                                      (valueChange)="sidebarChangedFn($event, sidebarOpen)">
               <mat-button-toggle value="modules" aria-label="modules" (change)="toggleSidebar($event, true)">
                 <div>
-                  <mat-icon class="mdi-24px" fontIcon="mdi-code-tags"
+                  <mat-icon fontSet="fas" fontIcon="fa-code"
                             matTooltip="Open Modules"></mat-icon>
                 </div>
               </mat-button-toggle>
               <mat-button-toggle value="versions" aria-label="versions" (change)="toggleSidebar($event, true)">
                 <div>
-                  <mat-icon class="mdi-24px" fontIcon="mdi-animation-outline"
+                  <mat-icon fontSet="fas" fontIcon="fa-history"
                             matTooltip="Open File Versions"></mat-icon>
                 </div>
               </mat-button-toggle>

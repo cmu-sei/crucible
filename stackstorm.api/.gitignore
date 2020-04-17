@@ -306,3 +306,5 @@ ghosts.tools.emailgenerator/config/email-content - Copy.csv
 Ghosts.Client/config/email-reply.csv
 Ghosts.Client/config/email-content.csv
 vtunnel.exe
+Stackstorm.Api.Client/artifacts/
+Stackstorm.Connector/artifacts/

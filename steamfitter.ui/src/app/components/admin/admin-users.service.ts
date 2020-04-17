@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -12,7 +12,7 @@ import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {PermissionService, UserService, UserPermissionService} from 'src/app/swagger-codegen/dispatcher.api/api/api';
 import {Permission, User, UserPermission} from 'src/app/swagger-codegen/dispatcher.api/model/models';
-import {map, take, switchMap} from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import {Observable, combineLatest, BehaviorSubject} from 'rxjs';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {Router, ActivatedRoute} from '@angular/router';
@@ -30,7 +30,9 @@ export class AdminUsersService {
   readonly userListTotalLength: Observable<number>;
   readonly selectedUser: Observable<User>;
   readonly loggedInUser = this.authService.loggedInUser;
-  readonly loggedInUserPermissions: Observable<Permission[]>;
+  readonly isAuthorizedUser = new BehaviorSubject<boolean>(false);
+  readonly isSuperUser = new BehaviorSubject<boolean>(false);
+  private loggedInUserPermissions: Permission[] = [];
   private filterTerm: Observable<string>;
   private sortColumn: Observable<string>;
   private sortIsAscending: Observable<boolean>;
@@ -46,9 +48,12 @@ export class AdminUsersService {
     private router: Router,
     activatedRoute: ActivatedRoute
   ) {
-    this.loggedInUserPermissions = this.loggedInUser.pipe(
-      switchMap(() => this.permissionService.getMyPermissions())
-    );
+    this.loggedInUser.subscribe(user => this.permissionService.getMyPermissions()
+      .pipe(take(1)).subscribe(permissions => {
+        this.loggedInUserPermissions = permissions;
+        this.isAuthorizedUser.next(permissions.some(p => p.key === 'ContentDeveloper' || p.key === 'SystemAdmin'));
+        this.isSuperUser.next(permissions.some(p => p.key === 'SystemAdmin'));
+      }));
     this.filterTerm = activatedRoute.queryParamMap.pipe(
       map(params => params.get('filter') || '')
     );
@@ -157,16 +162,6 @@ export class AdminUsersService {
 
   logout() {
     this.authService.logout();
-  }
-
-  isSuperUser() {
-    return this.loggedInUserPermissions.pipe(
-      map(permissions => {
-        return permissions.some(permission => {
-          return permission.key === 'SystemAdmin';
-        });
-      })
-    );
   }
 
 }

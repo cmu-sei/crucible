@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -24,6 +24,7 @@ using Steamfitter.Api.Data.Models;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Authorization;
 using Steamfitter.Api.Infrastructure.Exceptions;
+using Steamfitter.Api.Services;
 using Steamfitter.Api.ViewModels;
 
 namespace Steamfitter.Api.Services
@@ -43,13 +44,15 @@ namespace Steamfitter.Api.Services
     {
         private readonly SteamfitterContext _context;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IDispatchTaskService _dispatchTaskService;
         private readonly ClaimsPrincipal _user;
         private readonly IMapper _mapper;
 
-        public ScenarioService(SteamfitterContext context, IAuthorizationService authorizationService, IPrincipal user, IMapper mapper)
+        public ScenarioService(SteamfitterContext context, IAuthorizationService authorizationService, IDispatchTaskService dispatchTaskService, IPrincipal user, IMapper mapper)
         {
             _context = context;
             _authorizationService = authorizationService;
+            _dispatchTaskService = dispatchTaskService;
             _user = user as ClaimsPrincipal;
             _mapper = mapper;
         }
@@ -117,16 +120,12 @@ namespace Steamfitter.Api.Services
             _context.Scenarios.Add(newScenarioEntity);
             await _context.SaveChangesAsync(ct);
 
-            // copy all of the DispatchTasks
-            var oldDispatchTaskEntities = _context.DispatchTasks.Where(dt => dt.ScenarioId == oldScenarioId && dt.TriggerTaskId == null);
-            // copy the PARENT DispatchTasks
-            foreach (var oldDispatchTaskEntity in oldDispatchTaskEntities)
+            // copy all of the DispatchTasks, including children
+            var oldDispatchTaskEntityIds = _context.DispatchTasks.Where(dt => dt.ScenarioId == oldScenarioId && dt.TriggerTaskId == null).Select(s => s.Id);
+            foreach (var oldDispatchTaskEntityId in oldDispatchTaskEntityIds)
             {
-                var newDispatchTaskEntity = await CopyDispatchTaskEntity(oldDispatchTaskEntity, null, newScenarioEntity.Id, ct);
-                // copy this PARENT's subtasks
-                await CopySubTasks(oldDispatchTaskEntity.Id, newDispatchTaskEntity, ct);
+                await _dispatchTaskService.CopyAsync(oldDispatchTaskEntityId, newScenarioEntity.Id, "scenario", ct);
             }
-            await _context.SaveChangesAsync(ct);
 
             return await GetAsync(newScenarioEntity.Id, ct);
         }
@@ -164,43 +163,6 @@ namespace Steamfitter.Api.Services
 
             _context.Scenarios.Remove(scenarioToDelete);
             await _context.SaveChangesAsync(ct);
-
-            return true;
-        }
-
-        private async Task<DispatchTaskEntity> CopyDispatchTaskEntity(DispatchTaskEntity oldDispatchTaskEntity, Guid? triggerTaskId, Guid? scenarioId, CancellationToken ct)
-        {
-            var newDispatchTaskEntity = new DispatchTaskEntity() {
-                ScenarioId = scenarioId,
-                SessionId = null,
-                CreatedBy = _user.GetId(),
-                TriggerTaskId = triggerTaskId,
-                Name = oldDispatchTaskEntity.Name,
-                Description = oldDispatchTaskEntity.Description,
-                Action = oldDispatchTaskEntity.Action,
-                VmMask = oldDispatchTaskEntity.VmMask,
-                ApiUrl = oldDispatchTaskEntity.ApiUrl,
-                InputString = oldDispatchTaskEntity.InputString,
-                ExpectedOutput = oldDispatchTaskEntity.ExpectedOutput,
-                ExpirationSeconds = oldDispatchTaskEntity.ExpirationSeconds,
-                DelaySeconds = oldDispatchTaskEntity.DelaySeconds,
-                IntervalSeconds = oldDispatchTaskEntity.IntervalSeconds,
-                Iterations = oldDispatchTaskEntity.Iterations,
-                TriggerCondition = oldDispatchTaskEntity.TriggerCondition
-            };
-            _context.DispatchTasks.Add(newDispatchTaskEntity);
-
-            return newDispatchTaskEntity;
-        }
-
-        private async Task<bool> CopySubTasks(Guid oldDispatchTaskEntityId, DispatchTaskEntity newDispatchTaskEntity, CancellationToken ct)
-        {
-            var oldSubTaskEntities = _context.DispatchTasks.Where(dt => dt.TriggerTaskId == oldDispatchTaskEntityId);
-            foreach (var oldSubTaskEntity in oldSubTaskEntities)
-            {
-                var newSubTaskEntity = await CopyDispatchTaskEntity(oldSubTaskEntity, newDispatchTaskEntity.Id, newDispatchTaskEntity.SessionId, ct);
-                await CopySubTasks(oldSubTaskEntity.Id, newSubTaskEntity, ct);
-            }
 
             return true;
         }

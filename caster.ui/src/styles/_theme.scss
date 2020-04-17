@@ -1,5 +1,54 @@
+/*
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+*/
+
 @import "~@angular/material/theming";
-$primary: mat-palette($mat-light-blue);
+$light-theme-blue: (
+  50 : #e1f1f7,
+  100 : #b3dcec,
+  200 : #028bbf,
+  300 : #4eaed2,
+  400 : #289cc9,
+  500 : #028bbf,
+  600 : #0283b9,
+  700 : #0178b1,
+  800 : #016ea9,
+  900 : #015b9b,
+  A100 : #c6e4ff,
+  A200 : #93ccff,
+  A400 : #60b3ff,
+  A700 : #47a7ff,
+  contrast: (
+    50 : #1b1c1d,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$primary: mat-palette($light-theme-blue, 200);
 $accent: mat-palette($mat-light-blue, A100);
 $warn: mat-palette($mat-yellow, A200);
+$background-color: #f1f1f2;
 $theme: mat-light-theme($primary, $accent, $warn);
+$background: map-get($theme, background);
+$background: map_merge($background, (background: $background-color));
+$theme: map_merge($theme, (background: $background));
+$topBarColor: mat-contrast($light-theme-blue, 500);
+$topBarTextColor: mat-contrast($light-theme-blue, 50)

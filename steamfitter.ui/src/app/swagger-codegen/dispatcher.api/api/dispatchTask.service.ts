@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -176,6 +176,63 @@ export class DispatchTaskService {
 
         return this.httpClient.post<DispatchTask>(`${this.configuration.basePath}/dispatchtasks`,
             dispatchTask,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Copyies a new DispatchTask
+     * Copies a new DispatchTask with the attributes specified  &lt;para /&gt;  Accessible only to a SuperUser or an Administrator
+     * @param newLocation The data to create the DispatchTask with
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public copyDispatchTask(id: string, newLocation?: any, observe?: 'body', reportProgress?: boolean): Observable<DispatchTask[]>;
+    public copyDispatchTask(id: string, newLocation?: any, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DispatchTask[]>>;
+    public copyDispatchTask(id: string, newLocation?: any, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DispatchTask[]>>;
+    public copyDispatchTask(id: string, newLocation?: any, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json-patch+json',
+            'application/json',
+            'text/json',
+            'application/_*+json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<DispatchTask>(`${this.configuration.basePath}/dispatchtasks/${encodeURIComponent(String(id))}/copy`,
+            newLocation,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -788,6 +845,67 @@ export class DispatchTaskService {
 
         return this.httpClient.put<DispatchTask>(`${this.configuration.basePath}/dispatchtasks/${encodeURIComponent(String(id))}`,
             dispatchTask,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Moves a DispatchTask
+     * Moves a DispatchTask with the attributes specified  &lt;para /&gt;  Accessible only to a SuperUser or a User on an Admin Team within the specified DispatchTask
+     * @param id The Id of the Exericse to move
+     * @param newLocation The Id and type of the new location
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public moveDispatchTask(id: string, newLocation?: any, observe?: 'body', reportProgress?: boolean): Observable<DispatchTask[]>;
+    public moveDispatchTask(id: string, newLocation?: any, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DispatchTask[]>>;
+    public moveDispatchTask(id: string, newLocation?: any, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DispatchTask[]>>;
+    public moveDispatchTask(id: string, newLocation?: any, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling moveDispatchTask.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json-patch+json',
+            'application/json',
+            'text/json',
+            'application/_*+json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<any>(`${this.configuration.basePath}/dispatchtasks/${encodeURIComponent(String(id))}/move`,
+            newLocation,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

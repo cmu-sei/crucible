@@ -4,11 +4,11 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using Caster.Api.Infrastructure.Options;
@@ -55,7 +55,7 @@ namespace Caster.Api.Domain.Services
             _logger = logger;
         }
 
-        private TerraformResult Run(string workingDirectory, string arguments, DataReceivedEventHandler outputHandler)
+        private TerraformResult Run(string workingDirectory, IEnumerable<string> argumentList, DataReceivedEventHandler outputHandler)
         {
             int exitCode;
             _outputBuilder.Clear();
@@ -71,7 +71,13 @@ namespace Caster.Api.Domain.Services
             using (Process process = new Process())
             {
                 process.StartInfo = startInfo;
-                process.StartInfo.Arguments = arguments.Replace("\"", "\"\"\""); // process args need quotes to be escaped as triple quotes
+
+                if (argumentList != null)
+                {
+                    foreach(string arg in argumentList){
+                        process.StartInfo.ArgumentList.Add(arg);
+                    }
+                }
 
                 process.OutputDataReceived += outputHandler;
                 process.OutputDataReceived += OutputHandler;
@@ -125,11 +131,13 @@ namespace Caster.Api.Domain.Services
 
         public TerraformResult Init(string workingDirectory, DataReceivedEventHandler outputHandler)
         {
-            string args = "init -input=false";
+            List<string> args = new List<string>();
+            args.Add("init");
+            args.Add("-input=false");
 
             if (!string.IsNullOrEmpty(_options.PluginDirectory))
             {
-                args +=  $" -plugin-dir={_options.PluginDirectory}";
+                args.Add($"-plugin-dir={_options.PluginDirectory}");
             }
 
             return this.Run(workingDirectory, args, outputHandler);
@@ -137,21 +145,29 @@ namespace Caster.Api.Domain.Services
 
         public TerraformResult SelectWorkspace(string workingDirectory, string workspaceName, DataReceivedEventHandler outputHandler)
         {
-            return this.Run(workingDirectory, $"workspace select {workspaceName}", outputHandler);
+            List<string> args = new List<string>();
+            args.Add("workspace");
+            args.Add("select");
+            args.Add(workspaceName);
+
+            return this.Run(workingDirectory, args, outputHandler);
         }
 
         public TerraformResult Plan(string workingDirectory, bool destroy, string[] targets, DataReceivedEventHandler outputHandler)
         {
-            string args = "plan -input=false -out=plan";
+            List<string> args = new List<string>();
+            args.Add("plan");
+            args.Add("-input=false");
+            args.Add("-out=plan");
 
             if (destroy)
             {
-                args += " -destroy";
+                args.Add("-destroy");
             }
 
             foreach(string target in targets)
             {
-                args += $" --target={SanitizeArgument(target)}";
+                args.Add($"--target={target}");
             }
 
             return this.Run(workingDirectory, args, outputHandler);
@@ -159,38 +175,56 @@ namespace Caster.Api.Domain.Services
 
         public TerraformResult Apply(string workingDirectory, DataReceivedEventHandler outputHandler)
         {
-            return this.Run(workingDirectory, "apply plan", outputHandler);
+            List<string> args = new List<string>();
+            args.Add("apply");
+            args.Add("plan");
+
+            return this.Run(workingDirectory, args, outputHandler);
         }
 
         public TerraformResult Show(string workingDirectory)
         {
-            return this.Run(workingDirectory, "show -json plan", null);
+            List<string> args = new List<string>();
+            args.Add("show");
+            args.Add("-json");
+            args.Add("plan");
+
+            return this.Run(workingDirectory, args, null);
         }
 
         public TerraformResult Taint(string workingDirectory, string address, string statePath)
         {
-            return this.Run(workingDirectory, $"taint{this.GetStatePathArg(statePath)} {SanitizeArgument(address)}", null);
+            List<string> args = new List<string>();
+            args.Add("taint");
+            AddStatePathArg(statePath, ref args);
+            args.Add(address);
+
+            return this.Run(workingDirectory, args, null);
         }
 
         public TerraformResult Untaint(string workingDirectory, string address, string statePath)
         {
-            return this.Run(workingDirectory, $"untaint{this.GetStatePathArg(statePath)} {SanitizeArgument(address)}", null);
+            List<string> args = new List<string>();
+            args.Add("untaint");
+            AddStatePathArg(statePath, ref args);
+            args.Add(address);
+
+            return this.Run(workingDirectory, args, null);
         }
 
         public TerraformResult Refresh(string workingDirectory, string statePath)
         {
-            return this.Run(workingDirectory, $"refresh{this.GetStatePathArg(statePath)}", null);
+            List<string> args = new List<string>();
+            args.Add("refresh");
+            AddStatePathArg(statePath, ref args);
+            return this.Run(workingDirectory, args, null);
         }
 
-        private string GetStatePathArg(string statePath)
+        private void AddStatePathArg(string statePath, ref List<string> args)
         {
-            return string.IsNullOrEmpty(statePath) ? string.Empty : $" -state={statePath}";
-        }
-
-        private string SanitizeArgument(string arg)
-        {
-            return arg.Split(' ', 2)[0];
+            if (!string.IsNullOrEmpty(statePath)) {
+                args.Add($"-state={statePath}");
+            }
         }
     }
 }
-

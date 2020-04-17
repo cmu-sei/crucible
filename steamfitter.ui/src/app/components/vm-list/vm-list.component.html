@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
 
@@ -14,24 +14,24 @@ DM20-0181
       <div fxLayout="row">
         <div style="width: 40px;"></div>
         <mat-form-field fxFlex fxFlexFill>
-          <mat-select placeholder="Select an Exercise" [(value)]="selectedExercise" (selectionChange)="onExerciseChange()">
-            <mat-option *ngFor="let exercise of exercises" [value]="exercise">
-              {{exercise.name}}
+          <mat-select placeholder="Select a View" [value]="selectedView" (selectionChange)="onViewChange($event)">
+            <mat-option *ngFor="let view of viewList" [value]="view">
+              {{view.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <div style="width: 40px;"></div>
       </div>
-      <div fxLayout="row" *ngIf="!!selectedExercise">
+      <div fxLayout="row" *ngIf="!!selectedView">
         <img class="vmicon" height="55" src="/assets/img/SP_Icon_Virtual.png" />
         <mat-form-field>
-          <input name="vmSearch" matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+          <input name="vmSearch" matInput placeholder="Search" [formControl]="filterControl">
         </mat-form-field>
       </div>
     </div>
 
-    <div class="flex-container" *ngFor="let vm of vmModelDataSource.filteredData; let i = index">
-      <div *ngIf="i >= (pageEvent.pageIndex*pageEvent.pageSize) && i < ((pageEvent.pageIndex+1)*pageEvent.pageSize)">
+    <div class="flex-container" *ngFor="let vm of vmList">
+      <div>
         <div id="wrapper">
           <div id="context">
             <mat-checkbox (change)="onCheckBoxChange($event, vm)"></mat-checkbox>
@@ -48,9 +48,9 @@ DM20-0181
         </div>
       </div>
     </div>
-    <mat-paginator #paginator [pageSize]="defaultPageSize" [pageSizeOptions]="[10, 20, 30]" [showFirstLastButtons]="true" (page)="pageEvent = $event">
+    <mat-paginator #paginator *ngIf="pageEvent" [pageSizeOptions]="[2, 10, 20, 30]" [showFirstLastButtons]="true"
+      [pageSize]="pageEvent.pageSize" [length]="pageEvent.length" [pageIndex]="pageEvent.pageIndex" (page)="handlePageEvent($event)">
     </mat-paginator>
-
   </div>
   <div class="vm-list-container mat-elevation-z8" [style.visibility]="vmApiResponded ? 'hidden' : 'visible'">
     <label>The Steamfitter API or VM API is not currently reachable.</label>

@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -51,6 +51,8 @@ namespace Steamfitter.Api.Services
         Task<IEnumerable<ViewModels.DispatchTaskResult>> ExecuteAsync(Guid id, CancellationToken ct);
         Task<ViewModels.DispatchTask> UpdateAsync(Guid Id, ViewModels.DispatchTask DispatchTask, CancellationToken ct);
         Task<bool> DeleteAsync(Guid Id, CancellationToken ct);
+        Task<IEnumerable<ViewModels.DispatchTask>> CopyAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct);
+        Task<IEnumerable<ViewModels.DispatchTask>> MoveAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct);
     }
 
     public class DispatchTaskService : IDispatchTaskService
@@ -219,39 +221,71 @@ namespace Steamfitter.Api.Services
 
             var dispatchTaskToExecute = await _context.DispatchTasks.SingleOrDefaultAsync(v => v.Id == id, ct);
             await VerifyDispatchTaskToExecuteAsync(dispatchTaskToExecute, ct);
-
-            // create DispatchTaskResults required (at least one but one for each VM)
-            await CreateDispatchTaskResultsAsync(dispatchTaskToExecute, ct);
-            var dispatchTaskResultEntityList = _context.DispatchTaskResults.Where(dtr => dtr.DispatchTaskId == dispatchTaskToExecute.Id && dtr.Status == Data.TaskStatus.pending).ToList();
-
-            Data.TaskStatus overallStatus;
-            // determine where to execute the task, execute it, process result
-            switch (dispatchTaskToExecute.ApiUrl)
+            var dispatchTaskResultEntityList = _context.DispatchTaskResults.Where(dtr => dtr.DispatchTaskId == dispatchTaskToExecute.Id && dtr.Status == Data.TaskStatus.sent).ToList();
+            // schedule the task, if it has a delay and hasn't already been scheduled
+            if (dispatchTaskToExecute.DelaySeconds > 0 && !dispatchTaskResultEntityList.Any())
             {
-                case "stackstorm":
+                // create DispatchTaskResults required (at least one but one for each VM)
+                await CreateDispatchTaskResultsAsync(dispatchTaskToExecute, ct);
+                // schedule the task with Foreman
+                var wasPassedOn = await ScheduleTask(dispatchTaskToExecute);
+                if (wasPassedOn)
                 {
-                    overallStatus = await ExecuteStackstormTaskAsync(dispatchTaskToExecute, dispatchTaskResultEntityList, ct);
-                    break;
+                    dispatchTaskResultEntityList = _context.DispatchTaskResults.Where(dtr => dtr.DispatchTaskId == dispatchTaskToExecute.Id && dtr.Status == Data.TaskStatus.pending).ToList();
+                    dispatchTaskResultEntityList.ForEach(dtr => dtr.Status = Data.TaskStatus.sent);
+                    await _context.SaveChangesAsync(ct);
                 }
-                case "player":
-                case "vm":
-                case "caster":
-                default:
+                else
                 {
-                    var message = $"API ({dispatchTaskToExecute.ApiUrl}) is not currently implemented";
-                    _logger.LogError(message);
-                    throw new NotImplementedException(message);
+                    var resultEntity = NewDispatchTaskResultEntity(dispatchTaskToExecute);
+                    resultEntity.Status = Data.TaskStatus.error;
+                    await _context.DispatchTaskResults.AddAsync(resultEntity);
+                    await _context.SaveChangesAsync(ct);
+                    dispatchTaskResultEntityList.Add(resultEntity);
                 }
             }
-
-            // Process the subtasks
-            var subtaskEntityList = GetSubtasksToExecute(dispatchTaskToExecute.Id, overallStatus);
-            var allSubtasksWereProcessed = await ProcessSubtasks(subtaskEntityList, ct);
-            if (!allSubtasksWereProcessed)
+            else
             {
-                var message = $"One or more child tasks were not processed correctly for DispatchTask {dispatchTaskToExecute.Id}";
-                _logger.LogError(message);
-                throw new ApplicationException(message);
+                // create DispatchTaskResults required (at least one but one for each VM)
+                if (dispatchTaskResultEntityList.Any())
+                {
+                    dispatchTaskResultEntityList.ForEach(dtr => dtr.Status = Data.TaskStatus.pending);
+                    await _context.SaveChangesAsync(ct);
+                }
+                else
+                {
+                    await CreateDispatchTaskResultsAsync(dispatchTaskToExecute, ct);
+                    dispatchTaskResultEntityList = _context.DispatchTaskResults.Where(dtr => dtr.DispatchTaskId == dispatchTaskToExecute.Id && dtr.Status == Data.TaskStatus.pending).ToList();
+                }
+                // determine where to execute the task, execute it, process result
+                Data.TaskStatus overallStatus;
+                switch (dispatchTaskToExecute.ApiUrl)
+                {
+                    case "stackstorm":
+                    {
+                        overallStatus = await ExecuteStackstormTaskAsync(dispatchTaskToExecute, dispatchTaskResultEntityList, ct);
+                        break;
+                    }
+                    case "player":
+                    case "vm":
+                    case "caster":
+                    default:
+                    {
+                        var message = $"API ({dispatchTaskToExecute.ApiUrl}) is not currently implemented";
+                        _logger.LogError(message);
+                        throw new NotImplementedException(message);
+                    }
+                }
+
+                // Process the subtasks
+                var subtaskEntityList = GetSubtasksToExecute(dispatchTaskToExecute.Id, overallStatus);
+                var allSubtasksWereProcessed = await ProcessSubtasks(subtaskEntityList, ct);
+                if (!allSubtasksWereProcessed)
+                {
+                    var message = $"One or more child tasks were not processed correctly for DispatchTask {dispatchTaskToExecute.Id}";
+                    _logger.LogError(message);
+                    throw new ApplicationException(message);
+                }
             }
 
             return _mapper.Map(dispatchTaskResultEntityList, new List<ViewModels.DispatchTaskResult>());
@@ -293,6 +327,156 @@ namespace Steamfitter.Api.Services
             await _context.SaveChangesAsync(ct);
 
             return true;
+        }
+
+        public async Task<IEnumerable<ViewModels.DispatchTask>> CopyAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct)
+        {
+            // check user authorization
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
+                throw new ForbiddenException();
+            var items = await CopyDispatchTaskAsync(id, newLocationId, newLocationType, ct);
+
+            return  _mapper.Map<IEnumerable<DispatchTask>>(items);
+        }
+
+        public async Task<IEnumerable<ViewModels.DispatchTask>> MoveAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct)
+        {
+            // check user authorization
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
+                throw new ForbiddenException();
+            var items = await MoveDispatchTaskAsync(id, newLocationId, newLocationType, ct);
+
+            return _mapper.Map<IEnumerable<DispatchTask>>(items);
+        }
+
+        private async Task<IEnumerable<DispatchTaskEntity>> CopyDispatchTaskAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct)
+        {
+            // check for existing dispatchTask
+            var existingTaskEntity = await _context.DispatchTasks.SingleAsync(v => v.Id == id, ct);
+            if (existingTaskEntity == null)
+                throw new EntityNotFoundException<DispatchTask>();
+            // determine where the copy goes
+            Guid? triggerTaskId = null;
+            Guid? scenarioId = null;
+            Guid? sessionId = null;
+            switch (newLocationType)
+            {
+                case "dispatchTask":
+                    triggerTaskId = newLocationId;
+                    var newLocationTaskEntity = await _context.DispatchTasks.SingleAsync(v => v.Id == triggerTaskId, ct);
+                    if (await PreventAddingToSelfAsync(existingTaskEntity.Id, newLocationTaskEntity, ct))
+                    {
+                        throw new Exception("Cannot copy a DispatchTask underneath itself!");
+                    }
+                    scenarioId = newLocationTaskEntity.ScenarioId;
+                    sessionId = newLocationTaskEntity.SessionId;
+                    break;
+                case "scenario":
+                    scenarioId = newLocationId;
+                    break;
+                case "session":
+                    sessionId = newLocationId;
+                    break;
+                default:
+                    break;
+            }
+            // create the copy
+            var newDispatchTaskEntity = Mapper.Map<DispatchTaskEntity, DispatchTaskEntity>(existingTaskEntity);
+            // set the new task relationships
+            newDispatchTaskEntity.Scenario = null;
+            newDispatchTaskEntity.ScenarioId = scenarioId;
+            newDispatchTaskEntity.Session = null;
+            newDispatchTaskEntity.SessionId = sessionId;
+            newDispatchTaskEntity.CreatedBy = _user.GetId();
+            newDispatchTaskEntity.TriggerTaskId = triggerTaskId;
+            // save new task to the database
+            _context.DispatchTasks.Add(newDispatchTaskEntity);
+            await _context.SaveChangesAsync();
+            // return the new task with all of its new subtasks
+            var entities = new List<DispatchTaskEntity>();
+            entities.Add(newDispatchTaskEntity);
+            entities.AddRange(await CopySubTasks(id, newDispatchTaskEntity, ct));
+
+            return entities;
+        }
+
+        private async Task<IEnumerable<DispatchTaskEntity>> CopySubTasks(Guid oldDispatchTaskEntityId, DispatchTaskEntity newDispatchTaskEntity, CancellationToken ct)
+        {
+            var oldSubTaskEntityIds = _context.DispatchTasks.Where(dt => dt.TriggerTaskId == oldDispatchTaskEntityId).Select(dt => dt.Id);
+            var subEntities = new List<DispatchTaskEntity>();
+            foreach (var oldSubTaskEntityId in oldSubTaskEntityIds)
+            {
+                var newEntities = await CopyDispatchTaskAsync(oldSubTaskEntityId, newDispatchTaskEntity.Id, "dispatchTask", ct);
+                subEntities.AddRange(newEntities);
+            }
+
+            return subEntities;
+        }
+
+        private async Task<IEnumerable<DispatchTaskEntity>> MoveDispatchTaskAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct)
+        {
+            // check for existing dispatchTask
+            var existingTaskEntity = await _context.DispatchTasks.SingleAsync(v => v.Id == id, ct);
+            if (existingTaskEntity == null)
+                throw new EntityNotFoundException<DispatchTask>();
+            // determine where the copy goes
+            existingTaskEntity.TriggerTaskId = null;
+            existingTaskEntity.ScenarioId = null;
+            existingTaskEntity.SessionId = null;
+            switch (newLocationType)
+            {
+                case "dispatchTask":
+                    var newLocationTaskEntity = await _context.DispatchTasks.SingleAsync(v => v.Id == newLocationId, ct);
+                    if (await PreventAddingToSelfAsync(existingTaskEntity.Id, newLocationTaskEntity, ct))
+                    {
+                        throw new Exception("Cannot move a DispatchTask underneath itself!");
+                    }
+                    existingTaskEntity.TriggerTaskId = newLocationId;
+                    existingTaskEntity.ScenarioId = newLocationTaskEntity.ScenarioId;
+                    existingTaskEntity.SessionId = newLocationTaskEntity.SessionId;
+                    break;
+                case "scenario":
+                    existingTaskEntity.ScenarioId = newLocationId;
+                    break;
+                case "session":
+                    existingTaskEntity.SessionId = newLocationId;
+                    break;
+                default:
+                    break;
+            }
+            await _context.SaveChangesAsync();
+            var entities = new List<DispatchTaskEntity>();
+            entities.Add(existingTaskEntity);
+            entities.AddRange(await MoveSubTasks(existingTaskEntity, ct));
+
+            return entities;
+        }
+
+        private async Task<IEnumerable<DispatchTaskEntity>> MoveSubTasks(DispatchTaskEntity dispatchTaskEntity, CancellationToken ct)
+        {
+            var subTaskEntityIds = _context.DispatchTasks.Where(dt => dt.TriggerTaskId == dispatchTaskEntity.Id).Select(dt => dt.Id);
+            var subEntities = new List<DispatchTaskEntity>();
+            foreach (var subTaskEntityId in subTaskEntityIds)
+            {
+                var newEntities = await MoveDispatchTaskAsync(subTaskEntityId, dispatchTaskEntity.Id, "dispatchTask", ct);
+                subEntities.AddRange(newEntities);
+            }
+
+            return subEntities;
+        }
+
+        private async Task<bool> PreventAddingToSelfAsync(Guid existingId, DispatchTaskEntity newLocationEntity, CancellationToken ct)
+        {
+            // walk up the dispatch task family tree to make sure the existing task is not on it
+            // a null parentId means we hit the top
+            var parentId = newLocationEntity.TriggerTaskId;
+            var wouldAddToSelf = false;
+            while (!wouldAddToSelf && parentId != null)
+            {
+                wouldAddToSelf = (parentId == existingId);
+                parentId = (await _context.DispatchTasks.SingleAsync(v => v.Id == parentId, ct)).TriggerTaskId;
+            }
+            return wouldAddToSelf;
         }
 
         private async Task VerifyDispatchTaskToExecuteAsync(DispatchTaskEntity dispatchTaskToExecute, CancellationToken ct)
@@ -520,7 +704,7 @@ namespace Steamfitter.Api.Services
                 var wasPassedOn = false;
                 if (subtaskEntity.DelaySeconds > 0)
                 {
-                    wasPassedOn = await ScheduleSubtask(subtaskEntity);
+                    wasPassedOn = await ScheduleTask(subtaskEntity);
                     if (!wasPassedOn)
                     {
                         var resultEntity = NewDispatchTaskResultEntity(subtaskEntity);
@@ -550,10 +734,10 @@ namespace Steamfitter.Api.Services
             return executeResponse.IsSuccessStatusCode;
         }
 
-        private async Task<bool> ScheduleSubtask(DispatchTaskEntity subtaskEntity)
+        private async Task<bool> ScheduleTask(DispatchTaskEntity taskEntity)
         {
-            var startTime = DateTime.UtcNow.AddSeconds(subtaskEntity.DelaySeconds).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
-            var endTime = DateTime.UtcNow.AddSeconds(subtaskEntity.DelaySeconds + (subtaskEntity.Iterations * subtaskEntity.IntervalSeconds)).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
+            var startTime = DateTime.UtcNow.AddSeconds(taskEntity.DelaySeconds).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
+            var endTime = DateTime.UtcNow.AddSeconds(taskEntity.DelaySeconds + (taskEntity.Iterations * taskEntity.IntervalSeconds)).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
             var workorder = new {
                 groupName = "steamfitter",
                 start = startTime,
@@ -563,13 +747,13 @@ namespace Steamfitter.Api.Services
                 woTriggers = new[] {
                     new {
                         groupName = "steamfitter",
-                        interval = subtaskEntity.IntervalSeconds
+                        interval = taskEntity.IntervalSeconds
                     }
                 },
                 woParams = new [] {
                     new {
-                        name = "[task.id]",
-                        value = subtaskEntity.Id
+                        name = "[dispatchtask.id]",
+                        value = taskEntity.Id
                     }
                 }
             };
@@ -585,13 +769,13 @@ namespace Steamfitter.Api.Services
                 var scheduleResponse = await client.PostAsync(relativeAddress, httpContent);
                 if (!scheduleResponse.IsSuccessStatusCode)
                 {
-                    _logger.LogError($"Error scheduling DispatchTask {subtaskEntity.Id}! Response was {scheduleResponse.StatusCode}: {scheduleResponse.ReasonPhrase} - {scheduleResponse.RequestMessage}");
+                    _logger.LogError($"Error scheduling DispatchTask {taskEntity.Id}! Response was {scheduleResponse.StatusCode}: {scheduleResponse.ReasonPhrase} - {scheduleResponse.RequestMessage}");
                 }
                 return scheduleResponse.IsSuccessStatusCode; 
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error scheduling DispatchTask {subtaskEntity.Id}! {ex.Message}.  Check to make sure that the Foreman DispatchTask Scheduler is up and running.");
+                _logger.LogError($"Error scheduling DispatchTask {taskEntity.Id}! {ex.Message}.  Check to make sure that the Foreman DispatchTask Scheduler is up and running.");
                 return false;
             }
 

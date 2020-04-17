@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -51,18 +51,21 @@ namespace Steamfitter.Api.Services
         private readonly ClaimsPrincipal _user;
         private readonly IMapper _mapper;
         private readonly IDispatchTaskService _dispatchTaskService;
+        private readonly IStackStormService _stackstormService;
 
         public SessionService(SteamfitterContext context,
                                 IAuthorizationService authorizationService,
                                 IPrincipal user,
                                 IMapper mapper,
-                                IDispatchTaskService dispatchTaskService)
+                                IDispatchTaskService dispatchTaskService,
+                                IStackStormService stackstormService)
         {
             _context = context;
             _authorizationService = authorizationService;
             _user = user as ClaimsPrincipal;
             _mapper = mapper;
             _dispatchTaskService = dispatchTaskService;
+            _stackstormService = stackstormService;
         }
 
         public async Task<IEnumerable<ViewModels.Session>> GetAsync(CancellationToken ct)
@@ -152,12 +155,8 @@ namespace Steamfitter.Api.Services
             // copy the PARENT DispatchTasks
             foreach (var oldDispatchTaskEntity in oldDispatchTaskEntities)
             {
-                var newDispatchTaskEntity = await CopyDispatchTaskEntity(oldDispatchTaskEntity, null, sessionEntity.Id, ct);
-                // copy this PARENT's subtasks
-                await CopySubTasks(oldDispatchTaskEntity.Id, newDispatchTaskEntity, ct);
+                await _dispatchTaskService.CopyAsync(oldDispatchTaskEntity.Id, sessionEntity.Id, "session", ct);
             }
-            // save the changes
-            await _context.SaveChangesAsync(ct);
 
             return _mapper.Map<Session>(sessionEntity);
         }
@@ -187,9 +186,7 @@ namespace Steamfitter.Api.Services
             // copy the PARENT DispatchTasks
             foreach (var oldDispatchTaskEntity in oldDispatchTaskEntities)
             {
-                var newDispatchTaskEntity = await CopyDispatchTaskEntity(oldDispatchTaskEntity, null, newSessionEntity.Id, ct);
-                // copy this PARENT's subtasks
-                await CopySubTasks(oldDispatchTaskEntity.Id, newDispatchTaskEntity, ct);
+                await _dispatchTaskService.CopyAsync(oldDispatchTaskEntity.Id, newSessionEntity.Id, "session", ct);
             }
 
             return await GetAsync(newSessionEntity.Id, ct);
@@ -248,7 +245,9 @@ namespace Steamfitter.Api.Services
 
             _context.Sessions.Update(session);
             await _context.SaveChangesAsync(ct);
-
+            // TODO:  create a better way to do this that doesn't require getting ALL of the VM's
+            // We just need to grab all of the VM's from the session exercise
+            await _stackstormService.GetStackstormVms();
             var dispatchTasks = await _dispatchTaskService.GetBySessionIdAsync(session.Id, ct);
             foreach (var dispatchTask in dispatchTasks)
             {
@@ -290,42 +289,6 @@ namespace Steamfitter.Api.Services
             return _mapper.Map<Session>(session);
         }
 
-        private async Task<DispatchTaskEntity> CopyDispatchTaskEntity(DispatchTaskEntity oldDispatchTaskEntity, Guid? triggerTaskId, Guid? sessionId, CancellationToken ct)
-        {
-            var newDispatchTaskEntity = new DispatchTaskEntity() {
-                ScenarioId = null,
-                SessionId = sessionId,
-                CreatedBy = _user.GetId(),
-                TriggerTaskId = triggerTaskId,
-                Name = oldDispatchTaskEntity.Name,
-                Description = oldDispatchTaskEntity.Description,
-                Action = oldDispatchTaskEntity.Action,
-                VmMask = oldDispatchTaskEntity.VmMask,
-                ApiUrl = oldDispatchTaskEntity.ApiUrl,
-                InputString = oldDispatchTaskEntity.InputString,
-                ExpectedOutput = oldDispatchTaskEntity.ExpectedOutput,
-                ExpirationSeconds = oldDispatchTaskEntity.ExpirationSeconds,
-                DelaySeconds = oldDispatchTaskEntity.DelaySeconds,
-                IntervalSeconds = oldDispatchTaskEntity.IntervalSeconds,
-                Iterations = oldDispatchTaskEntity.Iterations,
-                TriggerCondition = oldDispatchTaskEntity.TriggerCondition
-            };
-            _context.DispatchTasks.Add(newDispatchTaskEntity);
-
-            return newDispatchTaskEntity;
-        }
-
-        private async Task<bool> CopySubTasks(Guid oldDispatchTaskEntityId, DispatchTaskEntity newDispatchTaskEntity, CancellationToken ct)
-        {
-            var oldSubTaskEntities = _context.DispatchTasks.Where(dt => dt.TriggerTaskId == oldDispatchTaskEntityId);
-            foreach (var oldSubTaskEntity in oldSubTaskEntities)
-            {
-                var newSubTaskEntity = await CopyDispatchTaskEntity(oldSubTaskEntity, newDispatchTaskEntity.Id, newDispatchTaskEntity.SessionId, ct);
-                await CopySubTasks(oldSubTaskEntity.Id, newSubTaskEntity, ct);
-            }
-
-            return true;
-        }
     }
 }
 

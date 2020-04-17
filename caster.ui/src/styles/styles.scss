@@ -1,17 +1,31 @@
+/*
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+*/
+/*
 @import "~node_modules/bootstrap-scss/functions";
 @import "~node_modules/bootstrap-scss/variables";
 @import "~node_modules/bootstrap-scss/mixins";
 @import "~node_modules/bootstrap-scss/popover";
 @import '~angular-tree-component/dist/angular-tree-component.css';
-@import "~xterm/css/xterm.css";
+
+*/
+
 /* You can add global styles to this file, and also import other style files */
+
+@import "~xterm/css/xterm.css";
 $mdi-font-path: "~@mdi/font/fonts";
 @import "~@mdi/font/scss/materialdesignicons";
-
 @import "~@angular/material/theming";
 @include mat-core();
 @import "theme";
 @import "../app/sei-cwd-common/cwd-toolbar/theme/theme";
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
 @include angular-material-theme($theme);
 @include cwd-toolbar-theme($theme);
@@ -19,6 +33,7 @@ $mdi-font-path: "~@mdi/font/fonts";
 body {
   height: 100vh;
   margin: 0;
+  background-color: $background-color;
 }
 
 /* You can add global styles to this file, and also import other style files */
@@ -35,7 +50,7 @@ box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10
 
 
 @font-face {
-  font-family: 'open_sansregular';
+  font-family: 'open_sansregular', sans-serif;
   src: url('/assets/fonts/opensans-regular.woff2') format('woff2'),
        url('/assets/fonts/opensans-regular.woff') format('woff');
   font-weight: normal;
@@ -43,7 +58,7 @@ box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10
 }
 
 @font-face {
-  font-family: 'open_sansbold';
+  font-family: 'open_sansbold', sans-serif;
   src: url('/assets/fonts/opensans-bold.woff2') format('woff2'),
        url('/assets/fonts/opensans-bold.woff') format('woff');
   font-weight: normal;
@@ -51,7 +66,7 @@ box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10
 }
 
 @font-face {
-  font-family: 'open_sansitalic';
+  font-family: 'open_sansitalic', sans-serif;
   src: url('/assets/fonts/opensans-italic.woff2') format('woff2'),
        url('/assets/fonts/opensans-italic.woff') format('woff');
   font-weight: normal;
@@ -59,15 +74,16 @@ box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10
 }
 
 body {
-  font-family: 'open_sansregular';
+  font-family: 'open_sansregular', sans-serif;
 }
 
 b {
-  font-family: 'open_sansbold';
+  font-family: 'open_sansbold', sans-serif;
 }
 
 i {
-  font-family: 'open_sansitalic';
+  font-family: 'open_sansitalic', sans-serif;
 }
+
 
 

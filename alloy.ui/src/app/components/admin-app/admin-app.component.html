@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
 
@@ -15,7 +15,7 @@ DM20-0181
       <mat-list-item class="appslist">
         <a class="nolink" href="/">
           <h4>
-            <b>Lab Administration</b>
+            <b>Administration</b>
           </h4>
         </a>
         <mat-divider></mat-divider>
@@ -23,13 +23,13 @@ DM20-0181
       <mat-list-item>
         <div class="showhand" id="wrapper">
           <div id="lefticon">
-            <img src="../../../../assets/svg-icons/build-24px.svg" alt="Exercises" (click)="adminGotoDefinitions()">
+            <img src="../../../../assets/svg-icons/build-24px.svg" alt="Views" (click)="adminGotoEventTemplates()">
           </div>
-    
-          <div id="content" (click)="adminGotoDefinitions()">{{definitionsText}}</div>
-    
+
+          <div id="content" (click)="adminGotoEventTemplates()">{{eventTemplatesText}}</div>
+
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="adminGotoDefinitions()">
+            <button mat-icon-button style="outline: none;" (click)="adminGotoEventTemplates()">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
             </button>
           </div>
@@ -38,13 +38,13 @@ DM20-0181
       <mat-list-item>
         <div class="showhand" id="wrapper">
           <div id="lefticon">
-            <img src="../../../assets/svg-icons/directions_run-24px.svg" alt="Users" (click)="adminGotoImplementations()">
+            <img src="../../../assets/svg-icons/directions_run-24px.svg" alt="Users" (click)="adminGotoEvents()">
           </div>
-    
-          <div id="content" (click)="adminGotoImplementations()">{{implementationsText}}</div>
-    
+
+          <div id="content" (click)="adminGotoEvents()">{{eventsText}}</div>
+
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="adminGotoImplementations()">
+            <button mat-icon-button style="outline: none;" (click)="adminGotoEvents()">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
             </button>
           </div>
@@ -68,8 +68,8 @@ DM20-0181
       </div>
 
     </div>
-    <app-definitions *ngIf="showStatus===definitionsText"></app-definitions>
-    <app-implementations *ngIf="showStatus===implementationsText" [refresh]="shouldUpdateImplementations"></app-implementations>
-  
+    <app-event-templates *ngIf="showStatus===eventTemplatesText"></app-event-templates>
+    <app-events *ngIf="showStatus===eventsText" [refresh]="shouldUpdateEvents"></app-events>
+
   </mat-sidenav-content>
 </mat-sidenav-container>

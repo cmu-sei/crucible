@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -6,7 +6,7 @@
         <RootNamespace>stackstorm.api.client</RootNamespace>
 
         <PackageId>Stackstorm.Api.Client</PackageId>
-        <Version>1.0.2</Version>
+        <Version>0.0.0</Version>
         <Authors>CERT.CWD</Authors>
         <Company>CMU.SEI</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

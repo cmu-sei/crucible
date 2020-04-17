@@ -53,3 +53,9 @@ src/assets/config/settings.[Ee]nv.json
 /terraform-plugins
 /terraform
 .vscode/
+
+
+# Docker
+/docker/certs
+/docker/**/*.json
+/docker/docker-compose

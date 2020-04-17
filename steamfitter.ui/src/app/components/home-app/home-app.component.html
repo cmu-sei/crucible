@@ -4,12 +4,12 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon® and CERT® are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
 
 
-<mat-sidenav-container class="appcontent-container" autosize *ngIf="isSuperUser">
+<mat-sidenav-container class="appcontent-container" autosize>
   <mat-sidenav class="appbarmenu-container" #sidenav mode="side" [(opened)]="isSidebarOpen">
     <mat-list class="appitems-container">
       <mat-list-item class="appslist">
@@ -23,13 +23,13 @@ DM20-0181
       <mat-list-item>
         <div class="showhand" id="wrapper">
           <div id="lefticon">
-            <img src="../../../../assets/svg-icons/input-24px.svg" alt="{{section.taskBuilder}}" (click)="selectedSection = section.taskBuilder">
+            <img src="../../../../assets/svg-icons/input-24px.svg" alt="{{section.taskBuilder}}" (click)="selectTab(section.taskBuilder)">
           </div>
 
-          <div id="content" (click)="selectedSection = section.taskBuilder">{{section.taskBuilder}}</div>
+          <div id="content" (click)="selectTab(section.taskBuilder)">{{section.taskBuilder}}</div>
 
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectedSection = section.taskBuilder">
+            <button mat-icon-button style="outline: none;" (click)="selectTab(section.taskBuilder)">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
             </button>
           </div>
@@ -38,13 +38,13 @@ DM20-0181
       <mat-list-item>
         <div class="showhand" id="wrapper">
           <div id="lefticon">
-            <img src="../../../../assets/svg-icons/history-24px.svg" alt="{{section.taskHistory}}" (click)="selectedSection = section.taskHistory">
+            <img src="../../../../assets/svg-icons/history-24px.svg" alt="{{section.taskHistory}}" (click)="selectTab(section.taskHistory)">
           </div>
 
-          <div id="content" (click)="selectedSection = section.taskHistory">{{section.taskHistory}}</div>
+          <div id="content" (click)="selectTab(section.taskHistory)">{{section.taskHistory}}</div>
 
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectedSection = section.taskHistory">
+            <button mat-icon-button style="outline: none;" (click)="selectTab(section.taskHistory)">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
             </button>
           </div>
@@ -53,13 +53,13 @@ DM20-0181
       <mat-list-item>
         <div class="showhand" id="wrapper">
           <div id="lefticon">
-            <img src="../../../../assets/svg-icons/menu-24px.svg" alt="{{section.scenarios}}" (click)="selectedSection = section.scenarios">
+            <img src="../../../../assets/svg-icons/menu-24px.svg" alt="{{section.scenarioTemplates}}" (click)="selectTab(section.scenarioTemplates)">
           </div>
 
-          <div id="content" (click)="selectedSection = section.scenarios">{{section.scenarios}}</div>
+          <div id="content" (click)="selectTab(section.scenarioTemplates)">{{section.scenarioTemplates}}</div>
 
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectedSection = section.scenarios">
+            <button mat-icon-button style="outline: none;" (click)="selectTab(section.scenarioTemplates)">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
             </button>
           </div>
@@ -68,13 +68,13 @@ DM20-0181
       <mat-list-item>
         <div class="showhand" id="wrapper">
           <div id="lefticon">
-            <img src="../../../../assets/svg-icons/playlist_play-24px.svg" alt="{{section.sessions}}" (click)="selectedSection = section.sessions">
+            <img src="../../../../assets/svg-icons/playlist_play-24px.svg" alt="{{section.scenarios}}" (click)="selectTab(section.scenarios)">
           </div>
 
-          <div id="content" (click)="selectedSection = section.sessions">{{section.sessions}}</div>
+          <div id="content" (click)="selectTab(section.scenarios)">{{section.scenarios}}</div>
 
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectedSection = section.sessions">
+            <button mat-icon-button style="outline: none;" (click)="selectTab(section.scenarios)">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
             </button>
           </div>
@@ -88,21 +88,21 @@ DM20-0181
       <div fxFlex="37" fxFlexOffset="3" class="title-text"><h4>{{ selectedSection }}</h4></div>
       <div fxFlex="60" fxLayoutAlign="end center">
         <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
-          <b>{{ (loggedInUser | async).profile.name }}</b>
+          <b>{{ (loggedInUser | async).profile.name }}</b><span *ngIf="!isAuthorizedUser"> - NO PERMISSIONS</span>
           <mat-icon style="transform: translateY(1px);" svgIcon="ic_expand_more_white_24px"></mat-icon>
         </button>
         <mat-menu #menu="matMenu" [overlapTrigger]="false">
-          <button *ngIf="isSuperUser | async" [routerLink]="['/admin']" mat-menu-item>Administration</button>
+          <button *ngIf="isSuperUser" [routerLink]="['/admin']" mat-menu-item>Administration</button>
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </div>
 
     </div>
-    <app-vm-task-execute *ngIf="selectedSection === section.taskBuilder"></app-vm-task-execute>
-    <app-task-history *ngIf="selectedSection === section.taskHistory"></app-task-history>
-    <app-scenarios *ngIf="selectedSection === section.scenarios" [refresh]="shouldUpdateScenarios"></app-scenarios>
-    <app-sessions *ngIf="selectedSection === section.sessions" [refresh]="shouldUpdateSessions"></app-sessions>
+    <span *ngIf="isAuthorizedUser">
+      <app-vm-task-execute *ngIf="selectedSection === section.taskBuilder"></app-vm-task-execute>
+      <app-task-history *ngIf="selectedSection === section.taskHistory"></app-task-history>
+      <app-scenario-templates *ngIf="selectedSection === section.scenarioTemplates"></app-scenario-templates>
+      <app-scenarios *ngIf="selectedSection === section.scenarios"></app-scenarios>
+    </span>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-
