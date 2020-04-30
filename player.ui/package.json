@@ -43,7 +43,7 @@
     "core-js": "^2.5.7",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng-push": "^0.2.2",
     "ng-socket-io": "^0.2.4",
     "ngx-clipboard": "^12.2.0",
