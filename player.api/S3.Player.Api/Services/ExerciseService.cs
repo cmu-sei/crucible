@@ -61,8 +61,8 @@ namespace S3.Player.Api.Services
                 throw new ForbiddenException();
 
             var items = await _context.Exercises
-                .ToListAsync(ct);         
-            
+                .ToListAsync(ct);
+
             return _mapper.Map<IEnumerable<Exercise>>(items);
         }
 
@@ -85,7 +85,7 @@ namespace S3.Player.Api.Services
 
             var user = await _context.Users
                 .Include(u => u.ExerciseMemberships)
-                    .ThenInclude(em => em.Exercise)                
+                    .ThenInclude(em => em.Exercise)
                 .Where(u => u.Id == userId)
                 .SingleOrDefaultAsync(ct);
 
@@ -96,7 +96,7 @@ namespace S3.Player.Api.Services
 
             return _mapper.Map<IEnumerable<ViewModels.Exercise>>(exercises);
         }
-        
+
         public async Task<ViewModels.Exercise> CreateAsync(ViewModels.Exercise exercise, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseCreationRequirement())).Succeeded)
@@ -117,7 +117,7 @@ namespace S3.Player.Api.Services
             var teamEntity = new TeamEntity() { Name = "Admin" };
             teamEntity.Permissions.Add(new TeamPermissionEntity() { Permission = exerciseAdminPermission });
 
-            var exerciseMembershipEntity = new ExerciseMembershipEntity { Exercise = exerciseEntity, UserId = userId };            
+            var exerciseMembershipEntity = new ExerciseMembershipEntity { Exercise = exerciseEntity, UserId = userId };
             exerciseEntity.Teams.Add(teamEntity);
             exerciseEntity.Memberships.Add(exerciseMembershipEntity);
 
@@ -144,6 +144,7 @@ namespace S3.Player.Api.Services
                 .Include(o => o.Teams)
                     .ThenInclude(o => o.Permissions)
                 .Include(o => o.Applications)
+                    .ThenInclude(o => o.Template)
                 .SingleOrDefaultAsync(o => o.Id == idToBeCloned, ct);
 
             var newExercise = exercise.Clone();
@@ -165,9 +166,9 @@ namespace S3.Player.Api.Services
                 foreach (var applicationInstance in team.Applications)
                 {
                     var newApplicationInstance = applicationInstance.Clone();
-               
+
                     var application = exercise.Applications.FirstOrDefault(o => o.Id == applicationInstance.ApplicationId);
-                    var newApplication = newExercise.Applications.FirstOrDefault(o => application != null && o.Name == application.Name);
+                    var newApplication = newExercise.Applications.FirstOrDefault(o => application != null && o.GetName() == application.GetName());
 
                     newApplicationInstance.Application = newApplication;
 
@@ -225,4 +226,3 @@ namespace S3.Player.Api.Services
         }
     }
 }
-

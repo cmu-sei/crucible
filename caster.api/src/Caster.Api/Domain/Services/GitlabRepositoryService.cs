@@ -160,7 +160,7 @@ namespace Caster.Api.Domain.Services
             var versions = new List<Domain.Models.ModuleVersion>();
             var response = await _httpClient.GetAsync($"projects/{id}/releases?private_token={_token}");
             var json = await response.Content.ReadAsByteArrayAsync();
-            var releases =JsonSerializer.Deserialize<GitlabRelease[]>(
+            var releases = JsonSerializer.Deserialize<GitlabRelease[]>(
                 json,
                 DefaultJsonSettings.Settings);
 
@@ -180,6 +180,7 @@ namespace Caster.Api.Domain.Services
                     ModuleId = moduleId,
                     Name = release.Name,
                     UrlLink = _baseUrl.Replace("ref=master", $"ref={release.Name}"),
+                    DateCreated = release.DateCreated,
                     Variables = variables,
                     Outputs = outputs
                 };
@@ -228,4 +229,3 @@ namespace Caster.Api.Domain.Services
         }
     }
 }
-

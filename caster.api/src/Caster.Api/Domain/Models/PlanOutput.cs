@@ -36,7 +36,6 @@ namespace Caster.Api.Domain.Models
         public string Name { get; set; }
         public string Mode { get; set; }
         public string Type { get; set; }
-        public int Index { get; set; }
         public string Deposed { get; set; }
         public Change Change { get; set; }
     }
@@ -57,4 +56,3 @@ namespace Caster.Api.Domain.Models
         Delete
     }
 }
-

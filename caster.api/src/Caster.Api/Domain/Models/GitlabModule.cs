@@ -46,6 +46,9 @@ namespace Caster.Api.Domain.Models
     {
         [JsonPropertyName("tag_name")]
         public string Name { get; set; }
+
+        [JsonPropertyName("released_at")]
+        public DateTime DateCreated { get; set; }
     }
 
     public static class GitlabModuleVariableResponse
@@ -130,4 +133,3 @@ namespace Caster.Api.Domain.Models
         }
     }
 }
-

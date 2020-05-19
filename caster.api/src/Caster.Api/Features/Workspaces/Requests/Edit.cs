@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Authorization;
 using Caster.Api.Infrastructure.Authorization;
 using Caster.Api.Infrastructure.Identity;
 using Caster.Api.Features.Workspaces.Interfaces;
+using FluentValidation;
 
 namespace Caster.Api.Features.Workspaces
 {
@@ -50,6 +51,14 @@ namespace Caster.Api.Features.Workspaces
             /// </summary>
             [DataMember]
             public bool DynamicHost { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator(IValidator<IWorkspaceUpdateRequest> baseValidator)
+            {
+                Include(baseValidator);
+            }
         }
 
         public class Handler : IRequestHandler<Command, Workspace>
@@ -98,4 +107,3 @@ namespace Caster.Api.Features.Workspaces
         }
     }
 }
-

@@ -26,8 +26,8 @@ namespace Caster.Api.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:PostgresExtension:uuid-ossp", ",,")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Caster.Api.Domain.Models.Apply", b =>
@@ -323,6 +323,10 @@ namespace Caster.Api.Data.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnName("date_created")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<Guid>("ModuleId")
                         .HasColumnName("module_id")
                         .HasColumnType("uuid");
@@ -413,7 +417,6 @@ namespace Caster.Api.Data.Migrations
             modelBuilder.Entity("Caster.Api.Domain.Models.RemovedResource", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnName("id")
                         .HasColumnType("text");
 
@@ -556,7 +559,8 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.Run", "Run")
                         .WithOne("Apply")
                         .HasForeignKey("Caster.Api.Domain.Models.Apply", "RunId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Caster.Api.Domain.Models.Directory", b =>
@@ -564,7 +568,8 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.Exercise", "Exercise")
                         .WithMany("Directories")
                         .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Caster.Api.Domain.Models.Directory", "Parent")
                         .WithMany("Children")
@@ -577,7 +582,8 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.Directory", "Directory")
                         .WithMany("Files")
                         .HasForeignKey("DirectoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Caster.Api.Domain.Models.User", "LockedBy")
                         .WithMany()
@@ -598,7 +604,8 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.File", "File")
                         .WithMany("FileVersions")
                         .HasForeignKey("FileId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Caster.Api.Domain.Models.User", "ModifiedBy")
                         .WithMany()
@@ -621,12 +628,14 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.Host", "Host")
                         .WithMany("Machines")
                         .HasForeignKey("HostId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Caster.Api.Domain.Models.Workspace", "Workspace")
                         .WithMany()
                         .HasForeignKey("WorkspaceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Caster.Api.Domain.Models.ModuleVersion", b =>
@@ -634,7 +643,8 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.Module", "Module")
                         .WithMany("Versions")
                         .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Caster.Api.Domain.Models.Plan", b =>
@@ -642,7 +652,8 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.Run", "Run")
                         .WithOne("Plan")
                         .HasForeignKey("Caster.Api.Domain.Models.Plan", "RunId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Caster.Api.Domain.Models.Run", b =>
@@ -650,7 +661,8 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.Workspace", "Workspace")
                         .WithMany("Runs")
                         .HasForeignKey("WorkspaceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Caster.Api.Domain.Models.UserPermission", b =>
@@ -658,12 +670,14 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.Permission", "Permission")
                         .WithMany("UserPermissions")
                         .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Caster.Api.Domain.Models.User", "User")
                         .WithMany("UserPermissions")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Caster.Api.Domain.Models.Workspace", b =>
@@ -671,7 +685,8 @@ namespace Caster.Api.Data.Migrations
                     b.HasOne("Caster.Api.Domain.Models.Directory", "Directory")
                         .WithMany("Workspaces")
                         .HasForeignKey("DirectoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Caster.Api.Domain.Models.Host", "Host")
                         .WithMany()
@@ -681,4 +696,3 @@ namespace Caster.Api.Data.Migrations
         }
     }
 }
-

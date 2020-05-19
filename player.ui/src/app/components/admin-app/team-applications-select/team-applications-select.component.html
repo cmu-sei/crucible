@@ -11,7 +11,7 @@ DM20-0181
 <div fxLayout="row" fxLayoutAlign="end" class="top-button">
   <button [hidden]="exerciseApplications === undefined || exerciseApplications.length === 0" mat-stroked-button [matMenuTriggerFor]="teamAppsMenu">Add Application</button>
   <mat-menu #teamAppsMenu="matMenu">
-    <button mat-menu-item *ngFor="let a of exerciseApplications" (click)="addExerciseAppToTeam(a)">{{a.name}}</button>
+    <button mat-menu-item *ngFor="let a of exerciseApplications" (click)="addExerciseAppToTeam(a)">{{getAppName(a)}}</button>
   </mat-menu>
 </div>
 <mat-accordion>
@@ -20,7 +20,7 @@ DM20-0181
     <mat-expansion-panel-header>
       <mat-panel-title>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <img class="app-icon" src="{{app.icon}}"> {{app.name}}
+          <img class="app-icon" src="{{app.icon}}"> {{getAppName(app)}}
         </div>
       </mat-panel-title>
     </mat-expansion-panel-header>

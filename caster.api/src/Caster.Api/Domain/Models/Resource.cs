@@ -100,9 +100,9 @@ namespace Caster.Api.Domain.Models
             return dict;
         }
 
-        public Guid? GetTeamId()
+        public Guid[] GetTeamIds()
         {
-            Guid? teamId = null;
+            var teamIds = new List<Guid>();
 
             // TODO: improve handling of this.
             if (this.Type == "vsphere_virtual_machine")
@@ -113,10 +113,24 @@ namespace Caster.Api.Domain.Models
                     {
                         Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(extraConfig.ToString());
 
-                        if (dict.ContainsKey("guestinfo.teamId"))
+                        string[] teamIdKeywords = new string[] {"guestinfo.teamId", "guestinfo.team_id"};
+
+                        foreach (var keyword in teamIdKeywords)
                         {
-                            string id = dict["guestinfo.teamId"];
-                            teamId = new Guid(id);
+                            if (dict.ContainsKey(keyword))
+                            {
+                                string idString = dict[keyword];
+                                string[] ids = idString.Split(',');
+
+                                foreach (var id in ids)
+                                {
+                                    Guid guid;
+                                    if (Guid.TryParse(id, out guid))
+                                    {
+                                        teamIds.Add(guid);
+                                    }
+                                }
+                            }
                         }
                     }
                     catch(Exception ex)
@@ -126,7 +140,7 @@ namespace Caster.Api.Domain.Models
                 }
             }
 
-            return teamId;
+            return teamIds.ToArray();
         }
 
         public bool IsVirtualMachine()
@@ -135,4 +149,3 @@ namespace Caster.Api.Domain.Models
         }
     }
 }
-

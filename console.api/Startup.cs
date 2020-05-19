@@ -9,9 +9,7 @@ DM20-0181
 */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,17 +20,17 @@ using S3.Vm.Console.Services;
 using S3.Vm.Console.Extensions;
 using S3.Vm.Console.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Security.Principal;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Converters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using AuthorizationOptions = S3.Vm.Console.Options.AuthorizationOptions;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
+using Microsoft.Extensions.Options;
 
 namespace S3.Vm.Console
 {
@@ -70,8 +68,9 @@ namespace S3.Vm.Console
                 x.ValueLengthLimit = int.MaxValue;
                 x.MultipartBodyLengthLimit = int.MaxValue;
             });
-            services.Configure<VmOptions>(Configuration.GetSection("VMOptions"));
-            services.Configure<RewriteHostOptions>(Configuration.GetSection("RewriteHost"));            
+            services.Configure<VmOptions>(Configuration.GetSection("VMOptions"))
+                .AddScoped(config => config.GetService<IOptionsSnapshot<VmOptions>>().Value);
+            services.Configure<RewriteHostOptions>(Configuration.GetSection("RewriteHost"));
 
             services.AddScoped<VmService>();
 
@@ -100,7 +99,11 @@ namespace S3.Vm.Console
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IPrincipal>(p => p.GetService<IHttpContextAccessor>().HttpContext.User);            
+            services.AddScoped<IPrincipal>(p => p.GetService<IHttpContextAccessor>().HttpContext.User);
+
+            services.AddApiClients();
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,7 +120,7 @@ namespace S3.Vm.Console
 
             app.UseStaticFiles();
             app.UseCors("default");
-            
+
             //move any querystring jwt to Auth bearer header
             app.Use(async (context, next) =>
             {
@@ -155,4 +158,3 @@ namespace S3.Vm.Console
         }
     }
 }
-

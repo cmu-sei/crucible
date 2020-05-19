@@ -49,8 +49,10 @@ namespace Caster.Api.Features.Exercises
             public bool PreserveIds { get; set; }
         }
 
-        public class ImportValidator : AbstractValidator<Command> {
-            public ImportValidator() {
+        public class ImportValidator : AbstractValidator<Command>
+        {
+            public ImportValidator()
+            {
                 RuleFor(x => x.Archive)
                     .NotNull().Must(BeAValidArchiveType)
                     .WithMessage($"File extension must be one of {string.Join(", ", ArchiveTypeHelpers.GetValidExtensions())}");

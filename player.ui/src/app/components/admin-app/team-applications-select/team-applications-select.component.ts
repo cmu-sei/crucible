@@ -9,7 +9,7 @@ DM20-0181
 */
 
 import { Component, OnInit, Input } from '@angular/core';
-import { Team, ApplicationService, ApplicationInstance, Application, ApplicationInstanceForm, Exercise, TeamService } from '../../../swagger-codegen/s3.player.api';
+import { Team, ApplicationService, ApplicationInstance, Application, ApplicationInstanceForm, Exercise, ApplicationTemplate } from '../../../swagger-codegen/s3.player.api';
 import { DialogService } from '../../../services/dialog/dialog.service';
 
 export enum ObjectType { Unknown, Team, Exercise }
@@ -26,6 +26,7 @@ export class TeamApplicationsSelectComponent implements OnInit {
 
   public exerciseApplications: Array<Application>;
   public applications: Array<ApplicationInstance>;
+  public applicationTemplates = new Array<ApplicationTemplate>();
   public objTypes = ObjectType;
 
   public subjectType = ObjectType.Unknown;
@@ -63,6 +64,10 @@ export class TeamApplicationsSelectComponent implements OnInit {
           this.exerciseApplications.push(app);
         }
       });
+    });
+
+    this.applicationService.getApplicationTemplates().subscribe(appTmps => {
+      this.applicationTemplates = appTmps;
     });
   }
 
@@ -135,6 +140,19 @@ export class TeamApplicationsSelectComponent implements OnInit {
       });
   }
 
+  getAppName(app: Application) {
+    if (app.name != null) {
+      return app.name;
+    } else if (app.applicationTemplateId != null) {
+      const template = this.applicationTemplates.find(x => x.id === app.applicationTemplateId);
 
+      if (template != null) {
+        return template.name;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }
-

@@ -82,17 +82,14 @@ namespace S3.Player.Api.Controllers
         /// </summary>
         /// <remarks>
         /// Returns all Exercises where the current User is a member of at least one of it's Teams
-        /// <para />
-        /// Accessible only to the current User.
-        /// <para/>
-        /// This is a convenience endpoint and simply returns a 302 redirect to the fully qualified users/{id}/exercises endpoint 
         /// </remarks>
         [HttpGet("me/exercises")]
         [ProducesResponseType(typeof(IEnumerable<Exercise>), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getMyExercises")]
         public async Task<IActionResult> GetMy(CancellationToken ct)
         {
-            return RedirectToAction(nameof(this.GetByUserId), new { id = User.GetId() });
+            var list = await _exerciseService.GetByUserIdAsync(User.GetId(), ct);
+            return Ok(list);
         }
 
         /// <summary>

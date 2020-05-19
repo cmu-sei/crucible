@@ -8,13 +8,17 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using S3.Vm.Console.Models;
 using S3.Vm.Console.Options;
+using S3.VM.Api;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -37,6 +41,35 @@ namespace S3.Vm.Console.Extensions
                 });
             });
         }
+
+        public static void AddApiClients(this IServiceCollection services)
+        {
+            services.AddVmApiClient();
+        }
+
+        private static void AddVmApiClient(this IServiceCollection services)
+        {
+            services.AddHttpClient();
+
+            services.AddScoped<IS3VmApiClient, S3VmApiClient>(p =>
+            {
+                var httpContextAccessor = p.GetRequiredService<IHttpContextAccessor>();
+                var httpClientFactory = p.GetRequiredService<IHttpClientFactory>();
+                var vmOptions = p.GetRequiredService<VmOptions>();
+
+                var uri = new Uri(vmOptions.ApiUrl);
+
+                string authHeader = httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+
+                var httpClient = httpClientFactory.CreateClient();
+                httpClient.BaseAddress = uri;
+                httpClient.DefaultRequestHeaders.Add("Authorization", authHeader);
+
+                var playerVmApiClient = new S3VmApiClient(httpClient, true);
+                playerVmApiClient.BaseUri = uri;
+
+                return playerVmApiClient;
+            });
+        }
     }
 }
-

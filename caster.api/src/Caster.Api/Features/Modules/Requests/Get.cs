@@ -21,6 +21,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Caster.Api.Infrastructure.Authorization;
 using Caster.Api.Infrastructure.Identity;
+using System.Linq;
 
 namespace Caster.Api.Features.Modules
 {
@@ -67,9 +68,10 @@ namespace Caster.Api.Features.Modules
                 if (module == null)
                     throw new EntityNotFoundException<Module>();
 
+                module.Versions = module.Versions.OrderByDescending(x => x.DateCreated).ToList();
+
                 return _mapper.Map<Module>(module);
             }
         }
     }
 }
-

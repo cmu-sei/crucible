@@ -40,7 +40,7 @@ namespace Caster.Api.Features.Applies.EventHandlers
         {
             var removedResources = workspace.GetRemovedResources();
             var resourcesToSync = removedResources
-                .Where(r => r.GetTeamId().HasValue)
+                .Where(r => r.GetTeamIds().Any())
                 .Select(r => new RemovedResource { Id = r.Id });
 
             await _dbContext.RemovedResources.AddRangeAsync(resourcesToSync);
