@@ -50,7 +50,7 @@ DM20-0181
               <div fxLayout="row">
                   <button *ngIf="!isIframe()" class="event-button" mat-raised-button color="accent" (click)="rejoinEvent()">Open Event</button>
                   <button class="event-button-end" mat-raised-button color="warn" (click)="endEvent()">End Event</button>
-                  <button class="event-button-end" mat-raised-button color="warn" (click)="redeployEvent()" [disabled]="redeploying">
+                  <button *ngIf="false" class="event-button-end" mat-raised-button color="warn" (click)="redeployEvent()" [disabled]="redeploying">
                     <div *ngIf="redeploying">
                       Redeploying...
                     </div>

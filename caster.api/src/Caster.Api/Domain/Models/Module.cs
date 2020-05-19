@@ -40,6 +40,7 @@ namespace Caster.Api.Domain.Models
         public virtual Module Module { get; set; }
         public string Name { get; set; }
         public string UrlLink { get; set; }
+        public DateTime DateCreated { get; set; }
         public List<ModuleVariable> Variables { get; set; } = new List<ModuleVariable>();
         public List<string> Outputs { get; set; } = new List<string>();
 

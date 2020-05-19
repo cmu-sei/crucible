@@ -53,7 +53,7 @@ namespace Steamfitter.Api.Services
 
         public async Task<IEnumerable<Exercise>> GetExercisesAsync(CancellationToken ct)
         {
-            var exercises = await _s3PlayerApiClient.GetExercisesAsync(ct);
+            var exercises = await _s3PlayerApiClient.GetMyExercisesAsync(ct);
             return (IEnumerable<Exercise>)exercises;
         }
 

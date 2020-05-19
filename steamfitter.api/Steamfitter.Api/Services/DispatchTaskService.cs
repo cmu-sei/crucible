@@ -33,6 +33,7 @@ using Steamfitter.Api.Infrastructure.Options;
 using Steamfitter.Api.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 namespace Steamfitter.Api.Services
 {
@@ -67,6 +68,7 @@ namespace Steamfitter.Api.Services
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<DispatchTaskService> _logger;
         private readonly IPlayerVmService _playerVmService;
+        private readonly bool _isHttps;
 
         public DispatchTaskService(
             SteamfitterContext context, 
@@ -78,7 +80,8 @@ namespace Steamfitter.Api.Services
             IDispatchTaskResultService dispatchTaskResultService,
             ILogger<DispatchTaskService> logger,
             IPlayerVmService playerVmService,
-            IHttpClientFactory httpClientFactory)
+            IHttpClientFactory httpClientFactory,
+            ClientOptions clientSettings)
         {
             _context = context;
             _authorizationService = authorizationService;
@@ -90,6 +93,7 @@ namespace Steamfitter.Api.Services
             _httpClientFactory = httpClientFactory;
             _logger = logger;
             _playerVmService = playerVmService;
+            _isHttps = clientSettings.urls.playerApi.ToLower().StartsWith("https:");
         }
 
         public async Task<IEnumerable<ViewModels.DispatchTask>> GetAsync(CancellationToken ct)
@@ -226,9 +230,14 @@ namespace Steamfitter.Api.Services
             if (dispatchTaskToExecute.DelaySeconds > 0 && !dispatchTaskResultEntityList.Any())
             {
                 // create DispatchTaskResults required (at least one but one for each VM)
-                await CreateDispatchTaskResultsAsync(dispatchTaskToExecute, ct);
-                // schedule the task with Foreman
-                var wasPassedOn = await ScheduleTask(dispatchTaskToExecute);
+                var tasksResultsAdded = await CreateDispatchTaskResultsAsync(dispatchTaskToExecute, ct);
+                var wasPassedOn = false;
+                if (tasksResultsAdded > 0) 
+                {
+                    // schedule the task with Foreman
+                    wasPassedOn = await ScheduleTask(dispatchTaskToExecute);
+                }
+
                 if (wasPassedOn)
                 {
                     dispatchTaskResultEntityList = _context.DispatchTaskResults.Where(dtr => dtr.DispatchTaskId == dispatchTaskToExecute.Id && dtr.Status == Data.TaskStatus.pending).ToList();
@@ -499,7 +508,7 @@ namespace Steamfitter.Api.Services
             }
         }
 
-        private async Task CreateDispatchTaskResultsAsync(DispatchTaskEntity dispatchTaskToExecute, CancellationToken ct)
+        private async Task<int> CreateDispatchTaskResultsAsync(DispatchTaskEntity dispatchTaskToExecute, CancellationToken ct)
         {
             var dispatchTaskResultEntities = new List<DispatchTaskResultEntity>();
             var sessionEntity = dispatchTaskToExecute.SessionId == null ? null : _context.Sessions.First(s => s.Id == dispatchTaskToExecute.SessionId);
@@ -507,15 +516,21 @@ namespace Steamfitter.Api.Services
             {
                 // if this task has a Session associated to an Exercise, create a VmList from the VmMask
                 var exerciseVms = await _playerVmService.GetExerciseVmsAsync((Guid)sessionEntity.ExerciseId, ct);
+                var matchedVmMask = false;
                 foreach (var vm in exerciseVms)
                 {
                     if (vm.Name.ToLower().Contains(dispatchTaskToExecute.VmMask.ToLower()))
                     {
+                        matchedVmMask = true;
                         var dispatchTaskResultEntity = NewDispatchTaskResultEntity(dispatchTaskToExecute);
                         dispatchTaskResultEntity.VmId = vm.Id;
                         dispatchTaskResultEntity.VmName = vm.Name;
                         dispatchTaskResultEntities.Add(dispatchTaskResultEntity);
                     }
+                }
+                if (!matchedVmMask)
+                {                    
+                    _logger.LogError($"CreateDispatchTaskResultsAsync - no VMs match VM Mask: {dispatchTaskToExecute.VmMask}.  VM List: {exerciseVms.Select(ev => ev.Name).ToList().ToString()}");
                 }
             }
             else if (dispatchTaskToExecute.VmMask.Count() > 0)
@@ -536,9 +551,7 @@ namespace Steamfitter.Api.Services
                 dispatchTaskResultEntities.Add(dispatchTaskResultEntity);
             }
             await _context.DispatchTaskResults.AddRangeAsync(dispatchTaskResultEntities);
-            await _context.SaveChangesAsync(ct);
-
-            return;
+            return await _context.SaveChangesAsync(ct);
         }
 
         private async Task VerifySessionTaskAsync(DispatchTaskEntity dispatchTaskToExecute, CancellationToken ct)
@@ -726,10 +739,24 @@ namespace Steamfitter.Api.Services
         private async Task<bool> ExecuteSubtask(Guid id)
         {
             var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(CurrentHttpContext.AppBaseUrl);
-            var relativeAddress = $"DispatchTasks/{id}/execute/";
-            client.DefaultRequestHeaders.Add("authorization", new List<string>(){CurrentHttpContext.Authorization});
+            var baseAddress = _isHttps ? CurrentHttpContext.AppBaseUrl.ToLower().Replace("http:", "https:") : CurrentHttpContext.AppBaseUrl;
+            client.BaseAddress = new Uri(baseAddress);
+            var relativeAddress = $"DispatchTasks/{id}/execute";
+            client.DefaultRequestHeaders.Add("Authorization", new List<string>(){CurrentHttpContext.Authorization});
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var executeResponse = await client.PostAsync(relativeAddress, new StringContent(""));
+            if (!executeResponse.IsSuccessStatusCode)
+            {
+                _logger.LogError(@"Error posting child task to " + client.BaseAddress + relativeAddress + 
+                    "\nchild request: " + client.DefaultRequestHeaders.ToString() +
+                    "\ninitial request: " + CurrentHttpContext.Authorization +
+                    "\nStatusCode: " + executeResponse.StatusCode.ToString() +
+                    "\nContent: " + executeResponse.Content.ToString() +
+                    "\nReasonPhrase: " + executeResponse.ReasonPhrase.ToString() +
+                    "\nRequestMessage: " + executeResponse.RequestMessage.ToString() +
+                    "\nHeaders: " + executeResponse.Headers.ToString()
+                );
+            }
 
             return executeResponse.IsSuccessStatusCode;
         }

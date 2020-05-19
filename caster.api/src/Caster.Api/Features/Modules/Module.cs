@@ -16,7 +16,7 @@ namespace Caster.Api.Features.Modules
     // modules must be uniquely identified in terraform cloud/enterprise
     // <ORGANIZATION>/<MODULE NAME>/<PROVIDER>
     // this is stored in Path
- 
+
     public class ModuleSummary
     {
         public Guid Id { get; set; }
@@ -41,6 +41,7 @@ namespace Caster.Api.Features.Modules
         public Guid ModuleId { get; set; }
         public string Name { get; set; }
         public string UrlLink { get; set; }
+        public DateTime DateCreated { get; set; }
         public List<ModuleVariable> Variables { get; set; } = new List<ModuleVariable>();
         public List<string> Outputs { get; set; } = new List<string>();
 
@@ -55,4 +56,3 @@ namespace Caster.Api.Features.Modules
         public bool IsOptional { get; set; }
     }
 }
-

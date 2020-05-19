@@ -23,6 +23,8 @@ using S3.Vm.Console.Options;
 using S3.Vm.Console.Extensions;
 using S3.Vm.Console.Models.VMware;
 using NetVimClient;
+using S3.VM.Api;
+using AutoMapper;
 
 namespace S3.Vm.Console.Services
 {
@@ -38,34 +40,32 @@ namespace S3.Vm.Console.Services
         private VimPortTypeClient _client;
         private ServiceContent _sic;
         ManagedObjectReference _props;
-        private IConfiguration _configuration;
-
-        private HttpClient vmApiClient = new HttpClient();
-
-        private IConnectionService _connectionService;
+        private readonly IConfiguration _configuration;
+        private readonly IS3VmApiClient _vmApiClient;
+        private readonly IConnectionService _connectionService;
+        private readonly IMapper _mapper;
 
         public VmService(
                 IOptions<VmOptions> options,
                 IOptions<RewriteHostOptions> rewriteHostOptions,
                 ILogger<VmService> logger,
                 IConfiguration configuration,
-                IConnectionService connectionService
+                IConnectionService connectionService,
+                IS3VmApiClient vmApiClient,
+                IMapper mapper
             )
         {
             _options = options.Value;
             _rewriteHostOptions = rewriteHostOptions.Value;
 
             _logger = logger;
-            vmApiClient.BaseAddress = new Uri(_options.ApiUrl);
-            vmApiClient.DefaultRequestHeaders.Accept.Clear();
-            vmApiClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
             _connectionService = connectionService;
             _client = connectionService.GetClient();
             _sic = connectionService.GetServiceContent();
             _props = connectionService.GetProps();
             _configuration = configuration;
+            _vmApiClient = vmApiClient;
+            _mapper = mapper;
         }
 
         public async Task<VmModel> GetAsync(Guid id, VmModel model)
@@ -160,21 +160,20 @@ namespace S3.Vm.Console.Services
             return await GetConsoleUrl(uuid, vmReference);
         }
 
-        public async Task<VmModel> GetModel(Guid uuid, string accessToken)
+        public async Task<VmModel> GetModel(Guid uuid)
         {
             VmModel model = new VmModel();
-            vmApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            string url = $"{_options.ApiUrl}/{uuid}";
-            HttpResponseMessage response = await vmApiClient.GetAsync(url);
-            if (response.IsSuccessStatusCode)
+
+            var vm = await _vmApiClient.GetVmAsync(uuid);
+
+            if (vm != null)
             {
-                // model = await response.Content.ReadAsAsync<IEnumerable<VmModel>>();
-                _logger.LogDebug($"name obtained from s3.vm.api at {url}");
-                model = await response.Content.ReadAsAsync<VmModel>();
+                model = _mapper.Map<VmModel>(vm);
+                 _logger.LogDebug($"name obtained from vm api");
             }
             else
             {
-                _logger.LogError($"{response.ReasonPhrase} for s3.vm.api at {url}");
+                _logger.LogError($"error connecting to vm api");
             }
 
             return model;
@@ -1321,4 +1320,3 @@ namespace S3.Vm.Console.Services
         #endregion
     }
 }
-

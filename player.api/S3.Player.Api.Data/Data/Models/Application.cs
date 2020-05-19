@@ -28,12 +28,12 @@ namespace S3.Player.Api.Data.Data.Models
 
         public string Icon { get; set; }
 
-        public bool Embeddable { get; set; }        
+        public bool Embeddable { get; set; }
         public bool LoadInBackground { get; set; }
 
         public ApplicationTemplateEntity()
         {
-            
+
         }
     }
 
@@ -56,7 +56,7 @@ namespace S3.Player.Api.Data.Data.Models
         public virtual ExerciseEntity Exercise { get; set; }
 
         [ForeignKey(nameof(Template))]
-        public Guid? ApplicationTemplateId { get; set; }        
+        public Guid? ApplicationTemplateId { get; set; }
         public virtual ApplicationTemplateEntity Template { get; set; }
 
         public ApplicationEntity()
@@ -72,6 +72,22 @@ namespace S3.Player.Api.Data.Data.Models
             entity.Exercise = null;
 
             return entity;
+        }
+
+        public string GetName()
+        {
+            string name = null;
+
+            if (this.Name != null)
+            {
+                name = this.Name;
+            }
+            else if (this.Template != null)
+            {
+                name = this.Template.Name;
+            }
+
+            return name;
         }
     }
 
@@ -104,4 +120,3 @@ namespace S3.Player.Api.Data.Data.Models
         }
     }
 }
-

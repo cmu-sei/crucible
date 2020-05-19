@@ -70,7 +70,7 @@ namespace S3.Vm.Console.Controllers
         public async Task<IActionResult> Get(Guid uuid)
         {
             string accessToken = GetAccessToken();
-            VmModel model = await _vmService.GetModel(uuid, accessToken);
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null)
             {
                 Response.StatusCode = 400;
@@ -87,13 +87,13 @@ namespace S3.Vm.Console.Controllers
                 _logger.LogInformation(new EventId(1), $"User {_user.GetName()} ({_user.GetId()}) in Team {team.Name} ({team.Id}) accessed console of {model.Name} ({uuid})");
             }
 
-            return Ok(model);            
+            return Ok(model);
         }
 
         [HttpGet("api/{uuid}/poweron")]
         public async Task<IActionResult> PowerOn(Guid uuid)
         {
-            VmModel model = await _vmService.GetModel(uuid, GetAccessToken());
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null)
             {
                 Response.StatusCode = 400;
@@ -107,7 +107,7 @@ namespace S3.Vm.Console.Controllers
         [HttpGet("api/{uuid}/poweroff")]
         public async Task<IActionResult> PowerOff(Guid uuid)
         {
-            VmModel model = await _vmService.GetModel(uuid, GetAccessToken());
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null)
             {
                 Response.StatusCode = 400;
@@ -122,7 +122,7 @@ namespace S3.Vm.Console.Controllers
         [HttpGet("api/{uuid}/adapter/{adapter}/nic/{nic}")]
         public async Task<IActionResult> ChangeNic(Guid uuid, string adapter, string nic)
         {
-            VmModel model = await _vmService.GetModel(uuid, GetAccessToken());
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null)
             {
                 Response.StatusCode = 400;
@@ -142,7 +142,7 @@ namespace S3.Vm.Console.Controllers
         [HttpGet("api/{uuid}/reboot")]
         public async Task<IActionResult> Reboot(Guid uuid)
         {
-            VmModel model = await _vmService.GetModel(uuid, GetAccessToken());
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null)
             {
                 Response.StatusCode = 400;
@@ -156,7 +156,7 @@ namespace S3.Vm.Console.Controllers
         [HttpGet("api/{uuid}/checkvmtools")]
         public async Task<IActionResult> CheckVmTools(Guid uuid)
         {
-            VmModel model = await _vmService.GetModel(uuid, GetAccessToken());
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null)
             {
                 Response.StatusCode = 400;
@@ -178,7 +178,7 @@ namespace S3.Vm.Console.Controllers
             var username = Request.Form["username"][0];
             var password = Request.Form["password"][0];
             var filepath = Request.Form["filepath"][0];
-            VmModel model = await _vmService.GetModel(uuid, GetAccessToken());
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null)
             {
                 Response.StatusCode = 400;
@@ -212,7 +212,7 @@ namespace S3.Vm.Console.Controllers
             var username = Request.Form["username"][0];
             var password = Request.Form["password"][0];
             var filepath = Request.Form["filepath"][0];
-            VmModel model = await _vmService.GetModel(uuid, GetAccessToken());
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null)
             {
                 Response.StatusCode = 400;
@@ -244,7 +244,7 @@ namespace S3.Vm.Console.Controllers
         [HttpGet("api/{uuid}/isos")]
         public async Task<IActionResult> GetIsos(Guid uuid)
         {
-            VmModel model = await _vmService.GetModel(uuid, GetAccessToken());
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null) {
                 Response.StatusCode = 400;
                 return Json("Error");
@@ -255,7 +255,7 @@ namespace S3.Vm.Console.Controllers
         [HttpPost("api/{uuid}/mountiso")]
         public async Task<IActionResult> MountIso(Guid uuid)
         {
-            VmModel model = await _vmService.GetModel(uuid, GetAccessToken());
+            VmModel model = await _vmService.GetModel(uuid);
             if (model.Name == null)
             {
                 Response.StatusCode = 400;
@@ -270,4 +270,3 @@ namespace S3.Vm.Console.Controllers
 
     }
 }
-

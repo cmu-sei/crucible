@@ -8,8 +8,26 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+using System.Linq;
+using FluentValidation;
+
 namespace Caster.Api.Features.Workspaces.Interfaces
 {
-    public interface IWorkspaceUpdateRequest {}
-}
+    public interface IWorkspaceUpdateRequest
+    {
+        string Name { get; set; }
+    }
 
+    public class IWorkspaceUpdateValidator : AbstractValidator<IWorkspaceUpdateRequest>
+    {
+        public IWorkspaceUpdateValidator()
+        {
+            RuleFor(x => x.Name)
+                .NotNull()
+                .MinimumLength(1)
+                .MaximumLength(90)
+                .Must(x => x.All(c => char.IsLetterOrDigit(c) || c == '-' || c == '_' || c == '.'))
+                .WithMessage($"Workspace names need to be 90 characters or less and can only include letters, numbers, -, _, and .");
+        }
+    }
+}

@@ -65,10 +65,9 @@ namespace Caster.Api.Features.Modules
 
                 return await _db.ModuleVersions.Where(v => v.ModuleId == request.ModuleId)
                     .ProjectTo<ModuleVersion>(_mapper.ConfigurationProvider)
-                    .OrderByDescending(v => v.Name)
+                    .OrderByDescending(v => v.DateCreated)
                     .ToArrayAsync();
             }
         }
     }
 }
-
