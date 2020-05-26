@@ -16,13 +16,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Caster.Api.Data;
 using Caster.Api.Domain.Services;
+using Caster.Api.Infrastructure.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Caster.Api.Hubs
 {
-    [Authorize]
+    [Authorize(Policy = nameof(CasterClaimTypes.ContentDeveloper))]
     public class ExerciseHub : Hub
     {
         private readonly IOutputService _outputService;
@@ -52,6 +53,18 @@ namespace Caster.Api.Hubs
         public async Task LeaveWorkspace(Guid workspaceId)
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, workspaceId.ToString());
+        }
+
+        [Authorize(Policy = nameof(CasterClaimTypes.SystemAdmin))]
+        public async Task JoinWorkspacesAdmin()
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, nameof(HubGroups.WorkspacesAdmin));
+        }
+
+        [Authorize(Policy = nameof(CasterClaimTypes.SystemAdmin))]
+        public async Task LeaveWorkspacesAdmin()
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, nameof(HubGroups.WorkspacesAdmin));
         }
 
         #region RunOutput

@@ -25,11 +25,11 @@ namespace Caster.Api.Features.Workspaces
     {
         private readonly IMediator _mediator;
 
-        public WorkspacesController(IMediator mediator) 
+        public WorkspacesController(IMediator mediator)
         {
             this._mediator = mediator;
         }
-        
+
         /// <summary>
         /// Get a Workspace by Id
         /// </summary>
@@ -42,7 +42,7 @@ namespace Caster.Api.Features.Workspaces
             var result = await this._mediator.Send(new Get.Query { Id = id });
             return Ok(result);
         }
-        
+
         /// <summary>
         /// Get all Workspaces
         /// </summary>
@@ -111,7 +111,7 @@ namespace Caster.Api.Features.Workspaces
             var result = await this._mediator.Send(command);
             return Ok(result);
         }
-        
+
         /// <summary>
         /// Delete a Workspace
         /// </summary>
@@ -124,6 +124,42 @@ namespace Caster.Api.Features.Workspaces
             await this._mediator.Send(new Delete.Command { Id = id });
             return NoContent();
         }
+
+        /// <summary>
+        /// Get the value of the global Workspaces lock status
+        /// </summary>
+        [HttpGet("workspaces/locking-status")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "GetWorkspaceLockingStatus")]
+        public async Task<IActionResult> GetLockingStatus()
+        {
+            var result = await this._mediator.Send(new GetLockingStatus.Query());
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Enable Workspace locking globally. Can only be accessed by a System Administrator.
+        /// </summary>
+        [HttpPost("workspaces/actions/enable-locking")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "EnableWorkspaceLocking")]
+        public async Task<IActionResult> EnableLocking()
+        {
+            var result = await this._mediator.Send(new SetLockingStatus.Command { Enabled = true });
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Disable Workspace locking globally. Can only be accessed by a System Administrator.
+        /// Use before taking the application down for maintenance and ensure no Workspace operations are in progress.
+        /// </summary>
+        [HttpPost("workspaces/actions/disable-locking")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "DisableWorkspaceLocking")]
+        public async Task<IActionResult> DisableLocking()
+        {
+            var result = await this._mediator.Send(new SetLockingStatus.Command { Enabled = false });
+            return Ok(result);
+        }
     }
 }
-

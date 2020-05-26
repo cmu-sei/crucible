@@ -45,7 +45,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
                 .ProjectTo<Run>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
-            await _exerciseHub.Clients.Group(run.WorkspaceId.ToString()).SendAsync("RunUpdated", run);
+            await _exerciseHub.Clients.Groups(run.WorkspaceId.ToString(), nameof(HubGroups.WorkspacesAdmin)).SendAsync("RunUpdated", run);
         }
     }
 }

@@ -10,7 +10,7 @@ DM20-0181
 
 using System;
 using System.Collections.Concurrent;
-using System.Threading;
+using Caster.Api.Infrastructure.Exceptions;
 using Caster.Api.Utilities.Synchronization;
 
 namespace Caster.Api.Domain.Services
@@ -18,15 +18,19 @@ namespace Caster.Api.Domain.Services
     public interface ILockService
     {
         Object GetHostLock(Guid hostId);
-        AsyncLock GetWorkspaceLock(Guid workspaceId);
         AsyncLock GetFileLock(Guid fileId);
+        AsyncLock GetWorkspaceLock(Guid workspaceId);
+        void EnableWorkspaceLocking();
+        void DisableWorkspaceLocking();
+        bool IsWorkspaceLockingEnabled();
     }
 
     public class LockService : ILockService
     {
         private ConcurrentDictionary<Guid, Object> _hostLocks = new ConcurrentDictionary<Guid, object>();
-        private ConcurrentDictionary<Guid, AsyncLock> _workspaceLocks = new ConcurrentDictionary<Guid, AsyncLock>();
         private ConcurrentDictionary<Guid, AsyncLock> _fileLocks = new ConcurrentDictionary<Guid, AsyncLock>();
+        private ConcurrentDictionary<Guid, AsyncLock> _workspaceLocks = new ConcurrentDictionary<Guid, AsyncLock>();
+        private bool _enableWorkspaceLocking = true;
 
         public LockService()
         {
@@ -37,14 +41,38 @@ namespace Caster.Api.Domain.Services
             return _hostLocks.GetOrAdd(hostId, x => { return new Object(); });
         }
 
-        public AsyncLock GetWorkspaceLock(Guid workspaceId)
-        {
-            return _workspaceLocks.GetOrAdd(workspaceId, x => { return new AsyncLock(); });
-        }
-
         public AsyncLock GetFileLock(Guid fileId)
         {
             return _fileLocks.GetOrAdd(fileId, x => { return new AsyncLock(); });
         }
+
+        #region Workspaces
+
+        public AsyncLock GetWorkspaceLock(Guid workspaceId)
+        {
+            if (!_enableWorkspaceLocking)
+            {
+                throw new ConflictException("Workspace operations are currently disabled due to maintenance. They will be re-enabled shortly.");
+            }
+
+            return _workspaceLocks.GetOrAdd(workspaceId, x => { return new AsyncLock(); });
+        }
+
+        public void EnableWorkspaceLocking()
+        {
+            _enableWorkspaceLocking = true;
+        }
+
+        public void DisableWorkspaceLocking()
+        {
+            _enableWorkspaceLocking = false;
+        }
+
+        public bool IsWorkspaceLockingEnabled()
+        {
+            return _enableWorkspaceLocking;
+        }
+
+        #endregion
     }
 }

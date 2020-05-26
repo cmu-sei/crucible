@@ -8,32 +8,10 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace Caster.Api.Infrastructure.Authorization
+namespace Caster.Api.Hubs
 {
-    public class OperatorRequirement : IAuthorizationRequirement
+    public enum HubGroups
     {
-        public OperatorRequirement()
-        {
-        }
-    }
-
-    public class OperatorHandler : AuthorizationHandler<OperatorRequirement>, IAuthorizationHandler
-    {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OperatorRequirement requirement)
-        {
-            if (context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.SystemAdmin)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.ContentDeveloper)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.Operator)))
-            {
-                context.Succeed(requirement);
-            }
-
-            return Task.CompletedTask;
-        }
+        WorkspacesAdmin
     }
 }

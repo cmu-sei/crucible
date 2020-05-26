@@ -23,16 +23,15 @@ namespace Caster.Api.Infrastructure.Authorization
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, BaseUserRequirement requirement)
         {
-            if (context.User.HasClaim(c => c.Type == CasterClaimTypes.SystemAdmin.ToString()) ||
-                context.User.HasClaim(c => c.Type == CasterClaimTypes.ContentDeveloper.ToString()) ||
-                context.User.HasClaim(c => c.Type == CasterClaimTypes.Operator.ToString()) ||
-                context.User.HasClaim(c => c.Type == CasterClaimTypes.BaseUser.ToString()))
+            if (context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.SystemAdmin)) ||
+                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.ContentDeveloper)) ||
+                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.Operator)) ||
+                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.BaseUser)))
             {
                 context.Succeed(requirement);
-            }                     
+            }
 
             return Task.CompletedTask;
         }
     }
 }
-

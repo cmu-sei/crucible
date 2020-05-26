@@ -9,6 +9,7 @@ DM20-0181
 */
 
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Caster.Api.Infrastructure.Authorization
@@ -24,8 +25,8 @@ namespace Caster.Api.Infrastructure.Authorization
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ContentDeveloperRequirement requirement)
         {
-            if (context.User.HasClaim(c => c.Type == CasterClaimTypes.SystemAdmin.ToString()) ||
-                context.User.HasClaim(c => c.Type == CasterClaimTypes.ContentDeveloper.ToString()))
+            if (context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.SystemAdmin)) ||
+                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.ContentDeveloper)))
             {
                 context.Succeed(requirement);
             }
@@ -34,4 +35,3 @@ namespace Caster.Api.Infrastructure.Authorization
         }
     }
 }
-

@@ -8,13 +8,13 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { arrayFind, EntityUIQuery, ID, isArray, Order, QueryConfig, QueryEntity } from '@datorama/akita';
+import { arrayFind, EntityUIQuery, ID, Order, QueryConfig, QueryEntity } from '@datorama/akita';
 import { WorkspaceState, WorkspaceStore, WorkspaceUIState } from './workspace.store';
-import {Resource, Run, Workspace} from '../../generated/caster-api';
-import { Injectable, InjectionToken } from '@angular/core';
+import {Resource, Run, Workspace, RunStatus} from '../../generated/caster-api';
+import { Injectable } from '@angular/core';
 import { StatusFilter, WorkspaceEntityUi } from './workspace.model';
 import { combineLatest, Observable, of } from 'rxjs';
-import {map, shareReplay, tap} from 'rxjs/operators';
+import {map, shareReplay} from 'rxjs/operators';
 
 
 @QueryConfig({
@@ -70,8 +70,15 @@ export class WorkspaceQuery extends QueryEntity<WorkspaceState, Workspace> {
     return this.ui.selectEntity(workspaceId, entity => entity.selectedRuns);
   }
 
-  expandedRuns$(workspaceId): Observable<string[]> {
-    return this.ui.selectEntity(workspaceId, entity => entity.expandedRuns);
+  expandedRuns$(workspaceId?): Observable<string[]> {
+    if (workspaceId != null) {
+      return this.ui.selectEntity(workspaceId, entity => entity.expandedRuns);
+    } else {
+      return this.ui.selectAll().pipe(
+        map(w => w.map(x => x.expandedRuns)),
+        map(r => [].concat(...r))
+      );
+    }
   }
 
   resourceActions$(workspaceId): Observable<string[]> {
@@ -99,6 +106,15 @@ export class WorkspaceQuery extends QueryEntity<WorkspaceState, Workspace> {
     );
   }
 
+  activeRuns$(): Observable<Run[]> {
+    const activeStatuses = [ RunStatus.Queued, RunStatus.Planning, RunStatus.Applying];
+
+    return this.selectAll().pipe(
+      map(w => w.map(x => x.runs.filter(r => activeStatuses.includes(r.status)))),
+      map(r => [].concat(...r))
+    );
+  }
+
   getWorkspaceView(workspaceId): Observable<string> {
     return this.ui.selectEntity(workspaceId, entity => entity.workspaceView);
   }
@@ -111,4 +127,3 @@ export class WorkspaceQuery extends QueryEntity<WorkspaceState, Workspace> {
     return this.selectEntity(id);
   }
 }
-

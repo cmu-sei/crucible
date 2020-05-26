@@ -27,8 +27,8 @@ export interface ModuleVersion {
     moduleId?: string;
     name?: string | null;
     urlLink?: string | null;
+    dateCreated?: Date;
     variables?: Array<ModuleVariable> | null;
     outputs?: Array<string> | null;
 }
-
 

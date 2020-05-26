@@ -164,6 +164,49 @@ export class WorkspacesService {
     }
 
     /**
+     * Disable Workspace locking globally. Can only be accessed by a System Administrator.  Use before taking the application down for maintenance and ensure no Workspace operations are in progress.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public disableWorkspaceLocking(observe?: 'body', reportProgress?: boolean): Observable<boolean>;
+    public disableWorkspaceLocking(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
+    public disableWorkspaceLocking(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public disableWorkspaceLocking(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        return this.httpClient.post<boolean>(`${this.configuration.basePath}/api/workspaces/actions/disable-locking`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Edit a Workspace
      * @param id The Id of the Workspace to Edit
      * @param EditWorkspaceCommand The Edit command
@@ -223,6 +266,49 @@ export class WorkspacesService {
     }
 
     /**
+     * Enable Workspace locking globally. Can only be accessed by a System Administrator.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public enableWorkspaceLocking(observe?: 'body', reportProgress?: boolean): Observable<boolean>;
+    public enableWorkspaceLocking(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
+    public enableWorkspaceLocking(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public enableWorkspaceLocking(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        return this.httpClient.post<boolean>(`${this.configuration.basePath}/api/workspaces/actions/enable-locking`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get a Workspace by Id
      * @param id The Id of the Workspace to retrieve
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -259,6 +345,48 @@ export class WorkspacesService {
 
 
         return this.httpClient.get<Workspace>(`${this.configuration.basePath}/api/workspaces/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get the value of the global Workspaces lock status
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getWorkspaceLockingStatus(observe?: 'body', reportProgress?: boolean): Observable<boolean>;
+    public getWorkspaceLockingStatus(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
+    public getWorkspaceLockingStatus(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public getWorkspaceLockingStatus(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        return this.httpClient.get<boolean>(`${this.configuration.basePath}/api/workspaces/locking-status`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -416,4 +544,3 @@ export class WorkspacesService {
     }
 
 }
-

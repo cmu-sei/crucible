@@ -22,7 +22,7 @@ namespace Caster.Api.Infrastructure.Authorization
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, FullRightsRequirement requirement)
         {
-            if(context.User != null && context.User.HasClaim(c => c.Type == CasterClaimTypes.SystemAdmin.ToString()))
+            if(context.User != null && context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.SystemAdmin)))
             {
                 context.Succeed(requirement);
             }

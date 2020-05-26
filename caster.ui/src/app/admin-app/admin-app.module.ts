@@ -37,7 +37,13 @@ import {
   MatSortModule,
   MatTooltipModule,
   MatTreeModule,
+  MatSlideToggleModule
 } from '@angular/material';
+import { AdminWorkspacesComponent } from './component/admin-workspaces/admin-workspaces.component';
+import { LockingStatusComponent } from './component/admin-workspaces/locking-status/locking-status.component';
+import { ActiveRunsComponent } from './component/admin-workspaces/active-runs/active-runs.component';
+import { CwdTableModule } from '../sei-cwd-common/cwd-table/cwd-table.module';
+import { WorkspaceModule } from '../workspace/workspace.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +51,10 @@ import {
     AdminModuleListComponent,
     AdminModulesComponent,
     UsersComponent,
-    UserListComponent
+    UserListComponent,
+    AdminWorkspacesComponent,
+    LockingStatusComponent,
+    ActiveRunsComponent
   ],
   imports: [
     ClipboardModule,
@@ -69,7 +78,10 @@ import {
     MatSortModule,
     MatTooltipModule,
     MatTreeModule,
-    RouterModule
+    RouterModule,
+    MatSlideToggleModule,
+    CwdTableModule,
+    WorkspaceModule
   ],
   exports: [
     AdminContainerComponent,
@@ -79,4 +91,3 @@ import {
   ]
 })
 export class AdminAppModule { }
-

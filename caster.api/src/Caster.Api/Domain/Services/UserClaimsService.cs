@@ -30,7 +30,7 @@ using Z.EntityFramework.Plus;
 
 namespace Caster.Api.Domain.Services
 {
-    public interface IUserClaimsService 
+    public interface IUserClaimsService
     {
         Task<ClaimsPrincipal> AddUserClaims(ClaimsPrincipal principal, bool update);
         Task<ClaimsPrincipal> GetClaimsPrincipal(Guid userId, bool setAsCurrent);
@@ -48,7 +48,7 @@ namespace Caster.Api.Domain.Services
 
         public UserClaimsService(CasterContext context, IMemoryCache cache, ClaimsTransformationOptions options)
         {
-            _context = context;            
+            _context = context;
             _options = options;
             _cache = cache;
         }
@@ -72,14 +72,14 @@ namespace Caster.Api.Domain.Services
                     {
                         _cache.Set(userId, claims, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(_options.CacheExpirationSeconds)));
                     }
-                }                
+                }
             }
             addNewClaims(identity, claims);
             return principal;
         }
 
         public async Task<ClaimsPrincipal> GetClaimsPrincipal(Guid userId, bool setAsCurrent)
-        {                        
+        {
             ClaimsIdentity identity = new ClaimsIdentity();
             identity.AddClaim(new Claim("sub", userId.ToString()));
             ClaimsPrincipal principal = new ClaimsPrincipal(identity);
@@ -129,7 +129,7 @@ namespace Caster.Api.Domain.Services
                     // First user is default SystemAdmin
                     if (!(await anyUsers.ValueAsync()))
                     {
-                        var systemAdminPermission = await _context.Permissions.Where(p => p.Key == CasterClaimTypes.SystemAdmin.ToString()).FirstOrDefaultAsync();
+                        var systemAdminPermission = await _context.Permissions.Where(p => p.Key == nameof(CasterClaimTypes.SystemAdmin)).FirstOrDefaultAsync();
 
                         if (systemAdminPermission != null)
                         {
@@ -149,7 +149,7 @@ namespace Caster.Api.Domain.Services
                         await _context.SaveChangesAsync();
                     }
                 }
-            }            
+            }
 
             return user;
         }
@@ -161,28 +161,28 @@ namespace Caster.Api.Domain.Services
             var userPermissions = await _context.UserPermissions
                 .Where(u => u.UserId == userId)
                 .Include(x => x.Permission)
-                .ToArrayAsync();         
+                .ToArrayAsync();
 
-            if (userPermissions.Where(x => x.Permission.Key == CasterClaimTypes.SystemAdmin.ToString()).Any())
+            if (userPermissions.Where(x => x.Permission.Key == nameof(CasterClaimTypes.SystemAdmin)).Any())
             {
-                claims.Add(new Claim(CasterClaimTypes.SystemAdmin.ToString(), "true"));
-            }
-            
-            if (userPermissions.Where(x => x.Permission.Key == CasterClaimTypes.ContentDeveloper.ToString()).Any())
-            {
-                claims.Add(new Claim(CasterClaimTypes.ContentDeveloper.ToString(), "true"));
-            }
-            
-            if (userPermissions.Where(x => x.Permission.Key == CasterClaimTypes.Operator.ToString()).Any())
-            {
-                claims.Add(new Claim(CasterClaimTypes.Operator.ToString(), "true"));
+                claims.Add(new Claim(ClaimTypes.Role, nameof(CasterClaimTypes.SystemAdmin)));
             }
 
-            if (userPermissions.Where(x => x.Permission.Key == CasterClaimTypes.BaseUser.ToString()).Any())
+            if (userPermissions.Where(x => x.Permission.Key == nameof(CasterClaimTypes.ContentDeveloper)).Any())
             {
-                claims.Add(new Claim(CasterClaimTypes.BaseUser.ToString(), "true"));
+                claims.Add(new Claim(ClaimTypes.Role, nameof(CasterClaimTypes.ContentDeveloper)));
             }
-            
+
+            if (userPermissions.Where(x => x.Permission.Key == nameof(CasterClaimTypes.Operator)).Any())
+            {
+                claims.Add(new Claim(ClaimTypes.Role, nameof(CasterClaimTypes.Operator)));
+            }
+
+            if (userPermissions.Where(x => x.Permission.Key == nameof(CasterClaimTypes.BaseUser)).Any())
+            {
+                claims.Add(new Claim(ClaimTypes.Role, nameof(CasterClaimTypes.BaseUser)));
+            }
+
             return claims;
         }
 
@@ -200,4 +200,3 @@ namespace Caster.Api.Domain.Services
         }
     }
 }
-

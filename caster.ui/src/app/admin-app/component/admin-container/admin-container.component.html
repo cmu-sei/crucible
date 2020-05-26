@@ -50,6 +50,21 @@ DM20-0181
           </div>
         </div>
       </mat-list-item>
+      <mat-list-item>
+        <div class="showhand" id="wrapper" (click)="adminGotoWorkspaces()">
+          <div id="lefticon">
+            <mat-icon class="mdi-24px" fontIcon="mdi-briefcase"></mat-icon>
+          </div>
+
+          <div id="content">{{workspacesText}}</div>
+
+          <div class="pull-right" id="rightcontext">
+            <button mat-icon-button style="outline: none;">
+              <mat-icon class="mdi-24px" fontIcon="mdi-menu-right"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
     </mat-list>
     <img class="cmu-logo" alt="cmu-logo" src="/assets/img/cmu-red-gray.png">
   </mat-sidenav>
@@ -71,8 +86,8 @@ DM20-0181
     <span *ngIf="isSuperUser">
       <cas-users *ngIf="showStatus===usersText"></cas-users>
       <cas-admin-modules *ngIf="showStatus===modulesText"></cas-admin-modules>
+      <cas-admin-workspaces *ngIf="showStatus===workspacesText"></cas-admin-workspaces>
     </span>
 
   </mat-sidenav-content>
 </mat-sidenav-container>
-

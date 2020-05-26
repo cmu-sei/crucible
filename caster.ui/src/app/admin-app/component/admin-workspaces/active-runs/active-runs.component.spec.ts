@@ -8,32 +8,28 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-namespace Caster.Api.Infrastructure.Authorization
-{
-    public class OperatorRequirement : IAuthorizationRequirement
-    {
-        public OperatorRequirement()
-        {
-        }
-    }
+import { ActiveRunsComponent } from './active-runs.component';
 
-    public class OperatorHandler : AuthorizationHandler<OperatorRequirement>, IAuthorizationHandler
-    {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OperatorRequirement requirement)
-        {
-            if (context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.SystemAdmin)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.ContentDeveloper)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.Operator)))
-            {
-                context.Succeed(requirement);
-            }
+describe('ActiveRunsComponent', () => {
+  let component: ActiveRunsComponent;
+  let fixture: ComponentFixture<ActiveRunsComponent>;
 
-            return Task.CompletedTask;
-        }
-    }
-}
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ ActiveRunsComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ActiveRunsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

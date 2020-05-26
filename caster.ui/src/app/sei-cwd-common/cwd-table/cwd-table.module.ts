@@ -8,16 +8,51 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { CwdTableComponent } from "./components/cwd-table/cwd-table.component";
+import {
+  MatIconModule,
+  MatFormFieldModule,
+  MatPaginatorModule,
+  MatCardModule,
+  MatProgressSpinnerModule,
+  MatExpansionModule,
+  MatInputModule,
+  MatSortModule,
+} from "@angular/material";
+import { FlexModule, ExtendedModule } from "@angular/flex-layout";
+import { FormsModule } from "@angular/forms";
+import { TableItemContentDirective } from "./directives/table-item-content.directive";
+import { TableActionDirective } from "./directives/table-action.directive";
+import { TableItemActionDirective } from "./directives/table-item-action.directive";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CwdTableComponent,
+    TableItemContentDirective,
+    TableActionDirective,
+    TableItemActionDirective,
+  ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatSortModule,
+    FlexModule,
+    ExtendedModule,
+    FormsModule,
+  ],
+  exports: [
+    CwdTableComponent,
+    TableItemContentDirective,
+    TableActionDirective,
+    TableItemActionDirective,
+  ],
 })
-export class CwdTableModule { }
-
+export class CwdTableModule {}

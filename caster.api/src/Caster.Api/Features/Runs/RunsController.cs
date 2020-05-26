@@ -26,7 +26,7 @@ namespace Caster.Api.Features.Runs
     {
         private readonly IMediator _mediator;
 
-        public RunsController(IMediator mediator) 
+        public RunsController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -42,6 +42,19 @@ namespace Caster.Api.Features.Runs
         public async Task<IActionResult> Get([FromRoute] Guid id, [FromQuery] Get.Query query)
         {
             query.Id = id;
+            var result = await this._mediator.Send(query);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Get all Runs
+        /// </summary>
+        /// <param name="query"></param>
+        [HttpGet("runs")]
+        [ProducesResponseType(typeof(IEnumerable<Run>), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "GetRuns")]
+        public async Task<IActionResult> GetAll([FromQuery] GetAll.Query query)
+        {
             var result = await this._mediator.Send(query);
             return Ok(result);
         }
@@ -90,4 +103,3 @@ namespace Caster.Api.Features.Runs
         }
     }
 }
-

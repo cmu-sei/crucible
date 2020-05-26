@@ -24,6 +24,7 @@ export class SignalRService {
   private hubConnection: signalR.HubConnection;
   private projectId: string;
   private workspaceIds: string[] = [];
+  private joinedWorkspacesAdmin = false;
   private connectionPromise: Promise<void>;
 
   constructor(
@@ -67,6 +68,10 @@ export class SignalRService {
     if (this.workspaceIds) {
       this.workspaceIds.forEach(x => this.joinWorkspace(x));
     }
+
+    if (this.joinedWorkspacesAdmin) {
+      this.joinWorkspacesAdmin();
+    }
   }
 
   public joinExercise(exerciseId: string) {
@@ -93,6 +98,19 @@ export class SignalRService {
   public leaveWorkspace(workspaceId: string) {
     this.workspaceIds = this.workspaceIds.filter(x => x !== workspaceId);
     this.hubConnection.invoke('LeaveWorkspace', workspaceId);
+  }
+
+  public joinWorkspacesAdmin() {
+    this.joinedWorkspacesAdmin = true;
+
+    if (this.hubConnection.state === signalR.HubConnectionState.Connected) {
+      this.hubConnection.invoke('JoinWorkspacesAdmin');
+    }
+  }
+
+  public leaveWorkspacesAdmin() {
+    this.joinedWorkspacesAdmin = false;
+    this.hubConnection.invoke('LeaveWorkspacesAdmin');
   }
 
   public streamPlanOutput(planId: string) {
@@ -138,6 +156,10 @@ export class SignalRService {
     this.hubConnection.on('WorkspaceDeleted', (workspaceId: string) => {
       this.workspaceService.deleted(workspaceId);
     });
+
+    this.hubConnection.on('WorkspaceSettingsUpdated', (lockingEnabled: boolean) => {
+      this.workspaceService.lockingEnabledUpdated(lockingEnabled);
+    });
   }
 
   private addRunHandlers() {
@@ -168,4 +190,3 @@ class RetryPolicy {
     return nextRetrySeconds * 1000;
   }
 }
-
