@@ -8,32 +8,28 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-namespace Caster.Api.Infrastructure.Authorization
-{
-    public class OperatorRequirement : IAuthorizationRequirement
-    {
-        public OperatorRequirement()
-        {
-        }
-    }
+import { LockingStatusComponent } from './locking-status.component';
 
-    public class OperatorHandler : AuthorizationHandler<OperatorRequirement>, IAuthorizationHandler
-    {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OperatorRequirement requirement)
-        {
-            if (context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.SystemAdmin)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.ContentDeveloper)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.Operator)))
-            {
-                context.Succeed(requirement);
-            }
+describe('LockingStatusComponent', () => {
+  let component: LockingStatusComponent;
+  let fixture: ComponentFixture<LockingStatusComponent>;
 
-            return Task.CompletedTask;
-        }
-    }
-}
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ LockingStatusComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LockingStatusComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

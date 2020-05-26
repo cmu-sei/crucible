@@ -22,7 +22,7 @@ import {
   WorkspacesService,
   RunStatus
 } from '../../generated/caster-api';
-import {concatMap, take, tap,} from 'rxjs/operators';
+import {concatMap, take, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {arrayAdd, arrayRemove, arrayUpsert, coerceArray} from '@datorama/akita';
 import {WorkspaceQuery} from './workspace.query';
@@ -102,6 +102,9 @@ export class WorkspaceService {
   }
 
   runUpdated(run: Run) {
+    const workspace: Workspace = { id: run.workspaceId, runs: [] };
+    this.workspaceStore.add(workspace);
+
     this.workspaceStore.update(run.workspaceId, entity => ({
       runs: arrayUpsert(entity.runs, run.id, { ...run })
     }));
@@ -214,6 +217,27 @@ export class WorkspaceService {
     );
   }
 
+  loadAllActiveRuns(): void {
+    this.workspaceStore.setLoading(true);
+
+    this.runsService.getRuns(true).pipe(
+      tap((runs) => {
+        const uniqueWorkspaceids = runs
+          .map(r => r.workspaceId)
+          .filter((v, i, a) => a.indexOf(v) === i);
+
+        uniqueWorkspaceids.forEach(x => {
+          const workspace: Workspace = { id: x, runs: [] };
+          this.workspaceStore.add(workspace);
+        });
+
+        runs.forEach(r => this.runUpdated(r));
+        this.workspaceStore.setLoading(false);
+      }),
+      take(1)
+    ).subscribe();
+  }
+
   loadResourcesByWorkspaceId(id: string): Observable<any> {
     return of(id).pipe(
       tap(() => {
@@ -262,6 +286,8 @@ export class WorkspaceService {
       if (exists && !expand) {
         return { expandedRuns: arrayRemove(entity.expandedRuns, run.id) };
       }
+
+      return { expandedRuns: entity.expandedRuns };
     });
   }
 
@@ -305,5 +331,28 @@ export class WorkspaceService {
   setWorkspaceView(id: string, view: string) {
     this.workspaceStore.ui.upsert(id, {workspaceView: view});
   }
-}
 
+  loadLockingStatus() {
+    this.workspacesService.getWorkspaceLockingStatus().pipe(take(1)).subscribe(lockingStatus => {
+      this.workspaceStore.update({ lockingEnabled: lockingStatus });
+    });
+  }
+
+  setLockingEnabled(status: boolean) {
+    let result: Observable<boolean>;
+
+    if (status) {
+      result = this.workspacesService.enableWorkspaceLocking();
+    } else {
+      result = this.workspacesService.disableWorkspaceLocking();
+    }
+
+    result.pipe(take(1)).subscribe(lockingStatus => {
+      this.lockingEnabledUpdated(lockingStatus);
+    });
+  }
+
+  lockingEnabledUpdated(status: boolean) {
+    this.workspaceStore.update({ lockingEnabled: status });
+  }
+}

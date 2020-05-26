@@ -8,32 +8,28 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
+using Caster.Api.Domain.Events;
+using MediatR;
+using Caster.Api.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
-namespace Caster.Api.Infrastructure.Authorization
+namespace Caster.Api.Features.Workspaces.EventHandlers
 {
-    public class OperatorRequirement : IAuthorizationRequirement
+    public class SignalRWorkspaceSettingsUpdatedHandler : INotificationHandler<WorkspaceSettingsUpdated>
     {
-        public OperatorRequirement()
+        private readonly IHubContext<ExerciseHub> _exerciseHub;
+
+        public SignalRWorkspaceSettingsUpdatedHandler(
+            IHubContext<ExerciseHub> exerciseHub)
         {
+            _exerciseHub = exerciseHub;
         }
-    }
 
-    public class OperatorHandler : AuthorizationHandler<OperatorRequirement>, IAuthorizationHandler
-    {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OperatorRequirement requirement)
+        public async Task Handle(WorkspaceSettingsUpdated notification, CancellationToken cancellationToken)
         {
-            if (context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.SystemAdmin)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.ContentDeveloper)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.Operator)))
-            {
-                context.Succeed(requirement);
-            }
-
-            return Task.CompletedTask;
+            await _exerciseHub.Clients.Group(nameof(HubGroups.WorkspacesAdmin)).SendAsync("WorkspaceSettingsUpdated", notification.LockingStatus);
         }
     }
 }

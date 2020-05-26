@@ -13,7 +13,9 @@ import {Workspace} from '../../generated/caster-api';
 import {Injectable, InjectionToken} from '@angular/core';
 import {WorkspaceEntityUi} from './workspace.model';
 
-export interface WorkspaceState extends EntityState<Workspace> {}
+export interface WorkspaceState extends EntityState<Workspace> {
+  lockingEnabled?: boolean;
+}
 export interface WorkspaceUIState extends EntityState<WorkspaceEntityUi> {}
 
 
@@ -38,4 +40,3 @@ export class WorkspaceStore extends EntityStore<WorkspaceState, Workspace> {
     this.createUIStore().setInitialEntityState((entity => ({...initialWorkspaceEntityUiState})));
   }
 }
-

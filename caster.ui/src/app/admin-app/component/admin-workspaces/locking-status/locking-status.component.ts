@@ -8,32 +8,26 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
-namespace Caster.Api.Infrastructure.Authorization
-{
-    public class OperatorRequirement : IAuthorizationRequirement
-    {
-        public OperatorRequirement()
-        {
-        }
-    }
+@Component({
+  selector: 'cas-locking-status',
+  templateUrl: './locking-status.component.html',
+  styleUrls: ['./locking-status.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class LockingStatusComponent implements OnInit {
 
-    public class OperatorHandler : AuthorizationHandler<OperatorRequirement>, IAuthorizationHandler
-    {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OperatorRequirement requirement)
-        {
-            if (context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.SystemAdmin)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.ContentDeveloper)) ||
-                context.User.HasClaim(ClaimTypes.Role, nameof(CasterClaimTypes.Operator)))
-            {
-                context.Succeed(requirement);
-            }
+  @Input() lockingEnabled: boolean;
+  @Output() setLockingEnabled = new EventEmitter<boolean>();
 
-            return Task.CompletedTask;
-        }
-    }
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  toggleLocking($event) {
+    $event.preventDefault();
+    this.setLockingEnabled.emit(!this.lockingEnabled);
+  }
 }

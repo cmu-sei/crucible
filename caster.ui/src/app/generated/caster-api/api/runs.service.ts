@@ -173,6 +173,67 @@ export class RunsService {
     }
 
     /**
+     * Get all Runs
+     * @param ActiveOnly If true, only return Active Runs.
+     * @param Limit Limit the number of results returned to this amount if present
+     * @param IncludePlan Whether to include the Plan resource with the Run
+     * @param IncludeApply Whether  to include the Apply resource with the Run
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getRuns(ActiveOnly?: boolean, Limit?: number, IncludePlan?: boolean, IncludeApply?: boolean, observe?: 'body', reportProgress?: boolean): Observable<Array<Run>>;
+    public getRuns(ActiveOnly?: boolean, Limit?: number, IncludePlan?: boolean, IncludeApply?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Run>>>;
+    public getRuns(ActiveOnly?: boolean, Limit?: number, IncludePlan?: boolean, IncludeApply?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Run>>>;
+    public getRuns(ActiveOnly?: boolean, Limit?: number, IncludePlan?: boolean, IncludeApply?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: this.encoder});
+        if (ActiveOnly !== undefined && ActiveOnly !== null) {
+            queryParameters = queryParameters.set('ActiveOnly', <any>ActiveOnly);
+        }
+        if (Limit !== undefined && Limit !== null) {
+            queryParameters = queryParameters.set('Limit', <any>Limit);
+        }
+        if (IncludePlan !== undefined && IncludePlan !== null) {
+            queryParameters = queryParameters.set('IncludePlan', <any>IncludePlan);
+        }
+        if (IncludeApply !== undefined && IncludeApply !== null) {
+            queryParameters = queryParameters.set('IncludeApply', <any>IncludeApply);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        return this.httpClient.get<Array<Run>>(`${this.configuration.basePath}/api/runs`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get a list of Runs for a specified Workspace
      * @param workspaceId The Id of a Workspace
      * @param Limit Limit the number of results returned to this amount if present

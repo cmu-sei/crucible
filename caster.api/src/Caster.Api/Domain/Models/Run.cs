@@ -49,6 +49,19 @@ namespace Caster.Api.Domain.Models
         Applied = 6
     }
 
+    public static class RunHelpers
+    {
+        public static RunStatus[] GetActiveStatuses()
+        {
+            return new RunStatus[]
+            {
+                RunStatus.Queued,
+                RunStatus.Planning,
+                RunStatus.Applying,
+            };
+        }
+    }
+
     public class RunConfiguration : IEntityTypeConfiguration<Run>
     {
         public void Configure(EntityTypeBuilder<Run> builder)
@@ -74,4 +87,3 @@ namespace Caster.Api.Domain.Models
         }
     }
 }
-

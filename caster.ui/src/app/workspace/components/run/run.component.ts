@@ -173,4 +173,3 @@ export class RunComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 }
-

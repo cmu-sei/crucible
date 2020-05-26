@@ -8,12 +8,12 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
-import {WorkspaceContainerComponent} from './components/workspace-container/workspace-container.component';
-import {CwdToolbarModule} from '../sei-cwd-common/cwd-toolbar';
-import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { WorkspaceContainerComponent } from './components/workspace-container/workspace-container.component';
+import { CwdToolbarModule } from '../sei-cwd-common/cwd-toolbar';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   MatButtonModule,
   MatCardModule,
@@ -29,26 +29,18 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
 } from '@angular/material';
-import {ExtendedModule, FlexModule} from '@angular/flex-layout';
-import {OutputComponent} from './components/output/output.component';
-import {CwdTableComponent} from '../sei-cwd-common/cwd-table/components/cwd-table/cwd-table.component';
-import {ClipboardModule} from 'ngx-clipboard';
-import {TableItemActionDirective} from '../sei-cwd-common/cwd-table/directives/table-item-action.directive';
-import {TableActionDirective} from '../sei-cwd-common/cwd-table/directives/table-action.directive';
-import {TableItemContentDirective} from '../sei-cwd-common/cwd-table/directives/table-item-content.directive';
-import {CwdTableModule} from '../sei-cwd-common/cwd-table/cwd-table.module';
+import { ExtendedModule, FlexModule } from '@angular/flex-layout';
+import { OutputComponent } from './components/output/output.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { CwdTableModule } from '../sei-cwd-common/cwd-table/cwd-table.module';
 import { RunComponent } from './components/run/run.component';
 
 @NgModule({
   declarations: [
     WorkspaceContainerComponent,
     OutputComponent,
-    CwdTableComponent,
-    TableItemActionDirective,
-    TableActionDirective,
-    TableItemContentDirective,
     RunComponent,
   ],
   imports: [
@@ -77,7 +69,6 @@ import { RunComponent } from './components/run/run.component';
     CwdTableModule,
     ExtendedModule
   ],
-  exports: [WorkspaceContainerComponent  ]
+  exports: [WorkspaceContainerComponent, RunComponent],
 })
-export class WorkspaceModule { }
-
+export class WorkspaceModule {}
