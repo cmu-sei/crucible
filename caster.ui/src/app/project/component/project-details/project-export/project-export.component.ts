@@ -8,7 +8,14 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { ProjectObjectType, ProjectService } from 'src/app/project/state';
 import { DirectoryService } from 'src/app/directories';
 import { FileService } from 'src/app/files/state';
@@ -21,7 +28,7 @@ import FileDownloadUtils from 'src/app/shared/utilities/file-download-utils';
   selector: 'cas-project-export',
   templateUrl: './project-export.component.html',
   styleUrls: ['./project-export.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectExportComponent implements OnInit {
   @Input() id: string;
@@ -46,19 +53,23 @@ export class ProjectExportComponent implements OnInit {
     private directoryService: DirectoryService,
     private projectService: ProjectService,
     private fileService: FileService,
-    private formBuilder: FormBuilder) {
-      this.form = formBuilder.group({
-        archiveType: [this.archiveTypes[0]],
-        includeIds: [true, Validators.required]
-      });
-    }
-
-  ngOnInit() {
-
+    private formBuilder: FormBuilder
+  ) {
+    this.form = formBuilder.group({
+      archiveType: [this.archiveTypes[0]],
+      includeIds: [true, Validators.required],
+    });
   }
 
+  ngOnInit() {}
+
   export() {
-    this.onExport(this.id, this._type, this.form.value.archiveType, this.form.value.includeIds);
+    this.onExport(
+      this.id,
+      this._type,
+      this.form.value.archiveType,
+      this.form.value.includeIds
+    );
     this.exportComplete.emit(true);
   }
 
@@ -66,36 +77,41 @@ export class ProjectExportComponent implements OnInit {
     this.exportComplete.emit(false);
   }
 
-  private onExport(id: string, type: ProjectObjectType, archiveType: ArchiveType, includeIds: boolean) {
+  private onExport(
+    id: string,
+    type: ProjectObjectType,
+    archiveType: ArchiveType,
+    includeIds: boolean
+  ) {
     switch (type) {
       case ProjectObjectType.DIRECTORY: {
-        this.directoryService.export(id, archiveType, includeIds).pipe(
-          take(1)
-        )
-        // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
-        .subscribe(result => {
-          FileDownloadUtils.downloadFile(result.blob, result.filename);
-        });
+        this.directoryService
+          .export(id, archiveType, includeIds)
+          .pipe(take(1))
+          // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
+          .subscribe((result) => {
+            FileDownloadUtils.downloadFile(result.blob, result.filename);
+          });
         break;
       }
       case ProjectObjectType.FILE: {
-        this.fileService.export(id).pipe(
-          take(1)
-        )
-        // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
-        .subscribe(result => {
-          FileDownloadUtils.downloadFile(result.blob, result.filename);
-        });
+        this.fileService
+          .export(id)
+          .pipe(take(1))
+          // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
+          .subscribe((result) => {
+            FileDownloadUtils.downloadFile(result.blob, result.filename);
+          });
         break;
       }
       case ProjectObjectType.PROJECT: {
-        this.projectService.export(id, archiveType, includeIds).pipe(
-          take(1)
-        )
-        // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
-        .subscribe(result => {
-          FileDownloadUtils.downloadFile(result.blob, result.filename);
-        });
+        this.projectService
+          .export(id, archiveType, includeIds)
+          .pipe(take(1))
+          // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
+          .subscribe((result) => {
+            FileDownloadUtils.downloadFile(result.blob, result.filename);
+          });
         break;
       }
     }

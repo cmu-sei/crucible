@@ -8,28 +8,28 @@ From the **Alloy.Api** folder ... $ dotnet ef migrations add --project ..\Alloy.
 
 ## Alloy API Data
 
-### Definition
+### EventTemplate
 
 - `Guid Id`
-- `Guid? ExerciseId` (Player, an exercise definition)
+- `Guid? ViewId` (Player, a view eventTemplate)
 - `Guid? DirectoryId` (Caster)
-- `Guid? ScenarioId` (Steamfitter)
+- `Guid? ScenarioTemplateId` (Steamfitter)
 - `string Name`
 - `string Description`
 - `int DurationHours`
 
-### Implementation
+### Event
 
 - `Guid Id`
-- `Guid DefinitionId` (Alloy)
+- `Guid EventTemplateId` (Alloy)
 - `Guid UserId`
-- `Guid? ExerciseId` (Player)
+- `Guid? ViewId` (Player)
 - `Guid? WorkspaceId` (Caster)
 - `Guid? RunId` (Caster)
-- `Guid? SessionId` (Steamfitter)
+- `Guid? ScenarioId` (Steamfitter)
 - `string Name`
 - `string Description`
-- `ImplementationStatus Status`
+- `EventStatus Status`
 - `DateTime? LaunchDate`
 - `DateTime? EndDate`
 - `DateTime? ExpirationDate`
@@ -37,7 +37,7 @@ From the **Alloy.Api** folder ... $ dotnet ef migrations add --project ..\Alloy.
 ## Caster Interface
 
 Alloy will deploy a lab/odx as a Caster workspace, including the workspace specific variables file. Variables include:
-- Player Exercise ID
+- Player View ID
 - Player Team Names
 
 Then, Alloy will:
@@ -45,54 +45,54 @@ Then, Alloy will:
 - Create a plan
 - Apply the plan
 
-Caster will write the `ExerciseId` and the `TeamId` from Player to each VM's guest info variables.
+Caster will write the `ViewId` and the `TeamId` from Player to each VM's guest info variables.
 
-Alloy will get all authorized exercise/directories from `caster.api`.
+Alloy will get all authorized view/directories from `caster.api`.
 
 ## Player Interface
 
-`Player.api` must have an idea of an Exercise definition. Alloy will get all authorized Exercise definitions from the `player.api`. `Player.api` must have a `CreateExerciseFromExerciseDefinition` endpoint.
+`Player.api` must have an idea of an View eventTemplate. Alloy will get all authorized View eventTemplates from the `player.api`. `Player.api` must have a `CreateViewFromViewEventTemplate` endpoint.
 
 ## Steamfitter Interface
 
-Alloy will get all authorized scenarios from `steamfitter.api`. Alloy will call the `CreateSessionFromScenario` endpoint.
+Alloy will get all authorized scenarioTemplates from `steamfitter.api`. Alloy will call the `CreateScenarioFromScenarioTemplate` endpoint.
 
 ## Preparing for Launch
 
-Determine if an implementation already exists that can be rejoined or if a new implementation needs to be created.
-   - `GET /definitions/{definitionId}/implementations/mine`
+Determine if an event already exists that can be rejoined or if a new event needs to be created.
+   - `GET /eventTemplates/{eventTemplateId}/events/mine`
    - check for `active` status
 
-If there is an `active` implementation, then present option to rejoin and skip launch.
+If there is an `active` event, then present option to rejoin and skip launch.
 
 ## Launch
 
-1. Create a new implementation from the definition.
-   - `POST /definitions/{definitionId}/implementations`
-2. Clone the Player exercise.
+1. Create a new event from the eventTemplate.
+   - `POST /eventTemplates/{eventTemplateId}/events`
+2. Clone the Player view.
 3. Deploy a new Caster workspace in the Caster directory.
    - `CreateWorkspaceFromDirectory`
    - Create a `Run` for the workspace
    - Wait for the `Run` to be `Planned` status
    - Apply the `Run`
    - Wait for the `Run` to be `Applied` status
-4. Create a Steamfitter session from the scenario.
-5. Set the Implementation status to `active`.
+4. Create a Steamfitter scenario from the scenarioTemplate.
+5. Set the Event status to `active`.
 
 ## End
 
-1. Set Player exercise to `Inactive`.
-2. End the Steamfitter session.
+1. Set Player view to `Inactive`.
+2. End the Steamfitter scenario.
 3. Destroy the Caster workspace.
    - Create an `isDestroy` `Run` for the workspace
    - Wait for the `Run` to be `Planned` status
    - Apply the `Run`
    - Wait for the `Run` to be `Applied` status
-4. Set the Implementation status to `ended` or `expired`.
+4. Set the Event status to `ended` or `expired`.
 
 ## Background Tasks
 
-The entire **Launch** and **End** processes will be single background tasks that poll the Caster API for each status change, update the implementation database record appropriately, and then move on to the next step in the process.
+The entire **Launch** and **End** processes will be single background tasks that poll the Caster API for each status change, update the event database record appropriately, and then move on to the next step in the process.
 
 ## Alloy documentation
 

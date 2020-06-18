@@ -30,7 +30,7 @@ namespace Alloy.Api.Services
     }
 
     /// <summary>
-    /// This class watches for expired implementations to process.
+    /// This class watches for expired events to process.
     /// These would not necessarily be in a queue at expiration time and therefore need to be queried.
     /// This class could be modified to monitor *any* entity that needs to be queried periodically.
     /// </summary>
@@ -39,7 +39,7 @@ namespace Alloy.Api.Services
         private readonly ILogger<AlloyQueryService> _logger;
         private readonly IOptionsMonitor<ClientOptions> _clientOptions;
         private readonly IServiceScopeFactory _scopeFactory;
-        private readonly IAlloyImplementationQueue _implementationQueue;
+        private readonly IAlloyEventQueue _eventQueue;
         private readonly int _minimumIntervalSeconds = 30;
         
         private Timer _timer;
@@ -48,13 +48,13 @@ namespace Alloy.Api.Services
             ILogger<AlloyQueryService> logger,
             IOptionsMonitor<ClientOptions> clientOptions,
             IServiceScopeFactory scopeFactory,
-            IAlloyImplementationQueue implementationQueue
+            IAlloyEventQueue eventQueue
         )
         {
             _logger = logger;
             _clientOptions = clientOptions;
             _scopeFactory = scopeFactory;
-            _implementationQueue = implementationQueue;
+            _eventQueue = eventQueue;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -88,22 +88,22 @@ namespace Alloy.Api.Services
                     using (var alloyContext = scope.ServiceProvider.GetRequiredService<AlloyContext>())
                     {
                         var currentDateTime = DateTime.UtcNow;
-                        var expiredImplementationEntities = alloyContext.Implementations.Where(o => 
+                        var expiredEventEntities = alloyContext.Events.Where(o => 
                             o.EndDate == null &&
                             o.ExpirationDate < currentDateTime).ToList();
 
-                        if (expiredImplementationEntities.Any())
+                        if (expiredEventEntities.Any())
                         {
-                            _logger.LogInformation($"AlloyQueryService is processing {expiredImplementationEntities.Count()} expired Implementations.");
-                            foreach (var implementationEntity in expiredImplementationEntities)
+                            _logger.LogInformation($"AlloyQueryService is processing {expiredEventEntities.Count()} expired Events.");
+                            foreach (var eventEntity in expiredEventEntities)
                             {
-                                implementationEntity.EndDate = DateTime.UtcNow;
-                                implementationEntity.Status = ImplementationStatus.Ending;
-                                implementationEntity.InternalStatus = InternalImplementationStatus.EndQueued;
-                                implementationEntity.RunId = null;
+                                eventEntity.EndDate = DateTime.UtcNow;
+                                eventEntity.Status = EventStatus.Ending;
+                                eventEntity.InternalStatus = InternalEventStatus.EndQueued;
+                                eventEntity.RunId = null;
                                 await alloyContext.SaveChangesAsync();
-                                 _logger.LogInformation($"AlloyQueryService is queueing {implementationEntity.Id}.");
-                                _implementationQueue.Add(implementationEntity);
+                                 _logger.LogInformation($"AlloyQueryService is queueing {eventEntity.Id}.");
+                                _eventQueue.Add(eventEntity);
                             }
                         }
                     }

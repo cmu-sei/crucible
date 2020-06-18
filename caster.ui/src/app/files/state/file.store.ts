@@ -8,28 +8,35 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { EntityState, EntityStore, StoreConfig, ActiveState, EntityUIStore } from '@datorama/akita';
+import {
+  EntityState,
+  EntityStore,
+  StoreConfig,
+  ActiveState,
+  EntityUIStore,
+} from '@datorama/akita';
 import { Injectable } from '@angular/core';
-import {ModelFile} from '../../generated/caster-api';
-import {FileUI} from 'src/app/files/state/file.model';
+import { ModelFile } from '../../generated/caster-api';
+import { FileUI } from 'src/app/files/state/file.model';
 
 export interface FileUIState extends EntityState<FileUI>, ActiveState {}
 export interface FileState extends EntityState<ModelFile>, ActiveState {}
 
 export const initialFileUIState: FileUI = {
   isSaved: true,
-  selectedVersionId: ''
+  selectedVersionId: '',
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({ name: 'files' })
 export class FileStore extends EntityStore<FileState> {
   ui: EntityUIStore<FileUIState>;
   constructor() {
     super();
-    this.createUIStore().setInitialEntityState(entity => ({...initialFileUIState}));
+    this.createUIStore().setInitialEntityState((entity) => ({
+      ...initialFileUIState,
+    }));
   }
 }
-

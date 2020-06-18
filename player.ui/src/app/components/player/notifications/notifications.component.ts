@@ -22,7 +22,7 @@ import { DialogService } from '../../../services/dialog/dialog.service';
 })
 export class NotificationsComponent implements OnInit {
 
-  @Input() exerciseGuid: string;
+  @Input() viewGuid: string;
   @Input() teamGuid: string;
   @Input() userGuid: string;
   @Input() userToken: string;
@@ -82,7 +82,7 @@ export class NotificationsComponent implements OnInit {
       }
     });
 
-    this.notificationService.exerciseNotification.subscribe(msg => {
+    this.notificationService.viewNotification.subscribe(msg => {
       // Check to see if a valid notification came across.
       if (msg.broadcastTime != undefined) {
         this.notification = msg;
@@ -113,7 +113,7 @@ export class NotificationsComponent implements OnInit {
       }
     });
 
-    this.notificationService.connectToNotificationServer(this.exerciseGuid, this.teamGuid, this.userGuid, this.userToken);
+    this.notificationService.connectToNotificationServer(this.viewGuid, this.teamGuid, this.userGuid, this.userToken);
 
   }
 
@@ -123,13 +123,13 @@ export class NotificationsComponent implements OnInit {
 
   public sendMessage(): void {
     if (this.messageToSend.trim().length > 0) {
-      this.dialogService.confirm("Confirm Message Send", "Are you sure that you want to send a system wide message to all users logged into this exercise?", null).subscribe(result => {
+      this.dialogService.confirm("Confirm Message Send", "Are you sure that you want to send a system wide message to all users logged into this view?", null).subscribe(result => {
         if (result['confirm'] == true) {
           if (this.messageToSend.trim().length > 225) {
             // Trim after 225 characters
             this.messageToSend = this.messageToSend.trim().substring(0, 225);
           }
-          this.notificationService.sendNotification(this.exerciseGuid, this.messageToSend);
+          this.notificationService.sendNotification(this.viewGuid, this.messageToSend);
           this.messageToSend = "";
         }
       });
@@ -185,4 +185,3 @@ export class NotificationsComponent implements OnInit {
 }
 
 }
-

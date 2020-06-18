@@ -10,6 +10,7 @@ DM20-0181
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Steamfitter.Api.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,6 +23,12 @@ namespace Steamfitter.Api.ViewModels
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int? DurationHours { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public ScenarioStatus Status { get; set; }
+        public bool OnDemand { get; set; }
+        public Guid? ScenarioTemplateId { get; set; }
+        public Guid? ViewId { get; set; }
+        public string View{ get; set; }
     }
 }

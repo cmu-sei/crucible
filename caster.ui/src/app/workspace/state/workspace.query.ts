@@ -8,21 +8,36 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { arrayFind, EntityUIQuery, ID, Order, QueryConfig, QueryEntity } from '@datorama/akita';
-import { WorkspaceState, WorkspaceStore, WorkspaceUIState } from './workspace.store';
-import {Resource, Run, Workspace, RunStatus} from '../../generated/caster-api';
+import {
+  arrayFind,
+  EntityUIQuery,
+  ID,
+  Order,
+  QueryConfig,
+  QueryEntity,
+} from '@datorama/akita';
+import {
+  WorkspaceState,
+  WorkspaceStore,
+  WorkspaceUIState,
+} from './workspace.store';
+import {
+  Resource,
+  Run,
+  Workspace,
+  RunStatus,
+} from '../../generated/caster-api';
 import { Injectable } from '@angular/core';
 import { StatusFilter, WorkspaceEntityUi } from './workspace.model';
 import { combineLatest, Observable, of } from 'rxjs';
-import {map, shareReplay} from 'rxjs/operators';
-
+import { map, shareReplay } from 'rxjs/operators';
 
 @QueryConfig({
   sortBy: 'name',
-  sortByOrder: Order.ASC
+  sortByOrder: Order.ASC,
 })
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WorkspaceQuery extends QueryEntity<WorkspaceState, Workspace> {
   ui: EntityUIQuery<WorkspaceUIState, WorkspaceEntityUi>;
@@ -34,8 +49,8 @@ export class WorkspaceQuery extends QueryEntity<WorkspaceState, Workspace> {
 
   workspaceRuns$(id): Observable<Run[]> {
     return combineLatest([
-      this.selectEntity(id, entity => entity.runs),
-      this.filters$(id)
+      this.selectEntity(id, (entity) => entity.runs),
+      this.filters$(id),
     ]).pipe(
       map(([runs, filters]) => {
         if (runs && runs.length > 0) {
@@ -48,54 +63,64 @@ export class WorkspaceQuery extends QueryEntity<WorkspaceState, Workspace> {
           });
 
           if (filters) {
-            const filtersReduced = filters.filter(f => f.filter === true).map(i => i.key);
+            const filtersReduced = filters
+              .filter((f) => f.filter === true)
+              .map((i) => i.key);
             if (filtersReduced && filtersReduced.length < 1) {
               return tmpRuns;
             } else {
-              return tmpRuns.filter(run => !filtersReduced.includes(run.status));
+              return tmpRuns.filter(
+                (run) => !filtersReduced.includes(run.status)
+              );
             }
           } else {
             return tmpRuns;
           }
         }
-      }),
+      })
     );
   }
 
   workspaceResources$(id): Observable<Resource[]> {
-    return this.selectEntity(id, entity => entity.resources);
+    return this.selectEntity(id, (entity) => entity.resources);
   }
 
   selectedRuns$(workspaceId): Observable<string[]> {
-    return this.ui.selectEntity(workspaceId, entity => entity.selectedRuns);
+    return this.ui.selectEntity(workspaceId, (entity) => entity.selectedRuns);
   }
 
   expandedRuns$(workspaceId?): Observable<string[]> {
     if (workspaceId != null) {
-      return this.ui.selectEntity(workspaceId, entity => entity.expandedRuns);
+      return this.ui.selectEntity(workspaceId, (entity) => entity.expandedRuns);
     } else {
       return this.ui.selectAll().pipe(
-        map(w => w.map(x => x.expandedRuns)),
-        map(r => [].concat(...r))
+        map((w) => w.map((x) => x.expandedRuns)),
+        map((r) => [].concat(...r))
       );
     }
   }
 
   resourceActions$(workspaceId): Observable<string[]> {
-    return this.ui.selectEntity(workspaceId, entity => entity.resourceActions);
+    return this.ui.selectEntity(
+      workspaceId,
+      (entity) => entity.resourceActions
+    );
   }
 
   expandedResources$(workspaceId: string): Observable<string[]> {
-    return this.ui.selectEntity(workspaceId, entity => entity.expandedResources);
+    return this.ui.selectEntity(
+      workspaceId,
+      (entity) => entity.expandedResources
+    );
   }
 
   filters$(workspaceId): Observable<StatusFilter[]> {
-    return this.ui.selectEntity(workspaceId, entity => entity.statusFilter);
+    return this.ui.selectEntity(workspaceId, (entity) => entity.statusFilter);
   }
 
   selectRunById$(workspace, runId): Observable<Run> {
     return this.selectEntity(workspace, 'runs').pipe(
-      map(runs => runs.find(r => r.id === runId))
+      map((runs) => runs.find((r) => r.id === runId))
     );
   }
 
@@ -107,16 +132,22 @@ export class WorkspaceQuery extends QueryEntity<WorkspaceState, Workspace> {
   }
 
   activeRuns$(): Observable<Run[]> {
-    const activeStatuses = [ RunStatus.Queued, RunStatus.Planning, RunStatus.Applying];
+    const activeStatuses = [
+      RunStatus.Queued,
+      RunStatus.Planning,
+      RunStatus.Applying,
+    ];
 
     return this.selectAll().pipe(
-      map(w => w.map(x => x.runs.filter(r => activeStatuses.includes(r.status)))),
-      map(r => [].concat(...r))
+      map((w) =>
+        w.map((x) => x.runs.filter((r) => activeStatuses.includes(r.status)))
+      ),
+      map((r) => [].concat(...r))
     );
   }
 
   getWorkspaceView(workspaceId): Observable<string> {
-    return this.ui.selectEntity(workspaceId, entity => entity.workspaceView);
+    return this.ui.selectEntity(workspaceId, (entity) => entity.workspaceView);
   }
 
   getOrSelectEntity(id: ID): Observable<Workspace> {

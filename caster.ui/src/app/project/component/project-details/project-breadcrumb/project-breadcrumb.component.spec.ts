@@ -18,9 +18,8 @@ describe('ProjectBreadcrumbComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectBreadcrumbComponent ]
-    })
-    .compileComponents();
+      declarations: [ProjectBreadcrumbComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('ProjectBreadcrumbComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

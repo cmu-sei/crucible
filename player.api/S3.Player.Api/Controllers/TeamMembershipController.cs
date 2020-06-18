@@ -27,7 +27,7 @@ namespace S3.Player.Api.Controllers
         public TeamMembershipController(ITeamMembershipService teamMembershipService)
         {
             _teamMembershipService = teamMembershipService;
-        }       
+        }
 
         /// <summary>
         /// Gets a specific Team Membership by id
@@ -35,7 +35,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Returns the Team Membership with the id specified
         /// <para />
-        /// Accessible to Super Users, Exercise Admins for the membership's Exercise, or the User that the membership belongs to
+        /// Accessible to Super Users, View Admins for the membership's View, or the User that the membership belongs to
         /// </remarks>
         /// <param name="id">The id of the Team Membership</param>
         /// <returns></returns>
@@ -53,20 +53,20 @@ namespace S3.Player.Api.Controllers
         }
 
         /// <summary>
-        /// Gets all Team Memberships for a User by Exercise
+        /// Gets all Team Memberships for a User by View
         /// </summary>
         /// <remarks>
         /// Returns a list of all of the Permissions in the system.
         /// <para />
         /// Accessible to Super Users or the specified User
-        /// </remarks>       
+        /// </remarks>
         /// <returns></returns>
-        [HttpGet("/users/{userId}/exercises/{exerciseId}/team-memberships")]
+        [HttpGet("/users/{userId}/views/{viewId}/team-memberships")]
         [ProducesResponseType(typeof(IEnumerable<TeamMembership>), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getTeamMemberships")]
-        public async Task<IActionResult> GetByExerciseIdForUser(Guid exerciseId, Guid userId)
+        public async Task<IActionResult> GetByViewIdForUser(Guid viewId, Guid userId)
         {
-            var list = await _teamMembershipService.GetByExerciseIdForUserAsync(exerciseId, userId);
+            var list = await _teamMembershipService.GetByViewIdForUserAsync(viewId, userId);
             return Ok(list);
         }
 
@@ -76,8 +76,8 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Updates a Team Membership with the attributes specified
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Exercise
-        /// </remarks>     
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified View
+        /// </remarks>
         /// <param name="id">The id of the Team Membership</param>
         /// <param name="form">The updated Team Membership values</param>
         [HttpPut("team-memberships/{id}")]
@@ -90,4 +90,3 @@ namespace S3.Player.Api.Controllers
         }
     }
 }
-

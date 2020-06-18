@@ -24,6 +24,7 @@ using Caster.Api.Infrastructure.Authorization;
 using Caster.Api.Infrastructure.Identity;
 using Caster.Api.Domain.Events;
 using Caster.Api.Features.Workspaces.Interfaces;
+using Caster.Api.Domain.Services;
 
 namespace Caster.Api.Features.Workspaces
 {
@@ -42,17 +43,20 @@ namespace Caster.Api.Features.Workspaces
             private readonly IAuthorizationService _authorizationService;
             private readonly ClaimsPrincipal _user;
             private readonly IMediator _mediator;
+            private readonly ILockService _lockService;
 
             public Handler(
                 CasterContext db,
                 IMapper mapper,
                 IAuthorizationService authorizationService,
-                IIdentityResolver identityResolver)
+                IIdentityResolver identityResolver,
+                ILockService lockService)
             {
                 _db = db;
                 _mapper = mapper;
                 _authorizationService = authorizationService;
                 _user = identityResolver.GetClaimsPrincipal();
+                _lockService = lockService;
             }
 
             protected override async Task Handle(Command request, CancellationToken cancellationToken)
@@ -65,13 +69,21 @@ namespace Caster.Api.Features.Workspaces
                 if (workspace == null)
                     throw new EntityNotFoundException<Workspace>();
 
-                if (workspace.GetState().GetResources().Any())
-                    throw new ConflictException("Cannot delete a Workspace with deployed Resources.");
+                using (var lockResult = await _lockService.GetWorkspaceLock(request.Id).LockAsync(0))
+                {
+                    if (!lockResult.AcquiredLock)
+                        throw new WorkspaceConflictException();
 
-                _db.Workspaces.Remove(workspace);
-                await _db.SaveChangesAsync(cancellationToken);
+                    if (workspace.GetState().GetResources().Any())
+                        throw new ConflictException("Cannot delete a Workspace with deployed Resources.");
+
+                    if (await _db.AnyIncompleteRuns(request.Id))
+                        throw new ConflictException("Cannot delete a Workspace with pending Runs.");
+
+                    _db.Workspaces.Remove(workspace);
+                    await _db.SaveChangesAsync(cancellationToken);
+                }
             }
         }
     }
 }
-

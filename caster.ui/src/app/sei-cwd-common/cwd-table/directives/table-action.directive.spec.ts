@@ -16,4 +16,3 @@ describe('ListActionDirective', () => {
     expect(directive).toBeTruthy();
   });
 });
-

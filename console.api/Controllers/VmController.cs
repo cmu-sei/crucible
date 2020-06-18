@@ -37,17 +37,20 @@ namespace S3.Vm.Console.Controllers
         private VmOptions _options;
         private readonly ILogger<VmController> _logger;
         private readonly ClaimsPrincipal _user;
+        private readonly IS3PlayerApiClient _playerClient;
 
         public VmController(
                 VmService vmService,
                 ILogger<VmController> logger,
                 IOptions<VmOptions> options,
-                IPrincipal user) : base()
+                IPrincipal user,
+                IS3PlayerApiClient playerClient) : base()
         {
             _vmService = vmService;
             _options = options.Value;
             _logger = logger;
             _user = user as ClaimsPrincipal;
+            _playerClient = playerClient;
         }
 
         public string GetAccessToken()
@@ -81,8 +84,8 @@ namespace S3.Vm.Console.Controllers
 
             if (_options.LogConsoleAccess && _logger.IsEnabled(LogLevel.Information))
             {
-                var s3playerApiClient = new S3PlayerApiClient(new Uri(_options.PlayerApiUrl), new TokenCredentials(accessToken, "Bearer"));
-                var team = (s3playerApiClient.GetUserExerciseTeams(model.ExerciseId, _user.GetId()) as IEnumerable<Team>).FirstOrDefault(t => t.IsPrimary.Value);
+                var team = (await _playerClient.GetUserViewTeamsAsync(model.ViewId, _user.GetId()))
+                    .FirstOrDefault(t => t.IsPrimary.Value);
 
                 _logger.LogInformation(new EventId(1), $"User {_user.GetName()} ({_user.GetId()}) in Team {team.Name} ({team.Id}) accessed console of {model.Name} ({uuid})");
             }
@@ -249,7 +252,7 @@ namespace S3.Vm.Console.Controllers
                 Response.StatusCode = 400;
                 return Json("Error");
             }
-            return Json(await _vmService.GetIsos(model.ExerciseId.ToString(), model.TeamId.ToString()));
+            return Json(await _vmService.GetIsos(model.ViewId.ToString(), model.TeamId.ToString()));
         }
 
         [HttpPost("api/{uuid}/mountiso")]

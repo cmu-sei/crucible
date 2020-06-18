@@ -22,7 +22,7 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class AdminAppComponent implements OnInit {
 
-  public exercisesText = 'View Templates';
+  public viewsText = 'Views';
   public usersText = 'Users';
   public appTemplatesText = 'Application Templates';
   public rolesPermissionsText = 'Roles / Permissions';
@@ -47,7 +47,7 @@ export class AdminAppComponent implements OnInit {
   ngOnInit() {
     this.opened = true;
     if (this.showStatus === undefined) {
-      this.adminGotoExercises();
+      this.adminGotoViews();
     }
 
     // Set the topbar color from config file
@@ -76,10 +76,10 @@ export class AdminAppComponent implements OnInit {
   }
 
   /**
-   * Set the display to Exercise
+   * Set the display to View
    */
-  adminGotoExercises(): void {
-    this.showStatus = this.exercisesText;
+  adminGotoViews(): void {
+    this.showStatus = this.viewsText;
   }
 
   /**
@@ -118,4 +118,3 @@ export class AdminAppComponent implements OnInit {
   }
 
 }
-

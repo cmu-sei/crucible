@@ -19,10 +19,9 @@ namespace S3.Player.Api.Infrastructure.Authorization
     {
         SystemAdmin,
         TeamMember,
-        ExerciseMember,
-        ExerciseAdmin,
+        ViewMember,
+        ViewAdmin,
         PrimaryTeam,
         HelpDeskAgent // TODO: Remove
     }
 }
-

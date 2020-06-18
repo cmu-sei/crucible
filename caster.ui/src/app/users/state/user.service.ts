@@ -8,20 +8,24 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {UserStore, CurrentUserStore} from './user.store';
-import {UserQuery} from './user.query';
-import {Injectable, InjectionToken} from '@angular/core';
-import {UsersService, User, UserPermissionsService, PermissionsService} from '../../generated/caster-api';
-import {tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {CwdAuthService} from '../../sei-cwd-common/cwd-auth/services';
+import { UserStore, CurrentUserStore } from './user.store';
+import { UserQuery } from './user.query';
+import { Injectable, InjectionToken } from '@angular/core';
+import {
+  UsersService,
+  User,
+  UserPermissionsService,
+  PermissionsService,
+} from '../../generated/caster-api';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { CwdAuthService } from '../../sei-cwd-common/cwd-auth/services';
+import { Theme } from '../../shared/models/theme-enum';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class UserService {
-
   constructor(
     private userStore: UserStore,
     private currentUserStore: CurrentUserStore,
@@ -48,7 +52,7 @@ export class UserService {
     this.userStore.setLoading(true);
     return this.usersService.getUser(id).pipe(
       tap((_user: User) => {
-        this.userStore.upsert(_user.id, {..._user});
+        this.userStore.upsert(_user.id, { ..._user });
       }),
       tap(() => {
         this.userStore.setLoading(false);
@@ -58,10 +62,10 @@ export class UserService {
 
   create(user: User): Observable<User> {
     return this.usersService.createUser(user).pipe(
-      tap(u => {
+      tap((u) => {
         this.userStore.add(u);
         this.userStore.ui.upsert(u.id, this.userQuery.ui.getEntity(u.id));
-      }),
+      })
     );
   }
 
@@ -70,36 +74,40 @@ export class UserService {
       tap(() => {
         this.userStore.remove(userId);
         this.userStore.ui.remove(userId);
-      }),
+      })
     );
   }
 
   addUserPermission(userId: string, permissionId: string) {
-    this.userPermissionService.createUserPermission({ userId, permissionId }).subscribe(up => {
-      this.loadById(userId).subscribe();
-    });
+    this.userPermissionService
+      .createUserPermission({ userId, permissionId })
+      .subscribe((up) => {
+        this.loadById(userId).subscribe();
+      });
   }
 
   removeUserPermission(userId: string, permissionId: string) {
-    this.userPermissionService.deleteUserPermissionByIds(userId, permissionId).subscribe(up => {
-      this.loadById(userId).subscribe();
-    });
+    this.userPermissionService
+      .deleteUserPermissionByIds(userId, permissionId)
+      .subscribe((up) => {
+        this.loadById(userId).subscribe();
+      });
   }
 
   setCurrentUser() {
     const currentUser = {
       name: '',
       isSuperUser: false,
-      id: ''
+      id: '',
     };
     this.currentUserStore.update(currentUser);
-    this.authService.user$.subscribe(user => {
+    this.authService.user$.subscribe((user) => {
       if (!!user) {
         currentUser.name = user.profile.name;
         currentUser.id = user.profile.sub;
         this.currentUserStore.update(currentUser);
-        this.permissionService.getMyPermissions().subscribe(permissions => {
-          currentUser.isSuperUser = permissions.some(permission => {
+        this.permissionService.getMyPermissions().subscribe((permissions) => {
+          currentUser.isSuperUser = permissions.some((permission) => {
             return permission.key === 'SystemAdmin';
           });
           this.currentUserStore.update(currentUser);
@@ -108,14 +116,18 @@ export class UserService {
     });
   }
 
+  setUserTheme(theme: Theme) {
+    this.currentUserStore.update({ theme });
+  }
+
   toggleSelected(id: string) {
-    this.userStore.ui.upsert(id, entity => ({isSelected: !entity.isSelected}));
+    this.userStore.ui.upsert(id, (entity) => ({
+      isSelected: !entity.isSelected,
+    }));
   }
 
   setActive(id) {
     this.userStore.setActive(id);
     this.userStore.ui.setActive(id);
-
   }
 }
-

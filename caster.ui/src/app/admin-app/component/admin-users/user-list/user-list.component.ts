@@ -8,13 +8,36 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, EventEmitter, OnInit, ViewChild, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { MatTableDataSource, MatPaginator, PageEvent, MatSort, MatDialogRef, Sort, MatDialog } from '@angular/material';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from 'src/app/sei-cwd-common/confirm-dialog/components/confirm-dialog.component';
-import { User, Permission, PermissionsService, UserPermission, UserPermissionsService } from '../../../../generated/caster-api';
-import {Subject, Observable, of} from 'rxjs';
+import {
+  User,
+  Permission,
+  PermissionsService,
+  UserPermission,
+  UserPermissionsService,
+} from '../../../../generated/caster-api';
+import { Subject, Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { fromMatSort, sortRows, fromMatPaginator, paginateRows } from 'src/app/datasource-utils';
+import {
+  fromMatSort,
+  sortRows,
+  fromMatPaginator,
+  paginateRows,
+} from 'src/app/datasource-utils';
 
 const WAS_CANCELLED = 'wasCancelled';
 
@@ -26,15 +49,14 @@ export interface Action {
 @Component({
   selector: 'cas-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit, OnChanges {
-
   public displayedColumns: string[] = ['id', 'name', 'permissions'];
   public filterString = '';
   public savedFilterString = '';
   public userDataSource = new MatTableDataSource<User>(new Array<User>());
-  public newUser: User = { permissions: []};
+  public newUser: User = { permissions: [] };
 
   // MatPaginator Output
   public defaultPageSize = 10;
@@ -50,15 +72,19 @@ export class UserListComponent implements OnInit, OnChanges {
   @Input() permissions: Permission[] = [];
   @Output() create: EventEmitter<User> = new EventEmitter<User>();
   @Output() delete: EventEmitter<string> = new EventEmitter<string>();
-  @Output() addUserPermission: EventEmitter<UserPermission> = new EventEmitter<UserPermission>();
-  @Output() removeUserPermission: EventEmitter<UserPermission> = new EventEmitter<UserPermission>();
+  @Output() addUserPermission: EventEmitter<UserPermission> = new EventEmitter<
+    UserPermission
+  >();
+  @Output() removeUserPermission: EventEmitter<
+    UserPermission
+  > = new EventEmitter<UserPermission>();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     // public dialogService: DialogService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   /**
    * Initialization
@@ -76,9 +102,9 @@ export class UserListComponent implements OnInit, OnChanges {
   }
 
   /**
-     * Called by UI to add a filter to the userDataSource
-     * @param filterValue
-     */
+   * Called by UI to add a filter to the userDataSource
+   * @param filterValue
+   */
   applyFilter(filterValue: string) {
     this.filterString = filterValue.toLowerCase();
     this.filterAndSort(this.filterString);
@@ -97,9 +123,12 @@ export class UserListComponent implements OnInit, OnChanges {
   filterAndSort(filterValue: string) {
     this.userDataSource.filter = filterValue;
     const rows$ = of(this.userDataSource.filteredData);
-    this.totalRows$ = rows$.pipe(map(rows => rows.length));
+    this.totalRows$ = rows$.pipe(map((rows) => rows.length));
     if (!!this.sortEvents$ && !!this.pageEvents$) {
-      this.displayedRows$ = rows$.pipe(sortRows(this.sortEvents$), paginateRows(this.pageEvents$));
+      this.displayedRows$ = rows$.pipe(
+        sortRows(this.sortEvents$),
+        paginateRows(this.pageEvents$)
+      );
     }
   }
 
@@ -108,16 +137,22 @@ export class UserListComponent implements OnInit, OnChanges {
    */
   addNewUser(addUser: boolean) {
     if (addUser) {
-      const user = {id: this.newUser.id, name: this.newUser.name, permissions: []};
+      const user = {
+        id: this.newUser.id,
+        name: this.newUser.name,
+        permissions: [],
+      };
       this.savedFilterString = this.filterString;
       this.create.emit(user);
     } else {
-      this.newUser = { permissions: []};
+      this.newUser = { permissions: [] };
     }
   }
 
   deleteUser(user: User) {
-    this.confirmDialog('Delete ' + user.name + '?', user.id, { buttonTrueText: 'Delete' }).subscribe(result => {
+    this.confirmDialog('Delete ' + user.name + '?', user.id, {
+      buttonTrueText: 'Delete',
+    }).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
         this.delete.emit(user.id);
       }
@@ -125,7 +160,10 @@ export class UserListComponent implements OnInit, OnChanges {
   }
 
   toggleUserPermission(user: User, permissionId: string) {
-    const userPermission: UserPermission = {userId: user.id, permissionId: permissionId};
+    const userPermission: UserPermission = {
+      userId: user.id,
+      permissionId: permissionId,
+    };
     if (this.hasPermission(permissionId, user)) {
       this.removeUserPermission.emit(userPermission);
     } else {
@@ -133,12 +171,19 @@ export class UserListComponent implements OnInit, OnChanges {
     }
   }
   hasPermission(permissionId: string, user: User) {
-    return !!user.permissions && user.permissions.some(p => {
-      return p.id === permissionId;
-    });
+    return (
+      !!user.permissions &&
+      user.permissions.some((p) => {
+        return p.id === permissionId;
+      })
+    );
   }
 
-  confirmDialog(title: string, message: string, data?: any): Observable<boolean> {
+  confirmDialog(
+    title: string,
+    message: string,
+    data?: any
+  ): Observable<boolean> {
     let dialogRef: MatDialogRef<ConfirmDialogComponent>;
     dialogRef = this.dialog.open(ConfirmDialogComponent, { data: data || {} });
     dialogRef.componentInstance.title = title;
@@ -146,7 +191,4 @@ export class UserListComponent implements OnInit, OnChanges {
 
     return dialogRef.afterClosed();
   }
-
 }
-
-

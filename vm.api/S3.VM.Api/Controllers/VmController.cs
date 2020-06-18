@@ -76,26 +76,26 @@ namespace S3.VM.Api.Controllers
         [SwaggerOperation(operationId: "getTeamVms")]
         public async Task<IActionResult> GetByTeamId(Guid teamId, string name, bool? includePersonal, bool? onlyMine, CancellationToken ct)
         {
-            var vms = await _vmService.GetByTeamIdAsync(teamId, 
-                name, 
-                includePersonal.HasValue ? includePersonal.Value : false, 
+            var vms = await _vmService.GetByTeamIdAsync(teamId,
+                name,
+                includePersonal.HasValue ? includePersonal.Value : false,
                 onlyMine.HasValue ? onlyMine.Value : false,
                 ct);
             return Ok(vms);
         }
 
         /// <summary>
-        /// Gets all of the Vms the calling user has access to in the specified Exercise
+        /// Gets all of the Vms the calling user has access to in the specified View
         /// </summary>
-        /// <param name="exerciseId">The Id of the Exercise</param>
+        /// <param name="viewId">The Id of the View</param>
         /// <param name="name">An optional search term for the vm's name</param>
         /// <returns></returns>
-        [HttpGet("exercises/{exerciseId}/vms")]
+        [HttpGet("views/{viewId}/vms")]
         [ProducesResponseType(typeof(IEnumerable<ViewModels.Vm>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getExerciseVms")]
-        public async Task<IActionResult> GetByExerciseId([FromRoute] Guid exerciseId, [FromQuery] string name, bool? includePersonal, bool? onlyMine, CancellationToken ct)
+        [SwaggerOperation(operationId: "getViewVms")]
+        public async Task<IActionResult> GetByViewId([FromRoute] Guid viewId, [FromQuery] string name, bool? includePersonal, bool? onlyMine, CancellationToken ct)
         {
-            var vms = await _vmService.GetByExerciseIdAsync(exerciseId, 
+            var vms = await _vmService.GetByViewIdAsync(viewId,
                 name,
                 includePersonal.HasValue ? includePersonal.Value : false,
                 onlyMine.HasValue ? onlyMine.Value : false,
@@ -110,7 +110,7 @@ namespace S3.VM.Api.Controllers
         /// Creates a new Virtual Machine with the attributes specified
         /// <para />
         /// Accessible to a User with management permissions on a team the Virtual Machine will be added to
-        /// </remarks>     
+        /// </remarks>
         /// <param name="form">The data to create the Team with</param>
         [HttpPost("vms")]
         [ProducesResponseType(typeof(ViewModels.Vm), (int)HttpStatusCode.Created)]
@@ -131,7 +131,7 @@ namespace S3.VM.Api.Controllers
         /// Updates a Virtual Machine with the attributes specified
         /// <para />
         /// Accessible to a User with management permissions on a team the Virtual Machine is in
-        /// </remarks>     
+        /// </remarks>
         /// <param name="form">The data to update the Virtual Machine with</param>
         [HttpPut("vms/{id}")]
         [ProducesResponseType(typeof(ViewModels.Vm), (int)HttpStatusCode.OK)]
@@ -152,7 +152,7 @@ namespace S3.VM.Api.Controllers
         /// Deletes a Vm with the specified id
         /// <para />
         /// Accessible to a User with management permission on a team the Virtual Machine is in
-        /// </remarks>    
+        /// </remarks>
         /// <param name="id">The id of the Vm</param>
         [HttpDelete("vms/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
@@ -170,7 +170,7 @@ namespace S3.VM.Api.Controllers
         /// Creates a new Virtual Machine with the attributes specified
         /// <para />
         /// Accessible to a User with management permissions on a team the Virtual Machine will be added to
-        /// </remarks>     
+        /// </remarks>
         /// <param name="vmId">The id of the Virtual Machine</param>
         /// <param name="teamId">The id of the Team</param>
         [HttpPost("teams/{teamId}/vms/{vmId}")]
@@ -189,7 +189,7 @@ namespace S3.VM.Api.Controllers
         /// Removes the specified Virtual Machine from the specified Team
         /// <para />
         /// Accessible to a User with management permissions on a team the Virtual Machine will be added to
-        /// </remarks>     
+        /// </remarks>
         /// <param name="vmId">The id of the Virtual Machine</param>
         /// <param name="teamId">The id of the Team</param>
         [HttpDelete("teams/{teamId}/vms/{vmId}")]
@@ -202,4 +202,3 @@ namespace S3.VM.Api.Controllers
         }
     }
 }
-

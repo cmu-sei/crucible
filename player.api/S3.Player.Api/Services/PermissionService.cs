@@ -32,7 +32,7 @@ namespace S3.Player.Api.Services
     {
         Task<IEnumerable<Permission>> GetAsync();
         Task<Permission> GetAsync(Guid id);
-        Task<IEnumerable<Permission>> GetByExerciseIdForUserAsync(Guid exerciseId, Guid userId);
+        Task<IEnumerable<Permission>> GetByViewIdForUserAsync(Guid viewId, Guid userId);
         Task<IEnumerable<Permission>> GetByTeamIdForUserAsync(Guid teamId, Guid userId);
         Task<Permission> CreateAsync(PermissionForm form);
         Task<Permission> UpdateAsync(Guid id, PermissionForm form);
@@ -60,7 +60,7 @@ namespace S3.Player.Api.Services
 
         public async Task<IEnumerable<Permission>> GetAsync()
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement())).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement())).Succeeded)
                 throw new ForbiddenException();
 
             var items = await _context.Permissions
@@ -132,9 +132,9 @@ namespace S3.Player.Api.Services
             return true;
         }
 
-        public async Task<IEnumerable<Permission>> GetByExerciseIdForUserAsync(Guid exerciseId, Guid userId)
+        public async Task<IEnumerable<Permission>> GetByViewIdForUserAsync(Guid viewId, Guid userId)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrExerciseAdminRequirement(exerciseId, userId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrViewAdminRequirement(viewId, userId))).Succeeded)
                 throw new ForbiddenException();
 
             var userQuery = _context.Users
@@ -146,7 +146,7 @@ namespace S3.Player.Api.Services
             if (user == null)
                 throw new EntityNotFoundException<User>();
 
-            return await GetPermissions(exerciseId, user);
+            return await GetPermissions(viewId, user);
         }
 
         public async Task<IEnumerable<Permission>> GetByTeamIdForUserAsync(Guid teamId, Guid userId)
@@ -169,15 +169,15 @@ namespace S3.Player.Api.Services
             if (team == null)
                 throw new EntityNotFoundException<Team>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrExerciseAdminRequirement(team.ExerciseId, userId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrViewAdminRequirement(team.ViewId, userId))).Succeeded)
                 throw new ForbiddenException();
 
-            return await GetPermissions(team.ExerciseId, user);
+            return await GetPermissions(team.ViewId, user);
         }
 
-        private async Task<IEnumerable<Permission>> GetPermissions(Guid exerciseId, UserEntity user)
+        private async Task<IEnumerable<Permission>> GetPermissions(Guid viewId, UserEntity user)
         {
-            var exerciseMembershipQuery = _context.ExerciseMemberships
+            var viewMembershipQuery = _context.ViewMemberships
                 .Include(x => x.PrimaryTeamMembership)
                 .ThenInclude(m => m.Role)
                 .ThenInclude(r => r.Permissions)
@@ -190,10 +190,10 @@ namespace S3.Player.Api.Services
                 .Include(x => x.PrimaryTeamMembership)
                 .ThenInclude(m => m.Team.Permissions)
                 .ThenInclude(p => p.Permission)
-                .Where(x => x.ExerciseId == exerciseId && x.UserId == user.Id);
+                .Where(x => x.ViewId == viewId && x.UserId == user.Id);
             //.Future() // TODO: Doesn't load all includes - bug in library?
 
-            ExerciseMembershipEntity membership = (await exerciseMembershipQuery.ToListAsync()).FirstOrDefault();
+            ViewMembershipEntity membership = (await viewMembershipQuery.ToListAsync()).FirstOrDefault();
 
             List<PermissionEntity> permissions = new List<PermissionEntity>();
 
@@ -318,7 +318,7 @@ namespace S3.Player.Api.Services
             if (permission == null)
                 throw new EntityNotFoundException<Permission>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(team.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(team.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             team.Permissions.Add(new TeamPermissionEntity(teamId, permissionId));
@@ -353,7 +353,7 @@ namespace S3.Player.Api.Services
             if (permission == null)
                 throw new EntityNotFoundException<Permission>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(team.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(team.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             if (teamPermission != null)

@@ -2,18 +2,18 @@
 Branch:  feature/BT-49-production-ready-player-responsiveness
 
 - Upgraded from Angular Version 6.0 to 7.3.4
-- Removed a bug where isSuperUser function was no longer needed after user.IsSystemAdmin functionality was added to the API.  The bug would cause SystemAdmins to see odd behavior on the Administration screen where the exercises would sometimes disappear.
+- Removed a bug where isSuperUser function was no longer needed after user.IsSystemAdmin functionality was added to the API.  The bug would cause SystemAdmins to see odd behavior on the Administration screen where the views would sometimes disappear.
 - Added navigation to exit the Administration screens
-- Added icon to Exercise Search screen and a button to clear the text
+- Added icon to View Search screen and a button to clear the text
 - Fixed the FxFlex on the top bar in player
-- Added progress spinners on Exercise loading tables.  
-- Added Sorting by exercise name.
-- Fixed Select box transparency issue.  
+- Added progress spinners on View loading tables.
+- Added Sorting by view name.
+- Fixed Select box transparency issue.
 - Fixed Admin User search table header.
 - Added Spinner when loading users in admin
 - Fixed FxFlex in Application Templates Admin, added sorting.
-- Updated headers for roles/permission admin.  
+- Updated headers for roles/permission admin.
 - Fixed scrolling on Permissions dialog in admin.
 - Added sorting to Roles and Permissions in admin.
-- Added progress spinner when loading exercise admin edit for Teams and Applications
-- Completely redesigned form for adding users to a team in an exercise
+- Added progress spinner when loading view admin edit for Teams and Applications
+- Completely redesigned form for adding users to a team in an view

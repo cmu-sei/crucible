@@ -17,7 +17,7 @@ DM20-0181
   margin-bottom: 40px;
 }
 
-.dispatchtask-container {
+.task-container {
   flex-direction: column;
   min-width: 920px;
   margin-left: 40px;
@@ -71,12 +71,12 @@ DM20-0181
   margin-bottom: -3px;
 }
 
-.dispatchtask-tree-invisible {
+.task-tree-invisible {
   display: none;
 }
 
-.dispatchtask-tree ul,
-.dispatchtask-tree li {
+.task-tree ul,
+.task-tree li {
   margin-top: 0;
   margin-bottom: 0;
   list-style-type: none;

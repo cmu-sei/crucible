@@ -10,11 +10,7 @@ DM20-0181
 
 import { Component, OnInit } from '@angular/core';
 import { NewTaskService } from '../../services/new-task/new-task.service';
-// TODO: resolve imports when API changes nouns
-import { Task } from 'src/app/data/task/task.store';
-import { TaskResult } from 'src/app/data/task-result/task-result.store';
-import { DispatchTaskService } from '../../swagger-codegen/dispatcher.api';
-import { Vm } from '../../swagger-codegen/dispatcher.api/model/vm';
+import { Task, Vm, Result, TaskService } from 'src/app/swagger-codegen/dispatcher.api';
 
 @Component({
   selector: 'app-execute-results',
@@ -26,24 +22,24 @@ export class ExecuteResultsComponent implements OnInit {
 
   public selectedVms: Array<Vm>;
   public task: Task;
-  public taskResults: TaskResult[];
+  public results: Result[];
   public isExecuting: boolean;
 
   constructor(
     private newTaskService: NewTaskService,
-    private taskService: DispatchTaskService
+    private taskService: TaskService
   ) {
 
     this.isExecuting = false;
 
     this.newTaskService.task.subscribe(task => {
-      this.taskResults = undefined;
+      this.results = undefined;
       this.task = task;
       this.setTaskVms();
     });
 
     this.newTaskService.vmList.subscribe(vms => {
-      this.taskResults = undefined;
+      this.results = undefined;
       this.selectedVms = vms;
       this.setTaskVms();
     });
@@ -63,14 +59,14 @@ export class ExecuteResultsComponent implements OnInit {
 
   executeTask() {
     this.isExecuting = true;
-    this.taskResults = undefined;
-    this.taskService.createAndExecuteDispatchTask(this.task).subscribe(results => {
-      this.taskResults = results;
+    this.results = undefined;
+    this.taskService.createAndExecuteTask(this.task).subscribe(results => {
+      this.results = results;
       this.isExecuting = false;
     },
     error => {
       this.isExecuting = false;
-      console.log('The Dispatcher API generated an error.  ' + error.message);
+      console.log('The Steamfitter API generated an error.  ' + error.message);
     });
   }
 }

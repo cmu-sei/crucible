@@ -9,36 +9,41 @@ DM20-0181
 */
 
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
-import {CwdAuthService} from './cwd-auth.service';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { CwdAuthService } from './cwd-auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CwdAuthGuardService implements CanActivate {
-  constructor(private authService: CwdAuthService) { }
+  constructor(private authService: CwdAuthService) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.authService.isAuthenticated().then(isAuthenticated => {
+    return this.authService.isAuthenticated().then((isAuthenticated) => {
       if (isAuthenticated) {
         return true;
       } else {
-        return this.authService.startSilentAuthentication()
-          .then(user => {
+        return this.authService
+          .startSilentAuthentication()
+          .then((user) => {
             if (user && !user.expired) {
               return true;
             } else {
               return this.startAuthentication(state.url);
             }
           })
-          .catch(e => {
+          .catch((e) => {
             return this.startAuthentication(state.url);
           });
       }
     });
   }
-  
+
   private startAuthentication(url: string): Promise<boolean> {
-    return this.authService.startAuthentication(url).then(user => {
+    return this.authService.startAuthentication(url).then((user) => {
       if (user && !user.expired) {
         return true;
       } else {
@@ -47,4 +52,3 @@ export class CwdAuthGuardService implements CanActivate {
     });
   }
 }
-

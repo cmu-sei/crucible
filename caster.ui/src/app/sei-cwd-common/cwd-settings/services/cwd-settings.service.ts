@@ -8,10 +8,10 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Injectable, NgModule, Optional} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, map, take, tap} from 'rxjs/operators';
-import {Observable, of, zip} from 'rxjs';
+import { Injectable, NgModule, Optional } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map, take, tap } from 'rxjs/operators';
+import { Observable, of, zip } from 'rxjs';
 
 @NgModule()
 export class CwdSettingsConfig {
@@ -20,66 +20,78 @@ export class CwdSettingsConfig {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CwdSettingsService {
   private _url: string;
   private _envUrl: string;
   private _settings: any;
-  
+
   get url() {
     return this._url;
   }
-  
+
   set url(value) {
     this._url = value;
   }
-  
+
   get envUrl() {
     return this._envUrl;
   }
-  
+
   set envUrl(value) {
     this._envUrl = value;
   }
-  
+
   set settings(value) {
     this._settings = value;
   }
-  
+
   get settings() {
     return this._settings;
   }
-  
-  
-  constructor(@Optional() config: CwdSettingsConfig = {url: `assets/config/settings.json`, envUrl: `assets/config/settings.env.json`},
-              private http: HttpClient) {
+
+  constructor(
+    @Optional()
+    config: CwdSettingsConfig = {
+      url: `assets/config/settings.json`,
+      envUrl: `assets/config/settings.env.json`,
+    },
+    private http: HttpClient
+  ) {
     this.url = config.url;
     this.envUrl = config.envUrl;
   }
-  
+
   load(): Promise<any> {
     return new Promise<any>((resolve) => {
       zip(
-        this.http.get<any>(this.url).pipe(catchError(err => this.notify(err))),
-        this.http.get<any>(this.envUrl).pipe(catchError(err => this.notify(err)))
-      ).pipe(
-        // Remove error objects, typically these are files or endpoints that don't exists.
-        map(result => result.filter(f => !(f instanceof HttpErrorResponse)))
+        this.http
+          .get<any>(this.url)
+          .pipe(catchError((err) => this.notify(err))),
+        this.http
+          .get<any>(this.envUrl)
+          .pipe(catchError((err) => this.notify(err)))
       )
+        .pipe(
+          // Remove error objects, typically these are files or endpoints that don't exists.
+          map((result) =>
+            result.filter((f) => !(f instanceof HttpErrorResponse))
+          )
+        )
         .subscribe((result) => {
           this.settings = result.reduce((p, v) => {
             return {
               ...p,
-              ...v
+              ...v,
             };
           }, this._settings);
           this.notify(this.settings).pipe(take(1)).subscribe();
           resolve(true);
-      });
+        });
     });
   }
-  
+
   notify(error: any): Observable<any> {
     return of(error).pipe(
       tap((e) => {
@@ -96,4 +108,3 @@ export class CwdSettingsService {
     );
   }
 }
-

@@ -8,13 +8,6 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-@import "theme";
-@import "~@angular/material/theming";
-
-.mat-button-toggle-checked {
-  background-color: mat-color($accent);
-}
-
 mat-button-toggle {
   flex: 1 1 100%;
   box-sizing: border-box;
@@ -44,6 +37,5 @@ mat-toolbar-row {
 
 .breadcrumb-bar {
   font-size: 14px;
-  color: rgba(90, 90, 90);
+  color: inherit;
 }
-

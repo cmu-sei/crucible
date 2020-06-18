@@ -10,7 +10,7 @@ DM20-0181
 
 import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { Scenario, SteamfitterService } from 'src/app/generated/alloy.api';
+import { ScenarioTemplate, SteamfitterService } from 'src/app/generated/alloy.api';
 import {map, take} from 'rxjs/operators';
 import {Observable, combineLatest, BehaviorSubject} from 'rxjs';
 import {Router, ActivatedRoute} from '@angular/router';
@@ -20,12 +20,12 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 
 export class SteamfitterDataService {
-  private _scenarioTemplates: Scenario[];
+  private _scenarioTemplates: ScenarioTemplate[];
   private _scenarioTemplateMask: Observable<string>;
-  readonly scenarioTemplates = new BehaviorSubject<Scenario[]>(this._scenarioTemplates);
-  readonly scenarioTemplateList: Observable<Scenario[]>;
+  readonly scenarioTemplates = new BehaviorSubject<ScenarioTemplate[]>(this._scenarioTemplates);
+  readonly scenarioTemplateList: Observable<ScenarioTemplate[]>;
   readonly scenarioTemplateFilter = new FormControl();
-  readonly selectedScenarioTemplate: Observable<Scenario>;
+  readonly selectedScenarioTemplate: Observable<ScenarioTemplate>;
   private _selectedScenarioTemplateId: string;
   private _vmMask: Observable<string>;
   private requestedScenarioTemplateId = this.activatedRoute.queryParamMap.pipe(
@@ -45,7 +45,8 @@ export class SteamfitterDataService {
     });
     this.scenarioTemplateList = combineLatest([this.scenarioTemplates, this._scenarioTemplateMask]).pipe(
       map(([items, filterTerm]) =>
-        items ? (items as Scenario[])
+        items ? (items as ScenarioTemplate[])
+          .sort((a: ScenarioTemplate, b: ScenarioTemplate) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
           .filter(item => item.name.toLowerCase().includes(filterTerm.toLowerCase()) ||
             item.id.toLowerCase().includes(filterTerm.toLowerCase()))
         : [])
@@ -66,13 +67,13 @@ export class SteamfitterDataService {
     );
   }
 
-  private updateScenarioTemplates(scenarioTemplates: Scenario[]) {
+  private updateScenarioTemplates(scenarioTemplates: ScenarioTemplate[]) {
     this._scenarioTemplates = Object.assign([], scenarioTemplates);
     this.scenarioTemplates.next(this._scenarioTemplates);
   }
 
   getScenarioTemplatesFromApi() {
-    this.steamfitterService.getScenarios().pipe(take(1)).subscribe(scenarioTemplates => {
+    this.steamfitterService.getScenarioTemplates().pipe(take(1)).subscribe(scenarioTemplates => {
       this.updateScenarioTemplates(scenarioTemplates);
     }, error => {
       this.updateScenarioTemplates([]);

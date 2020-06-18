@@ -10,8 +10,7 @@ DM20-0181
 
 import { Order, Query, QueryConfig, QueryEntity } from '@datorama/akita';
 import { TaskState, TaskStore } from './task.store';
-import { Task } from './task.store';
-// import { DispatchTask } from 'src/app/swagger-codegen/dispatcher.api';
+import { Task } from 'src/app/swagger-codegen/dispatcher.api';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 

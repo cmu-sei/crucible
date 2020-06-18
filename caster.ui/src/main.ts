@@ -13,12 +13,11 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import 'hammerjs';
 import {persistState} from '@datorama/akita';
 
 export const storage = persistState({
   key: 'akita-project-ui',
-  include: ['UI/projects', 'UI/files', 'UI/directories', 'UI/workspaces']
+  include: ['UI/projects', 'UI/files', 'UI/directories', 'UI/workspaces', 'currentUser']
 });
 
 if (environment.production) {

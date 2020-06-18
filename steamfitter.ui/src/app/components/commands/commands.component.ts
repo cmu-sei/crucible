@@ -9,8 +9,7 @@ DM20-0181
 */
 
 import { Component, OnInit } from '@angular/core';
-import { DispatchTaskService } from '../../swagger-codegen/dispatcher.api';
-import { Vm } from '../../swagger-codegen/dispatcher.api/model/vm';
+import { TaskService, Vm } from 'src/app/swagger-codegen/dispatcher.api';
 import { NewTaskService } from 'src/app/services/new-task/new-task.service';
 import { Command } from '../../models/command';
 
@@ -23,7 +22,7 @@ import { Command } from '../../models/command';
 export class CommandsComponent implements OnInit {
 
   constructor(
-    private taskService: DispatchTaskService,
+    private taskService: TaskService,
     private newTaskService: NewTaskService
   ) { }
 
@@ -43,7 +42,7 @@ export class CommandsComponent implements OnInit {
       }
     },
     error => {
-      console.log('The Dispatcher API is not responding.  ' + error.message);
+      console.log('The Steamfitter API is not responding.  ' + error.message);
     });
 
     this.newTaskService.vmList.subscribe(vmList => {
@@ -53,7 +52,7 @@ export class CommandsComponent implements OnInit {
 
 
   onCommandChange() {
-    this.newTaskService.UpdateCommand(this.selectedCommand);
+    this.newTaskService.updateCommand(this.selectedCommand);
   }
 
 }

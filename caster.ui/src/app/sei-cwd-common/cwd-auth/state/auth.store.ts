@@ -8,9 +8,9 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Store, StoreConfig} from '@datorama/akita';
-import {Injectable} from '@angular/core';
-import {User} from 'oidc-client';
+import { Store, StoreConfig } from '@datorama/akita';
+import { Injectable } from '@angular/core';
+import { User } from 'oidc-client';
 
 export interface AuthState {
   user: User;
@@ -18,15 +18,14 @@ export interface AuthState {
 
 export function createInitialState(): AuthState {
   return {
-    user: null
+    user: null,
   };
 }
 
-@Injectable({providedIn: 'root'})
-@StoreConfig({name: 'auth', resettable: true})
+@Injectable({ providedIn: 'root' })
+@StoreConfig({ name: 'auth', resettable: true })
 export class AuthStore extends Store<AuthState> {
   constructor() {
     super(createInitialState());
   }
 }
-

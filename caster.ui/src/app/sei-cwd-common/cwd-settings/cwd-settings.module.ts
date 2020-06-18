@@ -8,12 +8,23 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {APP_INITIALIZER, ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {CwdSettingsConfig, CwdSettingsService} from './services';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {ApiModule, BASE_PATH, Configuration, ConfigurationParameters} from '../../generated/caster-api';
-import {CWD_SETTINGS_TOKEN} from '../sei-cwd-common.module';
+import {
+  APP_INITIALIZER,
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+  SkipSelf,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CwdSettingsConfig, CwdSettingsService } from './services';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  ApiModule,
+  BASE_PATH,
+  Configuration,
+  ConfigurationParameters,
+} from '../../generated/caster-api';
+import { CWD_SETTINGS_TOKEN } from '../sei-cwd-common.module';
 
 export function get_settings(settings: CwdSettingsService, http: HttpClient) {
   return () => settings.load();
@@ -21,37 +32,37 @@ export function get_settings(settings: CwdSettingsService, http: HttpClient) {
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    CwdSettingsConfig,
-  ],
+  imports: [CommonModule, HttpClientModule, CwdSettingsConfig],
   providers: [
     CwdSettingsService,
-    {provide: CWD_SETTINGS_TOKEN, useExisting: CwdSettingsService},
-    {provide: APP_INITIALIZER, useFactory: get_settings, deps: [CWD_SETTINGS_TOKEN], multi: true},
-  
+    { provide: CWD_SETTINGS_TOKEN, useExisting: CwdSettingsService },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: get_settings,
+      deps: [CWD_SETTINGS_TOKEN],
+      multi: true,
+    },
   ],
-  exports: [
-    CwdSettingsConfig,
-  ]
+  exports: [CwdSettingsConfig],
 })
-
-
 export class CwdSettingsModule {
-  constructor(@Optional() @SkipSelf() parentModule: CwdSettingsModule, private settings: CwdSettingsService) {
+  constructor(
+    @Optional() @SkipSelf() parentModule: CwdSettingsModule,
+    private settings: CwdSettingsService
+  ) {
     if (parentModule) {
-      throw new Error(`SeiSettingsModule is already loaded. Import into AppModule only`);
+      throw new Error(
+        `SeiSettingsModule is already loaded. Import into AppModule only`
+      );
     }
   }
-  
-  static forRoot(config: CwdSettingsConfig): ModuleWithProviders {
+
+  static forRoot(
+    config: CwdSettingsConfig
+  ): ModuleWithProviders<CwdSettingsModule> {
     return {
       ngModule: CwdSettingsModule,
-      providers: [
-        {provide: CwdSettingsConfig, useValue: config}
-      ]
+      providers: [{ provide: CwdSettingsConfig, useValue: config }],
     };
   }
 }
-

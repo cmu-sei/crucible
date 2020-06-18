@@ -14,7 +14,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authorization;
@@ -24,17 +24,17 @@ using Steamfitter.Api.Data.Models;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Authorization;
 using Steamfitter.Api.Infrastructure.Exceptions;
-using Steamfitter.Api.ViewModels;
+using SAVM = Steamfitter.Api.ViewModels;
 
 namespace Steamfitter.Api.Services
 {
     public interface IUserService 
     {
-        Task<IEnumerable<ViewModels.User>> GetAsync(CancellationToken ct);
-        Task<ViewModels.User> GetAsync(Guid id, CancellationToken ct);             
-        Task<ViewModels.User> CreateAsync(ViewModels.User user, CancellationToken ct);
-        Task<ViewModels.User> UpdateAsync(Guid id, ViewModels.User user, CancellationToken ct);
-        Task<bool> DeleteAsync(Guid id, CancellationToken ct);
+        STT.Task<IEnumerable<ViewModels.User>> GetAsync(CancellationToken ct);
+        STT.Task<ViewModels.User> GetAsync(Guid id, CancellationToken ct);             
+        STT.Task<ViewModels.User> CreateAsync(ViewModels.User user, CancellationToken ct);
+        STT.Task<ViewModels.User> UpdateAsync(Guid id, ViewModels.User user, CancellationToken ct);
+        STT.Task<bool> DeleteAsync(Guid id, CancellationToken ct);
     }
 
     public class UserService : IUserService
@@ -54,7 +54,7 @@ namespace Steamfitter.Api.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ViewModels.User>> GetAsync(CancellationToken ct)
+        public async STT.Task<IEnumerable<ViewModels.User>> GetAsync(CancellationToken ct)
         {
             if(!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -65,7 +65,7 @@ namespace Steamfitter.Api.Services
             return items;
         }
 
-        public async Task<ViewModels.User> GetAsync(Guid id, CancellationToken ct)
+        public async STT.Task<ViewModels.User> GetAsync(Guid id, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -76,7 +76,7 @@ namespace Steamfitter.Api.Services
             return item;
         }
         
-        public async Task<ViewModels.User> CreateAsync(ViewModels.User user, CancellationToken ct)
+        public async STT.Task<ViewModels.User> CreateAsync(ViewModels.User user, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -89,7 +89,7 @@ namespace Steamfitter.Api.Services
             return await GetAsync(user.Id, ct);
         }
 
-        public async Task<ViewModels.User> UpdateAsync(Guid id, ViewModels.User user, CancellationToken ct)
+        public async STT.Task<ViewModels.User> UpdateAsync(Guid id, ViewModels.User user, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -103,7 +103,7 @@ namespace Steamfitter.Api.Services
             var userToUpdate = await _context.Users.SingleOrDefaultAsync(v => v.Id == id, ct);
 
             if (userToUpdate == null)
-                throw new EntityNotFoundException<User>();
+                throw new EntityNotFoundException<SAVM.User>();
 
             Mapper.Map(user, userToUpdate);
 
@@ -113,7 +113,7 @@ namespace Steamfitter.Api.Services
             return await GetAsync(id, ct);
         }
 
-        public async Task<bool> DeleteAsync(Guid id, CancellationToken ct)
+        public async STT.Task<bool> DeleteAsync(Guid id, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -126,7 +126,7 @@ namespace Steamfitter.Api.Services
             var userToDelete = await _context.Users.SingleOrDefaultAsync(v => v.Id == id, ct);
 
             if (userToDelete == null)
-                throw new EntityNotFoundException<User>();
+                throw new EntityNotFoundException<SAVM.User>();
 
             _context.Users.Remove(userToDelete);
             await _context.SaveChangesAsync(ct);

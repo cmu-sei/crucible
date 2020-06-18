@@ -60,10 +60,10 @@ namespace Caster.Api.Features.Hosts
             public bool Development { get; set; }
 
             /// <summary>
-            /// The Id of the Exercise to assign this Host to
+            /// The Id of the Project to assign this Host to
             /// </summary>
             [DataMember]
-            public Guid? ExerciseId { get; set; }
+            public Guid? ProjectId { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Host>
@@ -94,4 +94,3 @@ namespace Caster.Api.Features.Hosts
         }
     }
 }
-

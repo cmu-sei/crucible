@@ -8,17 +8,19 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-
 <div *ngIf="showTabs">
-  <mat-tab-group dynamicHeight animationDuration="0ms"
-    selectedIndex="{{projectUI.selectedTab}}"
-    (selectedTabChange)="tabChangeClickHandler($event)">
+  <mat-tab-group
+    dynamicHeight
+    animationDuration="0ms"
+    selectedIndex="{{ projectUI.selectedTab }}"
+    (selectedTabChange)="tabChangeClickHandler($event)"
+  >
     <mat-tab *ngFor="let tab of projectUI.openTabs" [label]="tab.id">
       <ng-template mat-tab-label>
         <button mat-icon-button (click)="closeTabClickHandler(tab)">
           <mat-icon class="mdi-18px" fontIcon="mdi-close"></mat-icon>
         </button>
-        {{projectObjectNames[tab.id]}}
+        {{ projectObjectNames[tab.id] }}
       </ng-template>
       <ng-template matTabContent>
         <span *ngIf="tab.type === tabType.FILE">
@@ -31,12 +33,15 @@ DM20-0181
             (sidebarChanged)="sidebarChangedFn($event)"
             (sidebarViewChanged)="sidebarViewChangedFn($event)"
             [breadcrumb]="breadcrumb$ | async"
-            (sidenavWidthChanged)="sidebarWidthChangedFn($event)">
+            (sidenavWidthChanged)="sidebarWidthChangedFn($event)"
+          >
           </cas-editor>
         </span>
-        <cas-workspace-container *ngIf="tab.type === tabType.WORKSPACE"
+        <cas-workspace-container
+          *ngIf="tab.type === tabType.WORKSPACE"
           [workspaceId]="tab.id"
-          [breadcrumb]="breadcrumb$ | async">
+          [breadcrumb]="breadcrumb$ | async"
+        >
         </cas-workspace-container>
       </ng-template>
     </mat-tab>
@@ -44,9 +49,12 @@ DM20-0181
 </div>
 <div *ngIf="!showTabs">
   <div fxFill>
-      <div class="message-text" fxLayout="column" fxLayoutAlign="space-around center">
-        Please open a file or workspace
-      </div>
+    <div
+      class="message-text"
+      fxLayout="column"
+      fxLayoutAlign="space-around center"
+    >
+      Please open a file or workspace
+    </div>
   </div>
 </div>
-

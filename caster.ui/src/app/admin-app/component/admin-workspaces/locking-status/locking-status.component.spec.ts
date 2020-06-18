@@ -18,9 +18,8 @@ describe('LockingStatusComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LockingStatusComponent ]
-    })
-    .compileComponents();
+      declarations: [LockingStatusComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

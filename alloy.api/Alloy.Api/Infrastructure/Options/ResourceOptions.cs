@@ -12,6 +12,6 @@ namespace Alloy.Api.Infrastructure.Options
 {
     public class ResourceOptions
     {
-        public int MaxImplementationsForBasicUser { get; set; }
+        public int MaxEventsForBasicUser { get; set; }
     }
 }

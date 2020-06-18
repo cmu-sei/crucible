@@ -11,7 +11,8 @@ DM20-0181
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, ElementRef,
+  Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -19,12 +20,15 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 
-import { Module, FileVersion, ModelFile} from '../../../generated/caster-api';
-import { FileQuery, FileService} from '../../../files/state';
-import { FileVersionQuery, FileVersionService } from 'src/app/fileVersions/state';
+import { FileVersion, ModelFile, Module } from '../../../generated/caster-api';
+import { FileQuery, FileService } from '../../../files/state';
+import {
+  FileVersionQuery,
+  FileVersionService,
+} from 'src/app/fileVersions/state';
 import { Observable, Subject } from 'rxjs';
 import { switchMap, take, takeUntil } from 'rxjs/operators';
 import { Breadcrumb } from 'src/app/project/state';
@@ -32,6 +36,7 @@ import { ModuleQuery, ModuleService } from '../../../modules/state';
 import { CurrentUserQuery } from 'src/app/users/state';
 import { MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { ConfirmDialogService } from 'src/app/sei-cwd-common/confirm-dialog/service/confirm-dialog.service';
+import { Theme } from '../../../shared/models/theme-enum';
 
 @Component({
   selector: 'cas-editor',
@@ -50,13 +55,19 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   @Output() sidebarViewChanged = new EventEmitter<string>();
   @Output() codeChanged = new EventEmitter<string>();
   @Output() sidenavWidthChanged = new EventEmitter<number>();
-  @ViewChild('sidenav', { read: ElementRef, static: false }) sidenav: ElementRef;
-  @ViewChild('sidebar', { static: false }) sidebar: MatButtonToggleGroup;
+  @ViewChild('sidenav', { read: ElementRef }) sidenav: ElementRef;
+  @ViewChild('sidebar') sidebar: MatButtonToggleGroup;
   public ngxEditor: any;
   public selectedVersionForDiff: FileVersion;
   public file: ModelFile;
   public code: string;
-  public editorOptions = { theme: 'vs-light', language: 'none', automaticLayout: true, readOnly: true };
+  public codeTheme: Theme;
+  public editorOptions = {
+    theme: this.codeTheme === Theme.DARK ? 'vs-dark' : 'vs-light',
+    language: 'ruby',
+    automaticLayout: true,
+    readOnly: true,
+  };
   public selectedModule$: Observable<Module>;
   public filename = '';
   public currentUserId: string;
@@ -78,23 +89,32 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     private currentUserQuery: CurrentUserQuery,
     private changeDetectorRef: ChangeDetectorRef,
     private confirmDialog: ConfirmDialogService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.selectedVersionForDiff = undefined;
 
-    this.currentUserQuery.select()
+    this.currentUserQuery
+      .select()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(user => {
+      .subscribe((user) => {
         this.currentUserId = user.id;
         this.isSuperUser = user.isSuperUser;
         this.updateEditorOptions(this.file);
       });
 
-    this.fileQuery.selectEntity(this.fileId)
+    this.currentUserQuery.userTheme$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(f => {
+      .subscribe((theme) => {
+        this.codeTheme = theme;
+        this.updateEditorOptions(null);
+        this.changeDetectorRef.markForCheck();
+      });
+
+    this.fileQuery
+      .selectEntity(this.fileId)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((f) => {
         if (f) {
           this.filename = f.name;
           this.code = f.editorContent;
@@ -104,7 +124,9 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
           }
 
           this.isEditing$ = this.fileQuery.isEditing(f.id, this.currentUserId);
-          this.isEditing$.pipe(takeUntil(this.unsubscribe$)).subscribe(isEditing => this.isEditing = isEditing);
+          this.isEditing$
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe((isEditing) => (this.isEditing = isEditing));
         } else {
           this.filename = '';
           this.code = '';
@@ -117,16 +139,21 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
 
     this.fileVersionService.load(this.fileId).pipe(take(1)).subscribe();
 
-    this.fileQuery.getSelectedVersionId(this.fileId).pipe(
-      switchMap((versionId: string) => this.fileVersionQuery.selectEntity(versionId)),
-      takeUntil(this.unsubscribe$)
-    ).subscribe(fileVersion => {
-      if (fileVersion && fileVersion.content) {
-        this.selectedVersionForDiff = fileVersion;
-      } else {
-        this.selectedVersionForDiff = undefined;
-      }
-    });
+    this.fileQuery
+      .getSelectedVersionId(this.fileId)
+      .pipe(
+        switchMap((versionId: string) =>
+          this.fileVersionQuery.selectEntity(versionId)
+        ),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((fileVersion) => {
+        if (fileVersion && fileVersion.content) {
+          this.selectedVersionForDiff = fileVersion;
+        } else {
+          this.selectedVersionForDiff = undefined;
+        }
+      });
 
     this.isSaved$ = this.fileQuery.selectIsSaved(this.fileId);
   }
@@ -138,8 +165,13 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
       writable = file.lockedById === this.currentUserId;
     }
 
-    this.editorOptions = Object.assign({},
-      { theme: 'vs-light', language: 'none', automaticLayout: true, readOnly: !writable });
+    const options = {
+      theme: this.codeTheme === Theme.DARK ? 'vs-dark' : 'vs-light',
+      language: 'ruby',
+      automaticLayout: true,
+      readOnly: !writable,
+    };
+    this.editorOptions = Object.assign({}, { ...options });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -149,7 +181,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     }
     if (this.breadcrumb && this.breadcrumb.length > 0) {
       this.breadcrumbString = '';
-      this.breadcrumb.forEach(bc => {
+      this.breadcrumb.forEach((bc) => {
         this.breadcrumbString = this.breadcrumbString + '  >  ' + bc.name;
       });
     }
@@ -162,9 +194,12 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   saveFile() {
-    this.fileService.updateFileContent(this.file.id, this.file.editorContent).pipe(take(1)).subscribe(() => {
-      this.fileVersionService.load(this.file.id).pipe(take(1)).subscribe();
-    });
+    this.fileService
+      .updateFileContent(this.file.id, this.file.editorContent)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.fileVersionService.load(this.file.id).pipe(take(1)).subscribe();
+      });
   }
 
   discardFileChanges() {
@@ -173,10 +208,13 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
 
   insertModuleFn(event) {
     // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
-    this.moduleService.createVersionSnippet(event).pipe(take(1)).subscribe(snippet => {
-      this.code = this.code + '\n' + snippet + '\n';
-      this.changeDetectorRef.markForCheck();
-    });
+    this.moduleService
+      .createVersionSnippet(event)
+      .pipe(take(1))
+      .subscribe((snippet) => {
+        this.code = this.code + '\n' + snippet + '\n';
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
   getModuleFn(event) {
@@ -187,8 +225,14 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
 
   getVersionFn(event) {
     // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
-    this.fileVersionService.loadFileVersionById(event.id).pipe(take(1)).subscribe();
-    if (this.selectedVersionForDiff && event.id === this.selectedVersionForDiff.id) {
+    this.fileVersionService
+      .loadFileVersionById(event.id)
+      .pipe(take(1))
+      .subscribe();
+    if (
+      this.selectedVersionForDiff &&
+      event.id === this.selectedVersionForDiff.id
+    ) {
       this.fileService.setSelectedVersionId(this.file.id, '');
     } else {
       this.fileService.setSelectedVersionId(this.file.id, event.id);
@@ -196,31 +240,52 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   revertToVersionFn(event) {
-    this.fileVersionService.loadFileVersionById(event.fileVersion.id).pipe(take(1)).subscribe(file => {
-      if (file.content === null || file.content === '') {
-        const data = { buttonTrueText: '', buttonFalseText: 'Ok' };
-        this.confirmDialog.confirmDialog('No Content', 'This version has no content.  Revert canceled.', data).pipe(take(1)).subscribe();
-      } else {
-        if (this.isEditing) {
-          this.confirmDialog.confirmDialog('Revert?', 'Are you sure that you want to overwrite the current file?')
-            .pipe(take(1)).subscribe(result => {
-              if (!result[this.confirmDialog.WAS_CANCELLED]) {
-                this.code = file.content;
-                this.fileService.updateEditorContent(this.file.id, this.code);
-                this.changeDetectorRef.markForCheck();
-                if (this.selectedVersionForDiff) {
-                  this.fileService.setSelectedVersionId(this.file.id, '');
-                }
-                this.saveFile();
-              }
-            });
-        } else {
+    this.fileVersionService
+      .loadFileVersionById(event.fileVersion.id)
+      .pipe(take(1))
+      .subscribe((file) => {
+        if (file.content === null || file.content === '') {
           const data = { buttonTrueText: '', buttonFalseText: 'Ok' };
-          this.confirmDialog.confirmDialog('Not in Edit Mode', 'The current file must be in edit mode to revert.', data)
-            .pipe(take(1)).subscribe();
+          this.confirmDialog
+            .confirmDialog(
+              'No Content',
+              'This version has no content.  Revert canceled.',
+              data
+            )
+            .pipe(take(1))
+            .subscribe();
+        } else {
+          if (this.isEditing) {
+            this.confirmDialog
+              .confirmDialog(
+                'Revert?',
+                'Are you sure that you want to overwrite the current file?'
+              )
+              .pipe(take(1))
+              .subscribe((result) => {
+                if (!result[this.confirmDialog.WAS_CANCELLED]) {
+                  this.code = file.content;
+                  this.fileService.updateEditorContent(this.file.id, this.code);
+                  this.changeDetectorRef.markForCheck();
+                  if (this.selectedVersionForDiff) {
+                    this.fileService.setSelectedVersionId(this.file.id, '');
+                  }
+                  this.saveFile();
+                }
+              });
+          } else {
+            const data = { buttonTrueText: '', buttonFalseText: 'Ok' };
+            this.confirmDialog
+              .confirmDialog(
+                'Not in Edit Mode',
+                'The current file must be in edit mode to revert.',
+                data
+              )
+              .pipe(take(1))
+              .subscribe();
+          }
         }
-      }
-    });
+      });
   }
 
   sidebarChangedFn(event, tostate) {
@@ -278,5 +343,4 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }

@@ -24,15 +24,15 @@ namespace Steamfitter.Api.Data
             _options = options;
         }
         
-        public DbSet<DispatchTaskEntity> DispatchTasks { get; set; }
-        public DbSet<DispatchTaskResultEntity> DispatchTaskResults { get; set; }
+        public DbSet<TaskEntity> Tasks { get; set; }
+        public DbSet<ResultEntity> Results { get; set; }
+        public DbSet<ScenarioTemplateEntity> ScenarioTemplates { get; set; }
         public DbSet<ScenarioEntity> Scenarios { get; set; }
-        public DbSet<SessionEntity> Sessions { get; set; }
         public DbSet<PermissionEntity> Permissions { get; set; }
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<UserPermissionEntity> UserPermissions { get; set; }
         public DbSet<FileEntity> Files { get; set; }
-        public DbSet<ExerciseAgent> ExerciseAgents { get; set; }
+        public DbSet<BondAgent> BondAgents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

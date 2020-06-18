@@ -27,12 +27,12 @@ export class TeamsService {
 
 
   /**
-   * Gets the list of teams for the user by the exercise.  Note that Admin/SuperUsers will receive all teams
-   * @param userGuid 
-   * @param exerciseGuid 
+   * Gets the list of teams for the user by the view.  Note that Admin/SuperUsers will receive all teams
+   * @param userGuid
+   * @param viewGuid
    */
-  public getUserTeamsByExercise(userGuid: string, exerciseGuid: string): Observable<Array<TeamData>> {
-    return this.http.get<Array<TeamData>>(`${this.settings.ApiUrl}/users/${userGuid}/exercises/${exerciseGuid}/teams`).pipe(
+  public getUserTeamsByView(userGuid: string, viewGuid: string): Observable<Array<TeamData>> {
+    return this.http.get<Array<TeamData>>(`${this.settings.ApiUrl}/users/${userGuid}/views/${viewGuid}/teams`).pipe(
       map(teams => {
         return teams;
       }),
@@ -41,4 +41,3 @@ export class TeamsService {
       }), );
   }
 }
-

@@ -19,15 +19,22 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource, PageEvent, Sort} from '@angular/material';
-import {fromMatPaginator, fromMatSort, paginateRows, sortRows} from '../../utils/datasource-utils';
-import {Observable, of} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {TableActionDirective} from '../../directives/table-action.directive';
-import {TableItemActionDirective} from '../../directives/table-item-action.directive';
-import {TableItemContentDirective} from '../../directives/table-item-content.directive';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import {
+  fromMatPaginator,
+  fromMatSort,
+  paginateRows,
+  sortRows,
+} from '../../utils/datasource-utils';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { TableActionDirective } from '../../directives/table-action.directive';
+import { TableItemActionDirective } from '../../directives/table-item-action.directive';
+import { TableItemContentDirective } from '../../directives/table-item-content.directive';
 
 @Component({
   selector: 'cwd-table',
@@ -56,15 +63,21 @@ export class CwdTableComponent<T> implements OnInit, OnChanges {
   @Input() getRowStyle: (item: T) => {};
   @Input() excludedAttributes: string[] = [];
   @Input() trackByPropertyName: string;
-  @Output() expand: EventEmitter<{ expand: boolean, item: T }> = new EventEmitter<{ expand: boolean, item: T }>();
+  @Output() expand: EventEmitter<{
+    expand: boolean;
+    item: T;
+  }> = new EventEmitter<{ expand: boolean; item: T }>();
   @Output() add: EventEmitter<T> = new EventEmitter<T>();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ContentChild(TableActionDirective, { static: false, read: TemplateRef }) tableActionTemplate;
-  @ContentChild(TableItemActionDirective, { static: false, read: TemplateRef }) tableActionItemTemplate;
-  @ContentChild((TableItemContentDirective), { static: false, read: TemplateRef }) tableItemContent;
-  constructor() { }
+  @ContentChild(TableActionDirective, { read: TemplateRef })
+  tableActionTemplate;
+  @ContentChild(TableItemActionDirective, { read: TemplateRef })
+  tableActionItemTemplate;
+  @ContentChild(TableItemContentDirective, { read: TemplateRef })
+  tableItemContent;
+  constructor() {}
 
   /**
    * Initialization
@@ -80,7 +93,7 @@ export class CwdTableComponent<T> implements OnInit, OnChanges {
 
     this.datasource.data = this.items;
 
-    this.datasource.filterPredicate = (data, filter: string)  => {
+    this.datasource.filterPredicate = (data, filter: string) => {
       const accumulator = (currentTerm, key) => {
         let ret = '';
         if (!this.excludedAttributes.includes(key)) {
@@ -148,13 +161,16 @@ export class CwdTableComponent<T> implements OnInit, OnChanges {
   filterAndSort() {
     if (this.datasource.filteredData) {
       const rows$ = of(this.datasource.filteredData);
-      this.totalRows$ = rows$.pipe(map(rows => rows.length));
-      this.displayedRows$ = rows$.pipe(sortRows(this.sortEvents$), paginateRows(this.pageEvents$));
+      this.totalRows$ = rows$.pipe(map((rows) => rows.length));
+      this.displayedRows$ = rows$.pipe(
+        sortRows(this.sortEvents$),
+        paginateRows(this.pageEvents$)
+      );
     }
   }
 
   isExpanded(item) {
-    return (this.expandedItems) ? this.expandedItems.includes(item.id) : false;
+    return this.expandedItems ? this.expandedItems.includes(item.id) : false;
   }
   /**
    * function to emit the item when expanded or callapsed
@@ -179,4 +195,3 @@ export class CwdTableComponent<T> implements OnInit, OnChanges {
     }
   }
 }
-

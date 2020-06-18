@@ -24,7 +24,7 @@ namespace Caster.Api.Infrastructure.Serialization
                     PropertyNameCaseInsensitive = true
                 };
 
-                settings.Converters.Add(new JsonStringEnumConverter());
+                settings.Converters.Add(new JsonStringEnumMemberConverter());
                 settings.Converters.Add(new OptionalConverter());
 
                 return settings;

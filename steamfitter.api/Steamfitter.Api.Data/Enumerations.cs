@@ -8,14 +8,6 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Steamfitter.Api.Data
 {
     public enum TaskAction
@@ -51,7 +43,7 @@ namespace Steamfitter.Api.Data
         Manual = 6
     }
 
-    public enum SessionStatus
+    public enum ScenarioStatus
     {
         ready = 1,
         active = 2,

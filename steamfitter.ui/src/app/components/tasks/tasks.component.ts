@@ -9,9 +9,7 @@ DM20-0181
 */
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Task } from 'src/app/data/task/task.store';
-import { TaskResult } from 'src/app/data/task-result/task-result.store';
-// import { DispatchTask, DispatchTaskResult } from 'src/app/swagger-codegen/dispatcher.api/model/models';
+import { Task, Result } from 'src/app/swagger-codegen/dispatcher.api/model/models';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
 import { Observable } from 'rxjs';
 
@@ -23,7 +21,7 @@ import { Observable } from 'rxjs';
 export class TasksComponent {
 
   @Input() taskList: Observable<Task[]>;
-  @Input() taskResultList: Observable<TaskResult[]>;
+  @Input() resultList: Observable<Result[]>;
   @Input() isLoading: Observable<boolean>;
   @Input() scenarioTemplateId: string;
   @Input() scenarioId: string;

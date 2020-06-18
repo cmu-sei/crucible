@@ -31,7 +31,7 @@ using Z.EntityFramework.Plus;
 
 namespace S3.Player.Api.Services
 {
-    public interface IUserClaimsService 
+    public interface IUserClaimsService
     {
         Task<ClaimsPrincipal> AddUserClaims(ClaimsPrincipal principal, bool update);
         Task<ClaimsPrincipal> GetClaimsPrincipal(Guid userId, bool setAsCurrent);
@@ -49,7 +49,7 @@ namespace S3.Player.Api.Services
 
         public UserClaimsService(PlayerContext context, IMemoryCache cache, ClaimsTransformationOptions options)
         {
-            _context = context;            
+            _context = context;
             _options = options;
             _cache = cache;
         }
@@ -73,14 +73,14 @@ namespace S3.Player.Api.Services
                     {
                         _cache.Set(userId, claims, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(_options.CacheExpirationSeconds)));
                     }
-                }                
+                }
             }
             addNewClaims(identity, claims);
             return principal;
         }
 
         public async Task<ClaimsPrincipal> GetClaimsPrincipal(Guid userId, bool setAsCurrent)
-        {                        
+        {
             ClaimsIdentity identity = new ClaimsIdentity();
             identity.AddClaim(new Claim("sub", userId.ToString()));
             ClaimsPrincipal principal = new ClaimsPrincipal(identity);
@@ -150,7 +150,7 @@ namespace S3.Player.Api.Services
                         await _context.SaveChangesAsync();
                     }
                 }
-            }            
+            }
 
             return user;
         }
@@ -162,19 +162,19 @@ namespace S3.Player.Api.Services
             UserPermissions userPermissions = await _context.Users
                 .Where(u => u.Id == userId)
                 .ProjectTo<UserPermissions>()
-                .FirstOrDefaultAsync();         
+                .FirstOrDefaultAsync();
 
             if (userPermissions.Permissions.Where(x => x.Key == PlayerClaimTypes.SystemAdmin.ToString()).Any())
             {
                 claims.Add(new Claim(ClaimTypes.Role, PlayerClaimTypes.SystemAdmin.ToString()));
             }
-            
+
             foreach (var teamPermission in userPermissions.TeamPermissions)
             {
-                if(!claims.Where(c => c.Type == PlayerClaimTypes.ExerciseMember.ToString() && c.Value == teamPermission.ExerciseId.ToString()).Any())
+                if(!claims.Where(c => c.Type == PlayerClaimTypes.ViewMember.ToString() && c.Value == teamPermission.ViewId.ToString()).Any())
                 {
-                    claims.Add(new Claim(PlayerClaimTypes.ExerciseMember.ToString(), teamPermission.ExerciseId.ToString()));
-                }                    
+                    claims.Add(new Claim(PlayerClaimTypes.ViewMember.ToString(), teamPermission.ViewId.ToString()));
+                }
 
                 claims.Add(new Claim(PlayerClaimTypes.TeamMember.ToString(), teamPermission.TeamId.ToString()));
 
@@ -182,11 +182,11 @@ namespace S3.Player.Api.Services
                 {
                     claims.Add(new Claim(PlayerClaimTypes.PrimaryTeam.ToString(), teamPermission.TeamId.ToString()));
 
-                    if (teamPermission.Permissions.Where(x => x.Key == PlayerClaimTypes.ExerciseAdmin.ToString()).Any())
+                    if (teamPermission.Permissions.Where(x => x.Key == PlayerClaimTypes.ViewAdmin.ToString()).Any())
                     {
-                        claims.Add(new Claim(PlayerClaimTypes.ExerciseAdmin.ToString(), teamPermission.ExerciseId.ToString()));
+                        claims.Add(new Claim(PlayerClaimTypes.ViewAdmin.ToString(), teamPermission.ViewId.ToString()));
                     }
-                }                    
+                }
             }
 
             return claims;
@@ -206,4 +206,3 @@ namespace S3.Player.Api.Services
         }
     }
 }
-

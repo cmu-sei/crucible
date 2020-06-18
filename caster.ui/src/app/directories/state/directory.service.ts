@@ -10,7 +10,13 @@ DM20-0181
 
 import { DirectoryStore } from './directory.store';
 import { Injectable } from '@angular/core';
-import { DirectoriesService, Directory, Workspace, ModelFile, ArchiveType } from '../../generated/caster-api';
+import {
+  DirectoriesService,
+  Directory,
+  Workspace,
+  ModelFile,
+  ArchiveType,
+} from '../../generated/caster-api';
 import { DirectoryUI } from './directory.model';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
@@ -20,48 +26,44 @@ import { WorkspaceService } from 'src/app/workspace/state';
 import HttpHeaderUtils from 'src/app/shared/utilities/http-header-utils';
 import { FileDownload } from 'src/app/shared/models/file-download';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DirectoryService {
-
   constructor(
     private directoryStore: DirectoryStore,
     private directoryQuery: DirectoryQuery,
     private directoriesService: DirectoriesService,
     private fileService: FileService,
     private workspaceService: WorkspaceService
-    ) {
+  ) {}
+
+  loadDirectories(projectId: string): Observable<Directory[]> {
+    return this.directoriesService
+      .getDirectoriesByProject(projectId, true, true, false)
+      .pipe(
+        tap((directories) => {
+          // First capture file and workspace data to load
+          let files: ModelFile[] = [];
+          let workspaces: Workspace[] = [];
+          const directoryUIs = this.directoryQuery.ui.getAll();
+          this.directoryStore.set(directories);
+          directories.forEach((dir) => {
+            const dUI = directoryUIs.find((d) => d.id === dir.id);
+            if (dUI) {
+              this.directoryStore.ui.upsert(dUI.id, dUI);
+            }
+            files = files.concat(dir.files);
+            workspaces = workspaces.concat(dir.workspaces);
+          });
+          this.fileService.filesUpdated(files);
+          this.workspaceService.setWorkspaces(workspaces);
+        })
+      );
   }
-
-
-
-  loadDirectories(exerciseId: string): Observable<Directory[]> {
-    return this.directoriesService.getDirectoriesByExercise(exerciseId, true, true, false).pipe(
-      tap(directories => {
-        // First capture file and workspace data to load
-        let files: ModelFile[] = [];
-        let workspaces: Workspace[] = [];
-        const directoryUIs =  this.directoryQuery.ui.getAll();
-        this.directoryStore.set(directories);
-        directories.forEach(dir => {
-          const dUI = directoryUIs.find(d => d.id === dir.id);
-          if (dUI) {
-            this.directoryStore.ui.upsert(dUI.id, dUI);
-          }
-          files = files.concat(dir.files);
-          workspaces = workspaces.concat(dir.workspaces);
-        });
-        this.fileService.filesUpdated(files);
-        this.workspaceService.setWorkspaces(workspaces);
-      }),
-    );
-  }
-
 
   add(directory: Directory) {
-    this.directoriesService.createDirectory(directory).subscribe(dir => {
+    this.directoriesService.createDirectory(directory).subscribe((dir) => {
       this.directoryStore.add(dir);
       const dirUI = this.directoryQuery.getEntity(dir.id);
       this.directoryStore.ui.upsert(dirUI.id, dirUI);
@@ -69,9 +71,11 @@ export class DirectoryService {
   }
 
   update(directory: Directory) {
-    this.directoriesService.editDirectory(directory.id, directory).subscribe(dir => {
-      this.directoryStore.update(dir.id, dir);
-    });
+    this.directoriesService
+      .editDirectory(directory.id, directory)
+      .subscribe((dir) => {
+        this.directoryStore.update(dir.id, dir);
+      });
   }
 
   delete(dirId: string) {
@@ -90,29 +94,43 @@ export class DirectoryService {
   }
 
   toggleIsExpanded(directoryUI: DirectoryUI) {
-    this.directoryStore.ui.upsert(directoryUI.id, d => ({ isExpanded: !d.isExpanded}));
+    this.directoryStore.ui.upsert(directoryUI.id, (d) => ({
+      isExpanded: !d.isExpanded,
+    }));
   }
 
   toggleIsFilesExpanded(directoryUI: DirectoryUI) {
-    this.directoryStore.ui.upsert(directoryUI.id, d => ({ isFilesExpanded: !d.isFilesExpanded}));
+    this.directoryStore.ui.upsert(directoryUI.id, (d) => ({
+      isFilesExpanded: !d.isFilesExpanded,
+    }));
   }
 
   toggleIsWorkspacesExpanded(directoryUI: DirectoryUI) {
-    this.directoryStore.ui.upsert(directoryUI.id, d => ({ isWorkspacesExpanded: !d.isWorkspacesExpanded}));
+    this.directoryStore.ui.upsert(directoryUI.id, (d) => ({
+      isWorkspacesExpanded: !d.isWorkspacesExpanded,
+    }));
   }
 
   toggleIsDirectoriesExpanded(directoryUI: DirectoryUI) {
-    this.directoryStore.ui.upsert(directoryUI.id, d => ({ isDirectoriesExpanded: !d.isDirectoriesExpanded}));
+    this.directoryStore.ui.upsert(directoryUI.id, (d) => ({
+      isDirectoriesExpanded: !d.isDirectoriesExpanded,
+    }));
   }
 
-  export(id: string, archiveType: ArchiveType, includeIds: boolean): Observable<FileDownload> {
-    return this.directoriesService.exportDirectory(id, archiveType, includeIds, 'response').pipe(
-      map(response => {
-        return {
-          blob: response.body,
-          filename: HttpHeaderUtils.getFilename(response.headers)
-        };
-      })
-    );
+  export(
+    id: string,
+    archiveType: ArchiveType,
+    includeIds: boolean
+  ): Observable<FileDownload> {
+    return this.directoriesService
+      .exportDirectory(id, archiveType, includeIds, 'response')
+      .pipe(
+        map((response) => {
+          return {
+            blob: response.body,
+            filename: HttpHeaderUtils.getFilename(response.headers),
+          };
+        })
+      );
   }
 }

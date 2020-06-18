@@ -8,18 +8,11 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Steamfitter.Api.Data.Models;
-using Steamfitter.Api.Data.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -53,7 +46,7 @@ namespace Steamfitter.Api.Data
 
         // public static bool Authenticate(string account, string password)
         // {
-        //     using (ExerciseContext db = new ExerciseContext())
+        //     using (ViewContext db = new ViewContext())
         //     {
         //         Member m = db.Members.Where(p => p.Account.ToLower() == account.ToLower()).FirstOrDefault();
         //         return (m != null) ? m.Password == password : false;
@@ -139,15 +132,15 @@ namespace Steamfitter.Api.Data
 
         // //assets.Key = fileName, assets.Value = asset contents
         // //Returns string.empty on success, error messages on failure
-        // public static string ImportAssets(int scenarioId, Dictionary<string, MemoryStream> assets)            
+        // public static string ImportAssets(int scenarioTemplateId, Dictionary<string, MemoryStream> assets)            
         // {
         //     string errors = string.Empty;
 
-        //     using(DataWrapper<Scenario> scenarioWrapper = new DataWrapper<Scenario>())
+        //     using(DataWrapper<ScenarioTemplate> scenarioTemplateWrapper = new DataWrapper<ScenarioTemplate>())
         //     {
         //         try
         //         {
-        //             Scenario scenario = scenarioWrapper.Get(scenarioId);
+        //             ScenarioTemplate scenarioTemplate = scenarioTemplateWrapper.Get(scenarioTemplateId);
         //             bool saved = false;
 
         //             //Must import config file last so linked files will be present
@@ -155,13 +148,13 @@ namespace Steamfitter.Api.Data
         //             {                                                
         //                 if (kvp.Key.EndsWith(".config") && !saved)
         //                 {
-        //                     scenarioWrapper.Save();
+        //                     scenarioTemplateWrapper.Save();
         //                     saved = true;
         //                 }
 
         //                 try
         //                 {
-        //                     ImportAsset(scenario, kvp.Value, kvp.Key);
+        //                     ImportAsset(scenarioTemplate, kvp.Value, kvp.Key);
         //                 }
         //                 catch(Exception ex)
         //                 {
@@ -180,7 +173,7 @@ namespace Steamfitter.Api.Data
         //     return errors;
         // }
 
-        // public static void ImportAsset(Scenario scenario, MemoryStream asset, string fileName)
+        // public static void ImportAsset(ScenarioTemplate scenarioTemplate, MemoryStream asset, string fileName)
         // {            
         //     bool handled = false;
         //     FileType fileType = FileType.unknown;
@@ -216,7 +209,7 @@ namespace Steamfitter.Api.Data
         //         case ".xga":
         //             fileType = FileType.xga;
         //             List<GuestAgentTaskTemplate> list = (List<GuestAgentTaskTemplate>)LoadObject(typeof(List<GuestAgentTaskTemplate>), asset);
-        //             ImportTaskTemplates(scenario, list);
+        //             ImportTaskTemplates(scenarioTemplate, list);
         //             handled = true;
         //             break;
 
@@ -225,25 +218,25 @@ namespace Steamfitter.Api.Data
         //             break;
 
         //         case ".templates":
-        //             ImportTemplates(scenario, asset);
+        //             ImportTemplates(scenarioTemplate, asset);
         //             handled = true;
         //             break;
 
         //         case ".xml":
         //             xnet.data.TemplateLibrary lib = (xnet.data.TemplateLibrary)LoadObject(typeof(xnet.data.TemplateLibrary), asset);
-        //             ConvertTemplates(scenario, lib);
+        //             ConvertTemplates(scenarioTemplate, lib);
         //             handled = true;
         //             break;
 
         //         case ".config":
         //             fileType = FileType.config;
-        //             ImportConfig(scenario, asset.ToArray(), fileName);
+        //             ImportConfig(scenarioTemplate, asset.ToArray(), fileName);
         //             handled = true;
         //             break;
 
         //         case ".ckeiconfig":
         //             fileType = FileType.ckeiconfig;
-        //             ImportCKEIConfig(scenario, asset.ToArray(), fileName);
+        //             ImportCKEIConfig(scenarioTemplate, asset.ToArray(), fileName);
         //             handled = true;
         //             break;
 
@@ -261,14 +254,14 @@ namespace Steamfitter.Api.Data
 
         //     if (!handled)
         //     {
-        //         Data.File df = scenario.Files.Where(o => o.Name.ToLower() == fileName.ToLower()).FirstOrDefault();
+        //         Data.File df = scenarioTemplate.Files.Where(o => o.Name.ToLower() == fileName.ToLower()).FirstOrDefault();
         //         if (df == null)
         //         {
         //             df = new Data.File();
         //             df.Name = fileName;
         //             df.Type = fileType;
         //             df.FileData = new FileData();
-        //             scenario.Files.Add(df);
+        //             scenarioTemplate.Files.Add(df);
         //         }
 
         //         df.FileData.Data = asset.ToArray();
@@ -276,7 +269,7 @@ namespace Steamfitter.Api.Data
         //         if (df.Type == FileType.map)
         //         {
         //             string map = Encoding.ASCII.GetString(df.FileData.Data);
-        //             map = map.Replace("ExerciseMap", "Map");
+        //             map = map.Replace("ViewMap", "Map");
         //             map = map.Replace("ImageFile>", "ImageName>");
         //             map = map.Replace("Base64Image>", "ImageBytesEncoded>");
         //             df.FileData.Data = Encoding.ASCII.GetBytes(map);
@@ -290,21 +283,21 @@ namespace Steamfitter.Api.Data
         //     System.IO.File.WriteAllBytes(path + "\\" + fileName, config.ToArray());
         // }
 
-        // public static void ImportFile(Scenario scenario, string fullpath)
+        // public static void ImportFile(ScenarioTemplate scenarioTemplate, string fullpath)
         // {
         //     string fileName = System.IO.Path.GetFileName(fullpath);
         //     using(MemoryStream asset = new MemoryStream(System.IO.File.ReadAllBytes(fullpath)))
         //     {
         //         asset.Position = 0;
-        //         ImportAsset(scenario, asset, fileName);
+        //         ImportAsset(scenarioTemplate, asset, fileName);
         //     }
         // }
 
-        // static void ImportConfig(Scenario scenario, byte[] fileData, string fileName)
+        // static void ImportConfig(ScenarioTemplate scenarioTemplate, byte[] fileData, string fileName)
         // {
         //     bool added = false;
 
-        //     Data.File file = scenario.Files.Where(o => o.Name.ToLower() == fileName.ToLower()).FirstOrDefault();
+        //     Data.File file = scenarioTemplate.Files.Where(o => o.Name.ToLower() == fileName.ToLower()).FirstOrDefault();
 
         //     if(file == null)
         //     {
@@ -314,14 +307,14 @@ namespace Steamfitter.Api.Data
         //         file.Name = fileName;
         //         file.Type = FileType.config;
         //         file.FileData = new FileData();
-        //         file.ScenarioId = scenario.Id;
+        //         file.ScenarioTemplateId = scenarioTemplate.Id;
         //         file.Guid = Guid.NewGuid();
         //     }
 
         //     file.FileData.Data = fileData;
 
-        //     //Process as ScenarioConfigurationModel to convert names into ids
-        //     ScenarioConfigurationModel configModel = new ScenarioConfigurationModel(file);
+        //     //Process as ScenarioTemplateConfigurationModel to convert names into ids
+        //     ScenarioTemplateConfigurationModel configModel = new ScenarioTemplateConfigurationModel(file);
         //     configModel.RemoveEmptyElements();
         //     file.FileData.Data = configModel.ToFileData();
 
@@ -338,11 +331,11 @@ namespace Steamfitter.Api.Data
         //     }
         // }
 
-        // static void ImportCKEIConfig(Scenario scenario, byte[] fileData, string fileName)
+        // static void ImportCKEIConfig(ScenarioTemplate scenarioTemplate, byte[] fileData, string fileName)
         // {
         //     bool added = false;
 
-        //     Data.File file = scenario.Files.Where(o => o.Name.ToLower() == fileName.ToLower()).FirstOrDefault();
+        //     Data.File file = scenarioTemplate.Files.Where(o => o.Name.ToLower() == fileName.ToLower()).FirstOrDefault();
 
         //     if (file == null)
         //     {
@@ -352,12 +345,12 @@ namespace Steamfitter.Api.Data
         //         file.Name = fileName;
         //         file.Type = FileType.ckeiconfig;
         //         file.FileData = new FileData();
-        //         file.ScenarioId = scenario.Id;
+        //         file.ScenarioTemplateId = scenarioTemplate.Id;
         //     }
 
         //     file.FileData.Data = fileData;
 
-        //     //Process as ScenarioConfigurationModel to convert names into ids
+        //     //Process as ScenarioTemplateConfigurationModel to convert names into ids
         //     CKEIConfigurationModel configModel = CKEIConfigurationModel.GetFromFile(file, true);
         //     file.FileData.Data = configModel.ToFileData();
 
@@ -374,19 +367,19 @@ namespace Steamfitter.Api.Data
         //     }
         // }
 
-        // static void ImportTaskTemplates(Scenario scenario, List<GuestAgentTaskTemplate> list)
+        // static void ImportTaskTemplates(ScenarioTemplate scenarioTemplate, List<GuestAgentTaskTemplate> list)
         // {            
         //     if (list != null && list.Count > 0)
         //     {
         //         using (DataWrapper<GuestAgentTaskTemplate> wrapper = new DataWrapper<GuestAgentTaskTemplate>())
         //         {
-        //             List<GuestAgentTaskTemplate> scenarioTemplates = wrapper.GetAll().Where(t => t.ScenarioId == scenario.Id).ToList();
+        //             List<GuestAgentTaskTemplate> scenarioTemplateTemplates = wrapper.GetAll().Where(t => t.ScenarioTemplateId == scenarioTemplate.Id).ToList();
         //             List<GuestAgentTaskTemplate> dbTemplates = new List<GuestAgentTaskTemplate>();
 
         //             foreach (GuestAgentTaskTemplate tt in list)
         //             {
-        //                 tt.ScenarioId = scenario.Id;
-        //                 GuestAgentTaskTemplate existing = scenarioTemplates.Where(o => o.ScenarioId == scenario.Id && o.Name == tt.Name).FirstOrDefault();
+        //                 tt.ScenarioTemplateId = scenarioTemplate.Id;
+        //                 GuestAgentTaskTemplate existing = scenarioTemplateTemplates.Where(o => o.ScenarioTemplateId == scenarioTemplate.Id && o.Name == tt.Name).FirstOrDefault();
         //                 if (existing != null)
         //                 {
         //                     tt.Id = existing.Id;
@@ -416,7 +409,7 @@ namespace Steamfitter.Api.Data
 
         //                     if(successTemplate == null)
         //                     {
-        //                         successTemplate = scenarioTemplates.Where(t => t.Name == dbTemplate.SuccessTemplateExportable).FirstOrDefault();
+        //                         successTemplate = scenarioTemplateTemplates.Where(t => t.Name == dbTemplate.SuccessTemplateExportable).FirstOrDefault();
         //                     }
 
         //                     if(successTemplate == null)
@@ -440,7 +433,7 @@ namespace Steamfitter.Api.Data
 
         //                     if (failureTemplate == null)
         //                     {
-        //                         failureTemplate = scenarioTemplates.Where(t => t.Name == dbTemplate.FailureTemplateExportable).FirstOrDefault();
+        //                         failureTemplate = scenarioTemplateTemplates.Where(t => t.Name == dbTemplate.FailureTemplateExportable).FirstOrDefault();
         //                     }
 
         //                     if (failureTemplate == null)
@@ -467,19 +460,19 @@ namespace Steamfitter.Api.Data
 
         // #region ImportTemplates
 
-        // static void ImportTemplates(Scenario scenario, MemoryStream stream)
+        // static void ImportTemplates(ScenarioTemplate scenarioTemplate, MemoryStream stream)
         // {
         //     TextReader tr = new StreamReader(stream);
-        //     ImportTemplates(scenario, tr);
+        //     ImportTemplates(scenarioTemplate, tr);
         // }
 
-        // static void ImportTemplates(Scenario scenario, string fullpath)
+        // static void ImportTemplates(ScenarioTemplate scenarioTemplate, string fullpath)
         // {
         //     TextReader tr = new StreamReader(fullpath);
-        //     ImportTemplates(scenario, tr);
+        //     ImportTemplates(scenarioTemplate, tr);
         // }
 
-        // static void ImportTemplates(Scenario scenario, TextReader tr)
+        // static void ImportTemplates(ScenarioTemplate scenarioTemplate, TextReader tr)
         // {            
         //     string config = "";
         //     string name = "";
@@ -509,11 +502,11 @@ namespace Steamfitter.Api.Data
         //                 }
         //                 else
         //                 {
-        //                     Template t = scenario.Templates.Where(o => o.Name == name).FirstOrDefault();
+        //                     Template t = scenarioTemplate.Templates.Where(o => o.Name == name).FirstOrDefault();
         //                     if (t == null)
         //                     {
         //                         t = new Template { Name = name };
-        //                         scenario.Templates.Add(t);
+        //                         scenarioTemplate.Templates.Add(t);
         //                     }
 
         //                     t.Config = config;
@@ -550,11 +543,11 @@ namespace Steamfitter.Api.Data
         //         }
         //         else
         //         {
-        //             Template t = scenario.Templates.Where(o => o.Name == name).FirstOrDefault();
+        //             Template t = scenarioTemplate.Templates.Where(o => o.Name == name).FirstOrDefault();
         //             if (t == null)
         //             {
         //                 t = new Template { Name = name };
-        //                 scenario.Templates.Add(t);
+        //                 scenarioTemplate.Templates.Add(t);
         //             }
 
         //             t.Config = config;
@@ -568,22 +561,22 @@ namespace Steamfitter.Api.Data
 
         // #endregion
 
-        // static void ConvertTemplates(Scenario scenario, xnet.data.TemplateLibrary lib)
+        // static void ConvertTemplates(ScenarioTemplate scenarioTemplate, xnet.data.TemplateLibrary lib)
         // {
         //     //string fileName = System.IO.Path.GetFileName(fullpath);
-        //     if (scenario.Templates == null)
-        //         scenario.Templates = new List<Template>();
+        //     if (scenarioTemplate.Templates == null)
+        //         scenarioTemplate.Templates = new List<Template>();
             
         //     if (lib != null)
         //     {
         //         foreach (xnet.data.TemplateGroup tg in lib.TemplateGroups)
         //         {
         //             string name = tg.Name + "+";
-        //             Template t = scenario.Templates.Where(o => o.Name == name).FirstOrDefault();
+        //             Template t = scenarioTemplate.Templates.Where(o => o.Name == name).FirstOrDefault();
         //             if (t == null)
         //             {
         //                 t = new Template { Name = name };
-        //                 scenario.Templates.Add(t);
+        //                 scenarioTemplate.Templates.Add(t);
         //             }
         //             t.Config = String.Join(Environment.NewLine, tg.Items.ToArray());
         //         }
@@ -593,11 +586,11 @@ namespace Steamfitter.Api.Data
         //             if (String.IsNullOrWhiteSpace(vmt.Name))
         //                 continue;
 
-        //             Template t = scenario.Templates.Where(o => o.Name == vmt.Name).FirstOrDefault();
+        //             Template t = scenarioTemplate.Templates.Where(o => o.Name == vmt.Name).FirstOrDefault();
         //             if (t == null)
         //             {
         //                 t = new Template { Name = vmt.Name };
-        //                 scenario.Templates.Add(t);
+        //                 scenarioTemplate.Templates.Add(t);
         //             }
         //             t.Config = vmt.TransformToList();
         //         }

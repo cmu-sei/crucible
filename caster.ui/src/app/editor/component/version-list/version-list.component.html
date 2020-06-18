@@ -12,38 +12,67 @@ DM20-0181
   <mat-card class="version-heading" fxFlex="1 1 auto" fxFill>
     <span><strong>FILE VERSIONS</strong></span>
     <div class="version-search">
-      <mat-icon class="mdi-24px" fontIcon="mdi-magnify" style="margin-right: 5px;"></mat-icon>
+      <mat-icon
+        class="mdi-24px"
+        fontIcon="mdi-magnify"
+        style="margin-right: 5px;"
+      ></mat-icon>
       <mat-form-field class="search-input">
-        <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        <input
+          matInput
+          [(ngModel)]="filterString"
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Search"
+        />
       </mat-form-field>
-      <button *ngIf="filterString != ''"
-              matTooltip="Clear Search"
-              mat-icon-button
-              (click)="clearFilter()"
-              style="outline: none;">
+      <button
+        *ngIf="filterString != ''"
+        matTooltip="Clear Search"
+        mat-icon-button
+        (click)="clearFilter()"
+        style="outline: none;"
+      >
         <mat-icon class="mdi-18px" fontIcon="mdi-close-circle"></mat-icon>
       </button>
     </div>
   </mat-card>
-  <mat-card *ngFor="let version of dataSource.filteredData" class="version-card" fxFlex="1 1 auto" fxFill
-            [class.selected]="selectedVersionId == version.id"
-            class="clickable highlight version-card" (click)="selectVersionFn(version)">
+  <mat-card
+    *ngFor="let version of dataSource.filteredData"
+    class="version-card"
+    fxFlex="1 1 auto"
+    fxFill
+    [class.selected]="selectedVersionId == version.id"
+    class="clickable highlight version-card"
+    (click)="selectVersionFn(version)"
+  >
     <mat-card-content>
-      <div fxLayout="column" fxLayoutAlign="space-around start" >
+      <div fxLayout="column" fxLayoutAlign="space-around start">
         <div>
-          
-          <span class="version-name">{{version.dateSaved | date: 'yyyy-MM-dd HH:mm'}} by {{version.modifiedByName}}
-            as {{version.name}}</span>
+          <span class="version-name"
+            >{{ version.dateSaved | date: 'yyyy-MM-dd HH:mm' }} by
+            {{ version.modifiedByName }} as {{ version.name }}</span
+          >
         </div>
-        <span *ngIf="version.tag" class="version-text"><strong>{{version.tag}}</strong> tag by {{version.taggedByName}}
-          on {{version.dateTagged | date: 'yyyy-MM-dd HH:mm'}}</span>
+        <span *ngIf="version.tag" class="version-text"
+          ><strong>{{ version.tag }}</strong> tag by
+          {{ version.taggedByName }} on
+          {{ version.dateTagged | date: 'yyyy-MM-dd HH:mm' }}</span
+        >
         <div fxLayout="row" fxFill fxLayoutAlign="end center">
-          <button mat-stroked-button (click)="$event.stopPropagation(); revertFile(version)">Revert</button>
+          <button
+            mat-stroked-button
+            (click)="$event.stopPropagation(); revertFile(version)"
+          >
+            Revert
+          </button>
         </div>
-      </div>  
+      </div>
     </mat-card-content>
   </mat-card>
-  <mat-card class="version-card" *ngIf="!dataSource.data || dataSource.data.length === 0">
+  <mat-card
+    class="version-card"
+    *ngIf="!dataSource.data || dataSource.data.length === 0"
+  >
     <mat-card-content>
       <div>
         <span class="version-name">No saved versions ...</span>
@@ -51,4 +80,3 @@ DM20-0181
     </mat-card-content>
   </mat-card>
 </div>
-

@@ -14,23 +14,40 @@ DM20-0181
     <img height="35" src="../../../assets/img/SP_Icon_Cartographer.png" alt="Definitions">
     -->
   </div>
-  <mat-icon style="margin-left: 50px; transform:scale(0.85); margin-right: 5px;" class="mdi mdi-18px"
-            fontIcon="mdi-magnify-outline"></mat-icon>
+  <mat-icon
+    style="margin-left: 50px; transform: scale(0.85); margin-right: 5px;"
+    class="mdi mdi-18px"
+    fontIcon="mdi-magnify-outline"
+  ></mat-icon>
   <mat-form-field style="width: 320px;">
-    <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <input
+      matInput
+      [(ngModel)]="filterString"
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Search"
+    />
   </mat-form-field>
   <div style="width: 50px;">
-    <button *ngIf="filterString != ''" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()"
-            style="outline: none;"
-            title="Clear Search">
-      <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+    <button
+      *ngIf="filterString != ''"
+      fxLayoutAlign="start center"
+      mat-icon-button
+      (click)="clearFilter()"
+      style="outline: none;"
+      title="Clear Search"
+    >
+      <mat-icon
+        style="transform: scale(0.85);"
+        svgIcon="ic_cancel_circle"
+      ></mat-icon>
     </button>
   </div>
-  <mat-paginator #paginator
-                 [length]="totalRows$ | async"
-                 [pageIndex]="0"
-                 [pageSize]="20"
-                 [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 100, 200]"
+  <mat-paginator
+    #paginator
+    [length]="totalRows$ | async"
+    [pageIndex]="0"
+    [pageSize]="20"
+    [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 100, 200]"
   ></mat-paginator>
   <div class="spacer"></div>
   <div class="button-end list-actions">
@@ -39,27 +56,30 @@ DM20-0181
   <div class="spacer"></div>
 </div>
 
-<mat-card *ngIf="loading"
-          style="display: flex; justify-content: center; align-items: center">
-  <mat-progress-spinner
-    color="primary"
-    mode="indeterminate">
+<mat-card
+  *ngIf="loading"
+  style="display: flex; justify-content: center; align-items: center;"
+>
+  <mat-progress-spinner color="primary" mode="indeterminate">
   </mat-progress-spinner>
 </mat-card>
 
 <mat-accordion [fxShow]="!loading" displayMode="flat" multi class="mat-table">
   <section matSort class="mat-elevation-z2 mat-header-row">
     <ng-container *ngFor="let label of displayedColumns; let idx = index">
-      <div class="mat-header-cell"
-           [mat-sort-header]="label">{{label}}
-      </div>
+      <div class="mat-header-cell" [mat-sort-header]="label">{{ label }}</div>
     </ng-container>
   </section>
-  <mat-expansion-panel *ngFor="let item of (displayedRows$ | async); trackBy: trackByFn"
-                       [expanded]="isExpanded(item)"
-                       (expandedChange)="expandedFn($event, item)">
-    <mat-expansion-panel-header class="mat-row" [ngStyle]="!getRowStyle ? {} : getRowStyle(item)">
-      <ng-container *ngFor="let key of displayedColumns; let idx = index;">
+  <mat-expansion-panel
+    *ngFor="let item of displayedRows$ | async; trackBy: trackByFn"
+    [expanded]="isExpanded(item)"
+    (expandedChange)="expandedFn($event, item)"
+  >
+    <mat-expansion-panel-header
+      class="mat-row"
+      [ngClass]="!getRowStyle ? '' : getRowStyle(item)"
+    >
+      <ng-container *ngFor="let key of displayedColumns; let idx = index">
         <ng-container [ngSwitch]="idx">
           <!-- first cell -->
           <span class="mat-cell" *ngSwitchCase="0">
@@ -71,13 +91,19 @@ DM20-0181
           </span>
           <!-- Actions Cell -->
           <span class="mat-cell" *ngSwitchCase="displayedColumns.length - 1">
-            <ng-container *ngTemplateOutlet="tableActionItemTemplate; context: {$implicit: item}"></ng-container>
+            <ng-container
+              *ngTemplateOutlet="
+                tableActionItemTemplate;
+                context: { $implicit: item }
+              "
+            ></ng-container>
           </span>
         </ng-container>
       </ng-container>
     </mat-expansion-panel-header>
-    <ng-container *ngTemplateOutlet="tableItemContent; context: {$implicit: item}">
+    <ng-container
+      *ngTemplateOutlet="tableItemContent; context: { $implicit: item }"
+    >
     </ng-container>
   </mat-expansion-panel>
 </mat-accordion>
-

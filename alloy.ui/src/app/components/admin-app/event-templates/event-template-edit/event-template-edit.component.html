@@ -48,13 +48,15 @@ DM20-0181
   <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field class="full-width">
-        <button mat-icon-button matPrefix ngxClipboard [cbContent]="eventTemplate.exerciseId" title="Copy:  {{eventTemplate.exerciseId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
-        <mat-select placeholder="Select a View Template" [(ngModel)]="eventTemplate.exerciseId"(selectionChange)="saveEventTemplate('exerciseId')">
+        <input matInput type="text" [formControl]="viewSearchControl" [matAutocomplete]="autoView" placeholder="Player View Template">
+        <button mat-icon-button matPrefix ngxClipboard [cbContent]="eventTemplate.viewId" title="Copy:  {{eventTemplate.viewId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <mat-autocomplete #autoView="matAutocomplete" ngDefaultControl [displayWith]="selectedViewName" placeholder="Select a View Template" [(ngModel)]="viewIdFormControl.value"
+              (optionSelected)="saveEventIds($event, 'viewId')" (opened)="filterViews()" (closed)="viewSearchControl.setValue('')">
           <mat-option [value]="null">None</mat-option>
-          <mat-option *ngFor="let view of (viewList | async)" [value]="view.id">
+          <mat-option *ngFor="let view of (filteredViewList | async)" [value]="view.id">
             {{view.name}}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
   </div>
@@ -62,13 +64,15 @@ DM20-0181
   <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field class="full-width">
+        <input matInput type="text" [formControl]="directorySearchControl" [matAutocomplete]="autoDirectory" placeholder="Caster Directory">
         <button mat-icon-button matPrefix ngxClipboard [cbContent]="eventTemplate.directoryId" title="Copy:  {{eventTemplate.directoryId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
-        <mat-select placeholder="Select a Directory" [(ngModel)]="eventTemplate.directoryId" (selectionChange)="saveEventTemplate('directoryId')">
+        <mat-autocomplete #autoDirectory="matAutocomplete" ngDefaultControl [displayWith]="selectedDirectoryName" placeholder="Select a Directory" [(ngModel)]="directoryIdFormControl.value"
+              (optionSelected)="saveEventIds($event, 'directoryId')" (opened)="filterDirectories()" (closed)="directorySearchControl.setValue('')">
           <mat-option [value]="null">None</mat-option>
-          <mat-option *ngFor="let directory of (directoryList | async)" [value]="directory.id">
+          <mat-option *ngFor="let directory of (filteredDirectoryList | async)" [value]="directory.id">
             {{directory.name}}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
   </div>
@@ -76,13 +80,15 @@ DM20-0181
   <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field class="full-width">
-        <button mat-icon-button matPrefix ngxClipboard [cbContent]="eventTemplate.scenarioId" title="Copy:  {{eventTemplate.scenarioId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
-        <mat-select placeholder="Select a Scenario Template" [(ngModel)]="eventTemplate.scenarioId" (selectionChange)="saveEventTemplate('scenarioTemplateId')">
+        <input matInput type="text" [formControl]="scenarioTemplateSearchControl" [matAutocomplete]="autoScenarioTemplate" placeholder="Steamfitter Scenario Template">
+        <button mat-icon-button matPrefix ngxClipboard [cbContent]="eventTemplate.scenarioTemplateId" title="Copy:  {{eventTemplate.scenarioTemplateId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <mat-autocomplete #autoScenarioTemplate="matAutocomplete" ngDefaultControl [displayWith]="selectedScenarioTemplateName" placeholder="Select a Scenario Template" [(ngModel)]="scenarioTemplateIdFormControl.value"
+              (optionSelected)="saveEventIds($event, 'scenarioTemplateId')" (opened)="filterScenarioTemplates()" (closed)="scenarioTemplateSearchControl.setValue('')">
           <mat-option [value]="null">None</mat-option>
-          <mat-option *ngFor="let scenarioTemplate of (scenarioTemplateList | async)" [value]="scenarioTemplate.id">
+          <mat-option *ngFor="let scenarioTemplate of (filteredScenarioTemplateList | async)" [value]="scenarioTemplate.id">
             {{scenarioTemplate.name}}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
   </div>

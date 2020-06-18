@@ -29,7 +29,7 @@ namespace Foreman.Service
             var hookId = Guid.Parse("b1dc89fe-96d1-43e0-b887-e070dc0d8335"); 
             var hook = new WebHook();
             hook.Id = hookId;
-            hook.PostbackUrl = " http://localhost:4400/DispatchTasks/[dispatchtask.id]/execute";
+            hook.PostbackUrl = " http://localhost:4400/Tasks/[task.id]/execute";
             hook.PostbackMethod = WebHook.WebhookMethod.POST;
             hook.MustAuthenticate = true;
             hook.CreatedUtc = DateTime.UtcNow;

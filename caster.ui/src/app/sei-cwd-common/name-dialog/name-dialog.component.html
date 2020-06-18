@@ -9,15 +9,27 @@ DM20-0181
 -->
 
 <h1 mat-dialog-title>{{ title }}</h1>
-<div style="font-family: 'open_sansregular', sans-serif">{{ message }}</div>
+<div style="font-family: 'open_sansregular', sans-serif;">{{ message }}</div>
 
 <form class="name-form">
   <mat-form-field class="form-full-width">
-    <input matInput placeholder="Name" (input)="name=$event.target.value" [value]="name">
+    <input
+      matInput
+      placeholder="Name"
+      (input)="name = $event.target.value"
+      [value]="name"
+    />
   </mat-form-field>
 </form>
 
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center" >
-  <button mat-stroked-button (click)="onClick()" [disabled]="name === ''" tabindex="3">Save</button>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+  <button
+    mat-stroked-button
+    (click)="onClick()"
+    [disabled]="name === ''"
+    tabindex="3"
+  >
+    Save
+  </button>
   <button mat-stroked-button (click)="onCancel()" tabindex="3">Cancel</button>
 </mat-dialog-actions>

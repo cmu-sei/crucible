@@ -18,7 +18,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: "cas-admin-container",
+  selector: 'cas-admin-container',
   templateUrl: './admin-container.component.html',
   styleUrls: ['./admin-container.component.scss'],
 })
@@ -26,7 +26,6 @@ export class AdminContainerComponent implements OnInit, OnDestroy {
   public username: string;
   public titleText: string;
   public isSuperUser = false;
-  public topBarColor = '#0FABEA';
   public definitionId = '';
   public isSidebarOpen = true;
   public usersText = 'Users';
@@ -46,9 +45,6 @@ export class AdminContainerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // Set the topbar color from config file
-    this.topBarColor = this.settingsService.settings.AppTopBarHexColor;
-
     // Set the page title from configuration file
     this.titleText = this.settingsService.settings.AppTopBarText;
     this.currentUserQuery

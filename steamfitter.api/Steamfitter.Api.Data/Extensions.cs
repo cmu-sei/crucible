@@ -8,15 +8,11 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Steamfitter.Api.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Steamfitter.Api.Data
@@ -819,7 +815,7 @@ namespace Steamfitter.Api.Data
     //     }
 
     //     //Returns a Dictionary where the key is the name of the table and the Value is a list of property names in that table, which are dependant upon T
-    //     public static Dictionary<string, List<string>> GetDependantRelationships<T>(this ExerciseContext context) where T : class
+    //     public static Dictionary<string, List<string>> GetDependantRelationships<T>(this ViewContext context) where T : class
     //     {
     //         Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
 

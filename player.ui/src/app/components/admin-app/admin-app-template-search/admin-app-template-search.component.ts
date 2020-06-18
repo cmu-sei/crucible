@@ -9,9 +9,9 @@ DM20-0181
 */
 
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { ApplicationTemplate } from '../../../swagger-codegen/s3.player.api';
+import { ApplicationTemplate } from '../../../generated/s3.player.api';
 import { MatTableDataSource, PageEvent, MatPaginator, MatSort, MatSortable } from '@angular/material';
-import { ApplicationService } from '../../../swagger-codegen/s3.player.api/api/application.service';
+import { ApplicationService } from '../../../generated/s3.player.api/api/application.service';
 
 export interface Action {
   Value: string;
@@ -87,7 +87,7 @@ export class AdminAppTemplateSearchComponent implements OnInit, AfterViewInit {
       name: 'New Template',
       url: 'http://localhost',
       embeddable: true,
-      icon: '/assets/img/exercise-player.png',
+      icon: '/assets/img/player.png',
       loadInBackground: false
     };
     this.applicationService.createApplicationTemplate(newAppTemplate).subscribe(newApp => {
@@ -121,4 +121,3 @@ export class AdminAppTemplateSearchComponent implements OnInit, AfterViewInit {
   }
 
 }
-

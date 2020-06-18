@@ -27,13 +27,13 @@ using System.Text.Json.Serialization;
 
 namespace Caster.Api.Features.Directories
 {
-    public class GetByExercise
+    public class GetByProject
     {
-        [DataContract(Name="GetDirectoriesByExerciseQuery")]
+        [DataContract(Name="GetDirectoriesByProjectQuery")]
         public class Query : IRequest<Directory[]>
         {
             [JsonIgnore]
-            public Guid ExerciseId { get; set; }
+            public Guid ProjectId { get; set; }
 
             /// <summary>
             /// Whether or not to return only top-level Directories
@@ -78,9 +78,9 @@ namespace Caster.Api.Features.Directories
                 if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                     throw new ForbiddenException();
 
-                await ValidateExercise(request.ExerciseId);
+                await ValidateProject(request.ProjectId);
 
-                var query = _db.Directories.Where(d => d.ExerciseId == request.ExerciseId);
+                var query = _db.Directories.Where(d => d.ProjectId == request.ProjectId);
 
                 if (!request.IncludeDescendants)
                     query = query.Where(d => d.ParentId == null);
@@ -91,14 +91,13 @@ namespace Caster.Api.Features.Directories
                 return directories;
             }
 
-            private async Task ValidateExercise(Guid exerciseId)
+            private async Task ValidateProject(Guid projectId)
             {
-                var exercise = await _db.Exercises.FindAsync(exerciseId);
+                var project = await _db.Projects.FindAsync(projectId);
 
-                if (exercise == null)
-                    throw new EntityNotFoundException<Exercise>();
+                if (project == null)
+                    throw new EntityNotFoundException<Project>();
             }
         }
     }
 }
-

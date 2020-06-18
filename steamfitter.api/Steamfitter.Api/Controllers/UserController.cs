@@ -12,14 +12,13 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Services;
-using Steamfitter.Api.ViewModels;
-using Steamfitter.Api.Infrastructure.Authorization;
+using SAVM = Steamfitter.Api.ViewModels;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Steamfitter.Api.Controllers
@@ -45,9 +44,9 @@ namespace Steamfitter.Api.Controllers
         /// </remarks>       
         /// <returns></returns>
         [HttpGet("users")]
-        [ProducesResponseType(typeof(IEnumerable<User>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<SAVM.User>), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getUsers")]
-        public async Task<IActionResult> Get(CancellationToken ct)
+        public async STT.Task<IActionResult> Get(CancellationToken ct)
         {
             var list = await _userService.GetAsync(ct);
             return Ok(list);
@@ -65,14 +64,14 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         /// <returns></returns>
         [HttpGet("users/{id}")]
-        [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(SAVM.User), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getUser")]
-        public async Task<IActionResult> Get(Guid id, CancellationToken ct)
+        public async STT.Task<IActionResult> Get(Guid id, CancellationToken ct)
         {
             var user = await _userService.GetAsync(id, ct);
 
             if (user == null)
-                throw new EntityNotFoundException<User>();
+                throw new EntityNotFoundException<SAVM.User>();
 
             return Ok(user);
         }
@@ -88,9 +87,9 @@ namespace Steamfitter.Api.Controllers
         /// <param name="user">The data to create the User with</param>
         /// <param name="ct"></param>
         [HttpPost("users")]
-        [ProducesResponseType(typeof(User), (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(SAVM.User), (int)HttpStatusCode.Created)]
         [SwaggerOperation(operationId: "createUser")]
-        public async Task<IActionResult> Create([FromBody] User user, CancellationToken ct)
+        public async STT.Task<IActionResult> Create([FromBody] SAVM.User user, CancellationToken ct)
         {
             user.CreatedBy = User.GetId();
             var createdUser = await _userService.CreateAsync(user, ct);
@@ -110,7 +109,7 @@ namespace Steamfitter.Api.Controllers
         [HttpDelete("users/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [SwaggerOperation(operationId: "deleteUser")]
-        public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+        public async STT.Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
             await _userService.DeleteAsync(id, ct);
             return NoContent();

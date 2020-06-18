@@ -18,24 +18,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Injectable()
 export class FileService {
 
-    private exerciseId: string;
+    private viewId: string;
 
     constructor(
         private http: HttpClient,
         private settings: SettingsService,
         private router: Router,
       ) {
-        this.exerciseId = this.router.routerState.snapshot.root.firstChild.params['exerciseId'];
+        this.viewId = this.router.routerState.snapshot.root.firstChild.params['viewId'];
       }
 
     public uploadIso(isForAll: boolean, file: File) {
-        const scope = isForAll ? 'exercise' : 'team';
+        const scope = isForAll ? 'view' : 'team';
         const payload: FormData = new FormData();
         payload.append('size', file.size.toString());
         payload.append('scope', scope);
         payload.append(file.name, file);
         return this.http.request(
-            new HttpRequest('POST', `${this.settings.ApiUrl}/exercises/${this.exerciseId}/isos`, payload, { reportProgress: true }));
+            new HttpRequest('POST', `${this.settings.ApiUrl}/views/${this.viewId}/isos`, payload, { reportProgress: true }));
     }
 }
-

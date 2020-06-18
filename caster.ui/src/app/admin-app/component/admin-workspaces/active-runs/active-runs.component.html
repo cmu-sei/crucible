@@ -12,19 +12,26 @@ DM20-0181
   <h1>Active Runs</h1>
   <cwd-table
     [items]="runs"
-    [displayedColumns]="['createdAt', 'isDestroy', 'status', 'workspaceId', 'actions']"
+    [displayedColumns]="[
+      'createdAt',
+      'isDestroy',
+      'status',
+      'workspaceId',
+      'actions'
+    ]"
     [trackByPropertyName]="'id'"
     [expandedItems]="expandedRuns"
     (expand)="expand($event)"
   >
-  <div *cwdTableItemContent="let item">
-    <ng-container *ngIf="expandedRuns.includes(item.id)">
-      <cas-run
-        [run]="item"
-        (planOutput)="planOutput($event, item)"
-        (applyOutput)="applyOutput($event, item)">
-      </cas-run>
-    </ng-container>
-  </div>
+    <div *cwdTableItemContent="let item">
+      <ng-container *ngIf="expandedRuns.includes(item.id)">
+        <cas-run
+          [run]="item"
+          (planOutput)="planOutput($event, item)"
+          (applyOutput)="applyOutput($event, item)"
+        >
+        </cas-run>
+      </ng-container>
+    </div>
   </cwd-table>
 </div>

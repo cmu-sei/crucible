@@ -18,9 +18,8 @@ describe('AdminWorkspacesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminWorkspacesComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminWorkspacesComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

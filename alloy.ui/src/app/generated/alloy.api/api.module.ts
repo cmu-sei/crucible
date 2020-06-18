@@ -13,8 +13,8 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { CasterService } from './api/caster.service';
-import { DefinitionService } from './api/definition.service';
-import { ImplementationService } from './api/implementation.service';
+import { EventTemplateService } from './api/event-template.service';
+import { EventService } from './api/event.service';
 import { PlayerService } from './api/player.service';
 import { SteamfitterService } from './api/steamfitter.service';
 
@@ -22,15 +22,10 @@ import { SteamfitterService } from './api/steamfitter.service';
   imports:      [],
   declarations: [],
   exports:      [],
-  providers: [
-    CasterService,
-    DefinitionService,
-    ImplementationService,
-    PlayerService,
-    SteamfitterService ]
+  providers: []
 })
 export class ApiModule {
-    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
+    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {
         return {
             ngModule: ApiModule,
             providers: [ { provide: Configuration, useFactory: configurationFactory } ]

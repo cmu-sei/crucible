@@ -8,24 +8,21 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {
-  MatButtonModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatTooltipModule,
-  MatTreeModule
-} from '@angular/material';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTreeModule } from '@angular/material/tree';
 
-import {DirectoryQuery, DirectoryService, DirectoryStore} from './state';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { DirectoryQuery, DirectoryService, DirectoryStore } from './state';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-import {CwdToolbarModule} from '../sei-cwd-common/cwd-toolbar';
-import {FilesModule} from '../files/files.module';
-
+import { CwdToolbarModule } from '../sei-cwd-common/cwd-toolbar';
+import { FilesModule } from '../files/files.module';
 
 @NgModule({
   declarations: [],
@@ -43,7 +40,6 @@ import {FilesModule} from '../files/files.module';
     CwdToolbarModule,
     FilesModule,
   ],
-  exports: []
+  exports: [],
 })
-export class DirectoriesModule { }
-
+export class DirectoriesModule {}

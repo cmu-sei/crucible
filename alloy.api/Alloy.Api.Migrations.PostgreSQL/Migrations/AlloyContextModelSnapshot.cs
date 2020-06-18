@@ -1,4 +1,4 @@
-/*
+﻿/*
 Crucible
 Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
@@ -30,7 +30,93 @@ namespace Alloy.Api.Migrations.PostgreSQL.Migrations
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Alloy.Api.Data.Models.DefinitionEntity", b =>
+            modelBuilder.Entity("Alloy.Api.Data.Models.EventEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnName("date_created");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnName("date_modified");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("description");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnName("end_date");
+
+                    b.Property<Guid?>("EventTemplateId")
+                        .HasColumnName("event_template_id");
+
+                    b.Property<DateTime?>("ExpirationDate")
+                        .HasColumnName("expiration_date");
+
+                    b.Property<int>("FailureCount")
+                        .HasColumnName("failure_count");
+
+                    b.Property<int>("InternalStatus")
+                        .HasColumnName("internal_status");
+
+                    b.Property<int>("LastEndInternalStatus")
+                        .HasColumnName("last_end_internal_status");
+
+                    b.Property<int>("LastEndStatus")
+                        .HasColumnName("last_end_status");
+
+                    b.Property<int>("LastLaunchInternalStatus")
+                        .HasColumnName("last_launch_internal_status");
+
+                    b.Property<int>("LastLaunchStatus")
+                        .HasColumnName("last_launch_status");
+
+                    b.Property<DateTime?>("LaunchDate")
+                        .HasColumnName("launch_date");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnName("modified_by");
+
+                    b.Property<string>("Name")
+                        .HasColumnName("name");
+
+                    b.Property<Guid?>("RunId")
+                        .HasColumnName("run_id");
+
+                    b.Property<Guid?>("ScenarioId")
+                        .HasColumnName("scenario_id");
+
+                    b.Property<int>("Status")
+                        .HasColumnName("status");
+
+                    b.Property<DateTime>("StatusDate")
+                        .HasColumnName("status_date");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("Username")
+                        .HasColumnName("username");
+
+                    b.Property<Guid?>("ViewId")
+                        .HasColumnName("view_id");
+
+                    b.Property<Guid?>("WorkspaceId")
+                        .HasColumnName("workspace_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventTemplateId");
+
+                    b.ToTable("events");
+                });
+
+            modelBuilder.Entity("Alloy.Api.Data.Models.EventTemplateEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,108 +141,36 @@ namespace Alloy.Api.Migrations.PostgreSQL.Migrations
                     b.Property<int>("DurationHours")
                         .HasColumnName("duration_hours");
 
-                    b.Property<Guid?>("ExerciseId")
-                        .HasColumnName("exercise_id");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnName("modified_by");
-
-                    b.Property<string>("Name")
-                        .HasColumnName("name");
-
-                    b.Property<Guid?>("ScenarioId")
-                        .HasColumnName("scenario_id");
-
-                    b.Property<bool>("isPublished")
+                    b.Property<bool>("IsPublished")
                         .HasColumnName("is_published");
 
-                    b.Property<bool>("useDynamicHost")
-                        .HasColumnName("use_dynamic_host");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("definitions");
-                });
-
-            modelBuilder.Entity("Alloy.Api.Data.Models.ImplementationEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnName("date_created");
-
-                    b.Property<DateTime?>("DateModified")
-                        .HasColumnName("date_modified");
-
-                    b.Property<Guid?>("DefinitionId")
-                        .HasColumnName("definition_id");
-
-                    b.Property<string>("Description")
-                        .HasColumnName("description");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnName("end_date");
-
-                    b.Property<Guid?>("ExerciseId")
-                        .HasColumnName("exercise_id");
-
-                    b.Property<DateTime?>("ExpirationDate")
-                        .HasColumnName("expiration_date");
-
-                    b.Property<int>("InternalStatus")
-                        .HasColumnName("internal_status");
-
-                    b.Property<DateTime?>("LaunchDate")
-                        .HasColumnName("launch_date");
-
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnName("modified_by");
 
                     b.Property<string>("Name")
                         .HasColumnName("name");
 
-                    b.Property<Guid?>("RunId")
-                        .HasColumnName("run_id");
+                    b.Property<Guid?>("ScenarioTemplateId")
+                        .HasColumnName("scenario_template_id");
 
-                    b.Property<Guid?>("SessionId")
-                        .HasColumnName("session_id");
+                    b.Property<bool>("UseDynamicHost")
+                        .HasColumnName("use_dynamic_host");
 
-                    b.Property<int>("Status")
-                        .HasColumnName("status");
-
-                    b.Property<DateTime>("StatusDate")
-                        .HasColumnName("status_date");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnName("user_id");
-
-                    b.Property<string>("Username")
-                        .HasColumnName("username");
-
-                    b.Property<Guid?>("WorkspaceId")
-                        .HasColumnName("workspace_id");
+                    b.Property<Guid?>("ViewId")
+                        .HasColumnName("view_id");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DefinitionId");
-
-                    b.ToTable("implementations");
+                    b.ToTable("event_templates");
                 });
 
-            modelBuilder.Entity("Alloy.Api.Data.Models.ImplementationEntity", b =>
+            modelBuilder.Entity("Alloy.Api.Data.Models.EventEntity", b =>
                 {
-                    b.HasOne("Alloy.Api.Data.Models.DefinitionEntity", "Definition")
+                    b.HasOne("Alloy.Api.Data.Models.EventTemplateEntity", "EventTemplate")
                         .WithMany()
-                        .HasForeignKey("DefinitionId");
+                        .HasForeignKey("EventTemplateId");
                 });
 #pragma warning restore 612, 618
         }
     }
 }
-

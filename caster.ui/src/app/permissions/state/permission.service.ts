@@ -8,19 +8,17 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {PermissionStore} from './permission.store';
-import {PermissionQuery} from './permission.query';
-import {Inject, Injectable, InjectionToken} from '@angular/core';
-import {PermissionsService, Permission} from '../../generated/caster-api';
-import {tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { PermissionStore } from './permission.store';
+import { PermissionQuery } from './permission.query';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { PermissionsService, Permission } from '../../generated/caster-api';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class PermissionService {
-
   constructor(
     private permissionStore: PermissionStore,
     private permissionsService: PermissionsService
@@ -42,14 +40,11 @@ export class PermissionService {
     this.permissionStore.setLoading(true);
     return this.permissionsService.getPermission(id).pipe(
       tap((_permission: Permission) => {
-        this.permissionStore.upsert(_permission.id, {..._permission});
+        this.permissionStore.upsert(_permission.id, { ..._permission });
       }),
       tap(() => {
         this.permissionStore.setLoading(false);
       })
     );
   }
-
 }
-
-

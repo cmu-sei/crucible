@@ -10,6 +10,7 @@ DM20-0181
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using S3.Player.Api;
 using S3.Vm.Console.Models;
 using S3.Vm.Console.Options;
 using S3.VM.Api;
@@ -44,13 +45,13 @@ namespace S3.Vm.Console.Extensions
 
         public static void AddApiClients(this IServiceCollection services)
         {
+            services.AddHttpClient();
             services.AddVmApiClient();
+            services.AddPlayerApiClient();
         }
 
         private static void AddVmApiClient(this IServiceCollection services)
         {
-            services.AddHttpClient();
-
             services.AddScoped<IS3VmApiClient, S3VmApiClient>(p =>
             {
                 var httpContextAccessor = p.GetRequiredService<IHttpContextAccessor>();
@@ -69,6 +70,31 @@ namespace S3.Vm.Console.Extensions
                 playerVmApiClient.BaseUri = uri;
 
                 return playerVmApiClient;
+            });
+        }
+
+        private static void AddPlayerApiClient(this IServiceCollection services)
+        {
+            services.AddHttpClient();
+
+            services.AddScoped<IS3PlayerApiClient, S3PlayerApiClient>(p =>
+            {
+                var httpContextAccessor = p.GetRequiredService<IHttpContextAccessor>();
+                var httpClientFactory = p.GetRequiredService<IHttpClientFactory>();
+                var vmOptions = p.GetRequiredService<VmOptions>();
+
+                var uri = new Uri(vmOptions.PlayerApiUrl);
+
+                string authHeader = httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+
+                var httpClient = httpClientFactory.CreateClient();
+                httpClient.BaseAddress = uri;
+                httpClient.DefaultRequestHeaders.Add("Authorization", authHeader);
+
+                var playerApiClient = new S3PlayerApiClient(httpClient, true);
+                playerApiClient.BaseUri = uri;
+
+                return playerApiClient;
             });
         }
     }

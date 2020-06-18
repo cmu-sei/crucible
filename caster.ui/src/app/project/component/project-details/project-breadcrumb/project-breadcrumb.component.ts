@@ -8,21 +8,25 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import {ProjectObjectType, Breadcrumb} from '../../../state';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { ProjectObjectType, Breadcrumb } from '../../../state';
 
 @Component({
   selector: 'cas-project-breadcrumb',
   templateUrl: './project-breadcrumb.component.html',
   styleUrls: ['./project-breadcrumb.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectBreadcrumbComponent {
   @Input() useButtonStyleBreadcrumbs: boolean;
   @Input() breadcrumbs: Array<Breadcrumb> = new Array<Breadcrumb>();
   @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
   tabType = ProjectObjectType;
-  constructor() { }
-
+  constructor() {}
 }
-

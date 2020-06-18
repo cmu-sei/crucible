@@ -28,8 +28,8 @@ namespace S3.Player.Api.Data.Data.Models
         public Guid? RoleId { get; set; }
         public RoleEntity Role { get; set; }
 
-        public Guid ExerciseId { get; set; }
-        public virtual ExerciseEntity Exercise { get; set; }
+        public Guid ViewId { get; set; }
+        public virtual ViewEntity View { get; set; }
 
         public virtual ICollection<ApplicationInstanceEntity> Applications { get; set; } = new List<ApplicationInstanceEntity>();
         public virtual ICollection<TeamMembershipEntity> Memberships { get; set; } = new List<TeamMembershipEntity>();
@@ -44,11 +44,10 @@ namespace S3.Player.Api.Data.Data.Models
             entity.Memberships = new List<TeamMembershipEntity>();
             entity.Permissions = new List<TeamPermissionEntity>();
             entity.Id = Guid.Empty;
-            entity.ExerciseId = Guid.Empty;
-            entity.Exercise = null;
+            entity.ViewId = Guid.Empty;
+            entity.View = null;
 
             return entity;
         }
     }
 }
-

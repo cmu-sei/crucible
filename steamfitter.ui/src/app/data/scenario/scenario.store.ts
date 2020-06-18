@@ -9,11 +9,8 @@ DM20-0181
 */
 
 import {EntityState, EntityStore, Store, StoreConfig} from '@datorama/akita';
-import {Session} from 'src/app/swagger-codegen/dispatcher.api';
+import {Scenario} from 'src/app/swagger-codegen/dispatcher.api';
 import {Injectable} from '@angular/core';
-
-// TODO: remove this interface when the API changes its nouns
-export interface Scenario extends Session {}
 
 export interface ScenarioState extends EntityState<Scenario> {
 }

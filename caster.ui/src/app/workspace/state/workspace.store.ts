@@ -8,16 +8,20 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityState, EntityStore, EntityUIStore, StoreConfig} from '@datorama/akita';
-import {Workspace} from '../../generated/caster-api';
-import {Injectable, InjectionToken} from '@angular/core';
-import {WorkspaceEntityUi} from './workspace.model';
+import {
+  EntityState,
+  EntityStore,
+  EntityUIStore,
+  StoreConfig,
+} from '@datorama/akita';
+import { Workspace } from '../../generated/caster-api';
+import { Injectable, InjectionToken } from '@angular/core';
+import { WorkspaceEntityUi } from './workspace.model';
 
 export interface WorkspaceState extends EntityState<Workspace> {
   lockingEnabled?: boolean;
 }
 export interface WorkspaceUIState extends EntityState<WorkspaceEntityUi> {}
-
 
 export const initialWorkspaceEntityUiState: WorkspaceEntityUi = {
   isExpanded: false,
@@ -26,17 +30,19 @@ export const initialWorkspaceEntityUiState: WorkspaceEntityUi = {
   resourceActions: [],
   selectedRuns: [],
   statusFilter: [],
-  workspaceView: 'runs'
+  workspaceView: 'runs',
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({ name: 'workspaces' })
 export class WorkspaceStore extends EntityStore<WorkspaceState, Workspace> {
   ui: EntityUIStore<WorkspaceUIState>;
   constructor() {
     super();
-    this.createUIStore().setInitialEntityState((entity => ({...initialWorkspaceEntityUiState})));
+    this.createUIStore().setInitialEntityState((entity) => ({
+      ...initialWorkspaceEntityUiState,
+    }));
   }
 }

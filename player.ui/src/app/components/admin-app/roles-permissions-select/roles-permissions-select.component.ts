@@ -15,7 +15,7 @@ DM20-0181
 // <app-roles-permissions-select [team]="teamObject"></app-roles-permissions-select>
 
 import { Component, OnInit, Input } from '@angular/core';
-import { User, Team, Role, UserService, TeamService, RoleService, Permission, PermissionService } from '../../../swagger-codegen/s3.player.api';
+import { User, Team, Role, UserService, TeamService, RoleService, Permission, PermissionService } from '../../../generated/s3.player.api';
 
 export enum ObjectType {Unknown, User, Team}
 
@@ -139,4 +139,3 @@ export class RolesPermissionsSelectComponent implements OnInit {
   }
 
 }
-

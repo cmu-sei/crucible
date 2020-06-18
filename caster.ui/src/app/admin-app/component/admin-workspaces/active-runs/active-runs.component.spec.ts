@@ -18,9 +18,8 @@ describe('ActiveRunsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActiveRunsComponent ]
-    })
-    .compileComponents();
+      declarations: [ActiveRunsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

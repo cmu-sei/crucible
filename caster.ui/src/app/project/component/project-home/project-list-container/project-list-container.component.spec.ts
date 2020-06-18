@@ -8,9 +8,9 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ProjectListContainerComponent} from './project-list-container.component';
+import { ProjectListContainerComponent } from './project-list-container.component';
 
 describe('ProjectContainerComponent', () => {
   let component: ProjectListContainerComponent;
@@ -18,9 +18,8 @@ describe('ProjectContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProjectListContainerComponent]
-    })
-      .compileComponents();
+      declarations: [ProjectListContainerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('ProjectContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

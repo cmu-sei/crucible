@@ -8,41 +8,46 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Injectable, Injector} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {CwdAuthService} from './cwd-auth.service';
+import { Injectable, Injector } from '@angular/core';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CwdAuthService } from './cwd-auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CwdAuthInterceptorService implements HttpInterceptor {
-  
-  private excludedPaths: Array<string> =
-    [
-      'assets/config/settings.json',
-      'assets/config/settings.env.json'
-    ];
-  
-  constructor(private injector: Injector) { }
-  
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  private excludedPaths: Array<string> = [
+    'assets/config/settings.json',
+    'assets/config/settings.env.json',
+  ];
+
+  constructor(private injector: Injector) {}
+
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     if (this.isExcluded(request.url)) {
       return next.handle(request);
     }
-    
+
     const authService = this.injector.get(CwdAuthService);
     request = request.clone({
       setHeaders: {
-        Authorization: authService.getAuthorizationHeader()
-      }
+        Authorization: authService.getAuthorizationHeader(),
+      },
     });
-    
+
     return next.handle(request);
   }
-  
+
   private isExcluded(url: string): boolean {
     return this.excludedPaths.includes(url);
   }
 }
-

@@ -36,7 +36,7 @@ namespace S3.Player.Api.Controllers
         /// Returns a list of all of the Roles in the system.
         /// <para />
         /// Only accessible to a SuperUser
-        /// </remarks>       
+        /// </remarks>
         /// <returns></returns>
         [HttpGet("Roles")]
         [ProducesResponseType(typeof(IEnumerable<Role>), (int)HttpStatusCode.OK)]
@@ -76,10 +76,10 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Creates a new Role with the attributes specified
         /// <para />
-        /// An Role is a top-level resource that can optionally be the parent of an Exercise specific Application resource, which would inherit it's properties
+        /// An Role is a top-level resource that can optionally be the parent of an View specific Application resource, which would inherit it's properties
         /// <para />
         /// Accessible only to a SuperUser
-        /// </remarks>   
+        /// </remarks>
         [HttpPost("Roles")]
         [ProducesResponseType(typeof(Role), (int)HttpStatusCode.Created)]
         [SwaggerOperation(operationId: "createRole")]
@@ -116,7 +116,7 @@ namespace S3.Player.Api.Controllers
         /// Deletes a Role with the specified id
         /// <para />
         /// Accessible only to a SuperUser
-        /// </remarks>    
+        /// </remarks>
         /// <param name="id">The id of the Role to delete</param>
         [HttpDelete("Roles/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
@@ -125,7 +125,6 @@ namespace S3.Player.Api.Controllers
         {
             await _RoleService.DeleteAsync(id);
             return NoContent();
-        }      
+        }
     }
 }
-

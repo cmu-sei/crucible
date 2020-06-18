@@ -10,9 +10,7 @@ DM20-0181
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, PageEvent, MatSort } from '@angular/material';
-// TODO: resolve imports after API changes nouns
-import { TaskResult } from 'src/app/data/task-result/task-result.store';
-import { DispatchTaskResultService } from 'src/app/swagger-codegen/dispatcher.api';
+import { Result, ResultService } from 'src/app/swagger-codegen/dispatcher.api';
 
 @Component({
   selector: 'app-task-history',
@@ -29,7 +27,7 @@ export class TaskHistoryComponent implements OnInit {
     'dateCreated',
     'id'
   ];
-  public modelDataSource = new MatTableDataSource<TaskResult>(new Array<TaskResult>());
+  public modelDataSource = new MatTableDataSource<Result>(new Array<Result>());
 
   // MatPaginator Output
   public defaultPageSize = 5;
@@ -44,10 +42,10 @@ export class TaskHistoryComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private taskResultService: DispatchTaskResultService) {
+  constructor(private resultService: ResultService) {
     this.loading = true;
     this.apiResponded = false;
-    this.taskResultService.getDispatchTaskResults().subscribe(
+    this.resultService.getResults().subscribe(
       res => {
         this.apiResponded = true;
         if (res != null) {
@@ -56,7 +54,7 @@ export class TaskHistoryComponent implements OnInit {
       },
       error => {
         console.log(
-          'API (' + this.taskResultService.configuration.basePath + ') is not responding:',
+          'API (' + this.resultService.configuration.basePath + ') is not responding:',
           error.message
         );
       }

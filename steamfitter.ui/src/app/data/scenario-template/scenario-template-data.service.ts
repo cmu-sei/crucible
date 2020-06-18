@@ -14,10 +14,7 @@ import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {PageEvent} from '@angular/material';
 import {Router, ActivatedRoute} from '@angular/router';
-// TODO: replace the following import when API renames its nouns
-import { ScenarioTemplate } from './scenario-template.store';
-// import { ScenarioTemplate } from 'src/app/swagger-codegen/dispatcher.api';
-import {ScenarioService} from 'src/app/swagger-codegen/dispatcher.api';
+import {ScenarioTemplate, ScenarioTemplateService} from 'src/app/swagger-codegen/dispatcher.api';
 import {map, take, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable, combineLatest} from 'rxjs';
 import {TaskDataService} from 'src/app/data/task/task-data.service';
@@ -45,7 +42,7 @@ export class ScenarioTemplateDataService {
   constructor(
     private scenarioTemplateStore: ScenarioTemplateStore,
     private scenarioTemplateQuery: ScenarioTemplateQuery,
-    private scenarioTemplateService: ScenarioService,
+    private scenarioTemplateService: ScenarioTemplateService,
     private taskDataService: TaskDataService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -108,7 +105,7 @@ export class ScenarioTemplateDataService {
 
   load() {
     this.scenarioTemplateStore.setLoading(true);
-    this.scenarioTemplateService.getScenarios().pipe(
+    this.scenarioTemplateService.getScenarioTemplates().pipe(
       tap(() => { this.scenarioTemplateStore.setLoading(false); }),
       take(1)
     ).subscribe(scenarioTemplates => {
@@ -120,7 +117,7 @@ export class ScenarioTemplateDataService {
 
   loadById(id: string): Observable<ScenarioTemplate> {
     this.scenarioTemplateStore.setLoading(true);
-    return this.scenarioTemplateService.getScenario(id).pipe(
+    return this.scenarioTemplateService.getScenarioTemplate(id).pipe(
       tap((_scenarioTemplate: ScenarioTemplate) => {
         this.scenarioTemplateStore.upsert(_scenarioTemplate.id, {..._scenarioTemplate});
       }),
@@ -130,7 +127,7 @@ export class ScenarioTemplateDataService {
 
   add(scenarioTemplate: ScenarioTemplate) {
     this.scenarioTemplateStore.setLoading(true);
-    this.scenarioTemplateService.createScenario(scenarioTemplate).pipe(
+    this.scenarioTemplateService.createScenarioTemplate(scenarioTemplate).pipe(
         tap(() => { this.scenarioTemplateStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {
@@ -142,7 +139,7 @@ export class ScenarioTemplateDataService {
 
   copyScenarioTemplate(scenarioTemplateId: string) {
     this.scenarioTemplateStore.setLoading(true);
-    this.scenarioTemplateService.copyScenario(scenarioTemplateId).pipe(
+    this.scenarioTemplateService.copyScenarioTemplate(scenarioTemplateId).pipe(
         tap(() => { this.scenarioTemplateStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {
@@ -154,7 +151,7 @@ export class ScenarioTemplateDataService {
 
   updateScenarioTemplate(scenarioTemplate: ScenarioTemplate) {
     this.scenarioTemplateStore.setLoading(true);
-    this.scenarioTemplateService.updateScenario(scenarioTemplate.id, scenarioTemplate).pipe(
+    this.scenarioTemplateService.updateScenarioTemplate(scenarioTemplate.id, scenarioTemplate).pipe(
         tap(() => { this.scenarioTemplateStore.setLoading(false); }),
         take(1)
       ).subscribe(n => {
@@ -164,7 +161,7 @@ export class ScenarioTemplateDataService {
   }
 
   delete(id: string) {
-    this.scenarioTemplateService.deleteScenario(id).pipe(take(1)).subscribe(r => {
+    this.scenarioTemplateService.deleteScenarioTemplate(id).pipe(take(1)).subscribe(r => {
       this.scenarioTemplateStore.remove(id);
       this.setActive('');
     });

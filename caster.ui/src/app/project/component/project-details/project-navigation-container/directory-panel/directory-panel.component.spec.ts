@@ -18,9 +18,8 @@ describe('DirectoryPanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DirectoryPanelComponent ]
-    })
-    .compileComponents();
+      declarations: [DirectoryPanelComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('DirectoryPanelComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

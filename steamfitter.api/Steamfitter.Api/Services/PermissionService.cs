@@ -14,7 +14,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authorization;
@@ -24,20 +24,20 @@ using Steamfitter.Api.Data.Models;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Authorization;
 using Steamfitter.Api.Infrastructure.Exceptions;
-using Steamfitter.Api.ViewModels;
+using SAVM = Steamfitter.Api.ViewModels;
 
 namespace Steamfitter.Api.Services
 {
     public interface IPermissionService
     {
-        Task<IEnumerable<ViewModels.Permission>> GetAsync(CancellationToken ct);
-        Task<IEnumerable<ViewModels.Permission>> GetMineAsync(CancellationToken ct);
-        Task<IEnumerable<ViewModels.Permission>> GetByUserAsync(Guid id, CancellationToken ct);
-        Task<ViewModels.Permission> GetAsync(Guid id, CancellationToken ct);
-        // Task<IEnumerable<ViewModels.Permission>> GetByUserIdAsync(Guid userId, CancellationToken ct);
-        Task<ViewModels.Permission> CreateAsync(ViewModels.Permission permission, CancellationToken ct);
-        Task<ViewModels.Permission> UpdateAsync(Guid id, ViewModels.Permission permission, CancellationToken ct);
-        Task<bool> DeleteAsync(Guid id, CancellationToken ct);
+        STT.Task<IEnumerable<ViewModels.Permission>> GetAsync(CancellationToken ct);
+        STT.Task<IEnumerable<ViewModels.Permission>> GetMineAsync(CancellationToken ct);
+        STT.Task<IEnumerable<ViewModels.Permission>> GetByUserAsync(Guid id, CancellationToken ct);
+        STT.Task<ViewModels.Permission> GetAsync(Guid id, CancellationToken ct);
+        // STT.Task<IEnumerable<ViewModels.Permission>> GetByUserIdAsync(Guid userId, CancellationToken ct);
+        STT.Task<ViewModels.Permission> CreateAsync(ViewModels.Permission permission, CancellationToken ct);
+        STT.Task<ViewModels.Permission> UpdateAsync(Guid id, ViewModels.Permission permission, CancellationToken ct);
+        STT.Task<bool> DeleteAsync(Guid id, CancellationToken ct);
     }
 
     public class PermissionService : IPermissionService
@@ -55,7 +55,7 @@ namespace Steamfitter.Api.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ViewModels.Permission>> GetAsync(CancellationToken ct)
+        public async STT.Task<IEnumerable<ViewModels.Permission>> GetAsync(CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -63,20 +63,20 @@ namespace Steamfitter.Api.Services
             var items = await _context.Permissions
                 .ToListAsync(ct);         
             
-            return _mapper.Map<IEnumerable<Permission>>(items);
+            return _mapper.Map<IEnumerable<SAVM.Permission>>(items);
         }
 
-        public async Task<IEnumerable<ViewModels.Permission>> GetMineAsync(CancellationToken ct)
+        public async STT.Task<IEnumerable<ViewModels.Permission>> GetMineAsync(CancellationToken ct)
         {
             var items = await _context.UserPermissions
                 .Where(w => w.UserId == _user.GetId())
                 .Select(x => x.Permission)
                 .ToListAsync(ct);         
             
-            return _mapper.Map<IEnumerable<Permission>>(items);
+            return _mapper.Map<IEnumerable<SAVM.Permission>>(items);
         }
 
-        public async Task<IEnumerable<ViewModels.Permission>> GetByUserAsync(Guid userId, CancellationToken ct)
+        public async STT.Task<IEnumerable<ViewModels.Permission>> GetByUserAsync(Guid userId, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -86,10 +86,10 @@ namespace Steamfitter.Api.Services
                 .Select(x => x.Permission)
                 .ToListAsync(ct);         
             
-            return _mapper.Map<IEnumerable<Permission>>(items);
+            return _mapper.Map<IEnumerable<SAVM.Permission>>(items);
         }
 
-        public async Task<ViewModels.Permission> GetAsync(Guid id, CancellationToken ct)
+        public async STT.Task<ViewModels.Permission> GetAsync(Guid id, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -97,10 +97,10 @@ namespace Steamfitter.Api.Services
             var item = await _context.Permissions
                 .SingleOrDefaultAsync(o => o.Id == id, ct);
 
-            return _mapper.Map<Permission>(item);
+            return _mapper.Map<SAVM.Permission>(item);
         }
 
-        public async Task<ViewModels.Permission> CreateAsync(ViewModels.Permission permission, CancellationToken ct)
+        public async STT.Task<ViewModels.Permission> CreateAsync(ViewModels.Permission permission, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -114,7 +114,7 @@ namespace Steamfitter.Api.Services
             return await GetAsync(permissionEntity.Id, ct);
         }
 
-        public async Task<ViewModels.Permission> UpdateAsync(Guid id, ViewModels.Permission permission, CancellationToken ct)
+        public async STT.Task<ViewModels.Permission> UpdateAsync(Guid id, ViewModels.Permission permission, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -122,7 +122,7 @@ namespace Steamfitter.Api.Services
             var permissionToUpdate = await _context.Permissions.SingleOrDefaultAsync(v => v.Id == id, ct);
 
             if (permissionToUpdate == null)
-                throw new EntityNotFoundException<Permission>();
+                throw new EntityNotFoundException<SAVM.Permission>();
 
             permission.CreatedBy = permissionToUpdate.CreatedBy;
             permission.DateCreated = permissionToUpdate.DateCreated;
@@ -135,7 +135,7 @@ namespace Steamfitter.Api.Services
             return _mapper.Map(permissionToUpdate, permission);
         }
 
-        public async Task<bool> DeleteAsync(Guid id, CancellationToken ct)
+        public async STT.Task<bool> DeleteAsync(Guid id, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -143,7 +143,7 @@ namespace Steamfitter.Api.Services
             var permissionToDelete = await _context.Permissions.SingleOrDefaultAsync(v => v.Id == id, ct);
 
             if (permissionToDelete == null)
-                throw new EntityNotFoundException<Permission>();
+                throw new EntityNotFoundException<SAVM.Permission>();
 
             _context.Permissions.Remove(permissionToDelete);
             await _context.SaveChangesAsync(ct);

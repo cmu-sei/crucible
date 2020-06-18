@@ -8,23 +8,29 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityUIQuery, HashMap, Order, QueryConfig, QueryEntity} from '@datorama/akita';
-import {ModulesState, ModuleStore, ModuleUIState} from './module.store';
-import {Module} from '../../generated/caster-api';
-import {Injectable, InjectionToken} from '@angular/core';
-import {Observable} from 'rxjs';
+import {
+  EntityUIQuery,
+  HashMap,
+  Order,
+  QueryConfig,
+  QueryEntity,
+} from '@datorama/akita';
+import { ModulesState, ModuleStore, ModuleUIState } from './module.store';
+import { Module } from '../../generated/caster-api';
+import { Injectable, InjectionToken } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export const MODULE_QUERY_TOKEN = new InjectionToken('ModuleQuery');
 @QueryConfig({
   sortBy: 'name',
-  sortByOrder: Order.ASC
+  sortByOrder: Order.ASC,
 })
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModuleQuery extends QueryEntity<ModulesState> {
   ui: EntityUIQuery<ModuleUIState>;
-  isLoading$ = this.select(state => state.loading);
+  isLoading$ = this.select((state) => state.loading);
 
   constructor(protected store: ModuleStore) {
     super(store);
@@ -35,4 +41,3 @@ export class ModuleQuery extends QueryEntity<ModulesState> {
     return this.selectEntity(id);
   }
 }
-

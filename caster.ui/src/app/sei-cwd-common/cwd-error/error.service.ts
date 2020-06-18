@@ -13,11 +13,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SystemMessageService } from '../cwd-system-message/services/system-message.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ErrorService implements ErrorHandler {
-
-  constructor(private injector: Injector) { }
+  constructor(private injector: Injector) {}
 
   handleError(err: any) {
     const messageService = this.injector.get(SystemMessageService);
@@ -27,7 +26,8 @@ export class ErrorService implements ErrorHandler {
       // Backend returns unsuccessful response codes such as 404, 500 etc.
       const apiError = err as HttpErrorResponse;
       title = apiError.error.title;
-      message = 'Code:  ' + apiError.status + '\nMessage: ' + apiError.message + '\n';
+      message =
+        'Code:  ' + apiError.status + '\nMessage: ' + apiError.message + '\n';
       message += apiError.error.detail;
       console.log(title);
       console.log(apiError);
@@ -43,4 +43,3 @@ export class ErrorService implements ErrorHandler {
     messageService.displayMessage(title, message, 1000);
   }
 }
-

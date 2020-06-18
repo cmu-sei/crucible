@@ -37,26 +37,26 @@ namespace S3.Player.Api.Hubs
             _ct = source.Token;
         }
 
-        public async Task Join(string exerciseString, string userString)
+        public async Task Join(string viewString, string userString)
         {
             var userId = Guid.Parse(userString);
-            var exerciseId = Guid.Parse(exerciseString);
-            var notification = await _notificationService.JoinUser(exerciseId, userId, _ct);
+            var viewId = Guid.Parse(viewString);
+            var notification = await _notificationService.JoinUser(viewId, userId, _ct);
             if (notification.ToId == userId)
             {
-                await Groups.AddToGroupAsync(Context.ConnectionId, getGroupString(exerciseString, userString));
+                await Groups.AddToGroupAsync(Context.ConnectionId, getGroupString(viewString, userString));
             }
             await Clients.Caller.SendAsync("Reply", notification);
         }
 
-        public async Task Post(string exerciseString, string userString, string data)
+        public async Task Post(string viewString, string userString, string data)
         {
-            var exerciseId = Guid.Parse(exerciseString);
+            var viewId = Guid.Parse(viewString);
             var userId = Guid.Parse(userString);
             var incomingData = new Notification();
             incomingData.Text = data;
             incomingData.Subject = "User Notification";
-            var notification = await _notificationService.PostToUser(exerciseId, userId, incomingData, _ct);
+            var notification = await _notificationService.PostToUser(viewId, userId, incomingData, _ct);
             if (notification.ToId != userId)
             {
                 notification.Text = "Message was not sent";
@@ -64,27 +64,26 @@ namespace S3.Player.Api.Hubs
             }
             else
             {
-                await Clients.Group(getGroupString(exerciseString, userString)).SendAsync("Reply", notification);
+                await Clients.Group(getGroupString(viewString, userString)).SendAsync("Reply", notification);
             }
         }
 
-        public async Task GetHistory(string exerciseString, string userString)
+        public async Task GetHistory(string viewString, string userString)
         {
-            var exerciseId = Guid.Parse(exerciseString);
+            var viewId = Guid.Parse(viewString);
             var userId = Guid.Parse(userString);
-            var notifications = await _notificationService.GetByUserAsync(exerciseId, userId, _ct);
+            var notifications = await _notificationService.GetByUserAsync(viewId, userId, _ct);
             await Clients.Caller.SendAsync("History", notifications);
         }
 
-        public async Task Leave(string exerciseString, string userString)
+        public async Task Leave(string viewString, string userString)
         {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, getGroupString(exerciseString, userString));
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, getGroupString(viewString, userString));
         }
 
-        private string getGroupString(string exerciseString, string userString)
+        private string getGroupString(string viewString, string userString)
         {
-            return String.Format("{0}_{1}", exerciseString, userString);
+            return String.Format("{0}_{1}", viewString, userString);
         }
     }
 }
-

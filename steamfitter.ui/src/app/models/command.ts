@@ -8,7 +8,7 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { DispatchTask } from 'src/app/swagger-codegen/dispatcher.api';
+import { Task } from 'src/app/swagger-codegen/dispatcher.api';
 export interface CommandParameterChoice {
   key: string;
   display: string;
@@ -26,7 +26,7 @@ export interface CommandParameters {
 
 export  interface Command {
     api: string;
-    action: DispatchTask.ActionEnum;
+    action: Task.ActionEnum;
     display: string;
     parameters: CommandParameters[];
 }

@@ -11,7 +11,7 @@ DM20-0181
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource, PageEvent, MatPaginator, MatSort, MatSortable } from '@angular/material';
 import { SUPER_USER } from '../../../services/logged-in-user/logged-in-user.service';
-import { User, UserService, RoleService, Role } from '../../../swagger-codegen/s3.player.api';
+import { User, UserService, RoleService, Role } from '../../../generated/s3.player.api';
 
 export interface Action {
   Value: string;
@@ -97,7 +97,7 @@ export class AdminUserSearchComponent implements OnInit, AfterViewInit {
 
 
   /**
-     * Called by UI to add a filter to the exerciseDataSource
+     * Called by UI to add a filter to the viewDataSource
      * @param filterValue
      */
   applyFilter(filterValue: string) {
@@ -130,5 +130,3 @@ export class AdminUserSearchComponent implements OnInit, AfterViewInit {
 
 
 }
-
-

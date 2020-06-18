@@ -29,12 +29,12 @@ using Z.EntityFramework.Plus;
 
 namespace S3.Player.Api.Services
 {
-    public interface IUserService 
+    public interface IUserService
     {
         Task<IEnumerable<ViewModels.User>> GetAsync(CancellationToken ct);
         Task<IEnumerable<ViewModels.User>> GetByTeamAsync(Guid teamId, CancellationToken ct);
-        Task<IEnumerable<ViewModels.User>> GetByExerciseAsync(Guid exerciseId, CancellationToken ct);
-        Task<ViewModels.User> GetAsync(Guid id, CancellationToken ct);             
+        Task<IEnumerable<ViewModels.User>> GetByViewAsync(Guid viewId, CancellationToken ct);
+        Task<ViewModels.User> GetAsync(Guid id, CancellationToken ct);
         Task<ViewModels.User> CreateAsync(ViewModels.User user, CancellationToken ct);
         Task<ViewModels.User> UpdateAsync(Guid id, ViewModels.User user, CancellationToken ct);
         Task<bool> DeleteAsync(Guid id, CancellationToken ct);
@@ -59,7 +59,7 @@ namespace S3.Player.Api.Services
 
         public async Task<IEnumerable<ViewModels.User>> GetAsync(CancellationToken ct)
         {
-            if(!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement())).Succeeded)
+            if(!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement())).Succeeded)
                 throw new ForbiddenException();
 
             var items = await _context.Users.ProjectTo<ViewModels.User>().ToArrayAsync(ct);
@@ -84,28 +84,28 @@ namespace S3.Player.Api.Services
             if (team == null)
                 throw new EntityNotFoundException<Team>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new TeamAccessRequirement(team.ExerciseId, team.Id))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new TeamAccessRequirement(team.ViewId, team.Id))).Succeeded)
                 throw new ForbiddenException();
-            
+
             return await userQuery.ToListAsync();
         }
 
-        public async Task<IEnumerable<ViewModels.User>> GetByExerciseAsync(Guid exerciseId, CancellationToken ct)
+        public async Task<IEnumerable<ViewModels.User>> GetByViewAsync(Guid viewId, CancellationToken ct)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(exerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(viewId))).Succeeded)
                 throw new ForbiddenException();
 
-            var exerciseQuery = _context.Exercises
-                .Where(e => e.Id == exerciseId)
+            var viewQuery = _context.Views
+                .Where(e => e.Id == viewId)
                 .Future();
 
-            var exercise = (await exerciseQuery.ToListAsync()).FirstOrDefault();
+            var view = (await viewQuery.ToListAsync()).FirstOrDefault();
 
-            if (exercise == null)
-                throw new EntityNotFoundException<Exercise>();
+            if (view == null)
+                throw new EntityNotFoundException<View>();
 
-            var users = _context.ExerciseMemberships
-                .Where(m => m.ExerciseId == exerciseId)
+            var users = _context.ViewMemberships
+                .Where(m => m.ViewId == viewId)
                 .Select(m => m.User)
                 .Distinct()
                 .ProjectTo<User>();
@@ -121,7 +121,7 @@ namespace S3.Player.Api.Services
             var item = await _context.Users.ProjectTo<ViewModels.User>().SingleOrDefaultAsync(o => o.Id == id, ct);
             return item;
         }
-        
+
         public async Task<ViewModels.User> CreateAsync(ViewModels.User user, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
@@ -176,7 +176,7 @@ namespace S3.Player.Api.Services
 
             _context.Users.Remove(userToDelete);
             await _context.SaveChangesAsync(ct);
-            
+
             return true;
         }
 
@@ -185,10 +185,10 @@ namespace S3.Player.Api.Services
             var teamQuery = _context.Teams.Where(t => t.Id == teamId).Future();
             var userExists = _context.Users.Where(u => u.Id == userId).DeferredAny().FutureValue();
 
-            var exerciseIdQuery = _context.Teams.Where(t => t.Id == teamId).Select(t => t.ExerciseId);
+            var viewIdQuery = _context.Teams.Where(t => t.Id == teamId).Select(t => t.ViewId);
 
-            var exerciseMembershipQuery = _context.ExerciseMemberships
-                .Where(x => x.UserId == userId && exerciseIdQuery.Contains(x.ExerciseId))
+            var viewMembershipQuery = _context.ViewMemberships
+                .Where(x => x.UserId == userId && viewIdQuery.Contains(x.ViewId))
                 .Future();
 
             var team = (await teamQuery.ToListAsync()).SingleOrDefault();
@@ -199,29 +199,29 @@ namespace S3.Player.Api.Services
             if(!(await userExists.ValueAsync()))
                 throw new EntityNotFoundException<User>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(team.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(team.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
-            var exerciseMembership = (await exerciseMembershipQuery.ToListAsync()).FirstOrDefault();
+            var viewMembership = (await viewMembershipQuery.ToListAsync()).FirstOrDefault();
 
             bool setPrimary = false;
-            if (exerciseMembership == null)
+            if (viewMembership == null)
             {
-                exerciseMembership = new ExerciseMembershipEntity { ExerciseId = team.ExerciseId, UserId = userId };
-                _context.ExerciseMemberships.Add(exerciseMembership);
+                viewMembership = new ViewMembershipEntity { ViewId = team.ViewId, UserId = userId };
+                _context.ViewMemberships.Add(viewMembership);
                 await _context.SaveChangesAsync(ct);
                 setPrimary = true;
             }
 
-            var teamMembership = new TeamMembershipEntity { ExerciseMembershipId = exerciseMembership.Id, UserId = userId, TeamId = teamId };
-            
+            var teamMembership = new TeamMembershipEntity { ViewMembershipId = viewMembership.Id, UserId = userId, TeamId = teamId };
+
             if (setPrimary)
             {
-                exerciseMembership.PrimaryTeamMembership = teamMembership;
+                viewMembership.PrimaryTeamMembership = teamMembership;
             }
 
-            _context.TeamMemberships.Add(teamMembership);           
-            
+            _context.TeamMemberships.Add(teamMembership);
+
             await _context.SaveChangesAsync(ct);
             await _userClaimsService.RefreshClaims(userId);
 
@@ -242,7 +242,7 @@ namespace S3.Player.Api.Services
             if (!(await userExists.ValueAsync()))
                 throw new EntityNotFoundException<User>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(team.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(team.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             var teamMemberships = await teamMembershipQuery.ToListAsync();
@@ -250,22 +250,22 @@ namespace S3.Player.Api.Services
 
             if (teamMembership != null)
             {
-                var exerciseMembership = _context.ExerciseMemberships.SingleOrDefault(eu => eu.UserId == userId && eu.ExerciseId == team.ExerciseId);
+                var viewMembership = _context.ViewMemberships.SingleOrDefault(eu => eu.UserId == userId && eu.ViewId == team.ViewId);
 
-                if (teamMemberships.Where(m => m.Team.ExerciseId == team.ExerciseId).Count() == 1)
+                if (teamMemberships.Where(m => m.Team.ViewId == team.ViewId).Count() == 1)
                 {
                     _context.TeamMemberships.Remove(teamMembership);
-                    exerciseMembership.PrimaryTeamMembershipId = null;
+                    viewMembership.PrimaryTeamMembershipId = null;
                     await _context.SaveChangesAsync();
 
-                    _context.ExerciseMemberships.Remove(exerciseMembership);
+                    _context.ViewMemberships.Remove(viewMembership);
                 }
-                else if (exerciseMembership.PrimaryTeamMembershipId == teamMembership.Id)
+                else if (viewMembership.PrimaryTeamMembershipId == teamMembership.Id)
                 {
                     // Set a new primary Team if we are deleting the current one
-                    Guid newPrimaryTeamMembershipId = teamMemberships.Where(m => m.Team.ExerciseId == team.ExerciseId && m.TeamId != teamId).FirstOrDefault().Id;
-                    exerciseMembership.PrimaryTeamMembershipId = newPrimaryTeamMembershipId;
-                    _context.ExerciseMemberships.Update(exerciseMembership);
+                    Guid newPrimaryTeamMembershipId = teamMemberships.Where(m => m.Team.ViewId == team.ViewId && m.TeamId != teamId).FirstOrDefault().Id;
+                    viewMembership.PrimaryTeamMembershipId = newPrimaryTeamMembershipId;
+                    _context.ViewMemberships.Update(viewMembership);
                     await _context.SaveChangesAsync(ct);
 
                     _context.TeamMemberships.Remove(teamMembership);
@@ -275,7 +275,7 @@ namespace S3.Player.Api.Services
                     _context.TeamMemberships.Remove(teamMembership);
                 }
 
-                await _context.SaveChangesAsync(ct);                                                  
+                await _context.SaveChangesAsync(ct);
             }
 
             await _userClaimsService.RefreshClaims(userId);
@@ -283,4 +283,3 @@ namespace S3.Player.Api.Services
         }
     }
 }
-

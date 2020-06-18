@@ -12,17 +12,14 @@ import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } 
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener, MatDialog, MatMenuTrigger } from '@angular/material';
 import { TaskEditComponent } from 'src/app/components/tasks/task-edit/task-edit.component';
-// TODO: resolve imports when API renames nouns
-import { Task } from 'src/app/data/task/task.store';
-import { TaskResult } from 'src/app/data/task-result/task-result.store';
-import { DispatchTask, DispatchTaskResult } from 'src/app/swagger-codegen/dispatcher.api';
+import { Task, Result } from 'src/app/swagger-codegen/dispatcher.api';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 interface  TaskNode {
   task: Task;
-  results?: TaskResult[];
+  results?: Result[];
   children?: TaskNode[];
 }
 
@@ -30,13 +27,13 @@ interface  FlatTaskNode {
   expandable: boolean;
   level: number;
   task: Task;
-  results?: TaskResult[];
+  results?: Result[];
 }
 
 const BLANK_TASK: Task = {
   name: '',
   description: '',
-  action: DispatchTask.ActionEnum.GuestProcessRun,
+  action: Task.ActionEnum.GuestProcessRun,
   vmMask: '',
   vmList: [],
   apiUrl: '',
@@ -45,7 +42,7 @@ const BLANK_TASK: Task = {
   expirationSeconds: 0,
   intervalSeconds: 0,
   iterations: 0,
-  triggerCondition: DispatchTask.TriggerConditionEnum.Manual,
+  triggerCondition: Task.TriggerConditionEnum.Manual,
 };
 
 @Component({
@@ -56,7 +53,7 @@ const BLANK_TASK: Task = {
 export class TaskTreeComponent implements OnInit, OnDestroy {
 
   @Input() taskList: Observable<Task[]>;
-  @Input() taskResultList: Observable<TaskResult[]>;
+  @Input() resultList: Observable<Result[]>;
   @Input() isLoading: boolean;
   @Input() scenarioTemplateId: string;
   @Input() scenarioId: string;
@@ -71,9 +68,9 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   @Output() pasteClipboard = new EventEmitter<string>();
   @ViewChild(FlatTreeControl) flatTreeControl;
   selectedTaskId = '';
-  manualTrigger = DispatchTask.TriggerConditionEnum.Manual;
+  manualTrigger = Task.TriggerConditionEnum.Manual;
   private tasks = new Array<Task>();
-  private taskResults = new Array<TaskResult>();
+  private results = new Array<Result>();
   private expandedNodeSet = new Set<string>();
   private unsubscribe = new Subject();
 
@@ -107,9 +104,9 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
       this.tasks = !tasks ? [] : tasks;
       this.createTaskNodes();
     });
-    if (!!this.taskResultList) {
-      this.taskResultList.pipe(takeUntil(this.unsubscribe)).subscribe(results => {
-        this.taskResults = !results ? [] : results;
+    if (!!this.resultList) {
+      this.resultList.pipe(takeUntil(this.unsubscribe)).subscribe(results => {
+        this.results = !results ? [] : results;
         this.createTaskNodes();
       });
 
@@ -136,8 +133,8 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
    * Creates a TaskNode to display in the tree
    */
   private createTaskNode(parentTask: Task): TaskNode {
-    const results = this.taskResults.filter(result => {
-      return result.dispatchTaskId === parentTask.id;
+    const results = this.results.filter(result => {
+      return result.taskId === parentTask.id;
     });
     const newNode: TaskNode = {
       task: parentTask,
@@ -170,7 +167,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
    */
   isEditableTask(taskId: string) {
     if (!this.isEditableState) { return false; }
-    const results = this.taskResults.filter(r => r.dispatchTaskId === taskId);
+    const results = this.results.filter(r => r.taskId === taskId);
     return (results.length === 0);
   }
 
@@ -185,12 +182,12 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
       const triggerTaskId = task.triggerTaskId;
       if (triggerTaskId) {
         const parent = this.tasks.find(dt => dt.id === triggerTaskId);
-        const results = this.taskResults.filter(r => r.dispatchTaskId === triggerTaskId);
+        const results = this.results.filter(r => r.taskId === triggerTaskId);
         if (results.length === 0) {
           isExecutable = false;
-        } else if (results.some(r => r.status === DispatchTaskResult.StatusEnum.Pending ||
-                                     r.status === DispatchTaskResult.StatusEnum.Queued ||
-                                     r.status === DispatchTaskResult.StatusEnum.Sent)) {
+        } else if (results.some(r => r.status === Result.StatusEnum.Pending ||
+                                     r.status === Result.StatusEnum.Queued ||
+                                     r.status === Result.StatusEnum.Sent)) {
           isExecutable = false;
         }
       }
@@ -235,7 +232,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
     // add a dependent Task
     const newTask = {...BLANK_TASK};
     if (!!this.scenarioTemplateId) {
-      newTask.scenarioId = this.scenarioTemplateId;
+      newTask.scenarioTemplateId = this.scenarioTemplateId;
     }
     if (!!this.scenarioId) {
       newTask.scenarioId = this.scenarioId;
@@ -361,7 +358,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  sortedResults(results: TaskResult[], sortBy: string, sortDescending: boolean) {
+  sortedResults(results: Result[], sortBy: string, sortDescending: boolean) {
     const sortValue = sortDescending ? 1 : -1;
     const sortedResults = results.sort((a, b) => a[sortBy] < b[sortBy] ? sortValue : -1 * sortValue);
     return sortedResults;

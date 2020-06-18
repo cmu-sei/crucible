@@ -8,7 +8,7 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-.dispatchtask-container {
+.task-container {
   flex-direction: column;
   min-width: 1200px;
   margin-left: 40px;

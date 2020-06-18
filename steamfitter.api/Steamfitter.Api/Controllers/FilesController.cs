@@ -13,9 +13,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using Steamfitter.Api.Services;
-using Steamfitter.Api.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +43,7 @@ namespace Steamfitter.Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<FileInfo>), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getAllFiles")]
-        public async Task<IActionResult> Get(CancellationToken ct)
+        public async STT.Task<IActionResult> Get(CancellationToken ct)
         {
             return Ok(await _filesService.GetAsync(ct));
         }
@@ -58,7 +57,7 @@ namespace Steamfitter.Api.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(FileInfo), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getFileById")]
-        public async Task<IActionResult> Get(Guid id, CancellationToken ct)
+        public async STT.Task<IActionResult> Get(Guid id, CancellationToken ct)
         {
             return Ok(await _filesService.GetAsync(id, ct));
         }
@@ -72,7 +71,7 @@ namespace Steamfitter.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(IEnumerable<FileInfo>), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "saveFile")]
-        public async Task<IActionResult> Post(IEnumerable<IFormFile> files, CancellationToken ct)
+        public async STT.Task<IActionResult> Post(IEnumerable<IFormFile> files, CancellationToken ct)
         {
             return Ok(await _filesService.SaveAsync(files, ct));
         }
@@ -87,7 +86,7 @@ namespace Steamfitter.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(IEnumerable<FileInfo>), (int)HttpStatusCode.NoContent)]
         [SwaggerOperation(operationId: "deleteFile")]
-        public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+        public async STT.Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
             await _filesService.DeleteAsync(id, ct);
             return NoContent();

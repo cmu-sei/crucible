@@ -9,7 +9,7 @@ DM20-0181
 */
 
 import { Injectable } from '@angular/core';
-import { DefinitionService, Definition, Implementation, ImplementationService } from 'src/app/generated/alloy.api';
+import { EventTemplateService, EventTemplate, Event, EventService } from 'src/app/generated/alloy.api';
 import { Observable, BehaviorSubject, combineLatest, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, shareReplay, take, mergeMap, tap, switchMap } from 'rxjs/operators';
@@ -19,19 +19,19 @@ import { map, shareReplay, take, mergeMap, tap, switchMap } from 'rxjs/operators
 })
 export class EventTemplatesService {
 
-  public eventTemplateList$: Observable<Definition[]>;
+  public eventTemplateList$: Observable<EventTemplate[]>;
   public searchControl$ = new FormControl();
   public selectedEventTemplateId: string | undefined = undefined;
-  public fullEventTemplateList$ = new BehaviorSubject<Definition[]>([]);
+  public fullEventTemplateList$ = new BehaviorSubject<EventTemplate[]>([]);
 
 
-  public currentEventTemplate$: Observable<Definition>;
+  public currentEventTemplate$: Observable<EventTemplate>;
   private searchTerm$ = new BehaviorSubject<string>('');
   private currentEventTemplateId$ = new BehaviorSubject<string>('');
 
 
   constructor(
-    private eventTemplateService: DefinitionService
+    private eventTemplateService: EventTemplateService
   ) {
 
     this.updatelist();
@@ -53,27 +53,27 @@ export class EventTemplatesService {
 
     this.currentEventTemplate$ = this.currentEventTemplateId$.pipe(
       switchMap(id => {
-        return this.eventTemplateService.getDefinition(id).pipe(take(1));
+        return this.eventTemplateService.getEventTemplate(id).pipe(take(1));
       })
     );
 
   }
 
-  addNew(eventTemplate: Definition) {
-    this.eventTemplateService.createDefinition(eventTemplate).pipe(take(1)).subscribe((def) => {
+  addNew(eventTemplate: EventTemplate) {
+    this.eventTemplateService.createEventTemplate(eventTemplate).pipe(take(1)).subscribe((def) => {
       this.selectedEventTemplateId = def.id;
       this.updatelist();
     });
   }
 
-  update(eventTemplate: Definition) {
-    this.eventTemplateService.updateDefinition(eventTemplate.id, eventTemplate).pipe(take(1)).subscribe(() => {
+  update(eventTemplate: EventTemplate) {
+    this.eventTemplateService.updateEventTemplate(eventTemplate.id, eventTemplate).pipe(take(1)).subscribe(() => {
       this.updatelist();
     });
   }
 
   delete(eventTemplate: string) {
-    this.eventTemplateService.deleteDefinition(eventTemplate).pipe(take(1)).subscribe(() => {
+    this.eventTemplateService.deleteEventTemplate(eventTemplate).pipe(take(1)).subscribe(() => {
       this.updatelist();
     });
   }
@@ -83,6 +83,6 @@ export class EventTemplatesService {
   }
 
   private updatelist() {
-    this.eventTemplateService.getDefinitions().pipe(take(1)).subscribe(defs => this.fullEventTemplateList$.next(defs));
+    this.eventTemplateService.getEventTemplates().pipe(take(1)).subscribe(defs => this.fullEventTemplateList$.next(defs));
   }
 }

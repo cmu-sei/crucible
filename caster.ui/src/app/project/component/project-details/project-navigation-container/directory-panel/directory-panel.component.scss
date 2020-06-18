@@ -7,67 +7,58 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-
+@import '~@angular/material/theming';
+@import 'theme';
 
 .add-new-text {
-    margin-left: 23px;
+  margin-left: 23px;
 }
 
 .icon-space {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .panel-header {
-    margin-top: 11px;
+  margin-top: 11px;
 }
 
 .link-text {
-    color: blue; 
-    cursor: pointer;
-    font-size: medium;
+  color: inherit;
+  cursor: pointer;
+  font-size: medium;
 }
 
 .link-locked-text {
-    color: grey; 
-    cursor: pointer;
-    font-size: medium;
+  cursor: pointer;
+  font-size: medium;
 }
 
 .link-admin-locked-text {
-    color: grey; 
-    cursor: pointer;
-    font-size: medium;
+  cursor: pointer;
+  font-size: medium;
 }
 
 .add-link-text {
-    color: blue; 
-    cursor: pointer;
-    font-size: small;
+  color: mat-color($primary);
+  cursor: pointer;
+  font-size: small;
 }
 
 .show-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
-
-.highlight:hover {
-    background-color: rgb(243, 243, 243);
-}
-
 
 :host ::ng-deep .mat-expansion-panel-header {
-    height: auto !important; 
-    margin-top: 5px !important;
-    margin-bottom: 5px !important;
-    padding-right: 1!important;
+  height: auto !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  padding-right: 1 !important;
 }
 :host ::ng-deep .mat-expansion-panel-body {
-    padding-right: 0 !important;
+  padding-right: 0 !important;
 }
 
 :host ::ng-deep .mat-list .mat-list-item {
-    height: auto !important;
-    margin-top: 5px !important;
-  }
-
-
-
+  height: auto !important;
+  margin-top: 5px !important;
+}

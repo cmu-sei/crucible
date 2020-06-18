@@ -9,9 +9,7 @@ DM20-0181
 */
 
 import { Component, EventEmitter, Output, NgZone, ViewChild, Input } from '@angular/core';
-// TODO: replace the following import when API renames its nouns
-import { ScenarioTemplate } from 'src/app/data/scenario-template/scenario-template.store';
-// import { ScenarioTemplate } from '../../../swagger-codegen/dispatcher.api';
+import { ScenarioTemplate } from 'src/app/swagger-codegen/dispatcher.api';
 import { ScenarioTemplateQuery } from 'src/app/data/scenario-template/scenario-template.query';
 import { TasksComponent } from '../../tasks/tasks.component';
 import { TaskDataService } from 'src/app/data/task/task-data.service';

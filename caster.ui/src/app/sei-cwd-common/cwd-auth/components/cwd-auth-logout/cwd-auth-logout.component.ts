@@ -9,20 +9,17 @@ DM20-0181
 */
 
 import { Component, OnInit } from '@angular/core';
-import {CwdAuthService} from '../../services';
+import { CwdAuthService } from '../../services';
 
 @Component({
   selector: 'cas-cwd-auth-logout',
   templateUrl: './cwd-auth-logout.component.html',
-  styleUrls: ['./cwd-auth-logout.component.scss']
+  styleUrls: ['./cwd-auth-logout.component.scss'],
 })
 export class CwdAuthLogoutComponent implements OnInit {
-
-  constructor(private authService: CwdAuthService) { }
+  constructor(private authService: CwdAuthService) {}
 
   ngOnInit() {
     this.authService.logout();
   }
-
 }
-

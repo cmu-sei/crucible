@@ -8,34 +8,40 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityState, EntityStore, EntityUIStore, StoreConfig, ActiveState} from '@datorama/akita';
-import {ProjectUI} from './project.model';
-import {Injectable} from '@angular/core';
-import { Exercise as Project } from 'src/app/generated/caster-api';
+import {
+  EntityState,
+  EntityStore,
+  EntityUIStore,
+  StoreConfig,
+  ActiveState,
+} from '@datorama/akita';
+import { ProjectUI } from './project.model';
+import { Injectable } from '@angular/core';
+import { Project } from 'src/app/generated/caster-api';
 
 export interface ProjectUIState extends EntityState<ProjectUI>, ActiveState {}
 export interface ProjectState extends EntityState<Project>, ActiveState {}
 
-
 export const initialProjectUIState: ProjectUI = {
   openTabs: [],
-  selectedTab: 0,
+  selectedTab: null,
   rightSidebarOpen: false,
   rightSidebarView: '',
   rightSidebarWidth: 300,
   leftSidebarOpen: true,
-  leftSidebarWidth: 364
+  leftSidebarWidth: 364,
 };
 
 @Injectable({
   providedIn: 'root',
 })
-@StoreConfig({name: 'projects'})
+@StoreConfig({ name: 'projects' })
 export class ProjectStore extends EntityStore<ProjectState> {
   ui: EntityUIStore<ProjectUIState>;
   constructor() {
     super();
-    this.createUIStore().setInitialEntityState((entity => ({...initialProjectUIState})));
+    this.createUIStore().setInitialEntityState((entity) => ({
+      ...initialProjectUIState,
+    }));
   }
 }
-

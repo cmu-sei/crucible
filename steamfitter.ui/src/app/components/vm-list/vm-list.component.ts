@@ -12,8 +12,8 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material';
 // Resolve imports when API changes nouns
-import { PlayerDataService, View } from 'src/app/services/data/player-data-service';
-import { Vm } from 'src/app/swagger-codegen/dispatcher.api';
+import { PlayerDataService } from 'src/app/services/data/player-data-service';
+import { Vm, View } from 'src/app/swagger-codegen/dispatcher.api';
 import { NewTaskService } from 'src/app/services/new-task/new-task.service';
 
 @Component({
@@ -38,6 +38,8 @@ export class VmListComponent implements OnDestroy {
     private playerDataService: PlayerDataService,
     private newTaskService: NewTaskService
   ) {
+    newTaskService.reset();
+    this.playerDataService.selectView('');
   }
 
   onViewChange(event: any) {
@@ -57,9 +59,9 @@ export class VmListComponent implements OnDestroy {
 
   onCheckBoxChange(event: any, vm: Vm) {
     if (event.checked) {
-      this.newTaskService.AddVm(vm);
+      this.newTaskService.addVm(vm);
     } else {
-      this.newTaskService.RemoveVm(vm);
+      this.newTaskService.removeVm(vm);
     }
   }
 

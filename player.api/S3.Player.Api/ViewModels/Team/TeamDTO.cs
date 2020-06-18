@@ -18,7 +18,7 @@ namespace S3.Player.Api.ViewModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Guid ExerciseId { get; set; }
+        public Guid ViewId { get; set; }
         public Guid? RoleId { get; set; }
         public string RoleName { get; set; }
         public List<Permission> Permissions { get; set; }

@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "swagger-gen": "docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate -i http://host.docker.internal:4400/swagger/v1/swagger.json -g typescript-angular -o /local/generated --additional-properties ngVersion=7.2 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original",
-    "swagger-gen-win": "docker run --rm -v %CD%:/local openapitools/openapi-generator-cli generate -i http://host.docker.internal:4400/swagger/v1/swagger.json -g typescript-angular -o /local/generated --additional-properties ngVersion=7.2 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original"
+    "swagger-gen": "curl --insecure http://host.docker.internal:4400/swagger/v1/swagger.json --output swagger.json && node_modules/@openapitools/openapi-generator-cli/bin/openapi-generator generate -i ./swagger.json -g typescript-angular -o src/app/swagger-codegen/dispatcher.api --additional-properties ngVersion=7.2 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original --type-mappings=DateTime=Date",
+    "swagger-gen-win": "docker run --rm -v %CD%:/local openapitools/openapi-generator-cli:v4.1.2 generate -i http://host.docker.internal:4400/swagger/v1/swagger.json -g typescript-angular -o /local/generated --additional-properties ngVersion=7.2 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original"
   },
   "private": true,
   "dependencies": {

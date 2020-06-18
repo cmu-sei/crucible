@@ -8,12 +8,11 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'cas-cwd-toolbar',
   templateUrl: './cwd-toolbar.component.html',
-  styleUrls: ['./cwd-toolbar.component.scss']
+  styleUrls: ['./cwd-toolbar.component.scss'],
 })
-export class CwdToolbarComponent { }
-
+export class CwdToolbarComponent {}

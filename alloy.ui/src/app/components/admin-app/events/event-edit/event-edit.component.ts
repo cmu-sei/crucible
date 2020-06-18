@@ -11,8 +11,8 @@ DM20-0181
 import { Component, OnInit, EventEmitter, Input, Output, NgZone, ViewChild } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { Exercise, PlayerService,
-          Implementation, ImplementationService } from '../../../../generated/alloy.api';
+import { View, PlayerService,
+          Event, EventService } from '../../../../generated/alloy.api';
 import { DialogService } from '../../../../services/dialog/dialog.service';
 
 @Component({
@@ -22,7 +22,7 @@ import { DialogService } from '../../../../services/dialog/dialog.service';
 })
 export class EventEditComponent implements OnInit {
 
-  @Input() event: Implementation;
+  @Input() event: Event;
   @Output() editComplete = new EventEmitter<boolean>();
 
   public eventNameFormControl: FormControl;
@@ -41,14 +41,14 @@ export class EventEditComponent implements OnInit {
   public runIdFormControl: FormControl;
   public scenarioIdFormControl: FormControl;
 
-  public eventStates = Object.values(Implementation.StatusEnum);
+  public eventStates = Object.values(Event.StatusEnum);
   public matcher = new UserErrorStateMatcher();
-  public views: Exercise[];
+  public views: View[];
   public selectedViewId: any;
   public changesWereMade = false;
 
   constructor(
-    public eventService: ImplementationService,
+    public eventService: EventService,
     public dialogService: DialogService,
     public zone: NgZone,
     public playerService: PlayerService
@@ -63,7 +63,7 @@ export class EventEditComponent implements OnInit {
     this.initForm();
 
     console.log(this.event);
-    this.playerService.getExercises().subscribe(views => {
+    this.playerService.getViews().subscribe(views => {
       this.views = views.sort((x1, x2) => {
         return (x1.name > x2.name) ? 1 : ((x1.name < x2.name) ? -1 : 0);
       });
@@ -99,11 +99,11 @@ export class EventEditComponent implements OnInit {
     this.internalStatusFormControl = new FormControl(this.event.internalStatus, [
       Validators.required
     ]);
-    this.eventTemplateIdFormControl = new FormControl(this.event.definitionId, []);
-    this.viewIdFormControl = new FormControl(this.event.exerciseId, []);
+    this.eventTemplateIdFormControl = new FormControl(this.event.eventTemplateId, []);
+    this.viewIdFormControl = new FormControl(this.event.viewId, []);
     this.workspaceIdFormControl = new FormControl(this.event.workspaceId, []);
     this.runIdFormControl = new FormControl(this.event.runId, []);
-    this.scenarioIdFormControl = new FormControl(this.event.sessionId, []);
+    this.scenarioIdFormControl = new FormControl(this.event.scenarioId, []);
   }
 
   private setFormDisabled() {
@@ -141,7 +141,7 @@ export class EventEditComponent implements OnInit {
     this.dialogService.confirm('Delete Event', 'Are you sure that you want to delete event ' + this.event.name + '?')
       .subscribe(result => {
         if (result['confirm']) {
-          this.eventService.deleteImplementation(this.event.id)
+          this.eventService.deleteEvent(this.event.id)
             .subscribe(deleted => {
               console.log('successfully deleted event');
               this.returnToEventList(true);
@@ -157,7 +157,7 @@ export class EventEditComponent implements OnInit {
     this.dialogService.confirm('End Event Now', 'Are you sure that you want to end event ' + this.event.name + '?')
       .subscribe(result => {
         if (result['confirm']) {
-          this.eventService.endImplementation(this.event.id)
+          this.eventService.endEvent(this.event.id)
             .subscribe(event => {
               console.log('successfully ended event ' + event.id);
               this.returnToEventList(true);
@@ -185,9 +185,9 @@ export class EventEditComponent implements OnInit {
             shouldUpdate = true;
         }
         break;
-      case 'exerciseId':
-        if (!this.viewIdFormControl.hasError('required') && this.event.exerciseId !== this.viewIdFormControl.value) {
-          this.event.exerciseId = this.viewIdFormControl.value;
+      case 'viewId':
+        if (!this.viewIdFormControl.hasError('required') && this.event.viewId !== this.viewIdFormControl.value) {
+          this.event.viewId = this.viewIdFormControl.value;
             shouldUpdate = true;
         }
         break;
@@ -236,7 +236,7 @@ export class EventEditComponent implements OnInit {
     }
     if (shouldUpdate) {
       this.changesWereMade = true;
-      this.eventService.updateImplementation(this.event.id, this.event).subscribe(updatedEvent => {
+      this.eventService.updateEvent(this.event.id, this.event).subscribe(updatedEvent => {
         updatedEvent.launchDate = !updatedEvent.launchDate ? null : new Date(updatedEvent.launchDate);
         updatedEvent.endDate = !updatedEvent.endDate ? null : new Date(updatedEvent.endDate);
         updatedEvent.expirationDate = !updatedEvent.expirationDate ? null : new Date(updatedEvent.expirationDate);

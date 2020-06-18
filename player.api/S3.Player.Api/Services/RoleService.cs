@@ -53,7 +53,7 @@ namespace S3.Player.Api.Services
 
         public async Task<IEnumerable<Role>> GetAsync()
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement())).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement())).Succeeded)
                 throw new ForbiddenException();
 
             var items = await _context.Roles
@@ -111,7 +111,7 @@ namespace S3.Player.Api.Services
             var roleToDelete = await _context.Roles.SingleOrDefaultAsync(t => t.Id == id);
 
             if (roleToDelete == null)
-                throw new EntityNotFoundException<Role>();            
+                throw new EntityNotFoundException<Role>();
 
             _context.Roles.Remove(roleToDelete);
             await _context.SaveChangesAsync();
@@ -120,4 +120,3 @@ namespace S3.Player.Api.Services
         }
     }
 }
-

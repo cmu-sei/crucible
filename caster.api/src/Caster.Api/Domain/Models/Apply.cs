@@ -11,6 +11,7 @@ DM20-0181
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace Caster.Api.Domain.Models
 {
@@ -27,12 +28,17 @@ namespace Caster.Api.Domain.Models
         public string Output { get; set; }
     }
 
-    public enum ApplyStatus 
+    public enum ApplyStatus
     {
         Queued = 0,
         Failed = 1,
         Applying = 2,
-        Applied = 3 
+        Applied = 3,
+
+        [EnumMember(Value = "Applied - State Error")]
+        Applied_StateError = 4,
+
+        [EnumMember(Value = "Failed - State Error")]
+        Failed_StateError = 5
     }
 }
-

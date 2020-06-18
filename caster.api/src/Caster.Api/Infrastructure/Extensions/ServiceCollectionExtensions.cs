@@ -20,6 +20,8 @@ using Caster.Api.Domain.Services;
 using Caster.Api.Infrastructure.HttpHandlers;
 using Caster.Api.Infrastructure.Options;
 using Caster.Api.Infrastructure.Swashbuckle.OperationFilters;
+using Caster.Api.Infrastructure.Swashbuckle.ParameterFilters;
+using Caster.Api.Infrastructure.Swashbuckle.SchemaFilters;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -28,7 +30,6 @@ using Polly;
 using Polly.Extensions.Http;
 using S3.VM.Api;
 using SimpleInjector;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Caster.Api.Infrastructure.Extensions
 {
@@ -125,10 +126,12 @@ namespace Caster.Api.Infrastructure.Extensions
             var commentsFilePath = Path.Combine(baseDirectory, commentsFileName);
 
             services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Caster API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Caster API", Version = "v1.1.0" });
                 c.CustomSchemaIds(schemaIdStrategy);
                 c.OperationFilter<JsonIgnoreQueryOperationFilter>();
                 c.OperationFilter<DefaultResponseOperationFilter>();
+                c.SchemaFilter<AutoRestEnumSchemaFilter>();
+                c.ParameterFilter<AutoRestEnumParameterFilter>();
 
                 c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {

@@ -15,4 +15,3 @@ export interface DirectoryUI {
   isWorkspacesExpanded: boolean;
   isDirectoriesExpanded: boolean;
 }
-

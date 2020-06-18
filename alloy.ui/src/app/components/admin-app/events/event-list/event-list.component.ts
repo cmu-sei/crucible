@@ -10,7 +10,7 @@ DM20-0181
 
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort, MatDialog } from '@angular/material';
-import { Implementation, ImplementationService } from 'src/app/generated/alloy.api';
+import { Event, EventService } from 'src/app/generated/alloy.api';
 import { EventEditComponent } from '../event-edit/event-edit.component';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
 import {Subject} from 'rxjs/Subject';
@@ -35,11 +35,11 @@ export class AdminEventListComponent implements OnInit {
   public filterString: string;
 
   public editEventText = 'Edit Event';
-  public eventToEdit: Implementation;
-  public eventDataSource = new MatTableDataSource<Implementation>(new Array<Implementation>());
-  public activeEvents = new Array<Implementation>();
-  public failedEvents = new Array<Implementation>();
-  public endedEvents = new Array<Implementation>();
+  public eventToEdit: Event;
+  public eventDataSource = new MatTableDataSource<Event>(new Array<Event>());
+  public activeEvents = new Array<Event>();
+  public failedEvents = new Array<Event>();
+  public endedEvents = new Array<Event>();
   public showActive = true;
   public showFailed = false;
   public showEnded = false;
@@ -49,7 +49,7 @@ export class AdminEventListComponent implements OnInit {
   public defaultPageSize = 10;
   public pageEvent: PageEvent;
   public isLoading: Boolean;
-  displayedRows$: Observable<Implementation[]>;
+  displayedRows$: Observable<Event[]>;
   totalRows$: Observable<number>;
   sortEvents$: Observable<Sort>;
   pageEvents$: Observable<PageEvent>;
@@ -60,7 +60,7 @@ export class AdminEventListComponent implements OnInit {
   @ViewChild(EventEditComponent, { static: true }) eventEditComponent: EventEditComponent;
 
   constructor(
-    private eventService: ImplementationService,
+    private eventService: EventService,
     public dialogService: DialogService,
     private dialog: MatDialog
   ) { }
@@ -71,7 +71,7 @@ export class AdminEventListComponent implements OnInit {
   ngOnInit() {
     this.sortEvents$ = fromMatSort(this.sort);
     this.pageEvents$ = fromMatPaginator(this.paginator);
-    // this.eventDataSource.filterPredicate = (data: Implementation, filterString: string) => {
+    // this.eventDataSource.filterPredicate = (data: Event, filterString: string) => {
     //   return this.customEventFilter(data, filterString);
     // };
     this.refresh.subscribe(shouldRefresh => {
@@ -85,7 +85,7 @@ export class AdminEventListComponent implements OnInit {
   /**
    * Defines the custom filterPredicate to filter the events
    */
-  // customEventFilter(data: Implementation, filterString: string) {
+  // customEventFilter(data: Event, filterString: string) {
   //   return data.status.toLowerCase().includes(filterString.toLowerCase());
   // }
 
@@ -113,7 +113,7 @@ export class AdminEventListComponent implements OnInit {
   public refreshEvents() {
     this.isLoading = true;
     this.eventToEdit = undefined;
-    this.eventService.getImplementations().subscribe(events => {
+    this.eventService.getEvents().subscribe(events => {
       this.activeEvents.length = 0;
       this.endedEvents.length = 0;
       this.failedEvents.length = 0;
@@ -157,7 +157,7 @@ export class AdminEventListComponent implements OnInit {
    * filters the events by status (active, ended, failed)
    */
   selectEvents() {
-    let selectedEvents = new Array<Implementation>();
+    let selectedEvents = new Array<Event>();
     if (this.showActive) {
       selectedEvents = selectedEvents.concat(this.activeEvents);
     }
@@ -179,7 +179,7 @@ export class AdminEventListComponent implements OnInit {
     switch (action) {
       case ('edit'): {
         // Edit event
-        this.eventService.getImplementation(eventGuid)
+        this.eventService.getEvent(eventGuid)
           .subscribe(event => {
             const dialogRef = this.dialog.open(EventEditComponent);
             dialogRef.afterOpened().subscribe(r => {
@@ -216,7 +216,7 @@ export class AdminEventListComponent implements OnInit {
     const endDate = new Date(startDate);
     endDate.setMonth(startDate.getMonth() + 1);
     const event = {name: 'New Event', description: 'Add description', status: 'ready', startDate: startDate, endDate: endDate};
-    this.eventService.createImplementation(<Implementation>event).subscribe(ex => {
+    this.eventService.createEvent(<Event>event).subscribe(ex => {
       this.refreshEvents();
       this.executeEventAction('edit', ex.id);
     });

@@ -23,13 +23,13 @@ export class WelderService {
     this.deployUrl = `${settings.WelderUrl}`;
   }
 
-  getDeploymentForExercise(exerciseName: string) {
-    const requestUrl = `${this.deployUrl}/api/${exerciseName}`;
+  getDeploymentForView(viewName: string) {
+    const requestUrl = `${this.deployUrl}/api/${viewName}`;
     return this.http.get<any>(requestUrl);
   }
 
-  deployToExercise(exerciseName: string) {
-    const requestUrl = `${this.deployUrl}/api/${exerciseName}`;
+  deployToView(viewName: string) {
+    const requestUrl = `${this.deployUrl}/api/${viewName}`;
     return this.http.post<any>(requestUrl, null);
   }
 
@@ -38,4 +38,3 @@ export class WelderService {
     return this.http.get<any>(requestUrl);
   }
 }
-

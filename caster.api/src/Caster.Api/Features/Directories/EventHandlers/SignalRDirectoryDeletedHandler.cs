@@ -24,17 +24,17 @@ namespace Caster.Api.Features.Directories.EventHandlers
 {
     public class SignalRDirectoryDeletedHandler : INotificationHandler<DirectoryDeleted>
     {
-        private readonly IHubContext<ExerciseHub> _exerciseHub;
+        private readonly IHubContext<ProjectHub> _projectHub;
 
         public SignalRDirectoryDeletedHandler(
-            IHubContext<ExerciseHub> exerciseHub)
+            IHubContext<ProjectHub> projectHub)
         {
-            _exerciseHub = exerciseHub;
+            _projectHub = projectHub;
         }
 
         public async Task Handle(DirectoryDeleted notification, CancellationToken cancellationToken)
         {
-            await _exerciseHub.Clients.Group(notification.Directory.ExerciseId.ToString()).SendAsync("DirectoryDeleted", notification.Directory.Id);
+            await _projectHub.Clients.Group(notification.Directory.ProjectId.ToString()).SendAsync("DirectoryDeleted", notification.Directory.Id);
         }
     }
 }

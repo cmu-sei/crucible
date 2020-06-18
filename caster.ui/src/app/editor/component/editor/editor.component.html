@@ -9,33 +9,52 @@ DM20-0181
 -->
 
 <mat-sidenav-container autosize [hasBackdrop]="false">
-
-  <mat-sidenav #sidenav mode="side" mwlResizable
-               [style.min-width.px]="sidenavWidth"
-               [style.max-width.px]="sidenavWidth"
-               [resizeCursorPrecision]="10"
-               [resizeEdges]="{left: true}"
-               (resizing)="resizingFn($event)"
-               (resizeEnd)="resizeEndFn($event)"
-               [(opened)]="sidebarOpen"
-               position="end">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    mwlResizable
+    [style.min-width.px]="sidenavWidth"
+    [style.max-width.px]="sidenavWidth"
+    [resizeCursorPrecision]="10"
+    [resizeEdges]="{ left: true }"
+    (resizing)="resizingFn($event)"
+    (resizeEnd)="resizeEndFn($event)"
+    [(opened)]="sidebarOpen"
+    position="end"
+  >
     <div fxLayout="column" fxLayoutAlign="center space-between">
-      <button *ngIf="sidebarOpen" mat-icon-button (click)="resetSidebar()"
-              matTooltip="Close Side Bar">
-        <mat-icon class="mdi-24px" fontIcon="mdi-chevron-double-right"></mat-icon>
+      <button
+        *ngIf="sidebarOpen"
+        mat-icon-button
+        (click)="resetSidebar()"
+        matTooltip="Close Side Bar"
+      >
+        <mat-icon
+          class="mdi-24px"
+          fontIcon="mdi-chevron-double-right"
+        ></mat-icon>
       </button>
       <ng-container [ngSwitch]="sidebar?.value">
         <div *ngSwitchCase="'modules'">
-          <cas-module-list *ngIf="filename.endsWith('.tf')" [modules]="modules"
-                           [selectedModule]="selectedModule$ | async"
-                           [isEditing]="isEditing$ | async"
-                           (getModule)="getModuleFn($event)" (insertModule)="insertModuleFn($event)"></cas-module-list>
+          <cas-module-list
+            *ngIf="filename.endsWith('.tf')"
+            [modules]="modules"
+            [selectedModule]="selectedModule$ | async"
+            [isEditing]="isEditing$ | async"
+            (getModule)="getModuleFn($event)"
+            (insertModule)="insertModuleFn($event)"
+          ></cas-module-list>
         </div>
         <div *ngSwitchCase="'versions'">
-          <cas-version-list *ngSwitchCase="'versions'" [fileId]="fileId"
-                            [selectedVersionId]="(selectedVersionForDiff) ? selectedVersionForDiff.id : ''"
-                            (getVersion)="getVersionFn($event)"
-                            (revertToVersion)="revertToVersionFn($event)"></cas-version-list>
+          <cas-version-list
+            *ngSwitchCase="'versions'"
+            [fileId]="fileId"
+            [selectedVersionId]="
+              selectedVersionForDiff ? selectedVersionForDiff.id : ''
+            "
+            (getVersion)="getVersionFn($event)"
+            (revertToVersion)="revertToVersionFn($event)"
+          ></cas-version-list>
         </div>
       </ng-container>
     </div>
@@ -44,89 +63,189 @@ DM20-0181
   <mat-sidenav-content #sidenavContent id="sidenavContent">
     <div fxLayout="column" fxFlex="1 1 auto">
       <mat-toolbar class="editor-toolbar" fxFlex="0 1 auto">
-        <mat-toolbar-row class="editor-toolbar" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
+        <mat-toolbar-row
+          class="editor-toolbar"
+          fxLayout="row"
+          fxLayoutAlign="end center"
+          fxLayoutGap="5px"
+        >
           <div class="breadcrumb-bar">
-            {{breadcrumbString}}
+            {{ breadcrumbString }}
           </div>
           <div class="spacer"></div>
-          <button mat-icon-button color="primary" fxFlexAlign="center" *ngIf="file && !file.administrativelyLocked"
-                  [disabled]="!isSuperUser"
-                  (click)="adminLockFile()">
-            <mat-icon class="fa-lg" fontSet="fas" fontIcon="fa-unlock"
-                      matTooltip="Not administratively locked"></mat-icon>
+          <button
+            mat-icon-button
+            color="primary"
+            fxFlexAlign="center"
+            *ngIf="file && !file.administrativelyLocked"
+            [disabled]="!isSuperUser"
+            (click)="adminLockFile()"
+          >
+            <mat-icon
+              class="fa-lg"
+              fontSet="fas"
+              fontIcon="fa-unlock"
+              matTooltip="Not administratively locked"
+            ></mat-icon>
           </button>
-          <button mat-icon-button fxFlexAlign="center" *ngIf="file && file.administrativelyLocked"
-                  [disabled]="!isSuperUser"
-                  (click)="adminUnlockFile()">
-            <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-lock" matTooltip="Administratively locked"></mat-icon>
+          <button
+            mat-icon-button
+            color="primary"
+            fxFlexAlign="center"
+            *ngIf="file && file.administrativelyLocked"
+            [disabled]="!isSuperUser"
+            (click)="adminUnlockFile()"
+          >
+            <mat-icon
+              fontSet="fas"
+              class="fa-lg"
+              fontIcon="fa-lock"
+              matTooltip="Administratively locked"
+            ></mat-icon>
           </button>
-          <button mat-icon-button color="primary" fxFlexAlign="center" [disabled]="isSaved$ | async"
-                  (click)="saveFile()">
-            <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-save" matTooltip="Save Changes"></mat-icon>
+          <button
+            mat-icon-button
+            color="primary"
+            fxFlexAlign="center"
+            [disabled]="isSaved$ | async"
+            (click)="saveFile()"
+          >
+            <mat-icon
+              fontSet="fas"
+              class="fa-lg"
+              fontIcon="fa-save"
+              matTooltip="Save Changes"
+            ></mat-icon>
           </button>
-          <button mat-icon-button color="primary" fxFlexAlign="center" [disabled]="file && file.editorContent === file.content"
-                  (click)="discardFileChanges()">
-            <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-undo-alt" matTooltip="Discard Changes"></mat-icon>
+          <button
+            mat-icon-button
+            color="primary"
+            fxFlexAlign="center"
+            [disabled]="file && file.editorContent === file.content"
+            (click)="discardFileChanges()"
+          >
+            <mat-icon
+              fontSet="fas"
+              class="fa-lg"
+              fontIcon="fa-undo-alt"
+              matTooltip="Discard Changes"
+            ></mat-icon>
           </button>
-          <button mat-icon-button color="primary" fxFlexAlign="center"
-                  *ngIf="file && file.lockedById && file.lockedById !== currentUserId"
-                  matTooltip="This file is being edited by {{file.lockedByName}}">
-            <mat-icon fontSet="fas" class="fa-lg" fontIcon="mdi-lock"></mat-icon>
+          <button
+            mat-icon-button
+            fxFlexAlign="center"
+            *ngIf="file && file.lockedById && file.lockedById !== currentUserId"
+            color="warn"
+            matTooltip="This file is being edited by {{ file.lockedByName }}"
+          >
+            <mat-icon
+              fontSet="fas"
+              class="fa-lg"
+              fontIcon="fa-user-edit"
+            ></mat-icon>
           </button>
-          <button mat-icon-button color="primary" fxFlexAlign="center" *ngIf="file && !file.lockedById"
-                  (click)="lockFile()" matTooltip="Edit this file. Only one person can edit a file at a time">
+          <button
+            mat-icon-button
+            fxFlexAlign="center"
+            *ngIf="file && !file.lockedById"
+            color="primary"
+            (click)="lockFile()"
+            matTooltip="Edit this file. Only one person can edit a file at a time"
+          >
             <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-edit"></mat-icon>
           </button>
-          <button mat-icon-button fxFlexAlign="center" *ngIf="file && file.lockedById === currentUserId"
-                  [disabled]="file.editorContent !== file.content"
-                  (click)="unlockFile()" matTooltip="Finish editing and allow someone else to edit this file">
+          <button
+            mat-icon-button
+            fxFlexAlign="center"
+            *ngIf="file && file.lockedById === currentUserId"
+            [disabled]="file.editorContent !== file.content"
+            color="warn"
+            (click)="unlockFile()"
+            matTooltip="Finish editing and allow someone else to edit this file"
+          >
             <mat-icon fontSet="fas" class="fa-lg" fontIcon="fa-edit"></mat-icon>
           </button>
           <mat-divider vertical style="height: 100%;"></mat-divider>
           <div *ngIf="filename.endsWith('.tf')">
-            <mat-button-toggle-group #sidebar="matButtonToggleGroup" [value]="sidebarView" fxLayout="row"
-                                     fxLayoutAlign="center space-around"
-                                     (valueChange)="sidebarChangedFn($event, sidebarOpen)">
-              <mat-button-toggle value="modules" aria-label="modules" (change)="toggleSidebar($event, true)">
+            <mat-button-toggle-group
+              #sidebar="matButtonToggleGroup"
+              [value]="sidebarView"
+              fxLayout="row"
+              fxLayoutAlign="center space-around"
+              (valueChange)="sidebarChangedFn($event, sidebarOpen)"
+            >
+              <mat-button-toggle
+                value="modules"
+                aria-label="modules"
+                (change)="toggleSidebar($event, true)"
+              >
                 <div>
-                  <mat-icon fontSet="fas" fontIcon="fa-code"
-                            matTooltip="Open Modules"></mat-icon>
+                  <mat-icon
+                    color="primary"
+                    fontSet="fas"
+                    fontIcon="fa-code"
+                    matTooltip="Open Modules"
+                  ></mat-icon>
                 </div>
               </mat-button-toggle>
-              <mat-button-toggle value="versions" aria-label="versions" (change)="toggleSidebar($event, true)">
+              <mat-button-toggle
+                value="versions"
+                aria-label="versions"
+                (change)="toggleSidebar($event, true)"
+              >
                 <div>
-                  <mat-icon fontSet="fas" fontIcon="fa-history"
-                            matTooltip="Open File Versions"></mat-icon>
+                  <mat-icon
+                    color="primary"
+                    fontSet="fas"
+                    fontIcon="fa-history"
+                    matTooltip="Open File Versions"
+                  ></mat-icon>
                 </div>
               </mat-button-toggle>
             </mat-button-toggle-group>
-
           </div>
         </mat-toolbar-row>
       </mat-toolbar>
 
-      <ngx-monaco-editor #editor *ngIf="!selectedVersionForDiff" id="editor" class="code-editor"
-                         [options]="editorOptions"
-                         [(ngModel)]="code"
-                         (ngModelChange)="codeChangedEventHandler($event)">
+      <ngx-monaco-editor
+        #editor
+        *ngIf="!selectedVersionForDiff"
+        id="editor"
+        class="code-editor"
+        [options]="editorOptions"
+        [(ngModel)]="code"
+        (ngModelChange)="codeChangedEventHandler($event)"
+      >
       </ngx-monaco-editor>
 
-      <mat-toolbar class="version-toolbar" fxFlex="0 1 auto" *ngIf="selectedVersionForDiff">
-        <mat-toolbar-row class="version-toolbar" fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-toolbar
+        class="version-toolbar"
+        fxFlex="0 1 auto"
+        *ngIf="selectedVersionForDiff"
+      >
+        <mat-toolbar-row
+          class="version-toolbar"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+        >
           <span class="left-version-text">
             CURRENT
           </span>
           <span class="right-version-text">
-            {{selectedVersionForDiff.dateSaved | date: 'yyyy-MM-dd HH:mm'}} by {{selectedVersionForDiff.modifiedByName}} as {{selectedVersionForDiff.name}}
+            {{ selectedVersionForDiff.dateSaved | date: 'yyyy-MM-dd HH:mm' }} by
+            {{ selectedVersionForDiff.modifiedByName }} as
+            {{ selectedVersionForDiff.name }}
           </span>
         </mat-toolbar-row>
       </mat-toolbar>
-      <ngx-monaco-diff-editor class="code-editor" *ngIf="selectedVersionForDiff"
-                              [options]="editorOptions"
-                              [original]="code"
-                              [modified]="selectedVersionForDiff.content">
+      <ngx-monaco-diff-editor
+        class="code-editor"
+        *ngIf="selectedVersionForDiff"
+        [options]="editorOptions"
+        [original]="code"
+        [modified]="selectedVersionForDiff.content"
+      >
       </ngx-monaco-diff-editor>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-

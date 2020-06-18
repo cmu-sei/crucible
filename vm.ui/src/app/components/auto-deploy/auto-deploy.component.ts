@@ -26,7 +26,7 @@ export class AutoDeployComponent implements OnInit {
   public showDeployButton = false;
   public deployButtonDisabled = false;
 
-  private exerciseId: string;
+  private viewId: string;
 
   constructor(
     public autoDeployService: AutoDeployService,
@@ -36,16 +36,16 @@ export class AutoDeployComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.exerciseId = this.route.snapshot.params['exerciseId'];
+    this.viewId = this.route.snapshot.params['viewId'];
 
-    this.vmService.GetExerciseVms(true, true).subscribe(
+    this.vmService.GetViewVms(true, true).subscribe(
       vms => {
           const vm = vms[0];
 
           if (vm) {
             window.location.href = vm.url;
           } else {
-            this.autoDeployService.getDeploymentForExercise(this.exerciseId).subscribe(
+            this.autoDeployService.getDeploymentForView(this.viewId).subscribe(
               result => {
                 if (!result.DefaultTemplateConfigured) {
                   this.snackBar.open('A default workstation has not been configured for your Team.');
@@ -70,7 +70,7 @@ export class AutoDeployComponent implements OnInit {
   }
 
   public autoDeploy() {
-    this.autoDeployService.deployToExercise(this.exerciseId).subscribe(
+    this.autoDeployService.deployToView(this.viewId).subscribe(
       result => {
         this.deployButtonDisabled = true;
         this.snackBar.open('Request Received. Please wait while your workstation is provisioned.');
@@ -85,7 +85,7 @@ export class AutoDeployComponent implements OnInit {
   }
 
   private checkForWorkstation() {
-    this.vmService.GetExerciseVms(true, true).subscribe(
+    this.vmService.GetViewVms(true, true).subscribe(
       vms => {
         const vm = vms[0];
 
@@ -96,4 +96,3 @@ export class AutoDeployComponent implements OnInit {
     );
   }
 }
-

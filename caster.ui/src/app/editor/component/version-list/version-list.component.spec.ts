@@ -18,9 +18,8 @@ describe('VersionListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VersionListComponent ]
-    })
-    .compileComponents();
+      declarations: [VersionListComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('VersionListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

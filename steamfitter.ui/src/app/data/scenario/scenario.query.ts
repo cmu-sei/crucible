@@ -10,11 +10,8 @@ DM20-0181
 
 import { Order, Query, QueryConfig, QueryEntity } from '@datorama/akita';
 import { ScenarioState, ScenarioStore } from './scenario.store';
-// TODO: replace the following import when API renames its nouns
-import { Scenario } from './scenario.store';
-// import { Session } from 'src/app/swagger-codegen/dispatcher.api';
+import { Scenario } from 'src/app/swagger-codegen/dispatcher.api';
 import { Injectable } from '@angular/core';
-import {PageEvent} from '@angular/material';
 import { Observable } from 'rxjs';
 
 @QueryConfig({

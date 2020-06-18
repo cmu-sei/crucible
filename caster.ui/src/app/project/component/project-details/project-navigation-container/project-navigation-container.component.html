@@ -9,27 +9,49 @@ DM20-0181
 -->
 
 <div *ngIf="project$ | async as project">
-    <div *ngFor="let obj of projectDirectories$ | async">
-        <cas-directory-panel [parentDirectory]="obj">
-        </cas-directory-panel>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon (click)="createNewDirectory()" title="Add New Directory" class="add-icon mdi-18px icon"
-            fontIcon="mdi-folder-plus-outline" matTooltip="Add New Directory to Project {{project.name}}"></mat-icon>
-        <a class="link-text" matTooltip="Add New Directory to Project {{project.name}}" (click)="createNewDirectory()">Add Directory</a>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon (click)="exportProject()" title="Export Project" class="add-icon fa" fontSet="fas"
-                  fontIcon="fa-file-export" matTooltip="Export Project {{project.name}}"></mat-icon>
-        <a class="link-text" matTooltip="Export Project {{project.name}}" (click)="exportProject()">Export Project</a>
-    </div>
+  <div *ngFor="let obj of projectDirectories$ | async">
+    <cas-directory-panel [parentDirectory]="obj"> </cas-directory-panel>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" class="nav-background">
+    <mat-icon
+      (click)="createNewDirectory()"
+      title="Add New Directory"
+      class="add-icon mdi-18px icon"
+      fontIcon="mdi-folder-plus-outline"
+      matTooltip="Add New Directory to Project {{ project.name }}"
+    ></mat-icon>
+    <a
+      class="add-link"
+      matTooltip="Add New Directory to Project {{ project.name }}"
+      (click)="createNewDirectory()"
+      >Add Directory</a
+    >
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" class="nav-background">
+    <mat-icon
+      (click)="exportProject()"
+      title="Export Project"
+      class="add-icon fa"
+      fontSet="fas"
+      fontIcon="fa-file-export"
+      matTooltip="Export Project {{ project.name }}"
+    ></mat-icon>
+    <a
+      class="add-link"
+      matTooltip="Export Project {{ project.name }}"
+      (click)="exportProject()"
+      >Export Project</a
+    >
+  </div>
 </div>
 
 <ng-template #exportDialog>
-    <cas-project-export *ngIf="project$ | async as project"
-                        [id]="project.id"
-                        [type]="objType"
-                        [name]="project.name"
-                        (exportComplete)="onExportComplete()">
-    </cas-project-export>
+  <cas-project-export
+    *ngIf="project$ | async as project"
+    [id]="project.id"
+    [type]="objType"
+    [name]="project.name"
+    (exportComplete)="onExportComplete()"
+  >
+  </cas-project-export>
 </ng-template>

@@ -8,9 +8,9 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, EventEmitter, Output, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Output, Inject } from '@angular/core';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
-import { MAT_DIALOG_DATA, ErrorStateMatcher } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -63,9 +63,10 @@ export class ScenarioTemplateEditDialogComponent {
 
   constructor(
     public dialogService: DialogService,
-    private changeDetectorRef: ChangeDetectorRef,
+    dialogRef: MatDialogRef<ScenarioTemplateEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    dialogRef.disableClose = true;
   }
 
   errorFree() {

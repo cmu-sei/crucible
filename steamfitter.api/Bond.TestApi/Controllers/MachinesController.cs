@@ -36,7 +36,7 @@ namespace Bond.TestApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post(ExerciseAgent model)
+        public IActionResult Post(BondAgent model)
         {
             _timelineLog.Info($"MACHINE|{DateTime.Now}|{JsonConvert.SerializeObject(model)}");
 

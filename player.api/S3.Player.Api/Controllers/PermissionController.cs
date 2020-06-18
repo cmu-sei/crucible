@@ -36,7 +36,7 @@ namespace S3.Player.Api.Controllers
         /// Returns a list of all of the Permissions in the system.
         /// <para />
         /// Only accessible to a SuperUser
-        /// </remarks>       
+        /// </remarks>
         /// <returns></returns>
         [HttpGet("permissions")]
         [ProducesResponseType(typeof(IEnumerable<Permission>), (int)HttpStatusCode.OK)]
@@ -76,10 +76,10 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Creates a new Permission with the attributes specified
         /// <para />
-        /// An Permission is a top-level resource that can optionally be the parent of an Exercise specific Application resource, which would inherit it's properties
+        /// An Permission is a top-level resource that can optionally be the parent of an View specific Application resource, which would inherit it's properties
         /// <para />
         /// Accessible only to a SuperUser
-        /// </remarks>   
+        /// </remarks>
         [HttpPost("permissions")]
         [ProducesResponseType(typeof(Permission), (int)HttpStatusCode.Created)]
         [SwaggerOperation(operationId: "createPermission")]
@@ -116,7 +116,7 @@ namespace S3.Player.Api.Controllers
         /// Deletes a Permission with the specified id
         /// <para />
         /// Accessible only to a SuperUser
-        /// </remarks>    
+        /// </remarks>
         /// <param name="id">The id of the Permission to delete</param>
         [HttpDelete("permissions/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
@@ -128,37 +128,37 @@ namespace S3.Player.Api.Controllers
         }
 
         /// <summary>
-        /// Gets a User's permissions for an Exercise
+        /// Gets a User's permissions for an View
         /// </summary>
         /// <remarks>
-        /// Returns a list of all of the Permissions for the User on this Exercise
+        /// Returns a list of all of the Permissions for the User on this View
         /// <para />
-        /// If the User is a member of the Exercise, this will first use any Permissions on their Primary Team Membership, and then apply any Permissions on the Team itself.
-        /// If the User is not a member of the Exercise, the User's top level Permissions will be returned.
-        /// </remarks>       
+        /// If the User is a member of the View, this will first use any Permissions on their Primary Team Membership, and then apply any Permissions on the Team itself.
+        /// If the User is not a member of the View, the User's top level Permissions will be returned.
+        /// </remarks>
         /// <returns></returns>
-        [HttpGet("users/{userId}/exercises/{exerciseId}/permissions")]
+        [HttpGet("users/{userId}/views/{viewId}/permissions")]
         [ProducesResponseType(typeof(IEnumerable<Permission>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getUserExercisePermissions")]
-        public async Task<IActionResult> GetByExerciseId(Guid exerciseId, Guid userId)
+        [SwaggerOperation(operationId: "getUserViewPermissions")]
+        public async Task<IActionResult> GetByViewId(Guid viewId, Guid userId)
         {
-            var list = await _permissionService.GetByExerciseIdForUserAsync(exerciseId, userId);
+            var list = await _permissionService.GetByViewIdForUserAsync(viewId, userId);
             return Ok(list);
         }
 
         /// <summary>
-        /// Gets a User's permissions for the Exercise a given Team is part of
+        /// Gets a User's permissions for the View a given Team is part of
         /// </summary>
         /// <remarks>
-        /// Returns a list of all of the Permissions for the User on the Exercise that the specified Team belongs to
+        /// Returns a list of all of the Permissions for the User on the View that the specified Team belongs to
         /// <para />
-        /// If the User is a member of the Exercise, this will first use any Permissions on their Primary Team Membership, and then apply any Permissions on the Team itself.
-        /// If the User is not a member of the Exercise, the User's top level Permissions will be returned.
-        /// </remarks>       
+        /// If the User is a member of the View, this will first use any Permissions on their Primary Team Membership, and then apply any Permissions on the Team itself.
+        /// If the User is not a member of the View, the User's top level Permissions will be returned.
+        /// </remarks>
         /// <returns></returns>
         [HttpGet("users/{userId}/teams/{teamId}/permissions")]
         [ProducesResponseType(typeof(IEnumerable<Permission>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getUserExercisePermissionsByTeam")]
+        [SwaggerOperation(operationId: "getUserViewPermissionsByTeam")]
         public async Task<IActionResult> GetByTeamId(Guid teamId, Guid userId)
         {
             var list = await _permissionService.GetByTeamIdForUserAsync(teamId, userId);
@@ -211,7 +211,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Adds the specified Permission to the specified Team
         /// <para />
-        /// Accessible to a SuperUser or an Exercise Admin of the Exercise the Team is part of
+        /// Accessible to a SuperUser or an View Admin of the View the Team is part of
         /// </remarks>
         /// <param name="teamId">The id of the Team</param>
         /// <param name="permissionId">The id of the Permission</param>
@@ -231,7 +231,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Removes the specified Permission from the specified Team
         /// <para />
-        /// Accessible to a SuperUser or an Exercise Admin of the Exercise the Team is part of
+        /// Accessible to a SuperUser or an View Admin of the View the Team is part of
         /// </remarks>
         /// <param name="teamId">The id of the Team</param>
         /// <param name="permissionId">The id of the Permission</param>
@@ -286,4 +286,3 @@ namespace S3.Player.Api.Controllers
         }
     }
 }
-

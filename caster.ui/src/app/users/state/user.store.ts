@@ -8,10 +8,17 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityState, EntityStore, EntityUIStore, Store, StoreConfig} from '@datorama/akita';
-import {User} from '../../generated/caster-api';
-import {Injectable, InjectionToken} from '@angular/core';
-import {UserUi} from './user.model';
+import {
+  EntityState,
+  EntityStore,
+  EntityUIStore,
+  Store,
+  StoreConfig,
+} from '@datorama/akita';
+import { User } from '../../generated/caster-api';
+import { Injectable } from '@angular/core';
+import { UserUi } from './user.model';
+import { Theme } from '../../shared/models/theme-enum';
 
 export interface UsersState extends EntityState<User> {}
 export interface UserUIState extends EntityState<UserUi> {}
@@ -19,18 +26,20 @@ export interface UserUIState extends EntityState<UserUi> {}
 export const initialUserUiState: UserUi = {
   isSelected: false,
   isEditing: false,
-  isSaved: false
+  isSaved: false,
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({ name: 'users' })
 export class UserStore extends EntityStore<UsersState> {
   ui: EntityUIStore<UserUIState>;
   constructor() {
     super();
-    this.createUIStore().setInitialEntityState((entity => ({...initialUserUiState})));
+    this.createUIStore().setInitialEntityState((entity) => ({
+      ...initialUserUiState,
+    }));
   }
 }
 
@@ -38,18 +47,20 @@ export interface CurrentUserState {
   name: string;
   isSuperUser: boolean;
   id: string;
+  theme?: Theme;
 }
 
 export function createInitialCurrentUserState(): CurrentUserState {
   return {
     name: '',
     isSuperUser: false,
-    id: ''
+    id: '',
+    theme: Theme.LIGHT,
   };
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({ name: 'currentUser' })
 export class CurrentUserStore extends Store<CurrentUserState> {
@@ -57,4 +68,3 @@ export class CurrentUserStore extends Store<CurrentUserState> {
     super(createInitialCurrentUserState());
   }
 }
-

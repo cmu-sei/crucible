@@ -19,8 +19,7 @@ export interface ApplicationData {
     icon: string;
     embeddable: boolean;
     loadInBackground: boolean;
-    exerciseId: string;
+    viewId: string;
     safeUrl: SafeUrl
 
 }
-

@@ -25,16 +25,7 @@ namespace Alloy.Api.Services
 {
     public interface ISteamfitterService
     {
-        Task<IEnumerable<Scenario>> GetScenariosAsync(CancellationToken ct);
-        // Task<Scenario> GetScenarioAsync(Guid scenarioId, CancellationToken ct);
-        // Task<IEnumerable<Session>> GetSessionsAsync(CancellationToken ct);
-        // Task<Session> GetSessionAsync(Guid sessionId, CancellationToken ct);
-        // Task<Session> CreateSessionFromScenarioAsync(Guid scenarioId, CancellationToken ct);
-        // Task<Session> StartSessionAsync(Guid scenarioId, CancellationToken ct);
-        // Task<Session> PauseSessionAsync(Guid scenarioId, CancellationToken ct);
-        // Task<Session> ContinueSessionAsync(Guid scenarioId, CancellationToken ct);
-        // Task<Session> EndSessionAsync(Guid scenarioId, CancellationToken ct);
-        // Task<bool> DeleteSessionAsync(Guid scenarioId, CancellationToken ct);
+        Task<IEnumerable<ScenarioTemplate>> GetScenarioTemplatesAsync(CancellationToken ct);
     }
 
     public class SteamfitterService : ISteamfitterService
@@ -48,66 +39,13 @@ namespace Alloy.Api.Services
             _steamfitterApiClient = steamfitterApiClient;
         }       
 
-        public async Task<IEnumerable<Scenario>> GetScenariosAsync(CancellationToken ct)
+        public async Task<IEnumerable<ScenarioTemplate>> GetScenarioTemplatesAsync(CancellationToken ct)
         {
-            var scenarios = await _steamfitterApiClient.GetScenariosAsync(ct);
+            var scenarioTemplates = await _steamfitterApiClient.GetScenarioTemplatesAsync(ct);
 
-            return scenarios;
+            return scenarioTemplates;
         }
 
-        // public async Task<Scenario> GetScenarioAsync(Guid scenarioId, CancellationToken ct)
-        // {
-        //     var scenario = await _steamfitterApiClient.GetScenarioAsync(scenarioId, ct);
-
-        //     return scenario;
-        // }
-
-        // public async Task<IEnumerable<Session>> GetSessionsAsync(CancellationToken ct)
-        // {
-        //     var sessions = await _steamfitterApiClient.GetSessionsAsync(ct);
-
-        //     return sessions;
-        // }
-
-        // public async Task<Session> GetSessionAsync(Guid sessionId, CancellationToken ct)
-        // {
-        //     var session = await _steamfitterApiClient.GetSessionAsync(sessionId, ct);
-
-        //     return session;
-        // }
-
-        // public async Task<Session> CreateSessionFromScenarioAsync(Guid scenarioId, CancellationToken ct)
-        // {
-        //     var newSession = await _steamfitterApiClient.CreateSessionFromScenarioAsync(scenarioId, ct);
-        //     return newSession;
-        // }
-
-        // public async Task<Session> StartSessionAsync(Guid sessionId, CancellationToken ct)
-        // {
-        //     return await _steamfitterApiClient.StartSessionAsync(sessionId, ct);
-        // }
-
-        // public async Task<Session> PauseSessionAsync(Guid sessionId, CancellationToken ct)
-        // {
-        //     return await _steamfitterApiClient.PauseSessionAsync(sessionId, ct);
-        // }
-
-        // public async Task<Session> ContinueSessionAsync(Guid sessionId, CancellationToken ct)
-        // {
-        //     return await _steamfitterApiClient.ContinueSessionAsync(sessionId, ct);
-        // }
-
-        // public async Task<Session> EndSessionAsync(Guid sessionId, CancellationToken ct)
-        // {
-        //     return await _steamfitterApiClient.EndSessionAsync(sessionId, ct);
-        // }
-
-        // public async Task<bool> DeleteSessionAsync(Guid sessionId, CancellationToken ct)
-        // {
-        //     // TODO: figure out why the swagger client code retunrs void and not bool
-        //     await _steamfitterApiClient.DeleteSessionAsync(sessionId, ct);
-        //     return true;
-        // }
 
 
 

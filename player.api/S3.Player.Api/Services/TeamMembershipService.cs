@@ -32,7 +32,7 @@ namespace S3.Player.Api.Services
     public interface ITeamMembershipService
     {
         Task<TeamMembership> GetAsync(Guid id);
-        Task<IEnumerable<TeamMembership>> GetByExerciseIdForUserAsync(Guid exerciseId, Guid userId);
+        Task<IEnumerable<TeamMembership>> GetByViewIdForUserAsync(Guid viewId, Guid userId);
         Task<TeamMembership> UpdateAsync(Guid id, TeamMembershipForm form);
     }
 
@@ -55,15 +55,15 @@ namespace S3.Player.Api.Services
                 .ProjectTo<TeamMembership>()
                 .SingleOrDefaultAsync(o => o.Id == id);
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrExerciseAdminRequirement(item.ExerciseId, item.UserId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrViewAdminRequirement(item.ViewId, item.UserId))).Succeeded)
                 throw new ForbiddenException();
 
             return item;
         }
 
-        public async Task<IEnumerable<TeamMembership>> GetByExerciseIdForUserAsync(Guid exerciseId, Guid userId)
+        public async Task<IEnumerable<TeamMembership>> GetByViewIdForUserAsync(Guid viewId, Guid userId)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrExerciseAdminRequirement(exerciseId, userId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrViewAdminRequirement(viewId, userId))).Succeeded)
                 throw new ForbiddenException();
 
             var userExists = _context.Users
@@ -72,7 +72,7 @@ namespace S3.Player.Api.Services
                 .FutureValue();
 
             var membershipQuery = _context.TeamMemberships
-                .Where(m => m.UserId == userId && m.ExerciseMembership.ExerciseId == exerciseId)
+                .Where(m => m.UserId == userId && m.ViewMembership.ViewId == viewId)
                 .ProjectTo<TeamMembership>()
                 .Future();
 
@@ -85,13 +85,13 @@ namespace S3.Player.Api.Services
         public async Task<TeamMembership> UpdateAsync(Guid id, TeamMembershipForm form)
         {
             var membershipToUpdate = await _context.TeamMemberships
-                .Include(m => m.ExerciseMembership)
+                .Include(m => m.ViewMembership)
                 .SingleOrDefaultAsync(v => v.Id == id);
 
             if (membershipToUpdate == null)
                 throw new EntityNotFoundException<TeamMembership>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(membershipToUpdate.ExerciseMembership.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(membershipToUpdate.ViewMembership.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             Mapper.Map(form, membershipToUpdate);
@@ -103,4 +103,3 @@ namespace S3.Player.Api.Services
         }
     }
 }
-

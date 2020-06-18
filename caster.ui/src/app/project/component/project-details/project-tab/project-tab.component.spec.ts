@@ -18,9 +18,8 @@ describe('ProjectTabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectTabComponent ]
-    })
-    .compileComponents();
+      declarations: [ProjectTabComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('ProjectTabComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

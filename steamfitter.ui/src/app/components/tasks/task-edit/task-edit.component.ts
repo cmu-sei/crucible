@@ -9,10 +9,9 @@ DM20-0181
 */
 
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
-// TODO: resolve imports when APIs change nouns
-import { DispatchTask, DispatchTaskService } from 'src/app/swagger-codegen/dispatcher.api';
+import { Task, TaskService } from 'src/app/swagger-codegen/dispatcher.api';
 import { Command } from 'src/app/models/command';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-task-edit',
@@ -23,20 +22,23 @@ export class TaskEditComponent implements OnInit {
 
   @Output() editComplete = new EventEmitter<any>();
   public triggerConditions = [
-    DispatchTask.TriggerConditionEnum.Time,
-    DispatchTask.TriggerConditionEnum.Manual,
-    DispatchTask.TriggerConditionEnum.Completion,
-    DispatchTask.TriggerConditionEnum.Success,
-    DispatchTask.TriggerConditionEnum.Failure,
-    DispatchTask.TriggerConditionEnum.Expiration
+    Task.TriggerConditionEnum.Time,
+    Task.TriggerConditionEnum.Manual,
+    Task.TriggerConditionEnum.Completion,
+    Task.TriggerConditionEnum.Success,
+    Task.TriggerConditionEnum.Failure,
+    Task.TriggerConditionEnum.Expiration
   ];
   public availableCommands: Command[];
   public selectedCommand: Command;
 
   constructor(
-    public taskService: DispatchTaskService,
+    public taskService: TaskService,
+    dialogRef: MatDialogRef<TaskEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+    dialogRef.disableClose = true;
+  }
 
   ngOnInit() {
     this.taskService.getAvailableCommands().subscribe(cmdsJson => {
@@ -47,18 +49,18 @@ export class TaskEditComponent implements OnInit {
       }
     },
     error => {
-      console.log('The Dispatcher API is not responding.  ' + error.message);
+      console.log('The Steamfitter API is not responding.  ' + error.message);
     });
   }
 
   onCommandChange() {
-    // Build dispatcher command
-    let dispatcherCmd = `{ "Moid": "${ '{moid}' }"`;
+    // Build command
+    let command = `{ "Moid": "${ '{moid}' }"`;
     this.selectedCommand.parameters.filter(obj => obj.key !== 'Moid').forEach(param => {
-      dispatcherCmd += `, "${ param.key }": "${ param.value.replace(/\\/g, '\\\\').replace(/"/g, '\\\"')}"`;
+      command += `, "${ param.key }": "${ param.value.replace(/\\/g, '\\\\').replace(/"/g, '\\\"')}"`;
     });
-    dispatcherCmd += '}';
-    this.data.task.inputString = dispatcherCmd;
+    command += '}';
+    this.data.task.inputString = command;
     this.data.task.apiUrl = this.selectedCommand.api;
     this.data.task.action = this.selectedCommand.action;
   }

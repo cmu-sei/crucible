@@ -284,7 +284,7 @@ export class OptionsBarComponent implements OnInit {
   }
 
   splitIsoList(isoList: any) {
-    const exerciseId = this.route.snapshot.queryParams['exerciseId'];
+    const viewId = this.route.snapshot.queryParams['viewId'];
     this.teamIsos = [];
     this.publicIsos = [];
     isoList.forEach(isoName => {
@@ -294,7 +294,7 @@ export class OptionsBarComponent implements OnInit {
         'filename': filename,
         'path': isoName
       };
-      if (isoName.indexOf('/' + exerciseId + '/' + exerciseId + '/') > -1) {
+      if (isoName.indexOf('/' + viewId + '/' + viewId + '/') > -1) {
         this.publicIsos.push(isoObject);
       } else {
         this.teamIsos.push(isoObject);
@@ -346,4 +346,3 @@ export class OptionsBarComponent implements OnInit {
     }, 2000);
   }
 }
-

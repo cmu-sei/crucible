@@ -38,9 +38,9 @@ namespace S3.Player.Api.Services
         Task<bool> DeleteTemplateAsync(Guid id, CancellationToken ct);
 
         // Applications
-        Task<IEnumerable<ViewModels.Application>> GetApplicationsByExerciseAsync(Guid exerciseId, CancellationToken ct);
+        Task<IEnumerable<ViewModels.Application>> GetApplicationsByViewAsync(Guid viewId, CancellationToken ct);
         Task<ViewModels.Application> GetApplicationAsync(Guid id, CancellationToken ct);
-        Task<ViewModels.Application> CreateApplicationAsync(Guid exerciseId, ViewModels.Application application, CancellationToken ct);
+        Task<ViewModels.Application> CreateApplicationAsync(Guid viewId, ViewModels.Application application, CancellationToken ct);
         Task<ViewModels.Application> UpdateApplicationAsync(Guid id, ViewModels.Application application, CancellationToken ct);
         Task<bool> DeleteApplicationAsync(Guid id, CancellationToken ct);
 
@@ -51,7 +51,7 @@ namespace S3.Player.Api.Services
         Task<ViewModels.ApplicationInstance> UpdateInstanceAsync(Guid id, ViewModels.ApplicationInstanceForm instance, CancellationToken ct);
         Task<bool> DeleteInstanceAsync(Guid id, CancellationToken ct);
     }
-    
+
     public class ApplicationService : IApplicationService
     {
         private readonly PlayerContext _context;
@@ -69,7 +69,7 @@ namespace S3.Player.Api.Services
 
         public async Task<IEnumerable<ViewModels.ApplicationTemplate>> GetTemplatesAsync(CancellationToken ct)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement())).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement())).Succeeded)
                 throw new ForbiddenException();
 
             var items = await _context.ApplicationTemplates
@@ -81,7 +81,7 @@ namespace S3.Player.Api.Services
 
         public async Task<ViewModels.ApplicationTemplate> GetTemplateAsync(Guid id, CancellationToken ct)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement())).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement())).Succeeded)
                 throw new ForbiddenException();
 
             var item = await _context.ApplicationTemplates
@@ -142,20 +142,20 @@ namespace S3.Player.Api.Services
 
         #region Applications
 
-        public async Task<IEnumerable<ViewModels.Application>> GetApplicationsByExerciseAsync(Guid exerciseId, CancellationToken ct)
+        public async Task<IEnumerable<ViewModels.Application>> GetApplicationsByViewAsync(Guid viewId, CancellationToken ct)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(exerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(viewId))).Succeeded)
                 throw new ForbiddenException();
 
-            var exercise = await _context.Exercises
+            var view = await _context.Views
                 .Include(e => e.Applications)
-                .Where(e => e.Id == exerciseId)
+                .Where(e => e.Id == viewId)
                 .SingleOrDefaultAsync(ct);
 
-            if (exercise == null)
-                throw new EntityNotFoundException<Exercise>();
+            if (view == null)
+                throw new EntityNotFoundException<View>();
 
-            return Mapper.Map<IEnumerable<ViewModels.Application>>(exercise.Applications);
+            return Mapper.Map<IEnumerable<ViewModels.Application>>(view.Applications);
         }
 
         public async Task<ViewModels.Application> GetApplicationAsync(Guid id, CancellationToken ct)
@@ -164,21 +164,21 @@ namespace S3.Player.Api.Services
                 .ProjectTo<ViewModels.Application>()
                 .SingleOrDefaultAsync(o => o.Id == id, ct);
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(item.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(item.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             return item;
         }
 
-        public async Task<ViewModels.Application> CreateApplicationAsync(Guid exerciseId, ViewModels.Application application, CancellationToken ct)
+        public async Task<ViewModels.Application> CreateApplicationAsync(Guid viewId, ViewModels.Application application, CancellationToken ct)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(exerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(viewId))).Succeeded)
                 throw new ForbiddenException();
 
-            var exerciseExists = await _context.Exercises.Where(e => e.Id == exerciseId).AnyAsync(ct);
+            var viewExists = await _context.Views.Where(e => e.Id == viewId).AnyAsync(ct);
 
-            if(!exerciseExists)
-                throw new EntityNotFoundException<Exercise>();
+            if(!viewExists)
+                throw new EntityNotFoundException<View>();
 
             var applicationEntity = Mapper.Map<ApplicationEntity>(application);
 
@@ -189,7 +189,7 @@ namespace S3.Player.Api.Services
 
             return application;
         }
-        
+
         public async Task<ViewModels.Application> UpdateApplicationAsync(Guid id, ViewModels.Application application, CancellationToken ct)
         {
             var applicationToUpdate = await _context.Applications.SingleOrDefaultAsync(v => v.Id == id, ct);
@@ -197,7 +197,7 @@ namespace S3.Player.Api.Services
             if (applicationToUpdate == null)
                 throw new EntityNotFoundException<Application>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(application.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(application.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             Mapper.Map(application, applicationToUpdate);
@@ -215,7 +215,7 @@ namespace S3.Player.Api.Services
             if (applicationToDelete == null)
                 throw new EntityNotFoundException<Application>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(applicationToDelete.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(applicationToDelete.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             _context.Applications.Remove(applicationToDelete);
@@ -245,7 +245,7 @@ namespace S3.Player.Api.Services
             if (team == null)
                 throw new EntityNotFoundException<Team>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new TeamAccessRequirement(team.ExerciseId, teamId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new TeamAccessRequirement(team.ViewId, teamId))).Succeeded)
                 throw new ForbiddenException();
 
             return await instanceQuery.ToListAsync();
@@ -257,7 +257,7 @@ namespace S3.Player.Api.Services
                 .ProjectTo<ViewModels.ApplicationInstance>()
                 .SingleOrDefaultAsync(a => a.Id == id, ct);
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(instance.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(instance.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             return instance;
@@ -270,7 +270,7 @@ namespace S3.Player.Api.Services
             if (team == null)
                 throw new EntityNotFoundException<Team>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(team.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(team.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             var instanceEntity = Mapper.Map<ApplicationInstanceEntity>(form);
@@ -284,7 +284,7 @@ namespace S3.Player.Api.Services
 
             return instance;
         }
-        
+
         public async Task<ViewModels.ApplicationInstance> UpdateInstanceAsync(Guid id, ViewModels.ApplicationInstanceForm form, CancellationToken ct)
         {
             var instanceToUpdate = await _context.ApplicationInstances
@@ -294,7 +294,7 @@ namespace S3.Player.Api.Services
             if (instanceToUpdate == null)
                 throw new EntityNotFoundException<ApplicationInstance>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(instanceToUpdate.Team.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(instanceToUpdate.Team.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             Mapper.Map(form, instanceToUpdate);
@@ -318,7 +318,7 @@ namespace S3.Player.Api.Services
             if (instanceToDelete == null)
                 throw new EntityNotFoundException<ApplicationInstance>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(instanceToDelete.Team.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(instanceToDelete.Team.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             _context.ApplicationInstances.Remove(instanceToDelete);
@@ -327,7 +327,6 @@ namespace S3.Player.Api.Services
             return true;
         }
 
-        #endregion       
+        #endregion
     }
 }
-

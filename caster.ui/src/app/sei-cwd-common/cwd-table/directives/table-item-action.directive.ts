@@ -11,11 +11,8 @@ DM20-0181
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[cwdTableItemAction]'
+  selector: '[cwdTableItemAction]',
 })
 export class TableItemActionDirective {
-
-  constructor() { }
-
+  constructor() {}
 }
-

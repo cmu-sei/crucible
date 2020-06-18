@@ -24,7 +24,7 @@ export class WelderComponent implements OnInit {
   public showDeployButton = false;
   public deployButtonDisabled = false;
   public readyVMs = new Set();
-  private exerciseName: string;
+  private viewName: string;
   private previousWSResults = [0, 0, 0];
 
   constructor(
@@ -35,7 +35,7 @@ export class WelderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.exerciseName = this.route.snapshot.params['exerciseName'];
+    this.viewName = this.route.snapshot.params['viewName'];
     this.checkForWorkstations();
     IntervalObservable.create(30000).subscribe(() => {
       const firstValue = this.previousWSResults[0];
@@ -60,7 +60,7 @@ export class WelderComponent implements OnInit {
 
   public autoDeploy() {
     this.deployButtonDisabled = true;
-    this.welderService.deployToExercise(this.exerciseName).subscribe(
+    this.welderService.deployToView(this.viewName).subscribe(
       response => {
         console.log(response);
         this.snackBar.open('Request received. Please wait while your workstations are provisioned.');
@@ -100,4 +100,3 @@ export class WelderComponent implements OnInit {
     window.open(vm.url, '_blank');
   }
 }
-

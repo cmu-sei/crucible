@@ -11,18 +11,12 @@ DM20-0181
 import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort, MatDialog } from '@angular/material';
-import { HttpEventType } from '@angular/common/http';
-import { Scenario } from 'src/app/data/scenario/scenario.store';
-import { View } from 'src/app/services/data/player-data-service';
+import { Scenario, View } from 'src/app/swagger-codegen/dispatcher.api';
 import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { ScenarioEditComponent } from 'src/app/components/scenarios/scenario-edit/scenario-edit.component';
 import { ScenarioEditDialogComponent } from 'src/app/components/scenarios/scenario-edit-dialog/scenario-edit-dialog.component';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
-import {Subject} from 'rxjs/Subject';
 import { Observable  } from 'rxjs/Observable';
-import { of  } from 'rxjs/observable/of';
-import { map } from 'rxjs/operators';
-import { fromMatSort, sortRows, fromMatPaginator, paginateRows } from 'src/app/datasource-utils';
 
 export interface Action {
   Value: string;

@@ -58,4 +58,5 @@ src/assets/config/settings.[Ee]nv.json
 # Docker
 /docker/certs
 /docker/**/*.json
+/docker/**/gitconfig
 /docker/docker-compose

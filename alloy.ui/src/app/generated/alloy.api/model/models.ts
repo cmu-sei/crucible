@@ -8,12 +8,12 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 export * from './apiError';
-export * from './definition';
+export * from './event-template';
 export * from './directory';
-export * from './exercise';
-export * from './implementation';
+export * from './view';
+export * from './event';
 export * from './file';
 export * from './permission';
-export * from './scenario';
+export * from './scenario-template';
 export * from './user';
 export * from './workspace';

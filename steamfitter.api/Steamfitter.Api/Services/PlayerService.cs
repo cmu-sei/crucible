@@ -8,53 +8,34 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Rest;
 using S3.Player.Api;
 using S3.Player.Api.Models;
-using Steamfitter.Api.Infrastructure.Extensions;
-using Steamfitter.Api.Infrastructure.Options;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
+
 
 namespace Steamfitter.Api.Services
 {
     public interface IPlayerService
     {
-        Task<IEnumerable<Exercise>> GetExercisesAsync(CancellationToken ct);
+        STT.Task<IEnumerable<View>> GetViewsAsync(CancellationToken ct);
     }
 
     public class PlayerService : IPlayerService
     {
-        private readonly S3PlayerApiClient _s3PlayerApiClient;
-        private readonly Guid _userId;
+        private readonly IS3PlayerApiClient _s3PlayerApiClient;
 
-        public PlayerService(IHttpContextAccessor httpContextAccessor, ClientOptions clientSettings)
+        public PlayerService(
+            IS3PlayerApiClient s3PlayerApiClient)
         {
-            _userId = httpContextAccessor.HttpContext.User.GetId();
-
-            // Workaround for token bug introduced in .NET Core 2.1.  Remove in 2.2
-            string authHeader = httpContextAccessor.HttpContext.Request.Headers["Authorization"];
-            string token = null;
-            if (!string.IsNullOrEmpty(authHeader))
-            {
-                token = authHeader.Replace("bearer ", string.Empty).Replace("Bearer ", string.Empty);
-            }
-
-            // Go back to this when bug is fixed in .NET Core 2.2
-            //var token = httpContextAccessor.HttpContext.GetTokenAsync("access_token").Result;
-
-            _s3PlayerApiClient = new S3PlayerApiClient(new Uri(clientSettings.urls.playerApi), new TokenCredentials(token, "Bearer"));        
+            _s3PlayerApiClient = s3PlayerApiClient;
         }       
 
-        public async Task<IEnumerable<Exercise>> GetExercisesAsync(CancellationToken ct)
+        public async STT.Task<IEnumerable<View>> GetViewsAsync(CancellationToken ct)
         {
-            var exercises = await _s3PlayerApiClient.GetMyExercisesAsync(ct);
-            return (IEnumerable<Exercise>)exercises;
+            var views = await _s3PlayerApiClient.GetMyViewsAsync(ct);
+            return (IEnumerable<View>)views;
         }
 
     }

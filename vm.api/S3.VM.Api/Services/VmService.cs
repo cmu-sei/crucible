@@ -31,7 +31,7 @@ namespace S3.VM.Api.Services
         Task<VmSummary[]> GetAllAsync(CancellationToken ct);
         Task<ViewModels.Vm> GetAsync(Guid id, CancellationToken ct);
         Task<IEnumerable<ViewModels.Vm>> GetByTeamIdAsync(Guid teamId, string name, bool includePersonal, bool onlyMine, CancellationToken ct);
-        Task<IEnumerable<ViewModels.Vm>> GetByExerciseIdAsync(Guid exerciseId, string name, bool includePersonal, bool onlyMine, CancellationToken ct);
+        Task<IEnumerable<ViewModels.Vm>> GetByViewIdAsync(Guid viewId, string name, bool includePersonal, bool onlyMine, CancellationToken ct);
         Task<ViewModels.Vm> CreateAsync(VmCreateForm form, CancellationToken ct);
         Task<ViewModels.Vm> UpdateAsync(Guid id, VmUpdateForm form, CancellationToken ct);
         Task<bool> DeleteAsync(Guid id, CancellationToken ct);
@@ -87,7 +87,7 @@ namespace S3.VM.Api.Services
             var model = _mapper.Map<ViewModels.Vm>(vmEntity);
             model.CanAccessNicConfiguration = await _playerService.CanManageTeamsAsync(teamIds, false, ct);
 
-            var teamId = await _playerService.GetPrimaryTeamByExerciseIdAsync(model.ExerciseId, ct);
+            var teamId = await _playerService.GetPrimaryTeamByViewIdAsync(model.ViewId, ct);
             model.TeamId = teamId;
             return model;
         }
@@ -109,10 +109,10 @@ namespace S3.VM.Api.Services
             else if (!includePersonal)
             {
                 vmQuery = vmQuery.Where(v => !v.UserId.HasValue);
-            }                            
+            }
 
             if (!string.IsNullOrEmpty(name))
-                vmQuery = vmQuery.Where(v => v.Name == name); 
+                vmQuery = vmQuery.Where(v => v.Name == name);
             // order the vms by name honoring trailing number as a number (i.e. abc1, abc2, abc10, abc11)
             vmQuery = sortVmsByNumber(vmQuery);
             var vmList = await vmQuery.ToListAsync(ct);
@@ -134,15 +134,15 @@ namespace S3.VM.Api.Services
                         }
                     }
                 }
-            }            
+            }
 
             return _mapper.Map<IEnumerable<ViewModels.Vm>>(vmList);
         }
 
-        public async Task<IEnumerable<ViewModels.Vm>> GetByExerciseIdAsync(Guid exerciseId, string name, bool includePersonal, bool onlyMine, CancellationToken ct)
+        public async Task<IEnumerable<ViewModels.Vm>> GetByViewIdAsync(Guid viewId, string name, bool includePersonal, bool onlyMine, CancellationToken ct)
         {
             List<VmEntity> vmList = new List<VmEntity>();
-            var teams = await _playerService.GetTeamsByExerciseIdAsync(exerciseId, ct);
+            var teams = await _playerService.GetTeamsByViewIdAsync(viewId, ct);
             var teamIds = teams.Select(t => t.Id.Value);
 
             if (onlyMine)
@@ -165,7 +165,7 @@ namespace S3.VM.Api.Services
                         vmList = vmList.OrderByDescending(v => v.VmTeams.Select(x => x.TeamId).Contains(primaryTeam.Id.Value)).ToList();
                     }
                 }
-            }     
+            }
             else
             {
                 var vmQuery = _context.VmTeams
@@ -203,7 +203,7 @@ namespace S3.VM.Api.Services
                         }
                     }
                 }
-            }            
+            }
 
             return _mapper.Map<IEnumerable<ViewModels.Vm>>(vmList);
         }
@@ -230,7 +230,7 @@ namespace S3.VM.Api.Services
                 .ToListAsync(ct);
 
             foreach(var vmTeam in vmEntity.VmTeams)
-            {                
+            {
                 if(!teamList.Contains(vmTeam.TeamId))
                 {
                     _context.Teams.Add(new TeamEntity() { Id = vmTeam.TeamId });
@@ -239,7 +239,7 @@ namespace S3.VM.Api.Services
 
             _context.Vms.Add(vmEntity);
             await _context.SaveChangesAsync(ct);
-            
+
             return _mapper.Map<ViewModels.Vm>(vmEntity);
         }
 
@@ -296,7 +296,7 @@ namespace S3.VM.Api.Services
             if (team == null)
             {
                 TeamEntity te = new TeamEntity { Id = teamId };
-                _context.Teams.Add(te);                
+                _context.Teams.Add(te);
             }
 
             var vmteam = await _context.VmTeams.SingleOrDefaultAsync(vt => vt.VmId == vmId && vt.TeamId == teamId);
@@ -326,7 +326,7 @@ namespace S3.VM.Api.Services
                 throw new ForbiddenException("Vm must be on at least one team");
 
             _context.VmTeams.Remove(vmteam);
-            await _context.SaveChangesAsync(ct);            
+            await _context.SaveChangesAsync(ct);
 
             return true;
         }
@@ -337,9 +337,8 @@ namespace S3.VM.Api.Services
             var numchars = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
             return vmQuery
             .OrderBy(v => v.Name.TrimEnd(numchars))
-            .ThenBy(v => v.Name.TrimEnd(numchars).Length < v.Name.Length ? 
+            .ThenBy(v => v.Name.TrimEnd(numchars).Length < v.Name.Length ?
                             int.Parse(v.Name.Substring(v.Name.TrimEnd(numchars).Length)) : 0);
         }
     }
 }
-

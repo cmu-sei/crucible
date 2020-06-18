@@ -48,4 +48,3 @@ Thumbs.db
 /terraform/
 
 src/assets/config/settings.env.json
-/package-lock.json

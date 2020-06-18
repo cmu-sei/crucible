@@ -45,7 +45,7 @@ namespace Caster.Api.Domain.Models
         public ChangeType[] Actions { get; set; }
     }
 
-    [JsonConverter(typeof(JsonStringEnumConverter))]
+    [JsonConverter(typeof(JsonStringEnumMemberConverter))]
     public enum ChangeType
     {
         [EnumMember(Value = "no-op")]

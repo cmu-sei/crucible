@@ -8,52 +8,34 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Rest;
 using S3.VM.Api;
 using S3.VM.Api.Models;
-using Steamfitter.Api.Infrastructure.Extensions;
-using Steamfitter.Api.Infrastructure.Options;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 
 namespace Steamfitter.Api.Services
 {
     public interface IPlayerVmService
     {
-        Task<IEnumerable<Vm>> GetExerciseVmsAsync(Guid exerciseId, CancellationToken ct);
+        STT.Task<IEnumerable<Vm>> GetViewVmsAsync(Guid viewId, CancellationToken ct);
     }
 
     public class PlayerVmService : IPlayerVmService
     {
-        private readonly S3VmApiClient _s3VmApiClient;
+        private readonly IS3VmApiClient _s3VmApiClient;
         private readonly Guid _userId;
 
-        public PlayerVmService(IHttpContextAccessor httpContextAccessor, ClientOptions clientSettings)
+        public PlayerVmService(
+            IS3VmApiClient s3VmApiClient)
         {
-            _userId = httpContextAccessor.HttpContext.User.GetId();
-
-            // Workaround for token bug introduced in .NET Core 2.1.  Remove in 2.2
-            string authHeader = httpContextAccessor.HttpContext.Request.Headers["Authorization"];
-            string token = null;
-            if (!string.IsNullOrEmpty(authHeader))
-            {
-                token = authHeader.Replace("bearer ", string.Empty).Replace("Bearer ", string.Empty);
-            }
-
-            // Go back to this when bug is fixed in .NET Core 2.2
-            //var token = httpContextAccessor.HttpContext.GetTokenAsync("access_token").Result;
-
-            _s3VmApiClient = new S3VmApiClient(new Uri(clientSettings.urls.vmApi), new TokenCredentials(token, "Bearer"));        
+            _s3VmApiClient = s3VmApiClient;
         }       
 
-        public async Task<IEnumerable<Vm>> GetExerciseVmsAsync(Guid exerciseId, CancellationToken ct)
+        public async STT.Task<IEnumerable<Vm>> GetViewVmsAsync(Guid viewId, CancellationToken ct)
         {
-            var vms = await _s3VmApiClient.GetExerciseVmsAsync(exerciseId, null, true, false, ct);
+            var vms = await _s3VmApiClient.GetViewVmsAsync(viewId, null, true, false, ct);
             return (IEnumerable<Vm>)vms;
         }
 

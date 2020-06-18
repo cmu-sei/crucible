@@ -8,22 +8,27 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Alloy.Api.ViewModels;
-using Swashbuckle.AspNetCore.Swagger;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Alloy.Api.Infrastructure.OperationFilters
 {    
     public class DefaultResponseOperationFilter : IOperationFilter
     {
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            var errorSchema = context.SchemaRegistry.GetOrRegister(typeof(ApiError));
-
-            operation.Responses.Add("default", new Response
+            operation.Responses.Add("default", new OpenApiResponse
             {
-                Description = "Error",
-                Schema = errorSchema
+                Description = "Problem response",
+                Content = new Dictionary<string, OpenApiMediaType>
+                {
+                    [ "application/json" ] = new OpenApiMediaType
+                    {
+                        Schema = context.SchemaGenerator.GenerateSchema(typeof(ProblemDetails), context.SchemaRepository)
+                    }
+                }
             });
         }
     }

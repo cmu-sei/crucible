@@ -9,12 +9,12 @@ DM20-0181
 */
 export * from './caster.service';
 import { CasterService } from './caster.service';
-export * from './definition.service';
-import { DefinitionService } from './definition.service';
-export * from './implementation.service';
-import { ImplementationService } from './implementation.service';
+export * from './event-template.service';
+import { EventTemplateService } from './event-template.service';
+export * from './event.service';
+import { EventService } from './event.service';
 export * from './player.service';
 import { PlayerService } from './player.service';
 export * from './steamfitter.service';
 import { SteamfitterService } from './steamfitter.service';
-export const APIS = [CasterService, DefinitionService, ImplementationService, PlayerService, SteamfitterService];
+export const APIS = [CasterService, EventTemplateService, EventService, PlayerService, SteamfitterService];

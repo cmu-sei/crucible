@@ -12,7 +12,7 @@ export enum ProjectObjectType {
   PROJECT = 'PROJECT',
   DIRECTORY = 'DIRECTORY',
   FILE = 'FILE',
-  WORKSPACE = 'WORKSPACE'
+  WORKSPACE = 'WORKSPACE',
 }
 
 export interface Breadcrumb {
@@ -39,4 +39,3 @@ export interface ProjectUI {
   leftSidebarOpen: boolean;
   leftSidebarWidth: number;
 }
-

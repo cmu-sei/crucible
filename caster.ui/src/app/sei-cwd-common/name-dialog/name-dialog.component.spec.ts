@@ -18,9 +18,8 @@ describe('NameDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NameDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [NameDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('NameDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

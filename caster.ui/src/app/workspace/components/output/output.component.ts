@@ -16,30 +16,30 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import {ITerminalAddon, Terminal} from 'xterm';
-import {FitAddon} from 'xterm-addon-fit';
+import { ITerminalAddon, Terminal } from 'xterm';
+import { FitAddon } from 'xterm-addon-fit';
 
 @Component({
   selector: 'cas-output',
   templateUrl: './output.component.html',
   styleUrls: ['./output.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OutputComponent implements OnInit, OnChanges {
   @Input() loading: boolean;
   @Input() output: string;
-  @ViewChild('xterm', {static: true, read: ElementRef}) eleXtern: ElementRef;
+  @ViewChild('xterm', { static: true, read: ElementRef }) eleXtern: ElementRef;
   xterm: Terminal = new Terminal();
   fitAddon: FitAddon = new FitAddon();
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.xterm.setOption('convertEol', true);
     this.xterm.open(this.eleXtern.nativeElement);
     this.xterm.loadAddon(this.fitAddon);
-    this.xterm.setOption('scrollback', 9999999);  // there is no infinite scrolling for xterm.  Set number of lines to very large number!
+    this.xterm.setOption('scrollback', 9999999); // there is no infinite scrolling for xterm.  Set number of lines to very large number!
     this.fitAddon.fit();
   }
 
@@ -51,4 +51,3 @@ export class OutputComponent implements OnInit, OnChanges {
     }
   }
 }
-

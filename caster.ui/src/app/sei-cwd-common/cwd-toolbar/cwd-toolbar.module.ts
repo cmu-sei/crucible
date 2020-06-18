@@ -10,10 +10,10 @@ DM20-0181
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatToolbarModule} from '@angular/material';
-import {PortalModule} from '@angular/cdk/portal';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { PortalModule } from '@angular/cdk/portal';
 import { CwdToolbarComponent } from './components/cwd-toolbar/cwd-toolbar.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { CwdToolbarNavigationItemComponent } from './components/cwd-toolbar-navigation-item/cwd-toolbar-navigation-item.component';
 import { CwdToolbarActionItemComponent } from './components/cwd-toolbar-action-item/cwd-toolbar-action-item.component';
 
@@ -21,19 +21,13 @@ import { CwdToolbarActionItemComponent } from './components/cwd-toolbar-action-i
   declarations: [
     CwdToolbarComponent,
     CwdToolbarNavigationItemComponent,
-    CwdToolbarActionItemComponent
+    CwdToolbarActionItemComponent,
   ],
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatToolbarModule,
-    PortalModule,
-  ],
+  imports: [CommonModule, FlexLayoutModule, MatToolbarModule, PortalModule],
   exports: [
     CwdToolbarComponent,
     CwdToolbarNavigationItemComponent,
     CwdToolbarActionItemComponent,
-  ]
+  ],
 })
-export class CwdToolbarModule { }
-
+export class CwdToolbarModule {}

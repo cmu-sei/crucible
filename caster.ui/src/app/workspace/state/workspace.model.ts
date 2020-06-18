@@ -8,9 +8,17 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Resource, Run, Workspace} from '../../generated/caster-api';
+import { Resource, Run, Workspace } from '../../generated/caster-api';
 
-export function createRun({id, workspaceId, createdAt, isDestroy, status, plan, apply}: Partial<Run>) {
+export function createRun({
+  id,
+  workspaceId,
+  createdAt,
+  isDestroy,
+  status,
+  plan,
+  apply,
+}: Partial<Run>) {
   return {
     id: id || null,
     workspaceId,
@@ -20,7 +28,7 @@ export function createRun({id, workspaceId, createdAt, isDestroy, status, plan, 
     planId: plan == null ? null : plan.id,
     applyId: apply == null ? null : apply.id,
     plan: plan || {},
-    apply: apply || {}
+    apply: apply || {},
   };
 }
 
@@ -48,7 +56,14 @@ export interface WorkspaceEntityUi {
   workspaceView: string;
 }
 
-export function createWorkspace({id, name, directoryId, runs, dynamicHost, resources}: Partial<Workspace>) {
+export function createWorkspace({
+  id,
+  name,
+  directoryId,
+  runs,
+  dynamicHost,
+  resources,
+}: Partial<Workspace>) {
   return {
     id: id || null,
     name,
@@ -58,4 +73,3 @@ export function createWorkspace({id, name, directoryId, runs, dynamicHost, resou
     resources: resources || [],
   } as Workspace;
 }
-

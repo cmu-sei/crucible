@@ -23,7 +23,7 @@ import { HttpHeaders }                                       from '@angular/comm
 import { Observable }                                        from 'rxjs';
 
 import { ApiError } from '../model/apiError';
-import { Scenario } from '../model/scenario';
+import { ScenarioTemplate } from '../model/scenario-template';
 
 
 import { Configuration }                                     from '../configuration';
@@ -35,9 +35,9 @@ export interface SteamfitterServiceInterface {
     
 
     /**
-    * Gets all Scenarios
-    * Returns a list of all of the Scenarios.
+    * Gets all ScenarioTemplates
+    * Returns a list of all of the ScenarioTemplates.
     */
-    getScenarios(extraHttpRequestParams?: any): Observable<Array<Scenario>>;
+    getScenarioTemplates(extraHttpRequestParams?: any): Observable<Array<ScenarioTemplate>>;
 
 }

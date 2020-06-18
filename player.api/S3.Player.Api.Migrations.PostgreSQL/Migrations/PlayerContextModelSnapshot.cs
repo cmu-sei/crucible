@@ -1,4 +1,4 @@
-/*
+﻿/*
 Crucible
 Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
@@ -27,7 +27,7 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
             modelBuilder
                 .HasAnnotation("Npgsql:PostgresExtension:uuid-ossp", "'uuid-ossp', '', ''")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("S3.Player.Api.Data.Data.Models.ApplicationEntity", b =>
@@ -43,9 +43,6 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                     b.Property<bool?>("Embeddable")
                         .HasColumnName("embeddable");
 
-                    b.Property<Guid>("ExerciseId")
-                        .HasColumnName("exercise_id");
-
                     b.Property<string>("Icon")
                         .HasColumnName("icon");
 
@@ -58,11 +55,14 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                     b.Property<string>("Url")
                         .HasColumnName("url");
 
+                    b.Property<Guid>("ViewId")
+                        .HasColumnName("view_id");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationTemplateId");
 
-                    b.HasIndex("ExerciseId");
+                    b.HasIndex("ViewId");
 
                     b.ToTable("applications");
                 });
@@ -119,55 +119,6 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                     b.ToTable("application_templates");
                 });
 
-            modelBuilder.Entity("S3.Player.Api.Data.Data.Models.ExerciseEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
-
-                    b.Property<string>("Description")
-                        .HasColumnName("description");
-
-                    b.Property<string>("Name")
-                        .HasColumnName("name");
-
-                    b.Property<int>("Status")
-                        .HasColumnName("status");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("exercises");
-                });
-
-            modelBuilder.Entity("S3.Player.Api.Data.Data.Models.ExerciseMembershipEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
-
-                    b.Property<Guid>("ExerciseId")
-                        .HasColumnName("exercise_id");
-
-                    b.Property<Guid?>("PrimaryTeamMembershipId")
-                        .HasColumnName("primary_team_membership_id");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PrimaryTeamMembershipId");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("ExerciseId", "UserId")
-                        .IsUnique();
-
-                    b.ToTable("exercise_memberships");
-                });
-
             modelBuilder.Entity("S3.Player.Api.Data.Data.Models.NotificationEntity", b =>
                 {
                     b.Property<int>("Key")
@@ -176,9 +127,6 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
 
                     b.Property<DateTime>("BroadcastTime")
                         .HasColumnName("broadcast_time");
-
-                    b.Property<Guid?>("ExerciseId")
-                        .HasColumnName("exercise_id");
 
                     b.Property<Guid>("FromId")
                         .HasColumnName("from_id");
@@ -209,6 +157,9 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
 
                     b.Property<int>("ToType")
                         .HasColumnName("to_type");
+
+                    b.Property<Guid?>("ViewId")
+                        .HasColumnName("view_id");
 
                     b.HasKey("Key");
 
@@ -287,20 +238,20 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                         .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<Guid>("ExerciseId")
-                        .HasColumnName("exercise_id");
-
                     b.Property<string>("Name")
                         .HasColumnName("name");
 
                     b.Property<Guid?>("RoleId")
                         .HasColumnName("role_id");
 
+                    b.Property<Guid>("ViewId")
+                        .HasColumnName("view_id");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ExerciseId");
-
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("ViewId");
 
                     b.ToTable("teams");
                 });
@@ -312,9 +263,6 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                         .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<Guid>("ExerciseMembershipId")
-                        .HasColumnName("exercise_membership_id");
-
                     b.Property<Guid?>("RoleId")
                         .HasColumnName("role_id");
 
@@ -324,13 +272,16 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnName("user_id");
 
-                    b.HasKey("Id");
+                    b.Property<Guid>("ViewMembershipId")
+                        .HasColumnName("view_membership_id");
 
-                    b.HasIndex("ExerciseMembershipId");
+                    b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("ViewMembershipId");
 
                     b.HasIndex("TeamId", "UserId")
                         .IsUnique();
@@ -409,15 +360,64 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                     b.ToTable("user_permissions");
                 });
 
+            modelBuilder.Entity("S3.Player.Api.Data.Data.Models.ViewEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Status")
+                        .HasColumnName("status");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("views");
+                });
+
+            modelBuilder.Entity("S3.Player.Api.Data.Data.Models.ViewMembershipEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<Guid?>("PrimaryTeamMembershipId")
+                        .HasColumnName("primary_team_membership_id");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnName("user_id");
+
+                    b.Property<Guid>("ViewId")
+                        .HasColumnName("view_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrimaryTeamMembershipId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("ViewId", "UserId")
+                        .IsUnique();
+
+                    b.ToTable("view_memberships");
+                });
+
             modelBuilder.Entity("S3.Player.Api.Data.Data.Models.ApplicationEntity", b =>
                 {
                     b.HasOne("S3.Player.Api.Data.Data.Models.ApplicationTemplateEntity", "Template")
                         .WithMany()
                         .HasForeignKey("ApplicationTemplateId");
 
-                    b.HasOne("S3.Player.Api.Data.Data.Models.ExerciseEntity", "Exercise")
+                    b.HasOne("S3.Player.Api.Data.Data.Models.ViewEntity", "View")
                         .WithMany("Applications")
-                        .HasForeignKey("ExerciseId")
+                        .HasForeignKey("ViewId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -431,24 +431,6 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                     b.HasOne("S3.Player.Api.Data.Data.Models.TeamEntity", "Team")
                         .WithMany("Applications")
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("S3.Player.Api.Data.Data.Models.ExerciseMembershipEntity", b =>
-                {
-                    b.HasOne("S3.Player.Api.Data.Data.Models.ExerciseEntity", "Exercise")
-                        .WithMany("Memberships")
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("S3.Player.Api.Data.Data.Models.TeamMembershipEntity", "PrimaryTeamMembership")
-                        .WithMany()
-                        .HasForeignKey("PrimaryTeamMembershipId");
-
-                    b.HasOne("S3.Player.Api.Data.Data.Models.UserEntity", "User")
-                        .WithMany("ExerciseMemberships")
-                        .HasForeignKey("UserId")
-                        .HasPrincipalKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -467,23 +449,18 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
 
             modelBuilder.Entity("S3.Player.Api.Data.Data.Models.TeamEntity", b =>
                 {
-                    b.HasOne("S3.Player.Api.Data.Data.Models.ExerciseEntity", "Exercise")
-                        .WithMany("Teams")
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("S3.Player.Api.Data.Data.Models.RoleEntity", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
+
+                    b.HasOne("S3.Player.Api.Data.Data.Models.ViewEntity", "View")
+                        .WithMany("Teams")
+                        .HasForeignKey("ViewId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("S3.Player.Api.Data.Data.Models.TeamMembershipEntity", b =>
                 {
-                    b.HasOne("S3.Player.Api.Data.Data.Models.ExerciseMembershipEntity", "ExerciseMembership")
-                        .WithMany("TeamMemberships")
-                        .HasForeignKey("ExerciseMembershipId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("S3.Player.Api.Data.Data.Models.RoleEntity", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
@@ -497,6 +474,11 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                         .WithMany("TeamMemberships")
                         .HasForeignKey("UserId")
                         .HasPrincipalKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("S3.Player.Api.Data.Data.Models.ViewMembershipEntity", "ViewMembership")
+                        .WithMany("TeamMemberships")
+                        .HasForeignKey("ViewMembershipId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -533,8 +515,25 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                         .HasPrincipalKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
+
+            modelBuilder.Entity("S3.Player.Api.Data.Data.Models.ViewMembershipEntity", b =>
+                {
+                    b.HasOne("S3.Player.Api.Data.Data.Models.TeamMembershipEntity", "PrimaryTeamMembership")
+                        .WithMany()
+                        .HasForeignKey("PrimaryTeamMembershipId");
+
+                    b.HasOne("S3.Player.Api.Data.Data.Models.UserEntity", "User")
+                        .WithMany("ViewMemberships")
+                        .HasForeignKey("UserId")
+                        .HasPrincipalKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("S3.Player.Api.Data.Data.Models.ViewEntity", "View")
+                        .WithMany("Memberships")
+                        .HasForeignKey("ViewId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 #pragma warning restore 612, 618
         }
     }
 }
-

@@ -19,10 +19,10 @@ import { NotificationData } from '../../models/notification-data';
 @Injectable()
 export class NotificationService {
 
-  public exerciseNotification = new BehaviorSubject<NotificationData>(<NotificationData>{});
+  public viewNotification = new BehaviorSubject<NotificationData>(<NotificationData>{});
   public notificationHistory = new BehaviorSubject<Array<NotificationData>>(new Array<NotificationData>());
   public canSendMessage = new BehaviorSubject<boolean>(false);
-  public exerciseConnection: HubConnection;
+  public viewConnection: HubConnection;
   public teamConnection: HubConnection;
   public userConnection: HubConnection;
 
@@ -32,9 +32,9 @@ export class NotificationService {
   ) { }
 
 
-  connectToNotificationServer(exerciseGuid: string, teamGuid: string, userGuid: string, userToken: string) {
-    this.exerciseConnection = new HubConnectionBuilder()
-      .withUrl(`${this.settings.NotificationsSettings.url}/exercise?bearer=${userToken}`)
+  connectToNotificationServer(viewGuid: string, teamGuid: string, userGuid: string, userToken: string) {
+    this.viewConnection = new HubConnectionBuilder()
+      .withUrl(`${this.settings.NotificationsSettings.url}/view?bearer=${userToken}`)
       .build();
     this.teamConnection = new HubConnectionBuilder()
       .withUrl(`${this.settings.NotificationsSettings.url}/team?bearer=${userToken}`)
@@ -43,21 +43,21 @@ export class NotificationService {
       .withUrl(`${this.settings.NotificationsSettings.url}/user?bearer=${userToken}`)
       .build();
 
-    this.exerciseConnection.on('Reply', (data: NotificationData) => {
+    this.viewConnection.on('Reply', (data: NotificationData) => {
       let validatedData = this.validateNotificationData(data);
       if (validatedData != null) {
-        this.exerciseNotification.next(validatedData);
+        this.viewNotification.next(validatedData);
       }
     });
 
-    this.exerciseConnection.on('History', (data: [NotificationData]) => {
+    this.viewConnection.on('History', (data: [NotificationData]) => {
       this.notificationHistory.next(data)
     });
 
     this.teamConnection.on('Reply', (data: NotificationData) => {
       let validatedData = this.validateNotificationData(data);
       if (validatedData != null) {
-        this.exerciseNotification.next(validatedData);
+        this.viewNotification.next(validatedData);
       }
     });
 
@@ -68,7 +68,7 @@ export class NotificationService {
     this.userConnection.on('Reply', (data: NotificationData) => {
       let validatedData = this.validateNotificationData(data);
       if (validatedData != null) {
-        this.exerciseNotification.next(validatedData);
+        this.viewNotification.next(validatedData);
       }
     });
 
@@ -76,14 +76,14 @@ export class NotificationService {
       this.notificationHistory.next(data)
     });
 
-    this.exerciseConnection.start()
+    this.viewConnection.start()
       .then(() => {
-        this.exerciseConnection.invoke('Join', exerciseGuid);
-        this.exerciseConnection.invoke('GetHistory', exerciseGuid);
-        console.log('Exercise connection started');
+        this.viewConnection.invoke('Join', viewGuid);
+        this.viewConnection.invoke('GetHistory', viewGuid);
+        console.log('View connection started');
       })
       .catch(() => {
-        console.log('Error while establishing Exercise connection');
+        console.log('Error while establishing View connection');
       });
 
     this.teamConnection.start()
@@ -98,8 +98,8 @@ export class NotificationService {
 
     this.userConnection.start()
       .then(() => {
-        this.userConnection.invoke('Join', exerciseGuid, userGuid);
-        this.userConnection.invoke('GetHistory', exerciseGuid, userGuid);
+        this.userConnection.invoke('Join', viewGuid, userGuid);
+        this.userConnection.invoke('GetHistory', viewGuid, userGuid);
         console.log('User connection started');
       })
       .catch(() => {
@@ -111,7 +111,7 @@ export class NotificationService {
   sendNotification(guid: string, msg: string) {
     console.log("Sending Notification  " + msg);
 
-    this.exerciseConnection.invoke('Post', guid, msg);
+    this.viewConnection.invoke('Post', guid, msg);
   }
 
 
@@ -136,4 +136,3 @@ export class NotificationService {
   }
 
 }
-

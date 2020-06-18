@@ -18,9 +18,8 @@ describe('CwdToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CwdToolbarComponent ]
-    })
-    .compileComponents();
+      declarations: [CwdToolbarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('CwdToolbarComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

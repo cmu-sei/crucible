@@ -99,7 +99,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
 
         private async Task<bool> DoWork(Domain.Models.Run run)
         {
-            var exerciseId = run.Workspace.Directory.ExerciseId;
+            var projectId = run.Workspace.Directory.ProjectId;
             var dynamicHost = run.Workspace.DynamicHost;
 
             Host host = null;
@@ -121,7 +121,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
                 {
                     // select a host. multiply by 1.0 to cast as double
                     host = await _db.Hosts
-                        .Where(h => h.ExerciseId == exerciseId && h.Enabled && !h.Development)
+                        .Where(h => h.ProjectId == projectId && h.Enabled && !h.Development)
                         .OrderBy(h => (h.Machines.Count * 1.0 / h.MaximumMachines * 1.0) * 100.0).FirstOrDefaultAsync();
                 }
 

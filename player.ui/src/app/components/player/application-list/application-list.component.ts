@@ -12,7 +12,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApplicationData } from '../../../models/application-data';
 import { FocusedAppService } from '../../../services/focused-app/focused-app.service';
 import { ApplicationsService } from '../../../services/applications/applications.service';
-import { ExercisesService } from '../../../services/exercises/exercises.service';
+import { ViewsService } from '../../../services/views/views.service';
 import { TeamsService } from '../../../services/teams/teams.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl, Title } from '@angular/platform-browser';
@@ -30,12 +30,12 @@ export class ApplicationListComponent implements OnInit {
 
 
   public applicationList: Array<ApplicationData> = new Array<ApplicationData>();
-  public exerciseGUID: string;
+  public viewGUID: string;
   public titleText: string;
 
   constructor(
     private applicationsService: ApplicationsService,
-    private exercisesService: ExercisesService,
+    private viewsService: ViewsService,
     private focusedAppService: FocusedAppService,
     private loggedInUserService: LoggedInUserService,
     private teamsService: TeamsService,
@@ -56,17 +56,17 @@ export class ApplicationListComponent implements OnInit {
     // The current applications list
     this.applicationList = [];
 
-    // Call to update the applications list anytime the Current Exercise GUID is changed
-    this.exercisesService.currentExerciseGuid.subscribe(currentExerciseGUID => {
-      if (currentExerciseGUID !== '') {
+    // Call to update the applications list anytime the Current View GUID is changed
+    this.viewsService.currentViewGuid.subscribe(currentViewGUID => {
+      if (currentViewGUID !== '') {
         // Tell the service to update once a user is officially logged in
         this.loggedInUserService.loggedInUser.subscribe(loggedInUser => {
           if (loggedInUser == null) {
             return;
           }
 
-          this.teamsService.getUserTeamsByExercise(loggedInUser.id, currentExerciseGUID).subscribe(team => {
-            this.applicationsService.getApplicationsByTeam(team.filter(t => t.isPrimary)[0].id, currentExerciseGUID).subscribe(apps => {
+          this.teamsService.getUserTeamsByView(loggedInUser.id, currentViewGUID).subscribe(team => {
+            this.applicationsService.getApplicationsByTeam(team.filter(t => t.isPrimary)[0].id, currentViewGUID).subscribe(apps => {
               this.applicationList = apps;
 
               this.applicationList.forEach(app => {
@@ -111,4 +111,3 @@ export class ApplicationListComponent implements OnInit {
   }
 
 }
-

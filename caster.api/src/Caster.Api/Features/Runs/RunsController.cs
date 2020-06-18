@@ -101,5 +101,18 @@ namespace Caster.Api.Features.Runs
             var result = await this._mediator.Send(new Reject.Command { Id = id });
             return Ok(result);
         }
+
+        /// <summary>
+        /// Retries saving the state for the specified Run.
+        /// </summary>
+        /// <param name="runId"></param>
+        [HttpPost("runs/{runId}/actions/save-state")]
+        [ProducesResponseType(typeof(Run), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "SaveState")]
+        public async Task<IActionResult> SaveState([FromRoute] Guid runId)
+        {
+            var result = await _mediator.Send(new SaveState.Command { RunId = runId });
+            return Ok(result);
+        }
     }
 }

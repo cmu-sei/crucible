@@ -13,12 +13,12 @@ import { Observable } from 'rxjs';
 import { ProjectQuery, ProjectService } from '../../../state';
 import { CwdAuthService } from '../../../../sei-cwd-common/cwd-auth/services';
 import { CwdSettingsService } from '../../../../sei-cwd-common/cwd-settings/services';
-import { Exercise as Project } from '../../../../generated/caster-api';
+import { Project } from '../../../../generated/caster-api';
 import { take } from 'rxjs/operators';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/sei-cwd-common/confirm-dialog/components/confirm-dialog.component';
 import { NameDialogComponent } from 'src/app/sei-cwd-common/name-dialog/name-dialog.component';
-import {UserService, CurrentUserQuery} from '../../../../users/state';
+import { UserService, CurrentUserQuery } from '../../../../users/state';
 const WAS_CANCELLED = 'wasCancelled';
 const NAME_VALUE = 'nameValue';
 @Component({
@@ -41,27 +41,23 @@ export class ProjectListContainerComponent implements OnInit {
     private settingsService: CwdSettingsService,
     private dialog: MatDialog,
     private userService: UserService,
-    private currentUserQuery: CurrentUserQuery) {
-  }
+    private currentUserQuery: CurrentUserQuery
+  ) {}
 
   ngOnInit() {
-
     this.projects = this.projectQuery.selectAll();
 
-    this.projectService.loadProjects().pipe(
-      take(1)
-    ).subscribe();
+    this.projectService.loadProjects().pipe(take(1)).subscribe();
 
     this.isLoading$ = this.projectQuery.selectLoading();
 
     // Set the topbar color from config file
     this.topBarColor = this.settingsService.settings.AppTopBarHexColor;
 
-
     // Set the page title from configuration file
     this.titleText = this.settingsService.settings.AppTopBarText;
 
-    this.currentUserQuery.select().subscribe(cu => {
+    this.currentUserQuery.select().subscribe((cu) => {
       this.isSuperUser = cu.isSuperUser;
       this.username = cu.name;
     });
@@ -73,34 +69,55 @@ export class ProjectListContainerComponent implements OnInit {
   }
 
   create() {
-    this.nameDialog('Create New Project?', '', { nameValue: '' }).subscribe(result => {
-      if (!result[WAS_CANCELLED]) {
-        const newProject = {
-          name: result[NAME_VALUE]
-        } as Project;
-        this.projectService.createProject(newProject).pipe(take(1)).subscribe();
+    this.nameDialog('Create New Project?', '', { nameValue: '' }).subscribe(
+      (result) => {
+        if (!result[WAS_CANCELLED]) {
+          const newProject = {
+            name: result[NAME_VALUE],
+          } as Project;
+          this.projectService
+            .createProject(newProject)
+            .pipe(take(1))
+            .subscribe();
+        }
       }
-    });
+    );
   }
 
   update(project: Project) {
-    this.nameDialog('Rename ' + project.name, '', { nameValue: project.name }).subscribe(result => {
+    this.nameDialog('Rename ' + project.name, '', {
+      nameValue: project.name,
+    }).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
-        const updatedProject = { ...project, name: result[NAME_VALUE] } as Project;
-        this.projectService.updateProject(updatedProject).pipe(take(1)).subscribe();
+        const updatedProject = {
+          ...project,
+          name: result[NAME_VALUE],
+        } as Project;
+        this.projectService
+          .updateProject(updatedProject)
+          .pipe(take(1))
+          .subscribe();
       }
     });
   }
 
   delete(project: Project) {
-    this.confirmDialog('Delete Project?', 'Delete Project ' + project.name + '?', { buttonTrueText: 'Delete' }).subscribe(result => {
+    this.confirmDialog(
+      'Delete Project?',
+      'Delete Project ' + project.name + '?',
+      { buttonTrueText: 'Delete' }
+    ).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
         this.projectService.deleteProject(project.id).pipe(take(1)).subscribe();
       }
     });
   }
 
-  confirmDialog(title: string, message: string, data?: any): Observable<boolean> {
+  confirmDialog(
+    title: string,
+    message: string,
+    data?: any
+  ): Observable<boolean> {
     let dialogRef: MatDialogRef<ConfirmDialogComponent>;
     dialogRef = this.dialog.open(ConfirmDialogComponent, { data: data || {} });
     dialogRef.componentInstance.title = title;
@@ -117,6 +134,4 @@ export class ProjectListContainerComponent implements OnInit {
 
     return dialogRef.afterClosed();
   }
-
 }
-

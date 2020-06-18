@@ -19,7 +19,8 @@ namespace Alloy.Api.Infrastructure.Options
         public int CasterDestroyMaxWaitMinutes { get; set; }
         public int CasterDestroyRetryDelayMinutes { get; set; }
         public int ApiClientRetryIntervalSeconds { get; set; }
-        public int ApiClientFailureMaxRetries { get; set; }
+        public int ApiClientLaunchFailureMaxRetries { get; set; }
+        public int ApiClientEndFailureMaxRetries { get; set; }
         public ApiUrlSettings urls { get; set; }
     }
 

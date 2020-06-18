@@ -4,28 +4,27 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon� and CERT� are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using Alloy.Api.Infrastructure.Options;
 using Alloy.Api.Infrastructure.OperationFilters;
 using Alloy.Api.Options;
 using Alloy.Api.Services;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using S3.Player.Api;
 using Caster.Api;
 using Steamfitter.Api;
 using System.Net.Http;
+using Microsoft.CodeAnalysis;
+using System.Text.Json;
+using Microsoft.OpenApi.Models;
 
 namespace Alloy.Api.Infrastructure.Extensions
 {
@@ -40,24 +39,44 @@ namespace Alloy.Api.Infrastructure.Extensions
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Alloy API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Alloy API", Version = "v1" });
 
-                c.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
-                    Type = "oauth2",
-                    Flow = "implicit",
-                    AuthorizationUrl = authOptions.AuthorizationUrl,
-                    Scopes = authOptions.AuthorizationScope.Split(' ').ToDictionary(x => x, x => "public api access")
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri(authOptions.AuthorizationUrl),
+                            Scopes = new Dictionary<string, string>()
+                            {
+                                {authOptions.AuthorizationScope, "public api access"}
+                            }
+                        }
+                    }
                 });
 
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
                 {
-                    { "oauth2", new[] { authOptions.AuthorizationScope } }
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "oauth2"
+                            },
+                            Scheme = "oauth2"
+                        },
+                        new[] {authOptions.AuthorizationScope}
+                    }
                 });
 
                 c.IncludeXmlComments(commentsFile);
-                c.DescribeAllEnumsAsStrings();
                 c.OperationFilter<DefaultResponseOperationFilter>();
+                c.MapType<Optional<Guid?>>(() => new OpenApiSchema { Type = "string", Format = "uuid", Nullable= true });
+                c.MapType<JsonElement?>(() => new OpenApiSchema { Type = "object" , Nullable = true});
             });
         }
 
@@ -132,7 +151,7 @@ namespace Alloy.Api.Infrastructure.Extensions
 
         public static void AddAlloyBackgroundService(this IServiceCollection services)
         {
-            services.AddSingleton<IAlloyImplementationQueue, AlloyImplementationQueue>();
+            services.AddSingleton<IAlloyEventQueue, AlloyEventQueue>();
             services.AddHostedService<AlloyQueryService>();
             services.AddHostedService<AlloyBackgroundService>();
         }

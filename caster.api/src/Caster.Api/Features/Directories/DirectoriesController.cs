@@ -92,17 +92,17 @@ namespace Caster.Api.Features.Directories
         }
 
         /// <summary>
-        /// Retrieve all directories within a single exercise.
+        /// Retrieve all directories within a single project.
         /// </summary>
-        /// <param name="exerciseId"></param>
+        /// <param name="projectId"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        [HttpGet("exercises/{exerciseId}/directories")]
+        [HttpGet("projects/{projectId}/directories")]
         [ProducesResponseType(typeof(IEnumerable<Directory>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(OperationId = "GetDirectoriesByExercise")]
-        public async Task<IActionResult> GetByExercise([FromRoute] Guid exerciseId, [FromQuery] GetByExercise.Query query)
+        [SwaggerOperation(OperationId = "GetDirectoriesByProject")]
+        public async Task<IActionResult> GetByProject([FromRoute] Guid projectId, [FromQuery] GetByProject.Query query)
         {
-            query.ExerciseId = exerciseId;
+            query.ProjectId = projectId;
             var result = await _mediator.Send(query);
             return Ok(result);
         }

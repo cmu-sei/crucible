@@ -666,22 +666,22 @@ namespace S3.Vm.Console.Services
             return names;
         }
 
-        public async Task<List<string>> GetIsos(string exerciseId, string teamId)
+        public async Task<List<string>> GetIsos(string viewId, string teamId)
         {
             // isos for team only
-            var list = await GetSubfolderIsos(exerciseId, teamId);
-            // isos for entire exercise
-            var list2 = await GetSubfolderIsos(exerciseId, exerciseId);
+            var list = await GetSubfolderIsos(viewId, teamId);
+            // isos for entire view
+            var list2 = await GetSubfolderIsos(viewId, viewId);
             list.AddRange(list2);
             return list.Distinct().ToList();
         }
 
-        private async Task<List<string>> GetSubfolderIsos(string exerciseId, string subfolder)
+        private async Task<List<string>> GetSubfolderIsos(string viewId, string subfolder)
         {
             List<string> list = new List<string>();
             var dsName = _options.DsName;
             var baseFolder = _options.BaseFolder;
-            var filepath = $"[{dsName}] {baseFolder}/{exerciseId}/{subfolder}";
+            var filepath = $"[{dsName}] {baseFolder}/{viewId}/{subfolder}";
             var datastore = await GetDatastoreByName(dsName);
             if (datastore == null)
             {

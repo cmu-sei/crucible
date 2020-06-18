@@ -9,7 +9,7 @@ DM20-0181
 */
 
 using System.Security.Claims;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using Steamfitter.Api.Services;
 using Microsoft.AspNetCore.Authentication;
 
@@ -24,7 +24,7 @@ namespace Steamfitter.Api.Infrastructure.Authorization
             _claimsService = claimsService;
         }
 
-        public async Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
+        public async STT.Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
             var user = await _claimsService.AddUserClaims(principal, true);
             _claimsService.SetCurrentClaimsPrincipal(user);

@@ -9,7 +9,7 @@ DM20-0181
 */
 
 import { ID } from '@datorama/akita';
-import {Permission} from '../../generated/caster-api';
+import { Permission } from '../../generated/caster-api';
 
 export interface PermissionUi {
   id?: string;
@@ -17,5 +17,3 @@ export interface PermissionUi {
   isEditing: boolean;
   isSaved: boolean;
 }
-
-

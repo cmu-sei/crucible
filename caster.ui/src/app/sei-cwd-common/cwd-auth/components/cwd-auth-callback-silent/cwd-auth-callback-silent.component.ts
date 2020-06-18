@@ -9,23 +9,21 @@ DM20-0181
 */
 
 import { Component, OnInit } from '@angular/core';
-import {CwdAuthService} from '../../services';
+import { CwdAuthService } from '../../services';
 
 @Component({
   selector: 'cas-cwd-auth-callback-silent',
   templateUrl: './cwd-auth-callback-silent.component.html',
-  styleUrls: ['./cwd-auth-callback-silent.component.scss']
+  styleUrls: ['./cwd-auth-callback-silent.component.scss'],
 })
 export class CwdAuthCallbackSilentComponent implements OnInit {
-
-  constructor(private authService: CwdAuthService) { }
+  constructor(private authService: CwdAuthService) {}
 
   ngOnInit() {
     this.validate();
   }
-  
+
   validate() {
     this.authService.completeSilentAuthentication();
   }
 }
-

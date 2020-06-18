@@ -22,6 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using S3.Player.Api;
+using S3.VM.Api;
 using System.Net.Http;
 
 namespace Steamfitter.Api.Infrastructure.Extensions
@@ -57,6 +58,53 @@ namespace Steamfitter.Api.Infrastructure.Extensions
                 c.OperationFilter<DefaultResponseOperationFilter>();
             });
         }
+
+        public static void AddS3PlayerApiClient(this IServiceCollection services)
+        {
+            services.AddScoped<IS3PlayerApiClient, S3PlayerApiClient>(p =>
+            {
+                var httpContextAccessor = p.GetRequiredService<IHttpContextAccessor>();
+                var httpClientFactory = p.GetRequiredService<IHttpClientFactory>();
+                var clientOptions = p.GetRequiredService<ClientOptions>();
+
+                var playerUri = new Uri(clientOptions.urls.playerApi);
+
+                string authHeader = httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+
+                var httpClient = httpClientFactory.CreateClient();
+                httpClient.BaseAddress = playerUri;
+                httpClient.DefaultRequestHeaders.Add("Authorization", authHeader);
+
+                var apiClient = new S3PlayerApiClient(httpClient, true);
+                apiClient.BaseUri = playerUri;
+
+                return apiClient;
+            });
+        }
+
+        public static void AddS3VmApiClient(this IServiceCollection services)
+        {
+            services.AddScoped<IS3VmApiClient, S3VmApiClient>(p =>
+            {
+                var httpContextAccessor = p.GetRequiredService<IHttpContextAccessor>();
+                var httpClientFactory = p.GetRequiredService<IHttpClientFactory>();
+                var clientOptions = p.GetRequiredService<ClientOptions>();
+
+                var vmUri = new Uri(clientOptions.urls.vmApi);
+
+                string authHeader = httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+
+                var httpClient = httpClientFactory.CreateClient();
+                httpClient.BaseAddress = vmUri;
+                httpClient.DefaultRequestHeaders.Add("Authorization", authHeader);
+
+                var apiClient = new S3VmApiClient(httpClient, true);
+                apiClient.BaseUri = vmUri;
+
+                return apiClient;
+            });
+        }
+
 
     }
 }

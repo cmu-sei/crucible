@@ -9,13 +9,8 @@ DM20-0181
 */
 
 import {EntityState, EntityStore, Store, StoreConfig} from '@datorama/akita';
-import {Scenario} from 'src/app/swagger-codegen/dispatcher.api';
+import {ScenarioTemplate} from 'src/app/swagger-codegen/dispatcher.api';
 import {Injectable} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {PageEvent} from '@angular/material';
-
-// TODO: remove this interface when the API changes its nouns
-export interface ScenarioTemplate extends Scenario {}
 
 export interface ScenarioTemplateState extends EntityState<ScenarioTemplate> {
 }

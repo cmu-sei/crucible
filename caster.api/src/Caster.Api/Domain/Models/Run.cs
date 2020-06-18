@@ -14,6 +14,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -46,7 +47,13 @@ namespace Caster.Api.Domain.Models
         Planning = 3,
         Planned = 4,
         Applying = 5,
-        Applied = 6
+        Applied = 6,
+
+        [EnumMember(Value = "Applied - State Error")]
+        Applied_StateError = 7,
+
+        [EnumMember(Value = "Failed - State Error")]
+        Failed_StateError = 8
     }
 
     public static class RunHelpers

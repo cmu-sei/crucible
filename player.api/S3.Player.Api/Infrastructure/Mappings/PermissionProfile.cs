@@ -30,8 +30,8 @@ namespace S3.Player.Api.Infrastructure.Mappings
                 .ForMember(dest => dest.TeamPermissions, opt => opt.MapFrom(src => src.TeamMemberships));
 
             CreateMap<TeamMembershipEntity, TeamPermissions>()
-                .ForMember(dest => dest.ExerciseId, opt => opt.MapFrom(src => src.ExerciseMembership.ExerciseId))
-                .ForMember(dest => dest.IsPrimary, opt => opt.MapFrom(src => src.ExerciseMembership.PrimaryTeamMembershipId == src.Id))
+                .ForMember(dest => dest.ViewId, opt => opt.MapFrom(src => src.ViewMembership.ViewId))
+                .ForMember(dest => dest.IsPrimary, opt => opt.MapFrom(src => src.ViewMembership.PrimaryTeamMembershipId == src.Id))
                 .ForMember(dest => dest.Permissions, opt => opt.MapFrom(src =>
                     src.Role.Permissions.Select(x => x.Permission).Concat(
                     src.Team.Role.Permissions.Select(x => x.Permission)).Concat(
@@ -39,4 +39,3 @@ namespace S3.Player.Api.Infrastructure.Mappings
         }
     }
 }
-

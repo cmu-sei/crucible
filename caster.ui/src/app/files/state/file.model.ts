@@ -28,4 +28,3 @@ export interface FileUI {
   isSaved: boolean;
   selectedVersionId: string;
 }
-

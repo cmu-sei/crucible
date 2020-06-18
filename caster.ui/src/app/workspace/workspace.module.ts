@@ -14,23 +14,21 @@ import { CommonModule } from '@angular/common';
 import { WorkspaceContainerComponent } from './components/workspace-container/workspace-container.component';
 import { CwdToolbarModule } from '../sei-cwd-common/cwd-toolbar';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatExpansionModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatButtonToggleModule,
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { OutputComponent } from './components/output/output.component';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -38,11 +36,7 @@ import { CwdTableModule } from '../sei-cwd-common/cwd-table/cwd-table.module';
 import { RunComponent } from './components/run/run.component';
 
 @NgModule({
-  declarations: [
-    WorkspaceContainerComponent,
-    OutputComponent,
-    RunComponent,
-  ],
+  declarations: [WorkspaceContainerComponent, OutputComponent, RunComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -67,7 +61,7 @@ import { RunComponent } from './components/run/run.component';
     FlexModule,
     ClipboardModule,
     CwdTableModule,
-    ExtendedModule
+    ExtendedModule,
   ],
   exports: [WorkspaceContainerComponent, RunComponent],
 })

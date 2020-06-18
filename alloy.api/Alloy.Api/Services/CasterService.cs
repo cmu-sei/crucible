@@ -26,7 +26,7 @@ namespace Alloy.Api.Services
 {
     public interface ICasterService
     {
-        // Task<IEnumerable<Exercise>> GetExercisesAsync(CancellationToken ct);
+        // Task<IEnumerable<View>> GetViewsAsync(CancellationToken ct);
         Task<IEnumerable<Directory>> GetDirectoriesAsync(CancellationToken ct);
         // Task<IEnumerable<Workspace>> GetWorkspacesAsync(CancellationToken ct);
         // Task<Workspace> CreateWorkspaceInDirectoryAsync(Guid directoryId, string varsFileContent, CancellationToken ct);
@@ -45,11 +45,11 @@ namespace Alloy.Api.Services
             _casterApiClient = casterApiClient;
         }       
 
-        // public async Task<IEnumerable<Exercise>> GetExercisesAsync(CancellationToken ct)
+        // public async Task<IEnumerable<View>> GetViewsAsync(CancellationToken ct)
         // {
-        //     var exercises = await _casterApiClient.GetAllExercisesAsync(ct);
+        //     var views = await _casterApiClient.GetAllViewsAsync(ct);
 
-        //     return exercises;
+        //     return views;
         // }
 
         public async Task<IEnumerable<Directory>> GetDirectoriesAsync(CancellationToken ct)

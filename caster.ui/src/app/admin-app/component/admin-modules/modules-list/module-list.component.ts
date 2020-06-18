@@ -8,14 +8,31 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, EventEmitter, OnInit, ViewChild, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { MatTableDataSource, MatPaginator, PageEvent, MatSort, MatDialogRef, Sort, MatDialog } from '@angular/material';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from 'src/app/sei-cwd-common/confirm-dialog/components/confirm-dialog.component';
 import { HttpEventType } from '@angular/common/http';
 import { Module } from '../../../../generated/caster-api';
-import {Subject, Observable, of} from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { fromMatSort, sortRows, fromMatPaginator, paginateRows } from 'src/app/datasource-utils';
+import {
+  fromMatSort,
+  sortRows,
+  fromMatPaginator,
+  paginateRows,
+} from 'src/app/datasource-utils';
 
 const WAS_CANCELLED = 'wasCancelled';
 
@@ -27,10 +44,9 @@ export interface Action {
 @Component({
   selector: 'cas-admin-module-list',
   templateUrl: './module-list.component.html',
-  styleUrls: ['./module-list.component.css']
+  styleUrls: ['./module-list.component.css'],
 })
 export class AdminModuleListComponent implements OnInit, OnChanges {
-
   public displayedColumns: string[] = ['name', 'path', 'dateModified'];
   public filterString = '';
   public savedFilterString = '';
@@ -53,9 +69,7 @@ export class AdminModuleListComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(
-    private dialog: MatDialog
-  ) { }
+  constructor(private dialog: MatDialog) {}
 
   /**
    * Initialization
@@ -73,9 +87,9 @@ export class AdminModuleListComponent implements OnInit, OnChanges {
   }
 
   /**
-     * Called by UI to add a filter to the moduleDataSource
-     * @param filterValue
-     */
+   * Called by UI to add a filter to the moduleDataSource
+   * @param filterValue
+   */
   applyFilter(filterValue: string) {
     this.filterString = filterValue.toLowerCase();
     this.filterAndSort(this.filterString);
@@ -94,9 +108,12 @@ export class AdminModuleListComponent implements OnInit, OnChanges {
   filterAndSort(filterValue: string) {
     this.moduleDataSource.filter = filterValue;
     const rows$ = of(this.moduleDataSource.filteredData);
-    this.totalRows$ = rows$.pipe(map(rows => rows.length));
+    this.totalRows$ = rows$.pipe(map((rows) => rows.length));
     if (!!this.sortEvents$ && !!this.pageEvents$) {
-      this.displayedRows$ = rows$.pipe(sortRows(this.sortEvents$), paginateRows(this.pageEvents$));
+      this.displayedRows$ = rows$.pipe(
+        sortRows(this.sortEvents$),
+        paginateRows(this.pageEvents$)
+      );
     }
   }
 
@@ -118,14 +135,20 @@ export class AdminModuleListComponent implements OnInit, OnChanges {
    * Deletes a module
    */
   deleteModule(module: Module) {
-    this.confirmDialog('Delete ' + module.name + ' ?', module.path, { buttonTrueText: 'Delete' }).subscribe(result => {
+    this.confirmDialog('Delete ' + module.name + ' ?', module.path, {
+      buttonTrueText: 'Delete',
+    }).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
         this.delete.emit(module.id);
       }
     });
   }
 
-  confirmDialog(title: string, message: string, data?: any): Observable<boolean> {
+  confirmDialog(
+    title: string,
+    message: string,
+    data?: any
+  ): Observable<boolean> {
     let dialogRef: MatDialogRef<ConfirmDialogComponent>;
     dialogRef = this.dialog.open(ConfirmDialogComponent, { data: data || {} });
     dialogRef.componentInstance.title = title;
@@ -133,7 +156,4 @@ export class AdminModuleListComponent implements OnInit, OnChanges {
 
     return dialogRef.afterClosed();
   }
-
 }
-
-

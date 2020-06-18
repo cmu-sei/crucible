@@ -67,11 +67,11 @@ export class VmListComponent implements OnInit, AfterViewInit {
         return matchFilter.every(Boolean); // AND
       };
 
-    this.vmService.GetExerciseVms(true, false).subscribe(res => {
+    this.vmService.GetViewVms(true, false).subscribe(res => {
       this.vmApiResponded = true;
       if (res != null) {
         res.forEach(vm => {
-          vm.url = vm.url + '?exerciseId=' + this.vmService.exerciseId;
+          vm.url = vm.url + '?viewId=' + this.vmService.viewId;
           vm.state = 'on';
         });
 
@@ -130,7 +130,7 @@ export class VmListComponent implements OnInit, AfterViewInit {
 
 
     let isAdmin = true;
-    this.teamsService.GetAllMyTeams(this.vmService.exerciseId).subscribe(teams => {
+    this.teamsService.GetAllMyTeams(this.vmService.viewId).subscribe(teams => {
       // There should only be 1 primary member, set that value for the current login
       // Determine if the user is an "Admin" if their isPrimary team has canManage == true
       const myPrimaryTeam = teams.filter(t => t.isPrimary)[0];
@@ -144,7 +144,7 @@ export class VmListComponent implements OnInit, AfterViewInit {
       const qf = fileSelector.files[0];
 
       if (isAdmin) {
-        // First prompt the user to confirm if the iso is available for the team or the entire exercise
+        // First prompt the user to confirm if the iso is available for the team or the entire view
         this.dialogService.confirm('Upload iso for?',
           'Please choose if you want this iso to be public or for your team only:',
           { buttonTrueText: 'Public', buttonFalseText: 'My Team Only' }).subscribe(result => {
@@ -183,4 +183,3 @@ export class VmListComponent implements OnInit, AfterViewInit {
   }
 
 }
-

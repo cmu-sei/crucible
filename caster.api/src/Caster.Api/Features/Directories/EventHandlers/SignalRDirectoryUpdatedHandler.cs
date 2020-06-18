@@ -26,16 +26,16 @@ namespace Caster.Api.Features.Directories.EventHandlers
     {
         private readonly CasterContext _db;
         private readonly IMapper _mapper;
-        private readonly IHubContext<ExerciseHub> _exerciseHub;
+        private readonly IHubContext<ProjectHub> _projectHub;
 
         public SignalRDirectoryUpdatedHandler(
             CasterContext db,
             IMapper mapper,
-            IHubContext<ExerciseHub> exerciseHub)
+            IHubContext<ProjectHub> projectHub)
         {
             _db = db;
             _mapper = mapper;
-            _exerciseHub = exerciseHub;
+            _projectHub = projectHub;
         }
 
         public async Task Handle(DirectoryUpdated notification, CancellationToken cancellationToken)
@@ -45,7 +45,7 @@ namespace Caster.Api.Features.Directories.EventHandlers
                 .ProjectTo<Directory>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
-            await _exerciseHub.Clients.Group(directory.ExerciseId.ToString()).SendAsync("DirectoryUpdated", directory);
+            await _projectHub.Clients.Group(directory.ProjectId.ToString()).SendAsync("DirectoryUpdated", directory);
         }
     }
 }

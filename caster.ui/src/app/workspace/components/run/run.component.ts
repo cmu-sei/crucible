@@ -8,7 +8,18 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, OnDestroy, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+  OnChanges,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Run, RunStatus } from 'src/app/generated/caster-api';
 import { ISubscription } from '@microsoft/signalr';
 import { SignalRService } from 'src/app/shared/signalr/signalr.service';
@@ -19,10 +30,9 @@ import { FitAddon } from 'xterm-addon-fit';
   selector: 'cas-run',
   templateUrl: './run.component.html',
   styleUrls: ['./run.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RunComponent implements OnInit, OnChanges, OnDestroy {
-
   @Input() run: Run;
   @Input() loading: boolean;
   @Output() planOutput = new EventEmitter<string>();
@@ -34,14 +44,14 @@ export class RunComponent implements OnInit, OnChanges, OnDestroy {
   isPlan = false;
   isApply = false;
 
-  @ViewChild('xterm', {static: true, read: ElementRef}) eleXtern: ElementRef;
+  @ViewChild('xterm', { static: true, read: ElementRef }) eleXtern: ElementRef;
 
   // there is no infinite scrolling for xterm.  Set number of lines to very large number!
-  xtermOptions: ITerminalOptions = { convertEol: true, scrollback: 9999999};
+  xtermOptions: ITerminalOptions = { convertEol: true, scrollback: 9999999 };
   xterm: Terminal = new Terminal(this.xtermOptions);
   fitAddon: FitAddon = new FitAddon();
 
-  constructor(private signalRService: SignalRService) { }
+  constructor(private signalRService: SignalRService) {}
 
   ngOnInit() {
     this.xterm.open(this.eleXtern.nativeElement);
@@ -145,16 +155,28 @@ export class RunComponent implements OnInit, OnChanges, OnDestroy {
         return true;
       }
       case RunStatus.Applied: {
-        if (this.status === RunStatus.Applying) {
+        if (
+          this.status === RunStatus.Applying ||
+          this.status === RunStatus.AppliedStateError
+        ) {
           // if we were already streaming applying, don't restart stream when applying finished
           this.setStatus();
           return false;
         }
         break;
       }
-      case RunStatus.Failed:
-      case RunStatus.Rejected:
-      case RunStatus.Queued: {
+      case RunStatus.Failed: {
+        if (
+          this.status === RunStatus.Applying ||
+          this.status === RunStatus.FailedStateError
+        ) {
+          // if we were already streaming applying, don't restart stream when applying finished
+          this.setStatus();
+          return false;
+        }
+        break;
+      }
+      default: {
         this.setStatus();
         return false;
       }

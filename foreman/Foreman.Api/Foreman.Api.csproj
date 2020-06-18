@@ -3,19 +3,17 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-
         <AssemblyVersion>0.5.0.2</AssemblyVersion>
         <FileVersion>0.5.0.2</FileVersion>
         <ReleaseVersion>0.5.0.2</ReleaseVersion>
         <SynchReleaseVersion>false</SynchReleaseVersion>
         <Version>0.5.0.2</Version>
-
         <Authors>Team Blue Thunder for Carnegie Mellon University</Authors>
         <Company>Carnegie Mellon University</Company>
         <Product>Foreman</Product>
         <Description>Foreman</Description>
         <Copyright>Carnegie Mellon University 2019</Copyright>
-
+        <ProjectGuid>{F76EE2EF-F01E-45B7-835B-0C9E56EC7C7D}</ProjectGuid>
     </PropertyGroup>
 
     <ItemGroup>

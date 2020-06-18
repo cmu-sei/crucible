@@ -8,9 +8,14 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component } from '@angular/core';
-import { MatIconRegistry } from '@angular/material';
+import { Component, HostBinding, OnDestroy } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
 import { CwdAuthService } from './sei-cwd-common/cwd-auth/services';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Theme } from './shared/models/theme-enum';
+import { CurrentUserQuery } from './users/state';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -18,14 +23,23 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
+  @HostBinding('class') componentCssClass: string;
   title = 'Caster';
   user$ = this.authService.user$;
+  unsubscribe$: Subject<null> = new Subject<null>();
   constructor(
     public matIconRegistry: MatIconRegistry,
     private authService: CwdAuthService,
-    public sanitizer: DomSanitizer) {
-
+    public overlayContainer: OverlayContainer,
+    private currentUserQuery: CurrentUserQuery,
+    public sanitizer: DomSanitizer
+  ) {
+    this.currentUserQuery.userTheme$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((theme) => {
+        this.setTheme(theme);
+      });
     matIconRegistry.setDefaultFontSetClass('mdi');
 
     matIconRegistry.addSvgIcon
@@ -52,6 +66,26 @@ export class AppComponent {
       ('ic_trash_can', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_trash_can.svg'));
     matIconRegistry.addSvgIcon
       ('ic_pencil', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_pencil.svg'));
+  
+  }
+
+  setTheme(theme: Theme) {
+    const classList = this.overlayContainer.getContainerElement().classList;
+    switch (theme) {
+      case Theme.LIGHT:
+        this.componentCssClass = theme;
+        classList.add(theme);
+        classList.remove(Theme.DARK);
+        break;
+      case Theme.DARK:
+        this.componentCssClass = theme;
+        classList.add(theme);
+        classList.remove(Theme.LIGHT);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next(null);
+    this.unsubscribe$.complete();
   }
 }
-

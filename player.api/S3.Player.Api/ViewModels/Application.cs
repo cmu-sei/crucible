@@ -19,14 +19,14 @@ namespace S3.Player.Api.ViewModels
         public Guid Id { get; set; }
 
         /// <summary>
-        /// The location of the application. {teamId}, {teamName}, {exerciseId} and {exerciseName} will be replaced dynamically if included
+        /// The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// The location of the application. {teamId}, {teamName}, {exerciseId} and {exerciseName} will be replaced dynamically if included
+        /// The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
         /// </summary>
-        [Url]        
+        [Url]
         public string Url { get; set; }
 
         public string Icon { get; set; }
@@ -39,7 +39,7 @@ namespace S3.Player.Api.ViewModels
     {
         public string Name { get; set; }
 
-        [Url]        
+        [Url]
         public string Url { get; set; }
 
         public string Icon { get; set; }
@@ -53,12 +53,12 @@ namespace S3.Player.Api.ViewModels
         public Guid Id { get; set; }
 
         /// <summary>
-        /// The location of the application. {teamId}, {teamName}, {exerciseId} and {exerciseName} will be replaced dynamically if included
+        /// The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// The location of the application. {teamId}, {teamName}, {exerciseId} and {exerciseName} will be replaced dynamically if included
+        /// The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
         /// </summary>
         [Url]
         public string Url { get; set; }
@@ -69,7 +69,7 @@ namespace S3.Player.Api.ViewModels
         public bool? LoadInBackground { get; set; }
 
         [Required]
-        public Guid ExerciseId { get; set; }
+        public Guid ViewId { get; set; }
 
         public Guid? ApplicationTemplateId { get; set; }
     }
@@ -83,12 +83,12 @@ namespace S3.Player.Api.ViewModels
         public float DisplayOrder { get; set; }
 
         /// <summary>
-        /// The location of the application. {teamId}, {teamName}, {exerciseId} and {exerciseName} will be replaced dynamically if included
+        /// The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// The location of the application. {teamId}, {teamName}, {exerciseId} and {exerciseName} will be replaced dynamically if included
+        /// The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
         /// </summary>
         public string Url { get; set; }
 
@@ -97,7 +97,7 @@ namespace S3.Player.Api.ViewModels
         public bool Embeddable { get; set; }
         public bool LoadInBackground { get; set; }
 
-        public Guid ExerciseId { get; set; }
+        public Guid ViewId { get; set; }
     }
 
     public class ApplicationInstanceForm

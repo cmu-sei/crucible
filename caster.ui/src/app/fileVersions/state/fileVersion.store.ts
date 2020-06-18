@@ -8,27 +8,33 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityState, EntityStore, EntityUIStore, StoreConfig} from '@datorama/akita';
-import {FileVersion} from '../../generated/caster-api';
-import {Injectable, InjectionToken} from '@angular/core';
-import {FileVersionUi} from './fileVersion.model';
+import {
+  EntityState,
+  EntityStore,
+  EntityUIStore,
+  StoreConfig,
+} from '@datorama/akita';
+import { FileVersion } from '../../generated/caster-api';
+import { Injectable, InjectionToken } from '@angular/core';
+import { FileVersionUi } from './fileVersion.model';
 
 export interface FileVersionsState extends EntityState<FileVersion> {}
 export interface FileVersionUIState extends EntityState<FileVersionUi> {}
 
 export const initialFileVersionUiState: FileVersionUi = {
-  isSelected: false
+  isSelected: false,
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({ name: 'fileVersions' })
 export class FileVersionStore extends EntityStore<FileVersionsState> {
   ui: EntityUIStore<FileVersionUIState>;
   constructor() {
     super();
-    this.createUIStore().setInitialEntityState((entity => ({...initialFileVersionUiState})));
+    this.createUIStore().setInitialEntityState((entity) => ({
+      ...initialFileVersionUiState,
+    }));
   }
 }
-

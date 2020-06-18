@@ -17,13 +17,13 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
-import {FileVersion} from '../../../generated/caster-api';
-import {MatTableDataSource} from '@angular/material';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {FileVersionQuery} from 'src/app/fileVersions/state';
+import { FileVersion } from '../../../generated/caster-api';
+import { MatTableDataSource } from '@angular/material/table';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { FileVersionQuery } from 'src/app/fileVersions/state';
 
 @Component({
   selector: 'cas-version-list',
@@ -31,14 +31,14 @@ import {FileVersionQuery} from 'src/app/fileVersions/state';
   styleUrls: ['./version-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-
 })
-
 export class VersionListComponent implements OnInit, OnDestroy {
   @Input() fileId: string;
   @Input() selectedVersionId: string;
   @Output() getVersion: EventEmitter<{ id: string }> = new EventEmitter();
-  @Output() revertToVersion: EventEmitter<{ fileVersion: FileVersion }> = new EventEmitter();
+  @Output() revertToVersion: EventEmitter<{
+    fileVersion: FileVersion;
+  }> = new EventEmitter();
   public versions: FileVersion[];
   public dataSource = new MatTableDataSource();
   public filterString = '';
@@ -47,28 +47,30 @@ export class VersionListComponent implements OnInit, OnDestroy {
   constructor(
     private fileVersionQuery: FileVersionQuery,
     private changeDetectorRef: ChangeDetectorRef
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.fileVersionQuery.selectAll().pipe(takeUntil(this.unsubscribe$)).subscribe(versions => {
-      if (this.fileId) {
-        const fileVersions = versions.filter(v => {
-          return (v.fileId === this.fileId);
-        });
-        this.dataSource.data = fileVersions;
-        this.dataSource.data.sort((a: any, b: any) => {
-          if (a.dateSaved < b.dateSaved) {
-            return 1;
-          } else if (a.dateSaved > b.dateSaved) {
-            return -1;
-          } else {
-            return 0;
-          }
-        });
-        this.changeDetectorRef.markForCheck();
-      }
-    });
+    this.fileVersionQuery
+      .selectAll()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((versions) => {
+        if (this.fileId) {
+          const fileVersions = versions.filter((v) => {
+            return v.fileId === this.fileId;
+          });
+          this.dataSource.data = fileVersions;
+          this.dataSource.data.sort((a: any, b: any) => {
+            if (a.dateSaved < b.dateSaved) {
+              return 1;
+            } else if (a.dateSaved > b.dateSaved) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
+          this.changeDetectorRef.markForCheck();
+        }
+      });
   }
 
   applyFilter(filterValue: string) {
@@ -83,7 +85,7 @@ export class VersionListComponent implements OnInit, OnDestroy {
   }
 
   selectVersionFn(version: FileVersion) {
-    this.getVersion.emit({id: version.id});
+    this.getVersion.emit({ id: version.id });
   }
 
   ngOnDestroy() {
@@ -92,7 +94,6 @@ export class VersionListComponent implements OnInit, OnDestroy {
   }
 
   revertFile(version: FileVersion) {
-    this.revertToVersion.emit({fileVersion: version});
+    this.revertToVersion.emit({ fileVersion: version });
   }
 }
-

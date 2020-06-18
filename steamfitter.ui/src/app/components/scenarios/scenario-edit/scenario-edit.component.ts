@@ -9,15 +9,13 @@ DM20-0181
 */
 
 import { Component, EventEmitter, Input, Output, NgZone, ViewChild } from '@angular/core';
-// TODO: resolve these imports when API changes nouns
-import { Session } from 'src/app/swagger-codegen/dispatcher.api/model/models';
-import { Scenario } from 'src/app/data/scenario/scenario.store';
+import { Scenario } from 'src/app/swagger-codegen/dispatcher.api/model/models';
 import { ScenarioQuery } from 'src/app/data/scenario/scenario.query';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { TaskTreeComponent } from 'src/app/components/tasks/task-tree/task-tree.component';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
 import { TaskQuery } from 'src/app/data/task/task.query';
-import { TaskResultQuery } from 'src/app/data/task-result/task-result.query';
+import { ResultQuery } from 'src/app/data/task-result/task-result.query';
 
 @Component({
   selector: 'app-scenario-edit',
@@ -32,16 +30,16 @@ export class ScenarioEditComponent {
   @ViewChild(TaskTreeComponent) taskTree: TaskTreeComponent;
 
   public changesWereMade = false;
-  public scenarioStates = Object.values(Session.StatusEnum);
+  public scenarioStates = Object.values(Scenario.StatusEnum);
   taskList = this.taskQuery.selectAll();
-  taskResultList = this.taskResultQuery.selectAll();
+  resultList = this.resultQuery.selectAll();
   isLoading = this.scenarioQuery.selectLoading();
 
   constructor(
     private scenarioQuery: ScenarioQuery,
     private taskDataService: TaskDataService,
     private taskQuery: TaskQuery,
-    private taskResultQuery: TaskResultQuery,
+    private resultQuery: ResultQuery,
     public dialogService: DialogService
   ) {
 

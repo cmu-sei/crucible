@@ -8,18 +8,25 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {QueryEntity, EntityUIQuery, QueryConfig, Order} from '@datorama/akita';
-import {DirectoryUIState, DirectoryState, DirectoryStore } from './directory.store';
-import {Injectable} from '@angular/core';
-
+import {
+  QueryEntity,
+  EntityUIQuery,
+  QueryConfig,
+  Order,
+} from '@datorama/akita';
+import {
+  DirectoryUIState,
+  DirectoryState,
+  DirectoryStore,
+} from './directory.store';
+import { Injectable } from '@angular/core';
 
 @QueryConfig({
   sortBy: 'name',
-  sortByOrder: Order.ASC
+  sortByOrder: Order.ASC,
 })
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DirectoryQuery extends QueryEntity<DirectoryState> {
   ui: EntityUIQuery<DirectoryUIState>;
@@ -29,5 +36,3 @@ export class DirectoryQuery extends QueryEntity<DirectoryState> {
     this.createUIQuery();
   }
 }
-
-

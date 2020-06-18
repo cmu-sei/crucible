@@ -15,8 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.1.0-preview1-final"/>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.1.0-preview1-final"/>
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.1"/>
-    <PackageReference Include="s3.player.api.client" Version="1.0.1"/>
-    <PackageReference Include="S3.VM.Api.Client" Version="1.3.0"/>
+    <PackageReference Include="S3.Player.Api.Client" Version="1.4.0" />
+    <PackageReference Include="S3.VM.Api.Client" Version="1.4.0"/>
     <PackageReference Include="AutoMapper" Version="9.0.0"/>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0"/>
   </ItemGroup>

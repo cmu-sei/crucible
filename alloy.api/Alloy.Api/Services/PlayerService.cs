@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon� and CERT� are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -27,9 +27,9 @@ namespace Alloy.Api.Services
 {
     public interface IPlayerService
     {
-        Task<IEnumerable<Exercise>> GetExercisesAsync(CancellationToken ct);
-        Task<Exercise> CloneExerciseAsync(Guid exerciseId, CancellationToken ct);
-        Task DeleteExerciseAsync(Guid exerciseId, CancellationToken ct);
+        Task<IEnumerable<View>> GetViewsAsync(CancellationToken ct);
+        Task<View> CloneViewAsync(Guid viewId, CancellationToken ct);
+        Task DeleteViewAsync(Guid viewId, CancellationToken ct);
         Task<IEnumerable<string>> GetUserClaimValuesAsync(CancellationToken ct);
         Task<User> GetUserAsync(CancellationToken ct);
     }
@@ -54,20 +54,20 @@ namespace Alloy.Api.Services
             _claimsService = claimsService;
         }       
 
-        public async Task<IEnumerable<Exercise>> GetExercisesAsync(CancellationToken ct)
+        public async Task<IEnumerable<View>> GetViewsAsync(CancellationToken ct)
         {
-            var exercises = await _s3PlayerApiClient.GetUserExercisesAsync(_user.GetId(), ct);
-            return (IEnumerable<Exercise>)exercises;
+            var views = await _s3PlayerApiClient.GetUserViewsAsync(_user.GetId(), ct);
+            return (IEnumerable<View>)views;
         }
 
-        public async Task<Exercise> CloneExerciseAsync(Guid exerciseId, CancellationToken ct)
+        public async Task<View> CloneViewAsync(Guid viewId, CancellationToken ct)
         {
-            return (Exercise) await _s3PlayerApiClient.CloneExerciseAsync(exerciseId);
+            return (View) await _s3PlayerApiClient.CloneViewAsync(viewId);
         }
 
-        public async Task DeleteExerciseAsync(Guid exerciseId, CancellationToken ct)
+        public async Task DeleteViewAsync(Guid viewId, CancellationToken ct)
         {
-            await _s3PlayerApiClient.DeleteExerciseAsync(exerciseId);
+            await _s3PlayerApiClient.DeleteViewAsync(viewId);
         }
 
         public async Task<IEnumerable<string>> GetUserClaimValuesAsync(CancellationToken ct)

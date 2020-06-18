@@ -18,9 +18,8 @@ describe('CwdAuthLogoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CwdAuthLogoutComponent ]
-    })
-    .compileComponents();
+      declarations: [CwdAuthLogoutComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('CwdAuthLogoutComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

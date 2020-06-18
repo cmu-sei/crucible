@@ -11,13 +11,10 @@ DM20-0181
 import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatTableDataSource, MatPaginator, PageEvent} from '@angular/material';
-import { Exercise, PlayerService, Vm } from 'src/app/swagger-codegen/dispatcher.api';
+import { View, PlayerService, Vm } from 'src/app/swagger-codegen/dispatcher.api';
 import {map, take, switchMap} from 'rxjs/operators';
 import {Observable, combineLatest, BehaviorSubject} from 'rxjs';
-import {AuthService} from 'src/app/services/auth/auth.service';
 import {Router, ActivatedRoute} from '@angular/router';
-
-export interface View extends Exercise {}
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +59,7 @@ export class PlayerDataService {
     this.viewList = combineLatest([this.views, this._viewMask]).pipe(
       map(([items, filterTerm]) =>
         items ? (items as View[])
+          .sort((a: View, b: View) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1 )
           .filter(item => item.name.toLowerCase().includes(filterTerm.toLowerCase()) ||
             item.id.toLowerCase().includes(filterTerm.toLowerCase()))
         : [])
@@ -93,7 +91,7 @@ export class PlayerDataService {
           };
           this.vmPageEvent.next(this._vmPageEvent);
         }
-        return vmList;
+        return vmList.sort((a: Vm, b: Vm) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1);
       })
     );
     this.selectedView = combineLatest([this.viewList, this.requestedViewId]).pipe(
@@ -120,7 +118,7 @@ export class PlayerDataService {
   }
 
   getViewsFromApi() {
-    this.playerService.getExercises().pipe(take(1)).subscribe(views => {
+    this.playerService.getViews().pipe(take(1)).subscribe(views => {
       this.updateViews(views);
     }, error => {
       this.updateViews([]);

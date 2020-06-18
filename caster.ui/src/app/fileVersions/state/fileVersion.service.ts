@@ -8,18 +8,20 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {FileVersionStore} from './fileVersion.store';
-import {Injectable, InjectionToken} from '@angular/core';
-import {FilesService, FileVersion, CreateSnippetCommand} from '../../generated/caster-api';
-import {tap, take} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { FileVersionStore } from './fileVersion.store';
+import { Injectable, InjectionToken } from '@angular/core';
+import {
+  FilesService,
+  FileVersion,
+  CreateSnippetCommand,
+} from '../../generated/caster-api';
+import { tap, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class FileVersionService {
-
   constructor(
     private fileVersionStore: FileVersionStore,
     private filesService: FilesService
@@ -29,7 +31,7 @@ export class FileVersionService {
     this.fileVersionStore.setLoading(true);
     return this.filesService.getFileVersions(fileId).pipe(
       tap((versions: FileVersion[]) => {
-        versions.forEach(version => {
+        versions.forEach((version) => {
           this.fileVersionStore.upsert(version.id, version);
         });
       }),
@@ -43,7 +45,7 @@ export class FileVersionService {
     this.fileVersionStore.setLoading(true);
     return this.filesService.getFileVersion(id).pipe(
       tap((version: FileVersion) => {
-        this.fileVersionStore.upsert(version.id, {...version});
+        this.fileVersionStore.upsert(version.id, { ...version });
       }),
       tap(() => {
         this.fileVersionStore.setLoading(false);
@@ -53,22 +55,24 @@ export class FileVersionService {
 
   tagFiles(tag: string, fileIds: string[]) {
     this.fileVersionStore.setLoading(true);
-    return this.filesService.tagFiles({tag, fileIds}).pipe(take(1)).subscribe(versions => {
-      versions.forEach(version => {
-        this.fileVersionStore.upsert(version.id, version);
+    return this.filesService
+      .tagFiles({ tag, fileIds })
+      .pipe(take(1))
+      .subscribe((versions) => {
+        versions.forEach((version) => {
+          this.fileVersionStore.upsert(version.id, version);
+        });
       });
-    });
   }
 
   toggleSelected(id: string) {
-    this.fileVersionStore.ui.upsert(id, entity => ({isSelected: !entity.isSelected}));
+    this.fileVersionStore.ui.upsert(id, (entity) => ({
+      isSelected: !entity.isSelected,
+    }));
   }
 
   setActive(id) {
     this.fileVersionStore.setActive(id);
     this.fileVersionStore.ui.setActive(id);
-
   }
 }
-
-

@@ -27,15 +27,15 @@ namespace S3.VM.Api.Infrastructure.Mappings
         public VmProfile()
         {
             CreateMap<VmEntity, ViewModels.Vm>()
-                .ForMember(dest => dest.IsOwner, opt => opt.ResolveUsing<VmOwnerResolver>())           
-                .ForMember(dest => dest.AllowedNetworks, opt => opt.MapFrom(src => src.AllowedNetworks.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).ToList()))     
-                .ForMember(dest => dest.ExerciseId, opt => opt.ResolveUsing<ExerciseIdResolver>());
+                .ForMember(dest => dest.IsOwner, opt => opt.ResolveUsing<VmOwnerResolver>())
+                .ForMember(dest => dest.AllowedNetworks, opt => opt.MapFrom(src => src.AllowedNetworks.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).ToList()))
+                .ForMember(dest => dest.ViewId, opt => opt.ResolveUsing<ViewIdResolver>());
 
             CreateMap<VmEntity, ViewModels.VmSummary>()
                 .ForMember(dest => dest.TeamIds, opt => opt.MapFrom(src => src.VmTeams.Select(x => x.TeamId)));
 
             CreateMap<ViewModels.VmUpdateForm, VmEntity>()
-                .ForMember(dest => dest.AllowedNetworks, opt => opt.MapFrom(src => String.Join(" ", src.AllowedNetworks))); 
+                .ForMember(dest => dest.AllowedNetworks, opt => opt.MapFrom(src => String.Join(" ", src.AllowedNetworks)));
 
             CreateMap<ViewModels.VmCreateForm, VmEntity>()
                 .ForMember(dest => dest.VmTeams,         opt => opt.MapFrom(src => src.TeamIds.Select(x => new VmTeamEntity(x, src.Id.Value))))
@@ -65,19 +65,18 @@ namespace S3.VM.Api.Infrastructure.Mappings
         }
     }
 
-    public class ExerciseIdResolver : IValueResolver<VmEntity, ViewModels.Vm, Guid>
+    public class ViewIdResolver : IValueResolver<VmEntity, ViewModels.Vm, Guid>
     {
         private IPlayerService _playerService;
 
-        public ExerciseIdResolver(IPlayerService playerService)
+        public ViewIdResolver(IPlayerService playerService)
         {
             _playerService = playerService;
         }
 
         public Guid Resolve(VmEntity source, ViewModels.Vm destination, Guid destMember, ResolutionContext context)
         {
-            return _playerService.GetCurrentExerciseId();
+            return _playerService.GetCurrentViewId();
         }
     }
 }
-

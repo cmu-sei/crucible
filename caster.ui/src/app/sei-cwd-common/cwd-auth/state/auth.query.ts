@@ -8,14 +8,16 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Query} from '@datorama/akita';
-import {AuthState, AuthStore} from './auth.store';
-import {Injectable} from '@angular/core';
+import { Query } from '@datorama/akita';
+import { AuthState, AuthStore } from './auth.store';
+import { Injectable } from '@angular/core';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthQuery extends Query<AuthState> {
-  isLoggedIn$ = this.select(state => !!state.user && !!state.user.access_token);
-  user$ = this.select(state => state.user);
+  isLoggedIn$ = this.select(
+    (state) => !!state.user && !!state.user.access_token
+  );
+  user$ = this.select((state) => state.user);
   /*
   getAuthorizationHeader() {
     return `${this.getValue().user.token_type} ${this.getValue().user.access_token}`;
@@ -25,4 +27,3 @@ export class AuthQuery extends Query<AuthState> {
     super(store);
   }
 }
-

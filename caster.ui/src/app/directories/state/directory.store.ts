@@ -8,30 +8,39 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { EntityState, EntityStore, StoreConfig, ActiveState, EntityUIStore } from '@datorama/akita';
+import {
+  EntityState,
+  EntityStore,
+  StoreConfig,
+  ActiveState,
+  EntityUIStore,
+} from '@datorama/akita';
 import { Injectable } from '@angular/core';
 import { DirectoryUI } from './directory.model';
 import { Directory } from 'src/app/generated/caster-api';
 
-export interface DirectoryUIState extends EntityState<DirectoryUI>, ActiveState {}
+export interface DirectoryUIState
+  extends EntityState<DirectoryUI>,
+    ActiveState {}
 export interface DirectoryState extends EntityState<Directory>, ActiveState {}
 
 export const initialDirectoryUIState: DirectoryUI = {
   isExpanded: false,
   isFilesExpanded: false,
   isWorkspacesExpanded: false,
-  isDirectoriesExpanded: false
+  isDirectoriesExpanded: false,
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({ name: 'directories' })
 export class DirectoryStore extends EntityStore<DirectoryState> {
   ui: EntityUIStore<DirectoryUIState>;
   constructor() {
     super();
-    this.createUIStore().setInitialEntityState((entity => ({...initialDirectoryUIState})));
+    this.createUIStore().setInitialEntityState((entity) => ({
+      ...initialDirectoryUIState,
+    }));
   }
 }
-

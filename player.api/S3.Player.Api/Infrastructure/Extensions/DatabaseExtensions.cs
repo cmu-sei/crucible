@@ -48,14 +48,14 @@ namespace S3.Player.Api.Extensions
                         if (!ctx.Database.IsSqlite())
                         {
                             ctx.Database.Migrate();
-                        }                        
+                        }
 
                         if (databaseOptions.DevModeRecreate)
                         {
                             ctx.Database.EnsureCreated();
                             ProcessSeedDataOptions(seedDataOptions, ctx);
 
-                            if (!ctx.Exercises.Any())
+                            if (!ctx.Views.Any())
                             {
                                 Seed.Run(ctx);
                             }
@@ -124,9 +124,9 @@ namespace S3.Player.Api.Extensions
                         context.Permissions.Add(permission);
                     }
                 }
-                
+
                 context.SaveChanges();
-            }            
+            }
         }
 
         public static IServiceCollection AddDbProvider(

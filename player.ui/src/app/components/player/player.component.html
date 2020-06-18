@@ -24,8 +24,8 @@ DM20-0181
         </button>
       </div>
 
-      <div class="exercise-text">
-        {{ exerciseName }}
+      <div class="view-text">
+        {{ viewName }}
       </div>
 
       <div class="team-text">
@@ -52,7 +52,7 @@ DM20-0181
         </button>
         <mat-menu #menu="matMenu" [overlapTrigger]="false">
           <!--<button mat-menu-item>Profile</button>-->
-          <button *ngIf="canEdit" mat-menu-item (click)="editExercise()">Edit View Template</button>
+          <button *ngIf="canEdit" mat-menu-item (click)="editView()">Edit View</button>
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </div>
@@ -61,7 +61,7 @@ DM20-0181
 
     <app-focused-app></app-focused-app>
 
-    <app-notifications *ngIf="userGuid && teamGuid" [exerciseGuid]="exerciseGuid" [teamGuid]="teamGuid" [userGuid]="userGuid"
+    <app-notifications *ngIf="userGuid && teamGuid" [viewGuid]="viewGuid" [teamGuid]="teamGuid" [userGuid]="userGuid"
       [userToken]="userToken" [userName]="username" class="notification-height">
     </app-notifications>
   </mat-sidenav-content>

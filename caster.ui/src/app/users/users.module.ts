@@ -13,11 +13,7 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ],
-  providers: [
-  ]
+  imports: [CommonModule],
+  providers: [],
 })
-export class UsersModule { }
-
+export class UsersModule {}

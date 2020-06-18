@@ -9,7 +9,7 @@ DM20-0181
 */
 
 using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 
 namespace Steamfitter.Api.Infrastructure.Authorization
 {
@@ -22,7 +22,7 @@ namespace Steamfitter.Api.Infrastructure.Authorization
 
     public class ContentDeveloperHandler : AuthorizationHandler<ContentDeveloperRequirement>, IAuthorizationHandler
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ContentDeveloperRequirement requirement)
+        protected override STT.Task HandleRequirementAsync(AuthorizationHandlerContext context, ContentDeveloperRequirement requirement)
         {
             if (context.User.HasClaim(c => c.Type == SteamfitterClaimTypes.SystemAdmin.ToString()) ||
                 context.User.HasClaim(c => c.Type == SteamfitterClaimTypes.ContentDeveloper.ToString()))
@@ -30,7 +30,7 @@ namespace Steamfitter.Api.Infrastructure.Authorization
                 context.Succeed(requirement);
             }
 
-            return Task.CompletedTask;
+            return STT.Task.CompletedTask;
         }
     }
 }

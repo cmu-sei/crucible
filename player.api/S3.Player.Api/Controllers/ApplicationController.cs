@@ -41,7 +41,7 @@ namespace S3.Player.Api.Controllers
         /// Returns a list of all of the Application Templates in the system.
         /// <para />
         /// Only accessible to a SuperUser
-        /// </remarks>       
+        /// </remarks>
         /// <returns></returns>
         [HttpGet("application-templates")]
         [ProducesResponseType(typeof(IEnumerable<ApplicationTemplate>), (int)HttpStatusCode.OK)]
@@ -67,7 +67,7 @@ namespace S3.Player.Api.Controllers
         [ProducesResponseType(typeof(ApplicationTemplate), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getApplicationTemplate")]
         public async Task<IActionResult> GetTemplate(Guid id, CancellationToken ct)
-        {            
+        {
             var template = await _applicationService.GetTemplateAsync(id, ct);
 
             if (template == null)
@@ -82,10 +82,10 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Creates a new Application Template with the attributes specified
         /// <para />
-        /// An Application Template is a top-level resource that can optionally be the parent of an Exercise specific Application resource, which would inherit it's properties
+        /// An Application Template is a top-level resource that can optionally be the parent of an View specific Application resource, which would inherit it's properties
         /// <para />
         /// Accessible only to a SuperUser
-        /// </remarks>   
+        /// </remarks>
         [HttpPost("application-templates")]
         [ProducesResponseType(typeof(ApplicationTemplate), (int)HttpStatusCode.Created)]
         [SwaggerOperation(operationId: "createApplicationTemplate")]
@@ -123,7 +123,7 @@ namespace S3.Player.Api.Controllers
         /// Deletes an Application Template with the specified id
         /// <para />
         /// Accessible only to a SuperUser
-        /// </remarks>    
+        /// </remarks>
         /// <param name="id">The id of the Application Template to delete</param>
         /// <param name="ct"></param>
         [HttpDelete("application-templates/{id}")]
@@ -140,22 +140,22 @@ namespace S3.Player.Api.Controllers
         #region Applications
 
         /// <summary>
-        /// Gets all Applications for an Exercise
+        /// Gets all Applications for an View
         /// </summary>
         /// <remarks>
-        /// Returns all Applications assigned to a specific Exercise
+        /// Returns all Applications assigned to a specific View
         /// <para />
-        /// Accessible to a SuperUser or a User on an Admin Team within that Exercise
+        /// Accessible to a SuperUser or a User on an Admin Team within that View
         /// </remarks>
-        /// <param name="id">The id of the Exercise</param>
+        /// <param name="id">The id of the View</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        [HttpGet("exercises/{id}/applications")]
+        [HttpGet("views/{id}/applications")]
         [ProducesResponseType(typeof(IEnumerable<Application>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getExerciseApplications")]
-        public async Task<IActionResult> GetApplicationsByExercise(Guid id, CancellationToken ct)
+        [SwaggerOperation(operationId: "getViewApplications")]
+        public async Task<IActionResult> GetApplicationsByView(Guid id, CancellationToken ct)
         {
-            var list = await _applicationService.GetApplicationsByExerciseAsync(id, ct);
+            var list = await _applicationService.GetApplicationsByViewAsync(id, ct);
             return Ok(list);
         }
 
@@ -165,7 +165,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Returns the Application with the id specified
         /// <para />
-        /// Accessible to a SuperUser or a User on an Admin Team in the Application's assigned Exercise
+        /// Accessible to a SuperUser or a User on an Admin Team in the Application's assigned View
         /// </remarks>
         /// <param name="id">The id of the Application</param>
         /// <param name="ct"></param>
@@ -184,17 +184,17 @@ namespace S3.Player.Api.Controllers
         }
 
         /// <summary>
-        /// Creates a new Application within an Exercise
+        /// Creates a new Application within an View
         /// </summary>
         /// <remarks>
-        /// Creates a new Application within an Exercise with the attributes specified
+        /// Creates a new Application within an View with the attributes specified
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Exercise
-        /// </remarks>     
-        /// <param name="id">The id of the Exercise</param>
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified View
+        /// </remarks>
+        /// <param name="id">The id of the View</param>
         /// <param name="application">The data to create the Application with</param>
         /// <param name="ct"></param>
-        [HttpPost("exercises/{id}/applications")]
+        [HttpPost("views/{id}/applications")]
         [ProducesResponseType(typeof(Application), (int)HttpStatusCode.Created)]
         [SwaggerOperation(operationId: "createApplication")]
         public async Task<IActionResult> CreateApplication([FromRoute] Guid id, [FromBody] Application application, CancellationToken ct)
@@ -209,8 +209,8 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Updates an Application with the attributes specified
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team in the Application's assigned Exercise
-        /// </remarks>     
+        /// Accessible only to a SuperUser or a User on an Admin Team in the Application's assigned View
+        /// </remarks>
         [HttpPut("applications/{id}")]
         [ProducesResponseType(typeof(Application), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "updateApplication")]
@@ -226,8 +226,8 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Deletes an Application with the specified id
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Team's Exercise
-        /// </remarks>    
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Team's View
+        /// </remarks>
         /// <param name="id">The id of the Application</param>
         /// <param name="ct"></param>
         [HttpDelete("applications/{id}")]
@@ -249,7 +249,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Returns all Application Instances assigned to a specific Team
         /// <para />
-        /// Accessible to a SuperUser, a User on an Admin Team in the Team's Exercise, or any User on the specified Team
+        /// Accessible to a SuperUser, a User on an Admin Team in the Team's View, or any User on the specified Team
         /// </remarks>
         /// <param name="id">The id of the Team</param>
         /// <param name="ct"></param>
@@ -269,7 +269,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Returns the Application Instance with the id specified
         /// <para />
-        /// Accessible to a SuperUser or a User on an Admin Team in the Application Instance's Team's Exercise
+        /// Accessible to a SuperUser or a User on an Admin Team in the Application Instance's Team's View
         /// </remarks>
         /// <param name="id">The id of the Application Instance</param>
         /// <param name="ct"></param>
@@ -293,8 +293,8 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Creates a new Application Instance within a Team with the attributes specified
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Team's Exercise
-        /// </remarks>     
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Team's View
+        /// </remarks>
         /// <param name="id">The id of the Team</param>
         /// <param name="instance">The data to create the Application Instance with</param>
         /// <param name="ct"></param>
@@ -313,8 +313,8 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Updates an Application Instance with the attributes specified
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team in the Application Instances's Team's Exercise
-        /// </remarks>     
+        /// Accessible only to a SuperUser or a User on an Admin Team in the Application Instances's Team's View
+        /// </remarks>
         /// <param name="id">The id of the Application Instance</param>
         /// <param name="instance">The updated instance values</param>
         /// <param name="ct"></param>
@@ -333,8 +333,8 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Deletes an Application Instance with the specified id
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team in the Application Instances's Team's Exercise
-        /// </remarks>    
+        /// Accessible only to a SuperUser or a User on an Admin Team in the Application Instances's Team's View
+        /// </remarks>
         /// <param name="id">The id of the Application</param>
         /// <param name="ct"></param>
         [HttpDelete("application-instances/{id}")]
@@ -349,4 +349,3 @@ namespace S3.Player.Api.Controllers
         #endregion
     }
 }
-

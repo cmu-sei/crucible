@@ -21,7 +21,7 @@ export class VmService {
 
   private vmUrl: string;
   private teamUrl: string;
-  public exerciseId: string;
+  public viewId: string;
   public teamId: string;
 
   constructor(
@@ -29,14 +29,14 @@ export class VmService {
     private settings: SettingsService,
     private router: Router,
   ) {
-    this.exerciseId = this.router.routerState.snapshot.root.firstChild.params['exerciseId'];
+    this.viewId = this.router.routerState.snapshot.root.firstChild.params['viewId'];
     this.teamId = this.router.routerState.snapshot.root.firstChild.params['teamId'];
 
-    this.vmUrl = `${settings.ApiUrl}/exercises/${this.exerciseId}/vms`;
+    this.vmUrl = `${settings.ApiUrl}/views/${this.viewId}/vms`;
     this.teamUrl = `${settings.ApiUrl}/teams/${this.teamId}/vms`;
   }
 
-  public GetExerciseVms(includePersonal: boolean, onlyMine: boolean): Observable<Array<VmModel>> {
+  public GetViewVms(includePersonal: boolean, onlyMine: boolean): Observable<Array<VmModel>> {
     let params = new HttpParams();
     params = params.append('includePersonal', includePersonal.toString());
     params = params.append('onlyMine', onlyMine.toString());
@@ -50,10 +50,9 @@ export class VmService {
     return this.http.get<Array<VmModel>>(this.teamUrl, { params: params });
   }
 
-  public GetExerciseVmsByName(exerciseId: string, name: string): Observable<Array<VmModel>> {
-    const url = `${this.settings.ApiUrl}/exercises/${exerciseId}/vms?name=${name}`;
+  public GetViewVmsByName(viewId: string, name: string): Observable<Array<VmModel>> {
+    const url = `${this.settings.ApiUrl}/views/${viewId}/vms?name=${name}`;
     return this.http.get<Array<VmModel>>(url);
   }
 
 }
-

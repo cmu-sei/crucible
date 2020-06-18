@@ -18,9 +18,8 @@ describe('OutputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OutputComponent ]
-    })
-    .compileComponents();
+      declarations: [OutputComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('OutputComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

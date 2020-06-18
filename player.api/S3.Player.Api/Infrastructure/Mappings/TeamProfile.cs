@@ -52,7 +52,7 @@ namespace S3.Player.Api.Infrastructure.Mappings
 
         public bool Resolve(TeamDTO source, Team destination, bool member, ResolutionContext context)
         {
-            return _authorizationService.AuthorizeAsync(_user, null, new ManageExerciseRequirement(source.ExerciseId)).Result.Succeeded;
+            return _authorizationService.AuthorizeAsync(_user, null, new ManageViewRequirement(source.ViewId)).Result.Succeeded;
         }
     }
 
@@ -90,4 +90,3 @@ namespace S3.Player.Api.Infrastructure.Mappings
         }
     }
 }
-

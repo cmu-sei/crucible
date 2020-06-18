@@ -8,14 +8,11 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Directive, OnInit} from '@angular/core';
+import { Directive, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[cwdTableAction]'
+  selector: '[cwdTableAction]',
 })
 export class TableActionDirective {
-
-  constructor() { }
-
+  constructor() {}
 }
-

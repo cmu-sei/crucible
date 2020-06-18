@@ -9,7 +9,7 @@ DM20-0181
 */
 
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ApplicationTemplate, ApplicationService } from '../../../../swagger-codegen/s3.player.api';
+import { ApplicationTemplate, ApplicationService } from '../../../../generated/s3.player.api';
 import { DialogService } from '../../../../services/dialog/dialog.service';
 
 @Component({
@@ -57,4 +57,3 @@ export class AdminTemplateDetailsComponent implements OnInit {
   }
 
 }
-

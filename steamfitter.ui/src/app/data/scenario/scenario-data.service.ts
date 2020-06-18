@@ -14,9 +14,7 @@ import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {PageEvent} from '@angular/material';
 import {Router, ActivatedRoute} from '@angular/router';
-// TODO: replace the following import when API renames its nouns
-import { Scenario } from './scenario.store';
-import {SessionService} from 'src/app/swagger-codegen/dispatcher.api';
+import {Scenario, ScenarioService} from 'src/app/swagger-codegen/dispatcher.api';
 import {map, take, tap, distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import {BehaviorSubject, Observable, combineLatest} from 'rxjs';
 import {TaskDataService} from 'src/app/data/task/task-data.service';
@@ -46,7 +44,7 @@ export class ScenarioDataService {
   constructor(
     private scenarioStore: ScenarioStore,
     private scenarioQuery: ScenarioQuery,
-    private scenarioService: SessionService,
+    private scenarioService: ScenarioService,
     private taskDataService: TaskDataService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -78,7 +76,7 @@ export class ScenarioDataService {
           .sort((a: Scenario, b: Scenario) => this.sortScenarios(a, b, sortColumn, sortIsAscending))
           .filter(scenario => ( ('' + scenario.name).toLowerCase().includes(filterTerm.toLowerCase()) ||
                                ('' + scenario.description).toLowerCase().includes(filterTerm.toLowerCase()) ||
-                               ('' + scenario.exercise).toLowerCase().includes(filterTerm.toLowerCase())) &&
+                               ('' + scenario.view).toLowerCase().includes(filterTerm.toLowerCase())) &&
                              (statuses.toString().indexOf(scenario.status) > -1) )
         : [])
     );
@@ -110,14 +108,14 @@ export class ScenarioDataService {
       case 'status': return (a.status.toLowerCase() < b.status.toLowerCase() ? -1 : 1) * (isAsc ? 1 : -1);
       case 'startDate': return (a.startDate.getTime() < b.startDate.getTime() ? -1 : 1) * (isAsc ? 1 : -1);
       case 'endDate': return (a.endDate.getTime() < b.endDate.getTime() ? -1 : 1) * (isAsc ? 1 : -1);
-      case 'view': return ((a.exercise + '') < (b.exercise + '') ? -1 : 1) * (isAsc ? 1 : -1);
+      case 'view': return ((a.view + '') < (b.view + '') ? -1 : 1) * (isAsc ? 1 : -1);
       default: return 0;
     }
   }
 
   load() {
     this.scenarioStore.setLoading(true);
-    this.scenarioService.getSessions().pipe(
+    this.scenarioService.getScenarios().pipe(
       tap(() => { this.scenarioStore.setLoading(false); }),
       take(1)
     ).subscribe(scenarios => {
@@ -133,7 +131,7 @@ export class ScenarioDataService {
 
   loadById(id: string): Observable<Scenario> {
     this.scenarioStore.setLoading(true);
-    return this.scenarioService.getSession(id).pipe(
+    return this.scenarioService.getScenario(id).pipe(
       tap((scenario: Scenario) => {
         // convert from UTC time.
         scenario.startDate = new Date(scenario.startDate);
@@ -146,7 +144,7 @@ export class ScenarioDataService {
 
   add(scenario: Scenario) {
     this.scenarioStore.setLoading(true);
-    this.scenarioService.createSession(scenario).pipe(
+    this.scenarioService.createScenario(scenario).pipe(
         tap(() => { this.scenarioStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {
@@ -161,7 +159,7 @@ export class ScenarioDataService {
 
   copyScenario(scenarioId: string) {
     this.scenarioStore.setLoading(true);
-    this.scenarioService.copySession(scenarioId).pipe(
+    this.scenarioService.copyScenario(scenarioId).pipe(
         tap(() => { this.scenarioStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {
@@ -176,7 +174,7 @@ export class ScenarioDataService {
 
   updateScenario(scenario: Scenario) {
     this.scenarioStore.setLoading(true);
-    this.scenarioService.updateSession(scenario.id, scenario).pipe(
+    this.scenarioService.updateScenario(scenario.id, scenario).pipe(
         tap(() => { this.scenarioStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {
@@ -189,14 +187,14 @@ export class ScenarioDataService {
   }
 
   delete(id: string) {
-    this.scenarioService.deleteSession(id).pipe(take(1)).subscribe(r => {
+    this.scenarioService.deleteScenario(id).pipe(take(1)).subscribe(r => {
       this.scenarioStore.remove(id);
       this.setActive('');
     });
   }
 
   start(id: string) {
-    this.scenarioService.startSession(id).pipe(take(1)).subscribe(s => {
+    this.scenarioService.startScenario(id).pipe(take(1)).subscribe(s => {
       // convert from UTC time.
       s.startDate = new Date(s.startDate);
       s.endDate = new Date(s.endDate);
@@ -205,7 +203,7 @@ export class ScenarioDataService {
   }
 
   end(id: string) {
-    this.scenarioService.endSession(id).pipe(take(1)).subscribe(s => {
+    this.scenarioService.endScenario(id).pipe(take(1)).subscribe(s => {
       // convert from UTC time.
       s.startDate = new Date(s.startDate);
       s.endDate = new Date(s.endDate);

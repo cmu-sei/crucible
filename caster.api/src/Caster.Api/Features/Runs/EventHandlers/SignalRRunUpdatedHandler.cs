@@ -26,16 +26,16 @@ namespace Caster.Api.Features.Runs.EventHandlers
     {
         private readonly CasterContext _db;
         private readonly IMapper _mapper;
-        private readonly IHubContext<ExerciseHub> _exerciseHub;
+        private readonly IHubContext<ProjectHub> _projectHub;
 
         public SignalRRunUpdatedHandler(
             CasterContext db,
             IMapper mapper,
-            IHubContext<ExerciseHub> exerciseHub)
+            IHubContext<ProjectHub> projectHub)
         {
             _db = db;
             _mapper = mapper;
-            _exerciseHub = exerciseHub;
+            _projectHub = projectHub;
         }
 
         public async Task Handle(IRunUpdate notification, CancellationToken cancellationToken)
@@ -45,7 +45,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
                 .ProjectTo<Run>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
-            await _exerciseHub.Clients.Groups(run.WorkspaceId.ToString(), nameof(HubGroups.WorkspacesAdmin)).SendAsync("RunUpdated", run);
+            await _projectHub.Clients.Groups(run.WorkspaceId.ToString(), nameof(HubGroups.WorkspacesAdmin)).SendAsync("RunUpdated", run);
         }
     }
 }

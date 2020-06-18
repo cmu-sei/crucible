@@ -10,7 +10,7 @@ DM20-0181
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExercisesService } from '../../services/exercises/exercises.service';
+import { ViewsService } from '../../services/views/views.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { TeamsService } from '../../services/teams/teams.service';
 import { TeamData } from '../../models/team-data';
@@ -18,9 +18,9 @@ import { SystemMessageService } from '../../services/system-message/system-messa
 import { SettingsService } from '../../services/settings/settings.service';
 import { Title } from '@angular/platform-browser';
 import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
-import { AdminExerciseEditComponent } from '../admin-app/admin-exercise-search/admin-exercise-edit/admin-exercise-edit.component';
-import { ExerciseService } from '../../swagger-codegen/s3.player.api/api/exercise.service';
-import { Exercise } from '../../swagger-codegen/s3.player.api/model/models';
+import { AdminViewEditComponent } from '../admin-app/admin-view-search/admin-view-edit/admin-view-edit.component';
+import { ViewService } from '../../generated/s3.player.api/api/view.service';
+import { View } from '../../generated/s3.player.api/model/models';
 import { MatDialog } from '@angular/material';
 
 @Component({
@@ -31,25 +31,25 @@ import { MatDialog } from '@angular/material';
 })
 export class PlayerComponent implements OnInit {
 
-  public exerciseGuid: string;
+  public viewGuid: string;
   public teamGuid: string;
   public userGuid: string;
   public userToken: string;
 
   public opened: boolean;
   public username: string;
-  public exercise: Exercise;
+  public view: View;
   public team: string;
   public teams: Array<TeamData>;
 
   public canEdit = false;
-  public exerciseName = '';
+  public viewName = '';
   public topBarColor = '#b00';
 
   constructor(
     private route: ActivatedRoute,
-    private exercisesService: ExercisesService,
-    private exerciseService: ExerciseService,
+    private viewsService: ViewsService,
+    private viewService: ViewService,
     private authService: AuthService,
     private loggedInUserService: LoggedInUserService,
     private teamsService: TeamsService,
@@ -81,21 +81,21 @@ export class PlayerComponent implements OnInit {
       this.userGuid = loggedInUser.id;
       this.userToken = this.authService.getAuthorizationToken();
 
-      // Get the exercise GUID from the URL that the user is entering the web page on
+      // Get the view GUID from the URL that the user is entering the web page on
       this.route.params.subscribe(params => {
-        this.exerciseGuid = params['id'];
+        this.viewGuid = params['id'];
 
-        // Tell the rest of the subscribed components to update their exercise guid
-        this.exercisesService.currentExerciseGuid.next(this.exerciseGuid);
+        // Tell the rest of the subscribed components to update their view guid
+        this.viewsService.currentViewGuid.next(this.viewGuid);
 
-        // Get the exercise object from the exercise GUID
-        this.exerciseService.getExercise(this.exerciseGuid).subscribe(exercise => {
-          this.exercise = exercise;
-          this.exerciseName = exercise.name;
-          this.canEdit = exercise.canManage;
+        // Get the view object from the view GUID
+        this.viewService.getView(this.viewGuid).subscribe(view => {
+          this.view = view;
+          this.viewName = view.name;
+          this.canEdit = view.canManage;
 
-          // Get the teams for the exercise and filter the members.
-          this.teamsService.getUserTeamsByExercise(this.userGuid, exercise.id).subscribe(teams => {
+          // Get the teams for the view and filter the members.
+          this.teamsService.getUserTeamsByView(this.userGuid, view.id).subscribe(teams => {
             this.teams = teams.filter(t => t.isMember);
             // There should only be 1 primary member, set that value for the current login
             const myTeam = teams.filter(t => t.isPrimary)[0];
@@ -129,22 +129,22 @@ export class PlayerComponent implements OnInit {
    */
   setPrimaryTeam(newTeamGuid) {
     if (newTeamGuid !== this.teamGuid) {
-      this.exercisesService.setPrimaryTeamId(this.userGuid, newTeamGuid).subscribe(team =>{
+      this.viewsService.setPrimaryTeamId(this.userGuid, newTeamGuid).subscribe(team =>{
         window.location.reload();
       });
     }
   }
 
   /**
-   * Called to open the edit exercise dialog window
+   * Called to open the edit view dialog window
    */
-  editExercise() {
-    const dialogRef = this.dialog.open(AdminExerciseEditComponent);
+  editView() {
+    const dialogRef = this.dialog.open(AdminViewEditComponent);
     dialogRef.afterOpen().subscribe(r => {
       dialogRef.componentInstance.resetStepper();
       dialogRef.componentInstance.updateApplicationTemplates();
-      dialogRef.componentInstance.updateExercise();
-      dialogRef.componentInstance.exercise = this.exercise;
+      dialogRef.componentInstance.updateView();
+      dialogRef.componentInstance.view = this.view;
     });
 
     dialogRef.componentInstance.editComplete.subscribe(() => {
@@ -152,4 +152,3 @@ export class PlayerComponent implements OnInit {
     });
   }
 }
-

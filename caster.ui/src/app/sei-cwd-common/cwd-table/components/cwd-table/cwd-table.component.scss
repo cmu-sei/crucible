@@ -7,6 +7,8 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
+@import '~@angular/material/theming';
+@import 'theme';
 
 .mat-accordion .mat-header-row {
   padding-left: 1.5rem;
@@ -35,7 +37,8 @@ $mat-row-horizontal-padding: 24px;
   min-height: $mat-row-height;
 }
 
-.mat-row, .mat-header-row {
+.mat-row,
+.mat-header-row {
   display: flex;
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -53,7 +56,8 @@ $mat-row-horizontal-padding: 24px;
   }
 }
 
-.mat-cell, .mat-header-cell {
+.mat-cell,
+.mat-header-cell {
   flex: 1;
   overflow: hidden;
   word-wrap: break-word;
@@ -63,6 +67,7 @@ $mat-row-horizontal-padding: 24px;
   flex: 1 1 auto;
 }
 
-.item-actions {}
-.list-actions {}
-
+.item-actions {
+}
+.list-actions {
+}

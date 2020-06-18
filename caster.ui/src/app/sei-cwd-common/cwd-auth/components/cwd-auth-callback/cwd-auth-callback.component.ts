@@ -9,38 +9,40 @@ DM20-0181
 */
 
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CwdAuthService} from '../../services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CwdAuthService } from '../../services';
 
 @Component({
   selector: 'cas-cwd-auth-callback',
   templateUrl: './cwd-auth-callback.component.html',
-  styleUrls: ['./cwd-auth-callback.component.scss']
+  styleUrls: ['./cwd-auth-callback.component.scss'],
 })
 export class CwdAuthCallbackComponent implements OnInit {
   errorMessage: string;
-  constructor(private route: ActivatedRoute, private router: Router, private authService: CwdAuthService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: CwdAuthService
+  ) {}
 
   ngOnInit() {
-    this.route.fragment.subscribe(frag => {
+    this.route.fragment.subscribe((frag) => {
       this.validate(frag);
     });
   }
-  
+
   validate(frag) {
-    this.authService.completeAuthentication(frag)
-      .then(
-        (user) => {
+    this.authService.completeAuthentication(frag).then(
+      (user) => {
         if (user && user.state) {
           const userGuid = user.profile.sub;
           this.router.navigateByUrl(user.state || '/');
         }
       },
-        (err) => {
-          console.log(err);
-          this.errorMessage = err;
-        }
-      );
+      (err) => {
+        console.log(err);
+        this.errorMessage = err;
+      }
+    );
   }
 }
-
