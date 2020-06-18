@@ -86,9 +86,9 @@ DM20-0181
   <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field class="full-width">
-        <button mat-icon-button matPrefix ngxClipboard [cbContent]="event.definitionId" title="Copy:  {{event.definitionId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <button mat-icon-button matPrefix ngxClipboard [cbContent]="event.eventTemplateId" title="Copy:  {{event.eventTemplateId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
         <input matInput placeholder="Event Template ID" [formControl]="eventTemplateIdFormControl"
-          (blur)="saveEvent('eventTemplateId')" value="{{event.definitionId}}" [errorStateMatcher]="matcher">
+          (blur)="saveEvent('eventTemplateId')" value="{{event.eventTemplateId}}" [errorStateMatcher]="matcher">
         <mat-error *ngIf="eventTemplateIdFormControl.hasError('required')">
           Event Template ID is <strong>required</strong>
         </mat-error>
@@ -99,9 +99,9 @@ DM20-0181
   <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field class="full-width">
-        <button mat-icon-button matPrefix ngxClipboard [cbContent]="event.exerciseId" title="Copy:  {{event.exerciseId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <button mat-icon-button matPrefix ngxClipboard [cbContent]="event.viewId" title="Copy:  {{event.viewId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
         <input matInput placeholder="View ID" [formControl]="viewIdFormControl"
-          (blur)="saveEvent('exerciseId')" value="{{event.exerciseId}}" [errorStateMatcher]="matcher">
+          (blur)="saveEvent('viewId')" value="{{event.viewId}}" [errorStateMatcher]="matcher">
       </mat-form-field>
     </div>
   </div>
@@ -129,9 +129,9 @@ DM20-0181
   <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field class="full-width">
-        <button mat-icon-button matPrefix ngxClipboard [cbContent]="event.sessionId" title="Copy:  {{event.sessionId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <button mat-icon-button matPrefix ngxClipboard [cbContent]="event.scenarioId" title="Copy:  {{event.scenarioId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
         <input matInput placeholder="Scenario ID" [formControl]="scenarioIdFormControl"
-          (blur)="saveEvent('scenarioId')" value="{{event.sessionId}}" [errorStateMatcher]="matcher">
+          (blur)="saveEvent('scenarioId')" value="{{event.scenarioId}}" [errorStateMatcher]="matcher">
       </mat-form-field>
     </div>
   </div>
@@ -175,7 +175,7 @@ DM20-0181
   <!-- <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field>
-        <mat-select placeholder="View" [(ngModel)]="event.exerciseId" (selectionChange)="saveEvent('exercise')">
+        <mat-select placeholder="View" [(ngModel)]="event.viewId" (selectionChange)="saveEvent('view')">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let view of views" [value]="view.id" [matTooltip]="view.id" matTooltipPosition="right">
             {{view.name}}

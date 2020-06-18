@@ -11,8 +11,11 @@ DM20-0181
 import { Component, NgZone } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { Definition } from '../../../generated/alloy.api';
+import { EventTemplate } from 'src/app/generated/alloy.api';
 import { Observable } from 'rxjs';
+import { PlayerDataService } from 'src/app/services/player-data/player-data.service';
+import { SteamfitterDataService } from 'src/app/services/steamfitter-data/steamfitter-data.service';
+import { CasterDataService } from 'src/app/services/caster-data/caster-data.service';
 
 @Component({
   selector: 'app-event-templates',
@@ -23,11 +26,21 @@ export class EventTemplatesComponent {
 
   public matcher = new UserErrorStateMatcher();
   public isLinear = false;
-  public eventTemplates$ = new Observable<Definition[] | void>();
+  public eventTemplates$ = new Observable<EventTemplate[] | void>();
+  public viewList = this.playerDataService.viewList;
+  public scenarioTemplateList = this.steamfitterDataService.scenarioTemplateList;
+  public directoryList = this.casterDataService.directoryList;
 
   constructor(
+    private playerDataService: PlayerDataService,
+    private steamfitterDataService: SteamfitterDataService,
+    private casterDataService: CasterDataService,
     public zone: NgZone
-  ) {}
+  ) {
+    playerDataService.getViewsFromApi();
+    steamfitterDataService.getScenarioTemplatesFromApi();
+    casterDataService.getDirectoriesFromApi();
+  }
 
 }
 

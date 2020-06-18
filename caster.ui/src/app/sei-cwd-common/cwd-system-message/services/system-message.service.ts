@@ -8,24 +8,23 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Injectable } from '@angular/core';
 import { SystemMessageComponent } from '../components/system-message.component';
 
-
 @Injectable()
 export class SystemMessageService {
+  constructor(private messageSheet: MatBottomSheet) {}
 
-    constructor(
-        private messageSheet: MatBottomSheet
-    ) { }
-
-    public displayMessage(title: string, message: string, displayAfterMs: number = 0) {
-        setTimeout(() => {
-            this.messageSheet.open(SystemMessageComponent, {data: {title, message} });
-        }, displayAfterMs);
-    }
+  public displayMessage(
+    title: string,
+    message: string,
+    displayAfterMs: number = 0
+  ) {
+    setTimeout(() => {
+      this.messageSheet.open(SystemMessageComponent, {
+        data: { title, message },
+      });
+    }, displayAfterMs);
+  }
 }
-
-
-

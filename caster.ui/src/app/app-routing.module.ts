@@ -8,20 +8,34 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {CwdAuthGuardService} from './sei-cwd-common/cwd-auth/services';
-import {AdminContainerComponent} from './admin-app/component/admin-container/admin-container.component';
-import {ProjectListContainerComponent} from './project/component/project-home/project-list-container/project-list-container.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CwdAuthGuardService } from './sei-cwd-common/cwd-auth/services';
+import { AdminContainerComponent } from './admin-app/component/admin-container/admin-container.component';
+import { ProjectListContainerComponent } from './project/component/project-home/project-list-container/project-list-container.component';
 
 const routes: Routes = [
-  {path: 'admin', component: AdminContainerComponent, pathMatch: 'full', canActivate: [CwdAuthGuardService]},
-  {path: '', component: ProjectListContainerComponent, pathMatch: 'full', canActivate: [CwdAuthGuardService]}
+  {
+    path: 'admin',
+    component: AdminContainerComponent,
+    pathMatch: 'full',
+    canActivate: [CwdAuthGuardService],
+  },
+  {
+    path: '',
+    component: ProjectListContainerComponent,
+    pathMatch: 'full',
+    canActivate: [CwdAuthGuardService],
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {paramsInheritanceStrategy: 'always', onSameUrlNavigation: 'reload'})],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      paramsInheritanceStrategy: 'always',
+      onSameUrlNavigation: 'reload',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
-
+export class AppRoutingModule {}

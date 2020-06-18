@@ -10,9 +10,8 @@ DM20-0181
 
 import { Component, EventEmitter, Output, Inject } from '@angular/core';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
-import { MAT_DIALOG_DATA, ErrorStateMatcher } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { Scenario } from 'src/app/swagger-codegen/dispatcher.api';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class UserErrorStateMatcher implements ErrorStateMatcher {
@@ -48,15 +47,18 @@ export class ScenarioEditDialogComponent {
 
   constructor(
     public dialogService: DialogService,
+    dialogRef: MatDialogRef<ScenarioEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+    dialogRef.disableClose = true;
+  }
 
   errorFree() {
     return !(this.scenarioNameFormControl.hasError('required')
               || this.scenarioNameFormControl.hasError('minlength')
               || this.descriptionFormControl.hasError('required')
               || this.descriptionFormControl.hasError('minlength')
-              || !this.data.scenario.exerciseId);
+              || !this.data.scenario.viewId);
   }
 
   trimInitialDescription() {
@@ -92,8 +94,8 @@ export class ScenarioEditDialogComponent {
         this.data.scenario.description = this.descriptionFormControl.value.toString();
         break;
       case 'view':
-        const view = this.data.views.find(v => v.id === this.data.scenario.exerciseId);
-        this.data.scenario.exercise = view ? view.name : '';
+        const view = this.data.views.find(v => v.id === this.data.scenario.viewId);
+        this.data.scenario.view = view ? view.name : '';
         break;
       case 'startDate':
         const newStart = new Date(this.startDateFormControl.value);

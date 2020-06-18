@@ -24,7 +24,6 @@ using Alloy.Api.Data;
 using Alloy.Api.Options;
 using Alloy.Api.Services;
 using System;
-using Newtonsoft.Json.Converters;
 using AutoMapper;
 using Alloy.Api.Infrastructure;
 using Alloy.Api.Infrastructure.Authorization;
@@ -34,6 +33,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Principal;
 using System.Linq;
 using Alloy.Api.Infrastructure.Extensions;
+using System.Text.Json.Serialization;
+using Microsoft.Extensions.Hosting;
+using Alloy.Api.Infrastructure.JsonConverters;
+using Alloy.Api.Infrastructure.Mappings;
 
 namespace Alloy.Api
 {
@@ -60,7 +63,6 @@ namespace Alloy.Api
                 case "Sqlite":
                 case "SqlServer":
                 case "PostgreSQL":
-                    services.AddDbProvider(Configuration);
                     services.AddDbContextPool<AlloyContext>(builder => builder.UseConfiguredDatabase(Configuration));
                     break;
             }
@@ -93,7 +95,7 @@ namespace Alloy.Api
             services.AddSignalR()
             .AddJsonProtocol(options =>
             {
-                options.PayloadSerializerSettings.Converters.Add(new StringEnumConverter());
+                options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
             services.AddMvc(options =>
@@ -110,7 +112,9 @@ namespace Alloy.Api
             })
             .AddJsonOptions(options =>
             {
-                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                options.JsonSerializerOptions.Converters.Add(new JsonNullableGuidConverter());
+                options.JsonSerializerOptions.Converters.Add(new JsonIntegerConverter());
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             })
             .SetCompatibilityVersion(CompatibilityVersion.Latest); 
 
@@ -138,8 +142,8 @@ namespace Alloy.Api
 
             services.AddMemoryCache();            
 
-            services.AddScoped<IDefinitionService, DefinitionService>();
-            services.AddScoped<IImplementationService, ImplementationService>();
+            services.AddScoped<IEventTemplateService, EventTemplateService>();
+            services.AddScoped<IEventService, EventService>();
             services.AddScoped<ICasterService, CasterService>();
             services.AddScoped<IPlayerService, PlayerService>();
             services.AddScoped<ISteamfitterService, SteamfitterService>();
@@ -160,17 +164,22 @@ namespace Alloy.Api
 
             ApplyPolicies(services);
 
-            services.AddAutoMapper();
+            services.AddAutoMapper(cfg => {
+                cfg.ForAllPropertyMaps(
+                    pm => pm.SourceType != null && Nullable.GetUnderlyingType(pm.SourceType) == pm.DestinationType,
+                    (pm, c) => c.MapFrom<object, object, object, object>(new IgnoreNullSourceValues(), pm.SourceMember.Name));
+            }, typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             
+            app.UseRouting();
             app.UseCors("default");
             
             //move any querystring jwt to Auth bearer header
@@ -191,6 +200,14 @@ namespace Alloy.Api
                 await next.Invoke();
 
             });
+            
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -201,9 +218,6 @@ namespace Alloy.Api
                 c.OAuthAppName(_authOptions.ClientName);
             });
 
-            app.UseAuthentication();
-
-            app.UseMvc();
 
             app.UseHttpContext();
         }

@@ -13,20 +13,20 @@ DM20-0181
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0;  
+  right: 0;
 }
 
 .appbarmenu-container {
   min-width: 50px;
   background-color: #f4f4f4;
   color: black;
-}  
+}
 
 .cmu-logo {
   width: 100%;
   position: absolute;
   bottom: 0;
-  
+
 }
 .pull-right {
   position: absolute;
@@ -57,14 +57,12 @@ DM20-0181
   margin-top: -2px;
 }
 
-.exercise-text {
+.view-text {
   font-size: 110%;
-  margin-left: 50px; 
+  margin-left: 50px;
   margin-right: 40px;
 }
 .team-text {
-  text-align: right; 
+  text-align: right;
   margin-right: 10px;
 }
-
-

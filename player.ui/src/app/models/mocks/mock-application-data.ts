@@ -20,7 +20,7 @@ export const MockApplicationData: ApplicationData[] = [
         loadInBackground: false,
         applicationId: "",
         displayOrder: 1,
-        exerciseId: "",
+        viewId: "",
         safeUrl: null
     },
     {
@@ -32,7 +32,7 @@ export const MockApplicationData: ApplicationData[] = [
         loadInBackground: false,
         applicationId: "",
         displayOrder: 2,
-        exerciseId: "",
+        viewId: "",
         safeUrl: null
     },
     {
@@ -44,7 +44,7 @@ export const MockApplicationData: ApplicationData[] = [
         loadInBackground: false,
         applicationId: "",
         displayOrder: 3,
-        exerciseId: "",
+        viewId: "",
         safeUrl: null
     },
     {
@@ -56,7 +56,7 @@ export const MockApplicationData: ApplicationData[] = [
         loadInBackground: false,
         applicationId: "",
         displayOrder: 4,
-        exerciseId: "",
+        viewId: "",
         safeUrl: null
     },
     {
@@ -68,7 +68,7 @@ export const MockApplicationData: ApplicationData[] = [
         loadInBackground: false,
         applicationId: "",
         displayOrder: 5,
-        exerciseId: "",
+        viewId: "",
         safeUrl: null
     },
     {
@@ -80,7 +80,7 @@ export const MockApplicationData: ApplicationData[] = [
         loadInBackground: false,
         applicationId: "",
         displayOrder: 6,
-        exerciseId: "",
+        viewId: "",
         safeUrl: null
     },
     {
@@ -92,8 +92,7 @@ export const MockApplicationData: ApplicationData[] = [
         loadInBackground: false,
         applicationId: "",
         displayOrder: 7,
-        exerciseId: "",
+        viewId: "",
         safeUrl: null
     }
 ];
-

@@ -16,8 +16,9 @@ describe('CwdAuthInterceptorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CwdAuthInterceptorService = TestBed.get(CwdAuthInterceptorService);
+    const service: CwdAuthInterceptorService = TestBed.get(
+      CwdAuthInterceptorService
+    );
     expect(service).toBeTruthy();
   });
 });
-

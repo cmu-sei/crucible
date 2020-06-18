@@ -23,7 +23,7 @@ namespace S3.Player.Api.Data.Data.Models
     {
         [Key]
         public int Key { get; set; }
-        public Guid? ExerciseId { get; set; }
+        public Guid? ViewId { get; set; }
         public string FromName { get; set; }
         public Guid FromId { get; set; }
         public NotificationType FromType { get; set; }
@@ -44,10 +44,10 @@ namespace S3.Player.Api.Data.Data.Models
         High = 2,
         System = 3
     }
-    
+
     public enum NotificationType
     {
-        Exercise = 0,
+        View = 0,
         Team = 1,
         User = 2,
         Application = 3,

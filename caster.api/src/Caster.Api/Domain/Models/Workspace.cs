@@ -223,8 +223,12 @@ namespace Caster.Api.Domain.Models
             directory.Delete(true);
         }
 
-        public async Task RetrieveState(string workingDir)
+        public async Task<bool> RetrieveState(string workingDir)
         {
+            bool success = false;
+
+            bool includeBackup = !string.IsNullOrEmpty(this.State);
+
             string state = null;
             string stateBackup = null;
             string statePath = this.GetStatePath(workingDir, backupState: false);
@@ -242,13 +246,23 @@ namespace Caster.Api.Domain.Models
 
             if (!string.IsNullOrEmpty(state))
             {
+                if (includeBackup)
+                {
+                    if (!string.IsNullOrEmpty(stateBackup))
+                    {
+                        this.StateBackup = stateBackup;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
                 this.State = state;
+                success = true;
             }
 
-            if (!string.IsNullOrEmpty(stateBackup))
-            {
-                this.StateBackup = stateBackup;
-            }
+            return success;
         }
     }
 

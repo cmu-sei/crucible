@@ -23,15 +23,15 @@ namespace S3.Player.Api.Data.Data
         public PlayerContext(DbContextOptions<PlayerContext> options) : base(options) {
             _options = options;
         }
-        
+
         public DbSet<UserEntity> Users { get; set; }
-        public DbSet<ExerciseEntity> Exercises { get; set; }
-        public DbSet<TeamEntity> Teams { get; set; }        
+        public DbSet<ViewEntity> Views { get; set; }
+        public DbSet<TeamEntity> Teams { get; set; }
         public DbSet<ApplicationTemplateEntity> ApplicationTemplates { get; set; }
         public DbSet<ApplicationEntity> Applications { get; set; }
         public DbSet<ApplicationInstanceEntity> ApplicationInstances { get; set; }
-        public DbSet<NotificationEntity> Notifications { get; set; }        
-        public DbSet<ExerciseMembershipEntity> ExerciseMemberships { get; set; }
+        public DbSet<NotificationEntity> Notifications { get; set; }
+        public DbSet<ViewMembershipEntity> ViewMemberships { get; set; }
         public DbSet<TeamMembershipEntity> TeamMemberships { get; set; }
         public DbSet<RoleEntity> Roles { get; set; }
         public DbSet<PermissionEntity> Permissions { get; set; }
@@ -41,7 +41,7 @@ namespace S3.Player.Api.Data.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurations();             
+            modelBuilder.ApplyConfigurations();
 
             // Apply PostgreSQL specific options
             if (Database.IsNpgsql())
@@ -52,4 +52,3 @@ namespace S3.Player.Api.Data.Data
         }
     }
 }
-

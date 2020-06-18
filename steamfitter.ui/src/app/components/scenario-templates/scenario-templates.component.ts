@@ -12,9 +12,7 @@ import { Component, EventEmitter, Output, NgZone, ViewChild } from '@angular/cor
 import { ErrorStateMatcher, MatStepper } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {Sort} from '@angular/material/sort';
-// TODO: replace the following import when API renames its nouns
-import { ScenarioTemplate } from 'src/app/data/scenario-template/scenario-template.store';
-// import { ScenarioTemplate } from '../../swagger-codegen/dispatcher.api';
+import { ScenarioTemplate } from 'src/app/swagger-codegen/dispatcher.api';
 import { ScenarioTemplateDataService } from 'src/app/data/scenario-template/scenario-template-data.service';
 import { ScenarioTemplateQuery } from 'src/app/data/scenario-template/scenario-template.query';
 import {Observable} from 'rxjs';

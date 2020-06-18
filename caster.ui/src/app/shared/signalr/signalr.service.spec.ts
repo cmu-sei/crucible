@@ -20,4 +20,3 @@ describe('SignalrService', () => {
     expect(service).toBeTruthy();
   });
 });
-

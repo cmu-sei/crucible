@@ -30,7 +30,7 @@ namespace S3.Player.Api.Data.Data.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }        
+        public Guid Id { get; set; }
 
         public Guid TeamId { get; set; }
         public virtual TeamEntity Team { get; set; }
@@ -38,8 +38,8 @@ namespace S3.Player.Api.Data.Data.Models
         public Guid UserId { get; set; }
         public virtual UserEntity User { get; set; }
 
-        public Guid ExerciseMembershipId { get; set; }
-        public virtual ExerciseMembershipEntity ExerciseMembership { get; set; }
+        public Guid ViewMembershipId { get; set; }
+        public virtual ViewMembershipEntity ViewMembership { get; set; }
 
         public Guid? RoleId { get; set; }
         public RoleEntity Role { get; set; }
@@ -57,9 +57,9 @@ namespace S3.Player.Api.Data.Data.Models
                 .HasForeignKey(tu => tu.TeamId);
 
             builder
-                .HasOne(tm => tm.ExerciseMembership)
+                .HasOne(tm => tm.ViewMembership)
                 .WithMany(t => t.TeamMemberships)
-                .HasForeignKey(tm => tm.ExerciseMembershipId);
+                .HasForeignKey(tm => tm.ViewMembershipId);
 
             builder
                 .HasOne(tu => tu.User)
@@ -69,4 +69,3 @@ namespace S3.Player.Api.Data.Data.Models
         }
     }
 }
-

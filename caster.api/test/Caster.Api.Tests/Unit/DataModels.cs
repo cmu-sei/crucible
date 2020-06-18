@@ -28,27 +28,27 @@ namespace Caster.Api.Tests.Unit
             builder.UseInMemoryDatabase("caster_test");
             _context = new CasterContext(builder.Options);
         }
-        
+
         [Fact]
-        public void Test_Exercise_InsertAndRetrieve()
+        public void Test_Project_InsertAndRetrieve()
         {
-            var exerciseInsert = new Exercise();
-            
-            _context.Exercises.Add(exerciseInsert);
+            var projectInsert = new Project();
+
+            _context.Projects.Add(projectInsert);
             _context.SaveChanges();
-            
-            var exerciseRetrieve = _context.Exercises.SingleOrDefault(item => item.Id == exerciseInsert.Id);
-            Assert.NotNull(exerciseRetrieve);
+
+            var projectRetrieve = _context.Projects.SingleOrDefault(item => item.Id == projectInsert.Id);
+            Assert.NotNull(projectRetrieve);
         }
 
         [Fact]
         public void Test_Directory_InsertAndRetrieve()
         {
             var directoryInsert = new Directory();
-            
+
             _context.Directories.Add(directoryInsert);
             _context.SaveChanges();
-            
+
             var directoryRetrieve = _context.Directories.SingleOrDefault(item => item.Id == directoryInsert.Id);
             Assert.NotNull(directoryRetrieve);
         }
@@ -66,19 +66,19 @@ namespace Caster.Api.Tests.Unit
         }
 
         [Fact]
-        public void Test_ExerciseAndDirectory_Relation()
+        public void Test_ProjectAndDirectory_Relation()
         {
-            var exerciseInsert = new Exercise{};
-            var directoryInsert = new Directory {Exercise = exerciseInsert};
-            
-            _context.Exercises.Add(exerciseInsert);
+            var projectInsert = new Project{};
+            var directoryInsert = new Directory {Project = projectInsert};
+
+            _context.Projects.Add(projectInsert);
             _context.Directories.Add(directoryInsert);
             _context.SaveChanges();
-            var exerciseRetrieve = _context.Exercises.Single(item => item.Id == exerciseInsert.Id);
+            var projectRetrieve = _context.Projects.Single(item => item.Id == projectInsert.Id);
             var directoryRetrieve = _context.Directories.Single(item => item.Id == directoryInsert.Id);
 
-            Assert.Contains(directoryRetrieve, exerciseRetrieve.Directories);
-            Assert.Equal(directoryRetrieve.Exercise, exerciseRetrieve);
+            Assert.Contains(directoryRetrieve, projectRetrieve.Directories);
+            Assert.Equal(directoryRetrieve.Project, projectRetrieve);
         }
 
         [Fact]

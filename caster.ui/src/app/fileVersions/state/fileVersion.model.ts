@@ -15,5 +15,3 @@ export interface FileVersionUi {
   id?: string;
   isSelected: boolean;
 }
-
-

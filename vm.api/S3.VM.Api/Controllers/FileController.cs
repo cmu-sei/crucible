@@ -48,7 +48,7 @@ namespace S3.VM.Api.Controllers
             _playerService = playerService;
         }
 
-        [HttpPost("exercises/{uuid}/isos"), DisableRequestSizeLimit]
+        [HttpPost("views/{uuid}/isos"), DisableRequestSizeLimit]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "uploadFileAsIso")]
         public async Task<IActionResult> Upload(Guid uuid)
@@ -63,18 +63,18 @@ namespace S3.VM.Api.Controllers
                 throw new Exception($"File exceeds the {_isoUploadOptions.MaxFileSize} byte maximum size.");
             }
 
-            var teamId = await _playerService.GetPrimaryTeamByExerciseIdAsync(uuid, new System.Threading.CancellationToken());
+            var teamId = await _playerService.GetPrimaryTeamByViewIdAsync(uuid, new System.Threading.CancellationToken());
 
-            if (scope == "exercise")
+            if (scope == "view")
             {
                 if (!(await _playerService.CanManageTeamAsync(teamId, new System.Threading.CancellationToken())))
-                    throw new InvalidOperationException("You do not have permission to upload public files for this Exercise");
+                    throw new InvalidOperationException("You do not have permission to upload public files for this View");
             }
 
             var destPath = Path.Combine(
                 _isoUploadOptions.BasePath,
                 uuid.ToString(),
-                (scope == "exercise") ? uuid.ToString() : teamId.ToString()
+                (scope == "view") ? uuid.ToString() : teamId.ToString()
             );
 
             var destFile = Path.Combine(destPath, filename);
@@ -115,4 +115,3 @@ namespace S3.VM.Api.Controllers
         }
     }
 }
-

@@ -12,7 +12,7 @@ services:
     environment:
       POSTGRES_DB: foreman_api
       POSTGRES_USER: foreman
-      POSTGRES_PASSWORD: Tartans@@1
+      POSTGRES_PASSWORD: password
     volumes:
       - ./_data:/var/lib/postgresql/data
     logging:

@@ -10,15 +10,14 @@ DM20-0181
 
 
 using System;
-using System.Security.Claims;
 
 namespace Alloy.Api.Extensions
 {
     public static class NotificationExtensions
     {
-        public static string ExerciseBroadcastGroup(Guid id)
+        public static string ViewBroadcastGroup(Guid id)
         {
-            return "Exercise_" + id.ToString();
+            return "View_" + id.ToString();
         }
 
         public static string TeamBroadcastGroup(Guid id)

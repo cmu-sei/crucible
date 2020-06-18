@@ -26,16 +26,16 @@ namespace Caster.Api.Features.Workspaces.EventHandlers
     {
         private readonly CasterContext _db;
         private readonly IMapper _mapper;
-        private readonly IHubContext<ExerciseHub> _exerciseHub;
+        private readonly IHubContext<ProjectHub> _projectHub;
 
         public SignalRWorkspaceUpdatedHandler(
             CasterContext db,
             IMapper mapper,
-            IHubContext<ExerciseHub> exerciseHub)
+            IHubContext<ProjectHub> projectHub)
         {
             _db = db;
             _mapper = mapper;
-            _exerciseHub = exerciseHub;
+            _projectHub = projectHub;
         }
 
         public async Task Handle(WorkspaceUpdated notification, CancellationToken cancellationToken)
@@ -45,12 +45,12 @@ namespace Caster.Api.Features.Workspaces.EventHandlers
                 .ProjectTo<Workspace>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
-            var exerciseId = await _db.Directories
+            var projectId = await _db.Directories
                 .Where(d => d.Id == workspace.DirectoryId)
-                .Select(d => d.ExerciseId)
+                .Select(d => d.ProjectId)
                 .FirstOrDefaultAsync();
 
-            await _exerciseHub.Clients.Group(exerciseId.ToString()).SendAsync("WorkspaceUpdated", workspace);
+            await _projectHub.Clients.Group(projectId.ToString()).SendAsync("WorkspaceUpdated", workspace);
         }
     }
 }

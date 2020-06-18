@@ -66,10 +66,6 @@ namespace Caster.Api.Data.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<Guid>("ExerciseId")
-                        .HasColumnName("exercise_id")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Name")
                         .HasColumnName("name")
                         .HasColumnType("text");
@@ -82,32 +78,19 @@ namespace Caster.Api.Data.Migrations
                         .HasColumnName("path")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnName("project_id")
+                        .HasColumnType("uuid");
 
-                    b.HasIndex("ExerciseId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
                     b.HasIndex("Path");
 
+                    b.HasIndex("ProjectId");
+
                     b.ToTable("directories");
-                });
-
-            modelBuilder.Entity("Caster.Api.Domain.Models.Exercise", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("uuid_generate_v4()");
-
-                    b.Property<string>("Name")
-                        .HasColumnName("name")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("exercises");
                 });
 
             modelBuilder.Entity("Caster.Api.Domain.Models.File", b =>
@@ -238,10 +221,6 @@ namespace Caster.Api.Data.Migrations
                         .HasColumnName("enabled")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid?>("ExerciseId")
-                        .HasColumnName("exercise_id")
-                        .HasColumnType("uuid");
-
                     b.Property<int>("MaximumMachines")
                         .HasColumnName("maximum_machines")
                         .HasColumnType("integer");
@@ -250,9 +229,13 @@ namespace Caster.Api.Data.Migrations
                         .HasColumnName("name")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnName("project_id")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ExerciseId");
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("hosts");
                 });
@@ -414,6 +397,23 @@ namespace Caster.Api.Data.Migrations
                     b.ToTable("plans");
                 });
 
+            modelBuilder.Entity("Caster.Api.Domain.Models.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<string>("Name")
+                        .HasColumnName("name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("projects");
+                });
+
             modelBuilder.Entity("Caster.Api.Domain.Models.RemovedResource", b =>
                 {
                     b.Property<string>("Id")
@@ -565,16 +565,16 @@ namespace Caster.Api.Data.Migrations
 
             modelBuilder.Entity("Caster.Api.Domain.Models.Directory", b =>
                 {
-                    b.HasOne("Caster.Api.Domain.Models.Exercise", "Exercise")
-                        .WithMany("Directories")
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Caster.Api.Domain.Models.Directory", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Caster.Api.Domain.Models.Project", "Project")
+                        .WithMany("Directories")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Caster.Api.Domain.Models.File", b =>
@@ -618,9 +618,9 @@ namespace Caster.Api.Data.Migrations
 
             modelBuilder.Entity("Caster.Api.Domain.Models.Host", b =>
                 {
-                    b.HasOne("Caster.Api.Domain.Models.Exercise", "Exercise")
+                    b.HasOne("Caster.Api.Domain.Models.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("ExerciseId");
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Caster.Api.Domain.Models.HostMachine", b =>

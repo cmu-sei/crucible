@@ -12,21 +12,36 @@ DM20-0181
   <div class="sp-icon">
     <mat-icon class="mdi-24px" fontIcon="mdi-account-multiple"></mat-icon>
   </div>
-  <mat-icon style="margin-left: 40px; transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
+  <mat-icon
+    style="margin-left: 40px; transform: scale(0.85); margin-right: 5px;"
+    svgIcon="ic_magnify_search"
+  ></mat-icon>
   <mat-form-field style="width: 300px;">
-    <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <input
+      matInput
+      [(ngModel)]="filterString"
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Search"
+    />
   </mat-form-field>
   <div style="width: 30px;">
-    <button *ngIf="!!filterString" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
-      title="Clear Search">
+    <button
+      *ngIf="!!filterString"
+      fxLayoutAlign="start center"
+      mat-icon-button
+      (click)="clearFilter()"
+      style="outline: none;"
+      title="Clear Search"
+    >
       <mat-icon class="mdi-24px" fontIcon="mdi-close-circle-outline"></mat-icon>
     </button>
   </div>
   <div style="width: 100px;">
-      <button mat-stroked-button (click)="addingNewUser = true" >Add User</button>
+    <button mat-stroked-button (click)="addingNewUser = true">Add User</button>
   </div>
   <div class="button-end">
-    <mat-paginator #paginator
+    <mat-paginator
+      #paginator
       [length]="totalRows$ | async"
       [pageIndex]="0"
       [pageSize]="20"
@@ -39,24 +54,44 @@ DM20-0181
   <section matSort class="mat-elevation-z2 mat-header-row">
     <span class="mat-header-cell" mat-sort-header="id">ID</span>
     <span class="mat-header-cell" mat-sort-header="name">Name</span>
-    <span class="mat-header-cell" mat-sort-header="permissions">Permissions</span>
+    <span class="mat-header-cell" mat-sort-header="permissions"
+      >Permissions</span
+    >
   </section>
 
   <mat-expansion-panel *ngIf="addingNewUser" [disabled]="true">
     <mat-expansion-panel-header class="mat-row">
       <span class="mat-cell">
         <mat-form-field>
-          <input matInput placeholder="User ID" [(ngModel)]="newUser.id" matTooltip="Must be a valid Guid">
+          <input
+            matInput
+            placeholder="User ID"
+            [(ngModel)]="newUser.id"
+            matTooltip="Must be a valid Guid"
+          />
         </mat-form-field>
       </span>
       <span class="mat-cell">
         <mat-form-field>
-          <input matInput placeholder="User Name" [(ngModel)]="newUser.name" matTooltip="Must have a minimum of 4 characters">
+          <input
+            matInput
+            placeholder="User Name"
+            [(ngModel)]="newUser.name"
+            matTooltip="Must have a minimum of 4 characters"
+          />
         </mat-form-field>
       </span>
       <span class="mat-cell">
-        <button mat-icon-button (click)="addNewUser(true)" [disabled]="!newUser.id || !newUser.name || newUser.name.length < 4">
-          <mat-icon class="mdi-24px" fontIcon="mdi-account-plus" matTooltip="Add this user"></mat-icon>
+        <button
+          mat-icon-button
+          (click)="addNewUser(true)"
+          [disabled]="!newUser.id || !newUser.name || newUser.name.length < 4"
+        >
+          <mat-icon
+            class="mdi-24px"
+            fontIcon="mdi-account-plus"
+            matTooltip="Add this user"
+          ></mat-icon>
         </button>
         <button mat-icon-button (click)="addNewUser(false)" matTooltip="Cancel">
           <mat-icon class="mdi-24px" fontIcon="mdi-account-remove"></mat-icon>
@@ -65,39 +100,64 @@ DM20-0181
     </mat-expansion-panel-header>
   </mat-expansion-panel>
 
-  <mat-expansion-panel *ngFor="let item of displayedRows$ | async" [disabled]="true">
+  <mat-expansion-panel
+    *ngFor="let item of displayedRows$ | async"
+    [disabled]="true"
+  >
     <mat-expansion-panel-header class="mat-row" *ngIf="!isLoading">
       <span class="mat-cell">
-        <button mat-icon-button ngxClipboard [cbContent]="item.id" (click)="$event.stopPropagation();" title="Copy:  {{item.id}}"><mat-icon class="mdi-24px" fontIcon="mdi-content-copy"></mat-icon></button>
-        {{item.id}}
+        <button
+          mat-icon-button
+          ngxClipboard
+          [cbContent]="item.id"
+          (click)="$event.stopPropagation()"
+          title="Copy:  {{ item.id }}"
+        >
+          <mat-icon class="mdi-24px" fontIcon="mdi-content-copy"></mat-icon>
+        </button>
+        {{ item.id }}
       </span>
       <span class="mat-cell">
-        {{item.name}}
+        {{ item.name }}
       </span>
       <span class="mat-cell">
         <div fxLayout="row">
           <div *ngFor="let permission of permissions">
-            <mat-checkbox [checked]="hasPermission(permission.id, item)" (change)="toggleUserPermission(item, permission.id)" style="margin-right: 20px;">{{permission.key}}</mat-checkbox>
+            <mat-checkbox
+              [checked]="hasPermission(permission.id, item)"
+              (change)="toggleUserPermission(item, permission.id)"
+              style="margin-right: 20px;"
+              >{{ permission.key }}</mat-checkbox
+            >
           </div>
-          <button mat-icon-button (click)="applyFilter(savedFilterString)" *ngIf="filterString === item.id" title="Done">
+          <button
+            mat-icon-button
+            (click)="applyFilter(savedFilterString)"
+            *ngIf="filterString === item.id"
+            title="Done"
+          >
             <mat-icon class="mdi-24px" fontIcon="mdi-exit-to-app"></mat-icon>
           </button>
-          <button mat-icon-button (click)="deleteUser(item); $event.stopPropagation();" title="Delete User">
-            <mat-icon class="mdi-24px" fontIcon="mdi-delete-forever-outline"></mat-icon>
+          <button
+            mat-icon-button
+            (click)="deleteUser(item); $event.stopPropagation()"
+            title="Delete User"
+          >
+            <mat-icon
+              class="mdi-24px"
+              fontIcon="mdi-delete-forever-outline"
+            ></mat-icon>
           </button>
         </div>
       </span>
     </mat-expansion-panel-header>
   </mat-expansion-panel>
-
 </mat-accordion>
 
-<mat-card *ngIf="isLoading"
-  style="display: flex; justify-content: center; align-items: center">
- <mat-progress-spinner
-   color="primary"
-   mode="indeterminate">
- </mat-progress-spinner>
+<mat-card
+  *ngIf="isLoading"
+  style="display: flex; justify-content: center; align-items: center;"
+>
+  <mat-progress-spinner color="primary" mode="indeterminate">
+  </mat-progress-spinner>
 </mat-card>
-
-

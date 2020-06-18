@@ -26,9 +26,8 @@ export class TeamsService {
     private settings: SettingsService) { }
 
 
-  public GetAllMyTeams(exerciseId: string): Observable<Array<TeamData>> {
-    const url = `${this.settings.ApiPlayerUrl}/me/exercises/${exerciseId}/teams`;
+  public GetAllMyTeams(viewId: string): Observable<Array<TeamData>> {
+    const url = `${this.settings.ApiPlayerUrl}/me/views/${viewId}/teams`;
     return this.http.get<Array<TeamData>>(url);
   }
 }
-

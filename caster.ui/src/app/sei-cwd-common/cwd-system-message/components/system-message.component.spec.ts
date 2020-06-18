@@ -18,9 +18,8 @@ describe('SystemMessageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SystemMessageComponent ]
-    })
-    .compileComponents();
+      declarations: [SystemMessageComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('SystemMessageComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

@@ -8,7 +8,6 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,8 +18,6 @@ using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 using Alloy.Api.Options;
 using Alloy.Api.Data;
-using Alloy.Api.Data.Models;
-using System.Collections.Generic;
 
 namespace Alloy.Api.Extensions
 {
@@ -53,7 +50,7 @@ namespace Alloy.Api.Extensions
                             ctx.Database.EnsureCreated();
                             // ProcessSeedDataOptions(seedDataOptions, ctx);
 
-                            if (!ctx.Definitions.Any())
+                            if (!ctx.EventTemplates.Any())
                             {
                                 Seed.Run(ctx);
                             }
@@ -78,30 +75,6 @@ namespace Alloy.Api.Extensions
             return webHost;
         }
 
-      public static IServiceCollection AddDbProvider(
-          this IServiceCollection services,
-          IConfiguration config
-      )
-        {
-            string dbProvider = DbProvider(config);
-            switch (dbProvider)
-            {
-                case "Sqlite":
-                    services.AddEntityFrameworkSqlite();
-                    break;
-
-                case "SqlServer":
-                    services.AddEntityFrameworkSqlServer();
-                    break;
-
-                case "PostgreSQL":
-                    services.AddEntityFrameworkNpgsql();
-                    break;
-
-            }
-            return services;
-        }
-
         private static string DbProvider (IConfiguration config)
         {
             return config.GetValue<string>("Database:Provider", "Sqlite").Trim();
@@ -120,10 +93,6 @@ namespace Alloy.Api.Extensions
             {
                 case "Sqlite":
                     builder.UseSqlite(connectionString, options => options.MigrationsAssembly(migrationsAssembly));
-                    break;
-
-                case "SqlServer":
-                    builder.UseSqlServer(connectionString, options => options.MigrationsAssembly(migrationsAssembly));
                     break;
 
                 case "PostgreSQL":

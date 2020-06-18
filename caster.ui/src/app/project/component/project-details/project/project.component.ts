@@ -8,24 +8,33 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
-import {Tab, ProjectUI} from '../../../state';
-import {MatTab} from '@angular/material';
-import { Exercise as Project } from 'src/app/generated/caster-api';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { Tab, ProjectUI } from '../../../state';
+import { MatTab } from '@angular/material/tabs';
+import { Project } from 'src/app/generated/caster-api';
 
 @Component({
   selector: 'cas-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectComponent {
   @Input() loading: boolean;
   @Input() project: Project;
   @Input() projectUI: ProjectUI;
   @Output() closeTab: EventEmitter<Tab> = new EventEmitter<Tab>();
-  @Output() tabChanged: EventEmitter<{index: number, tab: MatTab}> = new EventEmitter<{index: number, tab: MatTab}>();
+  @Output() tabChanged: EventEmitter<{
+    index: number;
+    tab: MatTab;
+  }> = new EventEmitter<{ index: number; tab: MatTab }>();
   @Output() breadcrumbClicked: EventEmitter<any> = new EventEmitter<any>();
   constructor() {}
 }
-

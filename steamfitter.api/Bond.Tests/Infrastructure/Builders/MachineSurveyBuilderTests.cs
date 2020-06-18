@@ -20,7 +20,7 @@ namespace Bond.Tests.Infrastructure.Builders
         public void BuilderReturnsValidMachineSurvey()
         {
             var response = MachineSurveyBuilder.Build();
-            Assert.IsType<ExerciseAgent>(response);
+            Assert.IsType<BondAgent>(response);
             Assert.NotEmpty(response.MachineName);
         }
     }

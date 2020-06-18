@@ -23,7 +23,7 @@ import { HttpHeaders }                                       from '@angular/comm
 import { Observable }                                        from 'rxjs';
 
 import { ApiError } from '../model/apiError';
-import { Exercise } from '../model/exercise';
+import { View } from '../model/view';
 import { User } from '../model/user';
 
 
@@ -36,10 +36,10 @@ export interface PlayerServiceInterface {
     
 
     /**
-    * Gets all Exercises
-    * Returns a list of all of the Exercises.
+    * Gets all Views
+    * Returns a list of all of the Views.
     */
-    getExercises(extraHttpRequestParams?: any): Observable<Array<Exercise>>;
+    getViews(extraHttpRequestParams?: any): Observable<Array<View>>;
 
     /**
     * Gets the user as defined in Player

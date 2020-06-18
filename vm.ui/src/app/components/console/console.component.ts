@@ -27,10 +27,10 @@ export class ConsoleComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const exerciseId = this.route.snapshot.params['exerciseId'];
+    const viewId = this.route.snapshot.params['viewId'];
     const name = this.route.snapshot.params['name'];
 
-    this.vmService.GetExerciseVmsByName(exerciseId, name)
+    this.vmService.GetViewVmsByName(viewId, name)
       .subscribe(
         vms => {
           if (vms != null) {
@@ -46,4 +46,3 @@ export class ConsoleComponent implements OnInit {
       );
   }
 }
-

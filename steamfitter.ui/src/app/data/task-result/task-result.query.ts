@@ -9,9 +9,8 @@ DM20-0181
 */
 
 import { Order, Query, QueryConfig, QueryEntity } from '@datorama/akita';
-import { TaskResultState, TaskResultStore } from './task-result.store';
-import { TaskResult } from './task-result.store';
-// import { DispatchTaskResult } from 'src/app/swagger-codegen/dispatcher.api';
+import { ResultState, ResultStore } from './task-result.store';
+import { Result } from 'src/app/swagger-codegen/dispatcher.api';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -22,12 +21,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TaskResultQuery extends QueryEntity<TaskResultState> {
-  constructor(protected store: TaskResultStore) {
+export class ResultQuery extends QueryEntity<ResultState> {
+  constructor(protected store: ResultStore) {
     super(store);
   }
 
-  selectById(id: string): Observable<TaskResult> {
+  selectById(id: string): Observable<Result> {
     return this.selectEntity(id);
   }
 }

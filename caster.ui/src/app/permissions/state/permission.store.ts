@@ -8,14 +8,19 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityState, EntityStore, EntityUIStore, StoreConfig} from '@datorama/akita';
-import {Permission} from '../../generated/caster-api';
-import {Injectable, InjectionToken} from '@angular/core';
+import {
+  EntityState,
+  EntityStore,
+  EntityUIStore,
+  StoreConfig,
+} from '@datorama/akita';
+import { Permission } from '../../generated/caster-api';
+import { Injectable, InjectionToken } from '@angular/core';
 
 export interface PermissionsState extends EntityState<Permission> {}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({ name: 'permissions' })
 export class PermissionStore extends EntityStore<PermissionsState> {
@@ -23,4 +28,3 @@ export class PermissionStore extends EntityStore<PermissionsState> {
     super();
   }
 }
-

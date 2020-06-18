@@ -31,16 +31,16 @@ namespace S3.VM.Api.Services
         Task<bool> CanManageTeamAsync(Guid teamId, CancellationToken ct);
         Task<bool> CanAccessTeamsAsync(IEnumerable<Guid> teamIds, CancellationToken ct);
         Task<bool> CanAccessTeamAsync(Guid teamId, CancellationToken ct);
-        Task<IEnumerable<Team>> GetTeamsByExerciseIdAsync(Guid exerciseId, CancellationToken ct);
-        Task<Guid> GetPrimaryTeamByExerciseIdAsync(Guid exerciseId, CancellationToken ct);
-        Guid GetCurrentExerciseId();
+        Task<IEnumerable<Team>> GetTeamsByViewIdAsync(Guid viewId, CancellationToken ct);
+        Task<Guid> GetPrimaryTeamByViewIdAsync(Guid viewId, CancellationToken ct);
+        Guid GetCurrentViewId();
     }
 
     public class PlayerService : IPlayerService
     {
         private readonly IS3PlayerApiClient _s3PlayerApiClient;
         private readonly Guid _userId;
-        private Guid _currentExerciseId;
+        private Guid _currentViewId;
         private Dictionary<Guid, Team> _teamCache;
 
         public PlayerService(IHttpContextAccessor httpContextAccessor, IS3PlayerApiClient s3PlayerApiClient)
@@ -48,7 +48,7 @@ namespace S3.VM.Api.Services
             _teamCache = new Dictionary<Guid, Team>();
             _userId = httpContextAccessor.HttpContext.User.GetId();
             _s3PlayerApiClient = s3PlayerApiClient;
-        }       
+        }
 
         public async Task<bool> IsSystemAdmin(CancellationToken ct)
         {
@@ -76,10 +76,10 @@ namespace S3.VM.Api.Services
                         if (team == null)
                             continue;
 
-                        _teamCache.Add(teamId, team);                        
+                        _teamCache.Add(teamId, team);
                     }
 
-                    _currentExerciseId = team.ExerciseId.Value;
+                    _currentViewId = team.ViewId.Value;
 
                     if (team.CanManage.Value)
                     {
@@ -88,11 +88,11 @@ namespace S3.VM.Api.Services
                         if (!all)
                             return true;
                     }
-                }                
+                }
                 catch(Exception ex)
                 {
 
-                }                                                                
+                }
             }
 
             return !teamDict.Values.Any(v => v == false);
@@ -121,11 +121,11 @@ namespace S3.VM.Api.Services
                         _teamCache.Add(teamId, team);
                     }
 
-                    _currentExerciseId = team.ExerciseId.Value;
+                    _currentViewId = team.ViewId.Value;
 
                     if (team.CanManage.Value || team.IsPrimary.Value)
-                        return true;                    
-                }    
+                        return true;
+                }
                 catch(Exception ex)
                 {
                 }
@@ -139,11 +139,11 @@ namespace S3.VM.Api.Services
             return await CanAccessTeamsAsync(new List<Guid> { teamId }, ct);
         }
 
-        public async Task<IEnumerable<Team>> GetTeamsByExerciseIdAsync(Guid exerciseId, CancellationToken ct)
+        public async Task<IEnumerable<Team>> GetTeamsByViewIdAsync(Guid viewId, CancellationToken ct)
         {
-            _currentExerciseId = exerciseId;
+            _currentViewId = viewId;
 
-            var teams = await _s3PlayerApiClient.GetUserExerciseTeamsAsync(exerciseId, _userId, ct);
+            var teams = await _s3PlayerApiClient.GetUserViewTeamsAsync(viewId, _userId, ct);
 
             foreach(Team team in teams)
             {
@@ -153,13 +153,13 @@ namespace S3.VM.Api.Services
                 }
             }
 
-            return teams.Where(t => (t.IsPrimary.HasValue && t.IsPrimary.Value) || t.CanManage.Value);            
+            return teams.Where(t => (t.IsPrimary.HasValue && t.IsPrimary.Value) || t.CanManage.Value);
         }
 
-        public async Task<Guid> GetPrimaryTeamByExerciseIdAsync(Guid exerciseId, CancellationToken ct)
+        public async Task<Guid> GetPrimaryTeamByViewIdAsync(Guid viewId, CancellationToken ct)
         {
-            _currentExerciseId = exerciseId;
-            var teams = await _s3PlayerApiClient.GetUserExerciseTeamsAsync(exerciseId, _userId, ct);
+            _currentViewId = viewId;
+            var teams = await _s3PlayerApiClient.GetUserViewTeamsAsync(viewId, _userId, ct);
 
             foreach (Team team in teams)
             {
@@ -174,10 +174,10 @@ namespace S3.VM.Api.Services
                 .Select(t => t.Id.Value)
                 .FirstOrDefault();
         }
-        
-        public Guid GetCurrentExerciseId()
+
+        public Guid GetCurrentViewId()
         {
-            return _currentExerciseId;
+            return _currentViewId;
         }
 
         public async Task<Team> GetTeamById(Guid id)
@@ -185,7 +185,7 @@ namespace S3.VM.Api.Services
             try
             {
                 return await _s3PlayerApiClient.GetTeamAsync(id);
-            }            
+            }
             catch(Exception ex)
             {
                 return null;
@@ -193,4 +193,3 @@ namespace S3.VM.Api.Services
         }
     }
 }
-

@@ -20,12 +20,12 @@ namespace S3.Player.Api.Infrastructure.Authorization
 {
     public class TeamAccessRequirement : IAuthorizationRequirement
     {
-        public Guid ExerciseId { get; set; }
+        public Guid ViewId { get; set; }
         public Guid TeamId { get; set; }
 
-        public TeamAccessRequirement(Guid exerciseId, Guid teamId)
+        public TeamAccessRequirement(Guid viewId, Guid teamId)
         {
-            ExerciseId = exerciseId;
+            ViewId = viewId;
             TeamId = teamId;
         }
     }
@@ -35,14 +35,13 @@ namespace S3.Player.Api.Infrastructure.Authorization
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, TeamAccessRequirement requirement)
         {
             if (context.User.HasClaim(PlayerClaimTypes.TeamMember.ToString(), requirement.TeamId.ToString()) ||
-                context.User.HasClaim(PlayerClaimTypes.ExerciseAdmin.ToString(), requirement.ExerciseId.ToString()) || 
+                context.User.HasClaim(PlayerClaimTypes.ViewAdmin.ToString(), requirement.ViewId.ToString()) ||
                 context.User.HasClaim(ClaimTypes.Role, PlayerClaimTypes.SystemAdmin.ToString()))
             {
                 context.Succeed(requirement);
-            }            
-                      
+            }
+
             return Task.CompletedTask;
         }
     }
 }
-

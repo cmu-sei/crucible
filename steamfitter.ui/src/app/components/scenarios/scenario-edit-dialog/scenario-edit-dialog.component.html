@@ -40,7 +40,7 @@ DM20-0181
   <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field>
-        <mat-select placeholder="View" [(ngModel)]="data.scenario.exerciseId" (selectionChange)="saveScenario('view')">
+        <mat-select placeholder="View" [(ngModel)]="data.scenario.viewId" (selectionChange)="saveScenario('view')">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let view of data.views" [value]="view.id" [matTooltip]="view.id" matTooltipPosition="right">
             {{view.name}}

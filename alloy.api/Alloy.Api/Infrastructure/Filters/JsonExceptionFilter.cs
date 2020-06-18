@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Alloy.Api.Infrastructure.Exceptions;
+using Microsoft.Extensions.Hosting;
 using Alloy.Api.ViewModels;
 using System;
 using System.Net;
@@ -20,9 +21,9 @@ namespace Alloy.Api.Infrastructure.Filters
 {
     public class JsonExceptionFilter : IExceptionFilter
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
-        public JsonExceptionFilter(IHostingEnvironment env)
+        public JsonExceptionFilter(IWebHostEnvironment env)
         {
             _env = env;
         }

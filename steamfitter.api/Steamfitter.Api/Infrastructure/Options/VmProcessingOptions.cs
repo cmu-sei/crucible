@@ -10,8 +10,6 @@ DM20-0181
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Steamfitter.Api.Infrastructure.Options
 {
@@ -25,8 +23,8 @@ namespace Steamfitter.Api.Infrastructure.Options
         public Guid ForemanWebhookId { get; set; }
         public int VmListUpdateIntervalMinutes { get; set; }
         public int HealthCheckSeconds { get; set; }
-        public int DispatchTaskProcessIntervalMilliseconds { get; set; }
-        public int DispatchTaskProcessMaxWaitSeconds { get; set; }
+        public int TaskProcessIntervalMilliseconds { get; set; }
+        public int TaskProcessMaxWaitSeconds { get; set; }
         public Dictionary<string, string> ApiParameters { get; set; }
     }
 }

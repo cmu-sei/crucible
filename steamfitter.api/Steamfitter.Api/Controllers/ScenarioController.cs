@@ -12,26 +12,24 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Services;
-using Steamfitter.Api.ViewModels;
-using Steamfitter.Api.Infrastructure.Authorization;
+using SAVM = Steamfitter.Api.ViewModels;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Steamfitter.Api.Controllers
 {
     public class ScenarioController : BaseController
     {
-        private readonly IScenarioService _scenarioService;
+        private readonly IScenarioService _ScenarioService;
         private readonly IAuthorizationService _authorizationService;
 
-        public ScenarioController(IScenarioService scenarioService, IAuthorizationService authorizationService)
+        public ScenarioController(IScenarioService ScenarioService, IAuthorizationService authorizationService)
         {
-            _scenarioService = scenarioService;
+            _ScenarioService = ScenarioService;
             _authorizationService = authorizationService;
         }
 
@@ -44,12 +42,12 @@ namespace Steamfitter.Api.Controllers
         /// Only accessible to a SuperUser
         /// </remarks>       
         /// <returns></returns>
-        [HttpGet("scenarios")]
-        [ProducesResponseType(typeof(IEnumerable<Scenario>), (int)HttpStatusCode.OK)]
+        [HttpGet("Scenarios")]
+        [ProducesResponseType(typeof(IEnumerable<SAVM.Scenario>), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getScenarios")]
-        public async Task<IActionResult> Get(CancellationToken ct)
+        public async STT.Task<IActionResult> Get(CancellationToken ct)
         {
-            var list = await _scenarioService.GetAsync(ct);
+            var list = await _ScenarioService.GetAsync(ct);
             return Ok(list);
         }
 
@@ -62,12 +60,12 @@ namespace Steamfitter.Api.Controllers
         // /// Accessible to a SuperUser or the specified User itself
         // /// </remarks>
         // /// <returns></returns>
-        // [HttpGet("users/{id}/scenarios")]
+        // [HttpGet("users/{id}/Scenarios")]
         // [ProducesResponseType(typeof(IEnumerable<Scenario>), (int)HttpStatusCode.OK)]
         // [SwaggerOperation(operationId: "getUserScenarios")]
-        // public async Task<IActionResult> GetByUserId(Guid id, CancellationToken ct)
+        // public async STT.Task<IActionResult> GetByUserId(int id, CancellationToken ct)
         // {
-        //     var list = await _scenarioService.GetByUserIdAsync(id, ct);
+        //     var list = await _ScenarioService.GetByUserIdAsync(id, ct);
         //     return Ok(list);
         // }
 
@@ -79,12 +77,12 @@ namespace Steamfitter.Api.Controllers
         // /// <para />
         // /// Accessible only to the current User.
         // /// <para/>
-        // /// This is a convenience endpoint and simply returns a 302 redirect to the fully qualified users/{id}/scenarios endpoint 
+        // /// This is a convenience endpoint and simply returns a 302 redirect to the fully qualified users/{id}/Scenarios endpoint 
         // /// </remarks>
-        // [HttpGet("me/scenarios")]
+        // [HttpGet("me/Scenarios")]
         // [ProducesResponseType(typeof(IEnumerable<Scenario>), (int)HttpStatusCode.OK)]
         // [SwaggerOperation(operationId: "getMyScenarios")]
-        // public async Task<IActionResult> GetMy(CancellationToken ct)
+        // public async STT.Task<IActionResult> GetMy(CancellationToken ct)
         // {
         //     return RedirectToAction(nameof(this.GetByUserId), new { id = User.GetId() });
         // }
@@ -100,17 +98,17 @@ namespace Steamfitter.Api.Controllers
         /// <param name="id">The id of the Scenario</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        [HttpGet("scenarios/{id}")]
-        [ProducesResponseType(typeof(Scenario), (int)HttpStatusCode.OK)]
+        [HttpGet("Scenarios/{id}")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getScenario")]
-        public async Task<IActionResult> Get(Guid id, CancellationToken ct)
+        public async STT.Task<IActionResult> Get(Guid id, CancellationToken ct)
         {
-            var scenario = await _scenarioService.GetAsync(id, ct);
+            var Scenario = await _ScenarioService.GetAsync(id, ct);
 
-            if (scenario == null)
-                throw new EntityNotFoundException<Scenario>();
+            if (Scenario == null)
+                throw new EntityNotFoundException<SAVM.Scenario>();
 
-            return Ok(scenario);
+            return Ok(Scenario);
         }
 
         /// <summary>
@@ -123,33 +121,51 @@ namespace Steamfitter.Api.Controllers
         /// </remarks>    
         /// <param name="scenario">The data to create the Scenario with</param>
         /// <param name="ct"></param>
-        [HttpPost("scenarios")]
-        [ProducesResponseType(typeof(Scenario), (int)HttpStatusCode.Created)]
+        [HttpPost("Scenarios")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.Created)]
         [SwaggerOperation(operationId: "createScenario")]
-        public async Task<IActionResult> Create([FromBody] Scenario scenario, CancellationToken ct)
+        public async STT.Task<IActionResult> Create([FromBody] SAVM.Scenario scenario, CancellationToken ct)
         {
-            scenario.CreatedBy = User.GetId();
-            var createdScenario = await _scenarioService.CreateAsync(scenario, ct);
+            var createdScenario = await _ScenarioService.CreateAsync(scenario, ct);
             return CreatedAtAction(nameof(this.Get), new { id = createdScenario.Id }, createdScenario);
         }
 
         /// <summary>
-        /// Copies a new Scenario
+        /// Creates a new Scenario from a ScenarioTemplate
         /// </summary>
         /// <remarks>
-        /// Copies a new Scenario with the attributes specified
+        /// Creates a new Scenario from the specified ScenarioTemplate
         /// <para />
         /// Accessible only to a SuperUser or an Administrator
         /// </remarks>    
-        /// <param name="id">The ID of scenario to copy</param>
+        /// <param name="id">The ScenarioTemplate ID to create the Scenario with</param>
         /// <param name="ct"></param>
-        [HttpPost("scenarios/{id}/copy")]
-        [ProducesResponseType(typeof(Scenario), (int)HttpStatusCode.Created)]
-        [SwaggerOperation(operationId: "copyScenario")]
-        public async Task<IActionResult> Copy(Guid id, CancellationToken ct)
+        [HttpPost("ScenarioTemplates/{id}/Scenarios")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.Created)]
+        [SwaggerOperation(operationId: "createScenarioFromScenarioTemplate")]
+        public async STT.Task<IActionResult> CreateFromScenarioTemplate(Guid id, CancellationToken ct)
         {
-            var newScenario = await _scenarioService.CopyAsync(id, ct);
-            return CreatedAtAction(nameof(this.Get), new { id = newScenario.Id }, newScenario);
+            var createdScenario = await _ScenarioService.CreateFromScenarioTemplateAsync(id, ct);
+            return CreatedAtAction(nameof(this.Get), new { id = createdScenario.Id }, createdScenario);
+        }
+
+        /// <summary>
+        /// Creates a new Scenario from a Scenario
+        /// </summary>
+        /// <remarks>
+        /// Creates a new Scenario from the specified Scenario
+        /// <para />
+        /// Accessible only to a SuperUser or an Administrator
+        /// </remarks>    
+        /// <param name="id">The Scenario ID to copy into a new Scenario</param>
+        /// <param name="ct"></param>
+        [HttpPost("Scenarios/{id}/Copy")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.Created)]
+        [SwaggerOperation(operationId: "copyScenario")]
+        public async STT.Task<IActionResult> CopyScenario(Guid id, CancellationToken ct)
+        {
+            var createdScenario = await _ScenarioService.CreateFromScenarioAsync(id, ct);
+            return CreatedAtAction(nameof(this.Get), new { id = createdScenario.Id }, createdScenario);
         }
 
         /// <summary>
@@ -163,13 +179,88 @@ namespace Steamfitter.Api.Controllers
         /// <param name="id">The Id of the Exericse to update</param>
         /// <param name="scenario">The updated Scenario values</param>
         /// <param name="ct"></param>
-        [HttpPut("scenarios/{id}")]
-        [ProducesResponseType(typeof(Scenario), (int)HttpStatusCode.OK)]
+        [HttpPut("Scenarios/{id}")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "updateScenario")]
-        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] Scenario scenario, CancellationToken ct)
+        public async STT.Task<IActionResult> Update([FromRoute] Guid id, [FromBody] SAVM.Scenario scenario, CancellationToken ct)
         {
-            scenario.ModifiedBy = User.GetId();
-            var updatedScenario = await _scenarioService.UpdateAsync(id, scenario, ct);
+            var updatedScenario = await _ScenarioService.UpdateAsync(id, scenario, ct);
+            return Ok(updatedScenario);
+        }
+
+        /// <summary>
+        /// Start a Scenario
+        /// </summary>
+        /// <remarks>
+        /// Updates a Scenario to active and executes initial Tasks
+        /// <para />
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Scenario
+        /// </remarks>  
+        /// <param name="id">The Id of the Scenario to update</param>
+        /// <param name="ct"></param>
+        [HttpPut("Scenarios/{id}/start")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(operationId: "startScenario")]
+        public async STT.Task<IActionResult> Start([FromRoute] Guid id, CancellationToken ct)
+        {
+            var updatedScenario = await _ScenarioService.StartAsync(id, ct);
+            return Ok(updatedScenario);
+        }
+
+        /// <summary>
+        /// Pause a Scenario
+        /// </summary>
+        /// <remarks>
+        /// Updates a Scenario to paused
+        /// <para />
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Scenario
+        /// </remarks>  
+        /// <param name="id">The Id of the Scenario to update</param>
+        /// <param name="ct"></param>
+        [HttpPut("Scenarios/{id}/pause")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(operationId: "pauseScenario")]
+        public async STT.Task<IActionResult> Pause([FromRoute] Guid id, CancellationToken ct)
+        {
+            var updatedScenario = await _ScenarioService.PauseAsync(id, ct);
+            return Ok(updatedScenario);
+        }
+
+        /// <summary>
+        /// Continue a Scenario
+        /// </summary>
+        /// <remarks>
+        /// Updates a Scenario to active
+        /// <para />
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Scenario
+        /// </remarks>  
+        /// <param name="id">The Id of the Scenario to update</param>
+        /// <param name="ct"></param>
+        [HttpPut("Scenarios/{id}/continue")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(operationId: "continueScenario")]
+        public async STT.Task<IActionResult> Continue([FromRoute] Guid id, CancellationToken ct)
+        {
+            var updatedScenario = await _ScenarioService.ContinueAsync(id, ct);
+            return Ok(updatedScenario);
+        }
+
+        /// <summary>
+        /// End a Scenario
+        /// </summary>
+        /// <remarks>
+        /// Updates a Scenario to ended
+        /// <para />
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Scenario
+        /// </remarks>  
+        /// <param name="id">The Id of the Scenario to update</param>
+        /// <param name="ct"></param>
+        [HttpPut("Scenarios/{id}/end")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(operationId: "endScenario")]
+        public async STT.Task<IActionResult> End([FromRoute] Guid id, CancellationToken ct)
+        {
+            var updatedScenario = await _ScenarioService.EndAsync(id, ct);
             return Ok(updatedScenario);
         }
 
@@ -183,12 +274,12 @@ namespace Steamfitter.Api.Controllers
         /// </remarks>    
         /// <param name="id">The id of the Scenario to delete</param>
         /// <param name="ct"></param>
-        [HttpDelete("scenarios/{id}")]
+        [HttpDelete("Scenarios/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [SwaggerOperation(operationId: "deleteScenario")]
-        public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+        public async STT.Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
-            await _scenarioService.DeleteAsync(id, ct);
+            await _ScenarioService.DeleteAsync(id, ct);
             return NoContent();
         }
 

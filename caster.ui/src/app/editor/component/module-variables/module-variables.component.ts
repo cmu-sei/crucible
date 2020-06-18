@@ -8,19 +8,30 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {MatDialog, MatDialogRef} from '@angular/material';
-import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
-import {Module, ModuleVersion, CreateSnippetCommand} from '../../../generated/caster-api';
-import {Observable} from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import {
+  Module,
+  ModuleVersion,
+  CreateSnippetCommand,
+} from '../../../generated/caster-api';
+import { Observable } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/sei-cwd-common/confirm-dialog/components/confirm-dialog.component';
 
 const WAS_CANCELLED = 'wasCancelled';
 
 @Component({
-    selector: 'cas-module-variables',
-    templateUrl: './module-variables.component.html',
-    styleUrls: ['./module-variables.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'cas-module-variables',
+  templateUrl: './module-variables.component.html',
+  styleUrls: ['./module-variables.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModuleVariablesComponent implements OnInit {
   @Input() selectedModule: Module;
@@ -43,7 +54,7 @@ export class ModuleVariablesComponent implements OnInit {
 
   setModuleValues() {
     this.moduleValues.length = 0;
-    this.selectedVersion.variables.forEach(variable => {
+    this.selectedVersion.variables.forEach((variable) => {
       const enteredValue = new EnteredValue();
       enteredValue.name = variable.name;
       enteredValue.value = variable.defaultValue;
@@ -61,13 +72,17 @@ export class ModuleVariablesComponent implements OnInit {
       const createSnippetCommand: CreateSnippetCommand = {
         versionId: this.selectedVersion.id,
         moduleName: this.newName,
-        variableValues: this.moduleValues
+        variableValues: this.moduleValues,
       };
-      const hasBlankValues = this.moduleValues.some(mv => {
+      const hasBlankValues = this.moduleValues.some((mv) => {
         return !mv.isOptional && (!mv.value || mv.value.length === 0);
       });
       if (hasBlankValues) {
-        this.confirmDialog('Some REQUIRED variable values have been left blank!', 'Are you sure that you want to insert this module with blank REQUIRED values?', { buttonTrueText: 'Insert' }).subscribe(result => {
+        this.confirmDialog(
+          'Some REQUIRED variable values have been left blank!',
+          'Are you sure that you want to insert this module with blank REQUIRED values?',
+          { buttonTrueText: 'Insert' }
+        ).subscribe((result) => {
           if (!result[WAS_CANCELLED]) {
             // return the snippet command with blank variable values
             this.variablesSelected.emit(createSnippetCommand);
@@ -83,7 +98,11 @@ export class ModuleVariablesComponent implements OnInit {
     }
   }
 
-  confirmDialog(title: string, message: string, data?: any): Observable<boolean> {
+  confirmDialog(
+    title: string,
+    message: string,
+    data?: any
+  ): Observable<boolean> {
     let dialogRef: MatDialogRef<ConfirmDialogComponent>;
     dialogRef = this.dialog.open(ConfirmDialogComponent, { data: data || {} });
     dialogRef.componentInstance.title = title;
@@ -91,7 +110,6 @@ export class ModuleVariablesComponent implements OnInit {
 
     return dialogRef.afterClosed();
   }
-
 }
 
 export class EnteredValue {
@@ -102,7 +120,10 @@ export class EnteredValue {
   type = 'string';
 
   isMultiLine() {
-    return !(this.type === 'string' || this.type === 'number' || this.type === 'bool' );
+    return !(
+      this.type === 'string' ||
+      this.type === 'number' ||
+      this.type === 'bool'
+    );
   }
 }
-

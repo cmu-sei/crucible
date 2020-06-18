@@ -15,7 +15,7 @@ import { CanDeactivateGuard } from './can-deactivate.guard';
 describe('CanDeactivateGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CanDeactivateGuard]
+      providers: [CanDeactivateGuard],
     });
   });
 
@@ -23,4 +23,3 @@ describe('CanDeactivateGuard', () => {
     expect(guard).toBeTruthy();
   }));
 });
-

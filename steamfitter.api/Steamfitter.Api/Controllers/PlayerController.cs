@@ -12,14 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Steamfitter.Api.Infrastructure.Extensions;
-using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Services;
-using Steamfitter.Api.ViewModels;
-using Steamfitter.Api.Infrastructure.Authorization;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using S3.Player.Api.Models;
 using S3.VM.Api.Models;
@@ -40,18 +36,18 @@ namespace Steamfitter.Api.Controllers
         }
 
         /// <summary>
-        /// Gets all Exercises this user can dispatch
+        /// Gets all Views this user can dispatch
         /// </summary>
         /// <remarks>
-        /// Returns a list of all of the Exercises this user can dispatch.
+        /// Returns a list of all of the Views this user can dispatch.
         /// </remarks>       
         /// <returns></returns>
-        [HttpGet("exercises")]
-        [ProducesResponseType(typeof(IEnumerable<Exercise>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getExercises")]
-        public async Task<IActionResult> GetExercises(CancellationToken ct)
+        [HttpGet("views")]
+        [ProducesResponseType(typeof(IEnumerable<View>), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(operationId: "getViews")]
+        public async STT.Task<IActionResult> GetViews(CancellationToken ct)
         {
-            var list = await _playerService.GetExercisesAsync(ct);
+            var list = await _playerService.GetViewsAsync(ct);
             return Ok(list);
         }
 
@@ -65,9 +61,9 @@ namespace Steamfitter.Api.Controllers
         [HttpGet("vms")]
         [ProducesResponseType(typeof(IEnumerable<Vm>), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getVms")]
-        public async Task<IActionResult> GetExerciseVms(Guid exerciseId, CancellationToken ct)
+        public async STT.Task<IActionResult> GetViewVms(Guid viewId, CancellationToken ct)
         {
-            var list = await _playerVmService.GetExerciseVmsAsync(exerciseId, ct);
+            var list = await _playerVmService.GetViewVmsAsync(viewId, ct);
             return Ok(list);
         }
     }

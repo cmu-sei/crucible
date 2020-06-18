@@ -22,10 +22,10 @@ namespace Caster.Api.Domain.Services
 {
     public interface IArchiveService
     {
-        Task<ArchiveResult> ArchiveExercise(Exercise exercise, ArchiveType type, bool includeIds);
+        Task<ArchiveResult> ArchiveProject(Project project, ArchiveType type, bool includeIds);
         Task<ArchiveResult> ArchiveDirectory(Directory directory,  ArchiveType type, bool includeIds);
         Directory ExtractDirectory(System.IO.Stream stream, string filename);
-        Exercise ExtractExercise(System.IO.Stream stream, string filename);
+        Project ExtractProject(System.IO.Stream stream, string filename);
     }
 
     public class ArchiveService : IArchiveService
@@ -33,16 +33,16 @@ namespace Caster.Api.Domain.Services
         #region Archive
 
         /// <summary>
-        /// Archive an Exercise.
+        /// Archive a Project.
         /// Assumes all Directories are fully populated with Files, Workspaces, and child Directories
         /// </summary>
-        public async Task<ArchiveResult> ArchiveExercise(Exercise exercise, ArchiveType type, bool includeIds)
+        public async Task<ArchiveResult> ArchiveProject(Project project, ArchiveType type, bool includeIds)
         {
             var stream = new System.IO.MemoryStream();
 
             using (ArchiveOutputStream archiveStream = ArchiveOutputStream.Create(stream, type))
             {
-                foreach(var directory in exercise.Directories.Where(d => d.ParentId == null))
+                foreach(var directory in project.Directories.Where(d => d.ParentId == null))
                 {
                     await ArchiveDirectory(directory, "", archiveStream, includeIds, includeDirName: true);
                 }
@@ -53,7 +53,7 @@ namespace Caster.Api.Domain.Services
             return new ArchiveResult
             {
                 Data = stream,
-                Name = $"{exercise.Name}.{type.GetExtension()}",
+                Name = $"{project.Name}.{type.GetExtension()}",
                 Type = type.GetContentType()
             };
         }
@@ -127,12 +127,12 @@ namespace Caster.Api.Domain.Services
 
         #region Extract
 
-        public Exercise ExtractExercise(System.IO.Stream stream, string filename)
+        public Project ExtractProject(System.IO.Stream stream, string filename)
         {
-            Exercise exercise = new Exercise(System.IO.Path.GetFileNameWithoutExtension(filename));
-            this.Extract(stream, filename, exercise: exercise);
+            Project project = new Project(System.IO.Path.GetFileNameWithoutExtension(filename));
+            this.Extract(stream, filename, project: project);
 
-            return exercise;
+            return project;
         }
 
         public Directory ExtractDirectory(System.IO.Stream stream, string filename)
@@ -143,13 +143,13 @@ namespace Caster.Api.Domain.Services
             return directory;
         }
 
-        private void Extract(System.IO.Stream stream, string filename, Exercise exercise = null, Directory directory = null)
+        private void Extract(System.IO.Stream stream, string filename, Project project = null, Directory directory = null)
         {
             using (var archiveInputStream = ArchiveInputStream.Create(stream, ArchiveTypeHelpers.GetType(filename)))
             {
                 while (archiveInputStream.GetNextEntry() is ArchiveEntry archiveEntry)
                 {
-                    var file = this.EnsureCreated(exercise, directory, archiveEntry.Name, archiveEntry.IsFile);
+                    var file = this.EnsureCreated(project, directory, archiveEntry.Name, archiveEntry.IsFile);
 
                     if (file != null && archiveEntry.IsFile)
                     {
@@ -165,7 +165,7 @@ namespace Caster.Api.Domain.Services
             }
         }
 
-        private File EnsureCreated(Exercise exercise, Directory root, string path, bool isFile)
+        private File EnsureCreated(Project project, Directory root, string path, bool isFile)
         {
             var isWorkspace = false;
             Directory parent = root;
@@ -229,9 +229,9 @@ namespace Caster.Api.Domain.Services
                         var newDir = new Directory(pathPart, parent);
                         Directory existingDir = null;
 
-                        if (parent == null && exercise != null)
+                        if (parent == null && project != null)
                         {
-                            existingDir = exercise.Directories.FirstOrDefault(x => x.Name == newDir.Name);
+                            existingDir = project.Directories.FirstOrDefault(x => x.Name == newDir.Name);
                         }
                         else if (parent != null)
                         {
@@ -242,7 +242,7 @@ namespace Caster.Api.Domain.Services
                         {
                             if (parent == null)
                             {
-                                exercise.Directories.Add(newDir);
+                                project.Directories.Add(newDir);
                             }
                             else
                             {

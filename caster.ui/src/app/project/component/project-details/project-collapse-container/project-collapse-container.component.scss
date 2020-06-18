@@ -9,13 +9,11 @@ DM20-0181
 */
 @import 'theme';
 @import '~@angular/material/theming';
-.topBarColor {
-  background-color: $topBarColor;
-}
+
 a {
-  color:inherit;
+  color: inherit;
   text-decoration: none;
- }
+}
 
 .appcontent-container {
   position: absolute;
@@ -28,8 +26,6 @@ a {
 
 .appbarmenu-container {
   min-width: 50px;
-  background-color: #f4f4f4;
-  color: black;
 }
 
 .cmu-logo {
@@ -37,17 +33,14 @@ a {
   position: absolute;
   bottom: 0;
   max-width: 300px;
-
 }
 .pull-right {
   position: absolute;
   right: 35px;
 }
 
-
 .bar-height {
   height: 40px;
-  color: white;
   border-width: 0.25pt;
   border-color: darkgray;
 }
@@ -72,11 +65,4 @@ a {
   font-size: 110%;
   margin-left: 50px;
   margin-right: 40px;
-  color: $topBarTextColor;
 }
-.team-text {
-  text-align: right;
-  margin-right: 10px;
-  color: $topBarTextColor;
-}
-

@@ -12,4 +12,3 @@ export * from './directory.query';
 export * from './directory.store';
 export * from './directory.service';
 export * from './directory.model';
-

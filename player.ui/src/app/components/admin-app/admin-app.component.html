@@ -10,7 +10,7 @@ DM20-0181
 
 <mat-sidenav-container class="appcontent-container" autosize>
   <mat-sidenav class="appbarmenu-container" #sidenav mode="side" [(opened)]="opened">
-    
+
     <mat-list class="appitems-container">
       <mat-list-item class="appslist">
         <a class="nolink" href="/">
@@ -23,13 +23,13 @@ DM20-0181
       <mat-list-item>
         <div class="showhand" id="wrapper">
           <div id="lefticon">
-            <img src="../../../../assets/img/exercise-player.png" alt="Exercises" (click)="adminGotoExercises()">
+            <img src="../../../../assets/img/player.png" alt="Views" (click)="adminGotoViews()">
           </div>
-    
-          <div id="content" (click)="adminGotoExercises()">{{exercisesText}}</div>
-    
+
+          <div id="content" (click)="adminGotoViews()">{{viewsText}}</div>
+
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="adminGotoExercises()">
+            <button mat-icon-button style="outline: none;" (click)="adminGotoViews()">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
             </button>
           </div>
@@ -40,9 +40,9 @@ DM20-0181
           <div id="lefticon">
             <img class="admin-icon" src="../../../assets/img/SP_Icon_User.png" alt="Users" (click)="adminGotoUsers()">
           </div>
-    
+
           <div id="content" (click)="adminGotoUsers()">{{usersText}}</div>
-    
+
           <div class="pull-right" id="rightcontext">
             <button mat-icon-button style="outline: none;" (click)="adminGotoUsers()">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
@@ -55,9 +55,9 @@ DM20-0181
           <div id="lefticon">
             <img class="admin-icon" src="../../../assets/img/SP_Icon_Intel.png" alt="Users" (click)="adminGotoAppTemplates()">
           </div>
-    
+
           <div id="content" (click)="adminGotoAppTemplates()">{{appTemplatesText}}</div>
-    
+
           <div class="pull-right" id="rightcontext">
             <button mat-icon-button style="outline: none;" (click)="adminGotoAppTemplates()">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
@@ -70,9 +70,9 @@ DM20-0181
           <div id="lefticon">
             <img class="admin-icon" src="../../../assets/img/SP_Icon_Alert.png" alt="Users" (click)="adminGotoRolesPermissions()">
           </div>
-    
+
           <div id="content" (click)="adminGotoRolesPermissions()">{{rolesPermissionsText}}</div>
-    
+
           <div class="pull-right" id="rightcontext">
             <button mat-icon-button style="outline: none;" (click)="adminGotoRolesPermissions()">
               <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
@@ -101,16 +101,16 @@ DM20-0181
     </div>
 
     <div>
-      
-      <app-admin-exercise-search fxFlex fxLayoutAlign="center" 
-                                 [hidden]="showStatus != exercisesText"></app-admin-exercise-search>
-      
-      <app-admin-user-search fxFlex fxLayoutAlign="center" 
+
+      <app-admin-view-search fxFlex fxLayoutAlign="center"
+                                 [hidden]="showStatus != viewsText"></app-admin-view-search>
+
+      <app-admin-user-search fxFlex fxLayoutAlign="center"
                              [hidden]="showStatus != usersText"></app-admin-user-search>
-      
-      <app-admin-app-template-search fxFlex fxLayoutAlign="center" 
+
+      <app-admin-app-template-search fxFlex fxLayoutAlign="center"
                                      [hidden]="showStatus != appTemplatesText"></app-admin-app-template-search>
-      <app-admin-role-permission-search fxFlex fxLayoutAlign="center" 
+      <app-admin-role-permission-search fxFlex fxLayoutAlign="center"
                                       [hidden]="showStatus != rolesPermissionsText"></app-admin-role-permission-search>
     </div>
 

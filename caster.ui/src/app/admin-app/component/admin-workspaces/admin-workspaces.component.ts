@@ -8,7 +8,12 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+} from '@angular/core';
 import { WorkspaceService, WorkspaceQuery } from 'src/app/workspace/state';
 import { Observable } from 'rxjs';
 import { Run } from 'src/app/generated/caster-api';
@@ -18,10 +23,9 @@ import { SignalRService } from 'src/app/shared/signalr/signalr.service';
   selector: 'cas-admin-workspaces',
   templateUrl: './admin-workspaces.component.html',
   styleUrls: ['./admin-workspaces.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminWorkspacesComponent implements OnInit, OnDestroy {
-
   public lockingEnabled$: Observable<boolean>;
   public activeRuns$: Observable<Run[]>;
   public expandedRuns$: Observable<string[]>;
@@ -29,18 +33,23 @@ export class AdminWorkspacesComponent implements OnInit, OnDestroy {
   constructor(
     private workspaceService: WorkspaceService,
     private workspaceQuery: WorkspaceQuery,
-    private signalRService: SignalRService) { }
+    private signalRService: SignalRService
+  ) {}
 
   ngOnInit() {
-    this.signalRService.startConnection().then(() => {
-      this.signalRService.joinWorkspacesAdmin();
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    this.signalRService
+      .startConnection()
+      .then(() => {
+        this.signalRService.joinWorkspacesAdmin();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     this.workspaceService.loadLockingStatus();
-    this.lockingEnabled$ = this.workspaceQuery.select(state => state.lockingEnabled);
+    this.lockingEnabled$ = this.workspaceQuery.select(
+      (state) => state.lockingEnabled
+    );
 
     this.workspaceService.loadAllActiveRuns();
     this.activeRuns$ = this.workspaceQuery.activeRuns$();
@@ -51,16 +60,24 @@ export class AdminWorkspacesComponent implements OnInit, OnDestroy {
     this.workspaceService.setLockingEnabled(status);
   }
 
-  expandRun(event: { expand: boolean, item: Run }) {
+  expandRun(event: { expand: boolean; item: Run }) {
     this.workspaceService.expandRun(event.expand, event.item);
   }
 
-  planOutput(event: { output: string, item: Run }) {
-    this.workspaceService.planOutputUpdated(event.item.workspaceId, event.item.id, event.output);
+  planOutput(event: { output: string; item: Run }) {
+    this.workspaceService.planOutputUpdated(
+      event.item.workspaceId,
+      event.item.id,
+      event.output
+    );
   }
 
-  applyOutput(event: { output: string, item: Run }) {
-    this.workspaceService.applyOutputUpdated(event.item.workspaceId, event.item.id, event.output);
+  applyOutput(event: { output: string; item: Run }) {
+    this.workspaceService.applyOutputUpdated(
+      event.item.workspaceId,
+      event.item.id,
+      event.output
+    );
   }
 
   ngOnDestroy() {

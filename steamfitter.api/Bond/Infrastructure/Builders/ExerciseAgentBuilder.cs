@@ -34,9 +34,9 @@ namespace Bond.Infrastructure.Builders
         /// Build the MachineSurvey information
         /// </summary>
         /// <returns>MachineSurvey</returns>
-        internal static ExerciseAgent Build()
+        internal static BondAgent Build()
         {
-            var exerciseAgent = new ExerciseAgent
+            var bondAgent = new BondAgent
             {
                 MonitoredTools = GetMonitoredTools(),
                 LocalUsers = LoadLocalUsers(),
@@ -50,10 +50,10 @@ namespace Bond.Infrastructure.Builders
             };
 
             //machineSurvey.Id =
-            exerciseAgent.VmWareUuid = GetGuestInfoVar(exerciseAgent);
+            bondAgent.VmWareUuid = GetGuestInfoVar(bondAgent);
 
-            exerciseAgent.SshPorts = BondManager.CurrentPorts;
-            return exerciseAgent;
+            bondAgent.SshPorts = BondManager.CurrentPorts;
+            return bondAgent;
         }
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace Bond.Infrastructure.Builders
         /// <summary>
         /// if configured, try to set machine.name based on some vmtools.exe guestinfovars value
         /// </summary>
-        /// <param name="exerciseAgent">The guestinfovars value</param>
-        private static Guid GetGuestInfoVar(ExerciseAgent exerciseAgent)
+        /// <param name="bondAgent">The guestinfovars value</param>
+        private static Guid GetGuestInfoVar(BondAgent bondAgent)
         {
             try
             {
@@ -184,7 +184,7 @@ namespace Bond.Infrastructure.Builders
                     {
                         var o = BondManager.Configuration.VmTools.IdFormatValue;
                         o = o.Replace("[formatkeyvalue]", output);
-                        o = o.Replace("[machinename]", exerciseAgent.MachineName);
+                        o = o.Replace("[machinename]", bondAgent.MachineName);
 
                         return Guid.Parse(o);
                     }

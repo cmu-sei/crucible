@@ -9,13 +9,10 @@ DM20-0181
 */
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Alloy.Api.Data.Models;
 using Alloy.Api.Data.Extensions;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 using System;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,8 +26,8 @@ namespace Alloy.Api.Data
             _options = options;
         }
         
-        public DbSet<DefinitionEntity> Definitions { get; set; }
-        public DbSet<ImplementationEntity> Implementations { get; set; }
+        public DbSet<EventTemplateEntity> EventTemplates { get; set; }
+        public DbSet<EventEntity> Events { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

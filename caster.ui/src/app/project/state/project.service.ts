@@ -13,7 +13,14 @@ import { Injectable } from '@angular/core';
 import { ProjectUI, Breadcrumb, ProjectObjectType, Tab } from './project.model';
 import { DirectoryQuery } from 'src/app/directories';
 import { ProjectQuery } from './project-query.service';
-import { Workspace, Directory, Exercise as Project, ExercisesService, ModelFile, ArchiveType } from 'src/app/generated/caster-api';
+import {
+  Workspace,
+  Directory,
+  Project,
+  ProjectsService,
+  ModelFile,
+  ArchiveType,
+} from 'src/app/generated/caster-api';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { WorkspaceQuery, WorkspaceService } from 'src/app/workspace/state';
@@ -21,7 +28,7 @@ import HttpHeaderUtils from 'src/app/shared/utilities/http-header-utils';
 import { FileDownload } from 'src/app/shared/models/file-download';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
   constructor(
@@ -29,59 +36,66 @@ export class ProjectService {
     private directoryQuery: DirectoryQuery,
     private workspaceQuery: WorkspaceQuery,
     private projectQuery: ProjectQuery,
-    private projectsService: ExercisesService
-    ) {
-
-  }
+    private projectsService: ProjectsService
+  ) {}
 
   loadProjects(): Observable<Project[]> {
-    return this.projectsService.getAllExercises().pipe(
-      tap(projects => {
+    return this.projectsService.getAllProjects().pipe(
+      tap((projects) => {
         const projectUIs = this.projectQuery.ui.getAll();
         this.projectStore.set(projects);
-        projects.forEach(project => {
-          const projectUI = projectUIs.find(pUI => (pUI.id === project.id));
+        projects.forEach((project) => {
+          const projectUI = projectUIs.find((pUI) => pUI.id === project.id);
           if (projectUI) {
             this.projectStore.ui.upsert(project.id, projectUI);
           }
         });
-      }),
+      })
     );
   }
 
   loadProject(projectId: string): Observable<Project> {
-    return this.projectsService.getExercise(projectId).pipe(
-      tap(project => {
+    return this.projectsService.getProject(projectId).pipe(
+      tap((project) => {
         this.projectStore.upsert(project.id, project);
-        this.projectStore.ui.upsert(project.id, this.projectQuery.ui.getEntity(project.id));
-      }),
+        this.projectStore.ui.upsert(
+          project.id,
+          this.projectQuery.ui.getEntity(project.id)
+        );
+      })
     );
   }
 
   createProject(project: Project): Observable<Project> {
-    return this.projectsService.createExercise(project).pipe(
-      tap(ex => {
+    return this.projectsService.createProject(project).pipe(
+      tap((ex) => {
         this.projectStore.add(ex);
-        this.projectStore.ui.upsert(ex.id, this.projectQuery.ui.getEntity(ex.id));
-      }),
+        this.projectStore.ui.upsert(
+          ex.id,
+          this.projectQuery.ui.getEntity(ex.id)
+        );
+      })
     );
   }
 
   deleteProject(projectId: string): Observable<any> {
-    return this.projectsService.deleteExercise(projectId).pipe(
+    return this.projectsService.deleteProject(projectId).pipe(
       tap(() => {
         this.projectStore.remove(projectId);
         this.projectStore.ui.remove(projectId);
-      }),
+      })
     );
   }
 
   updateProject(project: Project): Observable<Project> {
-    return this.projectsService.editExercise(project.id, project).pipe(
-      tap(project => {
+    return this.projectsService.editProject(project.id, project).pipe(
+      tap((project) => {
         this.projectStore.upsert(project.id, project);
-        this.projectStore.ui.upsert(project.id, this.projectQuery.ui.getEntity(project.id));
-      }),
+        this.projectStore.ui.upsert(
+          project.id,
+          this.projectQuery.ui.getEntity(project.id)
+        );
+      })
     );
   }
 
@@ -99,20 +113,22 @@ export class ProjectService {
     if (project) {
       const projectUI = this.projectQuery.ui.getEntity(project.id);
       const tabs = new Array<Tab>().concat(projectUI.openTabs);
-      const index = projectUI.openTabs.findIndex(e => e.id === id);
+      const index = projectUI.openTabs.findIndex((e) => e.id === id);
       tabs.splice(index, 1);
-      const selected = (projectUI.selectedTab >= tabs.length) ? tabs.length - 1 : projectUI.selectedTab;
-      const exUi = { ...projectUI, openTabs: tabs, selectedTab:  selected};
+      const selected =
+        projectUI.selectedTab >= tabs.length
+          ? tabs.length - 1
+          : projectUI.selectedTab;
+      const exUi = { ...projectUI, openTabs: tabs, selectedTab: selected };
       this.projectStore.ui.upsert(exUi.id, exUi);
     }
   }
-
 
   openTab(obj: ModelFile | Workspace, objType: ProjectObjectType) {
     const project = this.projectQuery.getActive();
     if (project) {
       const projectUI = this.projectQuery.ui.getEntity(project.id);
-      const tabIndex = projectUI.openTabs.findIndex(t => t.id === obj.id);
+      const tabIndex = projectUI.openTabs.findIndex((t) => t.id === obj.id);
       if (tabIndex > -1) {
         // Tab already open so simply select it
         if (projectUI.selectedTab !== tabIndex) {
@@ -123,19 +139,21 @@ export class ProjectService {
         // Tab is not open, add it
         let tabs = new Array<Tab>();
         tabs = tabs.concat(projectUI.openTabs);
-        tabs.push(
-          {
-            id: obj.id,
-            name: obj.name,
-            type: objType,
-            directoryId: obj.directoryId
-          } as Tab);
-        const exUi = { ...projectUI, openTabs: tabs, selectedTab: tabs.length - 1 } as ProjectUI;
+        tabs.push({
+          id: obj.id,
+          name: obj.name,
+          type: objType,
+          directoryId: obj.directoryId,
+        } as Tab);
+        const exUi = {
+          ...projectUI,
+          openTabs: tabs,
+          selectedTab: tabs.length - 1,
+        } as ProjectUI;
         this.projectStore.ui.upsert(exUi.id, exUi);
       }
     }
   }
-
 
   updateTabBreadcrumb(tabId: string, newBreadcrumb: Breadcrumb[]) {
     const project = this.projectQuery.getActive();
@@ -143,15 +161,17 @@ export class ProjectService {
     if (project) {
       const projectUI = this.projectQuery.ui.getEntity(project.id);
       let updatedTabs = new Array<Tab>();
-      projectUI.openTabs.forEach(tab => {
+      projectUI.openTabs.forEach((tab) => {
         if (tab.id === tabId) {
           if (!tab.breadcrumb) {
             isChanged = true;
           } else if (newBreadcrumb.length === tab.breadcrumb.length) {
             for (let i = 0; i < newBreadcrumb.length; i++) {
-              if (newBreadcrumb[i].id !== tab.breadcrumb[i].id ||
-                  newBreadcrumb[i].name !== tab.breadcrumb[i].name ||
-                  newBreadcrumb[i].type !== tab.breadcrumb[i].type) {
+              if (
+                newBreadcrumb[i].id !== tab.breadcrumb[i].id ||
+                newBreadcrumb[i].name !== tab.breadcrumb[i].name ||
+                newBreadcrumb[i].type !== tab.breadcrumb[i].type
+              ) {
                 isChanged = true;
               }
             }
@@ -162,7 +182,7 @@ export class ProjectService {
               name: tab.name,
               type: tab.type,
               directoryId: tab.directoryId,
-              breadcrumb: newBreadcrumb
+              breadcrumb: newBreadcrumb,
             };
             updatedTabs.push(newTab);
           }
@@ -177,56 +197,86 @@ export class ProjectService {
     }
   }
 
-
-  createBreadcrumb(project: Project, obj: ModelFile | Workspace | Tab , objType: ProjectObjectType): Array<Breadcrumb> {
+  createBreadcrumb(
+    project: Project,
+    obj: ModelFile | Workspace | Tab,
+    objType: ProjectObjectType
+  ): Array<Breadcrumb> {
     const breadcrumb: Breadcrumb[] = [];
-    breadcrumb.push({ name: obj.name, id: obj.id, type: objType } as Breadcrumb);
-    if (objType === ProjectObjectType.FILE && (obj as ModelFile).workspaceId !== null) {
+    breadcrumb.push({
+      name: obj.name,
+      id: obj.id,
+      type: objType,
+    } as Breadcrumb);
+    if (
+      objType === ProjectObjectType.FILE &&
+      (obj as ModelFile).workspaceId !== null
+    ) {
       // When the file belongs to a workspace, add the workspace to the breadcrumb
-      const workspace = this.workspaceQuery.getEntity((obj as ModelFile).workspaceId);
+      const workspace = this.workspaceQuery.getEntity(
+        (obj as ModelFile).workspaceId
+      );
       if (workspace) {
-        breadcrumb.unshift({ name: workspace.name, id: workspace.id, type: ProjectObjectType.WORKSPACE } as Breadcrumb);
+        breadcrumb.unshift({
+          name: workspace.name,
+          id: workspace.id,
+          type: ProjectObjectType.WORKSPACE,
+        } as Breadcrumb);
       }
     }
 
     let currentDir: Directory = this.directoryQuery.getEntity(obj.directoryId);
     while (currentDir) {
-      breadcrumb.unshift({ name: currentDir.name, id: currentDir.id, type: ProjectObjectType.DIRECTORY } as Breadcrumb);
+      breadcrumb.unshift({
+        name: currentDir.name,
+        id: currentDir.id,
+        type: ProjectObjectType.DIRECTORY,
+      } as Breadcrumb);
       currentDir = this.directoryQuery.getEntity(currentDir.parentId);
     }
-    breadcrumb.unshift({ name: project.name, id: project.id, type: ProjectObjectType.PROJECT } as Breadcrumb);
+    breadcrumb.unshift({
+      name: project.name,
+      id: project.id,
+      type: ProjectObjectType.PROJECT,
+    } as Breadcrumb);
 
     return breadcrumb;
   }
 
   setRightSidebarOpen(projectId: string, open: boolean) {
-    this.projectStore.ui.upsert(projectId, {rightSidebarOpen: open});
+    this.projectStore.ui.upsert(projectId, { rightSidebarOpen: open });
   }
 
   setRightSidebarView(projectId: string, view: string) {
-    this.projectStore.ui.upsert(projectId, {rightSidebarView: view});
+    this.projectStore.ui.upsert(projectId, { rightSidebarView: view });
   }
 
   setRightSidebarWidth(projectId: string, width: number) {
-    this.projectStore.ui.upsert(projectId, {rightSidebarWidth: width});
+    this.projectStore.ui.upsert(projectId, { rightSidebarWidth: width });
   }
 
   setLeftSidebarOpen(projectId: string, open: boolean) {
-    this.projectStore.ui.upsert(projectId, {leftSidebarOpen: open});
+    this.projectStore.ui.upsert(projectId, { leftSidebarOpen: open });
   }
 
   setLeftSidebarWidth(projectId: string, width: number) {
-    this.projectStore.ui.upsert(projectId, {leftSidebarWidth: width});
+    this.projectStore.ui.upsert(projectId, { leftSidebarWidth: width });
   }
 
-  export(id: string, archiveType: ArchiveType, includeIds: boolean): Observable<FileDownload> {
-    return this.projectsService.exportExercise(id, archiveType, includeIds, 'response').pipe(
-      map(response => {
-        return {
-          blob: response.body,
-          filename: HttpHeaderUtils.getFilename(response.headers)
-        };
-      })
-    );
+  export(
+    id: string,
+    archiveType: ArchiveType,
+    includeIds: boolean
+  ): Observable<FileDownload> {
+    return this.projectsService
+      .exportProject(id, archiveType, includeIds, 'response')
+      .pipe(
+        map((response) => {
+          return {
+            blob: response.body,
+            filename: HttpHeaderUtils.getFilename(response.headers),
+          };
+        })
+      );
   }
 }

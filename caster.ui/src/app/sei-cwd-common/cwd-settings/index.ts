@@ -10,4 +10,3 @@ DM20-0181
 
 export * from './services/cwd-settings.service';
 export * from './cwd-settings.module';
-

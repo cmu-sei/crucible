@@ -12,7 +12,6 @@ export interface VmModel {
   name: string;
   url: string;
   id: string;
-  exerciseId: string;
+  viewId: string;
   state: string;
 }
-

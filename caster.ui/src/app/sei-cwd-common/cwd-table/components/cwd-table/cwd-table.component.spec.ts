@@ -18,9 +18,8 @@ describe('TempListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CwdTableComponent ]
-    })
-    .compileComponents();
+      declarations: [CwdTableComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('TempListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

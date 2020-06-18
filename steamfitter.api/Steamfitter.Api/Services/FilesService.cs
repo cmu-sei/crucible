@@ -12,20 +12,17 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using AutoMapper;
 using Steamfitter.Api.Data;
 using Steamfitter.Api.Data.Models;
 using Steamfitter.Api.Infrastructure.Authorization;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Infrastructure.Options;
-using Steamfitter.Api.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,10 +30,10 @@ namespace Steamfitter.Api.Services
 {
     public interface IFilesService
     {
-        Task<IEnumerable<FileEntity>> GetAsync(CancellationToken ct);
-        Task<FileEntity> GetAsync(Guid id, CancellationToken ct);
-        Task<IEnumerable<FileEntity>> SaveAsync(IEnumerable<IFormFile> files, CancellationToken ct);
-        Task DeleteAsync(Guid id, CancellationToken ct);
+        STT.Task<IEnumerable<FileEntity>> GetAsync(CancellationToken ct);
+        STT.Task<FileEntity> GetAsync(Guid id, CancellationToken ct);
+        STT.Task<IEnumerable<FileEntity>> SaveAsync(IEnumerable<IFormFile> files, CancellationToken ct);
+        STT.Task DeleteAsync(Guid id, CancellationToken ct);
     }
 
     public class FilesService : IFilesService
@@ -57,7 +54,7 @@ namespace Steamfitter.Api.Services
             _options = fileSettings;
         }
 
-        public async Task<IEnumerable<FileEntity>> GetAsync(CancellationToken ct)
+        public async STT.Task<IEnumerable<FileEntity>> GetAsync(CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -71,7 +68,7 @@ namespace Steamfitter.Api.Services
         }
 
         //get file by id
-        public async Task<FileEntity> GetAsync(Guid id, CancellationToken ct)
+        public async STT.Task<FileEntity> GetAsync(Guid id, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -84,7 +81,7 @@ namespace Steamfitter.Api.Services
             return item;
         }
 
-        public async Task<IEnumerable<FileEntity>> SaveAsync(IEnumerable<IFormFile> files, CancellationToken ct)
+        public async STT.Task<IEnumerable<FileEntity>> SaveAsync(IEnumerable<IFormFile> files, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -126,7 +123,7 @@ namespace Steamfitter.Api.Services
             return list;
         }
 
-        public async Task DeleteAsync(Guid id, CancellationToken ct)
+        public async STT.Task DeleteAsync(Guid id, CancellationToken ct)
         {
             //delete db record
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)

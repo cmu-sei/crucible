@@ -61,8 +61,8 @@ namespace Caster.Api.Features.Workspaces
         /// <param name="directoryId">The Id of the Directory</param>
         [HttpGet("directories/{directoryId}/workspaces")]
         [ProducesResponseType(typeof(Workspace[]), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(OperationId = "GetWorkspacesByExerciseId")]
-        public async Task<IActionResult> GetByExercise([FromRoute] Guid directoryId)
+        [SwaggerOperation(OperationId = "GetWorkspacesByProjectId")]
+        public async Task<IActionResult> GetByProject([FromRoute] Guid directoryId)
         {
             var result = await this._mediator.Send(new GetByDirectory.Query { DirectoryId = directoryId });
             return Ok(result);

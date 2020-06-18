@@ -13,7 +13,7 @@ using System.IO;
 namespace Caster.Api.Domain.Models
 {
     /// <summary>
-    /// The result of archiving an Exercise, Directory, etc into a zip, tgz, etc
+    /// The result of archiving a Project, Directory, etc into a zip, tgz, etc
     /// </summary>
     public class ArchiveResult
     {

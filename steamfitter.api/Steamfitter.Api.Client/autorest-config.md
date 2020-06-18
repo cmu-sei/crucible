@@ -30,5 +30,8 @@ csharp:
   add-credentials: false
   override-client-name: SteamfitterApiClient
   output-folder: ./code
+  # stop the simplifier from making Task conflict:
+  skip-simplifier-on-namespace: 
+    - System.Threading.Tasks
 
 ```

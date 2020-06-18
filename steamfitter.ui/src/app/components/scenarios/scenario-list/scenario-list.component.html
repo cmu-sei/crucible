@@ -62,7 +62,7 @@ DM20-0181
   <mat-expansion-panel  *ngFor="let item of paginateScenarios(scenarioList, pageIndex, pageSize)" [expanded]="selectedScenario && (item.id == selectedScenario.id)" (click)="selectScenario(item.id)">
     <mat-expansion-panel-header class="mat-row">
       <span class="mat-cell">{{item.name}}</span>
-      <span class="mat-cell">{{item.exercise}}</span>
+      <span class="mat-cell">{{item.view}}</span>
       <span class="mat-cell">{{item.status}}</span>
       <span class="mat-cell">{{item.startDate | date: 'yyyy-MM-dd'}}</span>
       <span class="mat-cell">{{item.endDate | date: 'yyyy-MM-dd'}}</span>
@@ -72,7 +72,7 @@ DM20-0181
       <app-scenario-edit [scenario]="item"></app-scenario-edit>
       <div fxLayout="row" class="bottom-button" (click)="$event.stopPropagation();">
         <div fxFlex fxLayoutAlign="left" class="delete-button">
-          <button mat-stroked-button (click)="startScenario(item)" style="margin-left: 40px;" *ngIf="item.status === 'ready'" [disabled]="!item.exerciseId">Start Scenario Now</button>
+          <button mat-stroked-button (click)="startScenario(item)" style="margin-left: 40px;" *ngIf="item.status === 'ready'" [disabled]="!item.viewId">Start Scenario Now</button>
           <button mat-stroked-button (click)="endScenario(item)" style="margin-left: 40px;" *ngIf="item.status === 'active'">End Scenario Now</button>
           <button mat-stroked-button (click)="copyScenario(item)" style="margin-left: 40px;">Copy Scenario</button>
           <button mat-stroked-button (click)="editScenario(item)" style="margin-left: 40px;" *ngIf="item.status === 'ready' || item.status === 'active'">Edit Scenario</button>

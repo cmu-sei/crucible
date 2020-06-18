@@ -24,12 +24,12 @@ DM20-0181
     </mat-card>
     <button class="button-margin" mat-stroked-button (click)="executeTask()">Execute Task</button>
     <mat-spinner class="spinner-margin" *ngIf="isExecuting"></mat-spinner>
-    <mat-card *ngIf="taskResults !== undefined" style="width:90%">
+    <mat-card *ngIf="results !== undefined" style="width:90%">
       <div fxLayout="column" fxLayoutAlign="start start">
         <div>
           <h4>Result:</h4>
-          <p *ngFor="let taskResult of taskResults" class="add-margin result-text-area">
-            {{taskResult.vmName}} ({{taskResult.vmId}}): {{taskResult.actualOutput}}
+          <p *ngFor="let result of results" class="add-margin result-text-area">
+            {{result.vmName}} ({{result.vmId}}): {{result.actualOutput}}
           </p>
         </div>
       </div>

@@ -9,8 +9,6 @@ DM20-0181
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,15 +29,15 @@ namespace Alloy.Api.Infrastructure.Extensions
             return apiClient;
         }
 
-        public static async Task<Session> CreateSteamfitterSessionAsync(SteamfitterApiClient steamfitterApiClient, ImplementationEntity implementationEntity, Guid scenarioId, CancellationToken ct)
+        public static async Task<Scenario> CreateSteamfitterScenarioAsync(SteamfitterApiClient steamfitterApiClient, EventEntity eventEntity, Guid scenarioTemplateId, CancellationToken ct)
         {
             try
             {
-                var session = await steamfitterApiClient.CreateSessionFromScenarioAsync(scenarioId, ct);
-                session.Name = $"{session.Name.Replace("From Scenario ", "")} - {implementationEntity.Username}";
-                session.ExerciseId = implementationEntity.ExerciseId;
-                session = await steamfitterApiClient.UpdateSessionAsync((Guid)session.Id, session, ct);
-                return session;
+                var scenario = await steamfitterApiClient.CreateScenarioFromScenarioTemplateAsync(scenarioTemplateId, ct);
+                scenario.Name = $"{scenario.Name.Replace("From ScenarioTemplate ", "")} - {eventEntity.Username}";
+                scenario.ViewId = eventEntity.ViewId;
+                scenario = await steamfitterApiClient.UpdateScenarioAsync((Guid)scenario.Id, scenario, ct);
+                return scenario;
             }
             catch (Exception ex)
             {
@@ -47,11 +45,11 @@ namespace Alloy.Api.Infrastructure.Extensions
             }
         }
 
-        public static async Task<bool> StartSteamfitterSessionAsync(SteamfitterApiClient steamfitterApiClient, Guid sessionId, CancellationToken ct)
+        public static async Task<bool> StartSteamfitterScenarioAsync(SteamfitterApiClient steamfitterApiClient, Guid scenarioId, CancellationToken ct)
         {
             try
             {
-                await steamfitterApiClient.StartSessionAsync(sessionId, ct);
+                await steamfitterApiClient.StartScenarioAsync(scenarioId, ct);
                 return true;
             }
             catch(Exception ex)
@@ -60,16 +58,16 @@ namespace Alloy.Api.Infrastructure.Extensions
             }
         }
 
-        public static async Task<bool> EndSteamfitterSessionAsync(string steamfitterApiUrl, Guid? sessionId, SteamfitterApiClient steamfitterApiClient, CancellationToken ct)
+        public static async Task<bool> EndSteamfitterScenarioAsync(string steamfitterApiUrl, Guid? scenarioId, SteamfitterApiClient steamfitterApiClient, CancellationToken ct)
         {
-            // no session to end
-            if (sessionId == null)
+            // no scenario to end
+            if (scenarioId == null)
             {
                 return true;
             }
             try
             {
-                await steamfitterApiClient.EndSessionAsync((Guid)sessionId, ct);
+                await steamfitterApiClient.EndScenarioAsync((Guid)scenarioId, ct);
                 return true;
             }
             catch (Exception ex)

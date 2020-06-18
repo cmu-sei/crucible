@@ -38,8 +38,8 @@
     <PackageReference Include="Z.EntityFramework.Plus.QueryDeferred.EFCore" Version="1.7.1" />
     <PackageReference Include="Z.EntityFramework.Plus.QueryFuture.EFCore" Version="1.7.20" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
-    <PackageReference Include="s3.player.api.client" Version="1.0.0" />
-    <PackageReference Include="s3.vm.api.client" Version="1.0.0" />
+    <PackageReference Include="s3.player.api.client" Version="1.4.0" />
+    <PackageReference Include="s3.vm.api.client" Version="1.4.0" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
     <PackageReference Include="Stackstorm.Connector" Version="1.0.5" />
   </ItemGroup>

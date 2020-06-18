@@ -8,22 +8,28 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityUIQuery, HashMap, Order, QueryConfig, QueryEntity} from '@datorama/akita';
-import {PermissionsState, PermissionStore} from './permission.store';
-import {Permission} from '../../generated/caster-api';
-import {Injectable, InjectionToken} from '@angular/core';
-import {Observable} from 'rxjs';
+import {
+  EntityUIQuery,
+  HashMap,
+  Order,
+  QueryConfig,
+  QueryEntity,
+} from '@datorama/akita';
+import { PermissionsState, PermissionStore } from './permission.store';
+import { Permission } from '../../generated/caster-api';
+import { Injectable, InjectionToken } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export const MODULE_QUERY_TOKEN = new InjectionToken('PermissionQuery');
 @QueryConfig({
   sortBy: 'name',
-  sortByOrder: Order.ASC
+  sortByOrder: Order.ASC,
 })
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PermissionQuery extends QueryEntity<PermissionsState> {
-  isLoading$ = this.select(state => state.loading);
+  isLoading$ = this.select((state) => state.loading);
 
   constructor(protected store: PermissionStore) {
     super(store);
@@ -33,4 +39,3 @@ export class PermissionQuery extends QueryEntity<PermissionsState> {
     return this.selectEntity(id);
   }
 }
-

@@ -9,22 +9,22 @@ DM20-0181
 */
 
 export * from './apiError';
+export * from './bondAgent';
 export * from './directoryInfo';
-export * from './dispatchTask';
-export * from './dispatchTaskResult';
-export * from './exercise';
-export * from './exerciseAgent';
 export * from './fileInfo';
 export * from './iFormFile';
 export * from './localUser';
 export * from './monitoredTool';
+export * from './newLocation';
 export * from './oS';
 export * from './permission';
 export * from './problemDetails';
+export * from './result';
 export * from './scenario';
-export * from './session';
+export * from './scenarioTemplate';
 export * from './sshPort';
+export * from './task';
 export * from './user';
 export * from './userPermission';
+export * from './view';
 export * from './vm';
-

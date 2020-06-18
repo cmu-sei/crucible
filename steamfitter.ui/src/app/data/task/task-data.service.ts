@@ -10,14 +10,13 @@ DM20-0181
 
 import {TaskStore} from './task.store';
 import {TaskQuery} from './task.query';
-import {TaskResultStore} from 'src/app/data/task-result/task-result.store';
-import {TaskResultQuery} from 'src/app/data/task-result/task-result.query';
+import {ResultStore} from 'src/app/data/task-result/task-result.store';
+import {ResultQuery} from 'src/app/data/task-result/task-result.query';
 import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {PageEvent} from '@angular/material';
 import {Router, ActivatedRoute} from '@angular/router';
-import {Task} from 'src/app/data/task/task.store';
-import {DispatchTaskService, DispatchTaskResultService} from 'src/app/swagger-codegen/dispatcher.api';
+import {Task, TaskService, ResultService} from 'src/app/swagger-codegen/dispatcher.api';
 import {map, take, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable, combineLatest} from 'rxjs';
 
@@ -52,10 +51,10 @@ export class TaskDataService {
   constructor(
     private taskStore: TaskStore,
     private taskQuery: TaskQuery,
-    private taskService: DispatchTaskService,
-    private taskResultStore: TaskResultStore,
-    private taskResultQuery: TaskResultQuery,
-    private taskResultService: DispatchTaskResultService,
+    private taskService: TaskService,
+    private resultStore: ResultStore,
+    private resultQuery: ResultQuery,
+    private resultService: ResultService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -114,7 +113,7 @@ export class TaskDataService {
 
   load() {
     this.taskStore.setLoading(true);
-    this.taskService.getDispatchTasks().pipe(
+    this.taskService.getTasks().pipe(
       tap(() => { this.taskStore.setLoading(false); }),
       take(1)
     ).subscribe(tasks => {
@@ -126,26 +125,26 @@ export class TaskDataService {
 
   loadByScenarioTemplate(scenarioTemplateId: string) {
     this.taskStore.set([]);
-    return this.taskService.getScenarioDispatchTasks(scenarioTemplateId).pipe(take(1)).subscribe(tasks => {
+    return this.taskService.getScenarioTemplateTasks(scenarioTemplateId).pipe(take(1)).subscribe(tasks => {
       this.taskStore.set(tasks);
     });
   }
 
   loadByScenario(scenarioId: string) {
     this.taskStore.set([]);
-    this.taskResultStore.set([]);
-    this.taskService.getSessionDispatchTasks(scenarioId).pipe(take(1)).subscribe(tasks => {
+    this.resultStore.set([]);
+    this.taskService.getScenarioTasks(scenarioId).pipe(take(1)).subscribe(tasks => {
       this.taskStore.set(tasks);
       }
     );
-    this.taskResultService.getSessionDispatchTaskResults(scenarioId).pipe(take(1)).subscribe(taskResults => {
-      this.taskResultStore.set(taskResults);
+    this.resultService.getScenarioResults(scenarioId).pipe(take(1)).subscribe(results => {
+      this.resultStore.set(results);
     });
   }
 
   loadById(id: string): Observable<Task> {
     this.taskStore.setLoading(true);
-    return this.taskService.getDispatchTask(id).pipe(
+    return this.taskService.getTask(id).pipe(
       tap((_task: Task) => {
         this.taskStore.upsert(_task.id, {..._task});
       }),
@@ -155,7 +154,7 @@ export class TaskDataService {
 
   add(task: Task) {
     this.taskStore.setLoading(true);
-    this.taskService.createDispatchTask(task).pipe(
+    this.taskService.createTask(task).pipe(
         tap(() => { this.taskStore.setLoading(false); }),
         take(1)
       ).subscribe(dt => {
@@ -167,7 +166,7 @@ export class TaskDataService {
 
   updateTask(task: Task) {
     this.taskStore.setLoading(true);
-    this.taskService.updateDispatchTask(task.id, task).pipe(
+    this.taskService.updateTask(task.id, task).pipe(
         tap(() => { this.taskStore.setLoading(false); }),
         take(1)
       ).subscribe(dt => {
@@ -177,15 +176,15 @@ export class TaskDataService {
   }
 
   execute(id: string) {
-    this.taskService.executeDispatchTask(id).pipe(take(1)).subscribe(results => {
+    this.taskService.executeTask(id).pipe(take(1)).subscribe(results => {
       results.forEach(dtr => {
-        this.taskResultStore.upsert(dtr.id, dtr);
+        this.resultStore.upsert(dtr.id, dtr);
       });
     });
   }
 
   delete(id: string) {
-    this.taskService.deleteDispatchTask(id).pipe(take(1)).subscribe(dt => {
+    this.taskService.deleteTask(id).pipe(take(1)).subscribe(dt => {
       this.taskStore.remove(id);
     });
   }
@@ -206,7 +205,7 @@ export class TaskDataService {
   pasteClipboard(location: PasteLocation) {
     if (!!this._clipboard) {
       if (this._clipboard.isCut) {
-        this.taskService.moveDispatchTask(this._clipboard.id, location).pipe(take(1)).subscribe(dts => {
+        this.taskService.moveTask(this._clipboard.id, location).pipe(take(1)).subscribe(dts => {
             dts.forEach(dt => {
               this.taskStore.upsert(dt.id, dt);
               if (!!dt.triggerTaskId) {
@@ -216,7 +215,7 @@ export class TaskDataService {
           }
         );
       } else {
-        this.taskService.copyDispatchTask(this._clipboard.id, location).pipe(take(1)).subscribe(dts => {
+        this.taskService.copyTask(this._clipboard.id, location).pipe(take(1)).subscribe(dts => {
           dts.forEach(dt => {
             this.taskStore.add(dt);
             if (!!dt.triggerTaskId) {

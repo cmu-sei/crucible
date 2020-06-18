@@ -31,32 +31,32 @@ namespace Alloy.Api.Infrastructure.Extensions
             return apiClient;
         }
 
-        public static async Task<Guid?> CreatePlayerExerciseAsync(S3PlayerApiClient playerApiClient, ImplementationEntity implementationEntity, Guid parentExerciseId, CancellationToken ct)
+        public static async Task<Guid?> CreatePlayerViewAsync(S3PlayerApiClient playerApiClient, EventEntity eventEntity, Guid parentViewId, CancellationToken ct)
         {
             try
             {
-                var exercise = (await playerApiClient.CloneExerciseAsync(parentExerciseId, ct)) as S3.Player.Api.Models.Exercise;
-                exercise.Name = $"{exercise.Name.Replace("Clone of ", "")} - {implementationEntity.Username}";
-                await playerApiClient.UpdateExerciseAsync((Guid)exercise.Id, exercise, ct);
+                var view = (await playerApiClient.CloneViewAsync(parentViewId, ct)) as S3.Player.Api.Models.View;
+                view.Name = $"{view.Name.Replace("Clone of ", "")} - {eventEntity.Username}";
+                await playerApiClient.UpdateViewAsync((Guid)view.Id, view, ct);
                 // add user to first non-admin team
                 var roles = await playerApiClient.GetRolesAsync(ct) as IEnumerable<Role>;
-                var teams = (await playerApiClient.GetExerciseTeamsAsync((Guid)exercise.Id, ct)) as IEnumerable<Team>;
+                var teams = (await playerApiClient.GetViewTeamsAsync((Guid)view.Id, ct)) as IEnumerable<Team>;
                 foreach (var team in teams)
                 {
-                    if (team.Permissions.Where(p => p.Key == "ExerciseAdmin").Any())
+                    if (team.Permissions.Where(p => p.Key == "ViewAdmin").Any())
                         continue;
 
                     if (team.RoleId.HasValue)
                     {
                         var role = roles.Where(r => r.Id == team.RoleId).FirstOrDefault();
 
-                        if (role != null && role.Permissions.Where(p => p.Key == "ExerciseAdmin").Any())
+                        if (role != null && role.Permissions.Where(p => p.Key == "ViewAdmin").Any())
                             continue;
                     }
 
-                    await playerApiClient.AddUserToTeamAsync(team.Id.Value, implementationEntity.UserId, ct);
+                    await playerApiClient.AddUserToTeamAsync(team.Id.Value, eventEntity.UserId, ct);
                 }
-                return exercise.Id;
+                return view.Id;
             }
             catch (Exception ex)
             {
@@ -64,17 +64,17 @@ namespace Alloy.Api.Infrastructure.Extensions
             }
         }
 
-        public static async Task<bool> DeletePlayerExerciseAsync(string playerApiUrl, Guid? exerciseId, S3PlayerApiClient playerApiClient, CancellationToken ct)
+        public static async Task<bool> DeletePlayerViewAsync(string playerApiUrl, Guid? viewId, S3PlayerApiClient playerApiClient, CancellationToken ct)
         {
-            // no exercise to delete
-            if (exerciseId == null)
+            // no view to delete
+            if (viewId == null)
             {
                 return true;
             }
-            // try to delete the exercise
+            // try to delete the view
             try
             {
-                await playerApiClient.DeleteExerciseAsync((Guid)exerciseId, ct);
+                await playerApiClient.DeleteViewAsync((Guid)viewId, ct);
                 return true;
             }
             catch (Exception ex)

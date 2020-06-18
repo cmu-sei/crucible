@@ -11,7 +11,7 @@ DM20-0181
 import { Injectable, Injector, ErrorHandler } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SystemMessageService } from '../system-message/system-message.service';
-import { ApiError } from '../../swagger-codegen/dispatcher.api';
+import { ApiError } from 'src/app/swagger-codegen/dispatcher.api';
 
 @Injectable({
   providedIn: 'root'

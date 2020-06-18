@@ -14,16 +14,11 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.ServiceModel;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using Steamfitter.Api.Infrastructure.Options;
 using Stackstorm.Connector;
-using Stackstorm.Connector.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -35,13 +30,13 @@ namespace Steamfitter.Api.Services
         string GetVmMoid(Guid uuid);
         List<Guid> GetVmGuids(string mask);
         string GetVmName(Guid uuid);
-        Task GetStackstormVms();
-        Task<string> GuestCommand(string parameters);
-        Task<string> GuestReadFile(string parameters);
-        Task<string> VmPowerOn(string parameters);
-        Task<string> VmPowerOff(string parameters);
-        Task<string> CreateVmFromTemplate(string parameters);
-        Task<string> VmRemove(string parameters);
+        STT.Task GetStackstormVms();
+        STT.Task<string> GuestCommand(string parameters);
+        STT.Task<string> GuestReadFile(string parameters);
+        STT.Task<string> VmPowerOn(string parameters);
+        STT.Task<string> VmPowerOff(string parameters);
+        STT.Task<string> CreateVmFromTemplate(string parameters);
+        STT.Task<string> VmRemove(string parameters);
     }
 
     public class StackStormService : IStackStormService
@@ -88,16 +83,16 @@ namespace Steamfitter.Api.Services
             return _vmList[uuid].Name;
         }
 
-        public System.Threading.Tasks.Task StartAsync(CancellationToken cancellationToken)
+        public STT.Task StartAsync(CancellationToken cancellationToken)
         {
             Connect();
             Run();
-            return System.Threading.Tasks.Task.CompletedTask;
+            return STT.Task.CompletedTask;
         }
 
-        public System.Threading.Tasks.Task StopAsync(CancellationToken cancellationToken)
+        public STT.Task StopAsync(CancellationToken cancellationToken)
         {
-            return System.Threading.Tasks.Task.CompletedTask;
+            return STT.Task.CompletedTask;
         }
 
         private void Connect()
@@ -116,12 +111,12 @@ namespace Steamfitter.Api.Services
                     // if no vm's were found, check again in HealthCheckSeconds.  Otherwise, check again in VmListUpdateIntervalMinutes
                     if (_vmList.Any())
                     {
-                        await Task.Delay(new TimeSpan(0, _options.VmListUpdateIntervalMinutes, 0));
+                        await STT.Task.Delay(new TimeSpan(0, _options.VmListUpdateIntervalMinutes, 0));
                     }
                     else
                     {
                         _logger.LogError("The StackStormService did not find any VM's.  This could mean that StackStorm is not running or the StackStorm configuration is incorrect.");
-                        await Task.Delay(new TimeSpan(0, 0, _options.HealthCheckSeconds));
+                        await STT.Task.Delay(new TimeSpan(0, 0, _options.HealthCheckSeconds));
                     }
                 }
                 catch (Exception ex)
@@ -131,7 +126,7 @@ namespace Steamfitter.Api.Services
             }
         }
 
-        public async Task GetStackstormVms()
+        public async STT.Task GetStackstormVms()
         {
             // get the list of all VM's (moid, name) using vsphere.get_vms
             var vmIdentityObjs = new List<VmIdentityStrings>();
@@ -192,7 +187,7 @@ namespace Steamfitter.Api.Services
             }
         }
 
-        public async Task<string> GuestCommand(string parameters)
+        public async STT.Task<string> GuestCommand(string parameters)
         {
             var command = JsonConvert.DeserializeObject<Stackstorm.Connector.Models.Vsphere.Requests.Command>(parameters);
             // the moid parameter is actually a Guid and the moid must be looked up
@@ -202,7 +197,7 @@ namespace Steamfitter.Api.Services
             return executionResult.Value;
         }
 
-        public async Task<string> GuestReadFile(string parameters)
+        public async STT.Task<string> GuestReadFile(string parameters)
         {
             var command = JsonConvert.DeserializeObject<Stackstorm.Connector.Models.Vsphere.Requests.FileRead>(parameters);
             // the moid parameter is actually a Guid and the moid must be looked up
@@ -212,7 +207,7 @@ namespace Steamfitter.Api.Services
             return executionResult.Value;
         }
 
-        public async Task<string> VmPowerOn(string parameters)
+        public async STT.Task<string> VmPowerOn(string parameters)
         {
             var command = JObject.Parse(parameters);
             // the moid parameter is actually a Guid and the moid must be looked up
@@ -222,7 +217,7 @@ namespace Steamfitter.Api.Services
             return executionResult.State.ToString();
         }
 
-        public async Task<string> VmPowerOff(string parameters)
+        public async STT.Task<string> VmPowerOff(string parameters)
         {
             var command = JObject.Parse(parameters);
             // the moid parameter is actually a Guid and the moid must be looked up
@@ -232,7 +227,7 @@ namespace Steamfitter.Api.Services
             return executionResult.State.ToString();
         }
 
-        public async Task<string> CreateVmFromTemplate(string parameters)
+        public async STT.Task<string> CreateVmFromTemplate(string parameters)
         {
             var command = JsonConvert.DeserializeObject<Stackstorm.Connector.Models.Vsphere.Requests.CreateVmFromTemplate>(parameters);
             var executionResult = await _vsphere.CreateVmFromTemplate(command);
@@ -240,7 +235,7 @@ namespace Steamfitter.Api.Services
             return executionResult.Value;
         }
 
-        public async Task<string> VmRemove(string parameters)
+        public async STT.Task<string> VmRemove(string parameters)
         {
             var command = JObject.Parse(parameters);
             // the moid parameter is actually a Guid and the moid must be looked up

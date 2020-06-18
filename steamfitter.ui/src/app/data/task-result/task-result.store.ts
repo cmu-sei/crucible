@@ -9,19 +9,17 @@ DM20-0181
 */
 
 import {EntityState, EntityStore, Store, StoreConfig} from '@datorama/akita';
-import {DispatchTaskResult} from 'src/app/swagger-codegen/dispatcher.api';
+import {Result} from 'src/app/swagger-codegen/dispatcher.api';
 import {Injectable} from '@angular/core';
 
-export interface TaskResult extends DispatchTaskResult {}
-
-export interface TaskResultState extends EntityState<TaskResult> {
+export interface ResultState extends EntityState<Result> {
 }
 
 @Injectable({
   providedIn: 'root'
 })
-@StoreConfig({ name: 'dispatchtasks' })
-export class TaskResultStore extends EntityStore<TaskResultState> {
+@StoreConfig({ name: 'tasks' })
+export class ResultStore extends EntityStore<ResultState> {
   constructor() {
     super();
   }

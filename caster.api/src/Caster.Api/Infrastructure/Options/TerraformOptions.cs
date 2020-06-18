@@ -19,6 +19,7 @@ namespace Caster.Api.Infrastructure.Options
         public string GitlabApiUrl { get; set; }
         public string GitlabToken { get; set; }
         public int? GitlabGroupId { get; set; }
+        public int StateRetryCount { get; set; }
+        public int StateRetryIntervalSeconds { get; set; }
     }
 }
-

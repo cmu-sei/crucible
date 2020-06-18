@@ -11,7 +11,10 @@
     "e2e": "ng e2e",
     "docker:stack": "docker stack deploy -c ./docker/api.yml player_stack",
     "docker:stack:proxy": "docker stack deploy -c ./docker/api.yml -c ./docker/api-proxy.yml player_stack",
-    "docker:destroy": "docker stack rm player_stack"
+    "docker:destroy": "docker stack rm player_stack",
+    "swagger:gen": "curl --insecure http://localhost:4300/swagger/v1/swagger.json --output swagger.json && node_modules/@openapitools/openapi-generator-cli/bin/openapi-generator generate -i ./swagger.json -g typescript-angular -o src/app/generated/s3.player.api --additional-properties ngVersion=8.1.1 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original --type-mappings=DateTime=Date",
+    "swagger:gen:docker-win": "docker run --rm -v %CD%:/local openapitools/openapi-generator-cli:v4.3.1 generate -i http://host.docker.internal:4300/swagger/v1/swagger.json?format=openapi -g typescript-angular -o /local/src/app/generated/s3.player.api --additional-properties ngVersion=8.1.1 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original --type-mappings=DateTime=Date"
+
   },
   "scriptComments": {
     "docker:stack": "// Runs the entire player stack",
@@ -60,6 +63,7 @@
     "@angular/cli": "^8.1.0",
     "@angular/compiler-cli": "^8.1.1",
     "@angular/language-service": "^8.1.1",
+    "@openapitools/openapi-generator-cli": "^1.0.13-4.3.1",
     "@types/jasmine": "^3.3.5",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^10.5.1",

@@ -14,9 +14,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Steamfitter.Api.Data;
@@ -24,40 +23,50 @@ using Steamfitter.Api.Data.Models;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Authorization;
 using Steamfitter.Api.Infrastructure.Exceptions;
-using Steamfitter.Api.Services;
-using Steamfitter.Api.ViewModels;
+using SAVM = Steamfitter.Api.ViewModels;
 
 namespace Steamfitter.Api.Services
 {
     public interface IScenarioService
     {
-        Task<IEnumerable<ViewModels.Scenario>> GetAsync(CancellationToken ct);
-        Task<ViewModels.Scenario> GetAsync(Guid id, CancellationToken ct);
-        // Task<IEnumerable<ViewModels.Scenario>> GetByUserIdAsync(Guid userId, CancellationToken ct);
-        Task<ViewModels.Scenario> CreateAsync(ViewModels.Scenario scenario, CancellationToken ct);
-        Task<ViewModels.Scenario> CopyAsync(Guid id, CancellationToken ct);
-        Task<ViewModels.Scenario> UpdateAsync(Guid id, ViewModels.Scenario scenario, CancellationToken ct);
-        Task<bool> DeleteAsync(Guid id, CancellationToken ct);
+        STT.Task<IEnumerable<ViewModels.Scenario>> GetAsync(CancellationToken ct);
+        STT.Task<ViewModels.Scenario> GetAsync(Guid Id, CancellationToken ct);
+        STT.Task<ViewModels.Scenario> CreateAsync(ViewModels.Scenario Scenario, CancellationToken ct);
+        STT.Task<ViewModels.Scenario> CreateFromScenarioTemplateAsync(Guid scenarioTemplateId, CancellationToken ct);
+        STT.Task<ViewModels.Scenario> CreateFromScenarioAsync(Guid scenarioId, CancellationToken ct);
+        STT.Task<ViewModels.Scenario> UpdateAsync(Guid Id, ViewModels.Scenario Scenario, CancellationToken ct);
+        STT.Task<bool> DeleteAsync(Guid Id, CancellationToken ct);
+        STT.Task<ViewModels.Scenario> StartAsync(Guid Id, CancellationToken ct);
+        STT.Task<ViewModels.Scenario> PauseAsync(Guid Id, CancellationToken ct);
+        STT.Task<ViewModels.Scenario> ContinueAsync(Guid Id, CancellationToken ct);
+        STT.Task<ViewModels.Scenario> EndAsync(Guid Id, CancellationToken ct);
     }
 
     public class ScenarioService : IScenarioService
     {
         private readonly SteamfitterContext _context;
         private readonly IAuthorizationService _authorizationService;
-        private readonly IDispatchTaskService _dispatchTaskService;
         private readonly ClaimsPrincipal _user;
         private readonly IMapper _mapper;
+        private readonly ITaskService _taskService;
+        private readonly IStackStormService _stackstormService;
 
-        public ScenarioService(SteamfitterContext context, IAuthorizationService authorizationService, IDispatchTaskService dispatchTaskService, IPrincipal user, IMapper mapper)
+        public ScenarioService(SteamfitterContext context,
+                                IAuthorizationService authorizationService,
+                                IPrincipal user,
+                                IMapper mapper,
+                                ITaskService taskService,
+                                IStackStormService stackstormService)
         {
             _context = context;
             _authorizationService = authorizationService;
-            _dispatchTaskService = dispatchTaskService;
             _user = user as ClaimsPrincipal;
             _mapper = mapper;
+            _taskService = taskService;
+            _stackstormService = stackstormService;
         }
 
-        public async Task<IEnumerable<ViewModels.Scenario>> GetAsync(CancellationToken ct)
+        public async STT.Task<IEnumerable<ViewModels.Scenario>> GetAsync(CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -65,10 +74,10 @@ namespace Steamfitter.Api.Services
             var items = await _context.Scenarios
                 .ToListAsync(ct);         
             
-            return _mapper.Map<IEnumerable<Scenario>>(items);
+            return _mapper.Map<IEnumerable<SAVM.Scenario>>(items);
         }
 
-        public async Task<ViewModels.Scenario> GetAsync(Guid id, CancellationToken ct)
+        public async STT.Task<ViewModels.Scenario> GetAsync(Guid id, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -76,23 +85,24 @@ namespace Steamfitter.Api.Services
             var item = await _context.Scenarios
                 .SingleOrDefaultAsync(o => o.Id == id, ct);
 
-            return _mapper.Map<Scenario>(item);
+            return _mapper.Map<SAVM.Scenario>(item);
         }
 
-        public async Task<ViewModels.Scenario> CreateAsync(ViewModels.Scenario scenario, CancellationToken ct)
+        public async STT.Task<ViewModels.Scenario> CreateAsync(ViewModels.Scenario scenario, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
 
             scenario.DateCreated = DateTime.UtcNow;
+            scenario.CreatedBy = _user.GetId();
             var scenarioEntity = Mapper.Map<ScenarioEntity>(scenario);
 
             //TODO: add permissions
-            // var scenarioAdminPermission = await _context.Permissions
+            // var ScenarioAdminPermission = await _context.Permissions
             //     .Where(p => p.Key == PlayerClaimTypes.ScenarioAdmin.ToString())
             //     .FirstOrDefaultAsync();
 
-            // if (scenarioAdminPermission == null)
+            // if (ScenarioAdminPermission == null)
             //     throw new EntityNotFoundException<Permission>($"{PlayerClaimTypes.ScenarioAdmin.ToString()} Permission not found.");
 
             _context.Scenarios.Add(scenarioEntity);
@@ -101,36 +111,67 @@ namespace Steamfitter.Api.Services
             return await GetAsync(scenarioEntity.Id, ct);
         }
 
-        public async Task<ViewModels.Scenario> CopyAsync(Guid oldScenarioId, CancellationToken ct)
+        public async STT.Task<ViewModels.Scenario> CreateFromScenarioTemplateAsync(Guid scenarioTemplateId, CancellationToken ct)
+        {
+            var scenarioTemplateEntity = _context.ScenarioTemplates.Find(scenarioTemplateId);
+            if (scenarioTemplateEntity == null)
+                throw new EntityNotFoundException<SAVM.ScenarioTemplate>($"ScenarioTemplate {scenarioTemplateId} was not found.");
+
+            var scenarioEntity = new ScenarioEntity() {
+                CreatedBy = _user.GetId(),
+                Name = $"From ScenarioTemplate {scenarioTemplateEntity.Name}",
+                Description = scenarioTemplateEntity.Description,
+                OnDemand = true,
+                ScenarioTemplateId = scenarioTemplateId
+            };
+            var durationHours = scenarioTemplateEntity.DurationHours != null ? (int)scenarioTemplateEntity.DurationHours : 720;
+            scenarioEntity.EndDate = scenarioEntity.StartDate.AddHours(durationHours);
+            _context.Scenarios.Add(scenarioEntity);
+            await _context.SaveChangesAsync(ct);
+
+            // copy all of the Tasks
+            var oldTaskEntities = _context.Tasks.Where(dt => dt.ScenarioTemplateId == scenarioTemplateId && dt.TriggerTaskId == null);
+            // copy the PARENT Tasks
+            foreach (var oldTaskEntity in oldTaskEntities)
+            {
+                await _taskService.CopyAsync(oldTaskEntity.Id, scenarioEntity.Id, "scenario", ct);
+            }
+
+            return _mapper.Map<SAVM.Scenario>(scenarioEntity);
+        }
+
+        public async STT.Task<ViewModels.Scenario> CreateFromScenarioAsync(Guid oldScenarioId, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
 
             var oldScenarioEntity = _context.Scenarios.Find(oldScenarioId);
             if (oldScenarioEntity == null)
-                throw new EntityNotFoundException<Scenario>($"Scenario {oldScenarioId} was not found.");
+                throw new EntityNotFoundException<SAVM.Scenario>($"Scenario {oldScenarioId} was not found.");
 
             var newScenarioEntity = new ScenarioEntity() {
                 CreatedBy = _user.GetId(),
                 Name = $"Copy of {oldScenarioEntity.Name}",
                 Description = oldScenarioEntity.Description,
-                DurationHours = oldScenarioEntity.DurationHours
+                OnDemand = true,
+                ScenarioTemplateId = oldScenarioEntity.ScenarioTemplateId
             };
 
             _context.Scenarios.Add(newScenarioEntity);
             await _context.SaveChangesAsync(ct);
 
-            // copy all of the DispatchTasks, including children
-            var oldDispatchTaskEntityIds = _context.DispatchTasks.Where(dt => dt.ScenarioId == oldScenarioId && dt.TriggerTaskId == null).Select(s => s.Id);
-            foreach (var oldDispatchTaskEntityId in oldDispatchTaskEntityIds)
+            // copy all of the Tasks
+            var oldTaskEntities = _context.Tasks.Where(dt => dt.ScenarioId == oldScenarioId && dt.TriggerTaskId == null);
+            // copy the PARENT Tasks
+            foreach (var oldTaskEntity in oldTaskEntities)
             {
-                await _dispatchTaskService.CopyAsync(oldDispatchTaskEntityId, newScenarioEntity.Id, "scenario", ct);
+                await _taskService.CopyAsync(oldTaskEntity.Id, newScenarioEntity.Id, "scenario", ct);
             }
 
             return await GetAsync(newScenarioEntity.Id, ct);
         }
 
-        public async Task<ViewModels.Scenario> UpdateAsync(Guid id, ViewModels.Scenario scenario, CancellationToken ct)
+        public async STT.Task<ViewModels.Scenario> UpdateAsync(Guid id, ViewModels.Scenario scenario, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -138,11 +179,12 @@ namespace Steamfitter.Api.Services
             var scenarioToUpdate = await _context.Scenarios.SingleOrDefaultAsync(v => v.Id == id, ct);
 
             if (scenarioToUpdate == null)
-                throw new EntityNotFoundException<Scenario>();
+                throw new EntityNotFoundException<SAVM.Scenario>();
 
-            scenario.CreatedBy = scenarioToUpdate.CreatedBy;
             scenario.DateCreated = scenarioToUpdate.DateCreated;
+            scenario.CreatedBy = scenarioToUpdate.CreatedBy;
             scenario.DateModified = DateTime.UtcNow;
+            scenario.ModifiedBy = _user.GetId();
             Mapper.Map(scenario, scenarioToUpdate);
 
             _context.Scenarios.Update(scenarioToUpdate);
@@ -151,20 +193,79 @@ namespace Steamfitter.Api.Services
             return _mapper.Map(scenarioToUpdate, scenario);
         }
 
-        public async Task<bool> DeleteAsync(Guid id, CancellationToken ct)
+        public async STT.Task<bool> DeleteAsync(Guid id, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
 
-            var scenarioToDelete = await _context.Scenarios.SingleOrDefaultAsync(v => v.Id == id, ct);
+            var ScenarioToDelete = await _context.Scenarios.SingleOrDefaultAsync(v => v.Id == id, ct);
 
-            if (scenarioToDelete == null)
-                throw new EntityNotFoundException<Scenario>();
+            if (ScenarioToDelete == null)
+                throw new EntityNotFoundException<SAVM.Scenario>();
 
-            _context.Scenarios.Remove(scenarioToDelete);
+            _context.Scenarios.Remove(ScenarioToDelete);
             await _context.SaveChangesAsync(ct);
 
             return true;
+        }
+
+        public async STT.Task<ViewModels.Scenario> StartAsync(Guid id, CancellationToken ct)
+        {
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
+                throw new ForbiddenException();
+
+            var scenario = await _context.Scenarios
+                .SingleAsync(o => o.Id == id, ct);
+            var dateTimeStart = DateTime.UtcNow;
+            scenario.DateModified = dateTimeStart;
+            scenario.ModifiedBy = _user.GetId();
+            scenario.StartDate = dateTimeStart;
+            scenario.Status = ScenarioStatus.active;
+
+            _context.Scenarios.Update(scenario);
+            await _context.SaveChangesAsync(ct);
+            // TODO:  create a better way to do this that doesn't require getting ALL of the VM's
+            // We just need to grab all of the VM's from the scenario view
+            await _stackstormService.GetStackstormVms();
+            var tasks = await _taskService.GetByScenarioIdAsync(scenario.Id, ct);
+            foreach (var task in tasks)
+            {
+                if (task.TriggerTaskId is null && task.TriggerCondition != TaskTrigger.Manual)
+                {
+                    await _taskService.ExecuteAsync(task.Id, ct);
+                }
+            }
+
+            return _mapper.Map<SAVM.Scenario>(scenario);
+        }
+
+        public async STT.Task<ViewModels.Scenario> PauseAsync(Guid id, CancellationToken ct)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async STT.Task<ViewModels.Scenario> ContinueAsync(Guid id, CancellationToken ct)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async STT.Task<ViewModels.Scenario> EndAsync(Guid id, CancellationToken ct)
+        {
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
+                throw new ForbiddenException();
+
+            var scenario = await _context.Scenarios
+                .SingleAsync(o => o.Id == id, ct);
+            var endDateTime = DateTime.UtcNow;
+            scenario.DateModified = endDateTime;
+            scenario.ModifiedBy = _user.GetId();
+            scenario.Status = ScenarioStatus.ended;
+            scenario.EndDate = endDateTime;
+
+            _context.Scenarios.Update(scenario);
+            await _context.SaveChangesAsync(ct);
+
+            return _mapper.Map<SAVM.Scenario>(scenario);
         }
 
     }

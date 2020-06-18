@@ -20,4 +20,3 @@ describe('FilesFilterPipeService', () => {
     expect(service).toBeTruthy();
   });
 });
-

@@ -52,7 +52,7 @@ namespace Steamfitter.Api.Infrastructure.Extensions
                         {
                             ctx.Database.EnsureCreated();
 
-                            if (!ctx.Scenarios.Any())
+                            if (!ctx.ScenarioTemplates.Any())
                             {
                                 Seed.Run(ctx);
                             }

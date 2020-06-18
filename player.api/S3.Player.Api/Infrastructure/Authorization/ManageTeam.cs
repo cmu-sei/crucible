@@ -20,12 +20,12 @@ namespace S3.Player.Api.Infrastructure.Authorization
 {
     public class ManageTeamRequirement : IAuthorizationRequirement
     {
-        public Guid ExerciseId { get; set; }
+        public Guid ViewId { get; set; }
         public Guid TeamId { get; set; }
 
-        public ManageTeamRequirement(Guid exerciseId, Guid teamId)
+        public ManageTeamRequirement(Guid viewId, Guid teamId)
         {
-            ExerciseId = exerciseId;
+            ViewId = viewId;
             TeamId = teamId;
         }
     }
@@ -33,8 +33,8 @@ namespace S3.Player.Api.Infrastructure.Authorization
     public class ManageTeamHandler : AuthorizationHandler<ManageTeamRequirement>, IAuthorizationHandler
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ManageTeamRequirement requirement)
-        {        
-            if(context.User.HasClaim(PlayerClaimTypes.ExerciseAdmin.ToString(), requirement.ExerciseId.ToString()))
+        {
+            if(context.User.HasClaim(PlayerClaimTypes.ViewAdmin.ToString(), requirement.ViewId.ToString()))
             {
                 context.Succeed(requirement);
             }
@@ -43,4 +43,3 @@ namespace S3.Player.Api.Infrastructure.Authorization
         }
     }
 }
-

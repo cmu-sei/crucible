@@ -26,28 +26,28 @@ namespace Caster.Api.Features.Files.EventHandlers
     {
         private readonly CasterContext _db;
         private readonly IGetFileQuery _fileQuery;
-        private readonly IHubContext<ExerciseHub> _exerciseHub;
+        private readonly IHubContext<ProjectHub> _projectHub;
 
         public SignalRFileUpdatedHandler(
             CasterContext db,
             IGetFileQuery fileQuery,
-            IHubContext<ExerciseHub> exerciseHub)
+            IHubContext<ProjectHub> projectHub)
         {
             _db = db;
             _fileQuery = fileQuery;
-            _exerciseHub = exerciseHub;
+            _projectHub = projectHub;
         }
 
         public async Task Handle(FileUpdated notification, CancellationToken cancellationToken)
         {
             var file = await _fileQuery.ExecuteAsync(notification.FileId, notification.IncludeContent);
 
-            var exerciseId = await _db.Directories
+            var projectId = await _db.Directories
                 .Where(d => d.Id == file.DirectoryId)
-                .Select(d => d.ExerciseId)
+                .Select(d => d.ProjectId)
                 .FirstOrDefaultAsync();
 
-            await _exerciseHub.Clients.Group(exerciseId.ToString()).SendAsync("FileUpdated", file);
+            await _projectHub.Clients.Group(projectId.ToString()).SendAsync("FileUpdated", file);
         }
     }
 }

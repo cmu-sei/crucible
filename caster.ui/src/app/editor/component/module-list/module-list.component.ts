@@ -19,10 +19,11 @@ import {
   SimpleChanges,
   ViewEncapsulation,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import {Module, CreateSnippetCommand} from '../../../generated/caster-api';
-import {MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
+import { Module, CreateSnippetCommand } from '../../../generated/caster-api';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { ModuleVariablesComponent } from '../module-variables/module-variables.component';
 
 @Component({
@@ -30,14 +31,16 @@ import { ModuleVariablesComponent } from '../module-variables/module-variables.c
   templateUrl: './module-list.component.html',
   styleUrls: ['./module-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ModuleListComponent implements OnChanges, OnInit {
   @Input() modules: Module[];
   @Input() selectedModule: Module;
   @Input() isEditing: boolean;
 
-  @Output() insertModule: EventEmitter<CreateSnippetCommand> = new EventEmitter<CreateSnippetCommand>();
+  @Output() insertModule: EventEmitter<CreateSnippetCommand> = new EventEmitter<
+    CreateSnippetCommand
+  >();
   @Output() getModule: EventEmitter<{ id: string }> = new EventEmitter();
   code: string;
   dataSource = new MatTableDataSource();
@@ -45,7 +48,9 @@ export class ModuleListComponent implements OnChanges, OnInit {
   isDialogOpen = false;
   variablesDialogRef: MatDialogRef<ModuleVariablesComponent>;
 
-  @ViewChild('variablesDialog', { static: false }) variablesTemplate: TemplateRef<ModuleVariablesComponent>;
+  @ViewChild('variablesDialog') variablesTemplate: TemplateRef<
+    ModuleVariablesComponent
+  >;
 
   constructor(public dialog: MatDialog) {}
 
@@ -58,14 +63,17 @@ export class ModuleListComponent implements OnChanges, OnInit {
       this.dataSource.data = changes.modules.currentValue;
     }
 
-    if (!this.isDialogOpen &&
-        changes.selectedModule &&
-        !!this.selectedModule &&
-        !!this.selectedModule.versions &&
-        this.selectedModule.versions.length > 0) {
-
+    if (
+      !this.isDialogOpen &&
+      changes.selectedModule &&
+      !!this.selectedModule &&
+      !!this.selectedModule.versions &&
+      this.selectedModule.versions.length > 0
+    ) {
       this.isDialogOpen = true;
-      this.variablesDialogRef = this.dialog.open(this.variablesTemplate, { disableClose: true });
+      this.variablesDialogRef = this.dialog.open(this.variablesTemplate, {
+        disableClose: true,
+      });
     }
   }
 
@@ -92,7 +100,6 @@ export class ModuleListComponent implements OnChanges, OnInit {
   }
 
   selectModuleFn(module) {
-    this.getModule.emit({id: module.id});
+    this.getModule.emit({ id: module.id });
   }
 }
-

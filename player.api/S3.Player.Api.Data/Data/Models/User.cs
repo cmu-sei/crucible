@@ -28,12 +28,12 @@ namespace S3.Player.Api.Data.Data.Models
 
         public Guid Id { get; set; }
 
-        public string Name { get; set; }        
+        public string Name { get; set; }
 
         public Guid? RoleId { get; set; }
         public virtual RoleEntity Role { get; set; }
 
-        public ICollection<ExerciseMembershipEntity> ExerciseMemberships { get; set; } = new List<ExerciseMembershipEntity>();
+        public ICollection<ViewMembershipEntity> ViewMemberships { get; set; } = new List<ViewMembershipEntity>();
         public ICollection<TeamMembershipEntity> TeamMemberships { get; set; } = new List<TeamMembershipEntity>();
         public ICollection<UserPermissionEntity> Permissions { get; set; } = new List<UserPermissionEntity>();
     }

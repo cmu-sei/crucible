@@ -23,27 +23,27 @@ namespace S3.Player.Api.Data.Data
         {
             // Permissions
             var systemAdminPermission = context.Permissions.Where(x => x.Key == "SystemAdmin").FirstOrDefault();
-            var exerciseAdminPermission = context.Permissions.Where(x => x.Key == "ExerciseAdmin").FirstOrDefault();            
+            var viewAdminPermission = context.Permissions.Where(x => x.Key == "ViewAdmin").FirstOrDefault();
             var ostAdminPermission = new PermissionEntity { Id = Guid.NewGuid(), Key = "OsTicketAdmin", Description = "Admin in OsTicket" };
             var ostAgentPermission = new PermissionEntity { Id = Guid.NewGuid(), Key = "OsTicketAgent", Description = "Agent in OsTicket" };
             var viewAllVmsPermission = new PermissionEntity { Id = Guid.NewGuid(), Key = "ViewAllMachines", Description = "View all Virtual Machines" };
-            
+
             context.Permissions.Add(ostAdminPermission);
             context.Permissions.Add(ostAgentPermission);
-            context.Permissions.Add(viewAllVmsPermission);            
+            context.Permissions.Add(viewAllVmsPermission);
 
             // Roles
             var superUserRole = new RoleEntity { Id = Guid.Parse("f16d7689-4c22-498f-b975-021348b19120"), Name = "Super User" };
             superUserRole.Permissions.Add(new RolePermissionEntity { Id = Guid.NewGuid(), Permission = systemAdminPermission });
 
-            var exerciseAdminRole = new RoleEntity { Id = Guid.Parse("b8f2c55b-f47d-4ec9-8fce-606753c4af72"), Name = "Exercise Administrator" };
-            exerciseAdminRole.Permissions.Add(new RolePermissionEntity { Id = Guid.NewGuid(), Permission = exerciseAdminPermission });
-            exerciseAdminRole.Permissions.Add(new RolePermissionEntity { Id = Guid.NewGuid(), Permission = ostAdminPermission });
-            exerciseAdminRole.Permissions.Add(new RolePermissionEntity { Id = Guid.NewGuid(), Permission = ostAgentPermission });
-            exerciseAdminRole.Permissions.Add(new RolePermissionEntity { Id = Guid.NewGuid(), Permission = viewAllVmsPermission });
+            var viewAdminRole = new RoleEntity { Id = Guid.Parse("b8f2c55b-f47d-4ec9-8fce-606753c4af72"), Name = "View Administrator" };
+            viewAdminRole.Permissions.Add(new RolePermissionEntity { Id = Guid.NewGuid(), Permission = viewAdminPermission });
+            viewAdminRole.Permissions.Add(new RolePermissionEntity { Id = Guid.NewGuid(), Permission = ostAdminPermission });
+            viewAdminRole.Permissions.Add(new RolePermissionEntity { Id = Guid.NewGuid(), Permission = ostAgentPermission });
+            viewAdminRole.Permissions.Add(new RolePermissionEntity { Id = Guid.NewGuid(), Permission = viewAllVmsPermission });
 
             context.Roles.Add(superUserRole);
-            context.Roles.Add(exerciseAdminRole);            
+            context.Roles.Add(viewAdminRole);
 
             // sketch users
             var uEnder = new UserEntity { Id = Guid.Parse("3269cb19-1d39-40d3-a55e-e3e9779b6e0b"), Name = "Ender" };
@@ -60,26 +60,26 @@ namespace S3.Player.Api.Data.Data
             context.Users.Add(uBob);
             context.Users.Add(uAdministrator);
 
-            // exercise 1
-            var exercise1 = new ExerciseEntity
+            // view 1
+            var view1 = new ViewEntity
             {
                 Id = Guid.Parse("453d394e-bf18-499b-9786-149b0f8d69ec"),
                 Name = "RCC -E EM 2018",
-                Description = "Cyber exercises for evaluating the team.",
-                Status = ExerciseStatus.Active
+                Description = "Cyber views for evaluating the team.",
+                Status = ViewStatus.Active
             };
 
             var tBlue = new TeamEntity { Id = Guid.Parse("df7b7157-1727-48b5-803d-cfdb208767c0"), Name = "Blue" };
             tBlue.Permissions.Add(new TeamPermissionEntity(tBlue.Id, ostAdminPermission.Id));
 
-            var tAdmin = new TeamEntity { Id = Guid.Parse("453e0508-0515-402d-85e9-24e567096f7a"), Name = "Admin", Role = exerciseAdminRole };                        
+            var tAdmin = new TeamEntity { Id = Guid.Parse("453e0508-0515-402d-85e9-24e567096f7a"), Name = "Admin", Role = viewAdminRole };
 
-            //exercise1.ExerciseUsers.Add(new ExerciseUserEntity { ExerciseId = exercise1.Id, UserId = uEnder.Id, PrimaryTeamId = tBlue.Id });
-            //exercise1.ExerciseUsers.Add(new ExerciseUserEntity { ExerciseId = exercise1.Id, UserId = uBean.Id, PrimaryTeamId = tRed.Id });
-            //exercise1.ExerciseUsers.Add(new ExerciseUserEntity { ExerciseId = exercise1.Id, UserId = uGraff.Id, PrimaryTeamId = tWhite.Id });
-            //exercise1.ExerciseUsers.Add(new ExerciseUserEntity { ExerciseId = exercise1.Id, UserId = uBonzo.Id, PrimaryTeamId = tSupport.Id });
-            //exercise1.ExerciseUsers.Add(new ExerciseUserEntity { ExerciseId = exercise1.Id, UserId = uBob.Id, PrimaryTeamId = tBlue.Id });
-            //exercise1.ExerciseUsers.Add(new ExerciseUserEntity { ExerciseId = exercise1.Id, UserId = uAdministrator.Id, PrimaryTeamId = tAdmin.Id });
+            //view1.ViewUsers.Add(new ViewUserEntity { ViewId = view1.Id, UserId = uEnder.Id, PrimaryTeamId = tBlue.Id });
+            //view1.ViewUsers.Add(new ViewUserEntity { ViewId = view1.Id, UserId = uBean.Id, PrimaryTeamId = tRed.Id });
+            //view1.ViewUsers.Add(new ViewUserEntity { ViewId = view1.Id, UserId = uGraff.Id, PrimaryTeamId = tWhite.Id });
+            //view1.ViewUsers.Add(new ViewUserEntity { ViewId = view1.Id, UserId = uBonzo.Id, PrimaryTeamId = tSupport.Id });
+            //view1.ViewUsers.Add(new ViewUserEntity { ViewId = view1.Id, UserId = uBob.Id, PrimaryTeamId = tBlue.Id });
+            //view1.ViewUsers.Add(new ViewUserEntity { ViewId = view1.Id, UserId = uAdministrator.Id, PrimaryTeamId = tAdmin.Id });
 
 
 
@@ -99,28 +99,28 @@ namespace S3.Player.Api.Data.Data
             //tSupport.TeamUsers.Add(new TeamUserEntity { TeamId = tSupport.Id, UserId = uBonzo.Id });
             //tSupport.TeamUsers.Add(new TeamUserEntity { TeamId = tSupport.Id, UserId = uAdministrator.Id });
 
-            
+
             //tAdmin.TeamUsers.Add(new TeamUserEntity { TeamId = tAdmin.Id, UserId = uAdministrator.Id });
 
-            exercise1.Teams.Add(tBlue);
-            exercise1.Teams.Add(tRed);
-            exercise1.Teams.Add(tWhite);
-            exercise1.Teams.Add(tSupport);
-            exercise1.Teams.Add(tAdmin);
+            view1.Teams.Add(tBlue);
+            view1.Teams.Add(tRed);
+            view1.Teams.Add(tWhite);
+            view1.Teams.Add(tSupport);
+            view1.Teams.Add(tAdmin);
 
-            //// exercise 2
-            //var exercise2 = new ExerciseEntity
+            //// view 2
+            //var view2 = new ViewEntity
             //{
             //    Id = Guid.Parse("fc41c788-063b-4018-9f28-5f68a52f4e76"),
-            //    Name = "Exercise 2",
-            //    Description = "Another Exercise",
-            //    Status = ExerciseStatus.Active
+            //    Name = "View 2",
+            //    Description = "Another View",
+            //    Status = ViewStatus.Active
             //};
 
             var a = new ApplicationEntity
             {
                 Name = "Virtual Machines",
-                Url = "http://localhost:4303/exercises/{exerciseId}",
+                Url = "http://localhost:4303/views/{viewId}",
                 Embeddable = true,
             };
             a.Icon = "/assets/img/SP_Icon_Virtual.png";
@@ -136,7 +136,7 @@ namespace S3.Player.Api.Data.Data
             var c = new ApplicationEntity
             {
                 Name = "Chat",
-                Url = "https://INTERNAL_CHAT_SERVER?geid={exerciseId}",
+                Url = "https://INTERNAL_CHAT_SERVER?geid={viewId}",
                 Embeddable = false,
             };
             c.Icon = "/assets/img/SP_Icon_Chat.png";
@@ -144,8 +144,8 @@ namespace S3.Player.Api.Data.Data
 
             var d = new ApplicationEntity
             {
-                Name = "Exercise Hub",
-                Url = "https://hub.com?geid={exerciseId}",
+                Name = "View Hub",
+                Url = "https://hub.com?geid={viewId}",
                 Embeddable = true,
             };
 
@@ -160,11 +160,11 @@ namespace S3.Player.Api.Data.Data
             };
             e.Icon = "/assets/img/SP_Icon_Help.png";
 
-            exercise1.Applications.Add(a);
-            exercise1.Applications.Add(b);
-            exercise1.Applications.Add(c);
-            exercise1.Applications.Add(d);
-            exercise1.Applications.Add(e);
+            view1.Applications.Add(a);
+            view1.Applications.Add(b);
+            view1.Applications.Add(c);
+            view1.Applications.Add(d);
+            view1.Applications.Add(e);
 
             ApplicationInstanceEntity blueVmAppInstance = new ApplicationInstanceEntity { Application = a, DisplayOrder = 0 };
             ApplicationInstanceEntity blueIntelAppInstance = new ApplicationInstanceEntity { Application = b, DisplayOrder = 1 };
@@ -202,20 +202,19 @@ namespace S3.Player.Api.Data.Data
             tAdmin.Applications.Add(adminVmAppInstance);
             tAdmin.Applications.Add(adminHelpdeskAppInstance);
 
-            context.Exercises.Add(exercise1);
-            //context.Exercises.Add(exercise2);
+            context.Views.Add(view1);
+            //context.Views.Add(view2);
 
-            var exMembership1 = new ExerciseMembershipEntity { Exercise = exercise1, UserId = uEnder.Id };
-            exercise1.Memberships.Add(exMembership1);
+            var exMembership1 = new ViewMembershipEntity { View = view1, UserId = uEnder.Id };
+            view1.Memberships.Add(exMembership1);
             context.SaveChanges();
 
-            var enderBlueMembership = new TeamMembershipEntity { Team = tBlue, User = uEnder, ExerciseMembership = exMembership1, Role = exerciseAdminRole };
+            var enderBlueMembership = new TeamMembershipEntity { Team = tBlue, User = uEnder, ViewMembership = exMembership1, Role = viewAdminRole };
             exMembership1.PrimaryTeamMembership = enderBlueMembership;
 
             context.SaveChanges();
 
-            log.Debug("Seed completed");            
+            log.Debug("Seed completed");
         }
     }
 }
-

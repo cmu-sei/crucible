@@ -8,46 +8,66 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-
-  <div fxLayout="column" *ngIf="!!dataSource && !!dataSource.data && dataSource.data.length > 0">
-    <mat-card class="module-heading" fxFlex="1 1 auto" fxFill>
-      <span><strong>MODULES</strong></span>
-      <div class="module-search">
-        <mat-icon class="mdi-24px" fontIcon="mdi-magnify" style="margin-right: 5px;"></mat-icon>
-        <mat-form-field class="search-input">
-          <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
-        </mat-form-field>
-        <button *ngIf="filterString != ''"
-          matTooltip="Clear Search"
-          mat-icon-button
-          (click)="clearFilter()"
-          style="outline: none;">
-          <mat-icon class="mdi-18px" fontIcon="mdi-close-circle"></mat-icon>
-        </button>
+<div
+  fxLayout="column"
+  *ngIf="!!dataSource && !!dataSource.data && dataSource.data.length > 0"
+>
+  <mat-card class="module-heading" fxFlex="1 1 auto" fxFill>
+    <span><strong>MODULES</strong></span>
+    <div class="module-search">
+      <mat-icon
+        class="mdi-24px"
+        fontIcon="mdi-magnify"
+        style="margin-right: 5px;"
+      ></mat-icon>
+      <mat-form-field class="search-input">
+        <input
+          matInput
+          [(ngModel)]="filterString"
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Search"
+        />
+      </mat-form-field>
+      <button
+        *ngIf="filterString != ''"
+        matTooltip="Clear Search"
+        mat-icon-button
+        (click)="clearFilter()"
+        style="outline: none;"
+      >
+        <mat-icon class="mdi-18px" fontIcon="mdi-close-circle"></mat-icon>
+      </button>
+    </div>
+  </mat-card>
+  <mat-card
+    *ngFor="let module of dataSource.filteredData"
+    fxFlex="1 1 auto"
+    fxFill
+    class="clickable highlight module-card"
+    (click)="selectModuleFn(module)"
+  >
+    <mat-card-title fxLayout="column">
+      <div>
+        <span class="module-name"
+          ><strong>{{ module.name }}</strong></span
+        >
       </div>
-    </mat-card>
-    <mat-card *ngFor="let module of dataSource.filteredData" fxFlex="1 1 auto" fxFill
-        class="clickable highlight module-card" (click)="selectModuleFn(module)">
-      <mat-card-title fxLayout="column">
-        <div>
-          <span class="module-name"><strong>{{module.name}}</strong></span>
-        </div>
-        <div>
-          <span class="module-path">{{module.path}}</span>
-        </div>
-      </mat-card-title>
-      <mat-card-content>
-        {{module.description}}
-      </mat-card-content>
-    </mat-card>
-  </div>
+      <div>
+        <span class="module-path">{{ module.path }}</span>
+      </div>
+    </mat-card-title>
+    <mat-card-content>
+      {{ module.description }}
+    </mat-card-content>
+  </mat-card>
+</div>
 
-  <!-- Variables Dialog -->
-  <ng-template #variablesDialog>
-    <cas-module-variables
-      [selectedModule]="selectedModule"
-      [readOnly]="!isEditing"
-      (variablesSelected)="variablesSelected($event)">
-    </cas-module-variables>
-  </ng-template>
-
+<!-- Variables Dialog -->
+<ng-template #variablesDialog>
+  <cas-module-variables
+    [selectedModule]="selectedModule"
+    [readOnly]="!isEditing"
+    (variablesSelected)="variablesSelected($event)"
+  >
+  </cas-module-variables>
+</ng-template>

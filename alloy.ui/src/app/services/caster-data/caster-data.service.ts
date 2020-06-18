@@ -47,6 +47,7 @@ export class CasterDataService {
     this.directoryList = combineLatest([this.directories, this._directoryMask]).pipe(
       map(([items, filterTerm]) =>
         items ? (items as Directory[])
+          .sort((a: Directory, b: Directory) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
           .filter(item => item.name.toLowerCase().includes(filterTerm.toLowerCase()) ||
             item.id.toLowerCase().includes(filterTerm.toLowerCase()))
         : [])

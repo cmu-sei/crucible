@@ -9,10 +9,10 @@ DM20-0181
 */
 
 import { Component, OnInit, Input } from '@angular/core';
-import { Team, ApplicationService, ApplicationInstance, Application, ApplicationInstanceForm, Exercise, ApplicationTemplate } from '../../../swagger-codegen/s3.player.api';
+import { Team, ApplicationService, ApplicationInstance, Application, ApplicationInstanceForm, View, ApplicationTemplate } from '../../../generated/s3.player.api';
 import { DialogService } from '../../../services/dialog/dialog.service';
 
-export enum ObjectType { Unknown, Team, Exercise }
+export enum ObjectType { Unknown, Team, View }
 
 @Component({
   selector: 'app-team-applications-select',
@@ -22,9 +22,9 @@ export enum ObjectType { Unknown, Team, Exercise }
 export class TeamApplicationsSelectComponent implements OnInit {
 
   @Input() team: Team;
-  @Input() exercise: Exercise;
+  @Input() view: View;
 
-  public exerciseApplications: Array<Application>;
+  public viewApplications: Array<Application>;
   public applications: Array<ApplicationInstance>;
   public applicationTemplates = new Array<ApplicationTemplate>();
   public objTypes = ObjectType;
@@ -54,14 +54,14 @@ export class TeamApplicationsSelectComponent implements OnInit {
   }
 
   /**
-   * Refreshes the Exercise Apps list
+   * Refreshes the View Apps list
    */
-  refreshExerciseAppsAvailable(): void {
-    this.applicationService.getExerciseApplications(this.exercise.id).subscribe(apps => {
-      this.exerciseApplications = new Array<Application>();
+  refreshViewAppsAvailable(): void {
+    this.applicationService.getViewApplications(this.view.id).subscribe(apps => {
+      this.viewApplications = new Array<Application>();
       apps.forEach(app => {
         if (this.applications.findIndex(a => app.id === a.applicationId) === -1) {
-          this.exerciseApplications.push(app);
+          this.viewApplications.push(app);
         }
       });
     });
@@ -78,7 +78,7 @@ export class TeamApplicationsSelectComponent implements OnInit {
   refreshTeamApplications(): void {
     this.applicationService.getTeamApplicationInstances(this.team.id).subscribe(appInsts => {
       this.applications = appInsts;
-      this.refreshExerciseAppsAvailable();
+      this.refreshViewAppsAvailable();
     });
   }
 
@@ -87,7 +87,7 @@ export class TeamApplicationsSelectComponent implements OnInit {
    * Adds an application to the team
    * @param app The app to add
    */
-  addExerciseAppToTeam(app: Application): void {
+  addViewAppToTeam(app: Application): void {
     const appInstance = <ApplicationInstanceForm>({ teamId: this.team.id, applicationId: app.id, displayOrder: this.applications.length });
     this.applicationService.createApplicationInstance(this.team.id, appInstance).subscribe(rslt => {
       this.refreshTeamApplications();

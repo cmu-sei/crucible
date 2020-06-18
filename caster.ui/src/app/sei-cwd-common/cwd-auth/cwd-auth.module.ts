@@ -8,26 +8,30 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {CommonModule} from '@angular/common';
-import {CwdAuthCallbackComponent} from './components/cwd-auth-callback/cwd-auth-callback.component';
-import {CwdAuthCallbackSilentComponent} from './components/cwd-auth-callback-silent/cwd-auth-callback-silent.component';
-import {CwdAuthLogoutComponent} from './components/cwd-auth-logout/cwd-auth-logout.component';
-import {CwdAuthGuardService} from './services';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CwdAuthCallbackComponent } from './components/cwd-auth-callback/cwd-auth-callback.component';
+import { CwdAuthCallbackSilentComponent } from './components/cwd-auth-callback-silent/cwd-auth-callback-silent.component';
+import { CwdAuthLogoutComponent } from './components/cwd-auth-logout/cwd-auth-logout.component';
+import { CwdAuthGuardService } from './services';
 
 const cwdAuthRoutes: Routes = [
-  {path: 'auth-callback', component: CwdAuthCallbackComponent, canActivate: [CwdAuthGuardService]},
-  {path: 'auth-callback-silent', component: CwdAuthCallbackSilentComponent},
-  {path: 'logout', component: CwdAuthLogoutComponent}
+  {
+    path: 'auth-callback',
+    component: CwdAuthCallbackComponent,
+    canActivate: [CwdAuthGuardService],
+  },
+  { path: 'auth-callback-silent', component: CwdAuthCallbackSilentComponent },
+  { path: 'logout', component: CwdAuthLogoutComponent },
 ];
 
 @NgModule({
-  declarations: [CwdAuthCallbackComponent, CwdAuthCallbackSilentComponent, CwdAuthLogoutComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(cwdAuthRoutes),
-  ]
+  declarations: [
+    CwdAuthCallbackComponent,
+    CwdAuthCallbackSilentComponent,
+    CwdAuthLogoutComponent,
+  ],
+  imports: [CommonModule, RouterModule.forChild(cwdAuthRoutes)],
 })
-export class CwdAuthModule { }
-
+export class CwdAuthModule {}

@@ -12,4 +12,3 @@ export * from './fileVersion.query';
 export * from './fileVersion.store';
 export * from './fileVersion.service';
 export * from './fileVersion.model';
-

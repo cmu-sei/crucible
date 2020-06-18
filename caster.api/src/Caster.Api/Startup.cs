@@ -99,7 +99,7 @@ namespace Caster.Api
             {
                 // must be synced with DefaultJsonSettings.cs
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumMemberConverter());
                 options.JsonSerializerOptions.Converters.Add(new OptionalConverter());
             })
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
@@ -109,7 +109,7 @@ namespace Caster.Api
                 {
                     // must be synced with DefaultJsonSettings.cs
                     options.PayloadSerializerOptions.PropertyNameCaseInsensitive = true;
-                    options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumMemberConverter());
                     options.PayloadSerializerOptions.Converters.Add(new OptionalConverter());
                 });
 
@@ -204,7 +204,7 @@ namespace Caster.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ExerciseHub>("/hubs/exercise");
+                endpoints.MapHub<ProjectHub>("/hubs/project");
             });
 
             app.UseSwagger();

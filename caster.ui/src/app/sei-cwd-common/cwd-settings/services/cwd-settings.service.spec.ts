@@ -20,4 +20,3 @@ describe('SeiSettingsService', () => {
     expect(service).toBeTruthy();
   });
 });
-

@@ -25,11 +25,11 @@ namespace Caster.Api.Features.Applies
     {
         private readonly IMediator _mediator;
 
-        public AppliesController(IMediator mediator) 
+        public AppliesController(IMediator mediator)
         {
             _mediator = mediator;
         }
-        
+
         /// <summary>
         /// Get a single Apply
         /// </summary>
@@ -70,4 +70,3 @@ namespace Caster.Api.Features.Applies
         }
     }
 }
-

@@ -8,10 +8,15 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityState, EntityStore, EntityUIStore, StoreConfig} from '@datorama/akita';
-import {Module} from '../../generated/caster-api';
-import {Injectable, InjectionToken} from '@angular/core';
-import {ModuleUi} from './module.model';
+import {
+  EntityState,
+  EntityStore,
+  EntityUIStore,
+  StoreConfig,
+} from '@datorama/akita';
+import { Module } from '../../generated/caster-api';
+import { Injectable, InjectionToken } from '@angular/core';
+import { ModuleUi } from './module.model';
 
 export interface ModulesState extends EntityState<Module> {}
 export interface ModuleUIState extends EntityState<ModuleUi> {}
@@ -19,18 +24,19 @@ export interface ModuleUIState extends EntityState<ModuleUi> {}
 export const initialModuleUiState: ModuleUi = {
   isSelected: false,
   isEditing: false,
-  isSaved: false
+  isSaved: false,
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({ name: 'modules' })
 export class ModuleStore extends EntityStore<ModulesState> {
   ui: EntityUIStore<ModuleUIState>;
   constructor() {
     super();
-    this.createUIStore().setInitialEntityState((entity => ({...initialModuleUiState})));
+    this.createUIStore().setInitialEntityState((entity) => ({
+      ...initialModuleUiState,
+    }));
   }
 }
-

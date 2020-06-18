@@ -118,6 +118,8 @@ namespace Steamfitter.Api
             .SetCompatibilityVersion(CompatibilityVersion.Latest); 
 
             services.AddSwagger(_authOptions);
+            services.AddS3PlayerApiClient();
+            services.AddS3VmApiClient();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
@@ -141,21 +143,21 @@ namespace Steamfitter.Api
 
             services.AddMemoryCache();            
 
-            services.AddScoped<ISessionService, SessionService>();
-            services.AddScoped<IDispatchTaskService, DispatchTaskService>();
-            services.AddScoped<IDispatchTaskResultService, DispatchTaskResultService>();
             services.AddScoped<IScenarioService, ScenarioService>();
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IResultService, ResultService>();
+            services.AddScoped<IScenarioTemplateService, ScenarioTemplateService>();
             services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserPermissionService, UserPermissionService>();
             services.AddScoped<IFilesService, FilesService>();
-            services.AddScoped<IExerciseAgentService, ExerciseAgentService>();
+            services.AddScoped<IBondAgentService, BondAgentService>();
 
             services.AddSingleton<StackStormService>();
             services.AddSingleton<IHostedService>(x => x.GetService<StackStormService>());
             services.AddSingleton<IStackStormService>(x => x.GetService<StackStormService>());
 
-            services.AddSingleton<ExerciseAgentStore>();
+            services.AddSingleton<BondAgentStore>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IPrincipal>(p => p.GetService<IHttpContextAccessor>().HttpContext.User);

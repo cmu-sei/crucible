@@ -23,7 +23,7 @@ namespace Caster.Api.Domain.Services
 {
     public interface IImportService
     {
-        Task<ImportResult> ImportExercise(Exercise existingExercise, Exercise importedExercise, bool preserveIds);
+        Task<ImportResult> ImportProject(Project existingProject, Project importedProject, bool preserveIds);
         Task<ImportResult> ImportDirectory(Directory existingDirectory, Directory importedDirectory, bool preserveIds);
     }
 
@@ -45,16 +45,16 @@ namespace Caster.Api.Domain.Services
             _userId = identityResolver.GetClaimsPrincipal().GetId();
         }
 
-        public async Task<ImportResult> ImportExercise(Exercise existingExercise, Exercise importedExercise, bool preserveIds)
+        public async Task<ImportResult> ImportProject(Project existingProject, Project importedProject, bool preserveIds)
         {
             List<File> lockedFiles = new List<File>();
             List<AsyncLockResult> fileLocks = new List<AsyncLockResult>();
 
             try
             {
-                foreach (var directory in importedExercise.Directories.Where(x => !x.ParentId.HasValue))
+                foreach (var directory in importedProject.Directories.Where(x => !x.ParentId.HasValue))
                 {
-                    var existingDir = existingExercise.Directories.FirstOrDefault(x => x.Name.Equals(directory.Name));
+                    var existingDir = existingProject.Directories.FirstOrDefault(x => x.Name.Equals(directory.Name));
 
                     if (existingDir == null)
                     {
@@ -68,8 +68,8 @@ namespace Caster.Api.Domain.Services
                         }
 
                         _db.Entry(existingDir).State = EntityState.Added;
-                        existingDir.ExerciseId = existingExercise.Id;
-                        existingExercise.Directories.Add(existingDir);
+                        existingDir.ProjectId = existingProject.Id;
+                        existingProject.Directories.Add(existingDir);
                     }
 
                     lockedFiles.AddRange((await this.ImportDirectoryInternal(existingDir, directory, preserveIds, fileLocks)).LockedFiles);

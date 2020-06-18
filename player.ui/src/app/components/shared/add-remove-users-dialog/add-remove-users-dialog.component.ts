@@ -10,8 +10,8 @@ DM20-0181
 
 import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource, PageEvent, MatPaginator, MatSort, MatSortable } from '@angular/material';
-import { User, UserService, Team, TeamService, TeamMembershipService, TeamMembership } from '../../../swagger-codegen/s3.player.api';
-import { Role, RoleService, TeamMembershipForm, Permission } from '../../../swagger-codegen/s3.player.api';
+import { User, UserService, Team, TeamService, TeamMembershipService, TeamMembership } from '../../../generated/s3.player.api';
+import { Role, RoleService, TeamMembershipForm, Permission } from '../../../generated/s3.player.api';
 import { forkJoin, Observable } from 'rxjs';
 
 /** User node with related user and application information */
@@ -94,7 +94,7 @@ export class AddRemoveUsersDialogComponent implements OnInit {
 
 
   /**
-   * Called by UI to add a filter to the exerciseDataSource
+   * Called by UI to add a filter to the viewDataSource
    * @param filterValue
    */
   applyFilter(filterValue: string) {
@@ -136,7 +136,7 @@ export class AddRemoveUsersDialogComponent implements OnInit {
           // of all the observables is created.
           const membershipObservable = new Array<Observable<Array<TeamMembership>>>();
           tUsers.forEach(tu => {
-            membershipObservable.push(this.teamMembershipService.getTeamMemberships(this.team.exerciseId, tu.id));
+            membershipObservable.push(this.teamMembershipService.getTeamMemberships(this.team.viewId, tu.id));
           });
           // The rxjs forJoin allows for multiple observables to be called in parallel and then processing
           // will resume after all of the observables in the array are returned.
@@ -209,7 +209,7 @@ export class AddRemoveUsersDialogComponent implements OnInit {
       this.userService.addUserToTeam(this.team.id, user.id).subscribe(result => {
         const tUsers = this.teamUserDataSource.data.slice(0);
 
-        this.teamMembershipService.getTeamMemberships(this.team.exerciseId, user.id).subscribe(tmbs => {
+        this.teamMembershipService.getTeamMemberships(this.team.viewId, user.id).subscribe(tmbs => {
           const teamMembership = tmbs.find(tmb => tmb.teamId === this.team.id);
           const tUser = new TeamUser(user.name, user, teamMembership);
           tUsers.push(tUser);
@@ -279,4 +279,3 @@ export class AddRemoveUsersDialogComponent implements OnInit {
   }
 
 }
-

@@ -5,14 +5,14 @@ This project provides a restful api for steamfitter functionality in the Sketch/
 By default, steamfitter.api is available at localhost:4400, with the swagger page at localhost:4400/swagger/index.html.
 
 # Entity Description
-<b>Scenario:</b> A definition of a series of dispatch tasks that can be used to run an exercise
+<b>ScenarioTemplate:</b> A definition of a series of dispatch tasks that can be used to run a view
 
-<b>Session:</b> An instantiation of a series of dispatch tasks that run a particular exercise session.
+<b>Scenario:</b> An instantiation of a series of dispatch tasks that run a particular view.
 
-<b>DispatchTask:</b> An individual task that is defined to run on a group of VM's (defined by a VM mask) or that runs against an external API.
+<b>Task:</b> An individual task that is defined to run on a group of VM's (defined by a VM mask) or that runs against an external API.
 
-<b>DispatchTaskResult:</b> The result from the API or a single VM of running a DispatchTask.  There will be a DispatchTaskResult for each VM on which the DispatchTask was run. If no VM is associated with the DispatchTask, there wil be one DispatchTaskResult.
+<b>Result:</b> The result from the API or a single VM of running a Task.  There will be a Result for each VM on which the Task was run. If no VM is associated with the Task, there wil be one Result.
 
-# DispatchTask Execution
-1. Ad-hoc DispatchTasks must have a VmList associated with it.
-2. A Session can have a DispatchTask that uses a VmMask, <b>ONLY</b> if the Session is associated with a Player Exercise.
+# Task Execution
+1. Ad-hoc Tasks must have a VmList associated with it.
+2. A Scenario can have a Task that uses a VmMask, <b>ONLY</b> if the Scenario is associated with a Player View.

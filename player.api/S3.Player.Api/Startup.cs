@@ -45,7 +45,7 @@ namespace S3.Player.Api
         {
             Configuration = configuration;
             Configuration.GetSection("Authorization").Bind(_authOptions);
-        }        
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -101,7 +101,7 @@ namespace S3.Player.Api
             .AddJwtBearer(options =>
             {
                 options.Authority = _authOptions.Authority;
-                options.RequireHttpsMetadata = _authOptions.RequireHttpsMetadata;                
+                options.RequireHttpsMetadata = _authOptions.RequireHttpsMetadata;
                 options.Audience = _authOptions.AuthorizationScope;
                 options.SaveToken = true;
             });
@@ -111,23 +111,23 @@ namespace S3.Player.Api
                 options.LowercaseUrls = true;
             });
 
-            services.AddMemoryCache();            
+            services.AddMemoryCache();
 
-            services.AddScoped<IExerciseService, ExerciseService>();
+            services.AddScoped<IViewService, ViewService>();
             services.AddScoped<IApplicationService, ApplicationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IExerciseMembershipService, ExerciseMembershipService>();
+            services.AddScoped<IViewMembershipService, ViewMembershipService>();
             services.AddScoped<ITeamMembershipService, TeamMembershipService>();
 
             services.AddScoped<IClaimsTransformation, AuthorizationClaimsTransformer>();
             services.AddScoped<IUserClaimsService, UserClaimsService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IPrincipal>(p => p.GetService<IHttpContextAccessor>().HttpContext.User);            
+            services.AddScoped<IPrincipal>(p => p.GetService<IHttpContextAccessor>().HttpContext.User);
 
             ApplyPolicies(services);
 
@@ -141,9 +141,9 @@ namespace S3.Player.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseCors("default");
-            
+
             //move any querystring jwt to Auth bearer header
             app.Use(async (context, next) =>
             {
@@ -166,7 +166,7 @@ namespace S3.Player.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Exercise Player v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Player v1");
                 c.OAuthClientId(_authOptions.ClientId);
                 c.OAuthClientSecret(_authOptions.ClientSecret);
                 c.OAuthAppName(_authOptions.ClientName);
@@ -176,7 +176,7 @@ namespace S3.Player.Api
 
             app.UseSignalR(routes =>
                 {
-                    routes.MapHub<Hubs.ExerciseHub>("/notifications/exercise");
+                    routes.MapHub<Hubs.ViewHub>("/notifications/view");
                     routes.MapHub<Hubs.TeamHub>("/notifications/team");
                     routes.MapHub<Hubs.UserHub>("/notifications/user");
                 }
@@ -193,17 +193,16 @@ namespace S3.Player.Api
 
             // TODO: Add these automatically with reflection?
             services.AddSingleton<IAuthorizationHandler, FullRightsHandler>();
-            services.AddSingleton<IAuthorizationHandler, ExerciseAdminHandler>();
+            services.AddSingleton<IAuthorizationHandler, ViewAdminHandler>();
             services.AddSingleton<IAuthorizationHandler, TeamAccessHandler>();
-            services.AddSingleton<IAuthorizationHandler, SameUserOrExerciseAdminHandler>();
+            services.AddSingleton<IAuthorizationHandler, SameUserOrViewAdminHandler>();
             services.AddSingleton<IAuthorizationHandler, SameUserHandler>();
-            services.AddSingleton<IAuthorizationHandler, ExerciseMemberHandler>();
-            services.AddSingleton<IAuthorizationHandler, ExerciseCreationHandler>();
+            services.AddSingleton<IAuthorizationHandler, ViewMemberHandler>();
+            services.AddSingleton<IAuthorizationHandler, ViewCreationHandler>();
             services.AddSingleton<IAuthorizationHandler, ManageTeamHandler>();
             services.AddSingleton<IAuthorizationHandler, TeamMemberHandler>();
             services.AddSingleton<IAuthorizationHandler, PrimaryTeamHandler>();
-            services.AddSingleton<IAuthorizationHandler, ManageExerciseHandler>();
+            services.AddSingleton<IAuthorizationHandler, ManageViewHandler>();
         }
     }
 }
-

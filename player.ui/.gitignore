@@ -309,7 +309,7 @@ __pycache__/
 */assets/config/settings.env.json
 
 # Chad's Swagger-Codegen files that should be ignored
-*/src/app/swagger-codegen/s3.player.api/git_push.sh
-*/src/app/swagger-codegen/s3.player.api/README.md
-*/src/app/swagger-codegen/s3.player.api/.gitignore
-*/src/app/swagger-codegen/s3.player.api/.swagger-codegen-ignore
+*/src/app/generated/s3.player.api/git_push.sh
+*/src/app/generated/s3.player.api/README.md
+*/src/app/generated/s3.player.api/.gitignore
+*/src/app/generated/s3.player.api/.swagger-codegen-ignore

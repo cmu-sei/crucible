@@ -8,16 +8,38 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, Input, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { DirectoryQuery, DirectoryService, DirectoryUI } from '../../../../../directories/state';
-import { FileService, FileQuery } from '../../../../../files/state';
-import { WorkspaceService, WorkspaceQuery, StatusFilter } from '../../../../../workspace/state';
-import { MatDialogRef, MatDialog, MatMenuTrigger, getMatFormFieldPlaceholderConflictError } from '@angular/material';
+import {
+  DirectoryQuery,
+  DirectoryService,
+  DirectoryUI,
+} from '../../../../../directories/state';
+import { FileQuery, FileService } from '../../../../../files/state';
+import {
+  StatusFilter,
+  WorkspaceQuery,
+  WorkspaceService,
+} from '../../../../../workspace/state';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { ConfirmDialogComponent } from 'src/app/sei-cwd-common/confirm-dialog/components/confirm-dialog.component';
 import { NameDialogComponent } from 'src/app/sei-cwd-common/name-dialog/name-dialog.component';
-import { Workspace, Run, Directory, ModelFile, ArchiveType } from 'src/app/generated/caster-api';
-import { ProjectService, ProjectObjectType } from 'src/app/project/state';
+import {
+  Directory,
+  ModelFile,
+  Run,
+  Workspace,
+} from 'src/app/generated/caster-api';
+import { ProjectObjectType, ProjectService } from 'src/app/project/state';
 import { take } from 'rxjs/operators';
 import { ProjectExportComponent } from '../../project-export/project-export.component';
 import FileDownloadUtils from 'src/app/shared/utilities/file-download-utils';
@@ -28,10 +50,9 @@ const NAME_VALUE = 'nameValue';
 @Component({
   selector: 'cas-directory-panel',
   templateUrl: './directory-panel.component.html',
-  styleUrls: ['./directory-panel.component.scss']
+  styleUrls: ['./directory-panel.component.scss'],
 })
 export class DirectoryPanelComponent implements OnInit, OnDestroy {
-
   @Input() parentDirectory: Directory;
   public parentDirectoryUI$: Observable<DirectoryUI>;
   public panelOpenState = false;
@@ -47,8 +68,8 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
 
   private _destroyed$ = new Subject();
 
-  @ViewChild(MatMenuTrigger, null) contextMenu: MatMenuTrigger;
-  @ViewChild('exportDialog', { static: false }) exportDialog: TemplateRef<ProjectExportComponent>;
+  @ViewChild(MatMenuTrigger, { static: true }) contextMenu: MatMenuTrigger;
+  @ViewChild('exportDialog') exportDialog: TemplateRef<ProjectExportComponent>;
   private exportDialogRef: MatDialogRef<ProjectExportComponent>;
 
   contextMenuPosition = { x: '0px', y: '0px' };
@@ -62,22 +83,31 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
     private workspaceService: WorkspaceService,
     private projectService: ProjectService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (this.parentDirectory) {
-      this.parentDirectoryUI$ = this.directoryQuery.ui.selectEntity(this.parentDirectory.id);
+      this.parentDirectoryUI$ = this.directoryQuery.ui.selectEntity(
+        this.parentDirectory.id
+      );
 
-      this.directories$ = this.directoryQuery.selectAll(
-        { filterBy: (d => d.parentId === this.parentDirectory.id && d.exerciseId === this.parentDirectory.exerciseId) });
+      this.directories$ = this.directoryQuery.selectAll({
+        filterBy: (d) =>
+          d.parentId === this.parentDirectory.id &&
+          d.projectId === this.parentDirectory.projectId,
+      });
 
-      this.files$ = this.fileQuery.selectAll(
-        { filterBy: f => (f.directoryId === this.parentDirectory.id) });
-      this.parentFiles$ = this.fileQuery.selectAll(
-        { filterBy: f => (f.directoryId === this.parentDirectory.id && f.workspaceId === null) });
+      this.files$ = this.fileQuery.selectAll({
+        filterBy: (f) => f.directoryId === this.parentDirectory.id,
+      });
+      this.parentFiles$ = this.fileQuery.selectAll({
+        filterBy: (f) =>
+          f.directoryId === this.parentDirectory.id && f.workspaceId === null,
+      });
 
-      this.workspaces$ = this.workspaceQuery.selectAll(
-        { filterBy: (w => w.directoryId === this.parentDirectory.id) });
+      this.workspaces$ = this.workspaceQuery.selectAll({
+        filterBy: (w) => w.directoryId === this.parentDirectory.id,
+      });
     }
   }
 
@@ -86,7 +116,11 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
     this._destroyed$.complete();
   }
 
-  confirmDialog(title: string, message: string, data?: any): Observable<boolean> {
+  confirmDialog(
+    title: string,
+    message: string,
+    data?: any
+  ): Observable<boolean> {
     let dialogRef: MatDialogRef<ConfirmDialogComponent>;
     dialogRef = this.dialog.open(ConfirmDialogComponent, { data: data || {} });
     dialogRef.componentInstance.title = title;
@@ -105,7 +139,11 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
   }
 
   deleteDirectory(dir: Directory) {
-    this.confirmDialog('Delete Directory?', 'Delete directory ' + dir.name + '?', { buttonTrueText: 'Delete' }).subscribe(result => {
+    this.confirmDialog(
+      'Delete Directory?',
+      'Delete directory ' + dir.name + '?',
+      { buttonTrueText: 'Delete' }
+    ).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
         this.directoryService.delete(dir.id);
       }
@@ -113,45 +151,55 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
   }
 
   createNewDirectory(dirId?: string) {
-    this.nameDialog('Create New Directory?', '', { nameValue: '' }).subscribe(result => {
-      if (!result[WAS_CANCELLED]) {
-        const newDir = {
-          name: result[NAME_VALUE],
-          exerciseId: this.parentDirectory.exerciseId,
-          parentId: dirId,
-        };
-        this.directoryService.add(newDir);
+    this.nameDialog('Create New Directory?', '', { nameValue: '' }).subscribe(
+      (result) => {
+        if (!result[WAS_CANCELLED]) {
+          const newDir = {
+            name: result[NAME_VALUE],
+            projectId: this.parentDirectory.projectId,
+            parentId: dirId,
+          };
+          this.directoryService.add(newDir);
+        }
       }
-    });
+    );
   }
 
   renameDirectory() {
-    this.nameDialog('Rename ' + this.parentDirectory.name, '', { nameValue: this.parentDirectory.name }).subscribe(result => {
+    this.nameDialog('Rename ' + this.parentDirectory.name, '', {
+      nameValue: this.parentDirectory.name,
+    }).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
         console.log(result[NAME_VALUE]);
-        const updatedDirectory = { ...this.parentDirectory, name: result[NAME_VALUE] } as Directory;
+        const updatedDirectory = {
+          ...this.parentDirectory,
+          name: result[NAME_VALUE],
+        } as Directory;
         this.directoryService.update(updatedDirectory);
       }
     });
   }
 
-
   createFile(dirId: string, workspaceId?: string) {
-    this.nameDialog('Create New File?', '', { nameValue: '' }).subscribe(result => {
-      if (!result[WAS_CANCELLED]) {
-        const newFile = {
-            workspaceId: (workspaceId) ? workspaceId : null,
+    this.nameDialog('Create New File?', '', { nameValue: '' }).subscribe(
+      (result) => {
+        if (!result[WAS_CANCELLED]) {
+          const newFile = {
+            workspaceId: workspaceId ? workspaceId : null,
             directoryId: dirId,
             content: '',
-            name: result[NAME_VALUE]
+            name: result[NAME_VALUE],
           } as ModelFile;
-        this.fileService.add(newFile);
+          this.fileService.add(newFile);
+        }
       }
-    });
+    );
   }
 
   renameFile(file: ModelFile) {
-    this.nameDialog('Rename ' + file.name, '', { nameValue: file.name }).subscribe(result => {
+    this.nameDialog('Rename ' + file.name, '', {
+      nameValue: file.name,
+    }).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
         this.fileService.renameFile(file.id, result[NAME_VALUE]);
       }
@@ -159,7 +207,9 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
   }
 
   deleteFile(file: ModelFile) {
-    this.confirmDialog('Delete File?', 'Delete file ' + file.name + '?', { buttonTrueText: 'Delete' }).subscribe(result => {
+    this.confirmDialog('Delete File?', 'Delete file ' + file.name + '?', {
+      buttonTrueText: 'Delete',
+    }).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
         this.fileService.delete(file);
       }
@@ -167,7 +217,9 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
   }
 
   renameWorkspace(workspace: Workspace) {
-    this.nameDialog('Rename ' + workspace.name, '', { nameValue: workspace.name }).subscribe(result => {
+    this.nameDialog('Rename ' + workspace.name, '', {
+      nameValue: workspace.name,
+    }).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
         const newWorkspace = { ...workspace, name: result[NAME_VALUE] };
         this.workspaceService.update(newWorkspace);
@@ -176,22 +228,27 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
   }
 
   createWorkspace() {
-    this.nameDialog('Create New Workspace?', '', { nameValue: '' }).subscribe(result => {
-      if (!result[WAS_CANCELLED]) {
-        const newWorkspace =
-          {
+    this.nameDialog('Create New Workspace?', '', { nameValue: '' }).subscribe(
+      (result) => {
+        if (!result[WAS_CANCELLED]) {
+          const newWorkspace = {
             directoryId: this.parentDirectory.id,
             name: result[NAME_VALUE],
             statusFilter: new Array<StatusFilter>(),
             runs: new Array<Run>(),
           } as Workspace;
-        this.workspaceService.add(newWorkspace);
+          this.workspaceService.add(newWorkspace);
+        }
       }
-    });
+    );
   }
 
   deleteWorkspace(workspace: Workspace) {
-    this.confirmDialog('Delete workspace?', 'Delete workspace ' + workspace.name + '?', { buttonTrueText: 'Delete' }).subscribe(result => {
+    this.confirmDialog(
+      'Delete workspace?',
+      'Delete workspace ' + workspace.name + '?',
+      { buttonTrueText: 'Delete' }
+    ).subscribe((result) => {
       if (!result[WAS_CANCELLED]) {
         this.workspaceService.delete(workspace);
       }
@@ -231,7 +288,11 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
     return this.workspaceService.isExpanded(workspaceId);
   }
 
-  onContextMenu(event: MouseEvent, obj: ModelFile | Workspace | Directory, objectType: ProjectObjectType) {
+  onContextMenu(
+    event: MouseEvent,
+    obj: ModelFile | Workspace | Directory,
+    objectType: ProjectObjectType
+  ) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -276,13 +337,13 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
 
   onContextExport(obj: any) {
     if (obj.type === ProjectObjectType.FILE) {
-      this.fileService.export(obj.object.id).pipe(
-        take(1)
-      )
-      // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
-      .subscribe(result => {
-        FileDownloadUtils.downloadFile(result.blob, result.filename);
-      });
+      this.fileService
+        .export(obj.object.id)
+        .pipe(take(1))
+        // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
+        .subscribe((result) => {
+          FileDownloadUtils.downloadFile(result.blob, result.filename);
+        });
     } else {
       this.exportId = obj.object.id;
       this.exportName = obj.object.name;

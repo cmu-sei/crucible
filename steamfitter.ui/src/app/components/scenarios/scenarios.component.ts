@@ -13,7 +13,7 @@ import { ErrorStateMatcher, MatStepper } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
 import { PlayerDataService } from 'src/app/services/data/player-data-service';
-import { Scenario } from '../../swagger-codegen/dispatcher.api';
+import { Scenario } from 'src/app/swagger-codegen/dispatcher.api';
 import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { ScenarioQuery } from 'src/app/data/scenario/scenario.query';
 import { Observable, Subject } from 'rxjs';

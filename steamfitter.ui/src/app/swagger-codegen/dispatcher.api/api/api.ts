@@ -8,25 +8,24 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-export * from './dispatchTask.service';
-import { DispatchTaskService } from './dispatchTask.service';
-export * from './dispatchTaskResult.service';
-import { DispatchTaskResultService } from './dispatchTaskResult.service';
-export * from './exerciseAgent.service';
-import { ExerciseAgentService } from './exerciseAgent.service';
+export * from './bondAgent.service';
+import { BondAgentService } from './bondAgent.service';
 export * from './files.service';
 import { FilesService } from './files.service';
 export * from './permission.service';
 import { PermissionService } from './permission.service';
 export * from './player.service';
 import { PlayerService } from './player.service';
+export * from './result.service';
+import { ResultService } from './result.service';
 export * from './scenario.service';
 import { ScenarioService } from './scenario.service';
-export * from './session.service';
-import { SessionService } from './session.service';
+export * from './scenarioTemplate.service';
+import { ScenarioTemplateService } from './scenarioTemplate.service';
+export * from './task.service';
+import { TaskService } from './task.service';
 export * from './user.service';
 import { UserService } from './user.service';
 export * from './userPermission.service';
 import { UserPermissionService } from './userPermission.service';
-export const APIS = [DispatchTaskService, DispatchTaskResultService, ExerciseAgentService, FilesService, PermissionService, PlayerService, ScenarioService, SessionService, UserService, UserPermissionService];
-
+export const APIS = [BondAgentService, FilesService, PermissionService, PlayerService, ResultService, ScenarioService, ScenarioTemplateService, TaskService, UserService, UserPermissionService];

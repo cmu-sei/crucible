@@ -10,16 +10,13 @@ DM20-0181
 
 import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort, MatDialog } from '@angular/material';
+import { PageEvent, Sort, MatDialog } from '@angular/material';
 import { ScenarioTemplateDataService } from 'src/app/data/scenario-template/scenario-template-data.service';
-import { ScenarioTemplate } from 'src/app/data/scenario-template/scenario-template.store';
-import { Scenario } from 'src/app/data/scenario/scenario.store';
-import { SessionService } from 'src/app/swagger-codegen/dispatcher.api';
+import { ScenarioTemplate, Scenario, ScenarioService } from 'src/app/swagger-codegen/dispatcher.api';
 import { ScenarioTemplateEditComponent } from 'src/app/components/scenario-templates/scenario-template-edit/scenario-template-edit.component';
 import { ScenarioTemplateEditDialogComponent } from 'src/app/components/scenario-templates/scenario-template-edit-dialog/scenario-template-edit-dialog.component';
 import { ScenarioEditDialogComponent } from 'src/app/components/scenarios/scenario-edit-dialog/scenario-edit-dialog.component';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
-import { Observable } from 'rxjs';
 
 export interface Action {
   Value: string;
@@ -52,7 +49,7 @@ export class ScenarioTemplateListComponent implements OnInit {
   constructor(
     public dialogService: DialogService,
     private scenarioTemplateDataService: ScenarioTemplateDataService,
-    private scenarioService: SessionService,
+    private scenarioService: ScenarioService,
     private dialog: MatDialog
   ) { }
 
@@ -112,7 +109,7 @@ export class ScenarioTemplateListComponent implements OnInit {
     this.dialogService.confirm('Create Scenario', 'Are you sure that you want to create a scenario from ' + scenarioTemplate.name + '?')
       .subscribe(result => {
         if (result['confirm']) {
-          this.scenarioService.createSessionFromScenario(scenarioTemplate.id)
+          this.scenarioService.createScenarioFromScenarioTemplate(scenarioTemplate.id)
             .subscribe(newScenario => {
               console.log('successfully created scenario from scenarioTemplate');
               // this.returnToScenarioTemplateList();

@@ -52,8 +52,8 @@ namespace S3.Player.Api.Data.Data.Models
         public bool? Embeddable { get; set; }
         public bool? LoadInBackground { get; set; }
 
-        public Guid ExerciseId { get; set; }
-        public virtual ExerciseEntity Exercise { get; set; }
+        public Guid ViewId { get; set; }
+        public virtual ViewEntity View { get; set; }
 
         [ForeignKey(nameof(Template))]
         public Guid? ApplicationTemplateId { get; set; }
@@ -68,8 +68,8 @@ namespace S3.Player.Api.Data.Data.Models
         {
             var entity = this.MemberwiseClone() as ApplicationEntity;
             entity.Id = Guid.Empty;
-            entity.ExerciseId = Guid.Empty;
-            entity.Exercise = null;
+            entity.ViewId = Guid.Empty;
+            entity.View = null;
 
             return entity;
         }

@@ -11,10 +11,8 @@ DM20-0181
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Alloy.Api.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Alloy.Api.Infrastructure.Filters
 {

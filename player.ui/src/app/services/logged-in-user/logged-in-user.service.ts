@@ -11,7 +11,7 @@ DM20-0181
 
 import { Injectable } from '@angular/core';
 import { throwError as observableThrowError, Observable, Subject, BehaviorSubject } from 'rxjs';
-import { User, UserService, RoleService } from '../../swagger-codegen/s3.player.api';
+import { User, UserService, RoleService } from '../../generated/s3.player.api';
 
 // Used to display Super User text
 export const SUPER_USER = 'Super User';
@@ -39,4 +39,3 @@ export class LoggedInUserService {
 
   }
 }
-

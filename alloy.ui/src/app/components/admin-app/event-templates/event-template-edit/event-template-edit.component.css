@@ -81,3 +81,10 @@ DM20-0181
   margin-bottom: 0;
   list-style-type: none;
 }
+
+::ng-deep .mat-autocomplete-panel {
+  background-color: rgb(253, 253, 253);
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;    
+}

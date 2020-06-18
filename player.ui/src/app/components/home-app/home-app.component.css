@@ -9,7 +9,7 @@ DM20-0181
 */
 
 
-.app-exercise-container {
+.app-view-container {
     text-align: center;
 }
 
@@ -21,7 +21,7 @@ DM20-0181
 }
 
 .title-text {
-    text-align: left; 
+    text-align: left;
     margin-left: 10px;
     font-weight: bold;
     font-size: large;

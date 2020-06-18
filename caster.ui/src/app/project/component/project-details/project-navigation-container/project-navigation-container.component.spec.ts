@@ -18,9 +18,8 @@ describe('NavigationListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectNavigationContainerComponent ]
-    })
-    .compileComponents();
+      declarations: [ProjectNavigationContainerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('NavigationListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

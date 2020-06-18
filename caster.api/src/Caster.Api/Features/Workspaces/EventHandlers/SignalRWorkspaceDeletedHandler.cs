@@ -25,24 +25,24 @@ namespace Caster.Api.Features.Workspaces.EventHandlers
     public class SignalRWorkspaceDeletedHandler : INotificationHandler<WorkspaceDeleted>
     {
         private readonly CasterContext _db;
-        private readonly IHubContext<ExerciseHub> _exerciseHub;
+        private readonly IHubContext<ProjectHub> _projectHub;
 
         public SignalRWorkspaceDeletedHandler(
             CasterContext db,
-            IHubContext<ExerciseHub> exerciseHub)
+            IHubContext<ProjectHub> projectHub)
         {
             _db = db;
-            _exerciseHub = exerciseHub;
+            _projectHub = projectHub;
         }
 
         public async Task Handle(WorkspaceDeleted notification, CancellationToken cancellationToken)
         {
-            var exerciseId = await _db.Directories
+            var projectId = await _db.Directories
                 .Where(d => d.Id == notification.Workspace.DirectoryId)
-                .Select(d => d.ExerciseId)
+                .Select(d => d.ProjectId)
                 .FirstOrDefaultAsync();
 
-            await _exerciseHub.Clients.Group(exerciseId.ToString()).SendAsync("WorkspaceDeleted", notification.Workspace.Id);
+            await _projectHub.Clients.Group(projectId.ToString()).SendAsync("WorkspaceDeleted", notification.Workspace.Id);
         }
     }
 }

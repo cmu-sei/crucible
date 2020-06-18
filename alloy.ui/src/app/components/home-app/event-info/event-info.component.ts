@@ -11,8 +11,8 @@ DM20-0181
 import { Component, Input, OnInit, OnDestroy} from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { SettingsService } from '../../../services/settings/settings.service';
-import { Definition } from '../../../generated/alloy.api/model/definition';
-import { Implementation } from '../../../generated/alloy.api/model/implementation';
+import { EventTemplate } from '../../../generated/alloy.api/model/event-template';
+import { Event } from '../../../generated/alloy.api/model/event';
 import { Observable, interval, Subject } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { take, tap, takeUntil, shareReplay } from 'rxjs/operators';
@@ -31,12 +31,12 @@ export class EventInfoComponent implements OnInit, OnDestroy {
 
   readonly ONE_HOUR = (1000 * 3600);
 
-  public impsDataSource: MatTableDataSource<Implementation>;
-  public displayedColumns: string[] = ['username', 'status', 'dateCreated', 'endDate', 'statusDate'];
+  public impsDataSource: MatTableDataSource<Event>;
+  public displayedColumns: string[] = ['username', 'status', 'lastLaunchStatus', 'lastEndStatus', 'dateCreated', 'endDate', 'statusDate'];
 
-  public eventTemplate$: Observable<Definition>;
-  public events$: Observable<Implementation[]>;
-  public currentEvent: Implementation;
+  public eventTemplate$: Observable<EventTemplate>;
+  public events$: Observable<Event[]>;
+  public currentEvent: Event;
   public isLoading: boolean;
   public eventStatus: string;
   public pollingIntervalMS: number;
@@ -47,9 +47,10 @@ export class EventInfoComponent implements OnInit, OnDestroy {
   public failureDate: Date;
   public timer$: Observable<number>;
   public destroyTimer$ = new Subject<boolean>();
-  public Event = Implementation;
+  public Event = Event;
 
-  private newLaunch: boolean;
+  private failedEvent: Event;
+  private isNewLaunch = false;
 
   constructor(
     private settingsService: SettingsService,
@@ -58,13 +59,13 @@ export class EventInfoComponent implements OnInit, OnDestroy {
     public eventsService: EventsService
   ) {
 
-    this.impsDataSource = new MatTableDataSource<Implementation>(new Array<Implementation>());
+    this.impsDataSource = new MatTableDataSource<Event>(new Array<Event>());
     this.isLoading = true;
     this.remainingTime = '';
     this.timeRunningLow = false;
     this.eventStatus = '';
     this.failureMessage = '';
-    this.newLaunch = false;
+    this.failedEvent = undefined;
     this.pollingIntervalMS = parseInt(this.settingsService.PollingIntervalMS, 10);
 
     this.eventTemplate$ = this.eventTemplatesService.currentEventTemplate$;
@@ -92,7 +93,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
     this.destroyTimer$.complete();
   }
 
-  determineEventStatus(imps: Implementation[]): string {
+  determineEventStatus(imps: Event[]): string {
     this.impsDataSource.data = imps.sort((d1, d2) => {
       return +new Date(d2.dateCreated) - +new Date(d1.dateCreated);
     });
@@ -108,19 +109,19 @@ export class EventInfoComponent implements OnInit, OnDestroy {
       this.currentEvent = undefined;
       this.remainingTime = '';
     } else {
-      const actives = imps.find(s => s.status === Implementation.StatusEnum.Active);
+      const actives = imps.find(s => s.status === Event.StatusEnum.Active);
       if (actives !== undefined) {
-        // Active Event exit now
+        // Active Lab exit now
         status = 'EventActive';
         this.currentEvent = actives;
-        this.remainingTime = this.calculateRemainingTime(this.currentEvent.expirationDate);
+        this.remainingTime = this.calculateRemainingTime(new Date(this.currentEvent.expirationDate));
       } else {
         // No active Events, now check if anything is in progress
         const inProgress = imps.find(s =>
-          s.status === Implementation.StatusEnum.Creating ||
-          s.status === Implementation.StatusEnum.Planning ||
-          s.status === Implementation.StatusEnum.Applying ||
-          s.status === Implementation.StatusEnum.Ending);
+          s.status === Event.StatusEnum.Creating ||
+          s.status === Event.StatusEnum.Planning ||
+          s.status === Event.StatusEnum.Applying ||
+          s.status === Event.StatusEnum.Ending);
           if (inProgress !== undefined) {
             status = 'EventLaunchInProgress';
             this.currentEvent = inProgress;
@@ -145,13 +146,15 @@ export class EventInfoComponent implements OnInit, OnDestroy {
 
   launchEvent() {
     this.eventStatus = 'EventLaunchInProgress';
-    this.newLaunch = true;
+    this.failedEvent = undefined;
+    this.failureMessage = '';
     this.eventsService.launchEvent();
+    this.isNewLaunch = true;
   }
 
   rejoinEvent() {
     console.log('Opening ' + this.currentEvent.name + ' inside Player!!!');
-    window.location.href = this.settingsService.PlayerUIAddress + '/exercise-player/' + this.currentEvent.exerciseId; //TODO: change to view url when Player is updated
+    window.location.href = this.settingsService.PlayerUIAddress + '/view/' + this.currentEvent.viewId;
   }
 
   endEvent() {
@@ -160,6 +163,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
         .pipe(take(1))
         .subscribe(result => {
           if (result['confirm']) {
+            this.isNewLaunch = true;
             console.log('Ending ' + this.currentEvent.name);
             this.eventStatus = 'EventLaunchInProgress';
             this.eventsService.endEvent(this.currentEvent.id);
@@ -175,6 +179,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
         .subscribe(result => {
           if (result['confirm']) {
             console.log('Redeploying ' + this.currentEvent.name);
+            this.isNewLaunch = true;
             this.redeploying = true;
             this.eventsService.redeployEvent(this.currentEvent.id);
           }
@@ -213,15 +218,22 @@ export class EventInfoComponent implements OnInit, OnDestroy {
     return timeLeft;
   }
 
-  processFailureStatus(imp: Implementation) {
-    this.failureMessage = '';
-    this.failureDate = undefined;
+  processFailureStatus(imp: Event) {
 
-    if (this.newLaunch && imp) {
-      if (imp.status === Implementation.StatusEnum.Failed) {
+    if (imp) {
+      if ((imp.status === Event.StatusEnum.Failed || imp.lastLaunchInternalStatus) && !this.failedEvent) {
+        // Failed event and endEvent not sent yet
         this.failureDate = imp.dateCreated;
-        this.failureMessage = imp.internalStatus.toString().replace(/([A-Z])/g, ' $1').trim();
+        if (imp.lastLaunchInternalStatus) {
+          this.failureMessage = imp.lastLaunchInternalStatus.toString().replace(/([A-Z])/g, ' $1').trim();
+        } else {
+          this.failureMessage = imp.internalStatus.toString().replace(/([A-Z])/g, ' $1').trim();
+        }
+        this.failedEvent = imp;
       }
+    } else {
+      this.failureMessage = '';
+      this.failureDate = undefined;
     }
   }
 }

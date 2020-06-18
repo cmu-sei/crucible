@@ -37,7 +37,7 @@ DM20-0181
             <mat-card-content>
               <div class="description-text" fxLayout="row" fxFlexAlign="start center">{{eventTemplate.description}}</div>
             </mat-card-content>
-            <div *ngIf="failureMessage !== ''">
+            <div *ngIf="failureMessage !== '' && isNewLaunch">
               <div class="failure-text">Failure:  {{failureMessage}}</div>
               <div>Event ended.  Please try again later or contact an administrator.</div>
             </div>
@@ -96,12 +96,26 @@ DM20-0181
                           <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
                           <mat-cell *matCellDef="let element">
                             <div class='small-font'>{{element.status}}</div>
-                            <div *ngIf="element.status === Event.StatusEnum.Failed" class='small-font'>- {{element.internalStatus}}</div>
+                            <div *ngIf="element.status === Event.StatusEnum.Failed" class='small-font'>&nbsp;{{element.internalStatus}}</div>
+                          </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="lastLaunchStatus">
+                          <mat-header-cell *matHeaderCellDef> Last Launch </mat-header-cell>
+                          <mat-cell *matCellDef="let element">
+                            <div *ngIf="element.lastLaunchStatus" class='small-font'>{{element.lastLaunchStatus}}  {{element.lastLaunchInternalStatus}}</div>
+                          </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="lastEndStatus">
+                          <mat-header-cell *matHeaderCellDef> Last End Status</mat-header-cell>
+                          <mat-cell *matCellDef="let element">
+                            <div *ngIf="element.lastEndStatus" class='small-font'>{{element.lastEndStatus}}  {{element.lastEndInternalStatus}}</div>
                           </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="dateCreated">
-                          <mat-header-cell *matHeaderCellDef> Start Date </mat-header-cell>
+                          <mat-header-cell *matHeaderCellDef> Start Date Status</mat-header-cell>
                           <mat-cell *matCellDef="let element">
                             <div class='small-font'>{{element.dateCreated | date:'long'}}</div>
                           </mat-cell>
@@ -131,7 +145,4 @@ DM20-0181
             </mat-expansion-panel>
         </mat-accordion>
     </div>
-
-
-
   </div>

@@ -10,7 +10,7 @@ DM20-0181
 
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 
 namespace Steamfitter.Api.Infrastructure.Authorization
 {
@@ -20,14 +20,14 @@ namespace Steamfitter.Api.Infrastructure.Authorization
 
     public class FullRightsHandler : AuthorizationHandler<FullRightsRequirement>, IAuthorizationHandler
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, FullRightsRequirement requirement)
+        protected override STT.Task HandleRequirementAsync(AuthorizationHandlerContext context, FullRightsRequirement requirement)
         {
             if(context.User.HasClaim(c => c.Type == SteamfitterClaimTypes.SystemAdmin.ToString()))
             {
                 context.Succeed(requirement);
             }
 
-            return Task.CompletedTask;
+            return STT.Task.CompletedTask;
         }
     }
 }

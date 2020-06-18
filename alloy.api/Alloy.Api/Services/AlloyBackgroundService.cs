@@ -4,7 +4,7 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon� and CERT� are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
@@ -17,19 +17,14 @@ using Alloy.Api.Data.Models;
 using Alloy.Api.Infrastructure.Extensions;
 using Alloy.Api.Infrastructure.Options;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Caster.Api;
-using Caster.Api.Models;
 using IdentityModel.Client;
 using Steamfitter.Api;
-using Steamfitter.Api.Models;
 using S3.Player.Api;
-using S3.Player.Api.Models;
 
 namespace Alloy.Api.Services
 {
@@ -40,99 +35,112 @@ namespace Alloy.Api.Services
     public class AlloyBackgroundService : IAlloyBackgroundService
     {
         private readonly ILogger<AlloyBackgroundService> _logger;
-        private readonly IOptionsMonitor<ClientOptions> _clientOptions;
+        private readonly IOptionsMonitor<Infrastructure.Options.ClientOptions> _clientOptions;
         private readonly IServiceScopeFactory _scopeFactory;
-        private readonly IAlloyImplementationQueue _implementationQueue;
+        private readonly IAlloyEventQueue _eventQueue;
         private readonly IHttpClientFactory _httpClientFactory;
 
         public AlloyBackgroundService(
                 ILogger<AlloyBackgroundService> logger,
-                IOptionsMonitor<ClientOptions> clientOptions,
+                IOptionsMonitor<Infrastructure.Options.ClientOptions> clientOptions,
                 IServiceScopeFactory scopeFactory,
-                IAlloyImplementationQueue implementationQueue,
+                IAlloyEventQueue eventQueue,
                 IHttpClientFactory httpClientFactory
             )
         {
             _logger = logger;
             _clientOptions = clientOptions;
             _scopeFactory = scopeFactory;
-            _implementationQueue = implementationQueue;
+            _eventQueue = eventQueue;
             _httpClientFactory = httpClientFactory;
         }
 
-        public System.Threading.Tasks.Task StartAsync(CancellationToken cancellationToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            Bootstrap();
-
             _ = Run();
 
-            return System.Threading.Tasks.Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
-        public System.Threading.Tasks.Task StopAsync(CancellationToken cancellationToken)
+        public Task StopAsync(CancellationToken cancellationToken)
         {
-            return System.Threading.Tasks.Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
         /// <summary>
-        /// Bootstraps (loads data) Implementations that were in process when this api encounters a stop/start cycle
+        /// Bootstraps (loads data) Events that were in process when this api encounters a stop/start cycle
         /// </summary>
-        private void Bootstrap()
+        private async Task Bootstrap()
         {
-             _logger.LogInformation($"AlloyBackgroundService is starting bootstrap.");
-            using (var scope = _scopeFactory.CreateScope())
+            _logger.LogInformation($"AlloyBackgroundService is starting Bootstrap.");
+            var bootstrapComplete = false;
+            while (!bootstrapComplete)
             {
-                using (var alloyContext = scope.ServiceProvider.GetRequiredService<AlloyContext>())
+                try
                 {
-                    // get implementation entities that are currently "in process"
-                    var implementationEntities = alloyContext.Implementations
-                        .Where(o => o.Status != ImplementationStatus.Active &&
-                            o.Status != ImplementationStatus.Failed &&
-                            o.Status != ImplementationStatus.Ended &&
-                            o.Status != ImplementationStatus.Expired);
-
-                    if (implementationEntities.Any())
+                    using (var scope = _scopeFactory.CreateScope())
                     {
-                        _logger.LogInformation($"AlloyBackgroundService is queueing {implementationEntities.Count()} Implementations.");
-                        foreach (var implementationEntity in implementationEntities)
+                        using (var alloyContext = scope.ServiceProvider.GetRequiredService<AlloyContext>())
                         {
-                            _implementationQueue.Add(implementationEntity);
-                            _logger.LogInformation($"AlloyBackgroundService is queueing Implementation {implementationEntity.Id}.");
+                            // get event entities that are currently "in process"
+                            var eventEntities = alloyContext.Events
+                                .Where(o => o.Status != EventStatus.Active &&
+                                    o.Status != EventStatus.Failed &&
+                                    o.Status != EventStatus.Ended &&
+                                    o.Status != EventStatus.Expired);
+
+                            if (eventEntities.Any())
+                            {
+                                _logger.LogDebug($"AlloyBackgroundService is queueing {eventEntities.Count()} Events.");
+                                foreach (var eventEntity in eventEntities)
+                                {
+                                    _eventQueue.Add(eventEntity);
+                                    _logger.LogDebug($"AlloyBackgroundService is queueing Event {eventEntity.Id}.");
+                                }
+                            }
                         }
                     }
+                    bootstrapComplete = true;
+                }
+                catch (System.Exception ex)
+                {
+                    _logger.LogError("Exception encountered in AlloyBackgroundService Bootstrap.", ex);
+                    await Task.Delay(new TimeSpan(0, 0, _clientOptions.CurrentValue.BackgroundTimerIntervalSeconds));
                 }
             }
-            _logger.LogInformation($"AlloyBackgroundService bootstrap complete.");
+            _logger.LogInformation("AlloyBackgroundService Bootstrap complete.");
         }
 
         private async Task Run()
         {
+            await Bootstrap();
+
             await Task.Run(() =>
             {
                 while (true)
                 {
                     try
                     {
-                        _logger.LogInformation("The AlloyBackgroundService is ready to process implementations.");
+                        _logger.LogDebug("The AlloyBackgroundService is ready to process events.");
                         // _implementatioQueue is a BlockingCollection, so this loop will sleep if nothing is in the queue
-                        var implementationEntity = _implementationQueue.Take(new CancellationToken());
-                        // process the implementationEntity on a new thread
-                        var newThread = new Thread(ProcessTheImplementation);
-                        newThread.Start(implementationEntity);
+                        var eventEntity = _eventQueue.Take(new CancellationToken());
+                        // process the eventEntity on a new thread
+                        var newThread = new Thread(ProcessTheEvent);
+                        newThread.Start(eventEntity);
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogError("Exception encountered in AlloyBackgroundService loop", ex);
+                        _logger.LogError("Exception encountered in AlloyBackgroundService Run loop.", ex);
                     }
                 }
             });
         }
 
-        private async void ProcessTheImplementation(Object implementationEntityAsObject)
+        private async void ProcessTheEvent(Object eventEntityAsObject)
         {
             var ct = new CancellationToken();
-            var implementationEntity = implementationEntityAsObject == null ? (ImplementationEntity)null : (ImplementationEntity)implementationEntityAsObject;
-            _logger.LogInformation($"Processing Implementation {implementationEntity.Id} for status '{implementationEntity.Status}'.");
+            var eventEntity = eventEntityAsObject == null ? (EventEntity)null : (EventEntity)eventEntityAsObject;
+            _logger.LogDebug($"Processing Event {eventEntity.Id} for status '{eventEntity.Status}'.");
 
             try
             {
@@ -144,35 +152,35 @@ namespace Alloy.Api.Services
                         var resourceCount = int.MaxValue;
                         var resourceRetryCount = 0;
                         // get the alloy context entities required
-                        implementationEntity = alloyContext.Implementations.First(x => x.Id == implementationEntity.Id);
-                        var definitionEntity = alloyContext.Definitions.First(x => x.Id == implementationEntity.DefinitionId);
+                        eventEntity = alloyContext.Events.First(x => x.Id == eventEntity.Id);
+                        var eventTemplateEntity = alloyContext.EventTemplates.First(x => x.Id == eventEntity.EventTemplateId);
                         // get the auth token
                         var tokenResponse = await ApiClientsExtensions.GetToken(scope);
                         CasterApiClient casterApiClient = null;
                         S3PlayerApiClient playerApiClient = null;
                         SteamfitterApiClient steamfitterApiClient = null;
                         // LOOP until this thread's process is complete
-                        while (implementationEntity.Status == ImplementationStatus.Creating ||
-                            implementationEntity.Status == ImplementationStatus.Planning ||
-                            implementationEntity.Status == ImplementationStatus.Applying ||
-                            implementationEntity.Status == ImplementationStatus.Ending)
+                        while (eventEntity.Status == EventStatus.Creating ||
+                            eventEntity.Status == EventStatus.Planning ||
+                            eventEntity.Status == EventStatus.Applying ||
+                            eventEntity.Status == EventStatus.Ending)
                         {
-                            // the updateTheEntity flag is used to indicate if the implementation entity state should be updated at the end of this loop
+                            // the updateTheEntity flag is used to indicate if the event entity state should be updated at the end of this loop
                             var updateTheEntity = false;
                             // each time through the loop, one state (case) is handled based on Status and InternalStatus.  This allows for retries of a failed state.
-                            switch (implementationEntity.Status)
+                            switch (eventEntity.Status)
                             {
-                                // the "Creating" status means we are creating the initial player exercise, steamfitter session and caster workspace
-                                case ImplementationStatus.Creating:
+                                // the "Creating" status means we are creating the initial player view, steamfitter scenario and caster workspace
+                                case EventStatus.Creating:
                                 {
-                                    switch (implementationEntity.InternalStatus)
+                                    switch (eventEntity.InternalStatus)
                                     {
-                                        case InternalImplementationStatus.LaunchQueued:
-                                        case InternalImplementationStatus.CreatingExercise:
+                                        case InternalEventStatus.LaunchQueued:
+                                        case InternalEventStatus.CreatingView:
                                         {
-                                            if (definitionEntity.ExerciseId == null)
+                                            if (eventTemplateEntity.ViewId == null)
                                             {
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.CreatingSession;
+                                                eventEntity.InternalStatus = InternalEventStatus.CreatingScenario;
                                                 updateTheEntity = true;
                                             }
                                             else
@@ -180,12 +188,12 @@ namespace Alloy.Api.Services
                                                 try
                                                 {
                                                     playerApiClient = RefreshClient(playerApiClient, tokenResponse, ct);
-                                                    implementationEntity.InternalStatus = InternalImplementationStatus.CreatingExercise;
-                                                    var exerciseId = await PlayerApiExtensions.CreatePlayerExerciseAsync(playerApiClient, implementationEntity, (Guid)definitionEntity.ExerciseId, ct);
-                                                    if (exerciseId != null)
+                                                    eventEntity.InternalStatus = InternalEventStatus.CreatingView;
+                                                    var viewId = await PlayerApiExtensions.CreatePlayerViewAsync(playerApiClient, eventEntity, (Guid)eventTemplateEntity.ViewId, ct);
+                                                    if (viewId != null)
                                                     {
-                                                        implementationEntity.ExerciseId = exerciseId;
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.CreatingSession;
+                                                        eventEntity.ViewId = viewId;
+                                                        eventEntity.InternalStatus = InternalEventStatus.CreatingScenario;
                                                         updateTheEntity = true;
                                                     }
                                                     else
@@ -195,27 +203,27 @@ namespace Alloy.Api.Services
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    _logger.LogError($"Error creating the player exercise for Implementation {implementationEntity.Id}.", ex);
+                                                    _logger.LogError($"Error creating the player view for Event {eventEntity.Id}.", ex);
                                                     retryCount++;
                                                 }
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.CreatingSession:
+                                        case InternalEventStatus.CreatingScenario:
                                         {
-                                            if (definitionEntity.ScenarioId == null)
+                                            if (eventTemplateEntity.ScenarioTemplateId == null)
                                             {
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.CreatingWorkspace;
+                                                eventEntity.InternalStatus = InternalEventStatus.CreatingWorkspace;
                                                 updateTheEntity = true;
                                             }
                                             else
                                             {
                                                 steamfitterApiClient = RefreshClient(steamfitterApiClient, tokenResponse, ct);
-                                                var session = await SteamfitterApiExtensions.CreateSteamfitterSessionAsync(steamfitterApiClient, implementationEntity, (Guid)definitionEntity.ScenarioId, ct);
-                                                if (session != null)
+                                                var scenario = await SteamfitterApiExtensions.CreateSteamfitterScenarioAsync(steamfitterApiClient, eventEntity, (Guid)eventTemplateEntity.ScenarioTemplateId, ct);
+                                                if (scenario != null)
                                                 {
-                                                    implementationEntity.SessionId = session.Id;
-                                                    implementationEntity.InternalStatus = InternalImplementationStatus.CreatingWorkspace;
+                                                    eventEntity.ScenarioId = scenario.Id;
+                                                    eventEntity.InternalStatus = InternalEventStatus.CreatingWorkspace;
                                                     updateTheEntity = true;
                                                 }
                                                 else
@@ -225,35 +233,35 @@ namespace Alloy.Api.Services
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.CreatingWorkspace:
+                                        case InternalEventStatus.CreatingWorkspace:
                                         {
-                                            if (definitionEntity.DirectoryId == null)
+                                            if (eventTemplateEntity.DirectoryId == null)
                                             {
-                                                // There is no Caster directory, so start the session
+                                                // There is no Caster directory, so start the scenario
                                                 var launchDate = DateTime.UtcNow;
-                                                implementationEntity.Name = definitionEntity.Name;
-                                                implementationEntity.Description = definitionEntity.Description;
-                                                implementationEntity.LaunchDate = launchDate;
-                                                implementationEntity.ExpirationDate = launchDate.AddHours(definitionEntity.DurationHours);
-                                                implementationEntity.Status = ImplementationStatus.Applying;
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.StartingSession;
+                                                eventEntity.Name = eventTemplateEntity.Name;
+                                                eventEntity.Description = eventTemplateEntity.Description;
+                                                eventEntity.LaunchDate = launchDate;
+                                                eventEntity.ExpirationDate = launchDate.AddHours(eventTemplateEntity.DurationHours);
+                                                eventEntity.Status = EventStatus.Applying;
+                                                eventEntity.InternalStatus = InternalEventStatus.StartingScenario;
                                                 updateTheEntity = true;
                                             }
                                             else
                                             {
                                                 var varsFileContent = "";
-                                                if (implementationEntity.ExerciseId != null)
+                                                if (eventEntity.ViewId != null)
                                                 {
                                                     playerApiClient = RefreshClient(playerApiClient, tokenResponse, ct);
-                                                    varsFileContent = await CasterApiExtensions.GetCasterVarsFileContentAsync(implementationEntity, playerApiClient, ct);
+                                                    varsFileContent = await CasterApiExtensions.GetCasterVarsFileContentAsync(eventEntity, playerApiClient, ct);
                                                 }
                                                 casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                                var workspaceId = await CasterApiExtensions.CreateCasterWorkspaceAsync(casterApiClient, implementationEntity, (Guid)definitionEntity.DirectoryId, varsFileContent, definitionEntity.UseDynamicHost, ct);
+                                                var workspaceId = await CasterApiExtensions.CreateCasterWorkspaceAsync(casterApiClient, eventEntity, (Guid)eventTemplateEntity.DirectoryId, varsFileContent, eventTemplateEntity.UseDynamicHost, ct);
                                                 if (workspaceId != null)
                                                 {
-                                                    implementationEntity.WorkspaceId = workspaceId;
-                                                    implementationEntity.InternalStatus = InternalImplementationStatus.PlanningLaunch;
-                                                    implementationEntity.Status = ImplementationStatus.Planning;
+                                                    eventEntity.WorkspaceId = workspaceId;
+                                                    eventEntity.InternalStatus = InternalEventStatus.PlanningLaunch;
+                                                    eventEntity.Status = EventStatus.Planning;
                                                     updateTheEntity = true;
                                                 }
                                                 else
@@ -265,8 +273,8 @@ namespace Alloy.Api.Services
                                         }
                                         default:
                                         {
-                                            _logger.LogError($"Invalid status for Implementation {implementationEntity.Id}: {implementationEntity.Status} - {implementationEntity.InternalStatus}");
-                                            implementationEntity.Status = ImplementationStatus.Failed;
+                                            _logger.LogError($"Invalid status for Event {eventEntity.Id}: {eventEntity.Status} - {eventEntity.InternalStatus}");
+                                            eventEntity.Status = EventStatus.Failed;
                                             updateTheEntity = true;
                                             break;
                                         }
@@ -274,27 +282,27 @@ namespace Alloy.Api.Services
                                     break;
                                 }
                                 // the "Planning" state means that caster is planning a run
-                                case ImplementationStatus.Planning:
+                                case EventStatus.Planning:
                                 {
-                                    switch (implementationEntity.InternalStatus)
+                                    switch (eventEntity.InternalStatus)
                                     {
-                                        case InternalImplementationStatus.PlanningLaunch:
-                                        case InternalImplementationStatus.PlanningRedeploy:
+                                        case InternalEventStatus.PlanningLaunch:
+                                        case InternalEventStatus.PlanningRedeploy:
                                         {
                                             casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                            var runId = await CasterApiExtensions.CreateRunAsync(implementationEntity, casterApiClient, false, ct);
+                                            var runId = await CasterApiExtensions.CreateRunAsync(eventEntity, casterApiClient, false, ct);
                                             if (runId != null)
                                             {
-                                                implementationEntity.RunId = runId;
+                                                eventEntity.RunId = runId;
                                                 updateTheEntity = true;
 
-                                                switch (implementationEntity.InternalStatus)
+                                                switch (eventEntity.InternalStatus)
                                                 {
-                                                    case InternalImplementationStatus.PlanningLaunch:
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.PlannedLaunch;
+                                                    case InternalEventStatus.PlanningLaunch:
+                                                        eventEntity.InternalStatus = InternalEventStatus.PlannedLaunch;
                                                         break;
-                                                    case InternalImplementationStatus.PlanningRedeploy:
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.PlannedRedeploy;
+                                                    case InternalEventStatus.PlanningRedeploy:
+                                                        eventEntity.InternalStatus = InternalEventStatus.PlannedRedeploy;
                                                         break;
                                                 }
                                             }
@@ -304,22 +312,22 @@ namespace Alloy.Api.Services
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.PlannedLaunch:
-                                        case InternalImplementationStatus.PlannedRedeploy:
+                                        case InternalEventStatus.PlannedLaunch:
+                                        case InternalEventStatus.PlannedRedeploy:
                                         {
                                             casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                            updateTheEntity = await CasterApiExtensions.WaitForRunToBePlannedAsync(implementationEntity, casterApiClient, _clientOptions.CurrentValue.CasterCheckIntervalSeconds, _clientOptions.CurrentValue.CasterPlanningMaxWaitMinutes, ct);
+                                            updateTheEntity = await CasterApiExtensions.WaitForRunToBePlannedAsync(eventEntity, casterApiClient, _clientOptions.CurrentValue.CasterCheckIntervalSeconds, _clientOptions.CurrentValue.CasterPlanningMaxWaitMinutes, ct);
                                             if (updateTheEntity)
                                             {
-                                                implementationEntity.Status = ImplementationStatus.Applying;
+                                                eventEntity.Status = EventStatus.Applying;
 
-                                                switch (implementationEntity.InternalStatus)
+                                                switch (eventEntity.InternalStatus)
                                                 {
-                                                    case InternalImplementationStatus.PlannedLaunch:
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.ApplyingLaunch;
+                                                    case InternalEventStatus.PlannedLaunch:
+                                                        eventEntity.InternalStatus = InternalEventStatus.ApplyingLaunch;
                                                         break;
-                                                    case InternalImplementationStatus.PlannedRedeploy:
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.ApplyingRedeploy;
+                                                    case InternalEventStatus.PlannedRedeploy:
+                                                        eventEntity.InternalStatus = InternalEventStatus.ApplyingRedeploy;
                                                         break;
                                                 }
                                             }
@@ -331,8 +339,8 @@ namespace Alloy.Api.Services
                                         }
                                         default:
                                         {
-                                            _logger.LogError($"Invalid status for Implementation {implementationEntity.Id}: {implementationEntity.Status} - {implementationEntity.InternalStatus}");
-                                            implementationEntity.Status = ImplementationStatus.Failed;
+                                            _logger.LogError($"Invalid status for Event {eventEntity.Id}: {eventEntity.Status} - {eventEntity.InternalStatus}");
+                                            eventEntity.Status = EventStatus.Failed;
                                             updateTheEntity = true;
                                             break;
                                         }
@@ -340,24 +348,24 @@ namespace Alloy.Api.Services
                                     break;
                                 }
                                 // the "Applying" state means caster is applying a run (deploying VM's, etc.)
-                                case ImplementationStatus.Applying:
+                                case EventStatus.Applying:
                                 {
-                                    switch (implementationEntity.InternalStatus)
+                                    switch (eventEntity.InternalStatus)
                                     {
-                                        case InternalImplementationStatus.ApplyingLaunch:
-                                        case InternalImplementationStatus.ApplyingRedeploy:
+                                        case InternalEventStatus.ApplyingLaunch:
+                                        case InternalEventStatus.ApplyingRedeploy:
                                         {
                                             casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                            updateTheEntity = await CasterApiExtensions.ApplyRunAsync(implementationEntity, casterApiClient, ct);
+                                            updateTheEntity = await CasterApiExtensions.ApplyRunAsync(eventEntity, casterApiClient, ct);
                                             if (updateTheEntity)
                                             {
-                                                switch (implementationEntity.InternalStatus)
+                                                switch (eventEntity.InternalStatus)
                                                 {
-                                                    case InternalImplementationStatus.ApplyingLaunch:
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.AppliedLaunch;
+                                                    case InternalEventStatus.ApplyingLaunch:
+                                                        eventEntity.InternalStatus = InternalEventStatus.AppliedLaunch;
                                                         break;
-                                                    case InternalImplementationStatus.ApplyingRedeploy:
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.AppliedRedeploy;
+                                                    case InternalEventStatus.ApplyingRedeploy:
+                                                        eventEntity.InternalStatus = InternalEventStatus.AppliedRedeploy;
                                                         break;
                                                 }
                                             }
@@ -367,21 +375,21 @@ namespace Alloy.Api.Services
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.AppliedLaunch:
-                                        case InternalImplementationStatus.AppliedRedeploy:
+                                        case InternalEventStatus.AppliedLaunch:
+                                        case InternalEventStatus.AppliedRedeploy:
                                         {
                                             casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                            updateTheEntity = await CasterApiExtensions.WaitForRunToBeAppliedAsync(implementationEntity, casterApiClient, _clientOptions.CurrentValue.CasterCheckIntervalSeconds, _clientOptions.CurrentValue.CasterDeployMaxWaitMinutes, ct);
+                                            updateTheEntity = await CasterApiExtensions.WaitForRunToBeAppliedAsync(eventEntity, casterApiClient, _clientOptions.CurrentValue.CasterCheckIntervalSeconds, _clientOptions.CurrentValue.CasterDeployMaxWaitMinutes, ct);
                                             if (updateTheEntity)
                                             {
-                                                switch (implementationEntity.InternalStatus)
+                                                switch (eventEntity.InternalStatus)
                                                 {
-                                                    case InternalImplementationStatus.AppliedLaunch:
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.StartingSession;
+                                                    case InternalEventStatus.AppliedLaunch:
+                                                        eventEntity.InternalStatus = InternalEventStatus.StartingScenario;
                                                         break;
-                                                    case InternalImplementationStatus.AppliedRedeploy:
-                                                        implementationEntity.Status = ImplementationStatus.Active;
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.Launched;
+                                                    case InternalEventStatus.AppliedRedeploy:
+                                                        eventEntity.Status = EventStatus.Active;
+                                                        eventEntity.InternalStatus = InternalEventStatus.Launched;
                                                         break;
                                                 }
                                             }
@@ -391,13 +399,13 @@ namespace Alloy.Api.Services
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.StartingSession:
+                                        case InternalEventStatus.StartingScenario:
                                         {
-                                            // start the steamfitter session, if there is one
-                                            if (implementationEntity.SessionId != null)
+                                            // start the steamfitter scenario, if there is one
+                                            if (eventEntity.ScenarioId != null)
                                             {
                                                 steamfitterApiClient = RefreshClient(steamfitterApiClient, tokenResponse, ct);
-                                                updateTheEntity = await SteamfitterApiExtensions.StartSteamfitterSessionAsync(steamfitterApiClient, (Guid)implementationEntity.SessionId, ct);
+                                                updateTheEntity = await SteamfitterApiExtensions.StartSteamfitterScenarioAsync(steamfitterApiClient, (Guid)eventEntity.ScenarioId, ct);
                                             }
                                             else
                                             {
@@ -407,12 +415,12 @@ namespace Alloy.Api.Services
                                             if (updateTheEntity)
                                             {
                                                 var launchDate = DateTime.UtcNow;
-                                                implementationEntity.Name = definitionEntity.Name;
-                                                implementationEntity.Description = definitionEntity.Description;
-                                                implementationEntity.LaunchDate = launchDate;
-                                                implementationEntity.ExpirationDate = launchDate.AddHours(definitionEntity.DurationHours);
-                                                implementationEntity.Status = ImplementationStatus.Active;
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.Launched;
+                                                eventEntity.Name = eventTemplateEntity.Name;
+                                                eventEntity.Description = eventTemplateEntity.Description;
+                                                eventEntity.LaunchDate = launchDate;
+                                                eventEntity.ExpirationDate = launchDate.AddHours(eventTemplateEntity.DurationHours);
+                                                eventEntity.Status = EventStatus.Active;
+                                                eventEntity.InternalStatus = InternalEventStatus.Launched;
                                             }
                                             else
                                             {
@@ -422,8 +430,8 @@ namespace Alloy.Api.Services
                                         }
                                         default:
                                         {
-                                            _logger.LogError($"Invalid status for Implementation {implementationEntity.Id}: {implementationEntity.Status} - {implementationEntity.InternalStatus}");
-                                            implementationEntity.Status = ImplementationStatus.Failed;
+                                            _logger.LogError($"Invalid status for Event {eventEntity.Id}: {eventEntity.Status} - {eventEntity.InternalStatus}");
+                                            eventEntity.Status = EventStatus.Failed;
                                             updateTheEntity = true;
                                             break;
                                         }
@@ -431,17 +439,17 @@ namespace Alloy.Api.Services
                                     break;
                                 }
                                 // the "Ending" state means all entities are being torn down
-                                case ImplementationStatus.Ending:
+                                case EventStatus.Ending:
                                 {
-                                    switch (implementationEntity.InternalStatus)
+                                    switch (eventEntity.InternalStatus)
                                     {
-                                        case InternalImplementationStatus.EndQueued:
-                                        case InternalImplementationStatus.DeletingExercise:
+                                        case InternalEventStatus.EndQueued:
+                                        case InternalEventStatus.DeletingView:
                                         {
-                                            if (implementationEntity.ExerciseId != null)
+                                            if (eventEntity.ViewId != null)
                                             {
                                                 playerApiClient = RefreshClient(playerApiClient, tokenResponse, ct);
-                                                updateTheEntity = await PlayerApiExtensions.DeletePlayerExerciseAsync(_clientOptions.CurrentValue.urls.playerApi, implementationEntity.ExerciseId, playerApiClient, ct);
+                                                updateTheEntity = await PlayerApiExtensions.DeletePlayerViewAsync(_clientOptions.CurrentValue.urls.playerApi, eventEntity.ViewId, playerApiClient, ct);
                                             }
                                             else
                                             {
@@ -449,17 +457,17 @@ namespace Alloy.Api.Services
                                             }
                                             if (updateTheEntity)
                                             {
-                                                implementationEntity.ExerciseId = null;
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.DeletingSession;
+                                                eventEntity.ViewId = null;
+                                                eventEntity.InternalStatus = InternalEventStatus.DeletingScenario;
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.DeletingSession:
+                                        case InternalEventStatus.DeletingScenario:
                                         {
-                                            if (implementationEntity.SessionId != null)
+                                            if (eventEntity.ScenarioId != null)
                                             {
                                                 steamfitterApiClient = RefreshClient(steamfitterApiClient, tokenResponse, ct);
-                                                updateTheEntity = await SteamfitterApiExtensions.EndSteamfitterSessionAsync(_clientOptions.CurrentValue.urls.steamfitterApi, implementationEntity.SessionId, steamfitterApiClient, ct);
+                                                updateTheEntity = await SteamfitterApiExtensions.EndSteamfitterScenarioAsync(_clientOptions.CurrentValue.urls.steamfitterApi, eventEntity.ScenarioId, steamfitterApiClient, ct);
                                             }
                                             else
                                             {
@@ -467,8 +475,8 @@ namespace Alloy.Api.Services
                                             }
                                             if (updateTheEntity)
                                             {
-                                                implementationEntity.SessionId = null;
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.PlanningDestroy;
+                                                eventEntity.ScenarioId = null;
+                                                eventEntity.InternalStatus = InternalEventStatus.PlanningDestroy;
                                             }
                                             else
                                             {
@@ -476,16 +484,16 @@ namespace Alloy.Api.Services
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.PlanningDestroy:
+                                        case InternalEventStatus.PlanningDestroy:
                                         {
-                                            if (implementationEntity.WorkspaceId != null)
+                                            if (eventEntity.WorkspaceId != null)
                                             {
                                                 casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                                var runId = await CasterApiExtensions.CreateRunAsync(implementationEntity, casterApiClient, true, ct);
+                                                var runId = await CasterApiExtensions.CreateRunAsync(eventEntity, casterApiClient, true, ct);
                                                 if (runId != null)
                                                 {
-                                                    implementationEntity.RunId = runId;
-                                                    implementationEntity.InternalStatus = InternalImplementationStatus.PlannedDestroy;
+                                                    eventEntity.RunId = runId;
+                                                    eventEntity.InternalStatus = InternalEventStatus.PlannedDestroy;
                                                     updateTheEntity = true;
                                                 }
                                                 else
@@ -495,19 +503,42 @@ namespace Alloy.Api.Services
                                             }
                                             else
                                             {
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.Ended;
-                                                implementationEntity.Status = ImplementationStatus.Ended;
+                                                eventEntity.InternalStatus = InternalEventStatus.Ended;
+                                                eventEntity.Status = EventStatus.Ended;
                                                 updateTheEntity = true;
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.PlannedDestroy:
+                                        case InternalEventStatus.PlannedDestroy:
+                                        {
+                                            if (eventEntity.LastLaunchInternalStatus == InternalEventStatus.PlannedLaunch)
+                                            {
+                                                // This is an edge case.  The previous plan during a launch failed therefore there is nothing
+                                                // to destroy however the Workspace needs deleted.
+                                                eventEntity.InternalStatus = InternalEventStatus.DeletingWorkspace;
+                                            }
+                                            else
+                                            {
+                                                casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
+                                                updateTheEntity = await CasterApiExtensions.WaitForRunToBePlannedAsync(eventEntity, casterApiClient, _clientOptions.CurrentValue.CasterCheckIntervalSeconds, _clientOptions.CurrentValue.CasterPlanningMaxWaitMinutes, ct);
+                                                if (updateTheEntity)
+                                                {
+                                                    eventEntity.InternalStatus = InternalEventStatus.ApplyingDestroy;
+                                                }
+                                                else
+                                                {
+                                                    retryCount++;
+                                                }
+                                            }
+                                            break;
+                                        }
+                                        case InternalEventStatus.ApplyingDestroy:
                                         {
                                             casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                            updateTheEntity = await CasterApiExtensions.WaitForRunToBePlannedAsync(implementationEntity, casterApiClient, _clientOptions.CurrentValue.CasterCheckIntervalSeconds, _clientOptions.CurrentValue.CasterPlanningMaxWaitMinutes, ct);
+                                            updateTheEntity = await CasterApiExtensions.ApplyRunAsync(eventEntity, casterApiClient, ct);
                                             if (updateTheEntity)
                                             {
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.ApplyingDestroy;
+                                                eventEntity.InternalStatus = InternalEventStatus.AppliedDestroy;
                                             }
                                             else
                                             {
@@ -515,72 +546,58 @@ namespace Alloy.Api.Services
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.ApplyingDestroy:
+                                        case InternalEventStatus.AppliedDestroy:
                                         {
                                             casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                            updateTheEntity = await CasterApiExtensions.ApplyRunAsync(implementationEntity, casterApiClient, ct);
-                                            if (updateTheEntity)
-                                            {
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.AppliedDestroy;
-                                            }
-                                            else
-                                            {
-                                                retryCount++;
-                                            }
-                                            break;
-                                        }
-                                        case InternalImplementationStatus.AppliedDestroy:
-                                        {
-                                            casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                            await CasterApiExtensions.WaitForRunToBeAppliedAsync(implementationEntity, casterApiClient, _clientOptions.CurrentValue.CasterCheckIntervalSeconds, _clientOptions.CurrentValue.CasterDestroyMaxWaitMinutes, ct);
-                                            // all conditions in this case require an implementation entity update
+                                            await CasterApiExtensions.WaitForRunToBeAppliedAsync(eventEntity, casterApiClient, _clientOptions.CurrentValue.CasterCheckIntervalSeconds, _clientOptions.CurrentValue.CasterDestroyMaxWaitMinutes, ct);
+                                            // all conditions in this case require an event entity update
                                             updateTheEntity = true;
                                             // make sure that the run successfully deleted the resources
-                                            var count = (await casterApiClient.GetResourcesByWorkspaceAsync((Guid)implementationEntity.WorkspaceId, ct)).Count();
-                                            implementationEntity.RunId = null;
+                                            var count = (await casterApiClient.GetResourcesByWorkspaceAsync((Guid)eventEntity.WorkspaceId, ct)).Count();
+                                            eventEntity.RunId = null;
                                             if (count == 0)
                                             {
                                                 // resources deleted, so continue to delete the workspace
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.DeletingWorkspace;
+                                                eventEntity.InternalStatus = InternalEventStatus.DeletingWorkspace;
                                             }
                                             else
                                             {
                                                 if (count < resourceCount)
                                                 {
                                                     // still some resources, but making progress, try the whole process again
-                                                    implementationEntity.InternalStatus = InternalImplementationStatus.PlanningDestroy;
+                                                    eventEntity.InternalStatus = InternalEventStatus.PlanningDestroy;
                                                     resourceRetryCount = 0;
                                                 }
                                                 else
                                                 {
                                                     // still some resources and not making progress. Check max retries.
-                                                    if (resourceRetryCount < _clientOptions.CurrentValue.ApiClientFailureMaxRetries)
+                                                    if (resourceRetryCount < _clientOptions.CurrentValue.ApiClientEndFailureMaxRetries)
                                                     {
                                                         // try the whole process again after a wait
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.PlanningDestroy;
+                                                        eventEntity.InternalStatus = InternalEventStatus.PlanningDestroy;
                                                         resourceRetryCount++;
                                                         Thread.Sleep(TimeSpan.FromMinutes(_clientOptions.CurrentValue.CasterDestroyRetryDelayMinutes));
                                                     }
                                                     else
                                                     {
                                                         // the caster workspace resources could not be destroyed
-                                                        implementationEntity.InternalStatus = InternalImplementationStatus.FailedDestroy;
-                                                        implementationEntity.Status = ImplementationStatus.Failed;
+                                                        eventEntity.InternalStatus = InternalEventStatus.FailedDestroy;
+                                                        eventEntity.Status = EventStatus.Failed;
                                                     }
 
                                                 }
                                             }
                                             break;
                                         }
-                                        case InternalImplementationStatus.DeletingWorkspace:
+                                        case InternalEventStatus.DeletingWorkspace:
                                         {
                                             casterApiClient = RefreshClient(casterApiClient, tokenResponse, ct);
-                                            updateTheEntity = await CasterApiExtensions.DeleteCasterWorkspaceAsync(implementationEntity, casterApiClient, tokenResponse, ct);
+                                            updateTheEntity = await CasterApiExtensions.DeleteCasterWorkspaceAsync(eventEntity, casterApiClient, tokenResponse, ct);
                                             if (updateTheEntity)
                                             {
-                                                implementationEntity.WorkspaceId = null;
-                                                implementationEntity.Status = ImplementationStatus.Ended;
-                                                implementationEntity.InternalStatus = InternalImplementationStatus.Ended;
+                                                eventEntity.WorkspaceId = null;
+                                                eventEntity.Status = EventStatus.Ended;
+                                                eventEntity.InternalStatus = InternalEventStatus.Ended;
                                             }
                                             else
                                             {
@@ -590,8 +607,8 @@ namespace Alloy.Api.Services
                                         }
                                         default:
                                         {
-                                            _logger.LogError($"Invalid status for Implementation {implementationEntity.Id}: {implementationEntity.Status} - {implementationEntity.InternalStatus}");
-                                            implementationEntity.Status = ImplementationStatus.Failed;
+                                            _logger.LogError($"Invalid status for Event {eventEntity.Id}: {eventEntity.Status} - {eventEntity.InternalStatus}");
+                                            eventEntity.Status = EventStatus.Failed;
                                             updateTheEntity = true;
                                             break;
                                         }
@@ -602,22 +619,42 @@ namespace Alloy.Api.Services
                             // check for exceeding the max number of retries
                             if (!updateTheEntity)
                             {
-                                if (retryCount >= _clientOptions.CurrentValue.ApiClientFailureMaxRetries && _clientOptions.CurrentValue.ApiClientFailureMaxRetries > 0)
+                                if ((eventEntity.Status == EventStatus.Creating ||
+                                     eventEntity.Status == EventStatus.Planning ||
+                                     eventEntity.Status == EventStatus.Applying) &&
+                                    retryCount >= _clientOptions.CurrentValue.ApiClientLaunchFailureMaxRetries &&
+                                    _clientOptions.CurrentValue.ApiClientLaunchFailureMaxRetries > 0)
                                 {
-                                    _logger.LogError($"Retry count exceeded for Implementation {implementationEntity.Id}, with status of {implementationEntity.Status} - {implementationEntity.InternalStatus}");
-                                    implementationEntity.Status = ImplementationStatus.Failed;
+                                    _logger.LogError($"While launching the retry count exceeded for Event {eventEntity.Id}, with status of {eventEntity.Status} - {eventEntity.InternalStatus}");
+                                    eventEntity.LastLaunchStatus = eventEntity.Status;
+                                    eventEntity.LastLaunchInternalStatus = eventEntity.InternalStatus;
+                                    eventEntity.FailureCount++;
+                                    eventEntity.Status = EventStatus.Ending;
+                                    eventEntity.InternalStatus = InternalEventStatus.EndQueued;
                                     updateTheEntity = true;
                                 }
-                                else
+                                else if (eventEntity.Status == EventStatus.Ending &&
+                                    retryCount >= _clientOptions.CurrentValue.ApiClientEndFailureMaxRetries &&
+                                    _clientOptions.CurrentValue.ApiClientEndFailureMaxRetries > 0)
+                                {
+                                    _logger.LogError($"While ending the retry count exceeded for Event {eventEntity.Id}, with status of {eventEntity.Status} - {eventEntity.InternalStatus}");
+                                    eventEntity.LastEndStatus = eventEntity.Status;
+                                    eventEntity.LastEndInternalStatus = eventEntity.InternalStatus;
+                                    eventEntity.FailureCount++;
+                                    eventEntity.Status = EventStatus.Failed;
+                                    updateTheEntity = true;
+                                } 
+                                else 
                                 {
                                     Thread.Sleep(TimeSpan.FromSeconds(_clientOptions.CurrentValue.ApiClientRetryIntervalSeconds));
                                 }
+
                             }
                             // update the entity in the context, if we are moving on
                             if (updateTheEntity)
                             {
                                 retryCount = 0;
-                                implementationEntity.StatusDate = DateTime.UtcNow;
+                                eventEntity.StatusDate = DateTime.UtcNow;
                                 await alloyContext.SaveChangesAsync(ct);
                             }
                         }
@@ -626,7 +663,7 @@ namespace Alloy.Api.Services
             }
             catch(Exception ex)
             {
-                _logger.LogError($"Error processing implementation {implementationEntity.Id}", ex);
+                _logger.LogError($"Error processing event {eventEntity.Id}", ex);
             }
         }
 

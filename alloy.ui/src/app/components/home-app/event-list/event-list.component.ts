@@ -11,8 +11,8 @@ DM20-0181
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
 
-import { DefinitionService } from '../../../generated/alloy.api/api/definition.service';
-import { Definition } from '../../../generated/alloy.api/model/definition';
+import { EventTemplateService } from '../../../generated/alloy.api/api/event-template.service';
+import { EventTemplate } from '../../../generated/alloy.api/model/event-template';
 
 
 
@@ -26,23 +26,23 @@ export class EventListComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  public eventsDataSource: MatTableDataSource<Definition>;
+  public eventsDataSource: MatTableDataSource<EventTemplate>;
   public displayedColumns: string[] = ['name', 'description', 'durationHours'];
 
   public filterString: string;
   public isLoading: Boolean;
 
   constructor(
-    private eventTemplateService: DefinitionService
+    private eventTemplateService: EventTemplateService
   ) {
-    this.eventsDataSource = new MatTableDataSource<Definition>(new Array<Definition>());
+    this.eventsDataSource = new MatTableDataSource<EventTemplate>(new Array<EventTemplate>());
   }
 
   ngOnInit() {
     this.filterString = '';
 
     // Initial datasource
-    this.eventTemplateService.getDefinitions().subscribe(defs => {
+    this.eventTemplateService.getEventTemplates().subscribe(defs => {
       this.eventsDataSource.data = defs;
       this.sort.sort(<MatSortable>({id: 'name', start: 'asc'}));
       this.eventsDataSource.sort = this.sort;

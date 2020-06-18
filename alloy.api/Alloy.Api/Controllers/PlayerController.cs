@@ -20,7 +20,7 @@ using Alloy.Api.Infrastructure.Exceptions;
 using Alloy.Api.Services;
 using Alloy.Api.ViewModels;
 using Alloy.Api.Infrastructure.Authorization;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 using S3.Player.Api.Models;
 
 namespace Alloy.Api.Controllers
@@ -37,18 +37,18 @@ namespace Alloy.Api.Controllers
         }
 
         /// <summary>
-        /// Gets all Exercises
+        /// Gets all Views
         /// </summary>
         /// <remarks>
-        /// Returns a list of all of the Exercises.
+        /// Returns a list of all of the Views.
         /// </remarks>       
         /// <returns></returns>
-        [HttpGet("exercises")]
-        [ProducesResponseType(typeof(IEnumerable<Exercise>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getExercises")]
-        public async Task<IActionResult> GetExercises(CancellationToken ct)
+        [HttpGet("views")]
+        [ProducesResponseType(typeof(IEnumerable<View>), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "getViews")]
+        public async Task<IActionResult> GetViews(CancellationToken ct)
         {
-            var list = await _playerService.GetExercisesAsync(ct);
+            var list = await _playerService.GetViewsAsync(ct);
             return Ok(list);
         }
 
@@ -61,7 +61,7 @@ namespace Alloy.Api.Controllers
         /// <returns></returns>
         [HttpGet("users/me")]
         [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getUserMe")]
+        [SwaggerOperation(OperationId = "getUserMe")]
         public async Task<IActionResult> GetUserMe(CancellationToken ct)
         {
             var user = await _playerService.GetUserAsync(ct);

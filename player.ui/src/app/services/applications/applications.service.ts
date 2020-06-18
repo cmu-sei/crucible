@@ -26,7 +26,7 @@ export class ApplicationsService {
     private settings: SettingsService) { }
 
 
-  public getApplicationsByTeam(teamId: string, exerciseId: string): Observable<Array<ApplicationData>> {
+  public getApplicationsByTeam(teamId: string, viewId: string): Observable<Array<ApplicationData>> {
     return this.http.get<Array<ApplicationData>>(`${this.settings.ApiUrl}/teams/${teamId}/application-instances`).pipe(
       catchError(err => {
         console.log(err);
@@ -34,4 +34,3 @@ export class ApplicationsService {
       }));
   }
 }
-

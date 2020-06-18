@@ -11,4 +11,3 @@ DM20-0181
 export * from './cwd-auth-callback/cwd-auth-callback.component';
 export * from './cwd-auth-callback-silent/cwd-auth-callback-silent.component';
 export * from './cwd-auth-logout/cwd-auth-logout.component';
-

@@ -18,9 +18,8 @@ describe('CwdAuthCallbackComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CwdAuthCallbackComponent ]
-    })
-    .compileComponents();
+      declarations: [CwdAuthCallbackComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('CwdAuthCallbackComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

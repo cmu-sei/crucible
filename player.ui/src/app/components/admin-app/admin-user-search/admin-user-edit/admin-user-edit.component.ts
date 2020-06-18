@@ -9,7 +9,7 @@ DM20-0181
 */
 
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { User, UserService, Role, RoleService, Permission, PermissionService } from '../../../../swagger-codegen/s3.player.api';
+import { User, UserService, Role, RoleService, Permission, PermissionService } from '../../../../generated/s3.player.api';
 import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 
@@ -119,4 +119,3 @@ export class UserErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || isSubmitted));
   }
 }
-

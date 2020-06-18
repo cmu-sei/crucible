@@ -8,25 +8,32 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-
 <mat-sidenav-container class="appcontent-container" autosize>
-  <mat-sidenav class="appbarmenu-container" #sidenav mode="side" [(opened)]="isSidebarOpen">
+  <mat-sidenav
+    class="appbarmenu-container"
+    #sidenav
+    mode="side"
+    [(opened)]="isSidebarOpen"
+  >
     <mat-list class="appitems-container">
       <mat-list-item class="appslist">
-        <a class="nolink" href="/">
-          <h4>
-            <strong>Administration</strong>
-          </h4>
-        </a>
+        <h2>
+          <a class="nolink" routerLink="/">
+            Administration
+          </a>
+        </h2>
         <mat-divider></mat-divider>
       </mat-list-item>
       <mat-list-item>
         <div class="showhand" id="wrapper" (click)="adminGotoUsers()">
           <div id="lefticon">
-            <mat-icon class="mdi-24px" fontIcon="mdi-account-multiple"></mat-icon>
+            <mat-icon
+              class="mdi-24px"
+              fontIcon="mdi-account-multiple"
+            ></mat-icon>
           </div>
 
-          <div id="content">{{usersText}}</div>
+          <div id="content">{{ usersText }}</div>
 
           <div class="pull-right" id="rightcontext">
             <button mat-icon-button style="outline: none;">
@@ -41,7 +48,7 @@ DM20-0181
             <mat-icon class="mdi-24px" fontIcon="mdi-view-module"></mat-icon>
           </div>
 
-          <div id="content">{{modulesText}}</div>
+          <div id="content">{{ modulesText }}</div>
 
           <div class="pull-right" id="rightcontext">
             <button mat-icon-button style="outline: none;">
@@ -56,7 +63,7 @@ DM20-0181
             <mat-icon class="mdi-24px" fontIcon="mdi-briefcase"></mat-icon>
           </div>
 
-          <div id="content">{{workspacesText}}</div>
+          <div id="content">{{ workspacesText }}</div>
 
           <div class="pull-right" id="rightcontext">
             <button mat-icon-button style="outline: none;">
@@ -66,28 +73,16 @@ DM20-0181
         </div>
       </mat-list-item>
     </mat-list>
-    <img class="cmu-logo" alt="cmu-logo" src="/assets/img/cmu-red-gray.png">
+    <img class="cmu-logo" alt="cmu-logo" src="/assets/img/cmu-red-gray.png" />
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="bar-height" [ngStyle]="{'background-color': topBarColor}" fxLayout="row" fxLayoutAlign="start center">
-      <div fxFlex="37" fxFlexOffset="3" class="title-text"><h4>{{ showStatus }}</h4></div>
-      <div fxFlex="60" fxLayoutAlign="end center">
-        <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
-          <strong>{{ username }}</strong>
-          <mat-icon style="transform: translateY(1px);" svgIcon="ic_expand_more_white_24px"></mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" [overlapTrigger]="false">
-          <button [routerLink]="['/']" mat-menu-item>Exit Administration</button>
-          <button mat-menu-item (click)="logout()">Logout</button>
-        </mat-menu>
-      </div>
-
-    </div>
+    <cas-topbar [title]="showStatus" [sidenav]="null"></cas-topbar>
     <span *ngIf="isSuperUser">
-      <cas-users *ngIf="showStatus===usersText"></cas-users>
-      <cas-admin-modules *ngIf="showStatus===modulesText"></cas-admin-modules>
-      <cas-admin-workspaces *ngIf="showStatus===workspacesText"></cas-admin-workspaces>
+      <cas-users *ngIf="showStatus === usersText"></cas-users>
+      <cas-admin-modules *ngIf="showStatus === modulesText"></cas-admin-modules>
+      <cas-admin-workspaces
+        *ngIf="showStatus === workspacesText"
+      ></cas-admin-workspaces>
     </span>
-
   </mat-sidenav-content>
 </mat-sidenav-container>

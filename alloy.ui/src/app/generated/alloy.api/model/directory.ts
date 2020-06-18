@@ -24,7 +24,7 @@ import { Workspace } from './workspace';
 export interface Directory { 
     id?: string;
     name?: string;
-    exerciseId?: string;
+    viewId?: string;
     parentId?: string;
     files?: Array<any>;
     workspaces?: Array<Workspace>;

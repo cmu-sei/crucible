@@ -18,9 +18,8 @@ describe('ModuleListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminModuleListComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminModuleListComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('ModuleListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

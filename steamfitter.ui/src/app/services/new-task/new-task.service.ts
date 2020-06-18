@@ -10,11 +10,26 @@ DM20-0181
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Vm } from '../../swagger-codegen/dispatcher.api/model/vm';
 import { Command } from '../../models/command';
-// TODO: resolve imports when API changes nouns
-import { DispatchTask } from 'src/app/swagger-codegen/dispatcher.api/model/models';
-import { Task } from 'src/app/data/task/task.store';
+import { Task, Vm } from 'src/app/swagger-codegen/dispatcher.api/model/models';
+
+const BLANK_TASK = {
+  name: '',
+  description: '',
+  scenarioTemplateId: '',
+  scenarioId: '',
+  action: Task.ActionEnum.GuestProcessRun,
+  vmMask: '',
+  vmList: [],
+  apiUrl: '',
+  inputString: '',
+  expectedOutput: '',
+  expirationSeconds: 0,
+  intervalSeconds: 0,
+  iterations: 0,
+  triggerTaskId: '',
+  triggerCondition: Task.TriggerConditionEnum.Manual,
+};
 
 @Injectable({
   providedIn: 'root'
@@ -24,45 +39,36 @@ export class NewTaskService {
   public vmList = new BehaviorSubject<Array<Vm>>(new Array<Vm>());
   public command = new BehaviorSubject<Command>(undefined);
   public task = new BehaviorSubject<Task>(undefined);
-  private _task = {
-    name: '',
-    description: '',
-    scenarioTemplateId: '',
-    scenarioId: '',
-    action: DispatchTask.ActionEnum.GuestProcessRun,
-    vmMask: '',
-    vmList: [],
-    apiUrl: '',
-    inputString: '',
-    expectedOutput: '',
-    expirationSeconds: 0,
-    intervalSeconds: 0,
-    iterations: 0,
-    triggerTaskId: '',
-    triggerCondition: DispatchTask.TriggerConditionEnum.Manual,
-  };
+  private _task = {... BLANK_TASK};
 
   constructor() { }
 
-  AddVm(vm: Vm) {
+  reset() {
+    this.vmList.next(new Array<Vm>());
+    this.command.next(undefined);
+    this.task.next(undefined);
+    this._task = {... BLANK_TASK};
+  }
+
+  addVm(vm: Vm) {
     const newList: Array<Vm> = this.vmList.value;
     newList.push(vm);
     this.vmList.next(newList);
-    this.buildRawDispatcherCommand();
+    this.buildRawCommand();
   }
 
-  RemoveVm(vm: Vm) {
+  removeVm(vm: Vm) {
     const newList: Array<Vm> = this.vmList.value.filter(virtM => virtM.id !== vm.id);
     this.vmList.next(newList);
-    this.buildRawDispatcherCommand();
+    this.buildRawCommand();
   }
 
-  UpdateCommand(cmd: Command) {
+  updateCommand(cmd: Command) {
     this.command.next(cmd);
-    this.buildRawDispatcherCommand();
+    this.buildRawCommand();
   }
 
-  private buildRawDispatcherCommand() {
+  private buildRawCommand() {
     if (this.command.value !== undefined) {
       // Get first vm moid, NOT a list!
       const moid = this.vmList.value.length > 0 ? this.vmList.value[0].id : '';
@@ -72,18 +78,18 @@ export class NewTaskService {
       //   vmGuids.push(vm.id);
       // });
 
-      // Build dispatcher command
-      let dispatcherCmd = `{ "Moid": "{moid}"`;
+      // Build command
+      let command = `{ "Moid": "{moid}"`;
       this.command.value.parameters.filter(obj => obj.key !== 'Moid').forEach(param => {
-        dispatcherCmd += `, "${ param.key }": "${ param.value.replace(/\\/g, '\\\\').replace(/"/g, '\\\"')}"`;
+        command += `, "${ param.key }": "${ param.value.replace(/\\/g, '\\\\').replace(/"/g, '\\\"')}"`;
       });
-      dispatcherCmd += '}';
-      this._task.inputString = dispatcherCmd;
+      command += '}';
+      this._task.inputString = command;
       this._task.apiUrl = this.command.value.api;
       this._task.vmList = [moid];
       this._task.action =
-        DispatchTask.ActionEnum[Object.keys(DispatchTask.ActionEnum).find(key =>
-        DispatchTask.ActionEnum[key] ===  this.command.value.action)];
+        Task.ActionEnum[Object.keys(Task.ActionEnum).find(key =>
+        Task.ActionEnum[key] ===  this.command.value.action)];
       // let evryone know the new Task
       this.task.next(JSON.parse(JSON.stringify(this._task)));
     }

@@ -11,7 +11,11 @@ DM20-0181
 <div class="component-container mat-elevation-z8">
   <div fxLayout="row" class="add-margin">
     <div fxFlex>
-      <app-event-template-list></app-event-template-list>
+      <app-event-template-list
+        [viewList]="viewList"
+        [directoryList]="directoryList"
+        [scenarioTemplateList]="scenarioTemplateList"
+      ></app-event-template-list>
     </div>
   </div>
 </div>

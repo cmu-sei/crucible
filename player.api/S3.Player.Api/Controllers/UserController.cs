@@ -46,7 +46,7 @@ namespace S3.Player.Api.Controllers
         /// Returns a list of all of the Users in the system.
         /// <para />
         /// Only accessible to a SuperUser
-        /// </remarks>       
+        /// </remarks>
         [HttpGet("users")]
         [ProducesResponseType(typeof(IEnumerable<User>), (int)HttpStatusCode.OK)]
         [SwaggerOperation(operationId: "getUsers")]
@@ -62,7 +62,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Returns the User with the id specified
         /// <para />
-        /// Accessible to a SuperUser, a User on an Admin Team within any of the specified Users' Exercises, or a User that shares any Teams with the specified User
+        /// Accessible to a SuperUser, a User on an Admin Team within any of the specified Users' Views, or a User that shares any Teams with the specified User
         /// </remarks>
         /// <param name="id">The id of the User</param>
         /// <param name="ct"></param>
@@ -80,22 +80,22 @@ namespace S3.Player.Api.Controllers
         }
 
         /// <summary>
-        /// Gets all Users for an Exercise
+        /// Gets all Users for an View
         /// </summary>
         /// <remarks>
-        /// Returns all Users within a specific Exercise
+        /// Returns all Users within a specific View
         /// <para />
-        /// Accessible to a SuperUser or a User on an Admin Team within that Exercise
+        /// Accessible to a SuperUser or a User on an Admin Team within that View
         /// </remarks>
-        /// <param name="id">The id of the Exercise</param>
+        /// <param name="id">The id of the View</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        [HttpGet("exercises/{id}/users")]
+        [HttpGet("views/{id}/users")]
         [ProducesResponseType(typeof(IEnumerable<User>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getExerciseUsers")]
-        public async Task<IActionResult> GetByExercise(Guid id, CancellationToken ct)
+        [SwaggerOperation(operationId: "getViewUsers")]
+        public async Task<IActionResult> GetByView(Guid id, CancellationToken ct)
         {
-            var list = await _userService.GetByExerciseAsync(id, ct);
+            var list = await _userService.GetByViewAsync(id, ct);
             return Ok(list);
         }
 
@@ -105,7 +105,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Returns all Users within a specific Team
         /// <para />
-        /// Accessible to a SuperUser, a User on an Admin Team within the Team's Exercise, or other members of the Team
+        /// Accessible to a SuperUser, a User on an Admin Team within the Team's View, or other members of the Team
         /// </remarks>
         /// <param name="id">The id of the Team</param>
         /// <param name="ct"></param>
@@ -125,7 +125,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Adds the specified User to the specified Team
         /// <para />
-        /// Accessible to a SuperUser, or a User on an Admin Team within the Team's Exercise
+        /// Accessible to a SuperUser, or a User on an Admin Team within the Team's View
         /// </remarks>
         /// <param name="teamId">The id of the Team</param>
         /// <param name="userId">The id of the User</param>
@@ -146,7 +146,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Removes the specified User from the specified Team
         /// <para />
-        /// Accessible to a SuperUser, or a User on an Admin Team within the Team's Exercise
+        /// Accessible to a SuperUser, or a User on an Admin Team within the Team's View
         /// </remarks>
         /// <param name="teamId">The id of the Team</param>
         /// <param name="userId">The id of the User</param>
@@ -168,7 +168,7 @@ namespace S3.Player.Api.Controllers
         /// Creates a new User with the attributes specified
         /// <para />
         /// Accessible only to a SuperUser
-        /// </remarks>        
+        /// </remarks>
         /// <param name="user">The data to create the User with</param>
         /// <param name="ct"></param>
         [HttpPost("users")]
@@ -187,7 +187,7 @@ namespace S3.Player.Api.Controllers
         /// Updates a User with the attributes specified
         /// <para />
         /// Accessible only to a SuperUser
-        /// </remarks>     
+        /// </remarks>
         /// <param name="id">The Id of the User to update</param>
         /// <param name="user">The updated User values</param>
         /// <param name="ct"></param>
@@ -207,7 +207,7 @@ namespace S3.Player.Api.Controllers
         /// Deletes the User with the specified id
         /// <para />
         /// Accessible only to a SuperUser
-        /// </remarks>      
+        /// </remarks>
         /// <param name="id">The id of the User to delete</param>
         /// <param name="ct"></param>
         [HttpDelete("users/{id}")]
@@ -223,31 +223,30 @@ namespace S3.Player.Api.Controllers
         /// Sends a new User Notification
         /// </summary>
         /// <remarks>
-        /// Accessible only to a SuperUser or a User on an Admin User within the specified Exercise
+        /// Accessible only to a SuperUser or a User on an Admin User within the specified View
         /// </remarks>
-        /// <param name="exerciseId">The id of the Exercise</param>
+        /// <param name="viewId">The id of the View</param>
         /// <param name="userId">The id of the User</param>
         /// <param name="incomingData">The data to create the Notification</param>
         /// <param name="ct"></param>
-        [HttpPost("exercises/{exerciseId}/users/{userId}/notifications")]
+        [HttpPost("views/{viewId}/users/{userId}/notifications")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.Forbidden)]
         [SwaggerOperation(operationId: "broadcastToUser")]
-        public async Task<IActionResult> Broadcast([FromRoute] Guid exerciseId, Guid userId, [FromBody] Notification incomingData, CancellationToken ct)
+        public async Task<IActionResult> Broadcast([FromRoute] Guid viewId, Guid userId, [FromBody] Notification incomingData, CancellationToken ct)
         {
             if (!incomingData.IsValid())
             {
-                throw new ArgumentException(String.Format("Message was NOT sent to user {0} in exercise {1}", userId.ToString(), exerciseId.ToString()));
+                throw new ArgumentException(String.Format("Message was NOT sent to user {0} in view {1}", userId.ToString(), viewId.ToString()));
             }
-            var notification = await _notificationService.PostToUser(exerciseId, userId, incomingData, ct);
+            var notification = await _notificationService.PostToUser(viewId, userId, incomingData, ct);
             if (notification.ToId != userId)
             {
-                throw new ForbiddenException(String.Format("Message was NOT sent to user {0} in exercise {1}", userId.ToString(), exerciseId.ToString()));
+                throw new ForbiddenException(String.Format("Message was NOT sent to user {0} in view {1}", userId.ToString(), viewId.ToString()));
             }
 
-            await _userHub.Clients.Group(String.Format("{0}_{1}", exerciseId.ToString(), userId.ToString())).SendAsync("Reply", notification);
-            return Ok(String.Format("Message was sent to user {0} in exercise {1}", userId.ToString(), exerciseId.ToString()));
+            await _userHub.Clients.Group(String.Format("{0}_{1}", viewId.ToString(), userId.ToString())).SendAsync("Reply", notification);
+            return Ok(String.Format("Message was sent to user {0} in view {1}", userId.ToString(), viewId.ToString()));
         }
     }
 }
-

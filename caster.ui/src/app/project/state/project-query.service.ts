@@ -8,17 +8,19 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {QueryEntity, EntityUIQuery} from '@datorama/akita';
-import {ProjectStore, ProjectState, ProjectUIState} from './project-store.service';
-import {Breadcrumb, Tab} from './project.model';
-import {Observable} from 'rxjs';
-import {Injectable} from '@angular/core';
-import { Exercise as Project } from 'src/app/generated/caster-api';
-
-
+import { QueryEntity, EntityUIQuery } from '@datorama/akita';
+import {
+  ProjectStore,
+  ProjectState,
+  ProjectUIState,
+} from './project-store.service';
+import { Breadcrumb, Tab } from './project.model';
+import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Project } from 'src/app/generated/caster-api';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectQuery extends QueryEntity<ProjectState, Project> {
   ui: EntityUIQuery<ProjectUIState>;
@@ -29,42 +31,53 @@ export class ProjectQuery extends QueryEntity<ProjectState, Project> {
   }
 
   getRightSidebarOpen$(projectId): Observable<boolean> {
-    return this.ui.selectEntity(projectId, entity => entity.rightSidebarOpen);
+    return this.ui.selectEntity(projectId, (entity) => entity.rightSidebarOpen);
   }
 
   getRightSidebarView$(projectId): Observable<string> {
-    return this.ui.selectEntity(projectId, entity => entity.rightSidebarView);
+    return this.ui.selectEntity(projectId, (entity) => entity.rightSidebarView);
   }
 
   getRightSidebarWidth(projectId): Observable<number> {
-    return this.ui.selectEntity(projectId, entity => entity.rightSidebarWidth);
+    return this.ui.selectEntity(
+      projectId,
+      (entity) => entity.rightSidebarWidth
+    );
   }
 
   getLeftSidebarOpen(projectId): Observable<boolean> {
-    return this.ui.selectEntity(projectId, entity => entity.leftSidebarOpen);
+    return this.ui.selectEntity(projectId, (entity) => entity.leftSidebarOpen);
   }
 
   getLeftSidebarWidth(projectId): Observable<number> {
-    return this.ui.selectEntity(projectId, entity => entity.leftSidebarWidth);
+    return this.ui.selectEntity(projectId, (entity) => entity.leftSidebarWidth);
   }
 
-  selectTabBreadcrumb(projectId: string, tabId: string): Observable<Breadcrumb[]> {
-    return this.ui.selectEntity(projectId, entity => {
-      const tab = entity.openTabs.find(t => t.id === tabId);
+  selectTabBreadcrumb(
+    projectId: string,
+    tabId: string
+  ): Observable<Breadcrumb[]> {
+    return this.ui.selectEntity(projectId, (entity) => {
+      const tab = entity.openTabs.find((t) => t.id === tabId);
       return tab ? tab.breadcrumb : [];
     });
   }
 
   selectOpenTabs(projectId: string): Observable<Tab[]> {
-    return this.ui.selectEntity(projectId, entity => entity.openTabs);
+    return this.ui.selectEntity(projectId, (entity) => entity.openTabs);
   }
 
   selectSelectedTab(projectId: string): Observable<number> {
-    return this.ui.selectEntity(projectId, entity => entity.selectedTab);
+    return this.ui.selectEntity(projectId, (entity) => entity.selectedTab);
   }
 
-  selectBreadcrumb(projectId: string, entityId: string): Observable<Breadcrumb[]> {
-    return this.ui.selectEntity(projectId, entity => entity.openTabs.find(t => t.id === entityId).breadcrumb);
+  selectBreadcrumb(
+    projectId: string,
+    entityId: string
+  ): Observable<Breadcrumb[]> {
+    return this.ui.selectEntity(
+      projectId,
+      (entity) => entity.openTabs.find((t) => t.id === entityId).breadcrumb
+    );
   }
 }
-

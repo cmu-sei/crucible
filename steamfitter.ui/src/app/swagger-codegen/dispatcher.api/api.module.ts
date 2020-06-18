@@ -13,14 +13,14 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
-import { DispatchTaskService } from './api/dispatchTask.service';
-import { DispatchTaskResultService } from './api/dispatchTaskResult.service';
-import { ExerciseAgentService } from './api/exerciseAgent.service';
+import { BondAgentService } from './api/bondAgent.service';
 import { FilesService } from './api/files.service';
 import { PermissionService } from './api/permission.service';
 import { PlayerService } from './api/player.service';
+import { ResultService } from './api/result.service';
 import { ScenarioService } from './api/scenario.service';
-import { SessionService } from './api/session.service';
+import { ScenarioTemplateService } from './api/scenarioTemplate.service';
+import { TaskService } from './api/task.service';
 import { UserService } from './api/user.service';
 import { UserPermissionService } from './api/userPermission.service';
 
@@ -29,14 +29,14 @@ import { UserPermissionService } from './api/userPermission.service';
   declarations: [],
   exports:      [],
   providers: [
-    DispatchTaskService,
-    DispatchTaskResultService,
-    ExerciseAgentService,
+    BondAgentService,
     FilesService,
     PermissionService,
     PlayerService,
+    ResultService,
     ScenarioService,
-    SessionService,
+    ScenarioTemplateService,
+    TaskService,
     UserService,
     UserPermissionService ]
 })
@@ -59,4 +59,3 @@ export class ApiModule {
         }
     }
 }
-

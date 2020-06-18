@@ -8,9 +8,9 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy, Input } from '@angular/core';
 import { PageEvent } from '@angular/material';
-import { Definition } from '../../../../generated/alloy.api';
+import { EventTemplate, Directory, View, ScenarioTemplate } from 'src/app/generated/alloy.api';
 import { EventTemplateEditComponent } from '../event-template-edit/event-template-edit.component';
 import { Subject } from 'rxjs/Subject';
 import { Observable  } from 'rxjs/Observable';
@@ -25,26 +25,24 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class EventTemplateListComponent implements OnDestroy {
   @ViewChild(EventTemplateEditComponent, { static: true }) eventTemplateEditComponent: EventTemplateEditComponent;
-
+  @Input() viewList: Observable<View[]>;
+  @Input() directoryList: Observable<Directory[]>;
+  @Input() scenarioTemplateList: Observable<ScenarioTemplate[]>;
   public displayedColumns: string[] = ['name', 'description', 'durationHours'];
   public editEventTemplateText = 'Edit Event Template';
   public searchControl: FormControl = this.eventTemplatesService.searchControl$;
-  public eventTemplates: Definition[] = [];
+  public eventTemplates: EventTemplate[] = [];
   public isLoading = true;
   public sortValue = {active: 'dateCreated', direction: 'desc'};
-
   // MatPaginator Output
   public defaultPageSize = 10;
   public pageEvent: PageEvent;
   public pageEvents$: Observable<PageEvent>;
-
   private unsubscribe$ = new Subject();
-
 
   constructor(
     public eventTemplatesService: EventTemplatesService
   ) {
-
     this.eventTemplatesService.eventTemplateList$.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(defs => {
@@ -86,12 +84,12 @@ export class EventTemplateListComponent implements OnDestroy {
 
 
   addNewEventTemplate() {
-    const eventTemplate = <Definition>{name: 'New Event Template', description: 'Add description'};
+    const eventTemplate = <EventTemplate>{name: 'New Event Template', description: 'Add description'};
     this.eventTemplatesService.addNew(eventTemplate);
   }
 
 
-  togglePanel(eventTemplate: Definition) {
+  togglePanel(eventTemplate: EventTemplate) {
     if (this.eventTemplatesService.selectedEventTemplateId === eventTemplate.id) {
       this.eventTemplatesService.selectedEventTemplateId = undefined;
     } else {

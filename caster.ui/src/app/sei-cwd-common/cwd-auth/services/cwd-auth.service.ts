@@ -8,80 +8,90 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Injectable} from '@angular/core';
-import {CwdSettingsService} from '../../cwd-settings';
-import {User, UserManager, WebStorageStateStore, UserManagerEvents} from 'oidc-client';
-import {AuthStore} from '../state/auth.store';
-import {AuthQuery} from '../state/auth.query';
+import { Injectable } from '@angular/core';
+import { CwdSettingsService } from '../../cwd-settings';
+import {
+  User,
+  UserManager,
+  WebStorageStateStore,
+  UserManagerEvents,
+} from 'oidc-client';
+import { AuthStore } from '../state/auth.store';
+import { AuthQuery } from '../state/auth.query';
 import UserSignedOutCallback = UserManagerEvents.UserSignedOutCallback;
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CwdAuthService {
   private userManager: UserManager;
   private user: User;
   user$ = this.authQuery.user$;
-  
-  
-  
-  
-  
-  constructor(private settingsService: CwdSettingsService, private store: AuthStore, private authQuery: AuthQuery) {
+
+  constructor(
+    private settingsService: CwdSettingsService,
+    private store: AuthStore,
+    private authQuery: AuthQuery
+  ) {
     if (this.settingsService.settings.UseLocalAuthStorage) {
-      this.settingsService.settings.OIDCSettings.userStore = new WebStorageStateStore({store: window.localStorage});
+      this.settingsService.settings.OIDCSettings.userStore = new WebStorageStateStore(
+        { store: window.localStorage }
+      );
     }
-    this.userManager = new UserManager(this.settingsService.settings.OIDCSettings);
-    this.userManager.events.addUserLoaded(user => { this.onTokenLoaded(user); });
+    this.userManager = new UserManager(
+      this.settingsService.settings.OIDCSettings
+    );
+    this.userManager.events.addUserLoaded((user) => {
+      this.onTokenLoaded(user);
+    });
     this.userManager.events.addUserSignedOut(() => this.logout());
-  
-    this.userManager.getUser().then(user => {
+
+    this.userManager.getUser().then((user) => {
       if (user != null && user.profile != null) {
         this.onTokenLoaded(user);
       }
     });
   }
-  
+
   public isAuthenticated(): Promise<boolean> {
-    return this.userManager.getUser().then(user => {
+    return this.userManager.getUser().then((user) => {
       return user != null && !user.expired;
     });
   }
-  
+
   public startAuthentication(url: string): Promise<User> {
-    return this.userManager.signinRedirect({ state: url });
+    this.userManager.signinRedirect({ state: url });
+    return this.userManager.signinRedirectCallback(url);
   }
-  
+
   public completeAuthentication(url: string): Promise<User> {
     return this.userManager.signinRedirectCallback(url);
   }
-  
+
   public startSilentAuthentication(): Promise<User> {
     return this.userManager.signinSilent();
   }
-  
+
   public completeSilentAuthentication(): Promise<User> {
     return this.userManager.signinSilentCallback();
   }
-  
+
   public getAuthorizationHeader(): string {
     return `${this.user.token_type} ${this.user.access_token}`;
   }
-  
+
   public getAuthorizationToken(): string {
     return this.user.access_token;
   }
-  
+
   public logout() {
     return this.userManager.signoutRedirect();
   }
-  
+
   private onTokenLoaded(user) {
     this.user = user;
-    this.store.update({user});
+    this.store.update({ user });
     const userGuid = user.profile.sub;
     // this.loggedInUserService.setLoggedInUser(userGuid);
   }
 }
-

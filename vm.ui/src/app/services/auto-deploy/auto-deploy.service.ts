@@ -26,12 +26,11 @@ export class AutoDeployService {
     this.deployUrl = `${settings.DeployApiUrl}`;
   }
 
-  getDeploymentForExercise(exerciseId: string) {
-    return this.http.get<any>(`${this.deployUrl}/exercises/${exerciseId}/workstations`);
+  getDeploymentForView(viewId: string) {
+    return this.http.get<any>(`${this.deployUrl}/views/${viewId}/workstations`);
   }
 
-  deployToExercise(exerciseId: string) {
-    return this.http.post<any>(`${this.deployUrl}/exercises/${exerciseId}/workstations`, null);
+  deployToView(viewId: string) {
+    return this.http.post<any>(`${this.deployUrl}/views/${viewId}/workstations`, null);
   }
 }
-

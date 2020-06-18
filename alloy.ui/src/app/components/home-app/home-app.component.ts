@@ -14,7 +14,7 @@ import { SettingsService } from '../../services/settings/settings.service';
 import { Title } from '@angular/platform-browser';
 import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
 import { ActivatedRoute } from '@angular/router';
-import { ImplementationService } from 'src/app/generated/alloy.api';
+import { EventService } from 'src/app/generated/alloy.api';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -37,7 +37,7 @@ export class HomeAppComponent implements OnInit {
     private settingsService: SettingsService,
     private titleService: Title,
     private loggedInUserService: LoggedInUserService,
-    private eventService: ImplementationService
+    private eventService: EventService
   ) {  }
 
   ngOnInit() {
@@ -58,10 +58,10 @@ export class HomeAppComponent implements OnInit {
         const viewId = params['viewId'];
         if (viewId) {
           console.log('ViewId:  ', viewId);
-          this.eventService.getMyExerciseImplementations(viewId).pipe(take(1)).subscribe(imp => {
-            const index = imp.findIndex(i => i.exerciseId === viewId);
+          this.eventService.getMyViewEvents(viewId).pipe(take(1)).subscribe(imp => {
+            const index = imp.findIndex(i => i.viewId === viewId);
             if (index > -1) {
-              this.eventTemplateId = imp[0].definitionId;
+              this.eventTemplateId = imp[0].eventTemplateId;
             }
           });
         }

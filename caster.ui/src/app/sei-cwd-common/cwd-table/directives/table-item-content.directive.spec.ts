@@ -16,4 +16,3 @@ describe('ListItemContentDirective', () => {
     expect(directive).toBeTruthy();
   });
 });
-

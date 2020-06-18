@@ -20,7 +20,7 @@ using Alloy.Api.Infrastructure.Exceptions;
 using Alloy.Api.Services;
 using Alloy.Api.ViewModels;
 using Alloy.Api.Infrastructure.Authorization;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 using Caster.Api.Models;
 
 namespace Alloy.Api.Controllers
@@ -45,7 +45,7 @@ namespace Alloy.Api.Controllers
         /// <returns></returns>
         [HttpGet("directories")]
         [ProducesResponseType(typeof(IEnumerable<Directory>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getDirectories")]
+        [SwaggerOperation(OperationId = "getDirectories")]
         public async Task<IActionResult> GetDirectories(CancellationToken ct)
         {
             var list = await _casterService.GetDirectoriesAsync(ct);
@@ -61,7 +61,7 @@ namespace Alloy.Api.Controllers
         // /// <returns></returns>
         // [HttpGet("workspaces")]
         // [ProducesResponseType(typeof(IEnumerable<Workspace>), (int)HttpStatusCode.OK)]
-        // [SwaggerOperation(operationId: "getWorkspaces")]
+        // [SwaggerOperation(OperationId = "getWorkspaces")]
         // public async Task<IActionResult> GetWorkspaces(CancellationToken ct)
         // {
         //     var list = await _casterService.GetWorkspacesAsync(ct);

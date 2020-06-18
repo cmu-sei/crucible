@@ -8,20 +8,23 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityUIQuery, QueryEntity, QueryConfig, Order} from '@datorama/akita';
-import {FileState, FileStore, FileUIState } from './file.store';
-import {Injectable} from '@angular/core';
-import {ModelFile} from '../../generated/caster-api';
-import {Observable} from "rxjs";
-
+import {
+  EntityUIQuery,
+  QueryEntity,
+  QueryConfig,
+  Order,
+} from '@datorama/akita';
+import { FileState, FileStore, FileUIState } from './file.store';
+import { Injectable } from '@angular/core';
+import { ModelFile } from '../../generated/caster-api';
+import { Observable } from 'rxjs';
 
 @QueryConfig({
   sortBy: 'name',
-  sortByOrder: Order.ASC
+  sortByOrder: Order.ASC,
 })
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileQuery extends QueryEntity<FileState, ModelFile> {
   ui: EntityUIQuery<FileUIState>;
@@ -30,19 +33,18 @@ export class FileQuery extends QueryEntity<FileState, ModelFile> {
     this.createUIQuery();
   }
   getSelectedVersionId(fileId: string): Observable<string> {
-    return this.ui.selectEntity(fileId, entity => entity.selectedVersionId);
+    return this.ui.selectEntity(fileId, (entity) => entity.selectedVersionId);
   }
 
   isEditing(fileId: string, userId: string): Observable<boolean> {
-    return this.selectEntity(fileId, entity => entity.lockedById === userId);
+    return this.selectEntity(fileId, (entity) => entity.lockedById === userId);
   }
   // Observable Response
   selectIsSaved(fileId: string): Observable<boolean> {
-    return this.ui.selectEntity(fileId, entity => entity.isSaved);
+    return this.ui.selectEntity(fileId, (entity) => entity.isSaved);
   }
   // Value Response
   isSaved(fileId: string): boolean {
     return this.ui.getEntity(fileId).isSaved;
   }
 }
-

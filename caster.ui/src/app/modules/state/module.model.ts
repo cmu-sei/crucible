@@ -9,7 +9,7 @@ DM20-0181
 */
 
 import { ID } from '@datorama/akita';
-import {Module} from '../../generated/caster-api';
+import { Module } from '../../generated/caster-api';
 
 export interface ModuleUi {
   id?: string;
@@ -17,5 +17,3 @@ export interface ModuleUi {
   isEditing: boolean;
   isSaved: boolean;
 }
-
-

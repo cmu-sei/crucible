@@ -54,7 +54,12 @@ DM20-0181
       <span class="mat-cell">{{item.durationHours}}</span>
       <span class="mat-cell">{{item.dateCreated | date: 'yyyy-MM-dd'}}</span>
     </mat-expansion-panel-header>
-    <app-event-template-edit [eventTemplate]="item" (closePanel)="togglePanel(item.id)">
+    <app-event-template-edit
+      [eventTemplate]="item"
+      [viewList]="viewList"
+      [directoryList]="directoryList"
+      [scenarioTemplateList]="scenarioTemplateList"
+      (closePanel)="togglePanel(item.id)">
     </app-event-template-edit>
   </mat-expansion-panel>
 

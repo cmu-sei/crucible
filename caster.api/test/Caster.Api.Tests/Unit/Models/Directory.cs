@@ -33,7 +33,7 @@ namespace Caster.Api.Tests.Unit
             var directory = new Directory()
             {
                 Id = id,
-                ExerciseId = Guid.NewGuid(),
+                ProjectId = Guid.NewGuid(),
                 ParentId = parentId
             };
 

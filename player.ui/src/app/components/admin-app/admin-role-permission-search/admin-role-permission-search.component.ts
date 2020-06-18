@@ -10,8 +10,8 @@ DM20-0181
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
-import { Permission, PermissionService, PermissionForm } from '../../../swagger-codegen/s3.player.api';
-import { Role, RoleService, RoleForm } from '../../../swagger-codegen/s3.player.api';
+import { Permission, PermissionService, PermissionForm } from '../../../generated/s3.player.api';
+import { Role, RoleService, RoleForm } from '../../../generated/s3.player.api';
 import { DialogService } from '../../../services/dialog/dialog.service';
 import {FormControl} from '@angular/forms';
 
@@ -264,4 +264,3 @@ export class AdminRolePermissionSearchComponent implements OnInit {
     }
 
   }
-

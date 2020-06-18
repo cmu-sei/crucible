@@ -26,7 +26,7 @@ namespace Caster.Api.Data
             _options = options;
         }
 
-        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Project> Projects { get; set; }
         public DbSet<Directory> Directories { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<FileVersion> FileVersions { get; set; }
@@ -56,4 +56,3 @@ namespace Caster.Api.Data
         }
     }
 }
-

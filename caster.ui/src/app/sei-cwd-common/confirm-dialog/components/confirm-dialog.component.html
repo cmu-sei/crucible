@@ -12,8 +12,15 @@ DM20-0181
 <div class="message-text">{{ message }}</div>
 
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
-  <button mat-stroked-button *ngIf="buttonTrueText !== ''" (click)="onClick(true)" tabindex="3">{{buttonTrueText}}</button>
-  <button mat-stroked-button (click)="onCancel()" tabindex="3">{{buttonFalseText}}</button>
+  <button
+    mat-stroked-button
+    *ngIf="buttonTrueText !== ''"
+    (click)="onClick(true)"
+    tabindex="3"
+  >
+    {{ buttonTrueText }}
+  </button>
+  <button mat-stroked-button (click)="onCancel()" tabindex="3">
+    {{ buttonFalseText }}
+  </button>
 </mat-dialog-actions>
-
-

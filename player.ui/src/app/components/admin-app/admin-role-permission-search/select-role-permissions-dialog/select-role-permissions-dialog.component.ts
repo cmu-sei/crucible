@@ -10,7 +10,7 @@ DM20-0181
 
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Component, Inject, OnInit, AfterContentInit} from '@angular/core';
-import { PermissionService, RoleService } from '../../../../swagger-codegen/s3.player.api';
+import { PermissionService, RoleService } from '../../../../generated/s3.player.api';
 
 @Component({
     selector: 'select-role-permissions-dialog',
@@ -64,5 +64,3 @@ export class SelectRolePermissionsDialogComponent implements OnInit {
   }
 
 }
-
-

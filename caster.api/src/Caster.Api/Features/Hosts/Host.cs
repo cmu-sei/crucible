@@ -45,9 +45,8 @@ namespace Caster.Api.Features.Hosts
         public bool Development { get; set; }
 
         /// <summary>
-        /// The Exercise this Host is assigned to, if any
+        /// The Project this Host is assigned to, if any
         /// </summary>
-        public Guid? ExerciseId { get; set; }
+        public Guid? ProjectId { get; set; }
     }
 }
-

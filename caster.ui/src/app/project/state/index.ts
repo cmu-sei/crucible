@@ -12,4 +12,3 @@ export * from './project-query.service';
 export * from './project-store.service';
 export * from './project.service';
 export * from './project.model';
-

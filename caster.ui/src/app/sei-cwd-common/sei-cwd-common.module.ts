@@ -10,15 +10,12 @@ DM20-0181
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {InjectionToken} from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 export const CWD_SETTINGS_TOKEN = new InjectionToken('CwdSettings');
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule],
 })
-export class SeiCwdCommonModule { }
-
+export class SeiCwdCommonModule {}

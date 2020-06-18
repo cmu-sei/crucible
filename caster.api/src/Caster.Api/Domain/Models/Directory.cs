@@ -26,8 +26,8 @@ namespace Caster.Api.Domain.Models
 
         public string Name { get; set; }
 
-        public Guid ExerciseId { get; set; }
-        public virtual Exercise Exercise { get; set; }
+        public Guid ProjectId { get; set; }
+        public virtual Project Project { get; set; }
 
         public Guid? ParentId { get; set; }
         public virtual Directory Parent { get; set; }
@@ -58,7 +58,7 @@ namespace Caster.Api.Domain.Models
                 this.SetPath(parent.Path);
                 this.Parent = parent;
                 this.ParentId = parent.Id;
-                this.ExerciseId = parent.ExerciseId;
+                this.ProjectId = parent.ProjectId;
             }
             else
             {
@@ -130,7 +130,7 @@ namespace Caster.Api.Domain.Models
         public void Configure(EntityTypeBuilder<Directory> builder)
         {
             builder.HasIndex(d => d.Path);
-            builder.HasIndex(d => d.ExerciseId);
+            builder.HasIndex(d => d.ProjectId);
             builder.HasIndex(d => d.ParentId);
 
             builder

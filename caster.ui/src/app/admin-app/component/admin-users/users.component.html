@@ -9,21 +9,19 @@ DM20-0181
 -->
 
 <div class="component-container mat-elevation-z8">
-
   <div fxLayout="row" class="add-margin">
     <div fxFlex>
       <cas-user-list
-        *ngIf="!!users$ && !! permissions$ && !!isLoading$"
+        *ngIf="!!users$ && !!permissions$ && !!isLoading$"
         [users]="users$ | async"
-        [permissions] = "permissions$ | async"
+        [permissions]="permissions$ | async"
         [isLoading]="isLoading$ | async"
         (create)="create($event)"
         (delete)="delete($event)"
         (addUserPermission)="addUserPermission($event)"
-        (removeUserPermission)="removeUserPermission($event)">
+        (removeUserPermission)="removeUserPermission($event)"
+      >
       </cas-user-list>
     </div>
   </div>
-
 </div>
-

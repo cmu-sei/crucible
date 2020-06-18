@@ -9,6 +9,6 @@ DM20-0181
 */
 
 export interface FileDownload {
-    blob: Blob;
-    filename: string;
+  blob: Blob;
+  filename: string;
 }

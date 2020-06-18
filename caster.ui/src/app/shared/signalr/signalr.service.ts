@@ -12,15 +12,20 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { FileService } from 'src/app/files/state';
 import { DirectoryService } from 'src/app/directories';
-import { Directory, Workspace, Run, ModelFile } from 'src/app/generated/caster-api';
+import {
+  Directory,
+  Workspace,
+  Run,
+  ModelFile,
+} from 'src/app/generated/caster-api';
 import { WorkspaceService } from 'src/app/workspace/state';
 import { CwdAuthService, CwdSettingsService } from 'src/app/sei-cwd-common';
+import { ProjectService } from '../../project/state';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SignalRService {
-
   private hubConnection: signalR.HubConnection;
   private projectId: string;
   private workspaceIds: string[] = [];
@@ -29,11 +34,12 @@ export class SignalRService {
 
   constructor(
     private fileService: FileService,
+    private projectService: ProjectService,
     private directoryService: DirectoryService,
     private workspaceService: WorkspaceService,
     private authService: CwdAuthService,
     private settingsService: CwdSettingsService
-  ) { }
+  ) {}
 
   public startConnection(): Promise<void> {
     if (this.connectionPromise) {
@@ -41,10 +47,10 @@ export class SignalRService {
     }
 
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${this.settingsService.settings.ApiUrl}/hubs/exercise`, {
+      .withUrl(`${this.settingsService.settings.ApiUrl}/hubs/project`, {
         accessTokenFactory: () => {
           return this.authService.getAuthorizationToken();
-        }
+        },
       })
       .withAutomaticReconnect(new RetryPolicy(60, 0, 5))
       .build();
@@ -55,18 +61,18 @@ export class SignalRService {
 
     this.addHandlers();
     this.connectionPromise = this.hubConnection.start();
-    this.connectionPromise.then(x => this.JoinGroups());
+    this.connectionPromise.then((x) => this.JoinGroups());
 
     return this.connectionPromise;
   }
 
   private JoinGroups() {
     if (this.projectId) {
-      this.joinExercise(this.projectId);
+      this.joinProject(this.projectId);
     }
 
     if (this.workspaceIds) {
-      this.workspaceIds.forEach(x => this.joinWorkspace(x));
+      this.workspaceIds.forEach((x) => this.joinWorkspace(x));
     }
 
     if (this.joinedWorkspacesAdmin) {
@@ -74,17 +80,17 @@ export class SignalRService {
     }
   }
 
-  public joinExercise(exerciseId: string) {
-    this.projectId = exerciseId;
+  public joinProject(projectId: string) {
+    this.projectId = projectId;
 
     if (this.hubConnection.state === signalR.HubConnectionState.Connected) {
-      this.hubConnection.invoke('JoinExercise', exerciseId);
+      this.hubConnection.invoke('JoinProject', projectId);
     }
   }
 
-  public leaveExercise(exerciseId: string) {
+  public leaveProject(projectId: string) {
     this.projectId = null;
-    this.hubConnection.invoke('LeaveExercise', exerciseId);
+    this.hubConnection.invoke('LeaveProject', projectId);
   }
 
   public joinWorkspace(workspaceId: string) {
@@ -96,7 +102,7 @@ export class SignalRService {
   }
 
   public leaveWorkspace(workspaceId: string) {
-    this.workspaceIds = this.workspaceIds.filter(x => x !== workspaceId);
+    this.workspaceIds = this.workspaceIds.filter((x) => x !== workspaceId);
     this.hubConnection.invoke('LeaveWorkspace', workspaceId);
   }
 
@@ -134,6 +140,7 @@ export class SignalRService {
     });
 
     this.hubConnection.on('FileDeleted', (fileId: string) => {
+      this.projectService.closeTab(fileId);
       this.fileService.fileDeleted(fileId);
     });
   }
@@ -157,9 +164,12 @@ export class SignalRService {
       this.workspaceService.deleted(workspaceId);
     });
 
-    this.hubConnection.on('WorkspaceSettingsUpdated', (lockingEnabled: boolean) => {
-      this.workspaceService.lockingEnabledUpdated(lockingEnabled);
-    });
+    this.hubConnection.on(
+      'WorkspaceSettingsUpdated',
+      (lockingEnabled: boolean) => {
+        this.workspaceService.lockingEnabledUpdated(lockingEnabled);
+      }
+    );
   }
 
   private addRunHandlers() {
@@ -170,22 +180,25 @@ export class SignalRService {
 }
 
 class RetryPolicy {
-
   constructor(
     private maxSeconds: number,
     private minJitterSeconds: number,
     private maxJitterSeconds: number
-  ) { }
+  ) {}
 
-  nextRetryDelayInMilliseconds(retryContext: signalR.RetryContext): number | null {
+  nextRetryDelayInMilliseconds(
+    retryContext: signalR.RetryContext
+  ): number | null {
     let nextRetrySeconds = Math.pow(2, retryContext.previousRetryCount + 1);
 
     if (nextRetrySeconds > this.maxSeconds) {
       nextRetrySeconds = this.maxSeconds;
     }
 
-    nextRetrySeconds += Math.floor(
-      Math.random() * (this.maxJitterSeconds - this.minJitterSeconds + 1)) + this.minJitterSeconds; // Add Jitter
+    nextRetrySeconds +=
+      Math.floor(
+        Math.random() * (this.maxJitterSeconds - this.minJitterSeconds + 1)
+      ) + this.minJitterSeconds; // Add Jitter
 
     return nextRetrySeconds * 1000;
   }

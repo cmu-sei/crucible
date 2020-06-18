@@ -18,9 +18,8 @@ describe('ProjectCollapseContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectCollapseContainerComponent ]
-    })
-    .compileComponents();
+      declarations: [ProjectCollapseContainerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('ProjectCollapseContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

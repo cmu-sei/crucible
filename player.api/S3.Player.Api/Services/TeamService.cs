@@ -32,14 +32,14 @@ namespace S3.Player.Api.Services
     {
         Task<IEnumerable<ViewModels.Team>> GetAsync(CancellationToken ct);
         Task<ViewModels.Team> GetAsync(Guid id, CancellationToken ct);
-        Task<IEnumerable<ViewModels.Team>> GetByExerciseIdAsync(Guid exerciseId, CancellationToken ct);
-        Task<IEnumerable<ViewModels.Team>> GetByExerciseIdForUserAsync(Guid exerciseId, Guid userId, CancellationToken ct);
-        Task<ViewModels.Team> CreateAsync(Guid exerciseId, TeamForm form, CancellationToken ct);
-        Task<ViewModels.Team> UpdateAsync(Guid id, TeamForm form, CancellationToken ct);        
+        Task<IEnumerable<ViewModels.Team>> GetByViewIdAsync(Guid viewId, CancellationToken ct);
+        Task<IEnumerable<ViewModels.Team>> GetByViewIdForUserAsync(Guid viewId, Guid userId, CancellationToken ct);
+        Task<ViewModels.Team> CreateAsync(Guid viewId, TeamForm form, CancellationToken ct);
+        Task<ViewModels.Team> UpdateAsync(Guid id, TeamForm form, CancellationToken ct);
         Task<bool> DeleteAsync(Guid id, CancellationToken ct);
         Task<ViewModels.Team> SetPrimaryAsync(Guid teamId, Guid userId, CancellationToken ct);
     }
-    
+
     public class TeamService : ITeamService
     {
         private readonly PlayerContext _context;
@@ -67,36 +67,36 @@ namespace S3.Player.Api.Services
             return _mapper.Map<IEnumerable<Team>>(items);
         }
 
-        public async Task<IEnumerable<Team>> GetByExerciseIdAsync(Guid exerciseId, CancellationToken ct)
+        public async Task<IEnumerable<Team>> GetByViewIdAsync(Guid viewId, CancellationToken ct)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(exerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(viewId))).Succeeded)
                 throw new ForbiddenException();
 
-            var exerciseExists = _context.Exercises
-                .Where(e => e.Id == exerciseId)
+            var viewExists = _context.Views
+                .Where(e => e.Id == viewId)
                 .DeferredAny()
                 .FutureValue();
 
             var teamsQuery = _context.Teams
-                .Where(e => e.ExerciseId == exerciseId)
+                .Where(e => e.ViewId == viewId)
                 .ProjectTo<TeamDTO>();
                 //.Future();
 
-            if (!(await exerciseExists.ValueAsync()))
-                throw new EntityNotFoundException<Exercise>();
+            if (!(await viewExists.ValueAsync()))
+                throw new EntityNotFoundException<View>();
 
             var teams = await teamsQuery.ToListAsync();
 
             return _mapper.Map<IEnumerable<Team>>(teams);
         }
 
-        public async Task<IEnumerable<Team>> GetByExerciseIdForUserAsync(Guid exerciseId, Guid userId, CancellationToken ct)
+        public async Task<IEnumerable<Team>> GetByViewIdForUserAsync(Guid viewId, Guid userId, CancellationToken ct)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrExerciseAdminRequirement(exerciseId, userId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new SameUserOrViewAdminRequirement(viewId, userId))).Succeeded)
                 throw new ForbiddenException();
 
-            var exerciseExists = _context.Exercises
-                .Where(e => e.Id == exerciseId)
+            var viewExists = _context.Views
+                .Where(e => e.Id == viewId)
                 .DeferredAny()
                 .FutureValue();
 
@@ -108,17 +108,17 @@ namespace S3.Player.Api.Services
             //QueryFutureEnumerable<TeamDTO> teamQuery;
             IQueryable<TeamDTO> teamQuery;
 
-            if ((await _authorizationService.AuthorizeAsync(await _claimsService.GetClaimsPrincipal(userId, true), null, new ExerciseAdminRequirement(exerciseId))).Succeeded)
+            if ((await _authorizationService.AuthorizeAsync(await _claimsService.GetClaimsPrincipal(userId, true), null, new ViewAdminRequirement(viewId))).Succeeded)
             {
                 teamQuery = _context.Teams
-                    .Where(t => t.ExerciseId == exerciseId)
+                    .Where(t => t.ViewId == viewId)
                     .ProjectTo<TeamDTO>();
                     //.Future();
             }
             else
             {
                 teamQuery = _context.TeamMemberships
-                .Where(x => x.UserId == userId && x.Team.ExerciseId == exerciseId)
+                .Where(x => x.UserId == userId && x.Team.ViewId == viewId)
                 .Select(x => x.Team)
                 .Distinct()
                 .ProjectTo<TeamDTO>();
@@ -130,46 +130,46 @@ namespace S3.Player.Api.Services
             if (!(await userExists.ValueAsync()))
                 throw new EntityNotFoundException<User>();
 
-            if (!(await exerciseExists.ValueAsync()))
-                throw new EntityNotFoundException<Exercise>();
+            if (!(await viewExists.ValueAsync()))
+                throw new EntityNotFoundException<View>();
 
             return _mapper.Map<IEnumerable<Team>>(teams);
         }
 
         public async Task<Team> GetAsync(Guid id, CancellationToken ct)
-        {            
-            var team = await _context.Teams    
+        {
+            var team = await _context.Teams
                 .ProjectTo<TeamDTO>()
                 .SingleOrDefaultAsync(o => o.Id == id, ct);
 
             if(team != null)
             {
-                if (!(await _authorizationService.AuthorizeAsync(_user, null, new TeamAccessRequirement(team.ExerciseId, id))).Succeeded)
+                if (!(await _authorizationService.AuthorizeAsync(_user, null, new TeamAccessRequirement(team.ViewId, id))).Succeeded)
                     throw new ForbiddenException();
-            }            
+            }
 
             return _mapper.Map<Team>(team);
         }
-        
-        public async Task<Team> CreateAsync(Guid exerciseId, ViewModels.TeamForm form, CancellationToken ct)
+
+        public async Task<Team> CreateAsync(Guid viewId, ViewModels.TeamForm form, CancellationToken ct)
         {
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(exerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(viewId))).Succeeded)
                 throw new ForbiddenException();
 
-            var exerciseEntity = await _context.Exercises.SingleOrDefaultAsync(e => e.Id == exerciseId, ct);
+            var viewEntity = await _context.Views.SingleOrDefaultAsync(e => e.Id == viewId, ct);
 
-            if (exerciseEntity == null)
-                throw new EntityNotFoundException<Exercise>();
+            if (viewEntity == null)
+                throw new EntityNotFoundException<View>();
 
             var teamEntity = _mapper.Map<TeamEntity>(form);
 
-            exerciseEntity.Teams.Add(teamEntity);
+            viewEntity.Teams.Add(teamEntity);
             await _context.SaveChangesAsync(ct);
 
             var team = await GetAsync(teamEntity.Id, ct);
             return _mapper.Map<Team>(team);
         }
-        
+
         public async Task<Team> UpdateAsync(Guid id, ViewModels.TeamForm form, CancellationToken ct)
         {
             var teamToUpdate = await _context.Teams.SingleOrDefaultAsync(t => t.Id == id, ct);
@@ -177,7 +177,7 @@ namespace S3.Player.Api.Services
             if (teamToUpdate == null)
                 throw new EntityNotFoundException<Team>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(teamToUpdate.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(teamToUpdate.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             _mapper.Map(form, teamToUpdate);
@@ -196,7 +196,7 @@ namespace S3.Player.Api.Services
             if (teamToDelete == null)
                 throw new EntityNotFoundException<Team>();
 
-            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ExerciseAdminRequirement(teamToDelete.ExerciseId))).Succeeded)
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewAdminRequirement(teamToDelete.ViewId))).Succeeded)
                 throw new ForbiddenException();
 
             _context.Teams.Remove(teamToDelete);
@@ -214,14 +214,14 @@ namespace S3.Player.Api.Services
                 throw new ForbiddenException("You can only change your Primary Team to a Team that you are a member of");
 
             var teamEntity = await _context.Teams.SingleOrDefaultAsync(t => t.Id == teamId, ct);
-            var exerciseMembership = await _context.ExerciseMemberships
+            var viewMembership = await _context.ViewMemberships
                 .Include(m => m.TeamMemberships)
-                .SingleOrDefaultAsync(m => m.ExerciseId == teamEntity.ExerciseId && m.UserId == userId);
+                .SingleOrDefaultAsync(m => m.ViewId == teamEntity.ViewId && m.UserId == userId);
 
-            var teamMembership = exerciseMembership.TeamMemberships.Where(m => m.TeamId == teamId).FirstOrDefault();
+            var teamMembership = viewMembership.TeamMemberships.Where(m => m.TeamId == teamId).FirstOrDefault();
 
-            exerciseMembership.PrimaryTeamMembershipId = teamMembership.Id;
-            _context.ExerciseMemberships.Update(exerciseMembership);
+            viewMembership.PrimaryTeamMembershipId = teamMembership.Id;
+            _context.ViewMemberships.Update(viewMembership);
             await _context.SaveChangesAsync(ct);
 
             await _claimsService.RefreshClaims(userId);
@@ -231,4 +231,3 @@ namespace S3.Player.Api.Services
         }
     }
 }
-

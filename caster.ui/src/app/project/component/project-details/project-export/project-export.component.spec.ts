@@ -18,9 +18,8 @@ describe('ProjectExportComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectExportComponent ]
-    })
-    .compileComponents();
+      declarations: [ProjectExportComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

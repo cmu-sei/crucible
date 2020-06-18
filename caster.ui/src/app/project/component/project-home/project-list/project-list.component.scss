@@ -7,15 +7,18 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
+@import '../../../../../styles/theme';
 
-@import "../../../../../styles/theme";
+.spacer {
+  flex: 1 1 auto;
+}
 
 .project-list-container {
   display: flex;
   flex-direction: column;
   min-width: 300px;
   margin-top: 40px;
-  max-height: 100vh;
+  max-height: calc(100vh - 38px);
   width: 800px;
 }
 
@@ -31,13 +34,8 @@ DM20-0181
   flex: 0 1 5vw;
 }
 
-.selected {
-  background-color: mat-color($accent);
-}
-
 .project-text {
   margin-left: 20px;
-  color: blue;
+  color: inherit;
   cursor: pointer;
 }
-

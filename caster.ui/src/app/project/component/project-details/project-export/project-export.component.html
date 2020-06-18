@@ -8,32 +8,37 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<h2>Export {{typeString | titlecase}}: {{name}}</h2>
+<h2>Export {{ typeString | titlecase }}: {{ name }}</h2>
 
 <form [formGroup]="form" (ngSubmit)="export()">
+  <mat-form-field *ngIf="isArchiveable" fxLayout="row">
+    <mat-label>Archive Type</mat-label>
+    <mat-select formControlName="archiveType">
+      <mat-option
+        *ngFor="let archiveType of archiveTypes"
+        [value]="archiveType"
+      >
+        {{ archiveType }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <mat-form-field *ngIf="isArchiveable" fxLayout="row">
-        <mat-label>Archive Type</mat-label>
-        <mat-select formControlName="archiveType">
-          <mat-option *ngFor="let archiveType of archiveTypes" [value]="archiveType">
-            {{ archiveType }}
-          </mat-option>
-        </mat-select>
-    </mat-form-field>
+  <mat-form-field floatLabel="always" appearance="none" fxLayout="row">
+    <mat-label>Include Ids </mat-label>
+    <mat-slide-toggle
+      formControlName="includeIds"
+      matTooltip="Append Ids to Directory names to be optionally preserved on import"
+    ></mat-slide-toggle>
+    <textarea matInput hidden></textarea>
+  </mat-form-field>
 
-    <mat-form-field floatLabel="always" appearance="none" fxLayout="row">
-        <mat-label>Include Ids </mat-label>
-        <mat-slide-toggle formControlName="includeIds" matTooltip="Append Ids to Directory names to be optionally preserved on import"></mat-slide-toggle>
-        <textarea matInput hidden></textarea>
-    </mat-form-field>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <button type="submit" mat-raised-button [disabled]="!form.valid">
+      Export
+    </button>
 
-    <div fxLayout="row" fxLayoutAlign="space-around center">
-        <button type="submit" mat-raised-button [disabled]="!form.valid">
-            Export
-        </button>
-
-        <button type="reset" mat-raised-button (click)="cancel()">
-            Cancel
-        </button>
-    </div>
+    <button type="reset" mat-raised-button (click)="cancel()">
+      Cancel
+    </button>
+  </div>
 </form>

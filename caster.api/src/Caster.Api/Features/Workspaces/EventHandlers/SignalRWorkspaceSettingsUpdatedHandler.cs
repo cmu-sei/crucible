@@ -19,17 +19,17 @@ namespace Caster.Api.Features.Workspaces.EventHandlers
 {
     public class SignalRWorkspaceSettingsUpdatedHandler : INotificationHandler<WorkspaceSettingsUpdated>
     {
-        private readonly IHubContext<ExerciseHub> _exerciseHub;
+        private readonly IHubContext<ProjectHub> _projectHub;
 
         public SignalRWorkspaceSettingsUpdatedHandler(
-            IHubContext<ExerciseHub> exerciseHub)
+            IHubContext<ProjectHub> projectHub)
         {
-            _exerciseHub = exerciseHub;
+            _projectHub = projectHub;
         }
 
         public async Task Handle(WorkspaceSettingsUpdated notification, CancellationToken cancellationToken)
         {
-            await _exerciseHub.Clients.Group(nameof(HubGroups.WorkspacesAdmin)).SendAsync("WorkspaceSettingsUpdated", notification.LockingStatus);
+            await _projectHub.Clients.Group(nameof(HubGroups.WorkspacesAdmin)).SendAsync("WorkspaceSettingsUpdated", notification.LockingStatus);
         }
     }
 }

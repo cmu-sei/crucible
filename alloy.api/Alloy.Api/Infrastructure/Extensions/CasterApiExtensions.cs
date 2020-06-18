@@ -4,13 +4,12 @@ Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
 Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
 [DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
-Carnegie Mellon� and CERT� are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -34,16 +33,16 @@ namespace Alloy.Api.Infrastructure.Extensions
             return apiClient;
         }
 
-        public static async Task<Guid?> CreateCasterWorkspaceAsync(CasterApiClient casterApiClient, ImplementationEntity implementationEntity, Guid directoryId, string varsFileContent, bool useDynamicHost, CancellationToken ct)
+        public static async Task<Guid?> CreateCasterWorkspaceAsync(CasterApiClient casterApiClient, EventEntity eventEntity, Guid directoryId, string varsFileContent, bool useDynamicHost, CancellationToken ct)
         {
             try
             {
                 // remove special characters from the user name, use lower case and replace spaces with underscores
-                var userName = Regex.Replace(implementationEntity.Username.ToLower().Replace(" ", "_"), "[@&'(\\s)<>#]", "", RegexOptions.None);
+                var userName = Regex.Replace(eventEntity.Username.ToLower().Replace(" ", "_"), "[@&'(\\s)<>#]", "", RegexOptions.None);
                 // create the new workspace
                 var workspaceCommand = new CreateWorkspaceCommand()
                 {
-                    Name = $"{userName}-{implementationEntity.UserId.ToString()}",
+                    Name = $"{userName}-{eventEntity.UserId.ToString()}",
                     DirectoryId = directoryId,
                     DynamicHost = useDynamicHost
                 };
@@ -65,16 +64,16 @@ namespace Alloy.Api.Infrastructure.Extensions
             }
         }
 
-        public static async Task<string> GetCasterVarsFileContentAsync(ImplementationEntity implementationEntity, S3PlayerApiClient playerApiClient, CancellationToken ct)
+        public static async Task<string> GetCasterVarsFileContentAsync(EventEntity eventEntity, S3PlayerApiClient playerApiClient, CancellationToken ct)
         {
             try
             {
                 var varsFileContent = "";
-                var exercise = (await playerApiClient.GetExerciseAsync((Guid)implementationEntity.ExerciseId, ct)) as S3.Player.Api.Models.Exercise;
+                var view = (await playerApiClient.GetViewAsync((Guid)eventEntity.ViewId, ct)) as S3.Player.Api.Models.View;
 
                 // TODO: exercise_id is deprecated. Remove when no longer in use
-                varsFileContent = $"view_id = \"{exercise.Id}\"\r\nexercise_id = \"{exercise.Id}\"\r\nuser_id = \"{implementationEntity.UserId}\"\r\nusername = \"{implementationEntity.Username}\"\r\n";
-                var teams = (await playerApiClient.GetExerciseTeamsAsync((Guid)exercise.Id, ct)) as IEnumerable<Team>;
+                varsFileContent = $"exercise_id = \"{view.Id}\"\r\nview_id = \"{view.Id}\"\r\nuser_id = \"{eventEntity.UserId}\"\r\nusername = \"{eventEntity.Username}\"\r\n";
+                var teams = (await playerApiClient.GetViewTeamsAsync((Guid)view.Id, ct)) as IEnumerable<Team>;
 
                 foreach (var team in teams)
                 {
@@ -91,14 +90,14 @@ namespace Alloy.Api.Infrastructure.Extensions
         }
 
         public static async Task<Guid?> CreateRunAsync(
-            ImplementationEntity implementationEntity,
+            EventEntity eventEntity,
             CasterApiClient casterApiClient,
             bool isDestroy,
             CancellationToken ct)
         {
             var runCommand = new CreateRunCommand()
             {
-                WorkspaceId = implementationEntity.WorkspaceId,
+                WorkspaceId = eventEntity.WorkspaceId,
                 IsDestroy = isDestroy
             };
             try
@@ -113,29 +112,29 @@ namespace Alloy.Api.Infrastructure.Extensions
         }
 
         public static async Task<bool> WaitForRunToBePlannedAsync(
-            ImplementationEntity implementationEntity,
+            EventEntity eventEntity,
             CasterApiClient casterApiClient,
             int loopIntervalSeconds,
             int maxWaitMinutes,
             CancellationToken ct)
         {
-            if (implementationEntity.RunId == null)
+            if (eventEntity.RunId == null)
             {
                 return false;
             }
             var endTime = DateTime.UtcNow.AddMinutes(maxWaitMinutes);
-            var status = "Planning";
-            while (status == "Planning" && DateTime.UtcNow < endTime)
+            var status = RunStatus.Planning;
+            while (status == RunStatus.Planning && DateTime.UtcNow < endTime)
             {
-                var casterRun = await casterApiClient.GetRunAsync((Guid)implementationEntity.RunId);
+                var casterRun = await casterApiClient.GetRunAsync((Guid)eventEntity.RunId);
                 status = casterRun.Status;
                 // if not there yet, pause before the next check
-                if (status == "Planning")
+                if (status == RunStatus.Planning)
                 {
                     Thread.Sleep(TimeSpan.FromSeconds(loopIntervalSeconds));
                 }
             }
-            if (status == "Planned")
+            if (status == RunStatus.Planned)
             {
                 return true;
             }
@@ -146,15 +145,15 @@ namespace Alloy.Api.Infrastructure.Extensions
         }
 
         public static async Task<bool> ApplyRunAsync(
-            ImplementationEntity implementationEntity,
+            EventEntity eventEntity,
             CasterApiClient casterApiClient,
             CancellationToken ct)
         {
-            var initialInternalStatus = implementationEntity.InternalStatus;
+            var initialInternalStatus = eventEntity.InternalStatus;
             // if status is Planned or Applying
             try
             {
-                await casterApiClient.ApplyRunAsync((Guid)implementationEntity.RunId, ct);
+                await casterApiClient.ApplyRunAsync((Guid)eventEntity.RunId, ct);
                 return true;
             }
             catch (Exception ex)
@@ -163,12 +162,12 @@ namespace Alloy.Api.Infrastructure.Extensions
             }
         }
 
-        public static async Task<bool> DeleteCasterWorkspaceAsync(ImplementationEntity implementationEntity,
+        public static async Task<bool> DeleteCasterWorkspaceAsync(EventEntity eventEntity,
             CasterApiClient casterApiClient, TokenResponse tokenResponse, CancellationToken ct)
         {
             try
             {
-                await casterApiClient.DeleteWorkspaceAsync((Guid)implementationEntity.WorkspaceId, ct);
+                await casterApiClient.DeleteWorkspaceAsync((Guid)eventEntity.WorkspaceId, ct);
                 return true;
             }
             catch (Exception ex)
@@ -178,29 +177,40 @@ namespace Alloy.Api.Infrastructure.Extensions
         }
 
         public static async Task<bool> WaitForRunToBeAppliedAsync(
-            ImplementationEntity implementationEntity,
+            EventEntity eventEntity,
             CasterApiClient casterApiClient,
             int loopIntervalSeconds,
             int maxWaitMinutes,
             CancellationToken ct)
         {
-            if (implementationEntity.RunId == null)
+            if (eventEntity.RunId == null)
             {
                 return false;
             }
             var endTime = DateTime.UtcNow.AddMinutes(maxWaitMinutes);
-            var status = "Applying";
-            while (status == "Applying" && DateTime.UtcNow < endTime)
+            var status = ApplyStatus.Applying;
+            while ((status == ApplyStatus.Applying ||
+                    status == ApplyStatus.AppliedStateError ||
+                    status == ApplyStatus.FailedStateError)
+                    && DateTime.UtcNow < endTime)
             {
-                var casterRun = await casterApiClient.GetRunAsync((Guid)implementationEntity.RunId);
+                var casterRun = await casterApiClient.GetRunAsync((Guid)eventEntity.RunId);
                 status = casterRun.Status;
                 // if not there yet, pause before the next check
-                if (status == "Applying")
+                if (status == ApplyStatus.Applying ||
+                    status == ApplyStatus.AppliedStateError ||
+                    status == ApplyStatus.FailedStateError)
                 {
                     Thread.Sleep(TimeSpan.FromSeconds(loopIntervalSeconds));
+
+                    if (status == ApplyStatus.AppliedStateError ||
+                        status == ApplyStatus.FailedStateError)
+                    {
+                        await casterApiClient.SaveStateAsync(eventEntity.RunId.Value);
+                    }
                 }
             }
-            if (status == "Applied")
+            if (status == ApplyStatus.Applied)
             {
                 return true;
             }

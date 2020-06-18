@@ -47,7 +47,7 @@ namespace S3.Player.Api.Controllers
         /// Returns a list of all of the Teams in the system.
         /// <para />
         /// Only accessible to a SuperUser
-        /// </remarks>       
+        /// </remarks>
         /// <returns></returns>
         [HttpGet("teams")]
         [ProducesResponseType(typeof(IEnumerable<Team>), (int)HttpStatusCode.OK)]
@@ -59,62 +59,62 @@ namespace S3.Player.Api.Controllers
         }
 
         /// <summary>
-        /// Gets all Teams for an Exercise
+        /// Gets all Teams for an View
         /// </summary>
         /// <remarks>
-        /// Returns all Teams within a specific Exercise
+        /// Returns all Teams within a specific View
         /// <para />
-        /// Accessible to a SuperUser or a User on an Admin Team within that Exercise
+        /// Accessible to a SuperUser or a User on an Admin Team within that View
         /// </remarks>
-        /// <param name="id">The id of the Exercise</param>
+        /// <param name="id">The id of the View</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        [HttpGet("exercises/{id}/teams")]
+        [HttpGet("views/{id}/teams")]
         [ProducesResponseType(typeof(IEnumerable<Team>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getExerciseTeams")]
-        public async Task<IActionResult> GetByExercise(Guid id, CancellationToken ct)
+        [SwaggerOperation(operationId: "getViewTeams")]
+        public async Task<IActionResult> GetByView(Guid id, CancellationToken ct)
         {
-            var list = await _teamService.GetByExerciseIdAsync(id, ct);
+            var list = await _teamService.GetByViewIdAsync(id, ct);
             return Ok(list);
         }
 
         /// <summary>
-        /// Gets all Teams for a User by Exercise
+        /// Gets all Teams for a User by View
         /// </summary>
         /// <remarks>
-        /// Returns all Teams within a specific Exercise that a User is a member of
+        /// Returns all Teams within a specific View that a User is a member of
         /// <para />
-        /// Accessible to a SuperUser, a User on an Admin Team within that Exercise, or the specified User itself
+        /// Accessible to a SuperUser, a User on an Admin Team within that View, or the specified User itself
         /// </remarks>
         /// <param name="userId">The id of the User</param>
         /// <param name="ct"></param>
-        /// <param name="exerciseId">The id of the Exercise</param>
+        /// <param name="viewId">The id of the View</param>
         /// <returns></returns>
-        [HttpGet("users/{userId}/exercises/{exerciseId}/teams")]
+        [HttpGet("users/{userId}/views/{viewId}/teams")]
         [ProducesResponseType(typeof(IEnumerable<Team>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getUserExerciseTeams")]
-        public async Task<IActionResult> GetByExerciseForUser(Guid exerciseId, Guid userId, CancellationToken ct)
+        [SwaggerOperation(operationId: "getUserViewTeams")]
+        public async Task<IActionResult> GetByViewForUser(Guid viewId, Guid userId, CancellationToken ct)
         {
-            var list = await _teamService.GetByExerciseIdForUserAsync(exerciseId, userId, ct);
+            var list = await _teamService.GetByViewIdForUserAsync(viewId, userId, ct);
             return Ok(list);
         }
 
         /// <summary>
-        /// Gets all Teams for the current User by Exercise
+        /// Gets all Teams for the current User by View
         /// </summary>
         /// <remarks>
-        /// Returns all Teams within a specific Exercise that the current User is a member of
+        /// Returns all Teams within a specific View that the current User is a member of
         /// <para />
         /// Accessible only to the current User.
         /// <para/>
-        /// This is a convenience endpoint and simply returns a 302 redirect to the fully qualified users/{userId}/exercises/{exerciseId}/teams endpoint 
-        /// </remarks>        
-        /// <param name="id">The id of the Exercise</param>
-        [HttpGet("me/exercises/{id}/teams")]
-        [SwaggerOperation(operationId: "getMyExerciseTeams")]
-        public async Task<IActionResult> GetByExerciseForMe(Guid id)
-        {            
-            return RedirectToAction(nameof(this.GetByExerciseForUser), new { userId = User.GetId(), exerciseId = id });            
+        /// This is a convenience endpoint and simply returns a 302 redirect to the fully qualified users/{userId}/views/{viewId}/teams endpoint
+        /// </remarks>
+        /// <param name="id">The id of the View</param>
+        [HttpGet("me/views/{id}/teams")]
+        [SwaggerOperation(operationId: "getMyViewTeams")]
+        public async Task<IActionResult> GetByViewForMe(Guid id)
+        {
+            return RedirectToAction(nameof(this.GetByViewForUser), new { userId = User.GetId(), viewId = id });
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Returns the Team with the id specified
         /// <para />
-        /// Accessible to a SuperUser, a User on an Admin Team within the Team's Exercise, or a User that is a member of the specified Team
+        /// Accessible to a SuperUser, a User on an Admin Team within the Team's View, or a User that is a member of the specified Team
         /// </remarks>
         /// <param name="id">The id of the Team</param>
         /// <param name="ct"></param>
@@ -142,17 +142,17 @@ namespace S3.Player.Api.Controllers
         }
 
         /// <summary>
-        /// Creates a new Team within an Exercise
+        /// Creates a new Team within an View
         /// </summary>
         /// <remarks>
-        /// Creates a new Team within an Exercise with the attributes specified
+        /// Creates a new Team within an View with the attributes specified
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Exercise
-        /// </remarks>     
-        /// <param name="id">The id of the Exercise</param>
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified View
+        /// </remarks>
+        /// <param name="id">The id of the View</param>
         /// <param name="form">The data to create the Team with</param>
         /// <param name="ct"></param>
-        [HttpPost("exercises/{id}/teams")]
+        [HttpPost("views/{id}/teams")]
         [ProducesResponseType(typeof(Team), (int)HttpStatusCode.Created)]
         [SwaggerOperation(operationId: "createTeam")]
         public async Task<IActionResult> Create([FromRoute] Guid id, [FromBody]TeamForm form, CancellationToken ct)
@@ -167,8 +167,8 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Updates a Team with the attributes specified
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Exercise
-        /// </remarks>     
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified View
+        /// </remarks>
         /// <param name="id">The id of the Team</param>
         /// <param name="form">The updated Team values</param>
         /// <param name="ct"></param>
@@ -187,8 +187,8 @@ namespace S3.Player.Api.Controllers
         /// <remarks>
         /// Deletes a Team with the specified id
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Team's Exercise
-        /// </remarks>    
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Team's View
+        /// </remarks>
         /// <param name="id">The id of the Team</param>
         /// <param name="ct"></param>
         [HttpDelete("teams/{id}")]
@@ -204,10 +204,10 @@ namespace S3.Player.Api.Controllers
         /// Sends a new Team Notification
         /// </summary>
         /// <remarks>
-        /// Creates a new Team within an Exercise with the attributes specified
+        /// Creates a new Team within an View with the attributes specified
         /// <para />
-        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Exercise
-        /// </remarks>     
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified View
+        /// </remarks>
         /// <param name="id">The id of the Team</param>
         /// <param name="incomingData">The data to create the Team with</param>
         /// <param name="ct"></param>
@@ -252,4 +252,3 @@ namespace S3.Player.Api.Controllers
         }
     }
 }
-

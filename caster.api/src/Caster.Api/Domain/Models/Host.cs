@@ -27,8 +27,8 @@ namespace Caster.Api.Domain.Models
         public bool Enabled { get; set; }
         public bool Development { get; set; }
 
-        public Guid? ExerciseId { get; set; }
-        public virtual Exercise Exercise { get; set; }  
+        public Guid? ProjectId { get; set; }
+        public virtual Project Project { get; set; }
 
         public virtual ICollection<HostMachine> Machines { get; set; } = new HashSet<HostMachine>();
 
@@ -53,8 +53,7 @@ namespace Caster.Api.Domain.Models
         public Guid WorkspaceId { get; set; }
         public virtual Workspace Workspace { get; set; }
 
-        public Guid HostId { get; set; } 
+        public Guid HostId { get; set; }
         public virtual Host Host { get; set; }
     }
 }
-

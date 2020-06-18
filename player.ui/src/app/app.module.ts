@@ -22,8 +22,8 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppComponent } from './app.component';
 
-import { ApiModule as SwaggerCodegenApiModule } from './swagger-codegen/s3.player.api/api.module';
-import { BASE_PATH } from './swagger-codegen/s3.player.api';
+import { ApiModule as SwaggerCodegenApiModule } from './generated/s3.player.api/api.module';
+import { BASE_PATH } from './generated/s3.player.api';
 
 import {
   MatAutocompleteModule,
@@ -69,7 +69,7 @@ import { FocusedAppComponent } from './components/player/focused-app/focused-app
 import { PlayerComponent } from './components/player/player.component';
 import { HomeAppComponent } from './components/home-app/home-app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ExerciseListComponent } from './components/home-app/exercise-list/exercise-list.component';
+import { ViewListComponent } from './components/home-app/view-list/view-list.component';
 import { AuthCallbackComponent } from './components/auth/auth-callback.component';
 import { AuthCallbackSilentComponent } from './components/auth/auth-callback-silent.component';
 import { AppService } from './app.service';
@@ -81,7 +81,7 @@ import { FocusedAppService } from './services/focused-app/focused-app.service';
 import { NotificationService } from './services/notification/notification.service';
 import { TeamsService } from './services/teams/teams.service';
 import { LoggedInUserService } from './services/logged-in-user/logged-in-user.service';
-import { ExercisesService } from './services/exercises/exercises.service';
+import { ViewsService } from './services/views/views.service';
 import { ApplicationsService } from './services/applications/applications.service';
 import { DialogService } from './services/dialog/dialog.service';
 import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
@@ -92,16 +92,16 @@ import { SystemMessageComponent } from './components/shared/system-message/syste
 import { SystemMessageService } from './services/system-message/system-message.service';
 import { AuthLogoutComponent } from './components/auth/auth-logout.component';
 import { AdminAppComponent } from './components/admin-app/admin-app.component';
-import { AdminExerciseSearchComponent } from './components/admin-app/admin-exercise-search/admin-exercise-search.component';
+import { AdminViewSearchComponent } from './components/admin-app/admin-view-search/admin-view-search.component';
 import { AdminUserSearchComponent } from './components/admin-app/admin-user-search/admin-user-search.component';
 import { AdminAppTemplateSearchComponent } from './components/admin-app/admin-app-template-search/admin-app-template-search.component';
 import { AdminUserEditComponent } from './components/admin-app/admin-user-search/admin-user-edit/admin-user-edit.component';
 import { AdminRolePermissionSearchComponent } from './components/admin-app/admin-role-permission-search/admin-role-permission-search.component';
-import { AdminExerciseEditComponent } from './components/admin-app/admin-exercise-search/admin-exercise-edit/admin-exercise-edit.component';
+import { AdminViewEditComponent } from './components/admin-app/admin-view-search/admin-view-edit/admin-view-edit.component';
 import { AddRemoveUsersDialogComponent } from './components/shared/add-remove-users-dialog/add-remove-users-dialog.component';
 import { RolesPermissionsSelectComponent } from './components/admin-app/roles-permissions-select/roles-permissions-select.component';
 import { TeamApplicationsSelectComponent } from './components/admin-app/team-applications-select/team-applications-select.component';
-import { ExerciseApplicationsSelectComponent } from './components/admin-app/exercise-applications-select/exercise-applications-select.component';
+import { ViewApplicationsSelectComponent } from './components/admin-app/view-applications-select/view-applications-select.component';
 import { ErrorService } from './services/error/error.service';
 import { AdminTemplateDetailsComponent } from './components/admin-app/admin-app-template-search/admin-template-details/admin-template-details.component';
 
@@ -156,7 +156,7 @@ export class AngularMaterialModule { }
     FocusedAppComponent,
     PlayerComponent,
     HomeAppComponent,
-    ExerciseListComponent,
+    ViewListComponent,
     AuthCallbackComponent,
     AuthCallbackSilentComponent,
     AuthLogoutComponent,
@@ -166,16 +166,16 @@ export class AngularMaterialModule { }
     SelectRolePermissionsDialogComponent,
     SystemMessageComponent,
     AdminAppComponent,
-    AdminExerciseSearchComponent,
+    AdminViewSearchComponent,
     AdminUserSearchComponent,
     AdminAppTemplateSearchComponent,
     AdminRolePermissionSearchComponent,
     AdminUserEditComponent,
-    AdminExerciseEditComponent,
+    AdminViewEditComponent,
     AddRemoveUsersDialogComponent,
     RolesPermissionsSelectComponent,
     TeamApplicationsSelectComponent,
-    ExerciseApplicationsSelectComponent,
+    ViewApplicationsSelectComponent,
     AdminTemplateDetailsComponent
   ],
   imports: [
@@ -187,7 +187,7 @@ export class AngularMaterialModule { }
     AngularMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     AppRoutingModule,
     PushNotificationsModule,
     FlexLayoutModule,
@@ -203,7 +203,7 @@ export class AngularMaterialModule { }
     NotificationService,
     TeamsService,
     LoggedInUserService,
-    ExercisesService,
+    ViewsService,
     DialogService,
     ApplicationsService,
     SystemMessageService,
@@ -221,8 +221,7 @@ export class AngularMaterialModule { }
     {
       provide: BASE_PATH,
       useFactory: getBasePath,
-      deps: [SettingsService],
-      multi: true
+      deps: [SettingsService]
     },
     {
       provide: ErrorHandler,
@@ -238,11 +237,11 @@ export class AngularMaterialModule { }
     SelectRolePermissionsDialogComponent,
     SystemMessageComponent,
     AdminUserEditComponent,
-    AdminExerciseEditComponent,
+    AdminViewEditComponent,
     AddRemoveUsersDialogComponent,
     RolesPermissionsSelectComponent,
     TeamApplicationsSelectComponent,
-    ExerciseApplicationsSelectComponent,
+    ViewApplicationsSelectComponent,
     AdminTemplateDetailsComponent
   ],
 })
@@ -255,4 +254,3 @@ export function initConfig(settings: SettingsService) {
 export function getBasePath(settings: SettingsService) {
   return settings.ApiUrl;
 }
-

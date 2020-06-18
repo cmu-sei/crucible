@@ -8,7 +8,7 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 import { Injectable } from '@angular/core';
-import { ImplementationService, Implementation } from 'src/app/generated/alloy.api';
+import { EventService, Event } from 'src/app/generated/alloy.api';
 import { Observable, BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { take, switchMap, tap } from 'rxjs/operators';
 import { EventTemplatesService } from '../event-templates/event-templates.service';
@@ -18,21 +18,21 @@ import { EventTemplatesService } from '../event-templates/event-templates.servic
 })
 export class EventsService {
 
-  public currentEvents$: Observable<Implementation[]>;
+  public currentEvents$: Observable<Event[]>;
 
   private currentEventTemplateId: string;
   private updateTick$ = new Subject<number>();
 
   constructor(
     public eventTemplatesService: EventTemplatesService,
-    public eventService: ImplementationService
+    public eventService: EventService
   ) {
 
     this.currentEvents$ = combineLatest(this.eventTemplatesService.currentEventTemplate$, this.updateTick$).pipe(
       switchMap(([def]) => {
         if (def) {
           this.currentEventTemplateId = def.id;
-          return this.eventService.getMyDefinitionImplementations(def.id);
+          return this.eventService.getMyEventTemplateEvents(def.id);
         }
       }),
     );
@@ -44,21 +44,21 @@ export class EventsService {
   }
 
   launchEvent() {
-    this.eventService.createImplementationFromDefinition(this.currentEventTemplateId).pipe(
+    this.eventService.createEventFromEventTemplate(this.currentEventTemplateId).pipe(
       take(1),
       tap(() => this.updateEvents())
     ).subscribe();
   }
 
   endEvent(id: string) {
-    this.eventService.endImplementation(id).pipe(
+    this.eventService.endEvent(id).pipe(
       take(1),
       tap(() => this.updateEvents())
     ).subscribe();
   }
 
   redeployEvent(id: string) {
-    this.eventService.redeployImplementation(id).pipe(
+    this.eventService.redeployEvent(id).pipe(
       take(1),
       tap(() => this.updateEvents())
     ).subscribe();

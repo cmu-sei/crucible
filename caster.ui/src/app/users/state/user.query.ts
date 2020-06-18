@@ -8,22 +8,35 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {EntityUIQuery, HashMap, Order, Query, QueryConfig, QueryEntity} from '@datorama/akita';
-import {UsersState, UserStore, UserUIState, CurrentUserState, CurrentUserStore} from './user.store';
-import {User} from '../../generated/caster-api';
-import {Injectable, InjectionToken} from '@angular/core';
-import {Observable} from 'rxjs';
+import {
+  EntityUIQuery,
+  HashMap,
+  Order,
+  Query,
+  QueryConfig,
+  QueryEntity,
+} from '@datorama/akita';
+import {
+  UsersState,
+  UserStore,
+  UserUIState,
+  CurrentUserState,
+  CurrentUserStore,
+} from './user.store';
+import { User } from '../../generated/caster-api';
+import { Injectable, InjectionToken } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @QueryConfig({
   sortBy: 'name',
-  sortByOrder: Order.ASC
+  sortByOrder: Order.ASC,
 })
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserQuery extends QueryEntity<UsersState> {
   ui: EntityUIQuery<UserUIState>;
-  isLoading$ = this.select(state => state.loading);
+  isLoading$ = this.select((state) => state.loading);
 
   constructor(protected store: UserStore) {
     super(store);
@@ -36,11 +49,11 @@ export class UserQuery extends QueryEntity<UsersState> {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CurrentUserQuery extends Query<CurrentUserState> {
+  userTheme$ = this.select((state) => state.theme);
   constructor(protected store: CurrentUserStore) {
     super(store);
   }
 }
-

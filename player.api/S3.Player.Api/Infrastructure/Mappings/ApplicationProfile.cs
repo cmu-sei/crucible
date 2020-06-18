@@ -29,10 +29,8 @@ namespace S3.Player.Api.Infrastructure.Mappings
             CreateMap<ApplicationInstanceEntity, ApplicationInstance>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src =>
                     (src.Application.Name ?? src.Application.Template.Name ?? string.Empty)
-                        .Replace("{viewId}", src.Application.ExerciseId.ToString())
-                        .Replace("{viewName}", src.Application.Exercise.Name ?? string.Empty)
-                        .Replace("{exerciseId}", src.Application.ExerciseId.ToString())
-                        .Replace("{exerciseName}", src.Application.Exercise.Name ?? string.Empty)
+                        .Replace("{viewId}", src.Application.ViewId.ToString())
+                        .Replace("{viewName}", src.Application.View.Name ?? string.Empty)
                         .Replace("{teamId}", src.TeamId.ToString())
                         .Replace("{teamName}", src.Team.Name ?? string.Empty)))
 
@@ -47,15 +45,13 @@ namespace S3.Player.Api.Infrastructure.Mappings
 
                 .ForMember(dest => dest.Url, opt => opt.MapFrom(src =>
                     (src.Application.Url ?? src.Application.Template.Url ?? string.Empty)
-                        .Replace("{viewId}", src.Application.ExerciseId.ToString())
-                        .Replace("{viewName}", src.Application.Exercise.Name != null ? WebUtility.UrlEncode(src.Application.Exercise.Name) : string.Empty)
-                        .Replace("{exerciseId}", src.Application.ExerciseId.ToString())
-                        .Replace("{exerciseName}", src.Application.Exercise.Name != null ? WebUtility.UrlEncode(src.Application.Exercise.Name) : string.Empty)
+                        .Replace("{viewId}", src.Application.ViewId.ToString())
+                        .Replace("{viewName}", src.Application.View.Name != null ? WebUtility.UrlEncode(src.Application.View.Name) : string.Empty)
                         .Replace("{teamId}", src.TeamId.ToString())
                         .Replace("{teamName}", src.Team.Name != null ? WebUtility.UrlEncode(src.Team.Name) : string.Empty)))
 
-                .ForMember(dest => dest.ExerciseId, opt => opt.MapFrom(src =>
-                    src.Application.ExerciseId));
+                .ForMember(dest => dest.ViewId, opt => opt.MapFrom(src =>
+                    src.Application.ViewId));
         }
     }
 }

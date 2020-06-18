@@ -21,13 +21,13 @@ namespace S3.Player.Api.ViewModels
     public class UserPermissions
     {
         public List<PermissionEntity> Permissions { get; set; }
-        public List<TeamPermissions> TeamPermissions { get; set; }        
+        public List<TeamPermissions> TeamPermissions { get; set; }
     }
 
     public class TeamPermissions
     {
         public Guid TeamId { get; set; }
-        public Guid ExerciseId { get; set; }
+        public Guid ViewId { get; set; }
         public bool IsPrimary { get; set; }
         public List<PermissionEntity> Permissions { get; set; }
     }

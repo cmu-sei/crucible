@@ -10,13 +10,9 @@ DM20-0181
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { PlayerComponent } from './components/player/player.component';
-import { AppComponent } from './app.component';
-import { ApplicationListComponent } from './components/player/application-list/application-list.component';
-import { FocusedAppComponent } from './components/player/focused-app/focused-app.component';
-import { NotificationsComponent } from './components/player/notifications/notifications.component';
 import { HomeAppComponent } from './components/home-app/home-app.component';
 import { AuthGuard } from './services/auth/auth-guard.service';
 import { AuthCallbackComponent } from './components/auth/auth-callback.component';
@@ -26,8 +22,8 @@ import { AdminAppComponent } from './components/admin-app/admin-app.component';
 
 export const ROUTES: Routes = [
   { path: '', component: HomeAppComponent, canActivate: [AuthGuard] },
-  { path: 'exercise-player', component: HomeAppComponent, canActivate: [AuthGuard] },
-  { path: 'exercise-player/:id', component: PlayerComponent, canActivate: [AuthGuard] },
+  { path: 'exercise-player/:id', component: PlayerComponent, canActivate: [AuthGuard] }, // TODO: deprecated, remove when safe to do so
+  { path: 'view/:id', component: PlayerComponent, canActivate: [AuthGuard] },
   { path: 'home-app', component: HomeAppComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminAppComponent, canActivate: [AuthGuard] },
   { path: 'auth-callback', component: AuthCallbackComponent },
@@ -45,4 +41,3 @@ export const ROUTES: Routes = [
   ]
 })
 export class AppRoutingModule { }
-

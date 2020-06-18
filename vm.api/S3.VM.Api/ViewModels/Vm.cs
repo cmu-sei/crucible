@@ -19,15 +19,15 @@ namespace S3.VM.Api.ViewModels
         [Required]
         [Display(Name = "id", Description = "Virtual Machine GUID")]
         public Guid Id { get; set; }
-        
+
         [Display(Name = "url", Description = "Virtual Machine URL")]
         public string Url { get; set; }
-        
+
         [Display(Name = "name", Description = "Virtual Machine Display Name")]
         public string Name { get; set; }
 
-        [Display(Name = "exerciseId", Description = "The Id of the Exercise that this Vm's Teams belong to")]
-        public Guid ExerciseId { get; set; }
+        [Display(Name = "viewId", Description = "The Id of the View that this Vm's Teams belong to")]
+        public Guid ViewId { get; set; }
 
         [Display(Name = "userId", Description = "UserId of this Vm's owner if it is a personal Vm")]
         public Guid? UserId { get; set; }
@@ -35,7 +35,7 @@ namespace S3.VM.Api.ViewModels
         [Display(Name = "isOwner", Description = "True if this is a personal Vm and the calling user is it's owner")]
         public bool IsOwner { get; set; }
 
-        [Display(Name = "canAccessNicConfiguration", Description = "True if the user is an ExerciseAdmin for this Vm's exercise")]
+        [Display(Name = "canAccessNicConfiguration", Description = "True if the user is a ViewAdmin for this Vm's view")]
         public bool CanAccessNicConfiguration { get; set; }
 
         [Display(Name = "allowedNetworks", Description = "A list of networks that a regular user can access")]

@@ -20,4 +20,3 @@ describe('CwdAuthGuardService', () => {
     expect(service).toBeTruthy();
   });
 });
-

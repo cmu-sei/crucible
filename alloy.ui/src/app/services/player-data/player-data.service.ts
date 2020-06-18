@@ -10,7 +10,7 @@ DM20-0181
 
 import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { Exercise, PlayerService } from 'src/app/generated/alloy.api';
+import { View, PlayerService } from 'src/app/generated/alloy.api';
 import {map, take} from 'rxjs/operators';
 import {Observable, combineLatest, BehaviorSubject} from 'rxjs';
 import {Router, ActivatedRoute} from '@angular/router';
@@ -20,12 +20,12 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 
 export class PlayerDataService {
-  private _views: Exercise[];
+  private _views: View[];
   private _viewMask: Observable<string>;
-  readonly views = new BehaviorSubject<Exercise[]>(this._views);
-  readonly viewList: Observable<Exercise[]>;
+  readonly views = new BehaviorSubject<View[]>(this._views);
+  readonly viewList: Observable<View[]>;
   readonly viewFilter = new FormControl();
-  readonly selectedView: Observable<Exercise>;
+  readonly selectedView: Observable<View>;
   private _selectedViewId: string;
   private _vmMask: Observable<string>;
   private requestedViewId = this.activatedRoute.queryParamMap.pipe(
@@ -45,8 +45,9 @@ export class PlayerDataService {
     });
     this.viewList = combineLatest([this.views, this._viewMask]).pipe(
       map(([items, filterTerm]) =>
-        items ? (items as Exercise[])
-          .filter(item => item.name.toLowerCase().includes(filterTerm.toLowerCase()) ||
+        items ? (items as View[])
+        .sort((a: View, b: View) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
+        .filter(item => item.name.toLowerCase().includes(filterTerm.toLowerCase()) ||
             item.id.toLowerCase().includes(filterTerm.toLowerCase()))
         : [])
     );
@@ -66,13 +67,13 @@ export class PlayerDataService {
     );
   }
 
-  private updateViews(views: Exercise[]) {
+  private updateViews(views: View[]) {
     this._views = Object.assign([], views);
     this.views.next(this._views);
   }
 
   getViewsFromApi() {
-    this.playerService.getExercises().pipe(take(1)).subscribe(views => {
+    this.playerService.getViews().pipe(take(1)).subscribe(views => {
       this.updateViews(views.filter(x => x.status === 'Inactive'));
     }, error => {
       this.updateViews([]);

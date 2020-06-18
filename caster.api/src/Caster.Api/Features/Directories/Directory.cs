@@ -28,10 +28,10 @@ namespace Caster.Api.Features.Directories
         public string Name { get; set; }
 
         /// <summary>
-        /// Id of the exercise this directory is under.
+        /// Id of the project this directory is under.
         /// </summary>
 
-        public Guid ExerciseId { get; set; }
+        public Guid ProjectId { get; set; }
         /// <summary>
         /// Optional Id of the directory this directory is under
         /// </summary>
@@ -48,4 +48,3 @@ namespace Caster.Api.Features.Directories
         public List<Workspace> Workspaces { get; set; }
     }
 }
-

@@ -11,7 +11,9 @@ DM20-0181
 import { HttpHeaders } from '@angular/common/http';
 
 export default class HttpHeaderUtils {
-    static getFilename(headers: HttpHeaders): string {
-        return headers.get('content-disposition').match('filename\*?=[\'"]?(?:UTF-\d[\'"]*)?([^;\r\n"\']*)[\'"]?;?')[1];
-    }
+  static getFilename(headers: HttpHeaders): string {
+    return headers
+      .get('content-disposition')
+      .match('filename*?=[\'"]?(?:UTF-d[\'"]*)?([^;\r\n"\']*)[\'"]?;?')[1];
+  }
 }

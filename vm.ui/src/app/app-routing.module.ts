@@ -25,10 +25,16 @@ export const ROUTES: Routes = [
   { path: 'auth-callback', component: AuthCallbackComponent },
   { path: 'auth-callback-silent', component: AuthCallbackSilentComponent },
   { path: 'logout', component: AuthLogoutComponent },
-  { path: 'exercises/:exerciseId/auto-deploy', component: AutoDeployComponent, canActivate: [AuthGuard] },
-  { path: 'exercises/:exerciseName/:teamId/welder', component: WelderComponent, canActivate: [AuthGuard] },
-  { path: 'exercises/:exerciseId/vms/:name/console', component: ConsoleComponent, canActivate: [AuthGuard] },
-  { path: 'exercises/:exerciseId', component: VmMainComponent, canActivate: [AuthGuard] },
+  { path: 'views/:viewId/auto-deploy', component: AutoDeployComponent, canActivate: [AuthGuard] },
+  { path: 'views/:viewName/:teamId/welder', component: WelderComponent, canActivate: [AuthGuard] },
+  { path: 'views/:viewId/vms/:name/console', component: ConsoleComponent, canActivate: [AuthGuard] },
+  { path: 'views/:viewId', component: VmMainComponent, canActivate: [AuthGuard] },
+  // TODO: deprecated, remove when safe to do so
+  { path: 'exercises/:viewId/auto-deploy', component: AutoDeployComponent, canActivate: [AuthGuard] },
+  { path: 'exercises/:viewName/:teamId/welder', component: WelderComponent, canActivate: [AuthGuard] },
+  { path: 'exercises/:viewId/vms/:name/console', component: ConsoleComponent, canActivate: [AuthGuard] },
+  { path: 'exercises/:viewId', component: VmMainComponent, canActivate: [AuthGuard] },
+  // End depreceated routes
   { path: '**', component: VmMainComponent, canActivate: [AuthGuard] },
 ];
 
@@ -42,4 +48,3 @@ export const ROUTES: Routes = [
   ]
 })
 export class AppRoutingModule { }
-

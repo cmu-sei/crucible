@@ -26,7 +26,7 @@ namespace S3.Player.Api.ViewModels
         public Guid? RoleId { get; set; }
         public string RoleName { get; set; }
 
-        public Guid ExerciseId { get; set; }
+        public Guid ViewId { get; set; }
 
         public bool isPrimary { get; set; }
     }

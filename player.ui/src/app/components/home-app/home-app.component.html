@@ -22,12 +22,12 @@ DM20-0181
       <mat-icon style="transform: translateY(-5px);" svgIcon="ic_expand_more_white_24px"></mat-icon>
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
-      <button [hidden]="!isSuperUser" [routerLink]="['admin']" mat-menu-item>View Administration</button>
+      <button [hidden]="!isSuperUser" [routerLink]="['admin']" mat-menu-item>Administration</button>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </div>
 
 </div>
-<div class="app-exercise-container">
-  <app-exercise-list></app-exercise-list>
+<div class="app-view-container">
+  <app-view-list></app-view-list>
 </div>

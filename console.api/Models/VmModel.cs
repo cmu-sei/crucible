@@ -19,10 +19,10 @@ namespace S3.Vm.Console.Models
     public class VmModel
     {
         public Guid Id { get; set; }
-        
+
         public string Name { get; set; }
 
-        public Guid ExerciseId { get; set; }
+        public Guid ViewId { get; set; }
 
         public string Url { get; set; }
 

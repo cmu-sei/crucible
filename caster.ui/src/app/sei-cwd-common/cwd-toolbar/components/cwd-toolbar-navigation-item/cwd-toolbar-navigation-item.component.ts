@@ -9,35 +9,43 @@ DM20-0181
 */
 
 import {
-  AfterViewInit, ApplicationRef,
+  AfterViewInit,
+  ApplicationRef,
   Component,
-  ComponentFactoryResolver, Injector,
+  ComponentFactoryResolver,
+  Injector,
   OnDestroy,
   OnInit,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
-import {DomPortalOutlet, Portal, PortalOutlet, TemplatePortal} from '@angular/cdk/portal';
+import {
+  DomPortalOutlet,
+  Portal,
+  PortalOutlet,
+  TemplatePortal,
+} from '@angular/cdk/portal';
 
 @Component({
   selector: 'cas-cwd-toolbar-navigation-item',
   templateUrl: './cwd-toolbar-navigation-item.component.html',
-  styleUrls: ['./cwd-toolbar-navigation-item.component.scss']
+  styleUrls: ['./cwd-toolbar-navigation-item.component.scss'],
 })
-export class CwdToolbarNavigationItemComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CwdToolbarNavigationItemComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   private portalOutlet: PortalOutlet;
   private portal: TemplatePortal;
-  @ViewChild('cwdToolbarNavigation', {static: true}) cwdNavigationTmplRef;
+  @ViewChild('cwdToolbarNavigation', { static: true }) cwdNavigationTmplRef;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector,
     private appRef: ApplicationRef,
-    private viewContainerRef: ViewContainerRef) { }
+    private viewContainerRef: ViewContainerRef
+  ) {}
 
-  ngOnInit() {
-  }
-  
+  ngOnInit() {}
+
   ngAfterViewInit(): void {
     this.portalOutlet = new DomPortalOutlet(
       document.querySelector('#toolbar-navigation'),
@@ -45,13 +53,15 @@ export class CwdToolbarNavigationItemComponent implements OnInit, AfterViewInit,
       this.appRef,
       this.injector
     );
-    
-    this.portal = new TemplatePortal(this.cwdNavigationTmplRef, this.viewContainerRef);
+
+    this.portal = new TemplatePortal(
+      this.cwdNavigationTmplRef,
+      this.viewContainerRef
+    );
     this.portalOutlet.attach(this.portal);
   }
-  
+
   ngOnDestroy(): void {
     this.portalOutlet.detach();
   }
 }
-

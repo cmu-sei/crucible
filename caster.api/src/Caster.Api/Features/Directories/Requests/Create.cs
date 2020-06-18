@@ -39,10 +39,10 @@ namespace Caster.Api.Features.Directories
             public string Name { get; set; }
 
             /// <summary>
-            /// ID of the exercise this directory is under.
+            /// ID of the project this directory is under.
             /// </summary>
             [DataMember]
-            public Guid ExerciseId { get; set; }
+            public Guid ProjectId { get; set; }
 
             /// <summary>
             /// ID of the directory this directory is under.
@@ -75,7 +75,7 @@ namespace Caster.Api.Features.Directories
                 if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                     throw new ForbiddenException();
 
-                await ValidateExercise(request.ExerciseId);
+                await ValidateProject(request.ProjectId);
 
                 var directory = _mapper.Map<Domain.Models.Directory>(request);
                 await SetPath(directory);
@@ -85,12 +85,12 @@ namespace Caster.Api.Features.Directories
                 return _mapper.Map<Directory>(directory);
             }
 
-            private async Task ValidateExercise(Guid exerciseId)
+            private async Task ValidateProject(Guid projectId)
             {
-                var exercise = await _db.Exercises.FirstOrDefaultAsync(x => x.Id == exerciseId);
+                var project = await _db.Projects.FirstOrDefaultAsync(x => x.Id == projectId);
 
-                if (exercise == null)
-                    throw new EntityNotFoundException<Exercise>();
+                if (project == null)
+                    throw new EntityNotFoundException<Project>();
             }
 
             private async Task SetPath(Domain.Models.Directory directory)
@@ -108,8 +108,8 @@ namespace Caster.Api.Features.Directories
                     if (parentDirectory == null)
                         throw new EntityNotFoundException<Directory>("Parent Directory not found");
 
-                    if (parentDirectory.ExerciseId != directory.ExerciseId)
-                        throw new ConflictException("Parent and child Directories must be in the same Exercise");
+                    if (parentDirectory.ProjectId != directory.ProjectId)
+                        throw new ConflictException("Parent and child Directories must be in the same Project");
 
                     directory.SetPath(parentDirectory.Path);
                 }
@@ -117,4 +117,3 @@ namespace Caster.Api.Features.Directories
         }
     }
 }
-

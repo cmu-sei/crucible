@@ -6,6 +6,7 @@
         <PackageId>Foreman.Tests</PackageId>
         <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
         <IsPackable>false</IsPackable>
+        <ProjectGuid>{0d295b5d-aec8-4090-9545-83c5d98c239c}</ProjectGuid>
     </PropertyGroup>
 
     <ItemGroup>

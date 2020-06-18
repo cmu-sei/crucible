@@ -12,19 +12,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.AspNetCore.Authorization;
+using STT = System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Steamfitter.Api.Data;
 using Steamfitter.Api.Data.Models;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Authorization;
-using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Infrastructure.Options;
 using Z.EntityFramework.Plus;
 
@@ -32,9 +26,9 @@ namespace Steamfitter.Api.Services
 {
     public interface IUserClaimsService 
     {
-        Task<ClaimsPrincipal> AddUserClaims(ClaimsPrincipal principal, bool update);
-        Task<ClaimsPrincipal> GetClaimsPrincipal(Guid userId, bool setAsCurrent);
-        Task<ClaimsPrincipal> RefreshClaims(Guid userId);
+        STT.Task<ClaimsPrincipal> AddUserClaims(ClaimsPrincipal principal, bool update);
+        STT.Task<ClaimsPrincipal> GetClaimsPrincipal(Guid userId, bool setAsCurrent);
+        STT.Task<ClaimsPrincipal> RefreshClaims(Guid userId);
         ClaimsPrincipal GetCurrentClaimsPrincipal();
         void SetCurrentClaimsPrincipal(ClaimsPrincipal principal);
     }
@@ -53,7 +47,7 @@ namespace Steamfitter.Api.Services
             _cache = cache;
         }
 
-        public async Task<ClaimsPrincipal> AddUserClaims(ClaimsPrincipal principal, bool update)
+        public async STT.Task<ClaimsPrincipal> AddUserClaims(ClaimsPrincipal principal, bool update)
         {
             List<Claim> claims;
             var identity = ((ClaimsIdentity)principal.Identity);
@@ -78,7 +72,7 @@ namespace Steamfitter.Api.Services
             return principal;
         }
 
-        public async Task<ClaimsPrincipal> GetClaimsPrincipal(Guid userId, bool setAsCurrent)
+        public async STT.Task<ClaimsPrincipal> GetClaimsPrincipal(Guid userId, bool setAsCurrent)
         {                        
             ClaimsIdentity identity = new ClaimsIdentity();
             identity.AddClaim(new Claim("sub", userId.ToString()));
@@ -94,7 +88,7 @@ namespace Steamfitter.Api.Services
             return principal;
         }
 
-        public async Task<ClaimsPrincipal> RefreshClaims(Guid userId)
+        public async STT.Task<ClaimsPrincipal> RefreshClaims(Guid userId)
         {
             _cache.Remove(userId);
             return await GetClaimsPrincipal(userId, false);
@@ -110,7 +104,7 @@ namespace Steamfitter.Api.Services
             _currentClaimsPrincipal = principal;
         }
 
-        private async Task<UserEntity> ValidateUser(Guid subClaim, string nameClaim, bool update)
+        private async STT.Task<UserEntity> ValidateUser(Guid subClaim, string nameClaim, bool update)
         {
             var userQuery = _context.Users.Where(u => u.Id == subClaim).Future();
             var anyUsers = _context.Users.DeferredAny().FutureValue();
@@ -154,7 +148,7 @@ namespace Steamfitter.Api.Services
             return user;
         }
 
-        private async Task<IEnumerable<Claim>> GetUserClaims(Guid userId)
+        private async STT.Task<IEnumerable<Claim>> GetUserClaims(Guid userId)
         {
             List<Claim> claims = new List<Claim>();
 

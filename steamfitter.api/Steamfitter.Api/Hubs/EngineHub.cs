@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Steamfitter.Api.ViewModels;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading;
-using System.Threading.Tasks;
+using STT = System.Threading.Tasks;
 using Steamfitter.Api.Services;
 using Steamfitter.Api.Infrastructure.Exceptions;
 
@@ -26,7 +26,7 @@ namespace Steamfitter.Api.Hubs
     public class EngineHub : Hub
     {
         //private readonly CancellationToken _ct;
-        //private readonly IDispatchTaskResultService _dispatchTaskResultService;
+        //private readonly IResultService _resultService;
 
         public EngineHub()
         {
@@ -34,22 +34,22 @@ namespace Steamfitter.Api.Hubs
             //_ct = source.Token;
         }
 
-        public async Task Join(string myIdentity)
+        public async STT.Task Join(string myIdentity)
         {
             // TODO: log the identity of this client.
             // perhaps associate certain VM's with this client?
-            // perhaps have one client per exercise?
+            // perhaps have one client per view?
             return;
         }
 
-        public async Task ReceivedDispatchTaskResults(IEnumerable<DispatchTaskResult> dispatchTaskResults)
+        public async STT.Task ReceivedResults(IEnumerable<Result> results)
         {
-            // await _dispatchTaskResultService.MarkTasksSentAsync(dispatchTaskResults, _ct);
+            // await _resultService.MarkTasksSentAsync(results, _ct);
         }
 
-        public async Task TaskResults(IEnumerable<DispatchTaskResult> dispatchTaskResults)
+        public async STT.Task TaskResults(IEnumerable<Result> results)
         {
-            // await _dispatchTaskResultService.UpdateActualOutputsAsync(dispatchTaskResults, _ct);
+            // await _resultService.UpdateActualOutputsAsync(results, _ct);
         }
     }
 }

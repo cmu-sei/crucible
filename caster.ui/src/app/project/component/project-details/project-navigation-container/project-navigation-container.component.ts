@@ -8,17 +8,30 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {ProjectObjectType, ProjectQuery, ProjectService, ProjectStore} from '../../../state';
-import {DirectoryQuery, DirectoryService} from '../../../../directories/state';
-import {Directory, Exercise as Project} from '../../../../generated/caster-api';
-import {map, take, takeUntil} from 'rxjs/operators';
-import {RouterQuery} from '@datorama/akita-ng-router-store';
-import {MatDialog, MatDialogRef} from '@angular/material';
-import {NameDialogComponent} from 'src/app/sei-cwd-common/name-dialog/name-dialog.component';
-import {ProjectExportComponent} from '../project-export/project-export.component';
-
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import {
+  ProjectObjectType,
+  ProjectQuery,
+  ProjectService,
+  ProjectStore,
+} from '../../../state';
+import {
+  DirectoryQuery,
+  DirectoryService,
+} from '../../../../directories/state';
+import { Directory, Project } from '../../../../generated/caster-api';
+import { map, take, takeUntil } from 'rxjs/operators';
+import { RouterQuery } from '@datorama/akita-ng-router-store';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { NameDialogComponent } from 'src/app/sei-cwd-common/name-dialog/name-dialog.component';
+import { ProjectExportComponent } from '../project-export/project-export.component';
 
 const WAS_CANCELLED = 'wasCancelled';
 const NAME_VALUE = 'nameValue';
@@ -26,11 +39,9 @@ const NAME_VALUE = 'nameValue';
 @Component({
   selector: 'cas-project-navigation',
   templateUrl: './project-navigation-container.component.html',
-  styleUrls: ['./project-navigation-container.component.scss']
+  styleUrls: ['./project-navigation-container.component.scss'],
 })
-
 export class ProjectNavigationContainerComponent implements OnInit, OnDestroy {
-
   public project$: Observable<Project>;
   public projectDirectories$: Observable<Directory[]>;
   public projectId: string;
@@ -38,7 +49,7 @@ export class ProjectNavigationContainerComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  @ViewChild('exportDialog', { static: false }) exportDialog: TemplateRef<ProjectExportComponent>;
+  @ViewChild('exportDialog') exportDialog: TemplateRef<ProjectExportComponent>;
   private exportDialogRef: MatDialogRef<ProjectExportComponent>;
 
   constructor(
@@ -49,31 +60,42 @@ export class ProjectNavigationContainerComponent implements OnInit, OnDestroy {
     private directoryQuery: DirectoryQuery,
     private directoryService: DirectoryService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
+    this.routerQuery
+      .select('state')
+      .pipe(
+        map((state) => {
+          return state.params;
+        }),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((params) => {
+        this.projectId = params.id;
 
-    this.routerQuery.select('state').pipe(
-      map(state => state.root.params),
-      takeUntil(this.unsubscribe$),
-    ).subscribe(params => {
+        if (this.projectId) {
+          this.project$ = this.projectQuery.selectActive();
+          this.projectDirectories$ = this.directoryQuery.selectAll({
+            filterBy: (dir) =>
+              dir.projectId === this.projectId && dir.parentId === null,
+          });
 
-      this.projectId = params.id;
+          // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
+          this.projectService
+            .loadProject(this.projectId)
+            .pipe(take(1))
+            .subscribe();
+          // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
+          this.directoryService
+            .loadDirectories(this.projectId)
+            .pipe(take(1))
+            .subscribe();
 
-      if (this.projectId) {
-        this.project$ = this.projectQuery.selectActive();
-        this.projectDirectories$ = this.directoryQuery.selectAll(
-          { filterBy: dir => dir.exerciseId === this.projectId && dir.parentId === null });
-
-        // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
-        this.projectService.loadProject(this.projectId).pipe(take(1)).subscribe();
-        // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
-        this.directoryService.loadDirectories(this.projectId).pipe(take(1)).subscribe();
-
-        this.projectStore.setActive(this.projectId);
-        this.projectStore.ui.setActive(this.projectId);
-      }
-    });
+          this.projectStore.setActive(this.projectId);
+          this.projectStore.ui.setActive(this.projectId);
+        }
+      });
   }
 
   nameDialog(title: string, message: string, data?: any): Observable<boolean> {
@@ -87,11 +109,17 @@ export class ProjectNavigationContainerComponent implements OnInit, OnDestroy {
 
   createNewDirectory(dirId?: string) {
     // tslint:disable-next-line: rxjs-prefer-angular-takeuntil
-    this.nameDialog('Create New Directory?', '', { nameValue: '' }).pipe(take(1)).subscribe(result => {
-      if (!result[WAS_CANCELLED]) {
-        this.directoryService.add({ name: result[NAME_VALUE], exerciseId: this.projectId, parentId: null } as Directory);
-      }
-    });
+    this.nameDialog('Create New Directory?', '', { nameValue: '' })
+      .pipe(take(1))
+      .subscribe((result) => {
+        if (!result[WAS_CANCELLED]) {
+          this.directoryService.add({
+            name: result[NAME_VALUE],
+            projectId: this.projectId,
+            parentId: null,
+          } as Directory);
+        }
+      });
   }
 
   exportProject() {

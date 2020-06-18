@@ -62,13 +62,13 @@ namespace Bond
             }
         }
 
-        private static void DoPost(ClientConfiguration.ReporterOptions config, ExerciseAgent exerciseAgent)
+        private static void DoPost(ClientConfiguration.ReporterOptions config, BondAgent bondAgent)
         {
             //call home
             var client = new RestClient(config.PostUrl);
             var request = new RestRequest(Method.POST) {RequestFormat = DataFormat.Json};
 
-            request.AddJsonBody(exerciseAgent);
+            request.AddJsonBody(bondAgent);
 
             var response = client.Execute(request);
             _log.Info($"Post response {response.StatusCode}: {response.Content}");

@@ -21,11 +21,10 @@ namespace S3.Player.Api.Infrastructure.Mappings
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))
                 .ForMember(dest => dest.TeamName, opt => opt.MapFrom(src => src.Team.Name))
                 .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.RoleId.HasValue ? src.Role.Name : null))
-                .ForMember(dest => dest.ExerciseId, opt => opt.MapFrom(src => src.ExerciseMembership.ExerciseId))
-                .ForMember(dest => dest.isPrimary, opt => opt.MapFrom(src => src.ExerciseMembership.PrimaryTeamMembershipId == src.Id));
+                .ForMember(dest => dest.ViewId, opt => opt.MapFrom(src => src.ViewMembership.ViewId))
+                .ForMember(dest => dest.isPrimary, opt => opt.MapFrom(src => src.ViewMembership.PrimaryTeamMembershipId == src.Id));
 
             CreateMap<TeamMembershipForm, TeamMembershipEntity>();
         }
     }
 }
-
