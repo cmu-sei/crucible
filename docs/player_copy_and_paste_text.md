@@ -1,3 +1,5 @@
+# Player How to: Copy and paste text
+
 The procedures below show you how to:
 
 - Copy text from a local machine (that is, an _out-of-game_ computer) and paste it into a Player virtual machine, and
