@@ -1,3 +1,5 @@
+# Player Guide
+
 Welcome to the *Player Guide*. Player is the platform where individual participants on a team go to view content during a cyber simulation. In Player, participants navigate between various Crucible framework applications, view administrators set which teams can see what applications, and notifications are sent and received.
 
 ## Understanding key Player concepts 
