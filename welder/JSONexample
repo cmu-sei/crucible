@@ -1,0 +1,21 @@
+{
+  "view": [{
+    "name": "View Name",
+    "teams": [
+      {
+        "name": "Team Name",
+        "templates": ["VM Workstation Template Path"],
+        "cluster": "Target vCenter cluster",
+        "users": [
+          {
+            "name": "User Name",
+            "templates": ["VM Workstation Template Path"],
+            "cluster": "Target vCenter cluster"
+          }
+        ]
+      }
+    ],
+    "templates": ["VM Workstation Template Path"],
+    "cluster": "Target vCenter cluster"
+  }]
+}
