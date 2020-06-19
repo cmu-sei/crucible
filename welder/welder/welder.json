@@ -1,0 +1,21 @@
+{
+  "view": [{
+    "name": "Welder Test View",
+    "teams": [
+      {
+        "name": "Admin",
+        "templates": ["ScrapMetal"],
+        "cluster": "Gamespace",
+        "users": [
+          {
+            "name": "Administrator",
+            "templates": ["ScrapMetal2"],
+            "cluster": "Gamespace"
+          }
+        ]
+      }
+    ],
+    "templates": ["ScrapMetal3"],
+    "cluster": "Gamespace"
+  }]
+}
