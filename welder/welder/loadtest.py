@@ -28,8 +28,8 @@ def request_thread(token):
 def main():
     token_data = {
         'grant_type': 'password',
-        'username': 'administrator@this.ws',
-        'password': 'ChangeMe321!',
+        'username': '',
+        'password': '',
         'scope': 's3',
     }
 
