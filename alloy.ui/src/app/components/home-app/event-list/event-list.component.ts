@@ -75,7 +75,7 @@ export class EventListComponent implements OnInit {
 
 
   openEvent(id: string) {
-    window.location.href = '/events/' + id;
+    window.location.href = '/eventlist/' + id;
   }
 
 }

@@ -19,9 +19,9 @@ import { AuthCallbackSilentComponent } from './components/auth/auth-callback-sil
 import { AuthLogoutComponent } from './components/auth/auth-logout.component';
 
 export const ROUTES: Routes = [
-  { path: '', redirectTo: '/events', pathMatch: 'full'},
-  { path: 'events', component: HomeAppComponent, canActivate: [AuthGuard] },
-  { path: 'events/:id', component: HomeAppComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/eventlist', pathMatch: 'full'},
+  { path: 'eventlist', component: HomeAppComponent, canActivate: [AuthGuard] },
+  { path: 'eventlist/:id', component: HomeAppComponent, canActivate: [AuthGuard] },
   { path: 'exercise/:viewId', component: HomeAppComponent, canActivate: [AuthGuard] }, // DEPRECATED, remove when no longer in use
   { path: 'view/:viewId', component: HomeAppComponent, canActivate: [AuthGuard] },
   { path: 'auth-callback', component: AuthCallbackComponent },
