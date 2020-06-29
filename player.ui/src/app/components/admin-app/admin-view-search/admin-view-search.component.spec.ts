@@ -18,9 +18,8 @@ describe('AdminViewSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminViewSearchComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminViewSearchComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

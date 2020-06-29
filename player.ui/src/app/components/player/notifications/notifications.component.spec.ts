@@ -18,9 +18,8 @@ describe('NotificationsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotificationsComponent ]
-    })
-    .compileComponents();
+      declarations: [NotificationsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('NotificationsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

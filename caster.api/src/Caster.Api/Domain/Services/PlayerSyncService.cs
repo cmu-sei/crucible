@@ -116,7 +116,8 @@ namespace Caster.Api.Domain.Services
                 var runs = await dbContext.Runs
                     .AsNoTracking()
                     .GroupBy(x => x.WorkspaceId)
-                    .Select(g => new {
+                    .Select(g => new
+                    {
                         WorkspaceId = g.Key,
                         LastRun = g.Max(r => r.CreatedAt)
                     })
@@ -146,11 +147,12 @@ namespace Caster.Api.Domain.Services
                 {
                     CancellationToken ct;
 
-                    var workspaceLock = _locks.GetOrAdd(workspaceId, x => {
+                    var workspaceLock = _locks.GetOrAdd(workspaceId, x =>
+                    {
                         return new Object();
                     });
 
-                    lock(workspaceLock)
+                    lock (workspaceLock)
                     {
                         CancellationTokenSource tokenSource;
 
@@ -170,12 +172,12 @@ namespace Caster.Api.Domain.Services
                     await SyncWorkspace(workspaceId, scope, ct);
                 }
             }
-            catch(TaskCanceledException ex)
+            catch (TaskCanceledException ex)
             {
                 // expected to happen if another threads comes in to sync the same workspace
                 _logger.LogTrace($"{typeof(TaskCanceledException).Name} when syncing workspace with Id {workspaceId}", ex);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Exception trying to sync workspace with Id {workspaceId}", ex);
             }
@@ -207,11 +209,11 @@ namespace Caster.Api.Domain.Services
             {
                 virtualMachines = (await client.GetAllAsync(ct)).ToArray();
             }
-            catch(ApiErrorException ex)
+            catch (ApiErrorException ex)
             {
                 errorMessages.Add($"Error retrieving Virtual Machines: {ex.Body.Title}");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorMessages.Add($"Error retrieving Virtual Machines: {ex.Message}");
             }
@@ -226,7 +228,7 @@ namespace Caster.Api.Domain.Services
 
                     if (vm == null)
                     {
-                        if (teamIds.Any())
+                        if (teamIds != null && teamIds.Any())
                         {
                             // Create vm
                             VmCreateForm form = new VmCreateForm
@@ -240,7 +242,7 @@ namespace Caster.Api.Domain.Services
                             errorMessages.Add(await CallWrapperAsync((async () => await client.CreateVmAsync(form, ct)), $"Error Adding {form.Name} ({form.Id})"));
                         }
                     }
-                    else
+                    else if (teamIds != null)
                     {
                         if (!teamIds.Any())
                         {
@@ -250,16 +252,17 @@ namespace Caster.Api.Domain.Services
                         {
                             foreach (var teamId in teamIds)
                             {
-                                 // Check if team or properties have changed
+                                // Check if team or properties have changed
                                 if (!vm.TeamIds.Contains(teamId))
                                 {
                                     errorMessages.Add(await CallWrapperAsync((async () => await client.AddVmToTeamAsync(vm.Id.Value, teamId, ct)), $"Error Adding {vm.Name} ({vm.Id}) to Team {teamId}"));
                                 }
+                            }
 
-                                foreach (var oldTeamId in vm.TeamIds.Where(t => t != teamId))
-                                {
-                                    errorMessages.Add(await CallWrapperAsync((async () => await client.RemoveVmFromTeamAsync(vm.Id.Value, oldTeamId.Value, ct)), $"Error Removing {vm.Name} ({vm.Id}) from Team {oldTeamId}"));
-                                }
+                            // remove old teams
+                            foreach (var oldTeamId in vm.TeamIds.Where(t => !teamIds.Any(x => x == t)))
+                            {
+                                errorMessages.Add(await CallWrapperAsync((async () => await client.RemoveVmFromTeamAsync(vm.Id.Value, oldTeamId.Value, ct)), $"Error Removing {vm.Name} ({vm.Id}) from Team {oldTeamId}"));
                             }
 
                             if (vm.Name != resource.Name ||
@@ -299,18 +302,18 @@ namespace Caster.Api.Domain.Services
             {
                 await func();
             }
-            catch(ApiErrorException ex)
+            catch (ApiErrorException ex)
             {
                 // Ignore delete error if vm doesn't exist
                 if (!(delete && ex.Body.Status == (int)HttpStatusCode.NotFound && ex.Body.Title == "Vm not found"))
                     errorMessage = $"{errorString}: {ex.Body.Title}";
             }
-            catch(TaskCanceledException ex)
+            catch (TaskCanceledException ex)
             {
                 // Expected if cancellationToken is triggered. Don't need to handle here.
                 throw ex;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorMessage = $"{errorString}: {ex.Message}";
             }
@@ -341,10 +344,10 @@ namespace Caster.Api.Domain.Services
                                 await client.DeleteVmAsync(new Guid(removedResource.Id));
                                 deleteConfirmed = true;
                             }
-                            catch(ApiErrorException ex)
+                            catch (ApiErrorException ex)
                             {
                                 // TODO: Use instance field when it is implemented in VmApi to confirm
-                                if(ex.Body.Status == (int)HttpStatusCode.NotFound && ex.Body.Title == "Vm not found")
+                                if (ex.Body.Status == (int)HttpStatusCode.NotFound && ex.Body.Title == "Vm not found")
                                 {
                                     deleteConfirmed = true;
                                 }
@@ -365,7 +368,7 @@ namespace Caster.Api.Domain.Services
 
                     _reset.WaitOne(new TimeSpan(0, 0, _playerOptions.CurrentValue.RemoveLoopSeconds));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     _logger.LogError("Exception trying to sync deleted resources", ex);
                 }

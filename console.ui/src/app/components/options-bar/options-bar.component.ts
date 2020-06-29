@@ -8,25 +8,38 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit,  Pipe, PipeTransform, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Pipe,
+  PipeTransform,
+  OnDestroy,
+} from '@angular/core';
 import { VmService } from '../../services/vm/vm.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../services/notification/notification.service';
 import { NotificationData } from '../../models/notification/notification-model';
 import { AuthService } from '../../services/auth/auth.service';
-import { MatSnackBar} from '@angular/material/snack-bar';
-import { VmModel } from '../../models/vm/vm-model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  VmModel,
+  VirtualMachineToolsStatus,
+  VmResolution,
+} from '../../models/vm/vm-model';
+import { Subject } from 'rxjs';
+import { takeUntil, take } from 'rxjs/operators';
+import { SettingsService } from '../../services/settings/settings.service';
 
 declare var WMKS: any; // needed to check values
 const MAX_COPY_RETRIES = 1;
 
-@Pipe({name: 'keys'})
+@Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
   transform(value, args: string[]): any {
     const keys = [];
     for (const key of Object.keys(value)) {
-      keys.push({key: key, value: value[key]});
+      keys.push({ key: key, value: value[key] });
     }
     return keys;
   }
@@ -34,67 +47,86 @@ export class KeysPipe implements PipeTransform {
 @Component({
   selector: 'app-options-bar',
   templateUrl: './options-bar.component.html',
-  styleUrls: ['./options-bar.component.css']
+  styleUrls: ['./options-bar.component.css'],
 })
-
-export class OptionsBarComponent implements OnInit {
+export class OptionsBarComponent implements OnInit, OnDestroy {
   public opened = false;
 
   // we could check permissions in api and set this value
   public powerOptions = true;
-  public vmToolsAvailable = false;
   public uploadEnabled = false;
   public uploading = false;
   public retrievingIsos = false;
   public publicIsos: any;
   public teamIsos: any;
-  public vmSettingsButtonLabel = 'Enter VM Credentials';
   public tasksInProgress: NotificationData[] = [];
   public inFrame: boolean;
   public clipBoardText: string;
+  public virtualMachineToolsStatus: any;
+  public currentVmContainerResolution: VmResolution;
+  public vmResolutionsOptions: VmResolution[];
 
-  private copyRetryCount: number;
+  private copyTryCount: number;
+  private destroy$ = new Subject();
 
   constructor(
     public vmService: VmService,
+    public settingsService: SettingsService,
     private dialogService: DialogService,
     private notificationService: NotificationService,
     private route: ActivatedRoute,
     private authService: AuthService,
     private snackBar: MatSnackBar
-  ) {  }
+  ) {}
 
   ngOnInit() {
-    this.clipBoardText = '';
-    this.copyRetryCount = 0;
+    this.vmResolutionsOptions = [
+      { width: 1600, height: 1200 } as VmResolution,
+      { width: 1024, height: 768 } as VmResolution,
+      { width: 800, height: 600 } as VmResolution,
+    ];
 
-    this.vmService.modelSubject.subscribe(model => {
-      this.vmToolsAvailable = model.vmToolsAvailable;
-    });
-    this.notificationService.tasksInProgress.subscribe(data => {
+    this.virtualMachineToolsStatus = VirtualMachineToolsStatus;
+    this.clipBoardText = '';
+    this.copyTryCount = 0;
+
+    this.notificationService.tasksInProgress.subscribe((data) => {
       if (!!data && data.length > 0) {
         this.tasksInProgress = <Array<NotificationData>>data;
       }
     });
-    this.notificationService.connectToProgressHub(this.vmService.model.id, this.authService.getAuthorizationToken());
+    this.notificationService.connectToProgressHub(
+      this.vmService.model.id,
+      this.authService.getAuthorizationToken()
+    );
 
     this.inFrame = this.inIframe();
 
-    this.vmService.vmClipBoard.subscribe(data => {
-      if (data !== '') {
-        this.copyRetryCount = 0;
-        this.clipBoardText = data;
-        this.writeToClipboard(this.clipBoardText);
-      }
-    });
+    this.vmService.vmClipBoard
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data !== '') {
+          this.clipBoardText = data;
+          this.writeToClipboard(this.clipBoardText);
+          this.copyTryCount = 0;
+        }
+      });
 
+    this.vmService.vmResolution
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res) => (this.currentVmContainerResolution = res));
   }
 
-  inIframe () {
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  inIframe() {
     try {
-        return window.self !== window.top;
+      return window.self !== window.top;
     } catch (e) {
-        return true;
+      return true;
     }
   }
 
@@ -104,18 +136,19 @@ export class OptionsBarComponent implements OnInit {
 
   fullscreen() {
     if (this.vmService.wmks.isFullScreen()) {
-        // console.log('browser is fullscreen');
+      // console.log('browser is fullscreen');
     } else if (this.vmService.wmks.canFullScreen()) {
-        // console.log('attempting fullscreen');
-        this.vmService.wmks.enterFullScreen();
+      // console.log('attempting fullscreen');
+      this.vmService.wmks.enterFullScreen();
     } else {
-        console.log('cannot do fullscreen');
+      console.log('cannot do fullscreen');
     }
   }
 
   changeNic(adapter, nic) {
-    this.vmService.changeNic(this.vmService.model.id, adapter, nic).subscribe(
-     (model: VmModel) => {
+    this.vmService
+      .changeNic(this.vmService.model.id, adapter, nic)
+      .subscribe((model: VmModel) => {
         this.vmService.model = model;
       });
   }
@@ -138,15 +171,13 @@ export class OptionsBarComponent implements OnInit {
   }
 
   sendInputString() {
-    if (!this.vmToolsAvailable) {
-      this.dialogService.message('Alert!', 'Action requires VMware Tools to be running!');
-      return;
-    }
-    this.dialogService.sendText('Enter Text to Send').subscribe(enteredText => {
+    this.dialogService
+      .sendText('Enter Text to Send')
+      .subscribe((enteredText) => {
         if (enteredText) {
           this.vmService.wmks.sendInputString(enteredText);
         }
-    });
+      });
   }
 
   disconnect() {
@@ -180,24 +211,39 @@ export class OptionsBarComponent implements OnInit {
     this.vmService.reBoot(this.vmService.model.id);
   }
 
+  shutdownOS() {
+    console.log('shutdown OS requested');
+    this.vmService.shutdownOS(this.vmService.model.id);
+  }
+
   enableFileUpload(title) {
     this.vmService.uploadConfig.username = '';
     this.vmService.uploadConfig.password = '';
     this.vmService.uploadConfig.filepath = '';
-    if (!this.vmToolsAvailable) {
-      this.dialogService.message('Alert!', 'Action requires VMware Tools to be running!');
+    if (
+      this.vmService.model.vmToolsStatus !==
+        VirtualMachineToolsStatus.toolsOk &&
+      this.vmService.model.vmToolsStatus !== VirtualMachineToolsStatus.toolsOld
+    ) {
+      this.dialogService.message(
+        'Alert!',
+        'Action requires VMware Tools to be running!'
+      );
       this.uploadEnabled = false;
       return;
     }
     // get new credentials and upload path
-    this.dialogService.getFileUploadInfo(title).subscribe(enteredInfo => {
+    this.dialogService.getFileUploadInfo(title).subscribe((enteredInfo) => {
       if (!enteredInfo['username']) {
         return;
       }
       this.vmService.uploadConfig.username = enteredInfo['username'];
       this.vmService.uploadConfig.password = enteredInfo['password'];
       this.vmService.uploadConfig.filepath = enteredInfo['filepath'];
-      if (!this.vmService.uploadConfig.filepath.endsWith('\\') && !this.vmService.uploadConfig.filepath.endsWith('/')) {
+      if (
+        !this.vmService.uploadConfig.filepath.endsWith('\\') &&
+        !this.vmService.uploadConfig.filepath.endsWith('/')
+      ) {
         if (this.vmService.uploadConfig.filepath.includes('\\')) {
           this.vmService.uploadConfig.filepath += '\\';
         } else if (this.vmService.uploadConfig.filepath.includes('/')) {
@@ -208,11 +254,10 @@ export class OptionsBarComponent implements OnInit {
         }
       }
       this.vmService.verifyCredentials(this.vmService.model.id).subscribe(
-        response => {
+        (response) => {
           this.uploadEnabled = true;
-          this.vmSettingsButtonLabel = 'Change VM Credentials';
         },
-        error => {
+        (error) => {
           this.uploadEnabled = false;
           if (error.error.includes('credentials')) {
             this.enableFileUpload('Bad Credentials.  Please try again.');
@@ -232,30 +277,32 @@ export class OptionsBarComponent implements OnInit {
       return;
     }
     this.uploading = true;
-    this.vmService.sendFileToVm(this.vmService.model.id, fileSelector.files).subscribe(
-      response => {
-        fileSelector.value = '';
-        this.uploading = false;
-        console.log(response);
-      },
-      error => {
-        fileSelector.value = '';
-        this.uploading = false;
-        console.log(error);
-      }
-    );
+    this.vmService
+      .sendFileToVm(this.vmService.model.id, fileSelector.files)
+      .subscribe(
+        (response) => {
+          fileSelector.value = '';
+          this.uploading = false;
+          console.log(response);
+        },
+        (error) => {
+          fileSelector.value = '';
+          this.uploading = false;
+          console.log(error);
+        }
+      );
   }
 
   startIsoMount() {
     // refresh the iso list
     this.retrievingIsos = true;
     this.vmService.getIsos().subscribe(
-      response => {
+      (response) => {
         this.splitIsoList(response);
         this.retrievingIsos = false;
         this.mountIso();
       },
-      error => {
+      (error) => {
         console.log(error);
         this.publicIsos = [];
         this.teamIsos = [];
@@ -267,32 +314,37 @@ export class OptionsBarComponent implements OnInit {
   mountIso() {
     // select the iso
     const configData = {
-      'width': '500px',
-      'height': '540px'
+      width: '500px',
+      height: '540px',
     };
-    this.dialogService.mountIso(this.publicIsos, this.teamIsos, configData).subscribe(result => {
-      if (!result['path']) {
-        return;
-      }
-      // mount the iso
-      this.vmService.mountIso(this.vmService.model.id, result['path']).subscribe(
-        // refresh the vm model
-        (model: VmModel) => {
-          this.vmService.model = model;
-        });
-    });
+    this.dialogService
+      .mountIso(this.publicIsos, this.teamIsos, configData)
+      .subscribe((result) => {
+        if (!result['path']) {
+          return;
+        }
+        // mount the iso
+        this.vmService
+          .mountIso(this.vmService.model.id, result['path'])
+          .subscribe(
+            // refresh the vm model
+            (model: VmModel) => {
+              this.vmService.model = model;
+            }
+          );
+      });
   }
 
   splitIsoList(isoList: any) {
     const viewId = this.route.snapshot.queryParams['viewId'];
     this.teamIsos = [];
     this.publicIsos = [];
-    isoList.forEach(isoName => {
+    isoList.forEach((isoName) => {
       const start = isoName.lastIndexOf('/') + 1;
       const filename = isoName.substring(start);
       const isoObject = {
-        'filename': filename,
-        'path': isoName
+        filename: filename,
+        path: isoName,
       };
       if (isoName.indexOf('/' + viewId + '/' + viewId + '/') > -1) {
         this.publicIsos.push(isoObject);
@@ -303,18 +355,23 @@ export class OptionsBarComponent implements OnInit {
   }
 
   async writeToClipboard(clipText: string) {
-    try {
-      await navigator.clipboard.writeText(clipText);
-      this.snackBar.open('Copied Virtual Machine Clipboard', 'Ok', {
-        duration: 2000,
-        verticalPosition: 'top'
-      });
-    } catch (err) {
-      this.dialogService.message('Select text and press Ctrl+C to copy to your local clipboard:', clipText);
-      console.log('Problem');
+    // If the copyTryCount is 0 then the user did not try to copy from the VM, therefore ignore the broadcast
+    if (this.copyTryCount > 0) {
+      try {
+        await navigator.clipboard.writeText(clipText);
+        this.snackBar.open('Copied Virtual Machine Clipboard', 'Ok', {
+          duration: 2000,
+          verticalPosition: 'top',
+        });
+      } catch (err) {
+        this.dialogService.message(
+          'Select text and press Ctrl+C to copy to your local clipboard:',
+          clipText
+        );
+        console.log('Problem', err);
+      }
     }
   }
-
 
   async pasteFromClipboard() {
     try {
@@ -327,22 +384,35 @@ export class OptionsBarComponent implements OnInit {
   }
 
   copyVmClipboard() {
-    this.copyRetryCount++;
-    console.log('Trying to copy.  Count:  ', this.copyRetryCount);
+    this.copyTryCount++;
+    console.log('Trying to copy.  Count:  ', this.copyTryCount);
     this.vmService.wmks.grab();
     setTimeout(() => {
-      if (this.copyRetryCount > MAX_COPY_RETRIES) {
-        this.snackBar.open('Copy from VM failed!  Contact an Administrator to verify the the Virtual machine is configured properly.',
-        'Close',
-        {
-          duration: 10000,
-          verticalPosition: 'top'
-        });
-        this.copyRetryCount = 0;
-      } else if (this.copyRetryCount > 0 && this.copyRetryCount <= MAX_COPY_RETRIES) {
+      if (this.copyTryCount > MAX_COPY_RETRIES) {
+        this.snackBar.open(
+          'Copy from VM failed!  Contact an Administrator to verify the Virtual machine is configured properly.',
+          'Close',
+          {
+            duration: 10000,
+            verticalPosition: 'top',
+          }
+        );
+        this.copyTryCount = 0;
+      } else if (
+        this.copyTryCount > 0 &&
+        this.copyTryCount <= MAX_COPY_RETRIES
+      ) {
         console.log('Retry of copy');
         this.copyVmClipboard();
       }
     }, 2000);
+  }
+
+  setResolution(vmResolution: VmResolution) {
+    console.log('Setting Resolution:  ', vmResolution);
+    this.vmService
+      .setResolution(this.vmService.model.id, vmResolution)
+      .pipe(take(1))
+      .subscribe();
   }
 }

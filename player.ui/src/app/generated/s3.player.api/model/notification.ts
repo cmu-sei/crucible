@@ -20,45 +20,44 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface Notification {
-    fromId?: string;
-    fromType?: Notification.FromTypeEnum;
-    toId?: string;
-    toType?: Notification.ToTypeEnum;
-    broadcastTime?: Date;
-    toName?: string;
-    fromName?: string;
-    subject?: string;
-    text?: string;
-    link?: string;
-    priority?: Notification.PriorityEnum;
-    wasSuccess?: boolean;
-    canPost?: boolean;
-    iconUrl?: string;
+  fromId?: string;
+  fromType?: Notification.FromTypeEnum;
+  toId?: string;
+  toType?: Notification.ToTypeEnum;
+  broadcastTime?: Date;
+  toName?: string;
+  fromName?: string;
+  subject?: string;
+  text?: string;
+  link?: string;
+  priority?: Notification.PriorityEnum;
+  wasSuccess?: boolean;
+  canPost?: boolean;
+  iconUrl?: string;
 }
 export namespace Notification {
-    export type FromTypeEnum = 'View' | 'Team' | 'User' | 'Application' | 'Admin';
-    export const FromTypeEnum = {
-        View: 'View' as FromTypeEnum,
-        Team: 'Team' as FromTypeEnum,
-        User: 'User' as FromTypeEnum,
-        Application: 'Application' as FromTypeEnum,
-        Admin: 'Admin' as FromTypeEnum
-    };
-    export type ToTypeEnum = 'View' | 'Team' | 'User' | 'Application' | 'Admin';
-    export const ToTypeEnum = {
-        View: 'View' as ToTypeEnum,
-        Team: 'Team' as ToTypeEnum,
-        User: 'User' as ToTypeEnum,
-        Application: 'Application' as ToTypeEnum,
-        Admin: 'Admin' as ToTypeEnum
-    };
-    export type PriorityEnum = 'Normal' | 'Elevated' | 'High' | 'System';
-    export const PriorityEnum = {
-        Normal: 'Normal' as PriorityEnum,
-        Elevated: 'Elevated' as PriorityEnum,
-        High: 'High' as PriorityEnum,
-        System: 'System' as PriorityEnum
-    };
+  export type FromTypeEnum = 'View' | 'Team' | 'User' | 'Application' | 'Admin';
+  export const FromTypeEnum = {
+    View: 'View' as FromTypeEnum,
+    Team: 'Team' as FromTypeEnum,
+    User: 'User' as FromTypeEnum,
+    Application: 'Application' as FromTypeEnum,
+    Admin: 'Admin' as FromTypeEnum,
+  };
+  export type ToTypeEnum = 'View' | 'Team' | 'User' | 'Application' | 'Admin';
+  export const ToTypeEnum = {
+    View: 'View' as ToTypeEnum,
+    Team: 'Team' as ToTypeEnum,
+    User: 'User' as ToTypeEnum,
+    Application: 'Application' as ToTypeEnum,
+    Admin: 'Admin' as ToTypeEnum,
+  };
+  export type PriorityEnum = 'Normal' | 'Elevated' | 'High' | 'System';
+  export const PriorityEnum = {
+    Normal: 'Normal' as PriorityEnum,
+    Elevated: 'Elevated' as PriorityEnum,
+    High: 'High' as PriorityEnum,
+    System: 'System' as PriorityEnum,
+  };
 }

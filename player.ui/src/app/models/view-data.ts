@@ -9,10 +9,10 @@ DM20-0181
 */
 
 export interface ViewData {
-    id: string;
-    name: string;
-    description: string;
-    status: string;
-    teamName: string;
-    teamId: string;
+  id: string;
+  name: string;
+  description: string;
+  status: string;
+  teamName: string;
+  teamId: string;
 }

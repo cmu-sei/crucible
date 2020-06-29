@@ -10,23 +10,58 @@ DM20-0181
 
 <div fxLayout="column">
   <mat-form-field>
-    <input matInput placeholder="Name" tabIndex="1" name="name" [(ngModel)]="appTemplate.name" (change)="editAppTemplate()" />
+    <input
+      matInput
+      placeholder="Name"
+      tabIndex="1"
+      name="name"
+      [(ngModel)]="appTemplate.name"
+      (change)="editAppTemplate()"
+    />
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Url" tabIndex="2" name="url" [(ngModel)]="appTemplate.url" (change)="editAppTemplate()" />
+    <input
+      matInput
+      placeholder="Url"
+      tabIndex="2"
+      name="url"
+      [(ngModel)]="appTemplate.url"
+      (change)="editAppTemplate()"
+    />
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="icon" tabIndex="3" name="icon" [(ngModel)]="appTemplate.icon" (change)="editAppTemplate()" />
+    <input
+      matInput
+      placeholder="icon"
+      tabIndex="3"
+      name="icon"
+      [(ngModel)]="appTemplate.icon"
+      (change)="editAppTemplate()"
+    />
   </mat-form-field>
   <mat-form-field floatPlaceholder="always">
     <input matInput style="display: none;" />
-    <mat-checkbox tabIndex="4" name="embeddable" [(ngModel)]="appTemplate.embeddable" (change)="editAppTemplate()" >Embeddable</mat-checkbox>
+    <mat-checkbox
+      tabIndex="4"
+      name="embeddable"
+      [(ngModel)]="appTemplate.embeddable"
+      (change)="editAppTemplate()"
+      >Embeddable</mat-checkbox
+    >
   </mat-form-field>
   <mat-form-field floatPlaceholder="always">
     <input matInput style="display: none;" />
-    <mat-checkbox tabIndex="5" name="loadInBackground" [(ngModel)]="appTemplate.loadInBackground" (change)="editAppTemplate()" >Load in background</mat-checkbox>
+    <mat-checkbox
+      tabIndex="5"
+      name="loadInBackground"
+      [(ngModel)]="appTemplate.loadInBackground"
+      (change)="editAppTemplate()"
+      >Load in background</mat-checkbox
+    >
   </mat-form-field>
   <div fxLayout="row" fxLayoutAlign="end" class="bottom-button">
-    <button mat-stroked-button (click)="deleteApplicationTemplate()">Delete Application Template</button>
+    <button mat-stroked-button (click)="deleteApplicationTemplate()">
+      Delete Application Template
+    </button>
   </div>
 </div>

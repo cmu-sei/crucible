@@ -20,6 +20,7 @@ import { TaskDataService } from 'src/app/data/task/task-data.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
 import {map, takeUntil} from 'rxjs/operators';
+import { SignalRService } from 'src/app/services/signalr/signalr.service';
 
 enum Section {
   taskBuilder = 'Task Builder',
@@ -52,7 +53,8 @@ export class HomeAppComponent implements OnDestroy {
     private playerDataService: PlayerDataService,
     private scenarioTemplateDataService: ScenarioTemplateDataService,
     private scenarioDataService: ScenarioDataService,
-    private taskDataService: TaskDataService
+    private taskDataService: TaskDataService,
+    private signalRService: SignalRService
   ) {
     this.playerDataService.getViewsFromApi();
     activatedRoute.queryParamMap.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
@@ -64,6 +66,7 @@ export class HomeAppComponent implements OnDestroy {
     this.adminUsersService.isAuthorizedUser.pipe(takeUntil(this.unsubscribe$)).subscribe(isAuthorized => {
       this.isAuthorizedUser = isAuthorized;
     });
+    this.signalRService.startConnection();
   }
 
   selectTab(section: Section) {

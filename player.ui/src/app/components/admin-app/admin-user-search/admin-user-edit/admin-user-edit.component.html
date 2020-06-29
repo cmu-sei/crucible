@@ -8,17 +8,21 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div *ngIf="user != undefined" class="user-container mat-elevation-z8 scroll-container">
-
+<div
+  *ngIf="user != undefined"
+  class="user-container mat-elevation-z8 scroll-container"
+>
   <div fxLayout="row" class="title">
     <div fxFlexOffset="9">
-      <h4>Edit User {{user.name}}</h4>
+      <h4>Edit User {{ user.name }}</h4>
     </div>
   </div>
 
   <div fxLayout="row">
     <div fxFlex fxLayoutAlign="center center">
-      <app-roles-permissions-select [user]="user"></app-roles-permissions-select>
+      <app-roles-permissions-select
+        [user]="user"
+      ></app-roles-permissions-select>
     </div>
   </div>
 
@@ -27,7 +31,4 @@ DM20-0181
       <button mat-stroked-button (click)="returnToUserSearch()">Done</button>
     </div>
   </div>
-
-
-
 </div>

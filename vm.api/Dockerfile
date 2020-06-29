@@ -1,7 +1,7 @@
 #
 #multi-stage target: dev
 #
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS dev
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS dev
 
 ENV ASPNETCORE_URLS=http://0.0.0.0:4302 \
     ASPNETCORE_ENVIRONMENT=DEVELOPMENT
@@ -16,7 +16,7 @@ CMD ["dotnet", "run"]
 #
 #multi-stage target: prod
 #
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS prod
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS prod
 ARG commit
 ENV COMMIT=$commit
 
@@ -26,7 +26,7 @@ WORKDIR /app
 ENV ASPNETCORE_URLS=http://*:80
 EXPOSE 80
 
-CMD ["dotnet","S3.VM.Api.dll"]
+CMD ["dotnet","Player.Vm.Api.dll"]
 
 RUN apt-get update && \
-	apt-get install -y jq
+    apt-get install -y jq

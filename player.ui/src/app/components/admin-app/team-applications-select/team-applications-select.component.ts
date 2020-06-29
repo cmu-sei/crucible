@@ -9,18 +9,29 @@ DM20-0181
 */
 
 import { Component, OnInit, Input } from '@angular/core';
-import { Team, ApplicationService, ApplicationInstance, Application, ApplicationInstanceForm, View, ApplicationTemplate } from '../../../generated/s3.player.api';
+import {
+  Team,
+  ApplicationService,
+  ApplicationInstance,
+  Application,
+  ApplicationInstanceForm,
+  View,
+  ApplicationTemplate,
+} from '../../../generated/s3.player.api';
 import { DialogService } from '../../../services/dialog/dialog.service';
 
-export enum ObjectType { Unknown, Team, View }
+export enum ObjectType {
+  Unknown,
+  Team,
+  View,
+}
 
 @Component({
   selector: 'app-team-applications-select',
   templateUrl: './team-applications-select.component.html',
-  styleUrls: ['./team-applications-select.component.css']
+  styleUrls: ['./team-applications-select.component.scss'],
 })
 export class TeamApplicationsSelectComponent implements OnInit {
-
   @Input() team: Team;
   @Input() view: View;
 
@@ -36,7 +47,7 @@ export class TeamApplicationsSelectComponent implements OnInit {
   constructor(
     public applicationService: ApplicationService,
     public dialogService: DialogService
-  ) { }
+  ) {}
 
   /**
    * Initialization
@@ -44,7 +55,9 @@ export class TeamApplicationsSelectComponent implements OnInit {
   ngOnInit() {
     if (!this.team) {
       // a team must be provided or will not be functional
-      console.log('The applications select component requires a team, therefore will be non-functional.');
+      console.log(
+        'The applications select component requires a team, therefore will be non-functional.'
+      );
       return;
     } else {
       this.subjectType = ObjectType.Team;
@@ -57,85 +70,128 @@ export class TeamApplicationsSelectComponent implements OnInit {
    * Refreshes the View Apps list
    */
   refreshViewAppsAvailable(): void {
-    this.applicationService.getViewApplications(this.view.id).subscribe(apps => {
-      this.viewApplications = new Array<Application>();
-      apps.forEach(app => {
-        if (this.applications.findIndex(a => app.id === a.applicationId) === -1) {
-          this.viewApplications.push(app);
-        }
+    this.applicationService
+      .getViewApplications(this.view.id)
+      .subscribe((apps) => {
+        this.viewApplications = new Array<Application>();
+        apps.forEach((app) => {
+          if (
+            this.applications.findIndex((a) => app.id === a.applicationId) ===
+            -1
+          ) {
+            this.viewApplications.push(app);
+          }
+        });
       });
-    });
 
-    this.applicationService.getApplicationTemplates().subscribe(appTmps => {
+    this.applicationService.getApplicationTemplates().subscribe((appTmps) => {
       this.applicationTemplates = appTmps;
     });
   }
-
 
   /**
    * Refreshes the team apps
    */
   refreshTeamApplications(): void {
-    this.applicationService.getTeamApplicationInstances(this.team.id).subscribe(appInsts => {
-      this.applications = appInsts;
-      this.refreshViewAppsAvailable();
-    });
+    this.applicationService
+      .getTeamApplicationInstances(this.team.id)
+      .subscribe((appInsts) => {
+        this.applications = appInsts;
+        this.refreshViewAppsAvailable();
+      });
   }
-
 
   /**
    * Adds an application to the team
    * @param app The app to add
    */
   addViewAppToTeam(app: Application): void {
-    const appInstance = <ApplicationInstanceForm>({ teamId: this.team.id, applicationId: app.id, displayOrder: this.applications.length });
-    this.applicationService.createApplicationInstance(this.team.id, appInstance).subscribe(rslt => {
-      this.refreshTeamApplications();
-    });
+    const appInstance = <ApplicationInstanceForm>{
+      teamId: this.team.id,
+      applicationId: app.id,
+      displayOrder: this.applications.length,
+    };
+    this.applicationService
+      .createApplicationInstance(this.team.id, appInstance)
+      .subscribe((rslt) => {
+        this.refreshTeamApplications();
+      });
   }
-
 
   /**
    * Swaps the display orders of two teams in the application
    * @param app1
    * @param app2
    */
-  swapDisplayOrders(app1: ApplicationInstance, app2: ApplicationInstance): void {
-    const a1 = <ApplicationInstanceForm>({ id: app1.id, teamId: this.team.id, applicationId: app1.applicationId, displayOrder: app2.displayOrder });
-    const a2 = <ApplicationInstanceForm>({ id: app2.id, teamId: this.team.id, applicationId: app2.applicationId, displayOrder: app1.displayOrder });
+  swapDisplayOrders(
+    app1: ApplicationInstance,
+    app2: ApplicationInstance
+  ): void {
+    const a1 = <ApplicationInstanceForm>{
+      id: app1.id,
+      teamId: this.team.id,
+      applicationId: app1.applicationId,
+      displayOrder: app2.displayOrder,
+    };
+    const a2 = <ApplicationInstanceForm>{
+      id: app2.id,
+      teamId: this.team.id,
+      applicationId: app2.applicationId,
+      displayOrder: app1.displayOrder,
+    };
 
-    this.applicationService.updateApplicationInstance(app1.id, a1).subscribe(result1 => {
-      this.applicationService.updateApplicationInstance(app2.id, a2).subscribe(result2 => {
-        this.refreshTeamApplications();
+    this.applicationService
+      .updateApplicationInstance(app1.id, a1)
+      .subscribe((result1) => {
+        this.applicationService
+          .updateApplicationInstance(app2.id, a2)
+          .subscribe((result2) => {
+            this.refreshTeamApplications();
+          });
       });
-    });
   }
-
 
   /**
    * Removes an application from a team
    * @param app App to remove
    */
   removeApplicationInstanceFromTeam(app: ApplicationInstance): void {
-    this.dialogService.confirm('Remove Application from Team', 'Are you sure that you want to remove application ' + app.name + ' from team ' + this.team.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Remove Application from Team',
+        'Are you sure that you want to remove application ' +
+          app.name +
+          ' from team ' +
+          this.team.name +
+          '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
-          this.applicationService.deleteApplicationInstance(app.id).subscribe(rslt => {
-            // Verify display orders and fix if necessary
-            let index = 0;
-            const apps = this.applications.filter(a => a.id !== app.id);
-            apps.forEach(a => {
-              if (a.displayOrder !== index) {
-                const appOrdered = <ApplicationInstanceForm>({ id: a.id, teamId: this.team.id, applicationId: a.applicationId, displayOrder: index });
-                this.applicationService.updateApplicationInstance(appOrdered.id, appOrdered).subscribe(() => {
-                  a.displayOrder = index; // Update here rather than calling again.
-                });
-              }
-              index++;
-            });
+          this.applicationService
+            .deleteApplicationInstance(app.id)
+            .subscribe((rslt) => {
+              // Verify display orders and fix if necessary
+              let index = 0;
+              const apps = this.applications.filter((a) => a.id !== app.id);
+              apps.forEach((a) => {
+                if (a.displayOrder !== index) {
+                  const appOrdered = <ApplicationInstanceForm>{
+                    id: a.id,
+                    teamId: this.team.id,
+                    applicationId: a.applicationId,
+                    displayOrder: index,
+                  };
+                  this.applicationService
+                    .updateApplicationInstance(appOrdered.id, appOrdered)
+                    .subscribe(() => {
+                      a.displayOrder = index; // Update here rather than calling again.
+                    });
+                }
+                index++;
+              });
 
-            this.refreshTeamApplications();
-          });
+              this.refreshTeamApplications();
+            });
         }
       });
   }
@@ -144,7 +200,9 @@ export class TeamApplicationsSelectComponent implements OnInit {
     if (app.name != null) {
       return app.name;
     } else if (app.applicationTemplateId != null) {
-      const template = this.applicationTemplates.find(x => x.id === app.applicationTemplateId);
+      const template = this.applicationTemplates.find(
+        (x) => x.id === app.applicationTemplateId
+      );
 
       if (template != null) {
         return template.name;

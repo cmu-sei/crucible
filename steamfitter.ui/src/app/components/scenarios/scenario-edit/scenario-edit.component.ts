@@ -15,7 +15,7 @@ import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { TaskTreeComponent } from 'src/app/components/tasks/task-tree/task-tree.component';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
 import { TaskQuery } from 'src/app/data/task/task.query';
-import { ResultQuery } from 'src/app/data/task-result/task-result.query';
+import { ResultQuery } from 'src/app/data/result/result.query';
 
 @Component({
   selector: 'app-scenario-edit',

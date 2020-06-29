@@ -18,9 +18,8 @@ describe('AdminViewEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminViewEditComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminViewEditComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

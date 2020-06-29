@@ -8,18 +8,17 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { SafeUrl } from "@angular/platform-browser";
+import { SafeUrl } from '@angular/platform-browser';
 
 export interface ApplicationData {
-    id: string;
-    applicationId: string;
-    displayOrder: number;
-    name: string;
-    url: string;
-    icon: string;
-    embeddable: boolean;
-    loadInBackground: boolean;
-    viewId: string;
-    safeUrl: SafeUrl
-
+  id: string;
+  applicationId: string;
+  displayOrder: number;
+  name: string;
+  url: string;
+  icon: string;
+  embeddable: boolean;
+  loadInBackground: boolean;
+  viewId: string;
+  safeUrl: SafeUrl;
 }

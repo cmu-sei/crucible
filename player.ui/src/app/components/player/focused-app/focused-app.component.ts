@@ -15,24 +15,19 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-focused-app',
   templateUrl: './focused-app.component.html',
-  styleUrls: ['./focused-app.component.css']
+  styleUrls: ['./focused-app.component.scss'],
 })
 export class FocusedAppComponent implements OnInit {
-
   public focusedAppUrl: SafeUrl;
 
   constructor(
     private focusedAppService: FocusedAppService,
     private sanitizer: DomSanitizer
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
-    this.focusedAppService.focusedAppUrl.subscribe(url => {
+    this.focusedAppService.focusedAppUrl.subscribe((url) => {
       this.focusedAppUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
     });
   }
-
 }
-

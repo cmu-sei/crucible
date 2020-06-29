@@ -20,18 +20,17 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface View {
-    id?: string;
-    name?: string;
-    description?: string;
-    status?: View.StatusEnum;
-    canManage?: boolean;
+  id?: string;
+  name?: string;
+  description?: string;
+  status?: View.StatusEnum;
+  canManage?: boolean;
 }
 export namespace View {
-    export type StatusEnum = 'Active' | 'Inactive';
-    export const StatusEnum = {
-        Active: 'Active' as StatusEnum,
-        Inactive: 'Inactive' as StatusEnum
-    };
+  export type StatusEnum = 'Active' | 'Inactive';
+  export const StatusEnum = {
+    Active: 'Active' as StatusEnum,
+    Inactive: 'Inactive' as StatusEnum,
+  };
 }

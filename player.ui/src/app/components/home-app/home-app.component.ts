@@ -9,60 +9,52 @@ DM20-0181
 */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
-import { SettingsService } from '../../services/settings/settings.service';
 import { Title } from '@angular/platform-browser';
+import { ComnAuthService, ComnSettingsService } from '@crucible/common';
 import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
 
 @Component({
   selector: 'app-home-app',
   templateUrl: './home-app.component.html',
-  providers: [AuthService],
-  styleUrls: ['./home-app.component.css']
+  styleUrls: ['./home-app.component.scss'],
 })
 export class HomeAppComponent implements OnInit {
-
   public username: string;
   public titleText: string;
   public isSuperUser: Boolean;
   public topBarColor = '#b00';
 
   constructor(
-    private authService: AuthService,
-    private settingsService: SettingsService,
+    private authService: ComnAuthService,
+    private settingsService: ComnSettingsService,
     private titleService: Title,
     private usersService: LoggedInUserService
-  ) { }
+  ) {}
 
   ngOnInit() {
     // Set the topbar color from config file
-    this.topBarColor = this.settingsService.AppTopBarHexColor;
+    this.topBarColor = this.settingsService.settings.AppTopBarHexColor;
 
     // Set the page title from configuration file
-    this.titleText = this.settingsService.AppTopBarText;
-    this.titleService.setTitle(this.settingsService.AppTitle);
+    this.titleText = this.settingsService.settings.AppTopBarText;
+    this.titleService.setTitle(this.settingsService.settings.AppTitle);
     this.username = '';
     this.isSuperUser = false;
 
-    this.usersService.loggedInUser.subscribe(loggedInUser => {
-
+    this.usersService.loggedInUser.subscribe((loggedInUser) => {
       if (loggedInUser == null) {
         return;
       }
       // Get username information
       this.username = loggedInUser.name;
-
     });
 
-    this.usersService.isSuperUser.subscribe(isSuperUser => {
+    this.usersService.isSuperUser.subscribe((isSuperUser) => {
       this.isSuperUser = isSuperUser;
     });
-
   }
 
   logout(): void {
     this.authService.logout();
   }
-
 }
-

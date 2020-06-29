@@ -8,13 +8,13 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Component, Inject} from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
 import { Permission } from '../../../../generated/s3.player.api';
 
 @Component({
-    selector: 'create-permission-dialog',
-    templateUrl: './create-permission-dialog.component.html'
+  selector: 'create-permission-dialog',
+  templateUrl: './create-permission-dialog.component.html',
 })
 export class CreatePermissionDialogComponent {
   public title: string;
@@ -22,7 +22,8 @@ export class CreatePermissionDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data,
-    private dialogRef: MatDialogRef<CreatePermissionDialogComponent>) {
+    private dialogRef: MatDialogRef<CreatePermissionDialogComponent>
+  ) {
     this.dialogRef.disableClose = true;
   }
 
@@ -31,6 +32,6 @@ export class CreatePermissionDialogComponent {
   }
 
   done() {
-    this.dialogRef.close({'permission': this.permission});
+    this.dialogRef.close({ permission: this.permission });
   }
 }

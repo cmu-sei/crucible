@@ -9,18 +9,16 @@ DM20-0181
 */
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Http;
+using Microsoft.OpenApi.Models;
 using Steamfitter.Api.Infrastructure.Options;
 using Steamfitter.Api.Infrastructure.OperationFilters;
-using Steamfitter.Api.Infrastructure.Options;
-using Steamfitter.Api.Services;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using S3.Player.Api;
 using S3.VM.Api;
 using System.Net.Http;
@@ -38,24 +36,44 @@ namespace Steamfitter.Api.Infrastructure.Extensions
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Steamfitter API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Steamfitter API", Version = "v1" });
 
-                c.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
-                    Type = "oauth2",
-                    Flow = "implicit",
-                    AuthorizationUrl = authOptions.AuthorizationUrl,
-                    Scopes = authOptions.AuthorizationScope.Split(' ').ToDictionary(x => x, x => "public api access")
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri(authOptions.AuthorizationUrl),
+                            Scopes = new Dictionary<string, string>()
+                            {
+                                {authOptions.AuthorizationScope, "public api access"}
+                            }
+                        }
+                    }
                 });
 
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
                 {
-                    { "oauth2", new[] { authOptions.AuthorizationScope } }
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "oauth2"
+                            },
+                            Scheme = "oauth2"
+                        },
+                        new[] {authOptions.AuthorizationScope}
+                    }
                 });
 
                 c.IncludeXmlComments(commentsFile);
-                c.DescribeAllEnumsAsStrings();
                 c.OperationFilter<DefaultResponseOperationFilter>();
+                c.MapType<Optional<Guid?>>(() => new OpenApiSchema { Type = "string", Format = "uuid", Nullable= true });
+                c.MapType<JsonElement?>(() => new OpenApiSchema { Type = "object" , Nullable = true});
             });
         }
 

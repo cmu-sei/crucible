@@ -18,9 +18,8 @@ describe('AddRemoveUsersDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddRemoveUsersDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [AddRemoveUsersDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('AddRemoveUsersDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

@@ -18,9 +18,8 @@ describe('SelectRolePermissionsDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectRolePermissionsDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [SelectRolePermissionsDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('SelectRolePermissionsDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

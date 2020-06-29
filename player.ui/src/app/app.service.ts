@@ -8,17 +8,12 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 
-
-
-
 @Injectable()
 export class AppService {
-
-    // Resolve HTTP using the constructor
-    constructor(private _http: Http) { }
+  // Resolve HTTP using the constructor
+  constructor(private _http: Http) {}
 }
-

@@ -2,10 +2,9 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
-
         <IsPackable>false</IsPackable>
-
         <RootNamespace>stackstorm.api.client.test</RootNamespace>
+        <ProjectGuid>{9DC4BFB7-336F-47FD-894B-4EC7D808563D}</ProjectGuid>
     </PropertyGroup>
 
     <ItemGroup>

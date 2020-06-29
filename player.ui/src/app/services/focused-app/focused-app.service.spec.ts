@@ -15,12 +15,14 @@ import { FocusedAppService } from './focused-app.service';
 describe('FocusedAppService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FocusedAppService]
+      providers: [FocusedAppService],
     });
   });
 
-  it('should be created', inject([FocusedAppService], (service: FocusedAppService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [FocusedAppService],
+    (service: FocusedAppService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });
-

@@ -8,26 +8,23 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DomSanitizer, Title } from '@angular/platform-browser';
+import { ComnAuthService, ComnSettingsService } from '@crucible/common';
 import { ApplicationData } from '../../../models/application-data';
-import { FocusedAppService } from '../../../services/focused-app/focused-app.service';
 import { ApplicationsService } from '../../../services/applications/applications.service';
-import { ViewsService } from '../../../services/views/views.service';
-import { TeamsService } from '../../../services/teams/teams.service';
-import { AuthService } from '../../../services/auth/auth.service';
-import { DomSanitizer, SafeResourceUrl, SafeUrl, Title } from '@angular/platform-browser';
-import { SettingsService } from '../../../services/settings/settings.service';
+import { FocusedAppService } from '../../../services/focused-app/focused-app.service';
 import { LoggedInUserService } from '../../../services/logged-in-user/logged-in-user.service';
-
+import { TeamsService } from '../../../services/teams/teams.service';
+import { ViewsService } from '../../../services/views/views.service';
 
 @Component({
   selector: 'app-application-list',
   templateUrl: './application-list.component.html',
-  styleUrls: ['./application-list.component.css']
+  styleUrls: ['./application-list.component.scss'],
 })
 export class ApplicationListComponent implements OnInit {
   @Output() toggleSideNavEvent = new EventEmitter<String>();
-
 
   public applicationList: Array<ApplicationData> = new Array<ApplicationData>();
   public viewGUID: string;
@@ -39,54 +36,59 @@ export class ApplicationListComponent implements OnInit {
     private focusedAppService: FocusedAppService,
     private loggedInUserService: LoggedInUserService,
     private teamsService: TeamsService,
-    private authService: AuthService,
+    private authService: ComnAuthService,
     private sanitizer: DomSanitizer,
     private titleService: Title,
-    private settingsService: SettingsService
-  ) { }
-
-
+    private settingsService: ComnSettingsService
+  ) {}
 
   ngOnInit() {
-
     // Set the page title from configuration file
-    this.titleText = this.settingsService.AppTopBarText;
+    this.titleText = this.settingsService.settings.AppTopBarText;
     this.titleService.setTitle(this.titleText);
 
     // The current applications list
     this.applicationList = [];
 
     // Call to update the applications list anytime the Current View GUID is changed
-    this.viewsService.currentViewGuid.subscribe(currentViewGUID => {
+    this.viewsService.currentViewGuid.subscribe((currentViewGUID) => {
       if (currentViewGUID !== '') {
         // Tell the service to update once a user is officially logged in
-        this.loggedInUserService.loggedInUser.subscribe(loggedInUser => {
+        this.loggedInUserService.loggedInUser.subscribe((loggedInUser) => {
           if (loggedInUser == null) {
             return;
           }
 
-          this.teamsService.getUserTeamsByView(loggedInUser.id, currentViewGUID).subscribe(team => {
-            this.applicationsService.getApplicationsByTeam(team.filter(t => t.isPrimary)[0].id, currentViewGUID).subscribe(apps => {
-              this.applicationList = apps;
+          this.teamsService
+            .getUserTeamsByView(loggedInUser.id, currentViewGUID)
+            .subscribe((team) => {
+              this.applicationsService
+                .getApplicationsByTeam(
+                  team.filter((t) => t.isPrimary)[0].id,
+                  currentViewGUID
+                )
+                .subscribe((apps) => {
+                  this.applicationList = apps;
 
-              this.applicationList.forEach(app => {
-                  app.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(app.url);
-              });
+                  this.applicationList.forEach((app) => {
+                    app.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+                      app.url
+                    );
+                  });
 
-              // Service received new application list
-              if (this.applicationList.length > 0) {
-                const focusedApp: ApplicationData = this.applicationList[0];
+                  // Service received new application list
+                  if (this.applicationList.length > 0) {
+                    const focusedApp: ApplicationData = this.applicationList[0];
 
-                if (focusedApp != null) {
-                  this.openInFocusedApp(focusedApp.name, focusedApp.url);
-                }
-              }
+                    if (focusedApp != null) {
+                      this.openInFocusedApp(focusedApp.name, focusedApp.url);
+                    }
+                  }
+                });
             });
-          });
         });
       }
     });
-
   }
 
   sideNavToggle() {
@@ -99,15 +101,15 @@ export class ApplicationListComponent implements OnInit {
   }
 
   openInFocusedApp(name: string, url: string) {
-
-    this.authService.isAuthenticated().then(isAuthenticated => {
+    this.authService.isAuthenticated().then((isAuthenticated) => {
       if (!isAuthenticated) {
-        console.log('User is not authenticated and must not have been redirected to login.');
+        console.log(
+          'User is not authenticated and must not have been redirected to login.'
+        );
         window.location.reload();
       } else {
         this.focusedAppService.focusedAppUrl.next(url);
       }
     });
   }
-
 }

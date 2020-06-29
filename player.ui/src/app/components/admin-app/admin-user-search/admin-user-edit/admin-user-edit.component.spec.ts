@@ -18,9 +18,8 @@ describe('AdminUserEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminUserEditComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminUserEditComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('AdminUserEditComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

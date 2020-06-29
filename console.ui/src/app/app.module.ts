@@ -15,17 +15,16 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatProgressSpinnerModule,
-  MatButtonModule,
-  MatDialogModule,
-  MatMenuModule,
-  MatListModule,
-  MatIconModule,
-  MatInputModule,
-  MatBottomSheetModule,
-  MatSnackBarModule
-} from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
 import { OptionsBarComponent } from './components/options-bar/options-bar.component';
@@ -67,7 +66,8 @@ export function initConfig(settings: SettingsService) {
     MatMenuModule,
     MatBottomSheetModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ]
 })
 export class AngularMaterialModule { }

@@ -19,7 +19,7 @@ using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Services;
 using SAVM = Steamfitter.Api.ViewModels;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Steamfitter.Api.Controllers
 {
@@ -45,7 +45,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("users")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.User>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getUsers")]
+        [SwaggerOperation(OperationId = "getUsers")]
         public async STT.Task<IActionResult> Get(CancellationToken ct)
         {
             var list = await _userService.GetAsync(ct);
@@ -65,7 +65,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("users/{id}")]
         [ProducesResponseType(typeof(SAVM.User), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getUser")]
+        [SwaggerOperation(OperationId = "getUser")]
         public async STT.Task<IActionResult> Get(Guid id, CancellationToken ct)
         {
             var user = await _userService.GetAsync(id, ct);
@@ -88,7 +88,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPost("users")]
         [ProducesResponseType(typeof(SAVM.User), (int)HttpStatusCode.Created)]
-        [SwaggerOperation(operationId: "createUser")]
+        [SwaggerOperation(OperationId = "createUser")]
         public async STT.Task<IActionResult> Create([FromBody] SAVM.User user, CancellationToken ct)
         {
             user.CreatedBy = User.GetId();
@@ -108,7 +108,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpDelete("users/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [SwaggerOperation(operationId: "deleteUser")]
+        [SwaggerOperation(OperationId = "deleteUser")]
         public async STT.Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
             await _userService.DeleteAsync(id, ct);

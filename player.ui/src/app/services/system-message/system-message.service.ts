@@ -9,22 +9,17 @@ DM20-0181
 */
 
 import { Observable } from 'rxjs';
-import { MatBottomSheetRef, MatBottomSheet, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
+import { MatBottomSheetRef, MatBottomSheet, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Injectable } from '@angular/core';
 import { SystemMessageComponent } from '../../components/shared/system-message/system-message.component';
 
-
 @Injectable()
 export class SystemMessageService {
+  constructor(private messageSheet: MatBottomSheet) {}
 
-    constructor(
-        private messageSheet: MatBottomSheet
-    ) { }
-
-    public displayMessage(title: string, message: string) {
-        this.messageSheet.open(SystemMessageComponent, {data: {title: title, message: message} });
-    }
+  public displayMessage(title: string, message: string) {
+    this.messageSheet.open(SystemMessageComponent, {
+      data: { title: title, message: message },
+    });
+  }
 }
-
-
-

@@ -18,9 +18,8 @@ describe('AdminAppRolePermissionSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminRolePermissionSearchComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminRolePermissionSearchComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('AdminAppRolePermissionSearchComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

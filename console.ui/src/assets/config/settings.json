@@ -1,14 +1,29 @@
 {
-    "ConsoleApiUrl": "http://localhost:4304/api/",
-    "OIDCSettings": {
-        "authority": "http://localhost:5000/",
-        "client_id": "s3.console.web",
-        "redirect_uri": "http://localhost:4305/auth-callback",
-        "post_logout_redirect_uri": "http://localhost:4305",
-        "response_type": "id_token token",
-        "scope": "openid profile s3 s3-vm s3-console",
-        "automaticSilentRenew": true,
-        "silent_redirect_uri": "http://localhost:4305/auth-callback-silent"
-    },
-    "UseLocalAuthStorage": true
+  "ConsoleApiUrl": "http://localhost:4302/api/",
+  "OIDCSettings": {
+    "authority": "http://localhost:5000/",
+    "client_id": "s3.console.web",
+    "redirect_uri": "http://localhost:4305/auth-callback",
+    "post_logout_redirect_uri": "http://localhost:4305",
+    "response_type": "id_token token",
+    "scope": "openid profile s3 s3-vm s3-console",
+    "automaticSilentRenew": true,
+    "silent_redirect_uri": "http://localhost:4305/auth-callback-silent"
+  },
+  "UseLocalAuthStorage": true,
+  "VmResolutionOptions": [
+    { "width": 2560, "height": 1600 },
+    { "width": 1920, "height": 1440 },
+    { "width": 1920, "height": 1200 },
+    { "width": 1600, "height": 1200 },
+    { "width": 1400, "height": 1050 },
+    { "width": 1280, "height": 1024 },
+    { "width": 1440, "height": 900 },
+    { "width": 1280, "height": 960 },
+    { "width": 1366, "height": 768 },
+    { "width": 1280, "height": 800 },
+    { "width": 1280, "height": 720 },
+    { "width": 1024, "height": 768 },
+    { "width": 800, "height": 600 }
+  ]
 }

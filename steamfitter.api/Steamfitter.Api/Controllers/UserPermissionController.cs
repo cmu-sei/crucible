@@ -19,7 +19,7 @@ using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Services;
 using SAVM = Steamfitter.Api.ViewModels;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Steamfitter.Api.Controllers
 {
@@ -45,7 +45,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("userpermissions")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.UserPermission>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getUserPermissions")]
+        [SwaggerOperation(OperationId = "getUserPermissions")]
         public async STT.Task<IActionResult> Get(CancellationToken ct)
         {
             var list = await _userPermissionService.GetAsync(ct);
@@ -65,7 +65,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("userpermissions/{id}")]
         [ProducesResponseType(typeof(SAVM.UserPermission), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getUserPermission")]
+        [SwaggerOperation(OperationId = "getUserPermission")]
         public async STT.Task<IActionResult> Get(Guid id, CancellationToken ct)
         {
             var permission = await _userPermissionService.GetAsync(id, ct);
@@ -88,7 +88,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPost("userpermissions")]
         [ProducesResponseType(typeof(SAVM.UserPermission), (int)HttpStatusCode.Created)]
-        [SwaggerOperation(operationId: "createUserPermission")]
+        [SwaggerOperation(OperationId = "createUserPermission")]
         public async STT.Task<IActionResult> Create([FromBody] SAVM.UserPermission permission, CancellationToken ct)
         {
             permission.CreatedBy = User.GetId();
@@ -108,7 +108,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpDelete("userpermissions/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [SwaggerOperation(operationId: "deleteUserPermission")]
+        [SwaggerOperation(OperationId = "deleteUserPermission")]
         public async STT.Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
             await _userPermissionService.DeleteAsync(id, ct);
@@ -128,7 +128,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpDelete("users/{userId}/permissions/{permissionId}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [SwaggerOperation(operationId: "deleteUserPermissionByIds")]
+        [SwaggerOperation(OperationId = "deleteUserPermissionByIds")]
         public async STT.Task<IActionResult> Delete(Guid userId, Guid permissionId, CancellationToken ct)
         {
             await _userPermissionService.DeleteByIdsAsync(userId, permissionId, ct);

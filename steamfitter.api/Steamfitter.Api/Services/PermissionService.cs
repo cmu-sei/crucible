@@ -106,7 +106,7 @@ namespace Steamfitter.Api.Services
                 throw new ForbiddenException();
 
             permission.DateCreated = DateTime.UtcNow;
-            var permissionEntity = Mapper.Map<PermissionEntity>(permission);
+            var permissionEntity = _mapper.Map<PermissionEntity>(permission);
 
             _context.Permissions.Add(permissionEntity);
             await _context.SaveChangesAsync(ct);
@@ -127,7 +127,7 @@ namespace Steamfitter.Api.Services
             permission.CreatedBy = permissionToUpdate.CreatedBy;
             permission.DateCreated = permissionToUpdate.DateCreated;
             permission.DateModified = DateTime.UtcNow;
-            Mapper.Map(permission, permissionToUpdate);
+            _mapper.Map(permission, permissionToUpdate);
 
             _context.Permissions.Update(permissionToUpdate);
             await _context.SaveChangesAsync(ct);

@@ -78,23 +78,23 @@ namespace Caster.Api.Domain.Models
             switch (this.Type)
             {
                 case ResourceTypes.VsphereVirtualMachine:
-                {
-                    if (this.Attributes.TryGetProperty("guest_ip_addresses", out JsonElement ipAddresses))
-                        dict.Add("guest_ip_addresses", ipAddresses);
+                    {
+                        if (this.Attributes.TryGetProperty("guest_ip_addresses", out JsonElement ipAddresses))
+                            dict.Add("guest_ip_addresses", ipAddresses);
 
-                    if (this.Attributes.TryGetProperty("guest_id", out JsonElement guestId))
-                        dict.Add("guest_id", guestId);
+                        if (this.Attributes.TryGetProperty("guest_id", out JsonElement guestId))
+                            dict.Add("guest_id", guestId);
 
-                    break;
-                }
+                        break;
+                    }
                 case ResourceTypes.VsphereDistributedPortGroup:
                 case ResourceTypes.VsphereHostPortGroup:
-                {
-                    if (this.Attributes.TryGetProperty("vlan_id", out JsonElement vlanId))
-                        dict.Add("vlan_id", vlanId);
+                    {
+                        if (this.Attributes.TryGetProperty("vlan_id", out JsonElement vlanId))
+                            dict.Add("vlan_id", vlanId);
 
-                    break;
-                }
+                        break;
+                    }
             }
 
             return dict;
@@ -102,7 +102,7 @@ namespace Caster.Api.Domain.Models
 
         public Guid[] GetTeamIds()
         {
-            var teamIds = new List<Guid>();
+            List<Guid> teamIds = null;
 
             // TODO: improve handling of this.
             if (this.Type == "vsphere_virtual_machine")
@@ -113,12 +113,17 @@ namespace Caster.Api.Domain.Models
                     {
                         Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(extraConfig.ToString());
 
-                        string[] teamIdKeywords = new string[] {"guestinfo.teamId", "guestinfo.team_id"};
+                        string[] teamIdKeywords = new string[] { "guestinfo.teamId", "guestinfo.team_id" };
 
                         foreach (var keyword in teamIdKeywords)
                         {
                             if (dict.ContainsKey(keyword))
                             {
+                                if (teamIds == null)
+                                {
+                                    teamIds = new List<Guid>();
+                                }
+
                                 string idString = dict[keyword];
                                 string[] ids = idString.Split(',');
 
@@ -133,14 +138,14 @@ namespace Caster.Api.Domain.Models
                             }
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
 
                     }
                 }
             }
 
-            return teamIds.ToArray();
+            return teamIds == null ? null : teamIds.ToArray();
         }
 
         public bool IsVirtualMachine()

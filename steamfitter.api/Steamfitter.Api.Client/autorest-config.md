@@ -4,7 +4,7 @@
 #     $ npm install -g autorest
 #
 # To create the swagger.json file, run the following command from ..\Steamfitter.Api folder
-#     $ dotnet swagger tofile --output ..\Steamfitter.Api.Client\swagger.json bin\Debug\netcoreapp2.2\steamfitter.api.dll v1
+#     $ dotnet swagger tofile --output ..\Steamfitter.Api.Client\swagger.json bin\Debug\netcoreapp3.1\steamfitter.api.dll v1
 #
 # To generate the api client code ...
 #   from this folder (must contain this file, the csproj file and the swagger.json file) run the following command:

@@ -18,9 +18,8 @@ describe('CreatePermissionDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatePermissionDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [CreatePermissionDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('CreatePermissionDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

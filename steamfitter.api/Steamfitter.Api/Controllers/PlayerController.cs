@@ -16,7 +16,7 @@ using STT = System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Steamfitter.Api.Services;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 using S3.Player.Api.Models;
 using S3.VM.Api.Models;
 
@@ -44,7 +44,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("views")]
         [ProducesResponseType(typeof(IEnumerable<View>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getViews")]
+        [SwaggerOperation(OperationId = "getViews")]
         public async STT.Task<IActionResult> GetViews(CancellationToken ct)
         {
             var list = await _playerService.GetViewsAsync(ct);
@@ -60,7 +60,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("vms")]
         [ProducesResponseType(typeof(IEnumerable<Vm>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getVms")]
+        [SwaggerOperation(OperationId = "getVms")]
         public async STT.Task<IActionResult> GetViewVms(Guid viewId, CancellationToken ct)
         {
             var list = await _playerVmService.GetViewVmsAsync(viewId, ct);

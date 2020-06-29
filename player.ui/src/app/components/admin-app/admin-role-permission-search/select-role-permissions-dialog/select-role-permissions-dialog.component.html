@@ -10,15 +10,20 @@ DM20-0181
 
 <div style="max-height: 800px;" fxLayout="column" fxLayoutAlign="center none">
   <h1 mat-dialog-title>Select Permissions for {{ role.name }}</h1>
-  <mat-selection-list style="max-height: 600px; overflow-y:auto;" [(ngModel)]="selectedPermissions">
-    <mat-list-option *ngFor="let item of permissions" [value]="item.id" (click)="updateSelection(item.id)">
-      {{item.key}}
+  <mat-selection-list
+    style="max-height: 600px; overflow-y: auto;"
+    [(ngModel)]="selectedPermissions"
+  >
+    <mat-list-option
+      *ngFor="let item of permissions"
+      [value]="item.id"
+      (click)="updateSelection(item.id)"
+    >
+      {{ item.key }}
     </mat-list-option>
   </mat-selection-list>
-  <p>Options selected: {{selectedPermissions.length}}</p>
+  <p>Options selected: {{ selectedPermissions.length }}</p>
   <div fxlayout="row" fxLayoutAlign="center center">
     <button mat-stroked-button (click)="close()" tabIndex="4">Done</button>
-  </div>  
+  </div>
 </div>
-  
-

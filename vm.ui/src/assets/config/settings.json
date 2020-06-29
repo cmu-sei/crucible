@@ -2,6 +2,7 @@
     "ApiUrl": "http://localhost:4302/api",
     "DeployApiUrl": "http://localhost:4308/api",
     "ApiPlayerUrl": "http://localhost:4300",
+    "WelderUrl": "",
     "OIDCSettings": {
         "authority": "http://localhost:5000/",
         "client_id": "s3.vm.web",

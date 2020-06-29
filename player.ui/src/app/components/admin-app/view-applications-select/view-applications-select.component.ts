@@ -9,33 +9,38 @@ DM20-0181
 */
 
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { View, ApplicationTemplate, ApplicationService, Application } from '../../../generated/s3.player.api';
+import {
+  View,
+  ApplicationTemplate,
+  ApplicationService,
+  Application,
+} from '../../../generated/s3.player.api';
 import { DialogService } from '../../../services/dialog/dialog.service';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
+import {
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-view-applications-select',
   templateUrl: './view-applications-select.component.html',
-  styleUrls: ['./view-applications-select.component.css']
+  styleUrls: ['./view-applications-select.component.scss'],
 })
 export class ViewApplicationsSelectComponent implements OnInit {
-
   @Input() view: View;
-  @ViewChild(ViewApplicationsSelectComponent, { static: false }) child;
+  @ViewChild(ViewApplicationsSelectComponent) child;
 
   public nameFormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(3)
+    Validators.minLength(3),
   ]);
 
-  public urlFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  public urlFormControl = new FormControl('', [Validators.required]);
 
-  public iconFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  public iconFormControl = new FormControl('', [Validators.required]);
 
   public matcher = new AppErrorStateMatcher();
 
@@ -47,7 +52,7 @@ export class ViewApplicationsSelectComponent implements OnInit {
   constructor(
     public applicationService: ApplicationService,
     public dialogService: DialogService
-  ) { }
+  ) {}
 
   /**
    * Initialization
@@ -57,29 +62,31 @@ export class ViewApplicationsSelectComponent implements OnInit {
 
     if (!this.view) {
       // either a team or a view must be provided, so roles and permissions will not be functional
-      console.log('The applications select component requires either an view, therefore will be non-functional.');
+      console.log(
+        'The applications select component requires either an view, therefore will be non-functional.'
+      );
       return;
     } else {
       this.updateApplications();
     }
 
-    this.applicationService.getApplicationTemplates().subscribe(appTmps => {
+    this.applicationService.getApplicationTemplates().subscribe((appTmps) => {
       this.applicationTemplates = appTmps;
     });
   }
-
 
   /**
    * Called to update the list of apps for the view
    */
   updateApplications() {
     this.isLoading = true;
-    this.applicationService.getViewApplications(this.view.id).subscribe(appInsts => {
-      this.applications = appInsts;
-      this.isLoading = false;
-    });
+    this.applicationService
+      .getViewApplications(this.view.id)
+      .subscribe((appInsts) => {
+        this.applications = appInsts;
+        this.isLoading = false;
+      });
   }
-
 
   /**
    * Saves the application name
@@ -87,37 +94,35 @@ export class ViewApplicationsSelectComponent implements OnInit {
    * @param id app Guid
    */
   saveApplicationName(name: string, id: string): void {
-      if (name === '') {
-        name = null;
-      }
+    if (name === '') {
+      name = null;
+    }
 
-      // if (!this.nameFormControl.hasError('minlength') && !this.nameFormControl.hasError('required')) {
-      this.applicationService.getApplication(id).subscribe(app => {
-        app.name = name;
-        this.saveApplication(app);
-      });
+    // if (!this.nameFormControl.hasError('minlength') && !this.nameFormControl.hasError('required')) {
+    this.applicationService.getApplication(id).subscribe((app) => {
+      app.name = name;
+      this.saveApplication(app);
+    });
     // }
   }
 
-
   /**
- * Saves the application url
- * @param url New url for the application
- * @param id app Guid
- */
+   * Saves the application url
+   * @param url New url for the application
+   * @param id app Guid
+   */
   saveApplicationUrl(url: string, id: string): void {
     if (url === '') {
       url = null;
     }
 
     // if (!this.urlFormControl.hasError('required')) {
-      this.applicationService.getApplication(id).subscribe(app => {
-        app.url = url;
-        this.saveApplication(app);
-      });
+    this.applicationService.getApplication(id).subscribe((app) => {
+      app.url = url;
+      this.saveApplication(app);
+    });
     // }
   }
-
 
   /**
    * Saves the application icon path
@@ -130,68 +135,73 @@ export class ViewApplicationsSelectComponent implements OnInit {
     }
 
     // if (!this.iconFormControl.hasError('required')) {
-      this.applicationService.getApplication(id).subscribe(app => {
-        app.icon = iconPath;
-        this.saveApplication(app);
-      });
+    this.applicationService.getApplication(id).subscribe((app) => {
+      app.icon = iconPath;
+      this.saveApplication(app);
+    });
     // }
   }
-
 
   /**
    * Saves the application embeddable flag
    * @param application The changed application object
    */
   saveApplicationEmbeddable(application: Application): void {
-    this.applicationService.getApplication(application.id).subscribe(app => {
+    this.applicationService.getApplication(application.id).subscribe((app) => {
       app.embeddable = application.embeddable;
       this.saveApplication(app);
     });
   }
 
-
-    /**
+  /**
    * Saves the application load in background flag
    * @param application The changed application object
    */
   saveApplicationLoadInBackground(application: Application): void {
-    this.applicationService.getApplication(application.id).subscribe(app => {
+    this.applicationService.getApplication(application.id).subscribe((app) => {
       app.loadInBackground = application.loadInBackground;
       this.saveApplication(app);
     });
   }
 
   saveApplicationTemplateId(application: Application): void {
-    this.applicationService.getApplication(application.id).subscribe(app => {
+    this.applicationService.getApplication(application.id).subscribe((app) => {
       app.applicationTemplateId = application.applicationTemplateId;
       this.saveApplication(app);
     });
   }
 
-
   /**
    * Generically saves the application for the view and updates the applications list
    */
   saveApplication(app: Application) {
-    this.applicationService.updateApplication(app.id, app).subscribe(rslt => {
-      this.applicationService.getViewApplications(this.view.id).subscribe(appInsts => {
-        this.applications = appInsts;
-      });
+    this.applicationService.updateApplication(app.id, app).subscribe((rslt) => {
+      this.applicationService
+        .getViewApplications(this.view.id)
+        .subscribe((appInsts) => {
+          this.applications = appInsts;
+        });
       console.log('Application name updated');
     });
   }
-
 
   /**
    * Removes an app from the view
    * @param app The app to delete
    */
   deleteViewApplication(app: Application) {
-    this.dialogService.confirm('Delete Application', 'Are you sure that you want to remove the application ' + this.getAppName(app) + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Delete Application',
+        'Are you sure that you want to remove the application ' +
+          this.getAppName(app) +
+          '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
-          this.applicationService.deleteApplication(app.id)
-            .subscribe(deleted => {
+          this.applicationService
+            .deleteApplication(app.id)
+            .subscribe((deleted) => {
               console.log('successfully deleted application');
               this.updateApplications();
             });
@@ -203,7 +213,9 @@ export class ViewApplicationsSelectComponent implements OnInit {
     if (app.name != null) {
       return app.name;
     } else if (app.applicationTemplateId != null) {
-      const template = this.applicationTemplates.find(x => x.id === app.applicationTemplateId);
+      const template = this.applicationTemplates.find(
+        (x) => x.id === app.applicationTemplateId
+      );
 
       if (template != null) {
         return template.name;
@@ -219,7 +231,9 @@ export class ViewApplicationsSelectComponent implements OnInit {
     if (app.icon != null) {
       return app.icon;
     } else if (app.applicationTemplateId != null) {
-      const template = this.applicationTemplates.find(x => x.id === app.applicationTemplateId);
+      const template = this.applicationTemplates.find(
+        (x) => x.id === app.applicationTemplateId
+      );
 
       if (template != null) {
         return template.icon;
@@ -232,14 +246,18 @@ export class ViewApplicationsSelectComponent implements OnInit {
   }
 
   getTemplate(applicationTemplateId: string) {
-    const template = this.applicationTemplates.find(x => x.id === applicationTemplateId);
+    const template = this.applicationTemplates.find(
+      (x) => x.id === applicationTemplateId
+    );
     return template;
   }
-
 }
 /** Error when invalid control is dirty, touched, or submitted. */
 export class AppErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || isSubmitted));
   }

@@ -115,12 +115,13 @@ namespace Stackstorm.Connector.Models.Vsphere
             public PowerStates PowerState { get; set; }
             public string Moid { get; set; }
             public string Name { get; set; }
+            public string Uuid { get; set; }
 
             public Vm()
             {
             }
 
-            public Vm(object moid, object name, object powerState)
+            public Vm(object moid, object name, object powerState, object uuid)
             {
                 this.Moid = moid.ToString();
                 this.Name = name.ToString();
@@ -130,6 +131,7 @@ namespace Stackstorm.Connector.Models.Vsphere
                         ? PowerStates.On
                         : PowerStates.Off;
                 }
+                this.Uuid = uuid.ToString();
             }
         }
 

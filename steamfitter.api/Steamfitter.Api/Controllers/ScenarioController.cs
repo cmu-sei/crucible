@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Services;
 using SAVM = Steamfitter.Api.ViewModels;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Steamfitter.Api.Controllers
 {
@@ -44,7 +44,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("Scenarios")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.Scenario>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getScenarios")]
+        [SwaggerOperation(OperationId = "getScenarios")]
         public async STT.Task<IActionResult> Get(CancellationToken ct)
         {
             var list = await _ScenarioService.GetAsync(ct);
@@ -62,7 +62,7 @@ namespace Steamfitter.Api.Controllers
         // /// <returns></returns>
         // [HttpGet("users/{id}/Scenarios")]
         // [ProducesResponseType(typeof(IEnumerable<Scenario>), (int)HttpStatusCode.OK)]
-        // [SwaggerOperation(operationId: "getUserScenarios")]
+        // [SwaggerOperation(OperationId = "getUserScenarios")]
         // public async STT.Task<IActionResult> GetByUserId(int id, CancellationToken ct)
         // {
         //     var list = await _ScenarioService.GetByUserIdAsync(id, ct);
@@ -81,7 +81,7 @@ namespace Steamfitter.Api.Controllers
         // /// </remarks>
         // [HttpGet("me/Scenarios")]
         // [ProducesResponseType(typeof(IEnumerable<Scenario>), (int)HttpStatusCode.OK)]
-        // [SwaggerOperation(operationId: "getMyScenarios")]
+        // [SwaggerOperation(OperationId = "getMyScenarios")]
         // public async STT.Task<IActionResult> GetMy(CancellationToken ct)
         // {
         //     return RedirectToAction(nameof(this.GetByUserId), new { id = User.GetId() });
@@ -100,7 +100,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("Scenarios/{id}")]
         [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getScenario")]
+        [SwaggerOperation(OperationId = "getScenario")]
         public async STT.Task<IActionResult> Get(Guid id, CancellationToken ct)
         {
             var Scenario = await _ScenarioService.GetAsync(id, ct);
@@ -123,7 +123,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPost("Scenarios")]
         [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.Created)]
-        [SwaggerOperation(operationId: "createScenario")]
+        [SwaggerOperation(OperationId = "createScenario")]
         public async STT.Task<IActionResult> Create([FromBody] SAVM.Scenario scenario, CancellationToken ct)
         {
             var createdScenario = await _ScenarioService.CreateAsync(scenario, ct);
@@ -142,7 +142,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPost("ScenarioTemplates/{id}/Scenarios")]
         [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.Created)]
-        [SwaggerOperation(operationId: "createScenarioFromScenarioTemplate")]
+        [SwaggerOperation(OperationId = "createScenarioFromScenarioTemplate")]
         public async STT.Task<IActionResult> CreateFromScenarioTemplate(Guid id, CancellationToken ct)
         {
             var createdScenario = await _ScenarioService.CreateFromScenarioTemplateAsync(id, ct);
@@ -161,7 +161,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPost("Scenarios/{id}/Copy")]
         [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.Created)]
-        [SwaggerOperation(operationId: "copyScenario")]
+        [SwaggerOperation(OperationId = "copyScenario")]
         public async STT.Task<IActionResult> CopyScenario(Guid id, CancellationToken ct)
         {
             var createdScenario = await _ScenarioService.CreateFromScenarioAsync(id, ct);
@@ -181,7 +181,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPut("Scenarios/{id}")]
         [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "updateScenario")]
+        [SwaggerOperation(OperationId = "updateScenario")]
         public async STT.Task<IActionResult> Update([FromRoute] Guid id, [FromBody] SAVM.Scenario scenario, CancellationToken ct)
         {
             var updatedScenario = await _ScenarioService.UpdateAsync(id, scenario, ct);
@@ -200,7 +200,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPut("Scenarios/{id}/start")]
         [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "startScenario")]
+        [SwaggerOperation(OperationId = "startScenario")]
         public async STT.Task<IActionResult> Start([FromRoute] Guid id, CancellationToken ct)
         {
             var updatedScenario = await _ScenarioService.StartAsync(id, ct);
@@ -219,7 +219,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPut("Scenarios/{id}/pause")]
         [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "pauseScenario")]
+        [SwaggerOperation(OperationId = "pauseScenario")]
         public async STT.Task<IActionResult> Pause([FromRoute] Guid id, CancellationToken ct)
         {
             var updatedScenario = await _ScenarioService.PauseAsync(id, ct);
@@ -238,7 +238,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPut("Scenarios/{id}/continue")]
         [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "continueScenario")]
+        [SwaggerOperation(OperationId = "continueScenario")]
         public async STT.Task<IActionResult> Continue([FromRoute] Guid id, CancellationToken ct)
         {
             var updatedScenario = await _ScenarioService.ContinueAsync(id, ct);
@@ -257,7 +257,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPut("Scenarios/{id}/end")]
         [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "endScenario")]
+        [SwaggerOperation(OperationId = "endScenario")]
         public async STT.Task<IActionResult> End([FromRoute] Guid id, CancellationToken ct)
         {
             var updatedScenario = await _ScenarioService.EndAsync(id, ct);
@@ -276,7 +276,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpDelete("Scenarios/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [SwaggerOperation(operationId: "deleteScenario")]
+        [SwaggerOperation(OperationId = "deleteScenario")]
         public async STT.Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
             await _ScenarioService.DeleteAsync(id, ct);

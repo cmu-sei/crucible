@@ -18,9 +18,8 @@ describe('CreateRoleDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateRoleDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [CreateRoleDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('CreateRoleDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

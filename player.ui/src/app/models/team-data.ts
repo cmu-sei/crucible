@@ -8,12 +8,10 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-
 export interface TeamData {
-    id: string;
-    name: string;
-    canManage: boolean;
-    isMember: boolean;
-    isPrimary: boolean;
+  id: string;
+  name: string;
+  canManage: boolean;
+  isMember: boolean;
+  isPrimary: boolean;
 }
-

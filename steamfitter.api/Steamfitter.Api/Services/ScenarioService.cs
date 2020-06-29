@@ -17,9 +17,11 @@ using System.Threading;
 using STT = System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Steamfitter.Api.Data;
 using Steamfitter.Api.Data.Models;
+using Steamfitter.Api.Hubs;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Authorization;
 using Steamfitter.Api.Infrastructure.Exceptions;
@@ -50,13 +52,15 @@ namespace Steamfitter.Api.Services
         private readonly IMapper _mapper;
         private readonly ITaskService _taskService;
         private readonly IStackStormService _stackstormService;
+        private readonly IHubContext<EngineHub> _engineHub;
 
         public ScenarioService(SteamfitterContext context,
                                 IAuthorizationService authorizationService,
                                 IPrincipal user,
                                 IMapper mapper,
                                 ITaskService taskService,
-                                IStackStormService stackstormService)
+                                IStackStormService stackstormService,
+                                IHubContext<EngineHub> engineHub)
         {
             _context = context;
             _authorizationService = authorizationService;
@@ -64,6 +68,7 @@ namespace Steamfitter.Api.Services
             _mapper = mapper;
             _taskService = taskService;
             _stackstormService = stackstormService;
+            _engineHub = engineHub;
         }
 
         public async STT.Task<IEnumerable<ViewModels.Scenario>> GetAsync(CancellationToken ct)
@@ -95,7 +100,7 @@ namespace Steamfitter.Api.Services
 
             scenario.DateCreated = DateTime.UtcNow;
             scenario.CreatedBy = _user.GetId();
-            var scenarioEntity = Mapper.Map<ScenarioEntity>(scenario);
+            var scenarioEntity = _mapper.Map<ScenarioEntity>(scenario);
 
             //TODO: add permissions
             // var ScenarioAdminPermission = await _context.Permissions
@@ -107,8 +112,10 @@ namespace Steamfitter.Api.Services
 
             _context.Scenarios.Add(scenarioEntity);
             await _context.SaveChangesAsync(ct);
+            scenario = await GetAsync(scenarioEntity.Id, ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioCreated, scenario);
 
-            return await GetAsync(scenarioEntity.Id, ct);
+            return scenario;
         }
 
         public async STT.Task<ViewModels.Scenario> CreateFromScenarioTemplateAsync(Guid scenarioTemplateId, CancellationToken ct)
@@ -130,14 +137,17 @@ namespace Steamfitter.Api.Services
             await _context.SaveChangesAsync(ct);
 
             // copy all of the Tasks
-            var oldTaskEntities = _context.Tasks.Where(dt => dt.ScenarioTemplateId == scenarioTemplateId && dt.TriggerTaskId == null);
+            var oldTaskEntities = _context.Tasks.Where(dt => dt.ScenarioTemplateId == scenarioTemplateId && dt.TriggerTaskId == null).ToList();
             // copy the PARENT Tasks
             foreach (var oldTaskEntity in oldTaskEntities)
             {
                 await _taskService.CopyAsync(oldTaskEntity.Id, scenarioEntity.Id, "scenario", ct);
             }
 
-            return _mapper.Map<SAVM.Scenario>(scenarioEntity);
+            var scenario = _mapper.Map<SAVM.Scenario>(scenarioEntity);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioCreated, scenario);
+
+            return scenario;
         }
 
         public async STT.Task<ViewModels.Scenario> CreateFromScenarioAsync(Guid oldScenarioId, CancellationToken ct)
@@ -161,14 +171,17 @@ namespace Steamfitter.Api.Services
             await _context.SaveChangesAsync(ct);
 
             // copy all of the Tasks
-            var oldTaskEntities = _context.Tasks.Where(dt => dt.ScenarioId == oldScenarioId && dt.TriggerTaskId == null);
+            var oldTaskEntities = _context.Tasks.Where(dt => dt.ScenarioId == oldScenarioId && dt.TriggerTaskId == null).ToList();
             // copy the PARENT Tasks
             foreach (var oldTaskEntity in oldTaskEntities)
             {
                 await _taskService.CopyAsync(oldTaskEntity.Id, newScenarioEntity.Id, "scenario", ct);
             }
 
-            return await GetAsync(newScenarioEntity.Id, ct);
+            var scenario = await GetAsync(newScenarioEntity.Id, ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioCreated, scenario);
+
+            return scenario;
         }
 
         public async STT.Task<ViewModels.Scenario> UpdateAsync(Guid id, ViewModels.Scenario scenario, CancellationToken ct)
@@ -185,12 +198,15 @@ namespace Steamfitter.Api.Services
             scenario.CreatedBy = scenarioToUpdate.CreatedBy;
             scenario.DateModified = DateTime.UtcNow;
             scenario.ModifiedBy = _user.GetId();
-            Mapper.Map(scenario, scenarioToUpdate);
+            _mapper.Map(scenario, scenarioToUpdate);
 
             _context.Scenarios.Update(scenarioToUpdate);
             await _context.SaveChangesAsync(ct);
 
-            return _mapper.Map(scenarioToUpdate, scenario);
+            var updatedScenario =  _mapper.Map(scenarioToUpdate, scenario);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioUpdated, updatedScenario);
+
+            return updatedScenario;
         }
 
         public async STT.Task<bool> DeleteAsync(Guid id, CancellationToken ct)
@@ -205,6 +221,7 @@ namespace Steamfitter.Api.Services
 
             _context.Scenarios.Remove(ScenarioToDelete);
             await _context.SaveChangesAsync(ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioDeleted, id);
 
             return true;
         }
@@ -236,7 +253,10 @@ namespace Steamfitter.Api.Services
                 }
             }
 
-            return _mapper.Map<SAVM.Scenario>(scenario);
+            var updatedScenario = _mapper.Map<SAVM.Scenario>(scenario);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioUpdated, updatedScenario);
+
+            return updatedScenario;
         }
 
         public async STT.Task<ViewModels.Scenario> PauseAsync(Guid id, CancellationToken ct)
@@ -265,7 +285,10 @@ namespace Steamfitter.Api.Services
             _context.Scenarios.Update(scenario);
             await _context.SaveChangesAsync(ct);
 
-            return _mapper.Map<SAVM.Scenario>(scenario);
+            var updatedScenario = _mapper.Map<SAVM.Scenario>(scenario);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioUpdated, updatedScenario);
+
+            return updatedScenario;
         }
 
     }

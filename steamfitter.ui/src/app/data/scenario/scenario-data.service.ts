@@ -136,7 +136,7 @@ export class ScenarioDataService {
         // convert from UTC time.
         scenario.startDate = new Date(scenario.startDate);
         scenario.endDate = new Date(scenario.endDate);
-        this.scenarioStore.upsert(scenario.id, {...scenario});
+        this.updateStore({...scenario});
       }),
       tap(() => { this.scenarioStore.setLoading(false); })
     );
@@ -181,14 +181,14 @@ export class ScenarioDataService {
         // convert from UTC time.
         s.startDate = new Date(s.startDate);
         s.endDate = new Date(s.endDate);
-        this.scenarioStore.upsert(s.id, s);
+        this.updateStore(s);
       }
     );
   }
 
   delete(id: string) {
     this.scenarioService.deleteScenario(id).pipe(take(1)).subscribe(r => {
-      this.scenarioStore.remove(id);
+      this.deleteFromStore(id);
       this.setActive('');
     });
   }
@@ -198,7 +198,7 @@ export class ScenarioDataService {
       // convert from UTC time.
       s.startDate = new Date(s.startDate);
       s.endDate = new Date(s.endDate);
-      this.scenarioStore.upsert(s.id, s);
+      this.updateStore(s);
     });
   }
 
@@ -207,7 +207,7 @@ export class ScenarioDataService {
       // convert from UTC time.
       s.startDate = new Date(s.startDate);
       s.endDate = new Date(s.endDate);
-      this.scenarioStore.upsert(s.id, s);
+      this.updateStore(s);
     });
   }
 
@@ -217,6 +217,14 @@ export class ScenarioDataService {
 
   setPageEvent(pageEvent: PageEvent) {
     this.scenarioStore.update({pageEvent: pageEvent});
+  }
+
+  updateStore(scenario: Scenario) {
+    this.scenarioStore.upsert(scenario.id, scenario);
+  }
+
+  deleteFromStore(id: string) {
+    this.scenarioStore.remove(id);
   }
 
 }

@@ -8,7 +8,7 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div id='wmksContainer' #wmksContainer class="wmksContainer">
+<div id='wmksContainer' #wmksContainer class="wmksContainer" (window:resize)="onResize()">
     <div class="align-items-center center align-content-center" style="width: 70%;" *ngIf='this.vmService.showLoading'>
         <h1>{{progressMessage}}</h1>
     </div>

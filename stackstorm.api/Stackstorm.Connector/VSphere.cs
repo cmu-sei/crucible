@@ -71,7 +71,38 @@ namespace Stackstorm.Connector
                 //get vms and spit out
                 foreach (var node in j["result"])
                 {
-                    returnObject.Vms.Add(new Responses.Vm(node["moid"], node["name"], node["runtime.powerState"]));
+                    returnObject.Vms.Add(new Responses.Vm(node["moid"], node["name"], node["runtime.powerState"], null));
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Object was not in expected format: {e}");
+                Console.WriteLine(e);
+                returnObject.Exception = e;
+            }
+
+            return returnObject;
+        }
+
+        /// <summary>
+        /// clusters get auto-formatted into st2-friendly array: "[\"domain-c9\"]"
+        /// </summary>
+        /// <param name="cluster"></param>
+        public async Task<Responses.VmList> GetVmsWithUuid(IEnumerable<string> clusters)
+        {
+            var returnObject = new Responses.VmList();
+            var executionResult = await this.Client.VSphere.GetVmsWithUuid(new Dictionary<string, string> {{"clusters", clusters.ToSt2Array()}});
+            Log.Trace($"ExecutionResult: {executionResult}");
+
+            try
+            {
+                returnObject.Id = executionResult.id;
+                var j = executionResult.result.ToString().ToJObject();
+
+                //get vms and spit out
+                foreach (var node in j["result"])
+                {
+                    returnObject.Vms.Add(new Responses.Vm(node["moid"], node["name"], node["runtime.powerState"], node["config.uuid"]));
                 }
             }
             catch (Exception e)
@@ -148,7 +179,7 @@ namespace Stackstorm.Connector
 
                 foreach (var prop in j.OfType<JProperty>())
                 {
-                    returnObject.Vms.Add(new Responses.Vm(prop.Value.ToString(), prop.Name, null));
+                    returnObject.Vms.Add(new Responses.Vm(prop.Value.ToString(), prop.Name, null, null));
                 }
             }
             catch (Exception e)
@@ -210,6 +241,30 @@ namespace Stackstorm.Connector
             {
                 returnObject.Id = executionResult.id;
                 var commandTextObject = ((JObject) executionResult.result).First.First["stdout"];
+                returnObject.Value = commandTextObject.ToString();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Object was not in expected format: {e}");
+                Console.WriteLine(e);
+                returnObject.Exception = e;
+            }
+
+            return returnObject;
+        }
+
+        public async Task<Responses.VmStringValue> GuestCommandFast(Requests.Command request)
+        {
+            var returnObject = new Responses.VmStringValue();
+            var executionResult = await this.Client.VSphere.GuestProcessRunFast(new Dictionary<string, string>
+                {{"vm_id", request.Moid}, {"username", request.Username}, {"password", request.Password}, 
+                    {"command", request.CommandText}, {"arguments", request.CommandArgs}, {"workdir", request.CommandWorkDirectory}});
+            Log.Trace($"ExecutionResult: {executionResult}");
+
+            try
+            {
+                returnObject.Id = executionResult.id;
+                var commandTextObject = ((JObject) executionResult.result)["result"];
                 returnObject.Value = commandTextObject.ToString();
             }
             catch (Exception e)

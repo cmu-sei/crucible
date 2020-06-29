@@ -155,14 +155,14 @@ export class ScenarioTemplateDataService {
         tap(() => { this.scenarioTemplateStore.setLoading(false); }),
         take(1)
       ).subscribe(n => {
-        this.scenarioTemplateStore.upsert(n.id, n);
+        this.updateStore(n);
       }
     );
   }
 
   delete(id: string) {
     this.scenarioTemplateService.deleteScenarioTemplate(id).pipe(take(1)).subscribe(r => {
-      this.scenarioTemplateStore.remove(id);
+      this.deleteFromStore(id);
       this.setActive('');
     });
   }
@@ -173,6 +173,14 @@ export class ScenarioTemplateDataService {
 
   setPageEvent(pageEvent: PageEvent) {
     this.scenarioTemplateStore.update({pageEvent: pageEvent});
+  }
+
+  updateStore(scenarioTemplate: ScenarioTemplate) {
+    this.scenarioTemplateStore.upsert(scenarioTemplate.id, scenarioTemplate);
+  }
+
+  deleteFromStore(id: string) {
+    this.scenarioTemplateStore.remove(id);
   }
 
 }

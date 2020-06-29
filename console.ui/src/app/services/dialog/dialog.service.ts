@@ -9,7 +9,7 @@ DM20-0181
 */
 
 import { Observable } from 'rxjs';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { Injectable } from '@angular/core';
 import { MessageDialogComponent } from '../../components/shared/message-dialog/message-dialog.component';
 import { SendTextDialogComponent } from '../../components/shared/send-text-dialog/send-text-dialog.component';

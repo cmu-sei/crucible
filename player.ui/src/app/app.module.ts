@@ -8,105 +8,101 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+import { CdkTableModule } from '@angular/cdk/table';
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTreeModule } from '@angular/material/tree';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { CdkTableModule } from '@angular/cdk/table';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PushNotificationsModule } from 'ng-push';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ClipboardModule } from 'ngx-clipboard';
-
-import { AppComponent } from './app.component';
-
-import { ApiModule as SwaggerCodegenApiModule } from './generated/s3.player.api/api.module';
-import { BASE_PATH } from './generated/s3.player.api';
-
 import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatStepperModule,
-  MatTableDataSource,
-  MatBottomSheetModule,
-  MatTree,
-  MatTreeModule,
-  MatBadgeModule,
-} from '@angular/material';
-import { ApplicationListComponent } from './components/player/application-list/application-list.component';
-import { NotificationsComponent } from './components/player/notifications/notifications.component';
-import { FocusedAppComponent } from './components/player/focused-app/focused-app.component';
-import { PlayerComponent } from './components/player/player.component';
-import { HomeAppComponent } from './components/home-app/home-app.component';
+  ComnAuthModule,
+  ComnSettingsConfig,
+  ComnSettingsModule,
+  ComnSettingsService,
+} from '@crucible/common';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PushNotificationsModule } from 'ng-push-ivy';
+import { ClipboardModule } from 'ngx-clipboard';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { ViewListComponent } from './components/home-app/view-list/view-list.component';
-import { AuthCallbackComponent } from './components/auth/auth-callback.component';
-import { AuthCallbackSilentComponent } from './components/auth/auth-callback-silent.component';
+import { AppComponent } from './app.component';
 import { AppService } from './app.service';
-import { SettingsService } from './services/settings/settings.service';
-import { AuthGuard } from './services/auth/auth-guard.service';
-import { AuthService } from './services/auth/auth.service';
-import { AuthInterceptor } from './services/auth/auth.interceptor.service';
-import { FocusedAppService } from './services/focused-app/focused-app.service';
-import { NotificationService } from './services/notification/notification.service';
-import { TeamsService } from './services/teams/teams.service';
-import { LoggedInUserService } from './services/logged-in-user/logged-in-user.service';
-import { ViewsService } from './services/views/views.service';
-import { ApplicationsService } from './services/applications/applications.service';
-import { DialogService } from './services/dialog/dialog.service';
-import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
+import { AdminAppTemplateSearchComponent } from './components/admin-app/admin-app-template-search/admin-app-template-search.component';
+import { AdminTemplateDetailsComponent } from './components/admin-app/admin-app-template-search/admin-template-details/admin-template-details.component';
+import { AdminAppComponent } from './components/admin-app/admin-app.component';
+import { AdminRolePermissionSearchComponent } from './components/admin-app/admin-role-permission-search/admin-role-permission-search.component';
 import { CreatePermissionDialogComponent } from './components/admin-app/admin-role-permission-search/create-permission-dialog/create-permission-dialog.component';
 import { CreateRoleDialogComponent } from './components/admin-app/admin-role-permission-search/create-role-dialog/create-role-dialog.component';
 import { SelectRolePermissionsDialogComponent } from './components/admin-app/admin-role-permission-search/select-role-permissions-dialog/select-role-permissions-dialog.component';
-import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
-import { SystemMessageService } from './services/system-message/system-message.service';
-import { AuthLogoutComponent } from './components/auth/auth-logout.component';
-import { AdminAppComponent } from './components/admin-app/admin-app.component';
-import { AdminViewSearchComponent } from './components/admin-app/admin-view-search/admin-view-search.component';
-import { AdminUserSearchComponent } from './components/admin-app/admin-user-search/admin-user-search.component';
-import { AdminAppTemplateSearchComponent } from './components/admin-app/admin-app-template-search/admin-app-template-search.component';
 import { AdminUserEditComponent } from './components/admin-app/admin-user-search/admin-user-edit/admin-user-edit.component';
-import { AdminRolePermissionSearchComponent } from './components/admin-app/admin-role-permission-search/admin-role-permission-search.component';
+import { AdminUserSearchComponent } from './components/admin-app/admin-user-search/admin-user-search.component';
 import { AdminViewEditComponent } from './components/admin-app/admin-view-search/admin-view-edit/admin-view-edit.component';
-import { AddRemoveUsersDialogComponent } from './components/shared/add-remove-users-dialog/add-remove-users-dialog.component';
+import { AdminViewSearchComponent } from './components/admin-app/admin-view-search/admin-view-search.component';
 import { RolesPermissionsSelectComponent } from './components/admin-app/roles-permissions-select/roles-permissions-select.component';
 import { TeamApplicationsSelectComponent } from './components/admin-app/team-applications-select/team-applications-select.component';
 import { ViewApplicationsSelectComponent } from './components/admin-app/view-applications-select/view-applications-select.component';
+import { HomeAppComponent } from './components/home-app/home-app.component';
+import { ViewListComponent } from './components/home-app/view-list/view-list.component';
+import { ApplicationListComponent } from './components/player/application-list/application-list.component';
+import { FocusedAppComponent } from './components/player/focused-app/focused-app.component';
+import { NotificationsComponent } from './components/player/notifications/notifications.component';
+import { PlayerComponent } from './components/player/player.component';
+import { AddRemoveUsersDialogComponent } from './components/shared/add-remove-users-dialog/add-remove-users-dialog.component';
+import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
+import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
+import { BASE_PATH } from './generated/s3.player.api';
+import { ApiModule as SwaggerCodegenApiModule } from './generated/s3.player.api/api.module';
+import { ApplicationsService } from './services/applications/applications.service';
+import { DialogService } from './services/dialog/dialog.service';
 import { ErrorService } from './services/error/error.service';
-import { AdminTemplateDetailsComponent } from './components/admin-app/admin-app-template-search/admin-template-details/admin-template-details.component';
+import { FocusedAppService } from './services/focused-app/focused-app.service';
+import { LoggedInUserService } from './services/logged-in-user/logged-in-user.service';
+import { NotificationService } from './services/notification/notification.service';
+import { SystemMessageService } from './services/system-message/system-message.service';
+import { TeamsService } from './services/teams/teams.service';
+import { ViewsService } from './services/views/views.service';
 
 declare var require: any;
-
+const settings: ComnSettingsConfig = {
+  url: 'assets/config/settings.json',
+  envUrl: 'assets/config/settings.env.json',
+};
 @NgModule({
   exports: [
     CdkTableModule,
@@ -143,10 +139,10 @@ declare var require: any;
     MatTooltipModule,
     MatBottomSheetModule,
     MatTreeModule,
-    MatBadgeModule
-  ]
+    MatBadgeModule,
+  ],
 })
-export class AngularMaterialModule { }
+export class AngularMaterialModule {}
 
 @NgModule({
   declarations: [
@@ -157,9 +153,6 @@ export class AngularMaterialModule { }
     PlayerComponent,
     HomeAppComponent,
     ViewListComponent,
-    AuthCallbackComponent,
-    AuthCallbackSilentComponent,
-    AuthLogoutComponent,
     ConfirmDialogComponent,
     CreatePermissionDialogComponent,
     CreateRoleDialogComponent,
@@ -176,7 +169,7 @@ export class AngularMaterialModule { }
     RolesPermissionsSelectComponent,
     TeamApplicationsSelectComponent,
     ViewApplicationsSelectComponent,
-    AdminTemplateDetailsComponent
+    AdminTemplateDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -192,13 +185,13 @@ export class AngularMaterialModule { }
     PushNotificationsModule,
     FlexLayoutModule,
     SwaggerCodegenApiModule,
-    ClipboardModule
+    ClipboardModule,
+    environment.production ? [] : AkitaNgDevtools,
+    ComnSettingsModule.forRoot(),
+    ComnAuthModule.forRoot(),
   ],
   providers: [
     AppService,
-    SettingsService,
-    AuthGuard,
-    AuthService,
     FocusedAppService,
     NotificationService,
     TeamsService,
@@ -208,25 +201,14 @@ export class AngularMaterialModule { }
     ApplicationsService,
     SystemMessageService,
     {
-      provide: APP_INITIALIZER,
-      useFactory: initConfig,
-      deps: [SettingsService],
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-    {
       provide: BASE_PATH,
       useFactory: getBasePath,
-      deps: [SettingsService]
+      deps: [ComnSettingsService],
     },
     {
       provide: ErrorHandler,
-      useClass: ErrorService
-    }
+      useClass: ErrorService,
+    },
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -242,15 +224,11 @@ export class AngularMaterialModule { }
     RolesPermissionsSelectComponent,
     TeamApplicationsSelectComponent,
     ViewApplicationsSelectComponent,
-    AdminTemplateDetailsComponent
+    AdminTemplateDetailsComponent,
   ],
 })
-export class AppModule { }
+export class AppModule {}
 
-export function initConfig(settings: SettingsService) {
-  return () => settings.load();
-}
-
-export function getBasePath(settings: SettingsService) {
-  return settings.ApiUrl;
+export function getBasePath(settingsSvc: ComnSettingsService) {
+  return settingsSvc.settings.ApiUrl;
 }

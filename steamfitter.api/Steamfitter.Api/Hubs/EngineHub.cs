@@ -9,48 +9,38 @@ DM20-0181
 */
 
 using System;
-using System.Net;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Steamfitter.Api.ViewModels;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading;
 using STT = System.Threading.Tasks;
-using Steamfitter.Api.Services;
-using Steamfitter.Api.Infrastructure.Exceptions;
 
 namespace Steamfitter.Api.Hubs
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class EngineHub : Hub
     {
-        //private readonly CancellationToken _ct;
-        //private readonly IResultService _resultService;
-
         public EngineHub()
         {
-            //CancellationTokenSource source = new CancellationTokenSource();
-            //_ct = source.Token;
         }
 
-        public async STT.Task Join(string myIdentity)
-        {
-            // TODO: log the identity of this client.
-            // perhaps associate certain VM's with this client?
-            // perhaps have one client per view?
-            return;
-        }
-
-        public async STT.Task ReceivedResults(IEnumerable<Result> results)
-        {
-            // await _resultService.MarkTasksSentAsync(results, _ct);
-        }
-
-        public async STT.Task TaskResults(IEnumerable<Result> results)
-        {
-            // await _resultService.UpdateActualOutputsAsync(results, _ct);
-        }
     }
+
+    public static class EngineMethods
+    {
+        public const string ScenarioTemplateCreated = "ScenarioTemplateCreated";
+        public const string ScenarioTemplateUpdated = "ScenarioTemplateUpdated";
+        public const string ScenarioTemplateDeleted = "ScenarioTemplateDeleted";
+        public const string ScenarioCreated = "ScenarioCreated";
+        public const string ScenarioUpdated = "ScenarioUpdated";
+        public const string ScenarioDeleted = "ScenarioDeleted";
+        public const string TaskCreated = "TaskCreated";
+        public const string TaskUpdated = "TaskUpdated";
+        public const string TaskDeleted = "TaskDeleted";
+        public const string ResultCreated = "ResultCreated";
+        public const string ResultUpdated = "ResultUpdated";
+        public const string ResultsUpdated = "ResultsUpdated";
+        public const string ResultDeleted = "ResultDeleted";
+    } 
 }
 

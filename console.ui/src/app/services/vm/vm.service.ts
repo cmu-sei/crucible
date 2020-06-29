@@ -8,19 +8,24 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {throwError as observableThrowError,  Observable, BehaviorSubject, Subject } from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {
+  throwError as observableThrowError,
+  Observable,
+  BehaviorSubject,
+  interval,
+} from 'rxjs';
+import { catchError, take, startWith, takeWhile, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { SettingsService } from '../settings/settings.service';
-import { VmModel } from '../../models/vm/vm-model';
+import { VmModel, VmResolution } from '../../models/vm/vm-model';
 import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { VirtualMachineToolsStatus } from '../../models/vm/vm-model';
 
 declare var WMKS: any; // needed to check values
 
 @Injectable()
 export class VmService {
-
   public wmks;
   public model: VmModel;
   public showLoading = true;
@@ -31,25 +36,27 @@ export class VmService {
   public uploadConfig: any = {
     username: '',
     password: '',
-    filepath: ''
+    filepath: '',
   };
 
-  public modelSubject: Subject<VmModel> = new Subject<VmModel>();
   public vmClipBoard = new BehaviorSubject<string>('');
+  public vmResolution = new BehaviorSubject<VmResolution>({
+    width: 1024,
+    height: 768,
+  });
 
   private ConsoleApiUrl;
 
-  constructor (
+  constructor(
     private http: HttpClient,
     private settings: SettingsService,
     private titleService: Title
   ) {
-    this.ConsoleApiUrl = settings.ConsoleApiUrl;
+    this.ConsoleApiUrl = settings.ConsoleApiUrl + 'vms/vsphere/';
     this.model = new VmModel();
   }
 
   public getVm(id: string) {
-
     return this.http.get(this.ConsoleApiUrl + id).pipe(
       catchError((error: any) => {
         if (error.status === 500) {
@@ -70,38 +77,41 @@ export class VmService {
   }
 
   public sendPowerOn(id: string) {
-
-    return this.http.get(this.ConsoleApiUrl + id + '/poweron').pipe(
-      // .timeout(2000)
-      catchError((error: any) => {
-        if (error.status === 500) {
-          return observableThrowError(new Error(error.status));
-        } else if (error.status === 400) {
-          return observableThrowError(new Error(error.status));
-        } else {
-          return observableThrowError(error);
-        }
-      }));
+    return this.http
+      .post(this.ConsoleApiUrl + id + '/actions/power-on', '')
+      .pipe(
+        // .timeout(2000)
+        catchError((error: any) => {
+          if (error.status === 500) {
+            return observableThrowError(new Error(error.status));
+          } else if (error.status === 400) {
+            return observableThrowError(new Error(error.status));
+          } else {
+            return observableThrowError(error);
+          }
+        })
+      );
   }
 
   public sendPowerOff(id: string) {
-
-    return this.http.get(this.ConsoleApiUrl + id + '/poweroff').pipe(
-      // .timeout(2000)
-      catchError((error: any) => {
-        if (error.status === 500) {
-          return observableThrowError(new Error(error.status));
-        } else if (error.status === 400) {
-          return observableThrowError(new Error(error.status));
-        } else {
-          return observableThrowError(error);
-        }
-      }));
+    return this.http
+      .post(this.ConsoleApiUrl + id + '/actions/power-off', '')
+      .pipe(
+        // .timeout(2000)
+        catchError((error: any) => {
+          if (error.status === 500) {
+            return observableThrowError(new Error(error.status));
+          } else if (error.status === 400) {
+            return observableThrowError(new Error(error.status));
+          } else {
+            return observableThrowError(error);
+          }
+        })
+      );
   }
 
   public sendReboot(id: string) {
-
-    return this.http.get(this.ConsoleApiUrl + id + '/reboot').pipe(
+    return this.http.post(this.ConsoleApiUrl + id + '/actions/reboot', '').pipe(
       // .timeout(2000)
       catchError((error: any) => {
         if (error.status === 500) {
@@ -111,121 +121,156 @@ export class VmService {
         } else {
           return observableThrowError(error);
         }
-      }));
+      })
+    );
+  }
+
+  public sendShutdownOS(id: string) {
+    return this.http
+      .post(this.ConsoleApiUrl + id + '/actions/shutdown', '')
+      .pipe(
+        catchError((error: any) => {
+          if (error.status === 500) {
+            return observableThrowError(new Error(error.status));
+          } else if (error.status === 400) {
+            return observableThrowError(new Error(error.status));
+          } else {
+            return observableThrowError(error);
+          }
+        })
+      );
   }
 
   public checkForVmTools(id: string) {
-    return this.http.get(this.ConsoleApiUrl + id + '/checkvmtools');
+    return this.http.get(this.ConsoleApiUrl + id + '/tools').pipe(
+      catchError((error: any) => {
+        if (error.status === 500) {
+          return observableThrowError(new Error(error.status));
+        } else if (error.status === 400) {
+          return observableThrowError(new Error(error.status));
+        } else {
+          return observableThrowError(error);
+        }
+      })
+    );
   }
 
   public verifyCredentials(id: string) {
+    const data = {
+      username: this.uploadConfig.username,
+      password: this.uploadConfig.password,
+      filepath: this.uploadConfig.filepath,
+    };
+
+    return this.http.post(
+      this.ConsoleApiUrl + id + '/actions/validate-credentials',
+      data
+    );
+  }
+
+  public sendFileToVm(id: string, files: FileList) {
     const formData: FormData = new FormData();
     formData.append('username', this.uploadConfig.username);
     formData.append('password', this.uploadConfig.password);
     formData.append('filepath', this.uploadConfig.filepath);
-    return this.http.post(this.ConsoleApiUrl + id + '/checkvmcredentials', formData);
-  }
-
-  public sendFileToVm(id: string, files: FileList) {
-
-    const formData: FormData = new FormData();
     for (let i = 0; i < files.length; i++) {
-      formData.append('username', this.uploadConfig.username);
-      formData.append('password', this.uploadConfig.password);
-      formData.append('filepath', this.uploadConfig.filepath);
       formData.append(files[i].name, files[i]);
     }
     console.log('sending ' + files.length.toString() + ' files to the api');
-    return this.http.post(this.ConsoleApiUrl + id + '/uploadfile', formData);
+    return this.http.post(
+      this.ConsoleApiUrl + id + '/actions/upload-file',
+      formData
+    );
   }
 
-  public changeNic(id: string, adapter: string, nic: string){
-    return this.http.get(this.ConsoleApiUrl + id + '/adapter/' + adapter + '/nic/' + nic).pipe(
-    // .timeout(2000)
-    catchError((error: any) => {
-      if (error.status === 500) {
-        return observableThrowError(new Error(error.status));
-      } else if (error.status === 400) {
-        return observableThrowError(new Error(error.status));
-      } else {
-        return observableThrowError(error);
-      }
-    }));
+  public changeNic(id: string, adapter: string, nic: string) {
+    const data = { adapter: adapter, network: nic };
+    return this.http
+      .post(this.ConsoleApiUrl + id + '/actions/change-network', data)
+      .pipe(
+        // .timeout(2000)
+        catchError((error: any) => {
+          if (error.status === 500) {
+            return observableThrowError(new Error(error.status));
+          } else if (error.status === 400) {
+            return observableThrowError(new Error(error.status));
+          } else {
+            return observableThrowError(error);
+          }
+        })
+      );
   }
 
   public async connect(id: string) {
     console.log('Attempting to connect to vm');
 
-    this.getVm(id).subscribe(
-      (model: VmModel) => {
-        this.model = model;
-        this.modelSubject.next(this.model);
-
-        if (model.name) {
-          this.titleService.setTitle(model.name);
-        }
-
-        // console.log('got vm model');
-        if (model.state === 'error') {
-          console.log('could not get power state');
-          this.showError = true;
-          this.showPower = false;
-          this.showPoweringOff = false;
-          this.showLoading = false;
-          return;
-        } else if (model.state === 'off') {
-          this.showError = false;
-          this.showPower = true;
-          this.showPoweringOff = false;
-          this.showLoading = false;
-          // console.log('vm is off');
-          return;
-        } else if (model.state === '') {
-          this.showError = false;
-          this.showPower = false;
-          this.showPoweringOff = false;
-          this.showLoading = true;
-          // console.log('vm is off');
-          return;
-        } else if (model.state === 'on') {
-          this.showError = false;
-          this.showPower = false;
-          this.showPoweringOff = false;
-          this.showLoading = true;
-          // console.log('vm is on');
-        }
-
-        if (this.model.ticket) {
-          // console.log('got ticket: ' + this.model.ticket);
-
-          this.CreateWmks();
-          const state = this.wmks.getConnectionState();
-          if (state === WMKS.CONST.ConnectionState.DISCONNECTED) {
-            // console.log('connecting to ' + this.model.ticket);
-            this.wmks.connect(this.model.ticket);
+    this.getVm(id)
+      .pipe(take(1))
+      .subscribe(
+        (model: VmModel) => {
+          this.model = model;
+          if (model.name) {
+            this.titleService.setTitle(model.name);
           }
-          // ticket is one time use so unset it
-          this.model.ticket = null;
-          this.showLoading = false;
+
+          // console.log('got vm model');
+          if (model.state === 'error') {
+            console.log('could not get power state');
+            this.showError = true;
+            this.showPower = false;
+            this.showPoweringOff = false;
+            this.showLoading = false;
+            return;
+          } else if (model.state === 'off') {
+            this.showError = false;
+            this.showPower = true;
+            this.showPoweringOff = false;
+            this.showLoading = false;
+            // console.log('vm is off');
+            return;
+          } else if (model.state === '') {
+            this.showError = false;
+            this.showPower = false;
+            this.showPoweringOff = false;
+            this.showLoading = true;
+            // console.log('vm is off');
+            return;
+          } else if (model.state === 'on') {
+            this.showError = false;
+            this.showPower = false;
+            this.showPoweringOff = false;
+            this.showLoading = true;
+            // console.log('vm is on');
+          }
+
+          if (this.model.ticket) {
+            // console.log('got ticket: ' + this.model.ticket);
+
+            this.CreateWmks();
+            const state = this.wmks.getConnectionState();
+            if (state === WMKS.CONST.ConnectionState.DISCONNECTED) {
+              // console.log('connecting to ' + this.model.ticket);
+              this.wmks.connect(this.model.ticket);
+            }
+            // ticket is one time use so unset it
+            this.model.ticket = null;
+            this.showLoading = false;
+          }
+        },
+        (error) => {
+          this.model.name = 'Virtual Machine';
+          this.model.id = id; // make sure that we dont lose the id
+          this.model.state = error.message;
         }
-      },
-      error => {
-        this.model.name = 'Virtual Machine';
-        this.model.id = id; // make sure that we dont lose the id
-        this.model.state = error.message;
-      }
-    );
+      );
   }
 
-
-
   public CreateWmks() {
-
     this.wmks = WMKS.createWMKS('wmksContainer', {
       changeResolution: this.model.isOwner,
       rescale: true,
       position: WMKS.CONST.Position.CENTER,
-      retryConnectionInterval: 5000 // Changed to 5 seconds.  This affects initial connection to console.
+      retryConnectionInterval: 5000, // Changed to 5 seconds.  This affects initial connection to console.
     });
 
     this.wmks.register(
@@ -239,6 +284,24 @@ export class VmService {
           this.showPoweringOff = false;
           this.showError = false;
           this.showLock = false;
+          this.model.vmToolsStatus = VirtualMachineToolsStatus.toolsNotRunning;
+
+          interval(10000)
+            .pipe(
+              startWith(0),
+              takeWhile(
+                () =>
+                  this.model.vmToolsStatus ===
+                  VirtualMachineToolsStatus.toolsNotRunning
+              )
+            )
+            .subscribe(() => {
+              this.checkForVmTools(this.model.id)
+                .pipe(take(1))
+                .subscribe((val) => {
+                  this.model.vmToolsStatus = val as VirtualMachineToolsStatus;
+                });
+            });
         } else if (data.state === WMKS.CONST.ConnectionState.CONNECTING) {
           // console.log('connection state change : connecting');
           this.showLoading = true;
@@ -271,22 +334,17 @@ export class VmService {
       }
     );
 
-
     // Register the COPY event from the VM.
-    this.wmks.register(
-      WMKS.CONST.Events.COPY,
-      (event: any, data: string) => {
-        if (data) {
-          this.vmClipBoard.next(data);
-        }
-      });
-
+    this.wmks.register(WMKS.CONST.Events.COPY, (event: any, data: string) => {
+      if (data) {
+        this.vmClipBoard.next(data);
+      }
+    });
   }
-
 
   public powerOn(id: string) {
     this.sendPowerOn(id).subscribe(
-      response => {
+      (response) => {
         // console.log(response);
         if (response === 'poweron submitted') {
           console.log('poweron submitted');
@@ -296,7 +354,7 @@ export class VmService {
           console.log('poweron error received');
         }
       },
-      error => {
+      (error) => {
         console.log('error sending poweron to s3.vm.console');
       }
     );
@@ -304,33 +362,43 @@ export class VmService {
 
   public powerOff(id: string) {
     this.sendPowerOff(id).subscribe(
-      response => {
+      (response) => {
         if (response === 'poweroff submitted') {
           this.showPoweringOff = true;
           // Wait before submitting the destroy to allow events from wmks to finish.
           setTimeout(() => {
             this.wmks.destroy();
           }, 1000);
-
         } else if (response === 'already off') {
         } else if (response === 'poweroff error') {
           console.log('poweroff error received');
         }
       },
-      error => {
+      (error) => {
         console.log('error sending poweroff to s3.vm.console');
       }
     );
   }
 
-
   public reBoot(id: string) {
     // console.log('reboot requested');
     this.sendReboot(id).subscribe(
-      response => {
+      (response) => {
         // console.log(response);
       },
-      error => {
+      (error) => {
+        console.log('error sending reboot to s3.vm.console');
+        this.model.ticket = null;
+      }
+    );
+  }
+
+  public shutdownOS(id: string) {
+    this.sendShutdownOS(id).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
         console.log('error sending reboot to s3.vm.console');
         this.model.ticket = null;
       }
@@ -342,23 +410,43 @@ export class VmService {
   }
 
   public getIsos() {
-    return this.http.get(this.ConsoleApiUrl + this.model.id.toString() + '/isos');
+    return this.http.get(
+      this.ConsoleApiUrl + this.model.id.toString() + '/isos'
+    );
   }
 
   public mountIso(id: string, iso: string) {
-    const formData: FormData = new FormData();
-    formData.append('iso', iso);
-    return this.http.post(this.ConsoleApiUrl + id + '/mountiso', formData).pipe(
-    catchError((error: any) => {
-      if (error.status === 500) {
-        return observableThrowError(new Error(error.status));
-      } else if (error.status === 400) {
-        return observableThrowError(new Error(error.status));
-      } else {
-        return observableThrowError(error);
-      }
-    }));
+    const data = { iso: iso };
+    return this.http
+      .post(this.ConsoleApiUrl + id + '/actions/mount-iso', data)
+      .pipe(
+        catchError((error: any) => {
+          if (error.status === 500) {
+            return observableThrowError(new Error(error.status));
+          } else if (error.status === 400) {
+            return observableThrowError(new Error(error.status));
+          } else {
+            return observableThrowError(error);
+          }
+        })
+      );
   }
 
+  public setResolution(id: string, resolution: VmResolution) {
+    const data = { height: resolution.height, width: resolution.width };
+    return this.http
+      .post<string>(this.ConsoleApiUrl + id + '/actions/set-resolution', data)
+      .pipe(
+        catchError((error: any) => {
+          console.log(error);
+          if (error.status === 500) {
+            return observableThrowError(new Error(error.status));
+          } else if (error.status === 400) {
+            return observableThrowError(new Error(error.status));
+          } else {
+            return observableThrowError(error);
+          }
+        })
+      );
+  }
 }
-

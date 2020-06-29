@@ -18,9 +18,8 @@ describe('ApplicationsSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewApplicationsSelectComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewApplicationsSelectComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

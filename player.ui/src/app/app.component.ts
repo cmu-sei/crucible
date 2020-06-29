@@ -10,36 +10,74 @@ DM20-0181
 
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIcon
-      ('ic_apps_white_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_apps_white_24px.svg'));
-    iconRegistry.addSvgIcon
-      ('ic_chevron_left_white_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_chevron_left_white_24px.svg'));
-    iconRegistry.addSvgIcon
-      ('ic_chevron_right_black_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_chevron_right_black_24px.svg'));
-    iconRegistry.addSvgIcon
-      ('ic_expand_more_white_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_expand_more_white_24px.svg'));
-    iconRegistry.addSvgIcon
-      ('ic_clear_black_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_clear_black_24px.svg'));
-    iconRegistry.addSvgIcon
-      ('ic_expand_more_black_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_expand_more_black_24px.svg'));
-    iconRegistry.addSvgIcon
-      ('ic_cancel_circle', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_cancel_circle.svg'));
-    iconRegistry.addSvgIcon
-      ('ic_back_arrow', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_back_arrow_24px.svg'));
-    iconRegistry.addSvgIcon
-      ('ic_magnify_search', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_magnify_glass_48px.svg'));
-    iconRegistry.addSvgIcon
-      ('ic_clipboard_copy', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_clipboard_copy.svg'));
+    iconRegistry.addSvgIcon(
+      'ic_apps_white_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_apps_white_24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ic_chevron_left_white_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_chevron_left_white_24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ic_chevron_right_black_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_chevron_right_black_24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ic_expand_more_white_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_expand_more_white_24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ic_clear_black_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_clear_black_24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ic_expand_more_black_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_expand_more_black_24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ic_cancel_circle',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_cancel_circle.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ic_back_arrow',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_back_arrow_24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ic_magnify_search',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_magnify_glass_48px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ic_clipboard_copy',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_clipboard_copy.svg'
+      )
+    );
   }
 }
-
-

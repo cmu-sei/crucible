@@ -18,9 +18,8 @@ describe('ViewListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewListComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewListComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

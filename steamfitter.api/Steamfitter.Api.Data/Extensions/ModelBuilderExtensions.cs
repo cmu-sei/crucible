@@ -73,11 +73,11 @@ namespace Steamfitter.Api.Data.Extensions
                 // modify column names
                 foreach (var property in entity.GetProperties())
                 {
-                    property.Relational().ColumnName = mapper.TranslateMemberName(property.Relational().ColumnName);
+                    property.SetColumnName(mapper.TranslateMemberName(property.GetColumnName()));
                 }
 
                 // modify table name
-                entity.Relational().TableName = mapper.TranslateMemberName(entity.Relational().TableName);
+                entity.SetTableName(mapper.TranslateMemberName(entity.GetTableName()));
             }
         }
     }

@@ -18,9 +18,8 @@ describe('PlayerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerComponent ]
-    })
-    .compileComponents();
+      declarations: [PlayerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('PlayerComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

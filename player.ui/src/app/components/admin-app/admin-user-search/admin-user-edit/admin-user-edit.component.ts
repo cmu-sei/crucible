@@ -8,24 +8,41 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { User, UserService, Role, RoleService, Permission, PermissionService } from '../../../../generated/s3.player.api';
-import { ErrorStateMatcher } from '@angular/material';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {
+  Component,
+  OnChanges,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import {
+  User,
+  UserService,
+  Role,
+  RoleService,
+  Permission,
+  PermissionService,
+} from '../../../../generated/s3.player.api';
+import { ErrorStateMatcher } from '@angular/material/core';
+import {
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-admin-user-edit',
   templateUrl: './admin-user-edit.component.html',
-  styleUrls: ['./admin-user-edit.component.css']
+  styleUrls: ['./admin-user-edit.component.scss'],
 })
 export class AdminUserEditComponent implements OnChanges {
-
   @Input() user: User;
   @Output() editComplete = new EventEmitter<boolean>();
 
   public nameFormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(4)
+    Validators.minLength(4),
   ]);
 
   public matcher = new UserErrorStateMatcher();
@@ -38,22 +55,22 @@ export class AdminUserEditComponent implements OnChanges {
     private userService: UserService,
     private permissionService: PermissionService,
     private roleService: RoleService
-  ) { }
+  ) {}
 
   /**
    * Called when the form changes
    */
   ngOnChanges() {
     this.originalUser = this.user;
-    this.permissionService.getPermissions().subscribe(permissions => {
+    this.permissionService.getPermissions().subscribe((permissions) => {
       this.permissions = permissions;
     });
-    this.roleService.getRoles().subscribe(roles => {
+    this.roleService.getRoles().subscribe((roles) => {
       this.roles = roles;
     });
     this.selectedPermissions = [];
     if (!!this.user && !!this.user.permissions) {
-      this.user.permissions.forEach(permission => {
+      this.user.permissions.forEach((permission) => {
         this.selectedPermissions.push(permission.id);
       });
     }
@@ -74,10 +91,9 @@ export class AdminUserEditComponent implements OnChanges {
     if (this.user.name !== this.nameFormControl.value) {
       this.user.name = this.nameFormControl.value;
 
-      this.userService.updateUser(this.user.id, this.user)
-        .subscribe(user => {
-          this.user = user;
-        });
+      this.userService.updateUser(this.user.id, this.user).subscribe((user) => {
+        this.user = user;
+      });
     }
   }
 
@@ -86,13 +102,19 @@ export class AdminUserEditComponent implements OnChanges {
    * @param permission
    */
   updatePermissions(permission) {
-    const index = this.user.permissions.findIndex(x => x.id === permission.id);
+    const index = this.user.permissions.findIndex(
+      (x) => x.id === permission.id
+    );
     if (index === -1) {
       this.user.permissions.push(permission);
-      this.permissionService.addPermissionToUser(this.user.id, permission.id).subscribe();
+      this.permissionService
+        .addPermissionToUser(this.user.id, permission.id)
+        .subscribe();
     } else {
       this.user.permissions.slice(index);
-      this.permissionService.removePermissionFromUser(this.user.id, permission.id).subscribe();
+      this.permissionService
+        .removePermissionFromUser(this.user.id, permission.id)
+        .subscribe();
     }
   }
 
@@ -104,17 +126,20 @@ export class AdminUserEditComponent implements OnChanges {
       this.user.roleId = null;
       this.user.roleName = null;
     } else {
-      this.user.roleName = this.roles.find(x => x.id === this.user.roleId).name;
+      this.user.roleName = this.roles.find(
+        (x) => x.id === this.user.roleId
+      ).name;
     }
     this.userService.updateUser(this.user.id, this.user).subscribe();
   }
-
 }
-
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class UserErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || isSubmitted));
   }

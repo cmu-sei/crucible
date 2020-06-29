@@ -8,11 +8,35 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, EventEmitter, Output, NgZone, ViewChild } from '@angular/core';
-import { ErrorStateMatcher, MatStepper } from '@angular/material';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { View, Team, TeamService, ViewService, UserService } from '../../../../generated/s3.player.api';
-import { TeamForm, ApplicationTemplate, ApplicationService, Application } from '../../../../generated/s3.player.api';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  NgZone,
+  ViewChild,
+} from '@angular/core';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatStepper } from '@angular/material/stepper';
+import {
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
+import {
+  View,
+  Team,
+  TeamService,
+  ViewService,
+  UserService,
+} from '../../../../generated/s3.player.api';
+import {
+  TeamForm,
+  ApplicationTemplate,
+  ApplicationService,
+  Application,
+} from '../../../../generated/s3.player.api';
 import { User } from '../../../../generated/s3.player.api';
 import { DialogService } from '../../../../services/dialog/dialog.service';
 import { take } from 'rxjs/operators';
@@ -24,35 +48,32 @@ export class TeamUserApp {
     public name: string,
     public team: Team,
     public users: Array<User>
-  ) { }
+  ) {}
 }
-
 
 @Component({
   selector: 'app-admin-view-edit',
   templateUrl: './admin-view-edit.component.html',
-  styleUrls: ['./admin-view-edit.component.css']
+  styleUrls: ['./admin-view-edit.component.scss'],
 })
 export class AdminViewEditComponent implements OnInit {
-
   @Output() editComplete = new EventEmitter<boolean>();
-  @ViewChild(ViewApplicationsSelectComponent, { static: false }) viewApplicationsSelectComponent: ViewApplicationsSelectComponent;
-  @ViewChild(AdminViewEditComponent, { static: false }) child;
-  @ViewChild('stepper', { static: false }) stepper: MatStepper;
+  @ViewChild(ViewApplicationsSelectComponent)
+  viewApplicationsSelectComponent: ViewApplicationsSelectComponent;
+  @ViewChild(AdminViewEditComponent) child;
+  @ViewChild('stepper') stepper: MatStepper;
 
   public viewNameFormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(4)
+    Validators.minLength(4),
   ]);
 
   public teamNameFormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(3)
+    Validators.minLength(3),
   ]);
 
-  public descriptionFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  public descriptionFormControl = new FormControl('', [Validators.required]);
 
   public matcher = new UserErrorStateMatcher();
   public viewStates = Object.values(View.StatusEnum);
@@ -77,10 +98,7 @@ export class AdminViewEditComponent implements OnInit {
     public userService: UserService,
     public applicationService: ApplicationService,
     public zone: NgZone
-  ) {
-
-  }
-
+  ) {}
 
   /**
    * Initialize component
@@ -89,18 +107,16 @@ export class AdminViewEditComponent implements OnInit {
     this.isLoadingTeams = false;
     this.view = undefined;
     this.teams = new Array<TeamUserApp>();
-}
-
+  }
 
   /**
    * Updates the list of available app templates
    */
   updateApplicationTemplates() {
-    this.applicationService.getApplicationTemplates().subscribe(templates => {
+    this.applicationService.getApplicationTemplates().subscribe((templates) => {
       this.applicationTemplates = templates;
     });
   }
-
 
   /**
    * Updates the contents of the current view
@@ -110,15 +126,21 @@ export class AdminViewEditComponent implements OnInit {
       // Update the teams arrays
       this.isLoadingTeams = true;
       this.teams = new Array<TeamUserApp>();
-      this.teamService.getViewTeams(this.view.id).subscribe(tms => {
+      this.teamService.getViewTeams(this.view.id).subscribe((tms) => {
         const userTeams = new Array<TeamUserApp>();
-        tms.forEach(tm => {
-          this.userService.getTeamUsers(tm.id).subscribe(usrs => {
+        tms.forEach((tm) => {
+          this.userService.getTeamUsers(tm.id).subscribe((usrs) => {
             this.teams.push(new TeamUserApp(tm.name, tm, usrs));
             this.teams.sort((t1, t2) => {
-              if (t1.name === null || t2.name === null) { return 0; }
-              if (t1.name.toLowerCase() < t2.name.toLowerCase()) { return -1; }
-              if (t1.name.toLowerCase() > t2.name.toLowerCase()) { return 1; }
+              if (t1.name === null || t2.name === null) {
+                return 0;
+              }
+              if (t1.name.toLowerCase() < t2.name.toLowerCase()) {
+                return -1;
+              }
+              if (t1.name.toLowerCase() > t2.name.toLowerCase()) {
+                return 1;
+              }
               return 0;
             });
             if (this.teams.length === tms.length) {
@@ -130,18 +152,16 @@ export class AdminViewEditComponent implements OnInit {
     }
   }
 
-    /**
+  /**
    * Updates the contents of the current view
    */
   updateView(): void {
     if (this.view !== undefined && this.view.id !== undefined) {
-
       this.viewApplicationsSelectComponent.view = this.view;
       this.viewApplicationsSelectComponent.updateApplications();
       this.viewApplicationsSelectComponent.currentApp = undefined;
     }
   }
-
 
   /**
    * Returns the stepper to zero index
@@ -153,7 +173,6 @@ export class AdminViewEditComponent implements OnInit {
     }
   }
 
-
   /**
    * Closes the edit screen
    */
@@ -162,42 +181,46 @@ export class AdminViewEditComponent implements OnInit {
     this.editComplete.emit(true);
   }
 
-
   addViewApplication(template: ApplicationTemplate) {
     console.log(template);
     let app = <Application>{};
     if (template.id == null) {
-      app = <Application> {
+      app = <Application>{
         name: template.name,
         viewId: this.view.id,
       };
     } else {
       app = <Application>{
         viewId: this.view.id,
-        applicationTemplateId: template.id
+        applicationTemplateId: template.id,
       };
     }
 
     console.log(app);
-    this.applicationService.createApplication(this.view.id, app).subscribe(rslt => {
-      console.log('Application added');
-      this.viewApplicationsSelectComponent.updateApplications();
-      this.viewApplicationsSelectComponent.currentApp = rslt;
-    });
+    this.applicationService
+      .createApplication(this.view.id, app)
+      .subscribe((rslt) => {
+        console.log('Application added');
+        this.viewApplicationsSelectComponent.updateApplications();
+        this.viewApplicationsSelectComponent.currentApp = rslt;
+      });
   }
 
   /**
    * Delete an view after confirmation
    */
   deleteView(): void {
-    this.dialogService.confirm('Delete View', 'Are you sure that you want to delete view ' + this.view.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Delete View',
+        'Are you sure that you want to delete view ' + this.view.name + '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
-          this.viewService.deleteView(this.view.id)
-            .subscribe(deleted => {
-              console.log('successfully deleted view');
-              this.returnToViewSearch();
-            });
+          this.viewService.deleteView(this.view.id).subscribe((deleted) => {
+            console.log('successfully deleted view');
+            this.returnToViewSearch();
+          });
         }
       });
   }
@@ -206,54 +229,63 @@ export class AdminViewEditComponent implements OnInit {
    * Saves the current view
    */
   saveView(): void {
-    if (!this.viewNameFormControl.hasError('minlength') && !this.viewNameFormControl.hasError('required')) {
+    if (
+      !this.viewNameFormControl.hasError('minlength') &&
+      !this.viewNameFormControl.hasError('required')
+    ) {
       if (this.view.name !== this.viewNameFormControl.value) {
         this.view.name = this.viewNameFormControl.value;
-        this.viewService.updateView(this.view.id, this.view).subscribe(updatedView => {
-          this.view = updatedView;
-        });
+        this.viewService
+          .updateView(this.view.id, this.view)
+          .subscribe((updatedView) => {
+            this.view = updatedView;
+          });
       }
     }
 
     if (!this.descriptionFormControl.hasError('required')) {
       if (this.view.description !== this.descriptionFormControl.value) {
         this.view.description = this.descriptionFormControl.value;
-        this.viewService.updateView(this.view.id, this.view).subscribe(updatedView => {
-          this.view = updatedView;
-        });
+        this.viewService
+          .updateView(this.view.id, this.view)
+          .subscribe((updatedView) => {
+            this.view = updatedView;
+          });
       }
     }
   }
-
 
   /**
    * Updates the view status
    */
   saveViewStatus(): void {
     console.log(this.view.status);
-    this.viewService.updateView(this.view.id, this.view).subscribe(updatedView => {
-      this.view = updatedView;
-    });
+    this.viewService
+      .updateView(this.view.id, this.view)
+      .subscribe((updatedView) => {
+        this.view = updatedView;
+      });
   }
-
 
   /**
    * Delete a team after confirmation
    * @param tm The team to delete
    */
   deleteTeam(tm: Team): void {
-    this.dialogService.confirm('Delete View', 'Are you sure that you want to delete team ' + tm.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Delete View',
+        'Are you sure that you want to delete team ' + tm.name + '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
-          this.teamService.deleteTeam(tm.id)
-            .subscribe(deleted => {
-              console.log('successfully deleted team');
-              this.updateViewTeams();
-            });
+          this.teamService.deleteTeam(tm.id).subscribe((deleted) => {
+            console.log('successfully deleted team');
+            this.updateViewTeams();
+          });
         }
       });
   }
-
 
   /**
    * Saves the team name
@@ -261,15 +293,14 @@ export class AdminViewEditComponent implements OnInit {
    * @param id team Guid
    */
   saveTeamName(name: string, id: string): void {
-    this.teamService.getTeam(id).subscribe(tm => {
+    this.teamService.getTeam(id).subscribe((tm) => {
       tm.name = name;
-      this.teamService.updateTeam(id, tm).subscribe(updatedTeam => {
-        this.teams.find(t => t.team.id === id).team = updatedTeam;
+      this.teamService.updateTeam(id, tm).subscribe((updatedTeam) => {
+        this.teams.find((t) => t.team.id === id).team = updatedTeam;
         console.log('Team updated:  ' + updatedTeam.name);
       });
     });
   }
-
 
   /**
    * Opens the Add/Remove Users dialog for a specific team
@@ -277,9 +308,11 @@ export class AdminViewEditComponent implements OnInit {
    */
   openUsersDialog(team: Team): void {
     if (team !== undefined) {
-      this.dialogService.addRemoveUsersToTeam('Add or Remove Users for team ' + team.name, team)
-        .subscribe(result => {
-          this.teams.find(t => t.team.id === team.id).users = result['teamUsers'];
+      this.dialogService
+        .addRemoveUsersToTeam('Add or Remove Users for team ' + team.name, team)
+        .subscribe((result) => {
+          this.teams.find((t) => t.team.id === team.id).users =
+            result['teamUsers'];
         });
     }
   }
@@ -304,27 +337,35 @@ export class AdminViewEditComponent implements OnInit {
    * Adds a new Team to the view
    */
   addNewTeam() {
-    this.teamService.createTeam(this.view.id, <TeamForm>({ name: 'New Team' })).subscribe(newTeam => {
-      const team = new TeamUserApp('New Team', newTeam, new Array<User>());
-      this.teams.unshift(team);
-      this.currentTeam = team;
-      // This uses the rxjs take and ngZone to determine when the html is rendered
-      this.zone.onMicrotaskEmpty.asObservable().pipe(take(1)).subscribe(() => {
-        const nameElement = <HTMLInputElement>document.getElementById('teamName' + newTeam.id);
-        if (nameElement) {
-          nameElement.focus();
-          nameElement.select();
-        }
+    this.teamService
+      .createTeam(this.view.id, <TeamForm>{ name: 'New Team' })
+      .subscribe((newTeam) => {
+        const team = new TeamUserApp('New Team', newTeam, new Array<User>());
+        this.teams.unshift(team);
+        this.currentTeam = team;
+        // This uses the rxjs take and ngZone to determine when the html is rendered
+        this.zone.onMicrotaskEmpty
+          .asObservable()
+          .pipe(take(1))
+          .subscribe(() => {
+            const nameElement = <HTMLInputElement>(
+              document.getElementById('teamName' + newTeam.id)
+            );
+            if (nameElement) {
+              nameElement.focus();
+              nameElement.select();
+            }
+          });
       });
-    });
   }
-
 } // End Class
-
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class UserErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || isSubmitted));
   }

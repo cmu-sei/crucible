@@ -21,15 +21,14 @@ DM20-0181
  */
 import { Permission } from './permission';
 
-
 export interface Team {
-    id?: string;
-    name?: string;
-    viewId?: string;
-    roleId?: string;
-    roleName?: string;
-    permissions?: Array<Permission>;
-    canManage?: boolean;
-    isMember?: boolean;
-    isPrimary?: boolean;
+  id?: string;
+  name?: string;
+  viewId?: string;
+  roleId?: string;
+  roleName?: string;
+  permissions?: Array<Permission>;
+  canManage?: boolean;
+  isMember?: boolean;
+  isPrimary?: boolean;
 }

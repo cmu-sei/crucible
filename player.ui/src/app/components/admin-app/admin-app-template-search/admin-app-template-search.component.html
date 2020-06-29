@@ -9,60 +9,102 @@ DM20-0181
 -->
 
 <div class="list-container mat-elevation-z8">
-
   <div fxLayout="row" fxLayoutAlign="start center">
     <div class="sp-icon">
-        <img height="35" src="../../../assets/img/SP_Icon_Intel.png" alt="Application Templates">
-        Application Templates
-    </div> 
+      <img
+        height="35"
+        src="../../../assets/img/SP_Icon_Intel.png"
+        alt="Application Templates"
+      />
+      Application Templates
+    </div>
     <div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="5">
-      <mat-icon style="transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
+      <mat-icon
+        style="transform: scale(0.85); margin-right: 5px;"
+        svgIcon="ic_magnify_search"
+      ></mat-icon>
       <mat-form-field style="width: 250px;">
-        <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        <input
+          matInput
+          [(ngModel)]="filterString"
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Search"
+        />
       </mat-form-field>
-      <button *ngIf="filterString != ''" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
-        title="Clear Search">
-        <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+      <button
+        *ngIf="filterString != ''"
+        fxLayoutAlign="start center"
+        mat-icon-button
+        (click)="clearFilter()"
+        style="outline: none;"
+        title="Clear Search"
+      >
+        <mat-icon
+          style="transform: scale(0.85);"
+          svgIcon="ic_cancel_circle"
+        ></mat-icon>
       </button>
       <div class="button-end">
-          <button mat-stroked-button (click)="addAppTemplate()">Add Application Template</button>
-      </div>    
+        <button mat-stroked-button (click)="addAppTemplate()">
+          Add Application Template
+        </button>
+      </div>
     </div>
   </div>
 
   <mat-accordion>
     <mat-table #table [dataSource]="appTemplateDataSource" matSort>
-
       <ng-container matColumnDef="name">
-        <mat-header-cell fxFlex="30" *matHeaderCellDef mat-sort-header> Template Name </mat-header-cell>
+        <mat-header-cell fxFlex="30" *matHeaderCellDef mat-sort-header>
+          Template Name
+        </mat-header-cell>
         <mat-cell fxFlex="30" *matCellDef="let element">
-          <img class="app-icon" src="{{element.icon}}">&nbsp;&nbsp;{{element.name}}
+          <img class="app-icon" src="{{ element.icon }}" />&nbsp;&nbsp;{{
+            element.name
+          }}
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="url">
-        <mat-header-cell fxFlex="70" *matHeaderCellDef mat-sort-header> Url </mat-header-cell>
+        <mat-header-cell fxFlex="70" *matHeaderCellDef mat-sort-header>
+          Url
+        </mat-header-cell>
         <mat-cell fxFlex="70" *matCellDef="let element; let i = index">
           <div fxFlex="100">
-            <mat-expansion-panel [expanded]="currentAppTemplate !== undefined && element.id === currentAppTemplate.id"
-            (opened)="currentAppTemplate = element">
+            <mat-expansion-panel
+              [expanded]="
+                currentAppTemplate !== undefined &&
+                element.id === currentAppTemplate.id
+              "
+              (opened)="currentAppTemplate = element"
+            >
               <mat-expansion-panel-header>
                 <mat-panel-title style="font-size: small;">
-                  {{element.url}}
+                  {{ element.url }}
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <app-admin-template-details (refresh)="refresh($event)" [appTemplate]="element"></app-admin-template-details>
+              <app-admin-template-details
+                (refresh)="refresh($event)"
+                [appTemplate]="element"
+              ></app-admin-template-details>
             </mat-expansion-panel>
           </div>
         </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="appTemplateColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: appTemplateColumns;"></mat-row>
+      <mat-row *matRowDef="let row; columns: appTemplateColumns"></mat-row>
     </mat-table>
   </mat-accordion>
-  <div *ngIf="appTemplateDataSource.filteredData.length === 0">No Application Templates found</div>
-  <mat-paginator #paginator [pageSize]="defaultPageSize" [pageSizeOptions]="[10, 20, 30]" [showFirstLastButtons]="true"
-    (page)="pageEvent = $event">
+  <div *ngIf="appTemplateDataSource.filteredData.length === 0">
+    No Application Templates found
+  </div>
+  <mat-paginator
+    #paginator
+    [pageSize]="defaultPageSize"
+    [pageSizeOptions]="[10, 20, 30]"
+    [showFirstLastButtons]="true"
+    (page)="pageEvent = $event"
+  >
   </mat-paginator>
 </div>

@@ -18,9 +18,8 @@ describe('FocusedAppComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FocusedAppComponent ]
-    })
-    .compileComponents();
+      declarations: [FocusedAppComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('FocusedAppComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
