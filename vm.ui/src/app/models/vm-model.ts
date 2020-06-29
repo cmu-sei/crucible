@@ -14,4 +14,12 @@ export interface VmModel {
   id: string;
   viewId: string;
   state: string;
+  powerState: PowerState;
+}
+
+export enum PowerState {
+  Unknown,
+  On,
+  Off,
+  Suspended,
 }

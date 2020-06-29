@@ -18,9 +18,8 @@ describe('HomeAppComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeAppComponent ]
-    })
-    .compileComponents();
+      declarations: [HomeAppComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('HomeAppComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

@@ -70,6 +70,43 @@
         },
         {
             "api": "stackstorm",
+            "action": "guest_process_run_fast",
+            "display": "Run a command FASTER on the guest VM",
+            "parameters": [
+                {
+                    "key": "Moid",
+                    "display": "VM",
+                    "hint": "Select a VM",
+                    "inputType": "guid"
+                },
+                {
+                    "key": "Username",
+                    "display": "Username",
+                    "hint": "Username for the guest VM user to execute the action",
+                    "inputType": "text"
+                },
+                {
+                    "key": "Password",
+                    "display": "Password",
+                    "hint": "Password for the guest VM user to execute the action",
+                    "inputType": "password"
+                },
+                {
+                    "key": "CommandText",
+                    "display": "Command",
+                    "hint": "The command to execute on the guest VM.",
+                    "inputType": "text"
+                },
+                {
+                    "key": "CommandArgs",
+                    "display": "Arguments",
+                    "hint": "The arguments to pass to the command on the guest VM.",
+                    "inputType": "text"
+                }
+            ]
+        },
+        {
+            "api": "stackstorm",
             "action": "vm_create_from_template",
             "display": "Create a VM from a Template",
             "parameters": [

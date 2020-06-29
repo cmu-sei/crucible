@@ -15,12 +15,11 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using STT = System.Threading.Tasks;
 using Steamfitter.Api.Infrastructure.Options;
 using Stackstorm.Connector;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Steamfitter.Api.Services
 {
@@ -32,6 +31,7 @@ namespace Steamfitter.Api.Services
         string GetVmName(Guid uuid);
         STT.Task GetStackstormVms();
         STT.Task<string> GuestCommand(string parameters);
+        STT.Task<string> GuestCommandFast(string parameters);
         STT.Task<string> GuestReadFile(string parameters);
         STT.Task<string> VmPowerOn(string parameters);
         STT.Task<string> VmPowerOff(string parameters);
@@ -135,42 +135,20 @@ namespace Steamfitter.Api.Services
             var clusters = apiParameters["clusters"].ToString().Split(",");
             try
             {
-                var vmListResult = await _vsphere.GetVms(clusters);
-                // build a moid list to make only one call for all of the vm details
-                var moidList = new List<string>();
+                var vmListResult = await _vsphere.GetVmsWithUuid(clusters);
+                // add VM's to _vmList
                 foreach (var vm in vmListResult.Vms)
                 {
-                    moidList.Add(vm.Moid);
-                    vmIdentityObjs.Add(new VmIdentityStrings(){Moid=vm.Moid, Name=vm.Name});
-                }
-                // get the uuid for each vm
-                var vmDetailList = await _vsphere.GetVmDetails(moidList);
-                foreach (var vmIdentityObj in vmIdentityObjs)
-                {
-                    var uuidString = "";
-                    try
-                    {
-                        var vmDetail = vmDetailList.Vms.Single(x => x.Name == vmIdentityObj.Name);
-                        uuidString = vmDetail.Uuid;
-                    }
-                    catch (Exception)
-                    {
-                        // find the correct VM, if there are duplicate names
-                        var moidListSingle = new List<string>();
-                        moidListSingle.Add(vmIdentityObj.Moid);
-                        var vmDetailListSingle = await _vsphere.GetVmDetails(moidListSingle);
-                        var vmDetail = vmDetailListSingle.Vms.Single(x => x.Name == vmIdentityObj.Name);
-                        uuidString = vmDetail.Uuid;
-                    }
                     Guid uuid;
-                    if (Guid.TryParse(uuidString, out uuid))
+                    if (Guid.TryParse(vm.Uuid, out uuid))
                     {
                         uuidList.Add(uuid);
-                        _vmList[uuid] = vmIdentityObj;
+                        _vmList[uuid] = new VmIdentityStrings(){Moid=vm.Moid, Name=vm.Name};
+                        uuidList.Add(uuid);
                     }
                     else
                     {
-                        _logger.LogWarning($"VM {vmIdentityObj.Name} moid:{vmIdentityObj.Moid} uuid:{uuidString} is not a Guid.");
+                        _logger.LogInformation($"VM {vm.Name} moid:{vm.Moid} uuid:{vm.Uuid} is not a Guid.");
                     }
                 }
                 var keysToRemove = _vmList.Keys.Except(uuidList).ToList();
@@ -189,7 +167,7 @@ namespace Steamfitter.Api.Services
 
         public async STT.Task<string> GuestCommand(string parameters)
         {
-            var command = JsonConvert.DeserializeObject<Stackstorm.Connector.Models.Vsphere.Requests.Command>(parameters);
+            var command = JsonSerializer.Deserialize<Stackstorm.Connector.Models.Vsphere.Requests.Command>(parameters);
             // the moid parameter is actually a Guid and the moid must be looked up
             command.Moid = GetVmMoid(Guid.Parse(command.Moid));
             var executionResult = await _vsphere.GuestCommand(command);
@@ -197,9 +175,19 @@ namespace Steamfitter.Api.Services
             return executionResult.Value;
         }
 
+        public async STT.Task<string> GuestCommandFast(string parameters)
+        {
+            var command = JsonSerializer.Deserialize<Stackstorm.Connector.Models.Vsphere.Requests.Command>(parameters);
+            // the moid parameter is actually a Guid and the moid must be looked up
+            command.Moid = GetVmMoid(Guid.Parse(command.Moid));
+            var executionResult = await _vsphere.GuestCommandFast(command);
+
+            return executionResult.Value;
+        }
+
         public async STT.Task<string> GuestReadFile(string parameters)
         {
-            var command = JsonConvert.DeserializeObject<Stackstorm.Connector.Models.Vsphere.Requests.FileRead>(parameters);
+            var command = JsonSerializer.Deserialize<Stackstorm.Connector.Models.Vsphere.Requests.FileRead>(parameters);
             // the moid parameter is actually a Guid and the moid must be looked up
             command.Moid = GetVmMoid(Guid.Parse(command.Moid));
             var executionResult = await _vsphere.GuestFileRead(command);
@@ -209,27 +197,31 @@ namespace Steamfitter.Api.Services
 
         public async STT.Task<string> VmPowerOn(string parameters)
         {
-            var command = JObject.Parse(parameters);
-            // the moid parameter is actually a Guid and the moid must be looked up
-            var moid = GetVmMoid(Guid.Parse(command["Moid"].ToString()));
-            var executionResult = await _vsphere.GuestPowerOn(moid);
+            using (var command = JsonDocument.Parse(parameters))
+            {
+                // the moid parameter is actually a Guid and the moid must be looked up
+                var moid = GetVmMoid(Guid.Parse(command.RootElement.GetProperty("Moid").GetString()));
+                var executionResult = await _vsphere.GuestPowerOn(moid);
 
-            return executionResult.State.ToString();
+                return executionResult.State.ToString();
+            }
         }
 
         public async STT.Task<string> VmPowerOff(string parameters)
         {
-            var command = JObject.Parse(parameters);
-            // the moid parameter is actually a Guid and the moid must be looked up
-            var moid = GetVmMoid(Guid.Parse(command["Moid"].ToString()));
-            var executionResult = await _vsphere.GuestPowerOff(moid);
+            using (var command = JsonDocument.Parse(parameters))
+            {
+                // the moid parameter is actually a Guid and the moid must be looked up
+                var moid = GetVmMoid(Guid.Parse(command.RootElement.GetProperty("Moid").GetString()));
+                var executionResult = await _vsphere.GuestPowerOff(moid);
 
-            return executionResult.State.ToString();
+                return executionResult.State.ToString();
+            }
         }
 
         public async STT.Task<string> CreateVmFromTemplate(string parameters)
         {
-            var command = JsonConvert.DeserializeObject<Stackstorm.Connector.Models.Vsphere.Requests.CreateVmFromTemplate>(parameters);
+            var command = JsonSerializer.Deserialize<Stackstorm.Connector.Models.Vsphere.Requests.CreateVmFromTemplate>(parameters);
             var executionResult = await _vsphere.CreateVmFromTemplate(command);
 
             return executionResult.Value;
@@ -237,12 +229,14 @@ namespace Steamfitter.Api.Services
 
         public async STT.Task<string> VmRemove(string parameters)
         {
-            var command = JObject.Parse(parameters);
-            // the moid parameter is actually a Guid and the moid must be looked up
-            var moid = GetVmMoid(Guid.Parse(command["Moid"].ToString()));
-            var executionResult = await _vsphere.RemoveVm(moid);
+            using (var command = JsonDocument.Parse(parameters))
+            {
+                // the moid parameter is actually a Guid and the moid must be looked up
+                var moid = GetVmMoid(Guid.Parse(command.RootElement.GetProperty("Moid").GetString()));
+                var executionResult = await _vsphere.RemoveVm(moid);
 
-            return executionResult.Value;
+                return executionResult.Value;
+            }
         }
 
     }

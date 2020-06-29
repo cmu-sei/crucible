@@ -8,29 +8,33 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-
-import {throwError as observableThrowError,  Observable } from 'rxjs';
-
-import {catchError} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { SettingsService } from '../settings/settings.service';
+import { ComnSettingsService } from '@crucible/common';
+import { Observable, throwError as observableThrowError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ApplicationData } from '../../models/application-data';
-
 
 @Injectable()
 export class ApplicationsService {
-
   constructor(
     private http: HttpClient,
-    private settings: SettingsService) { }
+    private settings: ComnSettingsService
+  ) {}
 
-
-  public getApplicationsByTeam(teamId: string, viewId: string): Observable<Array<ApplicationData>> {
-    return this.http.get<Array<ApplicationData>>(`${this.settings.ApiUrl}/teams/${teamId}/application-instances`).pipe(
-      catchError(err => {
-        console.log(err);
-        return observableThrowError(err || 'Server error');
-      }));
+  public getApplicationsByTeam(
+    teamId: string,
+    viewId: string
+  ): Observable<Array<ApplicationData>> {
+    return this.http
+      .get<Array<ApplicationData>>(
+        `${this.settings.settings.ApiUrl}/teams/${teamId}/application-instances`
+      )
+      .pipe(
+        catchError((err) => {
+          console.log(err);
+          return observableThrowError(err || 'Server error');
+        })
+      );
   }
 }

@@ -10,18 +10,16 @@ DM20-0181
 
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { SettingsService } from '../../services/settings/settings.service';
-import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth/auth.service';
+import { ComnAuthService, ComnSettingsService } from '@crucible/common';
+import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
 
 @Component({
   selector: 'app-admin-app',
   templateUrl: './admin-app.component.html',
-  styleUrls: ['./admin-app.component.css']
+  styleUrls: ['./admin-app.component.scss'],
 })
 export class AdminAppComponent implements OnInit {
-
   public viewsText = 'Views';
   public usersText = 'Users';
   public appTemplatesText = 'Application Templates';
@@ -34,12 +32,12 @@ export class AdminAppComponent implements OnInit {
   public showStatus: string;
 
   constructor(
-    private settingsService: SettingsService,
+    private settingsService: ComnSettingsService,
     private titleService: Title,
     private loggedInUserService: LoggedInUserService,
     private router: Router,
-    private authService: AuthService
-  ) { }
+    private authService: ComnAuthService
+  ) {}
 
   /**
    * Initialization
@@ -51,28 +49,26 @@ export class AdminAppComponent implements OnInit {
     }
 
     // Set the topbar color from config file
-    this.topBarColor = this.settingsService.AppTopBarHexColor;
-
+    this.topBarColor = this.settingsService.settings.AppTopBarHexColor;
 
     // Set the page title from configuration file
-    this.titleService.setTitle(this.settingsService.AppTitle);
+    this.titleService.setTitle(this.settingsService.settings.AppTitle);
     this.username = '';
 
-    this.loggedInUserService.loggedInUser.subscribe(loggedInUser => {
+    this.loggedInUserService.loggedInUser.subscribe((loggedInUser) => {
       if (loggedInUser == null) {
         return;
       }
       // Get username information
       this.username = loggedInUser.name;
 
-      this.loggedInUserService.isSuperUser.subscribe(isSuperUser => {
+      this.loggedInUserService.isSuperUser.subscribe((isSuperUser) => {
         if (!isSuperUser) {
           this.router.navigate(['']);
           return;
         }
       });
     });
-
   }
 
   /**
@@ -116,5 +112,4 @@ export class AdminAppComponent implements OnInit {
   GotoMainPage(): void {
     this.router.navigate(['']);
   }
-
 }

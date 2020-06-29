@@ -21,12 +21,11 @@ DM20-0181
  */
 import { Permission } from './permission';
 
-
 export interface User {
-    id?: string;
-    name?: string;
-    roleId?: string;
-    roleName?: string;
-    permissions?: Array<Permission>;
-    isSystemAdmin?: boolean;
+  id?: string;
+  name?: string;
+  roleId?: string;
+  roleName?: string;
+  permissions?: Array<Permission>;
+  isSystemAdmin?: boolean;
 }

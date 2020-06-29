@@ -2,10 +2,9 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
-
         <IsPackable>false</IsPackable>
-
         <RootNamespace>stackstorm.connector.test</RootNamespace>
+        <ProjectGuid>{790778B8-5430-4834-9A99-E07065431DD2}</ProjectGuid>
     </PropertyGroup>
 
     <ItemGroup>

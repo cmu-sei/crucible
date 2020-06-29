@@ -24,4 +24,13 @@ export * from './view.service';
 import { ViewService } from './view.service';
 export * from './viewMembership.service';
 import { ViewMembershipService } from './viewMembership.service';
-export const APIS = [ApplicationService, PermissionService, RoleService, TeamService, TeamMembershipService, UserService, ViewService, ViewMembershipService];
+export const APIS = [
+  ApplicationService,
+  PermissionService,
+  RoleService,
+  TeamService,
+  TeamMembershipService,
+  UserService,
+  ViewService,
+  ViewMembershipService,
+];

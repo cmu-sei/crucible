@@ -77,7 +77,7 @@ namespace Steamfitter.Api.Services
                 throw new ForbiddenException();
 
             userPermission.DateCreated = DateTime.UtcNow;
-            var userPermissionEntity = Mapper.Map<UserPermissionEntity>(userPermission);
+            var userPermissionEntity = _mapper.Map<UserPermissionEntity>(userPermission);
 
             _context.UserPermissions.Add(userPermissionEntity);
             await _context.SaveChangesAsync(ct);

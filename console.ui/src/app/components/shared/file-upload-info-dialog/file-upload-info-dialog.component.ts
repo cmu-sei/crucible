@@ -8,9 +8,8 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {MAT_DIALOG_DATA, MatDialogRef, MatDialogModule, MatFormFieldModule} from '@angular/material';
-import {Component, Inject} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
 
 @Component({
     selector: 'file-upload-info-dialog',

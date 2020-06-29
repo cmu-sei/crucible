@@ -15,19 +15,29 @@ DM20-0181
 // <app-roles-permissions-select [team]="teamObject"></app-roles-permissions-select>
 
 import { Component, OnInit, Input } from '@angular/core';
-import { User, Team, Role, UserService, TeamService, RoleService, Permission, PermissionService } from '../../../generated/s3.player.api';
+import {
+  User,
+  Team,
+  Role,
+  UserService,
+  TeamService,
+  RoleService,
+  Permission,
+  PermissionService,
+} from '../../../generated/s3.player.api';
 
-export enum ObjectType {Unknown, User, Team}
+export enum ObjectType {
+  Unknown,
+  User,
+  Team,
+}
 
 @Component({
   selector: 'app-roles-permissions-select',
   templateUrl: './roles-permissions-select.component.html',
-  styleUrls: ['./roles-permissions-select.component.css']
+  styleUrls: ['./roles-permissions-select.component.scss'],
 })
-
-
 export class RolesPermissionsSelectComponent implements OnInit {
-
   @Input() user: User;
   @Input() team: Team;
 
@@ -51,7 +61,9 @@ export class RolesPermissionsSelectComponent implements OnInit {
   ngOnInit() {
     if ((!!this.team && !!this.user) || (!this.team && !this.user)) {
       // either a team or a user must be provided, so roles and permissions will not be functional
-      console.log('The roles and permissions component requires either a user or a team, therefore the dropdowns will be non-functional.');
+      console.log(
+        'The roles and permissions component requires either a user or a team, therefore the dropdowns will be non-functional.'
+      );
       return;
     } else if (!!this.team) {
       this.subjectType = ObjectType.Team;
@@ -60,48 +72,57 @@ export class RolesPermissionsSelectComponent implements OnInit {
       this.subjectType = ObjectType.User;
       this.subject = this.user;
     }
-    this.permissionService.getPermissions().subscribe(permissions => {
+    this.permissionService.getPermissions().subscribe((permissions) => {
       this.permissions = permissions;
     });
     this.selectedPermissions = [];
     if (!!this.subject.permissions && this.subject.permissions.length > 0) {
-      this.subject.permissions.forEach(permission => {
+      this.subject.permissions.forEach((permission) => {
         this.selectedPermissions.push(permission.id);
       });
     }
-    this.roleService.getRoles().subscribe(roles => {
+    this.roleService.getRoles().subscribe((roles) => {
       this.roles = roles;
     });
     this.selectedRole = this.subject.roleId;
   }
-
 
   /**
    * Updates the permission through the API
    * @param permission The permission object
    */
   updatePermissions(permission: Permission) {
-    const index = this.subject.permissions.findIndex(x => x.id === permission.id);
+    const index = this.subject.permissions.findIndex(
+      (x) => x.id === permission.id
+    );
     switch (this.subjectType) {
       case ObjectType.User:
         if (index === -1) {
           this.subject.permissions.push(permission);
-          this.permissionService.addPermissionToUser(this.user.id, permission.id).subscribe();
+          this.permissionService
+            .addPermissionToUser(this.user.id, permission.id)
+            .subscribe();
         } else {
           this.subject.permissions.splice(index, 1);
-          this.permissionService.removePermissionFromUser(this.user.id, permission.id).subscribe(() => {
-            console.log('Permision removed');
-          });
+          this.permissionService
+            .removePermissionFromUser(this.user.id, permission.id)
+            .subscribe(() => {
+              console.log('Permision removed');
+            });
         }
         break;
 
       case ObjectType.Team:
         if (index === -1) {
           this.subject.permissions.push(permission);
-          this.permissionService.addPermissionToTeam(this.team.id, permission.id).subscribe();
+          this.permissionService
+            .addPermissionToTeam(this.team.id, permission.id)
+            .subscribe();
         } else {
           this.subject.permissions.slice(index);
-          this.permissionService.removePermissionFromTeam(this.team.id, permission.id).subscribe();
+          this.permissionService
+            .removePermissionFromTeam(this.team.id, permission.id)
+            .subscribe();
         }
         break;
 
@@ -119,7 +140,7 @@ export class RolesPermissionsSelectComponent implements OnInit {
     if (!roleId) {
       roleId = null;
     } else {
-      const role = this.roles.find(x => x.id === roleId);
+      const role = this.roles.find((x) => x.id === roleId);
       roleName = role.name;
     }
     this.subject.roleId = roleId;
@@ -137,5 +158,4 @@ export class RolesPermissionsSelectComponent implements OnInit {
         break;
     }
   }
-
 }

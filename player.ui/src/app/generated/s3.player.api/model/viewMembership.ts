@@ -20,13 +20,12 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface ViewMembership {
-    id?: string;
-    userId?: string;
-    userName?: string;
-    viewId?: string;
-    viewName?: string;
-    primaryTeamId?: string;
-    primaryTeamName?: string;
+  id?: string;
+  userId?: string;
+  userName?: string;
+  viewId?: string;
+  viewName?: string;
+  primaryTeamId?: string;
+  primaryTeamName?: string;
 }

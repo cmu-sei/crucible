@@ -18,9 +18,8 @@ describe('ApplicationListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicationListComponent ]
-    })
-    .compileComponents();
+      declarations: [ApplicationListComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('ApplicationListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

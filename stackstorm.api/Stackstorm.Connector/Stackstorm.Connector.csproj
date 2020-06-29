@@ -1,15 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <RootNamespace>stackstorm.connector</RootNamespace>
-
         <PackageId>Stackstorm.Connector</PackageId>
         <Version>0.0.0</Version>
         <Authors>CERT.CWD</Authors>
         <Company>CMU.SEI</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageOutputPath>artifacts</PackageOutputPath>
+        <ProjectGuid>{A68AB09D-26AE-4824-A0A0-0F653BE743AB}</ProjectGuid>
     </PropertyGroup>
 
     <ItemGroup>

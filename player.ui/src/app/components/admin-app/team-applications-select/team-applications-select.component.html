@@ -9,56 +9,107 @@ DM20-0181
 -->
 
 <div fxLayout="row" fxLayoutAlign="end" class="top-button">
-  <button [hidden]="viewApplications === undefined || viewApplications.length === 0" mat-stroked-button [matMenuTriggerFor]="teamAppsMenu">Add Application</button>
+  <button
+    [hidden]="viewApplications === undefined || viewApplications.length === 0"
+    mat-stroked-button
+    [matMenuTriggerFor]="teamAppsMenu"
+  >
+    Add Application
+  </button>
   <mat-menu #teamAppsMenu="matMenu">
-    <button mat-menu-item *ngFor="let a of viewApplications" (click)="addViewAppToTeam(a)">{{getAppName(a)}}</button>
+    <button
+      mat-menu-item
+      *ngFor="let a of viewApplications"
+      (click)="addViewAppToTeam(a)"
+    >
+      {{ getAppName(a) }}
+    </button>
   </mat-menu>
 </div>
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let app of applications; let i = index" [expanded]="currentApp !== undefined && app.id === currentApp.id"
-    (opened)="currentApp = app">
+  <mat-expansion-panel
+    *ngFor="let app of applications; let i = index"
+    [expanded]="currentApp !== undefined && app.id === currentApp.id"
+    (opened)="currentApp = app"
+  >
     <mat-expansion-panel-header>
       <mat-panel-title>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <img class="app-icon" src="{{app.icon}}"> {{getAppName(app)}}
+          <img class="app-icon" src="{{ app.icon }}" /> {{ getAppName(app) }}
         </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
 
     <div>
       <div fxLayout="column">
-        <div class="wrap"><b>{{app.url}}</b></div>
+        <div class="wrap">
+          <b>{{ app.url }}</b>
+        </div>
         <mat-divider></mat-divider>
-        Embeddable: <b>{{app.embeddable}}</b>
+        Embeddable: <b>{{ app.embeddable }}</b>
         <mat-divider></mat-divider>
-        Load In Background: <b>{{app.loadInBackground}}</b>
+        Load In Background: <b>{{ app.loadInBackground }}</b>
       </div>
     </div>
 
     <div fxLayout="row" class="bottom-button">
       <div fxflex fxLayoutAlign="space-between center">
-        Display order:&nbsp;&nbsp;<b>{{app.displayOrder}}</b>
-        <button [hidden]="app.displayOrder === 0" mat-icon-button title="Move Up" (click)="swapDisplayOrders(app, applications[i-1])">
-          <mat-icon svgIcon="ic_expand_more_black_24px" style="transform: rotate(180deg);"></mat-icon>
+        Display order:&nbsp;&nbsp;<b>{{ app.displayOrder }}</b>
+        <button
+          [hidden]="app.displayOrder === 0"
+          mat-icon-button
+          title="Move Up"
+          (click)="swapDisplayOrders(app, applications[i - 1])"
+        >
+          <mat-icon
+            svgIcon="ic_expand_more_black_24px"
+            style="transform: rotate(180deg);"
+          ></mat-icon>
         </button>
-        <button [hidden]="app.displayOrder > 0 " mat-icon-button title="Move Up" style="opacity: 0.3; filter: alpha(opacity=30);">
-          <mat-icon svgIcon="ic_expand_more_black_24px" style="transform: rotate(180deg);"></mat-icon>
+        <button
+          [hidden]="app.displayOrder > 0"
+          mat-icon-button
+          title="Move Up"
+          style="opacity: 0.3; filter: alpha(opacity=30);"
+        >
+          <mat-icon
+            svgIcon="ic_expand_more_black_24px"
+            style="transform: rotate(180deg);"
+          ></mat-icon>
         </button>
-        <button [hidden]="app.displayOrder >= (applications.length - 1)" title="Move Down" mat-icon-button (click)="swapDisplayOrders(app, applications[i+1])">
+        <button
+          [hidden]="app.displayOrder >= applications.length - 1"
+          title="Move Down"
+          mat-icon-button
+          (click)="swapDisplayOrders(app, applications[i + 1])"
+        >
           <mat-icon svgIcon="ic_expand_more_black_24px"></mat-icon>
         </button>
-        <button [hidden]="app.displayOrder < (applications.length - 1)" title="Move Down" mat-icon-button style="opacity: 0.3; filter: alpha(opacity=30);">
+        <button
+          [hidden]="app.displayOrder < applications.length - 1"
+          title="Move Down"
+          mat-icon-button
+          style="opacity: 0.3; filter: alpha(opacity=30);"
+        >
           <mat-icon svgIcon="ic_expand_more_black_24px"></mat-icon>
         </button>
       </div>
       <div fxFlex fxLayoutAlign="end">
-        <button [hidden]="subjectType !== objTypes.View" mat-stroked-button (click)="deleteViewApplication(app)">Delete
-          Application
+        <button
+          [hidden]="subjectType !== objTypes.View"
+          mat-stroked-button
+          (click)="deleteViewApplication(app)"
+        >
+          Delete Application
         </button>
-        <button [hidden]="subjectType !== objTypes.Team" mat-stroked-button (click)="removeApplicationInstanceFromTeam(app)">Remove
-          Application</button>
+        <button
+          [hidden]="subjectType !== objTypes.Team"
+          mat-stroked-button
+          (click)="removeApplicationInstanceFromTeam(app)"
+        >
+          Remove Application
+        </button>
       </div>
     </div>
-
   </mat-expansion-panel>
 </mat-accordion>

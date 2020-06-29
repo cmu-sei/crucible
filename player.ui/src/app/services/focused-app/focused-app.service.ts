@@ -13,12 +13,9 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class FocusedAppService {
-
   public focusedAppUrl: BehaviorSubject<string>;
 
   constructor() {
     this.focusedAppUrl = new BehaviorSubject<string>('about:blank');
   }
-
 }
-

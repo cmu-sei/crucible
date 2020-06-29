@@ -9,9 +9,16 @@ DM20-0181
 */
 
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatTableDataSource, PageEvent, MatPaginator, MatSort, MatSortable } from '@angular/material';
+import { PageEvent, MatPaginator } from '@angular/material/paginator';
+import { MatSort, MatSortable } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { SUPER_USER } from '../../../services/logged-in-user/logged-in-user.service';
-import { User, UserService, RoleService, Role } from '../../../generated/s3.player.api';
+import {
+  User,
+  UserService,
+  RoleService,
+  Role,
+} from '../../../generated/s3.player.api';
 
 export interface Action {
   Value: string;
@@ -21,10 +28,9 @@ export interface Action {
 @Component({
   selector: 'app-admin-user-search',
   templateUrl: './admin-user-search.component.html',
-  styleUrls: ['./admin-user-search.component.css']
+  styleUrls: ['./admin-user-search.component.scss'],
 })
 export class AdminUserSearchComponent implements OnInit, AfterViewInit {
-
   public displayedColumns: string[] = ['name', 'roleName'];
   public isSuperUser: boolean;
   public filterString: string;
@@ -33,7 +39,6 @@ export class AdminUserSearchComponent implements OnInit, AfterViewInit {
   public editUserText = 'Edit User';
   public userToEdit: User;
   public userDataSource = new MatTableDataSource<User>(new Array<User>());
-
 
   // MatPaginator Output
   public defaultPageSize = 10;
@@ -48,14 +53,13 @@ export class AdminUserSearchComponent implements OnInit, AfterViewInit {
   constructor(
     private userService: UserService,
     private roleService: RoleService
-  ) { }
+  ) {}
 
   /**
    * Initialization
    */
   ngOnInit() {
-
-    this.sort.sort(<MatSortable>({id: 'name', start: 'asc'}));
+    this.sort.sort(<MatSortable>{ id: 'name', start: 'asc' });
     this.userDataSource.sort = this.sort;
 
     this.pageEvent = new PageEvent();
@@ -68,10 +72,9 @@ export class AdminUserSearchComponent implements OnInit, AfterViewInit {
     this.filterString = '';
 
     // Get the superUser Role for the action later
-    this.roleService.getRoles()
-      .subscribe(roles => {
-        this.superUserRole = roles.find(r => r.name === SUPER_USER);
-      });
+    this.roleService.getRoles().subscribe((roles) => {
+      this.superUserRole = roles.find((r) => r.name === SUPER_USER);
+    });
 
     this.refreshUsers();
   }
@@ -83,23 +86,21 @@ export class AdminUserSearchComponent implements OnInit, AfterViewInit {
     this.userDataSource.paginator = this.paginator;
   }
 
-
   /**
    * permission list for display
    */
   permissionsString(permissions) {
-    let val = permissions.map(p => p.key).join(', ');
+    let val = permissions.map((p) => p.key).join(', ');
     if (val.length > 50) {
       val = val.substring(0, 50) + ' ...';
     }
     return val;
   }
 
-
   /**
-     * Called by UI to add a filter to the viewDataSource
-     * @param filterValue
-     */
+   * Called by UI to add a filter to the viewDataSource
+   * @param filterValue
+   */
   applyFilter(filterValue: string) {
     this.filterString = filterValue;
     this.pageEvent.pageIndex = 0;
@@ -120,13 +121,9 @@ export class AdminUserSearchComponent implements OnInit, AfterViewInit {
   refreshUsers() {
     this.userToEdit = undefined;
     this.isLoading = true;
-    this.userService.getUsers().subscribe(users => {
+    this.userService.getUsers().subscribe((users) => {
       this.userDataSource.data = users;
       this.isLoading = false;
     });
   }
-
-
-
-
 }

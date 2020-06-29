@@ -20,39 +20,72 @@ DM20-0181
   <mat-list-item class="appslist">
     <a class="nolink" href="/">
       <h4>
-       <b>{{ titleText }}</b>
+        <b>{{ titleText }}</b>
       </h4>
     </a>
     <mat-divider></mat-divider>
   </mat-list-item>
   <mat-list-item *ngFor="let app of applicationList">
-
-    <iframe *ngIf="app.loadInBackground" class="hidden-app-iframe" [src]="app.safeUrl"></iframe>
+    <iframe
+      *ngIf="app.loadInBackground"
+      class="hidden-app-iframe"
+      [src]="app.safeUrl"
+    ></iframe>
 
     <div id="wrapper">
       <div id="lefticon">
-        <img *ngIf="app.embeddable" src="{{ app.icon }}" alt="{{ app.name }}" (click)="openInFocusedApp(app.name, app.url)">
-        <img *ngIf="!app.embeddable" src="{{ app.icon }}" alt="{{ app.name }}" (click)="openInTab(app.url)">
+        <img
+          *ngIf="app.embeddable"
+          src="{{ app.icon }}"
+          alt="{{ app.name }}"
+          (click)="openInFocusedApp(app.name, app.url)"
+        />
+        <img
+          *ngIf="!app.embeddable"
+          src="{{ app.icon }}"
+          alt="{{ app.name }}"
+          (click)="openInTab(app.url)"
+        />
       </div>
 
-      <div class="showhand" *ngIf="app.embeddable" id="content"  (click)="openInFocusedApp(app.name, app.url)">
+      <div
+        class="showhand"
+        *ngIf="app.embeddable"
+        id="content"
+        (click)="openInFocusedApp(app.name, app.url)"
+      >
         {{ app.name }}
       </div>
-      <div class="showhand" *ngIf="!app.embeddable" id="content"  (click)="openInTab(app.url)">
+      <div
+        class="showhand"
+        *ngIf="!app.embeddable"
+        id="content"
+        (click)="openInTab(app.url)"
+      >
         {{ app.name }}
       </div>
 
       <div class="pull-right" id="rightcontext">
-        <button mat-icon-button [matMenuTriggerFor]="menu" style="outline: none;">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          style="outline: none;"
+        >
           <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
         </button>
       </div>
     </div>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item *ngIf="app.embeddable" (click)="openInFocusedApp(app.name, app.url)">Open Here</button>
-      <button mat-menu-item (click)="openInTab(app.url)">Open in New Tab</button>
+      <button
+        mat-menu-item
+        *ngIf="app.embeddable"
+        (click)="openInFocusedApp(app.name, app.url)"
+      >
+        Open Here
+      </button>
+      <button mat-menu-item (click)="openInTab(app.url)">
+        Open in New Tab
+      </button>
     </mat-menu>
-
   </mat-list-item>
 </mat-list>
-

@@ -11,6 +11,7 @@ DM20-0181
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Hosting;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.ViewModels;
 using System;
@@ -20,9 +21,9 @@ namespace Steamfitter.Api.Infrastructure.Filters
 {
     public class JsonExceptionFilter : IExceptionFilter
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
-        public JsonExceptionFilter(IHostingEnvironment env)
+        public JsonExceptionFilter(IWebHostEnvironment env)
         {
             _env = env;
         }

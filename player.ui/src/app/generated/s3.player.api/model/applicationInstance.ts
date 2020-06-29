@@ -20,21 +20,20 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface ApplicationInstance {
-    id?: string;
-    applicationId?: string;
-    displayOrder?: number;
-    /**
-     * The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
-     */
-    name?: string;
-    /**
-     * The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
-     */
-    url?: string;
-    icon?: string;
-    embeddable?: boolean;
-    loadInBackground?: boolean;
-    viewId?: string;
+  id?: string;
+  applicationId?: string;
+  displayOrder?: number;
+  /**
+   * The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
+   */
+  name?: string;
+  /**
+   * The location of the application. {teamId}, {teamName}, {viewId} and {viewName} will be replaced dynamically if included
+   */
+  url?: string;
+  icon?: string;
+  embeddable?: boolean;
+  loadInBackground?: boolean;
+  viewId?: string;
 }

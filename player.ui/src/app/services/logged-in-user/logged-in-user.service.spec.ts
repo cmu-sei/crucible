@@ -15,12 +15,14 @@ import { LoggedInUserService } from './logged-in-user.service';
 describe('UsersService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LoggedInUserService]
+      providers: [LoggedInUserService],
     });
   });
 
-  it('should be created', inject([LoggedInUserService], (service: LoggedInUserService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [LoggedInUserService],
+    (service: LoggedInUserService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });
-

@@ -39,6 +39,7 @@ const BLANK_TASK: Task = {
   apiUrl: '',
   inputString: '',
   expectedOutput: '',
+  delaySeconds: 0,
   expirationSeconds: 0,
   intervalSeconds: 0,
   iterations: 0,
@@ -57,6 +58,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   @Input() isLoading: boolean;
   @Input() scenarioTemplateId: string;
   @Input() scenarioId: string;
+  @Input() userId: string;
   @Input() isEditableState: boolean;
   @Input() isExecutableState: boolean;
   @Input() clipboard: any;
@@ -72,6 +74,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   private tasks = new Array<Task>();
   private results = new Array<Result>();
   private expandedNodeSet = new Set<string>();
+  public expandedDetails = new Set<string>();
   private unsubscribe = new Subject();
 
   // tree controls
@@ -101,7 +104,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.taskList.pipe(takeUntil(this.unsubscribe)).subscribe(tasks => {
-      this.tasks = !tasks ? [] : tasks;
+      this.tasks = !tasks ? [] : this.filterTasks(tasks);
       this.createTaskNodes();
     });
     if (!!this.resultList) {
@@ -109,8 +112,19 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
         this.results = !results ? [] : results;
         this.createTaskNodes();
       });
-
     }
+  }
+
+  filterTasks(tasks: Task[]): Task[] {
+    if (this.scenarioTemplateId) {
+      tasks = tasks.filter(item => item.scenarioTemplateId && item.scenarioTemplateId === this.scenarioTemplateId);
+    } else if (this.scenarioId) {
+      tasks = tasks.filter(item => item.scenarioId && item.scenarioId === this.scenarioId);
+    } else if (this.userId) {
+      tasks = tasks.filter(item => item.userId && item.userId === this.userId);
+    }
+
+    return tasks;
   }
 
   hasChild = (_: number, node: FlatTaskNode) => node.expandable;
@@ -362,6 +376,23 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
     const sortValue = sortDescending ? 1 : -1;
     const sortedResults = results.sort((a, b) => a[sortBy] < b[sortBy] ? sortValue : -1 * sortValue);
     return sortedResults;
+  }
+
+  toggleNodeDetails(node: FlatTaskNode) {
+    const id = !!node.task ? node.task.id : null;
+    if (!!id) {
+      if (this.expandedDetails.has(id)) {
+        this.expandedDetails.delete(id);
+      } else {
+        this.expandedDetails.add(id);
+      }
+    }
+  }
+
+  areDetailsExpanded(node: FlatTaskNode) {
+    const id = !!node.task ? node.task.id : null;
+    const isExpanded = !!id && this.expandedDetails.has(id);
+    return isExpanded;
   }
 
   ngOnDestroy() {

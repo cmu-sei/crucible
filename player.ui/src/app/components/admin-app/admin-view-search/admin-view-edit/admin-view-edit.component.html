@@ -8,33 +8,53 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div *ngIf="view !== undefined" class="view-container mat-elevation-z8 scroll-container">
-
+<div
+  *ngIf="view !== undefined"
+  class="view-container mat-elevation-z8 scroll-container"
+>
   <div fxLayout="row" class="title">
     <div fxFlex="10" fxLayoutAlign="start center">
-      <button title="Return to View Search" mat-icon-button (click)="returnToViewSearch()">
+      <button
+        title="Return to View Search"
+        mat-icon-button
+        (click)="returnToViewSearch()"
+      >
         <mat-icon svgIcon="ic_back_arrow"></mat-icon>
       </button>
     </div>
     <div fxFlex="90" fxLayoutAlign="start center">
-      <h4>Edit View: {{view.name}}</h4>
+      <h4>Edit View: {{ view.name }}</h4>
     </div>
   </div>
 
   <mat-dialog-content>
-    <mat-vertical-stepper [linear]="isLinear" #stepper (selectionChange)="onViewStepChange($event)">
-
+    <mat-vertical-stepper
+      [linear]="isLinear"
+      #stepper
+      (selectionChange)="onViewStepChange($event)"
+    >
       <ng-template matStepperIcon="edit">&#10004;</ng-template>
       <ng-template matStepperIcon="done">&#10004;</ng-template>
-
 
       <mat-step label="View Information">
         <div fxLayout="row" class="add-margin">
           <div fxFlex fxFlexOffset="20">
             <mat-form-field class="full-width">
-              <input type="text" matInput [formControl]="viewNameFormControl" placeholder="Name (required)" (change)="saveView()"
-                value="{{view.name}}" [errorStateMatcher]="matcher">
-              <mat-error *ngIf="viewNameFormControl.hasError('minlength') && !viewNameFormControl.hasError('required')">
+              <input
+                type="text"
+                matInput
+                [formControl]="viewNameFormControl"
+                placeholder="Name (required)"
+                (change)="saveView()"
+                value="{{ view.name }}"
+                [errorStateMatcher]="matcher"
+              />
+              <mat-error
+                *ngIf="
+                  viewNameFormControl.hasError('minlength') &&
+                  !viewNameFormControl.hasError('required')
+                "
+              >
                 Must contain 4 or more characters
               </mat-error>
               <mat-error *ngIf="viewNameFormControl.hasError('required')">
@@ -47,8 +67,14 @@ DM20-0181
         <div fxLayout="row" class="add-margin">
           <div fxFlex fxFlexOffset="20">
             <mat-form-field class="full-width">
-              <textarea matInput placeholder="View Description (required)" [formControl]="descriptionFormControl"
-                (change)="saveView()" value="{{view.description}}" [errorStateMatcher]="matcher"></textarea>
+              <textarea
+                matInput
+                placeholder="View Description (required)"
+                [formControl]="descriptionFormControl"
+                (change)="saveView()"
+                value="{{ view.description }}"
+                [errorStateMatcher]="matcher"
+              ></textarea>
               <mat-error *ngIf="descriptionFormControl.hasError('required')">
                 Description is <strong>required</strong>
               </mat-error>
@@ -59,9 +85,14 @@ DM20-0181
         <div fxLayout="row" class="add-margin">
           <div fxFlex fxFlexOffset="20">
             <mat-form-field>
-              <mat-select placeholder="Status" [(ngModel)]="view.status" name="viewStatus" (selectionChange)="saveViewStatus()">
+              <mat-select
+                placeholder="Status"
+                [(ngModel)]="view.status"
+                name="viewStatus"
+                (selectionChange)="saveViewStatus()"
+              >
                 <mat-option *ngFor="let status of viewStates" [value]="status">
-                  {{status}}
+                  {{ status }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -70,41 +101,69 @@ DM20-0181
 
         <div fxLayout="row">
           <div fxFlex fxLayoutAlign="end" class="delete-button">
-            <button mat-stroked-button (click)="deleteView()">Delete View</button>
+            <button mat-stroked-button (click)="deleteView()">
+              Delete View
+            </button>
           </div>
         </div>
       </mat-step>
-
 
       <mat-step label="Applications">
         <div fxLayout="row" fxLayoutAlign="end" class="top-button">
-          <button mat-stroked-button [matMenuTriggerFor]="viewAppsMenu">Add New Application</button>
+          <button mat-stroked-button [matMenuTriggerFor]="viewAppsMenu">
+            Add New Application
+          </button>
           <mat-menu #viewAppsMenu="matMenu">
-            <button mat-menu-item (click)="addViewApplication(BLANK_TEMPLATE)">Blank Application</button>
-            <button mat-menu-item [matMenuTriggerFor]="viewAppTemplates">Templates</button>
+            <button mat-menu-item (click)="addViewApplication(BLANK_TEMPLATE)">
+              Blank Application
+            </button>
+            <button mat-menu-item [matMenuTriggerFor]="viewAppTemplates">
+              Templates
+            </button>
           </mat-menu>
           <mat-menu #viewAppTemplates="matMenu">
-            <button mat-menu-item *ngFor="let t of applicationTemplates" (click)="addViewApplication(t)">{{t.name}}</button>
+            <button
+              mat-menu-item
+              *ngFor="let t of applicationTemplates"
+              (click)="addViewApplication(t)"
+            >
+              {{ t.name }}
+            </button>
           </mat-menu>
         </div>
-        <app-view-applications-select #viewAppSelect [view]="view"></app-view-applications-select>
+        <app-view-applications-select
+          #viewAppSelect
+          [view]="view"
+        ></app-view-applications-select>
       </mat-step>
 
-
       <mat-step label="Teams">
-        <mat-card *ngIf="isLoadingTeams"
-          style="display: flex; justify-content: center; align-items: center">
-          <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+        <mat-card
+          *ngIf="isLoadingTeams"
+          style="display: flex; justify-content: center; align-items: center;"
+        >
+          <mat-progress-spinner
+            color="primary"
+            mode="indeterminate"
+          ></mat-progress-spinner>
         </mat-card>
         <mat-accordion *ngIf="!isLoadingTeams">
           <div fxLayout="row" fxLayoutAlign="end" class="top-button">
-            <button mat-stroked-button (click)="addNewTeam()">Add New Team</button>
+            <button mat-stroked-button (click)="addNewTeam()">
+              Add New Team
+            </button>
           </div>
-          <mat-expansion-panel *ngFor="let teamContainer of teams" [expanded]="currentTeam !== undefined && teamContainer.team.id === currentTeam.team.id"
-            (opened)="currentTeam = currentTeam">
+          <mat-expansion-panel
+            *ngFor="let teamContainer of teams"
+            [expanded]="
+              currentTeam !== undefined &&
+              teamContainer.team.id === currentTeam.team.id
+            "
+            (opened)="currentTeam = currentTeam"
+          >
             <mat-expansion-panel-header>
               <mat-panel-title>
-                {{teamContainer.name}}
+                {{ teamContainer.name }}
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -112,25 +171,64 @@ DM20-0181
               <div fxFlex="50" fxLayoutAlign="center">
                 <div fxLayout="column" fxLayoutAlign="space-between none">
                   <div>
-                    <button mat-icon-button ngxClipboard [cbContent]="teamContainer.team.id" title="Copy:  {{teamContainer.team.id}}"><mat-icon style="transform:scale(0.85);" svgIcon="ic_clipboard_copy"></mat-icon></button>
-                    <label style="font-size: xx-small">{{teamContainer.team.id}}</label>
+                    <button
+                      mat-icon-button
+                      ngxClipboard
+                      [cbContent]="teamContainer.team.id"
+                      title="Copy:  {{ teamContainer.team.id }}"
+                    >
+                      <mat-icon
+                        style="transform: scale(0.85);"
+                        svgIcon="ic_clipboard_copy"
+                      ></mat-icon>
+                    </button>
+                    <label style="font-size: xx-small;">{{
+                      teamContainer.team.id
+                    }}</label>
                   </div>
                   <mat-form-field>
-                    <input id="teamName{{teamContainer.team.id}}" matInput [formControl]="teamNameFormControl"
-                      placeholder="Team Name" (change)="saveTeamName($event.target.value, teamContainer.team.id)" value="{{teamContainer.team.name}}"
-                      [errorStateMatcher]="matcher" autofocus>
-                    <mat-error *ngIf="teamNameFormControl.hasError('minlength') && !teamNameFormControl.hasError('required')">
+                    <input
+                      id="teamName{{ teamContainer.team.id }}"
+                      matInput
+                      [formControl]="teamNameFormControl"
+                      placeholder="Team Name"
+                      (change)="
+                        saveTeamName($event.target.value, teamContainer.team.id)
+                      "
+                      value="{{ teamContainer.team.name }}"
+                      [errorStateMatcher]="matcher"
+                      autofocus
+                    />
+                    <mat-error
+                      *ngIf="
+                        teamNameFormControl.hasError('minlength') &&
+                        !teamNameFormControl.hasError('required')
+                      "
+                    >
                       Must contain 3 or more characters
                     </mat-error>
                     <mat-error *ngIf="teamNameFormControl.hasError('required')">
                       Name is <strong>required</strong>
                     </mat-error>
                   </mat-form-field>
-                  <app-roles-permissions-select [team]="teamContainer.team"></app-roles-permissions-select>
+                  <app-roles-permissions-select
+                    [team]="teamContainer.team"
+                  ></app-roles-permissions-select>
                   <div fxLayout="row" fxLayoutAlign="center">
-                    <button mat-button (click)="openUsersDialog(teamContainer.team)">
-                      <div matBadge="{{teamContainer.users.length}}" matBadgePosition="after" matBadgeColor="accent">
-                        <img class="left-icon" src="../../../../../assets/img/SP_Icon_User.png" alt="Users">
+                    <button
+                      mat-button
+                      (click)="openUsersDialog(teamContainer.team)"
+                    >
+                      <div
+                        matBadge="{{ teamContainer.users.length }}"
+                        matBadgePosition="after"
+                        matBadgeColor="accent"
+                      >
+                        <img
+                          class="left-icon"
+                          src="../../../../../assets/img/SP_Icon_User.png"
+                          alt="Users"
+                        />
                       </div>
                       Users
                     </button>
@@ -138,16 +236,23 @@ DM20-0181
                 </div>
               </div>
               <div fxFlex="50">
-                <app-team-applications-select [view]="view" [team]="teamContainer.team"></app-team-applications-select>
+                <app-team-applications-select
+                  [view]="view"
+                  [team]="teamContainer.team"
+                ></app-team-applications-select>
               </div>
             </div>
 
             <div fxLayout="row">
               <div fxFlex fxLayoutAlign="end" class="delete-button">
-                <button mat-stroked-button (click)="deleteTeam(teamContainer.team)">Delete Team</button>
+                <button
+                  mat-stroked-button
+                  (click)="deleteTeam(teamContainer.team)"
+                >
+                  Delete Team
+                </button>
               </div>
             </div>
-
           </mat-expansion-panel>
         </mat-accordion>
       </mat-step>
@@ -159,5 +264,4 @@ DM20-0181
       <button mat-stroked-button (click)="returnToViewSearch()">Done</button>
     </div>
   </div>
-
 </div>

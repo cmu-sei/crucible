@@ -19,7 +19,7 @@ using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Services;
 using SAVM = Steamfitter.Api.ViewModels;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Steamfitter.Api.Controllers
 {
@@ -45,7 +45,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("Results")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.Result>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getResults")]
+        [SwaggerOperation(OperationId = "getResults")]
         public async STT.Task<IActionResult> Get(CancellationToken ct)
         {
             var list = await _ResultService.GetAsync(ct);
@@ -61,7 +61,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("scenarios/{id}/Results")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.Task>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getScenarioResults")]
+        [SwaggerOperation(OperationId = "getScenarioResults")]
         public async STT.Task<IActionResult> GetByScenarioId(Guid id, CancellationToken ct)
         {
             var list = await _ResultService.GetByScenarioIdAsync(id, ct);
@@ -77,7 +77,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("views/{id}/Results")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.Task>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getViewResults")]
+        [SwaggerOperation(OperationId = "getViewResults")]
         public async STT.Task<IActionResult> GetByViewId(Guid id, CancellationToken ct)
         {
             var list = await _ResultService.GetByViewIdAsync(id, ct);
@@ -93,7 +93,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("users/{id}/Results")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.Task>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getUserResults")]
+        [SwaggerOperation(OperationId = "getUserResults")]
         public async STT.Task<IActionResult> GetByUserId(Guid id, CancellationToken ct)
         {
             var list = await _ResultService.GetByUserIdAsync(id, ct);
@@ -109,7 +109,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("me/Results")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.Task>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getMyResults")]
+        [SwaggerOperation(OperationId = "getMyResults")]
         public async STT.Task<IActionResult> GetMine(CancellationToken ct)
         {
             var list = await _ResultService.GetByUserIdAsync(User.GetId(), ct);
@@ -125,7 +125,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("vms/{id}/Results")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.Task>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getVmResults")]
+        [SwaggerOperation(OperationId = "getVmResults")]
         public async STT.Task<IActionResult> GetByVmId(Guid id, CancellationToken ct)
         {
             var list = await _ResultService.GetByVmIdAsync(id, ct);
@@ -145,7 +145,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("Results/{id}")]
         [ProducesResponseType(typeof(SAVM.Result), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getResult")]
+        [SwaggerOperation(OperationId = "getResult")]
         public async STT.Task<IActionResult> Get(Guid id, CancellationToken ct)
         {
             var Result = await _ResultService.GetAsync(id, ct);
@@ -168,7 +168,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPost("Results")]
         [ProducesResponseType(typeof(SAVM.Result), (int)HttpStatusCode.Created)]
-        [SwaggerOperation(operationId: "createResult")]
+        [SwaggerOperation(OperationId = "createResult")]
         public async STT.Task<IActionResult> Create([FromBody] SAVM.Result result, CancellationToken ct)
         {
             var createdResult = await _ResultService.CreateAsync(result, ct);
@@ -188,7 +188,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPut("Results/{id}")]
         [ProducesResponseType(typeof(SAVM.Result), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "updateResult")]
+        [SwaggerOperation(OperationId = "updateResult")]
         public async STT.Task<IActionResult> Update([FromRoute] Guid id, [FromBody] SAVM.Result result, CancellationToken ct)
         {
             var updatedResult = await _ResultService.UpdateAsync(id, result, ct);
@@ -207,7 +207,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpDelete("Results/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [SwaggerOperation(operationId: "deleteResult")]
+        [SwaggerOperation(OperationId = "deleteResult")]
         public async STT.Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
             await _ResultService.DeleteAsync(id, ct);

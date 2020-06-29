@@ -81,7 +81,7 @@ namespace Steamfitter.Api.Services
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
 
-            var userEntity = Mapper.Map<UserEntity>(user);
+            var userEntity = _mapper.Map<UserEntity>(user);
 
             _context.Users.Add(userEntity);
             await _context.SaveChangesAsync(ct);
@@ -105,7 +105,7 @@ namespace Steamfitter.Api.Services
             if (userToUpdate == null)
                 throw new EntityNotFoundException<SAVM.User>();
 
-            Mapper.Map(user, userToUpdate);
+            _mapper.Map(user, userToUpdate);
 
             _context.Users.Update(userToUpdate);
             await _context.SaveChangesAsync(ct);

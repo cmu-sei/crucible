@@ -14,6 +14,7 @@ import {catchError} from 'rxjs/operators';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserManagerSettings } from 'oidc-client';
+import { VmResolution } from '../../models/vm/vm-model';
 
 
 @Injectable()
@@ -22,6 +23,7 @@ export class SettingsService {
   public ConsoleApiUrl = '';
   public OIDCSettings: UserManagerSettings = null;
   public UseLocalAuthStorage = false;
+  public VmResolutionOptions: VmResolution[] = [];
 
   constructor(private http: HttpClient) { }
 

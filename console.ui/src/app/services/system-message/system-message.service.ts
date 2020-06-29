@@ -8,8 +8,7 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Observable } from 'rxjs';
-import { MatBottomSheetRef, MatBottomSheet, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Injectable } from '@angular/core';
 import { SystemMessageComponent } from '../../components/shared/system-message/system-message.component';
 

@@ -20,11 +20,10 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface Permission {
-    id?: string;
-    key?: string;
-    value?: string;
-    description?: string;
-    readOnly?: boolean;
+  id?: string;
+  key?: string;
+  value?: string;
+  description?: string;
+  readOnly?: boolean;
 }

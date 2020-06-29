@@ -18,9 +18,8 @@ describe('AdminAppTemplateSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminAppTemplateSearchComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminAppTemplateSearchComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('AdminAppTemplateSearchComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

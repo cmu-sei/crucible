@@ -20,11 +20,10 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface ApplicationTemplateForm {
-    name?: string;
-    url?: string;
-    icon?: string;
-    embeddable?: boolean;
-    loadInBackground?: boolean;
+  name?: string;
+  url?: string;
+  icon?: string;
+  embeddable?: boolean;
+  loadInBackground?: boolean;
 }

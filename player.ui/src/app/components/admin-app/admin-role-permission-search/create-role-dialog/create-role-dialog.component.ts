@@ -8,12 +8,12 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Component, Inject} from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
 
 @Component({
-    selector: 'create-role-dialog',
-    templateUrl: './create-role-dialog.component.html'
+  selector: 'create-role-dialog',
+  templateUrl: './create-role-dialog.component.html',
 })
 export class CreateRoleDialogComponent {
   public title: string;
@@ -21,7 +21,8 @@ export class CreateRoleDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data,
-    private dialogRef: MatDialogRef<CreateRoleDialogComponent>) {
+    private dialogRef: MatDialogRef<CreateRoleDialogComponent>
+  ) {
     this.dialogRef.disableClose = true;
   }
 
@@ -30,8 +31,6 @@ export class CreateRoleDialogComponent {
   }
 
   done() {
-    this.dialogRef.close({'name': this.name, 'value': ''});
+    this.dialogRef.close({ name: this.name, value: '' });
   }
 }
-
-

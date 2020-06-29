@@ -16,18 +16,22 @@ import { NotificationData } from '../../models/notification/notification-model';
 
 @Injectable()
 export class NotificationService {
-
   public progressConnection: HubConnection;
-  public tasksInProgress = new BehaviorSubject<Array<NotificationData>>(new Array<NotificationData>());
+  public tasksInProgress = new BehaviorSubject<Array<NotificationData>>(
+    new Array<NotificationData>()
+  );
 
-  constructor(
-    private settings: SettingsService
-  ) { }
+  constructor(private settings: SettingsService) {}
 
   connectToProgressHub(vmString: string, userToken: string) {
     console.log('Starting connection to ProgressHub');
     this.progressConnection = new HubConnectionBuilder()
-      .withUrl(`${this.settings.ConsoleApiUrl.replace('/api/', '/notifications/')}progress?bearer=${userToken}`)
+      .withUrl(
+        `${this.settings.ConsoleApiUrl.replace(
+          '/api/',
+          '/hubs/'
+        )}progress?access_token=${userToken}`
+      )
       .build();
 
     this.progressConnection.on('Progress', (data: [NotificationData]) => {
@@ -38,16 +42,19 @@ export class NotificationService {
       this.tasksInProgress.next(data);
     });
 
-    this.progressConnection.start()
+    this.progressConnection
+      .start()
       .then(() => {
         this.progressConnection.invoke('Join', vmString);
         console.log('Progress connection started');
       })
       .catch(() => {
-        console.log('Error while establishing Progress connection with the VM Console API.');
-        throw new Error('Error while establishing Progress connection with the VM Console API.');
+        console.log(
+          'Error while establishing Progress connection with the VM Console API.'
+        );
+        throw new Error(
+          'Error while establishing Progress connection with the VM Console API.'
+        );
       });
   }
-
 }
-

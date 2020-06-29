@@ -15,24 +15,24 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using STT = System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Steamfitter.Api.Data;
 using Steamfitter.Api.Data.Models;
+using Steamfitter.Api.Hubs;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure;
 using Steamfitter.Api.Infrastructure.Authorization;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Infrastructure.Options;
 using SAVM = Steamfitter.Api.ViewModels;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 
 namespace Steamfitter.Api.Services
@@ -70,6 +70,7 @@ namespace Steamfitter.Api.Services
         private readonly IPlayerService _playerService;
         private readonly IPlayerVmService _playerVmService;
         private readonly bool _isHttps;
+        private readonly IHubContext<EngineHub> _engineHub;
 
         public TaskService(
             SteamfitterContext context, 
@@ -83,7 +84,8 @@ namespace Steamfitter.Api.Services
             IPlayerService playerService,
             IPlayerVmService playerVmService,
             IHttpClientFactory httpClientFactory,
-            ClientOptions clientSettings)
+            ClientOptions clientSettings,
+            IHubContext<EngineHub> engineHub)
         {
             _context = context;
             _authorizationService = authorizationService;
@@ -97,6 +99,7 @@ namespace Steamfitter.Api.Services
             _playerService = playerService;
             _playerVmService = playerVmService;
             _isHttps = clientSettings.urls.playerApi.ToLower().StartsWith("https:");
+            _engineHub = engineHub;
         }
 
         public async STT.Task<IEnumerable<SAVM.Task>> GetAsync(CancellationToken ct)
@@ -204,12 +207,14 @@ namespace Steamfitter.Api.Services
             task.DateCreated = DateTime.UtcNow;
             task.CreatedBy = _user.GetId();
             task.UserId = _user.GetId();
-            var taskEntity = Mapper.Map<TaskEntity>(task);
+            var taskEntity = _mapper.Map<TaskEntity>(task);
 
             _context.Tasks.Add(taskEntity);
             await _context.SaveChangesAsync(ct);
+            task = await GetAsync(taskEntity.Id, ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.TaskCreated, task);
 
-            return await GetAsync(taskEntity.Id, ct);
+            return task;
         }
 
         public async STT.Task<IEnumerable<SAVM.Result>> CreateAndExecuteAsync(SAVM.Task task, CancellationToken ct)
@@ -305,7 +310,7 @@ namespace Steamfitter.Api.Services
                 }
             }
 
-            return _mapper.Map(resultEntityList, new List<SAVM.Result>());
+            return  _mapper.Map(resultEntityList, new List<SAVM.Result>());;
         }
 
         public async STT.Task<SAVM.Task> UpdateAsync(Guid id, SAVM.Task task, CancellationToken ct)
@@ -322,12 +327,14 @@ namespace Steamfitter.Api.Services
             task.DateCreated = taskToUpdate.DateCreated;
             task.DateModified = DateTime.UtcNow;
             task.ModifiedBy = _user.GetId();
-            Mapper.Map(task, taskToUpdate);
+            _mapper.Map(task, taskToUpdate);
 
             _context.Tasks.Update(taskToUpdate);
             await _context.SaveChangesAsync(ct);
+            var updatedTask = _mapper.Map(taskToUpdate, task);
+            _engineHub.Clients.All.SendAsync(EngineMethods.TaskUpdated, updatedTask);
 
-            return _mapper.Map(taskToUpdate, task);
+            return updatedTask;
         }
 
         public async STT.Task<bool> DeleteAsync(Guid id, CancellationToken ct)
@@ -342,6 +349,7 @@ namespace Steamfitter.Api.Services
 
             _context.Tasks.Remove(TaskToDelete);
             await _context.SaveChangesAsync(ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.TaskDeleted, id);
 
             return true;
         }
@@ -398,32 +406,38 @@ namespace Steamfitter.Api.Services
                     break;
             }
             // create the copy
-            var newTaskEntity = Mapper.Map<TaskEntity, TaskEntity>(existingTaskEntity);
+            var newTaskEntity = _mapper.Map<TaskEntity, TaskEntity>(existingTaskEntity);
             // set the new task relationships
             newTaskEntity.ScenarioTemplate = null;
             newTaskEntity.ScenarioTemplateId = scenarioTemplateId;
             newTaskEntity.Scenario = null;
             newTaskEntity.ScenarioId = scenarioId;
-            newTaskEntity.CreatedBy = _user.GetId();
+            newTaskEntity.TriggerTask = null;
             newTaskEntity.TriggerTaskId = triggerTaskId;
+            newTaskEntity.CreatedBy = _user.GetId();
+            newTaskEntity.ModifiedBy = _user.GetId();
+            newTaskEntity.DateCreated = DateTime.UtcNow;
+            newTaskEntity.DateModified = newTaskEntity.DateCreated;
             // save new task to the database
             _context.Tasks.Add(newTaskEntity);
             await _context.SaveChangesAsync();
+            var newTask = _mapper.Map<SAVM.Task>(newTaskEntity);
+            _engineHub.Clients.All.SendAsync(EngineMethods.TaskCreated, newTask);
             // return the new task with all of its new subtasks
             var entities = new List<TaskEntity>();
             entities.Add(newTaskEntity);
-            entities.AddRange(await CopySubTasks(id, newTaskEntity, ct));
+            entities.AddRange(await CopySubTasks(id, newTaskEntity.Id, ct));
 
             return entities;
         }
 
-        private async STT.Task<IEnumerable<TaskEntity>> CopySubTasks(Guid oldTaskEntityId, TaskEntity newTaskEntity, CancellationToken ct)
+        private async STT.Task<IEnumerable<TaskEntity>> CopySubTasks(Guid oldTaskEntityId, Guid newTaskEntityId, CancellationToken ct)
         {
-            var oldSubTaskEntityIds = _context.Tasks.Where(dt => dt.TriggerTaskId == oldTaskEntityId).Select(dt => dt.Id);
+            var oldSubTaskEntityIds = _context.Tasks.Where(dt => dt.TriggerTaskId == oldTaskEntityId).Select(dt => dt.Id).ToList();
             var subEntities = new List<TaskEntity>();
             foreach (var oldSubTaskEntityId in oldSubTaskEntityIds)
             {
-                var newEntities = await CopyTaskAsync(oldSubTaskEntityId, newTaskEntity.Id, "task", ct);
+                var newEntities = await CopyTaskAsync(oldSubTaskEntityId, newTaskEntityId, "task", ct);
                 subEntities.AddRange(newEntities);
             }
 
@@ -462,20 +476,22 @@ namespace Steamfitter.Api.Services
                     break;
             }
             await _context.SaveChangesAsync();
+            var movedTask = _mapper.Map<SAVM.Task>(existingTaskEntity);
+            _engineHub.Clients.All.SendAsync(EngineMethods.TaskUpdated, movedTask);
             var entities = new List<TaskEntity>();
             entities.Add(existingTaskEntity);
-            entities.AddRange(await MoveSubTasks(existingTaskEntity, ct));
+            entities.AddRange(await MoveSubTasks(existingTaskEntity.Id, ct));
 
             return entities;
         }
 
-        private async STT.Task<IEnumerable<TaskEntity>> MoveSubTasks(TaskEntity taskEntity, CancellationToken ct)
+        private async STT.Task<IEnumerable<TaskEntity>> MoveSubTasks(Guid taskEntityId, CancellationToken ct)
         {
-            var subTaskEntityIds = _context.Tasks.Where(dt => dt.TriggerTaskId == taskEntity.Id).Select(dt => dt.Id);
+            var subTaskEntityIds = _context.Tasks.Where(dt => dt.TriggerTaskId == taskEntityId).Select(dt => dt.Id).ToList();
             var subEntities = new List<TaskEntity>();
             foreach (var subTaskEntityId in subTaskEntityIds)
             {
-                var newEntities = await MoveTaskAsync(subTaskEntityId, taskEntity.Id, "task", ct);
+                var newEntities = await MoveTaskAsync(subTaskEntityId, taskEntityId, "task", ct);
                 subEntities.AddRange(newEntities);
             }
 
@@ -608,6 +624,7 @@ namespace Steamfitter.Api.Services
             }
             await _context.Results.AddRangeAsync(resultEntities);
             await _context.SaveChangesAsync(ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ResultsUpdated, _mapper.Map<IEnumerable<ViewModels.Result>>(resultEntities));
             return resultEntities;
         }
 
@@ -639,6 +656,8 @@ namespace Steamfitter.Api.Services
         private async STT.Task<Data.TaskStatus> ExecuteStackstormTaskAsync(TaskEntity taskToExecute, List<ResultEntity> resultEntityList, CancellationToken ct)
         {
             var overallStatus = Data.TaskStatus.succeeded;
+            var tasks = new List<STT.Task<string>>();
+            var xref = new Dictionary<int, ResultEntity>();
             foreach (var resultEntity in resultEntityList)
             {
                 STT.Task<string> task = null;
@@ -654,6 +673,11 @@ namespace Steamfitter.Api.Services
                     case TaskAction.guest_process_run:
                     {
                         task = STT.Task.Run(() => _stackStormService.GuestCommand(resultEntity.InputString));
+                        break;
+                    }
+                    case TaskAction.guest_process_run_fast:
+                    {
+                        task = STT.Task.Run(() => _stackStormService.GuestCommandFast(resultEntity.InputString));
                         break;
                     }
                     case TaskAction.vm_hw_power_on:
@@ -685,27 +709,37 @@ namespace Steamfitter.Api.Services
                         break;
                     }
                 }
-
-                if (task.Wait(TimeSpan.FromSeconds(resultEntity.ExpirationSeconds)))
+                tasks.Add(task);
+                xref[task.Id] = resultEntity;
+            }
+            foreach (var bucket in AsCompletedBuckets(tasks))
+            {
+                try 
                 {
-                    resultEntity.ActualOutput = task.Result.ToString();
+                    var task = await bucket;
+                    var resultEntity = xref[task.Id];
+                    resultEntity.ActualOutput = task.Result == null ? "" : task.Result.ToString();
                     resultEntity.Status = ProcessResult(resultEntity, ct);
-                }
-                else
-                {
-                    resultEntity.ActualOutput = task.Result.ToString();
-                    resultEntity.Status = Data.TaskStatus.expired;
-                }
-                resultEntity.StatusDate = DateTime.UtcNow;
-                if (resultEntity.Status != Data.TaskStatus.succeeded)
-                {
-                    if (overallStatus != Data.TaskStatus.failed)
+                    resultEntity.StatusDate = DateTime.UtcNow;
+                    if (resultEntity.Status != Data.TaskStatus.succeeded)
                     {
-                        overallStatus = resultEntity.Status;
+                        if (overallStatus != Data.TaskStatus.failed)
+                        {
+                            overallStatus = resultEntity.Status;
+                        }
                     }
+                    await _context.SaveChangesAsync();
+                    _engineHub.Clients.All.SendAsync(EngineMethods.ResultUpdated, _mapper.Map<ViewModels.Result>(resultEntity));
+                }
+                catch (OperationCanceledException)
+                {
+                    _logger.LogInformation("the executing task was cancelled");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation("the executing task caused an exception", ex);
                 }
             }
-            await _context.SaveChangesAsync();
             return overallStatus;
         }
 
@@ -841,7 +875,7 @@ namespace Steamfitter.Api.Services
                     }
                 }
             };
-            var jsonString = JsonConvert.SerializeObject(workorder);
+            var jsonString = JsonSerializer.Serialize(workorder);
             jsonString = jsonString.Replace("woTriggers", "triggers").Replace("woParams", "params");
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_options.ForemanUrl);
@@ -891,6 +925,32 @@ namespace Steamfitter.Api.Services
 
             return resultEntity;
         }
+        public static STT.Task<STT.Task<T>> [] AsCompletedBuckets<T>(IEnumerable<STT.Task<T>> tasks)
+        {
+            var inputTasks = tasks.ToList();
+
+            var buckets = new STT.TaskCompletionSource<STT.Task<T>>[inputTasks.Count];
+            var results = new STT.Task<STT.Task<T>>[buckets.Length];
+            for (int i = 0; i < buckets.Length; i++) 
+            {
+                buckets[i] = new STT.TaskCompletionSource<STT.Task<T>>();
+                results[i] = buckets[i].Task;
+            }
+
+            int nextTaskIndex = -1;
+            Action<STT.Task<T>> continuation = completed =>
+            {
+                var bucket = buckets[Interlocked.Increment(ref nextTaskIndex)];
+                bucket.TrySetResult(completed);
+            };
+
+            foreach (var inputTask in inputTasks)
+                inputTask.ContinueWith(continuation, CancellationToken.None, STT.TaskContinuationOptions.ExecuteSynchronously, STT.TaskScheduler.Default);
+
+            return results;
+        }
+
     }
+
 }
 

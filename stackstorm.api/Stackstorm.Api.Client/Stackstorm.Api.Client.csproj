@@ -1,16 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <LangVersion>latest</LangVersion>
         <RootNamespace>stackstorm.api.client</RootNamespace>
-
         <PackageId>Stackstorm.Api.Client</PackageId>
         <Version>0.0.0</Version>
         <Authors>CERT.CWD</Authors>
         <Company>CMU.SEI</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageOutputPath>artifacts</PackageOutputPath>
+        <ProjectGuid>{0C850809-F74A-41C3-9C36-E80F0004D444}</ProjectGuid>
     </PropertyGroup>
 
     <ItemGroup>

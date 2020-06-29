@@ -9,19 +9,18 @@ DM20-0181
 */
 
 export interface NotificationData {
-    fromId: string;
-    fromName: string;
-    fromType: string;
-    toId: string;
-    toName: string;
-    toType: string;
-    broadcastTime: string;
-    subject: string;
-    text: string;
-    iconUrl: string;
-    link: string;
-    priority: string;
-    wasSuccess: boolean;
-    canPost: boolean;
+  fromId: string;
+  fromName: string;
+  fromType: string;
+  toId: string;
+  toName: string;
+  toType: string;
+  broadcastTime: string;
+  subject: string;
+  text: string;
+  iconUrl: string;
+  link: string;
+  priority: string;
+  wasSuccess: boolean;
+  canPost: boolean;
 }
-

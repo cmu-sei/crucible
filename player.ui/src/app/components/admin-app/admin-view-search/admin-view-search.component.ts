@@ -9,7 +9,8 @@ DM20-0181
 */
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
+import { MatSort, MatSortable } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { View, ViewService } from '../../../generated/s3.player.api';
 import { LoggedInUserService } from '../../../services/logged-in-user/logged-in-user.service';
 import { DialogService } from '../../../services/dialog/dialog.service';
@@ -23,16 +24,16 @@ export interface Action {
 @Component({
   selector: 'app-admin-view-search',
   templateUrl: './admin-view-search.component.html',
-  styleUrls: ['./admin-view-search.component.css']
+  styleUrls: ['./admin-view-search.component.scss'],
 })
 export class AdminViewSearchComponent implements OnInit {
-
-  @ViewChild(AdminViewEditComponent, { static: true }) adminViewEditComponent: AdminViewEditComponent;
+  @ViewChild(AdminViewEditComponent, { static: true })
+  adminViewEditComponent: AdminViewEditComponent;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   public viewActions: Action[] = [
     { Value: 'edit', Text: 'Edit View' },
-    { Value: 'activate', Text: 'Activate/Deactivate View' }
+    { Value: 'activate', Text: 'Activate/Deactivate View' },
   ];
 
   public viewDataSource: MatTableDataSource<View>;
@@ -41,10 +42,11 @@ export class AdminViewSearchComponent implements OnInit {
   public showEditScreen: Boolean;
   public isLoading: Boolean;
 
-  constructor(private viewService: ViewService,
+  constructor(
+    private viewService: ViewService,
     public loggedInUserService: LoggedInUserService,
     public dialogService: DialogService
-  ) { }
+  ) {}
 
   /**
    * Initialization
@@ -52,7 +54,7 @@ export class AdminViewSearchComponent implements OnInit {
   ngOnInit() {
     // Initial datasource
     this.viewDataSource = new MatTableDataSource<View>(new Array<View>());
-    this.sort.sort(<MatSortable>({id: 'name', start: 'asc'}));
+    this.sort.sort(<MatSortable>{ id: 'name', start: 'asc' });
     this.viewDataSource.sort = this.sort;
     this.showEditScreen = false;
     this.filterString = '';
@@ -60,11 +62,10 @@ export class AdminViewSearchComponent implements OnInit {
     // Initial datasource
     this.filterString = '';
 
-    this.loggedInUserService.loggedInUser.subscribe(user => {
+    this.loggedInUserService.loggedInUser.subscribe((user) => {
       this.refreshViews();
     });
   }
-
 
   /**
    * Executes an action menu item
@@ -73,46 +74,47 @@ export class AdminViewSearchComponent implements OnInit {
    */
   executeViewAction(action: string, viewGuid: string) {
     switch (action) {
-      case ('edit'): {
+      case 'edit': {
         // Edit view
-        this.viewService.getView(viewGuid)
-          .subscribe(view => {
-            this.adminViewEditComponent.resetStepper();
-            this.adminViewEditComponent.updateView();
-            this.adminViewEditComponent.updateApplicationTemplates();
-            this.adminViewEditComponent.view = view;
-            this.showEditScreen = true;
+        this.viewService.getView(viewGuid).subscribe((view) => {
+          this.adminViewEditComponent.resetStepper();
+          this.adminViewEditComponent.updateView();
+          this.adminViewEditComponent.updateApplicationTemplates();
+          this.adminViewEditComponent.view = view;
+          this.showEditScreen = true;
         });
         break;
       }
-      case ('activate'): {
+      case 'activate': {
         // Activate or Deactivate
-        this.viewService.getView(viewGuid)
-          .subscribe(view => {
-            let msg = '';
-            let title = '';
-            let activation = View.StatusEnum.Inactive;
-            if (view.status === undefined || view.status === View.StatusEnum.Inactive) {
-              msg = 'Do you wish to Activate view ' + view.name + '?';
-              title = 'Activate View?';
-              activation = View.StatusEnum.Active;
-            } else {
-              msg = 'Do you wish to deactivate view ' + view.name + '?';
-              title = 'Deactivate View?';
-              activation = View.StatusEnum.Inactive;
+        this.viewService.getView(viewGuid).subscribe((view) => {
+          let msg = '';
+          let title = '';
+          let activation = View.StatusEnum.Inactive;
+          if (
+            view.status === undefined ||
+            view.status === View.StatusEnum.Inactive
+          ) {
+            msg = 'Do you wish to Activate view ' + view.name + '?';
+            title = 'Activate View?';
+            activation = View.StatusEnum.Active;
+          } else {
+            msg = 'Do you wish to deactivate view ' + view.name + '?';
+            title = 'Deactivate View?';
+            activation = View.StatusEnum.Inactive;
+          }
+          this.dialogService.confirm(title, msg).subscribe((result) => {
+            if (result['confirm']) {
+              view.status = activation;
+              this.viewService
+                .updateView(viewGuid, view)
+                .subscribe((updateview) => {
+                  console.log('successfully updated view ' + updateview.name);
+                  this.refreshViews();
+                });
             }
-            this.dialogService.confirm(title, msg)
-              .subscribe(result => {
-                if (result['confirm']) {
-                  view.status = activation;
-                  this.viewService.updateView(viewGuid, view)
-                    .subscribe(updateview => {
-                      console.log('successfully updated view ' + updateview.name);
-                      this.refreshViews();
-                    });
-                }
-              });
           });
+        });
         break;
       }
       default: {
@@ -122,13 +124,16 @@ export class AdminViewSearchComponent implements OnInit {
     }
   }
 
-
   /**
    * Adds a new view
    */
   addNewView() {
-    const view = <View>{name: 'New View', description: 'Add description', status: View.StatusEnum.Active};
-    this.viewService.createView(view).subscribe(ex => {
+    const view = <View>{
+      name: 'New View',
+      description: 'Add description',
+      status: View.StatusEnum.Active,
+    };
+    this.viewService.createView(view).subscribe((ex) => {
       this.refreshViews();
       this.executeViewAction('edit', ex.id);
     });
@@ -151,7 +156,7 @@ export class AdminViewSearchComponent implements OnInit {
   refreshViews() {
     this.showEditScreen = false;
     this.isLoading = true;
-    this.viewService.getViews().subscribe(views => {
+    this.viewService.getViews().subscribe((views) => {
       this.viewDataSource.data = views;
       this.isLoading = false;
     });
@@ -163,5 +168,4 @@ export class AdminViewSearchComponent implements OnInit {
   clearFilter() {
     this.applyFilter('');
   }
-
 }

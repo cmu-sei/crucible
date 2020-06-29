@@ -9,15 +9,14 @@ DM20-0181
 */
 
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-system-message',
   templateUrl: './system-message.component.html',
-  styleUrls: ['./system-message.component.css']
+  styleUrls: ['./system-message.component.scss'],
 })
 export class SystemMessageComponent implements OnInit {
-
   public displayTitle: string;
   public displayMessage: string;
 
@@ -27,13 +26,11 @@ export class SystemMessageComponent implements OnInit {
   ) {
     this.displayTitle = data.title;
     this.displayMessage = data.message;
-   }
-
-  ngOnInit() {
   }
+
+  ngOnInit() {}
 
   close() {
     this.messageSheet.dismiss();
   }
 }
-

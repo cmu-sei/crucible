@@ -8,23 +8,35 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-
-import { Injectable } from '@angular/core';
-import { throwError as observableThrowError, Observable, Subject, BehaviorSubject } from 'rxjs';
-import { User, UserService, RoleService } from '../../generated/s3.player.api';
+import { Injectable, OnDestroy } from '@angular/core';
+import { ComnAuthQuery } from '@crucible/common';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
+import { RoleService, User, UserService } from '../../generated/s3.player.api';
 
 // Used to display Super User text
 export const SUPER_USER = 'Super User';
 
-@Injectable()
-export class LoggedInUserService {
-
+@Injectable({ providedIn: 'root' })
+export class LoggedInUserService implements OnDestroy {
   public loggedInUser: BehaviorSubject<User> = new BehaviorSubject(null);
   public isSuperUser: BehaviorSubject<Boolean> = new BehaviorSubject(false);
+  unsubscribe$: Subject<null> = new Subject<null>();
 
   constructor(
     private userService: UserService,
-    private roleService: RoleService) { }
+    private authQuery: ComnAuthQuery,
+    private roleService: RoleService
+  ) {
+    this.authQuery.user$
+      .pipe(
+        filter((user) => !!user),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((user) => {
+        this.setLoggedInUser(user.profile.sub);
+      });
+  }
 
   /**
    * Once a user is logged in, this obtains Player Api specific User data.
@@ -32,10 +44,14 @@ export class LoggedInUserService {
    */
   public setLoggedInUser(guid: string) {
     console.log('user guid: ' + guid);
-    this.userService.getUser(guid).subscribe(user => {
+    this.userService.getUser(guid).subscribe((user) => {
       this.isSuperUser.next(user.isSystemAdmin);
       this.loggedInUser.next(user);
     });
+  }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next(null);
+    this.unsubscribe$.complete();
   }
 }

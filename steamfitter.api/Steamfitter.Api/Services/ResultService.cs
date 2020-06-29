@@ -143,7 +143,7 @@ namespace Steamfitter.Api.Services
 
             result.DateCreated = DateTime.UtcNow;
             result.CreatedBy = _user.GetId();
-            var resultEntity = Mapper.Map<ResultEntity>(result);
+            var resultEntity = _mapper.Map<ResultEntity>(result);
 
             //TODO: add permissions
             // var ResultAdminPermission = await _context.Permissions
@@ -173,7 +173,7 @@ namespace Steamfitter.Api.Services
             result.CreatedBy = resultToUpdate.CreatedBy;
             result.DateModified = DateTime.UtcNow;
             result.ModifiedBy = _user.GetId();
-            Mapper.Map(result, resultToUpdate);
+            _mapper.Map(result, resultToUpdate);
 
             _context.Results.Update(resultToUpdate);
             await _context.SaveChangesAsync(ct);

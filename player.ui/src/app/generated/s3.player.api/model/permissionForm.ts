@@ -20,9 +20,8 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface PermissionForm {
-    key?: string;
-    value?: string;
-    description?: string;
+  key?: string;
+  value?: string;
+  description?: string;
 }

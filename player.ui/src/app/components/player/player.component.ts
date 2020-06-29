@@ -8,29 +8,26 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ViewsService } from '../../services/views/views.service';
-import { AuthService } from '../../services/auth/auth.service';
-import { TeamsService } from '../../services/teams/teams.service';
-import { TeamData } from '../../models/team-data';
-import { SystemMessageService } from '../../services/system-message/system-message.service';
-import { SettingsService } from '../../services/settings/settings.service';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
-import { AdminViewEditComponent } from '../admin-app/admin-view-search/admin-view-edit/admin-view-edit.component';
+import { ActivatedRoute } from '@angular/router';
+import { ComnAuthService, ComnSettingsService } from '@crucible/common';
 import { ViewService } from '../../generated/s3.player.api/api/view.service';
 import { View } from '../../generated/s3.player.api/model/models';
-import { MatDialog } from '@angular/material';
+import { TeamData } from '../../models/team-data';
+import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
+import { SystemMessageService } from '../../services/system-message/system-message.service';
+import { TeamsService } from '../../services/teams/teams.service';
+import { ViewsService } from '../../services/views/views.service';
+import { AdminViewEditComponent } from '../admin-app/admin-view-search/admin-view-edit/admin-view-edit.component';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  providers: [AuthService],
-  styleUrls: ['./player.component.css']
+  styleUrls: ['./player.component.scss'],
 })
 export class PlayerComponent implements OnInit {
-
   public viewGuid: string;
   public teamGuid: string;
   public userGuid: string;
@@ -50,28 +47,26 @@ export class PlayerComponent implements OnInit {
     private route: ActivatedRoute,
     private viewsService: ViewsService,
     private viewService: ViewService,
-    private authService: AuthService,
+    private authService: ComnAuthService,
     private loggedInUserService: LoggedInUserService,
     private teamsService: TeamsService,
     private systemMessageService: SystemMessageService,
-    private settingsService: SettingsService,
+    private settingsService: ComnSettingsService,
     private titleService: Title,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
-
     this.opened = true;
     this.teams = new Array<TeamData>();
 
     // Set the topbar color from config file
-    this.topBarColor = this.settingsService.AppTopBarHexColor;
+    this.topBarColor = this.settingsService.settings.AppTopBarHexColor;
 
     // Set the page title from configuration file
-    this.titleService.setTitle(this.settingsService.AppTitle);
+    this.titleService.setTitle(this.settingsService.settings.AppTitle);
 
-    this.loggedInUserService.loggedInUser.subscribe(loggedInUser => {
-
+    this.loggedInUserService.loggedInUser.subscribe((loggedInUser) => {
       if (loggedInUser == null) {
         return;
       }
@@ -82,32 +77,37 @@ export class PlayerComponent implements OnInit {
       this.userToken = this.authService.getAuthorizationToken();
 
       // Get the view GUID from the URL that the user is entering the web page on
-      this.route.params.subscribe(params => {
+      this.route.params.subscribe((params) => {
         this.viewGuid = params['id'];
 
         // Tell the rest of the subscribed components to update their view guid
         this.viewsService.currentViewGuid.next(this.viewGuid);
 
         // Get the view object from the view GUID
-        this.viewService.getView(this.viewGuid).subscribe(view => {
+        this.viewService.getView(this.viewGuid).subscribe((view) => {
           this.view = view;
           this.viewName = view.name;
           this.canEdit = view.canManage;
 
           // Get the teams for the view and filter the members.
-          this.teamsService.getUserTeamsByView(this.userGuid, view.id).subscribe(teams => {
-            this.teams = teams.filter(t => t.isMember);
-            // There should only be 1 primary member, set that value for the current login
-            const myTeam = teams.filter(t => t.isPrimary)[0];
-            if (myTeam !== undefined) {
-              this.team = myTeam.name;
-              this.teamGuid = myTeam.id;
-              console.log('Primary Team id:  ' + myTeam.id);
-            } else {
-              this.systemMessageService.displayMessage('Error', 'Primary team membership was not found.  Please contact administrator.');
-              console.log('Team membership was not found!!!');
-            }
-          });
+          this.teamsService
+            .getUserTeamsByView(this.userGuid, view.id)
+            .subscribe((teams) => {
+              this.teams = teams.filter((t) => t.isMember);
+              // There should only be 1 primary member, set that value for the current login
+              const myTeam = teams.filter((t) => t.isPrimary)[0];
+              if (myTeam !== undefined) {
+                this.team = myTeam.name;
+                this.teamGuid = myTeam.id;
+                console.log('Primary Team id:  ' + myTeam.id);
+              } else {
+                this.systemMessageService.displayMessage(
+                  'Error',
+                  'Primary team membership was not found.  Please contact administrator.'
+                );
+                console.log('Team membership was not found!!!');
+              }
+            });
         });
       });
     });
@@ -129,9 +129,11 @@ export class PlayerComponent implements OnInit {
    */
   setPrimaryTeam(newTeamGuid) {
     if (newTeamGuid !== this.teamGuid) {
-      this.viewsService.setPrimaryTeamId(this.userGuid, newTeamGuid).subscribe(team =>{
-        window.location.reload();
-      });
+      this.viewsService
+        .setPrimaryTeamId(this.userGuid, newTeamGuid)
+        .subscribe((team) => {
+          window.location.reload();
+        });
     }
   }
 
@@ -140,7 +142,7 @@ export class PlayerComponent implements OnInit {
    */
   editView() {
     const dialogRef = this.dialog.open(AdminViewEditComponent);
-    dialogRef.afterOpen().subscribe(r => {
+    dialogRef.afterOpened().subscribe((r) => {
       dialogRef.componentInstance.resetStepper();
       dialogRef.componentInstance.updateApplicationTemplates();
       dialogRef.componentInstance.updateView();

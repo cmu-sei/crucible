@@ -18,8 +18,10 @@ using STT = System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
 using Steamfitter.Api.Data;
 using Steamfitter.Api.Data.Models;
+using Steamfitter.Api.Hubs;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Infrastructure.Authorization;
 using Steamfitter.Api.Infrastructure.Exceptions;
@@ -45,14 +47,22 @@ namespace Steamfitter.Api.Services
         private readonly ITaskService _taskService;
         private readonly ClaimsPrincipal _user;
         private readonly IMapper _mapper;
+        private readonly IHubContext<EngineHub> _engineHub;
 
-        public ScenarioTemplateService(SteamfitterContext context, IAuthorizationService authorizationService, ITaskService taskService, IPrincipal user, IMapper mapper)
+        public ScenarioTemplateService(
+            SteamfitterContext context,
+            IAuthorizationService authorizationService,
+            ITaskService taskService,
+            IPrincipal user,
+            IMapper mapper,
+            IHubContext<EngineHub> engineHub)
         {
             _context = context;
             _authorizationService = authorizationService;
             _taskService = taskService;
             _user = user as ClaimsPrincipal;
             _mapper = mapper;
+            _engineHub = engineHub;
         }
 
         public async STT.Task<IEnumerable<ViewModels.ScenarioTemplate>> GetAsync(CancellationToken ct)
@@ -83,7 +93,7 @@ namespace Steamfitter.Api.Services
                 throw new ForbiddenException();
 
             scenarioTemplate.DateCreated = DateTime.UtcNow;
-            var scenarioTemplateEntity = Mapper.Map<ScenarioTemplateEntity>(scenarioTemplate);
+            var scenarioTemplateEntity = _mapper.Map<ScenarioTemplateEntity>(scenarioTemplate);
 
             //TODO: add permissions
             // var scenarioTemplateAdminPermission = await _context.Permissions
@@ -95,8 +105,10 @@ namespace Steamfitter.Api.Services
 
             _context.ScenarioTemplates.Add(scenarioTemplateEntity);
             await _context.SaveChangesAsync(ct);
+            scenarioTemplate = await GetAsync(scenarioTemplateEntity.Id, ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioTemplateCreated, scenarioTemplate);
 
-            return await GetAsync(scenarioTemplateEntity.Id, ct);
+            return scenarioTemplate;
         }
 
         public async STT.Task<ViewModels.ScenarioTemplate> CopyAsync(Guid oldScenarioTemplateId, CancellationToken ct)
@@ -119,13 +131,16 @@ namespace Steamfitter.Api.Services
             await _context.SaveChangesAsync(ct);
 
             // copy all of the Tasks, including children
-            var oldTaskEntityIds = _context.Tasks.Where(dt => dt.ScenarioTemplateId == oldScenarioTemplateId && dt.TriggerTaskId == null).Select(s => s.Id);
+            var oldTaskEntityIds = _context.Tasks.Where(dt => dt.ScenarioTemplateId == oldScenarioTemplateId && dt.TriggerTaskId == null).Select(s => s.Id).ToList();
             foreach (var oldTaskEntityId in oldTaskEntityIds)
             {
                 await _taskService.CopyAsync(oldTaskEntityId, newScenarioTemplateEntity.Id, "scenarioTemplate", ct);
             }
 
-            return await GetAsync(newScenarioTemplateEntity.Id, ct);
+            var newScenarioTemplate = await GetAsync(newScenarioTemplateEntity.Id, ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioTemplateCreated, newScenarioTemplate);
+
+            return newScenarioTemplate;
         }
 
         public async STT.Task<ViewModels.ScenarioTemplate> UpdateAsync(Guid id, ViewModels.ScenarioTemplate scenarioTemplate, CancellationToken ct)
@@ -141,12 +156,15 @@ namespace Steamfitter.Api.Services
             scenarioTemplate.CreatedBy = scenarioTemplateToUpdate.CreatedBy;
             scenarioTemplate.DateCreated = scenarioTemplateToUpdate.DateCreated;
             scenarioTemplate.DateModified = DateTime.UtcNow;
-            Mapper.Map(scenarioTemplate, scenarioTemplateToUpdate);
+            _mapper.Map(scenarioTemplate, scenarioTemplateToUpdate);
 
             _context.ScenarioTemplates.Update(scenarioTemplateToUpdate);
             await _context.SaveChangesAsync(ct);
 
-            return _mapper.Map(scenarioTemplateToUpdate, scenarioTemplate);
+            scenarioTemplate = await GetAsync(scenarioTemplateToUpdate.Id, ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioTemplateUpdated, scenarioTemplate);
+
+            return scenarioTemplate;
         }
 
         public async STT.Task<bool> DeleteAsync(Guid id, CancellationToken ct)
@@ -161,6 +179,7 @@ namespace Steamfitter.Api.Services
 
             _context.ScenarioTemplates.Remove(scenarioTemplateToDelete);
             await _context.SaveChangesAsync(ct);
+            _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioTemplateDeleted, id);
 
             return true;
         }

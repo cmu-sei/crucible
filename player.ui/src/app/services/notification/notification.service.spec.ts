@@ -15,12 +15,14 @@ import { NotificationService } from './notification.service';
 describe('NotificationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NotificationService]
+      providers: [NotificationService],
     });
   });
 
-  it('should be created', inject([NotificationService], (service: NotificationService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [NotificationService],
+    (service: NotificationService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });
-

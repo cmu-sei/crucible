@@ -18,9 +18,8 @@ describe('AdminTemplateDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminTemplateDetailsComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminTemplateDetailsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('AdminTemplateDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

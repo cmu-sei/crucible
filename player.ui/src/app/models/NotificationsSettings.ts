@@ -9,6 +9,6 @@ DM20-0181
 */
 
 export interface NotificationsSettings {
-    url: string;
-    number_to_display: number;
+  url: string;
+  number_to_display: number;
 }

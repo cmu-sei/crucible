@@ -1,8 +1,0 @@
-bin/
-obj/
-.vs/
-.vscode/
-appsettings.Development.json
-appsettings.Staging.json
-appsettings.Production.json
-/S3.Vm.Console.sln

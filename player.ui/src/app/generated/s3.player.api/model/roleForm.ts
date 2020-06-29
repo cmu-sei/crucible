@@ -20,7 +20,6 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface RoleForm {
-    name?: string;
+  name?: string;
 }

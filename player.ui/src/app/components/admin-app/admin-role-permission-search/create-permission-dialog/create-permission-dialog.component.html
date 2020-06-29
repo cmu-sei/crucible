@@ -12,18 +12,34 @@ DM20-0181
   <h1 mat-dialog-title>{{ title }}</h1>
   <form (ngSubmit)="done()">
     <mat-form-field>
-      <input matInput placeholder="Name" tabIndex="1" name="key" [(ngModel)]="permission.key" />
-    </mat-form-field><br />
+      <input
+        matInput
+        placeholder="Name"
+        tabIndex="1"
+        name="key"
+        [(ngModel)]="permission.key"
+      /> </mat-form-field
+    ><br />
     <mat-form-field>
-      <input matInput placeholder="Value" tabIndex="2" name="value" [(ngModel)]="permission.value" />
-    </mat-form-field><br />
+      <input
+        matInput
+        placeholder="Value"
+        tabIndex="2"
+        name="value"
+        [(ngModel)]="permission.value"
+      /> </mat-form-field
+    ><br />
     <mat-form-field>
-      <input matInput placeholder="Description" tabIndex="3" name="description" [(ngModel)]="permission.description" />
-    </mat-form-field><br />
+      <input
+        matInput
+        placeholder="Description"
+        tabIndex="3"
+        name="description"
+        [(ngModel)]="permission.description"
+      /> </mat-form-field
+    ><br />
     <mat-dialog-actions fxlayout="row" fxLayoutAlign="space-evenly center">
       <button mat-stroked-button type="submit" tabindex="5">Done</button>
     </mat-dialog-actions>
   </form>
 </div>
-
-

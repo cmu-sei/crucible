@@ -29,7 +29,7 @@ DM20-0181
           <mat-icon svgIcon="ic_chevron_down_black_24px" *ngIf="treeControl.isExpanded(node)"></mat-icon>
           <mat-icon svgIcon="ic_chevron_right_black_24px" *ngIf="!treeControl.isExpanded(node)"></mat-icon>
         </button>
-        <mat-expansion-panel (click)="$event.stopPropagation();" (contextmenu)="onContextMenu($event, node)">
+        <mat-expansion-panel [expanded]="areDetailsExpanded(node)" (click)="toggleNodeDetails(node); $event.stopPropagation();" (contextmenu)="onContextMenu($event, node)">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <div fxLayout="row" fxLayoutAlign="space-around center">

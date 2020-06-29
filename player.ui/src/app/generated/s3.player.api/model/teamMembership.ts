@@ -20,15 +20,14 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface TeamMembership {
-    id?: string;
-    userId?: string;
-    userName?: string;
-    teamId?: string;
-    teamName?: string;
-    roleId?: string;
-    roleName?: string;
-    viewId?: string;
-    isPrimary?: boolean;
+  id?: string;
+  userId?: string;
+  userName?: string;
+  teamId?: string;
+  teamName?: string;
+  roleId?: string;
+  roleName?: string;
+  viewId?: string;
+  isPrimary?: boolean;
 }

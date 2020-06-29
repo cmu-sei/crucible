@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using SAVM = Steamfitter.Api.Data.Models;
 using Steamfitter.Api.Infrastructure.Exceptions;
 using Steamfitter.Api.Services;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Steamfitter.Api.Controllers
 {
@@ -49,7 +49,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("BondAgents")]
         [ProducesResponseType(typeof(IEnumerable<SAVM.BondAgent>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getBondAgents")]
+        [SwaggerOperation(OperationId = "getBondAgents")]
         public async STT.Task<IActionResult> Get(CancellationToken ct)
         {
             var list = await _BondAgentService.GetAsync(ct);
@@ -69,7 +69,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpGet("BondAgents/{id}")]
         [ProducesResponseType(typeof(SAVM.BondAgent), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getBondAgent")]
+        [SwaggerOperation(OperationId = "getBondAgent")]
         public async STT.Task<IActionResult> Get(Guid id, CancellationToken ct)
         {
             var BondAgent = await _BondAgentService.GetAsync(id, ct);
@@ -92,7 +92,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPost("BondAgents")]
         [ProducesResponseType(typeof(SAVM.BondAgent), (int)HttpStatusCode.Created)]
-        [SwaggerOperation(operationId: "createBondAgent")]
+        [SwaggerOperation(OperationId = "createBondAgent")]
         public async STT.Task<IActionResult> Create([FromBody] SAVM.BondAgent bondAgent, CancellationToken ct)
         {
             if(bondAgent.Id == Guid.Empty)
@@ -115,7 +115,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpPut("BondAgents/{id}")]
         [ProducesResponseType(typeof(SAVM.BondAgent), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "updateBondAgent")]
+        [SwaggerOperation(OperationId = "updateBondAgent")]
         public async STT.Task<IActionResult> Update([FromRoute] Guid id, [FromBody] SAVM.BondAgent BondAgent, CancellationToken ct)
         {
             var updatedBondAgent = await _BondAgentService.UpdateAsync(id, BondAgent, ct);
@@ -134,7 +134,7 @@ namespace Steamfitter.Api.Controllers
         /// <param name="ct"></param>
         [HttpDelete("BondAgents/{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [SwaggerOperation(operationId: "deleteBondAgent")]
+        [SwaggerOperation(OperationId = "deleteBondAgent")]
         public async STT.Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
             await _BondAgentService.DeleteAsync(id, ct);

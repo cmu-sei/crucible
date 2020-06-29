@@ -18,9 +18,8 @@ describe('ApplicationsSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TeamApplicationsSelectComponent ]
-    })
-    .compileComponents();
+      declarations: [TeamApplicationsSelectComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('ApplicationsSelectComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

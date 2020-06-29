@@ -18,7 +18,7 @@ using Steamfitter.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Steamfitter.Api.Controllers
 {
@@ -42,7 +42,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns>List of files this user can dispatch</returns>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<FileInfo>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getAllFiles")]
+        [SwaggerOperation(OperationId = "getAllFiles")]
         public async STT.Task<IActionResult> Get(CancellationToken ct)
         {
             return Ok(await _filesService.GetAsync(ct));
@@ -56,7 +56,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns>List of files this user can dispatch</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(FileInfo), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "getFileById")]
+        [SwaggerOperation(OperationId = "getFileById")]
         public async STT.Task<IActionResult> Get(Guid id, CancellationToken ct)
         {
             return Ok(await _filesService.GetAsync(id, ct));
@@ -70,7 +70,7 @@ namespace Steamfitter.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(IEnumerable<FileInfo>), (int)HttpStatusCode.OK)]
-        [SwaggerOperation(operationId: "saveFile")]
+        [SwaggerOperation(OperationId = "saveFile")]
         public async STT.Task<IActionResult> Post(IEnumerable<IFormFile> files, CancellationToken ct)
         {
             return Ok(await _filesService.SaveAsync(files, ct));
@@ -85,7 +85,7 @@ namespace Steamfitter.Api.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(IEnumerable<FileInfo>), (int)HttpStatusCode.NoContent)]
-        [SwaggerOperation(operationId: "deleteFile")]
+        [SwaggerOperation(OperationId = "deleteFile")]
         public async STT.Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
             await _filesService.DeleteAsync(id, ct);

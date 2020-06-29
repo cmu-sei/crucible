@@ -21,6 +21,7 @@ namespace stackstorm.api.client.Executions
         Task<Execution> GetMoid(Dictionary<string, string> parameters);
         Task<Execution> GetVmConsoleUrls(Dictionary<string, string> parameters);
         Task<Execution> GetVms(Dictionary<string, string> parameters);
+        Task<Execution> GetVmsWithUuid(Dictionary<string, string> parameters);
         Task<Execution> GuestDirectoryCreate(Dictionary<string, string> parameters);
         Task<Execution> GuestDirectoryDelete(Dictionary<string, string> parameters);
         Task<Execution> GuestFileCreate(Dictionary<string, string> parameters);
@@ -28,6 +29,7 @@ namespace stackstorm.api.client.Executions
         Task<Execution> GuestFileRead(Dictionary<string, string> parameters);
         Task<Execution> GuestFileUpload(Dictionary<string, string> parameters);
         Task<Execution> GuestProcessRun(Dictionary<string, string> parameters);
+        Task<Execution> GuestProcessRunFast(Dictionary<string, string> parameters);
         Task<Execution> GuestProcessStart(Dictionary<string, string> parameters);
         Task<Execution> GuestProcessWait(Dictionary<string, string> parameters);
         Task<Execution> GuestScriptRun(Dictionary<string, string> parameters);
@@ -86,6 +88,14 @@ namespace stackstorm.api.client.Executions
         }
 
         /// <summary>
+        /// Retrieves the virtual machines on a vCenter Server system with the UUID. It computes the union of Virtual Machine sets based on each parameter
+        /// </summary>
+        public async Task<Execution> GetVmsWithUuid(Dictionary<string, string> parameters)
+        {
+            return await AddExecution("vsphere.get_vms_with_uuid", parameters);
+        }
+
+        /// <summary>
         /// Creates a temporary directory inside the guest
         /// </summary>
         public async Task<Execution> GuestDirectoryCreate(Dictionary<string, string> parameters)
@@ -139,6 +149,14 @@ namespace stackstorm.api.client.Executions
         public async Task<Execution> GuestProcessRun(Dictionary<string, string> parameters)
         {
             return await AddExecution("vsphere.guest_process_run", parameters);
+        }
+
+        /// <summary>
+        /// Run a process inside the guest
+        /// </summary>
+        public async Task<Execution> GuestProcessRunFast(Dictionary<string, string> parameters)
+        {
+            return await AddExecution("vsphere.guest_process_run_fast", parameters);
         }
 
         /// <summary>

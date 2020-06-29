@@ -8,35 +8,30 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-
-import {throwError as observableThrowError,  Observable,  BehaviorSubject } from 'rxjs';
-import {catchError,  map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { SettingsService } from '../settings/settings.service';
-import { ViewData } from '../../models/view-data'
-import { MockViewData } from '../../models/mocks/mock-view-data';
-import { ApplicationsService } from '../applications/applications.service';
+import { ComnSettingsService } from '@crucible/common';
+import {
+  BehaviorSubject,
+  Observable,
+  throwError as observableThrowError,
+} from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { TeamData } from '../../models/team-data';
-
+import { ViewData } from '../../models/view-data';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-  })
+    'Content-Type': 'application/json',
+  }),
 };
 
 @Injectable()
 export class ViewsService {
-
   public readonly currentViewGuid: BehaviorSubject<string>;
   public viewList: BehaviorSubject<Array<ViewData>>;
 
-  constructor(
-    private http: HttpClient,
-    private settings: SettingsService,
-    private applicationsService: ApplicationsService) {
-
+  constructor(private http: HttpClient, private settings: ComnSettingsService) {
     this.currentViewGuid = new BehaviorSubject<string>('');
     this.viewList = new BehaviorSubject<Array<ViewData>>(new Array<ViewData>());
   }
@@ -46,42 +41,54 @@ export class ViewsService {
    * @param userGuid
    */
   public getViewList(userGuid: string): void {
-    this.http.get<Array<ViewData>>(`${this.settings.ApiUrl}/users/${userGuid}/views`)
-      .subscribe(views => {
+    this.http
+      .get<Array<ViewData>>(
+        `${this.settings.settings.ApiUrl}/users/${userGuid}/views`
+      )
+      .subscribe((views) => {
         const viewArray = new Array<ViewData>();
-        views.forEach(view => {
-          this.http.get<Array<TeamData>>(`${this.settings.ApiUrl}/users/${userGuid}/views/${view.id}/teams`).pipe(
-            map(teams => teams.filter(t => t.isMember))
-          ).subscribe(teams => {
-            teams.forEach(team => {
-              if (team.isPrimary) {
-                const ex = <ViewData>({
-                  id: view.id,
-                  name: view.name,
-                  description: view.description,
-                  status: view.status,
-                  teamId: team.id,
-                  teamName: team.name
-                });
-                viewArray.push(ex);
-              }
+        views.forEach((view) => {
+          this.http
+            .get<Array<TeamData>>(
+              `${this.settings.settings.ApiUrl}/users/${userGuid}/views/${view.id}/teams`
+            )
+            .pipe(map((teams) => teams.filter((t) => t.isMember)))
+            .subscribe((teams) => {
+              teams.forEach((team) => {
+                if (team.isPrimary) {
+                  const ex = <ViewData>{
+                    id: view.id,
+                    name: view.name,
+                    description: view.description,
+                    status: view.status,
+                    teamId: team.id,
+                    teamName: team.name,
+                  };
+                  viewArray.push(ex);
+                }
+              });
+              this.viewList.next(viewArray);
             });
-            this.viewList.next(viewArray);
-          });
         });
       }),
-      (err => {
+      (err) => {
         console.log(err);
         return observableThrowError(err || 'Server error');
-      });
+      };
   }
 
-
   public setPrimaryTeamId(userGuid: string, teamGuid: string): Observable<any> {
-    return this.http.post<any>(`${this.settings.ApiUrl}/users/${userGuid}/teams/${teamGuid}/primary`, null, httpOptions).pipe(
-      catchError(err => {
-        return observableThrowError(err || 'Server error');
-      }));
+    return this.http
+      .post<any>(
+        `${this.settings.settings.ApiUrl}/users/${userGuid}/teams/${teamGuid}/primary`,
+        null,
+        httpOptions
+      )
+      .pipe(
+        catchError((err) => {
+          return observableThrowError(err || 'Server error');
+        })
+      );
   }
 
   /**
@@ -89,10 +96,12 @@ export class ViewsService {
    * @param viewGuid
    */
   public getViewById(viewGuid: string): Observable<ViewData> {
-    return this.http.get<ViewData>(`${this.settings.ApiUrl}/views/${viewGuid}`).pipe(
-      catchError(err => {
-        return observableThrowError(err || 'Server error');
-      }));
+    return this.http
+      .get<ViewData>(`${this.settings.settings.ApiUrl}/views/${viewGuid}`)
+      .pipe(
+        catchError((err) => {
+          return observableThrowError(err || 'Server error');
+        })
+      );
   }
-
 }

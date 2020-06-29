@@ -20,10 +20,9 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface ApplicationInstanceForm {
-    id?: string;
-    teamId?: string;
-    applicationId?: string;
-    displayOrder?: number;
+  id?: string;
+  teamId?: string;
+  applicationId?: string;
+  displayOrder?: number;
 }

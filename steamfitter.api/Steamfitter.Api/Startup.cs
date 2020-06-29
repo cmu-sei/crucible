@@ -9,7 +9,6 @@ DM20-0181
 */
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,10 +22,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Steamfitter.Api.Infrastructure.Extensions;
 using Steamfitter.Api.Data;
+using Steamfitter.Api.Infrastructure.JsonConverters;
+using Steamfitter.Api.Infrastructure.Mapping;
 using Steamfitter.Api.Infrastructure.Options;
 using Steamfitter.Api.Services;
 using System;
-using Newtonsoft.Json.Converters;
 using AutoMapper;
 using Steamfitter.Api.Infrastructure;
 using Steamfitter.Api.Infrastructure.Authorization;
@@ -34,6 +34,7 @@ using Steamfitter.Api.Infrastructure.Filters;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Principal;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Hosting;
 
 namespace Steamfitter.Api
@@ -63,7 +64,6 @@ namespace Steamfitter.Api
                 case "Sqlite":
                 case "SqlServer":
                 case "PostgreSQL":
-                    services.AddDbProvider(Configuration);
                     services.AddDbContextPool<SteamfitterContext>(builder => builder.UseConfiguredDatabase(Configuration));
                     break;
             }
@@ -96,7 +96,7 @@ namespace Steamfitter.Api
             services.AddSignalR()
             .AddJsonProtocol(options =>
             {
-                options.PayloadSerializerSettings.Converters.Add(new StringEnumConverter());
+                options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
             services.AddMvc(options =>
@@ -113,7 +113,9 @@ namespace Steamfitter.Api
             })
             .AddJsonOptions(options =>
             {
-                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                options.JsonSerializerOptions.Converters.Add(new JsonNullableGuidConverter());
+                options.JsonSerializerOptions.Converters.Add(new JsonIntegerConverter());
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             })
             .SetCompatibilityVersion(CompatibilityVersion.Latest); 
 
@@ -166,18 +168,23 @@ namespace Steamfitter.Api
 
             ApplyPolicies(services);
 
-            services.AddAutoMapper();
+            services.AddAutoMapper(cfg => {
+                cfg.ForAllPropertyMaps(
+                    pm => pm.SourceType != null && Nullable.GetUnderlyingType(pm.SourceType) == pm.DestinationType,
+                    (pm, c) => c.MapFrom<object, object, object, object>(new IgnoreNullSourceValues(), pm.SourceMember.Name));
+            }, typeof(Startup));
+            
             services.Configure<VmTaskProcessingOptions>(Configuration.GetSection("VmTaskProcessing"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+            app.UseRouting();
             app.UseCors("default");
             
             //move any querystring jwt to Auth bearer header
@@ -209,14 +216,14 @@ namespace Steamfitter.Api
             });
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseSignalR(routes =>
+            app.UseEndpoints(endpoints =>
                 {
-                    routes.MapHub<Hubs.EngineHub>("/hubs/engine");
+                    endpoints.MapControllers();
+                    endpoints.MapHub<Hubs.EngineHub>("/hubs/engine");
                 }
             );
-
-            app.UseMvc();
 
             app.UseHttpContext();
         }

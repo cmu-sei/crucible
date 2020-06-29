@@ -18,9 +18,8 @@ describe('AdminUserSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminUserSearchComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminUserSearchComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,4 +32,3 @@ describe('AdminUserSearchComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

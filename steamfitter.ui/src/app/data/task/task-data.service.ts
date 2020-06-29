@@ -10,13 +10,13 @@ DM20-0181
 
 import {TaskStore} from './task.store';
 import {TaskQuery} from './task.query';
-import {ResultStore} from 'src/app/data/task-result/task-result.store';
-import {ResultQuery} from 'src/app/data/task-result/task-result.query';
+import {ResultStore} from 'src/app/data/result/result.store';
+import {ResultQuery} from 'src/app/data/result/result.query';
 import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {PageEvent} from '@angular/material';
 import {Router, ActivatedRoute} from '@angular/router';
-import {Task, TaskService, ResultService} from 'src/app/swagger-codegen/dispatcher.api';
+import {Task, TaskService, Result, ResultService} from 'src/app/swagger-codegen/dispatcher.api';
 import {map, take, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable, combineLatest} from 'rxjs';
 
@@ -146,7 +146,7 @@ export class TaskDataService {
     this.taskStore.setLoading(true);
     return this.taskService.getTask(id).pipe(
       tap((_task: Task) => {
-        this.taskStore.upsert(_task.id, {..._task});
+        this.updateStore({..._task});
       }),
       tap(() => { this.taskStore.setLoading(false); })
     );
@@ -170,7 +170,7 @@ export class TaskDataService {
         tap(() => { this.taskStore.setLoading(false); }),
         take(1)
       ).subscribe(dt => {
-        this.taskStore.upsert(dt.id, dt);
+        this.updateStore(dt);
       }
     );
   }
@@ -178,14 +178,14 @@ export class TaskDataService {
   execute(id: string) {
     this.taskService.executeTask(id).pipe(take(1)).subscribe(results => {
       results.forEach(dtr => {
-        this.resultStore.upsert(dtr.id, dtr);
+        this.updateResultStore(dtr);
       });
     });
   }
 
   delete(id: string) {
     this.taskService.deleteTask(id).pipe(take(1)).subscribe(dt => {
-      this.taskStore.remove(id);
+      this.deleteFromStore(id);
     });
   }
 
@@ -207,7 +207,7 @@ export class TaskDataService {
       if (this._clipboard.isCut) {
         this.taskService.moveTask(this._clipboard.id, location).pipe(take(1)).subscribe(dts => {
             dts.forEach(dt => {
-              this.taskStore.upsert(dt.id, dt);
+              this.updateStore(dt);
               if (!!dt.triggerTaskId) {
                 this.setActive(dt.id);
               }
@@ -227,6 +227,22 @@ export class TaskDataService {
       }
     }
     this.setClipboard(null);
+  }
+
+  updateStore(task: Task) {
+    this.taskStore.upsert(task.id, task);
+  }
+
+  deleteFromStore(id: string) {
+    this.taskStore.remove(id);
+  }
+
+  updateResultStore(result: Result) {
+    this.resultStore.upsert(result.id, result);
+  }
+
+  deleteFromResultStore(id: string) {
+    this.resultStore.remove(id);
   }
 
 }

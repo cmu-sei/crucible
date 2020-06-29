@@ -23,10 +23,12 @@ export class AuthService {
     if (this.settingsService.UseLocalAuthStorage) {
       (<any> this.settingsService.OIDCSettings.userStore) =  new WebStorageStateStore({store: window.localStorage});
     }
-        
     this.userManager = new UserManager(this.settingsService.OIDCSettings);
     this.userManager.events.addUserLoaded(user => { this.onTokenLoaded(user); });
-    this.userManager.events.addUserSignedOut(user => {this.logout();});
+    this.userManager.events.addUserSignedOut(() => {
+      this.logout();
+      return Promise.resolve;
+    });
 
     this.userManager.getUser().then(user => {
       if (user != null && user.profile != null) {
@@ -41,7 +43,7 @@ export class AuthService {
     });
   }
 
-  public startAuthentication(url: string): Promise<User> {
+  public startAuthentication(url: string): Promise<any> {
     return this.userManager.signinRedirect({ state: url });
   }
 

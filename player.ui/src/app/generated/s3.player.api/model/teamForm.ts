@@ -20,9 +20,8 @@ DM20-0181
  * Do not edit the class manually.
  */
 
-
 export interface TeamForm {
-    id?: string;
-    name?: string;
-    roleId?: string;
+  id?: string;
+  name?: string;
+  roleId?: string;
 }

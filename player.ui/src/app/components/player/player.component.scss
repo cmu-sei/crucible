@@ -1,0 +1,66 @@
+/*
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+*/
+
+.appcontent-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.appbarmenu-container {
+  min-width: 50px;
+  background-color: #f4f4f4;
+  color: black;
+}
+
+.cmu-logo {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.pull-right {
+  position: absolute;
+  right: 35px;
+}
+
+.bar-height {
+  height: 40px;
+  color: white;
+  border-width: 0.25pt;
+  border-color: darkgray;
+}
+
+.notification-height {
+  height: 40px;
+  border-width: 0.25pt;
+  border-color: darkgray;
+}
+
+.display {
+  position: absolute;
+  left: 80px;
+  top: 10px;
+}
+
+.expand {
+  margin-top: -2px;
+}
+
+.view-text {
+  font-size: 110%;
+  margin-left: 50px;
+  margin-right: 40px;
+}
+.team-text {
+  text-align: right;
+  margin-right: 10px;
+}
