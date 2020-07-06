@@ -7,33 +7,19 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
-
 <div
-  class="bar-height"
-  [ngStyle]="{ 'background-color': topBarColor }"
-  fxLayout="row"
-  fxLayoutAlign="start center"
+  class="center-text"
+  fxLayout="column"
+  fxLayoutAlign="center stretch"
+  fxFlexFill
 >
-  <div fxFlex class="title-text">
-    {{ titleText }}
+  <app-topbar
+    [title]="title"
+    [topbarColor]="topbarColor"
+    [topbarView]="TopbarView.PLAYER_HOME"
+    [topbarTextColor]="topbarTextColor"
+  ></app-topbar>
+  <div class="background" fxFlex="1 1 93vh">
+    <app-view-list></app-view-list>
   </div>
-
-  <div fxFlex fxLayoutAlign="end center">
-    <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
-      <b>{{ username }}</b>
-      <mat-icon
-        style="transform: translateY(-5px);"
-        svgIcon="ic_expand_more_white_24px"
-      ></mat-icon>
-    </button>
-    <mat-menu #menu="matMenu" [overlapTrigger]="false">
-      <button [hidden]="!isSuperUser" [routerLink]="['admin']" mat-menu-item>
-        Administration
-      </button>
-      <button mat-menu-item (click)="logout()">Logout</button>
-    </mat-menu>
-  </div>
-</div>
-<div class="app-view-container">
-  <app-view-list></app-view-list>
 </div>

@@ -55,6 +55,7 @@ import {
   ComnSettingsModule,
   ComnSettingsService,
 } from '@crucible/common';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PushNotificationsModule } from 'ng-push-ivy';
@@ -86,6 +87,7 @@ import { PlayerComponent } from './components/player/player.component';
 import { AddRemoveUsersDialogComponent } from './components/shared/add-remove-users-dialog/add-remove-users-dialog.component';
 import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
 import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
+import { TopbarComponent } from './components/shared/top-bar/topbar.component';
 import { BASE_PATH } from './generated/s3.player.api';
 import { ApiModule as SwaggerCodegenApiModule } from './generated/s3.player.api/api.module';
 import { ApplicationsService } from './services/applications/applications.service';
@@ -170,6 +172,7 @@ export class AngularMaterialModule {}
     TeamApplicationsSelectComponent,
     ViewApplicationsSelectComponent,
     AdminTemplateDetailsComponent,
+    TopbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -187,6 +190,7 @@ export class AngularMaterialModule {}
     SwaggerCodegenApiModule,
     ClipboardModule,
     environment.production ? [] : AkitaNgDevtools,
+    AkitaNgRouterStoreModule,
     ComnSettingsModule.forRoot(),
     ComnAuthModule.forRoot(),
   ],

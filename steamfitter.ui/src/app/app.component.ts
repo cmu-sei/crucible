@@ -60,6 +60,8 @@ export class AppComponent {
       ('input_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/input-24px.svg'));
     iconRegistry.addSvgIcon
       ('play_circle_outline_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/play_circle_outline-24px.svg'));
+    iconRegistry.addSvgIcon
+      ('open_in_new', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/open_in_new-black-18dp.svg'));
 
     }
 

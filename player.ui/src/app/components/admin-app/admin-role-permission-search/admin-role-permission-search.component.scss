@@ -9,8 +9,6 @@ DM20-0181
 */
 
 .list-container {
-  display: inline-block;
-  flex-direction: column;
   max-height: 750px;
   min-width: 800px;
   margin-top: 40px;
@@ -28,7 +26,7 @@ DM20-0181
 
 .button-end {
   margin-right: 10px;
-  margin-left: 100px;
+  margin-left: 60px;
 }
 
 .icon-pad {

@@ -86,7 +86,7 @@ import {
   MatFormFieldModule,
   MatTreeModule
 } from '@angular/material';
-import { ExecuteResultsComponent } from './components/execute-results/execute-results.component';
+import { ResultsComponent } from './components/results/results.component';
 import { DialogService } from './services/dialog/dialog.service';
 import { TaskHistoryComponent } from './components/task-history/task-history.component';
 import { TaskTreeComponent } from './components/tasks/task-tree/task-tree.component';
@@ -114,7 +114,7 @@ import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
     ScenarioEditDialogComponent,
     ScenarioListComponent,
     CommandsComponent,
-    ExecuteResultsComponent,
+    ResultsComponent,
     ConfirmDialogComponent,
     TaskHistoryComponent,
     TaskTreeComponent,

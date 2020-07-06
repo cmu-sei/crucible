@@ -10,17 +10,21 @@ DM20-0181
 
 import { Injectable, OnDestroy } from '@angular/core';
 import { ComnAuthQuery } from '@crucible/common';
+import { User as AuthUser } from 'oidc-client';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { RoleService, User, UserService } from '../../generated/s3.player.api';
-
+import {
+  RoleService,
+  User as PlayerUser,
+  UserService,
+} from '../../generated/s3.player.api';
 // Used to display Super User text
 export const SUPER_USER = 'Super User';
 
 @Injectable({ providedIn: 'root' })
 export class LoggedInUserService implements OnDestroy {
-  public loggedInUser: BehaviorSubject<User> = new BehaviorSubject(null);
-  public isSuperUser: BehaviorSubject<Boolean> = new BehaviorSubject(false);
+  public loggedInUser$: BehaviorSubject<AuthUser> = new BehaviorSubject(null);
+  public isSuperUser$: BehaviorSubject<Boolean> = new BehaviorSubject(false);
   unsubscribe$: Subject<null> = new Subject<null>();
 
   constructor(
@@ -30,11 +34,11 @@ export class LoggedInUserService implements OnDestroy {
   ) {
     this.authQuery.user$
       .pipe(
-        filter((user) => !!user),
+        filter((user: AuthUser) => user != null),
         takeUntil(this.unsubscribe$)
       )
       .subscribe((user) => {
-        this.setLoggedInUser(user.profile.sub);
+        this.setLoggedInUser(user);
       });
   }
 
@@ -42,12 +46,16 @@ export class LoggedInUserService implements OnDestroy {
    * Once a user is logged in, this obtains Player Api specific User data.
    * @param guid
    */
-  public setLoggedInUser(guid: string) {
-    console.log('user guid: ' + guid);
-    this.userService.getUser(guid).subscribe((user) => {
-      this.isSuperUser.next(user.isSystemAdmin);
-      this.loggedInUser.next(user);
-    });
+  public setLoggedInUser(authUser: AuthUser) {
+    this.userService
+      .getUser(authUser.profile.sub)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((playerUser: PlayerUser) => {
+        // combine player properties into the AuthUser profile.
+        authUser.profile = { ...authUser.profile, ...playerUser };
+        this.isSuperUser$.next(authUser.profile.isSystemAdmin);
+        this.loggedInUser$.next(authUser);
+      });
   }
 
   ngOnDestroy() {

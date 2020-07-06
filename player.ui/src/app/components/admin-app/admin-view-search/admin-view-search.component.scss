@@ -9,8 +9,6 @@ DM20-0181
 */
 
 .view-list-container {
-  display: inline-block;
-  flex-direction: column;
   max-height: 800px;
   min-width: 800px;
   margin-top: 40px;
@@ -28,4 +26,8 @@ DM20-0181
 
 .sp-icon {
   margin-left: 10px;
+}
+
+.hidden {
+  display: none !important;
 }

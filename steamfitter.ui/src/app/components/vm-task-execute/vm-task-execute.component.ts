@@ -12,6 +12,12 @@ import { Component, EventEmitter, Output, NgZone, ViewChild } from '@angular/cor
 import { ErrorStateMatcher, MatStepper } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { PlayerDataService } from 'src/app/services/data/player-data-service';
+import { TaskDataService } from 'src/app/data/task/task-data.service';
+import { Task, Vm, Result, TaskService } from 'src/app/swagger-codegen/dispatcher.api';
+import { NewTaskService } from '../../services/new-task/new-task.service';
+import { BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { ResultQuery } from 'src/app/data/result/result.query';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class UserErrorStateMatcher implements ErrorStateMatcher {
@@ -38,12 +44,61 @@ export class VmTaskExecuteComponent {
   selectedView = this.playerDataService.selectedView;
   vmList = this.playerDataService.vmList;
   pageEvent = this.playerDataService.vmPageEvent;
+  results = this.resultQuery.selectAll();
+  selectedVms: Array<Vm>;
+  task: Task;
+  isExecuting: boolean;
+  lastExecutionTime = new BehaviorSubject<Date>(new Date);
 
   constructor(
     public zone: NgZone,
-    private playerDataService: PlayerDataService
+    private playerDataService: PlayerDataService,
+    private newTaskService: NewTaskService,
+    private taskService: TaskService,
+    private resultQuery: ResultQuery,
+    private taskDataService: TaskDataService
   ) {
     this.playerDataService.getViewsFromApi();
+    this.isExecuting = false;
+
+    this.newTaskService.task.subscribe(task => {
+      this.task = task;
+      this.setTaskVms();
+    });
+
+    this.newTaskService.vmList.subscribe(vms => {
+      this.selectedVms = vms;
+      this.setTaskVms();
+    });
+
+    taskDataService.resetResultStore();
+  }
+
+  setTaskVms() {
+    if (this.task && this.selectedVms) {
+      this.task.vmList.length = 0;
+      this.selectedVms.forEach(vm => {
+        this.task.vmList.push(vm.id);
+      });
+    }
+  }
+
+  executeTask() {
+    this.lastExecutionTime.next(new Date());
+    this.isExecuting = true;
+    this.taskService.createAndExecuteTask(this.task).pipe(take(1)).subscribe(results => {
+      this.taskDataService.updateResultStoreMany(results);
+      this.isExecuting = false;
+    },
+    error => {
+      this.isExecuting = false;
+      console.log('The Steamfitter API generated an error.  ' + error.message);
+    });
+  }
+
+  openVmConsole(id: string) {
+    const url = this.selectedVms.find(v => v.id === id).url;
+    window.open(url, '_blank');
   }
 
   /**

@@ -9,11 +9,11 @@ DM20-0181
 */
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ViewData } from '../../../models/view-data';
-import { ViewsService } from '../../../services/views/views.service';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ViewData } from '../../../models/view-data';
 import { LoggedInUserService } from '../../../services/logged-in-user/logged-in-user.service';
+import { ViewsService } from '../../../services/views/views.service';
 
 @Component({
   selector: 'app-view-list',
@@ -55,11 +55,11 @@ export class ViewListComponent implements OnInit {
     });
 
     // Tell the service to update once a user is officially logged in
-    this.loggedInUserService.loggedInUser.subscribe((loggedInUser) => {
+    this.loggedInUserService.loggedInUser$.subscribe((loggedInUser) => {
       if (loggedInUser == null) {
         return;
       }
-      this.viewsService.getViewList(loggedInUser.id);
+      this.viewsService.getViewList(loggedInUser.profile.id);
     });
   }
 

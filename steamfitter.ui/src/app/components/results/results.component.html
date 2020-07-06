@@ -1,0 +1,88 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+
+<div class="content">
+  <mat-card style="width: 90%;">
+    <mat-tab-group dynamicHeight animationDuration="0ms" (selectedTabChange)="onTabChanged($event.index)" (click)="$event.stopPropagation();">
+      <mat-tab label="{{resultCount('all')}} Total">
+      </mat-tab>
+      <mat-tab label="{{resultCount('succeeded')}} Succeeded">
+      </mat-tab>
+      <mat-tab label="{{resultCount('failed')}} Failed">
+      </mat-tab>
+      <mat-tab label="{{resultCount('pending')}} Pending">
+      </mat-tab>
+      <mat-tab label="{{resultCount('queued')}} Queued">
+      </mat-tab>
+    </mat-tab-group>
+    <div class="flex-container" *ngFor="let result of filteredResults">
+      <div>
+        <div id="wrapper">
+          <div id="context">
+            <button mat-button (click)="toggleResultDisplay(result.id); $event.stopPropagation();" title="{{ result.status }}: Open/Close Details">
+              <img src="assets/img/{{ result.status }}.png" class="icon16" />
+              {{result.vmName}}
+            </button>
+            <button mat-button (click)="openVmConsole.emit(result.vmId); $event.stopPropagation();" title="Open {{result.vmName}}" style="min-width: 30px; width: 30px;">
+              <mat-icon svgIcon="open_in_new" style="margin-left: -15px;"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="showResults[result.id]">
+        <p>
+          id: {{result.id}}<br>
+          vmId: {{result.vmId}}<br>
+          vmName: {{result.vmName}}<br>
+          apiUrl: {{result.apiUrl}}<br>
+          inputString: {{result.inputString}}<br>
+          expirationSeconds: {{result.expirationSeconds}}<br>
+          iterations: {{result.iterations}}<br>
+          intervalSeconds: {{result.intervalSeconds}}<br>
+          status: {{result.status}}<br>
+          expectedOutput: {{result.expectedOutput}}<br>
+          actualOutput: {{result.actualOutput}}<br>
+          dateCreated: {{result.dateCreated | date: 'yyyy/MM/dd HH:mm:ss'}}<br>
+          statusDate: {{result.statusDate | date: 'yyyy/MM/dd HH:mm:ss'}}<br>
+        </p>
+        <div class="flex-container" *ngFor="let oldResult of oldResults(result)">
+          <div>
+            <div id="wrapper">
+              <div id="context">
+                <button mat-button (click)="toggleResultDisplay(oldResult.id); $event.stopPropagation();" title="{{ oldResult.status }}: Open/Close Details">
+                  <img src="assets/img/{{ oldResult.status }}.png" class="icon16" />
+                  {{oldResult.dateCreated | date: 'yyyy/MM/dd HH:mm:ss'}}
+                </button>
+                <div *ngIf="showResults[oldResult.id]">
+                  <p>
+                    id: {{oldResult.id}}<br>
+                    vmId: {{oldResult.vmId}}<br>
+                    vmName: {{oldResult.vmName}}<br>
+                    apiUrl: {{oldResult.apiUrl}}<br>
+                    inputString: {{oldResult.inputString}}<br>
+                    expirationSeconds: {{oldResult.expirationSeconds}}<br>
+                    iterations: {{oldResult.iterations}}<br>
+                    intervalSeconds: {{oldResult.intervalSeconds}}<br>
+                    status: {{oldResult.status}}<br>
+                    expectedOutput: {{oldResult.expectedOutput}}<br>
+                    actualOutput: {{oldResult.actualOutput}}<br>
+                    dateCreated: {{oldResult.dateCreated | date: 'yyyy/MM/dd HH:mm:ss'}}<br>
+                    statusDate: {{oldResult.statusDate | date: 'yyyy/MM/dd HH:mm:ss'}}<br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+

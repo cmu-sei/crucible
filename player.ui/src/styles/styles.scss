@@ -9,22 +9,30 @@ DM20-0181
 */
 
 /* VENDER IMPORTS */
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 @include mat-core();
+
 /* END VENDER IMPORTS */
 
 /* LOCAL IMPORTS */
-@import "theme";
+@import 'theme';
 /* END LOCAL IMPORTS */
 
-@include angular-material-theme($light-theme);
-@include globals($light-theme);
+.light-theme {
+  @include angular-material-theme($light-theme);
+  @include globals($light-theme);
+}
+
+.dark-theme {
+  @include angular-material-theme($dark-theme);
+  @include globals($dark-theme);
+}
 
 /* The following overrides transparent select options after upgrading to Angular 7 */
 .mat-select-panel {
   background: #fff;
 }
-.mat-select-panel:not([class*="mat-elevation-z"]) {
+.mat-select-panel:not([class*='mat-elevation-z']) {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }

@@ -55,7 +55,7 @@ namespace Caster.Api.Domain.Services
             _logger = logger;
         }
 
-        private TerraformResult Run(string workingDirectory, IEnumerable<string> argumentList, DataReceivedEventHandler outputHandler)
+        private TerraformResult Run(string workingDirectory, IEnumerable<string> argumentList, DataReceivedEventHandler outputHandler, bool redirectStandardError = true)
         {
             int exitCode;
             _outputBuilder.Clear();
@@ -66,7 +66,7 @@ namespace Caster.Api.Domain.Services
             startInfo.WorkingDirectory = workingDirectory;
             startInfo.CreateNoWindow = true;
             startInfo.RedirectStandardOutput = true;
-            startInfo.RedirectStandardError = true;
+            startInfo.RedirectStandardError = redirectStandardError;
 
             using (Process process = new Process())
             {
@@ -74,7 +74,8 @@ namespace Caster.Api.Domain.Services
 
                 if (argumentList != null)
                 {
-                    foreach(string arg in argumentList){
+                    foreach (string arg in argumentList)
+                    {
                         process.StartInfo.ArgumentList.Add(arg);
                     }
                 }
@@ -82,12 +83,20 @@ namespace Caster.Api.Domain.Services
                 process.OutputDataReceived += outputHandler;
                 process.OutputDataReceived += OutputHandler;
 
-                process.ErrorDataReceived += outputHandler;
-                process.ErrorDataReceived += OutputHandler;
+                if (redirectStandardError)
+                {
+                    process.ErrorDataReceived += outputHandler;
+                    process.ErrorDataReceived += OutputHandler;
+                }
 
                 process.Start();
                 process.BeginOutputReadLine();
-                process.BeginErrorReadLine();
+
+                if (redirectStandardError)
+                {
+                    process.BeginErrorReadLine();
+                }
+
                 process.WaitForExit();
 
                 exitCode = process.ExitCode;
@@ -165,7 +174,7 @@ namespace Caster.Api.Domain.Services
                 args.Add("-destroy");
             }
 
-            foreach(string target in targets)
+            foreach (string target in targets)
             {
                 args.Add($"--target={target}");
             }
@@ -189,7 +198,7 @@ namespace Caster.Api.Domain.Services
             args.Add("-json");
             args.Add("plan");
 
-            return this.Run(workingDirectory, args, null);
+            return this.Run(workingDirectory, args, null, redirectStandardError: false);
         }
 
         public TerraformResult Taint(string workingDirectory, string address, string statePath)
@@ -222,7 +231,8 @@ namespace Caster.Api.Domain.Services
 
         private void AddStatePathArg(string statePath, ref List<string> args)
         {
-            if (!string.IsNullOrEmpty(statePath)) {
+            if (!string.IsNullOrEmpty(statePath))
+            {
                 args.Add($"-state={statePath}");
             }
         }

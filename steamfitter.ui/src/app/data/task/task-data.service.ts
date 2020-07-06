@@ -138,18 +138,23 @@ export class TaskDataService {
       }
     );
     this.resultService.getScenarioResults(scenarioId).pipe(take(1)).subscribe(results => {
+      results.forEach(r => this.fixDates(r));
       this.resultStore.set(results);
     });
   }
 
-  loadById(id: string): Observable<Task> {
-    this.taskStore.setLoading(true);
-    return this.taskService.getTask(id).pipe(
-      tap((_task: Task) => {
-        this.updateStore({..._task});
-      }),
-      tap(() => { this.taskStore.setLoading(false); })
-    );
+  loadById(id: string) {
+    this.taskService.getTask(id).pipe(take(1)).subscribe(task => {
+      this.updateStore({...task});
+      this.resultService.getTaskResults(id).pipe(take(1)).subscribe(results => {
+        results.forEach(r => this.fixDates(r));
+        this.resultStore.set(results);
+      }, error => {
+        this.resultStore.set([]);
+      });
+    }, error => {
+      this.resultStore.set([]);
+    });
   }
 
   add(task: Task) {
@@ -157,9 +162,9 @@ export class TaskDataService {
     this.taskService.createTask(task).pipe(
         tap(() => { this.taskStore.setLoading(false); }),
         take(1)
-      ).subscribe(dt => {
-        this.taskStore.add(dt);
-        this.setActive(dt.id);
+      ).subscribe(t => {
+        this.taskStore.add(t);
+        this.setActive(t.id);
       }
     );
   }
@@ -177,9 +182,7 @@ export class TaskDataService {
 
   execute(id: string) {
     this.taskService.executeTask(id).pipe(take(1)).subscribe(results => {
-      results.forEach(dtr => {
-        this.updateResultStore(dtr);
-      });
+      this.updateResultStoreMany(results);
     });
   }
 
@@ -238,11 +241,37 @@ export class TaskDataService {
   }
 
   updateResultStore(result: Result) {
+    this.setAsDates(result);
     this.resultStore.upsert(result.id, result);
+  }
+
+  updateResultStoreMany(results: Result[]) {
+    results.forEach(result => this.setAsDates(result));
+    this.resultStore.upsertMany(results);
   }
 
   deleteFromResultStore(id: string) {
     this.resultStore.remove(id);
+  }
+
+  resetResultStore() {
+    this.resultStore.set([]);
+  }
+
+  fixDates(result: Result) {
+    // set as date object and handle c# not adding 'Z' to UTC dates.
+    result.dateCreated = new Date(result.dateCreated + 'Z');
+    result.dateModified = new Date(result.dateModified + 'Z');
+    result.statusDate = new Date(result.statusDate + 'Z');
+    result.sentDate = new Date(result.sentDate + 'Z');
+  }
+
+  setAsDates(result: Result) {
+    // set to a date object.
+    result.dateCreated = new Date(result.dateCreated);
+    result.dateModified = new Date(result.dateModified);
+    result.statusDate = new Date(result.statusDate);
+    result.sentDate = new Date(result.sentDate);
   }
 
 }

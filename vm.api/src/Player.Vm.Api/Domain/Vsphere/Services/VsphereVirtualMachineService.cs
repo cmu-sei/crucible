@@ -532,6 +532,7 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
                                 httpClient.Timeout = TimeSpan.FromMinutes(timeout);
                                 fileStream.CopyTo(ms);
                                 var fileContent = new ByteArrayContent(ms.ToArray());
+                                _logger.LogDebug("UploadFileToVm Upload URL:  " + fileTransferUrl);
                                 var uploadResponse = await httpClient.PutAsync(fileTransferUrl, fileContent);
                             }
                         }

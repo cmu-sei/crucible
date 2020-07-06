@@ -46,6 +46,6 @@ namespace Player.Vm.Api.Features.Vms
         public Guid TeamId { get; set; }
 
         public PowerState PowerState { get; set; }
-
+        public string[] IpAddresses { get; set; }
     }
 }

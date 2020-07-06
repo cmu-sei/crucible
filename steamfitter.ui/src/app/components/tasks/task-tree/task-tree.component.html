@@ -49,9 +49,11 @@ DM20-0181
           <div class="taskText"><b>Expiration (seconds):</b> {{node.task.experationSeconds}}</div>
           <div class="taskText" *ngIf="!!node.results && node.results.length > 0">
             <b>Results:</b>
-            <div class="taskText" style="margin-left: 80px;" *ngFor="let result of sortedResults(node.results, 'vmName', false)">
-                <img src="assets/img/{{ result.status }}.png" class="icon16" title="{{ result.status }}" /> {{result.statusDate | date: 'yyyy-MM-dd hh:mm.ss'}}&nbsp;&nbsp;<b>{{result.vmName}}</b>({{result.vmId}}):&nbsp; {{result.actualOutput}}
-            </div>
+            <app-results
+              [results]=resultList
+              [taskId]="node.task.id"
+              (openVmConsole)="openVmConsole($event)">
+          </app-results>
           </div>
         </mat-expansion-panel>
       </mat-tree-node>
