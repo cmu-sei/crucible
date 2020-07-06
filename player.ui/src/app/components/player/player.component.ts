@@ -8,17 +8,30 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit } from '@angular/core';
+// TODO: Set sidnav status in query string.
+// TODO: Set notification status in query string.
+// TODO: Set active application in query string.
+
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
-import { ComnAuthService, ComnSettingsService } from '@crucible/common';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
+import { ComnSettingsService } from '@crucible/common';
+import { RouterQuery } from '@datorama/akita-ng-router-store';
+import { combineLatest, EMPTY, Observable, of, Subject } from 'rxjs';
+import {
+  catchError,
+  map,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
+import { View } from '../../generated/s3.player.api';
+import { TeamService } from '../../generated/s3.player.api/api/team.service';
 import { ViewService } from '../../generated/s3.player.api/api/view.service';
-import { View } from '../../generated/s3.player.api/model/models';
-import { TeamData } from '../../models/team-data';
 import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
-import { SystemMessageService } from '../../services/system-message/system-message.service';
-import { TeamsService } from '../../services/teams/teams.service';
 import { ViewsService } from '../../services/views/views.service';
 import { AdminViewEditComponent } from '../admin-app/admin-view-search/admin-view-edit/admin-view-edit.component';
 
@@ -27,130 +40,155 @@ import { AdminViewEditComponent } from '../admin-app/admin-view-search/admin-vie
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss'],
 })
-export class PlayerComponent implements OnInit {
-  public viewGuid: string;
-  public teamGuid: string;
-  public userGuid: string;
-  public userToken: string;
+export class PlayerComponent implements OnInit, OnDestroy {
+  @ViewChild('sidenav') sidenav: MatSidenav;
 
-  public opened: boolean;
-  public username: string;
+  public loaded = false;
+  public data$: Observable<any>;
+  public opened$: Observable<boolean> = this.routerQuery.selectQueryParams(
+    'opened'
+  );
+
   public view: View;
-  public team: string;
-  public teams: Array<TeamData>;
-
-  public canEdit = false;
-  public viewName = '';
-  public topBarColor = '#b00';
+  public opened: boolean;
+  public topbarColor = '#b00';
+  public topbarTextColor = '#ffffff';
+  queryParams: any = {};
+  unsubscribe$: Subject<null> = new Subject<null>();
 
   constructor(
-    private route: ActivatedRoute,
+    private router: Router,
+    private routerQuery: RouterQuery,
     private viewsService: ViewsService,
     private viewService: ViewService,
-    private authService: ComnAuthService,
     private loggedInUserService: LoggedInUserService,
-    private teamsService: TeamsService,
-    private systemMessageService: SystemMessageService,
+    private teamService: TeamService,
     private settingsService: ComnSettingsService,
-    private titleService: Title,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.opened = true;
-    this.teams = new Array<TeamData>();
+    this.data$ = this.checkParam(['teamId', 'opened']).pipe(
+      tap((paramsExist) =>
+        paramsExist ? (this.loaded = true) : (this.loaded = false)
+      ),
+      switchMap(() => this.loadData()),
+      catchError((err) => {
+        console.log(err);
+        return EMPTY;
+      })
+    );
 
-    // Set the topbar color from config file
-    this.topBarColor = this.settingsService.settings.AppTopBarHexColor;
-
-    // Set the page title from configuration file
-    this.titleService.setTitle(this.settingsService.settings.AppTitle);
-
-    this.loggedInUserService.loggedInUser.subscribe((loggedInUser) => {
-      if (loggedInUser == null) {
-        return;
-      }
-
-      // Get login information
-      this.username = loggedInUser.name;
-      this.userGuid = loggedInUser.id;
-      this.userToken = this.authService.getAuthorizationToken();
-
-      // Get the view GUID from the URL that the user is entering the web page on
-      this.route.params.subscribe((params) => {
-        this.viewGuid = params['id'];
-
-        // Tell the rest of the subscribed components to update their view guid
-        this.viewsService.currentViewGuid.next(this.viewGuid);
-
-        // Get the view object from the view GUID
-        this.viewService.getView(this.viewGuid).subscribe((view) => {
-          this.view = view;
-          this.viewName = view.name;
-          this.canEdit = view.canManage;
-
-          // Get the teams for the view and filter the members.
-          this.teamsService
-            .getUserTeamsByView(this.userGuid, view.id)
-            .subscribe((teams) => {
-              this.teams = teams.filter((t) => t.isMember);
-              // There should only be 1 primary member, set that value for the current login
-              const myTeam = teams.filter((t) => t.isPrimary)[0];
-              if (myTeam !== undefined) {
-                this.team = myTeam.name;
-                this.teamGuid = myTeam.id;
-                console.log('Primary Team id:  ' + myTeam.id);
-              } else {
-                this.systemMessageService.displayMessage(
-                  'Error',
-                  'Primary team membership was not found.  Please contact administrator.'
-                );
-                console.log('Team membership was not found!!!');
-              }
-            });
-        });
-      });
-    });
-
-    this.team = '';
+    // Set the topbar color from config file.
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor;
   }
 
-  /**
-   * Logout of the Identity server
-   */
-  logout(): void {
-    this.authService.logout();
+  checkParam(params: string[]): Observable<boolean> {
+    return this.routerQuery.selectQueryParams([...params]).pipe(
+      switchMap((params) => {
+        return params.every((p) => p != null) ? of(true) : of(false);
+      })
+    );
+  }
+
+  loadData() {
+    return this.routerQuery.select().pipe(
+      // translate the state
+      map((state) => state.state),
+
+      // switchMap in case router state changes.
+      switchMap((state) =>
+        combineLatest([
+          this.loggedInUserService.loggedInUser$,
+          this.viewService.getView(state.params['id']),
+          this.teamService.getMyViewTeams(state.params['id']),
+        ]).pipe(
+          // this pipe allows us to return all previous observable values.
+          map(([user, view, teams]) => ({
+            state,
+            user,
+            view,
+            teams: teams.filter((t) => t.isMember),
+            team: teams.find((t) => t.isPrimary),
+            title: this.settingsService.settings.AppTitle,
+          }))
+        )
+      ),
+      tap(({ state, view, user, teams }) => {
+        if (!this.loaded) {
+          const params = {
+            teamId: teams.find((t) => t.isPrimary).id,
+            opened:
+              state.queryParams['opened'] != null
+                ? state.queryParams['opened']
+                : true,
+          };
+          this.addParam(params);
+          this.loaded = true;
+        }
+      }),
+      takeUntil(this.unsubscribe$)
+    );
+  }
+
+  addParam(params) {
+    this.queryParams = { ...this.queryParams, ...params };
+    this.router.navigate([], {
+      queryParams: { ...this.queryParams },
+      queryParamsHandling: 'merge',
+    });
   }
 
   /**
    * Set the primary team instance by the team Guid.  This is only valid when a user belongs to multiple
    * teams.  If a new primary team is set int he database, the page must be reloaded
-   * @param newTeamGuid
+   * @param teamId
    */
-  setPrimaryTeam(newTeamGuid) {
-    if (newTeamGuid !== this.teamGuid) {
-      this.viewsService
-        .setPrimaryTeamId(this.userGuid, newTeamGuid)
-        .subscribe((team) => {
-          window.location.reload();
-        });
-    }
+  setPrimaryTeam(newTeamId) {
+    combineLatest([of(newTeamId), this.data$])
+      .pipe(
+        switchMap(([newTeamId, data]) => {
+          if (newTeamId !== data.team.id) {
+            this.addParam({ teamId: newTeamId });
+            return this.viewsService.setPrimaryTeamId(
+              data.user.profile.id,
+              newTeamId
+            );
+          } else {
+            return of(EMPTY);
+          }
+        }),
+        take(1)
+      )
+      .subscribe();
   }
 
   /**
    * Called to open the edit view dialog window
    */
-  editView() {
+  editViewFn(event) {
     const dialogRef = this.dialog.open(AdminViewEditComponent);
-    dialogRef.afterOpened().subscribe((r) => {
-      dialogRef.componentInstance.resetStepper();
-      dialogRef.componentInstance.updateApplicationTemplates();
-      dialogRef.componentInstance.updateView();
-      dialogRef.componentInstance.view = this.view;
-    });
+    dialogRef
+      .afterOpened()
+      .pipe(withLatestFrom(this.data$), takeUntil(this.unsubscribe$))
+      .subscribe(([r, data]) => {
+        dialogRef.componentInstance.resetStepper();
+        dialogRef.componentInstance.updateApplicationTemplates();
+        dialogRef.componentInstance.updateView();
+        dialogRef.componentInstance.view = data.view;
+      });
 
     dialogRef.componentInstance.editComplete.subscribe(() => {
       dialogRef.close();
     });
+  }
+
+  sidenavToggleFn() {
+    this.addParam({ opened: !this.sidenav.opened });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next(null);
+    this.unsubscribe$.complete();
   }
 }

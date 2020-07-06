@@ -7,7 +7,7 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 
 $mat-cmu-tartan: (
   50: #ff3838,
@@ -15,7 +15,7 @@ $mat-cmu-tartan: (
   200: #e00,
   300: #d00,
   400: #c00,
-  500: #028bbf,
+  500: #b00,
   600: #a00,
   700: #900,
   800: #800,
@@ -84,8 +84,7 @@ $cmu-dark-theme-background: (
   status-bar: black,
   app-bar: map_get($mat-grey, 900),
   background: #373739,
-  // #303030,
-    hover: map_get($mat-gray, 800),
+  hover: map_get($mat-gray, 800),
   card: map_get($mat-grey, 900),
   dialog: map_get($mat-grey, 900),
   button: map_get($mat-cmu-tartan, default),
@@ -110,7 +109,7 @@ $cmu-dark-theme-foreground: (
   disabled-button: rgba(white, 0.3),
   disabled-text: $light-disabled-text,
   hint-text: $light-disabled-text,
-  secondary-text: #efefef,
+  secondary-text: $light-secondary-text,
   icon: #5acde6,
   icons: #5acde6,
   text: #efefef,
@@ -155,7 +154,7 @@ $custom-typography: mat-typography-config(
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
   $foreground: map-get($theme, foreground);
-  $background: map-get($theme, background);
+  $background: map-get($theme, 'background');
 
   .selected {
     background: mat-color($primary);
@@ -170,29 +169,30 @@ $custom-typography: mat-typography-config(
   }
 
   .background {
-    background-color: map-get($background, background);
-  }
-
-  .isDestroy {
-    @if map-get($theme, is-dark) {
-      background-color: mat-color($warn, 200);
-      &:hover,
-      &:focus {
-        background-color: mat-color($warn, 100) !important;
-      }
-    } @else {
-      background-color: mat-color($warn, 100);
-      &:hover,
-      &:focus {
-        background-color: mat-color($warn, 50) !important;
-      }
-    }
+    background-color: map-get($background, 'background');
   }
 
   .highlight {
     &:hover,
     &:focus {
       background: map-get($background, hover);
+    }
+  }
+
+  .text {
+    color: map-get($foreground, 'text');
+  }
+
+  .mat-tooltip {
+    background-color: map-get($background, hover);
+    color: map-get($foreground, text);
+  }
+
+  a {
+    color: map-get($foreground, text);
+    &:hover,
+    &:focus {
+      color: map-get($foreground, disabled);
     }
   }
 }

@@ -9,8 +9,6 @@ DM20-0181
 */
 
 .user-list-container {
-  display: inline-block;
-  flex-direction: column;
   min-width: 600px;
   margin-top: 40px;
   width: 600px;
@@ -32,4 +30,8 @@ DM20-0181
 .sp-icon {
   margin-left: 10px;
   margin-right: 20px;
+}
+
+.hidden {
+  display: none !important;
 }

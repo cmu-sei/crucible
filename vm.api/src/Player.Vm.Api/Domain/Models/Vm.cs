@@ -8,8 +8,6 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,6 +32,8 @@ namespace Player.Vm.Api.Domain.Models
         public string AllowedNetworks { get; set; }
 
         public PowerState PowerState { get; set; }
+
+        public string[] IpAddresses { get; set; }
     }
 
     public enum PowerState

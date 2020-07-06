@@ -49,6 +49,15 @@ DM20-0181
             svgIcon="ic_cancel_circle"
           ></mat-icon>
         </button>
+        <mat-checkbox class="search-checkbox" [(ngModel)]="showIps"
+          >Show IPs</mat-checkbox
+        >
+        <mat-checkbox
+          *ngIf="showIps"
+          class="search-checkbox"
+          [(ngModel)]="ipv4Only"
+          >IPv4 Only</mat-checkbox
+        >
         <div style="margin-top: 10px; margin-left: 200px;">
           <button
             mat-stroked-button
@@ -82,47 +91,64 @@ DM20-0181
       "
     >
       <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxFlex="none">
-          <button mat-icon-button (click)="openHere(vm.name, vm.url)">
-            <mat-progress-spinner
-              *ngIf="vm.state === undefined"
-              color="primary"
-              mode="indeterminate"
-              diameter="25"
-            ></mat-progress-spinner>
-            <mat-icon
-              *ngIf="vm.powerState !== undefined && vm.powerState === 'Unknown'"
-              style="color: red;"
-              svgIcon="monitor"
-              title="Power state unknown"
-            ></mat-icon>
-            <mat-icon
-              *ngIf="vm.powerState !== undefined && vm.powerState === 'On'"
-              style="color: black;"
-              svgIcon="monitor"
-            ></mat-icon>
-            <mat-icon
-              *ngIf="vm.powerState !== undefined && vm.powerState === 'Off'"
-              style="color: red;"
-              svgIcon="power_icon"
-              title="Powered Off"
-            ></mat-icon>
-          </button>
-        </div>
-        <div fxFlex class="content">
-          <label class="vm-link" (click)="openHere(vm.name, vm.url)">{{
-            vm.name
-          }}</label>
-        </div>
-        <div class="open-tab-icon">
-          <button
-            mat-icon-button
-            style="outline: none;"
-            (click)="openInTab(vm.url)"
-            title="Open in Browser Tab"
-          >
-            <mat-icon class="tab-icon" svgIcon="ic_open_tab"></mat-icon>
-          </button>
+        <div fxLayout="column">
+          <div>
+            <div fxFlex="none">
+              <button
+                mat-icon-button
+                (click)="openHere($event, vm.name, vm.url)"
+              >
+                <mat-progress-spinner
+                  *ngIf="vm.state === undefined"
+                  color="primary"
+                  mode="indeterminate"
+                  diameter="25"
+                ></mat-progress-spinner>
+                <mat-icon
+                  *ngIf="
+                    vm.powerState !== undefined && vm.powerState === 'Unknown'
+                  "
+                  style="color: red;"
+                  svgIcon="monitor"
+                  title="Power state unknown"
+                ></mat-icon>
+                <mat-icon
+                  *ngIf="vm.powerState !== undefined && vm.powerState === 'On'"
+                  style="color: black;"
+                  svgIcon="monitor"
+                ></mat-icon>
+                <mat-icon
+                  *ngIf="vm.powerState !== undefined && vm.powerState === 'Off'"
+                  style="color: red;"
+                  svgIcon="power_icon"
+                  title="Powered Off"
+                ></mat-icon>
+              </button>
+            </div>
+            <div fxFlex class="content">
+              <a
+                class="vm-link"
+                [attr.href]="vm.url"
+                (click)="openHere($event, vm.name, vm.url)"
+                >{{ vm.name }}</a
+              >
+            </div>
+            <div class="open-tab-icon">
+              <button
+                mat-icon-button
+                style="outline: none;"
+                (click)="openInTab(vm.url)"
+                title="Open in Browser Tab"
+              >
+                <mat-icon class="tab-icon" svgIcon="ic_open_tab"></mat-icon>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="showIps" fxLayout="column" class="content">
+            <label *ngFor="let address of getIpAddresses(vm)">
+              {{ address }}
+            </label>
+          </div>
         </div>
       </div>
     </div>

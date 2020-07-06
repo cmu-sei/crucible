@@ -26,12 +26,17 @@ import {
   MatSnackBarModule,
   MatBottomSheetModule,
   MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatCheckboxModule,
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTableModule } from '@angular/cdk/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { VmListComponent } from './components/vm-list/vm-list.component';
@@ -58,7 +63,7 @@ import { ErrorService } from './services/error/error.service';
 import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
 import { SystemMessageService } from './services/system-message/system-message.service';
 import { WelderComponent } from './components/welder/welder.component';
-import {WelderService} from './services/welder/welder.service';
+import { WelderService } from './services/welder/welder.service';
 
 export function initConfig(settings: SettingsService) {
   return () => settings.load();
@@ -81,10 +86,11 @@ export function initConfig(settings: SettingsService) {
     MatSnackBarModule,
     MatBottomSheetModule,
     MatDialogModule,
-    MatTabsModule
-  ]
+    MatTabsModule,
+    MatCheckboxModule,
+  ],
 })
-export class AngularMaterialModule { }
+export class AngularMaterialModule {}
 
 @NgModule({
   declarations: [
@@ -109,7 +115,7 @@ export class AngularMaterialModule { }
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     VmService,
@@ -126,23 +132,19 @@ export class AngularMaterialModule { }
       provide: APP_INITIALIZER,
       useFactory: initConfig,
       deps: [SettingsService],
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: ErrorHandler,
-      useClass: ErrorService
-    }
+      useClass: ErrorService,
+    },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    ConfirmDialogComponent,
-    SystemMessageComponent,
-  ]
+  entryComponents: [ConfirmDialogComponent, SystemMessageComponent],
 })
-export class AppModule { }
-
+export class AppModule {}

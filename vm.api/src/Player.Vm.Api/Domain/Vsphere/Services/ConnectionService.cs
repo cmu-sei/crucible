@@ -248,7 +248,7 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
                 new PropertySpec
                 {
                     type = "VirtualMachine",
-                    pathSet = new string[] { "name", "config.uuid", "summary.runtime.powerState" }
+                    pathSet = new string[] { "name", "config.uuid", "summary.runtime.powerState", "guest.net" }
                 },
 
                 new PropertySpec
@@ -325,6 +325,7 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
                         Reference = vm.obj,
                         State = (VirtualMachinePowerState)vm.GetProperty("summary.runtime.powerState") == VirtualMachinePowerState.poweredOn ? "on" : "off",
                         VmToolsStatus = vmToolsStatus,
+                        IpAddresses = ((GuestNicInfo[])vm.GetProperty("guest.net")).Where(x => x.ipAddress != null).SelectMany(x => x.ipAddress).ToArray()
                     };
 
                     vsphereVirtualMachines.Add(virtualMachine.Id, virtualMachine);
@@ -365,10 +366,11 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
                     {
                         var powerState = vsphereVirtualMachine.State == "on" ? PowerState.On : PowerState.Off;
                         vm.PowerState = powerState;
+                        vm.IpAddresses = vsphereVirtualMachine.IpAddresses;
                     }
                 }
 
-                await dbContext.SaveChangesAsync();
+                var count = await dbContext.SaveChangesAsync();
             }
         }
 

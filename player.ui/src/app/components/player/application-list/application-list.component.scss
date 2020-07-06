@@ -11,7 +11,6 @@ DM20-0181
 /* mat-list-item must be overridden here due to a heigh sizing bug */
 .appitems-container .mat-list-item {
   height: auto;
-  color: black;
 }
 
 .appslist {
@@ -19,18 +18,17 @@ DM20-0181
   margin-bottom: 20px;
 }
 
-.collapse-button {
-  margin-left: 200px;
-  margin-top: -2px;
-}
-
 .nolink {
   text-decoration: none;
-  color: black;
+  cursor: pointer;
 }
 
 .showhand {
   cursor: pointer;
+}
+
+.grow {
+  flex: 1 0 auto;
 }
 
 .hidden-app-iframe {
@@ -40,37 +38,15 @@ DM20-0181
   border: none;
 }
 
-#wrapper {
-  display: table;
-  table-layout: fixed;
-  width: 215px;
-  margin-top: 5px;
-  background-color: white;
-  color: black;
-  border-width: 0.25pt;
-  border-color: darkgray;
-}
-#wrapper > div {
-  display: table-cell;
-}
-
-#lefticon {
-  width: 60px;
+.lefticon {
   font-size: 75%;
   padding: 0.5em;
-}
-#lefticon > img {
+  padding-right: 1.5em;
   height: 35px;
   text-align: center;
   cursor: pointer;
 }
-#rightcontext {
-  width: 30px;
-  font-size: 75%;
-}
-#content {
-  text-align: left;
-  margin-left: 125px;
-  font-size: 80%;
-  padding: 0.5em;
+
+.righticon {
+  align-self: flex-end;
 }
