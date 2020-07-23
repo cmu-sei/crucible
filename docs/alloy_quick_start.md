@@ -1,4 +1,4 @@
-﻿# Alloy Quick Start
+# Alloy Quick Start
 
 Alloy joins the other independent Crucible apps together to provide a complete Crucible experience (i.e. labs, on-demand exercises, exercises, etc.).
 
@@ -44,6 +44,3 @@ The Alloy user interface as viewed by a user consists of two screens:
  - **Launch:** contains a view of a specific definition or lab.  Here, the user can **Launch** an implementation if no active implementation exists for this user and definition combination.  If an active implementation already exists, then the user can open it in Player or end it.
 
 > **Note:** Currently, there is **no** error reporting when launching a definition or lab.  If an error occurs, the user is returned to the Launch screen.
-
-
-
