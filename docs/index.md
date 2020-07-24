@@ -13,4 +13,4 @@ Within the Crucible simulation framework are the following applications:
 
 Copyright 2020 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/master/alloy.api/license.txt) file for details.
 
-See the <p class="view"><a href="./license">License</a></p>.
+See the <class="view"><a href="./license">License</a>.
