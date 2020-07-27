@@ -41,18 +41,24 @@ using MediatR;
 using System.Reflection;
 using Player.Vm.Api.Hubs;
 using System.Threading.Tasks;
+using Player.Vm.Api.Features.Shared.Behaviors;
 
 namespace Player.Vm.Api
 {
     public class Startup
     {
-        public AuthorizationOptions _authOptions = new AuthorizationOptions();
+        private readonly AuthorizationOptions _authOptions = new AuthorizationOptions();
+        private readonly ClientOptions _clientOptions = new ClientOptions();
+        private readonly IdentityClientOptions _identityClientOptions = new IdentityClientOptions();
+
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             Configuration.GetSection("Authorization").Bind(_authOptions);
+            Configuration.GetSection("ClientSettings").Bind(_clientOptions);
+            Configuration.GetSection("IdentityClient").Bind(_identityClientOptions);
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -62,7 +68,9 @@ namespace Player.Vm.Api
             switch (provider)
             {
                 case "InMemory":
-                    services.AddDbContextPool<VmContext>(opt => opt.UseInMemoryDatabase("vm"));
+                    services.AddDbContextPool<VmContext>((serviceProvider, optionsBuilder) => optionsBuilder
+                        .AddInterceptors(serviceProvider.GetRequiredService<EventTransactionInterceptor>())
+                        .UseInMemoryDatabase("vm"));
                     break;
                 case "Sqlite":
                 case "SqlServer":
@@ -97,6 +105,10 @@ namespace Player.Vm.Api
                 .Configure<RewriteHostOptions>(Configuration.GetSection("RewriteHost"))
                 .AddScoped(config => config.GetService<IOptionsSnapshot<RewriteHostOptions>>().Value);
 
+            services
+                .Configure<IdentityClientOptions>(Configuration.GetSection("IdentityClient"))
+                .AddScoped(config => config.GetService<IOptionsSnapshot<IdentityClientOptions>>().Value);
+
             services.AddCors(options => options.UseConfiguredCors(Configuration.GetSection("CorsPolicy")));
             services.AddMvc(options =>
             {
@@ -110,6 +122,7 @@ namespace Player.Vm.Api
             })
             .AddJsonOptions(options =>
             {
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
@@ -172,40 +185,30 @@ namespace Player.Vm.Api
 
             services.AddScoped<IVmService, VmService>();
             services.AddScoped<IPlayerService, PlayerService>();
+            services.AddScoped<IViewService, ViewService>();
+            services.AddSingleton<IAuthenticationService, AuthenticationService>();
 
             // Vsphere Services
             services.AddSingleton<ConnectionService>();
             services.AddSingleton<IHostedService>(x => x.GetService<ConnectionService>());
             services.AddSingleton<IConnectionService>(x => x.GetService<ConnectionService>());
             services.AddScoped<IVsphereService, VsphereService>();
-            services.AddHostedService<TaskService>();
+            services.AddSingleton<TaskService>();
+            services.AddSingleton<IHostedService>(x => x.GetService<TaskService>());
+            services.AddSingleton<ITaskService>(x => x.GetService<TaskService>());
+            services.AddSingleton<MachineStateService>();
+            services.AddSingleton<IHostedService>(x => x.GetService<MachineStateService>());
+            services.AddSingleton<IMachineStateService>(x => x.GetService<MachineStateService>());
 
             services.AddTransient<EventTransactionInterceptor>();
 
             services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CheckTasksBehavior<,>));
 
-            services.AddHttpClient();
+            services.AddMemoryCache();
 
-            services.AddScoped<IS3PlayerApiClient, S3PlayerApiClient>(p =>
-            {
-                var httpContextAccessor = p.GetRequiredService<IHttpContextAccessor>();
-                var httpClientFactory = p.GetRequiredService<IHttpClientFactory>();
-                var clientOptions = p.GetRequiredService<ClientOptions>();
-
-                var playerUri = new Uri(clientOptions.urls.playerApi);
-
-                string authHeader = httpContextAccessor.HttpContext.Request.Headers["Authorization"];
-
-                var httpClient = httpClientFactory.CreateClient();
-                httpClient.BaseAddress = playerUri;
-                httpClient.DefaultRequestHeaders.Add("Authorization", authHeader);
-
-                var s3PlayerApiClient = new S3PlayerApiClient(httpClient, true);
-                s3PlayerApiClient.BaseUri = playerUri;
-
-                return s3PlayerApiClient;
-            });
+            services.AddApiClients(identityClientOptions: _identityClientOptions, clientOptions: _clientOptions);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -221,6 +224,7 @@ namespace Player.Vm.Api
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ProgressHub>("/hubs/progress");
+                endpoints.MapHub<VmHub>("/hubs/vm");
             });
 
             app.UseSwagger();

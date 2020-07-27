@@ -21,6 +21,7 @@ import { VmModel, VmResolution } from '../../models/vm/vm-model';
 import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { VirtualMachineToolsStatus } from '../../models/vm/vm-model';
+import { IsoResult } from '../../models/vm/iso-result';
 
 declare var WMKS: any; // needed to check values
 
@@ -409,8 +410,8 @@ export class VmService {
     return this.uploadConfig.asObservable();
   }
 
-  public getIsos() {
-    return this.http.get(
+  public getIsos(): Observable<IsoResult[]> {
+    return this.http.get<IsoResult[]>(
       this.ConsoleApiUrl + this.model.id.toString() + '/isos'
     );
   }

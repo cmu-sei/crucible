@@ -71,3 +71,15 @@ DM20-0181
 .search-checkbox {
   margin-left: 20px;
 }
+
+.action-button {
+  margin-left: 20px;
+}
+
+.pending {
+  opacity: 0.5;
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.5);
+}

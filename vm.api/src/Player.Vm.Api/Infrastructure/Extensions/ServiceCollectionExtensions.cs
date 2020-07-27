@@ -9,13 +9,18 @@ DM20-0181
 */
 
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Player.Vm.Api.Infrastructure.HttpHandlers;
 using Player.Vm.Api.Infrastructure.OperationFilters;
 using Player.Vm.Api.Infrastructure.Options;
+using S3.Player.Api;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Serialization;
 
@@ -23,6 +28,8 @@ namespace Player.Vm.Api.Infrastructure.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+        #region Swagger
+
         public static void AddSwagger(this IServiceCollection services, AuthorizationOptions authOptions)
         {
             // XML Comments path
@@ -80,5 +87,64 @@ namespace Player.Vm.Api.Infrastructure.Extensions
             var dataContractAttribute = currentClass.GetCustomAttribute<DataContractAttribute>();
             return dataContractAttribute != null && dataContractAttribute.Name != null ? dataContractAttribute.Name : currentClass.Name;
         }
+
+        #endregion
+
+        #region Api Clients
+
+        public static void AddApiClients(
+            this IServiceCollection services,
+            IdentityClientOptions identityClientOptions,
+            ClientOptions clientOptions)
+        {
+            services.AddHttpClient();
+            services.AddIdentityClient(identityClientOptions);
+            services.AddPlayerClient(clientOptions);
+            services.AddTransient<AuthenticatingHandler>();
+        }
+
+        private static void AddIdentityClient(
+            this IServiceCollection services,
+            IdentityClientOptions identityClientOptions)
+        {
+            services.AddHttpClient("identity");
+        }
+
+
+        private static void AddPlayerClient(
+            this IServiceCollection services,
+            ClientOptions clientOptions)
+        {
+            services.AddHttpClient("player-admin")
+                .AddHttpMessageHandler<AuthenticatingHandler>();
+
+            services.AddScoped<IS3PlayerApiClient, S3PlayerApiClient>(p =>
+            {
+                var httpContextAccessor = p.GetRequiredService<IHttpContextAccessor>();
+                var httpClientFactory = p.GetRequiredService<IHttpClientFactory>();
+                var clientOptions = p.GetRequiredService<ClientOptions>();
+
+                var playerUri = new Uri(clientOptions.urls.playerApi);
+
+                string authHeader = httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+
+                if (authHeader == null)
+                {
+                    var token = httpContextAccessor.HttpContext.Request.Query["access_token"];
+                    authHeader = new AuthenticationHeaderValue("Bearer", token).ToString();
+                }
+
+                var httpClient = httpClientFactory.CreateClient();
+                httpClient.BaseAddress = playerUri;
+                httpClient.DefaultRequestHeaders.Add("Authorization", authHeader);
+
+                var s3PlayerApiClient = new S3PlayerApiClient(httpClient, true);
+                s3PlayerApiClient.BaseUri = playerUri;
+
+                return s3PlayerApiClient;
+            });
+        }
+
+        #endregion
     }
 }

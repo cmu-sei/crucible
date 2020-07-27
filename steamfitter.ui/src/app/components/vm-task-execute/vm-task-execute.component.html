@@ -8,71 +8,42 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div class="component-container mat-elevation-z8 scroll-container">
+<div class="component-container mat-elevation-z8 scroll-container" *ngIf="!!userScenario">
 
   <div fxLayout="row" class="title">
-    <div fxFlex="10" fxLayoutAlign="start center">
-      <button title="Return to Task Status" mat-icon-button (click)="returnToMain()">
-        <mat-icon svgIcon="input_24px"></mat-icon>
-      </button>
+    <div fxFlex="5" fxLayoutAlign="center center">
+      <mat-icon svgIcon="input_24px"></mat-icon>
     </div>
     <div fxFlex="90" fxLayoutAlign="start center">
-      <h4>Create a Task</h4>
+      <h4>Build and Execute a Task</h4>
     </div>
   </div>
 
-  <mat-dialog-content>
-    <mat-vertical-stepper [linear]="isLinear" #stepper (selectionChange)="onTaskStepChange($event)">
+  <div fxLayout="row" class="add-margin" (click)="$event.stopPropagation();">
+    <div style="width: 40px;"></div>
+    <mat-form-field fxFlex fxFlexFill>
+      <mat-select placeholder="Select a View" [value]="selectedView | async" (selectionChange)="onViewChange($event)">
+        <mat-option *ngFor="let view of viewList | async" [value]="view">
+          {{view.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div style="width: 40px;"></div>
+  </div>
 
-      <ng-template matStepperIcon="edit">&#10004;</ng-template>
-      <ng-template matStepperIcon="done">&#10004;</ng-template>
-
-      <mat-step label="Choose Virtual Machines">
-        <div fxLayout="row" class="add-margin">
-          <div fxFlex>
-            <app-vm-list [viewList]="viewList | async" [selectedView]="selectedView | async" [vmList]="vmList | async" [pageEvent]="pageEvent | async"></app-vm-list>
-          </div>
-        </div>
-      </mat-step>
-
-
-      <mat-step label="Select Commands">
-        <div fxLayout="row" fxLayoutAlign="start">
-          <app-commands></app-commands>
-        </div>
-      </mat-step>
-
-
-      <mat-step label="Execute and Results">
-        <div fxLayout="row" fxLayoutAlign="start" class="top-button">
-          <div class="content">
-            <div *ngIf="task !== undefined">
-              <mat-card style="width: 90%;">
-                <div fxLayout="column" fxLayoutAlign="start start">
-                  <div><h4>Command:</h4><label class="add-margin">{{task.action}}</label></div>
-                  <div *ngIf="selectedVms">
-                    <h4>Virtual Machines:</h4>
-                    <div *ngFor="let vm of selectedVms">
-                      <label class="add-margin">{{vm.name}}</label>
-                    </div>
-                  </div>
-                  <div><h4>Api:</h4><label class="add-margin">{{task.apiUrl}}</label></div>
-                </div>
-              </mat-card>
-              <button class="button-margin" mat-stroked-button (click)="executeTask()">Execute Task</button>
-              <mat-spinner class="spinner-margin" *ngIf="isExecuting"></mat-spinner>
-            </div>
-          </div>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start" class="top-button">
-          <app-results
-            [results]=results
-            (openVmConsole)="openVmConsole($event)">
-          </app-results>
-        </div>
-      </mat-step>
-    </mat-vertical-stepper>
-  </mat-dialog-content>
+  <div fxLayout="row" class="add-margin" (click)="$event.stopPropagation();">
+    <div fxFlex="90" fxFlexOffset="5">
+      <app-tasks
+        [taskList]="taskList"
+        [resultList]="results"
+        [scenarioId]="userScenario.id"
+        [isEditable]="true"
+        [isExecutable]="true"
+        (taskListChanged)="refreshTaskList()"
+        (deleteTaskRequested)="deleteTask($event)"
+      ></app-tasks>
+    </div>
+  </div>
 
 </div>
 

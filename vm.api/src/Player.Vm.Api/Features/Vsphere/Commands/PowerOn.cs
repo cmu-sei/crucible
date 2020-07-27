@@ -18,13 +18,14 @@ using Player.Vm.Api.Infrastructure.Exceptions;
 using AutoMapper;
 using Player.Vm.Api.Domain.Vsphere.Services;
 using Player.Vm.Api.Features.Vms;
+using Player.Vm.Api.Features.Shared.Interfaces;
 
 namespace Player.Vm.Api.Features.Vsphere
 {
     public class PowerOn
     {
         [DataContract(Name = "PowerOnVsphereVirtualMachine")]
-        public class Command : IRequest<string>
+        public class Command : IRequest<string>, ICheckTasksRequest
         {
             [JsonIgnore]
             public Guid Id { get; set; }

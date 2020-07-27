@@ -9,141 +9,244 @@ DM20-0181
 -->
 
 <div class="options-container" fxFlex fxLayoutAlign="start start">
-        <button mat-icon-button class="mat-small" [matMenuTriggerFor]='mainMenu'>
-                <mat-icon svgIcon="gear" alt="Gear"></mat-icon>
+  <button mat-icon-button class="mat-small" [matMenuTriggerFor]="mainMenu">
+    <mat-icon svgIcon="gear" alt="Gear"></mat-icon>
+  </button>
+  <mat-menu #mainMenu="matMenu">
+    <button *ngIf="!inFrame" mat-menu-item (click)="fullscreen()">
+      Fullscreen
+    </button>
+    <button *ngIf="inFrame" mat-menu-item (click)="openInTab()">
+      Open In New Tab
+    </button>
+    <button mat-menu-item (click)="reconnect()">Reconnect</button>
+
+    <!-- Resolution -->
+    <button
+      *ngIf="!vmService.model.isOwner"
+      mat-menu-item
+      [matMenuTriggerFor]="resolutionMenu"
+      matTooltipPosition="after"
+      aria-label="warning"
+    >
+      <span
+        [matTooltip]="
+          vmService.model.vmToolsStatus ===
+          virtualMachineToolsStatus.toolsNotInstalled
+            ? 'VmWare Tools is not installed'
+            : vmService.model.vmToolsStatus ===
+              virtualMachineToolsStatus.toolsNotRunning
+            ? 'VmWare Tools is not running'
+            : ''
+        "
+        matTooltipPosition="after"
+      >
+        Resolution
+      </span>
+    </button>
+    <mat-menu #resolutionMenu="matMenu">
+      <button
+        mat-menu-item
+        [disabled]="
+          vmService.model.vmToolsStatus ===
+            virtualMachineToolsStatus.toolsNotRunning ||
+          vmService.model.vmToolsStatus ===
+            virtualMachineToolsStatus.toolsNotInstalled
+        "
+        (click)="setResolution(currentVmContainerResolution)"
+      >
+        Current Browser {{ currentVmContainerResolution.width }}x{{
+          currentVmContainerResolution.height
+        }}
+      </button>
+      <button
+        mat-menu-item
+        *ngFor="let vmRes of settingsService.VmResolutionOptions"
+        [disabled]="
+          vmService.model.vmToolsStatus ===
+            virtualMachineToolsStatus.toolsNotRunning ||
+          vmService.model.vmToolsStatus ===
+            virtualMachineToolsStatus.toolsNotInstalled
+        "
+        (click)="setResolution(vmRes)"
+      >
+        {{ vmRes.width }}x{{ vmRes.height }}
+      </button>
+    </mat-menu>
+
+    <!-- Power -->
+    <button mat-menu-item [matMenuTriggerFor]="powerMenu" *ngIf="powerOptions">
+      Power
+    </button>
+    <mat-menu #powerMenu="matMenu">
+      <button mat-menu-item (click)="poweron()">Power On</button>
+      <button mat-menu-item (click)="poweroff()">Power Off</button>
+      <button mat-menu-item (click)="reboot()">Reboot</button>
+      <div
+        [matTooltip]="
+          vmService.model.vmToolsStatus ===
+          virtualMachineToolsStatus.toolsNotInstalled
+            ? 'VmWare Tools is not installed'
+            : vmService.model.vmToolsStatus ===
+              virtualMachineToolsStatus.toolsNotRunning
+            ? 'VmWare Tools is not running'
+            : ''
+        "
+        matTooltipPosition="after"
+      >
+        <button
+          mat-menu-item
+          [disabled]="
+            vmService.model.vmToolsStatus ===
+              virtualMachineToolsStatus.toolsNotRunning ||
+            vmService.model.vmToolsStatus ===
+              virtualMachineToolsStatus.toolsNotInstalled
+          "
+          (click)="shutdownOS()"
+          matTooltipPosition="after"
+          aria-label="warning"
+        >
+          Shutdown OS
         </button>
-        <mat-menu #mainMenu="matMenu">
-                <button *ngIf='!inFrame' mat-menu-item (click)='fullscreen()'>Fullscreen</button>
-                <button *ngIf='inFrame' mat-menu-item (click)='openInTab()'>Open In New Tab</button>
-                <button mat-menu-item (click)='reconnect()'>Reconnect</button>
+      </div>
+    </mat-menu>
+    <!-- Files -->
+    <input
+      #file
+      id="fileInput"
+      type="file"
+      multiple
+      style="display: none;"
+      (change)="uploadFileToVm(file)"
+    />
+    <button mat-menu-item [matMenuTriggerFor]="fileMenu">Files</button>
+    <mat-menu #fileMenu="matMenu">
+      <!-- send to VM -->
+      <div
+        [matTooltip]="
+          vmService.model.vmToolsStatus ===
+          virtualMachineToolsStatus.toolsNotInstalled
+            ? 'VmWare Tools is not installed'
+            : vmService.model.vmToolsStatus ===
+              virtualMachineToolsStatus.toolsNotRunning
+            ? 'VmWare Tools is not running'
+            : ''
+        "
+        matTooltipPosition="after"
+      >
+        <button
+          mat-menu-item
+          (click)="enableFileUpload('VM Send File Settings')"
+          [disabled]="
+            uploading ||
+            vmService.model.vmToolsStatus ===
+              virtualMachineToolsStatus.toolsNotRunning ||
+            vmService.model.vmToolsStatus ===
+              virtualMachineToolsStatus.toolsNotInstalled
+          "
+          aria-label="warning"
+        >
+          Enter VM Credentials
+        </button>
+      </div>
 
-                <!-- Resolution -->
-                <button *ngIf="!vmService.model.isOwner" mat-menu-item [matMenuTriggerFor]="resolutionMenu"
-                        matTooltipPosition="after"
-                        aria-label="warning">                                
-                        <span [matTooltip]="(vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotInstalled) ? 
-                                        'VmWare Tools is not installed' : 
-                                        (vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotRunning) ? 
-                                        'VmWare Tools is not running' : ''"
-                                matTooltipPosition="after">
-                                Resolution
-                        </span>
-                </button>
-                <mat-menu #resolutionMenu="matMenu">
-                        <button mat-menu-item 
-                                [disabled]="vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotRunning || 
-                                vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotInstalled"
-                                (click)="setResolution(currentVmContainerResolution)">
-                                Current Browser {{currentVmContainerResolution.width}}x{{currentVmContainerResolution.height}}
-                        </button>
-                        <button mat-menu-item *ngFor="let vmRes of settingsService.VmResolutionOptions" 
-                                [disabled]="vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotRunning || 
-                                vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotInstalled"
-                                (click)="setResolution(vmRes)">{{vmRes.width}}x{{vmRes.height}}
-                        </button>
-                </mat-menu>
-                
-
-                <!-- Power -->
-                <button mat-menu-item [matMenuTriggerFor]="powerMenu" *ngIf='powerOptions'>Power</button>
-                <mat-menu #powerMenu="matMenu">
-                        <button mat-menu-item (click)="poweron()">Power On</button>
-                        <button mat-menu-item (click)="poweroff()">Power Off</button>
-                        <button mat-menu-item (click)="reboot()">Reboot</button>
-                        <div [matTooltip]="(vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotInstalled) ? 
-                                        'VmWare Tools is not installed' : 
-                                        (vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotRunning) ? 
-                                        'VmWare Tools is not running' : ''"
-                                matTooltipPosition="after">
-                                <button mat-menu-item
-                                        [disabled]="vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotRunning || 
-                                                vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotInstalled" 
-                                        (click)="shutdownOS()"
-                                        matTooltipPosition="after"
-                                        aria-label="warning">                                
-                                        Shutdown OS
-                                </button>
-                        </div>
-                </mat-menu>
-                <!-- Files -->
-                <input #file id="fileInput" type="file" multiple style="display: none;"
-                        (change)="uploadFileToVm(file)" />
-                <button mat-menu-item [matMenuTriggerFor]="fileMenu">Files</button>
-                <mat-menu #fileMenu="matMenu">
-                        <!-- send to VM -->
-                        <div [matTooltip]="(vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotInstalled) ? 
-                                'VmWare Tools is not installed' : 
-                                (vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotRunning) ? 
-                                'VmWare Tools is not running' : ''"
-                                matTooltipPosition="after">
-                                <button mat-menu-item
-                                        (click)="enableFileUpload('VM Send File Settings');"
-                                        [disabled]="uploading || vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotRunning || 
-                                        vmService.model.vmToolsStatus === virtualMachineToolsStatus.toolsNotInstalled"
-                                        aria-label="warning">                                
-                                        Enter VM Credentials
-                                </button>
-                                </div>
-                                
-
-                        <button mat-menu-item (click)="file.click();" 
-                                [disabled]="!uploadEnabled || uploading">
-                                <span [matTooltip]="uploadEnabled ? 
-                                        '' : 'VM Credentials must be entered'"
-                                        matTooltipPosition="after">
-                                        Send File to VM
-                                </span>
-                        </button>
-                        <!-- mount DVD -->
-                        <button mat-menu-item [disabled]="retrievingIsos" (click)="startIsoMount();">Mount
-                                File to DVD</button>
-                </mat-menu>
-                <button mat-menu-item [matMenuTriggerFor]="keyboardMenu">Keyboard</button>
-                <mat-menu #keyboardMenu="matMenu">
-                        <!-- send ctrl-alt-del -->
-                        <button mat-menu-item (click)='cad()'>Send Ctrl-Alt-Del</button>
-                        <!-- paste text -->
-                        <button mat-menu-item (click)='sendInputString()'>Send Text</button>
-                </mat-menu>
-                <span *ngIf='vmService.model.networkCards'>
-                        <button *ngIf='vmService.model.canAccessNicConfiguration && vmService.model.networkCards.availableNetworks.length > 0'
-                                mat-menu-item [matMenuTriggerFor]="main_menu">Network Cards</button>
-                        <mat-menu #main_menu="matMenu">
-                                <ng-container
-                                        *ngFor="let mainItem of vmService.model.networkCards.currentNetworks | keys">
-                                        <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{ mainItem.key }}</button>
-                                        <mat-menu #sub_menu="matMenu">
-                                                <button *ngFor="let subItem of vmService.model.networkCards.availableNetworks"
-                                                        (click)="changeNic(mainItem.key, subItem)" mat-menu-item>
-                                                        <span *ngIf="mainItem.value==subItem">&#10004; </span>
-                                                        {{ subItem }}
-                                                </button>
-                                        </mat-menu>
-                                </ng-container>
-                        </mat-menu>
-                </span>
-                <!-- Clipboard -->
-                <button mat-menu-item [matMenuTriggerFor]="clipboardMenu">Clipboard</button>
-                <mat-menu #clipboardMenu="matMenu">
-                        <button mat-menu-item (click)="copyVmClipboard()">Copy</button>
-                        <button mat-menu-item (click)="pasteFromClipboard()">Paste</button>
-                </mat-menu>
-        </mat-menu>
-
-        <label class="vm-name">{{vmService.model.name}}</label>
-        <span *ngFor="let task of tasksInProgress">
-                <label class="vm-name" *ngIf="task.state !== 'success'">{{task.taskName}} ...
-                        {{task.progress}}%</label>
+      <button
+        mat-menu-item
+        (click)="file.click()"
+        [disabled]="!uploadEnabled || uploading"
+      >
+        <span
+          [matTooltip]="uploadEnabled ? '' : 'VM Credentials must be entered'"
+          matTooltipPosition="after"
+        >
+          Send File to VM
         </span>
+      </button>
+      <!-- mount ISO -->
+      <button
+        mat-menu-item
+        [disabled]="retrievingIsos"
+        (click)="startIsoMount()"
+      >
+        Mount ISO
+      </button>
+    </mat-menu>
+    <button mat-menu-item [matMenuTriggerFor]="keyboardMenu">Keyboard</button>
+    <mat-menu #keyboardMenu="matMenu">
+      <!-- send ctrl-alt-del -->
+      <button mat-menu-item (click)="cad()">Send Ctrl-Alt-Del</button>
+      <!-- paste text -->
+      <button mat-menu-item (click)="sendInputString()">Send Text</button>
+    </mat-menu>
+    <span *ngIf="vmService.model.networkCards">
+      <button
+        *ngIf="
+          vmService.model.canAccessNicConfiguration &&
+          vmService.model.networkCards.availableNetworks.length > 0
+        "
+        mat-menu-item
+        [matMenuTriggerFor]="main_menu"
+      >
+        Network Cards
+      </button>
+      <mat-menu #main_menu="matMenu">
+        <ng-container
+          *ngFor="
+            let mainItem of vmService.model.networkCards.currentNetworks | keys
+          "
+        >
+          <button mat-menu-item [matMenuTriggerFor]="sub_menu">
+            {{ mainItem.key }}
+          </button>
+          <mat-menu #sub_menu="matMenu">
+            <button
+              *ngFor="
+                let subItem of vmService.model.networkCards.availableNetworks
+              "
+              (click)="changeNic(mainItem.key, subItem)"
+              mat-menu-item
+            >
+              <span *ngIf="mainItem.value == subItem">&#10004; </span>
+              {{ subItem }}
+            </button>
+          </mat-menu>
+        </ng-container>
+      </mat-menu>
+    </span>
+    <!-- Clipboard -->
+    <button mat-menu-item [matMenuTriggerFor]="clipboardMenu">Clipboard</button>
+    <mat-menu #clipboardMenu="matMenu">
+      <button mat-menu-item (click)="copyVmClipboard()">Copy</button>
+      <button mat-menu-item (click)="pasteFromClipboard()">Paste</button>
+    </mat-menu>
+  </mat-menu>
 
-        <div class="options-container" fxFlex fxLayoutAlign="center start">
-                <button mat-stroked-button class="mat-top-button" title="Copy from Virtual Machine's clipboard" (click)="copyVmClipboard()">Copy
-                        <mat-icon svgIcon="ic_clipboard_copy"></mat-icon>
-                </button>
-                <button mat-stroked-button class="mat-top-button" style="margin-left: 20px;" title="Paste into the Virtual Machine" (click)="pasteFromClipboard()">Paste
-                        <mat-icon svgIcon="ic_clipboard_paste"></mat-icon>
-                </button>
-        </div>
+  <label class="vm-name">{{ vmService.model.name }}</label>
+  <span *ngFor="let task of tasksInProgress">
+    <label class="vm-name" *ngIf="task.state !== 'success'"
+      >{{ task.taskName }} ... {{ task.progress }}%</label
+    >
+  </span>
 
-
+  <div class="options-container" fxFlex fxLayoutAlign="center start">
+    <button
+      mat-stroked-button
+      class="mat-top-button"
+      title="Copy from Virtual Machine's clipboard"
+      (click)="copyVmClipboard()"
+    >
+      Copy
+      <mat-icon svgIcon="ic_clipboard_copy"></mat-icon>
+    </button>
+    <button
+      mat-stroked-button
+      class="mat-top-button"
+      style="margin-left: 20px;"
+      title="Paste into the Virtual Machine"
+      (click)="pasteFromClipboard()"
+    >
+      Paste
+      <mat-icon svgIcon="ic_clipboard_paste"></mat-icon>
+    </button>
+  </div>
 </div>

@@ -9,58 +9,97 @@ DM20-0181
 */
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  ChangeDetectionStrategy,
+  Input,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+} from '@angular/core';
+import { IsoResult, IsoFile } from '../../../models/vm/iso-result';
+import { Subject } from 'rxjs';
+import { debounceTime, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
-    selector: 'mount-iso-dialog',
-    templateUrl: './mount-iso-dialog.component.html'
+  selector: 'mount-iso-dialog',
+  templateUrl: './mount-iso-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MountIsoDialogComponent implements OnInit {
+export class MountIsoDialogComponent implements OnInit, OnDestroy {
   public data: any;
-  public publicIsos: any[];
-  public teamIsos: any[];
-  public filteredPublicIsos: any[];
-  public filteredTeamIsos: any[];
+  public isoResults: IsoResult[];
+
+  @Input()
+  set isoResult(val: IsoResult[]) {
+    this.isoResults = val;
+    this.isoResults.forEach((x) => {
+      x.display = this.applyFilter(x.isos);
+      x.hide = false;
+
+      x.teamIsoResults.forEach((y) => {
+        y.display = this.applyFilter(y.isos);
+        y.hide = false;
+      });
+    });
+  }
+
   public selectedIso: any;
-  public showTeamIsos: boolean;
-  public showPublicIsos: boolean;
+
+  private filterValue = '';
+  private searchSubject$ = new Subject<string>();
+  private unsubscribe$ = new Subject();
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) data,
-    private dialogRef: MatDialogRef<MountIsoDialogComponent>) {
+    private dialogRef: MatDialogRef<MountIsoDialogComponent>,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
     this.dialogRef.disableClose = true;
-    this.showPublicIsos = true;
-    this.showTeamIsos = true;
   }
 
   ngOnInit() {
-    this.publicIsos.sort(function(a, b) {
-      return a.filename.toLowerCase().localeCompare(b.filename.toLowerCase());
-    });
-    this.teamIsos.sort(function(a, b) {
-      return a.filename.toLowerCase().localeCompare(b.filename.toLowerCase());
-    });
-    this.filteredPublicIsos = [];
-    this.publicIsos.forEach(iso => {
-      const copyIso = Object.assign({}, iso);
-      this.filteredPublicIsos.push(copyIso);
-    });
-    this.filteredTeamIsos = [];
-    this.teamIsos.forEach(iso => {
-      const copyIso = Object.assign({}, iso);
-      this.filteredTeamIsos.push(copyIso);
-    });
+    this.searchSubject$
+      .pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((searchTextValue) => {
+        this.setFilter(searchTextValue);
+      });
+  }
+
+  onSearch(searchTextValue: string) {
+    this.searchSubject$.next(searchTextValue);
   }
 
   selectThisIso(iso: string) {
     this.selectedIso = iso;
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // default to lowercase matches
-    this.filteredPublicIsos = this.publicIsos.filter(iso => iso.filename.toLowerCase().includes(filterValue));
-    this.filteredTeamIsos = this.teamIsos.filter(iso => iso.filename.toLowerCase().includes(filterValue));
+  setFilter(filterValue: string) {
+    this.filterValue = filterValue.trim().toLowerCase();
+
+    this.isoResults.forEach((x) => {
+      if (!x.hide) {
+        x.display = this.applyFilter(x.isos);
+      }
+
+      x.teamIsoResults.forEach((y) => {
+        if (!y.hide) {
+          y.display = this.applyFilter(y.isos);
+        }
+      });
+    });
+
+    this.changeDetectorRef.markForCheck();
+  }
+
+  applyFilter(isos: IsoFile[]): IsoFile[] {
+    return isos.filter((x) =>
+      x.filename.toLowerCase().includes(this.filterValue)
+    );
   }
 
   close() {
@@ -70,6 +109,9 @@ export class MountIsoDialogComponent implements OnInit {
   done() {
     this.dialogRef.close(this.selectedIso);
   }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }
-
-

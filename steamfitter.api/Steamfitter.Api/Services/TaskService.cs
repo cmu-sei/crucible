@@ -52,8 +52,8 @@ namespace Steamfitter.Api.Services
         STT.Task<IEnumerable<SAVM.Result>> ExecuteAsync(Guid id, CancellationToken ct);
         STT.Task<SAVM.Task> UpdateAsync(Guid Id, SAVM.Task Task, CancellationToken ct);
         STT.Task<bool> DeleteAsync(Guid Id, CancellationToken ct);
-        STT.Task<IEnumerable<SAVM.Task>> CopyAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct);
-        STT.Task<IEnumerable<SAVM.Task>> MoveAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct);
+        STT.Task<IEnumerable<SAVM.Task>> CopyAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct);
+        STT.Task<IEnumerable<SAVM.Task>> MoveAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct);
     }
 
     public class TaskService : ITaskService
@@ -160,8 +160,8 @@ namespace Steamfitter.Api.Services
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
-
-            var Tasks = _context.Tasks.Where(dt => dt.UserId == userId && dt.ScenarioTemplateId == null && dt.ScenarioId == null);
+            // the user's personal scenario used in Task Builder is the user ID.
+            var Tasks = _context.Tasks.Where(dt => dt.UserId == userId && dt.ScenarioTemplateId == null && (dt.ScenarioId == null || dt.ScenarioId == userId));
 
             return _mapper.Map<IEnumerable<SAVM.Task>>(Tasks);
         }
@@ -192,11 +192,11 @@ namespace Steamfitter.Api.Services
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
             var vmListCount = task.VmList != null ? task.VmList.Count : 0;
-            if (task.VmMask != "" && vmListCount > 0)
-                throw new InvalidOperationException("A Task cannot have BOTH a VmMask and a VmList!");
-            // convert the list of vm guids into a comma separated string and save it in VmMask
             if (vmListCount > 0)
             {
+                if (task.VmMask != "")
+                    throw new InvalidOperationException("A Task cannot have BOTH a VmMask and a VmList!");
+                // convert the list of vm guids into a comma separated string and save it in VmMask
                 var vmIdString = "";
                 foreach (var vmId in task.VmList)
                 {
@@ -204,9 +204,14 @@ namespace Steamfitter.Api.Services
                 }
                 task.VmMask = vmIdString.Remove(vmIdString.Count() - 1);
             }
+            if (task.ActionParameters.Keys.Any(key => key == "Moid"))
+            {
+                task.ActionParameters["Moid"] = "{moid}";
+            }
             task.DateCreated = DateTime.UtcNow;
             task.CreatedBy = _user.GetId();
             task.UserId = _user.GetId();
+            task.Iterations = task.Iterations > 0 ? task.Iterations : 1;
             var taskEntity = _mapper.Map<TaskEntity>(task);
 
             _context.Tasks.Add(taskEntity);
@@ -238,34 +243,11 @@ namespace Steamfitter.Api.Services
             // schedule the task, if it has a delay and hasn't already been scheduled
             if (taskToExecute.DelaySeconds > 0 && !resultEntityList.Any())
             {
-                // create Results required (at least one but one for each VM)
-                resultEntityList = await CreateResultsAsync(taskToExecute, ct);
-                if (resultEntityList.Where(r => r.Status == Data.TaskStatus.error).Count() == 0) 
-                {
-                    var wasPassedOn = false;
-                    // schedule the task with Foreman
-                    wasPassedOn = await ScheduleTask(taskToExecute);
-                    if (wasPassedOn)
-                    {
-                        resultEntityList = _context.Results.Where(dtr => dtr.TaskId == taskToExecute.Id && dtr.Status == Data.TaskStatus.pending).ToList();
-                        resultEntityList.ForEach(dtr => dtr.Status = Data.TaskStatus.sent);
-                        await _context.SaveChangesAsync(ct);
-                    }
-                    else
-                    {
-                        _context.Results.RemoveRange(resultEntityList);
-                        var resultEntity = NewResultEntity(taskToExecute);
-                        resultEntity.Status = Data.TaskStatus.error;
-                        resultEntity.ActualOutput = "Error scheduling task!";
-                        await _context.Results.AddAsync(resultEntity);
-                        await _context.SaveChangesAsync(ct);
-                        resultEntityList.Add(resultEntity);
-                    }
-                }
+                resultEntityList = await ProcessDelayedTask(taskToExecute, null, ct);
             }
             else
             {
-                // create Results required (at least one but one for each VM)
+                // Determine if this was a scheduled task or not
                 if (resultEntityList.Any())
                 {
                     // this was a scheduled task, so just change result statuses to pending
@@ -274,43 +256,93 @@ namespace Steamfitter.Api.Services
                 }
                 else
                 {
+                    // this was not a scheduled task, so create Results required (at least one but one for each VM)
+                    taskToExecute.CurrentIteration = 1;
+                    await _context.SaveChangesAsync(ct);
                     resultEntityList = await CreateResultsAsync(taskToExecute, ct);
                 }
+                // make sure there were no errors creating the results before continuing
                 if (resultEntityList.Where(r => r.Status == Data.TaskStatus.error).Count() == 0)
                 {
-                    // determine where to execute the task, execute it, process result
-                    Data.TaskStatus overallStatus;
-                    switch (taskToExecute.ApiUrl)
-                    {
-                        case "stackstorm":
-                        {
-                            overallStatus = await ExecuteStackstormTaskAsync(taskToExecute, resultEntityList, ct);
-                            break;
-                        }
-                        case "player":
-                        case "vm":
-                        case "caster":
-                        default:
-                        {
-                            var message = $"API ({taskToExecute.ApiUrl}) is not currently implemented";
-                            _logger.LogError(message);
-                            throw new NotImplementedException(message);
-                        }
-                    }
+                    // ACTUALLY execute the task and process results
+                    var overallStatus = await ProcessTaskAsync(taskToExecute, resultEntityList, ct);
 
-                    // Process the subtasks
-                    var subtaskEntityList = GetSubtasksToExecute(taskToExecute.Id, overallStatus);
-                    var allSubtasksWereProcessed = await ProcessSubtasks(subtaskEntityList, ct);
-                    if (!allSubtasksWereProcessed)
+                    // Start the next Task (iteration or subtask)
+                    if (IsAnotherIteration(taskToExecute, overallStatus))
                     {
-                        var message = $"One or more child tasks were not processed correctly for Task {taskToExecute.Id}";
-                        _logger.LogError(message);
-                        throw new ApplicationException(message);
+                        // Process the next Iteration
+                        taskToExecute.CurrentIteration++;
+                        await _context.SaveChangesAsync(ct);
+                        await ProcessDelayedTask(taskToExecute, resultEntityList[0].DateCreated, ct);
+                    }
+                    else
+                    {
+                        // Process the subtasks
+                        var subtaskEntityList = GetSubtasksToExecute(taskToExecute.Id, overallStatus);
+                        var allSubtasksWereProcessed = await ProcessSubtasks(subtaskEntityList, ct);
+                        if (!allSubtasksWereProcessed)
+                        {
+                            var message = $"One or more child tasks were not processed correctly for Task {taskToExecute.Id}";
+                            _logger.LogError(message);
+                            throw new ApplicationException(message);
+                        }
                     }
                 }
             }
 
             return  _mapper.Map(resultEntityList, new List<SAVM.Result>());;
+        }
+
+        private bool IsAnotherIteration(TaskEntity task, Data.TaskStatus taskStatus)
+        {
+            // task.Iterations is always the hard stop
+            var isAnotherIteration = task.CurrentIteration < task.Iterations;
+            if (isAnotherIteration)
+            {
+                // still another iteration, unless the termination status has been achieved
+                switch (task.IterationTermination)
+                {
+                    case Data.TaskIterationTermination.UntilSuccess:
+                        isAnotherIteration = taskStatus != Data.TaskStatus.succeeded;
+                        break;
+                    case Data.TaskIterationTermination.UntilFailure:
+                        isAnotherIteration = taskStatus != Data.TaskStatus.failed;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return isAnotherIteration;
+        }
+
+        private async STT.Task<List<ResultEntity>> ProcessDelayedTask(TaskEntity taskToExecute, DateTime? lastIterationTime, CancellationToken ct)
+        {
+            // create Results required (at least one but one for each VM)
+            var resultEntityList = await CreateResultsAsync(taskToExecute, ct);
+            if (resultEntityList.Where(r => r.Status == Data.TaskStatus.error).Count() == 0)
+            {
+                var wasPassedOn = false;
+                // schedule the task with Foreman
+                wasPassedOn = await ScheduleTask(taskToExecute, lastIterationTime, ct);
+                if (wasPassedOn)
+                {
+                    resultEntityList = _context.Results.Where(dtr => dtr.TaskId == taskToExecute.Id && dtr.Status == Data.TaskStatus.pending).ToList();
+                    resultEntityList.ForEach(dtr => dtr.Status = Data.TaskStatus.sent);
+                    await _context.SaveChangesAsync(ct);
+                }
+                else
+                {
+                    _context.Results.RemoveRange(resultEntityList);
+                    var resultEntity = NewResultEntity(taskToExecute);
+                    resultEntity.Status = Data.TaskStatus.error;
+                    resultEntity.ActualOutput = "Error scheduling task!";
+                    await _context.Results.AddAsync(resultEntity);
+                    await _context.SaveChangesAsync(ct);
+                    resultEntityList.Add(resultEntity);
+                }
+            }
+
+            return resultEntityList;
         }
 
         public async STT.Task<SAVM.Task> UpdateAsync(Guid id, SAVM.Task task, CancellationToken ct)
@@ -323,6 +355,19 @@ namespace Steamfitter.Api.Services
             if (taskToUpdate == null)
                 throw new EntityNotFoundException<SAVM.Task>();
 
+            var vmListCount = task.VmList != null ? task.VmList.Count : 0;
+            if (vmListCount > 0)
+            {
+                if (task.VmMask != "")
+                    throw new InvalidOperationException("A Task cannot have BOTH a VmMask and a VmList!");
+                // convert the list of vm guids into a comma separated string and save it in VmMask
+                var vmIdString = "";
+                foreach (var vmId in task.VmList)
+                {
+                    vmIdString = vmIdString + vmId + ",";
+                }
+                task.VmMask = vmIdString.Remove(vmIdString.Count() - 1);
+            }
             task.CreatedBy = taskToUpdate.CreatedBy;
             task.DateCreated = taskToUpdate.DateCreated;
             task.DateModified = DateTime.UtcNow;
@@ -332,6 +377,7 @@ namespace Steamfitter.Api.Services
             _context.Tasks.Update(taskToUpdate);
             await _context.SaveChangesAsync(ct);
             var updatedTask = _mapper.Map(taskToUpdate, task);
+            updatedTask.VmList = null;
             _engineHub.Clients.All.SendAsync(EngineMethods.TaskUpdated, updatedTask);
 
             return updatedTask;
@@ -342,19 +388,30 @@ namespace Steamfitter.Api.Services
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
 
-            var TaskToDelete = await _context.Tasks.SingleOrDefaultAsync(v => v.Id == id, ct);
-
-            if (TaskToDelete == null)
+            var taskToDelete = await _context.Tasks.SingleOrDefaultAsync(v => v.Id == id, ct);
+            if (taskToDelete == null)
+            {
                 throw new EntityNotFoundException<SAVM.Task>();
+            }
+            else if (await _context.Results.AnyAsync(r => r.TaskId == taskToDelete.Id))
+            {
+                // if this task has results, just remove it from the scenario and scenario template
+                taskToDelete.ScenarioTemplate = null;
+                taskToDelete.ScenarioTemplateId = null;
+                taskToDelete.Scenario = null;
+                taskToDelete.ScenarioId = null;
+            } else
+            {
+                _context.Tasks.Remove(taskToDelete);
+            }
 
-            _context.Tasks.Remove(TaskToDelete);
             await _context.SaveChangesAsync(ct);
             _engineHub.Clients.All.SendAsync(EngineMethods.TaskDeleted, id);
 
             return true;
         }
 
-        public async STT.Task<IEnumerable<SAVM.Task>> CopyAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct)
+        public async STT.Task<IEnumerable<SAVM.Task>> CopyAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct)
         {
             // check user authorization
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
@@ -364,7 +421,7 @@ namespace Steamfitter.Api.Services
             return  _mapper.Map<IEnumerable<SAVM.Task>>(items);
         }
 
-        public async STT.Task<IEnumerable<SAVM.Task>> MoveAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct)
+        public async STT.Task<IEnumerable<SAVM.Task>> MoveAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct)
         {
             // check user authorization
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
@@ -444,7 +501,7 @@ namespace Steamfitter.Api.Services
             return subEntities;
         }
 
-        private async STT.Task<IEnumerable<TaskEntity>> MoveTaskAsync(Guid id, Guid newLocationId, string newLocationType, CancellationToken ct)
+        private async STT.Task<IEnumerable<TaskEntity>> MoveTaskAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct)
         {
             // check for existing task
             var existingTaskEntity = await _context.Tasks.SingleAsync(v => v.Id == id, ct);
@@ -535,7 +592,7 @@ namespace Steamfitter.Api.Services
         private async STT.Task<List<ResultEntity>> CreateResultsAsync(TaskEntity taskToExecute, CancellationToken ct)
         {
             var resultEntities = new List<ResultEntity>();
-            var viewIdList = new List<Guid?>();
+            Guid? viewId = null;
             var scenarioEntity = taskToExecute.ScenarioId == null ? null : _context.Scenarios.First(s => s.Id == taskToExecute.ScenarioId);
             if (taskToExecute.VmMask.Count() == 0)
             {
@@ -548,12 +605,7 @@ namespace Steamfitter.Api.Services
                 if (scenarioEntity != null)
                 {
                     // A scenario is assigned to a specific view
-                    viewIdList.Add(scenarioEntity.ViewId);
-                }
-                else
-                {
-                    // for an ad-hoc task, get the views that the user has access to
-                    viewIdList.AddRange((await _playerService.GetViewsAsync(ct)).Select(x => x.Id).ToList());
+                    viewId = scenarioEntity.ViewId;
                 }
                 // at this point, the VmMask could contain an actual mask, or a comma separated list of VM ID's
                 var vmMaskList = taskToExecute.VmMask.Split(",").ToList();
@@ -570,28 +622,24 @@ namespace Steamfitter.Api.Services
                 }
                 // determine if VM's should match by Name or ID
                 var matchName = vmIdList.Count() == 0;
-                // create a VmList from the view ID list and the VmMask matching criteria
-                foreach (var viewId in viewIdList)
+                // create a VmList from the view ID and the VmMask matching criteria
+                try
                 {
-                    try
+                    var viewVms = await _playerVmService.GetViewVmsAsync((Guid)viewId, ct);
+                    foreach (var vm in viewVms)
                     {
-                        var viewVms = await _playerVmService.GetViewVmsAsync((Guid)viewId, ct);
-                        foreach (var vm in viewVms)
+                        if ((!matchName && vmIdList.Contains((Guid)vm.Id)) || (matchName && vm.Name.ToLower().Contains(taskToExecute.VmMask.ToLower())))
                         {
-                            if ((!matchName && vmIdList.Contains((Guid)vm.Id)) || (matchName && vm.Name.ToLower().Contains(taskToExecute.VmMask.ToLower())))
-                            {
-                                vmList.Add(vm);
-                            }
+                            vmList.Add(vm);
                         }
                     }
-                    catch (System.Exception)
-                    {
-                        _logger.LogDebug($"CreateResultsAsync - No VM's found in view {viewId}");
-                    }
+                }
+                catch (System.Exception)
+                {
+                    _logger.LogDebug($"CreateResultsAsync - No VM's found in view {viewId}");
                 }
                 // make sure we are only matching a SINGLE view
-                var distinctViewIds = vmList.Select(v => (Guid)v.ViewId).Distinct();
-                if (distinctViewIds.Count()  == 1)
+                if (vmList.Count() > 0)
                 {
                     // create a result for each matched VM
                     foreach (var vm in vmList)
@@ -606,16 +654,20 @@ namespace Steamfitter.Api.Services
                 {
                     // Houston, we've had a problem.  Create a single result to show the error
                     var resultEntity = NewResultEntity(taskToExecute);
-                    if (distinctViewIds.Count() == 0)
+                    if (viewId != null)
                     {
                         // The problem is that NO VM's matched
                         resultEntity.ActualOutput = $"No matched VMs!  VM Mask: {taskToExecute.VmMask}.";
                     }
+                    else if (scenarioEntity != null)
+                    {
+                        // The problem is that this task did not have a scenario or a viewId
+                        resultEntity.ActualOutput = $"There was no view associated with this task's scenario!  {taskToExecute.Name} ({taskToExecute.Id})";
+                    }
                     else
                     {
-                        // The problem is that VM's matched from multiple views
-                        var matchedVms = string.Join(",", vmList.Select(v => $"{v.Name}(viewId:{v.ViewId})"));
-                        resultEntity.ActualOutput = $"Matched VMs in more than one view!  VM Mask: {taskToExecute.VmMask}.  Matched VMs: {matchedVms}.";
+                        // The problem is that this task did not have a scenario or a viewId
+                        resultEntity.ActualOutput = $"There was no scenario associated with this task!  {taskToExecute.Name} ({taskToExecute.Id})";
                     }
                     _logger.LogError($"CreateResultsAsync - {resultEntity.ActualOutput}");
                     resultEntity.Status = Data.TaskStatus.error;
@@ -653,62 +705,16 @@ namespace Steamfitter.Api.Services
             }
         }
 
-        private async STT.Task<Data.TaskStatus> ExecuteStackstormTaskAsync(TaskEntity taskToExecute, List<ResultEntity> resultEntityList, CancellationToken ct)
+        private async STT.Task<Data.TaskStatus> ProcessTaskAsync(TaskEntity taskToExecute, List<ResultEntity> resultEntityList, CancellationToken ct)
         {
             var overallStatus = Data.TaskStatus.succeeded;
             var tasks = new List<STT.Task<string>>();
             var xref = new Dictionary<int, ResultEntity>();
             foreach (var resultEntity in resultEntityList)
             {
-                STT.Task<string> task = null;
-                resultEntity.InputString = resultEntity.InputString.Replace("VmGuid", "Moid").Replace("{moid}", resultEntity.VmId.ToString());
+                resultEntity.InputString = resultEntity.InputString.Replace("{moid}", resultEntity.VmId.ToString());
                 resultEntity.VmName = _stackStormService.GetVmName((Guid)resultEntity.VmId);
-                switch (taskToExecute.Action)
-                {
-                    case TaskAction.guest_file_read:
-                    {
-                        task = STT.Task.Run(() => _stackStormService.GuestReadFile(resultEntity.InputString));
-                        break;
-                    }
-                    case TaskAction.guest_process_run:
-                    {
-                        task = STT.Task.Run(() => _stackStormService.GuestCommand(resultEntity.InputString));
-                        break;
-                    }
-                    case TaskAction.guest_process_run_fast:
-                    {
-                        task = STT.Task.Run(() => _stackStormService.GuestCommandFast(resultEntity.InputString));
-                        break;
-                    }
-                    case TaskAction.vm_hw_power_on:
-                    {
-                        task = STT.Task.Run(() => _stackStormService.VmPowerOn(resultEntity.InputString));
-                        break;
-                    }
-                    case TaskAction.vm_hw_power_off:
-                    {
-                        task = STT.Task.Run(() => _stackStormService.VmPowerOff(resultEntity.InputString));
-                        break;
-                    }
-                    case TaskAction.vm_create_from_template:
-                    {
-                        task = STT.Task.Run(() => _stackStormService.CreateVmFromTemplate(resultEntity.InputString));
-                        break;
-                    }
-                    case TaskAction.vm_hw_remove:
-                    {
-                        task = STT.Task.Run(() => _stackStormService.VmRemove(resultEntity.InputString));
-                        break;
-                    }
-                    default:
-                    {
-                        var message = $"Task Action {taskToExecute.Action} has not been implemented.";
-                        _logger.LogError(message);
-                        resultEntity.Status = Data.TaskStatus.failed;
-                        resultEntity.StatusDate = DateTime.UtcNow;
-                        break;
-                    }
-                }
+                var task = RunTask(taskToExecute, resultEntity, ct);
                 tasks.Add(task);
                 xref[task.Id] = resultEntity;
             }
@@ -741,6 +747,95 @@ namespace Steamfitter.Api.Services
                 }
             }
             return overallStatus;
+        }
+
+        private STT.Task<string> RunTask(TaskEntity taskToExecute, ResultEntity resultEntity, CancellationToken ct)
+        {
+            STT.Task<string> task = null;
+            switch (taskToExecute.ApiUrl)
+            {
+                case "stackstorm": // _stackStormService
+                {
+                    switch (taskToExecute.Action)
+                    {
+                        case TaskAction.guest_file_read:
+                        {
+                            task = STT.Task.Run(() => _stackStormService.GuestReadFile(resultEntity.InputString));
+                            break;
+                        }
+                        case TaskAction.guest_file_upload_content:
+                        {
+                            task = STT.Task.Run(() => _stackStormService.GuestFileUploadContent(resultEntity.InputString));
+                            break;
+                        }
+                        case TaskAction.guest_process_run:
+                        {
+                            task = STT.Task.Run(() => _stackStormService.GuestCommand(resultEntity.InputString));
+                            break;
+                        }
+                        case TaskAction.guest_process_run_fast:
+                        {
+                            task = STT.Task.Run(() => _stackStormService.GuestCommandFast(resultEntity.InputString));
+                            break;
+                        }
+                        case TaskAction.vm_hw_power_on:
+                        {
+                            task = STT.Task.Run(() => _stackStormService.VmPowerOn(resultEntity.InputString));
+                            break;
+                        }
+                        case TaskAction.vm_hw_power_off:
+                        {
+                            task = STT.Task.Run(() => _stackStormService.VmPowerOff(resultEntity.InputString));
+                            break;
+                        }
+                        case TaskAction.vm_create_from_template:
+                        {
+                            task = STT.Task.Run(() => _stackStormService.CreateVmFromTemplate(resultEntity.InputString));
+                            break;
+                        }
+                        case TaskAction.vm_hw_remove:
+                        {
+                            task = STT.Task.Run(() => _stackStormService.VmRemove(resultEntity.InputString));
+                            break;
+                        }
+                        default:
+                        {
+                            var message = $"Stackstorm Action {taskToExecute.Action} has not been implemented.";
+                            _logger.LogError(message);
+                            resultEntity.Status = Data.TaskStatus.failed;
+                            resultEntity.StatusDate = DateTime.UtcNow;
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case "vm": // _playerVmService
+                {
+                    switch (taskToExecute.Action)
+                    {
+                        case TaskAction.guest_file_write:
+                        default:
+                        {
+                            var message = $"Player VM API Action {taskToExecute.Action} has not been implemented.";
+                            _logger.LogError(message);
+                            resultEntity.Status = Data.TaskStatus.failed;
+                            resultEntity.StatusDate = DateTime.UtcNow;
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case "player":
+                case "caster":
+                default:
+                {
+                    var message = $"API ({taskToExecute.ApiUrl}) is not currently implemented";
+                    _logger.LogError(message);
+                    throw new NotImplementedException(message);
+                }
+            }
+
+            return task;
         }
 
         private Data.TaskStatus ProcessResult(ResultEntity resultEntity, CancellationToken ct)
@@ -808,7 +903,7 @@ namespace Steamfitter.Api.Services
                 var wasPassedOn = false;
                 if (subtaskEntity.DelaySeconds > 0)
                 {
-                    wasPassedOn = await ScheduleTask(subtaskEntity);
+                    wasPassedOn = await ScheduleTask(subtaskEntity, null, ct);
                     if (!wasPassedOn)
                     {
                         var resultEntity = NewResultEntity(subtaskEntity);
@@ -852,20 +947,33 @@ namespace Steamfitter.Api.Services
             return executeResponse.IsSuccessStatusCode;
         }
 
-        private async STT.Task<bool> ScheduleTask(TaskEntity taskEntity)
+        private async STT.Task<bool> ScheduleTask(TaskEntity taskEntity, DateTime? lastIterationTime, CancellationToken ct)
         {
-            var startTime = DateTime.UtcNow.AddSeconds(taskEntity.DelaySeconds).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
-            var endTime = DateTime.UtcNow.AddSeconds(taskEntity.DelaySeconds + (taskEntity.Iterations * taskEntity.IntervalSeconds)).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
+            var startTimeString = "";
+            var endTimeString = "";
+            if (lastIterationTime == null)
+            {
+                // set the task initial delay
+                startTimeString = DateTime.UtcNow.AddSeconds(taskEntity.DelaySeconds).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
+                endTimeString = DateTime.UtcNow.AddSeconds(taskEntity.DelaySeconds).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
+            }
+            else
+            {
+                // set the iteration interval
+                startTimeString = ((DateTime)lastIterationTime).AddSeconds(taskEntity.IntervalSeconds).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
+                endTimeString = ((DateTime)lastIterationTime).AddSeconds(taskEntity.IntervalSeconds).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
+
+            }
             var workorder = new {
                 groupName = "steamfitter",
-                start = startTime,
-                end = endTime,
+                start = startTimeString,
+                end = endTimeString,
                 job = "WebHook",
                 webhookid = _options.ForemanWebhookId,
                 woTriggers = new[] {
                     new {
                         groupName = "steamfitter",
-                        interval = taskEntity.IntervalSeconds
+                        interval = 0    // not using Foreman.Api's iteration capability. (interval = taskEntity.IntervalSeconds)
                     }
                 },
                 woParams = new [] {
@@ -884,7 +992,7 @@ namespace Steamfitter.Api.Services
             var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json-patch+json");
             try
             {
-                var scheduleResponse = await client.PostAsync(relativeAddress, httpContent);
+                var scheduleResponse = await client.PostAsync(relativeAddress, httpContent, ct);
                 if (!scheduleResponse.IsSuccessStatusCode)
                 {
                     _logger.LogError($"Error scheduling Task {taskEntity.Id}! Response was {scheduleResponse.StatusCode}: {scheduleResponse.ReasonPhrase} - {scheduleResponse.RequestMessage}");
@@ -912,15 +1020,18 @@ namespace Steamfitter.Api.Services
                 {
                     TaskId = taskEntity.Id,
                     ApiUrl = taskEntity.ApiUrl,
+                    Action = taskEntity.Action,
                     InputString = taskEntity.InputString,
                     ExpirationSeconds = expirationSeconds,
                     Iterations = taskEntity.Iterations,
+                    CurrentIteration = taskEntity.CurrentIteration > 0 ? taskEntity.CurrentIteration : 1,
                     IntervalSeconds = taskEntity.IntervalSeconds,
                     Status = Data.TaskStatus.pending,
                     ExpectedOutput = taskEntity.ExpectedOutput,
                     SentDate = DateTime.UtcNow,
                     StatusDate = DateTime.UtcNow,
-                    DateCreated = DateTime.UtcNow
+                    DateCreated = DateTime.UtcNow,
+                    CreatedBy = _user.GetId()
                 };
 
             return resultEntity;

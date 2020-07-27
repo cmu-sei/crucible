@@ -9,26 +9,35 @@ DM20-0181
 */
 
 import { Injectable } from '@angular/core';
-import { UserManager, UserManagerSettings, User, WebStorageStateStore } from 'oidc-client';
+import {
+  UserManager,
+  UserManagerSettings,
+  User,
+  WebStorageStateStore,
+} from 'oidc-client';
 import { SettingsService } from '../settings/settings.service';
 
 @Injectable()
 export class AuthService {
-
   private userManager: UserManager;
   private user: User;
 
   constructor(private settingsService: SettingsService) {
-
     if (this.settingsService.UseLocalAuthStorage) {
-      (<any> this.settingsService.OIDCSettings.userStore) =  new WebStorageStateStore({store: window.localStorage});
+      (<any>(
+        this.settingsService.OIDCSettings.userStore
+      )) = new WebStorageStateStore({ store: window.localStorage });
     }
-        
-    this.userManager = new UserManager(this.settingsService.OIDCSettings);
-    this.userManager.events.addUserLoaded(user => { this.onTokenLoaded(user); });
-    this.userManager.events.addUserSignedOut(user => {this.logout();});
 
-    this.userManager.getUser().then(user => {
+    this.userManager = new UserManager(this.settingsService.OIDCSettings);
+    this.userManager.events.addUserLoaded((user) => {
+      this.onTokenLoaded(user);
+    });
+    this.userManager.events.addUserSignedOut(() => {
+      this.logout();
+    });
+
+    this.userManager.getUser().then((user) => {
       if (user != null && user.profile != null) {
         this.onTokenLoaded(user);
       }
@@ -36,13 +45,14 @@ export class AuthService {
   }
 
   public isAuthenticated(): Promise<boolean> {
-    return this.userManager.getUser().then(user => {
+    return this.userManager.getUser().then((user) => {
       return user != null && !user.expired;
     });
   }
 
   public startAuthentication(url: string): Promise<User> {
-    return this.userManager.signinRedirect({ state: url });
+    this.userManager.signinRedirect({ state: url });
+    return this.userManager.signinRedirectCallback(url);
   }
 
   public completeAuthentication(url: string): Promise<User> {
@@ -61,6 +71,10 @@ export class AuthService {
     return `${this.user.token_type} ${this.user.access_token}`;
   }
 
+  public getAuthorizationToken(): string {
+    return this.user.access_token;
+  }
+
   public logout() {
     return this.userManager.signoutRedirect();
   }
@@ -69,4 +83,3 @@ export class AuthService {
     this.user = user;
   }
 }
-

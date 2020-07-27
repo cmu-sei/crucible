@@ -8,21 +8,20 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {TaskStore} from './task.store';
-import {TaskQuery} from './task.query';
-import {ResultStore} from 'src/app/data/result/result.store';
-import {ResultQuery} from 'src/app/data/result/result.query';
-import {Injectable} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {PageEvent} from '@angular/material';
-import {Router, ActivatedRoute} from '@angular/router';
-import {Task, TaskService, Result, ResultService} from 'src/app/swagger-codegen/dispatcher.api';
-import {map, take, tap} from 'rxjs/operators';
-import {BehaviorSubject, Observable, combineLatest} from 'rxjs';
+import { TaskStore } from './task.store';
+import { TaskQuery } from './task.query';
+import { ResultDataService } from 'src/app/data/result/result-data.service';
+import { Injectable } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { PageEvent } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Task, TaskService, Result } from 'src/app/swagger-codegen/dispatcher.api';
+import { map, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 
 export interface Clipboard {
-  taskId: string;
-  isCut: string;
+  id: string;
+  isCut: boolean;
 }
 
 export interface PasteLocation {
@@ -35,10 +34,7 @@ export interface PasteLocation {
 })
 
 export class TaskDataService {
-  private _requestedTaskId: string;
-  private _requestedTaskId$ = this.activatedRoute.queryParamMap.pipe(
-    map(params => params.get('taskId') || ''),
-  );
+  private _requestedTaskId$ = new BehaviorSubject<string>('');
   readonly taskList: Observable<Task[]>;
   readonly selected: Observable<Task>;
   readonly filterControl = new FormControl();
@@ -52,13 +48,20 @@ export class TaskDataService {
     private taskStore: TaskStore,
     private taskQuery: TaskQuery,
     private taskService: TaskService,
-    private resultStore: ResultStore,
-    private resultQuery: ResultQuery,
-    private resultService: ResultService,
+    private resultDataService: ResultDataService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    activatedRoute: ActivatedRoute
   ) {
     this.filterTerm = activatedRoute.queryParamMap.pipe(
+      tap(params => {
+        const taskId = params.get('taskId') || '';
+        if (taskId !== this._requestedTaskId$.getValue()) {
+          if (!!taskId) {
+            this.loadById(taskId);
+          }
+          this._requestedTaskId$.next(taskId);
+        }
+      }),
       map(params => params.get('taskmask') || '')
     );
     this.filterControl.valueChanges.subscribe(term => {
@@ -94,19 +97,7 @@ export class TaskDataService {
     );
     this.selected = combineLatest([this.taskList, this._requestedTaskId$]).pipe(
       map(([taskList, requestedTaskId]) => {
-        let selectedTask: Task = null;
-        if (taskList && taskList.length > 0 && requestedTaskId) {
-          selectedTask = taskList.find(task => task.id === requestedTaskId);
-          if (selectedTask && selectedTask.id !== this._requestedTaskId) {
-            this.taskStore.setActive(selectedTask.id);
-            this._requestedTaskId = requestedTaskId;
-          }
-        } else {
-          this._requestedTaskId = '';
-          this.taskStore.setActive('');
-          this.taskStore.update({taskList: []});
-        }
-        return selectedTask;
+        return taskList.find(task => task.id === requestedTaskId);
       })
     );
   }
@@ -132,28 +123,45 @@ export class TaskDataService {
 
   loadByScenario(scenarioId: string) {
     this.taskStore.set([]);
-    this.resultStore.set([]);
     this.taskService.getScenarioTasks(scenarioId).pipe(take(1)).subscribe(tasks => {
       this.taskStore.set(tasks);
       }
     );
-    this.resultService.getScenarioResults(scenarioId).pipe(take(1)).subscribe(results => {
-      results.forEach(r => this.fixDates(r));
-      this.resultStore.set(results);
-    });
+    this.resultDataService.loadByScenario(scenarioId);
+  }
+
+  loadByUser(userId: string) {
+    this.taskStore.set([]);
+    this.taskService.getUserTasks(userId).pipe(take(1)).subscribe(tasks => {
+      this.taskStore.set(tasks);
+      }
+    );
+    this.resultDataService.loadByUser(userId);
+  }
+
+  loadByView(viewId: string) {
+    this.taskStore.set([]);
+    this.taskService.getViewTasks(viewId).pipe(take(1)).subscribe(tasks => {
+      this.taskStore.set(tasks);
+      }
+    );
+    this.resultDataService.loadByView(viewId);
+  }
+
+  loadByVm(vmId: string) {
+    this.taskStore.set([]);
+    this.taskService.getScenarioTasks(vmId).pipe(take(1)).subscribe(tasks => {
+      this.taskStore.set(tasks);
+      }
+    );
+    this.resultDataService.loadByVm(vmId);
   }
 
   loadById(id: string) {
     this.taskService.getTask(id).pipe(take(1)).subscribe(task => {
       this.updateStore({...task});
-      this.resultService.getTaskResults(id).pipe(take(1)).subscribe(results => {
-        results.forEach(r => this.fixDates(r));
-        this.resultStore.set(results);
-      }, error => {
-        this.resultStore.set([]);
-      });
-    }, error => {
-      this.resultStore.set([]);
+      this.resultDataService.loadByTask(id);
+
     });
   }
 
@@ -182,7 +190,7 @@ export class TaskDataService {
 
   execute(id: string) {
     this.taskService.executeTask(id).pipe(take(1)).subscribe(results => {
-      this.updateResultStoreMany(results);
+      this.resultDataService.updateStoreMany(results);
     });
   }
 
@@ -240,18 +248,29 @@ export class TaskDataService {
     this.taskStore.remove(id);
   }
 
-  updateResultStore(result: Result) {
-    this.setAsDates(result);
-    this.resultStore.upsert(result.id, result);
+  resetStore() {
+    this.taskStore.set([]);
+    this.resultDataService.resetStore();
+    if (this._requestedTaskId$.getValue()) {
+      this.loadById(this._requestedTaskId$.getValue());
+    }
   }
 
-  updateResultStoreMany(results: Result[]) {
-    results.forEach(result => this.setAsDates(result));
-    this.resultStore.upsertMany(results);
+  fixDates(result: Result) {
+    // set as date object and handle c# not adding 'Z' to UTC dates.
+    result.dateCreated = new Date(result.dateCreated + 'Z');
+    result.dateModified = new Date(result.dateModified + 'Z');
+    result.statusDate = new Date(result.statusDate + 'Z');
+    result.sentDate = new Date(result.sentDate + 'Z');
   }
 
-  deleteFromResultStore(id: string) {
-    this.resultStore.remove(id);
+  setAsDates(result: Result) {
+    // set to a date object.
+    result.dateCreated = new Date(result.dateCreated);
+    result.dateModified = new Date(result.dateModified);
+    result.statusDate = new Date(result.statusDate);
+    result.sentDate = new Date(result.sentDate);
+
   }
 
   resetResultStore() {

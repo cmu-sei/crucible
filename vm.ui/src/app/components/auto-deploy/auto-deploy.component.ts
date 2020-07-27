@@ -8,25 +8,25 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit } from '@angular/core';
-import { VmModel } from '../../models/vm-model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AutoDeployService } from '../../services/auto-deploy/auto-deploy.service';
-import { VmService } from '../../services/vm/vm.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
-import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { interval, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { VmService } from '../../vms/state/vms.service';
 
 @Component({
   selector: 'app-auto-deploy',
   templateUrl: './auto-deploy.component.html',
-  styleUrls: ['./auto-deploy.component.css']
+  styleUrls: ['./auto-deploy.component.css'],
 })
-export class AutoDeployComponent implements OnInit {
-
+export class AutoDeployComponent implements OnInit, OnDestroy {
   public showDeployButton = false;
   public deployButtonDisabled = false;
 
   private viewId: string;
+  private unsubscribe$ = new Subject();
 
   constructor(
     public autoDeployService: AutoDeployService,
@@ -39,31 +39,35 @@ export class AutoDeployComponent implements OnInit {
     this.viewId = this.route.snapshot.params['viewId'];
 
     this.vmService.GetViewVms(true, true).subscribe(
-      vms => {
-          const vm = vms[0];
+      (vms) => {
+        const vm = vms[0];
 
-          if (vm) {
-            window.location.href = vm.url;
-          } else {
-            this.autoDeployService.getDeploymentForView(this.viewId).subscribe(
-              result => {
-                if (!result.DefaultTemplateConfigured) {
-                  this.snackBar.open('A default workstation has not been configured for your Team.');
-                  this.deployButtonDisabled = true;
-                  this.showDeployButton = true;
-                } else if (result.RoomFull) {
-                  // tslint:disable-next-line:max-line-length
-                  this.snackBar.open('Your team\'s workstation allocation is full. Please contact an administrator to request additional capacity.');
-                  this.deployButtonDisabled = true;
-                  this.showDeployButton = true;
-                } else {
-                  this.showDeployButton = true;
-                }
+        if (vm) {
+          window.location.href = vm.url;
+        } else {
+          this.autoDeployService
+            .getDeploymentForView(this.viewId)
+            .subscribe((result) => {
+              if (!result.DefaultTemplateConfigured) {
+                this.snackBar.open(
+                  'A default workstation has not been configured for your Team.'
+                );
+                this.deployButtonDisabled = true;
+                this.showDeployButton = true;
+              } else if (result.RoomFull) {
+                // tslint:disable-next-line:max-line-length
+                this.snackBar.open(
+                  "Your team's workstation allocation is full. Please contact an administrator to request additional capacity."
+                );
+                this.deployButtonDisabled = true;
+                this.showDeployButton = true;
+              } else {
+                this.showDeployButton = true;
               }
-            );
-          }
+            });
+        }
       },
-      err => {
+      (err) => {
         console.log(err);
       }
     );
@@ -71,28 +75,36 @@ export class AutoDeployComponent implements OnInit {
 
   public autoDeploy() {
     this.autoDeployService.deployToView(this.viewId).subscribe(
-      result => {
+      () => {
         this.deployButtonDisabled = true;
-        this.snackBar.open('Request Received. Please wait while your workstation is provisioned.');
+        this.snackBar.open(
+          'Request Received. Please wait while your workstation is provisioned.'
+        );
 
-        IntervalObservable.create(5000).subscribe(() => this.checkForWorkstation());
+        interval(5000)
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe(() => this.checkForWorkstation());
       },
-      err => {
+      (err) => {
         console.log(err);
         this.deployButtonDisabled = false;
-      });
+      }
+    );
     this.deployButtonDisabled = true;
   }
 
   private checkForWorkstation() {
-    this.vmService.GetViewVms(true, true).subscribe(
-      vms => {
-        const vm = vms[0];
+    this.vmService.GetViewVms(true, true).subscribe((vms) => {
+      const vm = vms[0];
 
-        if (vm) {
-          window.location.href = vm.url;
-        }
+      if (vm) {
+        window.location.href = vm.url;
       }
-    );
+    });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.unsubscribe();
+    this.unsubscribe$.complete();
   }
 }

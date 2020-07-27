@@ -20,6 +20,7 @@ DM20-0181
  * Do not edit the class manually.
  */
 
+import { Task } from './task';
 
 export interface Result {
     id?: string;
@@ -27,10 +28,12 @@ export interface Result {
     vmId?: string;
     vmName?: string;
     apiUrl?: string;
-    inputString?: string;
+    action?: Task.ActionEnum;
+    actionParameters?: { [key: string]: string; } | null;
     expirationSeconds?: number;
     iterations?: number;
     intervalSeconds?: number;
+    currentIteration?: number;
     status?: Result.StatusEnum;
     expectedOutput?: string;
     actualOutput?: string;

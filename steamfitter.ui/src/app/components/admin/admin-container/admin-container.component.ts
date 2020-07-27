@@ -17,7 +17,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { User, Permission, UserPermission } from 'src/app/swagger-codegen/dispatcher.api/model/models';
 import { PermissionService, UserPermissionService } from 'src/app/swagger-codegen/dispatcher.api/api/api';
 import {Router, ActivatedRoute} from '@angular/router';
-import { AdminUsersService } from '../admin-users.service';
+import { UserDataService } from '../../../data/user/user-data.service';
 
 @Component({
   selector: 'app-admin-container',
@@ -25,13 +25,13 @@ import { AdminUsersService } from '../admin-users.service';
   styleUrls: ['./admin-container.component.css']
 })
 export class AdminContainerComponent implements OnDestroy {
-  loggedInUser = this.adminUsersService.loggedInUser;
+  loggedInUser = this.userDataService.loggedInUser;
   usersText = 'Users';
   showSection: Observable<string>;
   isSidebarOpen = true;
   isSuperUser = false;
   userList: Observable<User[]>;
-  filterControl: FormControl = this.adminUsersService.filterControl;
+  filterControl: FormControl = this.userDataService.filterControl;
   filterString: Observable<string>;
   permissionList: Observable<Permission[]>;
   pageSize: Observable<number>;
@@ -40,18 +40,18 @@ export class AdminContainerComponent implements OnDestroy {
 
   constructor(
     private router: Router,
-    private adminUsersService: AdminUsersService,
+    private userDataService: UserDataService,
     activatedRoute: ActivatedRoute,
     private permissionService: PermissionService,
     private userPermissionService: UserPermissionService
   ) {
-    this.adminUsersService.isSuperUser.pipe(takeUntil(this.unsubscribe$)).subscribe(result => {
+    this.userDataService.isSuperUser.pipe(takeUntil(this.unsubscribe$)).subscribe(result => {
       this.isSuperUser = result;
       if (!result) {
         router.navigate(['/']);
       }
     });
-    this.userList = this.adminUsersService.userList;
+    this.userList = this.userDataService.userList;
     this.permissionList = this.permissionService.getPermissions();
     this.filterString = activatedRoute.queryParamMap.pipe(
       map(params => (params.get('filter') || ''))
@@ -65,8 +65,8 @@ export class AdminContainerComponent implements OnDestroy {
     this.showSection = activatedRoute.queryParamMap.pipe(
       map(params => params.get('section') || this.usersText)
     );
-    this.adminUsersService.getUsersFromApi().pipe(takeUntil(this.unsubscribe$)).subscribe();
-    this.adminUsersService.getPermissionsFromApi().pipe(takeUntil(this.unsubscribe$)).subscribe();
+    this.userDataService.getUsersFromApi();
+    this.userDataService.getPermissionsFromApi().pipe(takeUntil(this.unsubscribe$)).subscribe();
     this.gotoUserSection();
   }
 
@@ -75,27 +75,27 @@ export class AdminContainerComponent implements OnDestroy {
   }
 
   logout() {
-    this.adminUsersService.logout();
+    this.userDataService.logout();
   }
 
   selectUser(userId: string) {
-    this.router.navigate([], { queryParams: { selectedUser: userId }, queryParamsHandling: 'merge'});
+    this.router.navigate([], { queryParams: { userId: userId }, queryParamsHandling: 'merge'});
   }
 
   addUserHandler(user: User) {
-    this.adminUsersService.addUser(user);
+    this.userDataService.addUser(user);
   }
 
   deleteUserHandler(user: User) {
-    this.adminUsersService.deleteUser(user);
+    this.userDataService.deleteUser(user);
   }
 
   addUserPermissionHandler(userPermission: UserPermission) {
-    this.adminUsersService.addUserPermission(userPermission);
+    this.userDataService.addUserPermission(userPermission);
   }
 
   removeUserPermissionHandler(userPermission: UserPermission) {
-    this.adminUsersService.deleteUserPermission(userPermission);
+    this.userDataService.deleteUserPermission(userPermission);
   }
 
   sortChangeHandler(sort: Sort) {

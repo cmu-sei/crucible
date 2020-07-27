@@ -38,6 +38,8 @@ namespace Steamfitter.Api.Data.Models
         public int DelaySeconds { get; set; }
         public int IntervalSeconds { get; set; }
         public int Iterations { get; set; }
+        public TaskIterationTermination IterationTermination { get; set; }
+        public int CurrentIteration { get; set; }
         public Guid? TriggerTaskId { get; set; }
         public virtual TaskEntity TriggerTask { get; set; }
         public TaskTrigger TriggerCondition { get; set; }

@@ -30,7 +30,7 @@ DM20-0181
               <img src="assets/img/{{ result.status }}.png" class="icon16" />
               {{result.vmName}}
             </button>
-            <button mat-button (click)="openVmConsole.emit(result.vmId); $event.stopPropagation();" title="Open {{result.vmName}}" style="min-width: 30px; width: 30px;">
+            <button mat-button (click)="openVmConsole(result.vmId); $event.stopPropagation();" title="Open {{result.vmName}}" style="min-width: 30px; width: 30px;">
               <mat-icon svgIcon="open_in_new" style="margin-left: -15px;"></mat-icon>
             </button>
           </div>
@@ -42,9 +42,9 @@ DM20-0181
           vmId: {{result.vmId}}<br>
           vmName: {{result.vmName}}<br>
           apiUrl: {{result.apiUrl}}<br>
-          inputString: {{result.inputString}}<br>
+          actionParameters:<br/> <span *ngFor="let k of result.actionParameters | keyvalue">&nbsp;&nbsp;&nbsp;&nbsp;{{k.key}}: {{k.key.toLowerCase() === 'password' ? '**************' : k.value}}<br/></span>
           expirationSeconds: {{result.expirationSeconds}}<br>
-          iterations: {{result.iterations}}<br>
+          iteration {{result.currentIteration}} of {{result.iterations}}<br>
           intervalSeconds: {{result.intervalSeconds}}<br>
           status: {{result.status}}<br>
           expectedOutput: {{result.expectedOutput}}<br>
@@ -66,9 +66,9 @@ DM20-0181
                     vmId: {{oldResult.vmId}}<br>
                     vmName: {{oldResult.vmName}}<br>
                     apiUrl: {{oldResult.apiUrl}}<br>
-                    inputString: {{oldResult.inputString}}<br>
+                    actionParameters:<br/> <span *ngFor="let k of result.actionParameters | keyvalue">&nbsp;&nbsp;&nbsp;&nbsp;{{k.key}}: {{k.key.toLowerCase() === 'password' ? '**************' : k.value}}<br/></span>
                     expirationSeconds: {{oldResult.expirationSeconds}}<br>
-                    iterations: {{oldResult.iterations}}<br>
+                    iteration {{oldResult.currentIteration}} of {{oldResult.iterations}}<br>
                     intervalSeconds: {{oldResult.intervalSeconds}}<br>
                     status: {{oldResult.status}}<br>
                     expectedOutput: {{oldResult.expectedOutput}}<br>

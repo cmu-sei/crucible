@@ -8,7 +8,7 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div>
+<div fxLayout="row" fxLayoutAlign="start center">
   <app-task-tree
     [taskList]="taskList"
     [resultList]="resultList"
@@ -23,6 +23,7 @@ DM20-0181
     (saveTask)="saveTaskHandler($event)"
     (sendToClipboard)="sendToClipboard($event)"
     (pasteClipboard)="pasteClipboard($event)"
+    (taskSelected)="taskSelectedHandler($event)"
 ></app-task-tree>
 </div>
 

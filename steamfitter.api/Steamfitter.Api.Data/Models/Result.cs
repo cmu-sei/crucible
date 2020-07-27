@@ -26,10 +26,12 @@ namespace Steamfitter.Api.Data.Models
         public Guid? VmId { get; set; }
         public string VmName { get; set; }
         public string ApiUrl { get; set; }
+        public TaskAction Action { get; set; }
         public string InputString { get; set; }
         public int ExpirationSeconds { get; set; }
         public int Iterations { get; set; }
         public int IntervalSeconds { get; set; }
+        public int CurrentIteration { get; set; }
         public TaskStatus Status { get; set; }
         public string ExpectedOutput { get; set; }
         public string ActualOutput { get; set; }
@@ -45,7 +47,7 @@ namespace Steamfitter.Api.Data.Models
                 .HasOne(w => w.Task)
                 .WithMany(d => d.Results)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 

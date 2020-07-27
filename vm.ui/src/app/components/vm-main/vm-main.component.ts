@@ -8,28 +8,57 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { VmsQuery } from '../../vms/state/vms.query';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { VmModel } from '../../vms/state/vm.model';
+import { SignalRService } from '../shared/signalr/signalr.service';
+import { RouterQuery } from '@datorama/akita-ng-router-store';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vm-main',
   templateUrl: './vm-main.component.html',
-  styleUrls: ['./vm-main.component.css']
+  styleUrls: ['./vm-main.component.css'],
 })
-export class VmMainComponent implements OnInit {
+export class VmMainComponent implements OnInit, OnDestroy {
+  constructor(
+    private vmQuery: VmsQuery,
+    private signalRService: SignalRService,
+    private routerQuery: RouterQuery
+  ) {}
 
-  constructor() { }
-
-  public openVms: Array<{[name: string]: string}>;
+  public openVms: Array<{ [name: string]: string }>;
   public selectedTab: number;
+  public vms$: Observable<VmModel[]>;
+  public vmErrors$ = new BehaviorSubject<Record<string, string>>({});
 
   ngOnInit() {
-    this.openVms = new Array<{[name: string]: string}>();
+    this.openVms = new Array<{ [name: string]: string }>();
     this.selectedTab = 0;
+
+    this.vms$ = combineLatest([this.vmQuery.selectAll(), this.vmErrors$]).pipe(
+      map(([vms, errors]) => {
+        return vms.map((y) => ({
+          ...y,
+          lastError: errors[y.id],
+        }));
+      })
+    );
+
+    this.signalRService
+      .startConnection()
+      .then(() => {
+        this.signalRService.joinView(this.routerQuery.getParams('viewId'));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  onOpenVmHere(vmObj: {[name: string]: string}) {
+  onOpenVmHere(vmObj: { [name: string]: string }) {
     // Only open if not already
-    const index = this.openVms.findIndex(vm => vm.name === vmObj.name);
+    const index = this.openVms.findIndex((vm) => vm.name === vmObj.name);
     if (index === -1) {
       this.openVms.push(vmObj);
       this.selectedTab = this.openVms.length;
@@ -39,15 +68,15 @@ export class VmMainComponent implements OnInit {
   }
 
   remove(name: string) {
-    const index = this.openVms.findIndex(vm => vm.name === name);
+    const index = this.openVms.findIndex((vm) => vm.name === name);
     if (index !== -1) {
       this.selectedTab = 0;
       this.openVms.splice(index, 1);
     }
   }
 
-  openInNewTab(vmObj: {[name: string]: string}) {
-    const index = this.openVms.findIndex(vm => vm.name === vmObj.name);
+  openInNewTab(vmObj: { [name: string]: string }) {
+    const index = this.openVms.findIndex((vm) => vm.name === vmObj.name);
     if (index !== -1) {
       this.selectedTab = 0;
       this.openVms.splice(index, 1);
@@ -55,5 +84,12 @@ export class VmMainComponent implements OnInit {
     }
   }
 
-}
+  ngOnDestroy() {
+    this.signalRService.leaveView(this.routerQuery.getParams('viewId'));
+    this.vmErrors$.complete();
+  }
 
+  onErrors(errors: { [key: string]: string }) {
+    this.vmErrors$.next(errors);
+  }
+}

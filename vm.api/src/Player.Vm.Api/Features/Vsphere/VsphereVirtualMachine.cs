@@ -21,15 +21,11 @@ namespace Player.Vm.Api.Features.Vsphere
 
         public string Name { get; set; }
 
-        public Guid ViewId { get; set; }
-
         public string Url { get; set; }
 
         public Guid? UserId { get; set; }
 
         public bool IsOwner { get; set; }
-
-        public Guid TeamId { get; set; }
 
         public string Ticket { get; set; }
 

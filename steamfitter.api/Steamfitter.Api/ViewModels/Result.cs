@@ -10,6 +10,7 @@ DM20-0181
 
 using Steamfitter.Api.Data;
 using System;
+using System.Collections.Generic;
 
 namespace Steamfitter.Api.ViewModels
 {
@@ -20,9 +21,11 @@ namespace Steamfitter.Api.ViewModels
         public Guid? VmId { get; set; }
         public string VmName { get; set; }
         public string ApiUrl { get; set; }
-        public string InputString { get; set; }
+        public TaskAction Action { get; set; }
+        public Dictionary<string, string> ActionParameters { get; set; }
         public int ExpirationSeconds { get; set; }
         public int Iterations { get; set; }
+        public int CurrentIteration { get; set; }
         public int IntervalSeconds { get; set; }
         public TaskStatus Status { get; set; }
         public string ExpectedOutput { get; set; }

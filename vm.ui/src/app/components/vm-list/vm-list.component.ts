@@ -16,15 +16,18 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
+  Input,
 } from '@angular/core';
-import { VmService } from '../../services/vm/vm.service';
-import { VmModel } from '../../models/vm-model';
-import { MatTableDataSource, MatPaginator, PageEvent } from '@angular/material';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { FileService } from '../../services/file/file.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { TeamsService } from '../../services/teams/teams.service';
 import { HttpEventType } from '@angular/common/http';
-import { take } from 'rxjs/operators';
+import { take, switchMap, filter } from 'rxjs/operators';
+import { VmModel } from '../../vms/state/vm.model';
+import { VmService } from '../../vms/state/vms.service';
+import { SelectContainerComponent } from 'ngx-drag-to-select';
 
 @Component({
   selector: 'app-vm-list',
@@ -33,7 +36,9 @@ import { take } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VmListComponent implements OnInit, AfterViewInit {
-  public vmModelDataSource: any;
+  public vmModelDataSource = new MatTableDataSource<VmModel>(
+    new Array<VmModel>()
+  );
   public displayedColumns: string[] = ['name'];
 
   // MatPaginator Output
@@ -46,8 +51,17 @@ export class VmListComponent implements OnInit, AfterViewInit {
   public showIps = false;
   public ipv4Only = true;
 
+  public selectedVms = new Array<string>();
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(SelectContainerComponent)
+  selectContainer: SelectContainerComponent;
   @Output() openVmHere = new EventEmitter<{ [name: string]: string }>();
+  @Output() errors = new EventEmitter<{ [key: string]: string }>();
+
+  @Input() set vms(val: VmModel[]) {
+    this.vmModelDataSource.data = val;
+  }
 
   constructor(
     public vmService: VmService,
@@ -60,9 +74,6 @@ export class VmListComponent implements OnInit, AfterViewInit {
     this.pageEvent = new PageEvent();
     this.pageEvent.pageIndex = 0;
     this.pageEvent.pageSize = this.defaultPageSize;
-    this.vmModelDataSource = new MatTableDataSource<VmModel>(
-      new Array<VmModel>()
-    );
 
     // Create a filterPredicate that tells the Search to ONLY search on the name column
     this.vmModelDataSource.filterPredicate = (
@@ -75,14 +86,14 @@ export class VmListComponent implements OnInit, AfterViewInit {
       // Or if you don't want to specify specifics columns =>
       // const columns = (<any>Object).values(data);
       // Main loop
-      filterArray.forEach((filter) => {
+      filterArray.forEach((f) => {
         const customFilter = [];
         columns.forEach((column) =>
-          customFilter.push(column.toLowerCase().includes(filter))
+          customFilter.push(column.toLowerCase().includes(f))
         );
 
         data.ipAddresses.forEach((address) =>
-          customFilter.push(address.includes(filter))
+          customFilter.push(address.includes(f))
         );
 
         matchFilter.push(customFilter.some(Boolean)); // OR
@@ -94,16 +105,8 @@ export class VmListComponent implements OnInit, AfterViewInit {
       .GetViewVms(true, false)
       .pipe(take(1))
       .subscribe(
-        (res) => {
+        () => {
           this.vmApiResponded = true;
-          if (res != null) {
-            res.forEach((vm) => {
-              vm.url = vm.url + '?viewId=' + this.vmService.viewId;
-              vm.state = 'on';
-            });
-
-            this.vmModelDataSource.data = res;
-          }
         },
         (error) => {
           console.log('The VM API is not responding.  ' + error.message);
@@ -116,9 +119,10 @@ export class VmListComponent implements OnInit, AfterViewInit {
     this.vmModelDataSource.paginator = this.paginator;
   }
 
-  /*onPage(pageEvnt) {
-    this.pageEvent = PageEvent;
-  }*/
+  onPage(pageEvent) {
+    this.pageEvent = pageEvent;
+    this.selectContainer.clearSelection();
+  }
 
   /**
    * Called by UI to add a filter to the vmModelDataSource
@@ -216,10 +220,64 @@ export class VmListComponent implements OnInit, AfterViewInit {
   }
 
   public getIpAddresses(vm: VmModel): string[] {
+    if (vm.ipAddresses == null) {
+      return [];
+    }
+
     if (this.ipv4Only) {
       return vm.ipAddresses.filter((x) => !x.includes(':'));
     } else {
       return vm.ipAddresses;
     }
   }
+
+  public powerOffSelected() {
+    this.performAction(VmAction.PowerOff, 'Power Off', 'power off');
+  }
+
+  public powerOnSelected() {
+    this.performAction(VmAction.PowerOn, 'Power On', 'power on');
+  }
+
+  public shutdownSelected() {
+    this.performAction(VmAction.Shutdown, 'Shutdown', 'shutdown');
+  }
+
+  private performAction(action: VmAction, title: string, actionName: string) {
+    this.dialogService
+      .confirm(
+        `${title}`,
+        `Are you sure you want to ${actionName} ${this.selectedVms.length} selected machines?`,
+        { buttonTrueText: 'Confirm' }
+      )
+      .pipe(
+        filter((result) => result.wasCancelled === false),
+        switchMap(() => {
+          this.errors.emit({});
+
+          switch (action) {
+            case VmAction.PowerOff:
+              return this.vmService.powerOff(this.selectedVms);
+            case VmAction.PowerOn:
+              return this.vmService.powerOn(this.selectedVms);
+            case VmAction.Shutdown:
+              return this.vmService.shutdown(this.selectedVms);
+          }
+        }),
+        take(1)
+      )
+      .subscribe((x) => {
+        this.errors.emit(x.errors);
+      });
+  }
+
+  public trackByVmId(item) {
+    return item.id;
+  }
+}
+
+enum VmAction {
+  PowerOn,
+  PowerOff,
+  Shutdown,
 }

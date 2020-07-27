@@ -194,4 +194,14 @@ export class CwdTableComponent<T> implements OnInit, OnChanges {
       return index;
     }
   }
+
+  afterExpand(event, item: T) {
+    const expand = true;
+    this.expand.emit({ expand, item });
+  }
+
+  afterCollapse(event, item: T) {
+    const expand = false;
+    this.expand.emit({ expand, item });
+  }
 }

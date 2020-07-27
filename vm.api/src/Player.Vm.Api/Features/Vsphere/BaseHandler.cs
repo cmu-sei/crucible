@@ -18,6 +18,10 @@ using Player.Vm.Api.Infrastructure.Exceptions;
 using AutoMapper;
 using Player.Vm.Api.Domain.Vsphere.Services;
 using Player.Vm.Api.Features.Vms;
+using Player.Vm.Api.Domain.Services;
+using System.Security.Principal;
+using System.Security.Claims;
+using Player.Vm.Api.Infrastructure.Extensions;
 
 namespace Player.Vm.Api.Features.Vsphere
 {
@@ -25,16 +29,22 @@ namespace Player.Vm.Api.Features.Vsphere
     {
         private readonly IMapper _mapper;
         private readonly IVsphereService _vsphereService;
+        private readonly IPlayerService _playerService;
+        private readonly Guid _userId;
 
         public BaseHandler(
             IMapper mapper,
-            IVsphereService vsphereService)
+            IVsphereService vsphereService,
+            IPlayerService playerService,
+            IPrincipal principal)
         {
             _mapper = mapper;
             _vsphereService = vsphereService;
+            _playerService = playerService;
+            _userId = (principal as ClaimsPrincipal).GetId();
         }
 
-        protected async Task<VsphereVirtualMachine> GetVsphereVirtualMachine(Features.Vms.Vm vm)
+        protected async Task<VsphereVirtualMachine> GetVsphereVirtualMachine(Features.Vms.Vm vm, CancellationToken cancellationToken)
         {
             var domainMachine = await _vsphereService.GetMachineById(vm.Id);
 
@@ -42,12 +52,19 @@ namespace Player.Vm.Api.Features.Vsphere
                 throw new EntityNotFoundException<VsphereVirtualMachine>();
 
             var vsphereVirtualMachine = _mapper.Map<VsphereVirtualMachine>(domainMachine);
+            var canManage = await _playerService.CanManageTeamsAsync(vm.TeamIds, false, cancellationToken);
 
             vsphereVirtualMachine.Ticket = await _vsphereService.GetConsoleUrl(domainMachine); ;
-            vsphereVirtualMachine.NetworkCards = await _vsphereService.GetNicOptions(vm.Id, vm.CanAccessNicConfiguration, vm.AllowedNetworks, domainMachine);
+            vsphereVirtualMachine.NetworkCards = await _vsphereService.GetNicOptions(
+                id: vm.Id,
+                canManage: canManage,
+                allowedNetworks: vm.AllowedNetworks,
+                machine: domainMachine);
 
             // copy vm properties
             vsphereVirtualMachine = _mapper.Map(vm, vsphereVirtualMachine);
+            vsphereVirtualMachine.CanAccessNicConfiguration = canManage;
+            vsphereVirtualMachine.IsOwner = vsphereVirtualMachine.UserId == _userId;
 
             return vsphereVirtualMachine;
         }

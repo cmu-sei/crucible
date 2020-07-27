@@ -25,10 +25,12 @@ namespace Player.Vm.Api.Domain.Events
     public class EntityUpdated<TEntity> : INotification
     {
         public TEntity Entity { get; set; }
+        public string[] ModifiedProperties { get; set; }
 
-        public EntityUpdated(TEntity entity)
+        public EntityUpdated(TEntity entity, string[] modifiedProperties)
         {
             Entity = entity;
+            ModifiedProperties = modifiedProperties;
         }
     }
 

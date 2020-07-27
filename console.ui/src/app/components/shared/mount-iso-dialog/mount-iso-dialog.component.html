@@ -11,28 +11,54 @@ DM20-0181
 <div mat-dialog-title>
   <label>Select the file to mount ...&nbsp;&nbsp;&nbsp;</label>
   <mat-form-field>
-    <input name="vmSearch" matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <input
+      name="isoSearch"
+      matInput
+      (keyup)="onSearch($event.target.value)"
+      placeholder="Search"
+    />
   </mat-form-field>
 </div>
-<div style="overflow:scroll; height:350px;">
+<div style="overflow: scroll; height: 350px;">
   <mat-selection-list #selectedIsos>
-    <button mat-button (click)="showTeamIsos = !showTeamIsos;"><b>Team Files &gt;</b></button>
-    <span *ngIf="showTeamIsos">
-        <mat-list-option *ngFor="let iso of filteredTeamIsos" [selected]="iso === selectedIso" (click)=selectThisIso(iso)>
-            <h4 matLine>{{iso.filename}}</h4>
+    <div *ngFor="let result of isoResults">
+      <button mat-button (click)="result.hide = !result.hide">
+        <b
+          >{{ result.viewName }} Files ({{ result.isos.length }})
+          {{ result.hide ? '^' : '>' }}</b
+        >
+      </button>
+      <span *ngIf="!result.hide">
+        <mat-list-option
+          *ngFor="let iso of result.display"
+          [selected]="iso === selectedIso"
+          (click)="selectThisIso(iso)"
+        >
+          <h4 matLine>{{ iso.filename }}</h4>
+        </mat-list-option>
+      </span>
+      <div *ngFor="let teamResult of result.teamIsoResults">
+        <button mat-button (click)="teamResult.hide = !teamResult.hide">
+          <b
+            >{{ teamResult.teamName }} Files ({{ teamResult.isos.length }})
+            {{ teamResult.hide ? '^' : '>' }}</b
+          >
+        </button>
+        <span *ngIf="!teamResult.hide">
+          <mat-list-option
+            *ngFor="let iso of teamResult.display"
+            [selected]="iso === selectedIso"
+            (click)="selectThisIso(iso)"
+          >
+            <h4 matLine>{{ iso.filename }}</h4>
           </mat-list-option>
         </span>
-        <mat-divider></mat-divider>
-        <button mat-button (click)="showPublicIsos = !showPublicIsos;"><b>Public Files &gt;</b></button>
-    <span *ngIf="showPublicIsos" >
-      <mat-list-option *ngFor="let iso of filteredPublicIsos" [selected]="iso === selectedIso" (click)=selectThisIso(iso)>
-        <h4 matLine>{{iso.filename}}</h4>
-      </mat-list-option>
-    </span>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
   </mat-selection-list>
 </div>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
   <button mat-stroked-button (click)="close()" tabIndex="4">Cancel</button>
   <button mat-stroked-button (click)="done()" tabindex="5">Mount</button>
 </mat-dialog-actions>
-

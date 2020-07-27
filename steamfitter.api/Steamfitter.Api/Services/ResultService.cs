@@ -110,10 +110,10 @@ namespace Steamfitter.Api.Services
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
 
-            var taskIdList = _context.Tasks.Where(dt => dt.UserId == userId && dt.ScenarioTemplateId == null && dt.ScenarioId == null).Select(dt => dt.Id.ToString()).ToList();
+            var taskIdList = _context.Tasks.Where(dt => dt.UserId == userId).Select(dt => dt.Id.ToString()).ToList();
             var results = _context.Results.Where(r => taskIdList.Contains(r.TaskId.ToString()));
 
-            return _mapper.Map<IEnumerable<ViewModels.Result>>(results);
+            return _mapper.Map<IEnumerable<ViewModels.Result>>(results.OrderByDescending(r => r.StatusDate));
         }
         
         public async STT.Task<IEnumerable<ViewModels.Result>> GetByVmIdAsync(Guid vmId, CancellationToken ct)

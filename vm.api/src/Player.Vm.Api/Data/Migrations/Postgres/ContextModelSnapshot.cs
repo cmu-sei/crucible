@@ -51,9 +51,17 @@ namespace Player.Vm.Api.Data.Migrations.Postgres
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<string>("AllowedNetworks")
+                    b.Property<string[]>("AllowedNetworks")
                         .HasColumnName("allowed_networks")
-                        .HasColumnType("text");
+                        .HasColumnType("text[]");
+
+                    b.Property<bool>("HasPendingTasks")
+                        .HasColumnName("has_pending_tasks")
+                        .HasColumnType("boolean");
+
+                    b.Property<string[]>("IpAddresses")
+                        .HasColumnName("ip_addresses")
+                        .HasColumnType("text[]");
 
                     b.Property<string[]>("IpAddresses")
                         .HasColumnName("ip_addresses")

@@ -32,12 +32,14 @@ export interface Task {
     vmMask?: string;
     vmList?: Array<string>;
     apiUrl?: string;
-    inputString?: string;
+    actionParameters?: { [key: string]: string; } | null;
     expectedOutput?: string;
     expirationSeconds?: number;
     delaySeconds?: number;
     intervalSeconds?: number;
     iterations?: number;
+    iterationTermination?: Task.IterationTerminationEnum;
+    currentIteration?: number;
     triggerTaskId?: string;
     triggerCondition?: Task.TriggerConditionEnum;
     dateCreated?: Date;
@@ -65,6 +67,12 @@ export namespace Task {
         Completion: 'Completion' as TriggerConditionEnum,
         Expiration: 'Expiration' as TriggerConditionEnum,
         Manual: 'Manual' as TriggerConditionEnum
+    };
+    export type IterationTerminationEnum = 'IterationCount' | 'UntilSuccess' | 'UntilFailure';
+    export const IterationTerminationEnum = {
+        IterationCount: 'IterationCount' as IterationTerminationEnum,
+        UntilSuccess: 'UntilSuccess' as IterationTerminationEnum,
+        UntilFailure: 'UntilFailure' as IterationTerminationEnum
     };
 }
 

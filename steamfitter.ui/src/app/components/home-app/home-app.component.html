@@ -23,36 +23,6 @@ DM20-0181
       <mat-list-item>
         <div class="showhand" id="wrapper">
           <div id="lefticon">
-            <img src="../../../../assets/svg-icons/input-24px.svg" alt="{{section.taskBuilder}}" (click)="selectTab(section.taskBuilder)">
-          </div>
-
-          <div id="content" (click)="selectTab(section.taskBuilder)">{{section.taskBuilder}}</div>
-
-          <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectTab(section.taskBuilder)">
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
-        </div>
-      </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img src="../../../../assets/svg-icons/history-24px.svg" alt="{{section.taskHistory}}" (click)="selectTab(section.taskHistory)">
-          </div>
-
-          <div id="content" (click)="selectTab(section.taskHistory)">{{section.taskHistory}}</div>
-
-          <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectTab(section.taskHistory)">
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
-        </div>
-      </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
             <img src="../../../../assets/svg-icons/menu-24px.svg" alt="{{section.scenarioTemplates}}" (click)="selectTab(section.scenarioTemplates)">
           </div>
 
@@ -80,6 +50,36 @@ DM20-0181
           </div>
         </div>
       </mat-list-item>
+      <mat-list-item>
+        <div class="showhand" id="wrapper">
+          <div id="lefticon">
+            <img src="../../../../assets/svg-icons/input-24px.svg" alt="{{section.taskBuilder}}" (click)="selectTab(section.taskBuilder)">
+          </div>
+
+          <div id="content" (click)="selectTab(section.taskBuilder)">{{section.taskBuilder}}</div>
+
+          <div class="pull-right" id="rightcontext">
+            <button mat-icon-button style="outline: none;" (click)="selectTab(section.taskBuilder)">
+              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="showhand" id="wrapper">
+          <div id="lefticon">
+            <img src="../../../../assets/svg-icons/history-24px.svg" alt="{{section.history}}" (click)="selectTab(section.history)">
+          </div>
+
+          <div id="content" (click)="selectTab(section.history)">{{section.history}}</div>
+
+          <div class="pull-right" id="rightcontext">
+            <button mat-icon-button style="outline: none;" (click)="selectTab(section.history)">
+              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
     </mat-list>
     <img class="cmu-logo" src="/assets/img/cmu-red-gray.png">
   </mat-sidenav>
@@ -99,10 +99,10 @@ DM20-0181
 
     </div>
     <span *ngIf="isAuthorizedUser">
-      <app-vm-task-execute *ngIf="selectedSection === section.taskBuilder"></app-vm-task-execute>
-      <app-task-history *ngIf="selectedSection === section.taskHistory"></app-task-history>
       <app-scenario-templates *ngIf="selectedSection === section.scenarioTemplates"></app-scenario-templates>
       <app-scenarios *ngIf="selectedSection === section.scenarios"></app-scenarios>
+      <app-vm-task-execute *ngIf="selectedSection === section.taskBuilder"></app-vm-task-execute>
+      <app-history *ngIf="selectedSection === section.history"></app-history>
     </span>
   </mat-sidenav-content>
 </mat-sidenav-container>

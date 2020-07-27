@@ -73,7 +73,8 @@ DM20-0181
   <mat-expansion-panel
     *ngFor="let item of displayedRows$ | async; trackBy: trackByFn"
     [expanded]="isExpanded(item)"
-    (expandedChange)="expandedFn($event, item)"
+    (afterExpand)="afterExpand($event, item)"
+    (afterCollapse)="afterCollapse($event, item)"
   >
     <mat-expansion-panel-header
       class="mat-row"

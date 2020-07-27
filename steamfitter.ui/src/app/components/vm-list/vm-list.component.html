@@ -12,17 +12,6 @@ DM20-0181
   <div class="vm-list-container mat-elevation-z8" [style.visibility]="vmApiResponded ? 'visible' : 'hidden'">
     <div fxLayout="column">
       <div fxLayout="row">
-        <div style="width: 40px;"></div>
-        <mat-form-field fxFlex fxFlexFill>
-          <mat-select placeholder="Select a View" [value]="selectedView" (selectionChange)="onViewChange($event)">
-            <mat-option *ngFor="let view of viewList" [value]="view">
-              {{view.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div style="width: 40px;"></div>
-      </div>
-      <div fxLayout="row" *ngIf="!!selectedView">
         <img class="vmicon" height="55" src="/assets/img/SP_Icon_Virtual.png" />
         <mat-form-field>
           <input name="vmSearch" matInput placeholder="Search" [formControl]="filterControl">
@@ -34,16 +23,11 @@ DM20-0181
       <div>
         <div id="wrapper">
           <div id="context">
-            <mat-checkbox (change)="onCheckBoxChange($event, vm)"></mat-checkbox>
-            <!--<button mat-button [matMenuTriggerFor]="menu">
-              <mat-icon svgIcon="monitor"></mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="openInTab(vm.url)">Open in New Tab</button>
-            </mat-menu>-->
-          </div>
-          <div id="content">
+            <mat-checkbox [checked]="!!selectedVms && selectedVms.includes(vm.id)" (change)="onCheckBoxChange($event, vm.id)"></mat-checkbox>
             {{vm.name}}
+            <button mat-button (click)="openInTab(vm.url); $event.stopPropagation();" title="Open {{vm.name}}" style="min-width: 30px; width: 30px;">
+              <mat-icon svgIcon="open_in_new" style="margin-left: -15px;"></mat-icon>
+            </button>
           </div>
         </div>
       </div>

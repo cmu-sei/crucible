@@ -340,7 +340,7 @@ namespace Steamfitter.Api.Controllers
 
     public class NewLocation
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string LocationType { get; set; }
     }
 }

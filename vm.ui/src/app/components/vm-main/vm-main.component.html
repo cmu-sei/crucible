@@ -8,17 +8,38 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<mat-tab-group dynamicHeight animationDuration="0ms" [(selectedIndex)]="selectedTab">
+<mat-tab-group
+  dynamicHeight
+  animationDuration="0ms"
+  [(selectedIndex)]="selectedTab"
+>
   <mat-tab label="VM List">
-    <app-vm-list (openVmHere)="onOpenVmHere($event)"></app-vm-list>
+    <app-vm-list
+      [vms]="vms$ | async"
+      (openVmHere)="onOpenVmHere($event)"
+      (errors)="onErrors($event)"
+    ></app-vm-list>
   </mat-tab>
   <mat-tab *ngFor="let vm of openVms">
     <ng-template mat-tab-label>
-      <button mat-icon-button (click)="remove(vm.name)" style="outline: none;" title="Close {{vm.name}}">
-        <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+      <button
+        mat-icon-button
+        (click)="remove(vm.name)"
+        style="outline: none;"
+        title="Close {{ vm.name }}"
+      >
+        <mat-icon
+          style="transform: scale(0.85);"
+          svgIcon="ic_cancel_circle"
+        ></mat-icon>
       </button>
-      {{vm.name}}
-      <button mat-icon-button (click)="openInNewTab(vm)" style="outline: none;" title="Open in Browser Tab">
+      {{ vm.name }}
+      <button
+        mat-icon-button
+        (click)="openInNewTab(vm)"
+        style="outline: none;"
+        title="Open in Browser Tab"
+      >
         <mat-icon style="width: 15px;" svgIcon="ic_open_tab"></mat-icon>
       </button>
     </ng-template>
@@ -29,4 +50,3 @@ DM20-0181
     </ng-template>
   </mat-tab>
 </mat-tab-group>
-

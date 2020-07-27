@@ -29,11 +29,21 @@ namespace Player.Vm.Api.Domain.Models
 
         public virtual ICollection<VmTeam> VmTeams { get; set; } = new List<VmTeam>();
 
-        public string AllowedNetworks { get; set; }
+        public string[] AllowedNetworks { get; set; }
 
         public PowerState PowerState { get; set; }
 
         public string[] IpAddresses { get; set; }
+
+        public bool HasPendingTasks { get; set; }
+
+        public bool TeamsLoaded
+        {
+            get
+            {
+                return this.VmTeams != null && this.VmTeams.Count > 0;
+            }
+        }
     }
 
     public enum PowerState

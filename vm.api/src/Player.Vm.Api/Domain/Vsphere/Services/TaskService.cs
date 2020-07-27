@@ -22,47 +22,92 @@ using Player.Vm.Api.Domain.Vsphere.Options;
 using Player.Vm.Api.Domain.Vsphere.Extensions;
 using Player.Vm.Api.Domain.Vsphere.Models;
 using Player.Vm.Api.Hubs;
+using Microsoft.Extensions.DependencyInjection;
+using Player.Vm.Api.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using Nito.AsyncEx;
+using Player.Vm.Api.Infrastructure.Extensions;
 
 namespace Player.Vm.Api.Domain.Vsphere.Services
 {
-    public class TaskService : BackgroundService
+    public interface ITaskService
+    {
+        void CheckTasks();
+    }
+
+    public class TaskService : BackgroundService, ITaskService
     {
         private readonly IHubContext<ProgressHub> _progressHub;
         private readonly ILogger<TaskService> _logger;
         private VsphereOptions _options;
         private readonly IOptionsMonitor<VsphereOptions> _optionsMonitor;
+        private readonly IServiceProvider _serviceProvider;
+        private VmContext _dbContext;
 
         private IConnectionService _connectionService;
+        private IMachineStateService _machineStateService;
         private VimPortTypeClient _client;
         private ServiceContent _sic;
         private ManagedObjectReference _props;
         private ConcurrentDictionary<string, List<Notification>> _runningTasks = new ConcurrentDictionary<string, List<Notification>>();
+        private AsyncAutoResetEvent _resetEvent = new AsyncAutoResetEvent(false);
+        private bool _tasksPending = false;
 
 
         public TaskService(
                 IOptionsMonitor<VsphereOptions> optionsMonitor,
                 ILogger<TaskService> logger,
                 IHubContext<ProgressHub> progressHub,
-                IConnectionService connectionService
+                IConnectionService connectionService,
+                IMachineStateService machineStateService,
+                IServiceProvider serviceProvider
             )
         {
             _optionsMonitor = optionsMonitor;
             _logger = logger;
             _progressHub = progressHub;
             _connectionService = connectionService;
+            _serviceProvider = serviceProvider;
+            _machineStateService = machineStateService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
+            await Task.Yield();
+
             while (!cancellationToken.IsCancellationRequested)
             {
-                _options = _optionsMonitor.CurrentValue;
-                _client = _connectionService.GetClient();
-                _sic = _connectionService.GetServiceContent();
-                _props = _connectionService.GetProps();
-                await processTasks();
-                await Task.Delay(new TimeSpan(0, 0, 0, 0, _options.CheckTaskProgressIntervalMilliseconds));
+                try
+                {
+                    _options = _optionsMonitor.CurrentValue;
+                    _client = _connectionService.GetClient();
+                    _sic = _connectionService.GetServiceContent();
+                    _props = _connectionService.GetProps();
+                    _tasksPending = false;
+
+                    using (var scope = _serviceProvider.CreateScope())
+                    {
+                        _dbContext = scope.ServiceProvider.GetRequiredService<VmContext>();
+                        await processTasks();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Exception in TaskService");
+                }
+
+                var intervalMilliseconds = _tasksPending ?
+                    _options.ReCheckTaskProgressIntervalMilliseconds :
+                    _options.CheckTaskProgressIntervalMilliseconds;
+
+                await _resetEvent.WaitAsync(new TimeSpan(0, 0, 0, 0, intervalMilliseconds));
             }
+        }
+
+        public void CheckTasks()
+        {
+            _resetEvent.Set();
         }
 
         private async Task processTasks()
@@ -85,14 +130,24 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
         {
             if (_sic != null && _sic.taskManager != null)
             {
+                var pendingVms = await _dbContext.Vms
+                    .Include(x => x.VmTeams)
+                    .Where(x => x.HasPendingTasks)
+                    .ToArrayAsync();
+
+                var stillPendingVmIds = new List<Guid>();
+
                 PropertyFilterSpec[] filters = createPFSForRecentTasks(_sic.taskManager);
                 RetrievePropertiesResponse response = await _client.RetrievePropertiesAsync(_props, filters);
                 _runningTasks.Clear();
+                var forceCheckMachineState = false;
+
                 foreach (var task in response.returnval)
                 {
                     try
                     {
-                        var vmString = _connectionService.GetVmGuidByName(((ManagedObjectReference)task.GetProperty("info.entity")).Value).ToString();
+                        var vmRef = ((ManagedObjectReference)task.GetProperty("info.entity")).Value;
+                        var vmId = _connectionService.GetVmIdByRef(vmRef);
                         var broadcastTime = DateTime.UtcNow.ToString();
                         var taskId = task.GetProperty("info.key") != null ? task.GetProperty("info.key").ToString() : "";
                         var taskType = task.GetProperty("info.descriptionId") != null ? task.GetProperty("info.descriptionId").ToString() : "";
@@ -107,16 +162,75 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
                             progress = progress,
                             state = state
                         };
-                        var vmTasks = _runningTasks.ContainsKey(vmString) ? _runningTasks[vmString] : new List<Notification>();
-                        vmTasks.Add(notification);
-                        _runningTasks.AddOrUpdate(vmString, vmTasks, (k, v) => (v = vmTasks));
+
+                        if (vmId.HasValue)
+                        {
+                            var id = vmId.Value.ToString();
+                            var vmTasks = _runningTasks.ContainsKey(id) ? _runningTasks[id] : new List<Notification>();
+                            vmTasks.Add(notification);
+                            _runningTasks.AddOrUpdate(id, vmTasks, (k, v) => (v = vmTasks));
+                        }
+
+
+                        if ((state == TaskInfoState.queued.ToString() || state == TaskInfoState.running.ToString()))
+                        {
+                            _tasksPending = true;
+
+                            if (vmId.HasValue)
+                            {
+                                stillPendingVmIds.Add(vmId.Value);
+                            }
+                        }
+
+                        if (state == TaskInfoState.success.ToString() &&
+                            (this.GetPowerTaskTypes().Contains(taskType)))
+                        {
+                            if (vmId.HasValue)
+                            {
+                                forceCheckMachineState = true;
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
                         this._logger.LogError(ex.Message);
                     }
                 }
+
+                foreach (var vm in pendingVms)
+                {
+                    if (!stillPendingVmIds.Contains(vm.Id))
+                    {
+                        vm.HasPendingTasks = false;
+                    }
+                }
+
+                var vmsToUpdate = await _dbContext.Vms
+                    .Include(x => x.VmTeams)
+                    .Where(x => stillPendingVmIds.Contains(x.Id))
+                    .ToArrayAsync();
+
+                foreach (var vm in vmsToUpdate)
+                {
+                    vm.HasPendingTasks = true;
+                }
+
+                await _dbContext.SaveChangesAsync();
+
+                if (forceCheckMachineState)
+                {
+                    _machineStateService.CheckState();
+                }
             }
+        }
+
+        private string[] GetPowerTaskTypes()
+        {
+            return new string[]
+            {
+                "VirtualMachine.powerOff",
+                "VirtualMachine.powerOn",
+            };
         }
 
 
@@ -156,7 +270,5 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
 
             return new PropertyFilterSpec[] { pfSpec };
         }
-
-
     }
 }

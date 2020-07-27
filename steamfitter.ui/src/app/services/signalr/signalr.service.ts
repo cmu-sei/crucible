@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ScenarioTemplateDataService } from 'src/app/data/scenario-template/scenario-template-data.service';
 import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
+import { ResultDataService } from 'src/app/data/result/result-data.service';
 import { SettingsService } from 'src/app/services/settings/settings.service';
 
 @Injectable({
@@ -30,6 +31,7 @@ export class SignalRService {
     private scenarioTemplateDataService: ScenarioTemplateDataService,
     private scenarioDataService: ScenarioDataService,
     private taskDataService: TaskDataService,
+    private resultDataService: ResultDataService,
     private settingsService: SettingsService
   ) { }
 
@@ -101,21 +103,19 @@ export class SignalRService {
 
   private addResultHandlers() {
     this.hubConnection.on('ResultCreated', (result: Result) => {
-      this.taskDataService.updateResultStore(result);
+      this.resultDataService.updateStore(result);
     });
 
     this.hubConnection.on('ResultUpdated', (result: Result) => {
-      this.taskDataService.updateResultStore(result);
+      this.resultDataService.updateStore(result);
     });
 
     this.hubConnection.on('ResultsUpdated', (results: Result[]) => {
-      results.forEach(result => {
-        this.taskDataService.updateResultStore(result);
-      });
+      this.resultDataService.updateStoreMany(results);
     });
 
     this.hubConnection.on('ResultDeleted', (id: string) => {
-      this.taskDataService.deleteFromResultStore(id);
+      this.resultDataService.deleteFromStore(id);
     });
   }
 

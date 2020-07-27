@@ -8,13 +8,14 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material';
 // Resolve imports when API changes nouns
-import { PlayerDataService } from 'src/app/services/data/player-data-service';
+import { PlayerDataService } from 'src/app/data/player/player-data-service';
 import { Vm, View } from 'src/app/swagger-codegen/dispatcher.api';
-import { NewTaskService } from 'src/app/services/new-task/new-task.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vm-list',
@@ -23,29 +24,26 @@ import { NewTaskService } from 'src/app/services/new-task/new-task.service';
 })
 
 export class VmListComponent implements OnDestroy {
-  @Input() viewList: View[];
-  @Input() selectedView: View;
-  @Input() vmList: Vm[];
-  @Input() pageEvent: PageEvent;
+  @Input() selectedVms: string[];
+  @Output() updateVmList = new EventEmitter<string[]>();
+  vmList: Vm[];
+  pageEvent: PageEvent;
   displayedColumns: string[] = ['name'];
-
+  private unsubscribe$ = new Subject();
   uploading = false;
   uploadProgress = 0;
   vmApiResponded = true;
   filterControl: FormControl = this.playerDataService.vmFilter;
 
   constructor(
-    private playerDataService: PlayerDataService,
-    private newTaskService: NewTaskService
+    private playerDataService: PlayerDataService
   ) {
-    newTaskService.reset();
-    this.playerDataService.selectView('');
-  }
-
-  onViewChange(event: any) {
-    if (event && event.value && event.value.id) {
-      this.playerDataService.selectView(event.value.id);
-    }
+    this.playerDataService.vmList.pipe(takeUntil(this.unsubscribe$)).subscribe(vms => {
+      this.vmList = vms;
+    });
+    this.playerDataService.vmPageEvent.pipe(takeUntil(this.unsubscribe$)).subscribe(pe => {
+      this.pageEvent = pe;
+    });
   }
 
   // Local Component functions
@@ -53,16 +51,13 @@ export class VmListComponent implements OnDestroy {
     window.open(url, '_blank');
   }
 
-  openHere(url: string) {
-    window.location.href = url;
-  }
-
-  onCheckBoxChange(event: any, vm: Vm) {
+  onCheckBoxChange(event: any, vmId: string) {
     if (event.checked) {
-      this.newTaskService.addVm(vm);
+      this.selectedVms.push(vmId);
     } else {
-      this.newTaskService.removeVm(vm);
+      this.selectedVms = this.selectedVms.filter(id => id !== vmId);
     }
+    this.updateVmList.emit(this.selectedVms);
   }
 
   handlePageEvent(pageEvent: PageEvent) {
@@ -70,7 +65,9 @@ export class VmListComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.playerDataService.selectView('');
+    this.playerDataService.vmFilter.setValue('');
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

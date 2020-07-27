@@ -112,6 +112,29 @@ namespace Steamfitter.Api.Controllers
         }
 
         /// <summary>
+        /// Gets the personal Scenario for the current user
+        /// </summary>
+        /// <remarks>
+        /// Returns the current user's personal Scenario
+        /// <para />
+        /// Accessible to an authenticated User
+        /// </remarks>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        [HttpGet("Scenarios/me")]
+        [ProducesResponseType(typeof(SAVM.Scenario), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "getMyScenario")]
+        public async STT.Task<IActionResult> GetMine(CancellationToken ct)
+        {
+            var Scenario = await _ScenarioService.GetMineAsync(ct);
+
+            if (Scenario == null)
+                throw new EntityNotFoundException<SAVM.Scenario>();
+
+            return Ok(Scenario);
+        }
+
+        /// <summary>
         /// Creates a new Scenario
         /// </summary>
         /// <remarks>

@@ -8,16 +8,19 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, EventEmitter, Output, NgZone, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, NgZone, ViewChild, OnDestroy } from '@angular/core';
 import { ErrorStateMatcher, MatStepper } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { PlayerDataService } from 'src/app/services/data/player-data-service';
+import { PlayerDataService } from 'src/app/data/player/player-data-service';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
-import { Task, Vm, Result, TaskService } from 'src/app/swagger-codegen/dispatcher.api';
-import { NewTaskService } from '../../services/new-task/new-task.service';
-import { BehaviorSubject } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { ResultDataService } from 'src/app/data/result/result-data.service';
+import { Task, Vm, Result, TaskService, Scenario } from 'src/app/swagger-codegen/dispatcher.api';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 import { ResultQuery } from 'src/app/data/result/result.query';
+import { TaskQuery } from 'src/app/data/task/task.query';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class UserErrorStateMatcher implements ErrorStateMatcher {
@@ -32,7 +35,7 @@ export class UserErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './vm-task-execute.component.html',
   styleUrls: ['./vm-task-execute.component.css']
 })
-export class VmTaskExecuteComponent {
+export class VmTaskExecuteComponent implements OnDestroy {
 
   @Output() editComplete = new EventEmitter<boolean>();
   @ViewChild(VmTaskExecuteComponent) child;
@@ -42,36 +45,32 @@ export class VmTaskExecuteComponent {
   isLinear = false;
   viewList = this.playerDataService.viewList;
   selectedView = this.playerDataService.selectedView;
-  vmList = this.playerDataService.vmList;
-  pageEvent = this.playerDataService.vmPageEvent;
   results = this.resultQuery.selectAll();
+  taskList = this.taskQuery.selectAll();
   selectedVms: Array<Vm>;
   task: Task;
   isExecuting: boolean;
   lastExecutionTime = new BehaviorSubject<Date>(new Date);
+  loggedInUser = this.authService.loggedInUser;
+  userScenario: Scenario;
+  private unsubscribe$ = new Subject();
 
   constructor(
     public zone: NgZone,
     private playerDataService: PlayerDataService,
-    private newTaskService: NewTaskService,
     private taskService: TaskService,
     private resultQuery: ResultQuery,
-    private taskDataService: TaskDataService
+    private taskDataService: TaskDataService,
+    private resultDataService: ResultDataService,
+    private taskQuery: TaskQuery,
+    private authService: AuthService,
+    private scenarioDataService: ScenarioDataService
   ) {
-    this.playerDataService.getViewsFromApi();
+    this.scenarioDataService.selected.pipe(takeUntil(this.unsubscribe$)).subscribe(scenario => {
+      this.userScenario = scenario;
+    });
+    this.scenarioDataService.loadTaskBuilderScenario();
     this.isExecuting = false;
-
-    this.newTaskService.task.subscribe(task => {
-      this.task = task;
-      this.setTaskVms();
-    });
-
-    this.newTaskService.vmList.subscribe(vms => {
-      this.selectedVms = vms;
-      this.setTaskVms();
-    });
-
-    taskDataService.resetResultStore();
   }
 
   setTaskVms() {
@@ -87,7 +86,7 @@ export class VmTaskExecuteComponent {
     this.lastExecutionTime.next(new Date());
     this.isExecuting = true;
     this.taskService.createAndExecuteTask(this.task).pipe(take(1)).subscribe(results => {
-      this.taskDataService.updateResultStoreMany(results);
+      this.resultDataService.updateStoreMany(results);
       this.isExecuting = false;
     },
     error => {
@@ -96,42 +95,28 @@ export class VmTaskExecuteComponent {
     });
   }
 
-  openVmConsole(id: string) {
-    const url = this.selectedVms.find(v => v.id === id).url;
-    window.open(url, '_blank');
-  }
-
-  /**
-   * Returns the stepper to zero index
-   */
-  resetStepper() {
-    if (this.stepper) {
-      console.log('here  ' + this.stepper);
-      this.stepper.selectedIndex = 0;
+  refreshTaskList() {
+    if (this && this.task) {
+      this.taskDataService.loadById(this.task.id);
     }
   }
 
-  /**
-   * Closes the edit screen
-   */
-  returnToMain(): void {
-    // this.currentTeam = undefined;
-    // this.editComplete.emit(true);
+  deleteTask(id: string) {
+    this.taskDataService.delete(id);
   }
 
-  /**
-   * Called when the mat-step index has changed to signal an update to the task
-   * @param event SelectionChange event
-   */
-  onTaskStepChange(event: any) {
-    // index 2 is the Teams step.  Refresh when selected to ensure latest information updated
-    if (event.selectedIndex === 2) {
-      // this.updateView();
-    } else {
-      // Clicked away from teams
-      // this.currentTeam = undefined;
-      // this.updateApplicationTemplates();
+  onViewChange(event: any) {
+    if (event && event.value && event.value.id) {
+      const scenario = {... this.userScenario};
+      scenario.viewId = event.value.id;
+      this.scenarioDataService.updateScenario(scenario);
+      this.playerDataService.selectView(scenario.viewId);
     }
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 } // End Class

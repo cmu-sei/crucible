@@ -19,6 +19,8 @@ using AutoMapper;
 using Player.Vm.Api.Domain.Vsphere.Services;
 using Player.Vm.Api.Features.Vms;
 using Player.Vm.Api.Domain.Vsphere.Extensions;
+using Player.Vm.Api.Domain.Services;
+using System.Security.Principal;
 
 namespace Player.Vm.Api.Features.Vsphere
 {
@@ -41,8 +43,10 @@ namespace Player.Vm.Api.Features.Vsphere
             public Handler(
                 IVsphereService vsphereService,
                 IVmService vmService,
-                IMapper mapper) :
-                base(mapper, vsphereService)
+                IMapper mapper,
+                IPlayerService playerService,
+                IPrincipal principal) :
+                base(mapper, vsphereService, playerService, principal)
             {
                 _vsphereService = vsphereService;
                 _vmService = vmService;
@@ -58,7 +62,7 @@ namespace Player.Vm.Api.Features.Vsphere
 
                 await _vsphereService.ReconfigureVm(request.Id, Feature.iso, "", request.Iso);
 
-                return await base.GetVsphereVirtualMachine(vm);
+                return await base.GetVsphereVirtualMachine(vm, cancellationToken);
             }
         }
     }

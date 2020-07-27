@@ -12,6 +12,7 @@ import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angu
 import { Result } from 'src/app/swagger-codegen/dispatcher.api';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
+import { PlayerDataService } from 'src/app/data/player/player-data-service';
 
 enum ResultStatus {
   all = 0,
@@ -29,7 +30,6 @@ enum ResultStatus {
 export class ResultsComponent implements OnInit, OnDestroy {
   @Input() results: Observable<Result[]>;
   @Input() taskId: string;
-  @Output() openVmConsole = new EventEmitter<string>();
 
   allResults: Result[];
   currentResults: Result[];
@@ -40,6 +40,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject();
 
   constructor(
+    private playerDataService: PlayerDataService
   ) {
   }
 
@@ -123,6 +124,13 @@ export class ResultsComponent implements OnInit, OnDestroy {
     }
   }
 
+  openVmConsole(id: string) {
+    const vms = this.playerDataService.vms.value;
+    const vm = vms.find(v => v.id === id);
+    if (!!vm) {
+      window.open(vm.url, '_blank');
+    }
+  }
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

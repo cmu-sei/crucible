@@ -16,7 +16,7 @@ import { map, tap } from 'rxjs/operators';
 import { User, Permission, UserPermission } from 'src/app/swagger-codegen/dispatcher.api/model/models';
 import { PermissionService } from 'src/app/swagger-codegen/dispatcher.api/api/api';
 import {Router, ActivatedRoute} from '@angular/router';
-import { AdminUsersService } from '../admin-users.service';
+import { UserDataService } from '../../../data/user/user-data.service';
 import { paginateRows } from 'src/app/datasource-utils';
 
 
@@ -44,7 +44,7 @@ export class AdminUsersComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private adminUsersService: AdminUsersService,
+    private userDataService: UserDataService,
     activatedRoute: ActivatedRoute,
     private permissionService: PermissionService
   ) { }

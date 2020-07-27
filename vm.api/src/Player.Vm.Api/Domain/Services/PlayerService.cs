@@ -29,14 +29,14 @@ namespace Player.Vm.Api.Domain.Services
         Task<bool> CanAccessTeamAsync(Guid teamId, CancellationToken ct);
         Task<IEnumerable<Team>> GetTeamsByViewIdAsync(Guid viewId, CancellationToken ct);
         Task<Guid> GetPrimaryTeamByViewIdAsync(Guid viewId, CancellationToken ct);
-        Guid GetCurrentViewId();
+        Task<Guid?> GetGroupIdForViewAsync(Guid viewId, CancellationToken ct);
+        Task<View> GetViewByIdAsync(Guid viewId, CancellationToken ct);
     }
 
     public class PlayerService : IPlayerService
     {
         private readonly IS3PlayerApiClient _s3PlayerApiClient;
         private readonly Guid _userId;
-        private Guid _currentViewId;
         private Dictionary<Guid, Team> _teamCache;
 
         public PlayerService(IHttpContextAccessor httpContextAccessor, IS3PlayerApiClient s3PlayerApiClient)
@@ -74,8 +74,6 @@ namespace Player.Vm.Api.Domain.Services
 
                         _teamCache.Add(teamId, team);
                     }
-
-                    _currentViewId = team.ViewId.Value;
 
                     if (team.CanManage.Value)
                     {
@@ -117,8 +115,6 @@ namespace Player.Vm.Api.Domain.Services
                         _teamCache.Add(teamId, team);
                     }
 
-                    _currentViewId = team.ViewId.Value;
-
                     if (team.CanManage.Value || team.IsPrimary.Value)
                         return true;
                 }
@@ -137,8 +133,6 @@ namespace Player.Vm.Api.Domain.Services
 
         public async Task<IEnumerable<Team>> GetTeamsByViewIdAsync(Guid viewId, CancellationToken ct)
         {
-            _currentViewId = viewId;
-
             var teams = await _s3PlayerApiClient.GetUserViewTeamsAsync(viewId, _userId, ct);
 
             foreach (Team team in teams)
@@ -154,7 +148,6 @@ namespace Player.Vm.Api.Domain.Services
 
         public async Task<Guid> GetPrimaryTeamByViewIdAsync(Guid viewId, CancellationToken ct)
         {
-            _currentViewId = viewId;
             var teams = await _s3PlayerApiClient.GetUserViewTeamsAsync(viewId, _userId, ct);
 
             foreach (Team team in teams)
@@ -171,11 +164,6 @@ namespace Player.Vm.Api.Domain.Services
                 .FirstOrDefault();
         }
 
-        public Guid GetCurrentViewId()
-        {
-            return _currentViewId;
-        }
-
         public async Task<Team> GetTeamById(Guid id)
         {
             try
@@ -186,6 +174,34 @@ namespace Player.Vm.Api.Domain.Services
             {
                 return null;
             }
+        }
+
+        public async Task<Guid?> GetGroupIdForViewAsync(Guid viewId, CancellationToken ct)
+        {
+            var permissions = await _s3PlayerApiClient.GetUserViewPermissionsAsync(viewId, _userId, ct);
+
+            if (permissions.Any(p => p.Key == "ViewAdmin" && p.Value == "true"))
+            {
+                return viewId;
+            }
+
+            var teamMembership = permissions.Where(p => p.Key == "TeamMember").FirstOrDefault();
+            Guid teamId;
+
+            if (teamMembership != null)
+            {
+                if (Guid.TryParse(teamMembership.Value, out teamId))
+                {
+                    return teamId;
+                }
+            }
+
+            return null;
+        }
+
+        public async Task<View> GetViewByIdAsync(Guid viewId, CancellationToken ct)
+        {
+            return await _s3PlayerApiClient.GetViewAsync(viewId, ct);
         }
     }
 }
