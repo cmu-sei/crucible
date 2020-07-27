@@ -8,14 +8,11 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Steamfitter.Api.Data;
 using Steamfitter.Api.Data.Models;
-using Steamfitter.Api.Infrastructure.Authorization;
-using Steamfitter.Api.Services;
 using Steamfitter.Api.ViewModels;
-using System.Security.Claims;
+using System;
+using System.Text.Json;
+using System.Collections.Generic;
 
 namespace Steamfitter.Api.Infrastructure.Mappings
 {
@@ -23,10 +20,36 @@ namespace Steamfitter.Api.Infrastructure.Mappings
     {
         public ResultProfile()
         {
-            CreateMap<ResultEntity, Result>();
+            CreateMap<ResultEntity, Result>()
+                .ForMember(dest => dest.ActionParameters, m => m.MapFrom(src => ConvertToActionParameters(src)));
 
-            CreateMap<Result, ResultEntity>();
+            CreateMap<Result, ResultEntity>()
+                .ForMember(dest => dest.InputString, m => m.MapFrom(src => ConvertToInputString(src.ActionParameters)));;
         }
+
+        private Dictionary<string, string> ConvertToActionParameters(ResultEntity src)
+        {
+            var parameters = new Dictionary<string, string>();
+            try
+            {
+                parameters = JsonSerializer.Deserialize<Dictionary<string, string>>(src.InputString);
+            }
+            catch (Exception ex)
+            {
+                parameters["BadInputString"] = src.InputString;
+                Console.WriteLine($"Error mapping InputString for Result {src.Id} of Task {src.TaskId}");
+            }
+
+            return parameters;
+        }
+
+        private string ConvertToInputString(Dictionary<string, string> actionParameters)
+        {
+            var inputString = JsonSerializer.Serialize(actionParameters);
+
+            return inputString;
+        }
+
     }
 }
 

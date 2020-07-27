@@ -9,40 +9,37 @@ DM20-0181
 */
 
 import { Component, OnInit } from '@angular/core';
-import { VmService } from '../../services/vm/vm.service';
-import { VmModel } from '../../models/vm-model';
 import { SettingsService } from '../../services/settings/settings.service';
 import { ActivatedRoute } from '@angular/router';
+import { VmService } from '../../vms/state/vms.service';
 
 @Component({
   selector: 'app-console',
   templateUrl: './console.component.html',
-  styleUrls: ['./console.component.css']
+  styleUrls: ['./console.component.css'],
 })
 export class ConsoleComponent implements OnInit {
-
   constructor(
     private vmService: VmService,
     private settings: SettingsService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     const viewId = this.route.snapshot.params['viewId'];
     const name = this.route.snapshot.params['name'];
 
-    this.vmService.GetViewVmsByName(viewId, name)
-      .subscribe(
-        vms => {
-          if (vms != null) {
-            const vm = vms[0];
+    this.vmService.GetViewVmsByName(viewId, name).subscribe(
+      (vms) => {
+        if (vms != null) {
+          const vm = vms[0];
 
-            if (vm) {
-              window.location.href = vm.url;
-            }
+          if (vm) {
+            window.location.href = vm.url;
           }
-        },
-        err => {
         }
-      );
+      },
+      (err) => {}
+    );
   }
 }

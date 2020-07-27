@@ -11,7 +11,13 @@ DM20-0181
 <div fxLayout="row" class="add-margin" (contextmenu)="onContextMenu($event, null)">
   <div fxFlex="100" fxLayoutAlign="start">
     <div>
-      <b>Tasks:</b>&nbsp;&nbsp;&nbsp;(right-click for task function menu)
+      <b>Tasks:</b>&nbsp;&nbsp;&nbsp;
+      <button mat-icon-button title="Add a Task" (click)="onContextNew(null)">
+        <mat-icon svgIcon="ic_plus_circle_outline_48px"></mat-icon>
+      </button>
+      <button mat-icon-button title="Paste a Task" (click)="onContextPaste(null)" *ngIf="!!clipboard">
+        <mat-icon svgIcon="content_paste"></mat-icon>
+      </button>
     </div>
   </div>
 </div>
@@ -20,7 +26,7 @@ DM20-0181
     <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; width:100%">
       <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
     </mat-card>
-    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" *ngIf="!isLoading">
+    <mat-tree fxFlex="95" [dataSource]="dataSource" [treeControl]="treeControl" *ngIf="!isLoading">
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding style="margin-top: 5px;">
         <button mat-icon-button disabled *ngIf="!node.expandable"></button>
         <button mat-icon-button matTreeNodeToggle *ngIf="!!node.expandable"
@@ -41,17 +47,21 @@ DM20-0181
           <div class="taskText">
           </div>
           <div class="taskText"><b>Description:</b> {{node.task.description}}</div>
-          <div class="taskText"><b>Input:</b> {{node.task.inputString}}</div>
+          <div class="taskText"><b>API:</b> {{node.task.apiUrl}}</div>
+          <div class="taskText"><b>Action:</b> {{node.task.action}}</div>
+          <div class="taskText"><b>Action Parameters:</b><br/> <span *ngFor="let k of node.task.actionParameters | keyvalue">&nbsp;&nbsp;&nbsp;&nbsp;{{k.key}}: {{k.key.toLowerCase() === 'password' ? '**************' : k.value}}<br/></span></div>
           <div class="taskText"><b>Expected Output:</b> {{node.task.expectedOutput}}</div>
           <div class="taskText"><b>Delay (seconds):</b> {{node.task.delaySeconds}}</div>
           <div class="taskText"><b>Iterations:</b> {{node.task.iterations}}</div>
           <div class="taskText"><b>Iteration Interval (seconds):</b> {{node.task.intervalSeconds}}</div>
+          <div class="taskText"><b>Iteration Termination:</b> {{node.task.iterationTermination}}</div>
           <div class="taskText"><b>Expiration (seconds):</b> {{node.task.experationSeconds}}</div>
           <div class="taskText" *ngIf="!!node.results && node.results.length > 0">
             <b>Results:</b>
-            <div class="taskText" style="margin-left: 80px;" *ngFor="let result of sortedResults(node.results, 'vmName', false)">
-                <img src="assets/img/{{ result.status }}.png" class="icon16" title="{{ result.status }}" /> {{result.statusDate | date: 'yyyy-MM-dd hh:mm.ss'}}&nbsp;&nbsp;<b>{{result.vmName}}</b>({{result.vmId}}):&nbsp; {{result.actualOutput}}
-            </div>
+            <app-results
+              [results]=resultList
+              [taskId]="node.task.id">
+          </app-results>
           </div>
         </mat-expansion-panel>
       </mat-tree-node>

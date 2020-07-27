@@ -30,6 +30,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { SettingsService } from '../../services/settings/settings.service';
+import { IsoResult } from '../../models/vm/iso-result';
 
 declare var WMKS: any; // needed to check values
 const MAX_COPY_RETRIES = 1;
@@ -297,10 +298,9 @@ export class OptionsBarComponent implements OnInit, OnDestroy {
     // refresh the iso list
     this.retrievingIsos = true;
     this.vmService.getIsos().subscribe(
-      (response) => {
-        this.splitIsoList(response);
+      (isoResult) => {
         this.retrievingIsos = false;
-        this.mountIso();
+        this.mountIso(isoResult);
       },
       (error) => {
         console.log(error);
@@ -311,28 +311,26 @@ export class OptionsBarComponent implements OnInit, OnDestroy {
     );
   }
 
-  mountIso() {
+  mountIso(isoResult: IsoResult[]) {
     // select the iso
     const configData = {
       width: '500px',
       height: '540px',
     };
-    this.dialogService
-      .mountIso(this.publicIsos, this.teamIsos, configData)
-      .subscribe((result) => {
-        if (!result['path']) {
-          return;
-        }
-        // mount the iso
-        this.vmService
-          .mountIso(this.vmService.model.id, result['path'])
-          .subscribe(
-            // refresh the vm model
-            (model: VmModel) => {
-              this.vmService.model = model;
-            }
-          );
-      });
+    this.dialogService.mountIso(isoResult, configData).subscribe((result) => {
+      if (!result) {
+        return;
+      }
+      // mount the iso
+      this.vmService
+        .mountIso(this.vmService.model.id, result.path + result.filename)
+        .subscribe(
+          // refresh the vm model
+          (model: VmModel) => {
+            this.vmService.model = model;
+          }
+        );
+    });
   }
 
   splitIsoList(isoList: any) {

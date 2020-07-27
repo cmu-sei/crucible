@@ -22,11 +22,12 @@ const BLANK_TASK = {
   vmMask: '',
   vmList: [],
   apiUrl: '',
-  inputString: '',
+  actionParameters: {},
   expectedOutput: '',
   expirationSeconds: 0,
   intervalSeconds: 0,
-  iterations: 0,
+  iterations: 1,
+  iterationTermination: Task.IterationTerminationEnum.IterationCount,
   triggerTaskId: '',
   triggerCondition: Task.TriggerConditionEnum.Manual,
 };
@@ -72,19 +73,7 @@ export class NewTaskService {
     if (this.command.value !== undefined) {
       // Get first vm moid, NOT a list!
       const moid = this.vmList.value.length > 0 ? this.vmList.value[0].id : '';
-      //// Get vm list
-      // const vmGuids = Array<string>();
-      // this.vmList.value.forEach(vm => {
-      //   vmGuids.push(vm.id);
-      // });
-
-      // Build command
-      let command = `{ "Moid": "{moid}"`;
-      this.command.value.parameters.filter(obj => obj.key !== 'Moid').forEach(param => {
-        command += `, "${ param.key }": "${ param.value.replace(/\\/g, '\\\\').replace(/"/g, '\\\"')}"`;
-      });
-      command += '}';
-      this._task.inputString = command;
+      this._task.actionParameters = this.command.value.parameters;
       this._task.apiUrl = this.command.value.api;
       this._task.vmList = [moid];
       this._task.action =

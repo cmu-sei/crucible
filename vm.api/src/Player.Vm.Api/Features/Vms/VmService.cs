@@ -28,7 +28,7 @@ namespace Player.Vm.Api.Features.Vms
 {
     public interface IVmService
     {
-        Task<VmSummary[]> GetAllAsync(CancellationToken ct);
+        Task<Vm[]> GetAllAsync(CancellationToken ct);
         Task<Vm> GetAsync(Guid id, CancellationToken ct);
         Task<IEnumerable<Vm>> GetByTeamIdAsync(Guid teamId, string name, bool includePersonal, bool onlyMine, CancellationToken ct);
         Task<IEnumerable<Vm>> GetByViewIdAsync(Guid viewId, string name, bool includePersonal, bool onlyMine, CancellationToken ct);
@@ -54,13 +54,13 @@ namespace Player.Vm.Api.Features.Vms
             _mapper = mapper;
         }
 
-        public async Task<VmSummary[]> GetAllAsync(CancellationToken ct)
+        public async Task<Vm[]> GetAllAsync(CancellationToken ct)
         {
             if (!(await _playerService.IsSystemAdmin(ct)))
                 throw new ForbiddenException();
 
             var vms = await _context.Vms
-                .ProjectTo<VmSummary>(_mapper.ConfigurationProvider)
+                .ProjectTo<Vm>(_mapper.ConfigurationProvider)
                 .ToArrayAsync(ct);
 
             return vms;
@@ -85,10 +85,6 @@ namespace Player.Vm.Api.Features.Vms
                 throw new ForbiddenException("This machine belongs to another user");
 
             var model = _mapper.Map<Vm>(vmEntity);
-            model.CanAccessNicConfiguration = await _playerService.CanManageTeamsAsync(teamIds, false, ct);
-
-            var teamId = await _playerService.GetPrimaryTeamByViewIdAsync(model.ViewId, ct);
-            model.TeamId = teamId;
             return model;
         }
 
@@ -264,14 +260,17 @@ namespace Player.Vm.Api.Features.Vms
 
         public async Task<bool> DeleteAsync(Guid id, CancellationToken ct)
         {
-            var vmEntity = await _context.Vms.Where(v => v.Id == id).SingleOrDefaultAsync(ct);
+            var vmEntity = await _context.Vms
+                .Include(v => v.VmTeams)
+                .Where(v => v.Id == id)
+                .SingleOrDefaultAsync(ct);
 
             if (vmEntity == null)
                 throw new EntityNotFoundException<Vm>();
 
-            var teams = vmEntity.VmTeams.Select(v => v.TeamId).Distinct();
+            var teamIds = vmEntity.VmTeams.Select(v => v.TeamId).Distinct();
 
-            if (!(await _playerService.CanManageTeamsAsync(teams, false, ct)))
+            if (!(await _playerService.CanManageTeamsAsync(teamIds, false, ct)))
                 throw new ForbiddenException();
 
             _context.Vms.Remove(vmEntity);

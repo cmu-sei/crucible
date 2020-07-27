@@ -16,7 +16,7 @@ DM20-0181
   min-width: 300px;
   width: 100%;
   text-align: left;
-  padding: 30,30,30,30;
+  padding: 30, 30, 30, 30;
 }
 
 .vmicon {
@@ -37,7 +37,7 @@ DM20-0181
   margin-right: 40px;
 }
 
-.open-tab-icon{
+.open-tab-icon {
   margin-left: 0px;
   padding-right: 4em;
 }
@@ -45,7 +45,7 @@ DM20-0181
 .content {
   text-align: left;
   font-size: 70%;
-  padding-bottom: 0.2em;
+  padding-bottom: 0.5em;
   padding-top: 0.2em;
   padding-left: 0.1em;
   word-wrap: break-word;
@@ -68,3 +68,18 @@ DM20-0181
   margin-right: 20px;
 }
 
+.search-checkbox {
+  margin-left: 20px;
+}
+
+.action-button {
+  margin-left: 20px;
+}
+
+.pending {
+  opacity: 0.5;
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.5);
+}

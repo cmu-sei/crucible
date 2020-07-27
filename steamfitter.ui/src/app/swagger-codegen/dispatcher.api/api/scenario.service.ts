@@ -399,6 +399,48 @@ export class ScenarioService {
     }
 
     /**
+     * Gets the user's personal Scenario
+     * Returns the Scenario
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getMyScenario(observe?: 'body', reportProgress?: boolean): Observable<Scenario>;
+    public getMyScenario(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Scenario>>;
+    public getMyScenario(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Scenario>>;
+    public getMyScenario(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        return this.httpClient.get<Scenario>(`${this.configuration.basePath}/scenarios/me`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Gets all Scenario in the system
      * Returns a list of all of the Scenarios in the system.  &lt;para /&gt;  Only accessible to a SuperUser
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

@@ -28,6 +28,7 @@ namespace stackstorm.api.client.Executions
         Task<Execution> GuestFileDelete(Dictionary<string, string> parameters);
         Task<Execution> GuestFileRead(Dictionary<string, string> parameters);
         Task<Execution> GuestFileUpload(Dictionary<string, string> parameters);
+        Task<Execution> GuestFileUploadContent(Dictionary<string, string> parameters);
         Task<Execution> GuestProcessRun(Dictionary<string, string> parameters);
         Task<Execution> GuestProcessRunFast(Dictionary<string, string> parameters);
         Task<Execution> GuestProcessStart(Dictionary<string, string> parameters);
@@ -141,6 +142,14 @@ namespace stackstorm.api.client.Executions
         public async Task<Execution> GuestFileUpload(Dictionary<string, string> parameters)
         {
             return await AddExecution("vsphere.guest_file_upload", parameters);
+        }
+
+        /// <summary>
+        /// Upload a file to the guest with content
+        /// </summary>
+        public async Task<Execution> GuestFileUploadContent(Dictionary<string, string> parameters)
+        {
+            return await AddExecution("vsphere.guest_file_upload_content", parameters);
         }
 
         /// <summary>

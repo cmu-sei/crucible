@@ -33,6 +33,7 @@ namespace Steamfitter.Api.Services
     {
         STT.Task<IEnumerable<ViewModels.Scenario>> GetAsync(CancellationToken ct);
         STT.Task<ViewModels.Scenario> GetAsync(Guid Id, CancellationToken ct);
+        STT.Task<ViewModels.Scenario> GetMineAsync(CancellationToken ct);
         STT.Task<ViewModels.Scenario> CreateAsync(ViewModels.Scenario Scenario, CancellationToken ct);
         STT.Task<ViewModels.Scenario> CreateFromScenarioTemplateAsync(Guid scenarioTemplateId, CancellationToken ct);
         STT.Task<ViewModels.Scenario> CreateFromScenarioAsync(Guid scenarioId, CancellationToken ct);
@@ -89,6 +90,38 @@ namespace Steamfitter.Api.Services
 
             var item = await _context.Scenarios
                 .SingleOrDefaultAsync(o => o.Id == id, ct);
+
+            return _mapper.Map<SAVM.Scenario>(item);
+        }
+
+        public async STT.Task<ViewModels.Scenario> GetMineAsync(CancellationToken ct)
+        {
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
+                throw new ForbiddenException();
+
+            var item = await _context.Scenarios
+                .SingleOrDefaultAsync(o => o.Id == _user.GetId(), ct);
+            if (item == null)
+            {
+                var createdDate = DateTime.UtcNow;
+                var id = _user.GetId();
+                var name = _user.Claims.FirstOrDefault(c => c.Type == "name").Value;
+                item = new ScenarioEntity() {
+                    Id = id,
+                    Name = $"{name} User Scenario",
+                    Description = "Personal Task Builder Scenario",
+                    StartDate = createdDate,
+                    EndDate = createdDate.AddYears(100),
+                    Status = ScenarioStatus.active,
+                    OnDemand = false,
+                    DateCreated = createdDate,
+                    DateModified = createdDate,
+                    CreatedBy = id,
+                    ModifiedBy = id
+                };
+                _context.Scenarios.Add(item);
+                await _context.SaveChangesAsync(ct);
+            }
 
             return _mapper.Map<SAVM.Scenario>(item);
         }
@@ -214,12 +247,12 @@ namespace Steamfitter.Api.Services
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
 
-            var ScenarioToDelete = await _context.Scenarios.SingleOrDefaultAsync(v => v.Id == id, ct);
+            var scenarioToDelete = await _context.Scenarios.SingleOrDefaultAsync(v => v.Id == id, ct);
 
-            if (ScenarioToDelete == null)
+            if (scenarioToDelete == null)
                 throw new EntityNotFoundException<SAVM.Scenario>();
 
-            _context.Scenarios.Remove(ScenarioToDelete);
+            _context.Scenarios.Remove(scenarioToDelete);
             await _context.SaveChangesAsync(ct);
             _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioDeleted, id);
 

@@ -37,13 +37,14 @@ const BLANK_TASK: Task = {
   vmMask: '',
   vmList: [],
   apiUrl: '',
-  inputString: '',
+  actionParameters: {},
   expectedOutput: '',
   delaySeconds: 0,
   expirationSeconds: 0,
   intervalSeconds: 0,
-  iterations: 0,
-  triggerCondition: Task.TriggerConditionEnum.Manual,
+  iterations: 1,
+  iterationTermination: Task.IterationTerminationEnum.IterationCount,
+  triggerCondition: Task.TriggerConditionEnum.Manual
 };
 
 @Component({
@@ -74,7 +75,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   private tasks = new Array<Task>();
   private results = new Array<Result>();
   private expandedNodeSet = new Set<string>();
-  public expandedDetails = new Set<string>();
+  expandedDetails = new Set<string>();
   private unsubscribe = new Subject();
 
   // tree controls
@@ -180,9 +181,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
    * Determines if a Task can be edited
    */
   isEditableTask(taskId: string) {
-    if (!this.isEditableState) { return false; }
-    const results = this.results.filter(r => r.taskId === taskId);
-    return (results.length === 0);
+    return this.isEditableState;
   }
 
     /**
@@ -219,6 +218,8 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   }
 
   onContextEdit(task: Task) {
+    this.selectedTaskId = task.id;
+    this.taskSelected.emit(task.id);
     const dialogRef = this.dialog.open(TaskEditComponent, {
       data: { task: {...task}}
     });
@@ -243,6 +244,8 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   }
 
   onContextNew(task: Task) {
+    this.selectedTaskId = '';
+    this.taskSelected.emit(this.selectedTaskId);
     // add a dependent Task
     const newTask = {...BLANK_TASK};
     if (!!this.scenarioTemplateId) {
@@ -251,7 +254,13 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
     if (!!this.scenarioId) {
       newTask.scenarioId = this.scenarioId;
     }
-    newTask.triggerTaskId = task ? task.id : null;
+    if (task && task.id) {
+      newTask.triggerTaskId = task.id;
+      newTask.triggerCondition = Task.TriggerConditionEnum.Completion;
+    } else {
+      newTask.triggerTaskId = null;
+      newTask.triggerCondition = Task.TriggerConditionEnum.Time;
+    }
     const dialogRef = this.dialog.open(TaskEditComponent, {
       data: { task: newTask }
     });

@@ -69,6 +69,22 @@ namespace Steamfitter.Api.Controllers
         }
 
         /// <summary>
+        /// Gets all Results for a Task
+        /// </summary>
+        /// <remarks>
+        /// Returns all Results for the specified Task
+        /// </remarks>
+        /// <returns></returns>
+        [HttpGet("tasks/{id}/Results")]
+        [ProducesResponseType(typeof(IEnumerable<SAVM.Task>), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "getTaskResults")]
+        public async STT.Task<IActionResult> GetByTaskId(Guid id, CancellationToken ct)
+        {
+            var list = await _ResultService.GetByTaskIdAsync(id, ct);
+            return Ok(list);
+        }
+
+        /// <summary>
         /// Gets all Results for an View
         /// </summary>
         /// <remarks>

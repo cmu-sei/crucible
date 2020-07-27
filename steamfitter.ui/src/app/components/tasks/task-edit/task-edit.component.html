@@ -27,9 +27,6 @@ DM20-0181
       </mat-select>
     </mat-form-field>
     <mat-form-field class="param-full-width">
-      <input matInput placeholder="VM Mask (VM name includes this text)" [value]="data.task.vmMask" (input)="data.task.vmMask = $event.target.value">
-    </mat-form-field>
-    <mat-form-field class="param-full-width">
       <input matInput placeholder="Delay (in seconds) Before Executing This Task" [value]="data.task.delaySeconds" (input)="data.task.delaySeconds = $event.target.value">
     </mat-form-field>
     <mat-form-field class="param-full-width">
@@ -39,8 +36,25 @@ DM20-0181
       <input matInput placeholder="Interval (in seconds) Between Iterations" [value]="data.task.intervalSeconds" (input)="data.task.intervalSeconds = $event.target.value">
     </mat-form-field>
     <mat-form-field class="param-full-width">
+      <mat-label>IterationTermination</mat-label>
+      <mat-select [(ngModel)]="data.task.iterationTermination" name="iterationTermination">
+        <mat-option *ngFor="let choice of iterationTerminations" [value]="choice">
+          {{choice}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
       <input matInput placeholder="Expiration Timeout (in seconds)" [value]="data.task.expirationSeconds" (input)="data.task.expirationSeconds = $event.target.value">
     </mat-form-field>
+
+    <mat-checkbox [checked]="chooseVms" (change)="switchChooseVmsMethod($event)" style="margin-right: 20px;">Choose Actual VM's</mat-checkbox>
+    <mat-form-field class="param-full-width" *ngIf="!chooseVms">
+      <input matInput placeholder="VM Mask (VM name includes this text)" [value]="data.task.vmMask" (input)="data.task.vmMask = $event.target.value">
+    </mat-form-field>
+    <app-vm-list *ngIf="chooseVms"
+      [selectedVms]="data.task.vmList || []"
+      (updateVmList)="handleUpdateVmList($event)">
+    </app-vm-list>
 
     <mat-form-field fxFlex fxFlexFill>
       <mat-select placeholder="Select a Command" [(value)]="selectedCommand" (selectionChange)="onCommandChange()">
@@ -67,6 +81,14 @@ DM20-0181
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <div class="param-full-width" *ngIf="param.inputType === 'file'">
+            <input #file id="fileInput" type="file" multiple style="display: none;"
+            (change)="loadFileContent(param, file)" />
+            <button mat-menu-item (click)="file.click();" >
+                Select a Text File (... or enter text below)
+            </button>
+            <textarea class="mdc-text-field__input" rows="10" cols="160" placeholder="{{param.display}}" [(ngModel)]="param.value" name="content" (change)="onCommandChange()"></textarea>
+          </div>
         </div>
       </form>
     </div>

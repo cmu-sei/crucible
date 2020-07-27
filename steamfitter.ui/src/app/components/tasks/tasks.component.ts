@@ -61,8 +61,12 @@ export class TasksComponent {
     } else if (this.scenarioId) {
       this.taskDataService.pasteClipboard( {id: this.scenarioId, locationType: 'scenario'} );
     } else {
-      this.taskDataService.pasteClipboard(null);
+      this.taskDataService.pasteClipboard( {id: '', locationType: ''} );
     }
+  }
+
+  taskSelectedHandler(taskId: string) {
+    this.taskDataService.setActive(taskId);
   }
 
 }

@@ -8,108 +8,91 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { ComnAuthService, ComnSettingsService } from '@crucible/common';
-import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
+import { ComnSettingsService } from '@crucible/common';
+import { RouterQuery } from '@datorama/akita-ng-router-store';
+import { Observable, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { Section } from '../../models/section.model';
+import { TopbarView } from '../shared/top-bar/topbar.models';
 
 @Component({
   selector: 'app-admin-app',
   templateUrl: './admin-app.component.html',
   styleUrls: ['./admin-app.component.scss'],
 })
-export class AdminAppComponent implements OnInit {
-  public viewsText = 'Views';
-  public usersText = 'Users';
-  public appTemplatesText = 'Application Templates';
-  public rolesPermissionsText = 'Roles / Permissions';
-  public topBarColor = '#b00';
-
-  public username: string;
-
-  public opened: boolean;
-  public showStatus: string;
+export class AdminAppComponent implements OnInit, OnDestroy {
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  public topbarColor = '#b00';
+  public topbarTextColor = '#FFFFFF';
+  public TopbarView = TopbarView;
+  public queryParams: any = {
+    section: Section.ADMIN_VIEWS,
+  };
+  Section = Section;
+  unsubscribe$: Subject<null> = new Subject<null>();
+  public section$: Observable<Section> = this.routerQuery.selectQueryParams(
+    'section'
+  );
+  public title = '';
 
   constructor(
     private settingsService: ComnSettingsService,
-    private titleService: Title,
-    private loggedInUserService: LoggedInUserService,
     private router: Router,
-    private authService: ComnAuthService
+    private routerQuery: RouterQuery
   ) {}
 
   /**
    * Initialization
    */
   ngOnInit() {
-    this.opened = true;
-    if (this.showStatus === undefined) {
-      this.adminGotoViews();
-    }
+    this.routerQuery
+      .selectQueryParams()
+      .pipe(
+        switchMap((params: any) => of(params)),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((params: any) => {
+        // Redirect if no query params
+        const { section } = params;
+        this.sectionChangedFn(this.queryParams['section']);
+      });
 
     // Set the topbar color from config file
-    this.topBarColor = this.settingsService.settings.AppTopBarHexColor;
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor;
+    this.topbarTextColor = this.settingsService.settings.AppTopBarHexTextColor;
+  }
 
-    // Set the page title from configuration file
-    this.titleService.setTitle(this.settingsService.settings.AppTitle);
-    this.username = '';
-
-    this.loggedInUserService.loggedInUser.subscribe((loggedInUser) => {
-      if (loggedInUser == null) {
-        return;
-      }
-      // Get username information
-      this.username = loggedInUser.name;
-
-      this.loggedInUserService.isSuperUser.subscribe((isSuperUser) => {
-        if (!isSuperUser) {
-          this.router.navigate(['']);
-          return;
-        }
-      });
+  addParam(params: any): void {
+    this.queryParams = { ...this.queryParams, ...params };
+    this.router.navigate([], {
+      queryParams: { ...this.queryParams },
+      queryParamsHandling: 'merge',
     });
   }
 
-  /**
-   * Set the display to View
-   */
-  adminGotoViews(): void {
-    this.showStatus = this.viewsText;
+  sectionChangedFn(section: Section) {
+    this.addParam({ section });
+    switch (section) {
+      case Section.ADMIN_VIEWS:
+        this.title = 'Views';
+        break;
+      case Section.ADMIN_USERS:
+        this.title = 'Users';
+        break;
+      case Section.ADMIN_APP_TEMP:
+        this.title = 'Application Templates';
+        break;
+      case Section.ADMIN_ROLE_PERM:
+        this.title = 'Roles / Permissions';
+        break;
+    }
   }
 
-  /**
-   * Sets the display to Users
-   */
-  adminGotoUsers(): void {
-    this.showStatus = this.usersText;
-  }
-
-  /**
-   * Sets the display to App Templates
-   */
-  adminGotoAppTemplates(): void {
-    this.showStatus = this.appTemplatesText;
-  }
-
-  /**
-   * Sets the display to roles/permissions
-   */
-  adminGotoRolesPermissions(): void {
-    this.showStatus = this.rolesPermissionsText;
-  }
-
-  /**
-   * Calls the identity logout method
-   */
-  logout(): void {
-    this.authService.logout();
-  }
-
-  /**
-   * Change the screen to the main home page
-   */
-  GotoMainPage(): void {
-    this.router.navigate(['']);
+  ngOnDestroy() {
+    this.unsubscribe$.next(null);
+    this.unsubscribe$.complete();
   }
 }

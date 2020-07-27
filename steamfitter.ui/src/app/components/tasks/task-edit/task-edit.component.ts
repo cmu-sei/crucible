@@ -8,20 +8,23 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Inject, OnDestroy, EventEmitter } from '@angular/core';
 import { Task, TaskService } from 'src/app/swagger-codegen/dispatcher.api';
+import { TaskDataService } from 'src/app/data/task/task-data.service';
 import { Command } from 'src/app/models/command';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-edit',
   templateUrl: './task-edit.component.html',
   styleUrls: ['./task-edit.component.css']
 })
-export class TaskEditComponent implements OnInit {
+export class TaskEditComponent implements OnInit, OnDestroy {
 
   @Output() editComplete = new EventEmitter<any>();
-  public triggerConditions = [
+  triggerConditions = [
     Task.TriggerConditionEnum.Time,
     Task.TriggerConditionEnum.Manual,
     Task.TriggerConditionEnum.Completion,
@@ -29,19 +32,27 @@ export class TaskEditComponent implements OnInit {
     Task.TriggerConditionEnum.Failure,
     Task.TriggerConditionEnum.Expiration
   ];
-  public availableCommands: Command[];
-  public selectedCommand: Command;
+  iterationTerminations = [
+    Task.IterationTerminationEnum.IterationCount,
+    Task.IterationTerminationEnum.UntilSuccess,
+    Task.IterationTerminationEnum.UntilFailure
+  ];
+  availableCommands: Command[];
+  selectedCommand: Command;
+  chooseVms = false;
+  private unsubscribe$ = new Subject();
 
   constructor(
     public taskService: TaskService,
+    private taskDataService: TaskDataService,
     dialogRef: MatDialogRef<TaskEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: {task: Task}
   ) {
     dialogRef.disableClose = true;
   }
 
   ngOnInit() {
-    this.taskService.getAvailableCommands().subscribe(cmdsJson => {
+    this.taskService.getAvailableCommands().pipe(takeUntil(this.unsubscribe$)).subscribe(cmdsJson => {
       if (cmdsJson != null) {
         const cmds: AvailableCommands = JSON.parse(cmdsJson.toString());
         this.availableCommands = cmds.availableCommands;
@@ -51,16 +62,43 @@ export class TaskEditComponent implements OnInit {
     error => {
       console.log('The Steamfitter API is not responding.  ' + error.message);
     });
+    this.taskDataService.selected.pipe(takeUntil(this.unsubscribe$)).subscribe(t => {
+      if (!!t && !!t.id) {
+        this.data.task = this.formatTaskVmList({... t});
+        if (!t.iterationTermination) {
+          t.iterationTermination = Task.IterationTerminationEnum.IterationCount;
+        }
+        this.selectTheTaskCommand();
+      }
+    });
+  }
+
+  formatTaskVmList(task: Task) {
+    if (task.vmMask) {
+      const splitMask = task.vmMask.split(',');
+      if (splitMask[0].length === 36 && splitMask[0][8] === '-' && splitMask[0][13] === '-' && splitMask[0][18] === '-' && splitMask[0][23] === '-' ) {
+        task.vmList = splitMask;
+        task.vmMask = '';
+        this.chooseVms = true;
+      } else {
+        this.chooseVms = false;
+      }
+    } else {
+      this.chooseVms = (!!task.vmList && task.vmList.length > 0);
+    }
+    return task;
+  }
+
+  switchChooseVmsMethod(event: any) {
+    this.chooseVms = !this.chooseVms;
   }
 
   onCommandChange() {
-    // Build command
-    let command = `{ "Moid": "${ '{moid}' }"`;
-    this.selectedCommand.parameters.filter(obj => obj.key !== 'Moid').forEach(param => {
-      command += `, "${ param.key }": "${ param.value.replace(/\\/g, '\\\\').replace(/"/g, '\\\"')}"`;
+    const actionParameters: Record<string, string> = {};
+    this.selectedCommand.parameters.forEach(param => {
+      actionParameters[param.key] = param.value;
     });
-    command += '}';
-    this.data.task.inputString = command;
+    this.data.task.actionParameters = actionParameters;
     this.data.task.apiUrl = this.selectedCommand.api;
     this.data.task.action = this.selectedCommand.action;
   }
@@ -69,9 +107,8 @@ export class TaskEditComponent implements OnInit {
     if (!!this.availableCommands && this.availableCommands.length > 0) {
       this.availableCommands.forEach(cmd => {
         if (cmd.api === this.data.task.apiUrl && cmd.action === this.data.task.action) {
-          const selectedParameters = JSON.parse(this.data.task.inputString);
           cmd.parameters.forEach(p => {
-            p.value = selectedParameters[p.key];
+            p.value = this.data.task.actionParameters[p.key];
           });
           this.selectedCommand = cmd;
         } else {
@@ -82,15 +119,48 @@ export class TaskEditComponent implements OnInit {
   }
 
   errorFree() {
-    const isOkay = this.data
-      && this.data.task
+    const isOkay = this.data.task
       && this.data.task.name
       && this.data.task.name.length > 0;
     return isOkay;
   }
 
   handleEditComplete(saveChanges: boolean) {
+    if (this.chooseVms) {
+      this.data.task.vmMask = '';
+    } else {
+      this.data.task.vmList = [];
+    }
     this.editComplete.emit({ saveChanges: saveChanges, task: this.data.task });
+  }
+
+  handleUpdateVmList(vmList: string[]) {
+    this.data.task.vmList = vmList;
+  }
+
+  loadFileContent(param, fileSelector) {
+    const fileList: FileList = fileSelector.files;
+    if (!fileList || fileList.length !== 1) {
+      param.value = '';
+      this.onCommandChange();
+    } else {
+      const self = this;
+      const file = fileList[0];
+      const fileReader: FileReader = new FileReader();
+      fileReader.onloadend = function(x) {
+        if (file.name.endsWith('.json')) {
+          param.value = JSON.stringify(JSON.parse(fileReader.result.toString()));
+        }
+        param.value = fileReader.result.toString();
+        self.onCommandChange();
+      };
+      fileReader.readAsText(file);
+    }
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

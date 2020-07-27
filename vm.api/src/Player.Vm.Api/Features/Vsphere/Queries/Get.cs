@@ -25,6 +25,7 @@ using System.Security.Principal;
 using Player.Vm.Api.Infrastructure.Extensions;
 using S3.Player.Api;
 using System.Linq;
+using Player.Vm.Api.Domain.Services;
 
 namespace Player.Vm.Api.Features.Vsphere
 {
@@ -46,6 +47,7 @@ namespace Player.Vm.Api.Features.Vsphere
             private readonly VsphereOptions _vsphereOptions;
             private readonly ClaimsPrincipal _user;
             private readonly IS3PlayerApiClient _playerClient;
+            private readonly IPlayerService _playerService;
 
             public Handler(
                 IVmService vmService,
@@ -54,8 +56,9 @@ namespace Player.Vm.Api.Features.Vsphere
                 ILogger<Get> logger,
                 VsphereOptions vsphereOptions,
                 IPrincipal user,
-                IS3PlayerApiClient playerClient) :
-                base(mapper, vsphereService)
+                IS3PlayerApiClient playerClient,
+                IPlayerService playerService) :
+                base(mapper, vsphereService, playerService, user)
             {
                 _vmService = vmService;
                 _mapper = mapper;
@@ -73,22 +76,19 @@ namespace Player.Vm.Api.Features.Vsphere
                 if (vm == null)
                     throw new EntityNotFoundException<VsphereVirtualMachine>();
 
-                var vsphereVirtualMachine = await base.GetVsphereVirtualMachine(vm);
+                var vsphereVirtualMachine = await base.GetVsphereVirtualMachine(vm, cancellationToken);
 
-                await LogAccess(vm);
+                LogAccess(vm);
 
                 return vsphereVirtualMachine;
             }
 
-            private async Task LogAccess(Vms.Vm vm)
+            private void LogAccess(Vms.Vm vm)
             {
                 if (_vsphereOptions.LogConsoleAccess && _logger.IsEnabled(LogLevel.Information))
                 {
-                    var team = (await _playerClient.GetUserViewTeamsAsync(vm.ViewId, _user.GetId()))
-                        .FirstOrDefault(t => t.IsPrimary.Value);
-
                     _logger.LogInformation(new EventId(1),
-                        $"User {_user.GetName()} ({_user.GetId()}) in Team {team.Name} ({team.Id}) accessed console of {vm.Name} ({vm.Id})");
+                        $"User {_user.GetName()} ({_user.GetId()}) accessed console of {vm.Name} ({vm.Id})");
                 }
             }
         }

@@ -7,10 +7,12 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
+@import '~@angular/material/theming';
 
 .view-list-container {
-  display: inline-block;
+  display: inline-flex;
   flex-direction: column;
+  justify-content: center;
   max-height: 800px;
   min-width: 300px;
   margin-top: 40px;

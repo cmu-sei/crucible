@@ -10,7 +10,6 @@ DM20-0181
 
 import {
   Component,
-  OnInit,
   Input,
   ChangeDetectionStrategy,
   OnChanges,
@@ -19,6 +18,7 @@ import {
   ElementRef,
   Output,
   EventEmitter,
+  AfterViewInit,
 } from '@angular/core';
 import { Run, RunStatus } from 'src/app/generated/caster-api';
 import { ISubscription } from '@microsoft/signalr';
@@ -32,7 +32,7 @@ import { FitAddon } from 'xterm-addon-fit';
   styleUrls: ['./run.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RunComponent implements OnInit, OnChanges, OnDestroy {
+export class RunComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() run: Run;
   @Input() loading: boolean;
   @Output() planOutput = new EventEmitter<string>();
@@ -44,18 +44,25 @@ export class RunComponent implements OnInit, OnChanges, OnDestroy {
   isPlan = false;
   isApply = false;
 
-  @ViewChild('xterm', { static: true, read: ElementRef }) eleXtern: ElementRef;
+  @ViewChild('xterm') eleXterm: ElementRef;
 
   // there is no infinite scrolling for xterm.  Set number of lines to very large number!
-  xtermOptions: ITerminalOptions = { convertEol: true, scrollback: 9999999 };
+  xtermOptions: ITerminalOptions = {
+    convertEol: true,
+    scrollback: 9999999,
+  };
   xterm: Terminal = new Terminal(this.xtermOptions);
   fitAddon: FitAddon = new FitAddon();
 
   constructor(private signalRService: SignalRService) {}
 
-  ngOnInit() {
-    this.xterm.open(this.eleXtern.nativeElement);
+  ngAfterViewInit() {
+    this.openTerminal();
+  }
+
+  openTerminal() {
     this.xterm.loadAddon(this.fitAddon);
+    this.xterm.open(this.eleXterm.nativeElement);
     this.fitAddon.fit();
   }
 

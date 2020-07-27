@@ -16,10 +16,12 @@ DM20-0181
   right: 0;
 }
 
+.noscroll {
+  overflow: hidden;
+}
+
 .appbarmenu-container {
   min-width: 50px;
-  background-color: #f4f4f4;
-  color: black;
 }
 
 .cmu-logo {
@@ -42,7 +44,10 @@ DM20-0181
 .notification-height {
   height: 40px;
   border-width: 0.25pt;
-  border-color: darkgray;
+}
+
+.nolink {
+  text-decoration: none;
 }
 
 .display {

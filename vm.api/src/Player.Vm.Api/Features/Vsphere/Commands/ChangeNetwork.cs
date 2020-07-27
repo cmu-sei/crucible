@@ -19,6 +19,8 @@ using AutoMapper;
 using Player.Vm.Api.Domain.Vsphere.Services;
 using Player.Vm.Api.Features.Vms;
 using Player.Vm.Api.Domain.Vsphere.Extensions;
+using Player.Vm.Api.Domain.Services;
+using System.Security.Principal;
 
 namespace Player.Vm.Api.Features.Vsphere
 {
@@ -38,16 +40,20 @@ namespace Player.Vm.Api.Features.Vsphere
             private readonly IVsphereService _vsphereService;
             private readonly IVmService _vmService;
             private readonly IMapper _mapper;
+            private readonly IPlayerService _playerService;
 
             public Handler(
                 IVsphereService vsphereService,
                 IVmService vmService,
-                IMapper mapper) :
-                base(mapper, vsphereService)
+                IMapper mapper,
+                IPlayerService playerService,
+                IPrincipal principal) :
+                base(mapper, vsphereService, playerService, principal)
             {
                 _vsphereService = vsphereService;
                 _vmService = vmService;
                 _mapper = mapper;
+                _playerService = playerService;
             }
 
             public async Task<VsphereVirtualMachine> Handle(Command request, CancellationToken cancellationToken)
@@ -57,12 +63,12 @@ namespace Player.Vm.Api.Features.Vsphere
                 if (vm == null)
                     throw new EntityNotFoundException<VsphereVirtualMachine>();
 
-                if (!vm.CanAccessNicConfiguration)
+                if (!(await _playerService.CanManageTeamsAsync(vm.TeamIds, false, cancellationToken)))
                     throw new ForbiddenException("You do not have permission to change networks on this vm.");
 
                 await _vsphereService.ReconfigureVm(request.Id, Feature.net, request.Adapter, request.Network);
 
-                return await base.GetVsphereVirtualMachine(vm);
+                return await base.GetVsphereVirtualMachine(vm, cancellationToken);
             }
         }
     }

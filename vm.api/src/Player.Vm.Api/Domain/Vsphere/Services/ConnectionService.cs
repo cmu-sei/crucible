@@ -26,6 +26,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Player.Vm.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Player.Vm.Api.Domain.Models;
+using Nito.AsyncEx;
+using Player.Vm.Api.Infrastructure.Extensions;
 
 namespace Player.Vm.Api.Domain.Vsphere.Services
 {
@@ -36,11 +38,12 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
         UserSession GetSession();
         ManagedObjectReference GetProps();
         ManagedObjectReference GetMachineById(Guid id);
-        Guid GetVmGuidByName(string name);
+        Guid? GetVmIdByRef(string reference);
         List<Network> GetNetworksByHost(string hostReference);
         Network GetNetworkByReference(string networkReference);
         Network GetNetworkByName(string networkName);
         Datastore GetDatastoreByName(string dsName);
+        void ReloadCache();
     }
 
     public class ConnectionService : BackgroundService, IConnectionService
@@ -59,6 +62,10 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
         public ConcurrentDictionary<string, List<Network>> _networkCache = new ConcurrentDictionary<string, List<Network>>();
         public ConcurrentDictionary<string, Datastore> _datastoreCache = new ConcurrentDictionary<string, Datastore>();
         public ConcurrentDictionary<string, Guid> _vmGuids = new ConcurrentDictionary<string, Guid>();
+
+        private object _lock = new object();
+        private AsyncAutoResetEvent _resetEvent = new AsyncAutoResetEvent(false);
+        private bool _forceReload = false;
 
         public ConnectionService(
                 IOptionsMonitor<VsphereOptions> vsphereOptionsMonitor,
@@ -99,11 +106,17 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
             return machineReference;
         }
 
-        public Guid GetVmGuidByName(string name)
+        public Guid? GetVmIdByRef(string reference)
         {
-            Guid uuid;
-            _vmGuids.TryGetValue(name, out uuid);
-            return uuid;
+            Guid id;
+            if (_vmGuids.TryGetValue(reference, out id))
+            {
+                return id;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public List<Network> GetNetworksByHost(string hostReference)
@@ -136,6 +149,8 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
+            await Task.Yield();
+
             int count = 0;
 
             while (!cancellationToken.IsCancellationRequested)
@@ -148,13 +163,21 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
 
                     await Connect();
 
-                    if (count == 0)
+                    if (count == _options.LoadCacheAfterIterations)
                     {
-                        await LoadCache();
+                        count = 0;
                     }
 
-                    if (++count == _options.LoadCacheAfterIterations)
-                        count = 0;
+                    if (count == 0 || _forceReload)
+                    {
+                        lock (_lock)
+                        {
+                            _forceReload = false;
+                            count = 0;
+                        }
+
+                        await LoadCache();
+                    }
 
                     _logger.LogInformation($"Finished Connect Loop at {DateTime.UtcNow} with {_machineCache.Count()} Machines");
                 }
@@ -164,7 +187,17 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
                     count = 0;
                 }
 
-                await Task.Delay(new TimeSpan(0, 0, _options.ConnectionRetryIntervalSeconds));
+                await _resetEvent.WaitAsync(new TimeSpan(0, 0, _options.ConnectionRetryIntervalSeconds));
+                count++;
+            }
+        }
+
+        public void ReloadCache()
+        {
+            lock (_lock)
+            {
+                _forceReload = true;
+                _resetEvent.Set();
             }
         }
 
@@ -248,7 +281,7 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
                 new PropertySpec
                 {
                     type = "VirtualMachine",
-                    pathSet = new string[] { "name", "config.uuid", "summary.runtime.powerState" }
+                    pathSet = new string[] { "name", "config.uuid", "summary.runtime.powerState", "guest.net" }
                 },
 
                 new PropertySpec
@@ -325,6 +358,7 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
                         Reference = vm.obj,
                         State = (VirtualMachinePowerState)vm.GetProperty("summary.runtime.powerState") == VirtualMachinePowerState.poweredOn ? "on" : "off",
                         VmToolsStatus = vmToolsStatus,
+                        IpAddresses = ((GuestNicInfo[])vm.GetProperty("guest.net")).Where(x => x.ipAddress != null).SelectMany(x => x.ipAddress).ToArray()
                     };
 
                     vsphereVirtualMachines.Add(virtualMachine.Id, virtualMachine);
@@ -365,10 +399,11 @@ namespace Player.Vm.Api.Domain.Vsphere.Services
                     {
                         var powerState = vsphereVirtualMachine.State == "on" ? PowerState.On : PowerState.Off;
                         vm.PowerState = powerState;
+                        vm.IpAddresses = vsphereVirtualMachine.IpAddresses;
                     }
                 }
 
-                await dbContext.SaveChangesAsync();
+                var count = await dbContext.SaveChangesAsync();
             }
         }
 

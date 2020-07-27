@@ -10,97 +10,61 @@ DM20-0181
 
 <mat-sidenav-container class="appcontent-container" autosize>
   <mat-sidenav
-    class="appbarmenu-container"
     #sidenav
+    class="appbarmenu-container"
     mode="side"
-    [(opened)]="opened"
+    [opened]="opened$ | async"
   >
+    <ng-container *ngIf="data$ | async as data">
+      <mat-list class="appitems-container">
+        <mat-list-item class="appslist">
+          <a class="nolink" href="/">
+            <h2>
+              <b>{{ data.title }}</b>
+            </h2>
+          </a>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </ng-container>
     <app-application-list
-      (toggleSideNavEvent)="sidenav.toggle()"
+      *ngIf="data$ | async as data"
+      [viewId]="data.view.id"
+      [user]="data.user"
+      [teams]="data.teams"
+      (toggleSideNavEvent)="sidenavToggleFn()"
     ></app-application-list>
     <img class="cmu-logo" src="/assets/img/cmu-red-gray.png" />
   </mat-sidenav>
-  <mat-sidenav-content>
-    <div
-      class="bar-height"
-      [ngStyle]="{ 'background-color': topBarColor }"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-    >
-      <div [hidden]="opened">
-        <button (click)="sidenav.toggle()" mat-icon-button>
-          <mat-icon title="Open App Bar">
-            <img
-              class="expand"
-              width="32"
-              src="assets/img/SP_Icon_Expand.png"
-            />
-          </mat-icon>
-        </button>
-      </div>
-
-      <div class="view-text">
-        {{ viewName }}
-      </div>
-
-      <div class="team-text">
-        Team:
-      </div>
-      <div *ngIf="teams.length == 1">
-        <b>{{ team }}</b>
-      </div>
-      <div *ngIf="teams.length > 1" fxLayout="row" fxLayoutAlign="start center">
-        <button
-          mat-button
-          [matMenuTriggerFor]="teamMenu"
-          style="outline: none;"
-        >
-          <b>{{ team }}</b>
-          <mat-icon
-            style="transform: translateY(-5px);"
-            svgIcon="ic_expand_more_white_24px"
-          ></mat-icon>
-        </button>
-        <mat-menu #teamMenu="matMenu" [overlapTrigger]="false">
-          <button
-            *ngFor="let val of teams"
-            mat-menu-item
-            (click)="setPrimaryTeam(val.id)"
-          >
-            {{ val.name }}
-          </button>
-        </mat-menu>
-      </div>
-
-      <div fxFlex fxLayoutAlign="end center">
-        <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
-          <b>{{ username }}</b>
-          <mat-icon
-            style="transform: translateY(-5px);"
-            svgIcon="ic_expand_more_white_24px"
-          ></mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" [overlapTrigger]="false">
-          <!--<button mat-menu-item>Profile</button>-->
-          <button *ngIf="canEdit" mat-menu-item (click)="editView()">
-            Edit View
-          </button>
-          <button mat-menu-item (click)="logout()">Logout</button>
-        </mat-menu>
-      </div>
-    </div>
-
+  <mat-sidenav-content class="noscroll">
+    <ng-container *ngIf="data$ | async as data; else loading">
+      <app-topbar
+        [sidenav]="sidenav"
+        [title]="data.view.name"
+        [topbarColor]="topbarColor"
+        topbarView="player-home"
+        [teams]="data.teams"
+        [team]="data.team"
+        (setTeam)="setPrimaryTeam($event)"
+        (sidenavToggle)="sidenavToggleFn($event)"
+        (editView)="editViewFn($event)"
+        [topbarTextColor]="topbarTextColor"
+      ></app-topbar>
+    </ng-container>
     <app-focused-app></app-focused-app>
 
     <app-notifications
-      *ngIf="userGuid && teamGuid"
-      [viewGuid]="viewGuid"
-      [teamGuid]="teamGuid"
-      [userGuid]="userGuid"
-      [userToken]="userToken"
-      [userName]="username"
+      *ngIf="data$ | async as data; else loading"
+      [viewGuid]="data.view.id"
+      [teamGuid]="data.team.id"
+      [userGuid]="data.user.profile.id"
+      [userToken]="data.user.access_token"
+      [userName]="data.user.profile.name"
       class="notification-height"
     >
     </app-notifications>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<ng-template #loading>
+  LOADING
+</ng-template>

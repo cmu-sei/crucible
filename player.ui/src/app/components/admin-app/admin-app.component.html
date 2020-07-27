@@ -7,172 +7,151 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
-
-<mat-sidenav-container class="appcontent-container" autosize>
+<!-- SIDEBAR -->
+<mat-sidenav-container class="appcontent-container background" autosize>
   <mat-sidenav
     class="appbarmenu-container"
     #sidenav
     mode="side"
-    [(opened)]="opened"
+    [opened]="true"
   >
     <mat-list class="appitems-container">
       <mat-list-item class="appslist">
-        <a class="nolink" href="/">
-          <h4>
-            <b>Administration</b>
-          </h4>
+        <a class="nolink" [routerLink]="['/']">
+          <h2>
+            Administration
+          </h2>
         </a>
         <mat-divider></mat-divider>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img
-              src="../../../../assets/img/player.png"
-              alt="Views"
-              (click)="adminGotoViews()"
-            />
-          </div>
+      <mat-list-item class="showhand highlight">
+        <img
+          class="lefticon"
+          src="../../../../assets/img/player.png"
+          alt="Views"
+          (click)="sectionChangedFn(Section.ADMIN_VIEWS)"
+        />
 
-          <div id="content" (click)="adminGotoViews()">{{ viewsText }}</div>
+        <div class="grow" (click)="sectionChangedFn(Section.ADMIN_VIEWS)">
+          Views
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button
-              mat-icon-button
-              style="outline: none;"
-              (click)="adminGotoViews()"
-            >
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div class="righticon">
+          <button
+            class="right-icon"
+            mat-icon-button
+            (click)="sectionChangedFn(Section.ADMIN_VIEWS)"
+          >
+            <mat-icon
+              color="primary"
+              svgIcon="ic_chevron_right_black_24px"
+            ></mat-icon>
+          </button>
         </div>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img
-              class="admin-icon"
-              src="../../../assets/img/SP_Icon_User.png"
-              alt="Users"
-              (click)="adminGotoUsers()"
-            />
-          </div>
+      <mat-list-item class="applist showhand highlight">
+        <img
+          class="lefticon"
+          src="../../../assets/img/SP_Icon_User.png"
+          alt="Users"
+          (click)="sectionChangedFn(Section.ADMIN_USERS)"
+        />
 
-          <div id="content" (click)="adminGotoUsers()">{{ usersText }}</div>
+        <div class="grow" (click)="sectionChangedFn(Section.ADMIN_USERS)">
+          Users
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button
-              mat-icon-button
-              style="outline: none;"
-              (click)="adminGotoUsers()"
-            >
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div class="righticon">
+          <button
+            mat-icon-button
+            style="outline: none;"
+            (click)="sectionChangedFn(Section.ADMIN_USERS)"
+          >
+            <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+          </button>
         </div>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img
-              class="admin-icon"
-              src="../../../assets/img/SP_Icon_Intel.png"
-              alt="Users"
-              (click)="adminGotoAppTemplates()"
-            />
-          </div>
+      <mat-list-item class="showhand highlight">
+        <img
+          class="lefticon"
+          src="../../../assets/img/SP_Icon_Intel.png"
+          alt="Users"
+          (click)="sectionChangedFn(Section.ADMIN_APP_TEMP)"
+        />
 
-          <div id="content" (click)="adminGotoAppTemplates()">
-            {{ appTemplatesText }}
-          </div>
+        <div class="grow" (click)="sectionChangedFn(Section.ADMIN_APP_TEMP)">
+          Application Templates
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button
-              mat-icon-button
-              style="outline: none;"
-              (click)="adminGotoAppTemplates()"
-            >
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div>
+          <button
+            mat-icon-button
+            style="outline: none;"
+            (click)="sectionChangedFn(Section.ADMIN_APP_TEMP)"
+          >
+            <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+          </button>
         </div>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img
-              class="admin-icon"
-              src="../../../assets/img/SP_Icon_Alert.png"
-              alt="Users"
-              (click)="adminGotoRolesPermissions()"
-            />
-          </div>
+      <mat-list-item class="showhand highlight">
+        <img
+          class="lefticon"
+          src="../../../assets/img/SP_Icon_Alert.png"
+          alt="Users"
+          (click)="sectionChangedFn(Section.ADMIN_ROLE_PERM)"
+        />
 
-          <div id="content" (click)="adminGotoRolesPermissions()">
-            {{ rolesPermissionsText }}
-          </div>
+        <div
+          class="grow center-self"
+          (click)="sectionChangedFn(Section.ADMIN_ROLE_PERM)"
+        >
+          Roles / Permissions
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button
-              mat-icon-button
-              style="outline: none;"
-              (click)="adminGotoRolesPermissions()"
-            >
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div>
+          <button
+            mat-icon-button
+            style="outline: none;"
+            (click)="sectionChangedFn(Section.ADMIN_ROLE_PERM)"
+          >
+            <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+          </button>
         </div>
       </mat-list-item>
     </mat-list>
     <img class="cmu-logo" src="/assets/img/cmu-red-gray.png" />
   </mat-sidenav>
+  <!-- MAIN CONTENT -->
   <mat-sidenav-content>
-    <div
-      class="bar-height"
-      [ngStyle]="{ 'background-color': topBarColor }"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-    >
-      <div fxFlex="30" fxFlexOffset="3" class="title-text">
-        <h4>{{ showStatus }}</h4>
-      </div>
-      <div fxFlex="70" fxLayoutAlign="end center">
-        <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
-          <b>{{ username }}</b>
-          <mat-icon
-            style="transform: translateY(-5px);"
-            svgIcon="ic_expand_more_white_24px"
-          ></mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" [overlapTrigger]="false">
-          <button mat-menu-item (click)="GotoMainPage()">Exit</button>
-          <button mat-menu-item (click)="logout()">Logout</button>
-        </mat-menu>
-      </div>
-    </div>
+    <app-topbar
+      [topbarColor]="topbarColor"
+      [topbarTextColor]="topbarTextColor"
+      [topbarView]="TopbarView.PLAYER_ADMIN"
+      [title]="title"
+    ></app-topbar>
 
-    <div>
+    <div [ngSwitch]="section$ | async">
       <app-admin-view-search
+        *ngSwitchCase="Section.ADMIN_VIEWS"
         fxFlex
         fxLayoutAlign="center"
-        [hidden]="showStatus != viewsText"
       ></app-admin-view-search>
 
       <app-admin-user-search
+        *ngSwitchCase="Section.ADMIN_USERS"
         fxFlex
         fxLayoutAlign="center"
-        [hidden]="showStatus != usersText"
       ></app-admin-user-search>
 
       <app-admin-app-template-search
+        *ngSwitchCase="Section.ADMIN_APP_TEMP"
         fxFlex
         fxLayoutAlign="center"
-        [hidden]="showStatus != appTemplatesText"
       ></app-admin-app-template-search>
       <app-admin-role-permission-search
+        *ngSwitchCase="Section.ADMIN_ROLE_PERM"
         fxFlex
         fxLayoutAlign="center"
-        [hidden]="showStatus != rolesPermissionsText"
       ></app-admin-role-permission-search>
     </div>
   </mat-sidenav-content>

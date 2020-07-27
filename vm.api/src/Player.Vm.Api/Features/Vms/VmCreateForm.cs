@@ -30,6 +30,6 @@ namespace Player.Vm.Api.Features.Vms
 
         public Guid? UserId { get; set; }
 
-        public List<string> AllowedNetworks { get; set; }
+        public string[] AllowedNetworks { get; set; }
     }
 }

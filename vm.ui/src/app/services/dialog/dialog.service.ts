@@ -9,20 +9,19 @@ DM20-0181
 */
 
 import { Observable } from 'rxjs';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import {
+  MatDialogRef,
+  MatDialog,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { Injectable } from '@angular/core';
 import { ConfirmDialogComponent } from '../../components/shared/confirm-dialog/confirm-dialog.component';
 
-
 @Injectable()
 export class DialogService {
+  constructor(private dialog: MatDialog) {}
 
-  constructor(private dialog: MatDialog) {
-
-   }
-
-  public confirm(title: string, message: string, data?: any): Observable<boolean> {
-
+  public confirm(title: string, message: string, data?: any): Observable<any> {
     let dialogRef: MatDialogRef<ConfirmDialogComponent>;
     dialogRef = this.dialog.open(ConfirmDialogComponent, { data: data || {} });
     dialogRef.componentInstance.title = title;
@@ -31,5 +30,3 @@ export class DialogService {
     return dialogRef.afterClosed();
   }
 }
-
-

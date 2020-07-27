@@ -16,15 +16,26 @@ namespace Player.Vm.Api.Infrastructure.Exceptions
 {
     public class EntityNotFoundException<T> : Exception, IApiException where T : class
     {
+        private string _message { get; set; }
+
         public EntityNotFoundException()
             : base()
         {
+        }
+
+        public EntityNotFoundException(string message)
+            : base(message)
+        {
+            _message = message;
         }
 
         public override string Message
         {
             get
             {
+                if (!string.IsNullOrEmpty(_message))
+                    return _message;
+
                 var message = $"{(typeof(T).Name)} not found";
 
                 // Add spaces between words

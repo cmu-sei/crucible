@@ -26,12 +26,14 @@ namespace Steamfitter.Api.ViewModels
         public string VmMask { get; set; }
         public List<Guid> VmList { get; set; }
         public string ApiUrl { get; set; }
-        public string InputString { get; set; }
+        public Dictionary<string, string> ActionParameters { get; set; }
         public string ExpectedOutput { get; set; }
         public int ExpirationSeconds { get; set; }
         public int DelaySeconds { get; set; }
         public int IntervalSeconds { get; set; }
         public int Iterations { get; set; }
+        public TaskIterationTermination IterationTermination { get; set; }
+        public int CurrentIteration { get; set; }
         public Guid? TriggerTaskId { get; set; }
         public TaskTrigger TriggerCondition { get; set; }
     }

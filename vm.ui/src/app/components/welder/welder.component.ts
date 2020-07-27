@@ -8,24 +8,27 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import {Component, OnInit} from '@angular/core';
-import {WelderService} from '../../services/welder/welder.service';
-import {ActivatedRoute} from '@angular/router';
-import {MatSnackBar} from '@angular/material';
-import {VmService} from '../../services/vm/vm.service';
-import {IntervalObservable} from 'rxjs/observable/IntervalObservable';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { WelderService } from '../../services/welder/welder.service';
+import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { interval, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { VmService } from '../../vms/state/vms.service';
 
 @Component({
   selector: 'app-welder',
   templateUrl: './welder.component.html',
-  styleUrls: ['./welder.component.css']
+  styleUrls: ['./welder.component.css'],
 })
-export class WelderComponent implements OnInit {
+export class WelderComponent implements OnInit, OnDestroy {
   public showDeployButton = false;
   public deployButtonDisabled = false;
   public readyVMs = new Set();
   private viewName: string;
   private previousWSResults = [0, 0, 0];
+
+  private unsubscribe$ = new Subject();
 
   constructor(
     public welderService: WelderService,
@@ -37,45 +40,53 @@ export class WelderComponent implements OnInit {
   ngOnInit() {
     this.viewName = this.route.snapshot.params['viewName'];
     this.checkForWorkstations();
-    IntervalObservable.create(30000).subscribe(() => {
-      const firstValue = this.previousWSResults[0];
-      const allSame = this.previousWSResults.every(v => v === firstValue);
-      // If the values are all zeroes, then I still want to poll for VMs - if they're all non-zero, but still not equal, then I also
-      // want to continue polling. If they're all non-zero and also all equal, then it's time to stop polling.
-      if (!(firstValue > 0 && allSame)) {
-        this.checkForWorkstations();
-      }
+    interval(30000)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        const firstValue = this.previousWSResults[0];
+        const allSame = this.previousWSResults.every((v) => v === firstValue);
+        // If the values are all zeroes, then I still want to poll for VMs - if they're all non-zero, but still not equal, then I also
+        // want to continue polling. If they're all non-zero and also all equal, then it's time to stop polling.
+        if (!(firstValue > 0 && allSame)) {
+          this.checkForWorkstations();
+        }
 
-      // Once we start getting VMs back, that means our request is done or almost done.
-      if (this.readyVMs.size === 0) {
-        this.welderService.getQueueSize().subscribe(response => {
-          if (response != null) {
-            this.snackBar.open(response.toString());
-          }
-        }, err => console.log(err));
-      }
-    });
+        // Once we start getting VMs back, that means our request is done or almost done.
+        if (this.readyVMs.size === 0) {
+          this.welderService.getQueueSize().subscribe(
+            (response) => {
+              if (response != null) {
+                this.snackBar.open(response.toString());
+              }
+            },
+            (err) => console.log(err)
+          );
+        }
+      });
     this.showDeployButton = true;
   }
 
   public autoDeploy() {
     this.deployButtonDisabled = true;
     this.welderService.deployToView(this.viewName).subscribe(
-      response => {
+      (response) => {
         console.log(response);
-        this.snackBar.open('Request received. Please wait while your workstations are provisioned.');
+        this.snackBar.open(
+          'Request received. Please wait while your workstations are provisioned.'
+        );
       },
-      err => {
+      (err) => {
         console.log(err);
         this.deployButtonDisabled = false;
-      });
+      }
+    );
   }
 
   private checkForWorkstations() {
     this.vmService.GetTeamVms(true, true).subscribe(
-      vms => {
+      (vms) => {
         this.readyVMs.clear();
-        vms.forEach(vm => {
+        vms.forEach((vm) => {
           // If we're getting VMs back, then there's no point in letting the user click the deploy button again because it's a waste of
           // network resources.
           this.showDeployButton = false;
@@ -91,12 +102,18 @@ export class WelderComponent implements OnInit {
         this.previousWSResults.shift();
         this.previousWSResults.push(this.readyVMs.size);
       },
-      err => {
+      (err) => {
         console.log(err);
-      });
+      }
+    );
   }
 
   public openVMConsoleTab(vm) {
     window.open(vm.url, '_blank');
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.unsubscribe();
+    this.unsubscribe$.complete();
   }
 }

@@ -10,15 +10,19 @@ DM20-0181
 
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
+import { persistState } from '@datorama/akita';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+export const storage = persistState({
+  key: 'akita-player-ui',
+  include: ['auth.ui'],
+});
 
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch((err) => console.log(err));

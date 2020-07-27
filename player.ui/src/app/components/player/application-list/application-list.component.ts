@@ -8,96 +8,82 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DomSanitizer, Title } from '@angular/platform-browser';
-import { ComnAuthService, ComnSettingsService } from '@crucible/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ComnAuthService } from '@crucible/common';
+import { User } from 'oidc-client';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { ApplicationData } from '../../../models/application-data';
+import { TeamData } from '../../../models/team-data';
 import { ApplicationsService } from '../../../services/applications/applications.service';
 import { FocusedAppService } from '../../../services/focused-app/focused-app.service';
-import { LoggedInUserService } from '../../../services/logged-in-user/logged-in-user.service';
-import { TeamsService } from '../../../services/teams/teams.service';
-import { ViewsService } from '../../../services/views/views.service';
 
 @Component({
   selector: 'app-application-list',
   templateUrl: './application-list.component.html',
   styleUrls: ['./application-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApplicationListComponent implements OnInit {
-  @Output() toggleSideNavEvent = new EventEmitter<String>();
+export class ApplicationListComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() viewId: string;
+  @Input() user: User;
+  @Input() teams: TeamData[];
 
-  public applicationList: Array<ApplicationData> = new Array<ApplicationData>();
+  public applications$: Observable<ApplicationData[]>;
   public viewGUID: string;
   public titleText: string;
+  private unsubscribe$: Subject<null> = new Subject<null>();
 
   constructor(
     private applicationsService: ApplicationsService,
-    private viewsService: ViewsService,
     private focusedAppService: FocusedAppService,
-    private loggedInUserService: LoggedInUserService,
-    private teamsService: TeamsService,
     private authService: ComnAuthService,
-    private sanitizer: DomSanitizer,
-    private titleService: Title,
-    private settingsService: ComnSettingsService
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
-    // Set the page title from configuration file
-    this.titleText = this.settingsService.settings.AppTopBarText;
-    this.titleService.setTitle(this.titleText);
-
-    // The current applications list
-    this.applicationList = [];
-
-    // Call to update the applications list anytime the Current View GUID is changed
-    this.viewsService.currentViewGuid.subscribe((currentViewGUID) => {
-      if (currentViewGUID !== '') {
-        // Tell the service to update once a user is officially logged in
-        this.loggedInUserService.loggedInUser.subscribe((loggedInUser) => {
-          if (loggedInUser == null) {
-            return;
-          }
-
-          this.teamsService
-            .getUserTeamsByView(loggedInUser.id, currentViewGUID)
-            .subscribe((team) => {
-              this.applicationsService
-                .getApplicationsByTeam(
-                  team.filter((t) => t.isPrimary)[0].id,
-                  currentViewGUID
-                )
-                .subscribe((apps) => {
-                  this.applicationList = apps;
-
-                  this.applicationList.forEach((app) => {
-                    app.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-                      app.url
-                    );
-                  });
-
-                  // Service received new application list
-                  if (this.applicationList.length > 0) {
-                    const focusedApp: ApplicationData = this.applicationList[0];
-
-                    if (focusedApp != null) {
-                      this.openInFocusedApp(focusedApp.name, focusedApp.url);
-                    }
-                  }
-                });
-            });
-        });
-      }
-    });
+    this.refreshApps();
   }
 
-  sideNavToggle() {
-    this.toggleSideNavEvent.emit('Toggle Side Nav');
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.teams) {
+      this.refreshApps();
+    }
   }
 
   // Local Component functions
   openInTab(url: string) {
     window.open(url, '_blank');
+  }
+
+  refreshApps() {
+    this.applications$ = this.applicationsService
+      .getApplicationsByTeam(
+        this.teams.find((t) => t.isPrimary).id,
+        this.viewId
+      )
+      .pipe(
+        map((apps) => ({ apps })),
+        map(({ apps }) => {
+          apps.forEach(
+            (app) =>
+              (app.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+                app.url
+              ))
+          );
+          return apps;
+        }),
+        takeUntil(this.unsubscribe$)
+      );
   }
 
   openInFocusedApp(name: string, url: string) {
@@ -111,5 +97,10 @@ export class ApplicationListComponent implements OnInit {
         this.focusedAppService.focusedAppUrl.next(url);
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next(null);
+    this.unsubscribe$.complete();
   }
 }

@@ -18,6 +18,7 @@ import {Scenario, ScenarioService} from 'src/app/swagger-codegen/dispatcher.api'
 import {map, take, tap, distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import {BehaviorSubject, Observable, combineLatest} from 'rxjs';
 import {TaskDataService} from 'src/app/data/task/task-data.service';
+import { PlayerDataService } from 'src/app/data/player/player-data-service';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,8 @@ export class ScenarioDataService {
     private scenarioService: ScenarioService,
     private taskDataService: TaskDataService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private playerDataService: PlayerDataService
   ) {
     this.filterControl.valueChanges.subscribe(term => {
       router.navigate([], { queryParams: { scenariomask: term }, queryParamsHandling: 'merge'});
@@ -90,6 +92,7 @@ export class ScenarioDataService {
             this.scenarioStore.setActive(selectedScenario.id);
             this.taskDataService.loadByScenario(selectedScenario.id);
             this._requestedScenarioId = requestedScenarioId;
+            this.playerDataService.selectView(selectedScenario.viewId);
           }
         } else {
           this._requestedScenarioId = '';
@@ -123,7 +126,7 @@ export class ScenarioDataService {
         scenario.startDate = new Date(scenario.startDate + 'Z');
         scenario.endDate = new Date(scenario.endDate + 'Z');
       });
-      this.scenarioStore.set(scenarios);
+      this.scenarioStore.set(scenarios.filter(s => s.description !== 'Personal Task Builder Scenario'));
     }, error => {
       this.scenarioStore.set([]);
     });
@@ -140,6 +143,22 @@ export class ScenarioDataService {
       }),
       tap(() => { this.scenarioStore.setLoading(false); })
     );
+  }
+
+  loadTaskBuilderScenario() {
+    this.scenarioStore.setLoading(true);
+    this.setActive('');
+    return this.scenarioService.getMyScenario().pipe(
+      tap(() => { this.scenarioStore.setLoading(false); }),
+      take(1)
+    ).subscribe(scenario => {
+        // convert from UTC time.
+        scenario.startDate = new Date(scenario.startDate);
+        scenario.endDate = new Date(scenario.endDate);
+        this.updateStore({...scenario});
+        this.setActive(scenario.id);
+        this.taskDataService.loadByScenario(scenario.id);
+      });
   }
 
   add(scenario: Scenario) {

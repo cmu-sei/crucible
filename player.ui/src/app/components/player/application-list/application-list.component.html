@@ -7,74 +7,49 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
-
-<div class="collapse-button">
-  <button (click)="sideNavToggle()" mat-icon-button>
-    <mat-icon title="Open App Bar">
-      <img width="32" src="assets/img/SP_Icon_Collapse.png" />
-    </mat-icon>
-  </button>
-</div>
-
 <mat-list class="appitems-container">
-  <mat-list-item class="appslist">
-    <a class="nolink" href="/">
-      <h4>
-        <b>{{ titleText }}</b>
-      </h4>
-    </a>
-    <mat-divider></mat-divider>
-  </mat-list-item>
-  <mat-list-item *ngFor="let app of applicationList">
+  <mat-list-item
+    *ngFor="let app of applications$ | async"
+    class="showhand highlight"
+  >
     <iframe
       *ngIf="app.loadInBackground"
       class="hidden-app-iframe"
       [src]="app.safeUrl"
     ></iframe>
 
-    <div id="wrapper">
-      <div id="lefticon">
-        <img
-          *ngIf="app.embeddable"
-          src="{{ app.icon }}"
-          alt="{{ app.name }}"
-          (click)="openInFocusedApp(app.name, app.url)"
-        />
-        <img
-          *ngIf="!app.embeddable"
-          src="{{ app.icon }}"
-          alt="{{ app.name }}"
-          (click)="openInTab(app.url)"
-        />
-      </div>
+    <img
+      *ngIf="app.embeddable"
+      class="lefticon"
+      src="{{ app.icon }}"
+      alt="{{ app.name }}"
+      (click)="openInFocusedApp(app.name, app.url)"
+    />
+    <img
+      *ngIf="!app.embeddable"
+      class="lefticon"
+      src="{{ app.icon }}"
+      alt="{{ app.name }}"
+      (click)="openInTab(app.url)"
+    />
 
-      <div
-        class="showhand"
-        *ngIf="app.embeddable"
-        id="content"
-        (click)="openInFocusedApp(app.name, app.url)"
-      >
-        {{ app.name }}
-      </div>
-      <div
-        class="showhand"
-        *ngIf="!app.embeddable"
-        id="content"
-        (click)="openInTab(app.url)"
-      >
-        {{ app.name }}
-      </div>
-
-      <div class="pull-right" id="rightcontext">
-        <button
-          mat-icon-button
-          [matMenuTriggerFor]="menu"
-          style="outline: none;"
-        >
-          <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-        </button>
-      </div>
+    <div
+      *ngIf="app.embeddable"
+      class="grow"
+      (click)="openInFocusedApp(app.name, app.url)"
+    >
+      {{ app.name }}
     </div>
+    <div *ngIf="!app.embeddable" class="grow" (click)="openInTab(app.url)">
+      {{ app.name }}
+    </div>
+
+    <div class="righticon">
+      <button mat-icon-button [matMenuTriggerFor]="menu" style="outline: none;">
+        <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+      </button>
+    </div>
+
     <mat-menu #menu="matMenu">
       <button
         mat-menu-item

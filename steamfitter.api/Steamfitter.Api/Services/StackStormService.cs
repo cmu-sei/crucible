@@ -33,6 +33,7 @@ namespace Steamfitter.Api.Services
         STT.Task<string> GuestCommand(string parameters);
         STT.Task<string> GuestCommandFast(string parameters);
         STT.Task<string> GuestReadFile(string parameters);
+        STT.Task<string> GuestFileUploadContent(string parameters);
         STT.Task<string> VmPowerOn(string parameters);
         STT.Task<string> VmPowerOff(string parameters);
         STT.Task<string> CreateVmFromTemplate(string parameters);
@@ -191,6 +192,20 @@ namespace Steamfitter.Api.Services
             // the moid parameter is actually a Guid and the moid must be looked up
             command.Moid = GetVmMoid(Guid.Parse(command.Moid));
             var executionResult = await _vsphere.GuestFileRead(command);
+
+            return executionResult.Value;
+        }
+
+        public async STT.Task<string> GuestFileUploadContent(string parameters)
+        {
+            // \r and \n are not valid json characters for deserialize
+            var validJson = parameters.Replace("\r\n", "<*0x0A*>").Replace("\n", "<*0x0A*>");
+            var command = JsonSerializer.Deserialize<Stackstorm.Connector.Models.Vsphere.Requests.FileWrite>(validJson);
+            // \r\n is required for windows and still works in Ubuntu
+            command.GuestFileContent = command.GuestFileContent.Replace("<*0x0A*>", "\r\n");
+            // the moid parameter is actually a Guid and the moid must be looked up
+            command.Moid = GetVmMoid(Guid.Parse(command.Moid));
+            var executionResult = await _vsphere.GuestFileWrite(command);
 
             return executionResult.Value;
         }

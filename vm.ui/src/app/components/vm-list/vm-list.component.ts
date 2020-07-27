@@ -8,22 +8,37 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter,  } from '@angular/core';
-import { VmService } from '../../services/vm/vm.service';
-import { VmModel } from '../../models/vm-model';
-import { MatTableDataSource, MatPaginator, PageEvent } from '@angular/material';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { FileService } from '../../services/file/file.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { TeamsService } from '../../services/teams/teams.service';
 import { HttpEventType } from '@angular/common/http';
+import { take, switchMap, filter } from 'rxjs/operators';
+import { VmModel } from '../../vms/state/vm.model';
+import { VmService } from '../../vms/state/vms.service';
+import { SelectContainerComponent } from 'ngx-drag-to-select';
 
 @Component({
   selector: 'app-vm-list',
   templateUrl: './vm-list.component.html',
-  styleUrls: ['./vm-list.component.css']
+  styleUrls: ['./vm-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VmListComponent implements OnInit, AfterViewInit {
-  public vmModelDataSource: any;
+  public vmModelDataSource = new MatTableDataSource<VmModel>(
+    new Array<VmModel>()
+  );
   public displayedColumns: string[] = ['name'];
 
   // MatPaginator Output
@@ -33,70 +48,86 @@ export class VmListComponent implements OnInit, AfterViewInit {
   public uploadProgress = 0;
   public vmApiResponded = true;
   public filterString = '';
+  public showIps = false;
+  public ipv4Only = true;
+
+  public selectedVms = new Array<string>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Output() openVmHere = new EventEmitter<{[name: string]: string}>();
+  @ViewChild(SelectContainerComponent)
+  selectContainer: SelectContainerComponent;
+  @Output() openVmHere = new EventEmitter<{ [name: string]: string }>();
+  @Output() errors = new EventEmitter<{ [key: string]: string }>();
+
+  @Input() set vms(val: VmModel[]) {
+    this.vmModelDataSource.data = val;
+  }
 
   constructor(
     public vmService: VmService,
     private fileService: FileService,
     private dialogService: DialogService,
-    private teamsService: TeamsService) { }
+    private teamsService: TeamsService
+  ) {}
 
   ngOnInit() {
     this.pageEvent = new PageEvent();
     this.pageEvent.pageIndex = 0;
     this.pageEvent.pageSize = this.defaultPageSize;
-    this.vmModelDataSource = new MatTableDataSource<VmModel>(new Array<VmModel>());
-
 
     // Create a filterPredicate that tells the Search to ONLY search on the name column
-    this.vmModelDataSource.filterPredicate =
-      (data: VmModel, filters: string) => {
-        const matchFilter = [];
-        const filterArray = filters.split(' ');
-        const columns = [data.name];
-        // Or if you don't want to specify specifics columns =>
-        // const columns = (<any>Object).values(data);
-        // Main loop
-        filterArray.forEach(filter => {
-          const customFilter = [];
-          columns.forEach(column => customFilter.push(column.toLowerCase().includes(filter)));
-          matchFilter.push(customFilter.some(Boolean)); // OR
-        });
-        return matchFilter.every(Boolean); // AND
-      };
+    this.vmModelDataSource.filterPredicate = (
+      data: VmModel,
+      filters: string
+    ) => {
+      const matchFilter = [];
+      const filterArray = filters.split(' ');
+      const columns = [data.name];
+      // Or if you don't want to specify specifics columns =>
+      // const columns = (<any>Object).values(data);
+      // Main loop
+      filterArray.forEach((f) => {
+        const customFilter = [];
+        columns.forEach((column) =>
+          customFilter.push(column.toLowerCase().includes(f))
+        );
 
-    this.vmService.GetViewVms(true, false).subscribe(res => {
-      this.vmApiResponded = true;
-      if (res != null) {
-        res.forEach(vm => {
-          vm.url = vm.url + '?viewId=' + this.vmService.viewId;
-          vm.state = 'on';
-        });
+        data.ipAddresses.forEach((address) =>
+          customFilter.push(address.includes(f))
+        );
 
-        this.vmModelDataSource.data = res;
-      }
-    },
-    error => {
-      console.log('The VM API is not responding.  ' + error.message);
-      this.vmApiResponded = false;
-    });
+        matchFilter.push(customFilter.some(Boolean)); // OR
+      });
+      return matchFilter.every(Boolean); // AND
+    };
+
+    this.vmService
+      .GetViewVms(true, false)
+      .pipe(take(1))
+      .subscribe(
+        () => {
+          this.vmApiResponded = true;
+        },
+        (error) => {
+          console.log('The VM API is not responding.  ' + error.message);
+          this.vmApiResponded = false;
+        }
+      );
   }
 
   ngAfterViewInit() {
     this.vmModelDataSource.paginator = this.paginator;
   }
 
-
-  /*onPage(pageEvnt) {
-    this.pageEvent = PageEvent;
-  }*/
+  onPage(pageEvent) {
+    this.pageEvent = pageEvent;
+    this.selectContainer.clearSelection();
+  }
 
   /**
- * Called by UI to add a filter to the vmModelDataSource
- * @param filterValue
- */
+   * Called by UI to add a filter to the vmModelDataSource
+   * @param filterValue
+   */
   applyFilter(filterValue: string) {
     this.pageEvent.pageIndex = 0;
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -104,7 +135,7 @@ export class VmListComponent implements OnInit, AfterViewInit {
     this.vmModelDataSource.filter = filterValue;
   }
 
-    /**
+  /**
    * Clears the search string
    */
   clearFilter() {
@@ -116,8 +147,9 @@ export class VmListComponent implements OnInit, AfterViewInit {
     window.open(url, '_blank');
   }
 
-  openHere(vmName: string, url: string) {
-    const val = <{[name: string]: string}>{ name: vmName, url};
+  openHere($event, vmName: string, url: string) {
+    $event.preventDefault();
+    const val = <{ [name: string]: string }>{ name: vmName, url };
     this.openVmHere.emit(val);
   }
 
@@ -127,59 +159,125 @@ export class VmListComponent implements OnInit, AfterViewInit {
       return;
     }
 
-
-
     let isAdmin = true;
-    this.teamsService.GetAllMyTeams(this.vmService.viewId).subscribe(teams => {
-      // There should only be 1 primary member, set that value for the current login
-      // Determine if the user is an "Admin" if their isPrimary team has canManage == true
-      const myPrimaryTeam = teams.filter(t => t.isPrimary)[0];
-      if (myPrimaryTeam !== undefined) {
-        isAdmin = myPrimaryTeam.canManage;
-      } else {
-        isAdmin = false;
-        console.log('User does not have a primary team');
-      }
+    this.teamsService
+      .GetAllMyTeams(this.vmService.viewId)
+      .pipe(take(1))
+      .subscribe((teams) => {
+        // There should only be 1 primary member, set that value for the current login
+        // Determine if the user is an "Admin" if their isPrimary team has canManage == true
+        const myPrimaryTeam = teams.filter((t) => t.isPrimary)[0];
+        if (myPrimaryTeam !== undefined) {
+          isAdmin = myPrimaryTeam.canManage;
+        } else {
+          isAdmin = false;
+          console.log('User does not have a primary team');
+        }
 
-      const qf = fileSelector.files[0];
+        const qf = fileSelector.files[0];
 
-      if (isAdmin) {
-        // First prompt the user to confirm if the iso is available for the team or the entire view
-        this.dialogService.confirm('Upload iso for?',
-          'Please choose if you want this iso to be public or for your team only:',
-          { buttonTrueText: 'Public', buttonFalseText: 'My Team Only' }).subscribe(result => {
-            if (result['wasCancelled'] === false) {
-              const isForAll = result['confirm'];
-              this.sendIsoFile(isForAll, qf);
-            }
-          });
-      } else {
-        // The user is not an admin therfore iso's are only uploaded for the team
-        this.sendIsoFile(false, qf);
-      }
-      fileSelector.value = '';
-    });
+        if (isAdmin) {
+          // First prompt the user to confirm if the iso is available for the team or the entire view
+          this.dialogService
+            .confirm(
+              'Upload iso for?',
+              'Please choose if you want this iso to be public or for your team only:',
+              { buttonTrueText: 'Public', buttonFalseText: 'My Team Only' }
+            )
+            .pipe(take(1))
+            .subscribe((result) => {
+              if (result['wasCancelled'] === false) {
+                const isForAll = result['confirm'];
+                this.sendIsoFile(isForAll, qf);
+              }
+            });
+        } else {
+          // The user is not an admin therfore iso's are only uploaded for the team
+          this.sendIsoFile(false, qf);
+        }
+        fileSelector.value = '';
+      });
   }
 
   sendIsoFile(isForAll: boolean, file: File) {
     this.uploading = true;
-    this.fileService.uploadIso(isForAll, file)
-      .subscribe(
-        event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            const percentDone = Math.round(100 * event.loaded / event.total);
-            this.uploadProgress = percentDone;
-          }
+    this.fileService.uploadIso(isForAll, file).subscribe(
+      (event) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const percentDone = Math.round((100 * event.loaded) / event.total);
+          this.uploadProgress = percentDone;
+        }
 
-          if (event.type === HttpEventType.Response) {
-            this.uploading = false;
-          }
-        },
-        err => {
-          console.log(err);
+        if (event.type === HttpEventType.Response) {
           this.uploading = false;
         }
+      },
+      (err) => {
+        console.log(err);
+        this.uploading = false;
+      }
     );
   }
 
+  public getIpAddresses(vm: VmModel): string[] {
+    if (vm.ipAddresses == null) {
+      return [];
+    }
+
+    if (this.ipv4Only) {
+      return vm.ipAddresses.filter((x) => !x.includes(':'));
+    } else {
+      return vm.ipAddresses;
+    }
+  }
+
+  public powerOffSelected() {
+    this.performAction(VmAction.PowerOff, 'Power Off', 'power off');
+  }
+
+  public powerOnSelected() {
+    this.performAction(VmAction.PowerOn, 'Power On', 'power on');
+  }
+
+  public shutdownSelected() {
+    this.performAction(VmAction.Shutdown, 'Shutdown', 'shutdown');
+  }
+
+  private performAction(action: VmAction, title: string, actionName: string) {
+    this.dialogService
+      .confirm(
+        `${title}`,
+        `Are you sure you want to ${actionName} ${this.selectedVms.length} selected machines?`,
+        { buttonTrueText: 'Confirm' }
+      )
+      .pipe(
+        filter((result) => result.wasCancelled === false),
+        switchMap(() => {
+          this.errors.emit({});
+
+          switch (action) {
+            case VmAction.PowerOff:
+              return this.vmService.powerOff(this.selectedVms);
+            case VmAction.PowerOn:
+              return this.vmService.powerOn(this.selectedVms);
+            case VmAction.Shutdown:
+              return this.vmService.shutdown(this.selectedVms);
+          }
+        }),
+        take(1)
+      )
+      .subscribe((x) => {
+        this.errors.emit(x.errors);
+      });
+  }
+
+  public trackByVmId(item) {
+    return item.id;
+  }
+}
+
+enum VmAction {
+  PowerOn,
+  PowerOff,
+  Shutdown,
 }

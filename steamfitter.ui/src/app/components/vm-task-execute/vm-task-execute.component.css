@@ -9,21 +9,21 @@ DM20-0181
 */
 
 .component-container {
-    display: inline-block;
-    flex-direction: column;
-    min-width: 900px;
-    margin-top: 40px;
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-bottom: 40px;
+  flex-direction: column;
+  min-width: 1000px;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  background-color: white;
 }
 
 .title {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .full-width {
-    width: 70%;
+  width: 100%;
 }
 
 .add-margin {

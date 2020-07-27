@@ -9,6 +9,7 @@ DM20-0181
 */
 
 using System;
+using System.Collections.Generic;
 using NetVimClient;
 
 namespace Player.Vm.Api.Domain.Vsphere.Models
@@ -28,5 +29,7 @@ namespace Player.Vm.Api.Domain.Vsphere.Models
         public ManagedObjectReference Reference { get; set; }
 
         public VirtualDevice[] Devices { get; set; }
+
+        public string[] IpAddresses { get; set; }
     }
 }

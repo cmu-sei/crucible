@@ -11,16 +11,19 @@ DM20-0181
 <app-admin-view-edit
   fxFlex
   fxLayoutAlign="center"
-  [hidden]="!showEditScreen"
+  [class.hidden]="!showEditScreen"
   (editComplete)="refreshViews()"
 ></app-admin-view-edit>
 
-<div [hidden]="showEditScreen" class="view-list-container mat-elevation-z8">
-  <div fxLayout="row" fxLayoutAlign="start center">
+<div
+  [class.hidden]="showEditScreen"
+  class="view-list-container mat-elevation-z8"
+>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
     <div class="sp-icon">
       <img width="30" src="../../../../assets/img/player.png" alt="Views" />
-      Views
     </div>
+    <span>Views</span>
     <div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="5">
       <mat-icon
         style="transform: scale(0.85); margin-right: 5px;"
@@ -82,7 +85,7 @@ DM20-0181
           ></mat-icon>
         </button>
         <a
-          style="color: blue; cursor: pointer;"
+          style="cursor: pointer;"
           (click)="executeViewAction('edit', element.id)"
           >{{ element.name }}</a
         >

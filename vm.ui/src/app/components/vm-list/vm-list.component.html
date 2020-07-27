@@ -9,10 +9,7 @@ DM20-0181
 -->
 
 <div class="page">
-  <div
-    class="vm-list-container mat-elevation-z8"
-    [style.visibility]="vmApiResponded ? 'visible' : 'hidden'"
-  >
+  <div class="vm-list-container mat-elevation-z8" *ngIf="vmApiResponded">
     <div fxLayout="column">
       <div fxLayout="row" fxLayoutAlign="start center">
         <div class="sp-icon">
@@ -22,7 +19,7 @@ DM20-0181
             alt="Virtual Machines"
           />
         </div>
-        <div>Virtual Machines</div>
+        <div>Virtual Machines ({{ selectedVms.length }} selected)</div>
         <mat-icon
           style="transform: scale(0.85); margin-right: 5px; margin-left: 25px;"
           svgIcon="ic_magnify_search"
@@ -49,6 +46,46 @@ DM20-0181
             svgIcon="ic_cancel_circle"
           ></mat-icon>
         </button>
+        <mat-menu #actionsMenu="matMenu">
+          <button
+            mat-menu-item
+            (click)="powerOnSelected()"
+            [disabled]="selectedVms.length === 0"
+          >
+            Power On
+          </button>
+          <button
+            mat-menu-item
+            (click)="powerOffSelected()"
+            [disabled]="selectedVms.length === 0"
+          >
+            Power Off
+          </button>
+          <button
+            mat-menu-item
+            (click)="shutdownSelected()"
+            [disabled]="selectedVms.length === 0"
+          >
+            Shutdown
+          </button>
+        </mat-menu>
+        <button
+          mat-flat-button
+          color="primary"
+          class="action-button"
+          [matMenuTriggerFor]="actionsMenu"
+        >
+          Actions
+        </button>
+        <mat-checkbox class="search-checkbox" [(ngModel)]="showIps"
+          >Show IPs</mat-checkbox
+        >
+        <mat-checkbox
+          *ngIf="showIps"
+          class="search-checkbox"
+          [(ngModel)]="ipv4Only"
+          >IPv4 Only</mat-checkbox
+        >
         <div style="margin-top: 10px; margin-left: 200px;">
           <button
             mat-stroked-button
@@ -71,75 +108,111 @@ DM20-0181
       </div>
     </div>
 
-    <div
-      class="flex-container"
-      *ngFor="
-        let vm of vmModelDataSource.filteredData
-          | slice
-            : pageEvent.pageIndex * pageEvent.pageSize
-            : (pageEvent.pageIndex + 1) * pageEvent.pageSize;
-        let i = index
-      "
-    >
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxFlex="none">
-          <button mat-icon-button (click)="openHere(vm.name, vm.url)">
-            <mat-progress-spinner
-              *ngIf="vm.state === undefined"
-              color="primary"
-              mode="indeterminate"
-              diameter="25"
-            ></mat-progress-spinner>
-            <mat-icon
-              *ngIf="vm.powerState !== undefined && vm.powerState === 'Unknown'"
-              style="color: red;"
-              svgIcon="monitor"
-              title="Power state unknown"
-            ></mat-icon>
-            <mat-icon
-              *ngIf="vm.powerState !== undefined && vm.powerState === 'On'"
-              style="color: black;"
-              svgIcon="monitor"
-            ></mat-icon>
-            <mat-icon
-              *ngIf="vm.powerState !== undefined && vm.powerState === 'Off'"
-              style="color: red;"
-              svgIcon="power_icon"
-              title="Powered Off"
-            ></mat-icon>
-          </button>
+    <dts-select-container [(selectedItems)]="selectedVms">
+      <div
+        class="flex-container"
+        *ngFor="
+          let vm of vmModelDataSource.filteredData
+            | slice
+              : pageEvent.pageIndex * pageEvent.pageSize
+              : (pageEvent.pageIndex + 1) * pageEvent.pageSize;
+          let i = index;
+          trackBy: trackByVmId
+        "
+        [matTooltip]="vm.lastError"
+      >
+        <div
+          *ngIf="vm.powerState.toString() !== 'Unknown'; else notSelectable"
+          [dtsSelectItem]="vm.id"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <ng-container *ngTemplateOutlet="vmTemplate"></ng-container>
         </div>
-        <div fxFlex class="content">
-          <label class="vm-link" (click)="openHere(vm.name, vm.url)">{{
-            vm.name
-          }}</label>
-        </div>
-        <div class="open-tab-icon">
-          <button
-            mat-icon-button
-            style="outline: none;"
-            (click)="openInTab(vm.url)"
-            title="Open in Browser Tab"
-          >
-            <mat-icon class="tab-icon" svgIcon="ic_open_tab"></mat-icon>
-          </button>
-        </div>
-      </div>
-    </div>
 
+        <ng-template #notSelectable>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <ng-container *ngTemplateOutlet="vmTemplate"></ng-container>
+          </div>
+        </ng-template>
+
+        <ng-template #vmTemplate>
+          <div
+            fxLayout="column"
+            [ngClass]="{ pending: vm.hasPendingTasks, error: vm.lastError }"
+          >
+            <div>
+              <div fxFlex="none">
+                <button
+                  mat-icon-button
+                  (click)="openHere($event, vm.name, vm.url)"
+                >
+                  <mat-icon
+                    *ngIf="
+                      vm.powerState !== undefined &&
+                      vm.powerState.toString() === 'Unknown'
+                    "
+                    style="color: red;"
+                    svgIcon="monitor"
+                    title="Power state unknown"
+                  ></mat-icon>
+                  <mat-icon
+                    *ngIf="
+                      vm.powerState !== undefined &&
+                      vm.powerState.toString() === 'On'
+                    "
+                    style="color: black;"
+                    svgIcon="monitor"
+                  ></mat-icon>
+                  <mat-icon
+                    *ngIf="
+                      vm.powerState !== undefined &&
+                      vm.powerState.toString() === 'Off'
+                    "
+                    style="color: red;"
+                    svgIcon="power_icon"
+                    title="Powered Off"
+                  ></mat-icon>
+                </button>
+              </div>
+              <div fxFlex class="content">
+                <a
+                  class="vm-link"
+                  [attr.href]="vm.url"
+                  (click)="openHere($event, vm.name, vm.url)"
+                  >{{ vm.name }}</a
+                >
+              </div>
+              <div class="open-tab-icon">
+                <button
+                  mat-icon-button
+                  style="outline: none;"
+                  (click)="openInTab(vm.url)"
+                  title="Open in Browser Tab"
+                >
+                  <mat-icon class="tab-icon" svgIcon="ic_open_tab"></mat-icon>
+                </button>
+              </div>
+            </div>
+            <div *ngIf="showIps" fxLayout="column" class="content">
+              <label *ngFor="let address of getIpAddresses(vm)">
+                {{ address }}
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </dts-select-container>
     <mat-paginator
       #paginator
       [pageSize]="defaultPageSize"
       [pageSizeOptions]="[25, 50, 100, vmModelDataSource.filteredData.length]"
       [showFirstLastButtons]="true"
-      (page)="pageEvent = $event"
+      (page)="onPage($event)"
     >
     </mat-paginator>
   </div>
-  <div
-    class="vm-list-container mat-elevation-z8"
-    [style.visibility]="vmApiResponded ? 'hidden' : 'visible'"
-  >
+  <div class="vm-list-container mat-elevation-z8" *ngIf="!vmApiResponded">
     <label>The VM API is not currently reachable.</label>
   </div>
 </div>

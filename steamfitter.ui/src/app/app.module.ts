@@ -42,7 +42,6 @@ import { ScenarioEditDialogComponent } from './components/scenarios/scenario-edi
 import { ScenarioListComponent } from './components/scenarios/scenario-list/scenario-list.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import { CommandsComponent } from './components/commands/commands.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
@@ -86,9 +85,9 @@ import {
   MatFormFieldModule,
   MatTreeModule
 } from '@angular/material';
-import { ExecuteResultsComponent } from './components/execute-results/execute-results.component';
+import { ResultsComponent } from './components/results/results.component';
 import { DialogService } from './services/dialog/dialog.service';
-import { TaskHistoryComponent } from './components/task-history/task-history.component';
+import { HistoryComponent } from './components/history/history.component';
 import { TaskTreeComponent } from './components/tasks/task-tree/task-tree.component';
 import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
 import { TasksComponent } from './components/tasks/tasks.component';
@@ -113,10 +112,9 @@ import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
     ScenarioEditComponent,
     ScenarioEditDialogComponent,
     ScenarioListComponent,
-    CommandsComponent,
-    ExecuteResultsComponent,
+    ResultsComponent,
     ConfirmDialogComponent,
-    TaskHistoryComponent,
+    HistoryComponent,
     TaskTreeComponent,
     TaskEditComponent,
     TasksComponent,

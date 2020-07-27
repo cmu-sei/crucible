@@ -17,35 +17,50 @@ namespace Player.Vm.Api.Features.Vms
 {
     public class Vm
     {
-        [Required]
-        [Display(Name = "id", Description = "Virtual Machine GUID")]
+        /// <summary>
+        /// Virtual Machine unique id
+        /// </summary>
         public Guid Id { get; set; }
 
-        [Display(Name = "url", Description = "Virtual Machine URL")]
+        /// <summary>
+        /// Url to the Vm's console
+        /// </summary>
         public string Url { get; set; }
 
-        [Display(Name = "name", Description = "Virtual Machine Display Name")]
+        /// <summary>
+        /// The Vm's name
+        /// </summary>
+        /// <value></value>
         public string Name { get; set; }
 
-        [Display(Name = "viewId", Description = "The Id of the View that this Vm's Teams belong to")]
-        public Guid ViewId { get; set; }
-
-        [Display(Name = "userId", Description = "UserId of this Vm's owner if it is a personal Vm")]
+        /// <summary>
+        /// Id of the Vm's owner if it is a personal Vm
+        /// </summary>
         public Guid? UserId { get; set; }
 
-        [Display(Name = "isOwner", Description = "True if this is a personal Vm and the calling user is it's owner")]
-        public bool IsOwner { get; set; }
+        /// <summary>
+        /// A list of networks that a regular user can access
+        /// </summary>
+        public string[] AllowedNetworks { get; set; }
 
-        [Display(Name = "canAccessNicConfiguration", Description = "True if the user is a ViewAdmin for this Vm's view")]
-        public bool CanAccessNicConfiguration { get; set; }
-
-        [Display(Name = "allowedNetworks", Description = "A list of networks that a regular user can access")]
-        public List<string> AllowedNetworks { get; set; }
-
-        [Display(Name = "teamId", Description = "The Id of the primary team this Vm's User belong to")]
-        public Guid TeamId { get; set; }
-
+        /// <summary>
+        /// The Vm's last known power state
+        /// </summary>
         public PowerState PowerState { get; set; }
 
+        /// <summary>
+        /// A list of IP addresses of the Vm
+        /// </summary>
+        public string[] IpAddresses { get; set; }
+
+        /// <summary>
+        /// The Ids of the Team's the Vm is a part of
+        /// </summary>
+        public IEnumerable<Guid> TeamIds { get; set; }
+
+        /// <summary>
+        /// True if this Vm currently has pending tasks (power on, power off, etc)
+        /// </summary>
+        public bool HasPendingTasks { get; set; }
     }
 }

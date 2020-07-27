@@ -17,5 +17,6 @@
   "AppTitle": "Crucible",
   "AppTopBarText": "Crucible",
   "AppTopBarHexColor": "#b00",
+  "AppTopBarHexTextColor": "#FFFFFF",
   "UseLocalAuthStorage": true
 }

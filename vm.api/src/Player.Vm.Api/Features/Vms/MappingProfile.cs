@@ -23,19 +23,12 @@ namespace Player.Vm.Api.Features.Vms
         public MappingProfile()
         {
             CreateMap<Domain.Models.Vm, Vm>()
-                .ForMember(dest => dest.IsOwner, opt => opt.MapFrom<VmOwnerResolver>())
-                .ForMember(dest => dest.AllowedNetworks, opt => opt.MapFrom(src => src.AllowedNetworks.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).ToList()))
-                .ForMember(dest => dest.ViewId, opt => opt.MapFrom<ViewIdResolver>());
-
-            CreateMap<Domain.Models.Vm, VmSummary>()
                 .ForMember(dest => dest.TeamIds, opt => opt.MapFrom(src => src.VmTeams.Select(x => x.TeamId)));
 
-            CreateMap<VmUpdateForm, Domain.Models.Vm>()
-                .ForMember(dest => dest.AllowedNetworks, opt => opt.MapFrom(src => String.Join(" ", src.AllowedNetworks)));
+            CreateMap<VmUpdateForm, Domain.Models.Vm>();
 
             CreateMap<VmCreateForm, Domain.Models.Vm>()
-                .ForMember(dest => dest.VmTeams, opt => opt.MapFrom(src => src.TeamIds.Select(x => new Domain.Models.VmTeam(x, src.Id.Value))))
-                .ForMember(dest => dest.AllowedNetworks, opt => opt.MapFrom(src => String.Join(" ", src.AllowedNetworks)));
+                .ForMember(dest => dest.VmTeams, opt => opt.MapFrom(src => src.TeamIds.Select(x => new Domain.Models.VmTeam(x, src.Id.Value))));
         }
     }
 
@@ -58,21 +51,6 @@ namespace Player.Vm.Api.Features.Vms
             {
                 return false;
             }
-        }
-    }
-
-    public class ViewIdResolver : IValueResolver<Domain.Models.Vm, Vm, Guid>
-    {
-        private IPlayerService _playerService;
-
-        public ViewIdResolver(IPlayerService playerService)
-        {
-            _playerService = playerService;
-        }
-
-        public Guid Resolve(Domain.Models.Vm source, Vm destination, Guid destMember, ResolutionContext context)
-        {
-            return _playerService.GetCurrentViewId();
         }
     }
 }

@@ -15,52 +15,55 @@ import { MessageDialogComponent } from '../../components/shared/message-dialog/m
 import { SendTextDialogComponent } from '../../components/shared/send-text-dialog/send-text-dialog.component';
 import { FileUploadInfoDialogComponent } from '../../components/shared/file-upload-info-dialog/file-upload-info-dialog.component';
 import { MountIsoDialogComponent } from '../../components/shared/mount-iso-dialog/mount-iso-dialog.component';
-
+import { IsoResult, IsoFile } from '../../models/vm/iso-result';
 
 @Injectable()
 export class DialogService {
+  constructor(private dialog: MatDialog) {}
 
-    constructor(private dialog: MatDialog) { }
+  public message(
+    title: string,
+    message: string,
+    data?: any
+  ): Observable<boolean> {
+    let dialogRef: MatDialogRef<MessageDialogComponent>;
+    dialogRef = this.dialog.open(MessageDialogComponent, { data: data || {} });
+    dialogRef.componentInstance.title = title;
+    dialogRef.componentInstance.message = message;
 
-    public message(title: string, message: string, data?: any): Observable<boolean> {
+    return dialogRef.afterClosed();
+  }
 
-        let dialogRef: MatDialogRef<MessageDialogComponent>;
-        dialogRef = this.dialog.open(MessageDialogComponent, {data: data || {} });
-        dialogRef.componentInstance.title = title;
-        dialogRef.componentInstance.message = message;
+  public sendText(title: string, configData?: any): Observable<boolean> {
+    let dialogRef: MatDialogRef<SendTextDialogComponent>;
+    dialogRef = this.dialog.open(SendTextDialogComponent, configData || {});
+    dialogRef.componentInstance.title = title;
 
-        return dialogRef.afterClosed();
-    }
+    return dialogRef.afterClosed();
+  }
 
-    public sendText(title: string, configData?: any): Observable<boolean> {
+  public getFileUploadInfo(
+    title: string,
+    configData?: any
+  ): Observable<boolean> {
+    let dialogRef: MatDialogRef<FileUploadInfoDialogComponent>;
+    dialogRef = this.dialog.open(
+      FileUploadInfoDialogComponent,
+      configData || {}
+    );
+    dialogRef.componentInstance.title = title;
 
-        let dialogRef: MatDialogRef<SendTextDialogComponent>;
-        dialogRef = this.dialog.open(SendTextDialogComponent, configData || {});
-        dialogRef.componentInstance.title = title;
+    return dialogRef.afterClosed();
+  }
 
-        return dialogRef.afterClosed();
-    }
+  public mountIso(
+    isoResult: IsoResult[],
+    configData?: any
+  ): Observable<IsoFile> {
+    let dialogRef: MatDialogRef<MountIsoDialogComponent>;
+    dialogRef = this.dialog.open(MountIsoDialogComponent, configData || {});
+    dialogRef.componentInstance.isoResult = isoResult;
 
-    public getFileUploadInfo(title: string, configData?: any): Observable<boolean> {
-
-        let dialogRef: MatDialogRef<FileUploadInfoDialogComponent>;
-        dialogRef = this.dialog.open(FileUploadInfoDialogComponent, configData || {});
-        dialogRef.componentInstance.title = title;
-
-        return dialogRef.afterClosed();
-    }
-
-    public mountIso(publicIsos: string[], teamIsos: string[], configData?: any): Observable<boolean> {
-
-        let dialogRef: MatDialogRef<MountIsoDialogComponent>;
-        dialogRef = this.dialog.open(MountIsoDialogComponent, configData || {});
-        dialogRef.componentInstance.publicIsos = publicIsos;
-        dialogRef.componentInstance.teamIsos = teamIsos;
-
-        return dialogRef.afterClosed();
-    }
-
-
+    return dialogRef.afterClosed();
+  }
 }
-
-

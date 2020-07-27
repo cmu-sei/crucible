@@ -60,6 +60,12 @@ export class AppComponent {
       ('input_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/input-24px.svg'));
     iconRegistry.addSvgIcon
       ('play_circle_outline_24px', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/play_circle_outline-24px.svg'));
+    iconRegistry.addSvgIcon
+      ('open_in_new', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/open_in_new-black-18dp.svg'));
+    iconRegistry.addSvgIcon
+      ('content_paste', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/content_paste-black-24dp.svg'));
+    iconRegistry.addSvgIcon
+      ('ic_clipboard_copy', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_clipboard_copy.svg'));
 
     }
 

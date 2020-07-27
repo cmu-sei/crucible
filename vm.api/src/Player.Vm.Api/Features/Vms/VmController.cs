@@ -16,6 +16,8 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Swashbuckle.AspNetCore.Annotations;
+using Player.Vm.Api.Domain.Vsphere.Models;
+using MediatR;
 
 namespace Player.Vm.Api.Features.Vms
 {
@@ -25,10 +27,12 @@ namespace Player.Vm.Api.Features.Vms
     public class VmsController : ControllerBase
     {
         private readonly IVmService _vmService;
+        private readonly IMediator _mediator;
 
-        public VmsController(IVmService vmService)
+        public VmsController(IVmService vmService, IMediator mediator)
         {
             _vmService = vmService;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -36,7 +40,7 @@ namespace Player.Vm.Api.Features.Vms
         /// </summary>
         /// <returns></returns>
         [HttpGet("vms")]
-        [ProducesResponseType(typeof(IEnumerable<VmSummary>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<Vm>), (int)HttpStatusCode.OK)]
         [SwaggerOperation(OperationId = "getAll")]
         public async Task<IActionResult> GetAll(CancellationToken ct)
         {
@@ -211,6 +215,45 @@ namespace Player.Vm.Api.Features.Vms
         {
             await _vmService.RemoveFromTeamAsync(vmId, teamId, ct);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Power on multiple Virtual Machines
+        /// </summary>
+        [HttpPost("vms/actions/power-on")]
+        [ProducesResponseType(typeof(BulkPowerOperation.Response), (int)HttpStatusCode.Accepted)]
+        [SwaggerOperation(OperationId = "bulkPowerOn")]
+        public async Task<IActionResult> BulkPowerOn(BulkPowerOperation.Command command)
+        {
+            command.Operation = PowerOperation.PowerOn;
+            var result = await _mediator.Send(command);
+            return Accepted(result);
+        }
+
+        /// <summary>
+        /// Power off multiple Virtual Machines
+        /// </summary>
+        [HttpPost("vms/actions/power-off")]
+        [ProducesResponseType(typeof(BulkPowerOperation.Response), (int)HttpStatusCode.Accepted)]
+        [SwaggerOperation(OperationId = "bulkPowerOff")]
+        public async Task<IActionResult> BulkPowerOff(BulkPowerOperation.Command command)
+        {
+            command.Operation = PowerOperation.PowerOff;
+            var result = await _mediator.Send(command);
+            return Accepted(result);
+        }
+
+        /// <summary>
+        /// Shutdown multiple Virtual Machines
+        /// </summary>
+        [HttpPost("vms/actions/shutdown")]
+        [ProducesResponseType(typeof(BulkPowerOperation.Response), (int)HttpStatusCode.Accepted)]
+        [SwaggerOperation(OperationId = "bulkShutdown")]
+        public async Task<IActionResult> BulkShutdown(BulkPowerOperation.Command command)
+        {
+            command.Operation = PowerOperation.Shutdown;
+            var result = await _mediator.Send(command);
+            return Accepted(result);
         }
     }
 }

@@ -32,12 +32,14 @@ export interface Task {
     vmMask?: string;
     vmList?: Array<string>;
     apiUrl?: string;
-    inputString?: string;
+    actionParameters?: { [key: string]: string; } | null;
     expectedOutput?: string;
     expirationSeconds?: number;
     delaySeconds?: number;
     intervalSeconds?: number;
     iterations?: number;
+    iterationTermination?: Task.IterationTerminationEnum;
+    currentIteration?: number;
     triggerTaskId?: string;
     triggerCondition?: Task.TriggerConditionEnum;
     dateCreated?: Date;
@@ -46,7 +48,7 @@ export interface Task {
     modifiedBy?: string;
 }
 export namespace Task {
-    export type ActionEnum = 'guest_process_run' | 'guest_file_read' | 'guest_file_write' | 'vm_hw_power_off' | 'vm_hw_power_on' | 'vm_create_from_template' | 'vm_hw_remove';
+    export type ActionEnum = 'guest_process_run' | 'guest_file_read' | 'guest_file_write' | 'vm_hw_power_off' | 'vm_hw_power_on' | 'vm_create_from_template' | 'vm_hw_remove' | 'guest_process_run_fast';
     export const ActionEnum = {
         GuestProcessRun: 'guest_process_run' as ActionEnum,
         GuestFileRead: 'guest_file_read' as ActionEnum,
@@ -54,7 +56,8 @@ export namespace Task {
         VmHwPowerOff: 'vm_hw_power_off' as ActionEnum,
         VmHwPowerOn: 'vm_hw_power_on' as ActionEnum,
         VmCreateFromTemplate: 'vm_create_from_template' as ActionEnum,
-        VmHwRemove: 'vm_hw_remove' as ActionEnum
+        VmHwRemove: 'vm_hw_remove' as ActionEnum,
+        GuestProcessRunFast: 'guest_process_run_fast' as ActionEnum
     };
     export type TriggerConditionEnum = 'Time' | 'Success' | 'Failure' | 'Completion' | 'Expiration' | 'Manual';
     export const TriggerConditionEnum = {
@@ -64,6 +67,12 @@ export namespace Task {
         Completion: 'Completion' as TriggerConditionEnum,
         Expiration: 'Expiration' as TriggerConditionEnum,
         Manual: 'Manual' as TriggerConditionEnum
+    };
+    export type IterationTerminationEnum = 'IterationCount' | 'UntilSuccess' | 'UntilFailure';
+    export const IterationTerminationEnum = {
+        IterationCount: 'IterationCount' as IterationTerminationEnum,
+        UntilSuccess: 'UntilSuccess' as IterationTerminationEnum,
+        UntilFailure: 'UntilFailure' as IterationTerminationEnum
     };
 }
 

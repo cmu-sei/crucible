@@ -19,7 +19,8 @@ namespace Steamfitter.Api.Data
         vm_hw_power_on = 104,
         vm_create_from_template = 105,
         vm_hw_remove = 106,
-        guest_process_run_fast = 107
+        guest_process_run_fast = 107,
+        guest_file_upload_content = 108
     }
 
     public enum TaskStatus
@@ -37,11 +38,18 @@ namespace Steamfitter.Api.Data
     public enum TaskTrigger
     {
         Time = 1,
-        Success =2 ,
+        Success = 2,
         Failure = 3,
         Completion = 4,
         Expiration = 5,
         Manual = 6
+    }
+
+    public enum TaskIterationTermination
+    {
+        IterationCount = 0,
+        UntilSuccess = 1,
+        UntilFailure = 2
     }
 
     public enum ScenarioStatus

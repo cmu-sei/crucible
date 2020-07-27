@@ -11,33 +11,35 @@ DM20-0181
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatButtonModule,
-  MatSlideToggleModule,
-  MatListModule,
-  MatTableModule,
-  MatInputModule,
-  MatProgressSpinnerModule,
-  MatIconModule,
-  MatMenuModule,
-  MatPaginatorModule,
-  MatGridListModule,
-  MatCardModule,
-  MatSnackBarModule,
-  MatBottomSheetModule,
-  MatDialogModule,
-  MatTabsModule
-} from '@angular/material';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTableModule } from '@angular/cdk/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { VmListComponent } from './components/vm-list/vm-list.component';
 import { VmMainComponent } from './components/vm-main/vm-main.component';
 import { FocusedAppComponent } from './components/focused-app/focused-app.component';
-import { VmService } from './services/vm/vm.service';
 import { SettingsService } from './services/settings/settings.service';
 import { APP_INITIALIZER } from '@angular/core';
 import { AuthInterceptor } from './services/auth/auth.interceptor.service';
@@ -58,7 +60,14 @@ import { ErrorService } from './services/error/error.service';
 import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
 import { SystemMessageService } from './services/system-message/system-message.service';
 import { WelderComponent } from './components/welder/welder.component';
-import {WelderService} from './services/welder/welder.service';
+import { WelderService } from './services/welder/welder.service';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { environment } from '../environments/environment';
+import { VmService } from './vms/state/vms.service';
+import { BASE_PATH } from './generated/vm-api';
+import { DragToSelectModule } from 'ngx-drag-to-select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export function initConfig(settings: SettingsService) {
   return () => settings.load();
@@ -81,10 +90,12 @@ export function initConfig(settings: SettingsService) {
     MatSnackBarModule,
     MatBottomSheetModule,
     MatDialogModule,
-    MatTabsModule
-  ]
+    MatTabsModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+  ],
 })
-export class AngularMaterialModule { }
+export class AngularMaterialModule {}
 
 @NgModule({
   declarations: [
@@ -109,7 +120,12 @@ export class AngularMaterialModule { }
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    [
+      environment.production ? [] : AkitaNgDevtools.forRoot(),
+      AkitaNgRouterStoreModule,
+    ],
+    DragToSelectModule.forRoot(),
   ],
   providers: [
     VmService,
@@ -126,23 +142,28 @@ export class AngularMaterialModule { }
       provide: APP_INITIALIZER,
       useFactory: initConfig,
       deps: [SettingsService],
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: ErrorHandler,
-      useClass: ErrorService
-    }
+      useClass: ErrorService,
+    },
+    {
+      provide: BASE_PATH,
+      useFactory: getBasePath,
+      deps: [SettingsService],
+    },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    ConfirmDialogComponent,
-    SystemMessageComponent,
-  ]
+  entryComponents: [ConfirmDialogComponent, SystemMessageComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
+export function getBasePath(settingsSvc: SettingsService) {
+  return settingsSvc.ApiUrl.replace('/api', '');
+}

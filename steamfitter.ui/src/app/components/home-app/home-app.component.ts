@@ -12,8 +12,8 @@ import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material';
 import { ScenarioTemplateListComponent } from '../scenario-templates/scenario-template-list/scenario-template-list.component';
 import { ScenarioListComponent } from '../scenarios/scenario-list/scenario-list.component';
-import { AdminUsersService } from '../admin/admin-users.service';
-import { PlayerDataService } from 'src/app/services/data/player-data-service';
+import { UserDataService } from '../../data/user/user-data.service';
+import { PlayerDataService } from 'src/app/data/player/player-data-service';
 import { ScenarioTemplateDataService } from 'src/app/data/scenario-template/scenario-template-data.service';
 import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
@@ -23,8 +23,8 @@ import {map, takeUntil} from 'rxjs/operators';
 import { SignalRService } from 'src/app/services/signalr/signalr.service';
 
 enum Section {
-  taskBuilder = 'Task Builder',
-  taskHistory = 'Task History',
+  taskBuilder = 'Tasks',
+  history = 'History',
   scenarioTemplates = 'Scenario Templates',
   scenarios = 'Scenarios'
 }
@@ -39,7 +39,7 @@ export class HomeAppComponent implements OnDestroy {
   titleText = 'Steamfitter';
   section = Section;
   selectedSection: Section;
-  loggedInUser = this.adminUsersService.loggedInUser;
+  loggedInUser = this.userDataService.loggedInUser;
   isSuperUser = false;
   isAuthorizedUser = false;
   isSidebarOpen = true;
@@ -47,7 +47,7 @@ export class HomeAppComponent implements OnDestroy {
   private unsubscribe$ = new Subject();
 
   constructor(
-    private adminUsersService: AdminUsersService,
+    private userDataService: UserDataService,
     private router: Router,
     activatedRoute: ActivatedRoute,
     private playerDataService: PlayerDataService,
@@ -60,10 +60,10 @@ export class HomeAppComponent implements OnDestroy {
     activatedRoute.queryParamMap.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
        this.selectedSection = (params.get('tab') || Section.taskBuilder) as Section;
     });
-    this.adminUsersService.isSuperUser.pipe(takeUntil(this.unsubscribe$)).subscribe(isSuper => {
+    this.userDataService.isSuperUser.pipe(takeUntil(this.unsubscribe$)).subscribe(isSuper => {
       this.isSuperUser = isSuper;
     });
-    this.adminUsersService.isAuthorizedUser.pipe(takeUntil(this.unsubscribe$)).subscribe(isAuthorized => {
+    this.userDataService.isAuthorizedUser.pipe(takeUntil(this.unsubscribe$)).subscribe(isAuthorized => {
       this.isAuthorizedUser = isAuthorized;
     });
     this.signalRService.startConnection();
@@ -74,7 +74,7 @@ export class HomeAppComponent implements OnDestroy {
   }
 
   logout() {
-    this.adminUsersService.logout();
+    this.userDataService.logout();
   }
 
   ngOnDestroy() {

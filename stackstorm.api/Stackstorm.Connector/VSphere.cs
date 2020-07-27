@@ -215,18 +215,29 @@ namespace Stackstorm.Connector
             return returnObject;
         }
 
-        public async Task<object> GuestFileWrite(Requests.FileWrite request)
+        public async Task<Responses.VmStringValue> GuestFileWrite(Requests.FileWrite request)
         {
-            throw new NotImplementedException("//TODO");
+            var returnObject = new Responses.VmStringValue();
+            var executionResult = await this.Client.VSphere.GuestFileUploadContent(new Dictionary<string, string>
+                {{"vm_id", request.Moid}, {"username", request.Username}, {"password", request.Password}, 
+                    {"guest_file_path", request.GuestFilePath}, {"file_content", request.GuestFileContent}});
+            Log.Trace($"ExecutionResult: {executionResult}");
 
-            /*
-            public async Task<IActionResult> Upload(ICollection<IFormFile> files)
+            try
             {
-                var bucket = await BucketService.GetBucketForRequest();
-                var fileStorageResults = await FileService.Upload(bucket, files);
-                return Ok(fileStorageResults);
+                returnObject.Id = executionResult.id;
+                var commandTextObject = (JObject) executionResult.result;
+                var result = commandTextObject.GetValue("result");
+                returnObject.Value = (string) result;
             }
-            */
+            catch (Exception e)
+            {
+                Log.Error($"Object was not in expected format: {e}");
+                Console.WriteLine(e);
+                returnObject.Exception = e;
+            }
+
+            return returnObject;
         }
 
         public async Task<Responses.VmStringValue> GuestCommand(Requests.Command request)
