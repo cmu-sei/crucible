@@ -290,6 +290,13 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
       });
   }
 
+  openVmConsole(id: string) {
+    // TODO: get the VM url
+    // const url = this.selectedVms.find(v => v.id === id).url;
+    const url = 'http://localhost:4301';
+    window.open(url, '_blank');
+  }
+
   /**
    * This constructs an array of nodes that matches the DOM,
    * and calls rememberExpandedTreeNodes to persist expand state

@@ -131,7 +131,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
       window.open(vm.url, '_blank');
     }
   }
-
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

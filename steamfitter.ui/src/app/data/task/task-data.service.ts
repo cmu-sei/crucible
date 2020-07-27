@@ -161,6 +161,7 @@ export class TaskDataService {
     this.taskService.getTask(id).pipe(take(1)).subscribe(task => {
       this.updateStore({...task});
       this.resultDataService.loadByTask(id);
+
     });
   }
 
@@ -253,6 +254,27 @@ export class TaskDataService {
     if (this._requestedTaskId$.getValue()) {
       this.loadById(this._requestedTaskId$.getValue());
     }
+  }
+
+  fixDates(result: Result) {
+    // set as date object and handle c# not adding 'Z' to UTC dates.
+    result.dateCreated = new Date(result.dateCreated + 'Z');
+    result.dateModified = new Date(result.dateModified + 'Z');
+    result.statusDate = new Date(result.statusDate + 'Z');
+    result.sentDate = new Date(result.sentDate + 'Z');
+  }
+
+  setAsDates(result: Result) {
+    // set to a date object.
+    result.dateCreated = new Date(result.dateCreated);
+    result.dateModified = new Date(result.dateModified);
+    result.statusDate = new Date(result.statusDate);
+    result.sentDate = new Date(result.sentDate);
+
+  }
+
+  resetResultStore() {
+    this.resultStore.set([]);
   }
 
   fixDates(result: Result) {

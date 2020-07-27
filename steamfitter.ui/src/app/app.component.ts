@@ -66,7 +66,6 @@ export class AppComponent {
       ('content_paste', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/content_paste-black-24dp.svg'));
     iconRegistry.addSvgIcon
       ('ic_clipboard_copy', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_clipboard_copy.svg'));
-
     }
 
 }

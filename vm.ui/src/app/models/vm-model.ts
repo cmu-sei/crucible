@@ -15,6 +15,7 @@ export interface VmModel {
   viewId: string;
   state: string;
   powerState: PowerState;
+  ipAddresses: string[];
 }
 
 export enum PowerState {
