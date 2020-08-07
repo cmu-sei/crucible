@@ -97,16 +97,13 @@ export class ResultDataService {
       tap(() => { this.resultStore.setLoading(false); }),
       take(1)
     ).subscribe(results => {
+      results.forEach(r => this.fixDates(r));
       this.setStore(results);
     });
   }
 
   loadByScenario(scenarioId: string) {
     this.resetStore();
-    this.resultService.getScenarioResults(scenarioId).pipe(take(1)).subscribe(results => {
-      this.setStore(results);
-      }
-    );
     this.resultService.getScenarioResults(scenarioId).pipe(take(1)).subscribe(results => {
       results.forEach(r => this.fixDates(r));
       this.setStore(results);
@@ -116,6 +113,7 @@ export class ResultDataService {
   loadByTask(taskId: string) {
     this.resetStore();
     this.resultService.getTaskResults(taskId).pipe(take(1)).subscribe(results => {
+      results.forEach(r => this.fixDates(r));
       this.setStore(results);
       }
     );
@@ -124,6 +122,7 @@ export class ResultDataService {
   loadByUser(userId: string) {
     this.resetStore();
     this.resultService.getUserResults(userId).pipe(take(1)).subscribe(results => {
+      results.forEach(r => this.fixDates(r));
       this.setStore(results);
       }
     );
@@ -132,6 +131,7 @@ export class ResultDataService {
   loadByView(viewId: string) {
     this.resetStore();
     this.resultService.getViewResults(viewId).pipe(take(1)).subscribe(results => {
+      results.forEach(r => this.fixDates(r));
       this.setStore(results);
       }
     );
@@ -140,6 +140,7 @@ export class ResultDataService {
   loadByVm(vmId: string) {
     this.resetStore();
     this.resultService.getVmResults(vmId).pipe(take(1)).subscribe(results => {
+      results.forEach(r => this.fixDates(r));
       this.setStore(results);
       }
     );

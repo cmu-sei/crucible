@@ -10,9 +10,10 @@ DM20-0181
 
 import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PageEvent, Sort, MatDialog } from '@angular/material';
+import { PageEvent, Sort, MatDialog, MatMenuTrigger } from '@angular/material';
+import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { ScenarioTemplateDataService } from 'src/app/data/scenario-template/scenario-template-data.service';
-import { ScenarioTemplate, Scenario, ScenarioService } from 'src/app/swagger-codegen/dispatcher.api';
+import { ScenarioTemplate, Scenario } from 'src/app/swagger-codegen/dispatcher.api';
 import { ScenarioTemplateEditComponent } from 'src/app/components/scenario-templates/scenario-template-edit/scenario-template-edit.component';
 import { ScenarioTemplateEditDialogComponent } from 'src/app/components/scenario-templates/scenario-template-edit-dialog/scenario-template-edit-dialog.component';
 import { ScenarioEditDialogComponent } from 'src/app/components/scenarios/scenario-edit-dialog/scenario-edit-dialog.component';
@@ -45,20 +46,39 @@ export class ScenarioTemplateListComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'description', 'durationHours'];
   editScenarioTemplateText = 'Edit ScenarioTemplate';
+  // context menu
+  @ViewChild(MatMenuTrigger, null) contextMenu: MatMenuTrigger;
+  contextMenuPosition = { x: '0px', y: '0px' };
 
   constructor(
     public dialogService: DialogService,
     private scenarioTemplateDataService: ScenarioTemplateDataService,
-    private scenarioService: ScenarioService,
+    private scenarioDataService: ScenarioDataService,
     private dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.filterControl.setValue(this.filterString);
+    const id = this.selectedScenarioTemplate ? this.selectedScenarioTemplate.id : '';
+    // force already expanded scenarioTemplate to refresh details
+    if (id) {
+      const here = this;
+      this.setActive.emit('');
+      setTimeout(function() { here.setActive.emit(id); }, 1);
+    }
   }
 
   clearFilter() {
     this.filterControl.setValue('');
+  }
+
+  onContextMenu(event: MouseEvent, scenarioTemplate: ScenarioTemplate) {
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    this.contextMenu.menuData = { item: scenarioTemplate };
+    this.contextMenu.menu.focusFirstItem('mouse');
+    this.contextMenu.openMenu();
   }
 
   /**
@@ -109,11 +129,7 @@ export class ScenarioTemplateListComponent implements OnInit {
     this.dialogService.confirm('Create Scenario', 'Are you sure that you want to create a scenario from ' + scenarioTemplate.name + '?')
       .subscribe(result => {
         if (result['confirm']) {
-          this.scenarioService.createScenarioFromScenarioTemplate(scenarioTemplate.id)
-            .subscribe(newScenario => {
-              console.log('successfully created scenario from scenarioTemplate');
-              // this.returnToScenarioTemplateList();
-            });
+          this.scenarioDataService.createScenarioFromScenarioTemplate(scenarioTemplate.id);
         }
       });
   }

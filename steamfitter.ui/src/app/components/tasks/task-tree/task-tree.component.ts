@@ -232,11 +232,11 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   }
 
   onContextCopy(id: string) {
-    this.sendToClipboard.emit({ id: id, isCut: false });
+    this.sendToClipboard.emit({ id: id, resultId: undefined, isCut: false });
   }
 
   onContextCut(id: string) {
-    this.sendToClipboard.emit({ id: id, isCut: true });
+    this.sendToClipboard.emit({ id: id, resultId: undefined, isCut: true });
   }
 
   onContextPaste(id: string) {
@@ -288,13 +288,6 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
           this.executeRequested.emit(task.id);
         }
       });
-  }
-
-  openVmConsole(id: string) {
-    // TODO: get the VM url
-    // const url = this.selectedVms.find(v => v.id === id).url;
-    const url = 'http://localhost:4301';
-    window.open(url, '_blank');
   }
 
   /**

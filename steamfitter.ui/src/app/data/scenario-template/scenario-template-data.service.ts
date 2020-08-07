@@ -79,9 +79,9 @@ export class ScenarioTemplateDataService {
         if (scenarioTemplateList && scenarioTemplateList.length > 0 && requestedScenarioTemplateId) {
           selectedScenarioTemplate = scenarioTemplateList.find(scenarioTemplate => scenarioTemplate.id === requestedScenarioTemplateId);
           if (selectedScenarioTemplate && selectedScenarioTemplate.id !== this._requestedScenarioTemplateId) {
-            this.scenarioTemplateStore.setActive(selectedScenarioTemplate.id);
-            this.taskDataService.loadByScenarioTemplate(selectedScenarioTemplate.id);
+            this.scenarioTemplateStore.setActive(requestedScenarioTemplateId);
             this._requestedScenarioTemplateId = requestedScenarioTemplateId;
+            this.taskDataService.loadByScenarioTemplate(requestedScenarioTemplateId);
           }
         } else {
           this._requestedScenarioTemplateId = '';

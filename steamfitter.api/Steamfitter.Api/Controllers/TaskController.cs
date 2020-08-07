@@ -224,6 +224,26 @@ namespace Steamfitter.Api.Controllers
         }
 
         /// <summary>
+        /// Creates a Task from a Result
+        /// </summary>
+        /// <remarks>
+        /// Creates a Task in the location specified
+        /// <para />
+        /// Accessible only to a SuperUser or a User on an Admin Team within the specified Task
+        /// </remarks>  
+        /// <param name="resultId">The Id of the Result</param>
+        /// <param name="newLocation">The Id and type of the new location</param>
+        /// <param name="ct"></param>
+        [HttpPost("Tasks/copyfromresult/{resultId}")]
+        [ProducesResponseType(typeof(SAVM.Task[]), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(OperationId = "createTaskFromResult")]
+        public async STT.Task<IActionResult> CreateFromResult([FromRoute] Guid resultId, [FromBody] NewLocation newLocation, CancellationToken ct)
+        {
+            var task = await _TaskService.CreateFromResultAsync(resultId, newLocation.Id, newLocation.LocationType, ct);
+            return Ok(task);
+        }
+
+        /// <summary>
         /// Creates a new Task and executes it
         /// </summary>
         /// <remarks>

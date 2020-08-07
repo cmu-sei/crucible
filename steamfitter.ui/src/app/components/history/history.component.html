@@ -72,7 +72,7 @@ DM20-0181
             <button mat-icon-button title="View Detail" *ngIf="expandedResult === element">
               <mat-icon svgIcon="ic_chevron_down_black_24px"></mat-icon>
             </button>
-            <button mat-icon-button title="Copy Task" (click)="copyTask(element.taskId); $event.stopPropagation();">
+            <button mat-icon-button title="Copy Task" (click)="copyTask(element.id); $event.stopPropagation();">
               <mat-icon svgIcon="ic_clipboard_copy"></mat-icon>
             </button>
           </td>
@@ -117,7 +117,7 @@ DM20-0181
 
         <ng-container matColumnDef="expandedDetail">
           <td mat-cell *matCellDef="let result" [attr.colspan]="displayedColumns.length">
-            <div [@detailExpand]="result === expandedResult ? 'expanded' : 'collapsed'">
+            <div [@detailExpand]="result === expandedResult ? 'expanded' : 'collapsed'" (click)="$event.stopPropagation();">
               <p>
                 id: {{result.id}}<br>
                 vmId: {{result.vmId}}<br>

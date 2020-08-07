@@ -8,29 +8,17 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-.app-icon {
-  height: 35px;
-  text-align: center;
-  margin-right: 10px;
-}
+using S3.Player.Api.Data.Data.Models;
+using System;
 
-.bottom-button {
-  margin-top: 10px;
-}
-
-.wrap {
-  white-space: pre-wrap; /* CSS3 */
-  white-space: -moz-pre-wrap; /* Firefox */
-  white-space: -pre-wrap; /* Opera <7 */
-  white-space: -o-pre-wrap; /* Opera 7 */
-  word-wrap: break-word; /* IE */
-}
-
-.top-button {
-  margin-bottom: 10px;
-}
-
-.disabled-button {
-  opacity: 0.3;
-  filter: alpha(opacity=30);
+namespace S3.Player.Api.ViewModels
+{
+    public class ViewForm
+    {   
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public ViewStatus Status { get; set; }
+        public bool CreateAdminTeam { get; set; } = true;
+    }
 }

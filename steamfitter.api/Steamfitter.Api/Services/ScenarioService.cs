@@ -159,7 +159,7 @@ namespace Steamfitter.Api.Services
 
             var scenarioEntity = new ScenarioEntity() {
                 CreatedBy = _user.GetId(),
-                Name = $"From ScenarioTemplate {scenarioTemplateEntity.Name}",
+                Name = scenarioTemplateEntity.Name,
                 Description = scenarioTemplateEntity.Description,
                 OnDemand = true,
                 ScenarioTemplateId = scenarioTemplateId
@@ -194,7 +194,7 @@ namespace Steamfitter.Api.Services
 
             var newScenarioEntity = new ScenarioEntity() {
                 CreatedBy = _user.GetId(),
-                Name = $"Copy of {oldScenarioEntity.Name}",
+                Name = $"{oldScenarioEntity.Name} - {_user.Claims.FirstOrDefault(c => c.Type == "name").Value}",
                 Description = oldScenarioEntity.Description,
                 OnDemand = true,
                 ScenarioTemplateId = oldScenarioEntity.ScenarioTemplateId

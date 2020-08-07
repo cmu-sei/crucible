@@ -168,8 +168,8 @@ export class HistoryComponent implements OnInit, OnDestroy {
     }
   }
 
-  copyTask(taskId: string) {
-    this.taskDataService.setClipboard({ id: taskId, isCut: false });
+  copyTask(resultId: string) {
+    this.taskDataService.setClipboard({ id: undefined, resultId: resultId, isCut: false });
   }
 
   showDetail(result: Result) {

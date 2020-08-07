@@ -129,7 +129,7 @@ namespace S3.Player.Api.Controllers
         [HttpPost("views")]
         [ProducesResponseType(typeof(View), (int)HttpStatusCode.Created)]
         [SwaggerOperation(operationId: "createView")]
-        public async Task<IActionResult> Create([FromBody] View view, CancellationToken ct)
+        public async Task<IActionResult> Create([FromBody] ViewForm view, CancellationToken ct)
         {
             var createdView = await _viewService.CreateAsync(view, ct);
             return CreatedAtAction(nameof(this.Get), new { id = createdView.Id }, createdView);

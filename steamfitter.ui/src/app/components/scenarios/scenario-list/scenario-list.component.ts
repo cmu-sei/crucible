@@ -10,7 +10,7 @@ DM20-0181
 
 import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort, MatDialog, MatMenuTrigger } from '@angular/material';
 import { Scenario, View } from 'src/app/swagger-codegen/dispatcher.api';
 import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { ScenarioEditComponent } from 'src/app/components/scenarios/scenario-edit/scenario-edit.component';
@@ -63,7 +63,11 @@ export class ScenarioListComponent implements OnInit {
   sortEvents$: Observable<Sort>;
   pageEvents$: Observable<PageEvent>;
 
-  constructor(
+ // context menu
+ @ViewChild(MatMenuTrigger, null) contextMenu: MatMenuTrigger;
+ contextMenuPosition = { x: '0px', y: '0px' };
+
+ constructor(
     private scenarioDataService: ScenarioDataService,
     public dialogService: DialogService,
     private dialog: MatDialog
@@ -74,10 +78,26 @@ export class ScenarioListComponent implements OnInit {
     this.showStatus.ended = this.statuses.indexOf('ended') > -1;
     this.showStatus.ready = this.statuses.indexOf('ready') > -1;
     this.filterControl.setValue(this.filterString);
+    const id = this.selectedScenario ? this.selectedScenario.id : '';
+    // force already expanded scenario to refresh details
+    if (id) {
+      const here = this;
+      this.setActive.emit('');
+      setTimeout(function() { here.setActive.emit(id); }, 1);
+    }
   }
 
   clearFilter() {
     this.filterControl.setValue('');
+  }
+
+  onContextMenu(event: MouseEvent, scenario: Scenario) {
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    this.contextMenu.menuData = { item: scenario };
+    this.contextMenu.menu.focusFirstItem('mouse');
+    this.contextMenu.openMenu();
   }
 
   /**

@@ -48,6 +48,7 @@ namespace Caster.Api.Domain.Services
         private readonly TerraformOptions _options;
         private readonly ILogger<TerraformService> _logger;
         private StringBuilder _outputBuilder = new StringBuilder();
+        private string _workspaceName = null;
 
         public TerraformService(TerraformOptions options, ILogger<TerraformService> logger)
         {
@@ -62,11 +63,16 @@ namespace Caster.Api.Domain.Services
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = _options.BinaryPath;
-            startInfo.EnvironmentVariables.Add("TF_IN_AUTOMATION", "true");
             startInfo.WorkingDirectory = workingDirectory;
             startInfo.CreateNoWindow = true;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = redirectStandardError;
+            startInfo.EnvironmentVariables.Add("TF_IN_AUTOMATION", "true");
+
+            if (!string.IsNullOrEmpty(_workspaceName))
+            {
+                startInfo.EnvironmentVariables.Add("TF_WORKSPACE", _workspaceName);
+            }
 
             using (Process process = new Process())
             {
@@ -123,7 +129,11 @@ namespace Caster.Api.Domain.Services
         /// </summary>
         public TerraformResult InitializeWorkspace(string workingDirectory, string workspaceName, bool defaultWorkspace, DataReceivedEventHandler outputHandler)
         {
+            // Set TF_WORKSPACE env var for init to workaround bug with an empty configuration
+            // Will need to avoid this for a remote state init
+            _workspaceName = workspaceName;
             var result = this.Init(workingDirectory, outputHandler);
+            _workspaceName = null;
 
             if (!result.IsError)
             {

@@ -37,7 +37,7 @@ namespace Steamfitter.Api.Infrastructure.Mappings
             catch (Exception ex)
             {
                 parameters["BadInputString"] = src.InputString;
-                Console.WriteLine($"Error mapping InputString for Result {src.Id} of Task {src.TaskId}");
+                Console.WriteLine($"Error mapping InputString for Result {src.Id}");
             }
 
             return parameters;

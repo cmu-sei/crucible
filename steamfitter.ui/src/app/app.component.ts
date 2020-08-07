@@ -66,6 +66,11 @@ export class AppComponent {
       ('content_paste', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/content_paste-black-24dp.svg'));
     iconRegistry.addSvgIcon
       ('ic_clipboard_copy', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/ic_clipboard_copy.svg'));
+    iconRegistry.addSvgIcon
+      ('ic_menu', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/menu_24px.svg'));
+    iconRegistry.addSvgIcon
+      ('storage_black_18dp', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/storage-black-18dp.svg'));
+
     }
 
 }

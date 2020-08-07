@@ -32,7 +32,7 @@ namespace S3.Player.Api.Services
         Task<IEnumerable<ViewModels.View>> GetAsync(CancellationToken ct);
         Task<ViewModels.View> GetAsync(Guid id, CancellationToken ct);
         Task<IEnumerable<ViewModels.View>> GetByUserIdAsync(Guid userId, CancellationToken ct);
-        Task<ViewModels.View> CreateAsync(ViewModels.View view, CancellationToken ct);
+        Task<ViewModels.View> CreateAsync(ViewModels.ViewForm view, CancellationToken ct);
         Task<View> CloneAsync(Guid id, CancellationToken ct);
         Task<ViewModels.View> UpdateAsync(Guid id, ViewModels.View view, CancellationToken ct);
         Task<bool> DeleteAsync(Guid id, CancellationToken ct);
@@ -97,7 +97,7 @@ namespace S3.Player.Api.Services
             return _mapper.Map<IEnumerable<ViewModels.View>>(views);
         }
 
-        public async Task<ViewModels.View> CreateAsync(ViewModels.View view, CancellationToken ct)
+        public async Task<ViewModels.View> CreateAsync(ViewModels.ViewForm view, CancellationToken ct)
         {
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ViewCreationRequirement())).Succeeded)
                 throw new ForbiddenException();
@@ -113,21 +113,32 @@ namespace S3.Player.Api.Services
 
             var userId = _user.GetId();
 
+            TeamEntity teamEntity = null;
+            ViewMembershipEntity viewMembershipEntity = null;
             // Create an Admin team with the caller as a member
-            var teamEntity = new TeamEntity() { Name = "Admin" };
-            teamEntity.Permissions.Add(new TeamPermissionEntity() { Permission = viewAdminPermission });
+            if (view.CreateAdminTeam)
+            {
+                teamEntity = new TeamEntity() { Name = "Admin" };
+                teamEntity.Permissions.Add(new TeamPermissionEntity() { Permission = viewAdminPermission });
 
-            var viewMembershipEntity = new ViewMembershipEntity { View = viewEntity, UserId = userId };
-            viewEntity.Teams.Add(teamEntity);
-            viewEntity.Memberships.Add(viewMembershipEntity);
+                viewMembershipEntity = new ViewMembershipEntity { View = viewEntity, UserId = userId };
+                viewEntity.Teams.Add(teamEntity);
+                viewEntity.Memberships.Add(viewMembershipEntity);
+
+            }
 
             _context.Views.Add(viewEntity);
             await _context.SaveChangesAsync(ct);
+            
+            if (view.CreateAdminTeam)
+            {
+                var teamMembershipEntity = new TeamMembershipEntity { Team = teamEntity, UserId = userId, ViewMembership = viewMembershipEntity };
+                viewMembershipEntity.PrimaryTeamMembership = teamMembershipEntity;
+                _context.TeamMemberships.Add(teamMembershipEntity);
+                _context.ViewMemberships.Update(viewMembershipEntity);
+                await _context.SaveChangesAsync(ct);
+            }   
 
-            var teamMembershipEntity = new TeamMembershipEntity { Team = teamEntity, UserId = userId, ViewMembership = viewMembershipEntity };
-            viewMembershipEntity.PrimaryTeamMembership = teamMembershipEntity;
-            _context.TeamMemberships.Add(teamMembershipEntity);
-            _context.ViewMemberships.Update(viewMembershipEntity);
             await _context.SaveChangesAsync(ct);
 
             return await GetAsync(viewEntity.Id, ct);

@@ -122,7 +122,7 @@ namespace Steamfitter.Api.Services
 
             var newScenarioTemplateEntity = new ScenarioTemplateEntity() {
                 CreatedBy = _user.GetId(),
-                Name = $"Copy of {oldScenarioTemplateEntity.Name}",
+                Name = $"{oldScenarioTemplateEntity.Name} - {_user.Claims.FirstOrDefault(c => c.Type == "name").Value}",
                 Description = oldScenarioTemplateEntity.Description,
                 DurationHours = oldScenarioTemplateEntity.DurationHours
             };

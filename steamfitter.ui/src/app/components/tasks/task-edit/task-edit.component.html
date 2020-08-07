@@ -47,7 +47,7 @@ DM20-0181
       <input matInput placeholder="Expiration Timeout (in seconds)" [value]="data.task.expirationSeconds" (input)="data.task.expirationSeconds = $event.target.value">
     </mat-form-field>
 
-    <mat-checkbox [checked]="chooseVms" (change)="switchChooseVmsMethod($event)" style="margin-right: 20px;">Choose Actual VM's</mat-checkbox>
+    <mat-checkbox [checked]="chooseVms" (change)="switchChooseVmsMethod($event)" style="margin-right: 20px;" *ngIf="!data.task.scenarioTemplateId">Choose Actual VM's</mat-checkbox>
     <mat-form-field class="param-full-width" *ngIf="!chooseVms">
       <input matInput placeholder="VM Mask (VM name includes this text)" [value]="data.task.vmMask" (input)="data.task.vmMask = $event.target.value">
     </mat-form-field>

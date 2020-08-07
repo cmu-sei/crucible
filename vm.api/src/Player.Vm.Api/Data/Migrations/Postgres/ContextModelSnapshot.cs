@@ -63,10 +63,6 @@ namespace Player.Vm.Api.Data.Migrations.Postgres
                         .HasColumnName("ip_addresses")
                         .HasColumnType("text[]");
 
-                    b.Property<string[]>("IpAddresses")
-                        .HasColumnName("ip_addresses")
-                        .HasColumnType("text[]");
-
                     b.Property<string>("Name")
                         .HasColumnName("name")
                         .HasColumnType("text");

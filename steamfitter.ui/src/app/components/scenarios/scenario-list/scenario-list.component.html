@@ -51,6 +51,7 @@ DM20-0181
 
 <mat-accordion displayMode="flat" multi class="mat-table">
   <section matSort (matSortChange)="sortChanged($event)" class="mat-elevation-z2 mat-header-row">
+    <span class="mat-cell" fxFlex="4">&nbsp;</span>
     <span class="mat-header-cell" mat-sort-header="name">Name</span>
     <span class="mat-header-cell" mat-sort-header="view">View</span>
     <span class="mat-header-cell" mat-sort-header="status">Status</span>
@@ -60,29 +61,36 @@ DM20-0181
   </section>
 
   <mat-expansion-panel  *ngFor="let item of paginateScenarios(scenarioList, pageIndex, pageSize)" [expanded]="selectedScenario && (item.id == selectedScenario.id)" (click)="selectScenario(item.id)">
-    <mat-expansion-panel-header class="mat-row">
+    <mat-expansion-panel-header class="mat-row" (contextmenu)="onContextMenu($event, item)">
+      <div class="mat-cell" fxFlex="4" title="Scenario Menu" (click)="onContextMenu($event, item); $event.stopPropagation();">
+        <mat-icon svgIcon="menu_24px" class="menu-icon" title="Scenario Menu" (click)="onContextMenu($event, item); $event.stopPropagation();"></mat-icon>
+      </div>
       <span class="mat-cell">{{item.name}}</span>
       <span class="mat-cell">{{item.view}}</span>
-      <span class="mat-cell">{{item.status}}</span>
+      <span class="mat-cell" *ngIf="!!item.view || item.status !=='ready'">{{item.status}}</span>
+      <span class="mat-cell red-text" *ngIf="!item.view && item.status === 'ready'">Select a view!</span>
       <span class="mat-cell">{{item.startDate | date: 'yyyy-MM-dd'}}</span>
       <span class="mat-cell">{{item.endDate | date: 'yyyy-MM-dd'}}</span>
       <span class="mat-cell">{{item.description}}</span>
     </mat-expansion-panel-header>
     <ng-template matExpansionPanelContent>
       <app-scenario-edit [scenario]="item"></app-scenario-edit>
-      <div fxLayout="row" class="bottom-button" (click)="$event.stopPropagation();">
-        <div fxFlex fxLayoutAlign="left" class="delete-button">
-          <button mat-stroked-button (click)="startScenario(item)" style="margin-left: 40px;" *ngIf="item.status === 'ready'" [disabled]="!item.viewId">Start Scenario Now</button>
-          <button mat-stroked-button (click)="endScenario(item)" style="margin-left: 40px;" *ngIf="item.status === 'active'">End Scenario Now</button>
-          <button mat-stroked-button (click)="copyScenario(item)" style="margin-left: 40px;">Copy Scenario</button>
-          <button mat-stroked-button (click)="editScenario(item)" style="margin-left: 40px;" *ngIf="item.status === 'ready' || item.status === 'active'">Edit Scenario</button>
-        </div>
-        <div fxFlex fxLayoutAlign="end" class="delete-button">
-          <button mat-stroked-button (click)="deleteScenario(item)" *ngIf="item.status === 'ready'">Delete Scenario</button>
-        </div>
-      </div>
-      <div>&nbsp;</div>
     </ng-template>
   </mat-expansion-panel>
 
 </mat-accordion>
+
+<div style="visibility: hidden; position: fixed"
+    [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y"
+    [matMenuTriggerFor]="contextMenu">
+</div>
+<mat-menu #contextMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="editScenario(item)" fxLayout="row">Edit</button>
+    <button mat-menu-item (click)="copyScenario(item)" fxLayout="row">Copy</button>
+    <button mat-menu-item (click)="startScenario(item)" fxLayout="row" *ngIf="item.status === 'ready' && !!item.viewId">Start</button>
+    <button mat-menu-item (click)="endScenario(item)" fxLayout="row" *ngIf="item.status === 'active'">End</button>
+    <button mat-menu-item (click)="deleteScenario(item)" fxLayout="row">Delete</button>
+  </ng-template>
+</mat-menu>

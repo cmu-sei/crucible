@@ -46,7 +46,6 @@ namespace Steamfitter.Api.Data.Models
             builder
                 .HasOne(w => w.Task)
                 .WithMany(d => d.Results)
-                .IsRequired()
                 .OnDelete(DeleteBehavior.SetNull);
         }
     }

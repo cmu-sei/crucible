@@ -53,6 +53,7 @@ namespace Steamfitter.Api.Services
         STT.Task<SAVM.Task> UpdateAsync(Guid Id, SAVM.Task Task, CancellationToken ct);
         STT.Task<bool> DeleteAsync(Guid Id, CancellationToken ct);
         STT.Task<IEnumerable<SAVM.Task>> CopyAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct);
+        STT.Task<SAVM.Task> CreateFromResultAsync(Guid resultId, Guid? newLocationId, string newLocationType, CancellationToken ct);
         STT.Task<IEnumerable<SAVM.Task>> MoveAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct);
     }
 
@@ -390,21 +391,9 @@ namespace Steamfitter.Api.Services
 
             var taskToDelete = await _context.Tasks.SingleOrDefaultAsync(v => v.Id == id, ct);
             if (taskToDelete == null)
-            {
                 throw new EntityNotFoundException<SAVM.Task>();
-            }
-            else if (await _context.Results.AnyAsync(r => r.TaskId == taskToDelete.Id))
-            {
-                // if this task has results, just remove it from the scenario and scenario template
-                taskToDelete.ScenarioTemplate = null;
-                taskToDelete.ScenarioTemplateId = null;
-                taskToDelete.Scenario = null;
-                taskToDelete.ScenarioId = null;
-            } else
-            {
-                _context.Tasks.Remove(taskToDelete);
-            }
 
+            _context.Tasks.Remove(taskToDelete);
             await _context.SaveChangesAsync(ct);
             _engineHub.Clients.All.SendAsync(EngineMethods.TaskDeleted, id);
 
@@ -429,6 +418,73 @@ namespace Steamfitter.Api.Services
             var items = await MoveTaskAsync(id, newLocationId, newLocationType, ct);
 
             return _mapper.Map<IEnumerable<SAVM.Task>>(items);
+        }
+
+        public async STT.Task<SAVM.Task> CreateFromResultAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct)
+        {
+            // check user authorization
+            if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
+                throw new ForbiddenException();
+
+            // check for existing result
+            var resultEntity = await _context.Results.SingleAsync(v => v.Id == id, ct);
+            if (resultEntity == null)
+                throw new EntityNotFoundException<STT.Task>();
+            // determine where the new Task goes
+            Guid? triggerTaskId = null;
+            Guid? scenarioTemplateId = null;
+            Guid? scenarioId = null;
+            switch (newLocationType)
+            {
+                case "task":
+                    triggerTaskId = newLocationId;
+                    var newLocationTaskEntity = await _context.Tasks.SingleAsync(v => v.Id == triggerTaskId, ct);
+                    scenarioTemplateId = newLocationTaskEntity.ScenarioTemplateId;
+                    scenarioId = newLocationTaskEntity.ScenarioId;
+                    break;
+                case "scenarioTemplate":
+                    scenarioTemplateId = newLocationId;
+                    break;
+                case "scenario":
+                    scenarioId = newLocationId;
+                    break;
+                default:
+                    break;
+            }
+            // create the new Task
+            var newTaskEntity =  new TaskEntity();
+            newTaskEntity.ScenarioTemplate = null;
+            newTaskEntity.ScenarioTemplateId = scenarioTemplateId;
+            newTaskEntity.Scenario = null;
+            newTaskEntity.ScenarioId = scenarioId;
+            newTaskEntity.TriggerTask = null;
+            newTaskEntity.TriggerTaskId = triggerTaskId;
+            newTaskEntity.TriggerCondition = TaskTrigger.Manual;
+            newTaskEntity.Name = "New Task";
+            newTaskEntity.Description = "Created from old execution";
+            newTaskEntity.UserId = _user.GetId();
+            newTaskEntity.Action = resultEntity.Action;
+            newTaskEntity.VmMask = resultEntity.VmId.ToString();
+            newTaskEntity.ApiUrl = resultEntity.ApiUrl;
+            newTaskEntity.InputString = resultEntity.InputString;
+            newTaskEntity.ExpectedOutput = resultEntity.ExpectedOutput;
+            newTaskEntity.ExpirationSeconds = resultEntity.ExpirationSeconds;
+            newTaskEntity.DelaySeconds = 0;
+            newTaskEntity.IntervalSeconds = 0;
+            newTaskEntity.Iterations = 1;
+            newTaskEntity.IterationTermination = TaskIterationTermination.IterationCount;
+            newTaskEntity.CurrentIteration = 0;
+            newTaskEntity.CreatedBy = _user.GetId();
+            newTaskEntity.ModifiedBy = _user.GetId();
+            newTaskEntity.DateCreated = DateTime.UtcNow;
+            newTaskEntity.DateModified = newTaskEntity.DateCreated;
+            // save new task to the database
+            _context.Tasks.Add(newTaskEntity);
+            await _context.SaveChangesAsync();
+            var newTask = _mapper.Map<SAVM.Task>(newTaskEntity);
+            _engineHub.Clients.All.SendAsync(EngineMethods.TaskCreated, newTask);
+
+            return  _mapper.Map<SAVM.Task>(newTask);
         }
 
         private async STT.Task<IEnumerable<TaskEntity>> CopyTaskAsync(Guid id, Guid? newLocationId, string newLocationType, CancellationToken ct)
@@ -471,6 +527,7 @@ namespace Steamfitter.Api.Services
             newTaskEntity.ScenarioId = scenarioId;
             newTaskEntity.TriggerTask = null;
             newTaskEntity.TriggerTaskId = triggerTaskId;
+            newTaskEntity.UserId = _user.GetId();
             newTaskEntity.CreatedBy = _user.GetId();
             newTaskEntity.ModifiedBy = _user.GetId();
             newTaskEntity.DateCreated = DateTime.UtcNow;

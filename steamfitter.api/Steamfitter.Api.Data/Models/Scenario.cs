@@ -48,7 +48,7 @@ namespace Steamfitter.Api.Data.Models
             builder
                 .HasOne(d => d.ScenarioTemplate)
                 .WithMany(d => d.Scenarios)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 

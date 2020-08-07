@@ -20,7 +20,8 @@ import { map, take, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 
 export interface Clipboard {
-  id: string;
+  id: string | undefined;
+  resultId: string | undefined;
   isCut: boolean;
 }
 
@@ -161,7 +162,6 @@ export class TaskDataService {
     this.taskService.getTask(id).pipe(take(1)).subscribe(task => {
       this.updateStore({...task});
       this.resultDataService.loadByTask(id);
-
     });
   }
 
@@ -216,6 +216,7 @@ export class TaskDataService {
   pasteClipboard(location: PasteLocation) {
     if (!!this._clipboard) {
       if (this._clipboard.isCut) {
+        // isCut, so move the existing task
         this.taskService.moveTask(this._clipboard.id, location).pipe(take(1)).subscribe(dts => {
             dts.forEach(dt => {
               this.updateStore(dt);
@@ -225,7 +226,8 @@ export class TaskDataService {
             });
           }
         );
-      } else {
+      } else if (!!this._clipboard.id) {
+        // Task ID is supplied, so copy the existing Task
         this.taskService.copyTask(this._clipboard.id, location).pipe(take(1)).subscribe(dts => {
           dts.forEach(dt => {
             this.taskStore.add(dt);
@@ -233,8 +235,15 @@ export class TaskDataService {
               this.setActive(dt.id);
             }
           });
-        }
-      );
+        });
+      } else if (!!this._clipboard.resultId) {
+        // Result ID is supplied, so create a Task from the Result
+        this.taskService.createTaskFromResult(this._clipboard.resultId, location).pipe(take(1)).subscribe(task => {
+          this.taskStore.add(task);
+          if (!!task.triggerTaskId) {
+            this.setActive(task.id);
+          }
+        });
       }
     }
     this.setClipboard(null);
@@ -254,27 +263,6 @@ export class TaskDataService {
     if (this._requestedTaskId$.getValue()) {
       this.loadById(this._requestedTaskId$.getValue());
     }
-  }
-
-  fixDates(result: Result) {
-    // set as date object and handle c# not adding 'Z' to UTC dates.
-    result.dateCreated = new Date(result.dateCreated + 'Z');
-    result.dateModified = new Date(result.dateModified + 'Z');
-    result.statusDate = new Date(result.statusDate + 'Z');
-    result.sentDate = new Date(result.sentDate + 'Z');
-  }
-
-  setAsDates(result: Result) {
-    // set to a date object.
-    result.dateCreated = new Date(result.dateCreated);
-    result.dateModified = new Date(result.dateModified);
-    result.statusDate = new Date(result.statusDate);
-    result.sentDate = new Date(result.sentDate);
-
-  }
-
-  resetResultStore() {
-    this.resultStore.set([]);
   }
 
   fixDates(result: Result) {
