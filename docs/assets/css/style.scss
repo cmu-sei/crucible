@@ -6,8 +6,17 @@ a {
     color: rgb(187, 0, 0);
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 a:hover {
     color: rgb(187, 0, 0);
+}
+.wrapper {
+      flex: 1 1 auto;  /*grow vertically*/
 }
 
 /* Style the buttons that are used to open and close the accordion panel */
