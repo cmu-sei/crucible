@@ -121,6 +121,67 @@ export class TaskService {
     }
 
     /**
+     * Creates a Task from a Result
+     * Creates a Task in the location specified  &lt;para /&gt;  Accessible only to a SuperUser or a User on an Admin Team within the specified Task
+     * @param resultId The Id of the Result
+     * @param newLocation The Id and type of the new location
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createTaskFromResult(resultId: string, newLocation?: NewLocation, observe?: 'body', reportProgress?: boolean): Observable<Task>;
+    public createTaskFromResult(resultId: string, newLocation?: NewLocation, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Task>>;
+    public createTaskFromResult(resultId: string, newLocation?: NewLocation, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Task>>;
+    public createTaskFromResult(resultId: string, newLocation?: NewLocation, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (resultId === null || resultId === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling copyTask.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json-patch+json',
+            'application/json',
+            'text/json',
+            'application/_*+json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<Task>(`${this.configuration.basePath}/tasks/copyfromresult/${encodeURIComponent(String(resultId))}`,
+            newLocation,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Creates a new Task and executes it
      * Creates a new Task with the attributes specified and executes it  &lt;para /&gt;  Accessible only to a SuperUser or an Administrator
      * @param task The data to create the Task with

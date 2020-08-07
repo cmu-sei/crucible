@@ -26,6 +26,8 @@ namespace S3.Player.Api.Infrastructure.Mappings
                 .ForMember(dest => dest.CanManage, opt => opt.ResolveUsing<ManageViewResolver>());
 
             CreateMap<View, ViewEntity>();
+
+            CreateMap<ViewForm, ViewEntity>();
         }
     }
 

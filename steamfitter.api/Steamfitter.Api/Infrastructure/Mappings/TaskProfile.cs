@@ -27,7 +27,7 @@ namespace Steamfitter.Api.Infrastructure.Mappings
                 .ForMember(dest => dest.InputString, m => m.MapFrom(src => ConvertToInputString(src.ActionParameters)));
 
             CreateMap<TaskEntity, TaskEntity>()
-                .ForMember(dt => dt.Id, opt => opt.Ignore());;
+                .ForMember(dt => dt.Id, opt => opt.Ignore());
         }
 
         private Dictionary<string, string> ConvertToActionParameters(TaskEntity src)

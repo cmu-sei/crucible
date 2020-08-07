@@ -63,4 +63,8 @@ DM20-0181
   border-bottom: none;
 }
 
-
+.menu-icon {
+  height: 20px;
+  width: 20px;
+  margin-top: -2px;
+}

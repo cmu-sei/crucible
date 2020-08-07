@@ -89,9 +89,9 @@ export class ScenarioDataService {
         if (scenarioList && scenarioList.length > 0 && requestedScenarioId) {
           selectedScenario = scenarioList.find(scenario => scenario.id === requestedScenarioId);
           if (selectedScenario && selectedScenario.id !== this._requestedScenarioId) {
-            this.scenarioStore.setActive(selectedScenario.id);
-            this.taskDataService.loadByScenario(selectedScenario.id);
+            this.scenarioStore.setActive(requestedScenarioId);
             this._requestedScenarioId = requestedScenarioId;
+            this.taskDataService.loadByScenario(requestedScenarioId);
             this.playerDataService.selectView(selectedScenario.viewId);
           }
         } else {
@@ -179,6 +179,21 @@ export class ScenarioDataService {
   copyScenario(scenarioId: string) {
     this.scenarioStore.setLoading(true);
     this.scenarioService.copyScenario(scenarioId).pipe(
+        tap(() => { this.scenarioStore.setLoading(false); }),
+        take(1)
+      ).subscribe(s => {
+        // convert from UTC time.
+        s.startDate = new Date(s.startDate);
+        s.endDate = new Date(s.endDate);
+        this.scenarioStore.add(s);
+        this.setActive(s.id);
+      }
+    );
+  }
+
+  createScenarioFromScenarioTemplate(scenarioTemplateId: string) {
+    this.scenarioStore.setLoading(true);
+    this.scenarioService.createScenarioFromScenarioTemplate(scenarioTemplateId).pipe(
         tap(() => { this.scenarioStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {

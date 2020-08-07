@@ -71,6 +71,25 @@ namespace S3.Player.Api.Controllers
         }
 
         /// <summary>
+        /// Gets a specific Role by name
+        /// </summary>
+        /// <remarks>
+        /// Returns the Role with the name specified
+        /// <para />
+        /// Accessible to all authenticated Users
+        /// </remarks>
+        /// <param name="name">The name of the Role</param>
+        /// <returns></returns>
+        [HttpGet("Roles/name/{name}")]
+        [ProducesResponseType(typeof(Role), (int)HttpStatusCode.OK)]
+        [SwaggerOperation(operationId: "getRoleByName")]
+        public async Task<IActionResult> Get(string name)
+        {
+            var role = await _RoleService.GetAsync(name);
+            return Ok(role);
+        }
+
+        /// <summary>
         /// Creates a new Role
         /// </summary>
         /// <remarks>

@@ -21,7 +21,7 @@ DM20-0181
     </div>
   </div>
 </div>
-<div fxLayout="row" class="add-margin" (contextmenu)="onContextMenu($event, null)">
+<div fxLayout="row" class="add-margin">
   <div fxFlex="100" fxLayoutAlign="start">
     <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; width:100%">
       <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
@@ -35,11 +35,14 @@ DM20-0181
           <mat-icon svgIcon="ic_chevron_down_black_24px" *ngIf="treeControl.isExpanded(node)"></mat-icon>
           <mat-icon svgIcon="ic_chevron_right_black_24px" *ngIf="!treeControl.isExpanded(node)"></mat-icon>
         </button>
-        <mat-expansion-panel [expanded]="areDetailsExpanded(node)" (click)="toggleNodeDetails(node); $event.stopPropagation();" (contextmenu)="onContextMenu($event, node)">
-          <mat-expansion-panel-header>
+        <mat-expansion-panel [expanded]="areDetailsExpanded(node)" (click)="toggleNodeDetails(node); $event.stopPropagation();">
+          <mat-expansion-panel-header (contextmenu)="onContextMenu($event, node)">
             <mat-panel-title>
               <div fxLayout="row" fxLayoutAlign="space-around center">
-                <img src="assets/img/{{ node.task.triggerCondition.toLowerCase() }}.png" class="icon16" matTooltip="Runs on {{ node.task.triggerCondition }}" />
+                <button mat-icon-button title="Task Menu" (click)="onContextMenu($event, node); $event.stopPropagation();">
+                  <mat-icon svgIcon="menu_24px"></mat-icon>
+                </button>
+                <img src="assets/img/{{ node.task.triggerCondition.toLowerCase() }}.png" class="icon16" title="Runs on {{ node.task.triggerCondition }}" />
                 <mat-label>{{node.task.name}}</mat-label>
               </div>
             </mat-panel-title>
@@ -56,7 +59,7 @@ DM20-0181
           <div class="taskText"><b>Iteration Interval (seconds):</b> {{node.task.intervalSeconds}}</div>
           <div class="taskText"><b>Iteration Termination:</b> {{node.task.iterationTermination}}</div>
           <div class="taskText"><b>Expiration (seconds):</b> {{node.task.experationSeconds}}</div>
-          <div class="taskText" *ngIf="!!node.results && node.results.length > 0">
+          <div class="taskText" *ngIf="!!node.results && node.results.length > 0" (click)="$event.stopPropagation();">
             <b>Results:</b>
             <app-results
               [results]=resultList

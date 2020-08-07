@@ -10,7 +10,7 @@ DM20-0181
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <div class="sp-icon">
-    <img height="35" src="../../../assets/svg-icons/menu-24px.svg" alt="ScenarioTemplates">
+    <img height="35" src="../../../assets/svg-icons/storage-black-18dp.svg" alt="ScenarioTemplates">
   </div>
   <mat-icon style="margin-left: 50px; transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
   <mat-form-field style="width: 320px;">
@@ -46,6 +46,7 @@ DM20-0181
 
 <mat-accordion displayMode="flat" class="mat-table">
   <section matSort (matSortChange)="sortChanged($event)" class="mat-elevation-z2 mat-header-row">
+    <span class="mat-cell" fxFlex="4">&nbsp;</span>
     <span class="mat-header-cell" mat-sort-header="name">Name</span>
     <span class="mat-header-cell" mat-sort-header="description">Description</span>
     <span class="mat-header-cell" mat-sort-header="durationHours">Duration</span>
@@ -53,7 +54,10 @@ DM20-0181
   </section>
 
   <mat-expansion-panel *ngFor="let item of paginateScenarioTemplates(scenarioTemplateList, pageIndex, pageSize)" [expanded]="selectedScenarioTemplate && (item.id == selectedScenarioTemplate.id)" (click)="selectScenarioTemplate(item.id)">
-    <mat-expansion-panel-header class="mat-row">
+    <mat-expansion-panel-header class="mat-row" (contextmenu)="onContextMenu($event, item)">
+      <span class="mat-cell" fxFlex="4" title="Scenario Template Menu" (click)="onContextMenu($event, item); $event.stopPropagation();">
+        <mat-icon svgIcon="menu_24px" class="menu-icon" title="Scenario Template Menu" (click)="onContextMenu($event, item); $event.stopPropagation();"></mat-icon>
+      </span>
       <span class="mat-cell">{{item.name}}</span>
       <span class="mat-cell">{{item.description}}</span>
       <span class="mat-cell">{{item.durationHours}}</span>
@@ -61,19 +65,21 @@ DM20-0181
     </mat-expansion-panel-header>
     <ng-template matExpansionPanelContent>
       <app-scenario-template-edit [scenarioTemplate]="selectedScenarioTemplate"></app-scenario-template-edit>
-      <div fxLayout="row" class="bottom-button" (click)="$event.stopPropagation();">
-        <div fxFlex fxLayoutAlign="left" class="delete-button">
-          <button mat-stroked-button (click)="createScenario(item)" style="margin-left: 40px;">Create a Scenario</button>
-          <button mat-stroked-button (click)="copyScenarioTemplate(item)" style="margin-left: 40px;">Copy Scenario Template</button>
-          <button mat-stroked-button (click)="editScenarioTemplate(item)" style="margin-left: 40px;">Edit Scenario Template</button>
-        </div>
-        <div fxFlex fxLayoutAlign="end" class="delete-button">
-          <button mat-stroked-button (click)="deleteScenarioTemplate(item)">Delete Scenario Template</button>
-        </div>
-      </div>
-      <div>&nbsp;</div>
     </ng-template>
   </mat-expansion-panel>
 
 </mat-accordion>
 
+<div style="visibility: hidden; position: fixed"
+    [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y"
+    [matMenuTriggerFor]="contextMenu">
+</div>
+<mat-menu #contextMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="editScenarioTemplate(item)" fxLayout="row">Edit</button>
+    <button mat-menu-item (click)="copyScenarioTemplate(item)" fxLayout="row">Copy</button>
+    <button mat-menu-item (click)="deleteScenarioTemplate(item)" fxLayout="row">Delete</button>
+    <button mat-menu-item (click)="createScenario(item)" fxLayout="row">Create a Scenario</button>
+  </ng-template>
+</mat-menu>

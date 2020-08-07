@@ -10,7 +10,7 @@ DM20-0181
 
 <div fxLayout="row" fxLayoutAlign="end" class="top-button">
   <button
-    [hidden]="viewApplications === undefined || viewApplications.length === 0"
+    *ngIf="viewApplications != null && viewApplications.length > 0"
     mat-stroked-button
     [matMenuTriggerFor]="teamAppsMenu"
   >
@@ -56,7 +56,9 @@ DM20-0181
       <div fxflex fxLayoutAlign="space-between center">
         Display order:&nbsp;&nbsp;<b>{{ app.displayOrder }}</b>
         <button
-          [hidden]="app.displayOrder === 0"
+          *ngIf="{ disabled: app.displayOrder === 0 } as moveUp"
+          [disabled]="moveUp.disabled"
+          [ngClass]="moveUp.disabled ? 'disabled-button' : null"
           mat-icon-button
           title="Move Up"
           (click)="swapDisplayOrders(app, applications[i - 1])"
@@ -67,43 +69,20 @@ DM20-0181
           ></mat-icon>
         </button>
         <button
-          [hidden]="app.displayOrder > 0"
-          mat-icon-button
-          title="Move Up"
-          style="opacity: 0.3; filter: alpha(opacity=30);"
-        >
-          <mat-icon
-            svgIcon="ic_expand_more_black_24px"
-            style="transform: rotate(180deg);"
-          ></mat-icon>
-        </button>
-        <button
-          [hidden]="app.displayOrder >= applications.length - 1"
+          *ngIf="{
+            disabled: app.displayOrder >= applications.length - 1
+          } as moveDown"
+          [disabled]="moveDown.disabled"
+          [ngClass]="moveDown.disabled ? 'disabled-button' : null"
           title="Move Down"
           mat-icon-button
           (click)="swapDisplayOrders(app, applications[i + 1])"
         >
           <mat-icon svgIcon="ic_expand_more_black_24px"></mat-icon>
         </button>
-        <button
-          [hidden]="app.displayOrder < applications.length - 1"
-          title="Move Down"
-          mat-icon-button
-          style="opacity: 0.3; filter: alpha(opacity=30);"
-        >
-          <mat-icon svgIcon="ic_expand_more_black_24px"></mat-icon>
-        </button>
       </div>
       <div fxFlex fxLayoutAlign="end">
         <button
-          [hidden]="subjectType !== objTypes.View"
-          mat-stroked-button
-          (click)="deleteViewApplication(app)"
-        >
-          Delete Application
-        </button>
-        <button
-          [hidden]="subjectType !== objTypes.Team"
           mat-stroked-button
           (click)="removeApplicationInstanceFromTeam(app)"
         >

@@ -33,6 +33,7 @@ namespace S3.Player.Api.Services
     {
         Task<IEnumerable<Role>> GetAsync();
         Task<Role> GetAsync(Guid id);
+        Task<Role> GetAsync(string name);
         Task<Role> CreateAsync(RoleForm form);
         Task<Role> UpdateAsync(Guid id, RoleForm form);
         Task<bool> DeleteAsync(Guid id);
@@ -69,6 +70,20 @@ namespace S3.Player.Api.Services
                 .ProjectTo<Role>()
                 .SingleOrDefaultAsync(o => o.Id == id);
 
+            return item;
+        }
+
+        public async Task<Role> GetAsync(string name)
+        {
+            var item = await _context.Roles
+                .ProjectTo<Role>()
+                .SingleOrDefaultAsync(o => o.Name == name);
+            
+            if (item == null)
+            {
+                throw new EntityNotFoundException<Role>();
+            }
+            
             return item;
         }
 

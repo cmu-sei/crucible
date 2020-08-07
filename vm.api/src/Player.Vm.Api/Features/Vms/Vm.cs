@@ -62,6 +62,5 @@ namespace Player.Vm.Api.Features.Vms
         /// True if this Vm currently has pending tasks (power on, power off, etc)
         /// </summary>
         public bool HasPendingTasks { get; set; }
-
     }
 }
