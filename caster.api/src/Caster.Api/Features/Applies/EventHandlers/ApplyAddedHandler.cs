@@ -78,14 +78,14 @@ namespace Caster.Api.Features.Applies.EventHandlers
                 _apply.Run.Status = Domain.Models.RunStatus.Applying;
                 await this.UpdateApply();
 
-                workingDir =  _apply.Run.Workspace.GetPath(_options.RootWorkingDirectory);
+                workingDir = _apply.Run.Workspace.GetPath(_options.RootWorkingDirectory);
 
                 _timer = new System.Timers.Timer(_options.OutputSaveInterval);
                 _timer.Elapsed += OnTimedEvent;
                 _timer.Start();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error in {nameof(ApplyAddedHandler)}.Handle");
                 _apply.Status = Domain.Models.ApplyStatus.Failed;
@@ -96,10 +96,10 @@ namespace Caster.Api.Features.Applies.EventHandlers
 
             try
             {
-                var result = _terraformService.Apply(workingDir, OutputHandler);
+                var result = _terraformService.Apply(_apply.Run.Workspace, OutputHandler);
                 bool isError = result.IsError;
 
-                lock(_apply)
+                lock (_apply)
                 {
                     _timerComplete = true;
                     _timer.Stop();
@@ -111,7 +111,7 @@ namespace Caster.Api.Features.Applies.EventHandlers
 
                 stateRetrieved = await this.RetrieveState(workingDir);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error in {nameof(ApplyAddedHandler)}.Handle");
             }
@@ -137,7 +137,7 @@ namespace Caster.Api.Features.Applies.EventHandlers
                     _apply.Run.Workspace.CleanupFileSystem(_options.RootWorkingDirectory);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error Cleaning up Apply {_apply.Id}");
             }
@@ -160,7 +160,7 @@ namespace Caster.Api.Features.Applies.EventHandlers
                         break;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     _logger.LogError(ex, $"Error Retrieving State for Workspace {_apply.Run.WorkspaceId}");
                 }
@@ -193,7 +193,7 @@ namespace Caster.Api.Features.Applies.EventHandlers
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            lock(_apply)
+            lock (_apply)
             {
                 _timer.Stop();
 
@@ -204,7 +204,7 @@ namespace Caster.Api.Features.Applies.EventHandlers
 
                 try
                 {
-                    using(var dbContext = new CasterContext(_dbOptions))
+                    using (var dbContext = new CasterContext(_dbOptions))
                     {
                         // Only update the Output field
                         dbContext.Applies.Attach(_apply);
@@ -213,7 +213,7 @@ namespace Caster.Api.Features.Applies.EventHandlers
                         dbContext.SaveChanges();
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error in Timer");
                 }

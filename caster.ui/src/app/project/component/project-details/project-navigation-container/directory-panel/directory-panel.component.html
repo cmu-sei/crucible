@@ -334,8 +334,21 @@ DM20-0181
 
 <mat-menu #contextMenu="matMenu">
   <ng-template matMenuContent let-item="item">
-    <button mat-menu-item (click)="onContextRename(item)" fxLayout="row">
+    <button
+      *ngIf="canRename(item)"
+      mat-menu-item
+      (click)="onContextRename(item)"
+      fxLayout="row"
+    >
       Rename
+    </button>
+    <button
+      *ngIf="canEdit(item)"
+      mat-menu-item
+      (click)="onContextEdit(item)"
+      fxLayout="row"
+    >
+      Edit
     </button>
     <button mat-menu-item (click)="onContextDelete(item)" fxLayout="row">
       Delete
@@ -359,4 +372,20 @@ DM20-0181
     (exportComplete)="onExportComplete()"
   >
   </cas-project-export>
+</ng-template>
+
+<ng-template #workspaceEditDialog>
+  <cas-workspace-edit-container
+    [id]="editingWorkspaceId"
+    (editWorkspaceComplete)="onEditWorkspaceComplete()"
+  >
+  </cas-workspace-edit-container>
+</ng-template>
+
+<ng-template #directoryEditDialog>
+  <cas-directory-edit-container
+    [id]="editingDirectoryId"
+    (editDirectoryComplete)="onEditDirectoryComplete()"
+  >
+  </cas-directory-edit-container>
 </ng-template>

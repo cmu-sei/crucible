@@ -10,7 +10,8 @@ DM20-0181
 
 import { Component, EventEmitter, Output, Inject } from '@angular/core';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
-import { MAT_DIALOG_DATA, MatDialogRef, ErrorStateMatcher } from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 
 /** Error when invalid control is dirty, touched, or submitted. */

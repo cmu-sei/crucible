@@ -54,6 +54,7 @@ export * from './run';
 export * from './runStatus';
 export * from './tagFileCommand';
 export * from './taintResourcesCommand';
+export * from './terraformVersionsResult';
 export * from './user';
 export * from './userPermission';
 export * from './variableValue';

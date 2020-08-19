@@ -27,6 +27,7 @@ namespace Caster.Api.Infrastructure.Extensions
             using (var serviceScope = webHost.Services.CreateScope())
             {
                 var services = serviceScope.ServiceProvider;
+
                 try
                 {
                     var context = serviceScope.ServiceProvider.GetRequiredService<CasterContext>();
@@ -39,11 +40,14 @@ namespace Caster.Api.Infrastructure.Extensions
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred while initializing the database.");
+
+                    // exit on database connection error on startup so app can be restarted to try again
+                    throw;
                 }
 
-            }      
+            }
 
-            return webHost;      
+            return webHost;
         }
 
         private static void ProcessSeedDataOptions(SeedDataOptions options, CasterContext context)
@@ -59,7 +63,7 @@ namespace Caster.Api.Infrastructure.Extensions
                         context.Permissions.Add(permission);
                     }
                 }
-                
+
                 context.SaveChanges();
             }
             if (options.Users.Any())
@@ -73,7 +77,7 @@ namespace Caster.Api.Infrastructure.Extensions
                         context.Users.Add(user);
                     }
                 }
-                
+
                 context.SaveChanges();
             }
             if (options.UserPermissions.Any())
@@ -87,7 +91,7 @@ namespace Caster.Api.Infrastructure.Extensions
                         context.UserPermissions.Add(userPermission);
                     }
                 }
-                
+
                 context.SaveChanges();
             }
         }
@@ -95,4 +99,3 @@ namespace Caster.Api.Infrastructure.Extensions
 
     }
 }
-

@@ -10,7 +10,9 @@ DM20-0181
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatTableDataSource, MatPaginator, PageEvent, MatSort } from '@angular/material';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Result, User, View, Vm } from 'src/app/swagger-codegen/dispatcher.api';
 import { ResultQuery } from 'src/app/data/result/result.query';
 import { ResultDataService } from 'src/app/data/result/result-data.service';
@@ -64,8 +66,8 @@ export class HistoryComponent implements OnInit, OnDestroy {
   selectedVm: Vm;
   expandedResult: Result;
   private unsubscribe$ = new Subject();
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private resultQuery: ResultQuery,

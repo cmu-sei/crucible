@@ -11,30 +11,63 @@ DM20-0181
 <div class="page">
   <div class="vm-list-container mat-elevation-z8" [style.visibility]="vmApiResponded ? 'visible' : 'hidden'">
     <div fxLayout="column">
-      <div fxLayout="row">
-        <img class="vmicon" height="55" src="/assets/img/SP_Icon_Virtual.png" />
-        <mat-form-field>
-          <input name="vmSearch" matInput placeholder="Search" [formControl]="filterControl">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon style="margin-left: 10px; transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
+        <mat-form-field style="width: 320px;">
+          <input matInput name="vmSearch" placeholder="Search" [formControl]="filterControl">
         </mat-form-field>
+        <div style="width: 50px; margin-right: 30px;">
+          <button fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
+            title="Clear Search">
+            <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+          </button>
+        </div>
+        <mat-checkbox [(ngModel)]="showSelectedOnly" style="margin-left: 50px;" (change)="filterControl.setValue('')"></mat-checkbox>
+        <span style="margin-left: 10px;">View Selected (<b><u>{{selectedVms.length}}</u></b>)</span>
+        <button mat-icon-button (click)="checkAll();" title="Select all displayed VM's" style="margin-left: 100px;" [disabled]="showSelectedOnly">
+          <mat-icon svgIcon="check_box"></mat-icon>
+        </button>
+        <span>All</span>
+        <button mat-icon-button (click)="uncheckAll();" title="Unselect all displayed VM's" style="margin-left: 50px;">
+          <mat-icon svgIcon="check_box_outline_blank"></mat-icon>
+        </button>
+        <span>None</span>
       </div>
     </div>
-
-    <div class="flex-container" *ngFor="let vm of vmList">
-      <div>
-        <div id="wrapper">
-          <div id="context">
-            <mat-checkbox [checked]="!!selectedVms && selectedVms.includes(vm.id)" (change)="onCheckBoxChange($event, vm.id)"></mat-checkbox>
-            {{vm.name}}
-            <button mat-button (click)="openInTab(vm.url); $event.stopPropagation();" title="Open {{vm.name}}" style="min-width: 30px; width: 30px;">
-              <mat-icon svgIcon="open_in_new" style="margin-left: -15px;"></mat-icon>
-            </button>
+    <div *ngIf="!showSelectedOnly">
+      <div class="flex-container" *ngFor="let vm of vmList">
+        <div>
+          <div id="wrapper">
+            <div id="context">
+              <mat-checkbox [checked]="!!selectedVms && selectedVms.includes(vm.id)" (change)="onCheckBoxChange($event, vm.id)"></mat-checkbox>
+              {{vm.name}}
+              <button mat-icon-button (click)="openInTab(vm.url); $event.stopPropagation();" title="Open {{vm.name}}" style="height: 25px; width: 25px;">
+                <mat-icon svgIcon="open_in_new" style="height: 20px; width: 20px;"></mat-icon>
+              </button>
+            </div>
           </div>
         </div>
       </div>
+      <div class="flex-container" *ngIf="!vmList || vmList.length === 0"><span style="margin-left: 20px; margin-bottom: 20px;">No matching VM's</span></div>
+
     </div>
-    <mat-paginator #paginator *ngIf="pageEvent" [pageSizeOptions]="[2, 10, 20, 30]" [showFirstLastButtons]="true"
-      [pageSize]="pageEvent.pageSize" [length]="pageEvent.length" [pageIndex]="pageEvent.pageIndex" (page)="handlePageEvent($event)">
-    </mat-paginator>
+    <div *ngIf="showSelectedOnly">
+      <div class="flex-container" *ngFor="let vm of selectedVmList()">
+        <div>
+          <div id="wrapper">
+            <div id="context">
+              <mat-checkbox [checked]="!!selectedVms && selectedVms.includes(vm.id)" (change)="onCheckBoxChange($event, vm.id)"></mat-checkbox>
+              {{vm.name}}
+              <button mat-icon-button (click)="openInTab(vm.url); $event.stopPropagation();" title="Open {{vm.name}}" style="height: 25px; width: 25px;">
+                <mat-icon svgIcon="open_in_new" style="height: 20px; width: 20px;"></mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-container" *ngIf="!vmList || vmList.length === 0"><span style="margin-left: 20px; margin-bottom: 20px;">No matching VM's</span></div>
+
+    </div>
   </div>
   <div class="vm-list-container mat-elevation-z8" [style.visibility]="vmApiResponded ? 'hidden' : 'visible'">
     <label>The Steamfitter API or VM API is not currently reachable.</label>

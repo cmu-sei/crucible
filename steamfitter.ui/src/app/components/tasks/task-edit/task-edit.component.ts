@@ -12,7 +12,7 @@ import { Component, OnInit, Output, Inject, OnDestroy, EventEmitter } from '@ang
 import { Task, TaskService } from 'src/app/swagger-codegen/dispatcher.api';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
 import { Command } from 'src/app/models/command';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -91,6 +91,9 @@ export class TaskEditComponent implements OnInit, OnDestroy {
 
   switchChooseVmsMethod(event: any) {
     this.chooseVms = !this.chooseVms;
+    if (!this.chooseVms) {
+      this.data.task.vmList.length = 0;
+    }
   }
 
   onCommandChange() {

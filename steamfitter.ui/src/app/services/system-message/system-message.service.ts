@@ -9,7 +9,7 @@ DM20-0181
 */
 
 import { Observable } from 'rxjs';
-import { MatBottomSheetRef, MatBottomSheet, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
+import { MatBottomSheetRef, MatBottomSheet, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Injectable } from '@angular/core';
 import { SystemMessageComponent } from '../../components/shared/system-message/system-message.component';
 

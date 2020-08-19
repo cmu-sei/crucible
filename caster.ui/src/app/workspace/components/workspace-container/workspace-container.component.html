@@ -81,6 +81,11 @@ DM20-0181
           >
             Destroy
           </button>
+          <cas-workspace-version
+            *ngIf="workspace$ | async as workspace"
+            [workspace]="workspace"
+          >
+          </cas-workspace-version>
         </div>
         <div
           *cwdTableItemAction="let item"

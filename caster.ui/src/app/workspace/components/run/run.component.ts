@@ -19,6 +19,8 @@ import {
   Output,
   EventEmitter,
   AfterViewInit,
+  NgZone,
+  HostListener,
 } from '@angular/core';
 import { Run, RunStatus } from 'src/app/generated/caster-api';
 import { ISubscription } from '@microsoft/signalr';
@@ -43,8 +45,13 @@ export class RunComponent implements AfterViewInit, OnChanges, OnDestroy {
   status: RunStatus;
   isPlan = false;
   isApply = false;
+  height: number;
+  width: number;
+
+  private preventScroll = false;
 
   @ViewChild('xterm') eleXterm: ElementRef;
+  @ViewChild('dragHandleBottom') dragHandleBottom: ElementRef;
 
   // there is no infinite scrolling for xterm.  Set number of lines to very large number!
   xtermOptions: ITerminalOptions = {
@@ -54,10 +61,24 @@ export class RunComponent implements AfterViewInit, OnChanges, OnDestroy {
   xterm: Terminal = new Terminal(this.xtermOptions);
   fitAddon: FitAddon = new FitAddon();
 
-  constructor(private signalRService: SignalRService) {}
+  constructor(private signalRService: SignalRService, private ngZone: NgZone) {
+    window.addEventListener('wheel', this.scroll, { passive: false });
+  }
 
   ngAfterViewInit() {
     this.openTerminal();
+    this.setAllHandleTransform();
+  }
+
+  ngOnDestroy() {
+    this.disposeStream();
+    window.removeEventListener('wheel', this.scroll);
+  }
+
+  private disposeStream() {
+    if (this.streamSub != null) {
+      this.streamSub.dispose();
+    }
   }
 
   openTerminal() {
@@ -192,13 +213,110 @@ export class RunComponent implements AfterViewInit, OnChanges, OnDestroy {
     return true;
   }
 
-  ngOnDestroy() {
-    this.disposeStream();
+  fullscreen() {
+    const elem = this.eleXterm.nativeElement;
+
+    // save current height to restore after fullscreen
+    this.height = elem.offsetHeight;
+
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+      /* Chrome, Safari and Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+
+    elem.style.height = window.outerHeight + 'px';
+    this.fitAddon.fit();
   }
 
-  private disposeStream() {
-    if (this.streamSub != null) {
-      this.streamSub.dispose();
+  @HostListener('document:fullscreenchange', ['$event'])
+  @HostListener('document:webkitfullscreenchange', ['$event'])
+  @HostListener('document:mozfullscreenchange', ['$event'])
+  @HostListener('document:MSFullscreenChange', ['$event'])
+  fullscreenmode() {
+    // return to previous height when exiting fullscreen
+    if (document.fullscreenElement == null) {
+      this.eleXterm.nativeElement.style.height = this.height + 'px';
+      this.setAllHandleTransform();
+      this.fitAddon.fit();
     }
   }
+
+  setAllHandleTransform() {
+    const rect = this.eleXterm.nativeElement.getBoundingClientRect();
+    this.setHandleTransform(this.dragHandleBottom.nativeElement, rect, 'y');
+  }
+
+  setHandleTransform(
+    dragHandle: HTMLElement,
+    targetRect: ClientRect | DOMRect,
+    position: 'x' | 'y' | 'both'
+  ) {
+    const dragRect = dragHandle.getBoundingClientRect();
+    const translateX = targetRect.width - dragRect.width;
+    const translateY = targetRect.height - dragRect.height;
+
+    if (position === 'x') {
+      dragHandle.style.transform = `translate3d(${translateX}px, 0, 0)`;
+    }
+
+    if (position === 'y') {
+      dragHandle.style.transform = `translate3d(0, ${translateY}px, 0)`;
+    }
+
+    if (position === 'both') {
+      dragHandle.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
+    }
+  }
+
+  dragMove(dragHandle: HTMLElement) {
+    this.ngZone.runOutsideAngular(() => {
+      this.resize(dragHandle, this.eleXterm.nativeElement);
+    });
+
+    this.fitAddon.fit();
+  }
+
+  resize(dragHandle: HTMLElement, target: HTMLElement) {
+    const dragRect = dragHandle.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+
+    const width = dragRect.left - targetRect.left + dragRect.width;
+    const height = dragRect.top - targetRect.top + dragRect.height;
+
+    target.style.width = width + 'px';
+    target.style.height = height + 'px';
+
+    this.setAllHandleTransform();
+  }
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.preventScroll = true;
+  }
+
+  @HostListener('mouseout')
+  onMouseOut() {
+    this.preventScroll = false;
+  }
+
+  @HostListener('mouseover')
+  onMouseOver() {
+    this.preventScroll = true;
+  }
+
+  // prevent page from scrolling when terminal is scrolled
+  scroll = (event: Event): void => {
+    if (this.preventScroll) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  };
 }

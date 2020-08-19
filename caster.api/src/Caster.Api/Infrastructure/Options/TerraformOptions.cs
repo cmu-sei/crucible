@@ -13,6 +13,7 @@ namespace Caster.Api.Infrastructure.Options
     public class TerraformOptions
     {
         public string BinaryPath { get; set; }
+        public string DefaultVersion { get; set; }
         public string PluginDirectory { get; set; }
         public string RootWorkingDirectory { get; set; }
         public double OutputSaveInterval { get; set; }

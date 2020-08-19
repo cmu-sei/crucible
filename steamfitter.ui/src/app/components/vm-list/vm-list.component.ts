@@ -10,8 +10,6 @@ DM20-0181
 
 import { Component, Input, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PageEvent } from '@angular/material';
-// Resolve imports when API changes nouns
 import { PlayerDataService } from 'src/app/data/player/player-data-service';
 import { Vm, View } from 'src/app/swagger-codegen/dispatcher.api';
 import { Subject } from 'rxjs';
@@ -27,22 +25,19 @@ export class VmListComponent implements OnDestroy {
   @Input() selectedVms: string[];
   @Output() updateVmList = new EventEmitter<string[]>();
   vmList: Vm[];
-  pageEvent: PageEvent;
   displayedColumns: string[] = ['name'];
   private unsubscribe$ = new Subject();
   uploading = false;
   uploadProgress = 0;
   vmApiResponded = true;
   filterControl: FormControl = this.playerDataService.vmFilter;
+  showSelectedOnly = false;
 
   constructor(
     private playerDataService: PlayerDataService
   ) {
     this.playerDataService.vmList.pipe(takeUntil(this.unsubscribe$)).subscribe(vms => {
       this.vmList = vms;
-    });
-    this.playerDataService.vmPageEvent.pipe(takeUntil(this.unsubscribe$)).subscribe(pe => {
-      this.pageEvent = pe;
     });
   }
 
@@ -60,8 +55,27 @@ export class VmListComponent implements OnDestroy {
     this.updateVmList.emit(this.selectedVms);
   }
 
-  handlePageEvent(pageEvent: PageEvent) {
-    this.playerDataService.setVmPageEvent(pageEvent);
+  checkAll() {
+    this.vmList.forEach(vm => {
+      this.selectedVms.push(vm.id);
+    });
+    this.updateVmList.emit(this.selectedVms);
+  }
+
+  uncheckAll() {
+    this.vmList.forEach(vm => {
+      this.selectedVms = this.selectedVms.filter(id => id !== vm.id);
+    });
+    this.updateVmList.emit(this.selectedVms);
+    this.showSelectedOnly = this.showSelectedOnly && this.selectedVms.length > 0;
+  }
+
+  clearFilter() {
+    this.filterControl.setValue('');
+  }
+
+  selectedVmList() {
+    return this.vmList.filter(vm => this.selectedVms.includes(vm.id));
   }
 
   ngOnDestroy() {

@@ -54,6 +54,9 @@ namespace Player.Vm.Api.Infrastructure.Extensions
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred while initializing the database.");
+
+                    // exit on database connection error on startup so app can be restarted to try again
+                    throw;
                 }
             }
 

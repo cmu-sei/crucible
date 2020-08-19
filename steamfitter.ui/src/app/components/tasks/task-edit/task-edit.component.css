@@ -31,20 +31,14 @@ DM20-0181
   margin-bottom: 8px;
 }
 
-.bottom-button {
-  width: 200px;
-  margin-bottom: 10px;
-  margin-top: 10px;
+.close-button {
+  float: right;
 }
 
 .left-icon {
   width: 45px;
   font-size: 75%;
   padding:.5em;
-}
-
-.delete-button {
-  margin-top: 10px;
 }
 
 .top-button {
@@ -62,9 +56,5 @@ DM20-0181
 
 .param-indent {
   margin-left: 20px;
-}
-
-.content {
-  min-width: 900px;
 }
 

@@ -13,7 +13,7 @@ import { TaskQuery } from './task.query';
 import { ResultDataService } from 'src/app/data/result/result-data.service';
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Task, TaskService, Result } from 'src/app/swagger-codegen/dispatcher.api';
 import { map, take, tap } from 'rxjs/operators';

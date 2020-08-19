@@ -9,7 +9,8 @@ DM20-0181
 */
 
 import { Component, EventEmitter, Output, NgZone, ViewChild } from '@angular/core';
-import { ErrorStateMatcher, MatStepper } from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatStepper } from '@angular/material/stepper';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {Sort} from '@angular/material/sort';
 import { ScenarioTemplate } from 'src/app/swagger-codegen/dispatcher.api';

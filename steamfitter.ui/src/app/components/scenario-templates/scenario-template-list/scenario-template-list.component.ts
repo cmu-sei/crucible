@@ -10,7 +10,10 @@ DM20-0181
 
 import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PageEvent, Sort, MatDialog, MatMenuTrigger } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { ScenarioTemplateDataService } from 'src/app/data/scenario-template/scenario-template-data.service';
 import { ScenarioTemplate, Scenario } from 'src/app/swagger-codegen/dispatcher.api';
@@ -47,7 +50,7 @@ export class ScenarioTemplateListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'durationHours'];
   editScenarioTemplateText = 'Edit ScenarioTemplate';
   // context menu
-  @ViewChild(MatMenuTrigger, null) contextMenu: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, { static: true }) contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
 
   constructor(

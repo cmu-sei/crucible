@@ -8,4 +8,37 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div #xterm [hidden]="loading"></div>
+<div
+  fxLayout="column"
+  #xterm
+  [hidden]="loading"
+  class="container"
+  [style.width.px]="width"
+  [style.height.px]="height"
+>
+  <span
+    fxLayout="column"
+    #dragHandleBottom
+    cdkDragLockAxis="y"
+    class="dragHandle bottom"
+    cdkDrag
+    (cdkDragMoved)="dragMove(dragHandleBottom)"
+  >
+    <mat-icon
+      class="drag-icon mdi-24px"
+      fontIcon="mdi-drag-horizontal-variant"
+      matTooltip="Drag to resize"
+      [matTooltipShowDelay]="1000"
+    ></mat-icon>
+  </span>
+</div>
+<div>
+  <button
+    matTooltip="Fullscreen"
+    [matTooltipShowDelay]="1000"
+    mat-icon-button
+    (click)="fullscreen()"
+  >
+    <mat-icon class="mdi-24px" fontIcon="mdi-fullscreen"></mat-icon>
+  </button>
+</div>

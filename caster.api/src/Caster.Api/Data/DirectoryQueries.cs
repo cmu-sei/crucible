@@ -9,6 +9,7 @@ DM20-0181
 */
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Caster.Api.Data.Extensions;
@@ -21,18 +22,34 @@ namespace Caster.Api.Data
     {
         public async Task<Directory[]> GetDirectoryWithChildren(Guid directoryId, CancellationToken ct)
         {
-            var directory =  await this.Directories.FindAsync(new object[] { directoryId }, ct);
+            var directory = await this.Directories.FindAsync(new object[] { directoryId }, ct);
 
             if (directory == null)
                 return null;
 
-            var directories =  await this.Directories
+            var directories = await this.Directories
                 .GetChildren(directory, includeSelf: true)
                 .Include(d => d.Workspaces)
                 .Include(d => d.Files)
                 .ToArrayAsync();
 
             return directories;
+        }
+
+        public async Task<Directory> GetDirectoryWithAncestors(Guid id, CancellationToken ct)
+        {
+            var directory = await this.Directories.FindAsync(new object[] { id }, ct);
+
+            if (directory == null)
+                return null;
+
+            var ancestorIds = directory.PathIds();
+
+            var directories = await this.Directories
+                .Where(x => ancestorIds.Contains(x.Id))
+                .ToArrayAsync();
+
+            return directory;
         }
     }
 }

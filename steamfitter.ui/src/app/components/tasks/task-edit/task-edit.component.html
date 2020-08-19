@@ -7,63 +7,28 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
-<div mat-dialog-content>
-  <div fxFlex  fxLayout="column" class=" content">
+<h2 mat-dialog-title>Edit Task
+  <button mat-icon-button (click)="handleEditComplete(false)" title="Close" class="close-button" tabindex="-1">
+    <mat-icon svgIcon="ic_cancel_circle"></mat-icon>
+  </button>
+</h2>
+<mat-dialog-content>
+  <div fxFlex fxLayout="column" class=" content">
     <mat-form-field class="param-full-width">
       <input matInput placeholder="Name" [value]="data.task.name" (input)="data.task.name = $event.target.value">
     </mat-form-field>
     <mat-form-field class="param-full-width">
       <input matInput placeholder="Description" [value]="data.task.description" (input)="data.task.description = $event.target.value">
     </mat-form-field>
-    <mat-form-field class="param-full-width">
-      <input matInput placeholder="Expected Output" [value]="data.task.expectedOutput" (input)="data.task.expectedOutput = $event.target.value">
-    </mat-form-field>
-    <mat-form-field class="param-full-width">
-      <mat-label>Trigger Condition</mat-label>
-      <mat-select  [(ngModel)]="data.task.triggerCondition" name="triggerCondition">
-        <mat-option *ngFor="let choice of triggerConditions" [value]="choice">
-          {{choice}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="param-full-width">
-      <input matInput placeholder="Delay (in seconds) Before Executing This Task" [value]="data.task.delaySeconds" (input)="data.task.delaySeconds = $event.target.value">
-    </mat-form-field>
-    <mat-form-field class="param-full-width">
-      <input matInput placeholder="Number of Iterations" [value]="data.task.iterations" (input)="data.task.iterations = $event.target.value">
-    </mat-form-field>
-    <mat-form-field class="param-full-width">
-      <input matInput placeholder="Interval (in seconds) Between Iterations" [value]="data.task.intervalSeconds" (input)="data.task.intervalSeconds = $event.target.value">
-    </mat-form-field>
-    <mat-form-field class="param-full-width">
-      <mat-label>IterationTermination</mat-label>
-      <mat-select [(ngModel)]="data.task.iterationTermination" name="iterationTermination">
-        <mat-option *ngFor="let choice of iterationTerminations" [value]="choice">
-          {{choice}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="param-full-width">
-      <input matInput placeholder="Expiration Timeout (in seconds)" [value]="data.task.expirationSeconds" (input)="data.task.expirationSeconds = $event.target.value">
-    </mat-form-field>
 
-    <mat-checkbox [checked]="chooseVms" (change)="switchChooseVmsMethod($event)" style="margin-right: 20px;" *ngIf="!data.task.scenarioTemplateId">Choose Actual VM's</mat-checkbox>
-    <mat-form-field class="param-full-width" *ngIf="!chooseVms">
-      <input matInput placeholder="VM Mask (VM name includes this text)" [value]="data.task.vmMask" (input)="data.task.vmMask = $event.target.value">
-    </mat-form-field>
-    <app-vm-list *ngIf="chooseVms"
-      [selectedVms]="data.task.vmList || []"
-      (updateVmList)="handleUpdateVmList($event)">
-    </app-vm-list>
-
+    <h2>Action</h2>
     <mat-form-field fxFlex fxFlexFill>
-      <mat-select placeholder="Select a Command" [(value)]="selectedCommand" (selectionChange)="onCommandChange()">
+      <mat-select placeholder="Select an Action" [(value)]="selectedCommand" (selectionChange)="onCommandChange()">
         <mat-option *ngFor="let cmd of availableCommands" [value]="cmd">
           {{cmd.api}} - {{cmd.display}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-
     <div fxFlex fxLayout="column" *ngIf="selectedCommand != undefined" class="content">
       <form class="param-form">
         <div *ngFor="let param of selectedCommand.parameters" class="param-indent">
@@ -92,13 +57,53 @@ DM20-0181
         </div>
       </form>
     </div>
-    <div fxLayout="row" class="bottom-button">
-      <div fxFlex fxLayoutAlign="left" class="delete-button">
-        <button mat-stroked-button (click)="handleEditComplete(true)" [disabled]="!errorFree()" style="margin-left: 40px;">Save</button>
-      </div>
-      <div fxFlex fxLayoutAlign="end" class="delete-button">
-        <button mat-stroked-button (click)="handleEditComplete(false)">Cancel</button>
-      </div>
-    </div>
+    <mat-form-field class="param-full-width">
+      <mat-label>Trigger Condition</mat-label>
+      <mat-select  [(ngModel)]="data.task.triggerCondition" name="triggerCondition">
+        <mat-option *ngFor="let choice of triggerConditions" [value]="choice">
+          {{choice}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Expected Output" [value]="data.task.expectedOutput" (input)="data.task.expectedOutput = $event.target.value">
+    </mat-form-field>
+
+    <h2>Delay / Iteration / Expiration</h2>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Delay (in seconds) Before Executing This Task" [value]="data.task.delaySeconds" (input)="data.task.delaySeconds = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Number of Iterations" [value]="data.task.iterations" (input)="data.task.iterations = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Interval (in seconds) Between Iterations" [value]="data.task.intervalSeconds" (input)="data.task.intervalSeconds = $event.target.value">
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <mat-label>IterationTermination</mat-label>
+      <mat-select [(ngModel)]="data.task.iterationTermination" name="iterationTermination">
+        <mat-option *ngFor="let choice of iterationTerminations" [value]="choice">
+          {{choice}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="param-full-width">
+      <input matInput placeholder="Expiration Timeout (in seconds)" [value]="data.task.expirationSeconds" (input)="data.task.expirationSeconds = $event.target.value">
+    </mat-form-field>
+
+    <h2>VM Selection</h2>
+    <mat-checkbox [checked]="chooseVms" (change)="switchChooseVmsMethod($event)" style="margin-right: 20px;" *ngIf="!data.task.scenarioTemplateId">Choose Actual VM's</mat-checkbox>
+    <mat-form-field class="param-full-width" *ngIf="!chooseVms">
+      <input matInput placeholder="VM Mask (VM name includes this text)" [value]="data.task.vmMask" (input)="data.task.vmMask = $event.target.value">
+    </mat-form-field>
+    <app-vm-list *ngIf="chooseVms"
+      [selectedVms]="data.task.vmList || []"
+      (updateVmList)="handleUpdateVmList($event)">
+    </app-vm-list>
+
   </div>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-stroked-button (click)="handleEditComplete(true)" [disabled]="!errorFree()" style="margin-right: 400px;">Save</button>
+  <button mat-stroked-button (click)="handleEditComplete(false)">Cancel</button>
+</mat-dialog-actions>

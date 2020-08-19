@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace S3.Player.Api.Data.Data.Models
 {
@@ -24,6 +26,14 @@ namespace S3.Player.Api.Data.Data.Models
         public string Name { get; set; }        
 
         public virtual ICollection<RolePermissionEntity> Permissions { get; set; } = new List<RolePermissionEntity>();        
+    }
+
+    public class RoleConfiguration : IEntityTypeConfiguration<RoleEntity>
+    {
+        public void Configure(EntityTypeBuilder<RoleEntity> builder)
+        {
+            builder.HasIndex(e => new { e.Name }).IsUnique();
+        }
     }
 }
 

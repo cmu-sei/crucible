@@ -8,8 +8,24 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+using Caster.Api.Domain.Services;
+using FluentValidation;
+
 namespace Caster.Api.Features.Directories.Interfaces
 {
-    public interface IDirectoryUpdateRequest {}
-}
+    public interface IDirectoryUpdateRequest
+    {
+        string TerraformVersion { get; set; }
+    }
 
+    public class IWorkspaceUpdateValidator : AbstractValidator<IDirectoryUpdateRequest>
+    {
+        public IWorkspaceUpdateValidator(ITerraformService terraformService)
+        {
+            RuleFor(x => x.TerraformVersion)
+                .Must(x => terraformService.IsValidVersion(x))
+                .WithMessage("The specified version is not available. Please contact a system administrator to request it be added to the system.")
+                .When(x => !string.IsNullOrEmpty(x.TerraformVersion));
+        }
+    }
+}

@@ -23,9 +23,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CwdToolbarModule } from '../sei-cwd-common/cwd-toolbar';
 import { FilesModule } from '../files/files.module';
+import { DirectoryEditComponent } from './components/directory-edit-container/directory-edit/directory-edit.component';
+import { DirectoryEditContainerComponent } from './components/directory-edit-container/directory-edit-container.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [],
+  declarations: [DirectoryEditComponent, DirectoryEditContainerComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -39,7 +44,10 @@ import { FilesModule } from '../files/files.module';
     FlexLayoutModule,
     CwdToolbarModule,
     FilesModule,
+    MatSelectModule,
+    MatOptionModule,
+    BrowserAnimationsModule,
   ],
-  exports: [],
+  exports: [DirectoryEditContainerComponent],
 })
 export class DirectoriesModule {}

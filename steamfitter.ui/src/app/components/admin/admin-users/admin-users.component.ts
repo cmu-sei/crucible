@@ -10,7 +10,8 @@ DM20-0181
 
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Sort, PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { User, Permission, UserPermission } from 'src/app/swagger-codegen/dispatcher.api/model/models';

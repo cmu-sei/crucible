@@ -1,4 +1,4 @@
-/*
+﻿/*
 Crucible
 Copyright 2020 Carnegie Mellon University.
 NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
@@ -81,6 +81,10 @@ namespace Caster.Api.Data.Migrations
                     b.Property<Guid>("ProjectId")
                         .HasColumnName("project_id")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("TerraformVersion")
+                        .HasColumnName("terraform_version")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -543,6 +547,10 @@ namespace Caster.Api.Data.Migrations
 
                     b.Property<string>("SyncErrors")
                         .HasColumnName("sync_errors")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TerraformVersion")
+                        .HasColumnName("terraform_version")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

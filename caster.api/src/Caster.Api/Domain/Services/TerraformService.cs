@@ -8,25 +8,31 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using Caster.Api.Domain.Models;
 using Caster.Api.Infrastructure.Options;
 using Microsoft.Extensions.Logging;
+using NaturalSort.Extension;
 
 namespace Caster.Api.Domain.Services
 {
     public interface ITerraformService
     {
-        TerraformResult InitializeWorkspace(string workingDirectory, string workspaceName, bool defaultWorkspace, DataReceivedEventHandler outputHandler);
-        TerraformResult Init(string workingDirectory, DataReceivedEventHandler outputHandler);
-        TerraformResult SelectWorkspace(string workingDirectory, string workspaceName, DataReceivedEventHandler outputHandler);
-        TerraformResult Plan(string workingDirectory, bool destroy, string[] targets, DataReceivedEventHandler outputHandler);
-        TerraformResult Apply(string workingDirectory, DataReceivedEventHandler outputHandler);
-        TerraformResult Show(string workingDirectory);
-        TerraformResult Taint(string workingDirectory, string address, string statePath);
-        TerraformResult Untaint(string workingDirectory, string address, string statePath);
-        TerraformResult Refresh(string workingDirectory, string statePath);
+        TerraformResult InitializeWorkspace(Workspace workspace, DataReceivedEventHandler outputHandler);
+        TerraformResult Init(Workspace workspace, DataReceivedEventHandler outputHandler);
+        TerraformResult SelectWorkspace(Workspace workspace, DataReceivedEventHandler outputHandler);
+        TerraformResult Plan(Workspace workspace, bool destroy, string[] targets, DataReceivedEventHandler outputHandler);
+        TerraformResult Apply(Workspace workspace, DataReceivedEventHandler outputHandler);
+        TerraformResult Show(Workspace workspace);
+        TerraformResult Taint(Workspace workspace, string address, string statePath);
+        TerraformResult Untaint(Workspace workspace, string address, string statePath);
+        TerraformResult Refresh(Workspace workspace, string statePath);
+        bool IsValidVersion(string version);
+        IEnumerable<string> GetVersions();
     }
 
     public class TerraformResult
@@ -45,6 +51,7 @@ namespace Caster.Api.Domain.Services
 
     public class TerraformService : ITerraformService
     {
+        private const string _binaryName = "terraform";
         private readonly TerraformOptions _options;
         private readonly ILogger<TerraformService> _logger;
         private StringBuilder _outputBuilder = new StringBuilder();
@@ -56,14 +63,25 @@ namespace Caster.Api.Domain.Services
             _logger = logger;
         }
 
-        private TerraformResult Run(string workingDirectory, IEnumerable<string> argumentList, DataReceivedEventHandler outputHandler, bool redirectStandardError = true)
+        private string GetBinaryPath(Workspace workspace)
+        {
+            return System.IO.Path.Combine(
+                _options.BinaryPath,
+                string.IsNullOrEmpty(workspace.TerraformVersion) ?
+                    _options.DefaultVersion :
+                    workspace.TerraformVersion,
+                _binaryName
+            );
+        }
+
+        private TerraformResult Run(Workspace workspace, IEnumerable<string> argumentList, DataReceivedEventHandler outputHandler, bool redirectStandardError = true)
         {
             int exitCode;
             _outputBuilder.Clear();
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = _options.BinaryPath;
-            startInfo.WorkingDirectory = workingDirectory;
+            startInfo.FileName = this.GetBinaryPath(workspace);
+            startInfo.WorkingDirectory = workspace.GetPath(_options.RootWorkingDirectory);
             startInfo.CreateNoWindow = true;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = redirectStandardError;
@@ -127,19 +145,19 @@ namespace Caster.Api.Domain.Services
         /// <summary>
         /// Combines Init and Select Workspace
         /// </summary>
-        public TerraformResult InitializeWorkspace(string workingDirectory, string workspaceName, bool defaultWorkspace, DataReceivedEventHandler outputHandler)
+        public TerraformResult InitializeWorkspace(Workspace workspace, DataReceivedEventHandler outputHandler)
         {
             // Set TF_WORKSPACE env var for init to workaround bug with an empty configuration
             // Will need to avoid this for a remote state init
-            _workspaceName = workspaceName;
-            var result = this.Init(workingDirectory, outputHandler);
+            _workspaceName = workspace.Name;
+            var result = this.Init(workspace, outputHandler);
             _workspaceName = null;
 
             if (!result.IsError)
             {
-                if (!defaultWorkspace)
+                if (!workspace.IsDefault)
                 {
-                    var workspaceResult = this.SelectWorkspace(workingDirectory, workspaceName, outputHandler);
+                    var workspaceResult = this.SelectWorkspace(workspace, outputHandler);
                     result.Output += workspaceResult.Output;
                     result.ExitCode = workspaceResult.ExitCode;
                 }
@@ -148,7 +166,7 @@ namespace Caster.Api.Domain.Services
             return result;
         }
 
-        public TerraformResult Init(string workingDirectory, DataReceivedEventHandler outputHandler)
+        public TerraformResult Init(Workspace workspace, DataReceivedEventHandler outputHandler)
         {
             List<string> args = new List<string>();
             args.Add("init");
@@ -159,20 +177,20 @@ namespace Caster.Api.Domain.Services
                 args.Add($"-plugin-dir={_options.PluginDirectory}");
             }
 
-            return this.Run(workingDirectory, args, outputHandler);
+            return this.Run(workspace, args, outputHandler);
         }
 
-        public TerraformResult SelectWorkspace(string workingDirectory, string workspaceName, DataReceivedEventHandler outputHandler)
+        public TerraformResult SelectWorkspace(Workspace workspace, DataReceivedEventHandler outputHandler)
         {
             List<string> args = new List<string>();
             args.Add("workspace");
             args.Add("select");
-            args.Add(workspaceName);
+            args.Add(workspace.Name);
 
-            return this.Run(workingDirectory, args, outputHandler);
+            return this.Run(workspace, args, outputHandler);
         }
 
-        public TerraformResult Plan(string workingDirectory, bool destroy, string[] targets, DataReceivedEventHandler outputHandler)
+        public TerraformResult Plan(Workspace workspace, bool destroy, string[] targets, DataReceivedEventHandler outputHandler)
         {
             List<string> args = new List<string>();
             args.Add("plan");
@@ -189,55 +207,72 @@ namespace Caster.Api.Domain.Services
                 args.Add($"--target={target}");
             }
 
-            return this.Run(workingDirectory, args, outputHandler);
+            return this.Run(workspace, args, outputHandler);
         }
 
-        public TerraformResult Apply(string workingDirectory, DataReceivedEventHandler outputHandler)
+        public TerraformResult Apply(Workspace workspace, DataReceivedEventHandler outputHandler)
         {
             List<string> args = new List<string>();
             args.Add("apply");
             args.Add("plan");
 
-            return this.Run(workingDirectory, args, outputHandler);
+            return this.Run(workspace, args, outputHandler);
         }
 
-        public TerraformResult Show(string workingDirectory)
+        public TerraformResult Show(Workspace workspace)
         {
             List<string> args = new List<string>();
             args.Add("show");
             args.Add("-json");
             args.Add("plan");
 
-            return this.Run(workingDirectory, args, null, redirectStandardError: false);
+            return this.Run(workspace, args, null, redirectStandardError: false);
         }
 
-        public TerraformResult Taint(string workingDirectory, string address, string statePath)
+        public TerraformResult Taint(Workspace workspace, string address, string statePath)
         {
             List<string> args = new List<string>();
             args.Add("taint");
             AddStatePathArg(statePath, ref args);
             args.Add(address);
 
-            return this.Run(workingDirectory, args, null);
+            return this.Run(workspace, args, null);
         }
 
-        public TerraformResult Untaint(string workingDirectory, string address, string statePath)
+        public TerraformResult Untaint(Workspace workspace, string address, string statePath)
         {
             List<string> args = new List<string>();
             args.Add("untaint");
             AddStatePathArg(statePath, ref args);
             args.Add(address);
 
-            return this.Run(workingDirectory, args, null);
+            return this.Run(workspace, args, null);
         }
 
-        public TerraformResult Refresh(string workingDirectory, string statePath)
+        public TerraformResult Refresh(Workspace workspace, string statePath)
         {
             List<string> args = new List<string>();
             args.Add("refresh");
             AddStatePathArg(statePath, ref args);
-            return this.Run(workingDirectory, args, null);
+            return this.Run(workspace, args, null);
         }
+
+        public bool IsValidVersion(string version)
+        {
+            var path = System.IO.Path.Combine(
+                _options.BinaryPath,
+                version);
+
+            return System.IO.Directory.Exists(path);
+        }
+
+        public IEnumerable<string> GetVersions()
+        {
+            return System.IO.Directory.EnumerateDirectories(_options.BinaryPath)
+                .Select(x => System.IO.Path.GetFileName(x))
+                .OrderByDescending(x => x, StringComparison.OrdinalIgnoreCase.WithNaturalSort());
+        }
+
 
         private void AddStatePathArg(string statePath, ref List<string> args)
         {

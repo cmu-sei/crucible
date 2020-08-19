@@ -34,11 +34,13 @@ namespace Caster.Api.Domain.Models
 
         public string Path { get; set; }
 
+        public string TerraformVersion { get; set; }
+
         public virtual ICollection<File> Files { get; set; } = new HashSet<File>();
         public virtual ICollection<Workspace> Workspaces { get; set; } = new HashSet<Workspace>();
         public virtual ICollection<Directory> Children { get; set; } = new HashSet<Directory>(); // Only immediate children
 
-        public Directory() {}
+        public Directory() { }
 
         public Directory(string name, Directory parent = null, Guid? id = null)
         {
@@ -97,7 +99,8 @@ namespace Caster.Api.Domain.Models
 
         public string GetExportName(bool includeId)
         {
-            if (!includeId) {
+            if (!includeId)
+            {
                 return this.Name;
             }
             else

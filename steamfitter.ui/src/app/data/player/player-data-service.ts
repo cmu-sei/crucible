@@ -10,7 +10,8 @@ DM20-0181
 
 import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatTableDataSource, MatPaginator, PageEvent} from '@angular/material';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { View, PlayerService, Vm } from 'src/app/swagger-codegen/dispatcher.api';
 import {map, take, switchMap} from 'rxjs/operators';
 import {Observable, combineLatest, BehaviorSubject} from 'rxjs';
@@ -33,8 +34,6 @@ export class PlayerDataService {
   readonly vms = new BehaviorSubject<Vm[]>(this._vms);
   readonly vmList: Observable<Vm[]>;
   readonly vmFilter = new FormControl();
-  private _vmPageEvent: PageEvent = {length: 0, pageIndex: 0, pageSize: 10};
-  readonly vmPageEvent = new BehaviorSubject<PageEvent>(this._vmPageEvent);
   private _selectedVms: string[] = [];
   readonly selectedVms = new BehaviorSubject<string[]>(this._selectedVms);
   private requestedViewId = this.activatedRoute.queryParamMap.pipe(
@@ -63,36 +62,13 @@ export class PlayerDataService {
             item.id.toLowerCase().includes(filterTerm.toLowerCase()))
         : [])
     );
-    this.vmList = combineLatest([this.vms, this._vmMask, this.vmPageEvent]).pipe(
-      map(([items, filterTerm, page]) => {
-        if (!items || items.length === 0) {
-          if (page.length !== 0) {
-            page.length = 0;
-            page.pageIndex = 0;
-            this._vmPageEvent = page;
-            this.vmPageEvent.next(page);
-          }
-          return [];
-        }
-
+    this.vmList = combineLatest([this.vms, this._vmMask]).pipe(
+      map(([items, filterTerm]) => {
         let vmList = items ? items as Vm[] : [];
         vmList = vmList
           .sort((a: Vm, b: Vm) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
           .filter(item => item.name.toLowerCase().includes(filterTerm.toLowerCase()) ||
                   item.id.toLowerCase().includes(filterTerm.toLowerCase()));
-        const pgsz = page.pageSize;
-        const startIndex = page.pageIndex * pgsz;
-        const totalLength = vmList.length;
-        vmList = vmList.splice(startIndex, pgsz);
-        // if the vmList length has changed, then a new pageEvent is needed
-        if (this._vmPageEvent.length !== totalLength) {
-          this._vmPageEvent = {
-            length: totalLength,
-            pageIndex: 0,
-            pageSize: this._vmPageEvent.pageSize
-          };
-          this.vmPageEvent.next(this._vmPageEvent);
-        }
         return vmList;
       })
     );
@@ -124,11 +100,6 @@ export class PlayerDataService {
 
   selectView(viewId: string) {
     this.router.navigate([], { queryParams: { viewId: viewId }, queryParamsHandling: 'merge'});
-  }
-
-  setVmPageEvent(pageEvent: PageEvent) {
-    this._vmPageEvent = pageEvent;
-    this.vmPageEvent.next(pageEvent);
   }
 
   getAllVmsFromApi() {

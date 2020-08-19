@@ -12,7 +12,7 @@ import { Order, Query, QueryConfig, QueryEntity } from '@datorama/akita';
 import { ScenarioTemplateState, ScenarioTemplateStore } from './scenario-template.store';
 import { ScenarioTemplate } from 'src/app/swagger-codegen/dispatcher.api';
 import { Injectable } from '@angular/core';
-import {PageEvent} from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 
 @QueryConfig({

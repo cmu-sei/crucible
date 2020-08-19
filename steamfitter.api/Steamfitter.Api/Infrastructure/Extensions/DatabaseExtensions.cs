@@ -44,7 +44,7 @@ namespace Steamfitter.Api.Infrastructure.Extensions
                         if (!ctx.Database.IsSqlite())
                         {
                             ctx.Database.Migrate();
-                        }                        
+                        }
 
                         if (databaseOptions.DevModeRecreate)
                         {
@@ -65,6 +65,9 @@ namespace Steamfitter.Api.Infrastructure.Extensions
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred while initializing the database.");
+
+                    // exit on database connection error on startup so app can be restarted to try again
+                    throw;
                 }
             }
 
@@ -84,7 +87,7 @@ namespace Steamfitter.Api.Infrastructure.Extensions
                         context.Permissions.Add(permission);
                     }
                 }
-                
+
                 context.SaveChanges();
             }
             if (options.Users.Any())
@@ -98,7 +101,7 @@ namespace Steamfitter.Api.Infrastructure.Extensions
                         context.Users.Add(user);
                     }
                 }
-                
+
                 context.SaveChanges();
             }
             if (options.UserPermissions.Any())
@@ -112,12 +115,12 @@ namespace Steamfitter.Api.Infrastructure.Extensions
                         context.UserPermissions.Add(userPermission);
                     }
                 }
-                
+
                 context.SaveChanges();
             }
         }
 
-        private static string DbProvider (IConfiguration config)
+        private static string DbProvider(IConfiguration config)
         {
             return config.GetValue<string>("Database:Provider", "Sqlite").Trim();
         }
