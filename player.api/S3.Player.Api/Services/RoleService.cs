@@ -92,6 +92,15 @@ namespace S3.Player.Api.Services
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new FullRightsRequirement())).Succeeded)
                 throw new ForbiddenException();
 
+            // Ensure role with this name does not already exist
+            var role = await _context.Roles
+                .ProjectTo<Role>()
+                .SingleOrDefaultAsync(o => o.Name == form.Name);
+            if (role != null)
+            {
+                throw new ConflictException("A role with that name already exists.");
+            }
+
             var roleEntity = Mapper.Map<RoleEntity>(form);
 
             _context.Roles.Add(roleEntity);

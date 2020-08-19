@@ -9,7 +9,7 @@ DM20-0181
 */
 
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { MatTabChangeEvent } from '@angular/material';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ScenarioTemplateListComponent } from '../scenario-templates/scenario-template-list/scenario-template-list.component';
 import { ScenarioListComponent } from '../scenarios/scenario-list/scenario-list.component';
 import { UserDataService } from '../../data/user/user-data.service';

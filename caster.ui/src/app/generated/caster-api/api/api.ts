@@ -28,24 +28,12 @@ export * from './resources.service';
 import { ResourcesService } from './resources.service';
 export * from './runs.service';
 import { RunsService } from './runs.service';
+export * from './terraform.service';
+import { TerraformService } from './terraform.service';
 export * from './userPermissions.service';
 import { UserPermissionsService } from './userPermissions.service';
 export * from './users.service';
 import { UsersService } from './users.service';
 export * from './workspaces.service';
 import { WorkspacesService } from './workspaces.service';
-export const APIS = [
-  AppliesService,
-  DirectoriesService,
-  FilesService,
-  HostsService,
-  ModulesService,
-  PermissionsService,
-  PlansService,
-  ProjectsService,
-  ResourcesService,
-  RunsService,
-  UserPermissionsService,
-  UsersService,
-  WorkspacesService,
-];
+export const APIS = [AppliesService, DirectoriesService, FilesService, HostsService, ModulesService, PermissionsService, PlansService, ProjectsService, ResourcesService, RunsService, TerraformService, UserPermissionsService, UsersService, WorkspacesService];

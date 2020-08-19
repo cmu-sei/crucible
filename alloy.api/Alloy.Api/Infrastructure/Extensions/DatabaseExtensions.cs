@@ -43,7 +43,7 @@ namespace Alloy.Api.Extensions
                         if (!ctx.Database.IsSqlite())
                         {
                             ctx.Database.Migrate();
-                        }                        
+                        }
 
                         if (databaseOptions.DevModeRecreate)
                         {
@@ -69,13 +69,16 @@ namespace Alloy.Api.Extensions
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError("An error occurred while initializing the database.", ex);
+
+                    // exit on database connection error on startup so app can be restarted to try again
+                    throw;
                 }
             }
 
             return webHost;
         }
 
-        private static string DbProvider (IConfiguration config)
+        private static string DbProvider(IConfiguration config)
         {
             return config.GetValue<string>("Database:Provider", "Sqlite").Trim();
         }

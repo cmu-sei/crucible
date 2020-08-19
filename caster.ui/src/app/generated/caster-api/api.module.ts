@@ -8,14 +8,10 @@
  * DM20-0181
  */
 
-import {
-  NgModule,
-  ModuleWithProviders,
-  SkipSelf,
-  Optional,
-} from '@angular/core';
+import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
+
 
 import { AppliesService } from './api/applies.service';
 import { DirectoriesService } from './api/directories.service';
@@ -27,14 +23,15 @@ import { PlansService } from './api/plans.service';
 import { ProjectsService } from './api/projects.service';
 import { ResourcesService } from './api/resources.service';
 import { RunsService } from './api/runs.service';
+import { TerraformService } from './api/terraform.service';
 import { UserPermissionsService } from './api/userPermissions.service';
 import { UsersService } from './api/users.service';
 import { WorkspacesService } from './api/workspaces.service';
 
 @NgModule({
-  imports: [],
+  imports:      [],
   declarations: [],
-  exports: [],
+  exports:      [],
   providers: [
     AppliesService,
     DirectoriesService,
@@ -46,35 +43,27 @@ import { WorkspacesService } from './api/workspaces.service';
     ProjectsService,
     ResourcesService,
     RunsService,
+    TerraformService,
     UserPermissionsService,
     UsersService,
-    WorkspacesService,
-  ],
+    WorkspacesService ]
 })
 export class ApiModule {
-  public static forRoot(
-    configurationFactory: () => Configuration
-  ): ModuleWithProviders<ApiModule> {
-    return {
-      ngModule: ApiModule,
-      providers: [{ provide: Configuration, useFactory: configurationFactory }],
-    };
-  }
+    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
+        return {
+            ngModule: ApiModule,
+            providers: [ { provide: Configuration, useFactory: configurationFactory } ]
+        };
+    }
 
-  constructor(
-    @Optional() @SkipSelf() parentModule: ApiModule,
-    @Optional() http: HttpClient
-  ) {
-    if (parentModule) {
-      throw new Error(
-        'ApiModule is already loaded. Import in your base AppModule only.'
-      );
+    constructor( @Optional() @SkipSelf() parentModule: ApiModule,
+                 @Optional() http: HttpClient) {
+        if (parentModule) {
+            throw new Error('ApiModule is already loaded. Import in your base AppModule only.');
+        }
+        if (!http) {
+            throw new Error('You need to import the HttpClientModule in your AppModule! \n' +
+            'See also https://github.com/angular/angular/issues/20575');
+        }
     }
-    if (!http) {
-      throw new Error(
-        'You need to import the HttpClientModule in your AppModule! \n' +
-          'See also https://github.com/angular/angular/issues/20575'
-      );
-    }
-  }
 }

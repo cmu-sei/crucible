@@ -226,7 +226,7 @@ export class WorkspaceContainerComponent
       return run.status === status ? true : false;
     } else {
       if (this.workspaceRuns && this.workspaceRuns.length > 0) {
-        const result = this.workspaceRuns.filter((r) => run.status === status);
+        const result = this.workspaceRuns.filter(() => run.status === status);
         return result.length > 0 ? true : false;
       } else {
         return true;

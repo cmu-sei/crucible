@@ -93,6 +93,14 @@ export class WorkspaceService {
       });
   }
 
+  partialUpdate(id: string, workspace: Partial<Workspace>) {
+    this.workspacesService
+      .partialEditWorkspace(id, { ...workspace } as Workspace)
+      .subscribe((w) => {
+        this.workspaceStore.update(w.id, w);
+      });
+  }
+
   updated(workspace: Workspace) {
     this.workspaceStore.upsert(workspace.id, workspace);
   }

@@ -10,7 +10,11 @@ DM20-0181
 
 import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort, MatDialog, MatMenuTrigger } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Scenario, View } from 'src/app/swagger-codegen/dispatcher.api';
 import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { ScenarioEditComponent } from 'src/app/components/scenarios/scenario-edit/scenario-edit.component';
@@ -45,8 +49,8 @@ export class ScenarioListComponent implements OnInit {
   @Output() pageChange = new EventEmitter<PageEvent>();
   @Output() filterStatusChange = new EventEmitter<any>();
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(ScenarioEditComponent) scenarioEditComponent: ScenarioEditComponent;
 
   displayedColumns: string[] = ['name', 'view', 'status', 'startDate', 'endDate', 'description'];
@@ -64,7 +68,7 @@ export class ScenarioListComponent implements OnInit {
   pageEvents$: Observable<PageEvent>;
 
  // context menu
- @ViewChild(MatMenuTrigger, null) contextMenu: MatMenuTrigger;
+ @ViewChild(MatMenuTrigger, { static: true }) contextMenu: MatMenuTrigger;
  contextMenuPosition = { x: '0px', y: '0px' };
 
  constructor(

@@ -34,9 +34,22 @@ import { OutputComponent } from './components/output/output.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { CwdTableModule } from '../sei-cwd-common/cwd-table/cwd-table.module';
 import { RunComponent } from './components/run/run.component';
+import { WorkspaceEditContainerComponent } from './components/workspace-edit-container/workspace-edit-container.component';
+import { WorkspaceEditComponent } from './components/workspace-edit-container/workspace-edit/workspace-edit.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { WorkspaceVersionComponent } from './components/workspace-version/workspace-version.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
-  declarations: [WorkspaceContainerComponent, OutputComponent, RunComponent],
+  declarations: [
+    WorkspaceContainerComponent,
+    OutputComponent,
+    RunComponent,
+    WorkspaceEditContainerComponent,
+    WorkspaceEditComponent,
+    WorkspaceVersionComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -62,7 +75,14 @@ import { RunComponent } from './components/run/run.component';
     ClipboardModule,
     CwdTableModule,
     ExtendedModule,
+    MatOptionModule,
+    MatSelectModule,
+    DragDropModule,
   ],
-  exports: [WorkspaceContainerComponent, RunComponent],
+  exports: [
+    WorkspaceContainerComponent,
+    RunComponent,
+    WorkspaceEditContainerComponent,
+  ],
 })
 export class WorkspaceModule {}

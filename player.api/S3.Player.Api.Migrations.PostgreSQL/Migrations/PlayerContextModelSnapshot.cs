@@ -27,7 +27,7 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
             modelBuilder
                 .HasAnnotation("Npgsql:PostgresExtension:uuid-ossp", "'uuid-ossp', '', ''")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("S3.Player.Api.Data.Data.Models.ApplicationEntity", b =>
@@ -204,6 +204,9 @@ namespace S3.Player.Api.Migrations.PostgreSQL.Migrations
                         .HasColumnName("name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("roles");
                 });

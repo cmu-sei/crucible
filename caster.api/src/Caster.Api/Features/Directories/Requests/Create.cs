@@ -24,12 +24,13 @@ using Microsoft.AspNetCore.Authorization;
 using Caster.Api.Infrastructure.Authorization;
 using Caster.Api.Infrastructure.Identity;
 using Caster.Api.Features.Directories.Interfaces;
+using FluentValidation;
 
 namespace Caster.Api.Features.Directories
 {
     public class Create
     {
-        [DataContract(Name="CreateDirectoryCommand")]
+        [DataContract(Name = "CreateDirectoryCommand")]
         public class Command : IRequest<Directory>, IDirectoryUpdateRequest
         {
             /// <summary>
@@ -49,6 +50,22 @@ namespace Caster.Api.Features.Directories
             /// </summary>
             [DataMember]
             public Guid? ParentId { get; set; }
+
+            /// <summary>
+            /// The version of Terraform that will be set Workspaces created in this Directory.
+            /// If not set, will traverse parents until a version is found.
+            /// If still not set, the default version will be used.
+            /// </summary>
+            [DataMember]
+            public string TerraformVersion { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator(IValidator<IDirectoryUpdateRequest> baseValidator)
+            {
+                Include(baseValidator);
+            }
         }
 
         public class Handler : IRequestHandler<Command, Directory>

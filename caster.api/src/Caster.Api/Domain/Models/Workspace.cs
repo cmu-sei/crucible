@@ -33,7 +33,7 @@ namespace Caster.Api.Domain.Models
         public Guid DirectoryId { get; set; }
         public virtual Directory Directory { get; set; }
 
-        public string State { get; set;}
+        public string State { get; set; }
 
         public string StateBackup { get; set; }
 
@@ -46,6 +46,8 @@ namespace Caster.Api.Domain.Models
         public Guid? HostId { get; set; }
         public virtual Host Host { get; set; }
 
+        public string TerraformVersion { get; set; }
+
         public virtual ICollection<Run> Runs { get; set; } = new List<Run>();
         public virtual ICollection<File> Files { get; set; } = new List<File>();
 
@@ -53,11 +55,11 @@ namespace Caster.Api.Domain.Models
         {
             get
             {
-                return Name == "Default";
+                return Name.ToLower() == "default";
             }
         }
 
-        public Workspace() {}
+        public Workspace() { }
 
         public Workspace(string name, Directory directory)
         {
@@ -226,8 +228,7 @@ namespace Caster.Api.Domain.Models
         public async Task<bool> RetrieveState(string workingDir)
         {
             bool success = false;
-
-            bool includeBackup = !string.IsNullOrEmpty(this.State);
+            bool includeBackup = false;
 
             string state = null;
             string stateBackup = null;
@@ -241,6 +242,7 @@ namespace Caster.Api.Domain.Models
 
             if (System.IO.File.Exists(stateBackupPath))
             {
+                includeBackup = true;
                 stateBackup = await System.IO.File.ReadAllTextAsync(stateBackupPath);
             }
 

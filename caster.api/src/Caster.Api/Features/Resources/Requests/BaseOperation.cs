@@ -85,8 +85,7 @@ namespace Caster.Api.Features.Resources
             var files = await _db.GetWorkspaceFiles(workspace, workspace.Directory);
             await workspace.PrepareFileSystem(workingDir, files);
 
-            var initResult = _terraformService.InitializeWorkspace(
-                workingDir, workspace.Name, workspace.IsDefault, null);
+            var initResult = _terraformService.InitializeWorkspace(workspace, null);
 
             var statePath = string.Empty;
 
@@ -97,7 +96,7 @@ namespace Caster.Api.Features.Resources
 
             if (!initResult.IsError)
             {
-                switch(operation)
+                switch (operation)
                 {
                     case ResourceOperation.taint:
                     case ResourceOperation.untaint:
@@ -105,13 +104,13 @@ namespace Caster.Api.Features.Resources
                         {
                             TerraformResult taintResult = null;
 
-                            switch(operation)
+                            switch (operation)
                             {
                                 case ResourceOperation.taint:
-                                    taintResult = _terraformService.Taint(workingDir, address, statePath);
+                                    taintResult = _terraformService.Taint(workspace, address, statePath);
                                     break;
                                 case ResourceOperation.untaint:
-                                    taintResult = _terraformService.Untaint(workingDir, address, statePath);
+                                    taintResult = _terraformService.Untaint(workspace, address, statePath);
                                     break;
                             }
 
@@ -121,7 +120,7 @@ namespace Caster.Api.Features.Resources
                         }
                         break;
                     case ResourceOperation.refresh:
-                        TerraformResult refreshResult = _terraformService.Refresh(workingDir, statePath);
+                        TerraformResult refreshResult = _terraformService.Refresh(workspace, statePath);
                         if (refreshResult.IsError) _logger.LogError(refreshResult.Output);
                         break;
                 }
@@ -135,4 +134,3 @@ namespace Caster.Api.Features.Resources
         }
     }
 }
-

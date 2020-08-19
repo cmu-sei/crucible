@@ -88,7 +88,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
                 _outputService.RemoveOutput(_plan.Id);
                 await _mediator.Publish(new RunUpdated(run.Id));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error in {nameof(RunAddedHandler)}.Handle");
                 run.Status = Domain.Models.RunStatus.Failed;
@@ -147,18 +147,17 @@ namespace Caster.Api.Features.Runs.EventHandlers
             bool isError = false;
 
             // Init
-            var initResult = _terraformService.InitializeWorkspace(
-                workingDir, workspace.Name, workspace.IsDefault, OutputHandler);
+            var initResult = _terraformService.InitializeWorkspace(workspace, OutputHandler);
             isError = initResult.IsError;
 
             if (!isError)
             {
                 // Plan
-                var planResult = _terraformService.Plan(workingDir, run.IsDestroy, run.Targets, OutputHandler);
+                var planResult = _terraformService.Plan(workspace, run.IsDestroy, run.Targets, OutputHandler);
                 isError = planResult.IsError;
             }
 
-            lock(_plan)
+            lock (_plan)
             {
                 _timerComplete = true;
                 _timer.Stop();
@@ -166,7 +165,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
 
             if (dynamicHost)
             {
-                var result = _terraformService.Show(workingDir);
+                var result = _terraformService.Show(workspace);
                 isError = result.IsError;
 
                 if (!isError)
@@ -176,7 +175,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
 
                     var hostLock = _lockService.GetHostLock(host.Id);
 
-                    lock(hostLock)
+                    lock (hostLock)
                     {
                         var existingMachines = _db.HostMachines.Where(x => x.HostId == host.Id).ToList();
                         var addedCount = addedMachines.Count();
@@ -253,7 +252,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            lock(_plan)
+            lock (_plan)
             {
                 _timer.Stop();
 
@@ -264,7 +263,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
 
                 try
                 {
-                    using(var dbContext = new CasterContext(_dbOptions))
+                    using (var dbContext = new CasterContext(_dbOptions))
                     {
                         // Only update the Output field
                         dbContext.Plans.Attach(_plan);
@@ -272,7 +271,7 @@ namespace Caster.Api.Features.Runs.EventHandlers
                         dbContext.SaveChanges();
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error in Timer");
                 }

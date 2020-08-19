@@ -74,6 +74,9 @@ namespace S3.Player.Api.Extensions
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred while initializing the database.");
+
+                    // exit on database connection error on startup so app can be restarted to try again
+                    throw;
                 }
             }
 
@@ -153,7 +156,7 @@ namespace S3.Player.Api.Extensions
             return services;
         }
 
-        private static string DbProvider (IConfiguration config)
+        private static string DbProvider(IConfiguration config)
         {
             return config.GetValue<string>("Database:Provider", "Sqlite").Trim();
         }

@@ -10,7 +10,7 @@ DM20-0181
 
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -70,6 +70,10 @@ export class AppComponent {
       ('ic_menu', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/menu_24px.svg'));
     iconRegistry.addSvgIcon
       ('storage_black_18dp', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/storage-black-18dp.svg'));
+    iconRegistry.addSvgIcon
+      ('check_box_outline_blank', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/check_box_outline_blank-24px.svg'));
+    iconRegistry.addSvgIcon
+      ('check_box', sanitizer.bypassSecurityTrustResourceUrl('assets/svg-icons/check_box-24px.svg'));
 
     }
 

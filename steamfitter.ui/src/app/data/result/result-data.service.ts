@@ -12,7 +12,7 @@ import { ResultStore } from 'src/app/data/result/result.store';
 import { ResultQuery } from 'src/app/data/result/result.query';
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Result, ResultService } from 'src/app/swagger-codegen/dispatcher.api';
 import { map, take, tap } from 'rxjs/operators';
@@ -111,10 +111,9 @@ export class ResultDataService {
   }
 
   loadByTask(taskId: string) {
-    this.resetStore();
     this.resultService.getTaskResults(taskId).pipe(take(1)).subscribe(results => {
       results.forEach(r => this.fixDates(r));
-      this.setStore(results);
+      this.updateStoreMany(results);
       }
     );
   }
@@ -138,10 +137,9 @@ export class ResultDataService {
   }
 
   loadByVm(vmId: string) {
-    this.resetStore();
     this.resultService.getVmResults(vmId).pipe(take(1)).subscribe(results => {
       results.forEach(r => this.fixDates(r));
-      this.setStore(results);
+      this.updateStoreMany(results);
       }
     );
   }

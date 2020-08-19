@@ -27,7 +27,8 @@ namespace Caster.Api.Features.Workspaces.Behaviors
             _mediator = mediator;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next) {
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        {
             var response = await next();
             await _mediator.Publish(new WorkspaceUpdated(response.Id));
             return response;

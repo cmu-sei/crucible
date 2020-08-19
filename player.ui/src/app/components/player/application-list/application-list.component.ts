@@ -21,7 +21,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ComnAuthService } from '@crucible/common';
 import { User } from 'oidc-client';
 import { Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { ApplicationData } from '../../../models/application-data';
 import { TeamData } from '../../../models/team-data';
 import { ApplicationsService } from '../../../services/applications/applications.service';
@@ -81,6 +81,11 @@ export class ApplicationListComponent implements OnInit, OnChanges, OnDestroy {
               ))
           );
           return apps;
+        }),
+        tap((apps) => {
+          if (apps.length > 0) {
+            this.openInFocusedApp(apps[0].name, apps[0].url);
+          }
         }),
         takeUntil(this.unsubscribe$)
       );

@@ -43,6 +43,8 @@ import { ProjectObjectType, ProjectService } from 'src/app/project/state';
 import { take } from 'rxjs/operators';
 import { ProjectExportComponent } from '../../project-export/project-export.component';
 import FileDownloadUtils from 'src/app/shared/utilities/file-download-utils';
+import { WorkspaceEditContainerComponent } from 'src/app/workspace/components/workspace-edit-container/workspace-edit-container.component';
+import { DirectoryEditContainerComponent } from 'src/app/directories/components/directory-edit-container/directory-edit-container.component';
 
 const WAS_CANCELLED = 'wasCancelled';
 const NAME_VALUE = 'nameValue';
@@ -66,11 +68,25 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
   public exportObjectType: ProjectObjectType;
   public exportName: string;
 
+  public editingWorkspaceId: string;
+  public editingDirectoryId: string;
+
   private _destroyed$ = new Subject();
 
   @ViewChild(MatMenuTrigger, { static: true }) contextMenu: MatMenuTrigger;
+
   @ViewChild('exportDialog') exportDialog: TemplateRef<ProjectExportComponent>;
   private exportDialogRef: MatDialogRef<ProjectExportComponent>;
+
+  @ViewChild('workspaceEditDialog') workspaceEditDialog: TemplateRef<
+    WorkspaceEditContainerComponent
+  >;
+  private workspaceEditDialogRef: MatDialogRef<WorkspaceEditContainerComponent>;
+
+  @ViewChild('directoryEditDialog') directoryEditDialog: TemplateRef<
+    DirectoryEditContainerComponent
+  >;
+  private directoryEditDialogRef: MatDialogRef<DirectoryEditContainerComponent>;
 
   contextMenuPosition = { x: '0px', y: '0px' };
 
@@ -318,6 +334,38 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
     }
   }
 
+  onContextEdit(obj: any) {
+    const type = obj.type as ProjectObjectType;
+    switch (type) {
+      case ProjectObjectType.WORKSPACE: {
+        this.editWorkspace(obj.object as Workspace);
+        break;
+      }
+      case ProjectObjectType.DIRECTORY: {
+        this.editDirectory(obj.object as Directory);
+        break;
+      }
+    }
+  }
+
+  editWorkspace(workspace: Workspace) {
+    this.editingWorkspaceId = workspace.id;
+    this.workspaceEditDialogRef = this.dialog.open(this.workspaceEditDialog);
+  }
+
+  editDirectory(directory: Directory) {
+    this.editingDirectoryId = directory.id;
+    this.directoryEditDialogRef = this.dialog.open(this.directoryEditDialog);
+  }
+
+  onEditWorkspaceComplete() {
+    this.workspaceEditDialogRef.close();
+  }
+
+  onEditDirectoryComplete() {
+    this.directoryEditDialogRef.close();
+  }
+
   onContextDelete(obj: any) {
     const type = obj.type as ProjectObjectType;
     switch (type) {
@@ -370,6 +418,42 @@ export class DirectoryPanelComponent implements OnInit, OnDestroy {
       }
       case ProjectObjectType.FILE: {
         return true;
+      }
+    }
+  }
+
+  canRename(obj: any) {
+    const type = obj.type as ProjectObjectType;
+    switch (type) {
+      case ProjectObjectType.DIRECTORY: {
+        return false;
+      }
+      case ProjectObjectType.WORKSPACE: {
+        return false;
+      }
+      case ProjectObjectType.PROJECT: {
+        return true;
+      }
+      case ProjectObjectType.FILE: {
+        return true;
+      }
+    }
+  }
+
+  canEdit(obj: any) {
+    const type = obj.type as ProjectObjectType;
+    switch (type) {
+      case ProjectObjectType.DIRECTORY: {
+        return true;
+      }
+      case ProjectObjectType.WORKSPACE: {
+        return true;
+      }
+      case ProjectObjectType.PROJECT: {
+        return false;
+      }
+      case ProjectObjectType.FILE: {
+        return false;
       }
     }
   }

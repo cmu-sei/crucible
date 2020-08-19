@@ -29,7 +29,7 @@ namespace Caster.Api.Features.Workspaces
 {
     public class Edit
     {
-        [DataContract(Name="EditWorkspaceCommand")]
+        [DataContract(Name = "EditWorkspaceCommand")]
         public class Command : IRequest<Workspace>, IWorkspaceUpdateRequest
         {
             public Guid Id { get; set; }
@@ -51,6 +51,13 @@ namespace Caster.Api.Features.Workspaces
             /// </summary>
             [DataMember]
             public bool DynamicHost { get; set; }
+
+            /// <summary>
+            /// The version of Terraform that will be used for Runs in this Workspace.
+            /// If null or empty, the default version will be used.
+            /// </summary>
+            [DataMember]
+            public string TerraformVersion { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>

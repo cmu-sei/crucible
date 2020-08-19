@@ -9,7 +9,8 @@ DM20-0181
 */
 
 import { Component, EventEmitter, Output, NgZone, ViewChild, OnDestroy } from '@angular/core';
-import { ErrorStateMatcher, MatStepper } from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatStepper } from '@angular/material/stepper';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { PlayerDataService } from 'src/app/data/player/player-data-service';
 import { TaskDataService } from 'src/app/data/task/task-data.service';

@@ -10,7 +10,9 @@ DM20-0181
 
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { MatTreeFlatDataSource, MatTreeFlattener, MatDialog, MatMenuTrigger } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { TaskEditComponent } from 'src/app/components/tasks/task-edit/task-edit.component';
 import { Task, Result } from 'src/app/swagger-codegen/dispatcher.api';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
@@ -92,7 +94,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   // context menu
-  @ViewChild(MatMenuTrigger, null) contextMenu: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, { static: true }) contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
 
 
@@ -221,7 +223,8 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
     this.selectedTaskId = task.id;
     this.taskSelected.emit(task.id);
     const dialogRef = this.dialog.open(TaskEditComponent, {
-      data: { task: {...task}}
+      data: { task: {...task}},
+      minWidth: '90%'
     });
     dialogRef.componentInstance.editComplete.subscribe(result => {
       if (result.saveChanges && result.task) {
@@ -323,7 +326,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   }
 
   private rememberExpandedTreeNodes(
-    treeControl: FlatTreeControl<FlatTaskNode>,
+    treeControl: FlatTreeControl < FlatTaskNode > ,
     expandedNodeSet: Set<string>
   ) {
     if (treeControl.dataNodes) {
@@ -337,7 +340,7 @@ export class TaskTreeComponent implements OnInit, OnDestroy {
   }
 
   private forgetMissingExpandedNodes(
-    treeControl: FlatTreeControl<FlatTaskNode>,
+    treeControl: FlatTreeControl < FlatTaskNode > ,
     expandedNodeSet: Set<string>
   ) {
     if (treeControl.dataNodes) {

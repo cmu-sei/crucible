@@ -29,9 +29,9 @@
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.4.0"/>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0"/>
     <PackageReference Include="Nito.AsyncEx" Version="5.0.0"/>
-    <!--  Don't update to 1.2.0. It has a bug that creates corrupt .tar.gz archives -->
     <PackageReference Include="SharpZipLib" Version="1.1.0"/>
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.0.0-preview3"/>
     <PackageReference Include="Macross.Json.Extensions" Version="1.4.1"/>
+    <PackageReference Include="NaturalSort.Extension" Version="3.0.0"/>
   </ItemGroup>
 </Project>

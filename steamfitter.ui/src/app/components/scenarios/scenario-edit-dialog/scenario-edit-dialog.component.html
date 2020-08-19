@@ -53,16 +53,19 @@ DM20-0181
   <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field>
-        <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" (inputChange)="saveScenario('startDate')" (dateChange)="saveScenario('startDate')"
-          [value]="data.scenario.startDate" [formControl]="startDateFormControl">
+        <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date / Time" (inputChange)="saveScenario('startDate')" (dateChange)="saveScenario('startDate')"
+          [formControl]="startDateFormControl">
         <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatePicker [startAt]="data.scenario.startDate.toLocaleDateString()"></mat-datepicker>
       </mat-form-field>
-      <mat-form-field fxFlexOffset="10">
-        <input matInput [ngxTimepicker]="startTimePicker" placeholder="Start Time" (blur)="saveScenario('startTime')" readonly=true
-          [format]="24" [formControl]="startTimeFormControl" value="{{data.scenario.startDate.toTimeString().substr(0,5)}}">
-        <ngx-material-timepicker-toggle matSuffix [for]="startTimePicker"></ngx-material-timepicker-toggle>
-        <ngx-material-timepicker #startTimePicker [enableKeyboardInput]=true></ngx-material-timepicker>
+      <mat-form-field fxFlexOffset="5" style="margin-top: -15px;">
+        <input matInput hidden>
+        <ngx-timepicker-field
+          [formControl]="startTimeFormControl"
+          [format]="24"
+          [defaultTime]="startTimeFormControl.value"
+          (timeChanged)="saveScenario('startTime')">
+        </ngx-timepicker-field>
       </mat-form-field>
     </div>
   </div>
@@ -70,16 +73,19 @@ DM20-0181
   <div fxLayout="row" class="add-margin">
     <div fxFlex fxFlexOffset="10">
       <mat-form-field>
-        <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" (inputChange)="saveScenario('endDate')" (dateChange)="saveScenario('endDate')"
-          [value]="data.scenario.endDate" [formControl]="endDateFormControl">
+        <input matInput [matDatepicker]="endDatePicker" placeholder="End Date / Time" (inputChange)="saveScenario('endDate')" (dateChange)="saveScenario('endDate')"
+          [formControl]="endDateFormControl">
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatePicker [startAt]="data.scenario.endDate.toLocaleDateString()"></mat-datepicker>
       </mat-form-field>
-      <mat-form-field fxFlexOffset="10">
-        <input matInput [ngxTimepicker]="endTimePicker" placeholder="End Time" (blur)="saveScenario('endTime')" readonly=true
-          [format]="24" [formControl]="endTimeFormControl" value="{{data.scenario.endDate.toTimeString().substr(0,5)}}">
-        <ngx-material-timepicker-toggle matSuffix [for]="endTimePicker"></ngx-material-timepicker-toggle>
-        <ngx-material-timepicker #endTimePicker [enableKeyboardInput]=true></ngx-material-timepicker>
+      <mat-form-field fxFlexOffset="5" style="margin-top: -15px;">
+        <input matInput hidden>
+        <ngx-timepicker-field
+          [formControl]="endTimeFormControl"
+          [format]="24"
+          [defaultTime]="endTimeFormControl.value"
+          (timeChanged)="saveScenario('endTime')">
+        </ngx-timepicker-field>
       </mat-form-field>
     </div>
   </div>

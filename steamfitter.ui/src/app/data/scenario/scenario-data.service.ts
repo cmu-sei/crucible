@@ -12,7 +12,7 @@ import {ScenarioStore} from './scenario.store';
 import {ScenarioQuery} from './scenario.query';
 import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {PageEvent} from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Scenario, ScenarioService} from 'src/app/swagger-codegen/dispatcher.api';
 import {map, take, tap, distinctUntilChanged, debounceTime} from 'rxjs/operators';
@@ -123,8 +123,7 @@ export class ScenarioDataService {
       take(1)
     ).subscribe(scenarios => {
       scenarios.forEach(scenario => {
-        scenario.startDate = new Date(scenario.startDate + 'Z');
-        scenario.endDate = new Date(scenario.endDate + 'Z');
+        this.fixDates(scenario);
       });
       this.scenarioStore.set(scenarios.filter(s => s.description !== 'Personal Task Builder Scenario'));
     }, error => {
@@ -136,9 +135,6 @@ export class ScenarioDataService {
     this.scenarioStore.setLoading(true);
     return this.scenarioService.getScenario(id).pipe(
       tap((scenario: Scenario) => {
-        // convert from UTC time.
-        scenario.startDate = new Date(scenario.startDate);
-        scenario.endDate = new Date(scenario.endDate);
         this.updateStore({...scenario});
       }),
       tap(() => { this.scenarioStore.setLoading(false); })
@@ -152,9 +148,6 @@ export class ScenarioDataService {
       tap(() => { this.scenarioStore.setLoading(false); }),
       take(1)
     ).subscribe(scenario => {
-        // convert from UTC time.
-        scenario.startDate = new Date(scenario.startDate);
-        scenario.endDate = new Date(scenario.endDate);
         this.updateStore({...scenario});
         this.setActive(scenario.id);
         this.taskDataService.loadByScenario(scenario.id);
@@ -167,9 +160,7 @@ export class ScenarioDataService {
         tap(() => { this.scenarioStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {
-        // convert from UTC time.
-        s.startDate = new Date(s.startDate);
-        s.endDate = new Date(s.endDate);
+        this.setAsDates(s);
         this.scenarioStore.add(s);
         this.setActive(s.id);
       }
@@ -182,9 +173,7 @@ export class ScenarioDataService {
         tap(() => { this.scenarioStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {
-        // convert from UTC time.
-        s.startDate = new Date(s.startDate);
-        s.endDate = new Date(s.endDate);
+        this.setAsDates(s);
         this.scenarioStore.add(s);
         this.setActive(s.id);
       }
@@ -197,9 +186,7 @@ export class ScenarioDataService {
         tap(() => { this.scenarioStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {
-        // convert from UTC time.
-        s.startDate = new Date(s.startDate);
-        s.endDate = new Date(s.endDate);
+        this.setAsDates(s);
         this.scenarioStore.add(s);
         this.setActive(s.id);
       }
@@ -212,9 +199,6 @@ export class ScenarioDataService {
         tap(() => { this.scenarioStore.setLoading(false); }),
         take(1)
       ).subscribe(s => {
-        // convert from UTC time.
-        s.startDate = new Date(s.startDate);
-        s.endDate = new Date(s.endDate);
         this.updateStore(s);
       }
     );
@@ -229,18 +213,12 @@ export class ScenarioDataService {
 
   start(id: string) {
     this.scenarioService.startScenario(id).pipe(take(1)).subscribe(s => {
-      // convert from UTC time.
-      s.startDate = new Date(s.startDate);
-      s.endDate = new Date(s.endDate);
       this.updateStore(s);
     });
   }
 
   end(id: string) {
     this.scenarioService.endScenario(id).pipe(take(1)).subscribe(s => {
-      // convert from UTC time.
-      s.startDate = new Date(s.startDate);
-      s.endDate = new Date(s.endDate);
       this.updateStore(s);
     });
   }
@@ -254,11 +232,28 @@ export class ScenarioDataService {
   }
 
   updateStore(scenario: Scenario) {
+    this.setAsDates(scenario);
     this.scenarioStore.upsert(scenario.id, scenario);
   }
 
   deleteFromStore(id: string) {
     this.scenarioStore.remove(id);
+  }
+
+  fixDates(scenario: Scenario) {
+    // set as date object and handle c# not adding 'Z' to UTC dates.
+    scenario.dateCreated = new Date(scenario.dateCreated + 'Z');
+    scenario.dateModified = new Date(scenario.dateModified + 'Z');
+    scenario.startDate = new Date(scenario.startDate + 'Z');
+    scenario.endDate = new Date(scenario.endDate + 'Z');
+  }
+
+  setAsDates(scenario: Scenario) {
+    // set to a date object.
+    scenario.dateCreated = new Date(scenario.dateCreated);
+    scenario.dateModified = new Date(scenario.dateModified);
+    scenario.startDate = new Date(scenario.startDate);
+    scenario.endDate = new Date(scenario.endDate);
   }
 
 }

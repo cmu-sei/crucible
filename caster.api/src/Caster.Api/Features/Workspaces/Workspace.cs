@@ -33,6 +33,11 @@ namespace Caster.Api.Features.Workspaces
         /// True if this Workspace will be dynamically assigned a Host on first Run
         /// </summary>
         public bool DynamicHost { get; set; }
+
+        /// <summary>
+        /// The version of Terraform that will be used for Runs in this Workspace.
+        /// If null or empty, the default version will be used.
+        /// </summary>
+        public string TerraformVersion { get; set; }
     }
 }
-

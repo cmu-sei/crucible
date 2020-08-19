@@ -78,6 +78,14 @@ export class DirectoryService {
       });
   }
 
+  partialUpdate(id: string, directory: Partial<Directory>) {
+    this.directoriesService
+      .partialEditDirectory(id, directory)
+      .subscribe((dir) => {
+        this.directoryStore.update(dir.id, dir);
+      });
+  }
+
   delete(dirId: string) {
     this.directoriesService.deleteDirectory(dirId).subscribe(() => {
       this.deleted(dirId);

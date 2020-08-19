@@ -10,7 +10,8 @@ DM20-0181
 
 import { Component, EventEmitter, Output, Inject } from '@angular/core';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
-import { MAT_DIALOG_DATA, MatDialogRef, ErrorStateMatcher } from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -39,10 +40,10 @@ export class ScenarioEditDialogComponent {
     Validators.required,
     Validators.minLength(4)
   ]);
-  public startDateFormControl = new FormControl('', []);
-  public startTimeFormControl = new FormControl('', []);
-  public endDateFormControl = new FormControl('', []);
-  public endTimeFormControl = new FormControl('', []);
+  public startDateFormControl = new FormControl(this.data.scenario.startDate ? this.data.scenario.startDate : '', []);
+  public startTimeFormControl = new FormControl(this.data.scenario.startDate ? this.data.scenario.startDate.toTimeString().substr(0, 5) : '', []);
+  public endDateFormControl = new FormControl(this.data.scenario.endDate ? this.data.scenario.endDate : '', []);
+  public endTimeFormControl = new FormControl(this.data.scenario.endDate ? this.data.scenario.endDate.toTimeString().substr(0, 5) : '', []);
   public matcher = new UserErrorStateMatcher();
 
   constructor(
@@ -104,7 +105,8 @@ export class ScenarioEditDialogComponent {
         newStart.setMinutes(oldStart.getMinutes());
         this.data.scenario.startDate = newStart;
         const newEndDate = this.data.scenario.endDate.getTime() + (newStart.getTime() - oldStart.getTime());
-        this.data.scenario.endDate.setTime(newEndDate);
+        this.data.scenario.endDate = new Date(newEndDate);
+        this.endDateFormControl.setValue(this.data.scenario.endDate);
         break;
       case 'startTime':
         if ( this.startTimeFormControl.value.length === 5
@@ -116,6 +118,7 @@ export class ScenarioEditDialogComponent {
           this.data.scenario.startDate.setMinutes(timeParts[1]);
           const endDate = this.data.scenario.endDate.getTime() + (this.data.scenario.startDate.getTime() - oldDate.getTime());
           this.data.scenario.endDate.setTime(endDate);
+          this.endTimeFormControl.setValue(this.data.scenario.endDate.toTimeString().substr(0, 5));
         }
         break;
       case 'endDate':
