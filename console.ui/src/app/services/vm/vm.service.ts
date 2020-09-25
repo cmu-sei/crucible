@@ -8,20 +8,23 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ComnSettingsService } from '@crucible/common';
 import {
-  throwError as observableThrowError,
-  Observable,
   BehaviorSubject,
   interval,
+  Observable,
+  throwError as observableThrowError,
 } from 'rxjs';
-import { catchError, take, startWith, takeWhile, tap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
-import { SettingsService } from '../settings/settings.service';
-import { VmModel, VmResolution } from '../../models/vm/vm-model';
-import { HttpClient } from '@angular/common/http';
-import { Title } from '@angular/platform-browser';
-import { VirtualMachineToolsStatus } from '../../models/vm/vm-model';
+import { catchError, startWith, take, takeWhile } from 'rxjs/operators';
 import { IsoResult } from '../../models/vm/iso-result';
+import {
+  VirtualMachineToolsStatus,
+  VmModel,
+  VmResolution,
+} from '../../models/vm/vm-model';
 
 declare var WMKS: any; // needed to check values
 
@@ -50,10 +53,10 @@ export class VmService {
 
   constructor(
     private http: HttpClient,
-    private settings: SettingsService,
+    private settings: ComnSettingsService,
     private titleService: Title
   ) {
-    this.ConsoleApiUrl = settings.ConsoleApiUrl + 'vms/vsphere/';
+    this.ConsoleApiUrl = settings.settings.ConsoleApiUrl + 'vms/vsphere/';
     this.model = new VmModel();
   }
 

@@ -8,35 +8,40 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes, } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ComnAuthGuardService } from '@crucible/common';
 import { AdminAppComponent } from './components/admin-app/admin-app.component';
 import { HomeAppComponent } from './components/home-app/home-app.component';
-import { AuthGuard } from './services/auth/auth-guard.service';
-import { AuthCallbackComponent } from './components/auth/auth-callback.component';
-import { AuthCallbackSilentComponent } from './components/auth/auth-callback-silent.component';
-import { AuthLogoutComponent } from './components/auth/auth-logout.component';
 
 export const ROUTES: Routes = [
-  { path: '', redirectTo: '/eventlist', pathMatch: 'full'},
-  { path: 'eventlist', component: HomeAppComponent, canActivate: [AuthGuard] },
-  { path: 'eventlist/:id', component: HomeAppComponent, canActivate: [AuthGuard] },
-  { path: 'exercise/:viewId', component: HomeAppComponent, canActivate: [AuthGuard] }, // DEPRECATED, remove when no longer in use
-  { path: 'view/:viewId', component: HomeAppComponent, canActivate: [AuthGuard] },
-  { path: 'auth-callback', component: AuthCallbackComponent },
-  { path: 'auth-callback-silent', component: AuthCallbackSilentComponent },
-  { path: 'logout', component: AuthLogoutComponent },
+  { path: '', redirectTo: '/eventlist', pathMatch: 'full' },
+  {
+    path: 'eventlist',
+    component: HomeAppComponent,
+    canActivate: [ComnAuthGuardService],
+  },
+  {
+    path: 'eventlist/:id',
+    component: HomeAppComponent,
+    canActivate: [ComnAuthGuardService],
+  },
+  {
+    path: 'exercise/:viewId',
+    component: HomeAppComponent,
+    canActivate: [ComnAuthGuardService],
+  }, // DEPRECATED, remove when no longer in use
+  {
+    path: 'view/:viewId',
+    component: HomeAppComponent,
+    canActivate: [ComnAuthGuardService],
+  },
   { path: 'admin', component: AdminAppComponent },
 ];
 
 @NgModule({
-  exports: [
-    RouterModule
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(ROUTES)
-  ]
+  exports: [RouterModule],
+  imports: [CommonModule, RouterModule.forRoot(ROUTES)],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

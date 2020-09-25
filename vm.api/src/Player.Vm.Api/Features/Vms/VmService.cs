@@ -16,11 +16,13 @@ using Player.Vm.Api.Domain.Services;
 using Player.Vm.Api.Features.Vms;
 using Player.Vm.Api.Infrastructure.Exceptions;
 using Player.Vm.Api.Infrastructure.Extensions;
+using Player.Vm.Api.Infrastructure.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,7 +48,11 @@ namespace Player.Vm.Api.Features.Vms
         private readonly ClaimsPrincipal _user;
         private readonly IMapper _mapper;
 
-        public VmService(VmContext context, IPlayerService playerService, IPrincipal user, IMapper mapper)
+        public VmService(
+            VmContext context,
+            IPlayerService playerService,
+            IPrincipal user,
+            IMapper mapper)
         {
             _context = context;
             _playerService = playerService;
@@ -60,10 +66,10 @@ namespace Player.Vm.Api.Features.Vms
                 throw new ForbiddenException();
 
             var vms = await _context.Vms
-                .ProjectTo<Vm>(_mapper.ConfigurationProvider)
+                .Include(x => x.VmTeams)
                 .ToArrayAsync(ct);
 
-            return vms;
+            return _mapper.Map<Vm[]>(vms);
         }
 
         public async Task<Vm> GetAsync(Guid id, CancellationToken ct)
@@ -329,6 +335,8 @@ namespace Player.Vm.Api.Features.Vms
             return true;
         }
 
+        #region Private
+
         // order the vms by name honoring trailing number as a number (i.e. abc1, abc2, abc10, abc11)
         private List<Domain.Models.Vm> sortVmsByNumber(List<Domain.Models.Vm> list)
         {
@@ -340,5 +348,7 @@ namespace Player.Vm.Api.Features.Vms
                             int.Parse(v.Name.Substring(v.Name.TrimEnd(numchars).Length)) : 0)
                 .ToList();
         }
+
+        #endregion
     }
 }

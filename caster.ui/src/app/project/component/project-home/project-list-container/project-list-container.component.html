@@ -8,7 +8,13 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<cas-topbar title="Caster" [sidenav]="null"></cas-topbar>
+<cas-topbar
+  title="Caster"
+  [topbarView]="TopbarView.CASTER_HOME"
+  [topbarColor]="topbarColor"
+  [topbarTextColor]="topbarTextColor"
+  [sidenav]="null"
+></cas-topbar>
 
 <cas-project-list
   class="background"

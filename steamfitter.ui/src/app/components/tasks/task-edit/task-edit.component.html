@@ -32,11 +32,8 @@ DM20-0181
     <div fxFlex fxLayout="column" *ngIf="selectedCommand != undefined" class="content">
       <form class="param-form">
         <div *ngFor="let param of selectedCommand.parameters" class="param-indent">
-          <mat-form-field class="param-full-width" *ngIf="param.inputType === 'text'">
+          <mat-form-field class="param-full-width" *ngIf="param.inputType === 'text' && param.key.toLowerCase() !== 'username'">
             <input matInput placeholder="{{param.display}}" [value]="param.value" (input)="param.value = $event.target.value" (change)="onCommandChange()">
-          </mat-form-field>
-          <mat-form-field class="param-full-width" *ngIf="param.inputType === 'password'">
-            <input matInput [type]="'password'" placeholder="{{param.display}}" [value]="param.value" (input)="param.value = $event.target.value" (change)="onCommandChange()">
           </mat-form-field>
           <mat-form-field class="param-full-width" *ngIf="param.inputType === 'select'">
             <mat-label>{{param.display}}</mat-label>
@@ -91,11 +88,22 @@ DM20-0181
       <input matInput placeholder="Expiration Timeout (in seconds)" [value]="data.task.expirationSeconds" (input)="data.task.expirationSeconds = $event.target.value">
     </mat-form-field>
 
+    <span *ngIf="credentialsAreRequired()">
+      <h2>VM Credentials</h2>
+      <app-vm-credentials
+        [scenarioTemplateId]="data.task.scenarioTemplateId"
+        [scenarioId]="data.task.scenarioId"
+        [username]="username | async"
+        [password]="password | async"
+        (selectedVmCredentialChanged)="handleVmCredentialChange($event)"
+      ></app-vm-credentials>
+    </span>
+
     <h2>VM Selection</h2>
-    <mat-checkbox [checked]="chooseVms" (change)="switchChooseVmsMethod($event)" style="margin-right: 20px;" *ngIf="!data.task.scenarioTemplateId">Choose Actual VM's</mat-checkbox>
     <mat-form-field class="param-full-width" *ngIf="!chooseVms">
       <input matInput placeholder="VM Mask (VM name includes this text)" [value]="data.task.vmMask" (input)="data.task.vmMask = $event.target.value">
     </mat-form-field>
+    <mat-checkbox [checked]="chooseVms" (change)="switchChooseVmsMethod($event)" style="margin-right: 20px;" *ngIf="!data.task.scenarioTemplateId">Choose Actual VMs</mat-checkbox>
     <app-vm-list *ngIf="chooseVms"
       [selectedVms]="data.task.vmList || []"
       (updateVmList)="handleUpdateVmList($event)">

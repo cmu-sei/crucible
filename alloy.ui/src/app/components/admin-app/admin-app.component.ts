@@ -7,66 +7,60 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
-import { SettingsService } from '../../services/settings/settings.service';
 import { Title } from '@angular/platform-browser';
-import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
 import { Router } from '@angular/router';
-import {Subject} from 'rxjs/Subject';
+import { ComnAuthService, ComnSettingsService, Theme, ComnAuthQuery } from '@crucible/common';
+import { Subject } from 'rxjs/Subject';
+import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
+import { TopbarView } from './../shared/top-bar/topbar.models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-app',
   templateUrl: './admin-app.component.html',
-  styleUrls: ['./admin-app.component.css']
+  styleUrls: ['./admin-app.component.scss'],
 })
 export class AdminAppComponent implements OnInit {
+  username: string;
+  titleText: string;
+  isSuperUser: Boolean;
+  topBarColor = '#719F94';
+  topBarTextColor = '#FFFFFF';
+  eventTemplateId = '';
+  isSidebarOpen = true;
+  eventTemplatesText = 'Event Templates';
+  eventsText = 'Events';
+  showStatus = 'Event Templates';
+  shouldUpdateEventTemplates: Subject<boolean> = new Subject();
+  shouldUpdateEvents: Subject<boolean> = new Subject();
+  TopbarView = TopbarView;
+  theme$: Observable<Theme>;
 
-  public username: string;
-  public titleText: string;
-  public isSuperUser: Boolean;
-  public topBarColor = '#0c918d';
-  public eventTemplateId = '';
-  public isSidebarOpen = true;
-  public eventTemplatesText = 'Event Templates';
-  public eventsText = 'Events';
-  public showStatus = 'Event Templates';
-  public shouldUpdateEventTemplates: Subject<boolean> = new Subject();
-  public shouldUpdateEvents: Subject<boolean> = new Subject();
 
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private settingsService: SettingsService,
+    private authService: ComnAuthService,
+    private settingsService: ComnSettingsService,
     private titleService: Title,
-    private usersService: LoggedInUserService
-  ) {  }
+    private usersService: LoggedInUserService,
+    private authQuery: ComnAuthQuery
+  ) {
+    this.theme$ = this.authQuery.userTheme$;
+  }
 
   ngOnInit() {
     // Set the topbar color from config file
-    this.topBarColor = this.settingsService.AppTopBarHexColor;
-
+    this.topBarColor = this.settingsService.settings.AppTopBarHexColor;
+    this.topBarTextColor = this.settingsService.settings.AppTopBarHexTextColor;
     // Set the page title from configuration file
-    this.titleText = this.settingsService.AppTopBarText;
-    this.titleService.setTitle(this.settingsService.AppTitle);
+    this.titleText = this.settingsService.settings.AppTopBarText;
+    this.titleService.setTitle(this.settingsService.settings.AppTitle);
     this.username = '';
     this.isSuperUser = false;
-
-    this.usersService.loggedInUser.subscribe(loggedInUser => {
-
-      if (loggedInUser == null) {
-        return;
-      }
-      // Get username information
-      this.username = loggedInUser.name;
-
-    });
-
-    this.usersService.isSuperUser.subscribe(isSuperUser => {
+    this.usersService.isSuperUser.subscribe((isSuperUser) => {
       this.isSuperUser = isSuperUser;
     });
-
   }
 
   logout(): void {
@@ -74,7 +68,7 @@ export class AdminAppComponent implements OnInit {
   }
 
   isIframe(): boolean {
-    if ( window.location !== window.parent.location ) {
+    if (window.location !== window.parent.location) {
       // The page is in an iframe
       return true;
     } else {
@@ -96,5 +90,4 @@ export class AdminAppComponent implements OnInit {
   adminGotoEvents(): void {
     this.showStatus = this.eventsText;
   }
-
 }

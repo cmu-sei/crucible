@@ -154,16 +154,16 @@ namespace Steamfitter.Api
             services.AddScoped<IUserPermissionService, UserPermissionService>();
             services.AddScoped<IFilesService, FilesService>();
             services.AddScoped<IBondAgentService, BondAgentService>();
-
+            services.AddScoped<IVmCredentialService, VmCredentialService>();
             services.AddSingleton<StackStormService>();
             services.AddSingleton<IHostedService>(x => x.GetService<StackStormService>());
             services.AddSingleton<IStackStormService>(x => x.GetService<StackStormService>());
-
             services.AddSingleton<BondAgentStore>();
-
+            services.AddSingleton<ITaskExecutionQueue, TaskExecutionQueue>();
+            services.AddHostedService<TaskExecutionService>();
+            services.AddHostedService<TaskMaintenanceService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IPrincipal>(p => p.GetService<IHttpContextAccessor>().HttpContext.User);
-
             services.AddHttpClient();
 
             ApplyPolicies(services);
@@ -175,6 +175,10 @@ namespace Steamfitter.Api
             }, typeof(Startup));
             
             services.Configure<VmTaskProcessingOptions>(Configuration.GetSection("VmTaskProcessing"));
+            services
+                .Configure<ResourceOwnerAuthorizationOptions>(Configuration.GetSection("ResourceOwnerAuthorization"))
+                .AddScoped(config => config.GetService<IOptionsMonitor<ResourceOwnerAuthorizationOptions>>().CurrentValue);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

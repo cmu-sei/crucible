@@ -62,5 +62,11 @@ namespace Player.Vm.Api.Features.Vms
         /// True if this Vm currently has pending tasks (power on, power off, etc)
         /// </summary>
         public bool HasPendingTasks { get; set; }
+
+        /// <summary>
+        /// The connection info for connecting to a Vm console through Guacamole.
+        /// This is used for non-VMware Vms such as in Azure or AWS.
+        /// </summary>
+        public ConsoleConnectionInfo ConsoleConnectionInfo { get; set; }
     }
 }

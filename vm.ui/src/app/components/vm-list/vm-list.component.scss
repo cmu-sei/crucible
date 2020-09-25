@@ -1,0 +1,93 @@
+/*
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+*/
+
+.vm-list-container {
+  margin-top: 20px;
+  display: inline-block;
+  flex-direction: row;
+  height: 90%;
+  min-width: 300px;
+  width: 100%;
+  text-align: left;
+  padding: 30, 30, 30, 30;
+}
+
+.vmicon {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.page {
+  text-align: left;
+}
+
+.flex-container {
+  display: inline-flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  text-align: left;
+  width: 250px;
+  margin-right: 40px;
+}
+
+.open-tab-icon {
+  margin-left: 0px;
+  padding-right: 4em;
+}
+
+.content {
+  text-align: left;
+  font-size: 70%;
+  padding-bottom: 0.5em;
+  padding-top: 0.2em;
+  padding-left: 0.1em;
+  word-wrap: break-word;
+  max-width: 182px;
+  font-family: 'open_sansregular';
+}
+
+.tab-icon {
+  width: 16px;
+}
+
+.vm-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sp-icon {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.search-checkbox {
+  margin-left: 20px;
+}
+
+.action-button {
+  margin-left: 10px;
+  width: 90px;
+}
+
+.pending {
+  opacity: 0.5;
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.expand-padding {
+  padding-right: 10px;
+}
+
+.upload-padding {
+  margin-left: 10px;
+}

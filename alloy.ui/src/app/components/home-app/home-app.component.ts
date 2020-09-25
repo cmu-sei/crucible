@@ -9,48 +9,48 @@ DM20-0181
 */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
-import { SettingsService } from '../../services/settings/settings.service';
 import { Title } from '@angular/platform-browser';
-import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
 import { ActivatedRoute } from '@angular/router';
-import { EventService } from 'src/app/generated/alloy.api';
+import { ComnAuthService, ComnSettingsService } from '@crucible/common';
 import { take } from 'rxjs/operators';
+import { EventService } from 'src/app/generated/alloy.api';
+import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
+import { TopbarView } from '../shared/top-bar/topbar.models';
 
 @Component({
   selector: 'app-home-app',
   templateUrl: './home-app.component.html',
-  providers: [AuthService],
-  styleUrls: ['./home-app.component.css']
+  styleUrls: ['./home-app.component.scss'],
 })
 export class HomeAppComponent implements OnInit {
-
-  public username: string;
-  public titleText: string;
-  public isSuperUser: Boolean;
-  public topBarColor = '#0c918d';
-  public eventTemplateId = '';
+  username: string;
+  titleText: string;
+  isSuperUser: Boolean;
+  topBarColor = '#719F94';
+  topBarTextColor = '#FFFFFF';
+  eventTemplateId = '';
+  TopbarView = TopbarView;
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService,
-    private settingsService: SettingsService,
+    private settingsService: ComnSettingsService,
     private titleService: Title,
-    private loggedInUserService: LoggedInUserService,
     private eventService: EventService
-  ) {  }
+  ) {}
 
   ngOnInit() {
     // Set the topbar color from config file
-    this.topBarColor = this.settingsService.AppTopBarHexColor;
+    this.topBarColor = this.settingsService.settings.AppTopBarHexColor ? this.settingsService.settings.AppTopBarHexColor : this.topBarColor;
+    this.topBarTextColor = this.settingsService.settings.AppTopBarHexTextColor ? this.settingsService.settings.AppTopBarHexTextColor : this.topBarTextColor;
 
     // Set the page title from configuration file
-    this.titleText = this.settingsService.AppTopBarText;
-    this.titleService.setTitle(this.settingsService.AppTitle);
+    this.titleText = this.settingsService.settings.AppTopBarText;
+
+    this.titleService.setTitle(this.settingsService.settings.AppTitle);
     this.username = '';
 
     // Get the event GUID from the URL that the user is entering the web page on
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.eventTemplateId = params['id'];
 
       if (!this.eventTemplateId) {
@@ -58,38 +58,22 @@ export class HomeAppComponent implements OnInit {
         const viewId = params['viewId'];
         if (viewId) {
           console.log('ViewId:  ', viewId);
-          this.eventService.getMyViewEvents(viewId).pipe(take(1)).subscribe(imp => {
-            const index = imp.findIndex(i => i.viewId === viewId);
-            if (index > -1) {
-              this.eventTemplateId = imp[0].eventTemplateId;
-            }
-          });
+          this.eventService
+            .getMyViewEvents(viewId)
+            .pipe(take(1))
+            .subscribe((imp) => {
+              const index = imp.findIndex((i) => i.viewId === viewId);
+              if (index > -1) {
+                this.eventTemplateId = imp[0].eventTemplateId;
+              }
+            });
         }
       }
     });
-
-    this.loggedInUserService.loggedInUser.subscribe(loggedInUser => {
-
-      if (loggedInUser == null) {
-        return;
-      }
-      // Get username information
-      this.username = loggedInUser.name;
-
-    });
-
-    this.loggedInUserService.isSuperUser.subscribe(isSuperUser => {
-      this.isSuperUser = isSuperUser;
-    });
-
-  }
-
-  logout(): void {
-    this.authService.logout();
   }
 
   isIframe(): boolean {
-    if ( window.location !== window.parent.location ) {
+    if (window.location !== window.parent.location) {
       // The page is in an iframe
       return true;
     } else {
@@ -97,5 +81,4 @@ export class HomeAppComponent implements OnInit {
       return false;
     }
   }
-
 }

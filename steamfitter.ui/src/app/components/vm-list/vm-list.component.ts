@@ -8,19 +8,24 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, Input, Output, OnDestroy, EventEmitter } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PlayerDataService } from 'src/app/data/player/player-data-service';
-import { Vm, View } from 'src/app/swagger-codegen/dispatcher.api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { PlayerDataService } from 'src/app/data/player/player-data-service';
+import { Vm } from 'src/app/swagger-codegen/dispatcher.api';
 
 @Component({
   selector: 'app-vm-list',
   templateUrl: './vm-list.component.html',
-  styleUrls: ['./vm-list.component.css']
+  styleUrls: ['./vm-list.component.scss'],
 })
-
 export class VmListComponent implements OnDestroy {
   @Input() selectedVms: string[];
   @Output() updateVmList = new EventEmitter<string[]>();
@@ -33,12 +38,12 @@ export class VmListComponent implements OnDestroy {
   filterControl: FormControl = this.playerDataService.vmFilter;
   showSelectedOnly = false;
 
-  constructor(
-    private playerDataService: PlayerDataService
-  ) {
-    this.playerDataService.vmList.pipe(takeUntil(this.unsubscribe$)).subscribe(vms => {
-      this.vmList = vms;
-    });
+  constructor(private playerDataService: PlayerDataService) {
+    this.playerDataService.vmList
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((vms) => {
+        this.vmList = vms;
+      });
   }
 
   // Local Component functions
@@ -50,24 +55,25 @@ export class VmListComponent implements OnDestroy {
     if (event.checked) {
       this.selectedVms.push(vmId);
     } else {
-      this.selectedVms = this.selectedVms.filter(id => id !== vmId);
+      this.selectedVms = this.selectedVms.filter((id) => id !== vmId);
     }
     this.updateVmList.emit(this.selectedVms);
   }
 
   checkAll() {
-    this.vmList.forEach(vm => {
+    this.vmList.forEach((vm) => {
       this.selectedVms.push(vm.id);
     });
     this.updateVmList.emit(this.selectedVms);
   }
 
   uncheckAll() {
-    this.vmList.forEach(vm => {
-      this.selectedVms = this.selectedVms.filter(id => id !== vm.id);
+    this.vmList.forEach((vm) => {
+      this.selectedVms = this.selectedVms.filter((id) => id !== vm.id);
     });
     this.updateVmList.emit(this.selectedVms);
-    this.showSelectedOnly = this.showSelectedOnly && this.selectedVms.length > 0;
+    this.showSelectedOnly =
+      this.showSelectedOnly && this.selectedVms.length > 0;
   }
 
   clearFilter() {
@@ -75,7 +81,7 @@ export class VmListComponent implements OnDestroy {
   }
 
   selectedVmList() {
-    return this.vmList.filter(vm => this.selectedVms.includes(vm.id));
+    return this.vmList.filter((vm) => this.selectedVms.includes(vm.id));
   }
 
   ngOnDestroy() {
@@ -83,6 +89,4 @@ export class VmListComponent implements OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }
-

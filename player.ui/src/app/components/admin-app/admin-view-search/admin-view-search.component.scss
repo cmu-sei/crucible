@@ -24,10 +24,16 @@ DM20-0181
   margin-left: 100px;
 }
 
-.sp-icon {
-  margin-left: 10px;
-}
-
 .hidden {
   display: none !important;
+}
+
+.player-icon-small {
+  transform: scale(1.5); 
+  margin-left: 20px;
+}
+
+.header-text {
+  margin-left: 10px; 
+  font-family: open_sansbold;
 }

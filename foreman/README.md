@@ -1,4 +1,0 @@
-﻿# Foreman
-
-
-# Foreman.Tests

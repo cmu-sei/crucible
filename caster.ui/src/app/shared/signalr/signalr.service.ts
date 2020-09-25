@@ -9,17 +9,17 @@ DM20-0181
 */
 
 import { Injectable } from '@angular/core';
+import { ComnAuthService, ComnSettingsService } from '@crucible/common';
 import * as signalR from '@microsoft/signalr';
-import { FileService } from 'src/app/files/state';
 import { DirectoryService } from 'src/app/directories';
+import { FileService } from 'src/app/files/state';
 import {
   Directory,
-  Workspace,
-  Run,
   ModelFile,
+  Run,
+  Workspace,
 } from 'src/app/generated/caster-api';
 import { WorkspaceService } from 'src/app/workspace/state';
-import { CwdAuthService, CwdSettingsService } from 'src/app/sei-cwd-common';
 import { ProjectService } from '../../project/state';
 
 @Injectable({
@@ -37,8 +37,8 @@ export class SignalRService {
     private projectService: ProjectService,
     private directoryService: DirectoryService,
     private workspaceService: WorkspaceService,
-    private authService: CwdAuthService,
-    private settingsService: CwdSettingsService
+    private authService: ComnAuthService,
+    private settingsService: ComnSettingsService
   ) {}
 
   public startConnection(): Promise<void> {

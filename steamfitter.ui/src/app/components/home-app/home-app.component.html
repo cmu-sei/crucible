@@ -8,100 +8,147 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-
-<mat-sidenav-container class="appcontent-container" autosize>
-  <mat-sidenav class="appbarmenu-container" #sidenav mode="side" [(opened)]="isSidebarOpen">
-    <mat-list class="appitems-container">
+<mat-sidenav-container class="appcontent-container mat-elevation-z8" autosize>
+  <mat-sidenav
+    class="appbarmenu-container"
+    #sidenav
+    mode="side"
+    [(opened)]="isSidebarOpen"
+  >
+    <mat-list>
       <mat-list-item class="appslist">
-        <a class="nolink" href="/">
-          <h4>
-            <b>{{titleText}}</b>
-          </h4>
-        </a>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon
+            class="steamfitter-icon"
+            svgIcon="ic_crucible_steamfitter"
+          ></mat-icon>
+          <h2 class="icon-text">
+            {{ titleText }}
+          </h2>
+        </div>
         <mat-divider></mat-divider>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img src="../../../../assets/svg-icons/storage-black-18dp.svg" alt="{{section.scenarioTemplates}}" (click)="selectTab(section.scenarioTemplates)">
-          </div>
+      <mat-list-item
+        class="showhand highlight"
+        title="Show {{ section.scenarioTemplates }}"
+        (click)="selectTab(section.scenarioTemplates)"
+      >
+        <div class="lefticon">
+          <mat-icon
+            class="icon-35px"
+            svgIcon="storage"
+            [ngStyle]="{ color: topbarColor }"
+          ></mat-icon>
+        </div>
 
-          <div id="content" (click)="selectTab(section.scenarioTemplates)">{{section.scenarioTemplates}}</div>
+        <div class="application-name">
+          {{ section.scenarioTemplates }}
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectTab(section.scenarioTemplates)">
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div>
+          <button mat-icon-button>
+            <mat-icon class="icon-color" svgIcon="ic_chevron_right"></mat-icon>
+          </button>
         </div>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img src="../../../../assets/svg-icons/playlist_play-24px.svg" alt="{{section.scenarios}}" (click)="selectTab(section.scenarios)">
-          </div>
+      <mat-list-item
+        class="showhand highlight"
+        title="Show {{ section.scenarios }}"
+        (click)="selectTab(section.scenarios)"
+      >
+        <div class="lefticon">
+          <mat-icon
+            class="icon-35px"
+            svgIcon="playlist_play"
+            [ngStyle]="{ color: topbarColor }"
+          ></mat-icon>
+        </div>
 
-          <div id="content" (click)="selectTab(section.scenarios)">{{section.scenarios}}</div>
+        <div class="application-name">
+          {{ section.scenarios }}
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectTab(section.scenarios)">
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div>
+          <button mat-icon-button>
+            <mat-icon class="icon-color" svgIcon="ic_chevron_right"></mat-icon>
+          </button>
         </div>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img src="../../../../assets/svg-icons/input-24px.svg" alt="{{section.taskBuilder}}" (click)="selectTab(section.taskBuilder)">
-          </div>
+      <mat-list-item
+        class="showhand highlight"
+        title="Show {{ section.taskBuilder }}"
+        (click)="selectTab(section.taskBuilder)"
+      >
+        <div class="lefticon">
+          <mat-icon
+            class="icon-35px"
+            svgIcon="input"
+            [ngStyle]="{ color: topbarColor }"
+          ></mat-icon>
+        </div>
 
-          <div id="content" (click)="selectTab(section.taskBuilder)">{{section.taskBuilder}}</div>
+        <div class="application-name">
+          {{ section.taskBuilder }}
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectTab(section.taskBuilder)">
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div>
+          <button mat-icon-button>
+            <mat-icon class="icon-color" svgIcon="ic_chevron_right"></mat-icon>
+          </button>
         </div>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img src="../../../../assets/svg-icons/history-24px.svg" alt="{{section.history}}" (click)="selectTab(section.history)">
-          </div>
+      <mat-list-item
+        class="showhand highlight"
+        title="Show {{ section.history }}"
+        (click)="selectTab(section.history)"
+      >
+        <div class="lefticon">
+          <mat-icon
+            class="icon-35px"
+            svgIcon="history"
+            [ngStyle]="{ color: topbarColor }"
+          ></mat-icon>
+        </div>
 
-          <div id="content" (click)="selectTab(section.history)">{{section.history}}</div>
+        <div class="application-name">
+          {{ section.history }}
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="selectTab(section.history)">
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div>
+          <button mat-icon-button>
+            <mat-icon class="icon-color" svgIcon="ic_chevron_right"></mat-icon>
+          </button>
         </div>
       </mat-list-item>
     </mat-list>
-    <img class="cmu-logo" src="/assets/img/cmu-red-gray.png">
+    <img
+      class="crucible-logo"
+      [src]="
+        (theme$ | async) === 'light-theme'
+          ? '/assets/img/crucible-logo-light.png'
+          : '/assets/img/crucible-logo-dark.png'
+      "
+    />
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="bar-height app-base-color" fxLayout="row" fxLayoutAlign="start center">
-      <div fxFlex="37" fxFlexOffset="3" class="title-text"><h4>{{ selectedSection }}</h4></div>
-      <div fxFlex="60" fxLayoutAlign="end center">
-        <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
-          <b>{{ (loggedInUser | async).profile.name }}</b><span *ngIf="!isAuthorizedUser"> - NO PERMISSIONS</span>
-          <mat-icon style="transform: translateY(1px);" svgIcon="ic_expand_more_white_24px"></mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" [overlapTrigger]="false">
-          <button *ngIf="isSuperUser" [routerLink]="['/admin']" mat-menu-item>Administration</button>
-          <button mat-menu-item (click)="logout()">Logout</button>
-        </mat-menu>
-      </div>
-
-    </div>
+    <app-topbar
+      [title]="selectedSection"
+      [topbarView]="TopbarView.STEAMFITTER_HOME"
+      [topbarColor]="topbarColor"
+      [topbarTextColor]="topbarTextColor"
+      [sidenav]="sidenav"
+      (sidenavToggle)="sidenavToggleFn()"
+    ></app-topbar>
     <span *ngIf="isAuthorizedUser">
-      <app-scenario-templates *ngIf="selectedSection === section.scenarioTemplates"></app-scenario-templates>
-      <app-scenarios *ngIf="selectedSection === section.scenarios"></app-scenarios>
-      <app-vm-task-execute *ngIf="selectedSection === section.taskBuilder"></app-vm-task-execute>
+      <app-scenario-templates
+        *ngIf="selectedSection === section.scenarioTemplates"
+      ></app-scenario-templates>
+      <app-scenarios
+        *ngIf="selectedSection === section.scenarios"
+      ></app-scenarios>
+      <app-vm-task-execute
+        *ngIf="selectedSection === section.taskBuilder"
+      ></app-vm-task-execute>
       <app-history *ngIf="selectedSection === section.history"></app-history>
     </span>
   </mat-sidenav-content>

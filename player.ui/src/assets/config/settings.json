@@ -14,9 +14,9 @@
     "url": "http://localhost:4300/notifications",
     "number_to_display": 4
   },
-  "AppTitle": "Crucible",
-  "AppTopBarText": "Crucible",
-  "AppTopBarHexColor": "#b00",
+  "AppTitle": "Player",
+  "AppTopBarText": "Player",
+  "AppTopBarHexColor": "#5F8DB5",
   "AppTopBarHexTextColor": "#FFFFFF",
   "UseLocalAuthStorage": true
 }

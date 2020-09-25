@@ -9,140 +9,226 @@ DM20-0181
 -->
 
 <div class="event-info-container mat-elevation-z8">
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="sp-icon">
-          <img class="admin-icon" width="50" src="../../../assets/img/exercise-player.png" alt="Event Information">
-      </div>
-      <div><h2 style="margin-left: 20px;">Event</h2></div>
-      <div fxFlex fxLayoutAlign="end center">
-        <img width="306" style="margin-right: 10px;" src="/assets/img/cmu-red-white.png">
-      </div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="sp-icon">
+      <mat-icon class="alloy-icon" svgIcon="ic_crucible_alloy"></mat-icon>
     </div>
-
-    <mat-card *ngIf="isLoading"
-      style="display: flex; justify-content: center; align-items: center">
-    <mat-progress-spinner
-      color="primary"
-      mode="indeterminate">
-    </mat-progress-spinner>
-    </mat-card>
-
-    <div *ngIf="!isLoading && eventTemplate$ | async as eventTemplate">
-        <mat-divider [inset]="true"></mat-divider>
-        <mat-card>
-            <mat-card-header>
-              <mat-card-title><h1 style="margin-left: 20px;">{{eventTemplate.name}}</h1></mat-card-title>
-              <mat-card-subtitle></mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <div class="description-text" fxLayout="row" fxFlexAlign="start center">{{eventTemplate.description}}</div>
-            </mat-card-content>
-            <div *ngIf="failureMessage !== '' && isNewLaunch">
-              <div class="failure-text">Failure:  {{failureMessage}}</div>
-              <div>Event ended.  Please try again later or contact an administrator.</div>
-            </div>
-            <div *ngIf="eventStatus === 'EventReadyToLaunch'" fxLayout="column" fxLayoutAlign="space-between center">
-              <button *ngIf="!isIframe()" class="event-button" mat-raised-button color="warn" (click)="launchEvent()">Launch</button>
-              <h2 *ngIf="isIframe()">Event has ended</h2>
-              <label class="duration-label">Duration:  {{eventTemplate.durationHours}} hours</label>
-            </div>
-            <div *ngIf="eventStatus === 'EventActive'" fxLayout="column" fxLayoutAlign="space-between center">
-              <div fxLayout="row">
-                  <button *ngIf="!isIframe()" class="event-button" mat-raised-button color="accent" (click)="rejoinEvent()">Open Event</button>
-                  <button class="event-button-end" mat-raised-button color="warn" (click)="endEvent()">End Event</button>
-                  <button *ngIf="false" class="event-button-end" mat-raised-button color="warn" (click)="redeployEvent()" [disabled]="redeploying">
-                    <div *ngIf="redeploying">
-                      Redeploying...
-                    </div>
-                    <div *ngIf="!redeploying">
-                      Redeploy Event
-                    </div>
-                  </button>
-              </div>
-              <label *ngIf="!timeRunningLow" class="duration-label">{{remainingTime}}</label>
-              <label *ngIf="timeRunningLow" class="duration-label-red">{{remainingTime}}</label>
-            </div>
-            <div *ngIf="eventStatus === 'EventLaunchInProgress'" fxLayout="column" fxLayoutAlign="space-between center">
-              <h2>Please wait!</h2>
-              <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
-              <h3 *ngIf="currentEvent !== undefined">Status:  {{currentEvent.status}}</h3>
-              <h3 *ngIf="currentEvent === undefined">Status:  -</h3>
-            </div>
-
-        </mat-card>
-        <mat-divider [inset]="true"></mat-divider>
-        <mat-accordion *ngIf="events$ | async as events">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                <mat-panel-title>
-                    History
-                </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <div>
-                    <mat-table #table [dataSource]="impsDataSource" matSort>
-
-                        <!--- Note that these columns can be defined in any order.
-                              The actual rendered columns are set as a property on the row eventTemplate" -->
-
-                        <ng-container matColumnDef="username">
-                          <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
-                          <mat-cell *matCellDef="let element">
-                            {{element.username}}
-                          </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="status">
-                          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-                          <mat-cell *matCellDef="let element">
-                            <div class='small-font'>{{element.status}}</div>
-                            <div *ngIf="element.status === Event.StatusEnum.Failed" class='small-font'>&nbsp;{{element.internalStatus}}</div>
-                          </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="lastLaunchStatus">
-                          <mat-header-cell *matHeaderCellDef> Last Launch </mat-header-cell>
-                          <mat-cell *matCellDef="let element">
-                            <div *ngIf="element.lastLaunchStatus" class='small-font'>{{element.lastLaunchStatus}}  {{element.lastLaunchInternalStatus}}</div>
-                          </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="lastEndStatus">
-                          <mat-header-cell *matHeaderCellDef> Last End Status</mat-header-cell>
-                          <mat-cell *matCellDef="let element">
-                            <div *ngIf="element.lastEndStatus" class='small-font'>{{element.lastEndStatus}}  {{element.lastEndInternalStatus}}</div>
-                          </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="dateCreated">
-                          <mat-header-cell *matHeaderCellDef> Start Date Status</mat-header-cell>
-                          <mat-cell *matCellDef="let element">
-                            <div class='small-font'>{{element.dateCreated | date:'long'}}</div>
-                          </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="endDate">
-                          <mat-header-cell *matHeaderCellDef> End Date </mat-header-cell>
-                          <mat-cell *matCellDef="let element">
-                            <div class='small-font'>{{element.endDate | date:'long'}}</div>
-                          </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="statusDate">
-                          <mat-header-cell *matHeaderCellDef> Last Status Date </mat-header-cell>
-                          <mat-cell *matCellDef="let element">
-                            <div *ngIf="element.status === 'Failed'" class='small-font'>{{element.statusDate | date:'long'}}</div>
-                          </mat-cell>
-                        </ng-container>
-
-                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-                      </mat-table>
-                      <div *ngIf="impsDataSource.filteredData.length === 0">No results found</div>
-                </div>
-
-            </mat-expansion-panel>
-        </mat-accordion>
+    <div><h2 class="text title-text">Event</h2></div>
+    <div fxFlex fxLayoutAlign="end center">
+      <img
+        class="crucible-logo"
+        [src]="
+          (theme$ | async) === 'light-theme'
+            ? '/assets/img/crucible-logo-light.png'
+            : '/assets/img/crucible-logo-dark.png'
+        "
+      />
     </div>
   </div>
+
+  <mat-card *ngIf="isLoading" class="spinner-container">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
+
+  <div *ngIf="!isLoading && eventTemplate$ | async as eventTemplate">
+    <mat-divider [inset]="true"></mat-divider>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title
+          ><h1 class="template-name">
+            {{ eventTemplate.name }}
+          </h1></mat-card-title
+        >
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="description-text" fxLayout="row" fxFlexAlign="start center">
+          {{ eventTemplate.description }}
+        </div>
+      </mat-card-content>
+      <div *ngIf="failureMessage !== '' && isNewLaunch">
+        <div class="failure-text">Failure: {{ failureMessage }}</div>
+        <div>
+          Event ended. Please try again later or contact an administrator.
+        </div>
+      </div>
+      <div
+        *ngIf="eventStatus === 'EventReadyToLaunch'"
+        fxLayout="column"
+        fxLayoutAlign="space-between center"
+      >
+        <button
+          *ngIf="!isIframe()"
+          class="event-button"
+          mat-raised-button
+          color="warn"
+          (click)="launchEvent()"
+        >
+          Launch
+        </button>
+        <h2 *ngIf="isIframe()">Event has ended</h2>
+        <label class="duration-label"
+          >Duration: {{ eventTemplate.durationHours }} hours</label
+        >
+      </div>
+      <div
+        *ngIf="eventStatus === 'EventActive'"
+        fxLayout="column"
+        fxLayoutAlign="space-between center"
+      >
+        <div fxLayout="row">
+          <button
+            *ngIf="!isIframe()"
+            class="event-button"
+            mat-raised-button
+            color="accent"
+            (click)="rejoinEvent()"
+          >
+            Open Event
+          </button>
+          <button
+            class="event-button-end"
+            mat-raised-button
+            color="warn"
+            (click)="endEvent()"
+          >
+            End Event
+          </button>
+          <button
+            *ngIf="false"
+            class="event-button-end"
+            mat-raised-button
+            color="warn"
+            (click)="redeployEvent()"
+            [disabled]="redeploying"
+          >
+            <div *ngIf="redeploying">Redeploying...</div>
+            <div *ngIf="!redeploying">Redeploy Event</div>
+          </button>
+        </div>
+        <label *ngIf="!timeRunningLow" class="duration-label">{{
+          remainingTime
+        }}</label>
+        <label *ngIf="timeRunningLow" class="duration-label-warn">{{
+          remainingTime
+        }}</label>
+      </div>
+      <div
+        *ngIf="eventStatus === 'EventLaunchInProgress'"
+        fxLayout="column"
+        fxLayoutAlign="space-between center"
+      >
+        <h2>Please wait!</h2>
+        <mat-progress-spinner
+          color="primary"
+          mode="indeterminate"
+        ></mat-progress-spinner>
+        <h3 *ngIf="currentEvent !== undefined">
+          Status: {{ currentEvent.status }}
+        </h3>
+        <h3 *ngIf="currentEvent === undefined">Status: -</h3>
+      </div>
+    </mat-card>
+    <mat-divider [inset]="true"></mat-divider>
+    <mat-accordion *ngIf="events$ | async as events">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> History </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+          <mat-table
+            class="history-table"
+            [dataSource]="impsDataSource"
+            matSort
+          >
+            <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row eventTemplate" -->
+
+            <ng-container matColumnDef="username">
+              <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.username }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <div class="small-font">{{ element.status }}</div>
+                <div
+                  *ngIf="element.status === Event.StatusEnum.Failed"
+                  class="small-font"
+                >
+                  &nbsp;{{ element.internalStatus }}
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="lastLaunchStatus">
+              <mat-header-cell *matHeaderCellDef> Last Launch </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <div *ngIf="element.lastLaunchStatus" class="small-font">
+                  {{ element.lastLaunchStatus }}
+                  {{ element.lastLaunchInternalStatus }}
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="lastEndStatus">
+              <mat-header-cell *matHeaderCellDef>
+                Last End Status</mat-header-cell
+              >
+              <mat-cell *matCellDef="let element">
+                <div *ngIf="element.lastEndStatus" class="small-font">
+                  {{ element.lastEndStatus }}
+                  {{ element.lastEndInternalStatus }}
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dateCreated">
+              <mat-header-cell *matHeaderCellDef>
+                Start Date Status</mat-header-cell
+              >
+              <mat-cell *matCellDef="let element">
+                <div class="small-font">
+                  {{ element.dateCreated | date: 'long' }}
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="endDate">
+              <mat-header-cell *matHeaderCellDef> End Date </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <div class="small-font">
+                  {{ element.endDate | date: 'long' }}
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="statusDate">
+              <mat-header-cell *matHeaderCellDef>
+                Last Status Date
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <div *ngIf="element.status === 'Failed'" class="small-font">
+                  {{ element.statusDate | date: 'long' }}
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+          <div *ngIf="impsDataSource.filteredData.length === 0">
+            No results found
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

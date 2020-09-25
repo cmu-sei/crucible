@@ -25,6 +25,8 @@ namespace Steamfitter.Api.Data.Models
         public virtual ICollection<TaskEntity> Tasks { get; set; } = new HashSet<TaskEntity>();
         public int? DurationHours { get; set; }
         public virtual ICollection<ScenarioEntity> Scenarios { get; set; } = new HashSet<ScenarioEntity>();
+        public Guid? DefaultVmCredentialId { get; set; }
+        public virtual ICollection<VmCredentialEntity> VmCredentials { get; set; } = new HashSet<VmCredentialEntity>();
     }
 }
 

@@ -8,38 +8,48 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Result, User, View, Vm } from 'src/app/swagger-codegen/dispatcher.api';
-import { ResultQuery } from 'src/app/data/result/result.query';
+import { Subject } from 'rxjs';
+import { takeUntil, withLatestFrom } from 'rxjs/operators';
+import { PlayerDataService } from 'src/app/data/player/player-data-service';
 import { ResultDataService } from 'src/app/data/result/result-data.service';
+import { ResultQuery } from 'src/app/data/result/result.query';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
 import { UserDataService } from 'src/app/data/user/user-data.service';
-import { PlayerDataService } from 'src/app/data/player/player-data-service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Result, User, View, Vm } from 'src/app/swagger-codegen/dispatcher.api';
+import { ComnSettingsService } from '@crucible/common';
 
 enum HistoryView {
   user = 'User',
   view = 'View',
-  vm = 'VM'
+  vm = 'VM',
 }
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css'],
+  styleUrls: ['./history.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
     ]),
-  ],})
-
+  ],
+})
 export class HistoryComponent implements OnInit, OnDestroy {
   HistoryView = HistoryView;
   displayedColumns: string[] = [
@@ -48,7 +58,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
     'vmName',
     'status',
     'actualOutput',
-    'expectedOutput'
+    'expectedOutput',
   ];
   modelDataSource = new MatTableDataSource<Result>(new Array<Result>());
   // MatPaginator Output
@@ -68,47 +78,78 @@ export class HistoryComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  topbarColor = '#ef3a47';
 
   constructor(
     private resultQuery: ResultQuery,
     private taskDataService: TaskDataService,
     private userDataService: UserDataService,
     private playerDataService: PlayerDataService,
-    private resultDataService: ResultDataService
+    private resultDataService: ResultDataService,
+    private settingsService: ComnSettingsService
   ) {
     this.loading = true;
     this.apiResponded = false;
 
-    this.resultQuery.selectAll().pipe(takeUntil(this.unsubscribe$)).subscribe(
-      res => {
-        this.apiResponded = true;
-        if (res != null) {
-          this.modelDataSource.data = res.sort((a: Result, b: Result) => a.statusDate <= b.statusDate ? 1 : -1);
+    this.resultQuery
+      .selectAll()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        (res) => {
+          this.apiResponded = true;
+          if (res != null) {
+            this.modelDataSource.data = res.sort((a: Result, b: Result) =>
+              a.statusDate <= b.statusDate ? 1 : -1
+            );
+          }
+        },
+        (error) => {
+          console.log('API is not responding:', error.message);
         }
-      },
-      error => {
-        console.log(
-          'API is not responding:',
-          error.message
+      );
+    this.userDataService.users
+      .pipe(
+        withLatestFrom(this.userDataService.loggedInUser),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe(([users, user]) => {
+        this.userList =
+          !!users && users.length > 0
+            ? users.sort((a: User, b: User) =>
+                a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
+              )
+            : [];
+
+        this.selectedUser = this.userList.find(
+          (u) => u.id === user.profile.sub
         );
-      }
-    );
-    this.userDataService.users.pipe(takeUntil(this.unsubscribe$)).subscribe(users => {
-      this.userList = !!users && users.length > 0 ? users.sort((a: User, b: User) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1) : [];
-      const loggedInUser = this.userDataService.loggedInUser.getValue();
-      this.selectedUser = this.userList.find(u => u.id === loggedInUser.profile.sub);
-      if (this.historyView === HistoryView.user) {
-        this.handleUserChange(this.selectedUser);
-      }
-    });
+        if (this.historyView === HistoryView.user) {
+          this.handleUserChange(this.selectedUser);
+        }
+      });
     this.userDataService.getUsersFromApi();
-    this.playerDataService.viewList.pipe(takeUntil(this.unsubscribe$)).subscribe(views => {
-      this.viewList = !!views && views.length > 0 ? views.sort((a: User, b: User) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1) : [];
-    });
-    this.playerDataService.vms.pipe(takeUntil(this.unsubscribe$)).subscribe(vms => {
-      this.vmList = !!vms && vms.length > 0 ? vms.sort((a: User, b: User) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1) : [];
-    });
+    this.playerDataService.viewList
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((views) => {
+        this.viewList =
+          !!views && views.length > 0
+            ? views.sort((a: User, b: User) =>
+                a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
+              )
+            : [];
+      });
+    this.playerDataService.vms
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((vms) => {
+        this.vmList =
+          !!vms && vms.length > 0
+            ? vms.sort((a: User, b: User) =>
+                a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
+              )
+            : [];
+      });
     this.playerDataService.selectView('');
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor ? this.settingsService.settings.AppTopBarHexColor : this.topbarColor;
   }
 
   ngOnInit() {
@@ -171,7 +212,11 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   copyTask(resultId: string) {
-    this.taskDataService.setClipboard({ id: undefined, resultId: resultId, isCut: false });
+    this.taskDataService.setClipboard({
+      id: undefined,
+      resultId: resultId,
+      isCut: false,
+    });
   }
 
   showDetail(result: Result) {
@@ -182,6 +227,4 @@ export class HistoryComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }
-

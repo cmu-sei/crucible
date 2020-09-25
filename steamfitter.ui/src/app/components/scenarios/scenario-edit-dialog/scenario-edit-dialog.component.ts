@@ -8,15 +8,23 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, EventEmitter, Output, Inject } from '@angular/core';
-import { DialogService } from 'src/app/services/dialog/dialog.service';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import {
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class UserErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || isSubmitted));
   }
@@ -25,25 +33,39 @@ export class UserErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-scenario-edit-dialog',
   templateUrl: './scenario-edit-dialog.component.html',
-  styleUrls: ['./scenario-edit-dialog.component.css']
+  styleUrls: ['./scenario-edit-dialog.component.scss'],
 })
-
 export class ScenarioEditDialogComponent {
-
   @Output() editComplete = new EventEmitter<any>();
 
   public scenarioNameFormControl = new FormControl(this.data.scenario.name, [
     Validators.required,
-    Validators.minLength(4)
+    Validators.minLength(4),
   ]);
-  public descriptionFormControl = new FormControl(this.data.scenario.description ? this.data.scenario.description : ' ', [
-    Validators.required,
-    Validators.minLength(4)
-  ]);
-  public startDateFormControl = new FormControl(this.data.scenario.startDate ? this.data.scenario.startDate : '', []);
-  public startTimeFormControl = new FormControl(this.data.scenario.startDate ? this.data.scenario.startDate.toTimeString().substr(0, 5) : '', []);
-  public endDateFormControl = new FormControl(this.data.scenario.endDate ? this.data.scenario.endDate : '', []);
-  public endTimeFormControl = new FormControl(this.data.scenario.endDate ? this.data.scenario.endDate.toTimeString().substr(0, 5) : '', []);
+  public descriptionFormControl = new FormControl(
+    this.data.scenario.description ? this.data.scenario.description : ' ',
+    [Validators.required, Validators.minLength(4)]
+  );
+  public startDateFormControl = new FormControl(
+    this.data.scenario.startDate ? this.data.scenario.startDate : '',
+    []
+  );
+  public startTimeFormControl = new FormControl(
+    this.data.scenario.startDate
+      ? this.data.scenario.startDate.toTimeString().substr(0, 5)
+      : '',
+    []
+  );
+  public endDateFormControl = new FormControl(
+    this.data.scenario.endDate ? this.data.scenario.endDate : '',
+    []
+  );
+  public endTimeFormControl = new FormControl(
+    this.data.scenario.endDate
+      ? this.data.scenario.endDate.toTimeString().substr(0, 5)
+      : '',
+    []
+  );
   public matcher = new UserErrorStateMatcher();
 
   constructor(
@@ -55,16 +77,23 @@ export class ScenarioEditDialogComponent {
   }
 
   errorFree() {
-    return !(this.scenarioNameFormControl.hasError('required')
-              || this.scenarioNameFormControl.hasError('minlength')
-              || this.descriptionFormControl.hasError('required')
-              || this.descriptionFormControl.hasError('minlength')
-              || !this.data.scenario.viewId);
+    return !(
+      this.scenarioNameFormControl.hasError('required') ||
+      this.scenarioNameFormControl.hasError('minlength') ||
+      this.descriptionFormControl.hasError('required') ||
+      this.descriptionFormControl.hasError('minlength') ||
+      !this.data.scenario.viewId
+    );
   }
 
   trimInitialDescription() {
-    if (this.descriptionFormControl.value && this.descriptionFormControl.value.toString()[0] === ' ') {
-      this.descriptionFormControl.setValue(this.descriptionFormControl.value.toString().trim());
+    if (
+      this.descriptionFormControl.value &&
+      this.descriptionFormControl.value.toString()[0] === ' '
+    ) {
+      this.descriptionFormControl.setValue(
+        this.descriptionFormControl.value.toString().trim()
+      );
     }
   }
 
@@ -73,12 +102,19 @@ export class ScenarioEditDialogComponent {
    */
   handleEditComplete(saveChanges: boolean): void {
     if (!saveChanges) {
-      this.editComplete.emit({saveChanges: false, scenario: null});
+      this.editComplete.emit({ saveChanges: false, scenario: null });
     } else {
-      this.data.scenario.name = this.scenarioNameFormControl.value.toString().trim();
-      this.data.scenario.description = this.descriptionFormControl.value.toString().trim();
+      this.data.scenario.name = this.scenarioNameFormControl.value
+        .toString()
+        .trim();
+      this.data.scenario.description = this.descriptionFormControl.value
+        .toString()
+        .trim();
       if (this.errorFree) {
-        this.editComplete.emit({saveChanges: saveChanges, scenario: this.data.scenario});
+        this.editComplete.emit({
+          saveChanges: saveChanges,
+          scenario: this.data.scenario,
+        });
       }
     }
   }
@@ -95,7 +131,9 @@ export class ScenarioEditDialogComponent {
         this.data.scenario.description = this.descriptionFormControl.value.toString();
         break;
       case 'view':
-        const view = this.data.views.find(v => v.id === this.data.scenario.viewId);
+        const view = this.data.views.find(
+          (v) => v.id === this.data.scenario.viewId
+        );
         this.data.scenario.view = view ? view.name : '';
         break;
       case 'startDate':
@@ -104,21 +142,31 @@ export class ScenarioEditDialogComponent {
         newStart.setHours(oldStart.getHours());
         newStart.setMinutes(oldStart.getMinutes());
         this.data.scenario.startDate = newStart;
-        const newEndDate = this.data.scenario.endDate.getTime() + (newStart.getTime() - oldStart.getTime());
+        const newEndDate =
+          this.data.scenario.endDate.getTime() +
+          (newStart.getTime() - oldStart.getTime());
         this.data.scenario.endDate = new Date(newEndDate);
         this.endDateFormControl.setValue(this.data.scenario.endDate);
         break;
       case 'startTime':
-        if ( this.startTimeFormControl.value.length === 5
-            && (this.data.scenario.startDate.getHours() !== this.startTimeFormControl.value.substr(0, 2)
-                || this.data.scenario.startDate.getMinutes() !== this.startTimeFormControl.value.substr(2, 2))) {
+        if (
+          this.startTimeFormControl.value.length === 5 &&
+          (this.data.scenario.startDate.getHours() !==
+            this.startTimeFormControl.value.substr(0, 2) ||
+            this.data.scenario.startDate.getMinutes() !==
+              this.startTimeFormControl.value.substr(2, 2))
+        ) {
           const timeParts = this.startTimeFormControl.value.split(':');
           const oldDate = new Date(this.data.scenario.startDate);
           this.data.scenario.startDate.setHours(timeParts[0]);
           this.data.scenario.startDate.setMinutes(timeParts[1]);
-          const endDate = this.data.scenario.endDate.getTime() + (this.data.scenario.startDate.getTime() - oldDate.getTime());
+          const endDate =
+            this.data.scenario.endDate.getTime() +
+            (this.data.scenario.startDate.getTime() - oldDate.getTime());
           this.data.scenario.endDate.setTime(endDate);
-          this.endTimeFormControl.setValue(this.data.scenario.endDate.toTimeString().substr(0, 5));
+          this.endTimeFormControl.setValue(
+            this.data.scenario.endDate.toTimeString().substr(0, 5)
+          );
         }
         break;
       case 'endDate':
@@ -129,9 +177,13 @@ export class ScenarioEditDialogComponent {
         this.data.scenario.endDate = newEnd;
         break;
       case 'endTime':
-        if ( this.endTimeFormControl.value.length === 5
-            && (this.data.scenario.endDate.getHours() !== this.endTimeFormControl.value.substr(0, 2)
-                || this.data.scenario.endDate.getMinutes() !== this.endTimeFormControl.value.substr(2, 2))) {
+        if (
+          this.endTimeFormControl.value.length === 5 &&
+          (this.data.scenario.endDate.getHours() !==
+            this.endTimeFormControl.value.substr(0, 2) ||
+            this.data.scenario.endDate.getMinutes() !==
+              this.endTimeFormControl.value.substr(2, 2))
+        ) {
           const timeParts = this.endTimeFormControl.value.split(':');
           this.data.scenario.endDate.setHours(timeParts[0]);
           this.data.scenario.endDate.setMinutes(timeParts[1]);
@@ -141,5 +193,4 @@ export class ScenarioEditDialogComponent {
         break;
     }
   }
-
 }

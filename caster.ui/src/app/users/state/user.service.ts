@@ -8,19 +8,18 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { UserStore, CurrentUserStore } from './user.store';
-import { UserQuery } from './user.query';
-import { Injectable, InjectionToken } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { ComnAuthService, Theme } from '@crucible/common';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import {
-  UsersService,
+  PermissionsService,
   User,
   UserPermissionsService,
-  PermissionsService,
+  UsersService,
 } from '../../generated/caster-api';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { CwdAuthService } from '../../sei-cwd-common/cwd-auth/services';
-import { Theme } from '../../shared/models/theme-enum';
+import { UserQuery } from './user.query';
+import { CurrentUserStore, UserStore } from './user.store';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +32,7 @@ export class UserService {
     private usersService: UsersService,
     private userPermissionService: UserPermissionsService,
     private permissionService: PermissionsService,
-    private authService: CwdAuthService
+    private authService: ComnAuthService
   ) {}
 
   load(): Observable<User[]> {

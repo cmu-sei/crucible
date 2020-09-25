@@ -22,21 +22,20 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-
-import { FileVersion, ModelFile, Module } from '../../../generated/caster-api';
-import { FileQuery, FileService } from '../../../files/state';
+import { MatButtonToggleGroup } from '@angular/material/button-toggle';
+import { Theme } from '@crucible/common';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, take, takeUntil } from 'rxjs/operators';
 import {
   FileVersionQuery,
   FileVersionService,
 } from 'src/app/fileVersions/state';
-import { Observable, Subject } from 'rxjs';
-import { switchMap, take, takeUntil } from 'rxjs/operators';
 import { Breadcrumb } from 'src/app/project/state';
-import { ModuleQuery, ModuleService } from '../../../modules/state';
-import { CurrentUserQuery } from 'src/app/users/state';
-import { MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { ConfirmDialogService } from 'src/app/sei-cwd-common/confirm-dialog/service/confirm-dialog.service';
-import { Theme } from '../../../shared/models/theme-enum';
+import { CurrentUserQuery } from 'src/app/users/state';
+import { FileQuery, FileService } from '../../../files/state';
+import { FileVersion, ModelFile, Module } from '../../../generated/caster-api';
+import { ModuleQuery, ModuleService } from '../../../modules/state';
 
 @Component({
   selector: 'cas-editor',

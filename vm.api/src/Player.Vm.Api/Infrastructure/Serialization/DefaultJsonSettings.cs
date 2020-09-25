@@ -9,6 +9,7 @@ DM20-0181
 */
 
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Player.Vm.Api.Infrastructure.Serialization
 {
@@ -23,6 +24,8 @@ namespace Player.Vm.Api.Infrastructure.Serialization
                 {
                     PropertyNameCaseInsensitive = true
                 };
+
+                settings.Converters.Add(new JsonStringEnumConverter());
 
                 return settings;
             }

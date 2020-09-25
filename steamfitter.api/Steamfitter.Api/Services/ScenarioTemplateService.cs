@@ -17,6 +17,7 @@ using System.Threading;
 using STT = System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using Steamfitter.Api.Data;
@@ -70,7 +71,7 @@ namespace Steamfitter.Api.Services
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
 
-            var items = await _context.ScenarioTemplates
+            var items = await _context.ScenarioTemplates.Include(st => st.VmCredentials)
                 .ToListAsync(ct);         
             
             return _mapper.Map<IEnumerable<SAVM.ScenarioTemplate>>(items);
@@ -81,7 +82,7 @@ namespace Steamfitter.Api.Services
             if (!(await _authorizationService.AuthorizeAsync(_user, null, new ContentDeveloperRequirement())).Succeeded)
                 throw new ForbiddenException();
 
-            var item = await _context.ScenarioTemplates
+            var item = await _context.ScenarioTemplates.Include(st => st.VmCredentials)
                 .SingleOrDefaultAsync(o => o.Id == id, ct);
 
             return _mapper.Map<SAVM.ScenarioTemplate>(item);
@@ -120,14 +121,17 @@ namespace Steamfitter.Api.Services
             if (oldScenarioTemplateEntity == null)
                 throw new EntityNotFoundException<SAVM.ScenarioTemplate>($"ScenarioTemplate {oldScenarioTemplateId} was not found.");
 
-            var newScenarioTemplateEntity = new ScenarioTemplateEntity() {
-                CreatedBy = _user.GetId(),
-                Name = $"{oldScenarioTemplateEntity.Name} - {_user.Claims.FirstOrDefault(c => c.Type == "name").Value}",
-                Description = oldScenarioTemplateEntity.Description,
-                DurationHours = oldScenarioTemplateEntity.DurationHours
-            };
+            var newScenarioTemplateEntity = _mapper.Map<ScenarioTemplateEntity>(oldScenarioTemplateEntity);
+            newScenarioTemplateEntity.CreatedBy = _user.GetId();
+            newScenarioTemplateEntity.Name = $"{oldScenarioTemplateEntity.Name} - {_user.Claims.FirstOrDefault(c => c.Type == "name").Value}";
 
             _context.ScenarioTemplates.Add(newScenarioTemplateEntity);
+            await _context.SaveChangesAsync(ct);
+
+            // copy all of the VmCredentials
+            var oldVmCredentials = _context.VmCredentials.Where(vmc => vmc.ScenarioTemplateId == oldScenarioTemplateId).ToList();
+            var newDefaultVmCredentialId = await CopyVmCredentials(oldScenarioTemplateEntity.DefaultVmCredentialId, newScenarioTemplateEntity.Id, null, oldVmCredentials, ct);
+            newScenarioTemplateEntity.DefaultVmCredentialId = newDefaultVmCredentialId;
             await _context.SaveChangesAsync(ct);
 
             // copy all of the Tasks, including children
@@ -182,6 +186,30 @@ namespace Steamfitter.Api.Services
             _engineHub.Clients.All.SendAsync(EngineMethods.ScenarioTemplateDeleted, id);
 
             return true;
+        }
+
+        private async STT.Task<Guid?> CopyVmCredentials(Guid? oldDefaultVmCredentialId, Guid? scenarioTemplateId, Guid? scenarioId, List<VmCredentialEntity> oldVmCredentials, CancellationToken ct)
+        {
+            Guid? newDefaultVmCredentialId = null;
+            foreach (var oldVmCredentialEntity in oldVmCredentials)
+            {
+                var newVmCredentialEntity = _mapper.Map<VmCredentialEntity>(oldVmCredentialEntity);
+                newVmCredentialEntity.ScenarioTemplate = null;
+                newVmCredentialEntity.Scenario = null;
+                newVmCredentialEntity.ScenarioTemplateId = scenarioTemplateId;
+                newVmCredentialEntity.ScenarioId = scenarioId;
+                newVmCredentialEntity.CreatedBy = _user.GetId();
+                _context.VmCredentials.Add(newVmCredentialEntity);
+                // set the new default VM Credential
+                if (oldDefaultVmCredentialId == oldVmCredentialEntity.Id)
+                {
+                    await _context.SaveChangesAsync(ct);
+                    newDefaultVmCredentialId = newVmCredentialEntity.Id;
+                }
+            }
+            await _context.SaveChangesAsync(ct);
+
+            return newDefaultVmCredentialId;
         }
 
     }

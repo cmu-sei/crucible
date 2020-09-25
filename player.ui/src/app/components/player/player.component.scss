@@ -24,11 +24,16 @@ DM20-0181
   min-width: 50px;
 }
 
-.cmu-logo {
-  width: 100%;
+.player-icon {
+  transform: scale(2); 
+  width: 60px;
+}
+
+.crucible-logo {
   position: absolute;
   bottom: 0;
 }
+
 .pull-right {
   position: absolute;
   right: 35px;
@@ -48,6 +53,8 @@ DM20-0181
 
 .nolink {
   text-decoration: none;
+  position: absolute;
+  left: 0px;
 }
 
 .display {

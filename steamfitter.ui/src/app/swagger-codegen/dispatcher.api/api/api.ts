@@ -28,4 +28,6 @@ export * from './user.service';
 import { UserService } from './user.service';
 export * from './userPermission.service';
 import { UserPermissionService } from './userPermission.service';
-export const APIS = [BondAgentService, FilesService, PermissionService, PlayerService, ResultService, ScenarioService, ScenarioTemplateService, TaskService, UserService, UserPermissionService];
+export * from './vmCredential.service';
+import { VmCredentialService } from './vmCredential.service';
+export const APIS = [BondAgentService, FilesService, PermissionService, PlayerService, ResultService, ScenarioService, ScenarioTemplateService, TaskService, UserService, UserPermissionService, VmCredentialService];

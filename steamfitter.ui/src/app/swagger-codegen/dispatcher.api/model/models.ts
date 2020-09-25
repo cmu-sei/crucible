@@ -28,3 +28,4 @@ export * from './user';
 export * from './userPermission';
 export * from './view';
 export * from './vm';
+export * from './vmCredential';

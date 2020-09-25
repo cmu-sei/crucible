@@ -8,18 +8,20 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Task, Result } from 'src/app/swagger-codegen/dispatcher.api/model/models';
-import { TaskDataService } from 'src/app/data/task/task-data.service';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TaskDataService } from 'src/app/data/task/task-data.service';
+import {
+  Result,
+  Task,
+} from 'src/app/swagger-codegen/dispatcher.api/model/models';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css']
+  styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent {
-
   @Input() taskList: Observable<Task[]>;
   @Input() resultList: Observable<Result[]>;
   @Input() isLoading: Observable<boolean>;
@@ -29,9 +31,7 @@ export class TasksComponent {
   @Input() isExecutable: boolean;
   clipboard = this.taskDataService.clipboard;
 
-  constructor(
-    private taskDataService: TaskDataService
-  ) { }
+  constructor(private taskDataService: TaskDataService) {}
 
   deleteTask(id: string) {
     this.taskDataService.delete(id);
@@ -55,19 +55,23 @@ export class TasksComponent {
 
   pasteClipboard(taskId: string) {
     if (taskId) {
-      this.taskDataService.pasteClipboard( {id: taskId, locationType: 'task'} );
+      this.taskDataService.pasteClipboard({ id: taskId, locationType: 'task' });
     } else if (this.scenarioTemplateId) {
-      this.taskDataService.pasteClipboard( {id: this.scenarioTemplateId, locationType: 'scenarioTemplate'} );
+      this.taskDataService.pasteClipboard({
+        id: this.scenarioTemplateId,
+        locationType: 'scenarioTemplate',
+      });
     } else if (this.scenarioId) {
-      this.taskDataService.pasteClipboard( {id: this.scenarioId, locationType: 'scenario'} );
+      this.taskDataService.pasteClipboard({
+        id: this.scenarioId,
+        locationType: 'scenario',
+      });
     } else {
-      this.taskDataService.pasteClipboard( {id: '', locationType: ''} );
+      this.taskDataService.pasteClipboard({ id: '', locationType: '' });
     }
   }
 
   taskSelectedHandler(taskId: string) {
     this.taskDataService.setActive(taskId);
   }
-
 }
-

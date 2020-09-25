@@ -9,21 +9,20 @@ DM20-0181
 */
 
 using AutoMapper;
-using Player.Vm.Api.Domain.Services;
-using Player.Vm.Api.Infrastructure.Extensions;
-using System;
+using Player.Vm.Api.Infrastructure.Options;
 using System.Linq;
-using System.Security.Claims;
-using System.Security.Principal;
 
 namespace Player.Vm.Api.Features.Vms
 {
-    public class MappingProfile : AutoMapper.Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
             CreateMap<Domain.Models.Vm, Vm>()
-                .ForMember(dest => dest.TeamIds, opt => opt.MapFrom(src => src.VmTeams.Select(x => x.TeamId)));
+                .ForMember(dest => dest.TeamIds, opt => opt.MapFrom(src => src.VmTeams.Select(x => x.TeamId)))
+                .ForMember(dest => dest.Url, opt => opt.MapFrom<ConsoleUrlResolver>());
+
+            CreateMap<Domain.Models.ConsoleConnectionInfo, ConsoleConnectionInfo>().ReverseMap();
 
             CreateMap<VmUpdateForm, Domain.Models.Vm>();
 
@@ -32,25 +31,18 @@ namespace Player.Vm.Api.Features.Vms
         }
     }
 
-    public class VmOwnerResolver : IValueResolver<Domain.Models.Vm, Vm, bool>
+    public class ConsoleUrlResolver : IValueResolver<Domain.Models.Vm, Vm, string>
     {
-        private ClaimsPrincipal _user;
+        private readonly ConsoleUrlOptions _consoleUrlOptions;
 
-        public VmOwnerResolver(IPrincipal user)
+        public ConsoleUrlResolver(ConsoleUrlOptions consoleUrlOptions)
         {
-            _user = user as ClaimsPrincipal;
+            _consoleUrlOptions = consoleUrlOptions;
         }
 
-        public bool Resolve(Domain.Models.Vm source, Vm destination, bool member, ResolutionContext context)
+        public string Resolve(Domain.Models.Vm source, Vm destination, string member, ResolutionContext context)
         {
-            if (source.UserId.HasValue && source.UserId.Value == _user.GetId())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return source.GetUrl(_consoleUrlOptions);
         }
     }
 }

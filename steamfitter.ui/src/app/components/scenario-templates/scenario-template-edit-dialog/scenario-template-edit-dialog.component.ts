@@ -8,15 +8,23 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, EventEmitter, Output, Inject } from '@angular/core';
-import { DialogService } from 'src/app/services/dialog/dialog.service';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import {
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class UserErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || isSubmitted));
   }
@@ -24,41 +32,49 @@ export class UserErrorStateMatcher implements ErrorStateMatcher {
 
 /** Error when control isn't an integer */
 export class NotIntegerErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const hours = parseInt(control.value, 10);
     let isNotAnInteger = hours === NaN || hours <= 0;
     if (!isNotAnInteger && !!control.value) {
       isNotAnInteger = hours.toString() !== control.value.toString();
     }
     if (isNotAnInteger) {
-      control.setErrors({notAnInteger: true});
+      control.setErrors({ notAnInteger: true });
     }
     const isSubmitted = form && form.submitted;
-    return !!(control && (control.invalid || isNotAnInteger) && (control.dirty || isSubmitted));
+    return !!(
+      control &&
+      (control.invalid || isNotAnInteger) &&
+      (control.dirty || isSubmitted)
+    );
   }
 }
 
 @Component({
   selector: 'app-scenario-template-edit-dialog',
   templateUrl: './scenario-template-edit-dialog.component.html',
-  styleUrls: ['./scenario-template-edit-dialog.component.css']
+  styleUrls: ['./scenario-template-edit-dialog.component.scss'],
 })
-
 export class ScenarioTemplateEditDialogComponent {
-
   @Output() editComplete = new EventEmitter<any>();
 
-  scenarioTemplateNameFormControl = new FormControl(this.data.scenarioTemplate.name, [
-    Validators.required,
-    Validators.minLength(4)
-  ]);
-  descriptionFormControl = new FormControl(this.data.scenarioTemplate.description ? this.data.scenarioTemplate.description : ' ', [
-    Validators.required,
-    Validators.minLength(4)
-  ]);
-  durationHoursFormControl = new FormControl(this.data.scenarioTemplate.durationHours, [
-    Validators.required
-  ]);
+  scenarioTemplateNameFormControl = new FormControl(
+    this.data.scenarioTemplate.name,
+    [Validators.required, Validators.minLength(4)]
+  );
+  descriptionFormControl = new FormControl(
+    this.data.scenarioTemplate.description
+      ? this.data.scenarioTemplate.description
+      : ' ',
+    [Validators.required, Validators.minLength(4)]
+  );
+  durationHoursFormControl = new FormControl(
+    this.data.scenarioTemplate.durationHours,
+    [Validators.required]
+  );
   matcher = new UserErrorStateMatcher();
   notAnIntegerErrorState = new NotIntegerErrorStateMatcher();
 
@@ -71,18 +87,24 @@ export class ScenarioTemplateEditDialogComponent {
   }
 
   errorFree() {
-    const hasError = this.scenarioTemplateNameFormControl.hasError('required')
-              || this.scenarioTemplateNameFormControl.hasError('minlength')
-              || this.descriptionFormControl.hasError('required')
-              || this.descriptionFormControl.hasError('minlength')
-              || this.durationHoursFormControl.hasError('required')
-              || this.durationHoursFormControl.hasError('notAnInteger');
+    const hasError =
+      this.scenarioTemplateNameFormControl.hasError('required') ||
+      this.scenarioTemplateNameFormControl.hasError('minlength') ||
+      this.descriptionFormControl.hasError('required') ||
+      this.descriptionFormControl.hasError('minlength') ||
+      this.durationHoursFormControl.hasError('required') ||
+      this.durationHoursFormControl.hasError('notAnInteger');
     return !hasError;
   }
 
   trimInitialDescription() {
-    if (this.descriptionFormControl.value && this.descriptionFormControl.value.toString()[0] === ' ') {
-      this.descriptionFormControl.setValue(this.descriptionFormControl.value.toString().trim());
+    if (
+      this.descriptionFormControl.value &&
+      this.descriptionFormControl.value.toString()[0] === ' '
+    ) {
+      this.descriptionFormControl.setValue(
+        this.descriptionFormControl.value.toString().trim()
+      );
     }
   }
 
@@ -91,16 +113,27 @@ export class ScenarioTemplateEditDialogComponent {
    */
   handleEditComplete(saveChanges: boolean): void {
     if (!saveChanges) {
-      this.editComplete.emit({saveChanges: false, scenarioTemplate: null});
+      this.editComplete.emit({ saveChanges: false, scenarioTemplate: null });
     } else {
-      const modifiedScenarioTemplate = { ...this.data.scenarioTemplate, id: this.data.scenarioTemplate.id };
-      modifiedScenarioTemplate.name = this.scenarioTemplateNameFormControl.value.toString().trim();
-      modifiedScenarioTemplate.description = this.descriptionFormControl.value.toString().trim();
-      modifiedScenarioTemplate.durationHours = this.durationHoursFormControl.value.toString().trim();
+      const modifiedScenarioTemplate = {
+        ...this.data.scenarioTemplate,
+        id: this.data.scenarioTemplate.id,
+      };
+      modifiedScenarioTemplate.name = this.scenarioTemplateNameFormControl.value
+        .toString()
+        .trim();
+      modifiedScenarioTemplate.description = this.descriptionFormControl.value
+        .toString()
+        .trim();
+      modifiedScenarioTemplate.durationHours = this.durationHoursFormControl.value
+        .toString()
+        .trim();
       if (this.errorFree) {
-        this.editComplete.emit({saveChanges: saveChanges, scenarioTemplate: modifiedScenarioTemplate});
+        this.editComplete.emit({
+          saveChanges: saveChanges,
+          scenarioTemplate: modifiedScenarioTemplate,
+        });
       }
     }
   }
-
 }

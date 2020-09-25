@@ -9,67 +9,88 @@ DM20-0181
 -->
 
 <div class="events-list-container mat-elevation-z8">
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="sp-icon">
-          <img class="admin-icon" width="50" src="../../../assets/img/exercise-player.png" alt="Events">
-      </div>
-      <div><h2 style="margin-left: 10px;">My Events</h2></div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="5">
-        <mat-icon style="transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
-        <mat-form-field style="width: 320px;">
-          <input matInput [(ngModel)]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Search">
-        </mat-form-field>
-        <button *ngIf="filterString != ''" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
-          title="Clear Search">
-          <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="sp-icon">
+      <mat-icon class="alloy-icon" svgIcon="ic_crucible_alloy"></mat-icon>
+    </div>
+    <div><h2 class="text title-text">My Events</h2></div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="5">
+      <mat-icon
+        class="text icon-24px search-icon"
+        svgIcon="ic_magnify_search"
+      ></mat-icon>
+      <mat-form-field class="search-field">
+        <input
+          matInput
+          [(ngModel)]="filterString"
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Search"
+        />
+      </mat-form-field>
+      <div class="clear-search">
+        <button
+          mat-icon-button
+          fxLayoutAlign="start center"
+          (click)="clearFilter()"
+          title="Clear Search"
+        >
+          <mat-icon
+            class="text icon-20px"
+            svgIcon="ic_cancel_circle"
+          ></mat-icon>
         </button>
       </div>
-      <div fxFlex fxLayoutAlign="end center">
-        <img width="306" style="margin-right: 10px;" src="/assets/img/cmu-red-white.png">
-      </div>
     </div>
+    <div fxFlex fxLayoutAlign="end center">
+      <img
+        class="crucible-logo"
+        [src]="
+          (theme$ | async) === 'light-theme'
+            ? '/assets/img/crucible-logo-light.png'
+            : '/assets/img/crucible-logo-dark.png'
+        "
+      />
+    </div>
+  </div>
 
-    <mat-card *ngIf="isLoading"
-      style="display: flex; justify-content: center; align-items: center">
-    <mat-progress-spinner
-      color="primary"
-      mode="indeterminate">
+  <mat-card *ngIf="isLoading" class="spinner">
+    <mat-progress-spinner color="primary" mode="indeterminate">
     </mat-progress-spinner>
-    </mat-card>
+  </mat-card>
 
-    <mat-table #table [dataSource]="eventsDataSource" matSort>
-
-      <!--- Note that these columns can be defined in any order.
+  <mat-table #table [dataSource]="eventsDataSource" matSort>
+    <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row eventTemplate" -->
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Event Name </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <button mat-stroked-button (click)="openEvent(element.id)">Open</button>
-            &nbsp;&nbsp;{{element.name}}
-        </mat-cell>
-      </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Event Name
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-stroked-button (click)="openEvent(element.id)">Open</button>
+        &nbsp;&nbsp;{{ element.name }}
+      </mat-cell>
+    </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <div class="description-text">{{element.description}}</div>
-        </mat-cell>
-      </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div class="description-text">{{ element.description }}</div>
+      </mat-cell>
+    </ng-container>
 
-      <!-- duration Column -->
-      <ng-container matColumnDef="durationHours">
-        <mat-header-cell *matHeaderCellDef> Event Duration </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <div class="team-text">{{element.durationHours}}&nbsp; hours</div>
-        </mat-cell>
-      </ng-container>
+    <!-- duration Column -->
+    <ng-container matColumnDef="durationHours">
+      <mat-header-cell *matHeaderCellDef> Event Duration </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div class="duration-text">{{ element.durationHours }}&nbsp; hours</div>
+      </mat-cell>
+    </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-    </mat-table>
-    <div *ngIf="eventsDataSource.filteredData.length === 0">No results found</div>
-  </div>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <div *ngIf="eventsDataSource.filteredData.length === 0">No results found</div>
+</div>

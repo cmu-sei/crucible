@@ -11,7 +11,7 @@ DM20-0181
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { ComnSettingsService } from '@crucible/common';
+import { ComnSettingsService, Theme, ComnAuthQuery } from '@crucible/common';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
 import { Observable, of, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -25,7 +25,7 @@ import { TopbarView } from '../shared/top-bar/topbar.models';
 })
 export class AdminAppComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav: MatSidenav;
-  public topbarColor = '#b00';
+  public topbarColor = '#5F8DB5';
   public topbarTextColor = '#FFFFFF';
   public TopbarView = TopbarView;
   public queryParams: any = {
@@ -33,6 +33,7 @@ export class AdminAppComponent implements OnInit, OnDestroy {
   };
   Section = Section;
   unsubscribe$: Subject<null> = new Subject<null>();
+  theme$: Observable<Theme>;
   public section$: Observable<Section> = this.routerQuery.selectQueryParams(
     'section'
   );
@@ -41,8 +42,11 @@ export class AdminAppComponent implements OnInit, OnDestroy {
   constructor(
     private settingsService: ComnSettingsService,
     private router: Router,
-    private routerQuery: RouterQuery
-  ) {}
+    private routerQuery: RouterQuery,
+    private authQuery: ComnAuthQuery
+  ) {
+    this.theme$ = this.authQuery.userTheme$;
+  }
 
   /**
    * Initialization

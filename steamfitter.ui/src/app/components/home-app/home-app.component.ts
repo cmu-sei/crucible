@@ -7,35 +7,31 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { MatTabChangeEvent } from '@angular/material/tabs';
-import { ScenarioTemplateListComponent } from '../scenario-templates/scenario-template-list/scenario-template-list.component';
-import { ScenarioListComponent } from '../scenarios/scenario-list/scenario-list.component';
-import { UserDataService } from '../../data/user/user-data.service';
+import { MatSidenav } from '@angular/material/sidenav';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { PlayerDataService } from 'src/app/data/player/player-data-service';
-import { ScenarioTemplateDataService } from 'src/app/data/scenario-template/scenario-template-data.service';
-import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
-import { TaskDataService } from 'src/app/data/task/task-data.service';
-import {Router, ActivatedRoute} from '@angular/router';
-import {Subject} from 'rxjs';
-import {map, takeUntil} from 'rxjs/operators';
+import { ComnSettingsService, Theme, ComnAuthQuery } from '@crucible/common';
 import { SignalRService } from 'src/app/services/signalr/signalr.service';
+import { UserDataService } from '../../data/user/user-data.service';
+import { TopbarView } from './../shared/top-bar/topbar.models';
 
 enum Section {
   taskBuilder = 'Tasks',
   history = 'History',
   scenarioTemplates = 'Scenario Templates',
-  scenarios = 'Scenarios'
+  scenarios = 'Scenarios',
 }
 
 @Component({
   selector: 'app-home-app',
   templateUrl: './home-app.component.html',
-  styleUrls: ['./home-app.component.css']
+  styleUrls: ['./home-app.component.scss'],
 })
 export class HomeAppComponent implements OnDestroy {
-
+  @ViewChild('sidenav') sidenav: MatSidenav;
   titleText = 'Steamfitter';
   section = Section;
   selectedSection: Section;
@@ -45,32 +41,57 @@ export class HomeAppComponent implements OnDestroy {
   isSidebarOpen = true;
   viewList = this.playerDataService.viewList;
   private unsubscribe$ = new Subject();
+  topbarColor = '#ef3a47';
+  topbarTextColor = '#FFFFFF';
+  TopbarView = TopbarView;
+  theme$: Observable<Theme>;
 
   constructor(
     private userDataService: UserDataService,
     private router: Router,
     activatedRoute: ActivatedRoute,
     private playerDataService: PlayerDataService,
-    private scenarioTemplateDataService: ScenarioTemplateDataService,
-    private scenarioDataService: ScenarioDataService,
-    private taskDataService: TaskDataService,
-    private signalRService: SignalRService
+    private settingsService: ComnSettingsService,
+    private signalRService: SignalRService,
+    private authQuery: ComnAuthQuery
   ) {
+
+    this.theme$ = this.authQuery.userTheme$;
+
     this.playerDataService.getViewsFromApi();
-    activatedRoute.queryParamMap.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
-       this.selectedSection = (params.get('tab') || Section.taskBuilder) as Section;
-    });
-    this.userDataService.isSuperUser.pipe(takeUntil(this.unsubscribe$)).subscribe(isSuper => {
-      this.isSuperUser = isSuper;
-    });
-    this.userDataService.isAuthorizedUser.pipe(takeUntil(this.unsubscribe$)).subscribe(isAuthorized => {
-      this.isAuthorizedUser = isAuthorized;
-    });
+    activatedRoute.queryParamMap
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((params) => {
+        this.selectedSection = (params.get('tab') ||
+          Section.taskBuilder) as Section;
+      });
+    this.userDataService.isSuperUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isSuper) => {
+        this.isSuperUser = isSuper;
+      });
+    this.userDataService.isAuthorizedUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isAuthorized) => {
+        this.isAuthorizedUser = isAuthorized;
+      });
     this.signalRService.startConnection();
+
+    // Set the display settings from config file
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor ? this.settingsService.settings.AppTopBarHexColor : this.topbarColor;
+    this.topbarTextColor = this.settingsService.settings.AppTopBarHexTextColor ? this.settingsService.settings.AppTopBarHexTextColor : this.topbarTextColor;
+    this.titleText = this.settingsService.settings.AppTitle ? this.settingsService.settings.AppTitle : this.titleText;
   }
 
   selectTab(section: Section) {
-    this.router.navigate([], { queryParams: { tab: section }, queryParamsHandling: 'merge'});
+    this.router.navigate([], {
+      queryParams: { tab: section },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  sidenavToggleFn() {
+    this.sidenav.toggle();
   }
 
   logout() {
@@ -82,4 +103,3 @@ export class HomeAppComponent implements OnDestroy {
     this.unsubscribe$.complete();
   }
 }
-

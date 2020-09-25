@@ -8,31 +8,24 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, Input } from '@angular/core';
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-focused-app',
   templateUrl: './focused-app.component.html',
-  styleUrls: ['./focused-app.component.css']
+  styleUrls: ['./focused-app.component.scss'],
 })
 export class FocusedAppComponent implements OnInit {
-
   @Input() vmUrl: string;
 
   public currentUrl: SafeUrl;
 
-  constructor(
-    private sanitizer: DomSanitizer
-  ) {
-
-  }
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     console.log('Initializing:  ' + this.vmUrl);
     this.currentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.vmUrl);
     // this.currentUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps');
   }
-
 }
-

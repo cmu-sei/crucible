@@ -8,25 +8,38 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { VmsQuery } from '../../vms/state/vms.query';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { VmModel } from '../../vms/state/vm.model';
-import { SignalRService } from '../shared/signalr/signalr.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ComnAuthService, Theme } from '@crucible/common';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { VmModel } from '../../vms/state/vm.model';
+import { VmsQuery } from '../../vms/state/vms.query';
+import { SignalRService } from '../shared/signalr/signalr.service';
 
 @Component({
   selector: 'app-vm-main',
   templateUrl: './vm-main.component.html',
-  styleUrls: ['./vm-main.component.css'],
+  styleUrls: ['./vm-main.component.scss'],
 })
 export class VmMainComponent implements OnInit, OnDestroy {
+
+  unsubscribe$: Subject<null> = new Subject<null>();
+
   constructor(
     private vmQuery: VmsQuery,
     private signalRService: SignalRService,
-    private routerQuery: RouterQuery
-  ) {}
+    private routerQuery: RouterQuery,
+    private activatedRoute: ActivatedRoute,
+    private authService: ComnAuthService
+  ) {
+    this.activatedRoute.queryParamMap.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
+      const selectedTheme = params.get('theme');
+      const theme = selectedTheme === Theme.DARK ? Theme.DARK : Theme.LIGHT;
+      this.authService.setUserTheme(theme);
+    });
+  }
 
   public openVms: Array<{ [name: string]: string }>;
   public selectedTab: number;
@@ -34,6 +47,7 @@ export class VmMainComponent implements OnInit, OnDestroy {
   public vmErrors$ = new BehaviorSubject<Record<string, string>>({});
 
   ngOnInit() {
+
     this.openVms = new Array<{ [name: string]: string }>();
     this.selectedTab = 0;
 
@@ -87,6 +101,8 @@ export class VmMainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.signalRService.leaveView(this.routerQuery.getParams('viewId'));
     this.vmErrors$.complete();
+    this.unsubscribe$.next(null);
+    this.unsubscribe$.complete();
   }
 
   onErrors(errors: { [key: string]: string }) {

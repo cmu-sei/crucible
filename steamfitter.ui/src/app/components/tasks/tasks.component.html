@@ -8,22 +8,20 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div fxLayout="row" fxLayoutAlign="start center">
-  <app-task-tree
-    [taskList]="taskList"
-    [resultList]="resultList"
-    [scenarioTemplateId]="scenarioTemplateId"
-    [scenarioId]="scenarioId"
-    [isEditableState]="isEditable"
-    [isExecutableState]="isExecutable"
-    [isLoading]="isLoading | async"
-    [clipboard]="clipboard | async"
-    (deleteTaskRequested)="deleteTask($event)"
-    (executeRequested)="executeTask($event)"
-    (saveTask)="saveTaskHandler($event)"
-    (sendToClipboard)="sendToClipboard($event)"
-    (pasteClipboard)="pasteClipboard($event)"
-    (taskSelected)="taskSelectedHandler($event)"
+<app-task-tree
+  [taskList]="taskList"
+  [resultList]="resultList"
+  [scenarioTemplateId]="scenarioTemplateId"
+  [scenarioId]="scenarioId"
+  [isEditableState]="isEditable"
+  [isExecutableState]="isExecutable"
+  [isLoading]="isLoading"
+  [clipboard]="clipboard | async"
+  (deleteTaskRequested)="deleteTask($event)"
+  (executeRequested)="executeTask($event)"
+  (saveTask)="saveTaskHandler($event)"
+  (sendToClipboard)="sendToClipboard($event)"
+  (pasteClipboard)="pasteClipboard($event)"
+  (taskSelected)="taskSelectedHandler($event)"
 ></app-task-tree>
-</div>
 

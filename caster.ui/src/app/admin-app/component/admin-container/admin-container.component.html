@@ -17,11 +17,15 @@ DM20-0181
   >
     <mat-list class="appitems-container">
       <mat-list-item class="appslist">
-        <h2>
-          <a class="nolink" routerLink="/">
-            Administration
-          </a>
-        </h2>
+        <a class="nolink" [routerLink]="['/']">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon
+              class="caster-icon"
+              svgIcon="ic_crucible_caster"
+            ></mat-icon>
+            <h2 class="icon-text">Administration</h2>
+          </div>
+        </a>
         <mat-divider></mat-divider>
       </mat-list-item>
       <mat-list-item>
@@ -36,7 +40,7 @@ DM20-0181
           <div id="content">{{ usersText }}</div>
 
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;">
+            <button mat-icon-button style="outline: none">
               <mat-icon class="mdi-24px" fontIcon="mdi-menu-right"></mat-icon>
             </button>
           </div>
@@ -51,7 +55,7 @@ DM20-0181
           <div id="content">{{ modulesText }}</div>
 
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;">
+            <button mat-icon-button style="outline: none">
               <mat-icon class="mdi-24px" fontIcon="mdi-menu-right"></mat-icon>
             </button>
           </div>
@@ -66,17 +70,31 @@ DM20-0181
           <div id="content">{{ workspacesText }}</div>
 
           <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;">
+            <button mat-icon-button style="outline: none">
               <mat-icon class="mdi-24px" fontIcon="mdi-menu-right"></mat-icon>
             </button>
           </div>
         </div>
       </mat-list-item>
     </mat-list>
-    <img class="cmu-logo" alt="cmu-logo" src="/assets/img/cmu-red-gray.png" />
+    <img
+      class="crucible-logo"
+      [src]="
+        (theme$ | async) === 'light-theme'
+          ? '/assets/img/crucible-logo-light.png'
+          : '/assets/img/crucible-logo-dark.png'
+      "
+    />
   </mat-sidenav>
   <mat-sidenav-content>
-    <cas-topbar [title]="showStatus" [sidenav]="null"></cas-topbar>
+    <cas-topbar
+      [title]="showStatus"
+      [topbarColor]="topbarColor"
+      [topbarTextColor]="topbarTextColor"
+      [topbarView]="TopbarView.CASTER_ADMIN"
+      [sidenav]="sidenav"
+      (sidenavToggle)="sidenav.toggle()"
+    ></cas-topbar>
     <span *ngIf="isSuperUser">
       <cas-users *ngIf="showStatus === usersText"></cas-users>
       <cas-admin-modules *ngIf="showStatus === modulesText"></cas-admin-modules>

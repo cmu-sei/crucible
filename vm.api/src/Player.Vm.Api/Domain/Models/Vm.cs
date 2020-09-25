@@ -12,6 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Player.Vm.Api.Infrastructure.Options;
+using Player.Vm.Api.Infrastructure.Serialization;
 
 namespace Player.Vm.Api.Domain.Models
 {
@@ -37,12 +43,39 @@ namespace Player.Vm.Api.Domain.Models
 
         public bool HasPendingTasks { get; set; }
 
+        public ConsoleConnectionInfo ConsoleConnectionInfo { get; set; }
+
         public bool TeamsLoaded
         {
             get
             {
                 return this.VmTeams != null && this.VmTeams.Count > 0;
             }
+        }
+
+        public string GetUrl(ConsoleUrlOptions options)
+        {
+            // append guacamole params to url
+            if (this.ConsoleConnectionInfo != null && !string.IsNullOrEmpty(this.Url))
+            {
+                // guacamole expects the last part of the url to be a base64 encoded string combining the
+                // connection id, connection type (c for connection, g for group), and provider name
+                // separated by null characters
+                var connectionId = Convert.ToBase64String(
+                    Encoding.Default.GetBytes(
+                    $"{this.Id}{Convert.ToChar(0x0)}c{Convert.ToChar(0x0)}{options.Guacamole.ProviderName}"));
+
+                var guacamoleUrlFragment = $"/#/client/{connectionId}";
+
+                return $"{this.Url}{guacamoleUrlFragment}";
+            }
+
+            if (!string.IsNullOrEmpty(this.Url))
+            {
+                return this.Url;
+            }
+
+            return $"{options.Vsphere.Url}/vm/{this.Id}/console";
         }
     }
 
@@ -52,5 +85,18 @@ namespace Player.Vm.Api.Domain.Models
         On,
         Off,
         Suspended
+    }
+
+
+    public class VmConfiguration : IEntityTypeConfiguration<Vm>
+    {
+        public void Configure(EntityTypeBuilder<Vm> builder)
+        {
+            builder
+                .Property(x => x.ConsoleConnectionInfo)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v, DefaultJsonSettings.Settings),
+                    v => JsonSerializer.Deserialize<ConsoleConnectionInfo>(v, DefaultJsonSettings.Settings));
+        }
     }
 }

@@ -8,38 +8,40 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit } from '@angular/core';
-import { HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { VmService } from '../../services/vm/vm.service';
-import { WmksComponent } from '../wmks/wmks.component';
-import { OptionsBarComponent } from '../options-bar/options-bar.component';
+import { ComnAuthService, Theme } from '@crucible/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-console',
   templateUrl: './console.component.html',
-  styleUrls: ['./console.component.css']
+  styleUrls: ['./console.component.scss'],
 })
+export class ConsoleComponent {
+  noVmConsoleApi = true;
+  unsubscribe$: Subject<null> = new Subject<null>();
 
-export class ConsoleComponent implements OnInit {
-  public noVmConsoleApi = true;
-  private _route: ActivatedRoute;
-  private _vmService: VmService;
-
-  constructor(private route: ActivatedRoute, public vmService: VmService) {
-    this._route = route;
-    this._vmService = vmService;
-  }
-
-  ngOnInit() {
-    this._route.params.subscribe(
-      res => {
-        this._vmService.model.id = res.id;
-      },
-      error => {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    public vmService: VmService,
+    private authService: ComnAuthService
+  ) {
+    this.activatedRoute.params.subscribe(
+      (res) => {
+        this.vmService.model.id = res.id;
+        },
+      (error) => {
         console.log(error.message);
-      });
+      }
+    );
+    this.activatedRoute.queryParamMap.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
+      const selectedTheme = params.get('theme');
+      const theme = selectedTheme === Theme.DARK ? Theme.DARK : Theme.LIGHT;
+      this.authService.setUserTheme(theme);
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -49,6 +51,4 @@ export class ConsoleComponent implements OnInit {
       this.vmService.wmks.updateScreen();
     }
   }
-
 }
-

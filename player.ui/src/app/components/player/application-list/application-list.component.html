@@ -23,24 +23,24 @@ DM20-0181
       class="lefticon"
       src="{{ app.icon }}"
       alt="{{ app.name }}"
-      (click)="openInFocusedApp(app.name, app.url)"
+      (click)="openInFocusedApp(app)"
     />
     <img
       *ngIf="!app.embeddable"
       class="lefticon"
       src="{{ app.icon }}"
       alt="{{ app.name }}"
-      (click)="openInTab(app.url)"
+      (click)="openInTab(app)"
     />
 
     <div
       *ngIf="app.embeddable"
       class="grow"
-      (click)="openInFocusedApp(app.name, app.url)"
+      (click)="openInFocusedApp(app)"
     >
       {{ app.name }}
     </div>
-    <div *ngIf="!app.embeddable" class="grow" (click)="openInTab(app.url)">
+    <div *ngIf="!app.embeddable" class="grow" (click)="openInTab(app)">
       {{ app.name }}
     </div>
 
@@ -54,11 +54,11 @@ DM20-0181
       <button
         mat-menu-item
         *ngIf="app.embeddable"
-        (click)="openInFocusedApp(app.name, app.url)"
+        (click)="openInFocusedApp(app)"
       >
         Open Here
       </button>
-      <button mat-menu-item (click)="openInTab(app.url)">
+      <button mat-menu-item (click)="openInTab(app)">
         Open in New Tab
       </button>
     </mat-menu>

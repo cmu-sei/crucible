@@ -10,22 +10,22 @@ DM20-0181
 
 import {
   Component,
-  OnInit,
-  ViewChild,
   ElementRef,
   HostListener,
+  OnInit,
+  ViewChild,
 } from '@angular/core';
-import { VmService } from '../../services/vm/vm.service';
 import { interval } from 'rxjs';
-import { takeWhile, startWith } from 'rxjs/operators';
+import { startWith, takeWhile } from 'rxjs/operators';
 import { VmResolution } from '../../models/vm/vm-model';
+import { VmService } from '../../services/vm/vm.service';
 
 declare var WMKS: any; // needed to check values
 
 @Component({
   selector: 'app-wmks',
   templateUrl: './wmks.component.html',
-  styleUrls: ['./wmks.component.css'],
+  styleUrls: ['./wmks.component.scss'],
 })
 export class WmksComponent implements OnInit {
   @ViewChild('wmksContainer') wmksContainer: ElementRef;
@@ -49,8 +49,7 @@ export class WmksComponent implements OnInit {
     this.progressMessage = this.progressMessage + '...';
     if (!this.vmService.wmks) {
       if (this.vmService.model.state === '0') {
-        this.progressMessage =
-          'The VM Console API is currently not reachable.';
+        this.progressMessage = 'The VM Console API is currently not reachable.';
         this.isDone = true;
       } else if (this.progressMessage.startsWith('The VM API')) {
         this.progressMessage = 'Loading ...';
@@ -72,10 +71,9 @@ export class WmksComponent implements OnInit {
 
   @HostListener('window:resize')
   onResize() {
-
     const vmContainerRes = {
       width: this.wmksContainer.nativeElement.offsetWidth,
-      height: this.wmksContainer.nativeElement.offsetHeight
+      height: this.wmksContainer.nativeElement.offsetHeight,
     } as VmResolution;
 
     this.vmService.vmResolution.next(vmContainerRes);

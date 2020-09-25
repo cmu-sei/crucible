@@ -18,19 +18,22 @@ DM20-0181
     <mat-list class="appitems-container">
       <mat-list-item class="appslist">
         <a class="nolink" [routerLink]="['/']">
-          <h2>
-            Administration
-          </h2>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon
+              class="player-icon"
+              svgIcon="ic_crucible_player"
+            ></mat-icon>
+            <h2 class="icon-text">Administration</h2>
+          </div>
         </a>
         <mat-divider></mat-divider>
       </mat-list-item>
       <mat-list-item class="showhand highlight">
-        <img
-          class="lefticon"
-          src="../../../../assets/img/player.png"
-          alt="Views"
+        <mat-icon
+          class="lefticon player-icon-small"
+          svgIcon="ic_crucible_player"
           (click)="sectionChangedFn(Section.ADMIN_VIEWS)"
-        />
+        ></mat-icon>
 
         <div class="grow" (click)="sectionChangedFn(Section.ADMIN_VIEWS)">
           Views
@@ -119,7 +122,14 @@ DM20-0181
         </div>
       </mat-list-item>
     </mat-list>
-    <img class="cmu-logo" src="/assets/img/cmu-red-gray.png" />
+    <img
+      class="crucible-logo"
+      [src]="
+        (theme$ | async) === 'light-theme'
+          ? '/assets/img/crucible-logo-light.png'
+          : '/assets/img/crucible-logo-dark.png'
+      "
+    />
   </mat-sidenav>
   <!-- MAIN CONTENT -->
   <mat-sidenav-content>

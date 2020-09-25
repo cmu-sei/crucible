@@ -53,7 +53,7 @@ namespace Steamfitter.Api.Services
         {
             _options = options.Value;
             _logger = logger;
-        }       
+        }
 
         public ConcurrentDictionary<Guid, VmIdentityStrings> GetVmList()
         {
@@ -109,6 +109,14 @@ namespace Steamfitter.Api.Services
                 try
                 {
                     await GetStackstormVms();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Exception encountered in StackStorm loop calling GetStackstormVms()");
+                    _vmList = new ConcurrentDictionary<Guid, VmIdentityStrings>();
+                }
+                finally
+                {
                     // if no vm's were found, check again in HealthCheckSeconds.  Otherwise, check again in VmListUpdateIntervalMinutes
                     if (_vmList.Any())
                     {
@@ -120,10 +128,6 @@ namespace Steamfitter.Api.Services
                         await STT.Task.Delay(new TimeSpan(0, 0, _options.HealthCheckSeconds));
                     }
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError("Exception encountered in StackStorm loop", ex);
-                    _vmList = new ConcurrentDictionary<Guid, VmIdentityStrings>();                }
             }
         }
 
@@ -133,9 +137,12 @@ namespace Steamfitter.Api.Services
             var vmIdentityObjs = new List<VmIdentityStrings>();
             var uuidList = new List<Guid>();
             var apiParameters = _options.ApiParameters;
-            var clusters = apiParameters["clusters"].ToString().Split(",");
             try
             {
+                if (apiParameters == null || !apiParameters.ContainsKey("clusters")) {
+                    throw new Exception("\"clusters\" appsetting value needs to be set in order to get Stackstorm VMs");
+                }
+                var clusters = apiParameters["clusters"].ToString().Split(",");
                 var vmListResult = await _vsphere.GetVmsWithUuid(clusters);
                 // add VM's to _vmList
                 foreach (var vm in vmListResult.Vms)
@@ -144,7 +151,7 @@ namespace Steamfitter.Api.Services
                     if (Guid.TryParse(vm.Uuid, out uuid))
                     {
                         uuidList.Add(uuid);
-                        _vmList[uuid] = new VmIdentityStrings(){Moid=vm.Moid, Name=vm.Name};
+                        _vmList[uuid] = new VmIdentityStrings() { Moid = vm.Moid, Name = vm.Name };
                         uuidList.Add(uuid);
                     }
                     else
@@ -156,12 +163,12 @@ namespace Steamfitter.Api.Services
                 foreach (var key in keysToRemove)
                 {
                     VmIdentityStrings deletedStrings;
-                    _vmList.Remove(key, out deletedStrings); 
+                    _vmList.Remove(key, out deletedStrings);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"There was an error getting the VM information from stackstorm.  {ex.Message}", ex);
+                _logger.LogError(ex, "There was an error getting the VM information from stackstorm");
                 _vmList = new ConcurrentDictionary<Guid, VmIdentityStrings>();
             }
         }

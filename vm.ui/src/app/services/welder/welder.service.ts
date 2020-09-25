@@ -8,19 +8,16 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import { SettingsService } from '../settings/settings.service';
+import { ComnSettingsService } from '@crucible/common';
 
 @Injectable()
 export class WelderService {
   private readonly deployUrl: string;
 
-  constructor(
-    private http: HttpClient,
-    private settings: SettingsService,
-  ) {
-    this.deployUrl = `${settings.WelderUrl}`;
+  constructor(private http: HttpClient, private settings: ComnSettingsService) {
+    this.deployUrl = `${settings.settings.WelderUrl}`;
   }
 
   getDeploymentForView(viewName: string) {

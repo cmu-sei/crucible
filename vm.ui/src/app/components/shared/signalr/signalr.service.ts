@@ -9,11 +9,10 @@ DM20-0181
 */
 
 import { Injectable } from '@angular/core';
+import { ComnAuthService, ComnSettingsService } from '@crucible/common';
 import * as signalR from '@microsoft/signalr';
-import { AuthService } from '../../../services/auth/auth.service';
-import { SettingsService } from '../../../services/settings/settings.service';
-import { VmService } from '../../../vms/state/vms.service';
 import { VmModel } from '../../../vms/state/vm.model';
+import { VmService } from '../../../vms/state/vms.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +23,8 @@ export class SignalRService {
   private connectionPromise: Promise<void>;
 
   constructor(
-    private authService: AuthService,
-    private settingsService: SettingsService,
+    private authService: ComnAuthService,
+    private settingsService: ComnSettingsService,
     private vmService: VmService
   ) {}
 
@@ -35,11 +34,14 @@ export class SignalRService {
     }
 
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${this.settingsService.ApiUrl.replace('/api', '')}/hubs/vm`, {
-        accessTokenFactory: () => {
-          return this.authService.getAuthorizationToken();
-        },
-      })
+      .withUrl(
+        `${this.settingsService.settings.ApiUrl.replace('/api', '')}/hubs/vm`,
+        {
+          accessTokenFactory: () => {
+            return this.authService.getAuthorizationToken();
+          },
+        }
+      )
       .withAutomaticReconnect(new RetryPolicy(60, 0, 5))
       .build();
 

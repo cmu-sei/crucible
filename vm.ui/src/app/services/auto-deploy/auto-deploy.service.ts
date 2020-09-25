@@ -8,11 +8,10 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { SettingsService } from '../settings/settings.service';
 import { Router } from '@angular/router';
+import { ComnSettingsService } from '@crucible/common';
 
 @Injectable()
 export class AutoDeployService {
@@ -20,10 +19,10 @@ export class AutoDeployService {
 
   constructor(
     private http: HttpClient,
-    private settings: SettingsService,
+    private settings: ComnSettingsService,
     private router: Router
   ) {
-    this.deployUrl = `${settings.DeployApiUrl}`;
+    this.deployUrl = `${settings.settings.DeployApiUrl}`;
   }
 
   getDeploymentForView(viewId: string) {
@@ -31,6 +30,9 @@ export class AutoDeployService {
   }
 
   deployToView(viewId: string) {
-    return this.http.post<any>(`${this.deployUrl}/views/${viewId}/workstations`, null);
+    return this.http.post<any>(
+      `${this.deployUrl}/views/${viewId}/workstations`,
+      null
+    );
   }
 }

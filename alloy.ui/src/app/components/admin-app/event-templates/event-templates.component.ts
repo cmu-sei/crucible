@@ -9,26 +9,26 @@ DM20-0181
 */
 
 import { Component, NgZone } from '@angular/core';
-import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { EventTemplate } from 'src/app/generated/alloy.api';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Observable } from 'rxjs';
+import { EventTemplate } from 'src/app/generated/alloy.api';
+import { CasterDataService } from 'src/app/services/caster-data/caster-data.service';
 import { PlayerDataService } from 'src/app/services/player-data/player-data.service';
 import { SteamfitterDataService } from 'src/app/services/steamfitter-data/steamfitter-data.service';
-import { CasterDataService } from 'src/app/services/caster-data/caster-data.service';
 
 @Component({
   selector: 'app-event-templates',
   templateUrl: './event-templates.component.html',
-  styleUrls: ['./event-templates.component.css']
+  styleUrls: ['./event-templates.component.scss'],
 })
 export class EventTemplatesComponent {
-
   public matcher = new UserErrorStateMatcher();
   public isLinear = false;
   public eventTemplates$ = new Observable<EventTemplate[] | void>();
   public viewList = this.playerDataService.viewList;
-  public scenarioTemplateList = this.steamfitterDataService.scenarioTemplateList;
+  public scenarioTemplateList = this.steamfitterDataService
+    .scenarioTemplateList;
   public directoryList = this.casterDataService.directoryList;
 
   constructor(
@@ -41,13 +41,14 @@ export class EventTemplatesComponent {
     steamfitterDataService.getScenarioTemplatesFromApi();
     casterDataService.getDirectoriesFromApi();
   }
-
 }
-
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class UserErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || isSubmitted));
   }

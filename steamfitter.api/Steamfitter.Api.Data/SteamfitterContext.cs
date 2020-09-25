@@ -33,6 +33,7 @@ namespace Steamfitter.Api.Data
         public DbSet<UserPermissionEntity> UserPermissions { get; set; }
         public DbSet<FileEntity> Files { get; set; }
         public DbSet<BondAgent> BondAgents { get; set; }
+        public DbSet<VmCredentialEntity> VmCredentials { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

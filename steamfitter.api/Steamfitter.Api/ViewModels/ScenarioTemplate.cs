@@ -9,6 +9,7 @@ DM20-0181
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace Steamfitter.Api.ViewModels
 {
@@ -18,5 +19,7 @@ namespace Steamfitter.Api.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public int? DurationHours { get; set; }
+        public Guid? DefaultVmCredentialId { get; set; }
+        public List<VmCredential> VmCredentials { get; set; }
     }
 }

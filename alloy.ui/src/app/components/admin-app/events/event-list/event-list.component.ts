@@ -8,16 +8,25 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort, MatDialog } from '@angular/material';
-import { Event, EventService } from 'src/app/generated/alloy.api';
-import { EventEditComponent } from '../event-edit/event-edit.component';
-import { DialogService } from 'src/app/services/dialog/dialog.service';
-import {Subject} from 'rxjs/Subject';
-import { Observable  } from 'rxjs/Observable';
-import { of  } from 'rxjs/observable/of';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
-import { fromMatSort, sortRows, fromMatPaginator, paginateRows } from 'src/app/datasource-utils';
+import { Subject } from 'rxjs/Subject';
+import {
+  fromMatPaginator,
+  fromMatSort,
+  paginateRows,
+  sortRows,
+} from 'src/app/datasource-utils';
+import { Event, EventService } from 'src/app/generated/alloy.api';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
+import { EventEditComponent } from '../event-edit/event-edit.component';
+import { ComnSettingsService } from '@crucible/common';
 
 export interface Action {
   Value: string;
@@ -27,28 +36,34 @@ export interface Action {
 @Component({
   selector: 'app-admin-event-list',
   templateUrl: './event-list.component.html',
-  styleUrls: ['./event-list.component.css']
+  styleUrls: ['./event-list.component.scss'],
 })
 export class AdminEventListComponent implements OnInit {
+  displayedColumns: string[] = [
+    'name',
+    'username',
+    'status',
+    'statusDate',
+    'launchDate',
+    'expirationDate',
+  ];
+  filterString: string;
 
-  public displayedColumns: string[] = ['name', 'username', 'status', 'statusDate', 'launchDate', 'expirationDate'];
-  public filterString: string;
-
-  public editEventText = 'Edit Event';
-  public eventToEdit: Event;
-  public eventDataSource = new MatTableDataSource<Event>(new Array<Event>());
-  public activeEvents = new Array<Event>();
-  public failedEvents = new Array<Event>();
-  public endedEvents = new Array<Event>();
-  public showActive = true;
-  public showFailed = false;
-  public showEnded = false;
-
-
+  editEventText = 'Edit Event';
+  eventToEdit: Event;
+  eventDataSource = new MatTableDataSource<Event>(new Array<Event>());
+  activeEvents = new Array<Event>();
+  failedEvents = new Array<Event>();
+  endedEvents = new Array<Event>();
+  showActive = true;
+  showFailed = false;
+  showEnded = false;
+  topBarColor = '#719F94';
+  topBarTextColor = '#FFFFFF';
   // MatPaginator Output
-  public defaultPageSize = 10;
-  public pageEvent: PageEvent;
-  public isLoading: Boolean;
+  defaultPageSize = 10;
+  pageEvent: PageEvent;
+  isLoading: Boolean;
   displayedRows$: Observable<Event[]>;
   totalRows$: Observable<number>;
   sortEvents$: Observable<Sort>;
@@ -57,13 +72,19 @@ export class AdminEventListComponent implements OnInit {
   @Input() refresh: Subject<boolean>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(EventEditComponent, { static: true }) eventEditComponent: EventEditComponent;
+  @ViewChild(EventEditComponent, { static: true })
+  eventEditComponent: EventEditComponent;
 
   constructor(
     private eventService: EventService,
     public dialogService: DialogService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private settingsService: ComnSettingsService
+  ) {
+    // Set the topbar color from config file
+    this.topBarColor = this.settingsService.settings.AppTopBarHexColor ? this.settingsService.settings.AppTopBarHexColor : this.topBarColor;
+    this.topBarTextColor = this.settingsService.settings.AppTopBarHexTextColor ? this.settingsService.settings.AppTopBarHexTextColor : this.topBarTextColor;
+  }
 
   /**
    * Initialization
@@ -74,7 +95,7 @@ export class AdminEventListComponent implements OnInit {
     // this.eventDataSource.filterPredicate = (data: Event, filterString: string) => {
     //   return this.customEventFilter(data, filterString);
     // };
-    this.refresh.subscribe(shouldRefresh => {
+    this.refresh.subscribe((shouldRefresh) => {
       if (shouldRefresh) {
         this.refreshEvents();
       }
@@ -90,9 +111,9 @@ export class AdminEventListComponent implements OnInit {
   // }
 
   /**
-     * Called by UI to add a filter to the viewDataSource
-     * @param filterValue
-     */
+   * Called by UI to add a filter to the viewDataSource
+   * @param filterValue
+   */
   applyFilter(filterValue: string) {
     this.filterString = filterValue;
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -110,25 +131,31 @@ export class AdminEventListComponent implements OnInit {
   /**
    * Refreshes the events list and updates the mat table control
    */
-  public refreshEvents() {
+  refreshEvents() {
     this.isLoading = true;
     this.eventToEdit = undefined;
-    this.eventService.getEvents().subscribe(events => {
+    this.eventService.getEvents().subscribe((events) => {
       this.activeEvents.length = 0;
       this.endedEvents.length = 0;
       this.failedEvents.length = 0;
-      events.forEach(event => {
-        event.launchDate = !event.launchDate ? null : new Date(event.launchDate + 'Z');
+      events.forEach((event) => {
+        event.launchDate = !event.launchDate
+          ? null
+          : new Date(event.launchDate + 'Z');
         event.endDate = !event.endDate ? null : new Date(event.endDate + 'Z');
-        event.expirationDate = !event.expirationDate ? null : new Date(event.expirationDate + 'Z');
-        event.statusDate = !event.statusDate ? null : new Date(event.statusDate + 'Z');
+        event.expirationDate = !event.expirationDate
+          ? null
+          : new Date(event.expirationDate + 'Z');
+        event.statusDate = !event.statusDate
+          ? null
+          : new Date(event.statusDate + 'Z');
         switch (event.status) {
-          case ('Failed'): {
+          case 'Failed': {
             this.failedEvents.push(event);
             break;
           }
-          case ('Ended'):
-          case ('Expired'): {
+          case 'Ended':
+          case 'Expired': {
             this.endedEvents.push(event);
             break;
           }
@@ -149,8 +176,11 @@ export class AdminEventListComponent implements OnInit {
   filterAndSort() {
     this.eventDataSource.data = this.selectEvents();
     const rows$ = of(this.eventDataSource.filteredData);
-    this.totalRows$ = rows$.pipe(map(rows => rows.length));
-    this.displayedRows$ = rows$.pipe(sortRows(this.sortEvents$), paginateRows(this.pageEvents$));
+    this.totalRows$ = rows$.pipe(map((rows) => rows.length));
+    this.displayedRows$ = rows$.pipe(
+      sortRows(this.sortEvents$),
+      paginateRows(this.pageEvents$)
+    );
   }
 
   /**
@@ -177,24 +207,23 @@ export class AdminEventListComponent implements OnInit {
    */
   executeEventAction(action: string, eventGuid: string) {
     switch (action) {
-      case ('edit'): {
+      case 'edit': {
         // Edit event
-        this.eventService.getEvent(eventGuid)
-          .subscribe(event => {
-            const dialogRef = this.dialog.open(EventEditComponent);
-            dialogRef.afterOpened().subscribe(r => {
-              event.launchDate = new Date(event.launchDate + 'Z');
-              event.endDate = new Date(event.endDate + 'Z');
-              dialogRef.componentInstance.event = event;
-            });
+        this.eventService.getEvent(eventGuid).subscribe((event) => {
+          const dialogRef = this.dialog.open(EventEditComponent);
+          dialogRef.afterOpened().subscribe((r) => {
+            event.launchDate = new Date(event.launchDate + 'Z');
+            event.endDate = new Date(event.endDate + 'Z');
+            dialogRef.componentInstance.event = event;
+          });
 
-            dialogRef.componentInstance.editComplete.subscribe((newEvent) => {
-              dialogRef.close();
-              this.refreshEvents();
-              if (!!newEvent) {
-                this.executeEventAction('edit', newEvent.id);
-              }
-            });
+          dialogRef.componentInstance.editComplete.subscribe((newEvent) => {
+            dialogRef.close();
+            this.refreshEvents();
+            if (!!newEvent) {
+              this.executeEventAction('edit', newEvent.id);
+            }
+          });
         });
         break;
       }
@@ -205,7 +234,6 @@ export class AdminEventListComponent implements OnInit {
     }
   }
 
-
   /**
    * Adds a new event
    */
@@ -215,11 +243,16 @@ export class AdminEventListComponent implements OnInit {
     startDate.setHours(8, 0, 0, 0);
     const endDate = new Date(startDate);
     endDate.setMonth(startDate.getMonth() + 1);
-    const event = {name: 'New Event', description: 'Add description', status: 'ready', startDate: startDate, endDate: endDate};
-    this.eventService.createEvent(<Event>event).subscribe(ex => {
+    const event = {
+      name: 'New Event',
+      description: 'Add description',
+      status: 'ready',
+      startDate: startDate,
+      endDate: endDate,
+    };
+    this.eventService.createEvent(<Event>event).subscribe((ex) => {
       this.refreshEvents();
       this.executeEventAction('edit', ex.id);
     });
   }
-
 }

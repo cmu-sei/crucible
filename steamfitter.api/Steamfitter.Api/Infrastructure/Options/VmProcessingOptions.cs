@@ -19,12 +19,11 @@ namespace Steamfitter.Api.Infrastructure.Options
         public string ApiBaseUrl { get; set; }
         public string ApiUsername { get; set; }
         public string ApiPassword { get; set; }
-        public string ForemanUrl { get; set; }
-        public Guid ForemanWebhookId { get; set; }
         public int VmListUpdateIntervalMinutes { get; set; }
         public int HealthCheckSeconds { get; set; }
         public int TaskProcessIntervalMilliseconds { get; set; }
         public int TaskProcessMaxWaitSeconds { get; set; }
+        public int ExpirationCheckSeconds { get; set; }
         public Dictionary<string, string> ApiParameters { get; set; }
     }
 }

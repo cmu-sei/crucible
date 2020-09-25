@@ -14,7 +14,7 @@ import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import {Router, ActivatedRoute} from '@angular/router';
-import {ScenarioTemplate, ScenarioTemplateService} from 'src/app/swagger-codegen/dispatcher.api';
+import {ScenarioTemplate, ScenarioTemplateService, VmCredential, VmCredentialService} from 'src/app/swagger-codegen/dispatcher.api';
 import {map, take, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable, combineLatest} from 'rxjs';
 import {TaskDataService} from 'src/app/data/task/task-data.service';
@@ -44,6 +44,7 @@ export class ScenarioTemplateDataService {
     private scenarioTemplateQuery: ScenarioTemplateQuery,
     private scenarioTemplateService: ScenarioTemplateService,
     private taskDataService: TaskDataService,
+    private vmCredentialService: VmCredentialService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -115,14 +116,14 @@ export class ScenarioTemplateDataService {
     });
   }
 
-  loadById(id: string): Observable<ScenarioTemplate> {
+  loadById(id: string) {
     this.scenarioTemplateStore.setLoading(true);
     return this.scenarioTemplateService.getScenarioTemplate(id).pipe(
-      tap((_scenarioTemplate: ScenarioTemplate) => {
-        this.scenarioTemplateStore.upsert(_scenarioTemplate.id, {..._scenarioTemplate});
-      }),
-      tap(() => { this.scenarioTemplateStore.setLoading(false); })
-    );
+      tap(() => { this.scenarioTemplateStore.setLoading(false); }),
+      take(1)
+    ).subscribe(s => {
+      this.scenarioTemplateStore.upsert(s.id, {...s});
+    });
   }
 
   add(scenarioTemplate: ScenarioTemplate) {
@@ -169,6 +170,18 @@ export class ScenarioTemplateDataService {
 
   setActive(id: string) {
     this.router.navigate([], { queryParams: { scenarioTemplateId: id }, queryParamsHandling: 'merge'});
+  }
+
+  addVmCredential(vmCredential: VmCredential) {
+    this.vmCredentialService.createVmcredential(vmCredential).pipe(take(1)).subscribe(() => {
+      this.loadById(vmCredential.scenarioTemplateId);
+    });
+  }
+
+  deleteVmCredential(scenarioTemplateId: string, vmCredentialId: string) {
+    this.vmCredentialService.deleteVmcredential(vmCredentialId).pipe(take(1)).subscribe(() => {
+      this.loadById(scenarioTemplateId);
+    });
   }
 
   setPageEvent(pageEvent: PageEvent) {

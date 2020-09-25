@@ -8,31 +8,33 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+import { HttpEventType } from '@angular/common/http';
 import {
-  Component,
-  OnInit,
-  ViewChild,
   AfterViewInit,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
   Input,
+  OnInit,
+  Output,
+  ViewChild,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { FileService } from '../../services/file/file.service';
+import { ComnAuthQuery, Theme } from '@crucible/common';
+import { SelectContainerComponent } from 'ngx-drag-to-select';
+import { Observable } from 'rxjs';
+import { filter, switchMap, take } from 'rxjs/operators';
 import { DialogService } from '../../services/dialog/dialog.service';
+import { FileService } from '../../services/file/file.service';
 import { TeamsService } from '../../services/teams/teams.service';
-import { HttpEventType } from '@angular/common/http';
-import { take, switchMap, filter } from 'rxjs/operators';
 import { VmModel } from '../../vms/state/vm.model';
 import { VmService } from '../../vms/state/vms.service';
-import { SelectContainerComponent } from 'ngx-drag-to-select';
 
 @Component({
   selector: 'app-vm-list',
   templateUrl: './vm-list.component.html',
-  styleUrls: ['./vm-list.component.css'],
+  styleUrls: ['./vm-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VmListComponent implements OnInit, AfterViewInit {
@@ -50,8 +52,8 @@ export class VmListComponent implements OnInit, AfterViewInit {
   public filterString = '';
   public showIps = false;
   public ipv4Only = true;
-
   public selectedVms = new Array<string>();
+  public theme$: Observable<Theme>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(SelectContainerComponent)
@@ -67,8 +69,11 @@ export class VmListComponent implements OnInit, AfterViewInit {
     public vmService: VmService,
     private fileService: FileService,
     private dialogService: DialogService,
-    private teamsService: TeamsService
-  ) {}
+    private teamsService: TeamsService,
+    private authQuery: ComnAuthQuery
+  ) {
+    this.theme$ = authQuery.userTheme$;
+  }
 
   ngOnInit() {
     this.pageEvent = new PageEvent();

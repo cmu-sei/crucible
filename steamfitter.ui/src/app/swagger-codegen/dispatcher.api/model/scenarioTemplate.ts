@@ -19,6 +19,7 @@ DM20-0181
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { VmCredential } from './vmCredential';
 
 
 export interface ScenarioTemplate {
@@ -26,6 +27,8 @@ export interface ScenarioTemplate {
     name?: string;
     description?: string;
     durationHours?: number;
+    defaultVmCredentialId?: string | null;
+    vmCredentials?: Array<VmCredential> | null;
     dateCreated?: Date;
     dateModified?: Date;
     createdBy?: string;

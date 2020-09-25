@@ -10,26 +10,43 @@ DM20-0181
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <div class="sp-icon">
-    <img height="35" src="../../../assets/svg-icons/build-24px.svg" alt="Event Templates">
+    <mat-icon
+      class="icon35px"
+      svgIcon="clipboard_outline"
+      [ngStyle]="{'color': topBarColor}"
+      alt="Event Templates"
+    ></mat-icon>
   </div>
-  <mat-icon style="margin-left: 40px; transform:scale(0.85); margin-right: 5px;" svgIcon="ic_magnify_search"></mat-icon>
-  <mat-form-field style="width: 300px;">
-    <input matInput type="text" [formControl]="searchControl" placeholder="Search">
-  </mat-form-field>
-  <div style="width: 30px;">
-    <button *ngIf="searchControl.value !== ''" fxLayoutAlign="start center" mat-icon-button (click)="clearFilter()" style="outline: none;"
-      title="Clear Search">
-      <mat-icon style="transform:scale(0.85);" svgIcon="ic_cancel_circle"></mat-icon>
-    </button>
+  <div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="5">
+    <mat-icon
+      class="text icon-24px search-icon"
+      svgIcon="ic_magnify_search"
+    ></mat-icon>
+    <mat-form-field class="search-field">
+      <input matInput type="text" [formControl]="searchControl" placeholder="Search">
+    </mat-form-field>
+    <div class="clear-search">
+      <button
+        mat-icon-button
+        fxLayoutAlign="start center"
+        (click)="clearFilter()"
+        title="Clear Search"
+      >
+        <mat-icon
+          class="text icon-20px"
+          svgIcon="ic_cancel_circle"
+        ></mat-icon>
+      </button>
+    </div>
   </div>
-  <div style="width: 100px;">
+  <div class="add-new-button">
     <button mat-stroked-button (click)="addNewEventTemplate()">Add New Event Template</button>
   </div>
 </div>
 
 
 <mat-card *ngIf="isLoading"
-  style="display: flex; justify-content: center; align-items: center">
+  class="spinner">
  <mat-progress-spinner
    color="primary"
    mode="indeterminate">
@@ -47,12 +64,24 @@ DM20-0181
   <mat-expansion-panel *ngFor="let item of eventTemplates" [expanded]="item.id === eventTemplatesService.selectedEventTemplateId">
     <mat-expansion-panel-header class="mat-row" (click)="togglePanel(item)">
       <span class="mat-cell">
-        <button mat-icon-button ngxClipboard [cbContent]="item.id" (click)="$event.stopPropagation();" title="Copy:  {{item.id}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <button
+          mat-icon-button
+          ngxClipboard
+          [cbContent]="item.id"
+          (click)="$event.stopPropagation();"
+          title="Copy:  {{item.id}}"
+          class="copy-button"
+        >
+          <mat-icon
+            class="icon-20px"
+            svgIcon="ic_clipboard_copy"
+          ></mat-icon>
+        </button>
         {{item.name}}
       </span>
-      <span class="mat-cell">{{item.description}}</span>
-      <span class="mat-cell">{{item.durationHours}}</span>
-      <span class="mat-cell">{{item.dateCreated | date: 'yyyy-MM-dd'}}</span>
+      <span class="mat-cell detail-cell" title="{{item.description}}">{{item.description && item.description.length > 80 ? item.description.slice(0, 80) + ' ...' : item.description}}</span>
+      <span class="mat-cell detail-cell">{{item.durationHours}}</span>
+      <span class="mat-cell detail-cell">{{item.dateCreated | date: 'yyyy-MM-dd'}}</span>
     </mat-expansion-panel-header>
     <app-event-template-edit
       [eventTemplate]="item"

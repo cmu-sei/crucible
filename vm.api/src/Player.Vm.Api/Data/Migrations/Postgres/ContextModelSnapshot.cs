@@ -55,6 +55,10 @@ namespace Player.Vm.Api.Data.Migrations.Postgres
                         .HasColumnName("allowed_networks")
                         .HasColumnType("text[]");
 
+                    b.Property<string>("ConsoleConnectionInfo")
+                        .HasColumnName("console_connection_info")
+                        .HasColumnType("text");
+
                     b.Property<bool>("HasPendingTasks")
                         .HasColumnName("has_pending_tasks")
                         .HasColumnType("boolean");

@@ -8,99 +8,243 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div fxLayout="row" class="add-margin" (contextmenu)="onContextMenu($event, null)">
-  <div fxFlex="100" fxLayoutAlign="start">
-    <div>
-      <b>Tasks:</b>&nbsp;&nbsp;&nbsp;
-      <button mat-icon-button title="Add a Task" (click)="onContextNew(null)">
-        <mat-icon svgIcon="ic_plus_circle_outline_48px"></mat-icon>
-      </button>
-      <button mat-icon-button title="Paste a Task" (click)="onContextPaste(null)" *ngIf="!!clipboard">
-        <mat-icon svgIcon="content_paste"></mat-icon>
-      </button>
+<mat-card flex="100" *ngIf="!(isLoading | async)">
+  <div
+    fxLayout="row"
+    (contextmenu)="onContextMenu($event, null)"
+  >
+    <div fxFlex="100" fxLayoutAlign="start">
+      <div>
+        <b>Tasks:</b>&nbsp;&nbsp;&nbsp;
+        <button mat-icon-button title="Add a Task" (click)="onContextNew(null)">
+          <mat-icon
+            class="icon-color"
+            svgIcon="ic_plus_circle_outline"
+          ></mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          title="Paste a Task"
+          (click)="onContextPaste(null)"
+          *ngIf="!!clipboard"
+        >
+          <mat-icon svgIcon="content_paste"></mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-</div>
-<div fxLayout="row" class="add-margin">
-  <div fxFlex="100" fxLayoutAlign="start">
-    <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; width:100%">
-      <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
-    </mat-card>
-    <mat-tree fxFlex="95" [dataSource]="dataSource" [treeControl]="treeControl" *ngIf="!isLoading">
-      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding style="margin-top: 5px;">
-        <button mat-icon-button disabled *ngIf="!node.expandable"></button>
-        <button mat-icon-button matTreeNodeToggle *ngIf="!!node.expandable"
-          [matTreeNodeToggleRecursive]="false"
-          [attr.aria-label]="'toggle ' + node.task.name">
-          <mat-icon svgIcon="ic_chevron_down_black_24px" *ngIf="treeControl.isExpanded(node)"></mat-icon>
-          <mat-icon svgIcon="ic_chevron_right_black_24px" *ngIf="!treeControl.isExpanded(node)"></mat-icon>
-        </button>
-        <mat-expansion-panel [expanded]="areDetailsExpanded(node)" (click)="toggleNodeDetails(node); $event.stopPropagation();">
-          <mat-expansion-panel-header (contextmenu)="onContextMenu($event, node)">
-            <mat-panel-title>
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <button mat-icon-button title="Task Menu" (click)="onContextMenu($event, node); $event.stopPropagation();">
-                  <mat-icon svgIcon="menu_24px"></mat-icon>
-                </button>
-                <img src="assets/img/{{ node.task.triggerCondition.toLowerCase() }}.png" class="icon16" title="Runs on {{ node.task.triggerCondition }}" />
-                <mat-label>{{node.task.name}}</mat-label>
+  <div fxLayout="row">
+    <div fxFlex="100" fxLayoutAlign="start">
+      <mat-tree
+        fxFlex="100"
+        [dataSource]="dataSource"
+        [treeControl]="treeControl"
+      >
+        <mat-tree-node
+          *matTreeNodeDef="let node"
+          matTreeNodePadding
+          style="margin-top: 5px;"
+        >
+          <button mat-icon-button disabled *ngIf="!node.expandable"></button>
+          <button
+            mat-icon-button
+            matTreeNodeToggle
+            *ngIf="!!node.expandable"
+            [matTreeNodeToggleRecursive]="false"
+            [attr.aria-label]="'toggle ' + node.task.name"
+          >
+            <mat-icon
+              svgIcon="ic_chevron_down"
+              *ngIf="treeControl.isExpanded(node)"
+            ></mat-icon>
+            <mat-icon
+              class="icon-color"
+              svgIcon="ic_chevron_right"
+              *ngIf="!treeControl.isExpanded(node)"
+            ></mat-icon>
+          </button>
+          <mat-expansion-panel
+            fxFlex="100"
+            [expanded]="areDetailsExpanded(node)"
+            (click)="toggleNodeDetails(node); $event.stopPropagation()"
+          >
+            <mat-expansion-panel-header
+              (contextmenu)="onContextMenu($event, node)"
+            >
+              <mat-panel-title>
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+                  <button
+                    mat-icon-button
+                    title="Task Menu"
+                    (click)="onContextMenu($event, node); $event.stopPropagation()"
+                  >
+                    <mat-icon class="icon-color" svgIcon="menu"></mat-icon>
+                  </button>
+                  <mat-icon
+                    class="icon-color icon-20"
+                    svgIcon="{{node.task.triggerCondition.toLowerCase()}}"
+                    title="Runs on {{ node.task.triggerCondition }}"
+                  ></mat-icon>
+                  <mat-label>&nbsp;{{ node.task.name }}</mat-label>
+                </div>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <span (click)="$event.stopPropagation();">
+              <div class="taskText"></div>
+              <div class="taskText">
+                <b>Description:</b> {{ node.task.description }}
               </div>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="taskText">
-          </div>
-          <div class="taskText"><b>Description:</b> {{node.task.description}}</div>
-          <div class="taskText"><b>API:</b> {{node.task.apiUrl}}</div>
-          <div class="taskText"><b>Action:</b> {{node.task.action}}</div>
-          <div class="taskText"><b>Action Parameters:</b><br/> <span *ngFor="let k of node.task.actionParameters | keyvalue">&nbsp;&nbsp;&nbsp;&nbsp;{{k.key}}: {{k.key.toLowerCase() === 'password' ? '**************' : k.value}}<br/></span></div>
-          <div class="taskText"><b>Expected Output:</b> {{node.task.expectedOutput}}</div>
-          <div class="taskText"><b>Delay (seconds):</b> {{node.task.delaySeconds}}</div>
-          <div class="taskText"><b>Iterations:</b> {{node.task.iterations}}</div>
-          <div class="taskText"><b>Iteration Interval (seconds):</b> {{node.task.intervalSeconds}}</div>
-          <div class="taskText"><b>Iteration Termination:</b> {{node.task.iterationTermination}}</div>
-          <div class="taskText"><b>Expiration (seconds):</b> {{node.task.experationSeconds}}</div>
-          <div class="taskText" *ngIf="!!node.results && node.results.length > 0" (click)="$event.stopPropagation();">
-            <b>Results:</b>
-            <app-results
-              [results]=resultList
-              [taskId]="node.task.id">
-          </app-results>
-          </div>
-        </mat-expansion-panel>
-      </mat-tree-node>
-    </mat-tree>
+              <div class="taskText"><b>API:</b> {{ node.task.apiUrl }}</div>
+              <div class="taskText"><b>Action:</b> {{ node.task.action }}</div>
+              <div class="taskText">
+                <b>Action Parameters:</b><br />
+                <span *ngFor="let k of node.task.actionParameters | keyvalue"
+                  >&nbsp;&nbsp;&nbsp;&nbsp;{{ k.key }}:
+                  {{
+                    k.key.toLowerCase() === 'password' ? '**************' : k.value
+                  }}<br
+                /></span>
+              </div>
+              <div class="taskText">
+                <b>Expected Output:</b> {{ node.task.expectedOutput }}
+              </div>
+              <div class="taskText">
+                <b>Delay (seconds):</b> {{ node.task.delaySeconds }}
+              </div>
+              <div class="taskText">
+                <b>Iterations:</b> {{ node.task.iterations }}
+              </div>
+              <div class="taskText">
+                <b>Iteration Interval (seconds):</b> {{ node.task.intervalSeconds }}
+              </div>
+              <div class="taskText">
+                <b>Iteration Termination:</b> {{ node.task.iterationTermination }}
+              </div>
+              <div class="taskText">
+                <b>Expiration (seconds):</b> {{ node.task.experationSeconds }}
+              </div>
+              <div
+                class="taskText"
+                *ngIf="!!node.results && node.results.length > 0"
+              >
+                <b>Results:</b>
+                <app-results [results]="resultList" [taskId]="node.task.id">
+                </app-results>
+              </div>
+            </span>
+          </mat-expansion-panel>
+        </mat-tree-node>
+      </mat-tree>
+    </div>
   </div>
-</div>
+</mat-card>
+<mat-card flex *ngIf="isLoading | async">
+  <div fxLayout="column" fxLayoutAlign="start center" fxFlexAlign="center">
+    <div flex fxFlexAlign="center">
+      <mat-progress-spinner color="accent" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+  </div>
+</mat-card>
 
-
-<div style="visibility: hidden; position: fixed"
-    [style.left]="contextMenuPosition.x"
-    [style.top]="contextMenuPosition.y"
-    [matMenuTriggerFor]="contextMenu">
-</div>
+<div
+  style="visibility: hidden; position: fixed;"
+  [style.left]="contextMenuPosition.x"
+  [style.top]="contextMenuPosition.y"
+  [matMenuTriggerFor]="contextMenu"
+></div>
 <mat-menu #contextMenu="matMenu">
   <ng-template matMenuContent let-item="item">
     <span *ngIf="!item; else taskContext">
-      <button mat-menu-item (click)="onContextPaste(item)" fxLayout="row" *ngIf="!!clipboard">Paste</button>
-      <button mat-menu-item (click)="onContextNew(item)" fxLayout="row">New</button>
+      <button
+        mat-menu-item
+        (click)="onContextPaste(item)"
+        fxLayout="row"
+        *ngIf="!!clipboard"
+      >
+        Paste
+      </button>
+      <button mat-menu-item (click)="onContextNew(item)" fxLayout="row">
+        New
+      </button>
     </span>
     <ng-template #taskContext>
       <span *ngIf="isEditableTask(item.task.id); else readOnly">
-        <button mat-menu-item (click)="onContextEdit(item.task)" fxLayout="row">Edit</button>
-        <button mat-menu-item (click)="onContextCopy(item.task.id)" fxLayout="row">Copy</button>
-        <button mat-menu-item (click)="onContextCut(item.task.id)" fxLayout="row">Cut</button>
-        <button mat-menu-item (click)="onContextPaste(item.task.id)" fxLayout="row" *ngIf="!!clipboard">Paste</button>
-        <button mat-menu-item (click)="onContextNew(item.task)" fxLayout="row">New</button>
-        <button mat-menu-item (click)="onContextDelete(item.task)" fxLayout="row">Delete</button>
-        <button mat-menu-item (click)="onContextExecute(item.task)" fxLayout="row" *ngIf="isExecutableTask(item.task)">Execute</button>
+        <button mat-menu-item (click)="onContextEdit(item.task)" fxLayout="row">
+          Edit
+        </button>
+        <button
+          mat-menu-item
+          (click)="onContextCopy(item.task.id)"
+          fxLayout="row"
+        >
+          Copy
+        </button>
+        <button
+          mat-menu-item
+          (click)="onContextCut(item.task.id)"
+          fxLayout="row"
+        >
+          Cut
+        </button>
+        <button
+          mat-menu-item
+          (click)="onContextPaste(item.task.id)"
+          fxLayout="row"
+          *ngIf="!!clipboard"
+        >
+          Paste
+        </button>
+        <button mat-menu-item (click)="onContextNew(item.task)" fxLayout="row">
+          New
+        </button>
+        <button
+          mat-menu-item
+          (click)="onContextDelete(item.task)"
+          fxLayout="row"
+        >
+          Delete
+        </button>
+        <button
+          mat-menu-item
+          (click)="onContextExecute(item.task)"
+          fxLayout="row"
+          *ngIf="isExecutableTask(item.task)"
+        >
+          Execute
+        </button>
       </span>
       <ng-template #readOnly>
-        <button mat-menu-item (click)="onContextCopy(item.task.id)" fxLayout="row">Copy</button>
-        <button mat-menu-item (click)="onContextCut(item.task.id)" fxLayout="row">Cut</button>
-        <button mat-menu-item (click)="onContextDelete(item.task)" fxLayout="row">Delete</button>
-        <button mat-menu-item (click)="onContextExecute(item.task)" fxLayout="row" *ngIf="isExecutableTask(item.task)">Re-Execute</button>
+        <button
+          mat-menu-item
+          (click)="onContextCopy(item.task.id)"
+          fxLayout="row"
+        >
+          Copy
+        </button>
+        <button
+          mat-menu-item
+          (click)="onContextCut(item.task.id)"
+          fxLayout="row"
+        >
+          Cut
+        </button>
+        <button
+          mat-menu-item
+          (click)="onContextDelete(item.task)"
+          fxLayout="row"
+        >
+          Delete
+        </button>
+        <button
+          mat-menu-item
+          (click)="onContextExecute(item.task)"
+          fxLayout="row"
+          *ngIf="isExecutableTask(item.task)"
+        >
+          Re-Execute
+        </button>
       </ng-template>
     </ng-template>
   </ng-template>
 </mat-menu>
-

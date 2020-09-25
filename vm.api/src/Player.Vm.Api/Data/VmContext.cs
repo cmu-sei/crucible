@@ -31,7 +31,7 @@ namespace Player.Vm.Api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new VmTeamConfiguration());
+            modelBuilder.ApplyConfigurations();
 
             // Apply PostgreSQL specific options
             if (_options.FindExtension<NpgsqlOptionsExtension>() != null)

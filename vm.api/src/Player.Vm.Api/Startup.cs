@@ -42,6 +42,7 @@ using System.Reflection;
 using Player.Vm.Api.Hubs;
 using System.Threading.Tasks;
 using Player.Vm.Api.Features.Shared.Behaviors;
+using Microsoft.IdentityModel.Logging;
 
 namespace Player.Vm.Api
 {
@@ -108,6 +109,10 @@ namespace Player.Vm.Api
             services
                 .Configure<IdentityClientOptions>(Configuration.GetSection("IdentityClient"))
                 .AddScoped(config => config.GetService<IOptionsSnapshot<IdentityClientOptions>>().Value);
+
+            services
+                .Configure<ConsoleUrlOptions>(Configuration.GetSection("ConsoleUrls"))
+                .AddScoped(config => config.GetService<IOptionsSnapshot<ConsoleUrlOptions>>().Value);
 
             services.AddCors(options => options.UseConfiguredCors(Configuration.GetSection("CorsPolicy")));
             services.AddMvc(options =>
@@ -214,6 +219,11 @@ namespace Player.Vm.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                IdentityModelEventSource.ShowPII = true;
+            }
+
             app.UseCustomExceptionHandler();
             app.UseRouting();
             app.UseCors();
