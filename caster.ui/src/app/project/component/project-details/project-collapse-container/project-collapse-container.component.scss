@@ -66,3 +66,17 @@ a {
   margin-left: 50px;
   margin-right: 40px;
 }
+
+.caster-icon {
+  transform: scale(2); 
+  width: 60px;
+}
+
+.scroll-y {
+  overflow-y: auto;
+}
+
+.icon-text {
+  margin-left: 10px; 
+  font-family: open_sansbold;
+}

@@ -11,8 +11,8 @@ DM20-0181
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ComnAuthQuery, Theme } from '@crucible/common';
+import { DomSanitizer, Title } from '@angular/platform-browser';
+import { ComnAuthQuery, Theme, ComnSettingsService } from '@crucible/common';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -30,12 +30,17 @@ export class AppComponent implements OnDestroy {
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
     private overlayContainer: OverlayContainer,
-    private authQuery: ComnAuthQuery
+    private authQuery: ComnAuthQuery,
+    private settingsService: ComnSettingsService,
+    private titleService: Title
   ) {
     this.theme$.pipe(takeUntil(this.unsubscribe$)).subscribe((theme) => {
       this.setTheme(theme);
     });
     this.registerIcons();
+
+    // Set the Title for when the VM app is in it's own browser tab.
+    titleService.setTitle(settingsService.settings.AppTitle);
   }
 
   registerIcons() {
@@ -103,6 +108,12 @@ export class AppComponent implements OnDestroy {
       'ic_clipboard_copy',
       this.sanitizer.bypassSecurityTrustResourceUrl(
         'assets/svg-icons/ic_clipboard_copy.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'ic_crucible_player',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_crucible_player.svg'
       )
     );
   }

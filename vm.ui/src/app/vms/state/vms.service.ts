@@ -10,18 +10,18 @@ DM20-0181
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
-import { tap } from 'rxjs/operators';
-import { VmModel } from './vm.model';
-import { VmsStore } from './vms.store';
-import { SettingsService } from '../../services/settings/settings.service';
 import { Router } from '@angular/router';
+import { ComnSettingsService } from '@crucible/common';
+import { ID } from '@datorama/akita';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import {
-  VmsService,
   BulkPowerOperation,
   BulkPowerOperationResponse,
+  VmsService,
 } from '../../generated/vm-api';
+import { VmModel } from './vm.model';
+import { VmsStore } from './vms.store';
 
 @Injectable({ providedIn: 'root' })
 export class VmService {
@@ -33,7 +33,7 @@ export class VmService {
   constructor(
     private vmsStore: VmsStore,
     private http: HttpClient,
-    private settings: SettingsService,
+    private settings: ComnSettingsService,
     private router: Router,
     private vmsService: VmsService
   ) {
@@ -44,8 +44,8 @@ export class VmService {
       'teamId'
     ];
 
-    this.vmUrl = `${settings.ApiUrl}/views/${this.viewId}/vms`;
-    this.teamUrl = `${settings.ApiUrl}/teams/${this.teamId}/vms`;
+    this.vmUrl = `${settings.settings.ApiUrl}/views/${this.viewId}/vms`;
+    this.teamUrl = `${settings.settings.ApiUrl}/teams/${this.teamId}/vms`;
   }
 
   add(vm: VmModel) {
@@ -90,7 +90,7 @@ export class VmService {
     viewId: string,
     name: string
   ): Observable<Array<VmModel>> {
-    const url = `${this.settings.ApiUrl}/views/${viewId}/vms?name=${name}`;
+    const url = `${this.settings.settings.ApiUrl}/views/${viewId}/vms?name=${name}`;
     return this.http.get<Array<VmModel>>(url);
   }
 

@@ -8,45 +8,12 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SettingsService } from './services/settings/settings.service';
-import { AuthGuard } from './services/auth/auth-guard.service';
-import { AuthService } from './services/auth/auth.service';
-import { AuthInterceptor } from './services/auth/auth.interceptor.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { APP_INITIALIZER, ErrorHandler } from '@angular/core';
-import { ErrorService } from './services/error/error.service';
-import { BASE_PATH } from './swagger-codegen/dispatcher.api';
-import { ApiModule as SwaggerCodegenApiModule } from './swagger-codegen/dispatcher.api/api.module';
-import { AuthCallbackComponent } from './components/auth/auth-callback.component';
-import { AuthCallbackSilentComponent } from './components/auth/auth-callback-silent.component';
-import { HomeAppComponent } from './components/home-app/home-app.component';
-import { AuthLogoutComponent } from './components/auth/auth-logout.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { VmListComponent } from './components/vm-list/vm-list.component';
-import { SystemMessageService } from './services/system-message/system-message.service';
-import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
-import { VmTaskExecuteComponent } from './components/vm-task-execute/vm-task-execute.component';
-import { ScenarioTemplatesComponent } from './components/scenario-templates/scenario-templates.component';
-import { ScenarioTemplateEditComponent } from './components/scenario-templates/scenario-template-edit/scenario-template-edit.component';
-import { ScenarioTemplateEditDialogComponent } from './components/scenario-templates/scenario-template-edit-dialog/scenario-template-edit-dialog.component';
-import { ScenarioTemplateListComponent } from './components/scenario-templates/scenario-template-list/scenario-template-list.component';
-import { ScenariosComponent } from './components/scenarios/scenarios.component';
-import { ScenarioEditComponent } from './components/scenarios/scenario-edit/scenario-edit.component';
-import { ScenarioEditDialogComponent } from './components/scenarios/scenario-edit-dialog/scenario-edit-dialog.component';
-import { ScenarioListComponent } from './components/scenarios/scenario-list/scenario-list.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { ClipboardModule } from 'ngx-clipboard';
-import { AdminContainerComponent } from './components/admin/admin-container/admin-container.component';
-import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
@@ -81,21 +48,61 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-import { ResultsComponent } from './components/results/results.component';
-import { DialogService } from './services/dialog/dialog.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ComnAuthModule,
+  ComnSettingsConfig,
+  ComnSettingsModule,
+  ComnSettingsService,
+} from '@crucible/common';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { ClipboardModule } from 'ngx-clipboard';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AdminContainerComponent } from './components/admin/admin-container/admin-container.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 import { HistoryComponent } from './components/history/history.component';
-import { TaskTreeComponent } from './components/tasks/task-tree/task-tree.component';
+import { HomeAppComponent } from './components/home-app/home-app.component';
+import { ResultsComponent } from './components/results/results.component';
+import { ScenarioTemplateEditDialogComponent } from './components/scenario-templates/scenario-template-edit-dialog/scenario-template-edit-dialog.component';
+import { ScenarioTemplateEditComponent } from './components/scenario-templates/scenario-template-edit/scenario-template-edit.component';
+import { ScenarioTemplateListComponent } from './components/scenario-templates/scenario-template-list/scenario-template-list.component';
+import { ScenarioTemplatesComponent } from './components/scenario-templates/scenario-templates.component';
+import { ScenarioEditDialogComponent } from './components/scenarios/scenario-edit-dialog/scenario-edit-dialog.component';
+import { ScenarioEditComponent } from './components/scenarios/scenario-edit/scenario-edit.component';
+import { ScenarioListComponent } from './components/scenarios/scenario-list/scenario-list.component';
+import { ScenariosComponent } from './components/scenarios/scenarios.component';
+import { AddDialogComponent } from './components/vm-credentials/add-dialog/add-dialog.component';
+import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
+import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
+import { TopbarComponent } from './components/shared/top-bar/topbar.component';
 import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
+import { TaskTreeComponent } from './components/tasks/task-tree/task-tree.component';
 import { TasksComponent } from './components/tasks/tasks.component';
-import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
-import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
+import { VmListComponent } from './components/vm-list/vm-list.component';
+import { VmCredentialsComponent } from './components/vm-credentials/vm-credentials.component';
+import { VmTaskExecuteComponent } from './components/vm-task-execute/vm-task-execute.component';
+import { UserDataService } from './data/user/user-data.service';
+import { DialogService } from './services/dialog/dialog.service';
+import { SystemMessageService } from './services/system-message/system-message.service';
+import { BASE_PATH } from './swagger-codegen/dispatcher.api';
+import { ApiModule as SwaggerCodegenApiModule } from './swagger-codegen/dispatcher.api/api.module';
+
+const settings: ComnSettingsConfig = {
+  url: 'assets/config/settings.json',
+  envUrl: 'assets/config/settings.env.json',
+};
+
+export function getBasePath(settingsSvc: ComnSettingsService) {
+  return settingsSvc.settings.ApiUrl;
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthCallbackComponent,
-    AuthCallbackSilentComponent,
-    AuthLogoutComponent,
     HomeAppComponent,
     VmListComponent,
     SystemMessageComponent,
@@ -109,13 +116,16 @@ import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
     ScenarioEditDialogComponent,
     ScenarioListComponent,
     ResultsComponent,
+    AddDialogComponent,
     ConfirmDialogComponent,
     HistoryComponent,
     TaskTreeComponent,
     TaskEditComponent,
     TasksComponent,
+    VmCredentialsComponent,
     AdminContainerComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    TopbarComponent,
   ],
   imports: [
     AkitaNgDevtools.forRoot(),
@@ -166,56 +176,30 @@ import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
     MatTreeModule,
     CdkTreeModule,
     NgxMaterialTimepickerModule,
-    ClipboardModule
+    ClipboardModule,
+    ComnAuthModule.forRoot(),
+    ComnSettingsModule.forRoot(),
   ],
-  exports: [
-    MatSortModule
-  ],
+  exports: [MatSortModule],
   providers: [
-    AuthService,
-    SettingsService,
-    AuthGuard,
-    AuthService,
     DialogService,
     SystemMessageService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initConfig,
-      deps: [SettingsService],
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
+    UserDataService,
     {
       provide: BASE_PATH,
       useFactory: getBasePath,
-      deps: [SettingsService],
-      multi: true
-    // },
-    // {
-    //   provide: ErrorHandler,
-    //   useClass: ErrorService
-    }
+      deps: [ComnSettingsService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     SystemMessageComponent,
+    AddDialogComponent,
     ConfirmDialogComponent,
     ScenarioTemplateEditDialogComponent,
     ScenarioEditDialogComponent,
-    TaskEditComponent
-  ]
+    TaskEditComponent,
+  ],
 })
-export class AppModule { }
-
-export function initConfig(settings: SettingsService) {
-  return () => settings.load();
-}
-
-export function getBasePath(settings: SettingsService) {
-  return settings.ApiUrl;
-}
-
+export class AppModule {}

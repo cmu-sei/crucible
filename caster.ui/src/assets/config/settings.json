@@ -11,6 +11,7 @@
     "silent_redirect_uri": "http://localhost:4310/auth-callback-silent/"
   },
   "UseLocalAuthStorage": true,
-  "AppTopBarHexColor": "#0FABEA",
+  "AppTopBarHexColor": "#E9831C",
+  "AppTopBarHexTextColor": "#FFFFFF",
   "AppTopBarText": "Caster"
 }

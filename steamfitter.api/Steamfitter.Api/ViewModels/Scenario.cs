@@ -10,6 +10,7 @@ DM20-0181
 
 using Steamfitter.Api.Data;
 using System;
+using System.Collections.Generic;
 
 namespace Steamfitter.Api.ViewModels
 {
@@ -25,5 +26,7 @@ namespace Steamfitter.Api.ViewModels
         public Guid? ScenarioTemplateId { get; set; }
         public Guid? ViewId { get; set; }
         public string View{ get; set; }
+        public Guid? DefaultVmCredentialId { get; set; }
+        public List<VmCredential> VmCredentials { get; set; }
     }
 }

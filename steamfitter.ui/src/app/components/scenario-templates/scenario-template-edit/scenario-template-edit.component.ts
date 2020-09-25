@@ -8,21 +8,26 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, EventEmitter, Output, NgZone, ViewChild, Input } from '@angular/core';
-import { ScenarioTemplate } from 'src/app/swagger-codegen/dispatcher.api';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { ScenarioTemplateQuery } from 'src/app/data/scenario-template/scenario-template.query';
-import { TasksComponent } from '../../tasks/tasks.component';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
 import { TaskQuery } from 'src/app/data/task/task.query';
+import { ScenarioTemplate } from 'src/app/swagger-codegen/dispatcher.api';
+import { TasksComponent } from '../../tasks/tasks.component';
 
 @Component({
   selector: 'app-scenario-template-edit',
   templateUrl: './scenario-template-edit.component.html',
-  styleUrls: ['./scenario-template-edit.component.css']
+  styleUrls: ['./scenario-template-edit.component.scss'],
 })
-
 export class ScenarioTemplateEditComponent {
-
   @Input() scenarioTemplate: ScenarioTemplate;
   @Output() editComplete = new EventEmitter<boolean>();
   @Output() editScenarioTemplate = new EventEmitter<ScenarioTemplate>();
@@ -31,14 +36,14 @@ export class ScenarioTemplateEditComponent {
 
   taskList = this.taskQuery.selectAll();
   isLoading = this.scenarioTemplateQuery.selectLoading();
+  tasksAreLoading = this.taskQuery.selectLoading();
 
   constructor(
     private scenarioTemplateQuery: ScenarioTemplateQuery,
     private taskDataService: TaskDataService,
     private taskQuery: TaskQuery,
     public zone: NgZone
-  ) {
-  }
+  ) {}
 
   refreshTaskList() {
     if (this && this.scenarioTemplate) {
@@ -53,6 +58,4 @@ export class ScenarioTemplateEditComponent {
   returnToScenarioTemplateList() {
     this.editComplete.emit(true);
   }
-
 } // End Class
-

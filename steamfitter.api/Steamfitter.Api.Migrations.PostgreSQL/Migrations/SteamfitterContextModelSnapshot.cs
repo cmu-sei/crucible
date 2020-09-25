@@ -370,6 +370,10 @@ namespace Steamfitter.Api.Migrations.PostgreSQL.Migrations
                         .HasColumnName("date_modified")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<Guid?>("DefaultVmCredentialId")
+                        .HasColumnName("default_vm_credential_id")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Description")
                         .HasColumnName("description")
                         .HasColumnType("text");
@@ -436,6 +440,10 @@ namespace Steamfitter.Api.Migrations.PostgreSQL.Migrations
                     b.Property<DateTime?>("DateModified")
                         .HasColumnName("date_modified")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid?>("DefaultVmCredentialId")
+                        .HasColumnName("default_vm_credential_id")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .HasColumnName("description")
@@ -664,6 +672,59 @@ namespace Steamfitter.Api.Migrations.PostgreSQL.Migrations
                     b.ToTable("user_permissions");
                 });
 
+            modelBuilder.Entity("Steamfitter.Api.Data.Models.VmCredentialEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnName("created_by")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnName("date_created")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnName("date_modified")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("description")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnName("modified_by")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Password")
+                        .HasColumnName("password")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("ScenarioId")
+                        .HasColumnName("scenario_id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ScenarioTemplateId")
+                        .HasColumnName("scenario_template_id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Username")
+                        .HasColumnName("username")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScenarioId");
+
+                    b.HasIndex("ScenarioTemplateId");
+
+                    b.ToTable("vm_credentials");
+                });
+
             modelBuilder.Entity("Steamfitter.Api.Data.Models.BondAgent", b =>
                 {
                     b.HasOne("Steamfitter.Api.Data.Models.OS", "OperatingSystem")
@@ -739,6 +800,19 @@ namespace Steamfitter.Api.Migrations.PostgreSQL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Steamfitter.Api.Data.Models.VmCredentialEntity", b =>
+                {
+                    b.HasOne("Steamfitter.Api.Data.Models.ScenarioEntity", "Scenario")
+                        .WithMany("VmCredentials")
+                        .HasForeignKey("ScenarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Steamfitter.Api.Data.Models.ScenarioTemplateEntity", "ScenarioTemplate")
+                        .WithMany("VmCredentials")
+                        .HasForeignKey("ScenarioTemplateId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -12,11 +12,32 @@ DM20-0181
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace Player.Vm.Api.Infrastructure.Extensions
 {
     public static class ModelBuilderExtensions
     {
+        /// <summary>
+        /// Finds all IEntityTypeConfiguration classes and applies them to the ModelBuilder
+        /// </summary>
+        /// <param name="builder">The ModelBuilder</param>
+        public static void ApplyConfigurations(this ModelBuilder builder)
+        {
+            var implementedConfigTypes = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(t => !t.IsAbstract
+                    && !t.IsGenericTypeDefinition
+                    && t.GetTypeInfo().ImplementedInterfaces.Any(i =>
+                        i.GetTypeInfo().IsGenericType && i.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)));
+
+            foreach (var configType in implementedConfigTypes)
+            {
+                dynamic config = Activator.CreateInstance(configType);
+                builder.ApplyConfiguration(config);
+            }
+        }
+
         /// <summary>
         /// If using PostgreSQL, add uuid generation extension and set all Guid Identity properties to use it
         /// Without this, the client has to provide the UUID, which doesn't matter too much for EF, but can be annoying when making manual changes to the db.

@@ -8,10 +8,10 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -19,36 +19,35 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ComnAuthModule,
+  ComnSettingsConfig,
+  ComnSettingsModule,
+  ComnSettingsService,
+} from '@crucible/common';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { environment } from '../environments/environment';
+import { AdminAppModule } from './admin-app/admin-app.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
-import {
-  CWD_SETTINGS_TOKEN,
-  CwdAuthInterceptorService,
-  CwdAuthModule,
-  CwdSettingsConfig,
-  CwdSettingsModule,
-} from './sei-cwd-common';
-import { AdminAppModule } from './admin-app/admin-app.module';
 import { ApiModule, BASE_PATH } from './generated/caster-api';
-import { CwdToolbarModule } from './sei-cwd-common/cwd-toolbar/cwd-toolbar.module';
 import { ProjectModule } from './project/project.module';
 import { ErrorService } from './sei-cwd-common/cwd-error/error.service';
 import { SystemMessageComponent } from './sei-cwd-common/cwd-system-message/components/system-message.component';
 import { SystemMessageService } from './sei-cwd-common/cwd-system-message/services/system-message.service';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { CwdToolbarModule } from './sei-cwd-common/cwd-toolbar/cwd-toolbar.module';
 
-export const settings: CwdSettingsConfig = {
+export const settings: ComnSettingsConfig = {
   url: `assets/config/settings.json`,
   envUrl: `assets/config/settings.env.json`,
 };
 
 // since the generated api code is a separate module we will set the BASE_PATH here in the global app module.
-export function basePathFactory(_settings) {
-  return _settings.settings.ApiUrl;
+export function getBasePath(settings: ComnSettingsService) {
+  return settings.settings.ApiUrl;
 }
 
 @NgModule({
@@ -59,8 +58,8 @@ export function basePathFactory(_settings) {
     environment.production ? [] : AkitaNgDevtools,
     AkitaNgRouterStoreModule,
     AppRoutingModule,
-    CwdSettingsModule.forRoot(settings),
-    CwdAuthModule,
+    ComnSettingsModule.forRoot(),
+    ComnAuthModule.forRoot(),
     AdminAppModule,
     ApiModule,
     CwdToolbarModule,
@@ -79,13 +78,8 @@ export function basePathFactory(_settings) {
   providers: [
     {
       provide: BASE_PATH,
-      useFactory: basePathFactory,
-      deps: [CWD_SETTINGS_TOKEN],
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CwdAuthInterceptorService,
-      multi: true,
+      useFactory: getBasePath,
+      deps: [ComnSettingsService],
     },
     { provide: ErrorHandler, useClass: ErrorService },
     SystemMessageService,

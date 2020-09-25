@@ -8,9 +8,11 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { NgModule, ErrorHandler } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CdkTableModule } from '@angular/cdk/table';
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -27,51 +29,43 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CdkTableModule } from '@angular/cdk/table';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  HttpClientModule,
-  HttpClient,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
-
+  ComnAuthModule,
+  ComnSettingsConfig,
+  ComnSettingsModule,
+  ComnSettingsService,
+} from '@crucible/common';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { DragToSelectModule } from 'ngx-drag-to-select';
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AutoDeployComponent } from './components/auto-deploy/auto-deploy.component';
+import { ConsoleComponent } from './components/console/console.component';
+import { FocusedAppComponent } from './components/focused-app/focused-app.component';
+import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
+import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
 import { VmListComponent } from './components/vm-list/vm-list.component';
 import { VmMainComponent } from './components/vm-main/vm-main.component';
-import { FocusedAppComponent } from './components/focused-app/focused-app.component';
-import { SettingsService } from './services/settings/settings.service';
-import { APP_INITIALIZER } from '@angular/core';
-import { AuthInterceptor } from './services/auth/auth.interceptor.service';
-import { AuthGuard } from './services/auth/auth-guard.service';
-import { AuthService } from './services/auth/auth.service';
-import { AppRoutingModule } from './app-routing.module';
-import { AuthCallbackComponent } from './components/auth/auth-callback.component';
-import { AuthLogoutComponent } from './components/auth/auth-logout.component';
-import { ConsoleComponent } from './components/console/console.component';
-import { AutoDeployComponent } from './components/auto-deploy/auto-deploy.component';
-import { AutoDeployService } from './services/auto-deploy/auto-deploy.service';
-import { AuthCallbackSilentComponent } from './components/auth/auth-callback-silent.component';
-import { FileService } from './services/file/file.service';
-import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
-import { DialogService } from './services/dialog/dialog.service';
-import { TeamsService } from './services/teams/teams.service';
-import { ErrorService } from './services/error/error.service';
-import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
-import { SystemMessageService } from './services/system-message/system-message.service';
 import { WelderComponent } from './components/welder/welder.component';
-import { WelderService } from './services/welder/welder.service';
-import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
-import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
-import { environment } from '../environments/environment';
-import { VmService } from './vms/state/vms.service';
 import { BASE_PATH } from './generated/vm-api';
-import { DragToSelectModule } from 'ngx-drag-to-select';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { AutoDeployService } from './services/auto-deploy/auto-deploy.service';
+import { DialogService } from './services/dialog/dialog.service';
+import { ErrorService } from './services/error/error.service';
+import { FileService } from './services/file/file.service';
+import { SystemMessageService } from './services/system-message/system-message.service';
+import { TeamsService } from './services/teams/teams.service';
+import { WelderService } from './services/welder/welder.service';
+import { VmService } from './vms/state/vms.service';
 
-export function initConfig(settings: SettingsService) {
-  return () => settings.load();
-}
+const settings: ComnSettingsConfig = {
+  url: 'assets/config/settings.json',
+  envUrl: 'assets/config/settings.env.json',
+};
 
 @NgModule({
   exports: [
@@ -104,9 +98,6 @@ export class AngularMaterialModule {}
     VmMainComponent,
     FocusedAppComponent,
     AutoDeployComponent,
-    AuthCallbackComponent,
-    AuthCallbackSilentComponent,
-    AuthLogoutComponent,
     ConsoleComponent,
     ConfirmDialogComponent,
     SystemMessageComponent,
@@ -120,35 +111,24 @@ export class AngularMaterialModule {}
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
-    AppRoutingModule,
+    ComnSettingsModule.forRoot(),
+    ComnAuthModule.forRoot(),
     [
       environment.production ? [] : AkitaNgDevtools.forRoot(),
       AkitaNgRouterStoreModule,
     ],
     DragToSelectModule.forRoot(),
+    // App routing order matters; We must import the AppRoutingModule last in order to maintain the wildcard PageNotFoundComponent.
+    AppRoutingModule,
   ],
   providers: [
     VmService,
     AutoDeployService,
-    AuthGuard,
-    AuthService,
-    SettingsService,
     FileService,
     TeamsService,
     DialogService,
     SystemMessageService,
     WelderService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initConfig,
-      deps: [SettingsService],
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
     {
       provide: ErrorHandler,
       useClass: ErrorService,
@@ -156,7 +136,7 @@ export class AngularMaterialModule {}
     {
       provide: BASE_PATH,
       useFactory: getBasePath,
-      deps: [SettingsService],
+      deps: [ComnSettingsService],
     },
   ],
   bootstrap: [AppComponent],
@@ -164,6 +144,6 @@ export class AngularMaterialModule {}
 })
 export class AppModule {}
 
-export function getBasePath(settingsSvc: SettingsService) {
-  return settingsSvc.ApiUrl.replace('/api', '');
+export function getBasePath(settingsSvc: ComnSettingsService) {
+  return settingsSvc.settings.ApiUrl.replace('/api', '');
 }

@@ -49,7 +49,17 @@ DM20-0181
     <div fxFlex fxFlexOffset="10">
       <mat-form-field class="full-width">
         <input matInput type="text" [formControl]="viewSearchControl" [matAutocomplete]="autoView" placeholder="Player View Template">
-        <button mat-icon-button matPrefix ngxClipboard [cbContent]="eventTemplate.viewId" title="Copy:  {{eventTemplate.viewId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <button
+          mat-icon-button
+          matPrefix
+          ngxClipboard
+          [cbContent]="eventTemplate.viewId"
+          title="Copy:  {{eventTemplate.viewId}}">
+          <mat-icon
+            class="icon-color icon-20px"
+            svgIcon="ic_clipboard_copy"
+          ></mat-icon>
+        </button>
         <mat-autocomplete #autoView="matAutocomplete" ngDefaultControl [displayWith]="selectedViewName" placeholder="Select a View Template" [(ngModel)]="viewIdFormControl.value"
               (optionSelected)="saveEventIds($event, 'viewId')" (opened)="filterViews()" (closed)="viewSearchControl.setValue('')">
           <mat-option [value]="null">None</mat-option>
@@ -65,7 +75,18 @@ DM20-0181
     <div fxFlex fxFlexOffset="10">
       <mat-form-field class="full-width">
         <input matInput type="text" [formControl]="directorySearchControl" [matAutocomplete]="autoDirectory" placeholder="Caster Directory">
-        <button mat-icon-button matPrefix ngxClipboard [cbContent]="eventTemplate.directoryId" title="Copy:  {{eventTemplate.directoryId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <button
+          mat-icon-button
+          matPrefix
+          ngxClipboard
+          [cbContent]="eventTemplate.directoryId"
+          title="Copy:  {{eventTemplate.directoryId}}"
+        >
+          <mat-icon
+            class="icon-color icon-20px"
+            svgIcon="ic_clipboard_copy"
+          ></mat-icon>
+        </button>
         <mat-autocomplete #autoDirectory="matAutocomplete" ngDefaultControl [displayWith]="selectedDirectoryName" placeholder="Select a Directory" [(ngModel)]="directoryIdFormControl.value"
               (optionSelected)="saveEventIds($event, 'directoryId')" (opened)="filterDirectories()" (closed)="directorySearchControl.setValue('')">
           <mat-option [value]="null">None</mat-option>
@@ -81,7 +102,18 @@ DM20-0181
     <div fxFlex fxFlexOffset="10">
       <mat-form-field class="full-width">
         <input matInput type="text" [formControl]="scenarioTemplateSearchControl" [matAutocomplete]="autoScenarioTemplate" placeholder="Steamfitter Scenario Template">
-        <button mat-icon-button matPrefix ngxClipboard [cbContent]="eventTemplate.scenarioTemplateId" title="Copy:  {{eventTemplate.scenarioTemplateId}}" style="margin-top: -15px;"><mat-icon style="transform:scale(0.65);" svgIcon="ic_clipboard_copy"></mat-icon></button>
+        <button
+          mat-icon-button
+          matPrefix
+          ngxClipboard
+          [cbContent]="eventTemplate.scenarioTemplateId"
+          title="Copy:  {{eventTemplate.scenarioTemplateId}}"
+        >
+          <mat-icon
+            class="icon-color icon-20px"
+            svgIcon="ic_clipboard_copy"
+          ></mat-icon>
+        </button>
         <mat-autocomplete #autoScenarioTemplate="matAutocomplete" ngDefaultControl [displayWith]="selectedScenarioTemplateName" placeholder="Select a Scenario Template" [(ngModel)]="scenarioTemplateIdFormControl.value"
               (optionSelected)="saveEventIds($event, 'scenarioTemplateId')" (opened)="filterScenarioTemplates()" (closed)="scenarioTemplateSearchControl.setValue('')">
           <mat-option [value]="null">None</mat-option>
@@ -109,7 +141,7 @@ DM20-0181
 
   <div fxLayout="row" class="bottom-button">
     <div fxFlex fxLayoutAlign="left" class="delete-button">
-      <button mat-stroked-button (click)="cloneEventTemplate()" style="margin-left: 40px;">Clone this Event Template</button>
+      <button mat-stroked-button (click)="cloneEventTemplate()" class="clone-button">Clone this Event Template</button>
     </div>
     <div fxFlex fxLayoutAlign="center" class="delete-button">
       <button mat-stroked-button (click)="closePanel.emit(true)">Done</button>

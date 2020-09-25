@@ -12,5 +12,8 @@
         "automaticSilentRenew": true,
         "silent_redirect_uri": "http://host.docker.internal:4401/auth-callback-silent"
     },
+    "AppTitle": "Steamfitter",
+    "AppTopBarHexColor": "#EF3A47",
+    "AppTopBarHexTextColor": "#FFFFFF",
     "UseLocalAuthStorage": true
 }

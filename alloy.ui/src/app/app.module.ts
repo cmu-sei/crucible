@@ -7,81 +7,78 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { APP_INITIALIZER } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-
-import { ApiModule as SwaggerCodegenApiModule } from './generated/alloy.api/api.module';
-import { BASE_PATH } from './generated/alloy.api';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTreeModule } from '@angular/material/tree';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatStepperModule,
-  MatTableDataSource,
-  MatBottomSheetModule,
-  MatTree,
-  MatTreeModule,
-  MatBadgeModule,
-} from '@angular/material';
-
-import { AuthInterceptor } from './services/auth/auth.interceptor.service';
-import { AuthCallbackComponent } from './components/auth/auth-callback.component';
-import { AuthCallbackSilentComponent } from './components/auth/auth-callback-silent.component';
-import { AuthLogoutComponent } from './components/auth/auth-logout.component';
-import { AuthGuard } from './services/auth/auth-guard.service';
-import { AuthService } from './services/auth/auth.service';
+  ComnAuthModule,
+  ComnSettingsConfig,
+  ComnSettingsModule,
+  ComnSettingsService,
+} from '@crucible/common';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { ClipboardModule } from 'ngx-clipboard';
+import { environment } from '../environments/environment.prod';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminAppComponent } from './components/admin-app/admin-app.component';
-import { HomeAppComponent } from './components/home-app/home-app.component';
-import { SettingsService } from './services/settings/settings.service';
-import { LoggedInUserService } from './services/logged-in-user/logged-in-user.service';
-import { EventListComponent } from './components/home-app/event-list/event-list.component';
-import { EventInfoComponent } from './components/home-app/event-info/event-info.component';
-import { EventTemplatesComponent } from './components/admin-app/event-templates/event-templates.component';
-import { EventTemplateListComponent } from './components/admin-app/event-templates/event-template-list/event-template-list.component';
 import { EventTemplateEditComponent } from './components/admin-app/event-templates/event-template-edit/event-template-edit.component';
-import { EventsComponent } from './components/admin-app/events/events.component';
-import { AdminEventListComponent } from './components/admin-app/events/event-list/event-list.component';
+import { EventTemplateListComponent } from './components/admin-app/event-templates/event-template-list/event-template-list.component';
+import { EventTemplatesComponent } from './components/admin-app/event-templates/event-templates.component';
 import { EventEditComponent } from './components/admin-app/events/event-edit/event-edit.component';
+import { AdminEventListComponent } from './components/admin-app/events/event-list/event-list.component';
+import { EventsComponent } from './components/admin-app/events/events.component';
+import { EventInfoComponent } from './components/home-app/event-info/event-info.component';
+import { EventListComponent } from './components/home-app/event-list/event-list.component';
+import { HomeAppComponent } from './components/home-app/home-app.component';
 import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
+import { TopbarComponent } from './components/shared/top-bar/topbar.component';
+import { BASE_PATH } from './generated/alloy.api';
+import { ApiModule as SwaggerCodegenApiModule } from './generated/alloy.api/api.module';
 import { DialogService } from './services/dialog/dialog.service';
-import { ClipboardModule } from 'ngx-clipboard';
+import { LoggedInUserService } from './services/logged-in-user/logged-in-user.service';
 
+const settings: ComnSettingsConfig = {
+  url: 'assets/config/settings.json',
+  envUrl: 'assets/config/settings.env.json',
+};
 
 @NgModule({
   exports: [
@@ -105,7 +102,6 @@ import { ClipboardModule } from 'ngx-clipboard';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatRadioModule,
-    MatRippleModule,
     MatSelectModule,
     MatSidenavModule,
     MatSliderModule,
@@ -118,18 +114,13 @@ import { ClipboardModule } from 'ngx-clipboard';
     MatTooltipModule,
     MatBottomSheetModule,
     MatTreeModule,
-    MatBadgeModule
-  ]
+    MatBadgeModule,
+  ],
 })
-export class AngularMaterialModule { }
-
-
+export class AngularMaterialModule {}
 
 @NgModule({
   declarations: [
-    AuthCallbackComponent,
-    AuthCallbackSilentComponent,
-    AuthLogoutComponent,
     AppComponent,
     AdminAppComponent,
     HomeAppComponent,
@@ -141,7 +132,8 @@ export class AngularMaterialModule { }
     EventsComponent,
     AdminEventListComponent,
     EventEditComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TopbarComponent,
   ],
   imports: [
     HttpClientModule,
@@ -153,44 +145,30 @@ export class AngularMaterialModule { }
     FormsModule,
     ReactiveFormsModule,
     SwaggerCodegenApiModule,
-    ClipboardModule
+    ClipboardModule,
+    environment.production ? [] : AkitaNgDevtools,
+    AkitaNgRouterStoreModule,
+    ComnSettingsModule.forRoot(),
+    ComnAuthModule.forRoot(),
   ],
   providers: [
-    AuthGuard,
-    AuthService,
-    SettingsService,
     LoggedInUserService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initConfig,
-      deps: [SettingsService],
-      multi: true
-    },
     {
       provide: BASE_PATH,
       useFactory: getBasePath,
-      deps: [SettingsService]
+      deps: [ComnSettingsService],
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-    DialogService
+    DialogService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     EventTemplateEditComponent,
     EventEditComponent,
-    ConfirmDialogComponent
-  ]
+    ConfirmDialogComponent,
+  ],
 })
-export class AppModule { }
+export class AppModule {}
 
-export function initConfig(settings: SettingsService) {
-  return () => settings.load();
-}
-
-export function getBasePath(settings: SettingsService) {
-  return settings.ApiUrl;
+export function getBasePath(settingsSvc: ComnSettingsService) {
+  return settingsSvc.settings.ApiUrl;
 }

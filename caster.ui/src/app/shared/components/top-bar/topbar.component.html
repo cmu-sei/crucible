@@ -1,0 +1,107 @@
+<!--
+Crucible
+Copyright 2020 Carnegie Mellon University.
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+Released under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
+DM20-0181
+-->
+<mat-toolbar
+  class="toolbar"
+  [style.backgroundColor]="topbarColor ? topbarColor : null"
+  [style.color]="topbarTextColor ? topbarTextColor : null"
+>
+  <mat-toolbar-row>
+    <span class="margin-auto">
+      <button
+        *ngIf="sidenav && sidenav?.opened"
+        (click)="sidenavToggleFn()"
+        [color]="topbarTextColor"
+        mat-icon-button
+        matTooltip="Close Sidebar"
+      >
+        <mat-icon svgIcon="ic_chevron_left_white_24px"></mat-icon>
+      </button>
+      <button
+        *ngIf="sidenav && !sidenav?.opened"
+        (click)="sidenavToggleFn()"
+        [color]="topbarTextColor"
+        mat-icon-button
+        matTooltip="Open Sidebar"
+      >
+        <mat-icon svgIcon="ic_chevron_right_white_24px"></mat-icon>
+      </button>
+    </span>
+    <span class="view-text">{{ title }}</span>
+    <ng-container *ngIf="teams && team && teams.length > 0">
+      <div class="team-text">Team:</div>
+      <b class="team-text">{{ team.name }}</b>
+      <div *ngIf="teams.length > 1" fxLayout="row" fxLayoutAlign="start center">
+        <button mat-button [matMenuTriggerFor]="teamMenu" style="outline: none">
+          <mat-icon svgIcon="ic_expand_more_white_24px"></mat-icon>
+        </button>
+        <mat-menu #teamMenu="matMenu" [overlapTrigger]="false">
+          <button
+            *ngFor="let val of teams"
+            mat-menu-item
+            (click)="setTeamFn(val.id)"
+          >
+            {{ val.name }}
+          </button>
+        </mat-menu>
+      </div>
+    </ng-container>
+    <span class="spacer"></span>
+    <div
+      fxFlex
+      class="team-text"
+      fxLayoutAlign="end center"
+      *ngIf="currentUser$ | async as currentUser"
+    >
+      <button mat-button [matMenuTriggerFor]="menu" style="outline: none">
+        <strong>{{ currentUser.name }}</strong>
+        <mat-icon svgIcon="ic_expand_more_white_24px"></mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button
+          *ngIf="team && team.canManage"
+          (click)="editFn($event)"
+          mat-menu-item
+        >
+          Edit View
+        </button>
+        <button
+          *ngIf="
+            currentUser.isSuperUser !== null &&
+            currentUser.isSuperUser &&
+            topbarView === 'caster-admin'
+          "
+          [routerLink]="['/']"
+          mat-menu-item
+        >
+          Exit Administration
+        </button>
+        <button
+          *ngIf="
+            currentUser.isSuperUser && topbarView !== TopbarView.CASTER_ADMIN
+          "
+          [routerLink]="['/admin']"
+          mat-menu-item
+        >
+          Administration
+        </button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+        <mat-slide-toggle
+          class="mat-menu-item"
+          color="primary"
+          [checked]="(theme$ | async) === 'dark-theme' ? true : false"
+          (click)="$event.stopPropagation()"
+          (change)="themeFn($event)"
+        >
+          Dark Theme
+        </mat-slide-toggle>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

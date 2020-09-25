@@ -8,31 +8,25 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div class="bar-height" [ngStyle]="{'background-color': topBarColor}" fxLayout="row" fxLayoutAlign="start center">
-
-  <div fxFlex class="title-text">
-    {{ titleText }}
+<div
+  class="app-events-container"
+  fxLayout="column"
+  fxLayoutAlign="center stretch"
+  fxFlexFill
+>
+  <app-topbar
+    *ngIf="!isIframe()"
+    [title]="titleText"
+    [topbarView]="TopbarView.ALLOY_HOME"
+    [topbarColor]="topBarColor"
+    [topbarTextColor]="topBarTextColor"
+  >
+  </app-topbar>
+  <div *ngIf="eventTemplateId === undefined" class="background" fxFlex="1 0 93vh">
+    <app-event-list></app-event-list>
   </div>
 
-
-  <div *ngIf="!isIframe()" fxFlex fxLayoutAlign="end center">
-    <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
-      <b>{{ username }}</b>
-      <mat-icon style="transform: translateY(1px);" svgIcon="ic_expand_more_white_24px"></mat-icon>
-    </button>
-    <mat-menu #menu="matMenu" [overlapTrigger]="false">
-      <button *ngIf="eventTemplateId !== undefined" [routerLink]="['/']" mat-menu-item>My Events</button>
-      <button *ngIf="isSuperUser" [routerLink]="['/admin']" mat-menu-item>Administration</button>
-      <button mat-menu-item (click)="logout()">Logout</button>
-    </mat-menu>
+  <div *ngIf="eventTemplateId !== undefined" class="background" fxFlex="1 0 93vh">
+    <app-event-info [eventTemplateId]="eventTemplateId"></app-event-info>
   </div>
-
-</div>
-
-<div *ngIf="eventTemplateId === undefined" class="app-events-container">
-  <app-event-list></app-event-list>
-</div>
-
-<div *ngIf="eventTemplateId !== undefined" class="app-events-container">
-  <app-event-info [eventTemplateId]="eventTemplateId"></app-event-info>
 </div>

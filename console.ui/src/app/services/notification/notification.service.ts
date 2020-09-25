@@ -9,9 +9,9 @@ DM20-0181
 */
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
-import { SettingsService } from '../settings/settings.service';
+import { ComnSettingsService } from '@crucible/common';
+import { BehaviorSubject } from 'rxjs';
 import { NotificationData } from '../../models/notification/notification-model';
 
 @Injectable()
@@ -21,13 +21,13 @@ export class NotificationService {
     new Array<NotificationData>()
   );
 
-  constructor(private settings: SettingsService) {}
+  constructor(private settings: ComnSettingsService) {}
 
   connectToProgressHub(vmString: string, userToken: string) {
     console.log('Starting connection to ProgressHub');
     this.progressConnection = new HubConnectionBuilder()
       .withUrl(
-        `${this.settings.ConsoleApiUrl.replace(
+        `${this.settings.settings.ConsoleApiUrl.replace(
           '/api/',
           '/hubs/'
         )}progress?access_token=${userToken}`

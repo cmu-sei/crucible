@@ -11,12 +11,13 @@ DM20-0181
 <span *ngIf="scenarioTemplate !== undefined && scenarioTemplate !== null" (click)="$event.stopPropagation();">
 
   <div fxLayout="row" class="add-margin">
-    <div fxFlex fxFlexOffset="10">
+    <div fxFlex fxFlexOffset="3">
       <app-tasks
         [taskList]="taskList"
         [scenarioTemplateId]="scenarioTemplate.id"
         [isEditable]="true"
         [isExecutable]="false"
+        [isLoading]="tasksAreLoading"
         (taskListChanged)="refreshTaskList()"
         (deleteTaskRequested)="deleteTask($event)"
       ></app-tasks>

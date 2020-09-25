@@ -19,13 +19,17 @@ DM20-0181
             alt="Virtual Machines"
           />
         </div>
-        <div>Virtual Machines ({{ selectedVms.length }} selected)</div>
+        <div class="text">
+          Virtual Machines ({{ selectedVms.length }} selected)
+        </div>
         <mat-icon
-          style="transform: scale(0.85); margin-right: 5px; margin-left: 25px;"
+          class="text"
+          style="transform: scale(0.85); margin-right: 5px; margin-left: 25px"
           svgIcon="ic_magnify_search"
         ></mat-icon>
-        <mat-form-field style="width: 320px;">
+        <mat-form-field style="width: 320px">
           <input
+            class="text"
             name="vmSearch"
             matInput
             [(ngModel)]="filterString"
@@ -38,11 +42,12 @@ DM20-0181
           fxLayoutAlign="start center"
           mat-icon-button
           (click)="clearFilter()"
-          style="outline: none;"
+          style="outline: none"
           title="Clear Search"
         >
           <mat-icon
-            style="transform: scale(0.85);"
+            class="text"
+            style="transform: scale(0.85)"
             svgIcon="ic_cancel_circle"
           ></mat-icon>
         </button>
@@ -76,32 +81,44 @@ DM20-0181
           [matMenuTriggerFor]="actionsMenu"
         >
           Actions
+          <mat-icon
+            class="expand-padding"
+            svgIcon="ic_expand_more_24px"
+          ></mat-icon>
         </button>
-        <mat-checkbox class="search-checkbox" [(ngModel)]="showIps"
-          >Show IPs</mat-checkbox
-        >
-        <mat-checkbox
-          *ngIf="showIps"
-          class="search-checkbox"
-          [(ngModel)]="ipv4Only"
-          >IPv4 Only</mat-checkbox
-        >
-        <div style="margin-top: 10px; margin-left: 200px;">
+
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+          <mat-checkbox
+            class="search-checkbox text"
+            [(ngModel)]="showIps"
+            color="primary"
+            >Show IPs</mat-checkbox
+          >
+          <mat-checkbox
+            *ngIf="showIps"
+            class="search-checkbox text"
+            [(ngModel)]="ipv4Only"
+            color="primary"
+            >IPv4 Only</mat-checkbox
+          >
+        </div>
+        <div class="upload-padding" fxLayout="row" fxLayoutAlign="end center">
           <button
             mat-stroked-button
+            class="text"
             (click)="fileInput.click()"
             *ngIf="!uploading"
           >
             Upload File
           </button>
-          <button mat-stroked-button disabled *ngIf="uploading">
+          <button mat-button disabled *ngIf="uploading">
             Uploading ... {{ uploadProgress }}%
           </button>
           <input
             #fileInput
             type="file"
             multiple
-            style="display: none;"
+            style="display: none"
             (change)="uploadIso(fileInput)"
           />
         </div>
@@ -139,9 +156,10 @@ DM20-0181
         <ng-template #vmTemplate>
           <div
             fxLayout="column"
+            fxLayoutAlign="center center"
             [ngClass]="{ pending: vm.hasPendingTasks, error: vm.lastError }"
           >
-            <div>
+            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="(theme$ | async) as currentTheme">
               <div fxFlex="none">
                 <button
                   mat-icon-button
@@ -152,7 +170,7 @@ DM20-0181
                       vm.powerState !== undefined &&
                       vm.powerState.toString() === 'Unknown'
                     "
-                    style="color: red;"
+                    style="color: red"
                     svgIcon="monitor"
                     title="Power state unknown"
                   ></mat-icon>
@@ -161,7 +179,7 @@ DM20-0181
                       vm.powerState !== undefined &&
                       vm.powerState.toString() === 'On'
                     "
-                    style="color: black;"
+                    class="text"
                     svgIcon="monitor"
                   ></mat-icon>
                   <mat-icon
@@ -169,7 +187,7 @@ DM20-0181
                       vm.powerState !== undefined &&
                       vm.powerState.toString() === 'Off'
                     "
-                    style="color: red;"
+                    style="color: red"
                     svgIcon="power_icon"
                     title="Powered Off"
                   ></mat-icon>
@@ -179,15 +197,16 @@ DM20-0181
                 <a
                   class="vm-link"
                   [attr.href]="vm.url"
-                  (click)="openHere($event, vm.name, vm.url)"
+                  (click)="openHere($event, vm.name, vm.url + '?theme=' + currentTheme)"
                   >{{ vm.name }}</a
                 >
               </div>
               <div class="open-tab-icon">
                 <button
                   mat-icon-button
-                  style="outline: none;"
-                  (click)="openInTab(vm.url)"
+                  style="outline: none"
+                  class="text"
+                  (click)="openInTab(vm.url + '?theme=' + currentTheme)"
                   title="Open in Browser Tab"
                 >
                   <mat-icon class="tab-icon" svgIcon="ic_open_tab"></mat-icon>

@@ -7,15 +7,14 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CwdAuthService } from '../../../sei-cwd-common/cwd-auth/services';
-import { CwdSettingsService } from '../../../sei-cwd-common/cwd-settings/services';
-import { UserService, CurrentUserQuery } from '../../../users/state';
-import { RouterQuery } from '@datorama/akita-ng-router-store';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ComnAuthService, ComnSettingsService, Theme } from '@crucible/common';
+import { RouterQuery } from '@datorama/akita-ng-router-store';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CurrentUserQuery, UserService } from '../../../users/state';
+import { TopbarView } from './../../../shared/components/top-bar/topbar.models';
 
 @Component({
   selector: 'cas-admin-container',
@@ -32,21 +31,29 @@ export class AdminContainerComponent implements OnInit, OnDestroy {
   public modulesText = 'Modules';
   public workspacesText = 'Workspaces';
   public showStatus = this.usersText;
+  public theme$: Observable<Theme>;
+  public topbarColor;
+  public topbarTextColor;
+  TopbarView = TopbarView;
 
   private unsubscribe$ = new Subject();
 
   constructor(
-    private authService: CwdAuthService,
-    private settingsService: CwdSettingsService,
+    private authService: ComnAuthService,
+    private settingsService: ComnSettingsService,
     private userService: UserService,
     private currentUserQuery: CurrentUserQuery,
     private routerQuery: RouterQuery,
     private router: Router
-  ) {}
+  ) {
+    this.theme$ = this.currentUserQuery.userTheme$;
+  }
 
   ngOnInit() {
     // Set the page title from configuration file
     this.titleText = this.settingsService.settings.AppTopBarText;
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor;
+    this.topbarTextColor = this.settingsService.settings.AppTopBarHexTextColor;
     this.currentUserQuery
       .select()
       .pipe(takeUntil(this.unsubscribe$))

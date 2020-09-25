@@ -48,3 +48,5 @@ Thumbs.db
 /terraform/
 
 src/assets/config/settings.env.json
+docker/
+.vscode/

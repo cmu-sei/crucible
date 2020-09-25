@@ -39,6 +39,8 @@ namespace Steamfitter.Api.Data.Models
         public virtual ScenarioTemplateEntity ScenarioTemplate { get; set; }
         public Guid? ViewId { get; set; }
         public string View { get; set; }
+        public Guid? DefaultVmCredentialId { get; set; }
+        public virtual ICollection<VmCredentialEntity> VmCredentials { get; set; } = new HashSet<VmCredentialEntity>();
     }
 
     public class ScenarioEntityConfiguration : IEntityTypeConfiguration<ScenarioEntity>

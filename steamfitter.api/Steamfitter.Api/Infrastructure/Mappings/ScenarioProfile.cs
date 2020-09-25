@@ -26,6 +26,10 @@ namespace Steamfitter.Api.Infrastructure.Mappings
             CreateMap<ScenarioEntity, Scenario>();
 
             CreateMap<Scenario, ScenarioEntity>();
+
+            CreateMap<ScenarioEntity, ScenarioEntity>()
+                .ForMember(e => e.Id, opt => opt.Ignore());
+
         }
     }
 }

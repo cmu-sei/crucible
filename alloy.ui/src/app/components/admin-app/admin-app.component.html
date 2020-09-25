@@ -8,68 +8,105 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-
-<mat-sidenav-container class="appcontent-container" autosize *ngIf="isSuperUser">
-  <mat-sidenav class="appbarmenu-container" #sidenav mode="side" [(opened)]="isSidebarOpen">
-    <mat-list class="appitems-container">
-      <mat-list-item class="appslist">
-        <a class="nolink" href="/">
-          <h4>
-            <b>Administration</b>
-          </h4>
+<mat-sidenav-container
+  class="appcontent-container"
+  autosize
+  *ngIf="isSuperUser"
+>
+  <mat-sidenav
+    class="appbarmenu-container"
+    #sidenav
+    mode="side"
+    [(opened)]="isSidebarOpen"
+  >
+    <mat-list class="list-container">
+      <mat-list-item>
+        <a class="nolink" [routerLink]="['/']">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon
+              class="alloy-icon"
+              svgIcon="ic_crucible_alloy"
+            ></mat-icon>
+            <h3 class="icon-text">Administration</h3>
+          </div>
         </a>
         <mat-divider></mat-divider>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img src="../../../../assets/svg-icons/build-24px.svg" alt="Views" (click)="adminGotoEventTemplates()">
-          </div>
+      <mat-list-item
+        class="list-item showhand highlight"
+        (click)="adminGotoEventTemplates()"
+        title="Show Event Templates"
+      >
+        <div class="lefticon">
+          <mat-icon
+            class="icon-35px"
+            svgIcon="clipboard_outline"
+            [ngStyle]="{'color': topBarColor}"
+          ></mat-icon>
+        </div>
 
-          <div id="content" (click)="adminGotoEventTemplates()">{{eventTemplatesText}}</div>
+        <div class="application-name">
+          {{ eventTemplatesText }}
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="adminGotoEventTemplates()">
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div>
+          <button mat-icon-button>
+            <mat-icon class="icon-color" svgIcon="ic_chevron_right"></mat-icon>
+          </button>
         </div>
       </mat-list-item>
-      <mat-list-item>
-        <div class="showhand" id="wrapper">
-          <div id="lefticon">
-            <img src="../../../assets/svg-icons/directions_run-24px.svg" alt="Users" (click)="adminGotoEvents()">
-          </div>
+      <mat-list-item
+        class="list-item showhand highlight"
+        (click)="adminGotoEvents()"
+        title="Show Events"
+      >
+        <div class="lefticon">
+          <mat-icon
+            class="icon-35px"
+            svgIcon="clipboard_play_outline"
+            [ngStyle]="{'color': topBarColor}"
+          ></mat-icon>
+        </div>
 
-          <div id="content" (click)="adminGotoEvents()">{{eventsText}}</div>
+        <div class="application-name">
+          {{ eventsText }}
+        </div>
 
-          <div class="pull-right" id="rightcontext">
-            <button mat-icon-button style="outline: none;" (click)="adminGotoEvents()">
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
-            </button>
-          </div>
+        <div>
+          <button
+            mat-icon-button
+            (click)="adminGotoEvents()"
+          >
+            <mat-icon
+              svgIcon="ic_chevron_right"
+              class="icon-color"
+            ></mat-icon>
+          </button>
         </div>
       </mat-list-item>
     </mat-list>
-    <img class="cmu-logo" src="/assets/img/cmu-red-gray.png">
+    <img
+      class="crucible-logo"
+      [src]="
+        (theme$ | async) === 'light-theme'
+          ? '/assets/img/crucible-logo-light.png'
+          : '/assets/img/crucible-logo-dark.png'
+      "
+    />
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="bar-height" [ngStyle]="{'background-color': topBarColor}" fxLayout="row" fxLayoutAlign="start center">
-      <div fxFlex="37" fxFlexOffset="3" class="title-text"><h4>{{ showStatus }}</h4></div>
-      <div fxFlex="60" fxLayoutAlign="end center">
-        <button mat-button [matMenuTriggerFor]="menu" style="outline: none;">
-          <b>{{ username }}</b>
-          <mat-icon style="transform: translateY(1px);" svgIcon="ic_expand_more_white_24px"></mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" [overlapTrigger]="false">
-          <button [routerLink]="['/']" mat-menu-item>Exit Administration</button>
-          <button mat-menu-item (click)="logout()">Logout</button>
-        </mat-menu>
-      </div>
-
-    </div>
-    <app-event-templates *ngIf="showStatus===eventTemplatesText"></app-event-templates>
-    <app-events *ngIf="showStatus===eventsText" [refresh]="shouldUpdateEvents"></app-events>
-
+    <app-topbar
+      [title]="showStatus"
+      [topbarColor]="topBarColor"
+      [topbarTextColor]="topBarTextColor"
+      [topbarView]="TopbarView.ALLOY_ADMIN"
+    ></app-topbar>
+    <app-event-templates
+      *ngIf="showStatus === eventTemplatesText"
+    ></app-event-templates>
+    <app-events
+      *ngIf="showStatus === eventsText"
+      [refresh]="shouldUpdateEvents"
+    ></app-events>
   </mat-sidenav-content>
 </mat-sidenav-container>

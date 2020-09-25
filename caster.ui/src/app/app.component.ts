@@ -8,15 +8,14 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
-import { CwdAuthService } from './sei-cwd-common/cwd-auth/services';
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { Theme } from './shared/models/theme-enum';
-import { CurrentUserQuery } from './users/state';
+import { DomSanitizer, Title } from '@angular/platform-browser';
+import { ComnSettingsService, Theme } from '@crucible/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DomSanitizer } from '@angular/platform-browser';
+import { CurrentUserQuery } from './users/state';
 
 @Component({
   selector: 'app-root',
@@ -26,47 +25,109 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class AppComponent implements OnDestroy {
   @HostBinding('class') componentCssClass: string;
   title = 'Caster';
-  user$ = this.authService.user$;
   unsubscribe$: Subject<null> = new Subject<null>();
   constructor(
     public matIconRegistry: MatIconRegistry,
-    private authService: CwdAuthService,
     public overlayContainer: OverlayContainer,
     private currentUserQuery: CurrentUserQuery,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    public titleService: Title,
+    public settingsService: ComnSettingsService
   ) {
     this.currentUserQuery.userTheme$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((theme) => {
         this.setTheme(theme);
       });
+
+    titleService.setTitle(settingsService.settings.AppTopBarText);
+
     matIconRegistry.setDefaultFontSetClass('mdi');
 
-    matIconRegistry.addSvgIcon
-      ('ic_apps_white_24px', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_apps_white_24px.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_chevron_left_white_24px', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_chevron_left_white_24px.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_chevron_right_black_24px', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_chevron_right_black_24px.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_expand_more_white_24px', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_expand_more_white_24px.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_clear_black_24px', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_clear_black_24px.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_expand_more_black_24px', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_expand_more_black_24px.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_cancel_circle', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_cancel_circle.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_back_arrow', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_back_arrow_24px.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_magnify_search', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_magnify_glass_48px.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_clipboard_copy', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_clipboard_copy.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_trash_can', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_trash_can.svg'));
-    matIconRegistry.addSvgIcon
-      ('ic_pencil', sanitizer.bypassSecurityTrustResourceUrl('/assets/svg-icons/ic_pencil.svg'));
-  
+    matIconRegistry.addSvgIcon(
+      'ic_apps_white_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_apps_white_24px.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_chevron_left_white_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_chevron_left_white_24px.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_chevron_right_black_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_chevron_right_black_24px.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_chevron_right_white_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_chevron_right_white_24px.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_expand_more_white_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_expand_more_white_24px.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_clear_black_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_clear_black_24px.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_expand_more_black_24px',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_expand_more_black_24px.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_cancel_circle',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_cancel_circle.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_back_arrow',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_back_arrow_24px.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_magnify_search',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_magnify_glass_48px.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_clipboard_copy',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_clipboard_copy.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_trash_can',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_trash_can.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_pencil',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/svg-icons/ic_pencil.svg'
+      )
+    );
+    matIconRegistry.addSvgIcon(
+      'ic_crucible_caster',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svg-icons/ic_crucible_caster.svg'
+      )
+    );
   }
 
   setTheme(theme: Theme) {

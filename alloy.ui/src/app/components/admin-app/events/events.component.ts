@@ -8,44 +8,44 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, EventEmitter, Output, NgZone, ViewChild, Input } from '@angular/core';
-import { ErrorStateMatcher, MatStepper } from '@angular/material';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import {Subject} from 'rxjs/Subject';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css']
+  styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent implements OnInit {
-
   @Input() refresh: Subject<boolean>;
   @Output() editComplete = new EventEmitter<boolean>();
 
   public matcher = new UserErrorStateMatcher();
   public isLinear = false;
 
-  constructor(
-    public zone: NgZone
-  ) {
-
-  }
-
+  constructor(public zone: NgZone) {}
 
   /**
    * Initialize component
    */
-  ngOnInit() {
-
-  }
-
+  ngOnInit() {}
 } // End Class
-
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class UserErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || isSubmitted));
   }

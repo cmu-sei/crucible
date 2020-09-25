@@ -7,12 +7,10 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -31,40 +29,40 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { ResizableModule } from 'angular-resizable-element';
-import { ProjectQuery, ProjectService, ProjectStore } from './state';
-import { DirectoriesModule } from '../directories';
-import { ProjectComponent } from './component/project-details/project/project.component';
-import { ProjectListComponent } from './component/project-home/project-list/project-list.component';
-import { ProjectListContainerComponent } from './component/project-home/project-list-container/project-list-container.component';
-import { CwdAuthGuardService } from '../sei-cwd-common/cwd-auth/services';
-import { CwdToolbarModule } from '../sei-cwd-common/cwd-toolbar';
-import { EditorModule } from '../editor/editor.module';
-import { WorkspaceModule } from '../workspace/workspace.module';
-import { ProjectTabComponent } from './component/project-details/project-tab/project-tab.component';
-import { ProjectNavigationContainerComponent } from './component/project-details/project-navigation-container/project-navigation-container.component';
-import { ProjectCollapseContainerComponent } from './component/project-details/project-collapse-container/project-collapse-container.component';
-import { ConfirmDialogComponent } from '../sei-cwd-common/confirm-dialog/components/confirm-dialog.component';
-import { NameDialogComponent } from '../sei-cwd-common/name-dialog/name-dialog.component';
-import { DirectoryPanelComponent } from './component/project-details/project-navigation-container/directory-panel/directory-panel.component';
-import { ProjectBreadcrumbComponent } from './component/project-details/project-breadcrumb/project-breadcrumb.component';
-import { CanDeactivateGuard } from 'src/app/sei-cwd-common/cwd-route-guards/can-deactivate.guard';
-import { FilesFilterPipe } from './pipes/files-filter-pipe';
-import { ProjectExportComponent } from './component/project-details/project-export/project-export.component';
-import { TopbarComponent } from '../shared/components/topbar/topbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule, Routes } from '@angular/router';
+import { ComnAuthGuardService } from '@crucible/common';
+import { ResizableModule } from 'angular-resizable-element';
+import { CanDeactivateGuard } from 'src/app/sei-cwd-common/cwd-route-guards/can-deactivate.guard';
+import { DirectoriesModule } from '../directories';
+import { EditorModule } from '../editor/editor.module';
+import { ConfirmDialogComponent } from '../sei-cwd-common/confirm-dialog/components/confirm-dialog.component';
+import { CwdToolbarModule } from '../sei-cwd-common/cwd-toolbar';
+import { NameDialogComponent } from '../sei-cwd-common/name-dialog/name-dialog.component';
+import { WorkspaceModule } from '../workspace/workspace.module';
+import { TopbarComponent } from './../shared/components/top-bar/topbar.component';
+import { ProjectBreadcrumbComponent } from './component/project-details/project-breadcrumb/project-breadcrumb.component';
+import { ProjectCollapseContainerComponent } from './component/project-details/project-collapse-container/project-collapse-container.component';
+import { ProjectExportComponent } from './component/project-details/project-export/project-export.component';
+import { DirectoryPanelComponent } from './component/project-details/project-navigation-container/directory-panel/directory-panel.component';
+import { ProjectNavigationContainerComponent } from './component/project-details/project-navigation-container/project-navigation-container.component';
+import { ProjectTabComponent } from './component/project-details/project-tab/project-tab.component';
+import { ProjectComponent } from './component/project-details/project/project.component';
+import { ProjectListContainerComponent } from './component/project-home/project-list-container/project-list-container.component';
+import { ProjectListComponent } from './component/project-home/project-list/project-list.component';
+import { FilesFilterPipe } from './pipes/files-filter-pipe';
 
 const projectRoutes: Routes = [
   {
     path: 'projects',
     component: ProjectListContainerComponent,
-    canActivate: [CwdAuthGuardService],
+    canActivate: [ComnAuthGuardService],
   },
   {
     path: 'projects/:id',
     component: ProjectCollapseContainerComponent,
-    canActivate: [CwdAuthGuardService],
+    canActivate: [ComnAuthGuardService],
     canDeactivate: [CanDeactivateGuard],
   },
 ];

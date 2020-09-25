@@ -8,18 +8,18 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AutoDeployService } from '../../services/auto-deploy/auto-deploy.service';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { interval, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AutoDeployService } from '../../services/auto-deploy/auto-deploy.service';
 import { VmService } from '../../vms/state/vms.service';
 
 @Component({
   selector: 'app-auto-deploy',
   templateUrl: './auto-deploy.component.html',
-  styleUrls: ['./auto-deploy.component.css'],
+  styleUrls: ['./auto-deploy.component.scss'],
 })
 export class AutoDeployComponent implements OnInit, OnDestroy {
   public showDeployButton = false;

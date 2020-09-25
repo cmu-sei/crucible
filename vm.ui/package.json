@@ -33,6 +33,7 @@
     "@angular/platform-browser": "^9.1.11",
     "@angular/platform-browser-dynamic": "^9.1.11",
     "@angular/router": "^9.1.11",
+    "@crucible/common": "file:modules/crucible-common-0.0.3.tgz",
     "@datorama/akita": "^5.0.5",
     "@microsoft/signalr": "^3.1.5",
     "babel-polyfill": "^6.26.0",

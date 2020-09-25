@@ -7,7 +7,6 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 -->
-
 <div class="focused-app-container">
-  <iframe class="focused-app-iframe" [src]="focusedAppUrl"></iframe>
+  <iframe class="focused-app-iframe" [src]="(focusedAppUrl$ | async)"></iframe>
 </div>

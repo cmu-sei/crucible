@@ -8,19 +8,27 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Scenario, View } from 'src/app/swagger-codegen/dispatcher.api';
-import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
-import { ScenarioEditComponent } from 'src/app/components/scenarios/scenario-edit/scenario-edit.component';
+import { Observable } from 'rxjs/Observable';
 import { ScenarioEditDialogComponent } from 'src/app/components/scenarios/scenario-edit-dialog/scenario-edit-dialog.component';
+import { ScenarioEditComponent } from 'src/app/components/scenarios/scenario-edit/scenario-edit.component';
+import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
-import { Observable  } from 'rxjs/Observable';
+import { Scenario, View } from 'src/app/swagger-codegen/dispatcher.api';
+import { ComnSettingsService } from '@crucible/common';
 
 export interface Action {
   Value: string;
@@ -30,10 +38,9 @@ export interface Action {
 @Component({
   selector: 'app-scenario-list',
   templateUrl: './scenario-list.component.html',
-  styleUrls: ['./scenario-list.component.css']
+  styleUrls: ['./scenario-list.component.scss'],
 })
 export class ScenarioListComponent implements OnInit {
-
   @Input() scenarioList: Scenario[];
   @Input() selectedScenario: Scenario;
   @Input() pageSize: number;
@@ -51,9 +58,17 @@ export class ScenarioListComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(ScenarioEditComponent) scenarioEditComponent: ScenarioEditComponent;
-
-  displayedColumns: string[] = ['name', 'view', 'status', 'startDate', 'endDate', 'description'];
+  @ViewChild(ScenarioEditComponent)
+  scenarioEditComponent: ScenarioEditComponent;
+  topbarColor = '#ef3a47';
+  displayedColumns: string[] = [
+    'name',
+    'view',
+    'status',
+    'startDate',
+    'endDate',
+    'description',
+  ];
   showStatus = { active: true, ready: true, ended: false };
   editScenarioText = 'Edit Scenario';
   scenarioToEdit: Scenario;
@@ -67,15 +82,18 @@ export class ScenarioListComponent implements OnInit {
   sortEvents$: Observable<Sort>;
   pageEvents$: Observable<PageEvent>;
 
- // context menu
- @ViewChild(MatMenuTrigger, { static: true }) contextMenu: MatMenuTrigger;
- contextMenuPosition = { x: '0px', y: '0px' };
+  // context menu
+  @ViewChild(MatMenuTrigger, { static: true }) contextMenu: MatMenuTrigger;
+  contextMenuPosition = { x: '0px', y: '0px' };
 
- constructor(
+  constructor(
     private scenarioDataService: ScenarioDataService,
     public dialogService: DialogService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private settingsService: ComnSettingsService
+  ) {
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor ? this.settingsService.settings.AppTopBarHexColor : this.topbarColor;
+  }
 
   ngOnInit() {
     this.showStatus.active = this.statuses.indexOf('active') > -1;
@@ -87,7 +105,9 @@ export class ScenarioListComponent implements OnInit {
     if (id) {
       const here = this;
       this.setActive.emit('');
-      setTimeout(function() { here.setActive.emit(id); }, 1);
+      setTimeout(function () {
+        here.setActive.emit(id);
+      }, 1);
     }
   }
 
@@ -119,16 +139,16 @@ export class ScenarioListComponent implements OnInit {
         description: '',
         startDate: startDate,
         endDate: endDate,
-        status: 'ready'
+        status: 'ready',
       };
     } else {
-      scenario = {...scenarioToEdit};
+      scenario = { ...scenarioToEdit };
     }
     const dialogRef = this.dialog.open(ScenarioEditDialogComponent, {
       width: '800px',
-      data: {scenario: scenario, views: this.views}
+      data: { scenario: scenario, views: this.views },
     });
-    dialogRef.componentInstance.editComplete.subscribe(result => {
+    dialogRef.componentInstance.editComplete.subscribe((result) => {
       if (result.saveChanges && result.scenario) {
         this.saveScenario.emit(result.scenario);
       }
@@ -140,8 +160,12 @@ export class ScenarioListComponent implements OnInit {
    * Delete a scenario after confirmation
    */
   deleteScenario(scenario: Scenario): void {
-    this.dialogService.confirm('Delete Scenario', 'Are you sure that you want to delete scenario ' + scenario.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Delete Scenario',
+        'Are you sure that you want to delete scenario ' + scenario.name + '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
           this.scenarioDataService.delete(scenario.id);
         }
@@ -152,8 +176,12 @@ export class ScenarioListComponent implements OnInit {
    * Copy a scenario after confirmation
    */
   copyScenario(scenario: Scenario): void {
-    this.dialogService.confirm('Copy Scenario', 'Are you sure that you want to copy scenario ' + scenario.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Copy Scenario',
+        'Are you sure that you want to copy scenario ' + scenario.name + '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
           this.scenarioDataService.copyScenario(scenario.id);
         }
@@ -164,8 +192,12 @@ export class ScenarioListComponent implements OnInit {
    * Start a scenario
    */
   startScenario(scenario: Scenario): void {
-    this.dialogService.confirm('Start Scenario Now', 'Are you sure that you want to start scenario ' + scenario.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Start Scenario Now',
+        'Are you sure that you want to start scenario ' + scenario.name + '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
           this.scenarioDataService.start(scenario.id);
         }
@@ -176,8 +208,12 @@ export class ScenarioListComponent implements OnInit {
    * End a scenario
    */
   endScenario(scenario: Scenario): void {
-    this.dialogService.confirm('End Scenario Now', 'Are you sure that you want to end scenario ' + scenario.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'End Scenario Now',
+        'Are you sure that you want to end scenario ' + scenario.name + '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
           this.scenarioDataService.end(scenario.id);
         }
@@ -199,7 +235,11 @@ export class ScenarioListComponent implements OnInit {
     }
   }
 
-  paginateScenarios(scenarios: Scenario[], pageIndex: number, pageSize: number) {
+  paginateScenarios(
+    scenarios: Scenario[],
+    pageIndex: number,
+    pageSize: number
+  ) {
     if (!scenarios) {
       return [];
     }
@@ -215,7 +255,4 @@ export class ScenarioListComponent implements OnInit {
   sortChanged(sort: Sort) {
     this.sortChange.emit(sort);
   }
-
 }
-
-

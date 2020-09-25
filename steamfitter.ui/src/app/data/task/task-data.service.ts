@@ -116,50 +116,75 @@ export class TaskDataService {
   }
 
   loadByScenarioTemplate(scenarioTemplateId: string) {
-    this.taskStore.set([]);
-    return this.taskService.getScenarioTemplateTasks(scenarioTemplateId).pipe(take(1)).subscribe(tasks => {
+    this.taskStore.setLoading(true);
+    return this.taskService.getScenarioTemplateTasks(scenarioTemplateId).pipe(
+      tap(() => { this.taskStore.setLoading(false); }),
+      take(1)
+    ).subscribe(tasks => {
       this.taskStore.set(tasks);
+    }, error => {
+      this.taskStore.set([]);
     });
   }
 
   loadByScenario(scenarioId: string) {
-    this.taskStore.set([]);
-    this.taskService.getScenarioTasks(scenarioId).pipe(take(1)).subscribe(tasks => {
+    this.taskStore.setLoading(true);
+    this.taskService.getScenarioTasks(scenarioId).pipe(
+      tap(() => { this.taskStore.setLoading(false); }),
+      take(1)
+    ).subscribe(tasks => {
       this.taskStore.set(tasks);
-      }
-    );
+    }, error => {
+      this.taskStore.set([]);
+    });
     this.resultDataService.loadByScenario(scenarioId);
   }
 
   loadByUser(userId: string) {
-    this.taskStore.set([]);
-    this.taskService.getUserTasks(userId).pipe(take(1)).subscribe(tasks => {
+    this.taskStore.setLoading(true);
+    this.taskService.getUserTasks(userId).pipe(
+      tap(() => { this.taskStore.setLoading(false); }),
+      take(1)
+    ).subscribe(tasks => {
       this.taskStore.set(tasks);
-      }
-    );
+    }, error => {
+      this.taskStore.set([]);
+    });
     this.resultDataService.loadByUser(userId);
   }
 
   loadByView(viewId: string) {
-    this.taskStore.set([]);
-    this.taskService.getViewTasks(viewId).pipe(take(1)).subscribe(tasks => {
+    this.taskStore.setLoading(true);
+    this.taskService.getViewTasks(viewId).pipe(
+      tap(() => { this.taskStore.setLoading(false); }),
+      take(1)
+    ).subscribe(tasks => {
       this.taskStore.set(tasks);
-      }
-    );
+    }, error => {
+      this.taskStore.set([]);
+    });
     this.resultDataService.loadByView(viewId);
   }
 
   loadByVm(vmId: string) {
-    this.taskStore.set([]);
-    this.taskService.getScenarioTasks(vmId).pipe(take(1)).subscribe(tasks => {
+    this.taskStore.setLoading(true);
+    this.taskService.getScenarioTasks(vmId).pipe(
+      tap(() => { this.taskStore.setLoading(false); }),
+      take(1)
+    ).subscribe(tasks => {
       this.taskStore.set(tasks);
-      }
-    );
+    }, error => {
+      this.taskStore.set([]);
+    });
     this.resultDataService.loadByVm(vmId);
   }
 
   loadById(id: string) {
-    this.taskService.getTask(id).pipe(take(1)).subscribe(task => {
+    this.taskStore.setLoading(true);
+    this.taskService.getTask(id).pipe(
+      tap(() => { this.taskStore.setLoading(false); }),
+      take(1)
+    ).subscribe(task => {
       this.updateStore({...task});
       this.resultDataService.loadByTask(id);
     });

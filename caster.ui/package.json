@@ -60,13 +60,14 @@
     "domsanitizer": "^0.2.2",
     "monaco-editor": "^0.20.0",
     "ngx-clipboard": "^13.0.1",
-    "oidc-client": "^1.9.1",
+    "oidc-client": "^1.10.1",
     "rxjs": "~6.5.5",
     "tslib": "^1.10.0",
     "webpack": "^4.40.2",
     "xterm": "^4.8.1",
     "xterm-addon-fit": "^0.4.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@crucible/common": "file:modules/crucible-common-0.0.2.tgz"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.5",

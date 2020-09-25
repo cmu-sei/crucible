@@ -8,23 +8,21 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { User, Permission, UserPermission } from 'src/app/swagger-codegen/dispatcher.api/model/models';
-import { PermissionService } from 'src/app/swagger-codegen/dispatcher.api/api/api';
-import {Router, ActivatedRoute} from '@angular/router';
-import { UserDataService } from '../../../data/user/user-data.service';
-import { paginateRows } from 'src/app/datasource-utils';
-
+import {
+  Permission,
+  User,
+  UserPermission,
+} from 'src/app/swagger-codegen/dispatcher.api/model/models';
+import { ComnSettingsService } from '@crucible/common';
 
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
-  styleUrls: ['./admin-users.component.css']
+  styleUrls: ['./admin-users.component.scss'],
 })
 export class AdminUsersComponent implements OnInit {
   @Input() filterControl: FormControl;
@@ -40,26 +38,29 @@ export class AdminUsersComponent implements OnInit {
   @Output() sortChange = new EventEmitter<Sort>();
   @Output() pageChange = new EventEmitter<PageEvent>();
   addingNewUser = false;
-  newUser: User = { id: '', name: ''};
+  newUser: User = { id: '', name: '' };
   isLoading = false;
+  topbarColor = '#ef3a47';
 
   constructor(
-    private router: Router,
-    private userDataService: UserDataService,
-    activatedRoute: ActivatedRoute,
-    private permissionService: PermissionService
-  ) { }
+    private settingsService: ComnSettingsService
+  ) {
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor ? this.settingsService.settings.AppTopBarHexColor : this.topbarColor;
+  }
 
   ngOnInit() {
     this.filterControl.setValue(this.filterString);
   }
 
   hasPermission(permissionId: string, user: User) {
-    return user.permissions.some(p => p.id === permissionId);
+    return user.permissions.some((p) => p.id === permissionId);
   }
 
   toggleUserPermission(user: User, permissionId: string) {
-    const userPermission: UserPermission = {userId: user.id, permissionId: permissionId};
+    const userPermission: UserPermission = {
+      userId: user.id,
+      permissionId: permissionId,
+    };
     if (this.hasPermission(permissionId, user)) {
       this.removeUserPermission.emit(userPermission);
     } else {
@@ -100,6 +101,4 @@ export class AdminUsersComponent implements OnInit {
     const copy = users.slice();
     return copy.splice(startIndex, pageSize);
   }
-
 }
-

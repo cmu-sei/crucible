@@ -8,19 +8,30 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
-import { ScenarioTemplateDataService } from 'src/app/data/scenario-template/scenario-template-data.service';
-import { ScenarioTemplate, Scenario } from 'src/app/swagger-codegen/dispatcher.api';
-import { ScenarioTemplateEditComponent } from 'src/app/components/scenario-templates/scenario-template-edit/scenario-template-edit.component';
 import { ScenarioTemplateEditDialogComponent } from 'src/app/components/scenario-templates/scenario-template-edit-dialog/scenario-template-edit-dialog.component';
+import { ScenarioTemplateEditComponent } from 'src/app/components/scenario-templates/scenario-template-edit/scenario-template-edit.component';
 import { ScenarioEditDialogComponent } from 'src/app/components/scenarios/scenario-edit-dialog/scenario-edit-dialog.component';
+import { ScenarioTemplateDataService } from 'src/app/data/scenario-template/scenario-template-data.service';
+import { ScenarioDataService } from 'src/app/data/scenario/scenario-data.service';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
+import {
+  Scenario,
+  ScenarioTemplate,
+} from 'src/app/swagger-codegen/dispatcher.api';
+import { ComnSettingsService } from '@crucible/common';
 
 export interface Action {
   Value: string;
@@ -30,10 +41,9 @@ export interface Action {
 @Component({
   selector: 'app-scenario-template-list',
   templateUrl: './scenario-template-list.component.html',
-  styleUrls: ['./scenario-template-list.component.css']
+  styleUrls: ['./scenario-template-list.component.scss'],
 })
 export class ScenarioTemplateListComponent implements OnInit {
-
   @Input() scenarioTemplateList: ScenarioTemplate[];
   @Input() selectedScenarioTemplate: ScenarioTemplate;
   @Input() pageSize: number;
@@ -45,8 +55,9 @@ export class ScenarioTemplateListComponent implements OnInit {
   @Output() setActive = new EventEmitter<string>();
   @Output() sortChange = new EventEmitter<Sort>();
   @Output() pageChange = new EventEmitter<PageEvent>();
-  @ViewChild(ScenarioTemplateEditComponent) scenarioTemplateEditComponent: ScenarioTemplateEditComponent;
-
+  @ViewChild(ScenarioTemplateEditComponent)
+  scenarioTemplateEditComponent: ScenarioTemplateEditComponent;
+  topbarColor = '#ef3a47';
   displayedColumns: string[] = ['name', 'description', 'durationHours'];
   editScenarioTemplateText = 'Edit ScenarioTemplate';
   // context menu
@@ -57,17 +68,24 @@ export class ScenarioTemplateListComponent implements OnInit {
     public dialogService: DialogService,
     private scenarioTemplateDataService: ScenarioTemplateDataService,
     private scenarioDataService: ScenarioDataService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private settingsService: ComnSettingsService
+  ) {
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor ? this.settingsService.settings.AppTopBarHexColor : this.topbarColor;
+  }
 
   ngOnInit() {
     this.filterControl.setValue(this.filterString);
-    const id = this.selectedScenarioTemplate ? this.selectedScenarioTemplate.id : '';
+    const id = this.selectedScenarioTemplate
+      ? this.selectedScenarioTemplate.id
+      : '';
     // force already expanded scenarioTemplate to refresh details
     if (id) {
       const here = this;
       this.setActive.emit('');
-      setTimeout(function() { here.setActive.emit(id); }, 1);
+      setTimeout(function () {
+        here.setActive.emit(id);
+      }, 1);
     }
   }
 
@@ -88,12 +106,14 @@ export class ScenarioTemplateListComponent implements OnInit {
    * Edits or adds a scenarioTemplate
    */
   editScenarioTemplate(scenarioTemplate: ScenarioTemplate) {
-    scenarioTemplate = !scenarioTemplate ? <ScenarioTemplate>{name: '', description: ''} : scenarioTemplate;
+    scenarioTemplate = !scenarioTemplate
+      ? <ScenarioTemplate>{ name: '', description: '' }
+      : scenarioTemplate;
     const dialogRef = this.dialog.open(ScenarioTemplateEditDialogComponent, {
       width: '800px',
-      data: {scenarioTemplate: scenarioTemplate}
+      data: { scenarioTemplate: scenarioTemplate },
     });
-    dialogRef.componentInstance.editComplete.subscribe(result => {
+    dialogRef.componentInstance.editComplete.subscribe((result) => {
       if (result.saveChanges && result.scenarioTemplate) {
         this.saveScenarioTemplate.emit(result.scenarioTemplate);
       }
@@ -105,8 +125,14 @@ export class ScenarioTemplateListComponent implements OnInit {
    * Delete a scenarioTemplate after confirmation
    */
   deleteScenarioTemplate(scenarioTemplate: ScenarioTemplate): void {
-    this.dialogService.confirm('Delete ScenarioTemplate', 'Are you sure that you want to delete scenarioTemplate ' + scenarioTemplate.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Delete ScenarioTemplate',
+        'Are you sure that you want to delete scenarioTemplate ' +
+          scenarioTemplate.name +
+          '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
           this.scenarioTemplateDataService.delete(scenarioTemplate.id);
         }
@@ -117,10 +143,18 @@ export class ScenarioTemplateListComponent implements OnInit {
    * Copy a scenarioTemplate after confirmation
    */
   copyScenarioTemplate(scenarioTemplate: ScenarioTemplate): void {
-    this.dialogService.confirm('Copy ScenarioTemplate', 'Are you sure that you want to create a new scenarioTemplate from ' + scenarioTemplate.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Copy ScenarioTemplate',
+        'Are you sure that you want to create a new scenarioTemplate from ' +
+          scenarioTemplate.name +
+          '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
-          this.scenarioTemplateDataService.copyScenarioTemplate(scenarioTemplate.id);
+          this.scenarioTemplateDataService.copyScenarioTemplate(
+            scenarioTemplate.id
+          );
         }
       });
   }
@@ -129,10 +163,18 @@ export class ScenarioTemplateListComponent implements OnInit {
    * Create a scenario after confirmation
    */
   createScenario(scenarioTemplate: ScenarioTemplate): void {
-    this.dialogService.confirm('Create Scenario', 'Are you sure that you want to create a scenario from ' + scenarioTemplate.name + '?')
-      .subscribe(result => {
+    this.dialogService
+      .confirm(
+        'Create Scenario',
+        'Are you sure that you want to create a scenario from ' +
+          scenarioTemplate.name +
+          '?'
+      )
+      .subscribe((result) => {
         if (result['confirm']) {
-          this.scenarioDataService.createScenarioFromScenarioTemplate(scenarioTemplate.id);
+          this.scenarioDataService.createScenarioFromScenarioTemplate(
+            scenarioTemplate.id
+          );
         }
       });
   }
@@ -143,7 +185,7 @@ export class ScenarioTemplateListComponent implements OnInit {
   editNewScenario(scenario: Scenario) {
     const dialogRef = this.dialog.open(ScenarioEditDialogComponent, {
       width: '800px',
-      data: { scenario: scenario }
+      data: { scenario: scenario },
     });
     dialogRef.componentInstance.editComplete.subscribe((newScenario) => {
       dialogRef.close();
@@ -151,14 +193,21 @@ export class ScenarioTemplateListComponent implements OnInit {
   }
 
   selectScenarioTemplate(scenarioTemplateId: string) {
-    if (!!this.selectedScenarioTemplate && scenarioTemplateId === this.selectedScenarioTemplate.id) {
+    if (
+      !!this.selectedScenarioTemplate &&
+      scenarioTemplateId === this.selectedScenarioTemplate.id
+    ) {
       this.setActive.emit('');
     } else {
       this.setActive.emit(scenarioTemplateId);
     }
   }
 
-  paginateScenarioTemplates(scenarioTemplates: ScenarioTemplate[], pageIndex: number, pageSize: number) {
+  paginateScenarioTemplates(
+    scenarioTemplates: ScenarioTemplate[],
+    pageIndex: number,
+    pageSize: number
+  ) {
     if (!scenarioTemplates) {
       return [];
     }
@@ -174,7 +223,4 @@ export class ScenarioTemplateListComponent implements OnInit {
   sortChanged(sort: Sort) {
     this.sortChange.emit(sort);
   }
-
 }
-
-

@@ -8,22 +8,27 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { Component, EventEmitter, Input, Output, NgZone, ViewChild } from '@angular/core';
-import { Scenario } from 'src/app/swagger-codegen/dispatcher.api/model/models';
-import { ScenarioQuery } from 'src/app/data/scenario/scenario.query';
-import { DialogService } from 'src/app/services/dialog/dialog.service';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { TaskTreeComponent } from 'src/app/components/tasks/task-tree/task-tree.component';
+import { ResultQuery } from 'src/app/data/result/result.query';
+import { ScenarioQuery } from 'src/app/data/scenario/scenario.query';
 import { TaskDataService } from 'src/app/data/task/task-data.service';
 import { TaskQuery } from 'src/app/data/task/task.query';
-import { ResultQuery } from 'src/app/data/result/result.query';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
+import { Scenario } from 'src/app/swagger-codegen/dispatcher.api/model/models';
 
 @Component({
   selector: 'app-scenario-edit',
   templateUrl: './scenario-edit.component.html',
-  styleUrls: ['./scenario-edit.component.css']
+  styleUrls: ['./scenario-edit.component.scss'],
 })
 export class ScenarioEditComponent {
-
   @Input() scenario: Scenario;
   @Output() editComplete = new EventEmitter<boolean>();
   @ViewChild(ScenarioEditComponent) child: ScenarioEditComponent;
@@ -41,9 +46,7 @@ export class ScenarioEditComponent {
     private taskQuery: TaskQuery,
     private resultQuery: ResultQuery,
     public dialogService: DialogService
-  ) {
-
-  }
+  ) {}
 
   refreshTaskList() {
     if (this && this.scenario) {
@@ -58,5 +61,4 @@ export class ScenarioEditComponent {
   returnToScenarioList() {
     this.editComplete.emit(true);
   }
-
 } // End Class

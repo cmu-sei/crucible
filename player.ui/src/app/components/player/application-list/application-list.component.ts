@@ -18,10 +18,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ComnAuthService } from '@crucible/common';
+import { ComnAuthQuery, ComnAuthService, Theme } from '@crucible/common';
 import { User } from 'oidc-client';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
+import { Application } from '../../../generated/s3.player.api';
 import { ApplicationData } from '../../../models/application-data';
 import { TeamData } from '../../../models/team-data';
 import { ApplicationsService } from '../../../services/applications/applications.service';
@@ -42,13 +43,19 @@ export class ApplicationListComponent implements OnInit, OnChanges, OnDestroy {
   public viewGUID: string;
   public titleText: string;
   private unsubscribe$: Subject<null> = new Subject<null>();
+  private currentTheme = Theme.LIGHT;
 
   constructor(
     private applicationsService: ApplicationsService,
     private focusedAppService: FocusedAppService,
     private authService: ComnAuthService,
-    private sanitizer: DomSanitizer
-  ) {}
+    private sanitizer: DomSanitizer,
+    private authQuery: ComnAuthQuery
+  ) {
+    authQuery.userTheme$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((t) => (this.currentTheme = t));
+  }
 
   ngOnInit() {
     this.refreshApps();
@@ -61,7 +68,10 @@ export class ApplicationListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   // Local Component functions
-  openInTab(url: string) {
+  openInTab(app: ApplicationData) {
+    const url = app.url.includes('{theme}')
+      ? app.url.replace('{theme}', '?theme=' + this.currentTheme)
+      : app.url;
     window.open(url, '_blank');
   }
 
@@ -84,14 +94,14 @@ export class ApplicationListComponent implements OnInit, OnChanges, OnDestroy {
         }),
         tap((apps) => {
           if (apps.length > 0) {
-            this.openInFocusedApp(apps[0].name, apps[0].url);
+            this.openInFocusedApp(apps[0]);
           }
         }),
         takeUntil(this.unsubscribe$)
       );
   }
 
-  openInFocusedApp(name: string, url: string) {
+  openInFocusedApp(app: ApplicationData) {
     this.authService.isAuthenticated().then((isAuthenticated) => {
       if (!isAuthenticated) {
         console.log(
@@ -99,6 +109,9 @@ export class ApplicationListComponent implements OnInit, OnChanges, OnDestroy {
         );
         window.location.reload();
       } else {
+        const url = app.url.includes('{theme}')
+          ? app.url.replace('{theme}', '?theme=' + this.currentTheme)
+          : app.url;
         this.focusedAppService.focusedAppUrl.next(url);
       }
     });

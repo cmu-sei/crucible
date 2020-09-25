@@ -16,11 +16,10 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { ComnSettingsService } from '@crucible/common';
+import { ComnSettingsService, Theme, ComnAuthQuery } from '@crucible/common';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
 import { combineLatest, EMPTY, Observable, of, Subject } from 'rxjs';
 import {
-  catchError,
   map,
   switchMap,
   take,
@@ -34,6 +33,7 @@ import { ViewService } from '../../generated/s3.player.api/api/view.service';
 import { LoggedInUserService } from '../../services/logged-in-user/logged-in-user.service';
 import { ViewsService } from '../../services/views/views.service';
 import { AdminViewEditComponent } from '../admin-app/admin-view-search/admin-view-edit/admin-view-edit.component';
+import { SystemMessageService } from '../../services/system-message/system-message.service';
 
 @Component({
   selector: 'app-player',
@@ -51,10 +51,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   public view: View;
   public opened: boolean;
-  public topbarColor = '#b00';
+  public topbarColor = '#5F8DB5';
   public topbarTextColor = '#ffffff';
   queryParams: any = {};
   unsubscribe$: Subject<null> = new Subject<null>();
+  theme$: Observable<Theme>;
 
   constructor(
     private router: Router,
@@ -64,19 +65,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
     private loggedInUserService: LoggedInUserService,
     private teamService: TeamService,
     private settingsService: ComnSettingsService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private messageService: SystemMessageService,
+    private authQuery: ComnAuthQuery
+  ) {
+    this.theme$ = this.authQuery.userTheme$;
+  }
 
   ngOnInit() {
     this.data$ = this.checkParam(['teamId', 'opened']).pipe(
       tap((paramsExist) =>
         paramsExist ? (this.loaded = true) : (this.loaded = false)
       ),
-      switchMap(() => this.loadData()),
-      catchError((err) => {
-        console.log(err);
-        return EMPTY;
-      })
+      switchMap(() => this.loadData())
     );
 
     // Set the topbar color from config file.
@@ -85,8 +86,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   checkParam(params: string[]): Observable<boolean> {
     return this.routerQuery.selectQueryParams([...params]).pipe(
-      switchMap((params) => {
-        return params.every((p) => p != null) ? of(true) : of(false);
+      switchMap((p) => {
+        return p.every((x) => x != null) ? of(true) : of(false);
       })
     );
   }
@@ -115,7 +116,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
         )
       ),
       tap(({ state, view, user, teams }) => {
-        if (!this.loaded) {
+        if (teams.length === 0) {
+          this.messageService.displayMessage(
+            'Not a Member',
+            'You are not a member of any Teams in this View'
+          );
+        } else if (!this.loaded) {
           const params = {
             teamId: teams.find((t) => t.isPrimary).id,
             opened:

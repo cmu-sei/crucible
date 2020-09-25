@@ -8,35 +8,33 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeAppComponent } from './components/home-app/home-app.component';
-import { AuthGuard } from './services/auth/auth-guard.service';
-import { AuthCallbackComponent } from './components/auth/auth-callback.component';
-import { AuthCallbackSilentComponent } from './components/auth/auth-callback-silent.component';
-import { AuthLogoutComponent } from './components/auth/auth-logout.component';
+import { ComnAuthGuardService } from '@crucible/common';
 import { AdminContainerComponent } from './components/admin/admin-container/admin-container.component';
+import { HomeAppComponent } from './components/home-app/home-app.component';
 
 export const ROUTES: Routes = [
-  { path: '', component: HomeAppComponent, canActivate: [AuthGuard] },
-  { path: 'view', component: HomeAppComponent, canActivate: [AuthGuard] },
-  { path: 'auth-callback', component: AuthCallbackComponent },
-  { path: 'auth-callback-silent', component: AuthCallbackSilentComponent },
-  { path: 'logout', component: AuthLogoutComponent },
-  { path: 'admin', component: AdminContainerComponent, canActivate: [AuthGuard] },
+  {
+    path: '',
+    component: HomeAppComponent,
+    canActivate: [ComnAuthGuardService],
+  },
+  {
+    path: 'view',
+    component: HomeAppComponent,
+    canActivate: [ComnAuthGuardService],
+  },
+  {
+    path: 'admin',
+    component: AdminContainerComponent,
+    canActivate: [ComnAuthGuardService],
+  },
 ];
 
-
 @NgModule({
-  exports: [
-    RouterModule
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(ROUTES)
-  ]
+  exports: [RouterModule],
+  imports: [CommonModule, RouterModule.forRoot(ROUTES)],
 })
-export class AppRoutingModule { }
-
-
+export class AppRoutingModule {}

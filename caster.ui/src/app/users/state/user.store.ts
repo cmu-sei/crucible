@@ -8,6 +8,8 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
+import { Injectable } from '@angular/core';
+import { Theme } from '@crucible/common';
 import {
   EntityState,
   EntityStore,
@@ -16,9 +18,7 @@ import {
   StoreConfig,
 } from '@datorama/akita';
 import { User } from '../../generated/caster-api';
-import { Injectable } from '@angular/core';
 import { UserUi } from './user.model';
-import { Theme } from '../../shared/models/theme-enum';
 
 export interface UsersState extends EntityState<User> {}
 export interface UserUIState extends EntityState<UserUi> {}

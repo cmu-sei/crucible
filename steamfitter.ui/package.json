@@ -10,7 +10,12 @@
     "e2e": "ng e2e",
     "postinstall": "ngcc",
     "swagger-gen": "curl --insecure http://host.docker.internal:4400/swagger/v1/swagger.json --output swagger.json && node_modules/@openapitools/openapi-generator-cli/bin/openapi-generator generate -i ./swagger.json -g typescript-angular -o src/app/swagger-codegen/dispatcher.api --additional-properties ngVersion=9.1 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original --type-mappings=DateTime=Date",
-    "swagger-gen-win": "docker run --rm -v %CD%:/local openapitools/openapi-generator-cli:v4.1.2 generate -i http://host.docker.internal:4400/swagger/v1/swagger.json -g typescript-angular -o /local/generated --additional-properties ngVersion=9.1 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original"
+    "swagger-gen-win": "docker run --rm -v %CD%:/local openapitools/openapi-generator-cli:v4.1.2 generate -i http://host.docker.internal:4400/swagger/v1/swagger.json -g typescript-angular -o /local/generated --additional-properties ngVersion=9.1 --additional-properties useRxJS6=true --additional-properties modelPropertyNaming=original",
+    "docker:init": "docker network create identity --driver=overlay",
+    "docker:stack": "npm run docker:stack:identity && npm run docker:stack:api",
+    "docker:stack:api": "docker stack deploy -c docker-compose.yml -c docker/compose/api.yml steamfitter_stack",
+    "docker:stack:identity": "docker stack deploy -c docker-compose.yml -c docker/compose/identity.yml identity_stack",
+    "docker:destroy": "docker stack rm steamfitter_stack identity_stack"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +30,7 @@
     "@angular/platform-browser": "~9.1.12",
     "@angular/platform-browser-dynamic": "~9.1.12",
     "@angular/router": "~9.1.12",
+    "@crucible/common": "file:modules/crucible-common-0.0.2.tgz",
     "@datorama/akita": "^4.10.4",
     "@datorama/akita-ng-router-store": "^3.1.4",
     "@datorama/akita-ngdevtools": "^3.0.2",
@@ -35,7 +41,7 @@
     "luxon": "^1.12.0",
     "ngx-material-timepicker": "^5.5.3",
     "ngx-clipboard": "^12.2.1",
-    "oidc-client": "^1.6.1",
+    "oidc-client": "^1.10.1",
     "rxjs": "^6.6.0",
     "rxjs-compat": "^6.4.0",
     "tslib": "^1.10.0",

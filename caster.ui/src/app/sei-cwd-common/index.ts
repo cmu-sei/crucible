@@ -8,6 +8,4 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-export * from './cwd-settings';
-export * from './cwd-auth';
 export * from './sei-cwd-common.module';

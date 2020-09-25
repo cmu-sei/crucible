@@ -10,43 +10,85 @@ DM20-0181
 
 <div class="component-container mat-elevation-z8 scroll-container">
   <div fxLayout="row" class="title">
-    <div fxFlex="5" fxLayoutAlign="start center"><img height="35" src="../../../assets/svg-icons/history-24px.svg" alt="Scenarios"></div>
+    <div fxFlex="5" fxFlexOffset="1" fxLayoutAlign="start center">
+      <mat-icon
+        class="icon-35px"
+        [ngStyle]="{'color': topbarColor}"
+        svgIcon="history"
+        alt="History"
+      ></mat-icon>
+    </div>
     <div fxFlex="95" fxLayoutAlign="start center">
       <h4>
         <mat-form-field>
           <mat-label>Category</mat-label>
-          <mat-select [(value)]="historyView" (selectionChange)="handleHistoryViewChange($event.value)">
-            <mat-option *ngFor="let view of HistoryView | keyvalue" [value]="view.value">{{view.value}}</mat-option>
+          <mat-select
+            [(value)]="historyView"
+            (selectionChange)="handleHistoryViewChange($event.value)"
+          >
+            <mat-option
+              *ngFor="let view of HistoryView | keyvalue"
+              [value]="view.value"
+              >{{ view.value }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
         &nbsp; &nbsp;
-        <mat-form-field class="add-margin" *ngIf="historyView === HistoryView.user">
+        <mat-form-field
+          class="add-margin"
+          *ngIf="historyView === HistoryView.user"
+        >
           <mat-label>
             <span>{{ historyView }}s</span>
           </mat-label>
-          <mat-select [(value)]="selectedUser" (selectionChange)="handleUserChange($event.value)">
-            <mat-option *ngFor="let user of userList" [value]="user">{{user.name}}</mat-option>
+          <mat-select
+            [(value)]="selectedUser"
+            (selectionChange)="handleUserChange($event.value)"
+          >
+            <mat-option *ngFor="let user of userList" [value]="user">{{
+              user.name
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="add-margin" *ngIf="historyView === HistoryView.view">
+        <mat-form-field
+          class="add-margin"
+          *ngIf="historyView === HistoryView.view"
+        >
           <mat-label>
             <span>{{ historyView }}s</span>
           </mat-label>
-          <mat-select [(value)]="selectedView" (selectionChange)="handleViewChange($event.value)">
-            <mat-option *ngFor="let view of viewList" [value]="view">{{view.name}}</mat-option>
+          <mat-select
+            [(value)]="selectedView"
+            (selectionChange)="handleViewChange($event.value)"
+          >
+            <mat-option *ngFor="let view of viewList" [value]="view">{{
+              view.name
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="add-margin" *ngIf="historyView === HistoryView.vm">
+        <mat-form-field
+          class="add-margin"
+          *ngIf="historyView === HistoryView.vm"
+        >
           <mat-label>
             <span>{{ historyView }}s</span>
           </mat-label>
-          <mat-select [(value)]="selectedVm" (selectionChange)="handleVmChange($event.value)">
-            <mat-option *ngFor="let vm of vmList" [value]="vm">{{vm.name}}</mat-option>
+          <mat-select
+            [(value)]="selectedVm"
+            (selectionChange)="handleVmChange($event.value)"
+          >
+            <mat-option *ngFor="let vm of vmList" [value]="vm">{{
+              vm.name
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
         &nbsp; &nbsp;
         <mat-form-field>
-          <input matInput placeholder="Filter Results" (keyup)="applyFilter($event.target.value)" />
+          <input
+            matInput
+            placeholder="Filter Results"
+            (keyup)="applyFilter($event.target.value)"
+          />
         </mat-form-field>
       </h4>
     </div>
@@ -57,23 +99,54 @@ DM20-0181
     <div fxFlex="90" fxLayoutAlign="start center">
       <mat-card
         *ngIf="loading && !apiResponded"
-        style="display: flex; justify-content: center; align-items: center; width:100%"
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        "
       >
-        <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
       </mat-card>
 
-      <table mat-table [dataSource]="modelDataSource" matSort class="mat-elevation-z8" [hidden]="modelDataSource.data.length < 1" multiTemplateDataRows>
+      <table
+        mat-table
+        [dataSource]="modelDataSource"
+        matSort
+        class="mat-elevation-z8"
+        [hidden]="modelDataSource.data.length < 1"
+        multiTemplateDataRows
+      >
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <button mat-icon-button title="View Detail" *ngIf="expandedResult !== element">
-              <mat-icon svgIcon="ic_chevron_right_black_24px"></mat-icon>
+            <button
+              mat-icon-button
+              title="View Detail"
+              *ngIf="expandedResult !== element"
+            >
+              <mat-icon
+                class="icon-color"
+                svgIcon="ic_chevron_right"
+              ></mat-icon>
             </button>
-            <button mat-icon-button title="View Detail" *ngIf="expandedResult === element">
-              <mat-icon svgIcon="ic_chevron_down_black_24px"></mat-icon>
+            <button
+              mat-icon-button
+              title="View Detail"
+              *ngIf="expandedResult === element"
+            >
+              <mat-icon svgIcon="ic_chevron_down"></mat-icon>
             </button>
-            <button mat-icon-button title="Copy Task" (click)="copyTask(element.id); $event.stopPropagation();">
-              <mat-icon svgIcon="ic_clipboard_copy"></mat-icon>
+            <button
+              mat-icon-button
+              title="Copy Task"
+              (click)="copyTask(element.id); $event.stopPropagation()"
+            >
+              <mat-icon
+                class="icon-color"
+                svgIcon="ic_clipboard_copy"
+              ></mat-icon>
             </button>
           </td>
         </ng-container>
@@ -92,7 +165,11 @@ DM20-0181
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
           <td mat-cell *matCellDef="let element" class="status-column">
-            <img src="assets/img/{{ element.status }}.png" class="icon16" title="{{ element.status }}" />
+            <mat-icon
+              svgIcon="{{element.status.toLowerCase()}}"
+              class="icon-20"
+              title="{{ element.status }}"
+            ></mat-icon>
             {{ element.status | titlecase }}
           </td>
         </ng-container>
@@ -116,31 +193,59 @@ DM20-0181
         </ng-container>
 
         <ng-container matColumnDef="expandedDetail">
-          <td mat-cell *matCellDef="let result" [attr.colspan]="displayedColumns.length">
-            <div [@detailExpand]="result === expandedResult ? 'expanded' : 'collapsed'" (click)="$event.stopPropagation();">
-              <p>
-                id: {{result.id}}<br>
-                vmId: {{result.vmId}}<br>
-                vmName: {{result.vmName}}<br>
-                apiUrl: {{result.apiUrl}}<br>
-                action: {{result.action}}<br>
-                actionParameters:<br/> <span *ngFor="let k of result.actionParameters | keyvalue">&nbsp;&nbsp;&nbsp;&nbsp;{{k.key}}: {{k.key.toLowerCase() === 'password' ? '**************' : k.value}}<br/></span>
-                expirationSeconds: {{result.expirationSeconds}}<br>
-                iteration {{result.currentIteration}} of {{result.iterations}}<br>
-                intervalSeconds: {{result.intervalSeconds}}<br>
-                status: {{result.status}}<br>
-                expectedOutput: {{result.expectedOutput}}<br>
-                actualOutput: {{result.actualOutput}}<br>
-                dateCreated: {{result.dateCreated | date: 'yyyy/MM/dd HH:mm:ss'}}<br>
-                statusDate: {{result.statusDate | date: 'yyyy/MM/dd HH:mm:ss'}}<br>
-              </p>
+          <td
+            mat-cell
+            *matCellDef="let result"
+            [attr.colspan]="displayedColumns.length"
+          >
+            <div
+              [@detailExpand]="result === expandedResult ? 'expanded' : 'collapsed'"
+              (click)="$event.stopPropagation()"
+            >
+              <div class="result-details">
+                id: {{ result.id }}<br />
+                vmId: {{ result.vmId }}<br />
+                vmName: {{ result.vmName }}<br />
+                apiUrl: {{ result.apiUrl }}<br />
+                action: {{ result.action }}<br />
+                actionParameters:<br />
+                <span *ngFor="let k of result.actionParameters | keyvalue"
+                  >&nbsp;&nbsp;&nbsp;&nbsp;{{ k.key }}:
+                  {{
+                    k.key.toLowerCase() === 'password'
+                      ? '**************'
+                      : k.value
+                  }}<br
+                /></span>
+                expirationSeconds: {{ result.expirationSeconds }}<br />
+                iteration {{ result.currentIteration }} of {{ result.iterations
+                }}<br />
+                intervalSeconds: {{ result.intervalSeconds }}<br />
+                status: {{ result.status }}<br />
+                expectedOutput: {{ result.expectedOutput }}<br />
+                actualOutput: {{ result.actualOutput }}<br />
+                dateCreated:
+                {{ result.dateCreated | date: 'yyyy/MM/dd HH:mm:ss' }}<br />
+                statusDate: {{ result.statusDate | date: 'yyyy/MM/dd HH:mm:ss'
+                }}<br />
+              </div>
             </div>
           </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="element-row" (click)="showDetail(row)"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row" (click)="showDetail(row)"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          class="element-row"
+          (click)="showDetail(row)"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: ['expandedDetail']"
+          class="detail-row"
+          (click)="showDetail(row)"
+        ></tr>
       </table>
     </div>
     <div fxFlex="5" fxLayoutAlign="start center"></div>
@@ -157,4 +262,3 @@ DM20-0181
   >
   </mat-paginator>
 </div>
-

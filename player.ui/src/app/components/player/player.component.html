@@ -8,63 +8,76 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<mat-sidenav-container class="appcontent-container" autosize>
-  <mat-sidenav
-    #sidenav
-    class="appbarmenu-container"
-    mode="side"
-    [opened]="opened$ | async"
-  >
-    <ng-container *ngIf="data$ | async as data">
-      <mat-list class="appitems-container">
-        <mat-list-item class="appslist">
-          <a class="nolink" href="/">
-            <h2>
-              <b>{{ data.title }}</b>
-            </h2>
-          </a>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-      </mat-list>
-    </ng-container>
-    <app-application-list
-      *ngIf="data$ | async as data"
-      [viewId]="data.view.id"
-      [user]="data.user"
-      [teams]="data.teams"
-      (toggleSideNavEvent)="sidenavToggleFn()"
-    ></app-application-list>
-    <img class="cmu-logo" src="/assets/img/cmu-red-gray.png" />
-  </mat-sidenav>
-  <mat-sidenav-content class="noscroll">
-    <ng-container *ngIf="data$ | async as data; else loading">
-      <app-topbar
-        [sidenav]="sidenav"
-        [title]="data.view.name"
-        [topbarColor]="topbarColor"
-        topbarView="player-home"
-        [teams]="data.teams"
-        [team]="data.team"
-        (setTeam)="setPrimaryTeam($event)"
-        (sidenavToggle)="sidenavToggleFn($event)"
-        (editView)="editViewFn($event)"
-        [topbarTextColor]="topbarTextColor"
-      ></app-topbar>
-    </ng-container>
-    <app-focused-app></app-focused-app>
+<ng-container *ngIf="data$ | async as data; else loading">
+  <ng-container *ngIf="loaded" ; else loading>
+    <mat-sidenav-container class="appcontent-container" autosize>
+      <mat-sidenav
+        #sidenav
+        class="appbarmenu-container"
+        mode="side"
+        [opened]="opened$ | async"
+      >
+        <mat-list class="appitems-container">
+          <mat-list-item>
+            <a class="nolink" href="/">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon
+                  class="player-icon"
+                  svgIcon="ic_crucible_player"
+                ></mat-icon>
+                <h2>
+                  <b>{{ data.title }}</b>
+                </h2>
+              </div>
+            </a>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-list>
+        <app-application-list
+          [viewId]="data.view.id"
+          [user]="data.user"
+          [teams]="data.teams"
+          (toggleSideNavEvent)="sidenavToggleFn()"
+        ></app-application-list>
+        <img
+          class="crucible-logo"
+          [src]="
+            (theme$ | async) === 'light-theme'
+              ? '/assets/img/crucible-logo-light.png'
+              : '/assets/img/crucible-logo-dark.png'
+          "
+        />
+      </mat-sidenav>
+      <mat-sidenav-content class="noscroll">
+        <app-topbar
+          [sidenav]="sidenav"
+          [title]="data.view.name"
+          [topbarColor]="topbarColor"
+          topbarView="player-home"
+          [teams]="data.teams"
+          [team]="data.team"
+          (setTeam)="setPrimaryTeam($event)"
+          (sidenavToggle)="sidenavToggleFn($event)"
+          (editView)="editViewFn($event)"
+          [topbarTextColor]="topbarTextColor"
+        ></app-topbar>
 
-    <app-notifications
-      *ngIf="data$ | async as data; else loading"
-      [viewGuid]="data.view.id"
-      [teamGuid]="data.team.id"
-      [userGuid]="data.user.profile.id"
-      [userToken]="data.user.access_token"
-      [userName]="data.user.profile.name"
-      class="notification-height"
-    >
-    </app-notifications>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+        <app-focused-app></app-focused-app>
+
+        <app-notifications
+          [viewGuid]="data.view.id"
+          [teamGuid]="data.team.id"
+          [userGuid]="data.user.profile.id"
+          [userToken]="data.user.access_token"
+          [userName]="data.user.profile.name"
+          class="notification-height"
+        >
+        </app-notifications>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </ng-container>
+</ng-container>
+
 <ng-template #loading>
   LOADING
 </ng-template>

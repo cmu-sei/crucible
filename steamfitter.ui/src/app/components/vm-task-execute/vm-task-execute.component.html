@@ -8,31 +8,37 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 -->
 
-<div class="component-container mat-elevation-z8 scroll-container" *ngIf="!!userScenario">
-
+<div
+  class="component-container mat-elevation-z8 scroll-container"
+  *ngIf="!!userScenario"
+>
   <div fxLayout="row" class="title">
     <div fxFlex="5" fxLayoutAlign="center center">
-      <mat-icon svgIcon="input_24px"></mat-icon>
+      <mat-icon [ngStyle]="{'color': topbarColor}" svgIcon="input"></mat-icon>
     </div>
     <div fxFlex="90" fxLayoutAlign="start center">
       <h4>Build and Execute a Task</h4>
     </div>
   </div>
 
-  <div fxLayout="row" class="add-margin" (click)="$event.stopPropagation();">
+  <div fxLayout="row" class="add-margin" (click)="$event.stopPropagation()">
     <div style="width: 40px;"></div>
     <mat-form-field fxFlex fxFlexFill>
-      <mat-select placeholder="Select a View" [value]="selectedView | async" (selectionChange)="onViewChange($event)">
+      <mat-select
+        placeholder="Select a View"
+        [value]="selectedView | async"
+        (selectionChange)="onViewChange($event)"
+      >
         <mat-option *ngFor="let view of viewList | async" [value]="view">
-          {{view.name}}
+          {{ view.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <div style="width: 40px;"></div>
   </div>
 
-  <div fxLayout="row" class="add-margin" (click)="$event.stopPropagation();">
-    <div fxFlex="90" fxFlexOffset="5">
+  <div mat-card fxLayout="row" class="add-margin" (click)="$event.stopPropagation()">
+    <div fxFlex="94" fxFlexOffset="3">
       <app-tasks
         [taskList]="taskList"
         [resultList]="results"
@@ -44,6 +50,4 @@ DM20-0181
       ></app-tasks>
     </div>
   </div>
-
 </div>
-

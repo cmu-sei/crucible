@@ -7,7 +7,6 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,25 +14,27 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {
-  Breadcrumb,
-  ProjectObjectType,
-  ProjectQuery,
-  ProjectService,
-  ProjectUI,
-} from '../../../state';
-import { Project } from 'src/app/generated/caster-api';
+import { ComnAuthQuery, ComnSettingsService, Theme } from '@crucible/common';
 import { combineLatest, Observable, Subject } from 'rxjs';
+import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { FileQuery } from 'src/app/files/state';
+import { Project } from 'src/app/generated/caster-api';
+import { CanComponentDeactivate } from 'src/app/sei-cwd-common/cwd-route-guards/can-deactivate.guard';
+import { SignalRService } from 'src/app/shared/signalr/signalr.service';
 import {
   CurrentUserQuery,
   CurrentUserState,
   UserService,
 } from 'src/app/users/state';
-import { CwdAuthService, CwdSettingsService } from 'src/app/sei-cwd-common';
-import { CanComponentDeactivate } from 'src/app/sei-cwd-common/cwd-route-guards/can-deactivate.guard';
-import { FileQuery } from 'src/app/files/state';
-import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { SignalRService } from 'src/app/shared/signalr/signalr.service';
+import {
+  ProjectObjectType,
+  ProjectQuery,
+  ProjectService,
+  ProjectUI,
+} from '../../../state';
+import { TopbarView } from './../../../../shared/components/top-bar/topbar.models';
+
+const LEFT_SIDEBAR_MIN_WIDTH = 300;
 
 @Component({
   selector: 'cas-project-collapse-container',
@@ -52,6 +53,10 @@ export class ProjectCollapseContainerComponent
   public leftSidebarWidth: number;
   public currentUser$: Observable<CurrentUserState>;
   public titleText = 'Caster';
+  public topbarColor;
+  public topbarTextColor;
+  public theme$: Observable<Theme>;
+  TopbarView = TopbarView;
 
   private unsubscribe$ = new Subject();
 
@@ -59,12 +64,14 @@ export class ProjectCollapseContainerComponent
     private projectQuery: ProjectQuery,
     private projectService: ProjectService,
     private userService: UserService,
+    private authQuery: ComnAuthQuery,
     private currentUserQuery: CurrentUserQuery,
-    private authService: CwdAuthService,
-    private settingsService: CwdSettingsService,
+    private settingsService: ComnSettingsService,
     private fileQuery: FileQuery,
     private signalRService: SignalRService
-  ) {}
+  ) {
+    this.theme$ = this.currentUserQuery.userTheme$;
+  }
 
   ngOnInit() {
     this.loading$ = this.projectQuery.selectLoading();
@@ -79,6 +86,8 @@ export class ProjectCollapseContainerComponent
 
     // Set the page title from configuration file
     this.titleText = this.settingsService.settings.AppTopBarText;
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor;
+    this.topbarTextColor = this.settingsService.settings.AppTopBarHexTextColor;
 
     this.project$
       .pipe(
@@ -126,14 +135,19 @@ export class ProjectCollapseContainerComponent
   }
 
   resizingFn(event) {
-    this.leftSidebarWidth = event.rectangle.width;
+    const width =
+      event.rectangle.width >= LEFT_SIDEBAR_MIN_WIDTH
+        ? event.rectangle.width
+        : LEFT_SIDEBAR_MIN_WIDTH;
+    this.leftSidebarWidth = width;
   }
 
   resizeEndFn(event) {
-    this.projectService.setLeftSidebarWidth(
-      this.project.id,
-      event.rectangle.width
-    );
+    const width =
+      event.rectangle.width >= LEFT_SIDEBAR_MIN_WIDTH
+        ? event.rectangle.width
+        : LEFT_SIDEBAR_MIN_WIDTH;
+    this.projectService.setLeftSidebarWidth(this.project.id, width);
   }
 
   leftSidebarOpenFn(event) {

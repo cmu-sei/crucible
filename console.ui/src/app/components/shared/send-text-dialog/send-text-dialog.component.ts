@@ -8,13 +8,13 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-    selector: 'send-text-dialog',
-    templateUrl: './send-text-dialog.component.html',
-    styleUrls: ['./send-text-dialog.component.css']
+  selector: 'send-text-dialog',
+  templateUrl: './send-text-dialog.component.html',
+  styleUrls: ['./send-text-dialog.component.scss'],
 })
 export class SendTextDialogComponent {
   public title: string;
@@ -22,7 +22,8 @@ export class SendTextDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data,
-    private dialogRef: MatDialogRef<SendTextDialogComponent>) {
+    private dialogRef: MatDialogRef<SendTextDialogComponent>
+  ) {
     this.dialogRef.disableClose = true;
   }
 
@@ -35,5 +36,3 @@ export class SendTextDialogComponent {
     this.dialogRef.close(this.textToSend);
   }
 }
-
-

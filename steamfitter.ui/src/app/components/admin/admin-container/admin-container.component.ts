@@ -7,22 +7,29 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {Sort} from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { User, Permission, UserPermission } from 'src/app/swagger-codegen/dispatcher.api/model/models';
-import { PermissionService, UserPermissionService } from 'src/app/swagger-codegen/dispatcher.api/api/api';
-import {Router, ActivatedRoute} from '@angular/router';
+import {
+  PermissionService,
+} from 'src/app/swagger-codegen/dispatcher.api/api/api';
+import {
+  Permission,
+  User,
+  UserPermission,
+} from 'src/app/swagger-codegen/dispatcher.api/model/models';
 import { UserDataService } from '../../../data/user/user-data.service';
+import { TopbarView } from './../../shared/top-bar/topbar.models';
+import { ComnSettingsService, ComnAuthQuery, Theme } from '@crucible/common';
 
 @Component({
   selector: 'app-admin-container',
   templateUrl: './admin-container.component.html',
-  styleUrls: ['./admin-container.component.css']
+  styleUrls: ['./admin-container.component.scss'],
 })
 export class AdminContainerComponent implements OnDestroy {
   loggedInUser = this.userDataService.loggedInUser;
@@ -37,41 +44,60 @@ export class AdminContainerComponent implements OnDestroy {
   pageSize: Observable<number>;
   pageIndex: Observable<number>;
   private unsubscribe$ = new Subject();
+  TopbarView = TopbarView;
+  topbarColor = '#ef3a47';
+  topbarTextColor = '#FFFFFF';
+  theme$: Observable<Theme>;
 
   constructor(
     private router: Router,
     private userDataService: UserDataService,
     activatedRoute: ActivatedRoute,
     private permissionService: PermissionService,
-    private userPermissionService: UserPermissionService
+    private settingsService: ComnSettingsService,
+    private authQuery: ComnAuthQuery
   ) {
-    this.userDataService.isSuperUser.pipe(takeUntil(this.unsubscribe$)).subscribe(result => {
-      this.isSuperUser = result;
-      if (!result) {
-        router.navigate(['/']);
-      }
-    });
+
+    this.theme$ = this.authQuery.userTheme$;
+
+    this.userDataService.isSuperUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((result) => {
+        this.isSuperUser = result;
+        if (!result) {
+          router.navigate(['/']);
+        }
+      });
     this.userList = this.userDataService.userList;
     this.permissionList = this.permissionService.getPermissions();
     this.filterString = activatedRoute.queryParamMap.pipe(
-      map(params => (params.get('filter') || ''))
+      map((params) => params.get('filter') || '')
     );
     this.pageSize = activatedRoute.queryParamMap.pipe(
-      map(params => (parseInt(params.get('pagesize') || '20', 10)))
+      map((params) => parseInt(params.get('pagesize') || '20', 10))
     );
     this.pageIndex = activatedRoute.queryParamMap.pipe(
-      map(params => (parseInt(params.get('pageindex') || '0', 10)))
+      map((params) => parseInt(params.get('pageindex') || '0', 10))
     );
     this.showSection = activatedRoute.queryParamMap.pipe(
-      map(params => params.get('section') || this.usersText)
+      map((params) => params.get('section') || this.usersText)
     );
     this.userDataService.getUsersFromApi();
-    this.userDataService.getPermissionsFromApi().pipe(takeUntil(this.unsubscribe$)).subscribe();
+    this.userDataService
+      .getPermissionsFromApi()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe();
     this.gotoUserSection();
+    // Set the display settings from config file
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor ? this.settingsService.settings.AppTopBarHexColor : this.topbarColor;
+    this.topbarTextColor = this.settingsService.settings.AppTopBarHexTextColor ? this.settingsService.settings.AppTopBarHexTextColor : this.topbarTextColor;
   }
 
   gotoUserSection() {
-    this.router.navigate([], { queryParams: { section: this.usersText }, queryParamsHandling: 'merge'});
+    this.router.navigate([], {
+      queryParams: { section: this.usersText },
+      queryParamsHandling: 'merge',
+    });
   }
 
   logout() {
@@ -79,7 +105,10 @@ export class AdminContainerComponent implements OnDestroy {
   }
 
   selectUser(userId: string) {
-    this.router.navigate([], { queryParams: { userId: userId }, queryParamsHandling: 'merge'});
+    this.router.navigate([], {
+      queryParams: { userId: userId },
+      queryParamsHandling: 'merge',
+    });
   }
 
   addUserHandler(user: User) {
@@ -99,17 +128,21 @@ export class AdminContainerComponent implements OnDestroy {
   }
 
   sortChangeHandler(sort: Sort) {
-    this.router.navigate([], { queryParams: { sorton: sort.active, sortdir: sort.direction }, queryParamsHandling: 'merge'});
+    this.router.navigate([], {
+      queryParams: { sorton: sort.active, sortdir: sort.direction },
+      queryParamsHandling: 'merge',
+    });
   }
 
   pageChangeHandler(page: PageEvent) {
-    this.router.navigate([], { queryParams: { pageindex: page.pageIndex, pagesize: page.pageSize }, queryParamsHandling: 'merge'});
+    this.router.navigate([], {
+      queryParams: { pageindex: page.pageIndex, pagesize: page.pageSize },
+      queryParamsHandling: 'merge',
+    });
   }
 
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }
-

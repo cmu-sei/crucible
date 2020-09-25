@@ -27,27 +27,54 @@ DM20-0181
     [opened]="leftSidebarOpen"
     (openedChange)="leftSidebarOpenFn($event)"
   >
-    <div fxLayout="column" fxLayoutAlign="start start">
-      <div fxFill fxLayout="row" fxLayoutAlign="end center">
-        <button (click)="sidenav.toggle()" mat-icon-button>
-          <mat-icon
-            fontSet="fas"
-            class="fa-lg"
-            fontIcon="fa-chevron-left"
-            title="Open"
-          ></mat-icon>
-        </button>
+    <div fxFill fxLayout="column" fxLayoutAlign="space-between center">
+      <div
+        fxFlex="8"
+        fxFill
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+      >
+        <a [routerLink]="['/']">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon
+              class="caster-icon"
+              svgIcon="ic_crucible_caster"
+            ></mat-icon>
+            <h2 class="icon-text">
+              {{ titleText }}
+            </h2>
+          </div>
+        </a>
       </div>
-      <h2 style="margin-left: 10px;">
-        <a [routerLink]="['/']">{{ titleText }}</a>
-      </h2>
+
       <mat-divider></mat-divider>
-      <cas-project-navigation></cas-project-navigation>
+      <div fxFlex fxFill class="scroll-y">
+        <cas-project-navigation></cas-project-navigation>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div fxFlex="8" fxFill fxLayout="row" fxLayoutAlign="start end">
+        <img
+          class="crucible-logo"
+          [src]="
+            (theme$ | async) === 'light-theme'
+              ? '/assets/img/crucible-logo-light.png'
+              : '/assets/img/crucible-logo-dark.png'
+          "
+        />
+      </div>
     </div>
   </mat-sidenav>
 
   <mat-sidenav-content fxLayout="column" *ngIf="project">
-    <cas-topbar [title]="project.name" [sidenav]="sidenav"></cas-topbar>
+    <cas-topbar
+      [title]="project.name"
+      [topbarColor]="topbarColor"
+      [topbarTextColor]="topbarTextColor"
+      [topbarView]="TopbarView.CASTER_PROJECT"
+      [sidenav]="sidenav"
+      (sidenavToggle)="sidenav.toggle()"
+    ></cas-topbar>
     <div fxLayout="row" fxLayoutAlign="center stretch" fxFlex="0 1 auto">
       <div fxFill>
         <div

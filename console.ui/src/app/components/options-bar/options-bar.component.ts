@@ -10,27 +10,26 @@ DM20-0181
 
 import {
   Component,
+  OnDestroy,
   OnInit,
   Pipe,
   PipeTransform,
-  OnDestroy,
 } from '@angular/core';
-import { VmService } from '../../services/vm/vm.service';
-import { DialogService } from '../../services/dialog/dialog.service';
-import { ActivatedRoute } from '@angular/router';
-import { NotificationService } from '../../services/notification/notification.service';
-import { NotificationData } from '../../models/notification/notification-model';
-import { AuthService } from '../../services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { ComnAuthService, ComnSettingsService, Theme } from '@crucible/common';
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { NotificationData } from '../../models/notification/notification-model';
+import { IsoResult } from '../../models/vm/iso-result';
 import {
-  VmModel,
   VirtualMachineToolsStatus,
+  VmModel,
   VmResolution,
 } from '../../models/vm/vm-model';
-import { Subject } from 'rxjs';
-import { takeUntil, take } from 'rxjs/operators';
-import { SettingsService } from '../../services/settings/settings.service';
-import { IsoResult } from '../../models/vm/iso-result';
+import { DialogService } from '../../services/dialog/dialog.service';
+import { NotificationService } from '../../services/notification/notification.service';
+import { VmService } from '../../services/vm/vm.service';
 
 declare var WMKS: any; // needed to check values
 const MAX_COPY_RETRIES = 1;
@@ -48,35 +47,36 @@ export class KeysPipe implements PipeTransform {
 @Component({
   selector: 'app-options-bar',
   templateUrl: './options-bar.component.html',
-  styleUrls: ['./options-bar.component.css'],
+  styleUrls: ['./options-bar.component.scss'],
 })
 export class OptionsBarComponent implements OnInit, OnDestroy {
-  public opened = false;
+  opened = false;
 
   // we could check permissions in api and set this value
-  public powerOptions = true;
-  public uploadEnabled = false;
-  public uploading = false;
-  public retrievingIsos = false;
-  public publicIsos: any;
-  public teamIsos: any;
-  public tasksInProgress: NotificationData[] = [];
-  public inFrame: boolean;
-  public clipBoardText: string;
-  public virtualMachineToolsStatus: any;
-  public currentVmContainerResolution: VmResolution;
-  public vmResolutionsOptions: VmResolution[];
+  powerOptions = true;
+  uploadEnabled = false;
+  uploading = false;
+  retrievingIsos = false;
+  publicIsos: any;
+  teamIsos: any;
+  tasksInProgress: NotificationData[] = [];
+  inFrame: boolean;
+  clipBoardText: string;
+  virtualMachineToolsStatus: any;
+  currentVmContainerResolution: VmResolution;
+  vmResolutionsOptions: VmResolution[];
+  private isDark = false;
 
   private copyTryCount: number;
   private destroy$ = new Subject();
 
   constructor(
     public vmService: VmService,
-    public settingsService: SettingsService,
+    public settingsService: ComnSettingsService,
     private dialogService: DialogService,
     private notificationService: NotificationService,
     private route: ActivatedRoute,
-    private authService: AuthService,
+    private authService: ComnAuthService,
     private snackBar: MatSnackBar
   ) {}
 

@@ -23,6 +23,7 @@ import { ScenarioTemplateService } from './api/scenarioTemplate.service';
 import { TaskService } from './api/task.service';
 import { UserService } from './api/user.service';
 import { UserPermissionService } from './api/userPermission.service';
+import { VmCredentialService } from './api/vmCredential.service';
 
 @NgModule({
   imports:      [],
@@ -38,7 +39,8 @@ import { UserPermissionService } from './api/userPermission.service';
     ScenarioTemplateService,
     TaskService,
     UserService,
-    UserPermissionService ]
+    UserPermissionService,
+    VmCredentialService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {

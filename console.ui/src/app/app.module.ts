@@ -8,55 +8,57 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpModule } from '@angular/http';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
-import { AppComponent } from './app.component';
-import { OptionsBarComponent } from './components/options-bar/options-bar.component';
-import { WmksComponent } from './components/wmks/wmks.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { VmService } from './services/vm/vm.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import {
+  ComnAuthModule,
+  ComnSettingsConfig,
+  ComnSettingsModule,
+  ComnSettingsService,
+} from '@crucible/common';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AppComponent } from './app.component';
 import { ConsoleComponent } from './components/console/console.component';
-import { SettingsService } from './services/settings/settings.service';
-import { AuthCallbackComponent } from './components/auth/auth-callback/auth-callback.component';
-import { AuthCallbackSilentComponent } from './components/auth/auth-callback-silent/auth-callback-silent.component';
-import { AuthLogoutComponent } from './components/auth/auth-logout/auth-logout.component';
-import { AuthGuard } from './services/auth/auth-guard.service';
-import { AuthService } from './services/auth/auth.service';
-import { AuthInterceptor } from './services/auth/auth.interceptor.service';
-import { DialogService } from './services/dialog/dialog.service';
-import { NotificationService } from './services/notification/notification.service';
-import { MessageDialogComponent } from './components/shared/message-dialog/message-dialog.component';
-import { SendTextDialogComponent } from './components/shared/send-text-dialog/send-text-dialog.component';
+import {
+  KeysPipe,
+  OptionsBarComponent,
+} from './components/options-bar/options-bar.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FileUploadInfoDialogComponent } from './components/shared/file-upload-info-dialog/file-upload-info-dialog.component';
+import { MessageDialogComponent } from './components/shared/message-dialog/message-dialog.component';
 import { MountIsoDialogComponent } from './components/shared/mount-iso-dialog/mount-iso-dialog.component';
-import { KeysPipe } from './components/options-bar/options-bar.component';
-import { ErrorService } from './services/error/error.service';
+import { SendTextDialogComponent } from './components/shared/send-text-dialog/send-text-dialog.component';
 import { SystemMessageComponent } from './components/shared/system-message/system-message.component';
+import { WmksComponent } from './components/wmks/wmks.component';
+import { DialogService } from './services/dialog/dialog.service';
+import { ErrorService } from './services/error/error.service';
+import { NotificationService } from './services/notification/notification.service';
 import { SystemMessageService } from './services/system-message/system-message.service';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { VmService } from './services/vm/vm.service';
 
-export function initConfig(settings: SettingsService) {
-  return () => settings.load();
- }
+export const settings: ComnSettingsConfig = {
+  url: 'assets/config/settings.json',
+  envUrl: 'assets/config/settings.env.json',
+};
 
- @NgModule({
+@NgModule({
   exports: [
     MatButtonModule,
     MatListModule,
@@ -67,10 +69,10 @@ export function initConfig(settings: SettingsService) {
     MatBottomSheetModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+  ],
 })
-export class AngularMaterialModule { }
+export class AngularMaterialModule {}
 
 @NgModule({
   declarations: [
@@ -79,9 +81,6 @@ export class AngularMaterialModule { }
     WmksComponent,
     PageNotFoundComponent,
     ConsoleComponent,
-    AuthCallbackComponent,
-    AuthCallbackSilentComponent,
-    AuthLogoutComponent,
     MessageDialogComponent,
     SendTextDialogComponent,
     FileUploadInfoDialogComponent,
@@ -94,35 +93,26 @@ export class AngularMaterialModule { }
     HttpModule,
     HttpClientModule,
     RouterModule,
-    AppRoutingModule,
     FormsModule,
     AngularMaterialModule,
     FlexLayoutModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ComnSettingsModule.forRoot(),
+    ComnAuthModule.forRoot(),
+    AkitaNgDevtools.forRoot(),
+    // App routing order matters; We must import the AppRoutingModule last in order to maintain the wildcard PageNotFoundComponent.
+    AppRoutingModule,
   ],
   providers: [
     VmService,
-    SettingsService,
+
     SystemMessageService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initConfig,
-      deps: [SettingsService],
-      multi: true
-    },
-    AuthGuard,
-    AuthService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
     DialogService,
     NotificationService,
     {
       provide: ErrorHandler,
-      useClass: ErrorService
-    }
+      useClass: ErrorService,
+    },
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -131,8 +121,10 @@ export class AngularMaterialModule { }
     FileUploadInfoDialogComponent,
     MountIsoDialogComponent,
     SystemMessageComponent,
-  ]
+  ],
 })
-export class AppModule { }
+export class AppModule {}
 
-
+export function getBasePath(settingsSvc: ComnSettingsService) {
+  return settingsSvc.settings.ApiUrl.replace('/api', '');
+}

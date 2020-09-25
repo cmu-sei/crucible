@@ -7,18 +7,17 @@ Released under a MIT (SEI)-style license, please see license.txt or contact perm
 Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark Office by Carnegie Mellon University.
 DM20-0181
 */
-
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ComnAuthService, ComnSettingsService } from '@crucible/common';
 import { Observable } from 'rxjs';
-import { ProjectQuery, ProjectService } from '../../../state';
-import { CwdAuthService } from '../../../../sei-cwd-common/cwd-auth/services';
-import { CwdSettingsService } from '../../../../sei-cwd-common/cwd-settings/services';
-import { Project } from '../../../../generated/caster-api';
 import { take } from 'rxjs/operators';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/sei-cwd-common/confirm-dialog/components/confirm-dialog.component';
 import { NameDialogComponent } from 'src/app/sei-cwd-common/name-dialog/name-dialog.component';
-import { UserService, CurrentUserQuery } from '../../../../users/state';
+import { Project } from '../../../../generated/caster-api';
+import { CurrentUserQuery, UserService } from '../../../../users/state';
+import { ProjectQuery, ProjectService } from '../../../state';
+import { TopbarView } from './../../../../shared/components/top-bar/topbar.models';
 const WAS_CANCELLED = 'wasCancelled';
 const NAME_VALUE = 'nameValue';
 @Component({
@@ -29,16 +28,18 @@ const NAME_VALUE = 'nameValue';
 export class ProjectListContainerComponent implements OnInit {
   public username: string;
   public titleText: string;
-  public topBarColor = '#0FABEA';
+  public topbarColor = '#0FABEA';
+  public topbarTextColor;
   public isSuperUser = false;
   public projects: Observable<Project[]>;
   public isLoading$: Observable<boolean>;
+  TopbarView = TopbarView;
 
   constructor(
     private projectService: ProjectService,
     private projectQuery: ProjectQuery,
-    private authService: CwdAuthService,
-    private settingsService: CwdSettingsService,
+    private authService: ComnAuthService,
+    private settingsService: ComnSettingsService,
     private dialog: MatDialog,
     private userService: UserService,
     private currentUserQuery: CurrentUserQuery
@@ -52,7 +53,8 @@ export class ProjectListContainerComponent implements OnInit {
     this.isLoading$ = this.projectQuery.selectLoading();
 
     // Set the topbar color from config file
-    this.topBarColor = this.settingsService.settings.AppTopBarHexColor;
+    this.topbarColor = this.settingsService.settings.AppTopBarHexColor;
+    this.topbarTextColor = this.settingsService.settings.AppTopBarHexTextColor;
 
     // Set the page title from configuration file
     this.titleText = this.settingsService.settings.AppTopBarText;

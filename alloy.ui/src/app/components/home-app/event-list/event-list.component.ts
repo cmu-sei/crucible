@@ -9,51 +9,56 @@ DM20-0181
 */
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
-
+import { MatSort, MatSortable } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { EventTemplateService } from '../../../generated/alloy.api/api/event-template.service';
 import { EventTemplate } from '../../../generated/alloy.api/model/event-template';
-
-
-
+import { Router } from '@angular/router';
+import { ComnAuthQuery, Theme } from '@crucible/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-event-list',
   templateUrl: './event-list.component.html',
-  styleUrls: ['./event-list.component.css']
+  styleUrls: ['./event-list.component.scss'],
 })
 export class EventListComponent implements OnInit {
-
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   public eventsDataSource: MatTableDataSource<EventTemplate>;
   public displayedColumns: string[] = ['name', 'description', 'durationHours'];
 
   public filterString: string;
   public isLoading: Boolean;
+  theme$: Observable<Theme>;
 
   constructor(
-    private eventTemplateService: EventTemplateService
+    private eventTemplateService: EventTemplateService,
+    private router: Router,
+    private authQuery: ComnAuthQuery
+
   ) {
-    this.eventsDataSource = new MatTableDataSource<EventTemplate>(new Array<EventTemplate>());
+
+    this.theme$ = this.authQuery.userTheme$;
+
+    this.eventsDataSource = new MatTableDataSource<EventTemplate>(
+      new Array<EventTemplate>()
+    );
   }
 
   ngOnInit() {
     this.filterString = '';
 
     // Initial datasource
-    this.eventTemplateService.getEventTemplates().subscribe(defs => {
+    this.eventTemplateService.getEventTemplates().subscribe((defs) => {
       this.eventsDataSource.data = defs;
-      this.sort.sort(<MatSortable>({id: 'name', start: 'asc'}));
+      this.sort.sort(<MatSortable>{ id: 'name', start: 'asc' });
       this.eventsDataSource.sort = this.sort;
     });
 
     // Subscribe to the service
     this.isLoading = false;
-
-
   }
-
 
   /**
    * Called by UI to add a filter to the DataSource
@@ -73,9 +78,7 @@ export class EventListComponent implements OnInit {
     this.applyFilter('');
   }
 
-
   openEvent(id: string) {
-    window.location.href = '/eventlist/' + id;
+    this.router.navigate(['/eventlist/' + id]);
   }
-
 }

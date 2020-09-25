@@ -8,30 +8,27 @@ Carnegie Mellon(R) and CERT(R) are registered in the U.S. Patent and Trademark O
 DM20-0181
 */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ComnAuthGuardService } from '@crucible/common';
 import { ConsoleComponent } from '../components/console/console.component';
 import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
-import { AuthCallbackComponent } from '../components/auth/auth-callback/auth-callback.component';
-import { AuthLogoutComponent } from '../components/auth/auth-logout/auth-logout.component';
-import { AuthGuard } from '../services/auth/auth-guard.service';
-import { AuthCallbackSilentComponent } from '../components/auth/auth-callback-silent/auth-callback-silent.component';
 
 const routes: Routes = [
-  { path: 'vm/:id/console', component: ConsoleComponent, canActivate: [AuthGuard] },
-  { path: 'auth-callback', component: AuthCallbackComponent },
-  { path: 'auth-callback-silent', component: AuthCallbackSilentComponent },
-  { path: 'logout', component: AuthLogoutComponent },
-  { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuard] }
+  {
+    path: 'vm/:id/console',
+    component: ConsoleComponent,
+    canActivate: [ComnAuthGuardService],
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+  },
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes)
-  ],
-  declarations: []
+  imports: [CommonModule, RouterModule.forRoot(routes)],
+  declarations: [],
 })
-export class AppRoutingModule { }
-
+export class AppRoutingModule {}
