@@ -1,12 +1,8 @@
-# Crucible
+# Crucible Framework
 
-Developed by Carnegie Mellon University's Software Engineering Institute (SEI), Crucible is a modular framework for creating, deploying, and managing virtual environments to support training, education, and exercises.
+Developed by Carnegie Mellon University's Software Engineering Institute (SEI), Crucible is a modular framework for creating, deploying, and managing virtual environments to support training, education, and exercises. Within the Crucible framework are the following applications:
 
-## Crucible Framework
-
-Within the Crucible framework are the following applications:
-
-#### Alloy
+### Alloy
 Alloy joins the other independent Crucible apps together to provide a complete Crucible experience (i.e. labs, on-demand exercises, exercises, etc.). To get started with Alloy, see: 
 - [Alloy API Readme](https://github.com/cmu-sei/Alloy.Api/blob/development/README.md)
 - [Alloy API Repo](https://github.com/cmu-sei/Alloy.Api)
