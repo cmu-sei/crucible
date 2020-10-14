@@ -9,21 +9,37 @@ Alloy joins the other independent Crucible apps together to provide a complete C
 - [Alloy UI Repository](https://github.com/cmu-sei/Alloy.ui)
 
 ### Caster
-Caster is the primary deployment component of the Crucible framework. Caster is built upon [Terraform](https://www.terraform.io/), an open source "Infrastructure as Code" tool. Caster provides a web interface that gives exercise developers a way to create, share, and manage topology configurations. To get started with Caster, see
+
+Caster is the primary deployment component of the Crucible framework. Caster is built upon [Terraform](https://www.terraform.io/), an open source "Infrastructure as Code" tool. Caster provides a web interface that gives exercise developers a way to create, share, and manage topology configurations. To get started with Caster, see:
 - [Caster API Repository](https://github.com/cmu-sei/Caster.Api)
-- [Caster UI Repository](https://github.com/cmu-sei/Caster.Ui/blob/development/README.md)
+- [Caster UI Repository](https://github.com/cmu-sei/Caster.Ui)
+
+### osTicket
+
+osTicket (https://osticket.com/) is a widely-used open source support ticket system that can be configured and deployed for an exercise. To get started with the Crucible plugin for osTicket, see:
+- [osTicket Repository](https://github.com/cmu-sei/osticket-crucible)
+
+### Player
+
+Player is the centralized interface where users, teams, and administrators go to participate in the cyber exercise. To get started with the various components of Player, see: 
+- [Player API Repository](https://github.com/cmu-sei/Player.Api)
+- [Player Console UI Repository](https://github.com/cmu-sei/Console.Ui)
+- [Player UI Repository](https://github.com/cmu-sei/Player.Ui)
+- [Player VM API Repository](https://github.com/cmu-sei/Vm.Api)
+- [Player VM UI Repository](https://github.com/cmu-sei/Vm.Ui]
 
 ### Steamfitter
 
-Steamfitter gives exercise developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and injects which run against virtual machines in an exercise. To get started with Steamfitter, see: [Steamfitter API Readme](https://github.com/cmu-sei/Steamfitter.Api/blob/development/README.md) and [Steamfitter UI Readme](https://github.com/cmu-sei/Steamfitter.Ui/blob/development/README.md). Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source event-driven platform used to automate workflows, to execute commands. 
-- **Player:** Player is the centralized interface where users, teams, and administrators go to participate in the cyber exercise. To get started with Player, see: [Player API Readme](https://github.com/cmu-sei/Player.Api/blob/development/README.md) and [Player UI Readme](https://github.com/cmu-sei/Player.Ui/blob/development/README.md).
-- **Welder:** Welder is a simple application that can be added to an exercise; Welder allows users to dynamically load a VM workstation. See the [Welder repository](https://github.com/cmu-sei/Welder) in cmu-sei GitHub.
+Steamfitter gives exercise developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and injects which run against virtual machines in an exercise. To get started with Steamfitter, see: 
+- [Steamfitter API Repository](https://github.com/cmu-sei/Steamfitter.Api)
+- [Steamfitter UI Repository](https://github.com/cmu-sei/Steamfitter.Ui)
 
-## Installation
-<!--- I would like to get a high-level outline of installation steps and add them here. Perhaps link to more detailed How-To's in [SEI GitHub wiki](https://github.com/cmu-sei/crucible/wiki). --->
+Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source event-driven platform used to automate workflows, to execute commands. 
 
-## Authors
-<!--- What do you think of something like this: The Crucible Stack was built by the development team within the SEI's Mod/Sim and Exercises (MSE) Initiative. Contact them at: [crucible-devs@sei.cmu.edu](mailto:crucible-devs@sei.cmu.edu). I made that alias up. --->
+### Welder
+
+Welder is a simple application that can be added to an exercise; Welder allows users to dynamically load a VM workstation. To get started with Welder, see:
+- [Welder repository](https://github.com/cmu-sei/Welder)
 
 ## License
 Copyright 2020 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/master/license.md) file for details.
