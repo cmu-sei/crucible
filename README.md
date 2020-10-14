@@ -39,7 +39,7 @@ Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source ev
 ### Welder
 
 Welder is a simple application that can be added to an exercise; Welder allows users to dynamically load a VM workstation. To get started with Welder, see:
-- [Welder repository](https://github.com/cmu-sei/Welder)
+- [Welder Repository](https://github.com/cmu-sei/Welder)
 
 ## License
 Copyright 2020 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/master/license.md) file for details.
