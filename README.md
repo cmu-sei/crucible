@@ -26,7 +26,7 @@ Player is the centralized interface where users, teams, and administrators go to
 - [Player Console UI Repository](https://github.com/cmu-sei/Console.Ui)
 - [Player UI Repository](https://github.com/cmu-sei/Player.Ui)
 - [Player VM API Repository](https://github.com/cmu-sei/Vm.Api)
-- [Player VM UI Repository](https://github.com/cmu-sei/Vm.Ui]
+- [Player VM UI Repository](https://github.com/cmu-sei/Vm.Ui)
 
 ### Steamfitter
 
