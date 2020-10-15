@@ -1,6 +1,8 @@
 # Crucible Framework
 
-Developed by Carnegie Mellon University's Software Engineering Institute (SEI), Crucible is a modular framework for creating, deploying, and managing virtual environments to support training, education, and exercises. Within the Crucible framework are the following applications:
+Developed by Carnegie Mellon University's Software Engineering Institute (SEI), Crucible is a modular framework for creating, deploying, and managing virtual environments to support training, education, and exercises. 
+
+Within the Crucible framework are the following applications:
 
 ### Alloy
 
@@ -40,6 +42,10 @@ Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source ev
 
 Welder is a simple application that can be added to an exercise; Welder allows users to dynamically load a VM workstation. To get started with Welder, see:
 - [Welder Repository](https://github.com/cmu-sei/Welder)
+
+## Documentation
+
+You can find documentation on Crucible and all of its components [here](https://cmu-sei.github.io/crucible/).
 
 ## License
 Copyright 2020 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/master/license.md) file for details.
