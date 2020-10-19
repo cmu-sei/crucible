@@ -49,7 +49,8 @@ Steamfitter gives exercise developers the ability to create scenarios consisting
 Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source event-driven platform used to automate workflows, to execute commands. 
 
 ### Terraform Provider Identity
-- Player Provider creates Player user accounts which correspond with accounts registered and managed using the Identity API. For additional information, see: [Terraform Provider Identity](https://github.com/cmu-sei/Terraform.Provider.Identity)
+Player Provider creates Player user accounts which correspond with accounts registered and managed using the Identity API. For additional information, see: 
+- [Terraform Provider Identity](https://github.com/cmu-sei/Terraform.Provider.Identity)
 
 ### Welder
 
