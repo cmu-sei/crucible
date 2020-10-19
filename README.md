@@ -16,6 +16,15 @@ Caster is the primary deployment component of the Crucible framework. Caster is 
 - [Caster API Repository](https://github.com/cmu-sei/Caster.Api)
 - [Caster UI Repository](https://github.com/cmu-sei/Caster.Ui)
 
+### Crucible Common Modules
+
+Crucible common modules are a set of Angular modules that are common between Crucible apps. For more information, see:
+- [Crucible Common Modules Repository](https://github.com/cmu-sei/Crucible.Common.Ui)
+
+
+
+
+
 ### osTicket
 
 osTicket (https://osticket.com/) is a widely-used open source support ticket system that can be configured and deployed for an exercise. To get started with the Crucible plugin for osTicket, see:
