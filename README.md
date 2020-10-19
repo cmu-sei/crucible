@@ -61,5 +61,16 @@ Welder is a simple application that can be added to an exercise; Welder allows u
 
 You can find documentation on Crucible and all of its components [here](https://cmu-sei.github.io/crucible/).
 
+## Reporting bugs and requesting features
+
+Think you found a bug? Please report all Crucible bugs - including bugs for the individual Crucible apps - in the [cmu-sei/crucible issue tracker](https://github.com/cmu-sei/crucible/issues). 
+
+Include as much detail as possible including steps to reproduce, specific app involved, and any error messages you may have received.
+
+Have a good idea for a new feature? Submit all new feature requests through the [cmu-sei/crucible issue tracker](https://github.com/cmu-sei/crucible/issues). 
+
+Include the reasons why you're requesting the new feature and how it might benefit other Crucible users.
+
 ## License
+
 Copyright 2020 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/master/license.md) file for details.
