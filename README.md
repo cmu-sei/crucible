@@ -21,9 +21,10 @@ Caster is the primary deployment component of the Crucible framework. Caster is 
 Crucible common modules are a set of Angular modules that are common between Crucible apps. For more information, see:
 - [Crucible Common Modules Repository](https://github.com/cmu-sei/Crucible.Common.Ui)
 
+### Crucible Terraform Provider
 
-
-
+[Terraform](https://www.terraform.io/) is an _infrastructure as code_ tool for managing cloud-based infrastructure. A _provider_ is a plugin to Terraform that manages a given resource type. A provider supplies the logic needed to manage the infrastructure. There are four main resource types managed by this provider: virtual machines, views, application templates, and identity accounts. For more information, see: 
+- [Crucible Terraform Provider Repository](https://github.com/cmu-sei/Terraform.Provider.Player)
 
 ### osTicket
 
