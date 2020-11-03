@@ -2,7 +2,7 @@
 
 **Player** is the centralized interface where participants, teams, and administrators go to engage in a cyber event. In Player, participants view teams, applications, virtual environments, and third-party applications. The event experience is highly customizable by content developers.
 
-Player is meant to: 
+Think of Player as the front door to an event running on Crucible. Player is meant to: 
 
 - Provide a platform for individual participants on a team to view content in an exercise.
 - Allow for quick navigation between various applications in the Crucible framework.
