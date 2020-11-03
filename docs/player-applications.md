@@ -18,7 +18,7 @@ The **VM List** is set up to provide links to any virtual machines that the user
 
 ## Help desk using osTicket 
 
-**osTicket** (https://osticket.com/), a widely-used open source support ticket system, can be configured and deployed for an exercise.
+**osTicket** (https://osticket.com/), a widely-used open source support ticket system, can be configured and deployed for an exercise. Using this "built-in" help desk, participants can submit help requests to event administrators.
 
 ## Messaging with Mattermost 
 
