@@ -16,7 +16,7 @@ Some key Player concepts are described below.
 
 ### Collapsible navigation panel
 
-The left application navigation panel can be collapsed to provide additional display space.
+The left application navigation panel can be collapsed to provide additional display space. This side-bar is configurable per team by an administrator.
 
 ### Application navigation bar
 
