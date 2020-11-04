@@ -7,7 +7,7 @@ Every Exercise in Player contains *applications*.  Applications are served elsew
 
 ## Virtual Machines (VM-UI and VM-Console)
 
-The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system allows the VM to be opened within a tab on the same screen or popped out into a new browser tab using the icon.
+The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system allows the VM to be opened within a tab on the same screen or popped out into a new browser tab using the icon. Users can also run commands on one or more virtual machines.
 
 ### Player VM Console application
 
