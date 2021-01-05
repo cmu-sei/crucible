@@ -10,7 +10,7 @@ Within the Crucible simulation framework are the following applications:
 
 **Player:** Player is the centralized interface where participants, teams, and administrators go to engage in a cyber event. In Player, participants view teams, applications, virtual environments, and third-party applications. The event experience is highly customizable by content developers.
 
-**Steamfitter:** Steamfitter gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and injects which run against virtual machines in an event. These scenarios enable the content developer to automate assessments and configurations.
+**Steamfitter:** Steamfitter gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and injects that run against virtual machines in an event. These scenarios enable the content developer to automate assessments and configurations.
 
 **Welder:** Welder is a simple application that can be added to an exercise; Welder allows users to dynamically load a VM workstation.
 
