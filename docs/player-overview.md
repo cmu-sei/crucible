@@ -16,4 +16,4 @@ Player is ***not*** meant to:
 - Provide any mechanisms for individual applications to communicate with each other.
 - Provide any default applications.  However, some common applications can be consumed within an exercise.
 
-Descriptions of the common applications used in Player can be found in the [Player Applications](https://github.com/cmu-sei/crucible/wiki/Player-Applications) document.
+Descriptions of the common applications used in Player can be found in the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) document.
