@@ -4,7 +4,7 @@
 
 These procedures describe how to upload files from a local machine (an _out-of-game_ computer) to a virtual machine in the Player VM Console app. Please note the **Send File to VM** option should only be used for uploading small files.
 
-These procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://github.com/cmu-sei/crucible/wiki/Player-Applications) guide.
+These procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
 
 1. In the Player VM Console app, in the VM List, launch the virtual machine you want.
 2. On the VM tab, click the **gear icon**, and then select __Files__, **Send File to VM**.
