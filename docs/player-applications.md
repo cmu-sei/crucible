@@ -12,9 +12,9 @@ The **VM List** is set up to provide links to any virtual machines that the user
 ### Player VM Console application
 
 - Load VMware consoles
-- [Power On/Off VMs](https://github.com/cmu-sei/crucible/wiki/Player-How-to:-Power-a-VM-on-or-off)
-- [Copy/Paste](https://github.com/cmu-sei/crucible/wiki/Player-How-to:-Copy-and-paste-text)
-- [Send files/Mount ISOs](https://github.com/cmu-sei/crucible/wiki/Player-How-to:-Upload-files)
+- [Power On/Off VMs](https://cmu-sei.github.io/crucible/player-power-a-vm-on-or-off)
+- [Copy/Paste](https://cmu-sei.github.io/crucible/player-copy-and-paste-text)
+- [Send files/Mount ISOs](https://cmu-sei.github.io/crucible/player-how-to-upload-files)
 
 ## Help desk using osTicket 
 
