@@ -5,7 +5,7 @@ The procedures below show you how to:
 - Copy text from a local machine (that is, an _out-of-game_ computer) and paste it into a Player virtual machine, and
 - Copy text from a Player virtual machine and paste it into a local machine
 
-Procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://github.com/cmu-sei/crucible/wiki/Player-Applications) guide.
+Procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
 
 ## From local to Player VM 
 
