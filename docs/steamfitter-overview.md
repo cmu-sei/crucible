@@ -98,7 +98,7 @@ A task can have multiple results:
   - **IterationCountTask:** The task will execute until exactly the number of iteration times specified above; regardless of whether the task succeeds or fails.
   - **UntilSuccess:** The task will iterate until the command has a successful completion.
   - **UntilFailure:** The task will iterate until the command fails.
-- **Expiration Timeout: ** The time, in seconds, where if no response has been received the task expires (times out).  
+- **Expiration Timeout:** The time, in seconds, where if no response has been received the task expires (times out).  
 
 #### VM Selection
 
