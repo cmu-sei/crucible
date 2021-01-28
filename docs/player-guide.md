@@ -52,7 +52,7 @@ In the top-left corner, click the dropdown next to your user name, then **View A
 
 ### View Templates
 
-View Templates is where a Player view administrator adds a new view template and browses existing view templates. For step-by-step instructions on how to create a new view template, see [Player How to: Create a new View Template](https://github.com/cmu-sei/crucible/wiki/Player-How-to:-Create-a-new-View-Template).
+View Templates is where a Player view administrator adds a new view template and browses existing view templates. For step-by-step instructions on how to create a new view template, see [Player How to: Create a new View Template](https://cmu-sei.github.io/crucible/player-guide).
 
 ### Users
 
