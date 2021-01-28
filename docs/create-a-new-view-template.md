@@ -17,7 +17,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template. 
    - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view template; they are one-time use only.
-   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overriden for a particular view template. For help understanding application templates, see the [Player Guide](https://github.com/cmu-sei/crucible/wiki/Player-Guide) and the Player How to: Create a new App Template.
+   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overriden for a particular view template. For help understanding application templates, see the [Player Guide](https://cmu-sei.github.io/crucible/player-guide) and the Player How to: Create a new App Template.
 2. Click **Teams**.
 
 ### Add new teams:
