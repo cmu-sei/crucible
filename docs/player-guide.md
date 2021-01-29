@@ -1,16 +1,6 @@
-# Player Guide
+# Player Views
 
-Welcome to the *Player Guide*. Player is the platform where individual participants on a team go to view content during a cyber simulation. In Player, participants navigate between various Crucible framework applications, view administrators set which teams can see what applications, and notifications are sent and received.
-
-## Understanding key Player concepts 
-
-Some key Player concepts are described below.
-
-- **Authentication:** Player uses `IdentityServer 4` for authenticating users. Authentication gets a user into Player, but setting permissions within the Player Administration view (under **Users**) determines what a user can open and/or edit within Player.
-- **View template:** These are the settings associated with building a *view*. A view template can be edited, cloned, and deleted.
-- **Views:** The collection of content a participant can interact with during a cyber simulation. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different. 
-- **App template:** The settings associated with an app that is added to a team's *view*.  An app template can be created for common apps that are added to a view with default settings that an administrator can override if needed.
-- **Apps:** A website a participant in a view can open within Player or in a separate browser tab. A common example of an app used in Player is the Mattermost messaging platform.
+The collection of content a participant can interact with during a cyber simulation is called the _view_. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
 ## View: As seen by the end-user
 
@@ -34,21 +24,21 @@ Receive and read notifications here.
 
 ### Top bar
 
-The top bar displays the current *view name*, *team*, and the *menu select* dropdown.
+The top bar displays the current *view name*, *team*, and the *menu select* dropdown (your username in the top right).
 
 Player fully supports users who are on multiple teams.  Any such user, when logged in, can switch their view by using the *team* drop-down. 
 
 #### Menu select
 
-Log off here. If you are a view administrator, you have the option to edit the view template from here.
+Log off here. If you are a view administrator, you have the option to edit the view template from here. The option to enable Dark Theme is here too.
 
 ## View: As seen by the administrator
 
 A Player view administrator will see the **Administration navigation bar** on the left. To switch to the administrator view in Player if you have the appropriate permissions:
 
-In the top-left corner, click the dropdown next to your user name, then **View Administration**.
+In the top-right corner, click the dropdown next to your user name, then **Administration**.
 
-> **Important!** Only users who have the SystemAdmin permission can view the Administration screen and  the Administration nav bar (View Templates, Users, Application Templates, Roles / Permissions).
+> **Important!** Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (View Templates, Users, Application Templates, Roles / Permissions).
 
 ### View Templates
 
@@ -71,4 +61,4 @@ Think of *application templates* as "helpers" for adding new or common applicati
 
 In the Player system, creating a new application template is a relatively rare occurrence when compared to creating a view template. Create the application templates first because you will use them on each view template.
 
-For step-by-step instructions on how to create a new application template, see Player How to: Create a new App Template.
+For step-by-step instructions on how to create a new application template, see [Player How to: Create a new App Template](https://cmu-sei.github.io/crucible/create-a-new-view-template).
