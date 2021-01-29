@@ -105,7 +105,7 @@ _Taint_ is a flag on a resource that tells Terraform to destroy and recreate a n
 
 Taint allows users to redeploy resources. For example, if a user needs to redeploy a series of virtual machines, the user can:
 
-1. Raint these resources
+1. Taint these resources
 2. Run another plan-and-apply cycle that will redeploy the instance as if it was new from a template
 
 Some resources can't be tainted, however. 
