@@ -22,23 +22,6 @@
 
         <p>{{ site.description | default: site.github.project_tagline }}</p>
 
-        <button class="accordion">Alloy Documentation</button>
-        <div class="panel">        
-          <p class="view"><a href="./alloy-quick-start">Alloy Quick Start</a></p>
-          <b>Alloy "How to":</b>
-          <p class="view"><a href="./alloy-how-to-create-a-definition">How to create an Alloy definition</a></p>
-        </div>
-        
-        <button class="accordion">Caster Documentation</button>
-        <div class="panel">
-          <p class="view"><a href="./caster-overview">Caster Overview</a></p>
-        </div>
-        
-        <button class="accordion">Steamfitter Documentation</button>
-        <div class="panel">
-          <p class="view"><a href="./steamfitter-overview">Steamfitter Overview</a></p>
-        </div>    
-        
         <button class="accordion">Player Documentation</button>
         <div class="panel"> 
           <p class="view"><a href="./player-overview">Player Overview</a></p>
@@ -52,10 +35,26 @@
           <p class="view"><a href="./player-follow-user">How to follow a participant</a></p>
         </div>
         
+        <button class="accordion">Caster Documentation</button>
+        <div class="panel">
+          <p class="view"><a href="./caster-overview">Caster Overview</a></p>
+        </div>
+        
+        <button class="accordion">Steamfitter Documentation</button>
+        <div class="panel">
+          <p class="view"><a href="./steamfitter-overview">Steamfitter Overview</a></p>
+        </div> 
+        
+        <button class="accordion">Alloy Documentation</button>
+        <div class="panel">        
+          <p class="view"><a href="./alloy-quick-start">Alloy Quick Start</a></p>
+          <b>Alloy "How to":</b>
+          <p class="view"><a href="./alloy-how-to-create-a-definition">How to create an Alloy definition</a></p>
+        </div>   
+        
         <button class="accordion">Reference Material</button>
         <div class="panel"> 
           <p class="view"><a href="./crucible-glossary">Crucible Glossary</a></p>
-
 
           {% if site.github.is_project_page %}
 
