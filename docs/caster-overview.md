@@ -11,12 +11,12 @@ The goal is to create a tool that gives advanced users the power and flexibility
 ### Caster Documentation
 
 - [Caster Project](./caster-project)
-- Caster Directory
-- Caster Workspace
-- Caster Modules
-- Run, Plan, and Apply
-- Caster Files
-- Caster Hosts 
+- [Caster Directory](./caster-directory)
+- [Caster Workspace](./caster-workspace)
+- [Caster Modules](./caster-modules)
+- [Run, Plan, and Apply](./caster-run-plan-apply)
+- [Caster Files](./caster-files)
+- [Caster Hosts](./caster-hosts) 
 
 ### Terraform Documentation
 
