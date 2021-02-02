@@ -10,7 +10,7 @@ The goal is to create a tool that gives advanced users the power and flexibility
 
 ### Caster Documentation
 
-- Caster Project
+- [Caster Project](./caster-project)
 - Caster Directory
 - Caster Workspace
 - Caster Modules
