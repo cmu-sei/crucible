@@ -1,22 +1,24 @@
 # Alloy Overview
 
-Alloy joins the other independent Crucible apps together to provide a complete Crucible experience (i.e. labs, on-demand exercises, exercises, etc.).
+Alloy joins the other independent Crucible apps together to provide a complete Crucible experience.
 
-## Alloy Definition
+## Alloy Event Template
 
-An Alloy *definition* is used to associate one or more of the individual Crucible applications, including a Player exercise, Caster directory, and Steamfitter scenario.
+An Alloy _event template_ is used to associate one or more of the individual Crucible applications, including a Player view template, Caster directory, and Steamfitter scenario template. When an event template is launched, a new event is created.
 
-Only a **system admin** or a **content developer** can create or modify definitions in the Alloy administrator user interface.  **System admin** and **content developer** permissions are granted to users in the Player administrator user interface.
+Only a **system admin** or a **content developer** can create or modify event templates in the Alloy administrator user interface. **System admin** and **content developer** permissions are granted to users in the Player administrator user interface.
 
-## Alloy Implementation
-Once the definition has been created, it can be used to create an Alloy *implementation*. The implementation is the actual running of a labs, on-demand exercise, or exercise.
+## Alloy Event
 
-When the implementation is launched, Alloy:
- - clones the definition Player exercise
- - creates a Caster workspace under the definition Caster directory
- - creates and starts a Steamfitter session from the definition Steamfitter scenario
+Once the event template has been created, it can be used to create an Alloy _event_. The event is the actual running of a simulation.
 
-Active, ended, and failed implementations can be viewed by a system admin or content developer in the Alloy administrator user interface.
+When the event template is launched, Alloy:
+
+- clones the Player exercise specified in the event template
+- creates a Caster workspace under the Caster directory specified in the event template
+- creates and starts a Steamfitter session from the Steamfitter scenario specified in the event template
+
+Active, ended, and failed events can be viewed by a system admin or content developer in the Alloy administrator user interface.
 
 ## Alloy Settings
 
@@ -32,15 +34,17 @@ When deploying the Alloy API, `ResourceOwnerAuthorization` settings must be conf
         "TokenExpirationBufferSeconds": 900
       },
 
-The default setting for the maximum number of active implementations per user is **two**.  However, this can be changed in the `MaxImplementationsForBasicUser` setting.
+The default setting for the maximum number of active events per user is **two**. However, this can be changed in the `MaxEventsForBasicUser` setting.
 
       "Resource": {
-        "MaxImplementationsForBasicUser": 2
+        "MaxEventsForBasicUser": 2
       }
 
 ## Alloy User Interface
-The Alloy user interface as viewed by a user consists of two screens: 
- - **Labs:** contains a list of definitions and labs available to the user
- - **Launch:** contains a view of a specific definition or lab.  Here, the user can **Launch** an implementation if no active implementation exists for this user and definition combination.  If an active implementation already exists, then the user can open it in Player or end it.
 
-> **Note:** Currently, there is **no** error reporting when launching a definition or lab.  If an error occurs, the user is returned to the Launch screen.
+The Alloy user interface as viewed by a user consists of two screens:
+
+- **Labs:** contains a list of event templates and labs available to the user.
+- **Launch:** contains a view of a specific event template or lab. Here, the user can **Launch** an event if no active event exists for this user and event template combination. If an active event already exists, then the user can open it in Player or end it.
+
+> **Note:** Currently, there is **no** error reporting when launching an event template or lab. If an error occurs, the user is returned to the Launch screen.
