@@ -24,7 +24,8 @@ Crucible common modules are a set of Angular modules that are common between Cru
 ### Crucible Terraform Provider
 
 [Terraform](https://www.terraform.io/) is an _infrastructure as code_ tool for managing cloud-based infrastructure. A _provider_ is a plugin to Terraform that manages a given resource type. A provider supplies the logic needed to manage the infrastructure. There are four main resource types managed by this provider: virtual machines, views, application templates, and identity accounts. For more information, see: 
-- [Crucible Terraform Provider Repository](https://github.com/cmu-sei/Terraform.Provider.Player)
+- [Terraform Provider Crucible Repository](https://github.com/cmu-sei/terraform-provider-crucible)
+
 
 ### osTicket
 
@@ -50,7 +51,7 @@ Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source ev
 
 ### Terraform Provider Identity
 Player Provider creates Player user accounts which correspond with accounts registered and managed using the Identity API. For additional information, see: 
-- [Terraform Provider Identity](https://github.com/cmu-sei/Terraform.Provider.Identity)
+- [Terraform Provider Identity Repository](https://github.com/cmu-sei/terraform-provider-identity)
 
 ### Welder
 
