@@ -61,4 +61,4 @@ Think of *application templates* as "helpers" for adding new or common applicati
 
 In the Player system, creating a new application template is a relatively rare occurrence when compared to creating a view template. Create the application templates first because you will use them on each view template.
 
-For step-by-step instructions on how to create a new application template, see [Player How to: Create a new App Template](https://cmu-sei.github.io/crucible/create-a-new-view-template).
+For step-by-step instructions on how to create a new application template, see [Player How to: Create a new App Template](https://cmu-sei.github.io/crucible/create-a-new-app-template).
