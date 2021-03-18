@@ -21,6 +21,11 @@ Caster is the primary deployment component of the Crucible framework. Caster is 
 Crucible common modules are a set of Angular modules that are common between Crucible apps. For more information, see:
 - [Crucible Common Modules Repository](https://github.com/cmu-sei/Crucible.Common.Ui)
 
+### Crucible plugin for Moodle
+
+The Crucible plugin for Moodle is an activity plugin that allows Crucible labs and exercises to be accessed from the Moodle open-source learning management system. For more information, see:
+- [Crucible plugin for Moodle Repository](https://github.com/cmu-sei/moodle-mod_crucible)
+
 ### osTicket
 
 osTicket (https://osticket.com/) is a widely-used open source support ticket system that can be configured and deployed for an exercise. To get started with the Crucible plugin for osTicket, see:
