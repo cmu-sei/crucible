@@ -1,8 +1,8 @@
 # Crucible Framework
 
-Developed by Carnegie Mellon University's Software Engineering Institute (SEI), Crucible is a modular framework for creating, deploying, and managing virtual environments to support training, education, and exercises. 
+Developed by Carnegie Mellon University's Software Engineering Institute (SEI), Crucible is a modular framework for creating, deploying, and managing virtual environments to support training, education, and exercises. Within the Crucible framework are the following applications and plugins.
 
-Within the Crucible framework are the following applications:
+## Core Applications
 
 ### Alloy
 
@@ -16,24 +16,10 @@ Caster is the primary deployment component of the Crucible framework. Caster is 
 - [Caster API Repository](https://github.com/cmu-sei/Caster.Api)
 - [Caster UI Repository](https://github.com/cmu-sei/Caster.Ui)
 
-### Crucible Common Modules
-
-Crucible common modules are a set of Angular modules that are common between Crucible apps. For more information, see:
-- [Crucible Common Modules Repository](https://github.com/cmu-sei/Crucible.Common.Ui)
-
-### Crucible plugin for Moodle
-
-The Crucible plugin for Moodle is an activity plugin that allows Crucible labs and exercises to be accessed from the Moodle open-source learning management system. For more information, see:
-- [Crucible plugin for Moodle Repository](https://github.com/cmu-sei/moodle-mod_crucible)
-
-### osTicket
-
-osTicket (https://osticket.com/) is a widely-used open source support ticket system that can be configured and deployed for an exercise. To get started with the Crucible plugin for osTicket, see:
-- [osTicket Repository](https://github.com/cmu-sei/osticket-crucible)
-
 ### Player
 
 Player is the centralized interface where users, teams, and administrators go to participate in the cyber exercise. To get started with the various components of Player, see: 
+
 - [Player API Repository](https://github.com/cmu-sei/Player.Api)
 - [Player Console UI Repository](https://github.com/cmu-sei/Console.Ui)
 - [Player UI Repository](https://github.com/cmu-sei/Player.Ui)
@@ -43,19 +29,41 @@ Player is the centralized interface where users, teams, and administrators go to
 ### Steamfitter
 
 Steamfitter gives exercise developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and injects which run against virtual machines in an exercise. To get started with Steamfitter, see: 
+
 - [Steamfitter API Repository](https://github.com/cmu-sei/Steamfitter.Api)
 - [Steamfitter UI Repository](https://github.com/cmu-sei/Steamfitter.Ui)
 
-Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source event-driven platform used to automate workflows, to execute commands. 
+Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source event-driven platform used to automate workflows, to execute commands.
 
-### Terraform Provider Identity
-Player Provider creates Player user accounts which correspond with accounts registered and managed using the Identity API. For additional information, see: 
-- [Terraform Provider Identity Repository](https://github.com/cmu-sei/terraform-provider-identity)
+## Plugins
 
-### Terraform Provider Crucible
+### Crucible Common Modules
 
-[Terraform](https://www.terraform.io/) is an _infrastructure as code_ tool for managing cloud-based infrastructure. A _provider_ is a plugin to Terraform that manages a given resource type. A provider supplies the logic needed to manage the infrastructure. There are four main resource types managed by this provider: virtual machines, views, application templates, and identity accounts. For more information, see: 
+Crucible common modules are a set of Angular modules that are common between Crucible apps. For more information, see:
+- [Crucible Common Modules Repository](https://github.com/cmu-sei/Crucible.Common.Ui)
+
+### Crucible plugin for Moodle
+
+The Crucible plugin for Moodle is an activity plugin that allows Crucible labs and exercises to be accessed from the Moodle open-source learning management system. For more information, see:
+
+- [Crucible plugin for Moodle Repository](https://github.com/cmu-sei/moodle-mod_crucible)
+
+### osTicket
+
+osTicket (https://osticket.com/) is a widely-used open source support ticket system that can be configured and deployed for an exercise. To get started with the Crucible plugin for osTicket, see:
+- [osTicket Repository](https://github.com/cmu-sei/osticket-crucible)
+
+### Terraform Provider for Crucible
+
+This is the [Terraform](https://www.terraform.io/) Provider for Crucible which is used to create many Crucible resource types (e.g., Player Virtual Machines, Views, Applications, and others). For more information, see: 
+
 - [Terraform Provider Crucible Repository](https://github.com/cmu-sei/terraform-provider-crucible)
+
+### Terraform Provider for Identity
+
+This is the [Terraform](https://www.terraform.io/) Provider for [Identity](https://github.com/cmu-sei/Identity) that creates and manages user accounts and other resources  using the Identity API. For additional information, see: 
+
+- [Terraform Provider Identity Repository](https://github.com/cmu-sei/terraform-provider-identity)
 
 ### Welder
 
