@@ -35,6 +35,12 @@ Steamfitter gives exercise developers the ability to create scenarios consisting
 
 Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source event-driven platform used to automate workflows, to execute commands.
 
+## Crucible Appliance
+
+The Crucible appliance is an environment that includes everything needed to install and configure the core applications of the Crucible framework. The appliance application stack consists of a single-node Docker swarm utilizing a Traefik reverse proxy. They are assembled using Docker Compose files on an Ubuntu 20.04 operating system. To get started with the Crucible appliance, see:
+
+- [Crucible Appliance Repository](https://github.com/cmu-sei/Crucible.Appliance)
+
 ## Plugins
 
 ### Crucible Common Modules
