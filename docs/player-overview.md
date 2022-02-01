@@ -32,5 +32,5 @@ Some key Player concepts are described below.
 - **Team:** A group of logged in users who are associated with a view. Each team can be configured to view a particular set of applications and be granted team-level roles/permissions.
 - **User:** A user who is identified in an Identity Server configured for the Player system is automatically added into Player upon the first login. In addition, users can be pre-loaded into Player using the Player API.
   > Note: IdentityServer4 is an OAuth 2.0 framework that is used by the Software Engineering Institute to authenticate users. Some Identity servers are configured to authenticate using CAC cards while others are user/password based - depending upon the location of the system.
-- **View template:** These are the settings associated with building a *view*. A view template can be edited, cloned, and deleted.
+- **View:** These are the settings associated with building a *view*. A view can be edited, cloned, and deleted.
 - **Views:** The collection of content a participant can interact with during a cyber simulation. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.

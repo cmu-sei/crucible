@@ -4,7 +4,7 @@ Alloy joins the other independent Crucible apps together to provide a complete C
 
 ## Alloy Event Template
 
-An Alloy _event template_ is used to associate one or more of the individual Crucible applications, including a Player view template, Caster directory, and Steamfitter scenario template. When an event template is launched, a new event is created.
+An Alloy _event template_ is used to associate one or more of the individual Crucible applications, including a Player view, Caster directory, and Steamfitter scenario template. When an event template is launched, a new event is created.
 
 Only a **system admin** or a **content developer** can create or modify event templates in the Alloy administrator user interface. **System admin** and **content developer** permissions are granted to users in the Player administrator user interface.
 

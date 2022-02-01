@@ -5,7 +5,7 @@ A short collection of specialized terms related to the Crucible simulation frame
 ## Alloy Terms
 
 - **Event**: Created by the event template, the implementation is the actual running of a simulation.
-- **Event template**: Used to associate one or more of the individual Crucible applications, including a Player view template, Caster directory, and Steamfitter scenario template. When an event template is launched, a new event is created.
+- **Event template**: Used to associate one or more of the individual Crucible applications, including a Player view, Caster directory, and Steamfitter scenario template. When an event template is launched, a new event is created.
 - **Launch:** The view of a specific definition or lab.  Here, the user can Launch an implementation if no active implementation exists for this user and definition combination.  If an active implementation already exists, then the user can open it in Player or end it.
 
 ## Caster Terms
@@ -56,7 +56,7 @@ For applications that are used often but require slight modifications such as UR
    
    >**Note:**  **IdentityServer4** is an **OAuth 2.0** framework that is used by the Software Engineering Institute to authenticate users.  Some Identity servers are configured to authenticate using CAC cards while others are user/password based - depending upon the location of the system.
 - **View:** The collection of content that a user is allowed to interact with during a cyber simulation.
-- **View Template:** The settings associated with building a view.  A view template can be edited, cloned, or deleted.
+- **View:** The settings associated with building a view.  A view can be edited, cloned, or deleted.
 
 ## Roles
 

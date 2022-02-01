@@ -1,4 +1,4 @@
-# Working with Maps
+# Player Maps
 
 The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
 
@@ -11,6 +11,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
 3. The Select Map dropdown and the New Map icon appear in the right pane.
 
 ## Creating a new map
+![player-new-map](assets/img/player-new-map.png)
 
 1. In the newly created Map application, in the right pane, select **New Map**.
 2. Complete the following fields:
