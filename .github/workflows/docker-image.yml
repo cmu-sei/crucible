@@ -1,19 +1,5 @@
 name: Build & Publish Image
 
-# on:
-#   pull_request:
-#     branches:
-#       - development
-#   push:
-#     branches: [ development, staging ]
-#   release:
-#     types: [ "published" ]
-#   workflow_dispatch:
-#     inputs:
-#       tagName:
-#         description: 'Tag of the image you want to build and push'
-#         required: true
-        
 on:
   workflow_call:
     inputs:
@@ -26,7 +12,9 @@ on:
         type: string
         
     secrets:
-      DOCKER_BUILD_ARGS:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_PASSWORD:
         required: true
 
 jobs:
