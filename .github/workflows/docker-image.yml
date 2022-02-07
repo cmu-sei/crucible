@@ -1,0 +1,73 @@
+name: Build & Publish Image
+
+on:
+  pull_request:
+    branches:
+      - development
+  push:
+    branches: [ development, staging ]
+  release:
+    types: [ "published" ]
+  workflow_dispatch:
+    inputs:
+      tagName:
+        description: 'Tag of the image you want to build and push'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Prepare
+      id: prep
+      run: |
+        DOCKER_IMAGE=cmusei/vm-api
+        VERSION=development
+        if [[ ! -z "${{ github.event.inputs.tagName }}" ]]; then
+          VERSION=${{ github.event.inputs.tagName }}
+          TAGS="${DOCKER_IMAGE}:${VERSION}"
+        elif [[ $GITHUB_REF == refs/tags/* ]]; then
+          VERSION=${GITHUB_REF#refs/tags/}
+          MAJORMINORVERSION=$(echo $VERSION | grep -oP '(\d+)\.(\d+)')
+          TAGS="${DOCKER_IMAGE}:${VERSION},${DOCKER_IMAGE}:${MAJORMINORVERSION}"
+        elif [[ $GITHUB_REF == refs/heads/* ]]; then
+          VERSION=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g')
+          TAGS="${DOCKER_IMAGE}:${VERSION}"
+        fi
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          echo ::set-output name=push::false
+          echo "event is pull_request, not pushing image"
+        else        
+          echo ::set-output name=push::true
+          echo "event is not pull_request, pushing image"
+        fi
+        echo ::set-output name=version::${VERSION}
+        echo ::set-output name=tags::${TAGS}
+        echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to DockerHub
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: ${{ steps.prep.outputs.push }}
+        pull: true
+        tags: ${{ steps.prep.outputs.tags }}
+        labels: |
+          org.opencontainers.image.source=${{ github.event.repository.clone_url }}
+          org.opencontainers.image.created=${{ steps.prep.outputs.created }}
+          org.opencontainers.image.revision=${{ github.sha }}
