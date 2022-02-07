@@ -1,17 +1,32 @@
 name: Build & Publish Image
 
+# on:
+#   pull_request:
+#     branches:
+#       - development
+#   push:
+#     branches: [ development, staging ]
+#   release:
+#     types: [ "published" ]
+#   workflow_dispatch:
+#     inputs:
+#       tagName:
+#         description: 'Tag of the image you want to build and push'
+#         required: true
+        
 on:
-  pull_request:
-    branches:
-      - development
-  push:
-    branches: [ development, staging ]
-  release:
-    types: [ "published" ]
-  workflow_dispatch:
+  workflow_call:
     inputs:
-      tagName:
-        description: 'Tag of the image you want to build and push'
+      image-name:
+        required: true
+        type: string
+      dockerfile-path:
+        required: false
+        default: ./Dockerfile
+        type: string
+        
+    secrets:
+      DOCKER_BUILD_ARGS:
         required: true
 
 jobs:
@@ -25,7 +40,7 @@ jobs:
     - name: Prepare
       id: prep
       run: |
-        DOCKER_IMAGE=cmusei/vm-api
+        DOCKER_IMAGE=${{ inputs.image-name }}
         VERSION=development
         if [[ ! -z "${{ github.event.inputs.tagName }}" ]]; then
           VERSION=${{ github.event.inputs.tagName }}
@@ -63,7 +78,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./Dockerfile
+        file: ${{ inputs.dockerfile-path }}
         push: ${{ steps.prep.outputs.push }}
         pull: true
         tags: ${{ steps.prep.outputs.tags }}
