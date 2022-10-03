@@ -1,4 +1,4 @@
-## Crucible Framework
+# Crucible Framework
 
 Developed by Carnegie Mellon University's [Software Engineering Institute](https://www.sei.cmu.edu/) (SEI), Crucible is a modular framework for creating, deploying, and managing virtual environments to support training, education, and exercises.
 
