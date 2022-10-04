@@ -29,11 +29,6 @@ a:hover {
   margin-bottom: 10px;
 }
 
-/*style the wrapper idfk*/
-.wrapper {
-  overflow: scroll;
-}
-
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .accordion:hover {
   background-color: #ccc;
@@ -44,5 +39,5 @@ a:hover {
   padding: 0 18px;
   background-color: white;
   display: none;
-  overflow: scroll !important;
+  overflow: hidden;
 }
