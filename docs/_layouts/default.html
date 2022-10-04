@@ -22,7 +22,7 @@
         {% endif %}
 
         <p>{{ site.description | default: site.github.project_tagline }}</p>
-
+      </header>
         <button class="accordion">Player</button>
         <div class="panel"> 
           <p class="view"><a href="./player-overview">Player Overview</a></p>
@@ -90,7 +90,6 @@
           <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
         </ul>
         {% endif %}
-      </header>
       <section>
 
       {{ content }}
