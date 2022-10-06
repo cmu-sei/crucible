@@ -1,0 +1,60 @@
+site_name: Crucible Documentation
+extra_css:
+  - stylesheets/extra.css
+theme:
+  name: material
+  #custom_dir: !ENV [THEME_DIR, "material"]
+  features:
+    - navigation.tabs
+    - navigation.sections
+  logo: assets/img/crucible-icon-c-alpha.svg
+  favicon: assets/img/crucible-icon-c-alpha.svg
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: red
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+      primary: red
+nav:
+  - Home: index.md
+  - Player: 
+    - Player Overview: player/player-overview.md
+    - Player Views: player/player-views.md
+    - Player Applications: player/player-applications.md
+    - Player Maps: player/player-maps.md
+    - How To:
+      - Copy and Paste Text: player/player-copy-and-paste-text.md
+      - Create a new View: player/player-create-new-view.md
+      - Create a new App Template: player/player-create-new-app-template.md
+      - Power a VM on or off: player/player-power-a-vm-on-or-off.md
+      - Upload Files: player/player-how-to-upload-files.md
+      - Follow a Participant: player/player-follow-user.md
+  - Caster: 
+    - Caster Overview: caster/caster-overview.md
+    - Caster Project: caster/caster-project.md
+    - Caster Directory: caster/caster-directory.md
+    - Caster Workspace: caster/caster-workspace.md
+    - Caster Modules: caster/caster-modules.md
+    - Run, Plan, and Apply: caster/caster-run-plan-apply.md
+    - Caster Files: caster/caster-files.md
+    - Caster Hosts: caster/caster-hosts.md
+    - Caster Terraform Configuration: caster/caster-terraform-configuration.md
+  - Steamfitter: 
+    - Steamfitter Overview: steamfitter/steamfitter-overview.md
+    - Steamfitter Scenario Templates: steamfitter/steamfitter-scenario-templates.md
+    - Steamfitter Scenarios: steamfitter/steamfitter-scenarios.md
+    - Steamfitter Tasks: steamfitter/steamfitter-tasks.md
+    - Steamfitter History: steamfitter/steamfitter-history.md
+  - Alloy: 
+    - Alloy Overview: alloy/alloy-overview.md
+    - How To:
+      - Create an Alloy Definition: alloy/alloy-how-to-create-a-definition.md
+  
