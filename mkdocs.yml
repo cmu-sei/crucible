@@ -27,7 +27,6 @@ nav:
   - Home: index.md
   - Player: 
     - Player Overview: player/player-overview.md
-    - Glossary of Terms: 
     - Player Views: player/player-views.md
     - Player Applications: player/player-applications.md
     - Player Maps: player/player-maps.md
