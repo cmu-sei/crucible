@@ -29,8 +29,8 @@ nav:
     - Player Overview: player/player-overview.md
     - Player Views: player/player-views.md
     - Player Applications: player/player-applications.md
-      - Create a new App Template: player/player-create-new-app-template.md
-      - Player Maps: player/player-maps.md
+      Create a new App Template: player/player-create-new-app-template.md
+      Player Maps: player/player-maps.md
     - How To:
      - Copy and Paste Text: player/player-copy-and-paste-text.md
       - Create a new View: player/player-create-new-view.md
