@@ -28,12 +28,11 @@ nav:
   - Player: 
     - Overview: player/player-overview.md
     - Views: player/player-views.md
-    - Applications: 
-      - Overview: player/player-applications.md
-      - Create a new App Template: player/player-create-new-app-template.md
+    - Applications: player/player-applications.md
     - Maps: player/player-maps.md
     - How To:
       - Copy and Paste Text: player/player-copy-and-paste-text.md
+      - Create a new App Template: player/player-create-new-app-template.md
       - Create a new View: player/player-create-new-view.md
       - Power a VM on or off: player/player-power-a-vm-on-or-off.md
       - Upload Files: player/player-how-to-upload-files.md
