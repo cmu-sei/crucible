@@ -8,6 +8,7 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
+    - navigation.instant
   logo: assets/img/crucible-icon-c-alpha.svg
   favicon: assets/img/crucible-icon-c-alpha.svg
   palette:
