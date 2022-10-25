@@ -6,7 +6,6 @@ theme:
   #custom_dir: !ENV [THEME_DIR, "material"]
   features:
     - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.sections
   logo: assets/img/crucible-icon-c-alpha.svg
   favicon: assets/img/crucible-icon-c-alpha.svg
