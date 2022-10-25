@@ -7,7 +7,6 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
-    - navigation.tabs.sticky
   logo: assets/img/crucible-icon-c-alpha.svg
   favicon: assets/img/crucible-icon-c-alpha.svg
   palette:
