@@ -3,7 +3,7 @@
 The collection of content a participant can interact with during a cyber simulation is called the _view_. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
 ## View: As seen by the end-user
-![player-user-view](/docs/assets/img/player-user-view.png)
+![player-user-view](/crucible/docs/assets/img/player-user-view.png)
 
 ### Collapsible navigation panel
 
