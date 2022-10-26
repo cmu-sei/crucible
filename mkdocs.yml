@@ -28,10 +28,10 @@ theme:
       primary: red
 nav:
   - Home: index.md
-  - Player: 
-    - Overview: player/player-overview.md
+  - Player:
+    - player/index.md
     - Views: player/player-views.md
-  - Applications: player/player-applications.md
+    - Applications: player/player-applications.md
     - Maps: player/player-maps.md
     - How To:
       - Copy and Paste Text: player/player-copy-and-paste-text.md
