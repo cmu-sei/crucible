@@ -34,7 +34,7 @@ Player fully supports users who are on multiple teams.  Any such user, when logg
 Log off here. If you are a view administrator, you have the option to edit the view from here. The option to enable Dark Theme is here too.
 
 ## View: As seen by the administrator
-![player-admin-view](/assets/img/player-admin-view.png)
+![player-admin-view](../assets/img/player-admin-view.png)
 
 A Player view administrator will see the **Administration navigation bar** on the left. To switch to the administrator view in Player if you have the appropriate permissions:
 

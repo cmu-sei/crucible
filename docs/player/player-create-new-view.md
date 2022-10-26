@@ -5,7 +5,7 @@ Follow the procedures below to create a new *view* in Player. These instructions
 If you have not already done so, in the dropdown next to your username, select **Administration**.
 
 ### Step 1: Complete View Information
-![player-new-view](/assets/img/player-new-view.png)
+![player-new-view](../assets/img/player-new-view.png)
 
 1. Under Views, click **Add New View**.
 2. Add a **Name** and **View Description**.
