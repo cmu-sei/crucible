@@ -9,7 +9,7 @@ theme:
     - navigation.tabs.sticky
     - navigation.sections
     - navigation.indexes
-    - navigation.instant
+    - toc.integrate
   logo: assets/img/crucible-icon-c-alpha.svg
   favicon: assets/img/crucible-icon-c-alpha.svg
   palette:
