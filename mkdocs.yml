@@ -32,7 +32,7 @@ nav:
     - player/index.md
     - Views:
       - player/views/index.md
-#    - Create a new View: player/player-create-new-view.md
+      - Create a new View: player/player-create-new-view.md
 #    - Applications: player/player-applications.md
 #    - Maps: player/player-maps.md
 #    - How To:
