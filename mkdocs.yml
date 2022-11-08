@@ -69,5 +69,5 @@ nav:
     - alloy/index.md
     - Definitions:
       - alloy/definitions/index.md  
-      - Create an Alloy Definition: alloy/alloy-how-to-create-a-definition.md
+      - Create an Alloy Definition: alloy/definitions/alloy-how-to-create-a-definition.md
   
