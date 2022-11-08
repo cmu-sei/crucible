@@ -56,11 +56,15 @@ nav:
     - Caster Terraform Configuration: 
       - caster/terraform/index.md
   - Steamfitter: 
-    - Steamfitter Overview: steamfitter/steamfitter-overview.md
-    - Steamfitter Scenario Templates: steamfitter/steamfitter-scenario-templates.md
-    - Steamfitter Scenarios: steamfitter/steamfitter-scenarios.md
-    - Steamfitter Tasks: steamfitter/steamfitter-tasks.md
-    - Steamfitter History: steamfitter/steamfitter-history.md
+    - steamfitter/index.md
+    - Scenario Templates: 
+      - steamfitter/scenario-templates/steamfitter-scenario-templates.md
+    - Scenarios: 
+      - steamfitter/scenarios/steamfitter-scenarios.md
+    - Steamfitter Tasks: 
+      - steamfitter/tasks/steamfitter-tasks.md
+    - Steamfitter History: 
+      - steamfitter/history/steamfitter-history.md
   - Alloy: 
     - Alloy Overview: alloy/alloy-overview.md
     - How To:
