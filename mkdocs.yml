@@ -42,14 +42,15 @@ nav:
       - Create a new App Template: player/applications/player-create-new-app-template.md
     - Maps:
       - player/maps/index.md
-  - Caster: 
-    - Caster Overview: caster/caster-overview.md
-    - Caster Project: caster/caster-project.md
-    - Caster Directory: caster/caster-directory.md
-    - Caster Workspace: caster/caster-workspace.md
-    - Caster Modules: caster/caster-modules.md
-    - Run, Plan, and Apply: caster/caster-run-plan-apply.md
-    - Caster Files: caster/caster-files.md
+  - Caster:
+    - caster/index.md
+    - Projects:
+      - caster/projects/index.md
+      - Directories: caster/projects/caster-directory.md
+      - Files: caster/projects/caster-files.md
+      - Modules: caster/projects/caster-modules.md
+      - Workspace: caster/projects/caster-workspace.md
+      - Run, Plan, and Apply: caster/projects/caster-run-plan-apply.md
     - Caster Hosts: caster/caster-hosts.md
     - Caster Terraform Configuration: caster/caster-terraform-configuration.md
   - Steamfitter: 
