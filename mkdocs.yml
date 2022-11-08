@@ -58,13 +58,13 @@ nav:
   - Steamfitter: 
     - steamfitter/index.md
     - Scenario Templates: 
-      - steamfitter/scenario-templates/steamfitter-scenario-templates.md
+      - steamfitter/scenario-templates/index.md
     - Scenarios: 
-      - steamfitter/scenarios/steamfitter-scenarios.md
+      - steamfitter/scenarios/index.md
     - Steamfitter Tasks: 
-      - steamfitter/tasks/steamfitter-tasks.md
+      - steamfitter/tasks/index.md
     - Steamfitter History: 
-      - steamfitter/history/steamfitter-history.md
+      - steamfitter/history/index.md
   - Alloy: 
     - Alloy Overview: alloy/alloy-overview.md
     - How To:
