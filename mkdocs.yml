@@ -65,8 +65,7 @@ nav:
       - steamfitter/tasks/index.md
     - Steamfitter History: 
       - steamfitter/history/index.md
-  - Alloy: 
-    - Alloy Overview: alloy/alloy-overview.md
-    - How To:
-      - Create an Alloy Definition: alloy/alloy-how-to-create-a-definition.md
+  - Alloy:
+    - alloy/index.md  
+    - Create an Alloy Definition: alloy/alloy-how-to-create-a-definition.md
   
