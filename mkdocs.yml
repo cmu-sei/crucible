@@ -51,8 +51,10 @@ nav:
       - Modules: caster/projects/caster-modules.md
       - Workspace: caster/projects/caster-workspace.md
       - Run, Plan, and Apply: caster/projects/caster-run-plan-apply.md
-    - Caster Hosts: caster/caster-hosts.md
-    - Caster Terraform Configuration: caster/caster-terraform-configuration.md
+    - Hosts: 
+      - caster/hosts/index.md
+    - Caster Terraform Configuration: 
+      - caster/terraform/index.md
   - Steamfitter: 
     - Steamfitter Overview: steamfitter/steamfitter-overview.md
     - Steamfitter Scenario Templates: steamfitter/steamfitter-scenario-templates.md
