@@ -8,16 +8,6 @@ Initial versions of Caster focus on a web front-end for raw Terraform configurat
 
 The goal is to create a tool that gives advanced users the power and flexibility that they desire, while also allowing novice users to take advantage of complex topologies created by advanced users or create their own simple ones easily.
 
-### Caster Documentation
-
-- [Caster Project](./caster-project)
-- [Caster Directory](./caster-directory)
-- [Caster Workspace](./caster-workspace)
-- [Caster Modules](./caster-modules)
-- [Run, Plan, and Apply](./caster-run-plan-apply)
-- [Caster Files](./caster-files)
-- [Caster Hosts](./caster-hosts) 
-
 ### Terraform Documentation
 
 For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html).
