@@ -33,10 +33,10 @@ nav:
     - Views:
       - player/views/index.md
       - Create a new View: player/views/player-create-new-view.md
-      - Copy and Paste Text: player/player-copy-and-paste-text.md
-      - Power a VM on or off: player/player-power-a-vm-on-or-off.md
-      - Upload Files: player/player-how-to-upload-files.md
-      - Follow a Participant: player/player-follow-user.md
+      - Copy and Paste Text: player/views/player-copy-and-paste-text.md
+      - Power a VM on or off: player/views/player-power-a-vm-on-or-off.md
+      - Upload Files: player/views/player-how-to-upload-files.md
+      - Follow a Participant: player/views/player-follow-user.md
     - Applications:
       - player/applications/index.md
       - Create a new App Template: player/applications/player-create-new-app-template.md
