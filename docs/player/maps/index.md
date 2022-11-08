@@ -11,7 +11,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
 3. The Select Map dropdown and the New Map icon appear in the right pane.
 
 ## Creating a new map
-![player-new-map](assets/img/player-new-map.png)
+![player-new-map](../assets/img/player-new-map.png)
 
 1. In the newly created Map application, in the right pane, select **New Map**.
 2. Complete the following fields:

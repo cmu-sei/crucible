@@ -3,7 +3,7 @@
 The collection of content a participant can interact with during a cyber simulation is called the _view_. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
 ## View: As seen by the end-user
-![player-user-view](assets/img/player-user-view.png)
+![player-user-view](../assets/img/player-user-view.png)
 
 ### Collapsible navigation panel
 
@@ -34,7 +34,7 @@ Player fully supports users who are on multiple teams.  Any such user, when logg
 Log off here. If you are a view administrator, you have the option to edit the view from here. The option to enable Dark Theme is here too.
 
 ## View: As seen by the administrator
-![player-admin-view](assets/img/player-admin-view.png)
+![player-admin-view](../assets/img/player-admin-view.png)
 
 A Player view administrator will see the **Administration navigation bar** on the left. To switch to the administrator view in Player if you have the appropriate permissions:
 

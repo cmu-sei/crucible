@@ -6,7 +6,7 @@ Follow the procedures below to create a new app template in Player. These instru
 
 If you have not already done so, in the dropdown next to your username, select **View Administration**.
 
-![player-new-application-template](assets/img/player-new-application-template.png)
+![player-new-application-template](../assets/img/player-new-application-template.png)
 1. Under the Administration nav panel, select **Application Templates**.
 2. Click **Add Application Template**. 
    - Enter a **Name** for the app template.
