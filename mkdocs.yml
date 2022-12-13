@@ -70,4 +70,21 @@ nav:
     - Definitions:
       - alloy/definitions/index.md  
       - Create an Alloy Definition: alloy/definitions/alloy-how-to-create-a-definition.md
+  - Blueprint:
+    - blueprint/index.md
+    - Dashboard:
+      - blueprint/dashboard/index.md
+    - MSELs:
+      - blueprint/msels/index.md
+      - Create/Delete: blueprint/msels/blueprint-msel-create-delete.md
+      - Download: blueprint/msels/blueprint-msel-download.md
+      - Upload/Copy: blueprint/msels/blueprint-msel-upload-copy.md
+    - Edit Msels:
+      - blueprint/edit/index.md
+      - Info: blueprint/edit/blueprint-msel-info.md
+      - Roles: blueprint/edit/blueprint-msel-roles.md
+      - Data Fields: blueprint/edit/blueprint-msel-datafields.md
+      - Organizations: blueprint/edit/blueprint-msel-organizations.md
+      - Injects: blueprint/edit/blueprint-msel-injects.md
+      - Exercise View: blueprint/edit/blueprint-msel-overview.md
   
