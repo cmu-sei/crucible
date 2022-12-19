@@ -2,6 +2,6 @@
 
 On the basic information or **Info** tab users can edit:
 
-- Description
-- Template (mark MSEL as a template)
-- Status
+1. Description
+2. Template (mark MSEL as a template)
+3. Status
