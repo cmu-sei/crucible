@@ -1,6 +1,6 @@
 # Contributing
 
-If you are developing within the Crucible Framework or building an application to work alongside the Crucible Framework, please consider contributing documentation back to this repository. The documentation contained within is written in Markdown. The static site to display it is built using [Material for MkDocs](https://squidfunk.github.i0) and Github Pages.
+If you are developing within the Crucible Framework or building an application to work alongside the Crucible Framework, please consider contributing documentation back to this repository. The documentation contained within is written in Markdown. The static site to display it is built using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and Github Pages.
 
 ## Documentation Contribution Process
 
