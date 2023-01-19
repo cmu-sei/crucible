@@ -120,4 +120,4 @@ nav:
     - User Roles & Permissions:
       - cite/user-roles-permissions/index.md
       - User: cite/user-roles-permissions/cite-user-permissions.md
-      - User: cite/user-roles-permissions/cite-user-entered-roles.md
+      - Roles: cite/user-roles-permissions/cite-user-entered-roles.md
