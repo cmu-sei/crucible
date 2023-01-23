@@ -18,9 +18,9 @@ Unread - White Text Blue Background
 
 - Articles can be shared with another team, click **Share**. In the **Share Article** screen:
 
-1. Under **Share with...** , select a team. 
-2. Under **Email Contents...** , make any edits to the Subject and Message of the article.
-3. Click **Share**.
+- - Under **Share with...** , select a team. 
+- - Under **Email Contents...** , make any edits to the Subject and Message of the article.
+- - Click **Share**.
 
 - View More Information
 
