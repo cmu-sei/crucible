@@ -17,10 +17,9 @@ Unread - White Text Blue Background
 ![Unread Card](../../assets/img/gallery-archive-card-unread.png)
 
 - Articles can be shared with another team, click **Share**. In the **Share Article** screen:
-
-- - Under **Share with...** , select a team. 
-- - Under **Email Contents...** , make any edits to the Subject and Message of the article.
-- - Click **Share**.
+    1. Under **Share with...** , select a team. 
+    2. Under **Email Contents...** , make any edits to the Subject and Message of the article.
+    3. Click **Share**.
 
 - View More Information
 
