@@ -8,13 +8,13 @@ Clicking Details on a card will toggle to the Gallery Archive where the filtered
 
 - Cards can be marked as read.
 
-Read - Blue Text No Background
+    - Read - Blue Text No Background
 
-![Read Card](../../assets/img/gallery-archive-card-read.png)
+        ![Read Card](../../assets/img/gallery-archive-card-read.png)
 
-Unread - White Text Blue Background
+    - Unread - White Text Blue Background
 
-![Unread Card](../../assets/img/gallery-archive-card-unread.png)
+        ![Unread Card](../../assets/img/gallery-archive-card-unread.png)
 
 - Articles can be shared with another team, click **Share**. In the **Share Article** screen:
     1. Under **Share with...** , select a team. 
