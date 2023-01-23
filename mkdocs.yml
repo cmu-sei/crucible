@@ -121,3 +121,9 @@ nav:
       - cite/user-roles-permissions/index.md
       - User: cite/user-roles-permissions/cite-user-permissions.md
       - Roles: cite/user-roles-permissions/cite-user-entered-roles.md
+  - Gallery:
+    - gallery/index.md
+    - Archive:
+      - gallery/archive/index.md
+    - Wall:
+      - gallery/wall/index.md
