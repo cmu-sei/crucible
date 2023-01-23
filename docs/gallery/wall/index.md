@@ -1,6 +1,6 @@
 # Gallery Wall
 
-the Gallery Wall is a dashboard with red, yellow, and green indicator cards that help participants visualize and summarize different incident components. 
+The Gallery Wall is a dashboard with red, yellow, and green indicator cards that help participants visualize and summarize different incident components. 
 
 ![Gallery Wall](../../assets/img/gallery-wall.png)
 
@@ -22,5 +22,4 @@ Clicking Details on a card will toggle to the Gallery Archive where the filtered
     3. Click **Share**.
 
 - View More Information
-
-Sometimes, exercise facilitators add more content to supplement the article. This could be attached as a PDF document, video, or image – anything at all to enhance the article card. When more information is available, More appears blue. If no supplemental information is available, More appears grayed out. Click More to view supplemental information.
+    Sometimes, exercise facilitators add more content to supplement the article. This could be attached as a PDF document, video, or image – anything at all to enhance the article card. When more information is available, More appears blue. If no supplemental information is available, More appears grayed out. Click More to view supplemental information.
