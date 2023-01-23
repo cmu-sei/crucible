@@ -14,7 +14,7 @@ The Gallery Archive is a *one-stop-shop* archive or collection of articles
 
     You can use the dropdown to further filter intelligence information.
     
-3. Items per page / Wall
+3. Items per page
 
     Select the number of items to be displayed on the page. Use the '**<**' and '**>**' to move between pages.
     
