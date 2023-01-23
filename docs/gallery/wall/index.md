@@ -22,4 +22,5 @@ Clicking Details on a card will toggle to the Gallery Archive where the filtered
     3. Click **Share**.
 
 - View More Information
+
     Sometimes, exercise facilitators add more content to supplement the article. This could be attached as a PDF document, video, or image – anything at all to enhance the article card. When more information is available, More appears blue. If no supplemental information is available, More appears grayed out. Click More to view supplemental information.
