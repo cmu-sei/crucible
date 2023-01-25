@@ -5,8 +5,8 @@ The Blueprint **Dashboard** provides access to the following features:
 ![Blueprint Dashboard](../../assets/img/blueprint-dashboard.png)
 
 1. Create a Blank MSEL
-
     One of the main features of Blueprint is the ability to be able to create a MSEL from scratch using the application. This feature is helpful for users since it will eliminate the hassle of using Excel spreadsheets and have a more user-friendly application that will help users visualize their information easier.
+    
 2. Upload an Existing MSEL
 
     If creating a new MSEL from scratch is not desired, users can upload an already created MSEL and continue editing it on the application by using this functionality. Useful to share existing MSEL work without having to add the pieces of information to a blank MSEL one by one.
