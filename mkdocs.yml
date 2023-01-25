@@ -76,8 +76,8 @@ nav:
       - blueprint/dashboard/index.md
     - Edit MSEL:
       - blueprint/edit/index.md
-      - Info: blueprint/edit/blueprint-msel-info.md
-      - Roles: blueprint/edit/blueprint-msel-roles.md
+      - Info: blueprint/edit/index.md
+      - Roles: blueprint/edit/index.md
       - Data Fields: blueprint/edit/blueprint-msel-datafields.md
       - Organizations: blueprint/edit/blueprint-msel-organizations.md
       - Injects: blueprint/edit/blueprint-msel-injects.md
