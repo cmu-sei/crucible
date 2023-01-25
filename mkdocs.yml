@@ -74,12 +74,7 @@ nav:
     - blueprint/index.md
     - Dashboard:
       - blueprint/dashboard/index.md
-    - MSELs:
-      - blueprint/msels/index.md
-      - Create/Delete: blueprint/msels/blueprint-msel-create-delete.md
-      - Download: blueprint/msels/blueprint-msel-download.md
-      - Upload/Copy: blueprint/msels/blueprint-msel-upload-copy.md
-    - Edit Msels:
+    - Edit MSEL:
       - blueprint/edit/index.md
       - Info: blueprint/edit/blueprint-msel-info.md
       - Roles: blueprint/edit/blueprint-msel-roles.md
