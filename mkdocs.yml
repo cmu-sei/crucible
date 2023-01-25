@@ -74,8 +74,7 @@ nav:
     - blueprint/index.md
     - Dashboard:
       - blueprint/dashboard/index.md
-    - Edit MSEL:
-      - blueprint/edit/index.md
+    - Edit MSEL: blueprint/edit/index.md
       - Info: blueprint/edit/index.md
       - Roles: blueprint/edit/index.md
       - Data Fields: blueprint/edit/blueprint-msel-datafields.md
