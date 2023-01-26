@@ -24,7 +24,7 @@ Changes made are now saved and can be seen by other users.
 
 ## Role Tab
 
-On this tab, users will be able to edit basic information, such as MSEL Description and MSEL Status.
+On this tab, users will be able to edit basic information, such as MSEL Description and MSEL Status
 
 ![Blueprint Info](../../assets/img/blueprint-info-1.png)
 ![Blueprint Info](../../assets/img/blueprint-info-2.png)
