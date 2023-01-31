@@ -6,6 +6,49 @@ After uploading or creating a MSEL, users will be given the ability to edit any 
 
 With this functionality, users can now edit the same MSEL, instead of each user having their own copy and then sending their edits to the user responsible of recompiling all the edits together. By allowing users to access the MSEL on-the-fly, this will ensure that everyone will have the same copy of the MSEL on the day of the live scenario, so that no one is confused on the day of the exercise.
 
+## Info Tab
+
+On this tab, users will be able to edit basic information, such as MSEL Description and MSEL Status.
+
+To edit the MSEL’s Basic Information, follow these next steps:
+
+1. Select the MSEL you want to edit.
+2. Once selected, make sure you are in the Info tab.
+3. Then, click on the Edit button.
+
+![Blueprint Info](../../assets/img/blueprint-info-1.png)
+4. After clicking on the edit button, you will be able to change the MSEL’s Description.
+5. Also, you will be able to change the MSEL’s status.
+6. To save your current changes, click on the checkmark.
+
+![Blueprint Info](../../assets/img/blueprint-info-2.png)
+
+Changes made are now saved and can be seen by other users.
+
+## Role Tab
+
+On this tab, users will be able to add and assign teams to the MSEL. Assigned teams will be able to view and edit the MSEL.
+
+### Add Team
+To add a team to the MSEL’s Roles, follow these next steps:
+
+1. Select the MSEL you want to edit.
+2. Make sure you are in the Roles tab.
+3. Click on the Add a Team section and then select the desired team to be added.
+4. After selecting the desired team, click on the plus (+) button to add it to the MSEL’s Roles.
+
+### Delete Team
+To delete a team from the MSEL’s Roles, follow these next steps:
+
+1. Select the MSEL you want to edit.
+2. Make sure you are in the Roles tab.
+3. Select the desired team to be removed and click on the minus (-) button.
+
+Now the team has been added to the MSEL’s Roles and members will be able to view and edit the MSEL based on the role assigned to the team. The available roles are:
+
+- **Editor**: will be able to view and edit the MSEL.
+- **Approver**: will be able to view and edit the MSEL but will have the added feature of approving a MSEL.
+- **Owner**: the owner of the MSEL, will be able to view and edit the MSEL.
 
 ## Data Fields Tab
 
@@ -89,7 +132,7 @@ To search for a specific Organization Card, follow these next steps:
 2. Make sure you are in the Organizations tab.
 3. Click on the search bar and type the name of the desired organization.
 
-## **Moves Tab**
+## Moves Tab
 
 On this tab, users will be able to add all the related exercise moves to the MSEL.
 
