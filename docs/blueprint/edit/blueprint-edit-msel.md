@@ -132,7 +132,7 @@ To search for a specific Organization Card, follow these next steps:
 2. Make sure you are in the Organizations tab.
 3. Click on the search bar and type the name of the desired organization.
 
-## Moves Tab
+## **Moves Tab**
 
 On this tab, users will be able to add all the related exercise moves to the MSEL.
 
