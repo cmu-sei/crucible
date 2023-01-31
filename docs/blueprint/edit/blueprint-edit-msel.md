@@ -54,6 +54,8 @@ Now the team has been added to the MSEL’s Roles and members will be able to vi
 
 On this tab, users will be able to add data fields that are going to be used on the MSEL. These data fields can be compared to the column fields used on Excel.
 
+![Blueprint Data Fields](../../assets/img/blueprint-data.png)
+
 ### Add Data Field
 To add a Data Field to the MSEL, follow these next steps:
 
@@ -89,6 +91,8 @@ To search for a specific data field, follow these next steps:
 ## Organizations Tab
 
 On this tab, users will be able to add all the related organizations that are going to be used on the MSEL, as well as on the live exercise. Here, Organization Cards with their information are added. Additionally, users can create Organization Cards from scratch or from a template.
+
+![Blueprint Organizations](../../assets/img/blueprint-org.png)
 
 ### Add Organization
 To add an Organization Card from scratch, follow these next steps:
@@ -136,6 +140,8 @@ To search for a specific Organization Card, follow these next steps:
 
 On this tab, users will be able to add all the related exercise moves to the MSEL.
 
+![Blueprint Moves](../../assets/img/blueprint-moves.png)
+
 ### Add Move
 To add a new move to the MSEL, follow these next steps:
 
@@ -171,6 +177,8 @@ To search for a specific move, follow these next steps:
 ## Injects Tab
 
 On this tab, users will be able to add all the related injects to the MSEL.
+
+![Blueprint Injects](../../assets/img/blueprint-inject.png)
 
 ### New Inject
 To add a new inject, follow these next steps:
