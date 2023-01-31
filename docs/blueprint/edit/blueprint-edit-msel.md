@@ -19,7 +19,7 @@ To edit the MSEL’s Basic Information, follow these next steps:
 ![Blueprint Info](../../assets/img/blueprint-info-1.png)
 4. After clicking on the edit button, you will be able to change the MSEL’s Description.
 5. Also, you will be able to change the MSEL’s status.
-6. To save your current changes, click on the checkmark.
+6. To save your current changes, ==click on the checkmark==.
 
 ![Blueprint Info](../../assets/img/blueprint-info-2.png)
 
