@@ -74,9 +74,9 @@ nav:
     - blueprint/index.md
     - Dashboard:
       - blueprint/dashboard/index.md
-      - Edit MSEL: blueprint/edit/blueprint-edit-msel.md
-        - Info Tab: blueprint/edit/blueprint-edit-info.md
-        - Roles Tab: blueprint/edit/blueprint-edit-roles.md
+    - Edit MSEL: blueprint/edit/blueprint-edit-msel.md
+      - Info Tab: blueprint/edit/blueprint-edit-info.md
+      - Roles Tab: blueprint/edit/blueprint-edit-roles.md
   - CITE:
     - cite/index.md
     - Dashboard:
