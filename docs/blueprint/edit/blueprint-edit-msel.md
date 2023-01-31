@@ -77,7 +77,7 @@ To edit an existing data field, follow these next steps:
 
 1. Select the MSEL you want to edit.
 2. Make sure you are in the **Data Fields** tab.
-3. Select the data field to be edited and click on the **edit** button.
+3. Select the data field to be edited and click on the **Edit** button.
 4. Here, you can edit of the necessary information, such as **Display Order** and **Name**.
 5. After making all the necessary changes, click on the **checkmark** to save them. 
 
@@ -118,7 +118,7 @@ To edit an existing organization, follow these next steps:
 
 1. Select the MSEL you want to edit.
 2. Make sure you are in the **Organizations** tab.
-3. Select the desired card to be edited and click on the **edit** button from the card.
+3. Select the desired card to be edited and click on the **Edit** button from the card.
 4. Here, you will be able to edit all the necessary details. 
 5. After modifying all the necessary details, click on the **Save** button.
 
@@ -156,7 +156,7 @@ To edit the move’s details, follow these next steps:
 
 1. Select the MSEL you want to edit.
 2. Make sure you are in the **Moves** tab.
-3. Select the move you want to edit and click on the **edit** button for the corresponding move. 
+3. Select the move you want to edit and click on the **Edit** button for the corresponding move. 
 4. Here, you will be able to edit all the desired details.
 5. After making all the necessary changes, click on the **checkmark** to save the details.
 
