@@ -9,7 +9,7 @@ The scoresheet compares participant scores to organization scores, group average
 2. Displayed Move
     This is the move currently displayed on the screen. In figure above, it happens that the Displayed Move is the same as the Current Move. Clicking < displays previous moves. Clicking > displays the current move (see below). Using Displayed Moves, you can see responses to previous moves and scores, but you cannot edit a response.
   ![CITE Scores](../../assets/img/cite-scores.png)
-3. Scoring Features
+3. Scoring Features<br>
     User: This is the participant’s personal score for their reference only. In the figure above, this participant has scored this move as 7.34 so far. Your user score will also appear under the Score Summary range.
     Team: Toggling the Team icon displays how the team has scored this move so far. This is the score that the team collaborates on and submits for the current move and will be compared to the official score. The team score appears under the Score Summary range.
     Team Avg: This is the average of all of the users on the team. Team-avg appears under the Score Summary Range for all moves except for the current move.
