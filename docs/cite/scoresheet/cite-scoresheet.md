@@ -5,9 +5,9 @@ The scoresheet compares participant scores to organization scores, group average
 ![CITE Scoresheet](../../assets/img/cite-scoresheet.png)
 
 ##1. Event Name
-    The name of the event is in the top left corner. In the figure above, the event name is Circuit.
+&nbsp;&nbsp;&nbsp;&nbsp;The name of the event is in the top left corner. In the figure above, the event name is Circuit.
 ##2. Displayed Move
-    This is the move currently displayed on the screen. In figure above, it happens that the **Displayed Move** is the same as the **Current Move**. Clicking '**<**' displays previous moves. Clicking '**>**' displays the current move (see below). Using Displayed Moves, you can see responses to previous moves and scores, but you cannot edit a response.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This is the move currently displayed on the screen. In figure above, it happens that the **Displayed Move** is the same as the **Current Move**. Clicking '**<**' displays previous moves. Clicking '**>**' displays the current move (see below). Using Displayed Moves, you can see responses to previous moves and scores, but you cannot edit a response.<br>
 ##3. Scoring Features<br>
 ![CITE Scores](../../assets/img/cite-scores.png)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**User**: This is the participant’s personal score for their reference only. In the figure above, this participant has scored this move as 7.34 so far. Your user score will also appear under the Score Summary range.<br>
@@ -24,7 +24,7 @@ The scoresheet compares participant scores to organization scores, group average
 5. Categories and Options<br>
 These are the categories that are individually scored based upon the current move situation. For each category, select as many options as are relevant. Selecting options assigns points to each category which are compiled to create the move score as defined by the Scoring Model.
 
-##Add, Edit, and Delete a Comment
+#Add, Edit, and Delete a Comment
 
 When scoring a move, you can attach a comment (or multiple comments) to a category.
 
@@ -34,7 +34,7 @@ When scoring a move, you can attach a comment (or multiple comments) to a catego
   
 When you are finished scoring the categories and adding comments, click **Submit** to submit your scores.
 
-##Scoring Permissions
+#Scoring Permissions
 There are three levels of permissions in CITE that affect the way a team score is collaborated on and edited.<br>
 They are:
 
