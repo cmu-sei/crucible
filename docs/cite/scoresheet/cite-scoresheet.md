@@ -36,7 +36,7 @@ When scoring a move, you can attach a comment (or multiple comments) to a catego
 When you are finished scoring the categories and adding comments, click **Submit** to submit your scores.
 
 ##Scoring Permissions
-There are three levels of permissions in CITE that affect the way a team score is collaborated on and edited.\
+There are three levels of permissions in CITE that affect the way a team score is collaborated on and edited.<br>
 They are:
 
 - **Basic**: Can only view the team score.
