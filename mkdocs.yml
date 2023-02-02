@@ -79,7 +79,7 @@ nav:
     - cite/index.md
     - Dashboard: 
       - cite/dashboard/index.md     
-      - Scoresheet: cite/dashboard/cite-dashboard.md
+      - Scoresheet: cite/scoresheet/cite-scoresheet.md
   - Gallery:
     - gallery/index.md
     - Archive:
