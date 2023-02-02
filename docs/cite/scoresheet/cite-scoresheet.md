@@ -28,6 +28,7 @@ These are the categories that are individually scored based upon the current mov
 ##Add, Edit, and Delete a Comment
 
 When scoring a move, you can attach a comment (or multiple comments) to a category.
+
 - To add a comment, click ![CITE Add Comment](../../assets/img/cite-add-comment.png). Enter your comment and click **Save**.
 - To edit an existing comment, click ![CITE Edit Comment](../../assets/img/cite-edit-comment.png).  Make your changes, then click **Save**.
 - To delete an existing comment, click ![CITE Delete Comment](../../assets/img/cite-delete-comment.png). Click **Yes** to delete the comment.
@@ -35,7 +36,9 @@ When scoring a move, you can attach a comment (or multiple comments) to a catego
 When you are finished scoring the categories and adding comments, click **Submit** to submit your scores.
 
 ##Scoring Permissions
-There are three levels of permissions in CITE that affect the way a team score is collaborated on and edited. They are:
+There are three levels of permissions in CITE that affect the way a team score is collaborated on and edited.\
+They are:
+
 - **Basic**: Can only view the team score.
 - **Modify**: Can view and edit the team score.
 - **Submit**: Can view, edit, and submit team score.
