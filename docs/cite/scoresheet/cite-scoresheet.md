@@ -5,10 +5,9 @@ The scoresheet compares participant scores to organization scores, group average
 ![CITE Scoresheet](../../assets/img/cite-scoresheet.png)
 
 ##1. Event Name
-The name of the event is in the top left corner. In the figure above, the event name is Circuit.<br>
-##2. Displayed Move<br>
-    
-This is the move currently displayed on the screen. In figure above, it happens that the **Displayed Move** is the same as the **Current Move**. Clicking '**<**' displays previous moves. Clicking '**>**' displays the current move (see below). Using Displayed Moves, you can see responses to previous moves and scores, but you cannot edit a response.<br>
+    The name of the event is in the top left corner. In the figure above, the event name is Circuit.
+##2. Displayed Move
+    This is the move currently displayed on the screen. In figure above, it happens that the **Displayed Move** is the same as the **Current Move**. Clicking '**<**' displays previous moves. Clicking '**>**' displays the current move (see below). Using Displayed Moves, you can see responses to previous moves and scores, but you cannot edit a response.<br>
 ##3. Scoring Features<br>
 ![CITE Scores](../../assets/img/cite-scores.png)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**User**: This is the participant’s personal score for their reference only. In the figure above, this participant has scored this move as 7.34 so far. Your user score will also appear under the Score Summary range.<br>
