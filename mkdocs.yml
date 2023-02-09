@@ -70,4 +70,19 @@ nav:
     - Definitions:
       - alloy/definitions/index.md  
       - Create an Alloy Definition: alloy/definitions/alloy-how-to-create-a-definition.md
-  
+  - Blueprint:
+    - blueprint/index.md
+    - Dashboard:
+      - blueprint/dashboard/index.md
+    - Edit MSEL: blueprint/edit/blueprint-edit-msel.md
+  - CITE:
+    - cite/index.md
+    - Dashboard: 
+      - cite/dashboard/index.md     
+      - Scoresheet: cite/scoresheet/cite-scoresheet.md
+  - Gallery:
+    - gallery/index.md
+    - Archive:
+      - gallery/archive/index.md
+    - Wall:
+      - gallery/wall/index.md
