@@ -6,7 +6,7 @@ The dashboard shows exercise details like the date and time, incident summary, a
 
 Participants who can submit scores on behalf of their team also can add **suggested actions** and **participant roles** to the **CITE dashboard**. The use of actions and roles will allow your team to customize their response by tracking tasks and roles during the exercise. These actions and roles remain internal to your team and will not be visible to other participants.
 
-In figure below, notice that there is one **action** to consider and one role. 
+In figure below, notice that there are three **actions** and one **role**. 
 
 ![CITE Actions And Roles To Consider](../../assets/img/cite-consider-action.png)
 
@@ -19,7 +19,7 @@ Assuming that you have been granted the appropriate permissions by the exercise 
 3. Your team appears by default. You can only add a new action for your team.
 4. Click **Save**.
 
-When you return to the CITE Dashboard, your new action appears under Actions to consider. Actions are added per move.
+When you return to the CITE Dashboard, your new action appears under **Actions**. Actions are added per move.
 Assuming that you have been granted the appropriate permissions by the exercise administrator, follow these steps to add a new **Role**.
 
 1. In the top-right corner, click the **Administration** gear icon.
