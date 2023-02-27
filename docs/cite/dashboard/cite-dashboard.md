@@ -2,13 +2,13 @@
 
 The dashboard shows exercise details like the date and time, incident summary, a suggested list of actions for participants to consider taking, and suggested participant roles.
 
-##Actions to Consider and Roles
+##Actions and Roles
 
 Participants who can submit scores on behalf of their team also can add **suggested actions** and **participant roles** to the **CITE dashboard**. The use of actions and roles will allow your team to customize their response by tracking tasks and roles during the exercise. These actions and roles remain internal to your team and will not be visible to other participants.
 
 In figure below, notice that there are three **actions** and one **role**. 
 
-![CITE Actions And Roles To Consider](../../assets/img/cite-consider-action.png)
+![CITE Actions And Roles](../../assets/img/cite-consider-action.png)
 
 
 
