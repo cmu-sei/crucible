@@ -80,7 +80,7 @@ Every Exercise in Player contains *applications*.  Applications are served elsew
 - Messaging with Mattermost
 - General Document Links (PDF, PNG, etc.)
 
-## Working with Applications
+## Working with Applications hello world
 
 All system allows Applications to be opened within a tab on the same screen or popped out into a new browser tab using the arrow.
 
