@@ -28,20 +28,7 @@ theme:
       primary: red
 nav:
   - Home: index.md
-  - Player:
-    - player/index.md
-    - Views:
-      - player/views/index.md
-      - Create a new View: player/views/player-create-new-view.md
-      - Copy and Paste Text: player/views/player-copy-and-paste-text.md
-      - Power a VM on or off: player/views/player-power-a-vm-on-or-off.md
-      - Upload Files: player/views/player-how-to-upload-files.md
-      - Follow a Participant: player/views/player-follow-user.md
-    - Applications:
-      - player/applications/index.md
-      - Create a new App Template: player/applications/player-create-new-app-template.md
-    - Maps:
-      - player/maps/index.md
+  - Player: player/index.md
   - Caster:
     - caster/index.md
     - Projects:
