@@ -1,8 +1,8 @@
-**Player**
+# **Player**
 
-# Overview <!-- 1. Introduction -->
+## Overview <!-- 1. Introduction -->
 
-## What is Player? <!-- 1a. Description of the application/plugin and its purpose -->
+### What is Player? <!-- 1a. Description of the application/plugin and its purpose -->
 
 **Player** is the centralized interface where participants, teams, and administrators go to engage in a cyber event. In Player, participants view teams, applications, virtual environments, and third-party applications. The event experience is highly customizable by content developers.
 
@@ -22,7 +22,7 @@ Player is ***not*** meant to:
 
 Descriptions of the common applications used in Player can be found in the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) document.
 
-## Key Concepts <!-- 1b. List of features and capabilities -->
+### Key Concepts <!-- 1b. List of features and capabilities -->
 
 Some key Player concepts are described below.
 
@@ -60,26 +60,26 @@ These are the settings associated with building a *view*. A view can be edited, 
 **Views** 
 The collection of content a participant can interact with during a cyber simulation. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
-# Requirements <!-- 2.	Requirements -->
+## Requirements <!-- 2.	Requirements -->
 
-## Hardware/Software <!-- 2a.	List of hardware/software requirements. -->
+### Hardware/Software <!-- 2a.	List of hardware/software requirements. -->
 
-## Prerequisites <!-- 2b.	List of dependencies and prerequisites. -->
+### Prerequisites <!-- 2b.	List of dependencies and prerequisites. -->
 
-# Installation <!-- 3.	Installation (Step-by-step instructions for installation) -->
+## Installation <!-- 3.	Installation (Step-by-step instructions for installation) -->
 
 <!-- 4.	Cloud Deployment (if applicable) -->
 <!-- 4a.	Overview on how to deploy the application on a cloud environment. -->
 <!-- 4b.	Information on cloud-specific configurations and requirements. -->
 <!-- 4c.	Add location for helm charts or docker images. -->
 
-# Configuration <!-- 5.	Configuration -->
+## Configuration <!-- 5.	Configuration -->
 
-## Options and Settings <!-- Describe how to configure application/plugin. List available options and settings. -->
+### Options and Settings <!-- Describe how to configure application/plugin. List available options and settings. -->
 
-# User Guide <!-- 6.	User Guide -->
+## User Guide <!-- 6.	User Guide -->
 
-## Overview <!-- 6a.	Overview on how to use application/plugin. -->
+### Overview <!-- 6a.	Overview on how to use application/plugin. -->
 
 #### Player Applications
 
@@ -414,16 +414,16 @@ A _click point_ is a location on the map that when clicked by Player user launch
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click **Delete Map**.
 
-# Administrator User Guide <!-- 7.	Admin User Guide -->
+## Administrator User Guide <!-- 7.	Admin User Guide -->
 
-## Overview <!-- 7a.	Overview of admin user interface. -->
+### Overview <!-- 7a.	Overview of admin user interface. -->
 
-## Admin Capabilities <!-- 7b.	Explain the administration functionality. -->
+### Admin Capabilities <!-- 7b.	Explain the administration functionality. -->
 
-## Admin Tasks <!-- 7c.	Step-by-step instructions on how to perform administrative tasks. -->
+### Admin Tasks <!-- 7c.	Step-by-step instructions on how to perform administrative tasks. -->
 
-# Troubleshooting <!-- 8.	Troubleshooting (Common issues and how to resolve them) -->
+## Troubleshooting <!-- 8.	Troubleshooting (Common issues and how to resolve them) -->
 
-# FAQ <!-- 9.	FAQ (List of frequently asked questions and answers) -->
+## FAQ <!-- 9.	FAQ (List of frequently asked questions and answers) -->
 
-# License <!-- 10.	License (Information about open-source license used) -->
+## License <!-- 10.	License (Information about open-source license used) -->
