@@ -28,25 +28,35 @@ Some key Player concepts are described below.
 
 **Apps** 
 A website a participant in a view can open within Player or in a separate browser tab. A common example of an app used in Player is the Mattermost messaging platform.
+
 **App template**
  The settings associated with an app that is added to a team's *view*.  An app template can be created for common apps that are added to a view with default settings that an administrator can override if needed.
+
 **Authentication** 
 Player uses `IdentityServer 4` for authenticating users. Authentication gets a user into Player, but setting permissions within the Player Administration view (under **Users**) determines what a user can open and/or edit within Player.
+
 **Focused Application Panel** 
 The focused app panel displays the selected application in an iFrame. The iFrame points to the URL specified by the application template. The application within the focused app panel is responsible for authentication and content. Player displays content but has no control of the application running within the focused app panel.
+
 **Notification** 
 A message sent to a specific user, team, or view from an Administrator or an app that has been given permission.
+
 **Permission** 
 A key/value pair that can be created and used by any application given permission within the system. A permission can be assigned to a user or a team. Some permissions such as `SystemAdmin` are read-only. `ExerciseAdmin` and `SystemAdmin` are permanent permissions that cannot be edited or deleted.
+
 **Role** 
 A set of permissions that can be grouped together and assigned to a user or team.
+
 **Team** 
 A group of logged in users who are associated with a view. Each team can be configured to view a particular set of applications and be granted team-level roles/permissions.
+
 **User** 
 A user who is identified in an Identity Server configured for the Player system is automatically added into Player upon the first login. In addition, users can be pre-loaded into Player using the Player API.
   > Note: IdentityServer4 is an OAuth 2.0 framework that is used by the Software Engineering Institute to authenticate users. Some Identity servers are configured to authenticate using CAC cards while others are user/password based - depending upon the location of the system.
+
 **View** 
 These are the settings associated with building a *view*. A view can be edited, cloned, and deleted.
+
 **Views** 
 The collection of content a participant can interact with during a cyber simulation. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
@@ -170,7 +180,7 @@ In the top-right corner, click the dropdown next to your user name, then **Admin
 
 Views is where a Player view administrator adds a new view and browses existing views. For step-by-step instructions on how to create a new view, see [Player How to: Create a new View](./player-create-new-view.md).
 
-### Users
+#### Users
 
 Users are only available in Player after they have successfully authenticated via the identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:** 
 
@@ -181,7 +191,7 @@ A SystemAdmin creates the View and assigns ViewAdmin permissions to specific tea
 
 Users and/or teams can be assigned to a **Role**, which is a group of permissions. More about roles as future Player development is completed. Only a SystemAdmin can create roles. 
 
-### Application Templates
+#### Application Templates
 
 Think of *application templates* as "helpers" for adding new or common applications to Player. For example, the Virtual Machines application template contains several URLs. Including them in a template means that these values may be used over and over as part of a template--rather than manually entering the same information over and over again with each new view. 
 
@@ -195,7 +205,7 @@ Follow the procedures below to create a new *view* in Player. These instructions
 
 If you have not already done so, in the dropdown next to your username, select **Administration**.
 
-### Step 1: Complete View Information
+#### Step 1: Complete View Information
 ![player-new-view](../../assets/img/player-new-view.png)
 
 1. Under Views, click **Add New View**.
@@ -205,14 +215,14 @@ If you have not already done so, in the dropdown next to your username, select *
    - `Inactive` means that the new view will be cloned in Alloy.
 4. Select **Applications**.
 
-### Step 2: Add new applications
+#### Step 2: Add new applications
 
 1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template. 
    - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
    - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. For help understanding application templates, see the [Player Guide](https://cmu-sei.github.io/crucible/player-guide) and the Player How to: Create a new App Template.
 2. Click **Teams**.
 
-### Step 3: Add new teams
+#### Step 3: Add new teams
 
 1. Click **Add New Team**. Multiple teams can be added to a view.
 
@@ -233,7 +243,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
    - Next to the new team, click **Add Application**. Select an application from the list. These are the applications you added above. Each team you create gets a list of applications displayed in the Player application bar in the order defined here.
 
-### Step 4: Upload Files
+#### Step 4: Upload Files
 
 In this step, View Administrators upload a single file or multiple files simultaneously to a View which can be added as an application and attached to a team. 
 
@@ -264,7 +274,7 @@ Procedures assume you are in the Player VM Console app. For help on Player appli
 4. Select where in the virtual machine you want the copied text to go (this can be a new file or an open application).
 5. At the top of the Player window, click __Paste__. This inserts the copied text into the virtual machine.
 
-## From Player VM to local
+#### From Player VM to local
 
 1. In the Player VM Console app, select the virtual machine you want.
 2. On the virtual machine, select the text you would like to copy. Copy your text first to the virtual machine’s clipboard (how you do this depends upon the application you’re using).
@@ -280,9 +290,9 @@ For help on Player applications, see the [Player Applications](https://cmu-sei.g
 1. In the Player VM Console app, select the virtual machine you want.
 2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
 
-## Player How to: Upload files
+#### Player How to: Upload files
 
-## Upload from local to VM
+#### Upload from local to VM
 
 These procedures describe how to upload files from a local machine (an _out-of-game_ computer) to a virtual machine in the Player VM Console app. Please note the **Send File to VM** option should only be used for uploading small files.
 
@@ -299,7 +309,7 @@ These procedures assume you are in the Player VM Console app. For help on Player
 4. Select the file from your local machine that you want to upload.
 5. Click __Open__. This will copy the file to the destination folder specified in the VM Send File Settings window.
 
-## Upload files and mount ISO
+#### Upload files and mount ISO
 
 These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine – it’s a two-step process). This is useful for installers and uploading larger files (such as ISO files).
 
