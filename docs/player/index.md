@@ -22,7 +22,7 @@ Player is ***not*** meant to:
 
 Descriptions of the common applications used in Player can be found in the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) document.
 
-### Key Player Concepts <!-- 1b. List of features and capabilities -->
+### Key Concepts <!-- 1b. List of features and capabilities -->
 
 Some key Player concepts are described below.
 
@@ -60,19 +60,32 @@ These are the settings associated with building a *view*. A view can be edited, 
 **Views** 
 The collection of content a participant can interact with during a cyber simulation. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
-## <!-- 2.	Requirements -->
-### <!-- 2a.	List of hardware/software requirements. -->
-### <!-- 2b.	List of dependencies and prerequisites. -->
+## Requirements <!-- 2.	Requirements -->
+
+### Hardware/Software <!-- 2a.	List of hardware/software requirements. -->
+
+### Prerequisites <!-- 2b.	List of dependencies and prerequisites. -->
+
 ## <!-- 3.	Installation -->
+
 ### <!-- 3a.	Step-by-step instructions for installation. -->
+
 ## <!-- 4.	Cloud Deployment (if applicable) -->
+
 ### <!-- 4a.	Overview on how to deploy the application on a cloud environment. -->
+
 ### <!-- 4b.	Information on cloud-specific configurations and requirements. -->
+
 ### <!-- 4c.	Add location for helm charts or docker images. -->
+
 ## <!-- 5.	Configuration -->
+
 ### <!-- 5a.	Describe how to configure application/plugin. -->
+
 ### <!-- 5b.	List available options and settings. -->
+
 ## <!-- 6.	User Guide -->
+
 ### <!-- 6a.	Overview on how to use application/plugin. -->
 
 #### Player Applications
@@ -409,12 +422,21 @@ A _click point_ is a location on the map that when clicked by Player user launch
 3. Click **Delete Map**.
 
 ## <!-- 7.	Admin User Guide -->
+
 ### <!-- 7a.	Overview of admin user interface. -->
+
 ### <!-- 7b.	Explain the administration functionality. -->
+
 ### <!-- 7c.	Step-by-step instructions on how to perform administrative tasks. -->
+
 ## <!-- 8.	Troubleshooting -->
+
 ### <!-- 8a.	Common issues and how to resolve them. -->
+
 ## <!-- 9.	FAQ -->
+
 ### <!-- 9a.	List of frequently asked questions and answers. -->
+
 ## <!-- 10.	License -->
+
 ### <!-- 10a.	Information about open-source license used. -->
