@@ -81,7 +81,7 @@ The collection of content a participant can interact with during a cyber simulat
 
 ### Overview <!-- 6a.	Overview on how to use application/plugin. -->
 
-#### Player Applications
+### Player Applications
 
 Every Exercise in Player contains *applications*.  Applications are served elsewhere and viewed in a content panel in the Player user interface.  If the application requires authentication, we recommended you configure it to use the same identity server used by Player for the best user experience. The following are applications used in Player:
 
@@ -117,7 +117,7 @@ Mattermost (https://mattermost.com/), an open source messaging platform can be c
 
 Any documents or files  - PDF, PNG, etc. - that can be served on the web can be easily set up as an application for viewing.  This is particularly helpful for displaying instructions, intel, maps, and other information.
 
-##### Player How to: Create a new App Template
+#### Player How to: Create a new App Template
 
 An *app template*  contains the settings associated with an app that is added to a team's view.  An app template can be created for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. An app template can be used by any view admin when adding apps to a particular view.  Think of app templates as helpers for configuring common Crucible apps.
 
@@ -138,7 +138,7 @@ If you have not already done so, in the dropdown next to your username, select *
 <!-- 6b.	Explain user interface. -->
 <!-- 6c.	List of functionalities and how to use them. -->
 
-#### Player Views
+### Player Views
 
 The collection of content a participant can interact with during a cyber simulation is called the _view_. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
