@@ -142,7 +142,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 The collection of content a participant can interact with during a cyber simulation is called the _view_. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
-##### View: As seen by the end-user
+#### View: As seen by the end-user
 ![player-user-view](../../assets/img/player-user-view.png)
 
 ##### Collapsible navigation panel
@@ -173,7 +173,7 @@ Player fully supports users who are on multiple teams.  Any such user, when logg
 
 Log off here. If you are a view administrator, you have the option to edit the view from here. The option to enable Dark Theme is here too.
 
-##### View: As seen by the administrator
+#### View: As seen by the administrator
 ![player-admin-view](../../assets/img/player-admin-view.png)
 
 A Player view administrator will see the **Administration navigation bar** on the left. To switch to the administrator view in Player if you have the appropriate permissions:
@@ -197,7 +197,7 @@ A SystemAdmin creates the View and assigns ViewAdmin permissions to specific tea
 
 Users and/or teams can be assigned to a **Role**, which is a group of permissions. More about roles as future Player development is completed. Only a SystemAdmin can create roles. 
 
-##### Application Templates
+#### Application Templates
 
 Think of *application templates* as "helpers" for adding new or common applications to Player. For example, the Virtual Machines application template contains several URLs. Including them in a template means that these values may be used over and over as part of a template--rather than manually entering the same information over and over again with each new view. 
 
@@ -205,7 +205,7 @@ In the Player system, creating a new application template is a relatively rare o
 
 For step-by-step instructions on how to create a new application template, see [Player How to: Create a new App Template](./player-create-new-app-template.md).
 
-##### Player How to: Create a new View
+#### Player How to: Create a new View
 
 Follow the procedures below to create a new *view* in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
 
@@ -261,7 +261,7 @@ After adding the file as an application you have to return to **Step 3 Teams** a
 
 Click **Done** when you are finished adding or updating the view.
 
-##### Player How to: Copy and paste text
+#### Player How to: Copy and paste text
 
 The procedures below show you how to:
 
@@ -287,7 +287,7 @@ Procedures assume you are in the Player VM Console app. For help on Player appli
 3. Once you’ve copied your text to the virtual machine clipboard, click __Copy__ at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
 4. On your local machine, paste the copied text into a Notepad file or Word file.
 
-##### Player How to: Power a VM on or off
+#### Player How to: Power a VM on or off
 
 The procedures below show you how to remotely power a VM on or off from within the Player VM Console app. These procedures assume you are in the Player VM Console app. 
 
@@ -296,7 +296,7 @@ For help on Player applications, see the [Player Applications](https://cmu-sei.g
 1. In the Player VM Console app, select the virtual machine you want.
 2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
 
-##### Player How to: Upload files
+#### Player How to: Upload files
 
 ##### Upload from local to VM
 
@@ -330,7 +330,7 @@ These procedures describe how to upload files from a local machine to be mounted
 6. Click __Mount__. This process automatically mounts the file as a DVD Drive ISO.
 7. After the ISO has been mounted/used for file copy, right-click the DVD Drive ISO and and select __Eject__ to eject the ISO.
 
-##### Following a Participant 
+#### Following a Participant 
 
 The **user follow** feature in Player allows you to virtually look over a participant’s shoulder during a scenario. This is a useful feature when helping someone troubleshoot and for team members who are geographically separated. This can also be used by observers when evaluating or watching teams perform during an event.
 
@@ -352,19 +352,19 @@ If the person switches virtual machines then your display automatically follows 
 
 Clicking the **gear icon** in the upper left of the display you are following gives you the options to **Open In New Tab** and **Reconnect**. If you are already in a new browser tab, then you will see the **Fullscreen** option.
 
-##### Player Maps
+### Player Maps
 
 The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
 
 Assuming that View Administrator permissions have been granted, in Player add the map application to the view.
 
-##### Adding the Map application to the view
+#### Adding the Map application to the view
 
 1. In Player, in your present view, select your user name and then **Edit View**.
 2. Under Applications, select **Add New Application** then **Templates**, then **Map**.
 3. The Select Map dropdown and the New Map icon appear in the right pane.
 
-##### Creating a new map
+#### Creating a new map
 ![player-new-map](../../assets/img/player-new-map.png)
 
 1. In the newly created Map application, in the right pane, select **New Map**.
@@ -376,7 +376,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
    > Note that you can select more than one team here.
 3. Click **Submit**. The image of the new map appears in the right pane.
 
-##### Editing a map
+#### Editing a map
 
 1. In Player's left navigation pane, click the **Map application**. 
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -386,7 +386,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
    - **Save:** saves your map.
    - Click in the map to **add a click point**.
 
-##### Adding a click point
+#### Adding a click point
 
 A _click point_ is a location on the map that when clicked by Player user launches a resource like a virtual machine in a new tab. To add a click point to the map:
 
@@ -409,7 +409,7 @@ A _click point_ is a location on the map that when clicked by Player user launch
 4. Click an existing click point.
 5. In the Edit Click Point modal, click **Delete**.
 
-##### Deleting a map
+#### Deleting a map
 1. In Player's left navigation pane, click the **Map application**. 
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click **Delete Map**.
