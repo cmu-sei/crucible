@@ -60,23 +60,6 @@ These are the settings associated with building a *view*. A view can be edited, 
 **Views** 
 The collection of content a participant can interact with during a cyber simulation. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
-## Requirements <!-- 2.	Requirements -->
-
-### Hardware/Software <!-- 2a.	List of hardware/software requirements. -->
-
-### Prerequisites <!-- 2b.	List of dependencies and prerequisites. -->
-
-## Installation <!-- 3.	Installation (Step-by-step instructions for installation) -->
-
-<!-- 4.	Cloud Deployment (if applicable) -->
-<!-- 4a.	Overview on how to deploy the application on a cloud environment. -->
-<!-- 4b.	Information on cloud-specific configurations and requirements. -->
-<!-- 4c.	Add location for helm charts or docker images. -->
-
-## Configuration <!-- 5.	Configuration -->
-
-### Options and Settings <!-- Describe how to configure application/plugin. List available options and settings. -->
-
 ## User Guide <!-- 6.	User Guide -->
 
 ### Overview <!-- 6a.	Overview on how to use application/plugin. -->
@@ -421,9 +404,3 @@ A _click point_ is a location on the map that when clicked by Player user launch
 ### Admin Capabilities <!-- 7b.	Explain the administration functionality. -->
 
 ### Admin Tasks <!-- 7c.	Step-by-step instructions on how to perform administrative tasks. -->
-
-## Troubleshooting <!-- 8.	Troubleshooting (Common issues and how to resolve them) -->
-
-## FAQ <!-- 9.	FAQ (List of frequently asked questions and answers) -->
-
-## License <!-- 10.	License (Information about open-source license used) -->
