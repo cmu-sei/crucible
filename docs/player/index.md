@@ -153,7 +153,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 ### Define Subscriptions
 
-#### Creating and Managing Maps
+### Creating and Managing Maps
 
 The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
 
@@ -217,43 +217,39 @@ A _click point_ is a location on the map that when clicked by Player user launch
 
 ## User Guide
 
-### User Interface
-
-#### Top Bar
+### Top Bar
 
 The top bar displays the current *view name*, *team*, and the *menu select* dropdown (your username in the top right).
 
 Player fully supports users who are on multiple teams.  Any such user, when logged in, can switch their team by using the *team* drop-down. 
 
-#### Application Navigation Bar
+### Application Navigation Bar
 
 In the view, the navigation bar on the left contains applications.
 
-##### Documentation
+#### Documentation
 
 Any documents or files  - PDF, PNG, etc. - that can be served on the web can be easily set up as an application for viewing.  This is particularly helpful for displaying instructions, intel, maps, and other information.
 
-##### Map
+#### Map
 
 explain how players use maps
 
 insert screenshot here
 
-##### Virtual Machine Consoles
-
-**Virtual Machines (VM-UI and VM-Console)**
+#### Virtual Machine Consoles
 
 The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system allows the VM to be opened similar to an Application, within a tab on the same screen or popped out into a new browser tab using the icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
 
-##### Service Support Tickets
+#### Service Support Tickets
 
 osTicket (https://osticket.com/), a widely-used open source support ticket system, can be configured and deployed for an exercise. Using this "built-in" help desk, participants can submit help requests to event administrators.
 
-##### Chat
+#### Chat
 
 Mattermost (https://mattermost.com/), an open source messaging platform can be configured and deployed to provide an "off the shelf" chat system for users. 
 
-##### Email
+#### Email
 
 #### Notifications
 
@@ -261,13 +257,13 @@ Receive and read notifications here.
 
 > Tip! If your browser is set up to allow notifications you can receive Player notifications that way too.
 
-### Player Tips
+## Player Tips
 
-#### Pop-Out to Multiple Tabs/Windows
+### Pop-Out to Multiple Tabs/Windows
 
-#### Use Multiple Monitors
+### Use Multiple Monitors
 
-#### Copy and Paste Text
+### Copy and Paste Text
 
 The procedures below show you how to:
 
@@ -293,7 +289,7 @@ Procedures assume you are in the Player VM Console app. For help on Player appli
 3. Once you’ve copied your text to the virtual machine clipboard, click __Copy__ at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
 4. On your local machine, paste the copied text into a Notepad file or Word file.
 
-#### Power a Virtual Machine On or Off
+### Power a Virtual Machine On or Off
 
 The procedures below show you how to remotely power a VM on or off from within the Player VM Console app. These procedures assume you are in the Player VM Console app. 
 
@@ -302,7 +298,7 @@ For help on Player applications, see the [Player Applications](https://cmu-sei.g
 1. In the Player VM Console app, select the virtual machine you want.
 2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
 
-#### Upload Files
+### Upload Files
 
 **Upload from local to VM**
 
@@ -336,7 +332,7 @@ These procedures describe how to upload files from a local machine to be mounted
 6. Click __Mount__. This process automatically mounts the file as a DVD Drive ISO.
 7. After the ISO has been mounted/used for file copy, right-click the DVD Drive ISO and and select __Eject__ to eject the ISO.
 
-#### Follow Another Player
+### Follow Another Player
 
 The **user follow** feature in Player allows you to virtually look over a participant’s shoulder during a scenario. This is a useful feature when helping someone troubleshoot and for team members who are geographically separated. This can also be used by observers when evaluating or watching teams perform during an event.
 
