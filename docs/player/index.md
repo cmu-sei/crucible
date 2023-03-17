@@ -60,20 +60,16 @@ These are the settings associated with building a *view*. A view can be edited, 
 **Views** 
 The collection of content a participant can interact with during a cyber simulation. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
-
 ## Administrator User Guide
 
 ### Manage Views
 
-Views is where a Player view administrator adds a new view and browses existing views. For step-by-step instructions on how to create a new view, see [Player How to: Create a new View](./player-create-new-view.md).
-
-Follow the procedures below to create a new *view* in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
+Views is where a Player view administrator adds a new view and browses existing views.Follow the procedures below to create a new *view* in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
 
 If you have not already done so, in the dropdown next to your username, select **Administration**.
 
 #### Enter View Information
 
-Step 1: Complete View Information
 ![player-new-view](../../assets/img/player-new-view.png)
 
 1. Under Views, click **Add New View**.
@@ -85,16 +81,12 @@ Step 1: Complete View Information
 
 #### Assign Application Templates
 
-Step 2: Add new applications
-
 1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template. 
    - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
    - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. For help understanding application templates, see the [Player Guide](https://cmu-sei.github.io/crucible/player-guide) and the Player How to: Create a new App Template.
 2. Click **Teams**.
 
-#### Define Teams
-
-Step 3: Add new teams
+#### Add Teams
 
 1. Click **Add New Team**. Multiple teams can be added to a view.
 
@@ -117,8 +109,6 @@ Step 3: Add new teams
 
 #### Upload Files
 
-Step 4: Upload Files
-
 In this step, View Administrators upload a single file or multiple files simultaneously to a View which can be added as an application and attached to a team. 
 
 1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files - it has not been uploaded yet. 
@@ -135,9 +125,9 @@ Click **Done** when you are finished adding or updating the view.
 
 #### Assign Permissions
 
-**SystemAdmin:** can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
+> **SystemAdmin:** can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
 
-**ViewAdmin:** can edit anything within a View that they have permissions.
+> **ViewAdmin:** can edit anything within a View that they have permissions.
 
 A SystemAdmin creates the View and assigns ViewAdmin permissions to specific teams who can now edit that View.
 
@@ -163,27 +153,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 ### Define Subscriptions
 
-## User Guide
-
-### User Interface
-
-#### Top Bar
-
-The top bar displays the current *view name*, *team*, and the *menu select* dropdown (your username in the top right).
-
-Player fully supports users who are on multiple teams.  Any such user, when logged in, can switch their team by using the *team* drop-down. 
-
-#### Application Navigation Bar
-
-In the view, the navigation bar on the left contains applications.
-
-##### Documentation
-
-**General document links**
-
-Any documents or files  - PDF, PNG, etc. - that can be served on the web can be easily set up as an application for viewing.  This is particularly helpful for displaying instructions, intel, maps, and other information.
-
-##### Map
+#### Creating and Managing Maps
 
 The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
 
@@ -245,28 +215,41 @@ A _click point_ is a location on the map that when clicked by Player user launch
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click **Delete Map**.
 
+## User Guide
+
+### User Interface
+
+#### Top Bar
+
+The top bar displays the current *view name*, *team*, and the *menu select* dropdown (your username in the top right).
+
+Player fully supports users who are on multiple teams.  Any such user, when logged in, can switch their team by using the *team* drop-down. 
+
+#### Application Navigation Bar
+
+In the view, the navigation bar on the left contains applications.
+
+##### Documentation
+
+Any documents or files  - PDF, PNG, etc. - that can be served on the web can be easily set up as an application for viewing.  This is particularly helpful for displaying instructions, intel, maps, and other information.
+
+##### Map
+
+explain how players use maps
+
+insert screenshot here
+
 ##### Virtual Machine Consoles
 
 **Virtual Machines (VM-UI and VM-Console)**
 
 The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system allows the VM to be opened similar to an Application, within a tab on the same screen or popped out into a new browser tab using the icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
 
-**Player VM Console application**
-
-- Load VMware consoles
-- [Power On/Off VMs](https://cmu-sei.github.io/crucible/player-power-a-vm-on-or-off)
-- [Copy/Paste](https://cmu-sei.github.io/crucible/player-copy-and-paste-text)
-- [Send files/Mount ISOs](https://cmu-sei.github.io/crucible/player-how-to-upload-files)
-
-##### Services Support Tickets
-
-**Help desk using osTicket** 
+##### Service Support Tickets
 
 osTicket (https://osticket.com/), a widely-used open source support ticket system, can be configured and deployed for an exercise. Using this "built-in" help desk, participants can submit help requests to event administrators.
 
 ##### Chat
-
-**Messaging with Mattermost** 
 
 Mattermost (https://mattermost.com/), an open source messaging platform can be configured and deployed to provide an "off the shelf" chat system for users. 
 
