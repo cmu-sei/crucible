@@ -20,8 +20,6 @@ Player is ***not*** meant to:
 - Provide any mechanisms for individual applications to communicate with each other.
 - Provide any default applications.  However, some common applications can be consumed within an exercise.
 
-Descriptions of the common applications used in Player can be found in the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) document.
-
 ### Key Concepts
 
 Some key Player concepts are described below.
@@ -70,7 +68,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 #### Enter View Information
 
-![player-new-view](../../assets/img/player-new-view.png)
+![player-new-view](../assets/img/player-new-view.png)
 
 1. Under Views, click **Add New View**.
 2. Add a **Name** and **View Description**.
@@ -83,7 +81,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template. 
    - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
-   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. For help understanding application templates, see the [Player Guide](https://cmu-sei.github.io/crucible/player-guide) and the Player How to: Create a new App Template.
+   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. 
 2. Click **Teams**.
 
 #### Add Teams
@@ -139,7 +137,7 @@ Follow the procedures below to create a new app template in Player. These instru
 
 If you have not already done so, in the dropdown next to your username, select **View Administration**.
 
-![player-new-application-template](../../assets/img/player-new-application-template.png)
+![player-new-application-template](../assets/img/player-new-application-template.png)
 1. Under the Administration nav panel, select **Application Templates**.
 2. Click **Add Application Template**. 
    - Enter a **Name** for the app template.
@@ -166,7 +164,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
 3. The Select Map dropdown and the New Map icon appear in the right pane.
 
 **Creating a new map**
-![player-new-map](../../assets/img/player-new-map.png)
+![player-new-map](../assets/img/player-new-map.png)
 
 1. In the newly created Map application, in the right pane, select **New Map**.
 2. Complete the following fields:
@@ -270,7 +268,7 @@ The procedures below show you how to:
 - Copy text from a local machine (that is, an _out-of-game_ computer) and paste it into a Player virtual machine, and
 - Copy text from a Player virtual machine and paste it into a local machine
 
-Procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
+Procedures assume you are in the Player VM Console app.
 
 **From local to Player VM**
 
@@ -293,8 +291,6 @@ Procedures assume you are in the Player VM Console app. For help on Player appli
 
 The procedures below show you how to remotely power a VM on or off from within the Player VM Console app. These procedures assume you are in the Player VM Console app. 
 
-For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
-
 1. In the Player VM Console app, select the virtual machine you want.
 2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
 
@@ -304,7 +300,7 @@ For help on Player applications, see the [Player Applications](https://cmu-sei.g
 
 These procedures describe how to upload files from a local machine (an _out-of-game_ computer) to a virtual machine in the Player VM Console app. Please note the **Send File to VM** option should only be used for uploading small files.
 
-These procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
+These procedures assume you are in the Player VM Console app.
 
 1. In the Player VM Console app, in the VM List, launch the virtual machine you want.
 2. On the VM tab, click the **gear icon**, and then select __Files__, **Send File to VM**.
