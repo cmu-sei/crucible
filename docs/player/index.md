@@ -1,8 +1,8 @@
 # **Player**
 
-## Overview <!-- 1. Introduction -->
+## Overview 
 
-### What is Player? <!-- 1a. Description of the application/plugin and its purpose -->
+### What is Player?
 
 **Player** is the centralized interface where participants, teams, and administrators go to engage in a cyber event. In Player, participants view teams, applications, virtual environments, and third-party applications. The event experience is highly customizable by content developers.
 
@@ -22,7 +22,7 @@ Player is ***not*** meant to:
 
 Descriptions of the common applications used in Player can be found in the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) document.
 
-### Key Concepts <!-- 1b. List of features and capabilities -->
+### Key Concepts
 
 Some key Player concepts are described below.
 
@@ -60,9 +60,277 @@ These are the settings associated with building a *view*. A view can be edited, 
 **Views** 
 The collection of content a participant can interact with during a cyber simulation. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
 
-## User Guide <!-- 6.	User Guide -->
 
-### Overview <!-- 6a.	Overview on how to use application/plugin. -->
+
+The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
+
+Assuming that View Administrator permissions have been granted, in Player add the map application to the view.
+
+#### Adding the Map application to the view
+
+1. In Player, in your present view, select your user name and then **Edit View**.
+2. Under Applications, select **Add New Application** then **Templates**, then **Map**.
+3. The Select Map dropdown and the New Map icon appear in the right pane.
+
+#### Creating a new map
+![player-new-map](../../assets/img/player-new-map.png)
+
+1. In the newly created Map application, in the right pane, select **New Map**.
+2. Complete the following fields:
+   - **Name:** the name of the map.   
+   - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.   
+   - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.   
+   - **Teams:** only the teams selected here will see the new map.   
+   > Note that you can select more than one team here.
+3. Click **Submit**. The image of the new map appears in the right pane.
+
+#### Editing a map
+
+1. In Player's left navigation pane, click the **Map application**. 
+2. In the right pane, select a map from the **Select Map** dropdown.
+3. Click the **Edit** icon. From here, you can:
+   - **Edit Properties:** allows you to change the name, images, and teams of the map.
+   - **Discard Changes:** allows you to discard changes you made to the map; for example, adding a click point.
+   - **Save:** saves your map.
+   - Click in the map to **add a click point**.
+
+#### Adding a click point
+
+A _click point_ is a location on the map that when clicked by Player user launches a resource like a virtual machine in a new tab. To add a click point to the map:
+
+1. In Player's left navigation pane, click the **Map application**. 
+2. In the right pane, select a map from the **Select Map** dropdown.
+3. Click the **Edit** icon.
+4. Click anywhere in the map to launch the **Add Click Point** modal. If your map is a network topology diagram with network elements--routers, switches, firewalls, servers, etc.--then you may want to click on an element that represents the VM resource you want the user to launch. 
+   - **Radius:** by default, the value is 3.
+   - **Resource:** this is the virtual machine (or another map) that launches when clicked. The VMs that appear here are the VMs from the VM application in the current view.
+   - **Enter Custom Resource URL:** enable this if you want to link to something other than the view's VMs and maps that are available above. For example, you could place a click point labeled "Linux Help" that links to relevant Linux documentation.
+   - **Label:** this is how the click point is labeled on the map. If your click point is over top of an element that launches a Windows 10 Administrator Workstation, then it makes sense to label it "Win 10 Admin".
+5. Click **Save** to save the new click point in the map.
+6. Click **Save** again to save the map.
+
+##### Deleting a click point
+
+1. In Player's left navigation pane, click the **Map application**. 
+2. In the right pane, select a map from the **Select Map** dropdown.
+3. Click the **Edit** icon.
+4. Click an existing click point.
+5. In the Edit Click Point modal, click **Delete**.
+
+#### Deleting a map
+1. In Player's left navigation pane, click the **Map application**. 
+2. In the right pane, select a map from the **Select Map** dropdown.
+3. Click **Delete Map**.
+
+## Administrator User Guide
+
+### Manage Views
+Player How to: Create a new View
+
+Follow the procedures below to create a new *view* in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
+
+If you have not already done so, in the dropdown next to your username, select **Administration**.
+
+#### Enter View Information
+
+Step 1: Complete View Information
+![player-new-view](../../assets/img/player-new-view.png)
+
+1. Under Views, click **Add New View**.
+2. Add a **Name** and **View Description**.
+3. In the Status dropdown, select **Active** or **Inactive**.
+   - `Active` means that the new view is available for use immediately.
+   - `Inactive` means that the new view will be cloned in Alloy.
+4. Select **Applications**.
+
+#### Assign Application Templates
+
+Step 2: Add new applications
+
+1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template. 
+   - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
+   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. For help understanding application templates, see the [Player Guide](https://cmu-sei.github.io/crucible/player-guide) and the Player How to: Create a new App Template.
+2. Click **Teams**.
+
+##### Dashboard
+
+##### Tasks
+
+##### Virtual Machines
+
+##### Map
+
+#### Define Teams
+
+Step 3: Add new teams
+
+1. Click **Add New Team**. Multiple teams can be added to a view.
+
+2. Enter a **Team Name**.
+
+3. Assign a **Role** to the team.
+
+4. Assign **Permissions** to the team. Each team can be assigned special permissions. You may want to have a team of "admins" who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
+
+5. Click the **User** icon to select users to add to the new team.
+
+   - **Search** for the user whom you want to add. 
+   - Click **Add User** to move the user from All Users to Team Users.
+   - Under Team Users, you can assign a **Role** to the user at this time.
+   - Click **Done** when you are finished adding users to the team.
+
+6. Assign applications to the new team.
+
+   - Next to the new team, click **Add Application**. Select an application from the list. These are the applications you added above. Each team you create gets a list of applications displayed in the Player application bar in the order defined here.
+
+#### Upload Files
+
+Step 4: Upload Files
+
+In this step, View Administrators upload a single file or multiple files simultaneously to a View which can be added as an application and attached to a team. 
+
+1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files - it has not been uploaded yet. 
+2. Select the **Team(s)** that you want to access the file and click **Upload Staged File(s)**.
+3. The file appears under **Uploaded Files**. From here, you can: **Download** the file, **Delete** the file, **Copy Link** to the file, **Edit** the name and team of the file, and **Add File as Application**.
+
+After adding the file as an application you have to return to **Step 3 Teams** and add that application - the _newly_ uploaded file - to a team just as you would add any new application.
+
+Click **Done** when you are finished adding or updating the view.
+
+### Configure Users
+
+#### Assign Roles
+
+#### Assign Permissions
+
+##### SystemAdmin
+
+##### EventAdmin
+
+### Define Application Templates
+
+### Define Roles and Permissions
+
+### Define Subscriptions
+
+## User Guide
+
+### User Interface
+
+#### Top Bar
+
+#### Application Navigation Bar
+
+##### Documentation
+
+##### Map
+
+##### Virtual Machine Consoles
+
+##### Services Support Tickets
+
+##### Chat
+
+##### Email
+
+#### Notifications
+
+### Player Tips
+
+#### Pop-Out to Multiple Tabs/Windows
+
+#### Use Multiple Monitors
+
+#### Copy and Paste Text
+
+The procedures below show you how to:
+
+- Copy text from a local machine (that is, an _out-of-game_ computer) and paste it into a Player virtual machine, and
+- Copy text from a Player virtual machine and paste it into a local machine
+
+Procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
+
+**From local to Player VM**
+
+> Note: There is a 64K size limitation to the text block users can copy into and out of the player.
+
+1. On your local machine, open a text file or Word file.
+2. Select and copy the text you want to place into a Player virtual machine.
+3. In the Player VM Console app, select the virtual machine you want.
+4. Select where in the virtual machine you want the copied text to go (this can be a new file or an open application).
+5. At the top of the Player window, click __Paste__. This inserts the copied text into the virtual machine.
+
+**From Player VM to local**
+
+1. In the Player VM Console app, select the virtual machine you want.
+2. On the virtual machine, select the text you would like to copy. Copy your text first to the virtual machine’s clipboard (how you do this depends upon the application you’re using).
+3. Once you’ve copied your text to the virtual machine clipboard, click __Copy__ at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
+4. On your local machine, paste the copied text into a Notepad file or Word file.
+
+#### Power a Virtual MAchine On or Off
+
+The procedures below show you how to remotely power a VM on or off from within the Player VM Console app. These procedures assume you are in the Player VM Console app. 
+
+For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
+
+1. In the Player VM Console app, select the virtual machine you want.
+2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
+
+#### Upload Files
+
+**Upload from local to VM**
+
+These procedures describe how to upload files from a local machine (an _out-of-game_ computer) to a virtual machine in the Player VM Console app. Please note the **Send File to VM** option should only be used for uploading small files.
+
+These procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
+
+1. In the Player VM Console app, in the VM List, launch the virtual machine you want.
+2. On the VM tab, click the **gear icon**, and then select __Files__, **Send File to VM**.
+
+> If the **Send File to VM** option is grayed out you will have to enter the credentials used to log into the virtual machine.
+> Select __Enter VM Credentials__. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Click **Done**.
+> Any user registered for the exercise will have the virtual machine credentials.
+
+3. After entering your credentials, select the __Send File to VM__ option (this should no longer be grayed out). 
+4. Select the file from your local machine that you want to upload.
+5. Click __Open__. This will copy the file to the destination folder specified in the VM Send File Settings window.
+
+**Upload files and mount ISO**
+
+These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine – it’s a two-step process). This is useful for installers and uploading larger files (such as ISO files).
+
+1. In the VM List screen, click __Upload File__.
+2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).
+3. Click __Open__.
+4. On the VM tab, click the **gear icon**, and then select __Files__, __Mount File to DVD__.
+5. In the Search box that opens look for and select the uploaded file that you now want to mount.
+
+   > Note that there are two file areas: Team Files and Public Files. Files can be mounted for only your team (under __Team Files__) or any team (under __Public Files__).
+
+6. Click __Mount__. This process automatically mounts the file as a DVD Drive ISO.
+7. After the ISO has been mounted/used for file copy, right-click the DVD Drive ISO and and select __Eject__ to eject the ISO.
+
+#### Follow Another Player
+
+The **user follow** feature in Player allows you to virtually look over a participant’s shoulder during a scenario. This is a useful feature when helping someone troubleshoot and for team members who are geographically separated. This can also be used by observers when evaluating or watching teams perform during an event.
+
+To follow another participant:
+
+1. In Player, in the left sidebar, select the **Virtual Machines** application.
+2. In the main Player window, select **User List**.
+>If you are a View Administrator (_ViewAdmin_), then you will see *all* the teams and *all* the participants. Otherwise, you will just see the team you are on and your teammates. 
+3. Locate the participant in the scenario.
+   - Use the **Search** feature to search on a participant's username if you know it.
+   - Click **Expand All** to expand the teams to see all of the participants.
+   - Click **Collapse All** to collapse the teams.
+   - Select a team to expand it and see its participants.
+   - Check **Hide Inactive** to display _only_ those participants who are working in a virtual machine at the moment.
+4. Click the participant’s name. Now, you can see the console display for the virtual machine that the person is on in the main Player window. 
+5. Click the icon next to the participant's name to follow that participant in a new browser tab. 
+
+If the person switches virtual machines then your display automatically follows them. You can’t interact with them while following; and, if their virtual machine goes out of focus then following stops. 
+
+Clicking the **gear icon** in the upper left of the display you are following gives you the options to **Open In New Tab** and **Reconnect**. If you are already in a new browser tab, then you will see the **Fullscreen** option.
 
 ### Player Applications
 
@@ -117,9 +385,6 @@ If you have not already done so, in the dropdown next to your username, select *
 
 3. Enable **Embeddable** if desired. Ebeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames.  The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads.  This is important for some apps that may require some initialization.
-
-<!-- 6b.	Explain user interface. -->
-<!-- 6c.	List of functionalities and how to use them. -->
 
 ### Player Views
 
@@ -188,219 +453,4 @@ In the Player system, creating a new application template is a relatively rare o
 
 For step-by-step instructions on how to create a new application template, see [Player How to: Create a new App Template](./player-create-new-app-template.md).
 
-#### Player How to: Create a new View
 
-Follow the procedures below to create a new *view* in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
-
-If you have not already done so, in the dropdown next to your username, select **Administration**.
-
-##### Step 1: Complete View Information
-![player-new-view](../../assets/img/player-new-view.png)
-
-1. Under Views, click **Add New View**.
-2. Add a **Name** and **View Description**.
-3. In the Status dropdown, select **Active** or **Inactive**.
-   - `Active` means that the new view is available for use immediately.
-   - `Inactive` means that the new view will be cloned in Alloy.
-4. Select **Applications**.
-
-##### Step 2: Add new applications
-
-1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template. 
-   - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
-   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. For help understanding application templates, see the [Player Guide](https://cmu-sei.github.io/crucible/player-guide) and the Player How to: Create a new App Template.
-2. Click **Teams**.
-
-##### Step 3: Add new teams
-
-1. Click **Add New Team**. Multiple teams can be added to a view.
-
-2. Enter a **Team Name**.
-
-3. Assign a **Role** to the team.
-
-4. Assign **Permissions** to the team. Each team can be assigned special permissions. You may want to have a team of "admins" who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
-
-5. Click the **User** icon to select users to add to the new team.
-
-   - **Search** for the user whom you want to add. 
-   - Click **Add User** to move the user from All Users to Team Users.
-   - Under Team Users, you can assign a **Role** to the user at this time.
-   - Click **Done** when you are finished adding users to the team.
-
-6. Assign applications to the new team.
-
-   - Next to the new team, click **Add Application**. Select an application from the list. These are the applications you added above. Each team you create gets a list of applications displayed in the Player application bar in the order defined here.
-
-##### Step 4: Upload Files
-
-In this step, View Administrators upload a single file or multiple files simultaneously to a View which can be added as an application and attached to a team. 
-
-1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files - it has not been uploaded yet. 
-2. Select the **Team(s)** that you want to access the file and click **Upload Staged File(s)**.
-3. The file appears under **Uploaded Files**. From here, you can: **Download** the file, **Delete** the file, **Copy Link** to the file, **Edit** the name and team of the file, and **Add File as Application**.
-
-After adding the file as an application you have to return to **Step 3 Teams** and add that application - the _newly_ uploaded file - to a team just as you would add any new application.
-
-Click **Done** when you are finished adding or updating the view.
-
-#### Player How to: Copy and paste text
-
-The procedures below show you how to:
-
-- Copy text from a local machine (that is, an _out-of-game_ computer) and paste it into a Player virtual machine, and
-- Copy text from a Player virtual machine and paste it into a local machine
-
-Procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
-
-##### From local to Player VM 
-
-> Note: There is a 64K size limitation to the text block users can copy into and out of the player.
-
-1. On your local machine, open a text file or Word file.
-2. Select and copy the text you want to place into a Player virtual machine.
-3. In the Player VM Console app, select the virtual machine you want.
-4. Select where in the virtual machine you want the copied text to go (this can be a new file or an open application).
-5. At the top of the Player window, click __Paste__. This inserts the copied text into the virtual machine.
-
-##### From Player VM to local
-
-1. In the Player VM Console app, select the virtual machine you want.
-2. On the virtual machine, select the text you would like to copy. Copy your text first to the virtual machine’s clipboard (how you do this depends upon the application you’re using).
-3. Once you’ve copied your text to the virtual machine clipboard, click __Copy__ at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
-4. On your local machine, paste the copied text into a Notepad file or Word file.
-
-#### Player How to: Power a VM on or off
-
-The procedures below show you how to remotely power a VM on or off from within the Player VM Console app. These procedures assume you are in the Player VM Console app. 
-
-For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
-
-1. In the Player VM Console app, select the virtual machine you want.
-2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
-
-#### Player How to: Upload files
-
-##### Upload from local to VM
-
-These procedures describe how to upload files from a local machine (an _out-of-game_ computer) to a virtual machine in the Player VM Console app. Please note the **Send File to VM** option should only be used for uploading small files.
-
-These procedures assume you are in the Player VM Console app. For help on Player applications, see the [Player Applications](https://cmu-sei.github.io/crucible/player-applications) guide.
-
-1. In the Player VM Console app, in the VM List, launch the virtual machine you want.
-2. On the VM tab, click the **gear icon**, and then select __Files__, **Send File to VM**.
-
-> If the **Send File to VM** option is grayed out you will have to enter the credentials used to log into the virtual machine.
-> Select __Enter VM Credentials__. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Click **Done**.
-> Any user registered for the exercise will have the virtual machine credentials.
-
-3. After entering your credentials, select the __Send File to VM__ option (this should no longer be grayed out). 
-4. Select the file from your local machine that you want to upload.
-5. Click __Open__. This will copy the file to the destination folder specified in the VM Send File Settings window.
-
-##### Upload files and mount ISO
-
-These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine – it’s a two-step process). This is useful for installers and uploading larger files (such as ISO files).
-
-1. In the VM List screen, click __Upload File__.
-2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).
-3. Click __Open__.
-4. On the VM tab, click the **gear icon**, and then select __Files__, __Mount File to DVD__.
-5. In the Search box that opens look for and select the uploaded file that you now want to mount.
-
-   > Note that there are two file areas: Team Files and Public Files. Files can be mounted for only your team (under __Team Files__) or any team (under __Public Files__).
-
-6. Click __Mount__. This process automatically mounts the file as a DVD Drive ISO.
-7. After the ISO has been mounted/used for file copy, right-click the DVD Drive ISO and and select __Eject__ to eject the ISO.
-
-#### Following a Participant 
-
-The **user follow** feature in Player allows you to virtually look over a participant’s shoulder during a scenario. This is a useful feature when helping someone troubleshoot and for team members who are geographically separated. This can also be used by observers when evaluating or watching teams perform during an event.
-
-To follow another participant:
-
-1. In Player, in the left sidebar, select the **Virtual Machines** application.
-2. In the main Player window, select **User List**.
->If you are a View Administrator (_ViewAdmin_), then you will see *all* the teams and *all* the participants. Otherwise, you will just see the team you are on and your teammates. 
-3. Locate the participant in the scenario.
-   - Use the **Search** feature to search on a participant's username if you know it.
-   - Click **Expand All** to expand the teams to see all of the participants.
-   - Click **Collapse All** to collapse the teams.
-   - Select a team to expand it and see its participants.
-   - Check **Hide Inactive** to display _only_ those participants who are working in a virtual machine at the moment.
-4. Click the participant’s name. Now, you can see the console display for the virtual machine that the person is on in the main Player window. 
-5. Click the icon next to the participant's name to follow that participant in a new browser tab. 
-
-If the person switches virtual machines then your display automatically follows them. You can’t interact with them while following; and, if their virtual machine goes out of focus then following stops. 
-
-Clicking the **gear icon** in the upper left of the display you are following gives you the options to **Open In New Tab** and **Reconnect**. If you are already in a new browser tab, then you will see the **Fullscreen** option.
-
-### Player Maps
-
-The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
-
-Assuming that View Administrator permissions have been granted, in Player add the map application to the view.
-
-#### Adding the Map application to the view
-
-1. In Player, in your present view, select your user name and then **Edit View**.
-2. Under Applications, select **Add New Application** then **Templates**, then **Map**.
-3. The Select Map dropdown and the New Map icon appear in the right pane.
-
-#### Creating a new map
-![player-new-map](../../assets/img/player-new-map.png)
-
-1. In the newly created Map application, in the right pane, select **New Map**.
-2. Complete the following fields:
-   - **Name:** the name of the map.   
-   - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.   
-   - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.   
-   - **Teams:** only the teams selected here will see the new map.   
-   > Note that you can select more than one team here.
-3. Click **Submit**. The image of the new map appears in the right pane.
-
-#### Editing a map
-
-1. In Player's left navigation pane, click the **Map application**. 
-2. In the right pane, select a map from the **Select Map** dropdown.
-3. Click the **Edit** icon. From here, you can:
-   - **Edit Properties:** allows you to change the name, images, and teams of the map.
-   - **Discard Changes:** allows you to discard changes you made to the map; for example, adding a click point.
-   - **Save:** saves your map.
-   - Click in the map to **add a click point**.
-
-#### Adding a click point
-
-A _click point_ is a location on the map that when clicked by Player user launches a resource like a virtual machine in a new tab. To add a click point to the map:
-
-1. In Player's left navigation pane, click the **Map application**. 
-2. In the right pane, select a map from the **Select Map** dropdown.
-3. Click the **Edit** icon.
-4. Click anywhere in the map to launch the **Add Click Point** modal. If your map is a network topology diagram with network elements--routers, switches, firewalls, servers, etc.--then you may want to click on an element that represents the VM resource you want the user to launch. 
-   - **Radius:** by default, the value is 3.
-   - **Resource:** this is the virtual machine (or another map) that launches when clicked. The VMs that appear here are the VMs from the VM application in the current view.
-   - **Enter Custom Resource URL:** enable this if you want to link to something other than the view's VMs and maps that are available above. For example, you could place a click point labeled "Linux Help" that links to relevant Linux documentation.
-   - **Label:** this is how the click point is labeled on the map. If your click point is over top of an element that launches a Windows 10 Administrator Workstation, then it makes sense to label it "Win 10 Admin".
-5. Click **Save** to save the new click point in the map.
-6. Click **Save** again to save the map.
-
-##### Deleting a click point
-
-1. In Player's left navigation pane, click the **Map application**. 
-2. In the right pane, select a map from the **Select Map** dropdown.
-3. Click the **Edit** icon.
-4. Click an existing click point.
-5. In the Edit Click Point modal, click **Delete**.
-
-#### Deleting a map
-1. In Player's left navigation pane, click the **Map application**. 
-2. In the right pane, select a map from the **Select Map** dropdown.
-3. Click **Delete Map**.
-
-## Administrator User Guide <!-- 7.	Admin User Guide -->
-
-### Overview <!-- 7a.	Overview of admin user interface. -->
-
-### Admin Capabilities <!-- 7b.	Explain the administration functionality. -->
-
-### Admin Tasks <!-- 7c.	Step-by-step instructions on how to perform administrative tasks. -->
