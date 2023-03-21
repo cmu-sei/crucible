@@ -60,6 +60,12 @@ The collection of content a participant can interact with during a cyber simulat
 
 ## Administrator User Guide
 
+![player-admin-view](../assets/img/player-admin-view.png)
+
+A Player view administrator will see the **Administration navigation bar** on the left. To switch to the administrator view in Player if you have the appropriate permissions:
+
+In the top-right corner, click the dropdown next to your user name, then **Administration**.
+
 ### Manage Views
 
 Views is where a Player view administrator adds a new view and browses existing views.Follow the procedures below to create a new *view* in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
@@ -119,7 +125,11 @@ Click **Done** when you are finished adding or updating the view.
 
 ### Configure Users
 
+Users are only available in Player after they have successfully authenticated via the identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:** 
+
 #### Assign Roles
+
+Users and/or teams can be assigned to a **Role**, which is a group of permissions. More about roles as future Player development is completed. Only a SystemAdmin can create roles. 
 
 #### Assign Permissions
 
@@ -128,6 +138,7 @@ Click **Done** when you are finished adding or updating the view.
 > **ViewAdmin:** can edit anything within a View that they have permissions.
 
 A SystemAdmin creates the View and assigns ViewAdmin permissions to specific teams who can now edit that View.
+> **Important!** Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Views, Users, Application Templates, Roles / Permissions).
 
 ### Define Application Templates
 
@@ -214,6 +225,8 @@ A _click point_ is a location on the map that when clicked by Player user launch
 3. Click **Delete Map**.
 
 ## User Guide
+
+![player-user-view](../assets/img/player-user-view.png)
 
 ### Top Bar
 
