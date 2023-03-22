@@ -1,5 +1,4 @@
-# **Player**
-*User Interface*
+# **Player** *User Interface*
 
 ## Overview 
 
