@@ -29,19 +29,7 @@ theme:
 nav:
   - Home: index.md
   - Player: player/index.md
-  - Caster:
-    - caster/index.md
-    - Projects:
-      - caster/projects/index.md
-      - Directories: caster/projects/caster-directory.md
-      - Files: caster/projects/caster-files.md
-      - Modules: caster/projects/caster-modules.md
-      - Workspace: caster/projects/caster-workspace.md
-      - Run, Plan, and Apply: caster/projects/caster-run-plan-apply.md
-    - Hosts: 
-      - caster/hosts/index.md
-    - Caster Terraform Configuration: 
-      - caster/terraform/index.md
+  - Caster: caster/index.md
   - Steamfitter: 
     - steamfitter/index.md
     - Scenario Templates: 
