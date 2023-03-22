@@ -1,4 +1,4 @@
-# **Player** *User Interface*
+# **Player,** *the User Interface*
 
 ## Overview 
 
