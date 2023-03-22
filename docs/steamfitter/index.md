@@ -1,5 +1,4 @@
-# Steamfitter
-*Event-Handling*
+# **Steamfitter** *Event-Handling*
 
 ## Overview
 

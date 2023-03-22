@@ -1,5 +1,4 @@
-# **Alloy**
-*On-Demand*
+# **Alloy** *On-Demand*
 
 ## Overview
 
