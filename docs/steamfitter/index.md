@@ -113,4 +113,4 @@ Scenario templates are where predefined tasks are grouped; scenario templates ar
 
 After adding the new scenario template, you can **Create a Scenario**, **Copy** a scenario template to create a duplicate, **Edit** it, and **Delete** it.
 
-Add tasks in the Scenario Templates screen by clicking the **+** ("plus") icon. Complete the same task information as you did when you created a new task. For additional help, see [Steamfitter Tasks](./steamfitter-tasks).
+Add tasks in the Scenario Templates screen by clicking the **+** ("plus") icon. Complete the same task information as you did when you created a new task.
