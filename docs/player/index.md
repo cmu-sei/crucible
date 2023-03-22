@@ -1,4 +1,5 @@
-# **Player,** *the User Interface*
+# **Player**
+*Designing User Interfaces*
 
 ## Overview 
 

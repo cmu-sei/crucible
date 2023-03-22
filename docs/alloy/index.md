@@ -1,4 +1,5 @@
-# **Alloy** *On-Demand*
+# **Alloy**
+*Conducting a Simulation*
 
 ## Overview
 
