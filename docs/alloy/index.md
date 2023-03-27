@@ -91,3 +91,5 @@ When the end process is initiated, the Alloy API goes through the following proc
  4. Deletes the Caster workspace.
 
 ### Invite Others to Event/Exercise
+
+## Alloy Tips

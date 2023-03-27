@@ -93,6 +93,14 @@ Behind the scenes Steamfitter uses StackStorm ([stackstorm.com](https://stacksto
 
 ## Administrator Guide
 
+### Scenario Templates
+
+### Scenarios
+
+### Tasks
+
+### History
+
 ### Assigning Permissions
 
 In order to use Steamfitter, a user must be given **Content Developer** permissions by a Steamfitter System Admin. Any user who visits the Steamfitter URL is automatically added to the user list with no permissions. Only a Steamfitter System Admin can grant another user elevated permissions.
@@ -114,3 +122,5 @@ Scenario templates are where predefined tasks are grouped; scenario templates ar
 After adding the new scenario template, you can **Create a Scenario**, **Copy** a scenario template to create a duplicate, **Edit** it, and **Delete** it.
 
 Add tasks in the Scenario Templates screen by clicking the **+** ("plus") icon. Complete the same task information as you did when you created a new task.
+
+## Steamfitter Tips
