@@ -105,7 +105,11 @@ Users can add new projects, name projects, and save projects. A project's landin
 
 #### Export Project
 
+Export Projects allows you to export the project as a zip file.
+
 #### Add Directory
+
+Add Directory lets you create a new directory at the same level as the above projects.
 
 ### Files
 
@@ -152,7 +156,7 @@ Peer directories (directories that fall outside a parent directory) are not incl
 
 Designer provides a graphical user interface for creating and editing terraform deployments through the use of modules.
 
-When you open a project, you can create a design and add modules backed by git to that design. 
+When you open a project, you can create a design and add modules backed by git to that design. You can also use create variables to be used in the modules settings.
 
 ## Caster Tips
 
