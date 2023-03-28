@@ -170,6 +170,7 @@ When an on-demand event is started in Alloy, it creates a new View in Player. If
 When the event is ended, it recieves the ViewDeleted notification and cleans up. Similarly any application can be configured to subscribe to these notifications and support on-demand events without Player code having to be added for each application specifically.
 
 When adding a Subscription, you must specify:
+
 1. Name - The name of the Subscription, for display purposes
 2. Callback URL - The URL that the recieving application expects notifications from Player to be sent to
 3. Client ID - The ID of a client in the OAuth2/OIDC server that is used for authentication in the environment. This client should support the Client Credentials grant and be authorized to include whatever scopes the receiving application requires to call it's Callback URL endpoint. For the VM API it's default required scope is player-vm-privileged. This is the privileged scope that has elevated permissions and should not be the same as the scope used by the normal VM UI client.
