@@ -1,11 +1,11 @@
-# **Player** ![icon-player](../assets/img/icon-player.jpg)
+# **Player**
 *Designing User Interfaces*
 
 ## Overview 
 
 ### What is Player?
 
-**Player** is the centralized interface where participants, teams, and administrators go to engage in a cyber event. In Player, participants view teams, applications, virtual environments, and third-party applications. The event experience is highly customizable by content developers.
+**Player** ![icon-player](../assets/img/icon-player.jpg) is the centralized interface where participants, teams, and administrators go to engage in a cyber event. In Player, participants view teams, applications, virtual environments, and third-party applications. The event experience is highly customizable by content developers.
 
 Think of Player as the front door to an event running on Crucible. Player is meant to: 
 
@@ -254,6 +254,7 @@ insert screenshot here
 The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system allows the VM to be opened similar to an Application, within a tab on the same screen or popped out into a new browser tab using the icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
 
 **File Upload**
+
 A View Admin can upload images and documents for a specific View in player that provides authentication to download. In addition, that document can be setup to show up as an application in left hand menu of Player.
 
 ![vm-app-1](../assets/img/vm-app-1.png)
@@ -263,6 +264,7 @@ From the File Upload section of the Edit View panel, a View Admin can Download, 
 ![vm-app-2](../assets/img/vm-app-2.png)
 
 **Multi-Select VMs**
+
 A user can run operations on multiple VM's by first using the mouse to click and drag a box around the VM's that they would like to select. In addition the user can use the ctrl+click to select or unselect a previously selected VM. Once the user has selected the VM's that they want to perform an operation, the ![vm-app-3](../assets/img/vm-app-3.png) button can be used to display the menu of available options.
 
 ![vm-app-4](../assets/img/vm-app-4.png)
@@ -277,21 +279,25 @@ For the Multi-Select option above, the following options are available:
 - Open in browser tab - Creates a web browser tab that opens each of the selected VM's
 
 **Sort by Team (View Admin Only)**
+
 The sort by team option can be checked that will rearrange all VM's in expansion panels based on the the teams that have access to the VM's. In the example shown here, each team can be expanded to show what VM's they have access to. This is especially useful for View Admins when verifying if a specific VM is accessible (or not accessible) for a specific team.
 
 ![vm-app-5](../assets/img/vm-app-5.png)
 
 **Filter by Powered State**
+
 VM's can not be filtered by powered status. By clicking the ![vm-app-6](../assets/img/vm-app-6.png) dropdown, the user can select to display only the Powered On, Powered Off, or Suspended VM's.
 
 ![vm-app-7](../assets/img/vm-app-7.png)
 
 **User List**
+
 The User List in Player allows for a user to view the teams and its members that the user has permissions to see.  Note that View Admins can always see all teams that are a part of the View. Using expansion panels, the user can expand the team and view each member of that team. If a team member is working within a VM, the name of the VM will be displayed with a link to open that VM in Read-Only mode. When in Read-Only mode, the user will not be allowed to gain any keyboard or mouse control.
 
 ![vm-app-8](../assets/img/vm-app-8.png)
 
 **VM Usage Logging (View Admin Only)**
+
 The VM Usage Logging function is a administrative feature that when configured, will record the user activity of when a user interacts with a VM. The configuration must be setup by and administrator to records the specific teams in the view over a specific time period.
 
 ![vm-app-9](../assets/img/vm-app-9.png)
