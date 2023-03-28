@@ -150,6 +150,10 @@ Peer directories (directories that fall outside a parent directory) are not incl
 
 ### Designs
 
+Designer provides a graphical user interface for creating and editing terraform deployments through the use of modules.
+
+When you open a project, you can create a design and add modules backed by git to that design. 
+
 ## Caster Tips
 
 ### Crafting Terraform Code

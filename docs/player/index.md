@@ -141,7 +141,7 @@ Users and/or teams can be assigned to a **Role**, which is a group of permission
 A SystemAdmin creates the View and assigns ViewAdmin permissions to specific teams who can now edit that View.
 > **Important!** Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Views, Users, Application Templates, Roles / Permissions).
 
-### Define Application Templates
+### Define Application Template
 
 An *app template*  contains the settings associated with an app that is added to a team's view.  An app template can be created for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. An app template can be used by any view admin when adding apps to a particular view.  Think of app templates as helpers for configuring common Crucible apps.
 
