@@ -159,9 +159,23 @@ If you have not already done so, in the dropdown next to your username, select *
 3. Enable **Embeddable** if desired. Ebeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames.  The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads.  This is important for some apps that may require some initialization.
 
-### Define Roles and Permissions
+<!---### Define Roles and Permissions-->
 
-### Define Subscriptions
+### Subscriptions
+
+Subscriptions allow a Player administrator to configure client applications to be notified when supported actions occur within the Player API. Also known as Webhooks, this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy.
+For example, the Vm API supports subscribing to ViewCreated and ViewDeleted in Player.
+
+When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured Player notifies Vm API of the new View and it ensures that any Maps that were set up for the parent View are made available in the newly created View. This allows for Maps to be used in on-demand events. 
+
+When the event is ended, it receives the ViewDeleted notification and cleans up. Similarly, any application can be configured to subscribe to these notifications and support on-demand events without Playe code having to be added for each application specifically.
+
+When adding a Subscription, you must specify:
+1. Name - The name of the Subscription, for display purposes
+2. Callback URL - The URL that the receiving application expects notifications from Player to be sent to 
+3. Client ID - The ID of a client in the OAuth2/OIDC server that is used for authentication in the environment. This client should support the Client Credentials grant and be authorized to include whatever scopes the receiving application requires to call it's Callback URL endpoint. For the Vm API it's default required scope is player-vm-privileged. This is a privileged scope that has elevated permissions and should not be the same as the scope used by the normal Vm UI client.
+4. Client Secret - The secret required to authenticate with the Client ID specified
+5. Events - The Player events that this application would like to be notified about, such as ViewCreated and ViewDeleted
 
 ### Creating and Managing Maps
 
@@ -245,9 +259,9 @@ Any documents or files  - PDF, PNG, etc. - that can be served on the web can be 
 
 #### Map
 
-explain how players use maps
+View Admins may use the Map application to display a map for team (e.g. a network map of a lab).
 
-insert screenshot here
+Clicking the Map application will open up the assigned map. User can click on pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
 
 #### Virtual Machine Applications
 
@@ -314,7 +328,7 @@ osTicket (https://osticket.com/), a widely-used open source support ticket syste
 
 Mattermost (https://mattermost.com/), an open source messaging platform can be configured and deployed to provide an "off the shelf" chat system for users. 
 
-#### Email
+<!---#### Email-->
 
 #### Notifications
 
@@ -324,9 +338,9 @@ Receive and read notifications here.
 
 ## Player Tips
 
-### Pop-Out to Multiple Tabs/Windows
+### Taking Advantage of screen real estate
 
-### Use Multiple Monitors
+Player and its component applications (as well as any thrid party application linked through Player) can take advantage of any monitor setup. Any application in the application bar can be opened up in a new window or a new tab by clicking the [>] button on the right side of the application card. Virtual machine consoles can similarly be opened up in a new window or tab. This allows users to be very flexible with how they display the information presented in Player. Pull up documentation or a lab guide on one monitor while your virtual machine is on another. Use multiple windows with your ultra-wide to see everything at once. The possibilities are endless!
 
 ### Copy and Paste Text
 
