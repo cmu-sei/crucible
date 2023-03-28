@@ -163,18 +163,17 @@ If you have not already done so, in the dropdown next to your username, select *
 
 ### Subscriptions
 
-Subscriptions allow a Player administrator to configure client applications to be notified when supported actions occur within the Player API. Also known as Webhooks, this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy.
-For example, the Vm API supports subscribing to ViewCreated and ViewDeleted in Player.
+Subscriptions allow a Player administrator to configure client applications to be notified when supported actions occur within the Player API. Also known as Webhooks this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy. For example, the VM API supports subscribing to ViewCreated and ViewDeleted in Player.
 
-When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured Player notifies Vm API of the new View and it ensures that any Maps that were set up for the parent View are made available in the newly created View. This allows for Maps to be used in on-demand events. 
+When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured Player notifies VM API of the new View and it ensures that any Maps that were set up for the parent View are made available in the newly created View. This allows for Maps to be used in on-demand events.
 
-When the event is ended, it receives the ViewDeleted notification and cleans up. Similarly, any application can be configured to subscribe to these notifications and support on-demand events without Playe code having to be added for each application specifically.
+When the event is ended, it recieves the ViewDeleted notification and cleans up. Similarly any application can be configured to subscribe to these notifications and support on-demand events without Player code having to be added for each application specifically.
 
 When adding a Subscription, you must specify:
-1. Name - The name of the Subscription, for display purposes
-2. Callback URL - The URL that the receiving application expects notifications from Player to be sent to 
-3. Client ID - The ID of a client in the OAuth2/OIDC server that is used for authentication in the environment. This client should support the Client Credentials grant and be authorized to include whatever scopes the receiving application requires to call it's Callback URL endpoint. For the Vm API it's default required scope is player-vm-privileged. This is a privileged scope that has elevated permissions and should not be the same as the scope used by the normal Vm UI client.
-4. Client Secret - The secret required to authenticate with the Client ID specified
+1. Name - The name of the Subscription, for display purposes
+2. Callback URL - The URL that the recieving application expects notifications from Player to be sent to
+3. Client ID - The ID of a client in the OAuth2/OIDC server that is used for authentication in the environment. This client should support the Client Credentials grant and be authorized to include whatever scopes the receiving application requires to call it's Callback URL endpoint. For the VM API it's default required scope is player-vm-privileged. This is the privileged scope that has elevated permissions and should not be the same as the scope used by the normal VM UI client.
+4. Client Secret - The secret required to authenticate witht he CLient ID specified
 5. Events - The Player events that this application would like to be notified about, such as ViewCreated and ViewDeleted
 
 ### Creating and Managing Maps
