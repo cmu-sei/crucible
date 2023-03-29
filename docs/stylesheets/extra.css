@@ -1,3 +1,89 @@
-:root > * {
-    --md-primary-fg-color:        #CC002B;
-  }
+.md-typeset__table {
+    min-width: 100%;
+}
+
+@media only screen and (min-width: 768px)
+{
+	td:nth-child(1){
+		white-space: nowrap;
+	}
+}
+
+@font-face {
+    font-family: Arial, Helvetica, sans-serif;
+    /*src: url("typography/Telegraf-Regular.otf");*/
+}
+
+@font-face {
+    font-family: Arial, Helvetica, sans-serif;
+    /*src: url("typography/Telegraf-UltraBold.otf");*/
+}
+
+/*.Telegraf-Regular{
+    font-family:Telegraf-Regular;
+}
+
+.Telegraf-UltraBold{
+    font-family:Telegraf-UltraBold;
+}*/
+
+* {
+    --md-primary-fg-color: #6D6E71;
+    --md-primary-fg-color--light: #6D6E71;
+    --md-primary-fg-color--dark:  #6D6E71;
+    --md-typeset-color:   var(--md-default-fg-color);
+    --md-typeset-a-color: var(--md-primary-fg-color--light);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --md-primary-fg-color: #181917;
+    --md-primary-fg-color--light: #9c0278;
+    --md-primary-fg-color--dark:  #535530;
+}
+
+:root>* {
+    --md-primary-bg-color:   #000;
+    --md-typeset-color:   var(--md-default-fg-color);
+    --md-typeset-a-color: var(--md-primary-fg-color--light);
+}
+
+/*
+markdown and image alignment
+ALT tag and a CSS selector on the alt tag
+*/
+img[src*='#left'] {
+    float: left;
+}
+img[src*='#right'] {
+    float: right;
+}
+img[src*='#center'] {
+    display: block;
+    margin: auto;
+}
+
+/*
+Tables set to 100% width
+*/
+.md-typeset__table {
+    min-width: 100%;
+}
+
+.md-typeset table:not([class]) {
+    display: table;
+}
+
+/*
+Colors for First Steps
+custom code blocks coloring
+*/
+.fsg-timestamp {
+    color: grey;
+}
+.fsg-userinput {
+    color: cornflowerblue;
+}
+.fsg-path, .fsg-prompt {
+    color: mediumseagreen;
+}
