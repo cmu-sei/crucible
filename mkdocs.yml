@@ -37,11 +37,7 @@ nav:
     - Dashboard:
       - blueprint/dashboard/index.md
     - Edit MSEL: blueprint/edit/blueprint-edit-msel.md
-  - CITE:
-    - cite/index.md
-    - Dashboard: 
-      - cite/dashboard/index.md     
-      - Scoresheet: cite/scoresheet/cite-scoresheet.md
+  - CITE: cite/index.md
   - Gallery:
     - gallery/index.md
     - Archive:

@@ -63,6 +63,25 @@ img[src*='#center'] {
     margin: auto;
 }
 
+img[alt='CITE Dashboard']{
+    border: solid;
+}
+
+img[alt='CITE Scoresheet']{
+    border: solid;
+}
+
+img[alt='Edit']{
+    border: solid;
+}
+
+img[alt='Comment']{
+    border: solid;
+}
+
+img[alt='Trash']{
+    border: solid;
+}
 /*
 Tables set to 100% width
 */
