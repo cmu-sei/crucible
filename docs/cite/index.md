@@ -36,6 +36,193 @@ For installation, refer to these GitHub repositories.
 
 ## Administrator Guide
 
+### Evaluations
+The following image shows the Evaluations Administration Page. Here administrators can add, edit, and delete evaluations.
+
+![Evaluations Admin](../assets/img/EvaluationsAdmin.png)
+
+**Add an Evaluation** 
+
+Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Evaluation.
+
+![Add Evaluation](../assets/img/AddEvaluation.png)
+
+1. Under the Evaluation Administration View, click **+**. 
+2. Add an **Evaluation Description** to keep track of what is going to happen in this exercise.
+3. Select the **Scoring Model** to be used during the exercise.
+4. To make the Evaluation available, select an **Evaluation Status** of **Active**.
+5. Add a **Situation Date & Time** to set the time for the exercise.
+6. Click **Save**.
+
+If necessary, an Evaluation can be deleted by clicking on the **Trash Icon** next to the desired Evaluation.
+
+In the same way, an Evaluatiion can be edited by clicking on the **Edit Icon** next to the desired Evaluation.
+
+**Configue an Evaluation**
+
+To configure an evaluation to be used for an exercise, administrators will need to add Moves and Teams to the evaluation. To do this follow these steps.
+
+![Configure Evaluation](../assets/img/ConfigureEvaluations.png)
+
+*Moves*
+
+![Moves](../assets/img/moves.png)
+
+1. Click on the **+** on the Moves section.
+2. Add a **Move Number**.
+3. Add a **Move Description**, which will explain what will be happening when the move is executed.
+4. Add a **Situation Description** about the background information for the exercise.
+5. Add a **Situation Date & Time** of when the exercise is going to occur.
+6. Click **Save**.
+
+
+If necessary, a Move can be deleted by clicking on the **Trash Icon** next to the desired Move.
+
+In the same way, a Move can be edited by clicking on the **Edit Icon** next to the desired Move.
+
+*Teams*
+
+![Teams](../assets/img/teams.png)
+
+1. Click on the **+** on the Teams section.
+2. Add a **Name** for the team.
+3. Add a **Short Name** for the team, which could be the team's acryonym.
+4. Select the **Team Type**, which contains the following options: Individual Organization, Other, and Official Score Contributor. 
+5. Click **Save**.
+
+If necessary, a Team can be deleted by clicking on the **Trash Icon** next to the desired Team.
+
+In the same way, a Team can be edited by clicking on the **Edit Icon** next to the desired Team.
+
+### Scoring Models
+
+The following image shows the Scoring Models Administration Page. Here administrators can add, edit, and delete scoring models.
+
+![Scoring Models Admin](../assets/img/scoringModelsAdmin.png)
+
+**Add a Scoring Model**
+
+Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Scoring Model.
+
+![Add Scoring Model](../assets/img/addScoringModel.png)
+
+1. Under the Scoring Model Administration View, click **+**.
+2. Add a **Scoring Model Description** that will provide details for this model.
+3. Select a **Scoring Model Status**, if desired to be used right away, select **Active**.
+4. Add a **Calculation Equation** for the model.
+5. Click **Save**.
+
+If necessary, a Scoring Model can be deleted by clicking on the **Trash Icon** next to the desired Scoring Model.
+
+In the same way, a Scoring Model can be edited by clicking on the **Edit Icon** next to the desired Scoring Model.
+
+**Configure a Scoring Model**
+
+To configure a scoring model to be used for an exercise, administrators will need to add Scoring Categories to the scoring model. To do this follow these steps.
+
+![Configure Scoring Model](../assets/img/configureScoringModel.png)
+
+*Scoring Categories*
+
+![Scoring Categories](../assets/img/scoringCategories.png)
+
+1. Click on the **+** on the Scoring Categories section.
+2. Add a **Scoring Category Description** to describe this category's functionality.
+3. If necessary, provide a **Display Order** to organize the scoring categories.
+4. Provide the **Calculation Equation** to be used. 
+5. Provide the **Calculation Weight**.
+6. If necessary, check the option **Allow Multiple Selections**.
+7. If necessary, check the option **Modifier Selection Required**.
+8. Click **Save**.
+
+If necessary, a Scoring Category can be deleted by clicking on the **Trash Icon** next to the desired Scoring Category.
+
+In the same way, a Scoring Category can be edited by clicking on the **Edit Icon** next to the desired Scoring Category.
+
+### Actions
+
+The following image shows the Actions Administration Page. Here administrators can add, edit, and delete actions.
+
+However, users who can submit scores on behalf of their team also can add suggested actions to the CITE dashboard. The use of actions will allow the team members to customize their response by tracking tasks during the exercise. These actions remain internal to the team and will not be visible to other participants.
+
+![Actions Admin](../assets/img/actionsAdmin.png)
+
+**Add an Action**
+
+Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Action.
+
+![Add Action](../assets/img/addAction.png)
+
+1. Under the Actions Administration View, click **+**.
+2. Add an **Action Description** that will provide information for the action.
+3. Select the desired **Team** where the action will be added.
+4. Click **Save**.
+
+If necessary, an Action can be deleted by clicking on the **Trash Icon** next to the desired Action.
+
+In the same way, an Action can be edited by clicking on the **Edit Icon** next to the desired Action.
+
+### Roles
+
+The following image shows the Roles Administration Page. Here administrators can add, edit, and delete roles.
+
+However, users who can submit scores on behalf of their team also can add participant roles to the CITE dashboard. The use of roles will allow the team members to customize their response by tracking tasks during the exercise. These roles remain internal to the team and will not be visible to other participants.
+
+![Roles Admin](../assets/img/rolesAdmin.png)
+
+**Add a Role**
+
+Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Role.
+
+![Add Role](../assets/img/addRole.png)
+
+1. Under the Roles Administration View, click **+**.
+2. Add an **Role Name** that will provide a description for the role..
+3. Select the desired **Team** where the role will be added.
+4. Click **Save**.
+
+If necessary, a Role can be deleted by clicking on the **Trash Icon** next to the desired Role.
+
+In the same way, a Role can be edited by clicking on the **Edit Icon** next to the desired Role.
+
+### Submissions
+
+The following image shows the Roles Administration Page. Here administrators can keep track of all the score submissions provided by the different teams during an exercise. This will allow administrators to compare their scores with the official score, as well as keep track of which teams are on a good track and which are not.
+
+Additional functionalities including copying the entire score, as well as deleting a score submitted by a team.
+
+![Submissiosn Admin](../assets/img/submissionsAdmin.png)
+
+### Users
+
+The following image shows the Users Administration Page. Here administrators can add and delete users. Additionally, administrators will be able to assign the necessary permissions to each user. 
+
+The available permissions are: 
+
+- SystemAdmin: Permission that will grant an user all administration privileges on the CITE application.
+- ContentDeveloper: Will be provided the permission to manage other CITE Admin pages except the Users Admin page and their permissions.
+- CanSubmit: The users is allowed to submit a score for the different moves on an exercise.
+- CanModify: The user is allowed to modify a score for previous moves on an exercise.
+- CanIncrementMove: The user is given the permission to increment the current move during an exercise.
+
+![Users Admin](../assets/img/usersAdmin.png)
+
+**Add a User**
+
+Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add a User.
+
+![Add User](../assets/img/addUser.png)
+
+1. Under the Users Administration View, click **+**.
+2. Add a **User ID** that will be unique for the user.
+3. Add a **User Name** that will identify the user to be added.
+4. Click **Save** represented by a user with a + sign.
+5. After adding the user to CITE, select the desired permissions to be assigned by clicking on the checkboxes next to the user.
+
+If necessary, a User can be deleted by clicking on the **Trash Icon** next to the desired User.
+
+In the same way, a User can be edited by clicking on the **Edit Icon** next to the desired User.
+
 ## User Guide
 
 ### Moves
@@ -145,8 +332,3 @@ When scoring a move, the user can attach a comment (or multiple comments) to a c
 - To delete an existing comment, click ![Trash](../assets/img/trash.png). Clcik Yes to delete the comment.
 
 When finished scoring the categories and adding comments, click Submit to submit the scores.
-
-## CITE Tips
-test
-
-

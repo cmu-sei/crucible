@@ -4,9 +4,9 @@
 
 @media only screen and (min-width: 768px)
 {
-	td:nth-child(1){
-		white-space: nowrap;
-	}
+    td:nth-child(1){
+        white-space: nowrap;
+    }
 }
 
 @font-face {
@@ -63,24 +63,44 @@ img[src*='#center'] {
     margin: auto;
 }
 
-img[alt='CITE Dashboard']{
+img {
     border: solid;
 }
 
-img[alt='CITE Scoresheet']{
-    border: solid;
+
+img[alt='Add Evaluation']{
+    width: 600px;
+    height: 600px;
 }
 
-img[alt='Edit']{
-    border: solid;
+img[alt='Add Scoring Model']{
+    width: 600px;
+    height: 400px;
 }
 
-img[alt='Comment']{
-    border: solid;
+img[alt='Scoring Categories']{
+    width: 600px;
+    height: 400px;
 }
 
-img[alt='Trash']{
-    border: solid;
+img[alt='Add Action']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='Add Role']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='Moves']{
+    width: 550px;
+    height: 400px;
+}
+
+img[alt='Teams']{
+    width: 550px;
+    height: 350px;
 }
 /*
 Tables set to 100% width
