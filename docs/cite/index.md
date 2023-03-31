@@ -54,7 +54,7 @@ The CITE Dashboard shows exercise details like the date and time, incident summa
 
 The following image will show some important hotspots about the CITE Dashboard. Reference the number on the hotspot to know more about this section.
 
-![CITE Dashboard](../../assets/img/CITE-Dashboard.png)
+![CITE Dashboard](../assets/img/CITE-Dashboard.png)
 
 
 #### Active Incident & Moves
@@ -96,7 +96,7 @@ The CITE Scoresheet compares participant scores to organization scores, group av
 
 The following image will show some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to know more about this section.
 
-![CITE Scoresheet](../../assets/img/CITE-Scoresheet.png)
+![CITE Scoresheet](../assets/img/CITE-Scoresheet.png)
 
 #### Event Name
 *Hotspot 1:*
@@ -140,13 +140,13 @@ Categories that are individually scored based upon the current move situation. F
 **Add, Edit, and Delete a Comment**
 When scoring a move, the user can attach a comment (or multiple comments) to a category.
 
-- To add a comment, click ![Comment](../../assets/img/comment.png). Enter the comment and click Save.
-- To edit an existing comment, click ![Edit](../../assets/img/edit.png). Make any changes, then click Save.
-- To delete an existing comment, click ![Trash](../../assets/img/trash.png). Clcik Yes to delete the comment.
+- To add a comment, click ![Comment](../assets/img/comment.png). Enter the comment and click Save.
+- To edit an existing comment, click ![Edit](../assets/img/edit.png). Make any changes, then click Save.
+- To delete an existing comment, click ![Trash](../assets/img/trash.png). Clcik Yes to delete the comment.
 
 When finished scoring the categories and adding comments, click Submit to submit the scores.
 
 ## CITE Tips
-
+test
 
 
