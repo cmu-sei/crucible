@@ -56,7 +56,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 If necessary, an Evaluation can be deleted by clicking on the **Trash Icon** next to the desired Evaluation.
 
-In the same way, an Evaluatiion can be edited by clicking on the **Edit Icon** next to the desired Evaluation.
+In the same way, an Evaluation can be edited by clicking on the **Edit Icon** next to the desired Evaluation.
 
 **Configue an Evaluation**
 
@@ -200,7 +200,7 @@ The available permissions are:
 
 - System Admin: Permission that will grant a user all administration privileges on the CITE application.
 - Content Developer: Will be provided the permission to manage other CITE Admin pages except the Users Admin page and their permissions.
-- Can Submit: The users is allowed to submit a score for the different moves on an exercise.
+- Can Submit: The user is allowed to submit a score for the different moves on an exercise.
 - Can Modify: The user is allowed to modify a score for previous moves on an exercise.
 - Can Increment Move: The user is given the permission to increment the current move during an exercise.
 

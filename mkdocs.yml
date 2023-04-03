@@ -34,9 +34,4 @@ nav:
   - Alloy: alloy/index.md
   - Blueprint: blueprint/index.md
   - CITE: cite/index.md
-  - Gallery:
-    - gallery/index.md
-    - Archive:
-      - gallery/archive/index.md
-    - Wall:
-      - gallery/wall/index.md
+  - Gallery: gallery/index.md
