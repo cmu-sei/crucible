@@ -39,13 +39,13 @@ For installation, refer to these GitHub repositories.
 ### Evaluations
 The following image shows the Evaluations Administration Page. Here administrators can add, edit, and delete evaluations.
 
-![Evaluations Admin](../assets/img/EvaluationsAdmin.png)
+![Evaluations Admin OE](../assets/img/EvaluationsAdmin.png)
 
 **Add an Evaluation** 
 
 Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Evaluation.
 
-![Add Evaluation](../assets/img/AddEvaluation.png)
+![Add Evaluation OE](../assets/img/AddEvaluation.png)
 
 1. Under the Evaluation Administration View, click **+**. 
 2. Add an **Evaluation Description** to keep track of what is going to happen in this exercise.
@@ -62,11 +62,11 @@ In the same way, an Evaluatiion can be edited by clicking on the **Edit Icon** n
 
 To configure an evaluation to be used for an exercise, administrators will need to add Moves and Teams to the evaluation. To do this follow these steps.
 
-![Configure Evaluation](../assets/img/ConfigureEvaluations.png)
+![Configure Evaluation OE](../assets/img/ConfigureEvaluations.png)
 
 *Moves*
 
-![Moves](../assets/img/moves.png)
+![Moves OE](../assets/img/moves.png)
 
 1. Click on the **+** on the Moves section.
 2. Add a **Move Number**.
@@ -82,7 +82,7 @@ In the same way, a Move can be edited by clicking on the **Edit Icon** next to t
 
 *Teams*
 
-![Teams](../assets/img/teams.png)
+![Teams OE](../assets/img/teams.png)
 
 1. Click on the **+** on the Teams section.
 2. Add a **Name** for the team.
@@ -98,13 +98,13 @@ In the same way, a Team can be edited by clicking on the **Edit Icon** next to t
 
 The following image shows the Scoring Models Administration Page. Here administrators can add, edit, and delete scoring models.
 
-![Scoring Models Admin](../assets/img/scoringModelsAdmin.png)
+![Scoring Models Admin OE](../assets/img/scoringModelsAdmin.png)
 
 **Add a Scoring Model**
 
 Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Scoring Model.
 
-![Add Scoring Model](../assets/img/addScoringModel.png)
+![Add Scoring Model OE](../assets/img/addScoringModel.png)
 
 1. Under the Scoring Model Administration View, click **+**.
 2. Add a **Scoring Model Description** that will provide details for this model.
@@ -120,11 +120,11 @@ In the same way, a Scoring Model can be edited by clicking on the **Edit Icon** 
 
 To configure a scoring model to be used for an exercise, administrators will need to add Scoring Categories to the scoring model. To do this follow these steps.
 
-![Configure Scoring Model](../assets/img/configureScoringModel.png)
+![Configure Scoring Model OE](../assets/img/configureScoringModel.png)
 
 *Scoring Categories*
 
-![Scoring Categories](../assets/img/scoringCategories.png)
+![Scoring Categories OE](../assets/img/scoringCategories.png)
 
 1. Click on the **+** on the Scoring Categories section.
 2. Add a **Scoring Category Description** to describe this category's functionality.
@@ -145,13 +145,13 @@ The following image shows the Actions Administration Page. Here administrators c
 
 However, users who can submit scores on behalf of their team also can add suggested actions to the CITE dashboard. The use of actions will allow the team members to customize their response by tracking tasks during the exercise. These actions remain internal to the team and will not be visible to other participants.
 
-![Actions Admin](../assets/img/actionsAdmin.png)
+![Actions Admin OE](../assets/img/actionsAdmin.png)
 
 **Add an Action**
 
 Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Action.
 
-![Add Action](../assets/img/addAction.png)
+![Add Action OE](../assets/img/addAction.png)
 
 1. Under the Actions Administration View, click **+**.
 2. Add an **Action Description** that will provide information for the action.
@@ -168,13 +168,13 @@ The following image shows the Roles Administration Page. Here administrators can
 
 However, users who can submit scores on behalf of their team also can add participant roles to the CITE dashboard. The use of roles will allow the team members to customize their response by tracking tasks during the exercise. These roles remain internal to the team and will not be visible to other participants.
 
-![Roles Admin](../assets/img/rolesAdmin.png)
+![Roles Admin OE](../assets/img/rolesAdmin.png)
 
 **Add a Role**
 
 Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Role.
 
-![Add Role](../assets/img/addRole.png)
+![Add Role OE](../assets/img/addRole.png)
 
 1. Under the Roles Administration View, click **+**.
 2. Add an **Role Name** that will provide a description for the role..
@@ -191,7 +191,7 @@ The following image shows the Roles Administration Page. Here administrators can
 
 Additional functionalities including copying the entire score, as well as deleting a score submitted by a team.
 
-![Submissiosn Admin](../assets/img/submissionsAdmin.png)
+![Submissiosn Admin OE](../assets/img/submissionsAdmin.png)
 
 ### Users
 
@@ -205,13 +205,13 @@ The available permissions are:
 - CanModify: The user is allowed to modify a score for previous moves on an exercise.
 - CanIncrementMove: The user is given the permission to increment the current move during an exercise.
 
-![Users Admin](../assets/img/usersAdmin.png)
+![Users Admin OE](../assets/img/usersAdmin.png)
 
 **Add a User**
 
 Assuming that the users has been granted the appropriate permissions by the exercise administrator, follow these steps to add a User.
 
-![Add User](../assets/img/addUser.png)
+![Add User OE](../assets/img/addUser.png)
 
 1. Under the Users Administration View, click **+**.
 2. Add a **User ID** that will be unique for the user.
@@ -241,7 +241,7 @@ The CITE Dashboard shows exercise details like the date and time, incident summa
 
 The following image will show some important hotspots about the CITE Dashboard. Reference the number on the hotspot to know more about this section.
 
-![CITE Dashboard](../assets/img/CITE-Dashboard.png)
+![CITE Dashboard OE](../assets/img/CITE-Dashboard.png)
 
 
 #### Active Incident & Moves
@@ -283,7 +283,7 @@ The CITE Scoresheet compares participant scores to organization scores, group av
 
 The following image will show some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to know more about this section.
 
-![CITE Scoresheet](../assets/img/CITE-Scoresheet.png)
+![CITE Scoresheet OE](../assets/img/CITE-Scoresheet.png)
 
 #### Event Name
 *Hotspot 1:*
@@ -327,8 +327,8 @@ Categories that are individually scored based upon the current move situation. F
 **Add, Edit, and Delete a Comment**
 When scoring a move, the user can attach a comment (or multiple comments) to a category.
 
-- To add a comment, click ![Comment](../assets/img/comment.png). Enter the comment and click Save.
-- To edit an existing comment, click ![Edit](../assets/img/edit.png). Make any changes, then click Save.
-- To delete an existing comment, click ![Trash](../assets/img/trash.png). Clcik Yes to delete the comment.
+- To add a comment, click ![Comment OE](../assets/img/comment.png). Enter the comment and click Save.
+- To edit an existing comment, click ![Edit OE](../assets/img/edit.png). Make any changes, then click Save.
+- To delete an existing comment, click ![Trash OE](../assets/img/trash.png). Clcik Yes to delete the comment.
 
 When finished scoring the categories and adding comments, click Submit to submit the scores.

@@ -63,7 +63,7 @@ img[src*='#center'] {
     margin: auto;
 }
 
-img {
+img[alt*='OE'] {
     border: solid;
 }
 
@@ -72,6 +72,7 @@ img[alt='Add Evaluation']{
     width: 600px;
     height: 600px;
 }
+
 
 img[alt='Add Scoring Model']{
     width: 600px;
