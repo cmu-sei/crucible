@@ -32,11 +32,7 @@ nav:
   - Caster: caster/index.md
   - Steamfitter: steamfitter/index.md
   - Alloy: alloy/index.md
-  - Blueprint:
-    - blueprint/index.md
-    - Dashboard:
-      - blueprint/dashboard/index.md
-    - Edit MSEL: blueprint/edit/blueprint-edit-msel.md
+  - Blueprint: blueprint/index.md
   - CITE: cite/index.md
   - Gallery:
     - gallery/index.md
