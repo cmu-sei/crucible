@@ -166,7 +166,7 @@ To edit the MSEL's basic information and configuration, follow these next steps:
 
  Integrations:
 
-- Gallery: Blueprint will add the collections, exhibits, cards, articles, team, and users specified on the MSEL.
+- Gallery: Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL.
 - CITE: Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL.
 - Player & Steamfitter: Blueprint will automate the adding of injects specified on the MSEL.
 
