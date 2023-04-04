@@ -96,7 +96,7 @@ The Blueprint Dashboard shows created MSELS. Here, users are able to select the 
 
 The following image will show some important hotspots about the Blueprint Dashboard. Reference the number on the hotspot to know more about this section.
 
-![Blueprint Dashboard OE](../assets/img/Blueprint-Dashboard.png)
+![Blueprint Dashboard OE](../assets/img/blueprint-dashboard.png)
 
 #### Create a Blank MSEL
 *Hotspot 1:*

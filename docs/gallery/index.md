@@ -133,7 +133,7 @@ The following images shows the Exhibits Administration Page. Here, administrator
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Exhibit.
 
-![Add Exhibit OE](../assets/img/AddExhibit.png)
+![Add Exhibit OE](../assets/img/addExhibit.png)
 
 1. Under the Exhibit Administration View, click **Add Exhibit**.
 2. Provide the **Current Move Number**.
