@@ -164,9 +164,11 @@ To edit the MSEL's basic information and configuration, follow these next steps:
 10. To change the MSEL's status to approved, select **Aprove** within the available options.
 11. To add an exercise view, add the link to the **Exercise View URL** field.
 
-- Gallery Integration: Blueprint will add the collections, exhibits, cards, articles, team, and users specified on the MSEL.
-- CITE Integration: Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL.
-- Player & Steamfitter Integration: Blueprint will automate the adding of injects specified on the MSEL.
+ Integrations:
+
+- Gallery: Blueprint will add the collections, exhibits, cards, articles, team, and users specified on the MSEL.
+- CITE: Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL.
+- Player & Steamfitter: Blueprint will automate the adding of injects specified on the MSEL.
 
 #### Roles Tab
 
