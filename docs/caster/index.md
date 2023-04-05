@@ -90,7 +90,7 @@ Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and sub-
 - VLANs can be marked as reserved (0, 1, and 4095 are reserved by default) so that they will never be used
 - fixed modified properties in entity updated events to restore signalR functionality
 
-## User Guide
+## Content Developer Guide
 
 ### Project
 
