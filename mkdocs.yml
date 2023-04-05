@@ -3,7 +3,7 @@ extra_css:
   - stylesheets/extra.css
 theme:
   name: material
-  #custom_dir: !ENV [THEME_DIR, "material"]
+  custom_dir: material/overrides
   features:
     - navigation.tabs
     - navigation.tabs.sticky
