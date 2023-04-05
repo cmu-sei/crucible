@@ -391,7 +391,7 @@ If the person switches virtual machines then your display automatically follows 
 
 Clicking the **gear icon** in the upper left of the display you are following gives you the options to **Open In New Tab** and **Reconnect**. If you are already in a new browser tab, then you will see the **Fullscreen** option.
 
-### Key Concepts
+### Term Glossary
 
 Some key Player concepts are described below.
 
