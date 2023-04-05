@@ -74,14 +74,6 @@ In order to avoid this, a System Administrator should follow these steps in the 
 - Disable Workspace Operations by clicking the toggle button
 - Wait until all Active Runs are completed
 
-**Reporting bugs and requesting features**
-
-Think you found a bug? Please report all Crucible bugs - including bugs for the individual Crucible apps - in the cmu-sei/crucible issue tracker.
-Include as much detail as possible including steps to reproduce, specific app involved, and any error messages you may have received.
-
-Have a good idea for a new feature? Submit all new feature requests through the cmu-sei/crucible issue tracker.
-Include the reasons why you're requesting the new feature and how it might benefit other Crucible users.
-
 ### VLANs
 
 Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and sub-divided into Partitions. A VLAN can then be requested by a user from a Partition, and they will receive an unused VLAN id, which will then be marked as used until they release it. Projects can be assigned Partition's and a system-wide default Partition can be set for users to request VLAN Ids from their Project's Partition or the default as well.
