@@ -5,7 +5,7 @@
 
 ### What is Blueprint?
 
-**Blueprint** is a web application created to make the build out process of a Master Scenario Event List (MSEL) and injects easier to perform. With this application, it will further simplify the creation and visualization of the MSEL, allowing the user to select/define the simulated entities, attacks, timeframe, regulators impacted by the scenario, etc. Additionally, it will leverage many advantages over the traditional method of using an excel spreadsheet by facitilating the collaboration between exercise designer's belonging to multiple teams.
+**Blueprint** is a web application created to make the build-out process of Master Scenario Event List (MSELs) and injects easier to perform. This application simplifies the creation and visualization of the MSEL, allowing the user to select/define the simulated entities, attacks, timeframe, and regulators impacted by the scenario. This approach has many advantages over the traditional method of using an excel spreadsheet and facilitates the collaboration between exercise designers belonging to multiple teams.
 
 Additionally, Blueprint can be integrated with Player, Gallery, CITE and Steamfitter. Integrating Blueprint with these applications will automate the configuration process for an exercise.
 
