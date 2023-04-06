@@ -4,7 +4,22 @@ If you are developing within the Crucible Framework or building an application t
 
 ## Documentation Contribution Process
 
-1. The easiest way to get started is to **fork this repo**. This will create a copy of the repository under your own personal account, allowing you to experiment with the documentation and formatting without affecting the main project. It will also copy all Github Actions workflows so that you can build your own static Github Pages site.
+### Github Devcontainers
+
+The easiest way to contribute is to use Github Devcontainers to setup a development environment accessible through your browser. In that environment, you can create a new branch, make changes, preview changes, and create pull requests to the main repo.
+
+1. From the main page of this repo, click the green "Code" button, click the "Codespaces" tab, and click the green "Create codespace on main" button. This will open up a new tab in your browser
+2. Wait for the codespace to finish setting up. When done, you will be presented with an in-browser VSCode editor with a terminal open at the bottom. Watch the bottom terminal for a few setup commands to finish running. You will see a pip3 installing several prerequisites. When finished, the terminal will show `[@your-username -> /workspaces/crucible (main)
+3. Using the terminal, create a new branch: `git checkout -b [your-branch-name]
+4. Build the documentation site and serve it over a webserver local to your devcontainer: `mkdocs serve`. After a few seconds the command will complete and you should see a popup in the bottom right of your editor that says "Your application running on port 8000 is available." Cick the green "Open in Browser" button to see the documentation site in a new tab.  As long as you do not cancel the command in the terminal, this website will automatically update when any change is made to `mkdocs.yml` or any file in the `docs/` directory (if you keep the terminal open, you will see the build commands running everytime you make a change).  If you need to run more terminal commands, use `ctrl+c` to cancel. Run `mkdocs serve` again when you need to preview changes. 
+5. Make changes to the documentation as necessary, previewing the changes as you go.
+6. When you are ready to submit your documentation for review, cancel the mkdocs command in the terminal with `ctrl+c`. Commit and push changes to your branch: `git add *`, `git commit -m "[description commit message]"`, `git push --set-upstream origin [your branch name]`
+7. Return to the main Crucible repo and switch to your branch. Click the green "Compare & Pull Request" button. Make any necessary changes to the PR title and comments, and click the green "Create Pull Request" button.
+8. A Crucible maintainer will review your pull request and accept or reject changes.
+
+### Fork
+
+1. You may also choose to **fork this repo**. This will create a copy of the repository under your own personal account, allowing you to experiment with the documentation and formatting without affecting the main project. It will also copy all Github Actions workflows so that you can build your own static Github Pages site.
 2. After forking, you need to enable workflows since Github automatically disables them for forks. Click **Actions** and then click **I understand my workflows, go ahead and enable them**. There is only one workflow, *build-mkdocs* that will run when code is pushed to the main branch. This workflow will create a new branch titled *gh-pages* that we will use as a source for Github Pages.  You must also ensure that GitHub Actions has read/write permissions to the repository. Navigate to your project **Settings** and select **Actions** then **General** under **Code and automation**. Scroll to the bottom and select *Read and Write Permissions*. Make sure to **Save**.
 3. Add your documentation as appropriate. All current documentation is under the *docs* directory.  If you are contributing a new application, create a new directory under *docs* for it. If adding screenshots or other media, add them under the *assets* directory. Keep in mind that Material for MkDocs prefers relative links when adding screenshots etc. to markdown documentation.
 4. If adding new application documentaiton, adding it to the navigation header in the static GitHub Pages site is done in the *mkdocs.yml* file at the root of the repository.  Add a new section under the *nav:* header. If you want to nest further sections under your application sections, make sure each sub-section's relevant documenation is contained within its own subdirectory.
