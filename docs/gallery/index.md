@@ -5,7 +5,7 @@
 
 ### What is Gallery?
 
-**Gallery** is a web application where participants receive financial sector cyber incident information.
+**Gallery** is a web application where participants receive incident information.
 
 In the Gallery User Interface, there are two major functional sections:
 
