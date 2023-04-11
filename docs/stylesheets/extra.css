@@ -28,9 +28,15 @@
 }*/
 
 * {
-    --md-primary-fg-color: #6D6E71;
-    --md-primary-fg-color--light: #6D6E71;
-    --md-primary-fg-color--dark:  #6D6E71;
+    --md-primary-fg-color: #C41230
+
+    ;
+    --md-primary-fg-color--light: #C41230
+
+    ;
+    --md-primary-fg-color--dark:  #C41230
+
+    ;
     --md-typeset-color:   var(--md-default-fg-color);
     --md-typeset-a-color: var(--md-primary-fg-color--light);
     font-family: Arial, Helvetica, sans-serif;
