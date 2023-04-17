@@ -4,21 +4,19 @@
 
 ## Overview
 
-Caster is the primary deployment component of the Crucible simulation framework. Caster is built around [Terraform](https://www.terraform.io/), an open source "Infrastructure as Code" tool. 
+Caster is the primary deployment component of the Crucible simulation framework. Caster is built around [Terraform](https://www.terraform.io/), an open source "Infrastructure as Code" tool.
 
-Caster is meant to provide a web interface that gives exercise developers a powerful and flexible way to create, share, and manage topology configurations. 
+Caster is meant to provide a web interface that gives exercise developers a powerful and flexible way to create, share, and manage topology configurations.
 
-Initial versions of Caster focus on a web front-end for raw Terraform configurations and outputs. This gives advanced developers easier access to a powerful deployment tool. Targeted improvements to the experience for these users will be made in the future. Eventually, this system will be used to underpin a more user-friendly interface that will allow configurations to be pieced together with less or no writing of Terraform code directly. 
+Initial versions of Caster focus on a web front-end for raw Terraform configurations and outputs. This gives advanced developers easier access to a powerful deployment tool. Targeted improvements to the experience for these users will be made in the future. Eventually, this system will be used to underpin a more user-friendly interface that will allow configurations to be pieced together with less or no writing of Terraform code directly.
 
 The goal is to create a tool that gives advanced users the power and flexibility that they desire, while also allowing novice users to take advantage of complex topologies created by advanced users or create their own simple ones easily.
 
-**Terraform Integration**
+### Terraform Integration
 
 For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html).
 
 ## Administrator User Guide
-
-### Users
 
 ### Modules
 
@@ -28,26 +26,27 @@ For more information on native Terraform constructs used in Caster, please refer
 
 Modules are very powerful and allow for complex configurations to be made simpler and more easily shared and used. A module takes any Terraform configuration consisting of any number of resources and turns it into a single block, exposing required and/or optional variables. Some examples include:
 
-- A generic virtual machine module that abstracts away commonly used parameters into variables such as: 
-  - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
-  - **Networks:** creates a NIC for each specified network and assigns it to the specified network vlan.
-  - **ExerciseId:** appends the `exerciseId` to the name of the vm for use with ODX's where unique naming is required.
-  - Other simplified variable names based on the target audience.
-- A module to create a very specific type of virtual machine resource, such as a domain controller, that points to a known good VMware template/base disk and an Ansible playbook that requires variables such as:
-  - Domain Name
-  - IP Address
-  - DomainAdminUser
-  - DomainAdminPass
+* A generic virtual machine module that abstracts away commonly used parameters into variables such as:
+    - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
+    - **Networks:** creates a NIC for each specified network and assigns it to the specified network vlan.
+    - **ExerciseId:** appends the `exerciseId` to the name of the vm for use with ODX's where unique naming is required.
+    - Other simplified variable names based on the target audience.
+
+* A module to create a very specific type of virtual machine resource, such as a domain controller, that points to a known good VMware template/base disk and an Ansible playbook that requires variables such as:
+    - Domain Name
+    - IP Address
+    - DomainAdminUser
+    - DomainAdminPass
 - A module to define an entire Cyber Flag enclave.
 - A module to define a generic GreySpace that accepts variables to configure GreyBox, TopGen, etc.
 
-Modules allow for endless flexibility for developers to wrap whatever configuration they can create into a small package and describe to consumers of the module exactly what it does and what values it requires to function. 
+Modules allow for endless flexibility for developers to wrap whatever configuration they can create into a small package and describe to consumers of the module exactly what it does and what values it requires to function.
 
-Caster makes it easier to search for and use modules when building a Terraform configuration. 
+Caster makes it easier to search for and use modules when building a Terraform configuration.
 
 Caster supports modules created as GitLab projects that are visible to the GitLabToken defined in the API settings with at least one version defined.  All versions will be shown in Caster when the project is added/refreshed to Caster.  
 
->**Note:**  Caster requires that the inputs file and the outputs file be written in JSON (that is, `variables.tf.json` and `ouptuts.tf.json`). 
+>**Note:**  Caster requires that the inputs file and the outputs file be written in JSON (that is, `variables.tf.json` and `ouptuts.tf.json`).
 
 There are three ways that the a module can be added/refreshed to Caster:
 
@@ -63,28 +62,10 @@ Upon selecting a Module, a form opens that allows the user to select the Version
 
 Upon **Submit**, Caster generates the Terraform code that can be copied into a configuration file to use the selected module with the selected variable values.
 
-### Workspaces
-
-**Updating/Restarting Caster.Api**
-
-Caster.Api utilizes the Terraform binary in order execute workspace operations. Because this binary is running inside of the Caster.Api service, restarting or stopping the Caster.Api Docker container while a Terraform operation is in progress can lead to a corrupted state.
-
-In order to avoid this, a System Administrator should follow these steps in the Caster UI before stopping the Caster.Api container:
-- Navigate to Administration > Workspaces
-- Disable Workspace Operations by clicking the toggle button
-- Wait until all Active Runs are completed
-
-**Reporting bugs and requesting features**
-
-Think you found a bug? Please report all Crucible bugs - including bugs for the individual Crucible apps - in the cmu-sei/crucible issue tracker.
-Include as much detail as possible including steps to reproduce, specific app involved, and any error messages you may have received.
-
-Have a good idea for a new feature? Submit all new feature requests through the cmu-sei/crucible issue tracker.
-Include the reasons why you're requesting the new feature and how it might benefit other Crucible users.
-
 ### VLANs
 
 Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and sub-divided into Partitions. A VLAN can then be requested by a user from a Partition, and they will receive an unused VLAN id, which will then be marked as used until they release it. Projects can be assigned Partition's and a system-wide default Partition can be set for users to request VLAN Ids from their Project's Partition or the default as well.
+
 - VLANs can have tags for organizational purposes and can be requsted by tag
 - A VLAN can be requested by specific vlanId within a Partition
 - VLANs can be marked as reserved (0, 1, and 4095 are reserved by default) so that they will never be used
@@ -120,7 +101,7 @@ Add Directory lets you create a new directory at the same level as the above pro
 
 >**Note:** When working with Files in Caster **CTRL+L** locks/unlocks a file to prevent others from editing that file simultaneously. When locked, the file icon appears as a dashed line. When unlocked, the file icon appears solid. Files can also be locked by an administrator. A file is *administratively locked* to prevent anyone from changing that file. A lock icon in the top right corner of the file edit screen denotes that the file is administratively locked. **CTRL+S** saves a file.
 
-See the official [Terraform Documentation](https://www.terraform.io/docs/index.html) for more details on supported file types and extensions. In the future, Caster may provide more guidance on what types of files can be created and what their contents are expected to be.
+See the official [Terraform Documentation](https://www.terraform.io/docs/index.html) for more details on supported file types and extensions.
 
 ### Workspaces
 
@@ -131,22 +112,30 @@ Workspaces can contain files, which extend the configuration of the directory fo
 A workspace is where users:
 
 - Create an instance of a Terraform configuration
-- Run their plans (_Runs_ are a specific instance of a Terraform plan; explained [here](./caster-run-plan-apply))
+- Run their plans (_Runs_ are a specific instance of a Terraform plan; explained [here](./#run-plan-and-apply))
 - Manage the differences and the variables in their environments
 
-Users can access workspaces from a project's navigation pane in Caster. Users can add additional files, but _not_ additional directories, to a workspace. The workspace view allows users to see all the runs that have been planned and applied. Runs shaded in red are destroyed operations, while runs in white signify various other status classifications.
+Users can access workspaces from a project's navigation pane in Caster. Users can add additional files, but *not* additional directories, to a workspace. The workspace view allows users to see all the runs that have been planned and applied. Runs shaded in red are destroyed operations, while runs in white signify various other status classifications.
 
 Users can `Plan`, `Destroy`, `Apply`, `Taint`, and `Reject` operations in real time in the workspace view.
+
+Caster.Api utilizes the Terraform binary in order execute workspace operations. This binary is running inside of the Caster.Api service. **Restarting or stopping the Caster.Api Docker container while a Terraform operation is in progress can lead to a corrupted state.**
+
+In order to avoid this, a System Administrator should follow these steps in the Caster UI before stopping the Caster.Api container:
+
+- Navigate to Administration > Workspaces
+- Disable Workspace Operations by clicking the toggle button
+- Wait until all Active Runs are completed
 
 ### Directories
 
 The top-level construct within a project is called a *directory*. A project can contain many directories. Directories contain files that make up a particular Terraform configuration, workspaces that represent a specific instance of that configuration, and sub-directories. Directories are meant to be used primarily for organization and shared resources.
 
-**Directory Hierarchies**
+#### Directory Hierarchies
 
 Directories can contain sub-directories to create a _hierarchy_ of directories and the configuration files contained within them. When a run is created in a workspace, the files in the workspace, the workspace's directory, ***and all parent directories*** are merged together and passed to Terraform as a single configuration. This eliminates redundancy when developing many environments that are largely the same, or sharing a set of common variables or data across many configurations. 
 
-> For example, a large deployment might have a top-level directory that defines global variables like `vlan ids` and `team ids` in use, and then sub-directories that define resources that use those variables.
+For example, a large deployment might have a top-level directory that defines global variables like `vlan ids` and `team ids` in use, and then sub-directories that define resources that use those variables.
 
 Users can add, rename, delete, or export a directory from the navigation panel on a project's main Caster page. 
 
@@ -166,15 +155,17 @@ This topic is for anyone who manages a Crucible instance who wants to configure 
 
 Documentation describing this can be found in **HashiCorp's Terraform** documentation: **CLI Configuration File** > [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
 
-For your reference, below is the `.terraformrc` file currently implemented in the SEI's CyberForce instance of Caster.
+For your reference, below is the `.terraformrc` file currently implemented.
 
-In the SEI's instance, we want to be able to use any plugins in the `sei` or `mastercard` namespace that have been downloaded locally.  In addition, any of the `hashicorp` namespace providers in the `direct` section can be downloaded directly from the Internet without any operator intervention.  
+We want to be able to use any providers in the `sei` or `mastercard` namespace that have been downloaded locally.  In addition, any of the `hashicorp` namespace providers in the `direct` section can be downloaded directly from the Internet without any operator intervention.  
 
 These plugins are then all cached in the `plugin_cache_dir` section, to save from downloading the providers during every Terraform `plan` and `apply`.
 
+> Note: Offline installs will have to manually import the providers of your choice into your installation of Caster.
+
 **Sample Caster Terraform Configuration**
 
-```
+```terraformrc
 plugin_cache_dir = "/terraform/plugin-cache"
 provider_installation {
 	filesystem_mirror {        
@@ -209,7 +200,7 @@ Along with all of the files normally added to the run, Caster will create a `gen
 
 When the workspace is deleted after an on-demand exercise (ODX) is finished, the host's resources will be released. If a run attempts to deploy more virtual machines than there is capacity for in the available hosts, the run will fail.
 
-**On-Demand Exercise functionality**
+#### On-Demand Exercise functionality
 
 Caster is called by Alloy in order to deploy resources for lab or ODX-style functionality. Caster itself does not differ in its main functionality of deploying workspaces and lets Alloy handle most of the ODX functionality. 
 
@@ -217,8 +208,8 @@ However, in order to support this functionality Caster dynamically selects a hos
 
 Normally, the cluster or host to deploy to is embedded in the configuration - either directly or as a variable - and Caster doesn't concern itself with this. For ODX's, Caster *does* need to concern itself with:
 
-- ensuring that resources are deployed evenly to the available hosts, and 
-- more ODX's than the hardware can deploy are not deployed. 
+- ensuring that resources are deployed evenly to the available hosts,
+- more ODX's than the hardware can deploy are not deployed.
 
 To address these concerns the concept of a *host* was added to Caster.
 
@@ -281,3 +272,11 @@ Taint allows users to redeploy resources. For example, if a user needs to redepl
 Some resources can't be tainted, however. 
 
 Users can taint resources within the workspace view. Once a resource is tainted it will display in red shading. Users can also easily access the `Untaint` command while in workspace view before running another plan-and-apply cycle if they change their mind and decide to keep the resource.
+
+### Reporting bugs and requesting features
+
+Think you found a bug? Please report all Crucible bugs - including bugs for the individual Crucible apps - in the cmu-sei/crucible issue tracker.
+Include as much detail as possible including steps to reproduce, specific app involved, and any error messages you may have received.
+
+Have a good idea for a new feature? Submit all new feature requests through the cmu-sei/crucible issue tracker.
+Include the reasons why you're requesting the new feature and how it might benefit other Crucible users.
