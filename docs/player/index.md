@@ -48,8 +48,8 @@ If you have not already done so, in the dropdown next to your username, select *
 #### Assign Application Templates
 
 1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template. 
-   - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
-   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. 
+    - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
+     - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. 
 2. Click **Teams**.
 
 #### Add Teams
@@ -80,14 +80,12 @@ In this step, View Administrators upload a single file or multiple files simulta
 1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files - it has not been uploaded yet. 
 2. Select the **Team(s)** that you want to access the file and click **Upload Staged File(s)**.
 3. The file appears under **Uploaded Files**. From here, you can: **Download** the file, **Delete** the file, **Copy Link** to the file, **Edit** the name and team of the file, and **Add File as Application**.
-
-After adding the file as an application you have to return to **Step 3 Teams** and add that application - the _newly_ uploaded file - to a team just as you would add any new application.
-
-Click **Done** when you are finished adding or updating the view.
+4. After adding the file as an application you have to return to **Step 3 Teams** and add that application - the _newly_ uploaded file - to a team just as you would add any new application.
+5. Click **Done** when you are finished adding or updating the view.
 
 ### Configure Users
 
-Users are only available in Player after they have successfully authenticated via the identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:** 
+Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:** 
 
 #### Assign Roles
 
@@ -95,16 +93,15 @@ Users and/or teams can be assigned to a **Role**, which is a group of permission
 
 #### Assign Permissions
 
-> **SystemAdmin:** can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
-
-> **ViewAdmin:** can edit anything within a View that they have permissions.
+- **SystemAdmin:** can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
+- **ViewAdmin:** can edit anything within a View that they have permissions.
 
 A SystemAdmin creates the View and assigns ViewAdmin permissions to specific teams who can now edit that View.
 > **Important!** Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Views, Users, Application Templates, Roles / Permissions).
 
 ### Define Application Template
 
-An *app template*  contains the settings associated with an app that is added to a team's view.  An app template can be created for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. An app template can be used by any view admin when adding apps to a particular view.  Think of app templates as helpers for configuring common Crucible apps.
+An app template contains the settings associated with an app that is added to a team's view. An app template can be created for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. An app template can be used by any view admin when adding apps to a particular view. Think of app templates as helpers for configuring common Crucible apps.
 
 Follow the procedures below to create a new app template in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
 
@@ -113,11 +110,10 @@ If you have not already done so, in the dropdown next to your username, select *
 ![player-new-application-template](../assets/img/player-new-application-template.png)
 1. Under the Administration nav panel, select **Application Templates**.
 2. Click **Add Application Template**. 
-   - Enter a **Name** for the app template.
-   - Enter a **URL** for the app template.
-   - Enter the path for the icon.
-
-3. Enable **Embeddable** if desired. Ebeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames.  The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
+      - Enter a **Name** for the app template.
+      - Enter a **URL** for the app template.
+      - Enter the path for the icon.
+3. Enable **embeddable** if desired. Ebeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames.  The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads.  This is important for some apps that may require some initialization.
 
 <!---### Define Roles and Permissions-->
