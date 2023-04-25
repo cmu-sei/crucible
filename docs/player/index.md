@@ -23,13 +23,14 @@ Player is ***not*** meant to:
 
 ![player-admin-view](../assets/img/player-admin-view.png)
 
-A Player view administrator will see the **Administration navigation bar** on the left. To switch to the administrator view in Player if you have the appropriate permissions:
+A Player administrator will see the **Administration navigation bar** on the left. If you have the appropriate permissions, here are the steps to switch to the administrator view in Player:
 
-In the top-right corner, click the dropdown next to your user name, then **Administration**.
+1. In the top-right corner, click the dropdown next to your username.
+2. Click **Administration**.
 
 ### Manage Views
 
-Views is where a Player view administrator adds a new view and browses existing views.Follow the procedures below to create a new *view* in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
+Views is where a Player view administrator adds a new view and browses existing views. Follow the procedures below to create a new view in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
 
 If you have not already done so, in the dropdown next to your username, select **Administration**.
 
@@ -40,8 +41,8 @@ If you have not already done so, in the dropdown next to your username, select *
 1. Under Views, click **Add New View**.
 2. Add a **Name** and **View Description**.
 3. In the Status dropdown, select **Active** or **Inactive**.
-   - `Active` means that the new view is available for use immediately.
-   - `Inactive` means that the new view will be cloned in Alloy.
+      -  `Active` means that the new view is available for use immediately.
+      - `Inactive` means that the new view will be cloned in Alloy.
 4. Select **Applications**.
 
 #### Assign Application Templates
@@ -391,40 +392,29 @@ If the person switches virtual machines then your display automatically follows 
 
 Clicking the **gear icon** in the upper left of the display you are following gives you the options to **Open In New Tab** and **Reconnect**. If you are already in a new browser tab, then you will see the **Fullscreen** option.
 
-### Term Glossary
+### Glossary
 
-Some key Player concepts are described below.
+The following glossary provides a brief definition of key terms and concepts as they are used in the context of the Player application.
 
-**Apps** 
-A website a participant in a view can open within Player or in a separate browser tab. A common example of an app used in Player is the Mattermost messaging platform.
+**Apps:** A website a participant in a view can open within Player or in a separate browser tab. A common example of an app used in Player is the Mattermost messaging platform.
 
-**App template**
- The settings associated with an app that is added to a team's *view*.  An app template can be created for common apps that are added to a view with default settings that an administrator can override if needed.
+**App Template:** The settings associated with an app that is added to a team's View.  An app template can be created for common apps that are added to a view with default settings that an administrator can override if needed.
 
-**Authentication** 
-Player uses `IdentityServer 4` for authenticating users. Authentication gets a user into Player, but setting permissions within the Player Administration view (under **Users**) determines what a user can open and/or edit within Player.
+**Authentication:** Player uses IdentityServer 4 to authenticate users. Authentication gets a user into Player. However, to determine what a user can open and/or edit within Player, administrators need to set the required permissions within the Player Administration View under the Users Administrator tab.
 
-**Focused Application Panel** 
-The focused app panel displays the selected application in an iFrame. The iFrame points to the URL specified by the application template. The application within the focused app panel is responsible for authentication and content. Player displays content but has no control of the application running within the focused app panel.
+**Focused Application Panel:** The focused app panel displays the selected application in an iFrame. The iFrame points to the URL specified by the application template. The application within the focused app panel is responsible for authentication and content. Player displays content but has no control of the application running within the focused app panel.
 
-**Notification** 
-A message sent to a specific user, team, or view from an Administrator or an app that has been given permission.
+**Notification:** A message sent to a specific user, team, or view from an Administrator or an app that has been given permission.
 
-**Permission** 
-A key/value pair that can be created and used by any application given permission within the system. A permission can be assigned to a user or a team. Some permissions such as `SystemAdmin` are read-only. `ExerciseAdmin` and `SystemAdmin` are permanent permissions that cannot be edited or deleted.
+**Permission:** A key/value pair that can be created and used by any application given permission within the system. A permission can be assigned to a user or a team. Some permissions such as `SystemAdmin` are read-only. `ExerciseAdmin` and `SystemAdmin` are permanent permissions that cannot be edited or deleted.
 
-**Role** 
-A set of permissions that can be grouped together and assigned to a user or team.
+**Role:** A set of permissions that can be grouped together and assigned to a user or team.
 
-**Team** 
-A group of logged in users who are associated with a view. Each team can be configured to view a particular set of applications and be granted team-level roles/permissions.
+**Team:** A group of logged in users who are associated with a view. Each team can be configured to view a particular set of applications and be granted team-level roles/permissions.
 
-**User** 
-A user who is identified in an Identity Server configured for the Player system is automatically added into Player upon the first login. In addition, users can be pre-loaded into Player using the Player API.
+**User:** A user who is identified in an Identity Server configured for the Player system is automatically added into Player upon the first login. In addition, users can be pre-loaded into Player using the Player API.
   > Note: IdentityServer4 is an OAuth 2.0 framework that is used by the Software Engineering Institute to authenticate users. Some Identity servers are configured to authenticate using CAC cards while others are user/password based - depending upon the location of the system.
 
-**View** 
-These are the settings associated with building a *view*. A view can be edited, cloned, and deleted.
+**View:** These are the settings associated with building a view. A view can be edited, cloned, and deleted.
 
-**Views** 
-The collection of content a participant can interact with during a cyber simulation. Depending upon your role (*end-user* view  versus *administrator* view) a view will look different.
+**Views:** The collection of content a participant can interact with during a cyber simulation. Depending upon your role (end-user vs administrator) a view will look different.
