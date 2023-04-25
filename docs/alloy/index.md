@@ -3,7 +3,7 @@
 
 ## Overview
 
-An Alloy Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable.  Events can be scheduled to run for a set ammount of time. Upon completion of the event, Alloy will clear up all related assets.
+An Alloy Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable.  Events can be scheduled to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
 
 ## Administrator Guide
 
@@ -35,9 +35,9 @@ Once the event template has been created, it can be used to create an Alloy _eve
 
 When the event template is launched, Alloy:
 
-- clones the Player exercise specified in the event template
-- creates a Caster workspace under the Caster directory specified in the event template
-- creates and starts a Steamfitter session from the Steamfitter scenario specified in the event template
+- Clones the Player exercise specified in the event template
+- Creates a Caster workspace under the Caster directory specified in the event template
+- Creates and starts a Steamfitter session from the Steamfitter scenario specified in the event template
 
 Active, ended, and failed events can be viewed by a system admin or content developer in the Alloy administrator user interface.
 
