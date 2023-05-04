@@ -99,7 +99,7 @@ Users and/or teams can be assigned to a **Role**, which is a group of permission
 A SystemAdmin creates the View and assigns ViewAdmin permissions to specific teams who can now edit that View.
 > **Important!** Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Views, Users, Application Templates, Roles / Permissions).
 
-### Define [Application Template](### Glossary)
+### Create Application Templates
 
 An app template contains the settings associated with an app that is added to a team's view. An app template can be created for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. An app template can be used by any view admin when adding apps to a particular view. Think of app templates as helpers for configuring common Crucible apps.
 
@@ -121,9 +121,9 @@ If you have not already done so, in the dropdown next to your username, select *
 
 ### Subscriptions
 
-Subscriptions allow a Player administrator to configure client applications to be notified when supported actions occur within the Player API. Also known as Webhooks this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy. For example, the VM API supports subscribing to ViewCreated and ViewDeleted in Player.
+Subscriptions allow a Player administrator to configure client applications to be notified when supported actions occur within the Player API. Also known as Webhooks, this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy. For example, the VM API supports subscribing to ViewCreated and ViewDeleted in Player.
 
-When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured Player notifies VM API of the new View and it ensures that any Maps that were set up for the parent View are made available in the newly created View. This allows for Maps to be used in on-demand events.
+When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured, Player notifies VM API of the new View and it ensures that any Maps that were set up for the parent View are made available in the newly created View. This allows for Maps to be used in on-demand events.
 
 When the event is ended, it recieves the ViewDeleted notification and cleans up. Similarly any application can be configured to subscribe to these notifications and support on-demand events without Player code having to be added for each application specifically.
 
@@ -131,13 +131,13 @@ When adding a Subscription, you must specify:
 
 1. Name - The name of the Subscription, for display purposes
 2. Callback URL - The URL that the recieving application expects notifications from Player to be sent to
-3. Client ID - The ID of a client in the OAuth2/OIDC server that is used for authentication in the environment. This client should support the Client Credentials grant and be authorized to include whatever scopes the receiving application requires to call it's Callback URL endpoint. For the VM API it's default required scope is player-vm-privileged. This is the privileged scope that has elevated permissions and should not be the same as the scope used by the normal VM UI client.
-4. Client Secret - The secret required to authenticate witht he CLient ID specified
+3. Client ID - The ID of a client in the OAuth2/OIDC server that is used for authentication in the environment. This client should support the Client Credentials grant and be authorized to include whatever scopes the receiving application requires to call it's Callback URL endpoint. For the VM API, it's default required scope is player-vm-privileged. This is the privileged scope that has elevated permissions and should not be the same as the scope used by the normal VM UI client.
+4. Client Secret - The secret required to authenticate witht he Client ID specified
 5. Events - The Player events that this application would like to be notified about, such as ViewCreated and ViewDeleted
 
 ### Creating and Managing Maps
 
-The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
+The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view, to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
 
 Assuming that View Administrator permissions have been granted, in Player add the map application to the view.
 
@@ -152,11 +152,11 @@ Assuming that View Administrator permissions have been granted, in Player add th
 
 1. In the newly created Map application, in the right pane, select **New Map**.
 2. Complete the following fields:
-   - **Name:** the name of the map.   
-   - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.   
-   - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.   
-   - **Teams:** only the teams selected here will see the new map.   
-   > Note that you can select more than one team here.
+    - **Name:** the name of the map.   
+     - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.   
+     - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.   
+     - **Teams:** only the teams selected here will see the new map.   
+    > Note that you can select more than one team here.
 3. Click **Submit**. The image of the new map appears in the right pane.
 
 **Editing a map**
@@ -171,7 +171,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
 
 **Adding a click point**
 
-A _click point_ is a location on the map that when clicked by Player user launches a resource like a virtual machine in a new tab. To add a click point to the map:
+A _click point_ is a location on the map that, when clicked by Player user, launches a resource like a virtual machine in a new tab. To add a click point to the map:
 
 1. In Player's left navigation pane, click the **Map application**. 
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -193,6 +193,7 @@ A _click point_ is a location on the map that when clicked by Player user launch
 5. In the Edit Click Point modal, click **Delete**.
 
 **Deleting a map**
+
 1. In Player's left navigation pane, click the **Map application**. 
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click **Delete Map**.
@@ -217,38 +218,39 @@ Any documents or files  - PDF, PNG, etc. - that can be served on the web can be 
 
 #### Map
 
-View Admins may use the Map application to display a map for team (e.g. a network map of a lab).
+View Admins may use the Map application to display a map for a team (e.g. a network map of a lab).
 
-Clicking the Map application will open up the assigned map. User can click on pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
+Clicking the Map application will open up the assigned map. Users can click on pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
 
 #### Virtual Machine Applications
 
-The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system allows the VM to be opened similar to an Application, within a tab on the same screen or popped out into a new browser tab using the icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
+The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system allows the VM to be opened similar to an application, within a tab on the same screen or popped out into a new browser tab using the icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
 
 **File Upload**
 
-A View Admin can upload images and documents for a specific View in player that provides authentication to download. In addition, that document can be setup to show up as an application in left hand menu of Player.
+A View Admin can upload images and documents for a specific View in Player that provides authentication to download. In addition, that document can be setup to show up as an application in the left hand menu of Player.
 
 ![vm-app-1](../assets/img/vm-app-1.png)
 
-From the File Upload section of the Edit View panel, a View Admin can Download, Delete, Copy Link, Edit Name and Add as App. When adding the file as a Player View application, a prompt will be shown that verifies which teams in the View will see the file get added as an application. Note that it is important that the View Admin give permission for the file to be view by any team that they wish to add the application otherwise the user will not be authorized to view the file.
+From the File Upload section of the Edit View panel, a View Admin can Download, Delete, Copy Link, Edit Name and Add as App. When adding the file as a Player View application, a prompt will be shown that verifies which teams in the View will see the file get added as an application. Note that it is important that the View Admin gives permission for the file to be viewed by any team that they wish to add the application otherwise the user will not be authorized to view the file.
 
 ![vm-app-2](../assets/img/vm-app-2.png)
 
 **Multi-Select VMs**
 
-A user can run operations on multiple VM's by first using the mouse to click and drag a box around the VM's that they would like to select. In addition the user can use the ctrl+click to select or unselect a previously selected VM. Once the user has selected the VM's that they want to perform an operation, the ![vm-app-3](../assets/img/vm-app-3.png) button can be used to display the menu of available options.
+A user can run operations on multiple VM's by first using the mouse to click and drag a box around the VM's that they would like to select. In addition, the user can use the ctrl+click to select or unselect a previously selected VM. Once the user has selected the VM's that they want to perform an operation, the ![vm-app-3](../assets/img/vm-app-3.png) button can be used to display the menu of available options.
 
 ![vm-app-4](../assets/img/vm-app-4.png)
 
 For the Multi-Select option above, the following options are available:
-- Clear Selections - Unselects all selected VM's
-- Power On - Makes an API call to power on the selected VM's
-- Power Off - Makes an API call to power off the selected VM's
-- Reboot - Makes an API call to perform an operating system reboot of the selected VM's
-- Shutdown - Makes an API call to perform an operating system shutdown of the selected VM's
-- Open in Player tab - Will create a tab within Player that opens each of the selected VM's
-- Open in browser tab - Creates a web browser tab that opens each of the selected VM's
+
+ - Clear Selections - Unselects all selected VM's
+ -  Power On - Makes an API call to power on the selected VM's
+ - Power Off - Makes an API call to power off the selected VM's
+ - Reboot - Makes an API call to perform an operating system reboot of the selected VM's
+ - Shutdown - Makes an API call to perform an operating system shutdown of the selected VM's
+ - Open in Player tab - Will create a tab within Player that opens each of the selected VM's
+ - Open in browser tab - Creates a web browser tab that opens each of the selected VM's
 
 **Sort by Team (View Admin Only)**
 
@@ -270,7 +272,7 @@ The User List in Player allows for a user to view the teams and its members that
 
 **VM Usage Logging (View Admin Only)**
 
-The VM Usage Logging function is a administrative feature that when configured, will record the user activity of when a user interacts with a VM. The configuration must be setup by and administrator to records the specific teams in the view over a specific time period.
+The VM Usage Logging function is a administrative feature that when configured, will record the user activity of when a user interacts with a VM. The configuration must be setup by an administrator to records the specific teams in the view over a specific time period.
 
 ![vm-app-9](../assets/img/vm-app-9.png)
 
@@ -304,14 +306,14 @@ Player and its component applications (as well as any third party application li
 
 The procedures below show you how to:
 
-- Copy text from a local machine (that is, an _out-of-game_ computer) and paste it into a Player virtual machine, and
+- Copy text from a local machine (that is, an out-of-game computer) and paste it into a Player virtual machine
 - Copy text from a Player virtual machine and paste it into a local machine
 
 Procedures assume you are in the Player VM Console app.
 
 **From local to Player VM**
 
-> Note: There is a 64K size limitation to the text block users can copy into and out of the player.
+> Note: There is a 64K size limitation to the text block users can copy into and out of Player.
 
 1. On your local machine, open a text file or Word file.
 2. Select and copy the text you want to place into a Player virtual machine.
