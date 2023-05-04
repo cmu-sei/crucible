@@ -90,7 +90,7 @@ A task can have multiple results:
    - *Manual:* A *manual* trigger condition is executed by manual intervention - clicking a button, for example, to fire off a task. It's up to a user to intervene to execute the task. 
    - *Completion:* When the parent task completes the dependent task runs - regardless of success or failure.
    - *Success:* If the expected output is contained in the actual output then the dependent task runs.
-    - *Failure:* Only runs if the expected output is not contained within the actual output. 
+   - *Failure:* Only runs if the expected output is not contained within the actual output. 
 
 *Expected Output:* Whatever you type here, if the actual output contains that text, then it is considered a success. If the output does not contain what is typed here, then it is considered a failure.
 
@@ -100,9 +100,9 @@ A task can have multiple results:
 - *Number of Iterations:* An *iteration* is an execution of a task when the task is configured to iterate for *x* number of times. Enter the number of times you want the task to execute here.
 - *Interval Between Iterations:* The time in seconds in between iterations. 
 - *Iteration Termination:* 
-   - *IterationCountTask:* The task will execute until exactly the number of iteration times specified above; regardless of whether the task succeeds or fails.
-   - *UntilSuccess:* The task will iterate until the command has a successful completion.
-   - *UntilFailure:* The task will iterate until the command fails.
+     - *IterationCountTask:* The task will execute until exactly the number of iteration times specified above; regardless of whether the task succeeds or fails.
+     - *UntilSuccess:* The task will iterate until the command has a successful completion.
+     - *UntilFailure:* The task will iterate until the command fails.
 - *Expiration Timeout:* The time, in seconds, where if no response has been received the task expires (times out).  
 
 **VM Selection**
