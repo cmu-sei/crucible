@@ -152,11 +152,11 @@ Assuming that View Administrator permissions have been granted, in Player add th
 
 1. In the newly created Map application, in the right pane, select **New Map**.
 2. Complete the following fields:
-    - **Name:** the name of the map.   
-     - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.   
-     - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.   
-     - **Teams:** only the teams selected here will see the new map.   
-    > Note that you can select more than one team here.
+   - **Name:** the name of the map.   
+   - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.   
+   - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.   
+   - **Teams:** only the teams selected here will see the new map.   
+      > Note that you can select more than one team here.
 3. Click **Submit**. The image of the new map appears in the right pane.
 
 **Editing a map**
