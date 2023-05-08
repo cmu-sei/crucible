@@ -29,15 +29,15 @@ For more information on native Terraform constructs used in Caster, please refer
 Modules are very powerful and allow for complex configurations to be made simpler and more easily shared and used. A module takes any Terraform configuration consisting of any number of resources and turns it into a single block, exposing required and/or optional variables. Some examples include:
 
 - A generic virtual machine module that abstracts away commonly used parameters into variables such as: 
-  - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
-  - **Networks:** creates a NIC for each specified network and assigns it to the specified network vlan.
-  - **ExerciseId:** appends the `exerciseId` to the name of the vm for use with ODX's where unique naming is required.
-  - Other simplified variable names based on the target audience.
+    - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
+    - **Networks:** creates a NIC for each specified network and assigns it to the specified network vlan.
+    - **ExerciseId:** appends the `exerciseId` to the name of the vm for use with ODX's where unique naming is required.
+    - Other simplified variable names based on the target audience.
 - A module to create a very specific type of virtual machine resource, such as a domain controller, that points to a known good VMware template/base disk and an Ansible playbook that requires variables such as:
-  - Domain Name
-  - IP Address
-  - DomainAdminUser
-  - DomainAdminPass
+    - Domain Name
+    - IP Address
+    - DomainAdminUser
+    - DomainAdminPass
 - A module to define an entire Cyber Flag enclave.
 - A module to define a generic GreySpace that accepts variables to configure GreyBox, TopGen, etc.
 
