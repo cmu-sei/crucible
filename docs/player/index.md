@@ -117,7 +117,7 @@ If you have not already done so, in the dropdown next to your username, select *
 3. Enable **embeddable** if desired. Ebeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames.  The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads.  This is important for some apps that may require some initialization.
 
-<!---### Define Roles and Permissions-->
+### Define Roles and Permissions
 
 ### Subscriptions
 
@@ -135,7 +135,31 @@ When adding a Subscription, you must specify:
 4. Client Secret - The secret required to authenticate witht he Client ID specified
 5. Events - The Player events that this application would like to be notified about, such as ViewCreated and ViewDeleted
 
-### Creating and Managing Maps
+## User Guide
+
+![player-user-view](../assets/img/player-user-view.png)
+
+### Top Bar
+
+The top bar displays the current *view name*, *team*, and the *menu select* dropdown (your username in the top right).
+
+Player fully supports users who are on multiple teams.  Any such user, when logged in, can switch their team by using the *team* drop-down. 
+
+### Application Navigation Bar
+
+In the view, the navigation bar on the left contains applications.
+
+#### Documentation
+
+Any documents or files  - PDF, PNG, etc. - that can be served on the web can be easily set up as an application for viewing.  This is particularly helpful for displaying instructions, intel, maps, and other information.
+
+#### Maps
+
+View Admins may use the Map application to display a map for a team (e.g. a network map of a lab).
+
+Clicking the Map application will open up the assigned map. Users can click on pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
+
+**Creating and Managing Maps**
 
 The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view, to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
 
@@ -197,30 +221,6 @@ A _click point_ is a location on the map that, when clicked by Player user, laun
 1. In Player's left navigation pane, click the **Map application**. 
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click **Delete Map**.
-
-## User Guide
-
-![player-user-view](../assets/img/player-user-view.png)
-
-### Top Bar
-
-The top bar displays the current *view name*, *team*, and the *menu select* dropdown (your username in the top right).
-
-Player fully supports users who are on multiple teams.  Any such user, when logged in, can switch their team by using the *team* drop-down. 
-
-### Application Navigation Bar
-
-In the view, the navigation bar on the left contains applications.
-
-#### Documentation
-
-Any documents or files  - PDF, PNG, etc. - that can be served on the web can be easily set up as an application for viewing.  This is particularly helpful for displaying instructions, intel, maps, and other information.
-
-#### Map
-
-View Admins may use the Map application to display a map for a team (e.g. a network map of a lab).
-
-Clicking the Map application will open up the assigned map. Users can click on pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
 
 #### Virtual Machine Applications
 

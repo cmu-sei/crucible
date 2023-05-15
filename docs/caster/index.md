@@ -20,6 +20,20 @@ For more information on native Terraform constructs used in Caster, please refer
 
 ### Users
 
+Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:** 
+
+#### Assign Roles
+
+Users and/or teams can be assigned to a **Role**, which is a group of permissions. More about roles as future Player development is completed. Only a SystemAdmin can create roles. 
+
+#### Assign Permissions
+
+- **SystemAdmin:** can edit anything in Caster; SystemAdmin permissions are given by existing SystemAdmin.
+- **ContentDeveloper:** can edit anything within a Directory that they have permissions.
+
+A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to specific teams who can now edit that Directory.
+> **Important!** Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Users, Modules, Workspaces).
+
 ### Modules
 
 [Modules](https://www.terraform.io/docs/glossary.html#module) are a Terraform construct:
@@ -63,26 +77,16 @@ Upon selecting a Module, a form opens that allows the user to select the Version
 
 Upon **Submit**, Caster generates the Terraform code that can be copied into a configuration file to use the selected module with the selected variable values.
 
-### Workspaces
-
-**Updating/Restarting Caster.Api**
-
-Caster.Api utilizes the Terraform binary in order execute workspace operations. Because this binary is running inside of the Caster.Api service, restarting or stopping the Caster.Api Docker container while a Terraform operation is in progress can lead to a corrupted state.
-
-In order to avoid this, a System Administrator should follow these steps in the Caster UI before stopping the Caster.Api container:
-- Navigate to Administration > Workspaces
-- Disable Workspace Operations by clicking the toggle button
-- Wait until all Active Runs are completed
-
 ### VLANs
 
 Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and sub-divided into Partitions. A VLAN can then be requested by a user from a Partition, and they will receive an unused VLAN id, which will then be marked as used until they release it. Projects can be assigned Partition's and a system-wide default Partition can be set for users to request VLAN Ids from their Project's Partition or the default as well.
+
 - VLANs can have tags for organizational purposes and can be requsted by tag
 - A VLAN can be requested by specific vlanId within a Partition
 - VLANs can be marked as reserved (0, 1, and 4095 are reserved by default) so that they will never be used
 - fixed modified properties in entity updated events to restore signalR functionality
 
-## Content Developer Guide
+## User Guide
 
 ### Project
 
@@ -129,6 +133,14 @@ A workspace is where users:
 Users can access workspaces from a project's navigation pane in Caster. Users can add additional files, but _not_ additional directories, to a workspace. The workspace view allows users to see all the runs that have been planned and applied. Runs shaded in red are destroyed operations, while runs in white signify various other status classifications.
 
 Users can `Plan`, `Destroy`, `Apply`, `Taint`, and `Reject` operations in real time in the workspace view.
+
+Caster.Api utilizes the Terraform binary in order execute workspace operations. This binary is running inside of the Caster.Api service. *Restarting or stopping the Caster.Api Docker container while a Terraform operation is in progress can lead to a corrupted state.*
+
+In order to avoid this, a System Administrator should follow these steps in the Caster UI before stopping the Caster.Api container:
+
+- Navigate to Administration > Workspaces
+- Disable Workspace Operations by clicking the toggle button
+- Wait until all Active Runs are completed
 
 ### Directories
 
