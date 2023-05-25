@@ -21,16 +21,16 @@ Player is ***not*** meant to:
 
 ## Administrator User Guide
 
-![player-admin-view](../assets/img/player-admin-view.png)
+![adminbutton](../assets/img/admin button.png)
 
 A Player administrator will see the **Administration navigation bar** on the left. If you have the appropriate permissions, here are the steps to switch to the administrator view in Player:
 
 1. In the top-right corner, click the dropdown next to your username.
 2. Click **Administration**.
 
-![adminbutton](../assets/img/admin button.png)
-
 ### Manage Views
+
+![adminview](../assets/img/admin view.png)
 
 Views is where a Player view administrator adds a new view and browses existing views. Follow the procedures below to create a new view in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
 
@@ -38,7 +38,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 #### Enter View Information
 
-![player-new-view](../assets/img/player-new-view.png)
+![newviewinfo](../assets/img/new view info.png)
 
 1. Under Views, click **Add New View**.
 2. Add a **Name** and **View Description**.
@@ -49,12 +49,17 @@ If you have not already done so, in the dropdown next to your username, select *
 
 #### Assign Application Templates
 
+![newviewapps](../assets/img/new view apps.png)
+
 1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template. 
     - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
      - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. 
+     ![newviewapptemplate](../assets/img/new view app template.png)
 2. Click **Teams**.
 
 #### Add Teams
+
+![newviewnewteam](../assets/img/new view new team.png)
 
 1. Click **Add New Team**. Multiple teams can be added to a view.
 
@@ -63,6 +68,8 @@ If you have not already done so, in the dropdown next to your username, select *
 3. Assign a **Role** to the team.
 
 4. Assign **Permissions** to the team. Each team can be assigned special permissions. You may want to have a team of "admins" who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
+
+![newviewnewteamadduser](../assets/img/new view new team add user.png)
 
 5. Click the **User** icon to select users to add to the new team.
 
@@ -78,6 +85,8 @@ If you have not already done so, in the dropdown next to your username, select *
 #### Upload Files
 
 In this step, View Administrators upload a single file or multiple files simultaneously to a View which can be added as an application and attached to a team. 
+
+![newviewaddfile](../assets/img/new view add file.png)
 
 1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files - it has not been uploaded yet. 
 2. Select the **Team(s)** that you want to access the file and click **Upload Staged File(s)**.
