@@ -28,6 +28,8 @@ Behind the scenes Steamfitter uses StackStorm ([stackstorm.com](https://stacksto
 
 ## Administrator Guide
 
+
+
 ### Scenario Templates
 
 Scenario templates are where predefined tasks are grouped; scenario templates are used to create scenarios that can be run on-demand. All that is required to enter a new scenario template is a **Name**, **Description**, and **Duration**.

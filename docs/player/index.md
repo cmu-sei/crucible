@@ -28,6 +28,8 @@ A Player administrator will see the **Administration navigation bar** on the lef
 1. In the top-right corner, click the dropdown next to your username.
 2. Click **Administration**.
 
+![adminbutton](../assets/img/admin button.png)
+
 ### Manage Views
 
 Views is where a Player view administrator adds a new view and browses existing views. Follow the procedures below to create a new view in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
