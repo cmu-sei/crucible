@@ -130,6 +130,16 @@ If you have not already done so, in the dropdown next to your username, select *
 
 ### Define Roles and Permissions
 
+From the Administration section of Player, users and/or teams can be assigned any set of Permissions:
+
+Define Roles
+Users and/or teams can be assigned to a Role, which is a group of permissions. Roles are a predefined set of permissions that admin can create for ease of administrating.
+
+Define Permissions
+Permissions can be created by admin as well. Player uses two established permissions, SystemAdmin and ViewAdmin.
+SystemAdmin: can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
+ViewAdmin: can edit anything within a View that they have permissions.
+
 ### Subscriptions
 
 Subscriptions allow a Player administrator to configure client applications to be notified when supported actions occur within the Player API. Also known as Webhooks, this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy. For example, the VM API supports subscribing to ViewCreated and ViewDeleted in Player.
