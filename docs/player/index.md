@@ -412,7 +412,7 @@ If the person switches virtual machines then your display automatically follows 
 
 Clicking the **gear icon** in the upper left of the display you are following gives you the options to **Open In New Tab** and **Reconnect**. If you are already in a new browser tab, then you will see the **Fullscreen** option.
 
-### Glossary
+## Glossary
 
 The following glossary provides a brief definition of key terms and concepts as they are used in the context of the Player application.
 
