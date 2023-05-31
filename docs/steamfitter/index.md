@@ -28,9 +28,11 @@ Behind the scenes Steamfitter uses StackStorm ([stackstorm.com](https://stacksto
 
 ## Administrator Guide
 
-
+Steamfitter was developed as an administrative tool, and therefore only can be accesses with SystemAdmin permissions. Consequently, there is no user guide.
 
 ### Scenario Templates
+
+![scenariotemplate](../assets/img/scenario templates.png)
 
 Scenario templates are where predefined tasks are grouped; scenario templates are used to create scenarios that can be run on-demand. All that is required to enter a new scenario template is a **Name**, **Description**, and **Duration**.
 
@@ -39,6 +41,8 @@ After adding the new scenario template, you can **Create a Scenario**, **Copy** 
 Add tasks in the Scenario Templates screen by clicking the **+** ("plus") icon. Complete the same task information as you did when you created a new task.
 
 ### Scenarios
+
+![scenarios](../assets/img/scenarios.png)
 
 Scenarios are groupings of predefined tasks that can be executed against a required view's VMs.
 
