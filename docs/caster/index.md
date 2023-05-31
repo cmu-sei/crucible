@@ -20,6 +20,8 @@ For more information on native Terraform constructs used in Caster, please refer
 
 ### Users
 
+![caster-users](../assets/img/caster-users.png)
+
 Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:** 
 
 #### Assign Roles
@@ -35,6 +37,8 @@ A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to 
 > **Important!** Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Users, Modules, Workspaces).
 
 ### Modules
+
+![caster-modules](../assets/img/caster-modules.png)
 
 [Modules](https://www.terraform.io/docs/glossary.html#module) are a Terraform construct:
 
@@ -79,6 +83,8 @@ Upon **Submit**, Caster generates the Terraform code that can be copied into a c
 
 ### VLANs
 
+![caster-VLANs](../assets/img/caster-VLANs.png)
+
 Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and sub-divided into Partitions. A VLAN can then be requested by a user from a Partition, and they will receive an unused VLAN id, which will then be marked as used until they release it. Projects can be assigned Partition's and a system-wide default Partition can be set for users to request VLAN Ids from their Project's Partition or the default as well.
 
 - VLANs can have tags for organizational purposes and can be requsted by tag
@@ -119,6 +125,8 @@ Add Directory lets you create a new directory at the same level as the above pro
 See the official [Terraform Documentation](https://www.terraform.io/docs/index.html) for more details on supported file types and extensions. In the future, Caster may provide more guidance on what types of files can be created and what their contents are expected to be.
 
 ### Workspaces
+
+![caster-workspaces](../assets/img/caster-workspaces.png)
 
 A *workspace* represents a specific instance of a deployed Terraform configuration. The same configuration can be used to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example: a configuration for an enclave in a Cyber Flag exercise may be defined once, and then deployed to `flag00` through `flag30` workspaces - each creating a copy of the enclave. 
 
