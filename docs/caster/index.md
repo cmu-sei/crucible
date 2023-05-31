@@ -83,7 +83,7 @@ Upon **Submit**, Caster generates the Terraform code that can be copied into a c
 
 ### VLANs
 
-![caster-VLANs](../assets/img/caster-VLANs.png)
+![caster-VLANs](../assets/img/caster-VLANs.PNG)
 
 Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and sub-divided into Partitions. A VLAN can then be requested by a user from a Partition, and they will receive an unused VLAN id, which will then be marked as used until they release it. Projects can be assigned Partition's and a system-wide default Partition can be set for users to request VLAN Ids from their Project's Partition or the default as well.
 
