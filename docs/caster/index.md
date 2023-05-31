@@ -293,3 +293,5 @@ Taint allows users to redeploy resources. For example, if a user needs to redepl
 Some resources can't be tainted, however. 
 
 Users can taint resources within the workspace view. Once a resource is tainted it will display in red shading. Users can also easily access the `Untaint` command while in workspace view before running another plan-and-apply cycle if they change their mind and decide to keep the resource.
+
+## Glossary
