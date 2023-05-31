@@ -20,7 +20,7 @@ For more information on native Terraform constructs used in Caster, please refer
 
 ### Users
 
-![caster-users](../assets/img/caster-users.png)
+![caster-users](../assets/img/caster-users.PNG)
 
 Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:** 
 
@@ -38,7 +38,7 @@ A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to 
 
 ### Modules
 
-![caster-modules](../assets/img/caster-modules.png)
+![caster-modules](../assets/img/caster-modules.PNG)
 
 [Modules](https://www.terraform.io/docs/glossary.html#module) are a Terraform construct:
 
@@ -126,7 +126,7 @@ See the official [Terraform Documentation](https://www.terraform.io/docs/index.h
 
 ### Workspaces
 
-![caster-workspaces](../assets/img/caster-workspaces.png)
+![caster-workspaces](../assets/img/caster-workspaces.PNG)
 
 A *workspace* represents a specific instance of a deployed Terraform configuration. The same configuration can be used to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example: a configuration for an enclave in a Cyber Flag exercise may be defined once, and then deployed to `flag00` through `flag30` workspaces - each creating a copy of the enclave. 
 
