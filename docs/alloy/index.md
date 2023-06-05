@@ -99,3 +99,11 @@ When the end process is initiated, the Alloy API goes through the following proc
 <!-- ## Alloy Tips -->
 
 ## Glossary
+
+Definition
+
+Event
+
+Exercise
+
+Workspace

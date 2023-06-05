@@ -137,7 +137,9 @@ Users and/or teams can be assigned to a Role, which is a group of permissions. R
 
 Define Permissions
 Permissions can be created by admin as well. Player uses two established permissions, SystemAdmin and ViewAdmin.
+
 SystemAdmin: can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
+
 ViewAdmin: can edit anything within a View that they have permissions.
 
 ### Subscriptions

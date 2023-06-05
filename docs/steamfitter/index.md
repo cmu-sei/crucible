@@ -1,5 +1,5 @@
 # **Steamfitter**
-*Crafting a Secenario*
+*Crafting a Scenario*
 
 ## Overview
 
@@ -129,3 +129,19 @@ The default History view shows task results for the current user sorted in rever
 <!--- Steamfitter Tips --->
 
 ## Glossary
+
+Delsy
+
+Execute
+
+Expiration
+
+Iteration
+
+Scenario
+
+Scenario Template
+
+StackStorm
+
+Task
