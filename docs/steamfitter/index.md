@@ -130,7 +130,7 @@ The default History view shows task results for the current user sorted in rever
 
 ## Glossary
 
-Delsy
+Delay
 
 Execute
 
