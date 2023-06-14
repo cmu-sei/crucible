@@ -130,18 +130,18 @@ The default History view shows task results for the current user sorted in rever
 
 ## Glossary
 
-Delay
+**Delay:**
 
-Execute
+**Execute:**
 
-Expiration
+**Expiration:**
 
-Iteration
+**Iteration:**
 
-Scenario
+**Scenario:**
 
-Scenario Template
+**Scenario Template:**
 
-StackStorm
+**StackStorm:**
 
-Task
+**Task:**

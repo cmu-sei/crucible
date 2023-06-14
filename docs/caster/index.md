@@ -296,22 +296,22 @@ Users can taint resources within the workspace view. Once a resource is tainted 
 
 ## Glossary
 
-Design
+**Design:**
 
-Directory
+**Directory:**
 
-File
+**File:**
 
-Host
+**Host:**
 
-Module
+**Module:**
 
-Pool
+**Pool:**
 
-Project
+**Project:**
 
-Terraform
+**Terraform:**
 
-Topology
+**Topology:**
 
-Workspace
+**Workspace:**

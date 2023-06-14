@@ -79,8 +79,6 @@ When launching an implementation from a definition, the Alloy API goes through t
 5.  Plans and applies the Caster workspace to deploy the infrastructure.
 6.  Starts the Steamfitter scenario.
 
-> History: 
-
 **Understanding the end process**
 
 There are two ways the end process can be triggered:
@@ -100,10 +98,10 @@ When the end process is initiated, the Alloy API goes through the following proc
 
 ## Glossary
 
-Definition
+**Definition:**
 
-Event
+**Event:**
 
-Exercise
+**Exercise:**
 
-Workspace
+**Workspace:**
