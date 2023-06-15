@@ -49,9 +49,20 @@
 }
 
 :root>* {
-    --md-primary-bg-color:   #000;
+    --md-primary-bg-color:  white;
     --md-typeset-color:   var(--md-default-fg-color);
     --md-typeset-a-color: var(--md-primary-fg-color--light);
+}
+
+.tx-hero {
+    color: black !important;
+    justify-content: right;
+}
+
+.tx-hero .md-button {
+    margin-top: .5rem;
+    margin-right: .5rem;
+    color: black !important;
 }
 
 /*
@@ -148,6 +159,8 @@ img[alt='Scoring Categories OE']{
     width: 600px;
     height: 400px;
 }
+
+
 
 img[alt='Add Action OE']{
     width: 500px;
