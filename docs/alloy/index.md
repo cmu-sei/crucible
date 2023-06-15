@@ -92,16 +92,12 @@ When the end process is initiated, the Alloy API goes through the following proc
  3. Plans and applies the *destroy* of the Caster workspace.
  4. Deletes the Caster workspace.
 
-### Invite Others to Event/Exercise
+<!-- ### Invite Others to Event/Exercise -->
 
 <!-- ## Alloy Tips -->
 
 ## Glossary
 
-**Definition:**
+**Definition:** The structure and build of the Alloy Exercise, usually contains some combination of a Player exercise, Caster directory, and Steamfitter scenario.
 
-**Event:**
-
-**Exercise:**
-
-**Workspace:**
+**Event:** The actual running of a simulation. An Event Template is the planned exercise to occur.
