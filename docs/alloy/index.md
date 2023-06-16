@@ -41,7 +41,7 @@ When the event template is launched, Alloy:
 
 Active, ended, and failed events can be viewed by a system admin or content developer in the Alloy administrator user interface.
 
-### Events
+<!-- ### Events -->
 
 ## User Guide 
 
