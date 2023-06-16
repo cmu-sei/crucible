@@ -4,9 +4,11 @@
 
 @media only screen and (min-width: 768px)
 {
+
     td:nth-child(1){
         white-space: nowrap;
     }
+
 }
 
 @font-face {
@@ -28,6 +30,7 @@
 }*/
 
 * {
+
     --md-primary-fg-color: #C41230
 
     ;
@@ -37,6 +40,7 @@
     --md-primary-fg-color--dark:  #C41230
 
     ;
+
     --md-typeset-color:   var(--md-default-fg-color);
     --md-typeset-a-color: var(--md-primary-fg-color--light);
     font-family: Arial, Helvetica, sans-serif;
@@ -49,7 +53,9 @@
 }
 
 :root>* {
+
     --md-primary-bg-color:  white;
+
     --md-typeset-color:   var(--md-default-fg-color);
     --md-typeset-a-color: var(--md-primary-fg-color--light);
 }
@@ -64,6 +70,7 @@
     margin-right: .5rem;
     color: black !important;
 }
+
 
 /*
 markdown and image alignment
@@ -181,6 +188,7 @@ img[alt='Teams OE']{
     width: 550px;
     height: 350px;
 }
+
 /*
 Tables set to 100% width
 */
