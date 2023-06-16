@@ -296,22 +296,20 @@ Users can taint resources within the workspace view. Once a resource is tainted 
 
 ## Glossary
 
-**Design:**
+**Designer:** a graphical user interface for creating and editing terraform deployments through the use of modules
 
-**Directory:**
+**Directory:** the outline of a project and the modules it contains
 
-**File:**
+**File:** text files that will eventually be put onto a file system and used with the Terraform command line tool
 
-**Host:**
+**Host:** consists of a name, datastore, and maximum number of virtual machines that it can support
 
-**Module:**
+**Module:** a container for multiple resources that are used together. Modules can be used to create lightweight abstractions, so that you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects
 
-**Pool:**
+**Project:** a way to organize and categorize similar environments for multiple workspaces and directories within Caster
 
-**Project:**
+**Terraform:** an open source "Infrastructure as Code" tool
 
-**Terraform:**
+**Topology:** the physical and logical arrangement of nodes and connections in a network
 
-**Topology:**
-
-**Workspace:**
+**Workspace:** a specific instance of a deployed Terraform configuration
