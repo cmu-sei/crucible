@@ -102,7 +102,7 @@ A task can have multiple results:
 
 **Delay / Iteration / Expiration**
 
-- *Delay:* Set in seconds before executing the task executes.
+- *Delay:* Set in seconds before the task executes.
 - *Number of Iterations:* An *iteration* is an execution of a task when the task is configured to iterate for *x* number of times. Enter the number of times you want the task to execute here.
 - *Interval Between Iterations:* The time in seconds in between iterations. 
 - *Iteration Termination:* 
@@ -130,18 +130,18 @@ The default History view shows task results for the current user sorted in rever
 
 ## Glossary
 
-**Delay:**
+**Delay:** set in seconds before the task executes
 
-**Execute:**
+**Execute:** to carry out the task
 
-**Expiration:**
+**Expiration:** when a task times out
 
-**Iteration:**
+**Iteration:** an execution of a task when the task is configured to iterate for x number of times
 
-**Scenario:**
+**Scenario:** groupings of predefined tasks that can be executed against a required view's VMs
 
-**Scenario Template:**
+**Scenario Template:** where predefined tasks are grouped; scenario templates are used to create scenarios that can be run on-demand
 
-**StackStorm:**
+**StackStorm:** an open source application that can connect applications, services, and workflows
 
-**Task:**
+**Task:** an action or command that can be executed against one or more topology resources
