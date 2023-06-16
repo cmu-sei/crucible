@@ -47,6 +47,7 @@ A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to 
 Modules are very powerful and allow for complex configurations to be made simpler and more easily shared and used. A module takes any Terraform configuration consisting of any number of resources and turns it into a single block, exposing required and/or optional variables. Some examples include:
 
 - A generic virtual machine module that abstracts away commonly used parameters into variables such as: 
+
     - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
     - **Networks:** creates a NIC for each specified network and assigns it to the specified network vlan.
     - **ExerciseId:** appends the `exerciseId` to the name of the vm for use with ODX's where unique naming is required.
@@ -81,6 +82,7 @@ Upon selecting a Module, a form opens that allows the user to select the Version
 
 Upon **Submit**, Caster generates the Terraform code that can be copied into a configuration file to use the selected module with the selected variable values.
 
+
 ### VLANs
 
 ![caster-VLANs](../assets/img/caster-VLANs.PNG)
@@ -96,7 +98,7 @@ Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and sub-
 
 ### Project
 
-The top-level construct in Caster is called a *project*. The _project_ is a way to organize and categorize similar environments for multiple workspaces and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
+The top-level construct in Caster is called a *project*. The _project_ is a way to organize and categorize similar environments for multiple s and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
 
 A project is meant to:
 

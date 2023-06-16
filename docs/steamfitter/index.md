@@ -1,4 +1,5 @@
 # **Steamfitter**
+
 *Crafting a Scenario*
 
 ## Overview
@@ -12,6 +13,7 @@ In the Steamfitter UI, there are four major functional sections:
 - Tasks: User tasks used to create and execute ad-hoc tasks. 
 - History: Displays the results of all tasks executed by all users.
 
+
 ### Steamfitter Permissions
 
 In order to use Steamfitter, a user must be given **Content Developer** permissions by a Steamfitter System Admin. Any user who visits the Steamfitter URL is automatically added to the user list with no permissions. Only a Steamfitter System Admin can grant another user elevated permissions.
@@ -23,6 +25,7 @@ In order to use Steamfitter, a user must be given **Content Developer** permissi
 > Content Developer and System Administrator within Steamfitter only apply to the Steamfitter application - not to any other application in the Crucible framework.
 
 ### StackStorm Integration
+
 
 Behind the scenes Steamfitter uses StackStorm ([stackstorm.com](https://stackstorm.com/)) to execute these tasks.  StackStorm is an open source application that can connect applications, services, and workflows. Steamfitter uses StackStorm to send commands to the guest VMs using the StackStorm vSphere Action Pack, so that none of the communication for the tasks run by StackStorm occurs over the network.
 
@@ -41,6 +44,7 @@ After adding the new scenario template, you can **Create a Scenario**, **Copy** 
 Add tasks in the Scenario Templates screen by clicking the **+** ("plus") icon. Complete the same task information as you did when you created a new task.
 
 ### Scenarios
+
 
 ![scenarios](../assets/img/scenarios.png)
 
@@ -92,15 +96,18 @@ A task can have multiple results:
 - *Select an Action:* Power on a VM, power off a VM, read a file, etc. An *action* is the name StackStorm gives to a single Task/Command.
 
 - *Trigger Condition:* 
+
    - *Time:* A *timed* trigger is executed automatically after a set *delay* in seconds. A timed trigger can have multiple *iterations* executed on a specific interval.  
    - *Manual:* A *manual* trigger condition is executed by manual intervention - clicking a button, for example, to fire off a task. It's up to a user to intervene to execute the task. 
    - *Completion:* When the parent task completes the dependent task runs - regardless of success or failure.
    - *Success:* If the expected output is contained in the actual output then the dependent task runs.
    - *Failure:* Only runs if the expected output is not contained within the actual output. 
 
+
 *Expected Output:* Whatever you type here, if the actual output contains that text, then it is considered a success. If the output does not contain what is typed here, then it is considered a failure.
 
 **Delay / Iteration / Expiration**
+
 
 - *Delay:* Set in seconds before the task executes.
 - *Number of Iterations:* An *iteration* is an execution of a task when the task is configured to iterate for *x* number of times. Enter the number of times you want the task to execute here.
@@ -109,6 +116,7 @@ A task can have multiple results:
       - *IterationCountTask:* The task will execute until exactly the number of iteration times specified above; regardless of whether the task succeeds or fails.
       - *UntilSuccess:* The task will iterate until the command has a successful completion.
       - *UntilFailure:* The task will iterate until the command fails.
+
 - *Expiration Timeout:* The time, in seconds, where if no response has been received the task expires (times out).  
 
 **VM Selection**
@@ -145,3 +153,4 @@ The default History view shows task results for the current user sorted in rever
 **StackStorm:** an open source application that can connect applications, services, and workflows
 
 **Task:** an action or command that can be executed against one or more topology resources
+

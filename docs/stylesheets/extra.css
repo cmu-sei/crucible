@@ -4,9 +4,11 @@
 
 @media only screen and (min-width: 768px)
 {
-	td:nth-child(1){
-		white-space: nowrap;
-	}
+
+    td:nth-child(1){
+        white-space: nowrap;
+    }
+
 }
 
 @font-face {
@@ -28,9 +30,17 @@
 }*/
 
 * {
-    --md-primary-fg-color: #6D6E71;
-    --md-primary-fg-color--light: #6D6E71;
-    --md-primary-fg-color--dark:  #6D6E71;
+
+    --md-primary-fg-color: #C41230
+
+    ;
+    --md-primary-fg-color--light: #C41230
+
+    ;
+    --md-primary-fg-color--dark:  #C41230
+
+    ;
+
     --md-typeset-color:   var(--md-default-fg-color);
     --md-typeset-a-color: var(--md-primary-fg-color--light);
     font-family: Arial, Helvetica, sans-serif;
@@ -43,10 +53,24 @@
 }
 
 :root>* {
-    --md-primary-bg-color:   #000;
+
+    --md-primary-bg-color:  white;
+
     --md-typeset-color:   var(--md-default-fg-color);
     --md-typeset-a-color: var(--md-primary-fg-color--light);
 }
+
+.tx-hero {
+    color: black !important;
+    justify-content: right;
+}
+
+.tx-hero .md-button {
+    margin-top: .5rem;
+    margin-right: .5rem;
+    color: black !important;
+}
+
 
 /*
 markdown and image alignment
@@ -61,6 +85,108 @@ img[src*='#right'] {
 img[src*='#center'] {
     display: block;
     margin: auto;
+}
+
+img[alt*='OE'] {
+    border: solid;
+}
+
+
+img[alt='Add Evaluation OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Add Gallery User OE']{
+    width: 500px;
+    height: 400px;
+}
+
+img[alt='Add Collection OE']{
+    width: 350px;
+    height: 300px;
+}
+
+img[alt='Add Card OE']{
+    width: 350px;
+    height: 300px;
+}
+
+img[alt='Add Article OE']{
+    width: 500px;
+    height: 600px;
+}
+
+img[alt='Add Exhibit OE']{
+    width: 350px;
+    height: 300px;
+}
+
+img[alt='Exhibit Teams OE']{
+    width: 650px;
+    height: 500px;
+}
+
+img[alt='Card Teams OE']{
+    width: 400px;
+    height: 400px;
+}
+
+img[alt='Blueprint Add Team OE']{
+    width: 550px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add User OE']{
+    width: 550px;
+    height: 50px;
+}
+
+img[alt='Blueprint Add Organization OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Blueprint Add Moves OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Blueprint Add Injects OE']{
+    width: 550px;
+    height: 600px;
+}
+
+img[alt='Add Scoring Model OE']{
+    width: 600px;
+    height: 400px;
+}
+
+img[alt='Scoring Categories OE']{
+    width: 600px;
+    height: 400px;
+}
+
+
+
+img[alt='Add Action OE']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='Add Role OE']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='Moves OE']{
+    width: 550px;
+    height: 400px;
+}
+
+img[alt='Teams OE']{
+    width: 550px;
+    height: 350px;
 }
 
 /*
