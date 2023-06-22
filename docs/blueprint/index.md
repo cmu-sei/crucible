@@ -64,6 +64,8 @@ If users desire to have an offline copy of any desired MSEL, they will have the 
 
 With the Upload feature, users can update the information from the MSEL Card with the new uploaded information. This feature will modify all the existing information with the one found on the .xlsx file.
 
+**Note:** When engaging in the export and import process of MSELs from the Blueprint application, it is imperative to ensure that injects and settings of the MSEL align with your particular preferences. It is worth noting that on occasion, during the import process of MSELs into the application, it may be necessary to reconfigure settings and specific fields.
+
 #### Delete
 *Hotspot 6:*
 
@@ -413,5 +415,3 @@ The following glossary provides a brief definition of key terms and concepts as 
 4. **Moves**: A defined period of time during an exercise, in which a series of injects are distributed for users to discuss and assess the current incident severity.
 5. **MSEL**: (Master Scenario Events List) provides a timeline for all expected events and injects.
 6. **System Admin Permission**: Can add users to a team, as well as assign the required permissions. 
-
-
