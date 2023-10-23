@@ -1,178 +1,33 @@
-# Resources and Requirements
+# Crucible Install
 
-## Requirements
+## Resources
 
-- Kubernetes
-  - For bare metal/lab installs, we recommend [K3s](https://docs.k3s.io/)
-- vCenter/Proxmox (for virtualization)
+## Importance of Certificates
 
-## Recommended
+This installation requires the creation of certificates that are placed in the correct place. This also includes the current vsphere certificate that is located on the landing page at `/downloads`. There is an example of the installation of the certificates in this documentation but make sure that these are correctly located and created. **This is the most troubleshooted issue when it comes to the install. You are able to see these issues by viewing the logs of the application.**
 
-- Helm
-- oAuth Provider
-  + We currently use [IdentityServer](https://identityserver4.readthedocs.io/en/latest/) and [Keycloak](https://www.keycloak.org/documentation)
+## Importance of DNS for Lab Installs
 
-## Crucible Applications and GitHub Pages
+If you are running this install in a lab, please note that it is highly recommended you also include a DNS server. There are tricky configurations that could throw you into a spiral. For example, the DNS server that's included in the K3S (Rancher) Kubernetes cluster is CoreDNS. This has a configmap that is customizable and during the many different installs had to be accessed and altered. **Most issues that you run into the install will most likely be DNS related and should be troubleshooted first.**
 
-- [Alloy API](https://github.com/cmu-sei/Alloy.Api)
-- [Alloy UI](https://github.com/cmu-sei/Alloy.ui)
-- [Caster API](https://github.com/cmu-sei/Caster.Api)
-- [Caster UI](https://github.com/cmu-sei/Caster.Ui)
-- [Player API](https://github.com/cmu-sei/Player.Api)
-- [Player Console UI](https://github.com/cmu-sei/Console.Ui)
-- [Player UI](https://github.com/cmu-sei/Player.Ui)
-- [Player VM API](https://github.com/cmu-sei/Vm.Api)
-- [Player VM UI](https://github.com/cmu-sei/Vm.Ui)
-- [Steamfitter API](https://github.com/cmu-sei/Steamfitter.Api)
-- [Steamfitter UI](https://github.com/cmu-sei/Steamfitter.Ui)
-- [CITE API](https://github.com/cmu-sei/CITE.Api)
-- [CITE UI](https://github.com/cmu-sei/CITE.Ui)
-- [Gallery API](https://github.com/cmu-sei/Gallery.Api)
-- [Gallery UI](https://github.com/cmu-sei/Gallery.Ui)
-- [Blueprint API](https://github.com/cmu-sei/Blueprint.Api)
-- [Blueprint UI](https://github.com/cmu-sei/Blueprint.Ui)
+## Usage of Helm
 
-## Crucible Helm Charts
+To get the newest version of the helm chart, you are able to pull it down using `helm show values` and using the helm repository. You can direct the output to a yaml file by using `> example.values.yaml`.
 
-- [Alloy](https://github.com/cmu-sei/helm-charts/tree/main/charts/alloy)
-- [Caster](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster)
-- [Player](https://github.com/cmu-sei/helm-charts/tree/main/charts/player)
-- [Steamfitter](https://github.com/cmu-sei/helm-charts/tree/main/charts/steamfitter)
-- [CITE](https://github.com/cmu-sei/helm-charts/tree/main/charts/cite)
-- [Gallery](https://github.com/cmu-sei/helm-charts/tree/main/charts/gallery)
-- [Blueprint](https://github.com/cmu-sei/helm-charts/tree/main/charts/blueprint)
+For most/all of the values files in this example, they use a combination of the `env` file and substituting the variables with `envsubst`. With the combination of the `helm upgrade -i`, this will install the needed applications into your Kubernetes cluster. This looks like this in the example of player:
 
-## Other Helm Charts
+```bash
+envsubst < values/crucible/player.values.yaml | helm upgrade -i player sei/player -f -
+```
 
-- [MetalLB](https://github.com/metallb/metallb)
-- [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
-- [Rancher](https://github.com/rancher/charts)
-- [Longhorn](https://github.com/longhorn/charts)
-- [StackStorm](https://github.com/StackStorm/stackstorm-k8s)
-- [Rocketchat](https://github.com/RocketChat/helm-charts)
-- [Moodle](https://github.com/bitnami/charts/tree/main/bitnami/moodle)
+This also applies to the other values files included with this documentation.
 
-## Docker Images
+The reason behind `helm upgrade -i` is so that you are able to install the application if it doesn't exist. If it does, it will then do a `helm upgrade` instead, only applying your changes.
 
-!!! note
+## Note to Application Settings and Environment Variables
 
-    These images mean that there isn't a Helm repository being used to deploy these applications but are currently being used by us. To create a deployment, please view the Kubernetes deployment documentation.
+These are all located at the related GitHub pages. It's important to say this because a lot of troubleshooting can be done by simply following the application logs and reference the GitHub page. There also could be updates or more information located in the application settings and should be routine to check the settings if there is an update.
 
-We primarily use these images in setting up a email server. The above Helm charts will pull the correct Docker images. This is completely optional but is what we use during certain exercises.
+## Seed Data for Applications
 
-- [Roundcube](https://hub.docker.com/r/roundcube/roundcubemail)
-
-We prebuild our Dovecot and Postfix Docker images. You can find an image on the Docker repository if needed.
-
-## Infrastructure
-
-Not all applications require virtualization. Gallery, CITE, Blueprint, Player and Steamfitter all can be ran without a hypervisor.
-
-You are able to run the full Crucible stack on minimal hardware. We usually run on four nodes: one server and three agents. Each node has around 100-250 GB of storage, 8GB RAM, 2 Cores. This is mainly for Longhorn and Stackstorm which takes a lot of resources even when limiting their availability. This is only what we recommend. As stated before, you can run this on one node outside of production. The only concern would be storage space.
-
-# Install Overview
-
-## Certificates
-
-This stack is very dependent on TLS. Please create certificates and add them as secrets into the cluster. Down below will create self-signed certificates for testing. If you are going to install this into production, you will have to change these.
-
-??? example
-
-    ``` json
-    {
-      "names": [
-        {
-          "C": "US"
-        }
-      ],
-      "key": {
-        "algo": "rsa",
-        "size": 2048
-      },
-      "CN": "Foundry Appliance Host",
-      "hosts": ["$DOMAIN", "*.$DOMAIN"]
-    }
-    ```
-
-    ``` bash
-    cfssl gencert -initca certificates/root-ca.json | cfssljson -bare root-ca
-    cfssl gencert -ca certificates/root-ca.pem -ca-key certificates/root-ca-key.pem -config certificates/config.json \
-                -profile intca certificates/int-ca.json | cfssljson -bare int-ca
-    cfssl gencert -ca certificates/int-ca.pem -ca-key certificates/int-ca-key.pem -config certificates/config.json \
-                -profile server certificates/host.json | cfssljson -bare host
-    ```
-
-    ``` bash
-    kubectl create secret tls appliance-cert --key certificates/host-key.pem --cert <( cat certificates/host.pem certificates/int-ca.pem ) --dry-run=client -o yaml | kubectl apply -f -
-    kubectl create secret generic appliance-root-ca --from-file=appliance-root-ca=certificates/root-ca.pem --dry-run=client -o yaml | kubectl apply -f -
-    ```
-
-## Loadbalancer
-
-If you're using a cloud provider for your Kubernetes cluster, you do not have to worry about supplying your own loadbalancer. If you are installing this on bare metal, which would be a majority of the time if you are testing the software, you will have to provide a loadbalancer. We recommend using MetalLB. The documentation will guide you on how to install this into your cluster.
-
-- [Helm Install MetalLB](https://metallb.universe.tf/installation/#installation-with-helm)
-- [Configuring MetalLB](https://metallb.universe.tf/configuration/)
-
-??? example
-
-    ``` bash
-    helm upgrade -i metallb metallb/metallb --namespace metallb-system --create-namespace
-    ```
-
-## Ingress
-
-In order to access these services, you need to be able to communicate to the cluster. The easiest way to do this is to add `ingress-nginx` to your cluster. Before you install this, you have to have an active loadbalancer. Here's a one liner using Helm to install `ingress-nginx`:
-
-??? example
-
-    ``` bash
-    helm upgrade -i nginx ingress-nginx/ingress-nginx --namespace nginx --create-namespace --set controller.watchIngressWithoutClass=true --set controller.kind=Deployment --set controller.ingressClassResource.name=nginx --set controller.ingressClassResource.default=true --set controller.ingressClass=nginx
-    ```
-
-## Rancher
-
-K3s is created by Rancher but Rancher itself is a GUI to help configure your Kubernetes cluster if you are already using K3s. If you are not using K3s, please do not install this application. Rancher will also help you get to and configure Longhorn.
-
-??? example
-
-    ``` bash
-    helm upgrade -i rancher rancher-stable/rancher --namespace cattle-system --create-namespace --set bootstrapPassword=$RANCHER_PASS --set replicas=1 --set auditLog.level=2 --set auditLog.destination=hostPath --set hostname=rancher.$DOMAIN --set ingress.tls.source=secret --set ingress.tls.secretName=name-of-certificate
-    ```
-
-## Longhorn
-
-Longhorn is used to easily manage, create, and backup persistent volumes and persistent volume claims. You do not have to install this but you will have to manage your own PV's and PVC's if you are not using a cloud provider.
-
-??? example
-
-    ``` bash
-    helm upgrade -i longhorn longhorn/longhorn --namespace longhorn-system --create-namespace --set persistance.defaultClassReplicaCount=1 --wait
-    ```
-
-## PostgreSQL and pgAdmin
-
-Majority of the applications above use PostgreSQL. We also use pgAdmin to help manage the database. This may differ if you're using a cloud provider.
-
-??? example
-
-    ``` bash
-    helm upgrade -i postgresql bitnami/postgresql --set global.storageClass=longhorn --set global.postgresql.auth.postgresPassword=$POSTGRES_PASS
-    ```
-
-[Here's the chart for pgAdmin that we use.](https://github.com/rowanruseler/helm-charts/blob/master/charts/pgadmin4/values.yaml)
-
-??? example
-
-    ``` bash
-    helm upgrade -i pgadmin runix/pgadmin4 -f -
-    ```
-
-## Crucible Installation
-
-All of the Crucible applications have their settings on the GitHub page and can be modified in the values yaml file on the corresponding Helm chart. There are settings within each application you do have to set up in order for communication. We have populated environment files and scripts that help guide you with this part of the installation. These are located at these two GitHub pages:
-
-- [k3s-install](https://github.com/avershave/k3s-install)
-- [k3s-production](https://github.com/sei-noconnor/k3s-production)
-
-These contain the necessary values and setup procedures to install the entire Crucible stack. More information on these settings can be located on the individual GitHub pages.
+Most of the applications take in seed data to automate up the process of getting the application up and running. This data is somewhat documented on most of the GitHub pages and also included in the values file on the Helm chart. The documentation is currently limited but describes itself in the examples.

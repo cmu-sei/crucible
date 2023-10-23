@@ -48,5 +48,11 @@ nav:
   - CITE: cite/index.md
   - Gallery: gallery/index.md
   - Integrations: integrations/index.md
-  - Overview Install: install/index.md
+  - Installation:
+    - Installation: install/index.md
+    - Longhorn: install/longhorn/index.md
+    - PostgreSQL: install/postgresql/index.md
+    - Identity: install/identity/index.md
+    - Crucible: install/crucible/index.md
+  - Install Overview: overview/index.md
 
