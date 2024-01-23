@@ -1,3 +1,4 @@
 mkdocs-material
+Pygments
 pillow
 cairosvg
