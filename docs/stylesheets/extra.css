@@ -163,20 +163,23 @@ img[alt='Add Scoring Model OE']{
 }
 
 img[alt='Scoring Categories OE']{
+    width: 400px;
+    height: 400px;
+}
+
+img[alt='Scoring Options OE']{
     width: 600px;
     height: 400px;
 }
 
-
-
 img[alt='Add Action OE']{
-    width: 500px;
-    height: 300px;
+    width: 700px;
+    height: 200px;
 }
 
 img[alt='Add Role OE']{
-    width: 500px;
-    height: 300px;
+    width: 700px;
+    height: 200px;
 }
 
 img[alt='Moves OE']{

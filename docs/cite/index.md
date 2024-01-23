@@ -42,7 +42,7 @@ In CITE, a Move is a defined period of time during an exercise, in which a serie
 
 When in Dashboard view, users will have two features to interact with moves:
 
-- Displayed Move: Move that will be currently dispalyed on the screen. Here, users can see responses to previous moves and scores, but users will not be able to edit a response.
+- Displayed Move: Move that will be currently displayed on the screen. Here, users can see responses to previous moves and scores, but users will not be able to edit a response.
 
 - Current Move: Move that is currently active. There are cases where the Displayed Move and the Current Move might be the same. Here, users are allowed to edit the category of the move.
 
@@ -52,37 +52,52 @@ The CITE Dashboard shows exercise details like the date and time, incident summa
 
 The following image will show some important hotspots about the CITE Dashboard. Reference the number on the hotspot to know more about this section.
 
-![CITE Dashboard OE](../assets/img/CITE-Dashboard.png)
+![CITE Dashboard OE](../assets/img/CITE-Dashboard-v2.png)
 
 #### Active Incident & Moves
 *Hotspot 1:* 
 
 The name of the active incident and the move number currently displayed.
 
-#### Situation Description, Date & Time
+#### Situation Date & Time
 *Hotspot 2:*
 
-The date and time of the situation displayed and a short description of the event.
+The date and time of the situation displayed.
 
-#### Actions to Consider
+#### Situation Description
 *Hotspot 3:*
 
-Users can see the different actions necessary to be executed during the exercise. These action are for everyone on the team and "per move", meaning they change at each move of the exercise.
+Short description of the event. This section also allows for the use of HTML elements, useful when receiving MSEL information from Blueprint.
+
+#### Unread Articles Link
+*Hotspot 4:*
+
+Direct link to Gallery Archive, which will show the user's unread articles.
+
+#### Actions to Consider
+*Hotspot 5:*
+
+Users can see the different actions necessary to be executed during the exercise. These actions are for everyone on the team and "per move", meaning they change at each move of the exercise.
 
 These are added to guide users on an appropriate course of action during an exercise. However, these actions are not connected to the scoresheet.
 
 #### Roles
-*Hotspot 4:* 
+*Hotspot 6:* 
 
-The roles are added so that each team member will have a clear path of their responsibilities during the exercise. For this, roles can be customized for each team and then the team members are going to decide what role each user is assigned.
+The roles are added so that each team member will have a clear path of their responsibilities during the exercise. For this, roles can be customized for each team and then the team members decide what role each user should be assigned to.
 
 #### Score Summary
-*Hotspot 5:*
+*Hotspot 7:*
 
 Displays the various scores at the appropriate severity level for the disaplyed move. Here, scores are always visible.
 
+#### Team Selection
+*Hotspot 8:*
+
+This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user will be able to see how other teams progress during the exercise, as well as participate on their own team.
+
 #### Dashboard & Scoresheet Toggle
-*Hotspot 6:*
+*Hotspot 9:*
 
 By using this icon, users can toggle between the CITE Dashboard and the CITE Scoresheet.
 
@@ -92,17 +107,17 @@ The CITE Scoresheet compares participant scores to organization scores, group av
 
 The following image will show some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to know more about this section.
 
-![CITE Scoresheet OE](../assets/img/CITE-Scoresheet.png)
+![CITE Scoresheet OE](../assets/img/CITE-Scoresheet-v2.png)
 
 #### Event Name
 *Hotspot 1:*
 
-The Event Name is the name of the current event.
+The name of the current event.
 
 #### Displayed Move
 *Hotspot 2:*
 
-The move currently displayed on the screen. Clicking < displays previous moves. Clicking > displays the current move. Using Displayed Moves, users can see responses to previous moves and scores but the user cannot edit a previous response.
+The move currently displayed on the screen. Clicking < displays previous moves. Clicking > displays the current move. Using Displayed Move, users can see responses to previous moves and scores but the user cannot edit a previous response.
 
 #### Scoring Features
 *Hotspot 3:*
@@ -123,13 +138,8 @@ The move currently displayed on the screen. Clicking < displays previous moves. 
 
 - Preset: Sets the user's selections to the previous move score to use as a starting point for the current move.
 
-#### Score Summary
-*Hotspot 4:*
-
-Displays the various scores at the appropriate severity level for the displayed move so that the scores are always visible.
-
 #### Categories and Options
-*Hotspot 5:*
+*Hotspot 4:*
 
 Categories that are individually scored based upon the current move situation. For each category, select as many options as relevant. Selecting options assigns points to each category which are compiled to create the move score as defined by the [scoring model](#glossary).
 
@@ -142,45 +152,61 @@ When scoring a move, the user can attach a comment (or multiple comments) to a c
 
 When finished scoring the categories and adding comments, click Submit to submit the scores.
 
+#### Score Summary
+*Hotspot 5:*
+
+Displays the various scores at the appropriate severity level for the displayed move so that the scores are always visible.
+
+#### Team Selection
+*Hotspot 6:*
+
+This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user will be able to see how other teams progress during the exercise, as well as participate on their own team.
+
+#### Dashboard & Scoresheet Toggle
+*Hotspot 7:*
+
+By using this icon, users can toggle between the CITE Dashboard and the CITE Scoresheet.
+
 ## Administrator Guide
 
 ### Evaluations
 The following image shows the Evaluations Administration Page. Here, administrators can add, edit, and delete [evaluations](#glossary).
 
-![Evaluations Admin OE](../assets/img/EvaluationsAdmin.png)
+![Evaluations Admin OE](../assets/img/EvaluationsAdmin-v2.png)
 
 **Add an Evaluation** 
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Evaluation.
 
-![Add Evaluation OE](../assets/img/AddEvaluation-v2.png)
+![Add Evaluation OE](../assets/img/AddEvaluation-v3.png)
 
 1. Under the Evaluation Administration View, click **+**. 
 2. Add an **Evaluation Description** to keep track of what is going to happen in this exercise.
 3. Select the **Scoring Model** to be used during the exercise.
 4. To make the Evaluation available, select an **Evaluation Status** of **Active**.
-5. Add a **Situation Date & Time** to set the time for the exercise.
-6. Click **Save**.
+5. Set the **Current Move** of the exercise.
+6. Add a **Situation Date & Time** to set the time for the exercise.
+7. Click **Save**.
 
 If necessary, an Evaluation can be deleted by clicking on the **Trash Icon** next to the desired Evaluation.
 
 In the same way, an Evaluation can be edited by clicking on the **Edit Icon** next to the desired Evaluation.
 
-**Configue an Evaluation**
+**Configure an Evaluation**
 
 To configure an evaluation to be used for an exercise, administrators will need to add Moves and Teams to the evaluation. To do this, follow these steps.
 
-![Configure Evaluation OE](../assets/img/ConfigureEvaluations.png)
+![Configure Evaluation OE](../assets/img/ConfigureEvaluations-v2.png)
 
 *Moves*
 
-![Moves OE](../assets/img/moves-v2.png)
+![Moves OE](../assets/img/moves-v3.png)
 
 1. Click on the **+** on the Moves section.
 2. Add a **Move Number**.
 3. Add a **Move Description**, which will explain what will be happening when the move is executed.
-4. Add a **Situation Description** about the background information for the exercise.
-5. Add a **Situation Date & Time** of when the exercise is going to occur.
+4. Add a **Situation Date & Time** of when the exercise is going to occur.
+5. Add a **Situation Description** about the background information for the exercise.
 6. Click **Save**.
 
 If necessary, a Move can be deleted by clicking on the **Trash Icon** next to the desired Move.
@@ -201,11 +227,23 @@ If necessary, a Team can be deleted by clicking on the **Trash Icon** next to th
 
 In the same way, a Team can be edited by clicking on the **Edit Icon** next to the desired Team.
 
+*Observers*
+
+To assign the Observer role to a user:
+
+1. Under **Evaluation Users**, search for the desired user.
+2. Once the user has been found, click on **Add**.
+
+To remove the Observer role from a user:
+
+1. Under **Observers**, search for the desired user.
+2. Once the user has been found, click on **Remove**.
+
 ### Scoring Models
 
 The following image shows the [Scoring Models](#glossary) Administration Page. Here, administrators can add, edit, and delete scoring models.
 
-![Scoring Models Admin OE](../assets/img/scoringModelsAdmin.png)
+![Scoring Models Admin OE](../assets/img/scoringModelsAdmin-v2.png)
 
 **Add a Scoring Model**
 
@@ -221,7 +259,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 When adding a Scoring Model, an administrator is required to add a defined equation to calculate the submission score from the category scores and can contain the following variables:
 
-- **{average}:** The average value of the Scoring Categories
+- **{average}:** The average value of the Scoring Categories.
 - **{sum}:** The sum of the Scoring Categories.
 - **{count}:** The count of the Scoring Categories.
 - **{minPossible}:** The minimum possible value of the submission.
@@ -294,22 +332,23 @@ In the same way, a Scoring Option can be edited by clicking on the **Edit Icon**
 
 ### Actions
 
-The following image shows the Actions Administration Page. Here,administrators can add, edit, and delete actions.
+The following image shows the Actions Administration Page. Here, administrators can add, edit, and delete actions.
 
 However, users who can submit scores on behalf of their team can also add suggested actions to the CITE dashboard. The use of actions will allow the team members to customize their response by tracking tasks during the exercise. These actions remain internal to the team and will not be visible to other participants.
 
-![Actions Admin OE](../assets/img/actionsAdmin.png)
+![Actions Admin OE](../assets/img/actionsAdmin-v2.png)
 
 **Add an Action**
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Action.
 
-![Add Action OE](../assets/img/addAction-v2.png)
+![Add Action OE](../assets/img/addAction-v3.png)
 
-1. Under the Actions Administration View, click **+**.
-2. Add an **Action Description** that will provide information for the action.
-3. Select the desired **Team** where the action will be added.
-4. Click **Save**.
+1. Under the Actions Administration View, click on the **Move** dropdown and select the desired move.
+2. Click on the **Team** dropdown and select the desired team.
+3. Click on the **+** icon to add an Action.
+4. Add an **Action Description** that will provide additional information.
+5. Click **Save**.
 
 If necessary, an Action can be deleted by clicking on the **Trash Icon** next to the desired Action.
 
@@ -321,17 +360,17 @@ The following image shows the Roles Administration Page. Here, administrators ca
 
 However, users who can submit scores on behalf of their team can also add participant roles to the CITE dashboard. The use of roles will allow the team members to customize their response by tracking their responsibility during the exercise. These roles remain internal to the team and will not be visible to other participants.
 
-![Roles Admin OE](../assets/img/rolesAdmin.png)
+![Roles Admin OE](../assets/img/rolesAdmin-v2.png)
 
 **Add a Role**
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Role.
 
-![Add Role OE](../assets/img/addRole-v2.png)
+![Add Role OE](../assets/img/addRole-v3.png)
 
-1. Under the Roles Administration View, click **+**.
-2. Add an **Role Name** that will provide a description for the role..
-3. Select the desired **Team** where the role will be added.
+1. Under the Roles Administration View, click on the **Team** dropdown and select the desired team.
+2. Click on the **+** icon to add a Role.
+3. Add a **Role Name** that will provide a description for the Role.
 4. Click **Save**.
 
 If necessary, a Role can be deleted by clicking on the **Trash Icon** next to the desired Role.
@@ -340,11 +379,33 @@ In the same way, a Role can be edited by clicking on the **Edit Icon** next to t
 
 ### Submissions
 
-The following image shows the Roles Administration Page. Here, administrators can keep track of all the score [submissions](#glossary) provided by the different teams during an exercise. This will allow administrators to compare their scores with the official score, as well as keep track of which teams are on a good track and which are not.
+The following image shows the Submissions Administration Page. Here, administrators can keep track of all the score [submissions](#glossary) provided by the different teams during an exercise. This will allow administrators to compare their scores with the official score, as well as keep track of which teams are on a good track and which are not.
 
 Additional functionalities include copying the entire score, as well as deleting a score submitted by a team.
 
-![Submissiosn Admin OE](../assets/img/submissionsAdmin.png)
+![Submissiosn Admin OE](../assets/img/submissionsAdmin-v2.png)
+
+### Team Types
+
+The following image shoes the [Team Types](#glossary) Administration Page. Here, administrators can create different types of teams to be used during an exercise. This will allow administrators to classify the different teams on the platform based on common characteristics and/or organizations.
+
+![Team Types Admin OE](../assets/img/teamTypesAdmin.png)
+
+**Add a Team Type**
+
+Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Team Type.
+
+![Add Team Type OE](../assets/img/addTeamType.png)
+
+1. Under the Team Type Administration View, click on the **+** icon. 
+2. Add a **Team Type Name**.
+3. If applicable, check the box for **Official Score Contributor**.
+4. If applicable, check the box for **Show TeamTypeAverage**.
+5. To save these selections, click on the user with a plus sign.
+
+If necessary, a Team Type can be deleted by clicking on the **Trash Icon** next to the desired Team Type.
+
+In the same way, a Team Type can be edited by clicking on the **Edit Icon** next to the desired Team Type.
 
 ### Users
 
@@ -393,6 +454,6 @@ The following glossary provides a brief definition of key terms and concepts as 
 11. **Scoring Category**: Has a defined equation used to calculate the submission score from the categroy scores. Additionally, the category has a weight which will multiply the score obtained.
 12. **Scoring Model**: Tool used to assign a comparative value, takes into account the totality of the data points, their relative weights, and the scores for each of their range values.
 13. **Scoring Options**: Has a preset value which will be used to calculate the submission score for the Scoring Category it is part of.
-14. **Submission**: act of providing a score or response for evaluation in relation to an incident presented during the current move.
+14. **Submission**: Act of providing a score or response for an evaluation in relation to an incident presented during the current move.
 15. **Submit-Level Permission**: Can view, edit, and submit the team score.
-
+16. **Team Types**: Types of teams available to be assigned to different teams with similar characteristics during an exercise.
