@@ -122,11 +122,6 @@ img[alt='Add Exhibit OE']{
     height: 300px;
 }
 
-img[alt='Exhibit Teams OE']{
-    width: 650px;
-    height: 500px;
-}
-
 img[alt='Card Teams OE']{
     width: 400px;
     height: 400px;
@@ -190,6 +185,21 @@ img[alt='Moves OE']{
 img[alt='Teams OE']{
     width: 550px;
     height: 350px;
+}
+
+img[alt='Add Articles Exercise OE']{
+    width: 800px;
+    height: 700px;
+}
+
+img[alt='Article Created OE']{
+    width: 400px;
+    height: 200px;
+}
+
+img[alt='Add Teams Exhibit OE']{
+    width: 600px;
+    height: 300px;
 }
 
 /*

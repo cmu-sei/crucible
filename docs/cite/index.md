@@ -229,12 +229,12 @@ In the same way, a Team can be edited by clicking on the **Edit Icon** next to t
 
 *Observers*
 
-To assign the Observer role to a user:
+To assign the [Observer Role](#glossary) to a user:
 
 1. Under **Evaluation Users**, search for the desired user.
 2. Once the user has been found, click on **Add**.
 
-To remove the Observer role from a user:
+To remove the Observer Role from a user:
 
 1. Under **Observers**, search for the desired user.
 2. Once the user has been found, click on **Remove**.
@@ -450,10 +450,11 @@ The following glossary provides a brief definition of key terms and concepts as 
 7. **Modifiers**: If enabled, this value is used in calculating the Scoring Category score. Depending on how the equation is written, the modifier can be used to add, subtract, multiply and/or divide within the equation.
 8. **Modify-Level Permission**: Can view and edit the team score.
 9. **Moves**: A defined period of time during an exercise, in which a series of injects are distributed for users to discuss and assess the current incident severity.
-10. **Roles**: Provide a set of responsibilities assigned to a user during an exercise.
-11. **Scoring Category**: Has a defined equation used to calculate the submission score from the categroy scores. Additionally, the category has a weight which will multiply the score obtained.
-12. **Scoring Model**: Tool used to assign a comparative value, takes into account the totality of the data points, their relative weights, and the scores for each of their range values.
-13. **Scoring Options**: Has a preset value which will be used to calculate the submission score for the Scoring Category it is part of.
-14. **Submission**: Act of providing a score or response for an evaluation in relation to an incident presented during the current move.
-15. **Submit-Level Permission**: Can view, edit, and submit the team score.
-16. **Team Types**: Types of teams available to be assigned to different teams with similar characteristics during an exercise.
+10. **Observer Role**: Individuals who are tasked with impartially and objectively monitoring teams during an exercise.
+11. **Roles**: Provide a set of responsibilities assigned to a user during an exercise.
+12. **Scoring Category**: Has a defined equation used to calculate the submission score from the categroy scores. Additionally, the category has a weight which will multiply the score obtained.
+13. **Scoring Model**: Tool used to assign a comparative value, takes into account the totality of the data points, their relative weights, and the scores for each of their range values.
+14. **Scoring Options**: Has a preset value which will be used to calculate the submission score for the Scoring Category it is part of.
+15. **Submission**: Act of providing a score or response for an evaluation in relation to an incident presented during the current move.
+16. **Submit-Level Permission**: Can view, edit, and submit the team score.
+17. **Team Types**: Types of teams available to be assigned to different teams with similar characteristics during an exercise.
