@@ -358,7 +358,7 @@ In the same way, an Action can be edited by clicking on the **Edit Icon** next t
 
 The following image shows the Roles Administration Page. Here, administrators can add, edit, and delete roles.
 
-However, users who can submit scores on behalf of their team can also add participant roles to the CITE dashboard. The use of roles will allow the team members to customize their response by tracking their responsibility during the exercise. These roles remain internal to the team and will not be visible to other participants.
+However, users who can submit scores on behalf of their team can also add participant roles to the CITE dashboard. The use of roles will allow the team members to customize their response by tracking their responsibilities during an exercise. These roles remain internal to the team and will not be visible to other participants.
 
 ![Roles Admin OE](../assets/img/rolesAdmin-v2.png)
 

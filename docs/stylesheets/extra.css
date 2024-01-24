@@ -147,7 +147,7 @@ img[alt='Blueprint Add Moves OE']{
     height: 600px;
 }
 
-img[alt='Blueprint Add Injects OE']{
+img[alt='Blueprint Add Event OE']{
     width: 550px;
     height: 600px;
 }
@@ -200,6 +200,41 @@ img[alt='Article Created OE']{
 img[alt='Add Teams Exhibit OE']{
     width: 600px;
     height: 300px;
+}
+
+img[alt='Blueprint Add Data Fields OE']{
+    width: 600px;
+    height: 500px;
+}
+
+img[alt='Blueprint Add CITE Actions OE']{
+    width: 600px;
+    height: 300px;
+}
+
+img[alt='Blueprint Add CITE Roles OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add Gallery Cards OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add Organization Template OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Configure Blueprint Teams OE']{
+    width: 800px;
+    height: 600px;
+}
+
+img[alt='Blueprint Add Card Template OE']{
+    width: 600px;
+    height: 200px;
 }
 
 /*
