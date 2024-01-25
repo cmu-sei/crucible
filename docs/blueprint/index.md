@@ -5,7 +5,7 @@
 
 ### What is Blueprint?
 
-[**Blueprint**](#glossary) is a web application created to make the development of a [Master Scenario Event Lists (MSEL)](#glossary) and [injects](#glossary) easier. With this application, it will further simplify the creation and visualization of the MSEL, allowing the user to select/define the simulated entities, attacks, timeframe, regulators impacted by the scenario, etc. Additionally, it will leverage many advantages over the traditional method of using an excel spreadsheet by facitilating the collaboration between exercise designer's belonging to multiple teams.
+[**Blueprint**](#glossary) is a web application created to make the development of a [Master Scenario Event Lists (MSEL)](#glossary) and [events](#glossary) easier. With this application, it will further simplify the creation and visualization of the MSEL, allowing the user to select/define the simulated entities, attacks, timeframe, regulators impacted by the scenario, etc. Additionally, it will leverage many advantages over the traditional method of using an excel spreadsheet by facitilating the collaboration between exercise designer's belonging to multiple teams.
 
 Additionally, Blueprint can be integrated with Player, Gallery, CITE and Steamfitter. Integrating Blueprint with these applications will automate the configuration process for an exercise.
 
@@ -20,11 +20,11 @@ For installation, refer to these GitHub repositories.
 
 To use Blueprint, a user must be assigned Content Developer permissions and be added to their respective team.
 
-There are two levels of permissions in Blueprint that affect the way a user interacts with the Blueprint application and collaborates on the MSEL creation. 
+There are three levels of permissions in Blueprint that affect the way a user interacts with the Blueprint application and collaborates on the MSEL creation. 
 
 - [System Admin](#glossary): Can add users to a team, as well as assign the required permissions to the users. Additionally, users with this permission can view, edit, create, and approve events on the MSEL.
 - [Content Developer](#glossary): Can view, edit, create, and approve events on the MSEL.
-- [Facilitator](#glossary): Manages the exercise, can advance moves, execute injects, and check injects as completed.
+- [Facilitator](#glossary): Manages the exercise, can advance moves, execute events, and check events as completed.
 
 Most users will have the Content Developer permission, since that is all that is required to be able to create and collaborate with other teams on the MSEL creation. 
 
@@ -34,7 +34,7 @@ Refer to this section [Administrator Guide](#administrator-guide) for more infor
 
 ### Blueprint Dashboard
 
-The Blueprint Dashboard shows created MSELs. Here, users are able to select the desired MSEL to work on, as well create or delete them.
+The Blueprint Dashboard shows created MSELs. Here, users are able to select the desired MSEL to work on, as well as create or delete them.
 
 The following image will show some important hotspots about the Blueprint Dashboard. Reference the number on the hotspot to know more about this section.
 
@@ -70,7 +70,7 @@ This functionality will enable users to search for an specific MSEL, in case it 
 
 **1. Download**
 
-If users desire to have an offline copy of any desired MSEL, they will have the ability to download a copy to their devices by using the Download feature. If by any chance users don’t have an internet connection, this feature will be useful since they will be able to work offline on the MSEL and then upload the MSEL back to the application, so that other users can see any changes made. Although users can work on the MSEL offline, it is not recommended since they will be missing of all of the helpful features that Blueprint offers.
+If users desire to have an offline copy of any desired MSEL, they will have the ability to download a copy to their devices by using the Download feature. If by any chance users don’t have an internet connection, this feature will be useful since they will be able to work offline on the MSEL and then upload the MSEL back to the application, so that other users can see any changes made. Although users can work on the MSEL offline, it is not recommended since they will be missing on all of the helpful features that Blueprint offers.
 
 **2. Upload**
 
@@ -123,14 +123,14 @@ To edit the MSEL's basic information and configuration, follow these next steps:
 10. If desired to be integrated with CITE, check the **Integrate CITE** box.
 11. If desired to be integrated with Steamfitter, check the **Integrate Steamfitter** box.
 12. To change the MSEL's status to approved, select **Aprove** within the available options under the **MSEL Status** field.
-13. If desired, an Exercise View of the MSEL can be shared with other users by sharing the **Exercise View Url** automaticallyo generated.
+13. If desired, an Exercise View of the MSEL can be shared with other users by sharing the **Exercise View Url** automatically generated.
 14. To save these settings, click on the **checkmark** at the top.
 
  Integrations:
 
-- **Gallery:** Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To know more about this integration reference this [Gallery](#gallery).
-- **CITE:** Blueprint will add the evaluation, [moves](#glossary), actions, roles, teams, and users specified on the MSEL. To know more about this integration reference this [CITE](#cite).
-- **Player & Steamfitter:** Blueprint will automate the adding of injects specified on the MSEL, as well as configure exercise details in Player.
+- **[Gallery](#glossary):** Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To know more about this integration reference this section [Gallery](#gallery).
+- **[CITE](#glossary):** Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL. To know more about this integration reference this section [CITE](#cite).
+- **[Player](#glossary) & [Steamfitter](#glossary):** Blueprint will automate the adding of events specified on the MSEL, as well as configure exercise details in Player.
 
 **Note:** Player and Steamfitter integrations are currently a work in progress.
 
@@ -170,20 +170,20 @@ To delete a team from the MSEL, follow these steps:
 1. Navigate to the **Teams** tab.
 2. Select the desired team to be removed and click on the **-** button.
 
-Now the team has been added to the MSEL and members will be able to view and edit the MSEL based on the role assigned to the team. 
+Now the team has been added to the MSEL and members will be able to view and edit the MSEL based on the role assigned to each team member. 
 
 ![Blueprint Roles OE](../assets/img/blueprintRoles.png)
 
 The available roles are:
 
-- **Editor:** Can view and edit the MSEL.
-- **Approver:** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
-- **MoveEditor:** Can edit moves on the MSEL, as well as increment them during an exercise.
-- **Owner:** Owner of the MSEL, can view and edit the MSEL.
-- **Facilitator:** Manages the exercise, can advance moves, execute injects, and check injects as completed.
-- **Viewer:** Can view the MSEL, but can't do any edits to it.
-- **GalleryObserver:** When Gallery integration is enabled, this role will allow a user to observe other team's progress on the Gallery application during an exercise.
-- **CITEObserver:** When CITE integration is enabled, this rolw will allow a user to observe other team's progress on the CITE application during an exercise.
+- **[Editor](#glossary):** Can view and edit the MSEL.
+- **[Approver](#glossary):** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
+- **[Move Editor](#glossary):** Can edit moves on the MSEL, as well as increment them during an exercise.
+- **[Owner](#glossary):** Owner of the MSEL, can view and edit the MSEL.
+- **[Facilitator](#glossary):** Manages the exercise, can advance moves, execute events, and check events as completed.
+- **[Viewer](#glossary):** Can view the MSEL, but can't do any edits to it.
+- **[Gallery Observer](#glossary):** When Gallery integration is enabled, this role will allow a user to observe other team's progress on the Gallery application during an exercise.
+- **[CITE Observer](#glossary):** When CITE integration is enabled, this role will allow a user to observe other team's progress on the CITE application during an exercise.
 
 #### Data Fields Tab
 
@@ -193,8 +193,8 @@ On this tab, users will be able to add data fields that are going to be used on 
 
 As it can be seen, there are two categories of Data Fields.
 
-- **System Defined:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
-- **User Defined:** These are added by the user on an as-needed basis.
+- **[System Defined](#glossary):** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
+- **[User Defined](#glossary):** These are added by the user on an as-needed basis.
 
 *Add a Data Field*
 
@@ -208,9 +208,9 @@ To add a Data Field to the MSEL, follow these steps:
 4. Add a **Name** for the data field.
 5. If necessary, check the **Use Option List** box and add the desired options.
 6. If necessary, check the **Display on the Events List** box and it will appear on the Events tab.
-7. If necessary, check the **Dispaly on the Exercise View** box and it will appear on the Exercise View tab.
-8. If necessary, check the **Display on "Advanced" edit tab** box and it will appear on the Advanced section when adding new injects to the MSEL.
-9. If necessary, check the **Dispaly for Content Developers and MSEL Owners ONLY!!!** box to limit who can view this data field.
+7. If necessary, check the **Display on the Exercise View** box and it will appear on the Exercise View tab.
+8. If necessary, check the **Display on "Advanced" edit tab** box and it will appear on the Advanced section when adding new events to the MSEL.
+9. If necessary, check the **Display for Content Developers and MSEL Owners ONLY!!!** box to limit who can view this data field.
 10. If integrated with Gallery, add the **Gallery Article Parameter** the data field should be mapped to.
 11. If desired to be a specific size, add the **Column Metadata (Width)**.
 12. If desired to be a specific color, add the **Column Metadata (Color)**.
@@ -240,7 +240,7 @@ To search for a specific Data Field, follow these steps:
 
 #### Organizations Tab
 
-On this tab, users will be able to add all the related organizations that are going to be used on the MSEL, as well as on the live exercise. Here, organization with their information are added. Additionally, users can create organization from scratch or from a template.
+On this tab, users will be able to add all the related organizations that are going to be used on the MSEL, as well as on the live exercise. Here, organizations with their information are added. Additionally, users can create organizations from scratch or from a template.
 
 ![Blueprint Organizations Tab OE](../assets/img/blueprintOrganizations-v2.png)
 
@@ -263,7 +263,7 @@ To add an Organization Card from scratch, follow these steps:
 
 *Add an Organization Card From Template*
 
-To view create an organization from a template, follow these steps:
+To create an organization from a template, follow these steps:
 
 1. Navigate to the **Organizations** tab.
 2. Click on **Add Organization**.
@@ -296,13 +296,15 @@ To search for a specific organization, follow these steps:
 
 #### Moves Tab
 
-On this tab, users will be able to add all the related exercise Moves to the MSEL.
+On this tab, users will be able to add all the related exercise [moves](#glossary) to the MSEL.
 
 ![Blueprint Moves Tab OE](../assets/img/blueprintMoves-v2.png)
 
 *Add a Move*
 
 ![Blueprint Add Moves OE](../assets/img/blueprintAddMove-v3.png)
+
+To add a move, follow these steps:
 
 1. Navigate to the **Moves** tab.
 2. Click on the **+** icon.
@@ -356,12 +358,12 @@ To add a new event, follow these steps:
 6. Add the **Description** for the event.
 7. Add the **Status** for the event.
 8. Add the **Date/Time** for the event.
-9. Indicate the **Move** for the inject.
+9. Indicate the **Move** for the event.
 10. Add a **Group**.
 11. Add an **Exercise Date**.
 12. Add a **Type**.
 13. Select the **Delivery Method** from the given options.
-14. Add a **Title** for the inject.
+14. Add a **Title** for the event.
 15. Select the **From Org** from the given options.
 16. Select the **To Org** from the given options.
 17. If necessary, add any additional **Details**.
@@ -416,7 +418,7 @@ On the Teams tab, extra CITE configurations should be done on teams that have be
 
 ##### CITE Actions Tab
 
-On this tab, CITE Actions can be added to be pushed from Blueprint. These actions will allow team members to customize their response by tracking tasks during the exercise.
+On this tab, [CITE Actions](#glossary) can be added to be pushed from Blueprint. These actions will allow team members to customize their response by tracking tasks during the exercise.
 
 ![Blueprint CITE Actions OE](../assets/img/blueprintCiteActions.png)
 
@@ -453,7 +455,7 @@ To search for a specific action, follow these steps:
 
 ##### CITE Roles Tab
 
-On this tab, CITE Roles can be added to be pushed from Blueprint. These roles will allow team members to customize their response by tracking their responsibilities during an exercise.
+On this tab, [CITE Roles](#glossary) can be added to be pushed from Blueprint. These roles will allow team members to customize their response by tracking their responsibilities during an exercise.
 
 ![Blueprint CITE Roles OE](../assets/img/blueprintCiteRoles.png)
 
@@ -492,7 +494,7 @@ After adding all of the MSEL information and performing all of the configuration
 
 ![Blueprint Push to CITE OE](../assets/img/pushCITE.png)
 
-To push to CITE, follow these steps:
+To push MSEL information to CITE, follow these steps:
 
 1. Navigate to the **Info** tab.
 2. Select an option from the **Select Scoring Model** dropdown.
@@ -528,11 +530,11 @@ Data fields that should be added are:
 - Url
 - Open in a New Tab
 
-After adding these data fields, it should be mapped to the appropriate Gallery field. This can be done by selecting an option from the **Gallery Article Parameter** dropdown when adding/editing a data field.
+After adding these data fields, these should be mapped to their appropriate Gallery field. This can be done by selecting an option from the **Gallery Article Parameter** dropdown when adding/editing a data field.
 
 ##### Gallery Cards Tab
 
-On this tab, Gallery Cards can be added to be psuhed from Blueprint. These are the different cards presented in the Gallery Wall and where different articles related to that card can be found.
+On this tab, [Gallery Cards](#glossary) can be added to be pushed from Blueprint. These are the different cards presented in the Gallery Wall and where different articles related to that card can be found.
 
 ![Blueprint Gallery Cards OE](../assets/img/blueprintGalleryCards.png)
 
@@ -567,7 +569,7 @@ After adding all of the MSEL information and performing all of the configuration
 
 ![Blueprint Push to Gallery OE](../assets/img/pushGallery.png)
 
-To push to Gallery, follow these steps:
+To push MSEL information to Gallery, follow these steps:
 
 1. Navigate to the **Info** tab.
 2. Click the **Push to Gallery** button.
@@ -575,7 +577,7 @@ To push to Gallery, follow these steps:
 ## Administrator Guide
 
 ### Teams
-The following image shows the Teams Administration Page. Here, administrators can add, edit, and delete teams. To be able to use the Blueprint application, administrator should assign a team to desired users. 
+The following image shows the Teams Administration Page. Here, administrators can add, edit, and delete teams. To be able to use the Blueprint application, the administrator should assign a team to desired users. 
 
 ![Blueprint Teams Admin OE](../assets/img/blueprintTeams-v2.png)
 
@@ -613,7 +615,7 @@ The available permissions are:
 
 - **System Admin:** Can use all administration privileges on the Blueprint application.
 - **Content Developer:** Can view, edit, create, and approve events on the MSEL.
-- **Facilitator:** Manages the exercise, can advance moves, execute injects, and check injects as completed.
+- **Facilitator:** Manages the exercise, can advance moves, execute events, and check events as completed.
 
 ![Blueprint Users Admin OE](../assets/img/blueprintUsersAdmin-v2.png)
 
@@ -633,7 +635,7 @@ If necessary, a user can be deleted by clicking on the **Trash Icon** next to th
 
 In the same way, a user can be edited by clicking on the **Edit Icon** next to the desired user.
 
-### Organization Templates
+### Organizations
 
 The following image shows the Organization Templates Administration Page. Here, administrators can add and delete organization templates.
 
@@ -656,7 +658,7 @@ If necessary, an organization template can be deleted by clicking on the **Trash
 
 In the same way, an organization template can be edited by clicking on the **Edit Icon** next to the desired organization template.
 
-### Gallery Card Templates
+### Gallery Cards
 
 The following image shows the Gallery Card Templates Administration Page. Here, administrators can add and delete Gallery card templates.
 
@@ -677,21 +679,70 @@ If necessary, an Gallery card template can be deleted by clicking on the **Trash
 
 In the same way, an Gallery card template can be edited by clicking on the **Edit Icon** next to the desired card template.
 
-### CITE Actions Templates
+### CITE Actions
 
-The following image shows the CITE Actions Templates Administration Page. Here, administrators can add and delete CITE action templates.
+The following image shows the CITE Action Templates Administration Page. Here, administrators can add and delete CITE action templates.
 
 ![Blueprint Actions Admin OE](../assets/img/blueprintActionsAdmin.png)
 
+**Add a CITE Action Template**
+
+Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a CITE action template.
+
+![Blueprint CITE Action Template OE](../assets/img/AddCITEActionTemplate.png)
+
+1. Under the CITE Actions Administration View, click **+**.
+2. Add a **Description of the Action**.
+3. Click **Save**.
+
+If necessary, an CITE action template can be deleted by clicking on the **Trash Icon** next to the desired action template.
+
+In the same way, an CITE action template can be edited by clicking on the **Edit Icon** next to the desired action template.
+
+### CITE Roles
+
+The following image shows the CITE Roles Templates Administration Page. Here, administrators can add and delete CITE roles templates.
+
+![Blueprint Roles Admin OE](../assets/img/blueprintRolesAdmin.png)
+
+**Add a CITE Role Template**
+
+Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a CITE role template.
+
+![Blueprint CITE Role Template OE](../assets/img/AddCITERoleTemplate.png)
+
+1. Under the CITE Roles Administration View, click **+**.
+2. Add a **Name** for the role.
+3. Click **Save**.
+
+If necessary, a CITE role template can be deleted by clicking on the **Trash Icon** next to the desired role template.
+
+In the same way, a CITE role template can be edited by clicking on the **Edit Icon** next to the desired role template.
 
 ## Glossary
 
 The following glossary provides a brief definition of key terms and concepts as they are used in the context of the Blueprint application. 
 
-1. **Blueprint**: Web application created to make the development of a MSEL and injects easier.
-2. **Content Developer Permission**: Can view, edit, create, and approve events on the MSEL.
-3. **Facilitator Permission**: Manages the exercise, can advance moves, execute injects, and check injects as completed.
-3. **Injects**: Specific scenario events or messages within the scenario that prompt users to implement designated actions.
-4. **Moves**: A defined period of time during an exercise, in which a series of injects are distributed for users to discuss and assess the current incident severity.
-5. **MSEL**: (Master Scenario Events List) provides a timeline for all expected events and injects.
-6. **System Admin Permission**: Can add users to a team, as well as assign the required permissions. 
+1. **Approver Role:** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
+2. **Blueprint**: Web application created to make the development of a MSEL and events easier.
+3. **CITE:** Web application that allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents.
+4. **CITE Action:** Series of steps to guide users on an appropriate course of action during an exercise.
+5. **CITE Observer Role:** When CITE integration is enabled, this role will allow a user to observe other team's progress on the CITE application during an exercise.
+6. **CITE Role:** Provide a set of responsibilities assigned to a user during an exercise.
+7. **Content Developer Permission**: Can view, edit, create, and approve events on the MSEL.
+8. **Editor Role:** Can view and edit the MSEL.
+9. **Events**: Specific scenario events or messages within the scenario that prompt users to implement designated actions.
+10. **Facilitator Permission**: Manages the exercise, can advance moves, execute events, and check events as completed.
+11. **Gallery:** Web application where participants receive incident information.
+12. **Gallery Card:** Groups articles into their respective categories, the categories can be defined in the administration panel.
+13. **Gallery Observer Role:** When Gallery integration is enabled, this role will allow a user to observe other team's progress on the Gallery application during an exercise.
+14. **Move Editor:** Can edit moves on the MSEL, as well as increment them during an exercise.
+15. **Moves**: A defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
+16. **Owner Role:** Owner of the MSEL, can view edit the MSEL.
+17. **Player:** Centralized web interface where participants, teams, and administrators go to engage in a cyber event.
+18. **MSEL**: (Master Scenario Events List) provides a timeline for all expected events.
+19. **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
+20. **System Admin Permission**: Can add users to a team, as well as assign the required permissions. 
+21. **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
+22. **User Defined Data Fields:** These are added by the user on an as-needed basis.
+23. **Viewer Role:** Can view the MSEL, but can't do any edits to it.
