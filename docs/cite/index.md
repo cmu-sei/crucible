@@ -38,26 +38,26 @@ For installation, refer to these GitHub repositories.
 
 ### Moves
 
-In CITE, a Move is a defined period of time during an exercise, in which a series of injects are distributed for users to discuss and assess the current incident severity.
+In CITE, a Move is a defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
 
 When in Dashboard view, users will have two features to interact with moves:
 
-- Displayed Move: Move that will be currently displayed on the screen. Here, users can see responses to previous moves and scores, but users will not be able to edit a response.
+- **Displayed Move:** Move that will be currently displayed on the screen. Here, users can see responses to previous moves and scores, but users will not be able to edit a response.
 
-- Current Move: Move that is currently active. There are cases where the Displayed Move and the Current Move might be the same. Here, users are allowed to edit the category of the move.
+- **Current Move:** Move that is currently active. There are cases where the Displayed Move and the Current Move might be the same. Here, users are allowed to edit the category of the move.
 
 ### CITE Dashboard
 
 The CITE Dashboard shows exercise details like the date and time, incident summary, a suggested list of actions for participants to consider taking, and suggested participant roles.
 
-The following image will show some important hotspots about the CITE Dashboard. Reference the number on the hotspot to know more about this section.
+The following image will show some important hotspots about the CITE Dashboard. Reference the number on the hotspot to know more about each section.
 
 ![CITE Dashboard OE](../assets/img/CITE-Dashboard-v2.png)
 
-#### Active Incident & Moves
+#### Active Events & Moves
 *Hotspot 1:* 
 
-The name of the active incident and the move number currently displayed.
+The name of the active event and the move number currently displayed.
 
 #### Situation Date & Time
 *Hotspot 2:*
@@ -105,7 +105,7 @@ By using this icon, users can toggle between the CITE Dashboard and the CITE Sco
 
 The CITE Scoresheet compares participant scores to organization scores, group average scores, and the oficial score.
 
-The following image will show some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to know more about this section.
+The following image will show some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to know more about each section.
 
 ![CITE Scoresheet OE](../assets/img/CITE-Scoresheet-v2.png)
 
@@ -122,21 +122,21 @@ The move currently displayed on the screen. Clicking < displays previous moves. 
 #### Scoring Features
 *Hotspot 3:*
 
-- User: This is the participant's personal score for their reference only. The user score will also appear under the Score Summary range. 
+- **User:** This is the participant's personal score for their reference only. The user score will also appear under the Score Summary range. 
 
-- Team: Toggling the Team icon, displays how the team has scored this move so far. This is the score that the team collaborates on and submits for the current move. This score will be compared to the official score. The Team score appears under the Score Summary range.
+- **Team:** Toggling the Team icon, displays how the team has scored this move so far. This is the score that the team collaborates on and submits for the current move. This score will be compared to the official score. The Team score appears under the Score Summary range.
 
-- Team Avg: The average of all the users on the team. The Team Avg appears under the Score Summary Range for all moves except the current move.
+- **Team Avg:** The average of all the users on the team. The Team Avg appears under the Score Summary range for all moves except the current move.
 
-- Group Avg: The average of all of the teams in the user's group. Group Avg appears under the Score Summary Range for all moves except for the current move.
+- **Group Avg:** The average of all of the teams in the user's group. Group Avg appears under the Score Summary range for all moves except for the current move.
 
-- Official: The potential score; that is, how the incident should have been scored had it been a real-life scenario. Official score appears under the Score Summary Range for all moves except the current move.
+- **Official:** The potential score; that is, how the incident should have been scored had it been a real-life scenario. Official score appears under the Score Summary range for all moves except the current move.
 
-- Submit: Submits the score indicating that the user is done scoring the current move. Click Yes or No. If the user clicks Yes, but changes their mind, click Reopen to edit the scoring.
+- **Submit:** Submits the score indicating that the user is done scoring the current move. Click Yes or No. If the user clicks Yes, but changes their mind, click Reopen to edit the scoring.
 
-- Clear: Clears any selections the user has checked but does not clear comments enterred. Selecting Clear returns to a score of 0.00.
+- **Clear:** Clears any selections the user has checked but does not clear comments enterred. Selecting Clear returns to a score of 0.00.
 
-- Preset: Sets the user's selections to the previous move score to use as a starting point for the current move.
+- **Preset:** Sets the user's selections to the previous move score to use as a starting point for the current move.
 
 #### Categories and Options
 *Hotspot 4:*
@@ -144,6 +144,7 @@ The move currently displayed on the screen. Clicking < displays previous moves. 
 Categories that are individually scored based upon the current move situation. For each category, select as many options as relevant. Selecting options assigns points to each category which are compiled to create the move score as defined by the [scoring model](#glossary).
 
 **Add, Edit, and Delete a Comment**
+
 When scoring a move, the user can attach a comment (or multiple comments) to a category.
 
 - To add a comment, click ![Comment OE](../assets/img/comment.png). Enter the comment and click Save.
@@ -194,7 +195,7 @@ In the same way, an Evaluation can be edited by clicking on the **Edit Icon** ne
 
 **Configure an Evaluation**
 
-To configure an evaluation to be used for an exercise, administrators will need to add Moves and Teams to the evaluation. To do this, follow these steps.
+To configure an evaluation to be used for an exercise, administrators will need to add moves and teams to the evaluation. To do this, follow these steps.
 
 ![Configure Evaluation OE](../assets/img/ConfigureEvaluations-v2.png)
 
@@ -413,11 +414,11 @@ The following image shows the Users Administration Page. Here, administrators ca
 
 The available permissions are: 
 
-- System Admin: Permission that will grant a user all administration privileges on the CITE application.
-- Content Developer: Will be provided the permission to manage other CITE Admin pages except the Users Admin page and their permissions.
-- Can Submit: The user is allowed to submit a score for the different moves on an exercise.
-- Can Modify: The user is allowed to modify a score for previous moves on an exercise.
-- Can Increment Move: The user is given the permission to increment the current move during an exercise.
+- **System Admin:** Permission that will grant a user all administration privileges on the CITE application.
+- **Content Developer:** Will be provided the permission to manage other CITE Admin pages except the Users Admin page and their permissions.
+- **Can Submit:** The user is allowed to submit a score for the different moves on an exercise.
+- **Can Modify:** The user is allowed to modify a score for previous moves on an exercise.
+- **Can Increment Move:** The user is given the permission to increment the current move during an exercise.
 
 ![Users Admin OE](../assets/img/usersAdmin.png)
 
@@ -449,7 +450,7 @@ The following glossary provides a brief definition of key terms and concepts as 
 6. **Evaluation**: Defines the scoring model used, as well as the moves and teams who will be participating in the exercise.
 7. **Modifiers**: If enabled, this value is used in calculating the Scoring Category score. Depending on how the equation is written, the modifier can be used to add, subtract, multiply and/or divide within the equation.
 8. **Modify-Level Permission**: Can view and edit the team score.
-9. **Moves**: A defined period of time during an exercise, in which a series of injects are distributed for users to discuss and assess the current incident severity.
+9. **Moves**: A defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
 10. **Observer Role**: Individuals who are tasked with impartially and objectively monitoring teams during an exercise.
 11. **Roles**: Provide a set of responsibilities assigned to a user during an exercise.
 12. **Scoring Category**: Has a defined equation used to calculate the submission score from the categroy scores. Additionally, the category has a weight which will multiply the score obtained.

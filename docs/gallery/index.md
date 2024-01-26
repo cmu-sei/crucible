@@ -24,12 +24,12 @@ For installation, refer to these GitHub repositories.
 
 The Gallery Wall is a dashboard with red, orange, yellow, and green status indicators. Each of these cards have a specifc set of actions, which will help users throughout the in-game exercise. 
 
-- Red: indicates a closed status.
-- Orange: indicates a critical status.
-- Yellow: indicates an affected status.
-- Green: indicates an open status.
+- **Red:** Indicates a closed status.
+- **Orange:** Indicates a critical status.
+- **Yellow:** Indicates an affected status.
+- **Green:** Indicates an open status.
 
-The following image will show some important hotspots about the Gallery Wall. Reference the number on the hotspot to know more about this section.
+The following image will show some important hotspots about the Gallery Wall. Reference the number on the hotspot to know more about each section.
 
 ![Gallery Wall OE](../assets/img/galleryWall-v2.png)
 
@@ -56,7 +56,7 @@ The number of [articles](#glossary) left to read from the event.
 #### Details
 *Hotspot 5:*
 
-Provides additional details than those provided in the Gallery Wall Dashboard. All articles related to the event will be filtered and shown to provide more information.
+Provides additional details than those provided in the Gallery Wall. All articles related to the event will be filtered and shown to provide more information.
 
 #### Team Selection
 *Hotspot 6:*
@@ -72,14 +72,14 @@ By using this icon, users can toggle between the Gallery Wall and Gallery Archiv
 
 The Gallery Archive is a collection of information that contains relevant reporting, intelligence, news, and social media data sources.
 
-The following image will show some important hotspots about the Gallery Archive. Reference the number on the hotspot to know more about the section.
+The following image will show some important hotspots about the Gallery Archive. Reference the number on the hotspot to know more about each section.
 
 ![Gallery Archive OE](../assets/img/galleryArchive-v2.png)
 
 #### Add an Article
 *Hotspot 1:*
 
-Users assigned the appropriate permissions can add articles to the Archive related to the exercise current events and injects. 
+Users assigned the appropriate permissions can add articles to the Archive related to the exercise current events.
 
 To add an article, refer to this section [Add Articles During an Exercise](#add-articles-during-an-exercise).
 
@@ -93,7 +93,7 @@ To search the archive, enter the terms in the **Search the Archive** field. The 
 #### Cards Filter
 *Hotspot 3:*
 
-Users can use the dropdown to further filter intelligence information. Users can sort the Gallery articles based on their card categories. This will be useful for users that are searching for information from a specific category or article.
+Users can use this dropdown to further filter intelligence information. Users can sort the Gallery articles based on their card categories. This will be useful for users that are searching for information from a specific category.
 
 #### Source Filters
 *Hotspot 4:*
@@ -103,14 +103,14 @@ These articles come from different categories of sources: [reporting](#glossary)
 #### Article Information
 *Hotspot 5:*
 
-The information in the Gallery Archive is displayed in articles. Each article contains the **Title, Source Type, Source Name, and Date Posted**.
+The information in the Gallery Archive is displayed in articles. Each article contains the Title, Source Type, Source Name, and Date Posted.
 
 For the information included on the article:
 
-- Title: The title of the intelligence report.
-- Source Type: The source of the intelligence report (News, Intel, Reporting, or Social Media).
-- Source Name: The specific person or agency who supplied the intelligence.
-- Date Posted: The Date and timestamp of when the intelligence report was posted.
+- **Title:** The title of the intelligence report.
+- **Source Type:** The source of the intelligence report (News, Intel, Reporting, or Social Media).
+- **Source Name:** The specific person or agency who supplied the intelligence.
+- **Date Posted:** The date and timestamp of when the intelligence report was posted.
 
 #### View
 *Hotspot 6:*
@@ -222,9 +222,9 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 3. Add a **Description** about the collection.
 4. Click **Save**.
 
-If necessary, a collection can be deleted by cliking on the **Trash Icon** next to the desired collection.
+If necessary, a collection can be deleted by clicking on the **Trash Icon** next to the desired collection.
 
-In the same way, a collection can be edited by cliking on the **Edit Icon** next to the desired collection.
+In the same way, a collection can be edited by clicking on the **Edit Icon** next to the desired collection.
 
 ### Cards
 
@@ -244,9 +244,9 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 4. From the options, select the desired **Collection**.
 5. Click **Save**.
 
-If necessary, a card can be deleted by cliking on the **Trash Icon** next to the desired card.
+If necessary, a card can be deleted by clicking on the **Trash Icon** next to the desired card.
 
-In the same way, a card can be edited by cliking on the **Edit Icon** next to the desired card.
+In the same way, a card can be edited by clicking on the **Edit Icon** next to the desired card.
 
 ### Articles
 

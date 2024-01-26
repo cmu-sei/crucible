@@ -675,9 +675,9 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 3. Add a **Card Description**.
 4. Click **Save**.
 
-If necessary, an Gallery card template can be deleted by clicking on the **Trash Icon** next to the desired card template.
+If necessary, a Gallery card template can be deleted by clicking on the **Trash Icon** next to the desired card template.
 
-In the same way, an Gallery card template can be edited by clicking on the **Edit Icon** next to the desired card template.
+In the same way, a Gallery card template can be edited by clicking on the **Edit Icon** next to the desired card template.
 
 ### CITE Actions
 
@@ -695,9 +695,9 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 2. Add a **Description of the Action**.
 3. Click **Save**.
 
-If necessary, an CITE action template can be deleted by clicking on the **Trash Icon** next to the desired action template.
+If necessary, a CITE action template can be deleted by clicking on the **Trash Icon** next to the desired action template.
 
-In the same way, an CITE action template can be edited by clicking on the **Edit Icon** next to the desired action template.
+In the same way, a CITE action template can be edited by clicking on the **Edit Icon** next to the desired action template.
 
 ### CITE Roles
 
@@ -738,7 +738,7 @@ The following glossary provides a brief definition of key terms and concepts as 
 13. **Gallery Observer Role:** When Gallery integration is enabled, this role will allow a user to observe other team's progress on the Gallery application during an exercise.
 14. **Move Editor:** Can edit moves on the MSEL, as well as increment them during an exercise.
 15. **Moves**: A defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
-16. **Owner Role:** Owner of the MSEL, can view edit the MSEL.
+16. **Owner Role:** Owner of the MSEL, can view and edit the MSEL.
 17. **Player:** Centralized web interface where participants, teams, and administrators go to engage in a cyber event.
 18. **MSEL**: (Master Scenario Events List) provides a timeline for all expected events.
 19. **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
