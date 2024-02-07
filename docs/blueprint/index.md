@@ -5,7 +5,7 @@
 
 ### What is Blueprint?
 
-[**Blueprint**](#glossary) is a web application created to make the development of a [Master Scenario Event Lists (MSEL)](#glossary) and [events](#glossary) easier. With this application, it will further simplify the creation and visualization of the MSEL, allowing the user to select/define the simulated entities, attacks, timeframe, regulators impacted by the scenario, etc. Additionally, it will leverage many advantages over the traditional method of using an excel spreadsheet by facitilating the collaboration between exercise designer's belonging to multiple teams.
+[**Blueprint**](#glossary) is a web application created to make the development of a [Master Scenario Event List (MSEL)](#glossary) and [events](#glossary) easier. With this application, it will further simplify the creation and visualization of the MSEL, allowing the user to select/define the simulated entities, attacks, timeframe, and regulators impacted by the scenario, etc. Additionally, it will leverage many advantages over the traditional method of using an excel spreadsheet by facitilating the collaboration between exercise designers belonging to multiple teams.
 
 Additionally, Blueprint can be integrated with Player, Gallery, CITE and Steamfitter. Integrating Blueprint with these applications will automate the configuration process for an [exercise](#glossary).
 
@@ -81,7 +81,7 @@ If users desire to have an offline copy of any desired MSEL, they will have the 
 
 With the Upload feature, users can update the information from the MSEL Card with the new uploaded information. This feature will modify all the existing information with the one found on the .xlsx file.
 
-**Note:** When engaging in the export and import process of MSELs from the Blueprint application, it is imperative to ensure that injects and settings of the MSEL align with your particular preferences. It is worth noting that on occasion, during the import process of MSELs into the application, it may be necessary to reconfigure settings and specific fields.
+**Note:** When engaging in the export and import process of MSELs from the Blueprint application, it is imperative to ensure that events and settings of the MSEL align with your particular preferences. It is worth noting that on occasion, during the import process of MSELs into the application, it may be necessary to reconfigure settings and specific fields.
 
 **Delete**
 
@@ -99,7 +99,7 @@ Click on the desire MSEL card to access its information. Here, users can also ed
 #### Template Feature
 *Hotspot 8:*
 
-Checkbox used to identify and/or assign which MSELs should be a Template. 
+Checkbox used to identify and/or assign which MSELs should be a template. 
 
 
 ### MSEL Definition
@@ -169,7 +169,7 @@ Column       | Data Type     | Description  | Example
 
 After all changes have been added, click on the **checkmark** to save the page.
 
-#### Teams Roles
+#### Team Roles
 
 On this tab, users will be able to add and assign teams, as well as their respective roles during an exercise to the MSEL. Assigned teams will be able to view and edit the MSEL.
 
@@ -235,7 +235,7 @@ Column       | Data Type     | Description  | Example
 **Data Type** | Dropdown Text | Data type for the data field | String
 **Use Option List** | Boolean | Add options to be selected when adding an event | True
 **Display on the Events list** | Boolean | Display this data field on the Events list tab | True
-**Display on the Exercise View** | Boolean | Display this data field on the Exercise View Tab | True
+**Display on the Exercise View** | Boolean | Display this data field on the Exercise View tab | True
 **Display on "Avanced" edit tab** | Boolean | Display this data field on the data field edit component Advanced tab | True
 **Display for Content Developers and MSEL Owners ONLY!!!** | Boolean | Display this data field for users who are Content Developers or MSEL Owners only | True
 **Gallery Article Parameter** | Dopdown Text | If using the Gallery integration, select the Gallery parameter that aligns with the data field | Description
@@ -405,11 +405,11 @@ Column       | Data Type     | Description  | Example
 **Description** | String |  Information, details, and characteristics of the event | STARTEX
 **Status** | Dropdown Text | Approval status of the event to be used on the MSEL | Approved
 **Time** | Datetime | Start date/time of the move real-time | 11/20/2023, 09:00:00
-**Move** | Dropdown Text | Move number the inject is part of | 1
-**Group** | Integer | Groups injects within a move, often times executed within the same time range | 1
+**Move** | Dropdown Text | Move number the event is part of | 1
+**Group** | Integer | Groups events within a move, often times executed within the same time range | 1
 **Exericse Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27
-**Type** | String | Source type for the inject | Email
-**Delivery Method** | Dropdown Text | How is the inject going to be delivered to participants | Email
+**Type** | String | Source type for the event | Email
+**Delivery Method** | Dropdown Text | How is the event going to be delivered to participants | Email
 
 If not already completed on the previous tab, fill the fields from the **Advanced** tab following the Data Format Table specifications. This tab focuses on the MSEL's metadata and style.
 
@@ -420,7 +420,7 @@ If not already completed on the previous tab, fill the fields from the **Advance
 Column       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Exericse Date/Time** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27
-**Row Metadata** | Integer |  Defines the size of this event's on the Events and Exercise View tabs | 15,199,21,133
+**Row Metadata** | Integer |  Defines the size of this event on the Events and Exercise View tabs | 15,199,21,133
 
 If Gallery integration is enabled and not already completed on the Default tab, fill the fields from the **Gallery** tab following the Data Format Table specifications. This tab focuses on the Gallery fields necessary for the integration to work.
 
@@ -432,10 +432,10 @@ Column       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Description** | String |  Information, details, and characteristics of the event | STARTEX
 **Status** | Dropdown Text | Approval status of the event to be used on the MSEL | Approved
-**Move** | Dropdown Text | Move number the inject is part of | 1
-**Group** | Integer | Groups injects within a move, often times executed within the same time range | 1
+**Move** | Dropdown Text | Move number the event is part of | 1
+**Group** | Integer | Groups events within a move, often times executed within the same time range | 1
 **Exericse Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27
-**Delivery Method** | Dropdown Text | How is the inject going to be delivered to participants | Gallery
+**Delivery Method** | Dropdown Text | How is the event going to be delivered to participants | Gallery
 **Title** | String | Title of the event | Bank Consortium Falls Victim to Ransomware Attack
 **From Org** | Dropdown Text | Select the organization that sends this event | CC News
 **To Org** | Dropdown Text | Select the organization that receives this event | ALL
@@ -477,7 +477,7 @@ To search for a specific event, follow these steps:
 
 #### Exercise View
 
-Whereas the Events tab is for MSEL Owners and Content Developers to add, edit, and delete MSEL events, the Exercise View tab is meant to be used to allow participants to access MSEL events on-the-fly in a read-only format. This will allow the trackiing of current and future events to be executed during an exercise.
+Whereas the Events tab is for MSEL Owners and Content Developers to add, edit, and delete MSEL events, the Exercise View tab is meant to be used to allow participants access to MSEL events on-the-fly in a read-only format. This will allow the tracking of current and future events to be executed during an exercise.
 
 ![Blueprint Exercise View OE](../assets/img/blueprintExerciseView-v2.png)
 
@@ -491,7 +491,7 @@ If enabled, Blueprint will be able to push MSEL information to the CITE Applicat
 
 To enable the full CITE integration functionality the following tabs should be configured.
 
-##### Teams Roles
+##### Team Roles
 
 ![CITE Teams OE](../assets/img/citeTeams.png)
 
@@ -634,7 +634,7 @@ To push MSEL information to CITE, follow these steps:
 
 #### Gallery
 
-If enabled, Blueprint will be able to push MSEL information to the Gallery Application. For this, additional tabs will be added to the Blueprint side panel, which will be needed to be configured.
+If enabled, Blueprint will be able to push MSEL information to the Gallery application. For this, additional tabs will be added to the Blueprint side panel, which will be needed to be configured.
 
 To enable the full Gallery integration functionality the following tabs should be configured.
 
@@ -652,7 +652,7 @@ Column       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Description** | String |  Information, details, and characteristics of the event | STARTEX
 **Date Posted** | Datetime | Date of when the event was posted | 1/24/2024, 14:18:27
-**Delivery Method** | Dropdown Text | How is the inject going to be delivered to participants | Gallery
+**Delivery Method** | Dropdown Text | How is the event going to be delivered to participants | Gallery
 **Name** | String | Name of the event | Common Operating Picture 1
 **From Org** | Dropdown Text | Select the organization that sends this event | CC News
 **To Org** | Dropdown Text | Select the organization that receives this event | ALL
@@ -661,8 +661,8 @@ Column       | Data Type     | Description  | Example
 **Status** | Dropdown Text | Approval status of the event to be used on the MSEL | Approved
 **Source Type** | Dropdown Text | Select from where the event's details come from | News
 **Source Name** | String | Add the author of the event | BBC News
-**Move** | Dropdown Text | Move number the inject is part of | 1
-**Group** | Integer | Groups injects within a move, often times executed within the same time range | 1
+**Move** | Dropdown Text | Move number the event is part of | 1
+**Group** | Integer | Groups events within a move, often times executed within the same time range | 1
 **Url** | String | Provide a URL if more information is necessary for participants to access | www.bbcnews.com/ransomware-attack-xyzbank
 **Open in a New Tab** | Boolean | If a URL was provided, select this option if desired to open the URL in a new tab | True
 
@@ -678,7 +678,7 @@ On this tab, [Gallery Cards](#glossary) can be added to be pushed from Blueprint
 
 ![Blueprint Add Gallery Cards OE](../assets/img/blueprintAddGalleryCards.png)
 
-To add a Gallery Card, follow these steps:
+To add a Gallery card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
 2. Click on the **+** icon.
@@ -690,13 +690,13 @@ Column       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name** | String | Name of the Gallery card | Energy Sector
 **Card Description** | String |  Information, details, and characteristics of the Gallery card | The current state of the Energy Sector
-**Move** | Dropdown Text | Select the Move where this Gallery Card should be displayed | 0
+**Move** | Dropdown Text | Select the move where this Gallery card should be displayed | 0
 
 After all desired configurations have been added, click **Save**.
 
 *Edit a Gallery Card*
 
-To edit the Gallery Card's details, follow these steps:
+To edit the Gallery card's details, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
 2. Select the desired card to be edited and click on the **Edit** icon next to the card.
@@ -705,7 +705,7 @@ To edit the Gallery Card's details, follow these steps:
 
 *Delete a Gallery Card*
 
-To delete a Gallery Card, follow these steps:
+To delete a Gallery card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
 2. Select the desired card to be deleted and click on the **Trash Can** icon next to the card.
@@ -735,7 +735,7 @@ The following image shows the Teams Administration Page. Here, administrators ca
 
 ![Blueprint Teams Admin OE](../assets/img/blueprintTeams-v2.png)
 
-#### Add a Team
+**Add a Team**
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a team.
 
@@ -750,11 +750,11 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 Column       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name** | String | Name for the team | Carnegie Mellon University
-**Short Name** | String | Short Name for the team | CMU
+**Short Name** | String | Short name for the team | CMU
 
 After all desired configurations have been added, click **Save**.
 
-#### Edit a Team
+**Edit a Team**
 
 To edit the team's details, follow these steps:
 
@@ -763,22 +763,22 @@ To edit the team's details, follow these steps:
 4. Here, users will be prompted the same teams's edit component as when adding a new team.
 5. After doing all the necessary edits, click **Save**.
 
-#### Delete a Team
+**Delete a Team**
 
 To delete a team, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
 2. Under the Teams Administration View, select the team to be deleted and click on the **Trash Can Icon** next to the team.
 
-#### Search For a Team
+**Search For a Team**
 
 To search for a specific team, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
-2. Click on the **Search Bar** and type the name of the desired team.
+2. Under the Teams Administration View, click on the **Search Bar** and type the name of the desired team.
 
 
-#### Add/Remove Users From a Team
+**Add/Remove Users From a Team**
 
 To configure a team for an exercise, administrators will need to add users to their respective teams. To do this, follow these steps. 
 
@@ -800,7 +800,7 @@ The available permissions are:
 
 ![Blueprint Users Admin OE](../assets/img/blueprintUsersAdmin-v2.png)
 
-#### Add a User
+**Add a User**
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a user.
 
@@ -818,19 +818,19 @@ Column       | Data Type     | Description  | Example
 
 Click **Save** represented by a user with a + sign and select the desired permissions to be assigned by clicking on the checkboxes next to the user.
 
-#### Delete a User
+**Delete a User**
 
 To delete a user, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
 2. Under the Users Administration View, select the user to be deleted and click on the **Trash Can Icon** next to the user.
 
-#### Search For a User
+**Search For a User**
 
 To search for a specific user, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
-2. Click on the **Search Bar** and type the name of the desired user.
+2. Under the Users Administration View, click on the **Search Bar** and type the name of the desired user.
 
 ### Organization Templates
 
@@ -838,7 +838,7 @@ The following image shows the Organization Templates Administration Page. Here, 
 
 ![Blueprint Organizations Admin OE](../assets/img/blueprintOrganizationsAdmin.png)
 
-#### Add an Organization Template
+**Add an Organization Template**
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an organization template.
 
@@ -859,7 +859,7 @@ Column       | Data Type     | Description  | Example
 
 After all desired configurations have been added, click **Save**.
 
-#### Edit an Organization Template
+**Edit an Organization Template**
 
 To edit the organization template's details, follow these steps:
 
@@ -868,19 +868,19 @@ To edit the organization template's details, follow these steps:
 4. Here, users will be prompted the same organization's edit component as when adding a new organization template.
 5. After doing all the necessary edits, click **Save**.
 
-#### Delete an Organization Template
+**Delete an Organization Template**
 
 To delete an organization template, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
 2. Under the Organizations Administration View, select the organization to be deleted and click on the **Trash Can Icon** next to the organization template.
 
-#### Search For an Organization Template
+**Search For an Organization Template**
 
 To search for a specific organization template, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
-2. Click on the **Search Bar** and type the name of the desired organization template.
+2. Under the Organizations Administration View, click on the **Search Bar** and type the name of the desired organization template.
 
 ### Gallery Card Templates
 
@@ -888,7 +888,7 @@ The following image shows the Gallery Card Templates Administration Page. Here, 
 
 ![Blueprint Cards Admin OE](../assets/img/blueprintCardsAdmin.png)
 
-#### Add a Gallery Card Template
+**Add a Gallery Card Template**
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Gallery card template.
 
@@ -901,12 +901,12 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 Column       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
-**Name** | String | Gallery Card name | Information Technology Sector
-**Card Description** | String |  Information, details, and characteristics of the Gallery Card | Status of the Information Technology Sector
+**Name** | String | Gallery card name | Information Technology Sector
+**Card Description** | String |  Information, details, and characteristics of the Gallery card | Status of the Information Technology Sector
 
 After all desired configurations have been added, click **Save**.
 
-#### Edit a Gallery Card Template
+**Edit a Gallery Card Template**
 
 To edit the Gallery card template's details, follow these steps:
 
@@ -915,19 +915,19 @@ To edit the Gallery card template's details, follow these steps:
 4. Here, users will be prompted the same Gallery card's edit component as when adding a new card template.
 5. After doing all the necessary edits, click **Save**.
 
-#### Delete a Gallery Card Template
+**Delete a Gallery Card Template**
 
 To delete an Gallery card template, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
 2. Under the Gallery Cards Administration View, select the card template to be deleted and click on the **Trash Can Icon** next to the card template.
 
-#### Search For a Gallery Card Template
+**Search For a Gallery Card Template**
 
 To search for a specific Gallery card template, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
-2. Click on the **Search Bar** and type the name of the desired card template.
+2. Under the Gallery Cards Administration View, click on the **Search Bar** and type the name of the desired card template.
 
 ### CITE Actions Templates
 
@@ -935,7 +935,7 @@ The following image shows the CITE Action Templates Administration Page. Here, a
 
 ![Blueprint Actions Admin OE](../assets/img/blueprintActionsAdmin.png)
 
-#### Add a CITE Action Template
+**Add a CITE Action Template**
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a CITE action template.
 
@@ -952,7 +952,7 @@ Column       | Data Type     | Description  | Example
 
 After all desired configurations have been added, click **Save**.
 
-#### Edit a CITE Action Template
+**Edit a CITE Action Template**
 
 To edit the CITE action template's details, follow these steps:
 
@@ -961,19 +961,19 @@ To edit the CITE action template's details, follow these steps:
 4. Here, users will be prompted the same CITE action's edit component as when adding a new action template.
 5. After doing all the necessary edits, click **Save**.
 
-#### Delete a CITE Action Template
+**Delete a CITE Action Template**
 
 To delete an CITE action template, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
 2. Under the CITE Actions Administration View, select the action template to be deleted and click on the **Trash Can Icon** next to the action template.
 
-#### Search For a CITE Action Template
+**Search For a CITE Action Template**
 
 To search for a specific CITE action template, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
-2. Click on the **Search Bar** and type the name of the desired action template.
+2. Under the CITE Actions Administration View, click on the **Search Bar** and type the name of the desired action template.
 
 ### CITE Roles
 
@@ -981,7 +981,7 @@ The following image shows the CITE Roles Templates Administration Page. Here, ad
 
 ![Blueprint Roles Admin OE](../assets/img/blueprintRolesAdmin.png)
 
-#### Add a CITE Role Template
+**Add a CITE Role Template**
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a CITE role template.
 
@@ -998,7 +998,7 @@ Column       | Data Type     | Description  | Example
 
 After all desired configurations have been added, click **Save**.
 
-#### Edit a CITE Role Template
+**Edit a CITE Role Template**
 
 To edit the CITE role template's details, follow these steps:
 
@@ -1007,19 +1007,19 @@ To edit the CITE role template's details, follow these steps:
 4. Here, users will be prompted the same CITE role's edit component as when adding a new role template.
 5. After doing all the necessary edits, click **Save**.
 
-#### Delete a CITE Role Template
+**Delete a CITE Role Template**
 
-To delete an CITE role template, follow these steps:
+To delete a CITE role template, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
 2. Under the CITE Roles Administration View, select the role template to be deleted and click on the **Trash Can Icon** next to the role template.
 
-#### Search For a CITE Role Template
+**Search For a CITE Role Template**
 
 To search for a specific CITE role template, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen. 
-2. Click on the **Search Bar** and type the name of the desired role template.
+2. Under the CITE Roles Administration View, click on the **Search Bar** and type the name of the desired role template.
 
 ## Glossary
 
