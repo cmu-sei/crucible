@@ -1,5 +1,4 @@
-# **Gallery**
-*Keeping You in the Know!*
+# ![Gallery Logo](../assets/img/gallery-logo.png) **Gallery:** Keeping You in the Know!
 
 ## Overview
 

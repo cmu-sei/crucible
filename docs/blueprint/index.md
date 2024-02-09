@@ -1,5 +1,4 @@
-# **Blueprint**
-*Building a MSEL*
+# ![Blueprint Logo](../assets/img/blueprint-logo.png) **Blueprint:** Building a MSEL
 
 ## Overview
 
@@ -196,7 +195,7 @@ Now the team has been added to the MSEL and members will be able to view and edi
 
 The available roles are:
 
-- **[Editor](#glossary):** Can view and edit the MSEL.
+- **[Editor](#glossary):** Edit the events that they are assigned to, but not other events.  They cannot delete them or create new ones.
 - **[Approver](#glossary):** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
 - **[Move Editor](#glossary):** Can edit moves on the MSEL, as well as increment them during an exercise.
 - **[Owner](#glossary):** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).
@@ -796,9 +795,8 @@ The available permissions are:
 
 - **System Admin:** Can use all administration privileges on the Blueprint application.
 - **Content Developer:** Can view, edit, create, and approve events on the MSEL.
-- **Facilitator:** Manages the exercise, can advance moves, execute events, and check events as completed.
 
-![Blueprint Users Admin OE](../assets/img/blueprintUsersAdmin-v2.png)
+![Blueprint Users Admin OE](../assets/img/blueprintUsersAdmin-v3.png)
 
 **Add a User**
 
@@ -1033,7 +1031,7 @@ The following glossary provides a brief definition of key terms and concepts as 
 6. **CITE Role:** Provide a set of responsibilities assigned to a user during an exercise.
 7. **Content Developer Permission:** Can view, edit, create, and approve events on the MSEL.
 8. **Data Fields:** Structured components containing essential information about the event's characterictics, context, and implications.
-9. **Editor Role:** Can view and edit the MSEL.
+9. **Editor Role:** Edit the events that they are assigned to, but not other events.  They cannot delete them or create new ones.
 10. **Events**: Specific scenario events or messages within the scenario that prompt users to implement designated actions.
 11. **Exercises**: Structured and simulated activity designed to assess, train, or evaluate the capabilities, preparedness, and responses of individuals, teams, or organizations in dealing with various situations, especially emergencies or crisis scenarios.
 12. **Facilitator Permission**: Manages the exercise, can advance moves, execute events, and check events as completed.

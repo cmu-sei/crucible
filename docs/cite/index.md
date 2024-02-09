@@ -1,5 +1,4 @@
-# **CITE**
-*Evaluating Threats*
+# ![CITE Logo](../assets/img/cite-logo.png) **CITE:** Evaluating Threats
 
 ## Overview
 

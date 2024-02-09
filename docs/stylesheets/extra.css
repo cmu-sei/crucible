@@ -257,6 +257,21 @@ img[alt='Blueprint Add Event Gallery OE']{
     height: 500px;
 }
 
+img[alt='Blueprint Logo']{
+    width:80px;
+    height:80px;
+}
+
+img[alt='CITE Logo']{
+    width:80px;
+    height:80px;
+}
+
+img[alt='Gallery Logo']{
+    width:80px;
+    height:80px;
+}
+
 /*
 Tables set to 100% width
 */
