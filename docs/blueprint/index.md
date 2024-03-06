@@ -21,7 +21,7 @@ To use Blueprint, a user must be assigned Content Developer permissions and be a
 
 There are three levels of permissions in Blueprint that affect the way a user interacts with the Blueprint application and collaborates on the MSEL creation. 
 
-- [System Admin](#glossary): Can add users to a team, as well as assign the required permissions to the users. Additionally, users with this permission can view, edit, create, and approve events on the MSEL.
+- [System Admin](#glossary): Can add users to a team, as well as assign the required permissions to users. Additionally, users with this permission can view, edit, create, and approve events on the MSEL.
 - [Content Developer](#glossary): Can view, edit, create, and approve events on the MSEL.
 - [Facilitator](#glossary): Manages the exercise, can advance moves, execute events, and check events as completed.
 
@@ -67,7 +67,7 @@ Users can use this filter to narrow down MSELs presented on the dashboard based 
 
 *Hotspot 5:*
 
-This functionality will enable users to search for an specific MSEL, in case it is not presented at the top on the dashboard.
+This functionality will enable users to search for a specific MSEL, in case it is not presented at the top on the dashboard.
 
 #### Manage MSEL
 *Hotspot 6:*
@@ -111,7 +111,7 @@ With this functionality, users can now edit the same MSEL, instead of each user 
 
 On this tab, users will be able to edit and configure MSEL settings, as well as enable/disable integrations.
 
-![Blueprint Info Tab OE](../assets/img/blueprintBasicInfo-v2.png)
+![Blueprint Info Tab OE](../assets/img/blueprintBasicInfo-v3.png)
 
 To edit the MSEL's basic information and configuration, follow these next steps:
 
@@ -132,7 +132,7 @@ Column       | Data Type     | Description  | Example
 **Integrate Gallery**| Boolean | Add Gallery integration functionality to the MSEL | True
 **Integrate CITE** | Boolean | Add CITE integration functionality to the MSEL | True
 **Select Scoring Model** | Dropdown Text | Select a CITE Scoring Model | CISA NCISS
-**Integrate Steamfitter** | Boolean | Add Steamfitter integration functionality to the MSEL | True
+**Integrate Steamfitter** | Boolean | Add Steamfitter integration functionality to the MSEL | False
 **MSEL Status** | Dropdown Text | Select MSEL status designation | Active
 **Header Row Metadata (Height)** | Integer | An integer value that defines the height of the header row when this MSEL is exported as an xlsx file | 30
 
@@ -144,7 +144,7 @@ Integrations:
 - **[CITE](#glossary):** Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL. To know more about this integration reference this section [CITE](#cite).
 - **[Player](#glossary) & [Steamfitter](#glossary):** Blueprint will automate the adding of events specified on the MSEL, as well as configure exercise details in Player.
 
-**Note:** Player and Steamfitter integrations are currently a work in progress.
+**Note:** Steamfitter integration is currently a work in progress.
 
 #### Add Page
 
@@ -619,18 +619,6 @@ To search for a specific role, follow these steps:
 1. Navigate to the **CITE Roles** tab.
 2. Click on the **Search Bar** and type the name of the desired role.
 
-##### Push to CITE
-
-After adding all of the MSEL information and performing all of the configurations necessary, this information can be pushed to the CITE application.
-
-![Blueprint Push to CITE OE](../assets/img/pushCITE.png)
-
-To push MSEL information to CITE, follow these steps:
-
-1. Navigate to the **Info** tab.
-2. Select an option from the **Select Scoring Model** dropdown.
-3. Click the **Push to CITE** button.
-
 #### Gallery
 
 If enabled, Blueprint will be able to push MSEL information to the Gallery application. For this, additional tabs will be added to the Blueprint side panel, which will be needed to be configured.
@@ -716,16 +704,85 @@ To search for a specific card, follow these steps:
 1. Navigate to the **Gallery Cards** tab.
 2. Click on the **Search Bar** and type the name of the desired card.
 
-##### Push to Gallery
+#### Player
 
-After adding all of the MSEL information and performing all of the configurations necessary, this information can be pushed to the Gallery application.
+If enabled, Blueprint will be able to push MSEL information to the Player application. For this, additional tabs will be added to the Blueprint side panel, which will be needed to be configured.
 
-![Blueprint Push to Gallery OE](../assets/img/pushGallery.png)
+To enable the full Player integration functionality the following tabs should be configured.
 
-To push MSEL information to Gallery, follow these steps:
+##### Player Apps
+
+On this tab, [Player Apps](#glossary) configurations can be added to be pushed from Blueprint. These are the different applications accessible from the [Player View](#glossary).
+
+![Player Apps OE](../assets/img/blueprintPlayerApps.png)
+
+*Add a Player App*
+
+![Blueprint Add Player App OE](../assets/img/blueprintAddPlayerApp.png)
+
+To add a Player App, follow these steps:
+
+1. Navigate to the **Player Apps** tab.
+2. Click on the **+** icon.
+3. Select an app template from the provided list.
+3. Fill the fields as necessary following the Data Format Table specifications.
+
+**Data Format Table**
+
+Column       | Data Type     | Description  | Example
+------------ | ------------- | ------------ | -----------
+**Name** | String | Name of the application | Chat
+**Url** | String | URL of the application | https://roundcube.hamilton.treasury.gov/
+**Icon Url** | String | URL of the application's icon | https://roundcube.hamilton.treasury.gov/roundcube.png
+**Embeddable** | Boolean | Select whether the app should be embedded in Player's iframe | True
+**Load in Background** | Boolean | Select whether the app should load in the background | True
+
+After all desired configurations have been added, click **Save**.
+
+*Edit a Player App*
+
+To edit the Player app's details, follow these steps:
+
+1. Navigate to the **Player Apps** tab.
+2. Select the desired app to be edited and click on the **Edit** icon next to the app.
+4. Here, users will be prompted the same app's edit component as when adding a new app.
+5. After doing all the necessary edits, click **Save**.
+
+*Delete a Player App*
+
+To delete a Player App, follow these steps:
+
+1. Navigate to the **Player Apps** tab.
+2. Select the desired app to be deleted and click on the **Trash Can** icon next to the app.
+
+*Search For a Player App*
+
+To search for a specific app, follow these steps:
+
+1. Navigate to the **Player Apps** tab.
+2. Click on the **Search Bar** and type the name of the desired app.
+
+#### Push Integrations
+
+After adding all of the MSEL information and performing all of the configurations necessary, information from the different enabled integrations can be pushed to their respective applications.
+
+![Blueprint Push Integrations OE](../assets/img/pushIntegrations.png)
+
+To push MSEL information to their respective applications, follow these steps:
 
 1. Navigate to the **Info** tab.
-2. Click the **Push to Gallery** button.
+2. Click the **Push Integrations** button.
+
+#### Remove Integrations
+
+If desired, MSEL information can be removed after being pushed to their respective applications
+
+![Blueprint Remove Integrations OE](../assets/img/removeIntegrations.png)
+
+To remove MSEL information from the applications, follow these steps:
+
+1. Navigate to the **Info** tab.
+2. Click the **Remove Integrations** button.
 
 ## Administrator Guide
 
@@ -1044,8 +1101,10 @@ The following glossary provides a brief definition of key terms and concepts as 
 18. **Organizations:** Entities within an exercise with defined roles, responsibilities, and functions.
 20. **Owner Role:** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).
 21. **Player:** Centralized web interface where participants, teams, and administrators go to engage in a cyber event.
-22. **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
-23. **System Admin Permission:** Can add users to a team, as well as assign the required permissions. 
-24. **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
-25. **User Defined Data Fields:** These are added by the user on an as-needed basis.
-26. **Viewer Role:** Can view the MSEL, but can't do any edits to it.
+22. **Player Apps:** List of applications accessible from the same Player view.
+23. **Player View:** These are the settings associated with building a view. A view can be edited, cloned, and deleted.
+24. **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
+25. **System Admin Permission:** Can add users to a team, as well as assign the required permissions. 
+26. **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
+27. **User Defined Data Fields:** These are added by the user on an as-needed basis.
+28. **Viewer Role:** Can view the MSEL, but can't do any edits to it.

@@ -51,7 +51,7 @@ The CITE Dashboard shows exercise details like the date and time, incident summa
 
 The following image will show some important hotspots about the CITE Dashboard. Reference the number on the hotspot to know more about each section.
 
-![CITE Dashboard OE](../assets/img/CITE-Dashboard-v2.png)
+![CITE Dashboard OE](../assets/img/CITE-Dashboard-v3.png)
 
 #### Active Events & Moves
 *Hotspot 1:* 
@@ -68,32 +68,34 @@ The date and time of the situation displayed.
 
 Short description of the event. This section also allows for the use of HTML elements, useful when receiving MSEL information from Blueprint.
 
-#### Unread Articles Link
-*Hotspot 4:*
-
-Direct link to Gallery Archive, which will show the user's unread articles.
-
 #### Actions to Consider
-*Hotspot 5:*
+*Hotspot 4:*
 
 Users can see the different actions necessary to be executed during the exercise. These actions are for everyone on the team and "per move", meaning they change at each move of the exercise.
 
 These are added to guide users on an appropriate course of action during an exercise. However, these actions are not connected to the scoresheet.
 
 #### Roles
-*Hotspot 6:* 
+*Hotspot 5:* 
 
 The roles are added so that each team member will have a clear path of their responsibilities during the exercise. For this, roles can be customized for each team and then the team members decide what role each user should be assigned to.
 
 #### Score Summary
-*Hotspot 7:*
+*Hotspot 6:*
 
 Displays the various scores at the appropriate severity level for the disaplyed move. Here, scores are always visible.
 
 #### Team Selection
-*Hotspot 8:*
+*Hotspot 7:*
 
 This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user will be able to see how other teams progress during the exercise, as well as participate on their own team.
+
+#### CITE Report Toggle
+*Hotspot 8:*
+
+This feature will redirect users to a printable version of the CITE report that recollects all user's responses throughout the exercise.
+
+Refer to this section [CITE Report](#cite-report) for more information.
 
 #### Dashboard & Scoresheet Toggle
 *Hotspot 9:*
@@ -106,7 +108,7 @@ The CITE Scoresheet compares participant scores to organization scores, group av
 
 The following image will show some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to know more about each section.
 
-![CITE Scoresheet OE](../assets/img/CITE-Scoresheet-v2.png)
+![CITE Scoresheet OE](../assets/img/CITE-Scoresheet-v3.png)
 
 #### Event Name
 *Hotspot 1:*
@@ -162,10 +164,25 @@ Displays the various scores at the appropriate severity level for the displayed 
 
 This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user will be able to see how other teams progress during the exercise, as well as participate on their own team.
 
-#### Dashboard & Scoresheet Toggle
+#### CITE Report Toggle
 *Hotspot 7:*
 
+This feature will redirect users to a printable version of the CITE report that recollects all user's responses throughout the exercise.
+
+Refer to this section [CITE Report](#cite-report) for more information.
+
+#### Dashboard & Scoresheet Toggle
+*Hotspot 8:*
+
 By using this icon, users can toggle between the CITE Dashboard and the CITE Scoresheet.
+
+### CITE Report
+
+The [CITE Report](#glossary) recollects all user's responses into a single printable page version, for users to reference or keep for their records, as well as for exercise administrators to obtain valuable insights from the exercise.
+
+The following image will shows the CITE Report. Here, users can view and/or print their own.
+
+![CITE Report OE](../assets/img/CITE-Report.png)
 
 ## Administrator Guide
 
@@ -178,7 +195,7 @@ The following image shows the Evaluations Administration Page. Here, administrat
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Evaluation.
 
-![Add Evaluation OE](../assets/img/AddEvaluation-v3.png)
+![Add Evaluation OE](../assets/img/AddEvaluation-v4.png)
 
 1. Under the Evaluation Administration View, click **+**. 
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -190,6 +207,8 @@ Column       | Data Type     | Description  | Example
 **Evaluation Description** | String | Details, characteristics and information of the evaluation | NCISS Demonstration
 **Scoring Model** | Dropdown Text | Scoring model to be used in the evaluation | CISA NCISS
 **Evaluation Status** | Dropdown Text | Status of the evaluation after configuration | Active
+**Show Past Situation Descriptions** | Boolean | Display situation descriptions from past moves in a list format | False
+**Right Side Display** | Dropdown Text | Select what to display (Score Summary, Scoresheet, Html Block, Embedded Url, None) | Scoresheet
 **Gallery Exhibit ID** | guid | ID of the Gallery exhibit, if using Gallery during an exercise | 81a623e3-faeb-4a56-8b4d-0d42f90b6829
 **Current Move** | Integer | Current move of the evaluation | 0
 **Situation Date/Time** | Datetime | Evaluation situation date/time | 1/23/2024, 14:22:40
@@ -261,7 +280,7 @@ To delete a move, follow these steps:
 
 *Teams*
 
-![Teams OE](../assets/img/teams-v2.png)
+![Teams OE](../assets/img/teams-v3.png)
 
 1. Click on the **+** on the Teams section.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -273,6 +292,7 @@ Column       | Data Type     | Description  | Example
 **Name** | String | Name for the team | Carnegie Mellon University
 **Short Name** | String | Short name for the team, such as an acronym | CMU
 **Team Type** | Dropdown Text | Select what type should be assigned to the team | Individual Organization
+**Hide Scoresheet** | Boolean | Select whether to hide CITE Scoresheet from that specific team | False
 
 To save these settings, click **Save**.
 
@@ -318,7 +338,7 @@ The following image shows the [Scoring Models](#glossary) Administration Page. H
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Scoring Model.
 
-![Add Scoring Model OE](../assets/img/addScoringModel-v2.png)
+![Add Scoring Model OE](../assets/img/addScoringModel-v3.png)
 
 1. Under the Scoring Model Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -330,6 +350,9 @@ Column       | Data Type     | Description  | Example
 **Scoring Model Description** | String | Details, characteristics and information of the scoring model | NCISS Scoring Model
 **Scoring Model Status** | Dropdown Text | Status of the scoring model after configuration | Active
 **Calculation Equation** | Varchar | Equation used to evaluate participant's scores | {sum}
+**Hide Scores on Scoresheet** | Boolean | Don't show scores on Scoresheet | false
+**Display Comments as Textboxes** | Boolean | Provide a larger textbox on Scoresheet for lengthy responses | false
+**Display Scoring Categories by Move Number** | Boolean | Display different sets of scoring categories per move, instead of all at once | false
 
 To save these settings, click **Save**.
 
@@ -374,7 +397,7 @@ Within a Scoring Model, an administrator can add one or more Scoring Categories.
 
 *Add Scoring Category*
 
-![Scoring Categories OE](../assets/img/scoringCategories-v2.png)
+![Scoring Categories OE](../assets/img/scoringCategories-v3.png)
 
 1. Click on the **+** on the Scoring Categories section.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -385,9 +408,11 @@ Column       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Scoring Category Description** | String | Details, characteristics and information of the scoring category | Information Impact
 **Display Order** | Integer | Scoring category display order on CITE Scoresheet | 1
+**First Move to Display** | Integer | Move number the scoring category should be first displayed | 1
+**Last Move to Display** | Integer | Move number the scoring category should be last displayed | 1
 **Calculation Equation** | Varchar | Equation used to evaluate participant's scores | {sum}
 **Calculation Weight** | Integer | Weight of the score compared to other categories | 1
-**Allow Multiple Selections** | Boolean | Allow mulitple selections within the same scoring category | True
+**Scoring Option Selection Type** | Dropdown Text | Determine whether the checkboxes should be shown for scoring from Single, Multiple, None options | Single
 **Modifier Selection Required** | Boolean | Modifiers can be added to add an alternate value to the calculation | True
 
 To save these settings, click **Save**.
@@ -656,16 +681,17 @@ The following glossary provides a brief definition of key terms and concepts as 
 2. **Basic-Level Permission**: Can only view the team score.
 3. **CITE**: Web application that allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents.
 4. **CITE Dashboard**: Shows exercise details.
-5. **CITE Scoresheet**: Compares participant scores to organizations scores, group average scores, and the official score.
-6. **Evaluation**: Defines the scoring model used, as well as the moves and teams who will be participating in the exercise.
-7. **Modifiers**: If enabled, this value is used in calculating the Scoring Category score. Depending on how the equation is written, the modifier can be used to add, subtract, multiply and/or divide within the equation.
-8. **Modify-Level Permission**: Can view and edit the team score.
-9. **Moves**: A defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
-10. **Observer Role**: Individuals who are tasked with impartially and objectively monitoring teams during an exercise.
-11. **Roles**: Provide a set of responsibilities assigned to a user during an exercise.
-12. **Scoring Category**: Has a defined equation used to calculate the submission score from the categroy scores. Additionally, the category has a weight which will multiply the score obtained.
-13. **Scoring Model**: Tool used to assign a comparative value, takes into account the totality of the data points, their relative weights, and the scores for each of their range values.
-14. **Scoring Options**: Has a preset value which will be used to calculate the submission score for the Scoring Category it is part of.
-15. **Submission**: Act of providing a score or response for an evaluation in relation to an incident presented during the current move.
-16. **Submit-Level Permission**: Can view, edit, and submit the team score.
-17. **Team Types**: Types of teams available to be assigned to different teams with similar characteristics during an exercise.
+5. **CITE Report**: Recollects all user's responses into a single printable page version, for user to reference or keep for their records.
+6. **CITE Scoresheet**: Compares participant scores to organizations scores, group average scores, and the official score.
+7. **Evaluation**: Defines the scoring model used, as well as the moves and teams who will be participating in the exercise.
+8. **Modifiers**: If enabled, this value is used in calculating the Scoring Category score. Depending on how the equation is written, the modifier can be used to add, subtract, multiply and/or divide within the equation.
+9. **Modify-Level Permission**: Can view and edit the team score.
+10. **Moves**: A defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
+11. **Observer Role**: Individuals who are tasked with impartially and objectively monitoring teams during an exercise.
+12. **Roles**: Provide a set of responsibilities assigned to a user during an exercise.
+13. **Scoring Category**: Has a defined equation used to calculate the submission score from the categroy scores. Additionally, the category has a weight which will multiply the score obtained.
+14. **Scoring Model**: Tool used to assign a comparative value, takes into account the totality of the data points, their relative weights, and the scores for each of their range values.
+15. **Scoring Options**: Has a preset value which will be used to calculate the submission score for the Scoring Category it is part of.
+16. **Submission**: Act of providing a score or response for an evaluation in relation to an incident presented during the current move.
+17. **Submit-Level Permission**: Can view, edit, and submit the team score.
+18. **Team Types**: Types of teams available to be assigned to different teams with similar characteristics during an exercise.
