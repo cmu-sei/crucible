@@ -122,11 +122,6 @@ img[alt='Add Exhibit OE']{
     height: 300px;
 }
 
-img[alt='Exhibit Teams OE']{
-    width: 650px;
-    height: 500px;
-}
-
 img[alt='Card Teams OE']{
     width: 400px;
     height: 400px;
@@ -152,7 +147,7 @@ img[alt='Blueprint Add Moves OE']{
     height: 600px;
 }
 
-img[alt='Blueprint Add Injects OE']{
+img[alt='Blueprint Add Event OE']{
     width: 550px;
     height: 600px;
 }
@@ -163,20 +158,23 @@ img[alt='Add Scoring Model OE']{
 }
 
 img[alt='Scoring Categories OE']{
+    width: 400px;
+    height: 400px;
+}
+
+img[alt='Scoring Options OE']{
     width: 600px;
     height: 400px;
 }
 
-
-
 img[alt='Add Action OE']{
-    width: 500px;
-    height: 300px;
+    width: 700px;
+    height: 200px;
 }
 
 img[alt='Add Role OE']{
-    width: 500px;
-    height: 300px;
+    width: 700px;
+    height: 200px;
 }
 
 img[alt='Moves OE']{
@@ -187,6 +185,96 @@ img[alt='Moves OE']{
 img[alt='Teams OE']{
     width: 550px;
     height: 350px;
+}
+
+img[alt='Add Articles Exercise OE']{
+    width: 800px;
+    height: 700px;
+}
+
+img[alt='Article Created OE']{
+    width: 400px;
+    height: 200px;
+}
+
+img[alt='Add Teams Exhibit OE']{
+    width: 600px;
+    height: 300px;
+}
+
+img[alt='Blueprint Add Data Fields OE']{
+    width: 600px;
+    height: 500px;
+}
+
+img[alt='Blueprint Add CITE Actions OE']{
+    width: 600px;
+    height: 300px;
+}
+
+img[alt='Blueprint Add CITE Roles OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add Gallery Cards OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add Organization Template OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Configure Blueprint Teams OE']{
+    width: 800px;
+    height: 600px;
+}
+
+img[alt='Blueprint Add Card Template OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint CITE Action Template OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint CITE Role Template OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add Event Advanced OE']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='Blueprint Add Event Gallery OE']{
+    width: 500px;
+    height: 500px;
+}
+
+img[alt='Blueprint Add Player App OE']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='Blueprint Logo']{
+    width:80px;
+    height:80px;
+}
+
+img[alt='CITE Logo']{
+    width:80px;
+    height:80px;
+}
+
+img[alt='Gallery Logo']{
+    width:80px;
+    height:80px;
 }
 
 /*
