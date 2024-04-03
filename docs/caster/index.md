@@ -1,6 +1,4 @@
-# **Caster**
-
-*Coding a Topology*
+# ![Caster Logo](../assets/img/crucible-icon-caster.svg){: style="height:75px;width:75px"} **Caster:** Coding a Topology
 
 ## Overview
 

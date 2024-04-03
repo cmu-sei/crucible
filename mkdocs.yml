@@ -38,6 +38,7 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
   - admonition
+  - attr_list
 nav:
   - Home: index.md
   - Player: player/index.md

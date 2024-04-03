@@ -1,5 +1,4 @@
-# **Player**
-*Designing User Interfaces*
+# ![Player Logo](../assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"} **Player:** Designing User Interfaces
 
 ## Overview 
 

@@ -1,6 +1,4 @@
-# **Steamfitter**
-
-*Crafting a Scenario*
+# ![Steamfitter Logo](../assets/img/crucible-icon-steamfitter.svg){: style="height:75px;width:75px"} **Steamfitter:** Crafting a Scenario
 
 ## Overview
 
