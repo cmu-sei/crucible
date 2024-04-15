@@ -19,6 +19,22 @@ For installation, refer to these GitHub repositories.
 
 ## User Guide
 
+### Gallery Landing Page
+
+The landing page of Gallery provides a central approach to recopiling all collections and exhibits that the user is a participant of into just one display.
+
+![Gallery Landing Page OE](../assets/img/galleryLandingPage.png)
+
+First, users should select the collection they want to access from the dropdown, then a list of exhibits will be shown were the user will be able to select the one desired to be accessed.
+
+*Search for an Exhibit*
+
+To search for an exhibit, follow these steps:
+
+1. Navigate to Gallery's landing page.
+2. Select a collection from the dropdown.
+3. Click on the **Search Bar** and add the name of the creator of the exhibit.
+
 ### Gallery Wall
 
 The Gallery Wall is a dashboard with red, orange, yellow, and green status indicators. Each of these cards have a specifc set of actions, which will help users throughout the in-game exercise. 
@@ -160,7 +176,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field      | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name of the article | No cell phone connectivity
 **Summary** | String | Short summary of the article | No cell phone connectivity after pass of Hurricane Delta
@@ -216,7 +232,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name or username that identifies the user | user-1
 **ID** | guid | Unique ID for the user | 9dd4e3d8-5098-4b0a-9216-697cda5553f8
@@ -259,7 +275,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name of the collection | NCIS Demonstration
 **Description** | String | Details, characteristics and information of the collection | This is a collection created for demo purposes.
@@ -301,7 +317,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field      | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name of the card | Information Technology Sector
 **Description** | String | Details, characteristics and information of the card | This card is created to provide additional information related to the IT sector.
@@ -344,7 +360,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name of the article | Hurricane Delta has landed in Fort Myers
 **Summary** | String | Short summary and details of the article | Hurricane Delta has caused major damages
@@ -396,7 +412,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field      | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Current Move** | Integer | Number of the current move | 1
 **Current Inject** | Integer | Number of the inject within the move | 2
@@ -439,7 +455,7 @@ To add a team to the Exhibit, follow these steps.
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field      | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name** | String | Full name of the team | Carnegie Mellon University
 **Short Name** | String | Short name of the team, such as an acronym | CMU
@@ -467,7 +483,7 @@ To add a Team Card to the Exhibit, follow these steps.
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Team** | Dropdown Text | Team the card should be part of | CMU - Carnegie Mellon University
 **Card** | Dropdown Text | Gallery card to be assigned | Communications Sector
