@@ -33,7 +33,7 @@ Refer to this section [Administrator Guide](#administrator-guide) for more infor
 
 ### Blueprint Landing Page
 
-The landing page of Blueprint provides a variety of interaction modalities for exercises, tailored according to the permissions assigned to each user. The functionalities accessible are as follows:
+The landing page of Blueprint provides a variety of interaction modalities for exercises, tailored according to the permissions assigned to each user. The functionalities available are as follows:
 
 ![Blueprint Landing Page OE](../assets/img/blueprintLandingPage.png)
 
@@ -52,13 +52,13 @@ After clicking on Start Event, users will be redirected to a page where all avai
 This option is visible to users who hold administrative roles or are content developers within Blueprint, or have been assigned as contributors to the exercise MSEL. Such users are empowered to continue developing the current MSEL or to create new ones.
 
 #### End Event
-For those launched events, an extra Blueprint functionality is going to be added to the Player View, where users can manage their event. This feature further enables users to invite others to the event or even end event after the user has completed the exercise.
+For those launched events, an extra Blueprint functionality is going to be added to the Player View, where users can manage their event. This feature further enables users to invite others to the event or even end the event after the user has completed the exercise.
 
 ![Blueprint End Event OE](../assets/img/blueprintEndEvent.png)
 
 *Launched Event User Invitations*
 
-To invite other users to the launched Event, follow these steps:
+To invite other users to the launched event, follow these steps:
 
 ![Blueprint Launched Event Invites OE](../assets/img/blueprintEventInvitations.png)
 
@@ -80,7 +80,7 @@ After all desired configurations have been added, click **Save**.
 
 *Ending a Launched Event*
 
-To end an Event, follow these steps:
+To end an event, follow these steps:
 
 1. Navigate to the **Manage Event** application from Player's side panel. 
 2. Click on **End Event**.

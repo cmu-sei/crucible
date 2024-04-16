@@ -25,7 +25,7 @@ The landing page of Gallery provides a central approach to recopiling all collec
 
 ![Gallery Landing Page OE](../assets/img/galleryLandingPage.png)
 
-First, users should select the collection they want to access from the dropdown, then a list of exhibits will be shown were the user will be able to select the one desired to be accessed.
+First, users should select the collection they want to access from the dropdown, then a list of exhibits will be shown where the user will be able to select the one desired to be accessed.
 
 *Search for an Exhibit*
 

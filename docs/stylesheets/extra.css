@@ -154,7 +154,7 @@ img[alt='Blueprint Add Event OE']{
 
 img[alt='Add Scoring Model OE']{
     width: 600px;
-    height: 400px;
+    height: 600px;
 }
 
 img[alt='Scoring Categories OE']{
@@ -290,6 +290,11 @@ img[alt='CITE Team Type OE']{
 img[alt='Blueprint Add Invitations OE']{
     width: 500px;
     height: 300px;
+}
+
+img[alt='CITE Advance Move OE']{
+    width: 300px;
+    height: 50px;
 }
 
 /*

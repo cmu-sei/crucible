@@ -45,6 +45,19 @@ When in Dashboard view, users will have two features to interact with moves:
 
 - **Current Move:** Move that is currently active. There are cases where the Displayed Move and the Current Move might be the same. Here, users are allowed to edit the category of the move.
 
+### CITE Landing Page
+
+The landing page of CITE provides a central approach to recopiling all evaluations that the user is a participant of into just one display.
+
+![CITE Landing Page OE](../assets/img/CITELandingPage.png)
+
+*Search for an Evaluation*
+
+To search for an evaluation, follow these steps:
+
+1. Navigate to CITE's landing page.
+2. Click on the Search Bar and add the name of the name of the evaluation.
+
 ### CITE Dashboard
 
 The CITE Dashboard shows exercise details like the date and time, incident summary, a suggested list of actions for participants to consider taking, and suggested participant roles.
@@ -57,6 +70,10 @@ The following image will show some important hotspots about the CITE Dashboard. 
 *Hotspot 1:* 
 
 The name of the active event and the move number currently displayed.
+
+If the Can Increment Move permission is assigned to the user, this section will add the button option "Advance Move", which will enable the user to advance CITE's current move, as well as go back and forth between moves using the arrows.
+
+![CITE Advance Move OE](../assets/img/advanceMoveButton.png)
 
 #### Situation Date & Time
 *Hotspot 2:*
@@ -195,20 +212,18 @@ The following image shows the Evaluations Administration Page. Here, administrat
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Evaluation.
 
-![Add Evaluation OE](../assets/img/AddEvaluation-v4.png)
+![Add Evaluation OE](../assets/img/AddEvaluation-v5.png)
 
 1. Under the Evaluation Administration View, click **+**. 
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Evaluation Description** | String | Details, characteristics and information of the evaluation | NCISS Demonstration
 **Scoring Model** | Dropdown Text | Scoring model to be used in the evaluation | CISA NCISS
 **Evaluation Status** | Dropdown Text | Status of the evaluation after configuration | Active
-**Show Past Situation Descriptions** | Boolean | Display situation descriptions from past moves in a list format | False
-**Right Side Display** | Dropdown Text | Select what to display (Score Summary, Scoresheet, Html Block, Embedded Url, None) | Scoresheet
 **Gallery Exhibit ID** | guid | ID of the Gallery exhibit, if using Gallery during an exercise | 81a623e3-faeb-4a56-8b4d-0d42f90b6829
 **Current Move** | Integer | Current move of the evaluation | 0
 **Situation Date/Time** | Datetime | Evaluation situation date/time | 1/23/2024, 14:22:40
@@ -249,7 +264,7 @@ To configure an evaluation to be used for an exercise, administrators will need 
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Move Number** | Integer | Move number to be added | 0
 **Move Description** | String | Details, characteristics and information of the move | The exercise will begin at 0900 EST
@@ -287,7 +302,7 @@ To delete a move, follow these steps:
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name** | String | Name for the team | Carnegie Mellon University
 **Short Name** | String | Short name for the team, such as an acronym | CMU
@@ -338,21 +353,29 @@ The following image shows the [Scoring Models](#glossary) Administration Page. H
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Scoring Model.
 
-![Add Scoring Model OE](../assets/img/addScoringModel-v3.png)
+![Add Scoring Model OE](../assets/img/addScoringModel-v4.png)
 
 1. Under the Scoring Model Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Scoring Model Description** | String | Details, characteristics and information of the scoring model | NCISS Scoring Model
 **Scoring Model Status** | Dropdown Text | Status of the scoring model after configuration | Active
 **Calculation Equation** | Varchar | Equation used to evaluate participant's scores | {sum}
-**Hide Scores on Scoresheet** | Boolean | Don't show scores on Scoresheet | false
-**Display Comments as Textboxes** | Boolean | Provide a larger textbox on Scoresheet for lengthy responses | false
-**Display Scoring Categories by Move Number** | Boolean | Display different sets of scoring categories per move, instead of all at once | false
+**Use Individual User Scoring** | Boolean | If selected, the User score is displayed | False
+**Use Team Scoring** | Boolean | If selected, the Team score is displayed | True
+**Use Official Scoring** | Boolean | If selected, the Official score is displayed | False
+**Use Team Average Scoring** | Boolean | If selected, the Team Average score is displayed | False
+**Use Type Average Scoring** | Boolean | If selected, the Type Average score is displayed | False
+**Use Submit** | Boolean | Setting to add Submit button to CITE Scoresheet | False
+**Hide Scores on Scoresheet** | Boolean | Don't show scores on Scoresheet | True
+**Display Comments as Textboxes** | Boolean | Provide a larger textbox on Scoresheet for lengthy responses | True
+**Display Scoring Categories by Move Number** | Boolean | Display different sets of scoring categories per move, instead of all at once | True
+**Show Past Situation Descriptions** | Boolean | Display situation descriptions from past moves in a list format | True
+**Right Side Display** | Dropdown Text | Select what to display (Score Summary, Scoresheet, Html Block, Embedded Url, None) | Scoresheet
 
 To save these settings, click **Save**.
 
@@ -404,7 +427,7 @@ Within a Scoring Model, an administrator can add one or more Scoring Categories.
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Scoring Category Description** | String | Details, characteristics and information of the scoring category | Information Impact
 **Display Order** | Integer | Scoring category display order on CITE Scoresheet | 1
@@ -462,7 +485,7 @@ Within a Scoring Category, an administrator can add one or more [Scoring Options
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Scoring Option Description** | String | Details, characteristics and information of the scoring option | No Impact
 **Display Order** | Integer | Scoring option display order on CITE Scoresheet | 1
@@ -514,7 +537,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Action Description** | String | Details, characteristics and information of the action | Time to Score
 
@@ -558,7 +581,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Role Name** | String | Name of the role | Team Lead
 
@@ -607,7 +630,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **TeamType Name** | String | Name of the team type | Individual Organization
 **Official Score Contributor** | Boolean | Select if the team should contribute to CITE's official score | True
@@ -658,7 +681,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **User ID** | guid | User ID that identifies the user | 81a623e3-faeb-4a56-8b4d-0d42f90b6829
 **User Name** | string | User name that identifies the user | user-1
