@@ -204,9 +204,9 @@ The following image will shows the CITE Report. Here, users can view and/or prin
 ## Administrator Guide
 
 ### Evaluations
-The following image shows the Evaluations Administration Page. Here, administrators can add, edit, and delete [evaluations](#glossary).
+The following image shows the Evaluations Administration Page. Here, administrators can add, edit, upload, download, copy, and delete [evaluations](#glossary).
 
-![Evaluations Admin OE](../assets/img/EvaluationsAdmin-v2.png)
+![Evaluations Admin OE](../assets/img/EvaluationsAdmin-v3.png)
 
 **Add an Evaluation** 
 
@@ -214,7 +214,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Evaluation OE](../assets/img/AddEvaluation-v5.png)
 
-1. Under the Evaluation Administration View, click **+**. 
+1. Under the Evaluation Administration View, click **+ Icon**. 
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -248,6 +248,33 @@ To delete an evaluation, follow these steps:
 1. Click on the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
 3. Select the evaluation to be deleted and click on the **Trash Can Icon** next to the evaluation.
+
+**Upload an Evaluation**
+
+To upload an evaluation, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Click on the **Up Arrow** next to the + Icon.
+4. Select the evaluation JSON file to be uploaded.
+
+**Download an Evaluation**
+
+To download an evaluation, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Click on the **Down Arrow** next to the evaluation to be downloaded.
+4. Look for the JSON file in your Downloads folder.
+
+**Copy an Evaluation**
+
+To copy an evaluation, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Click on the **Copy Icon** next to the evaluation to be copied.
+4. Look for the evaluation name with the user's name.
 
 **Configure an Evaluation**
 
@@ -345,9 +372,9 @@ To remove the Observer Role from a user:
 
 ### Scoring Models
 
-The following image shows the [Scoring Models](#glossary) Administration Page. Here, administrators can add, edit, and delete scoring models.
+The following image shows the [Scoring Models](#glossary) Administration Page. Here, administrators can add, edit, copy, download, upload, and delete scoring models.
 
-![Scoring Models Admin OE](../assets/img/scoringModelsAdmin-v2.png)
+![Scoring Models Admin OE](../assets/img/scoringModelsAdmin-v3.png)
 
 **Add a Scoring Model**
 
@@ -355,7 +382,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Scoring Model OE](../assets/img/addScoringModel-v4.png)
 
-1. Under the Scoring Model Administration View, click **+**.
+1. Under the Scoring Model Administration View, click **+ Icon**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -400,6 +427,33 @@ To edit a scoring model, follow these steps:
 3. Select the scoring model to be edited, and click on the **Edit Icon** next to the scoring model.
 4. Here, users will be prompted the same scoring model's edit component as when adding a new scoring model.
 5. After doing all the necessary edits, click **Save**.
+
+**Upload a Scoring Model**
+
+To upload a scoring model, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Click on the **Up Arrow** next to the + Icon.
+4. Select the scoring model JSON file to be uploaded.
+
+**Download a Scoring Model**
+
+To download a scoring model, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Click on the **Down Arrow** next to the scoring model to be downloaded.
+4. Look for the JSON file in your Downloads folder.
+
+**Copy a Scoring Model**
+
+To copy a scoring model, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Click on the **Copy Icon** next to the scoring model to be copied.
+4. Look for the scoring model name with the user's name.
 
 **Delete a Scoring Model**
 

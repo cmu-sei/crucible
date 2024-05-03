@@ -260,9 +260,9 @@ To delete a user, follow these steps:
 
 ### Collections
 
-The following image shows the Collections Administration Page. Here, administrators can add and delete [collections](#glossary). These are where the articles will be assigned to, in the case there are multiple exercises running at the same time.
+The following image shows the Collections Administration Page. Here, administrators can add, upload, download, copy, and delete [collections](#glossary). These are where the articles will be assigned to, in the case there are multiple exercises running at the same time.
 
-![Collections Admin OE](../assets/img/collectionsAdmin.png)
+![Collections Admin OE](../assets/img/collectionsAdmin-v2.png)
 
 **Add a Collection**
 
@@ -270,7 +270,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Collection OE](../assets/img/addCollection-v2.png)
 
-1. Under the Collections Administration View, click **Add Collection**.
+1. Under the Collections Administration View, click **+ Icon**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -299,6 +299,33 @@ To delete a collection, follow these steps:
 1. Click on the **Settings Cog**.
 2. Navigate to the **Collections** tab.
 3. Select the collection to be deleted and click on the **Trash Can Icon** next to the collection.
+
+**Upload a Collection**
+
+Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to upload a collection.
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Collections** tab.
+3. Click on the **Up Arrow** next to the + Icon. 
+4. Select the collection JSON file to be uploaded.
+
+**Download a Collection**
+
+Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to download a collection.
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Collections** tab.
+3. Click on the **Down Arrow** next to the collection to be downloaded.
+4. Look for the JSON file in your Downloads folder.
+
+**Copy a Collection**
+
+Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to copy a collection.
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Collections** tab.
+3. Click on the **Copy Icon** next to the collection to be copied.
+4. Look for the collection name with the user's name.
 
 ### Cards
 
@@ -399,7 +426,7 @@ To delete an article, follow these steps:
 
 The following image shows the Exhibits Administration Page. Here, administrators configure the actual exercise to be run based on the teams, collections and articles previously configured.
 
-![Exhibits Admin OE](../assets/img/exhibitsAdmin-v2.png)
+![Exhibits Admin OE](../assets/img/exhibitsAdmin-v3.png)
 
 **Add an Exhibit**
 
@@ -407,7 +434,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Exhibit OE](../assets/img/addExhibit-v2.png)
 
-1. Under the Exhibit Administration View, click **Add Exhibit**.
+1. Under the Exhibit Administration View, click **+ Icon**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -437,6 +464,35 @@ To delete an exhibit, follow these steps:
 1. Click on the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
 3. Select the exhibit to be deleted and click on the **Trash Can Icon** next to the exhibit.
+
+**Upload an Exhibit**
+
+To upload an exhibit, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Exhibits** tab.
+3. Click on the **Up Arrow** next to the + Icon.
+4. Select the exhibit JSON file to be uploaded.
+
+**Note:** When adding a new exhibit, a new collection with the uploaded exhibit will be created. To view the uploaded exhibit, navigate to the collection using the dropdown and select the collection with the same name as the file uploaded.
+
+**Download an Exhibit**
+
+To download an exhibit, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Exhibits** tab.
+3. Click on the **Down Arrow** next to the exhibit to be downloaded.
+4. Look for the JSON file in your Downloads folder.
+
+**Copy an Exhibit**
+
+To copy an exhibit, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Exhibits** tab.
+3. Click on the **Copy Icon** next to the exhibit to be copied.
+4. Look for the exhibit name with the user's name.
 
 **Configure an Exhibit**
 
