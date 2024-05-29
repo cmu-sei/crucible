@@ -19,6 +19,22 @@ For installation, refer to these GitHub repositories.
 
 ## User Guide
 
+### Gallery Landing Page
+
+The landing page of Gallery provides a central approach to recopiling all collections and exhibits that the user is a participant of into just one display.
+
+![Gallery Landing Page OE](../assets/img/galleryLandingPage.png)
+
+First, users should select the collection they want to access from the dropdown, then a list of exhibits will be shown where the user will be able to select the one desired to be accessed.
+
+*Search for an Exhibit*
+
+To search for an exhibit, follow these steps:
+
+1. Navigate to Gallery's landing page.
+2. Select a collection from the dropdown.
+3. Click on the **Search Bar** and add the name of the creator of the exhibit.
+
 ### Gallery Wall
 
 The Gallery Wall is a dashboard with red, orange, yellow, and green status indicators. Each of these cards have a specifc set of actions, which will help users throughout the in-game exercise. 
@@ -160,7 +176,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field      | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name of the article | No cell phone connectivity
 **Summary** | String | Short summary of the article | No cell phone connectivity after pass of Hurricane Delta
@@ -216,7 +232,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name or username that identifies the user | user-1
 **ID** | guid | Unique ID for the user | 9dd4e3d8-5098-4b0a-9216-697cda5553f8
@@ -244,9 +260,9 @@ To delete a user, follow these steps:
 
 ### Collections
 
-The following image shows the Collections Administration Page. Here, administrators can add and delete [collections](#glossary). These are where the articles will be assigned to, in the case there are multiple exercises running at the same time.
+The following image shows the Collections Administration Page. Here, administrators can add, upload, download, copy, and delete [collections](#glossary). These are where the articles will be assigned to, in the case there are multiple exercises running at the same time.
 
-![Collections Admin OE](../assets/img/collectionsAdmin.png)
+![Collections Admin OE](../assets/img/collectionsAdmin-v2.png)
 
 **Add a Collection**
 
@@ -254,12 +270,12 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Collection OE](../assets/img/addCollection-v2.png)
 
-1. Under the Collections Administration View, click **Add Collection**.
+1. Under the Collections Administration View, click **+ Icon**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name of the collection | NCIS Demonstration
 **Description** | String | Details, characteristics and information of the collection | This is a collection created for demo purposes.
@@ -284,6 +300,33 @@ To delete a collection, follow these steps:
 2. Navigate to the **Collections** tab.
 3. Select the collection to be deleted and click on the **Trash Can Icon** next to the collection.
 
+**Upload a Collection**
+
+Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to upload a collection.
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Collections** tab.
+3. Click on the **Up Arrow** next to the + Icon. 
+4. Select the collection JSON file to be uploaded.
+
+**Download a Collection**
+
+Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to download a collection.
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Collections** tab.
+3. Click on the **Down Arrow** next to the collection to be downloaded.
+4. Look for the JSON file in your Downloads folder.
+
+**Copy a Collection**
+
+Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to copy a collection.
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Collections** tab.
+3. Click on the **Copy Icon** next to the collection to be copied.
+4. Look for the collection name with the user's name.
+
 ### Cards
 
 The following image shows the Cards Administration Page. Here, administrators can add and delete cards. These are the different cards presented in the Gallery Wall and where different articles related to that card can be found. 
@@ -301,7 +344,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field      | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name of the card | Information Technology Sector
 **Description** | String | Details, characteristics and information of the card | This card is created to provide additional information related to the IT sector.
@@ -344,7 +387,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name**         | String        | Name of the article | Hurricane Delta has landed in Fort Myers
 **Summary** | String | Short summary and details of the article | Hurricane Delta has caused major damages
@@ -383,7 +426,7 @@ To delete an article, follow these steps:
 
 The following image shows the Exhibits Administration Page. Here, administrators configure the actual exercise to be run based on the teams, collections and articles previously configured.
 
-![Exhibits Admin OE](../assets/img/exhibitsAdmin-v2.png)
+![Exhibits Admin OE](../assets/img/exhibitsAdmin-v3.png)
 
 **Add an Exhibit**
 
@@ -391,12 +434,12 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Exhibit OE](../assets/img/addExhibit-v2.png)
 
-1. Under the Exhibit Administration View, click **Add Exhibit**.
+1. Under the Exhibit Administration View, click **+ Icon**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field      | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Current Move** | Integer | Number of the current move | 1
 **Current Inject** | Integer | Number of the inject within the move | 2
@@ -422,6 +465,35 @@ To delete an exhibit, follow these steps:
 2. Navigate to the **Exhibits** tab.
 3. Select the exhibit to be deleted and click on the **Trash Can Icon** next to the exhibit.
 
+**Upload an Exhibit**
+
+To upload an exhibit, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Exhibits** tab.
+3. Click on the **Up Arrow** next to the + Icon.
+4. Select the exhibit JSON file to be uploaded.
+
+**Note:** When adding a new exhibit, a new collection with the uploaded exhibit will be created. To view the uploaded exhibit, navigate to the collection using the dropdown and select the collection with the same name as the file uploaded.
+
+**Download an Exhibit**
+
+To download an exhibit, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Exhibits** tab.
+3. Click on the **Down Arrow** next to the exhibit to be downloaded.
+4. Look for the JSON file in your Downloads folder.
+
+**Copy an Exhibit**
+
+To copy an exhibit, follow these steps:
+
+1. Click on the **Settings Cog**.
+2. Navigate to the **Exhibits** tab.
+3. Click on the **Copy Icon** next to the exhibit to be copied.
+4. Look for the exhibit name with the user's name.
+
 **Configure an Exhibit**
 
 To configure an exhibit to be used for an exercise, administrators will need to add Exhibit Teams, Card Teams, Article Teams, as well as assign the respective Observers (if desired). To do this, follow these steps.
@@ -439,7 +511,7 @@ To add a team to the Exhibit, follow these steps.
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field      | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Name** | String | Full name of the team | Carnegie Mellon University
 **Short Name** | String | Short name of the team, such as an acronym | CMU
@@ -467,7 +539,7 @@ To add a Team Card to the Exhibit, follow these steps.
 
 **Data Format Table**
 
-Column       | Data Type     | Description  | Example
+Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
 **Team** | Dropdown Text | Team the card should be part of | CMU - Carnegie Mellon University
 **Card** | Dropdown Text | Gallery card to be assigned | Communications Sector
