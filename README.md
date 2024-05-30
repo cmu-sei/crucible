@@ -92,4 +92,4 @@ Include the reasons why you're requesting the new feature and how it might benef
 
 ## License
 
-Copyright 2021 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/master/license.md) file for details.
+Copyright 2021 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/main/LICENSE.md) file for details.
