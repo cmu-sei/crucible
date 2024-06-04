@@ -51,6 +51,8 @@
 - [StackStorm](https://github.com/StackStorm/stackstorm-k8s)
 - [Rocketchat](https://github.com/RocketChat/helm-charts)
 - [Moodle](https://github.com/bitnami/charts/tree/main/bitnami/moodle)
+- [Webmail](https://github.com/cmu-sei/helm-charts/tree/main/charts/webmail)
+- [Keycloak](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
 
 ## Docker Images
 
@@ -60,10 +62,9 @@
 
 We primarily use these images in setting up a email server. The above Helm charts will pull the correct Docker images. This is completely optional but is what we use during certain exercises.
 
-- [Roundcube](https://hub.docker.com/r/roundcube/roundcubemail)
-
-We prebuild our Dovecot and Postfix Docker images. You can find an image on the Docker repository if needed.
-
+- [ClamAV](https://hub.docker.com/r/clamav/clamav/)
+- [MISP](https://github.com/coolacid/docker-misp)
+ 
 ## Infrastructure
 
 Not all applications require virtualization. Gallery, CITE, Blueprint, Player and Steamfitter all can be ran without a hypervisor.
