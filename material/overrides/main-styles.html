@@ -65,6 +65,8 @@ Blue color variations
     }
 
     .tx-hero {
+        flex: 1;
+        margin: 10px;
         color: var(--md-primary-bg-color);
         justify-content: right;
     }
@@ -119,6 +121,8 @@ Blue color variations
     }
 
     .tx-container-9 {
+        display: flex; /* Use flexbox */
+        justify-content: space-between; /* Space between the two sections */
         padding: 0rem;
         background-color: white;
         margin-bottom: 0px;
@@ -192,6 +196,10 @@ Blue color variations
     }
 
     .tx-hero__content-9 {
+        height: 450px;
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: flex-start; /* Align items to the top */
         margin-left: 50px;
         justify-content: left;
         color: #000000;
@@ -199,7 +207,7 @@ Blue color variations
         padding: 0 0px;
         padding-bottom: 40px;
         word-break: break-word;
-        float: right;
+        float: left;
     }
 
     .tx-hero__content-9 h1 {
@@ -212,6 +220,17 @@ Blue color variations
         text-overflow: ellipsis;
         line-height: normal;
         /*font-family: inherit;*/
+    }
+
+    .tx-hero__content-9 p {
+        font-size: 17px;
+        line-height: 1.8em;
+        text-rendering: optimizeLegibility;
+        color: black;
+        display: block;
+        margin: 0;
+        padding: 0;
+        text-indent: 0;
     }
 
     .tx-container-3 {
