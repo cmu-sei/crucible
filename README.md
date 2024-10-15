@@ -35,6 +35,27 @@ Steamfitter gives exercise developers the ability to create scenarios consisting
 
 Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source event-driven platform used to automate workflows, to execute commands.
 
+### Blueprint
+
+Blueprint is a web application created to make the development of a Master Scenario Event List (MSEL) and events easier. To get started with Blueprint see:
+
+- [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api)
+- [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui)
+
+### CITE
+
+CITE is a web application created to integrate with the Crucible Framework and allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents. To get started with CITE see:
+
+- [CITE API Repository](https://github.com/cmu-sei/CITE.Api)
+- [CITE UI Repository](https://github.com/cmu-sei/CITE.Ui)
+
+### Gallery
+
+Gallery is a web application where participants receive incident information. To get started with Gallery see:
+
+- [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
+- [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui)
+
 ## Crucible Appliance
 
 The Crucible appliance is an environment that includes everything needed to install and configure the core applications of the Crucible framework. The appliance application stack consists of a single-node Docker swarm utilizing a Traefik reverse proxy. They are assembled using Docker Compose files on an Ubuntu 20.04 operating system. To get started with the Crucible appliance, see:
