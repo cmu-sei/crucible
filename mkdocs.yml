@@ -45,6 +45,25 @@ nav:
   - Caster: caster/index.md
   - Steamfitter: steamfitter/index.md
   - Alloy: alloy/index.md
+  - TopoMojo:
+    - About: topomojo/about.md
+    - Getting started with TopoMojo: topomojo/getting-started.md
+    - Finding an existing space: topomojo/finding-a-space.md
+    - Building a new space:
+      - Settings and Templates: topomojo/building-a-workspace.md
+      - Document: topomojo/lab-document.md
+      - Challenge: topomojo/challenge.md
+      - Files: topomojo/files.md
+      - Play: topomojo/play.md
+    - Admin features:
+      - Admin Dashboard: topomojo/admin-dashboard.md
+      - Gamespaces: topomojo/admin-gamespaces.md
+      - Workspaces: topomojo/admin-workspaces.md
+      - Templates: topomojo/admin-templates.md
+      - Machines: topomojo/admin-machines.md
+      - Users: topomojo/admin-users.md
+      - Log: topomojo/admin-log.md    
+    - Copy and paste: topomojo/copy-paste.md
   - Blueprint: blueprint/index.md
   - CITE: cite/index.md
   - Gallery: gallery/index.md
