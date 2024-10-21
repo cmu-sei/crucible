@@ -1,0 +1,1990 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="player/">
+      
+      
+      <link rel="icon" href="assets/img/crucible-icon-c-alpha.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Crucible Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+
+  <!-- Determine title -->
+  
+  
+
+  <!-- The image needs to have an absolute URL -->
+  
+
+  <!-- Open graph meta tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Crucible Documentation" />
+  <meta property="og:description" content="None" />
+  <meta property="og:url" content="None" />
+  <meta property="og:image" content="Noneassets/images/illustrations/banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="568" />
+
+  <!-- google-site-verification meta-tag -->
+  <meta name="google-site-verification" content="-Rj8YMCn9uu5IwOFdC-WfAzXp4ZOMJtYKxU40ZgcJIU" />
+
+<!-- Extra stylesheets -->
+<!--  <link
+    rel="stylesheet"
+    href="assets/stylesheets/overrides.css"
+  />-->
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introducing-crucible" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Crucible Documentation" class="md-header__button md-logo" aria-label="Crucible Documentation" data-md-component="logo">
+      
+  <img src="assets/img/crucible-icon-c-alpha.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Crucible Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="player/" class="md-tabs__link">
+        
+  
+    
+  
+  Player
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="caster/" class="md-tabs__link">
+        
+  
+    
+  
+  Caster
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="steamfitter/" class="md-tabs__link">
+        
+  
+    
+  
+  Steamfitter
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="alloy/" class="md-tabs__link">
+        
+  
+    
+  
+  Alloy
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="topomojo/about/" class="md-tabs__link">
+          
+  
+    
+  
+  TopoMojo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="gameboard/" class="md-tabs__link">
+          
+  
+    
+  
+  Gameboard
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="blueprint/" class="md-tabs__link">
+        
+  
+    
+  
+  Blueprint
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="cite/" class="md-tabs__link">
+        
+  
+    
+  
+  CITE
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="gallery/" class="md-tabs__link">
+        
+  
+    
+  
+  Gallery
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="integrations/" class="md-tabs__link">
+        
+  
+    
+  
+  Integrations
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="install/" class="md-tabs__link">
+        
+  
+    
+  
+  Overview Install
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Crucible Documentation" class="md-nav__button md-logo" aria-label="Crucible Documentation" data-md-component="logo">
+      
+  <img src="assets/img/crucible-icon-c-alpha.svg" alt="logo">
+
+    </a>
+    Crucible Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addressing-persistent-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Addressing Persistent Challenges
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automating-cyber-experimentation-and-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automating Cyber Experimentation and Exercise
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#designing-user-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Designing User Interfaces
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Designing User Interfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-source-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open-Source Integrations:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coding-a-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coding a Topology
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coding a Topology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-source-integrations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open-Source Integrations:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crafting-a-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crafting a Scenario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crafting a Scenario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-source-integrations_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open-Source Integrations:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#animating-activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Animating Activity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluating-threats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluating Threats
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#displaying-incident-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      Displaying Incident Information
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessing-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assessing Performance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assessing Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-source-integrations_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open-Source Integrations:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-a-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching a Simulation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operational Deployment
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="player/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Player
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="caster/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Caster
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="steamfitter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Steamfitter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="alloy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Alloy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    TopoMojo
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            TopoMojo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started with TopoMojo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/finding-a-space/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Finding an existing space
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Building a new space
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            Building a new space
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/building-a-workspace/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Settings and Templates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/lab-document/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Document
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/challenge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Challenge
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/play/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Play
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Admin features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            Admin features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/admin-dashboard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Admin Dashboard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/admin-gamespaces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gamespaces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/admin-workspaces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workspaces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/admin-templates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Templates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/admin-machines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Machines
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/admin-users/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Users
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/admin-log/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="topomojo/copy-paste/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Copy and paste
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="gameboard/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Gameboard
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Gameboard
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/participating/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Participating in a game
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/practice-area/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practicing challenges
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using integrated support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/reports-beta/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Reports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Administering games
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            Administering games
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/admin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/admin-practice-area/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/admin-roles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Roles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/admin-players/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Players
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/admin-observe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Observe mode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/admin-settings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Settings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/admin-feedback-form/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Feedback form
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/completion-certificates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Certificates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/admin-clone-yaml-json/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Clone, yaml, and json options
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gameboard/game-center/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administering with Game Center [BETA]
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="blueprint/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blueprint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CITE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gallery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gallery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="integrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="introducing-crucible"><img alt="An icon representing the Crucible application suite icon" src="assets/img/home/cruciblelogo.svg" style="height:75px;width:75px" title="Crucible Application Suite Icon" /> Introducing Crucible</h1>
+<p><strong>Crucible</strong> is an open-source application framework for operating a cyber range. Crucible aims to be both simple and powerful, highly extensible, and cost effective.
+Since 2018, Crucible has effectively enabled large-scale Department of Defense (DoD) cyber exercises to increase operator performance. Crucible is now available to the public under open-source licensing.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li>Open-source cyber-range application framework</li>
+<li>Modular design with extensive application programming interfaces</li>
+<li>Customizable, immersive, browser-based user interface </li>
+<li>“Infrastructure as code” approach to topology building—enabling scalability, iteration, and reuse</li>
+<li>Flexible integration of powerful, third-party, open-source tools </li>
+<li>Scenario-based exercising </li>
+<li>Efficiency through automation</li>
+<li>Interoperability through open standards</li>
+</ul>
+<h3 id="addressing-persistent-challenges">Addressing Persistent Challenges</h3>
+<p>Cyber range administrators confront persistent challenges:
+* manual configurations leads to high-labor costs and excessive human error—with limited scalability and automation
+* proprietary range software leads to vendor lock-in and increasing costs
+CMU SEI developed Crucible in response to a decade of experiencing these frictions.</p>
+<h3 id="automating-cyber-experimentation-and-exercise">Automating Cyber Experimentation and Exercise</h3>
+<p>Crucible automates creation of virtual cyber environments featuring modeled topologies, simulated user activity, and scripted scenario events. These environments power individual labs, team-based exercises, and operational experimentation. These simulations can be fully automated or facilitated. Crucible content developers create new templates by specifying a topology, scenario, assessments, and user interfaces. Participants are challenged to perform mission-essential tasks and individual qualification requirements. Each Crucible application is built using the open-source Angular and .NET Core software frameworks.</p>
+<h2 id="designing-user-interfaces">Designing User Interfaces</h2>
+<p><a href="player/"><img alt="Player Logo" src="assets/img/crucible-icon-player.svg" style="height:75px;width:75px" /></a>
+Crucible’s <a href="player/"><strong>Player</strong></a> application is the user’s window into the virtual environment. Player enables 
+assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.</p>
+<h3 id="open-source-integrations">Open-Source Integrations:</h3>
+<ul>
+<li><strong>osTicket</strong>, a support ticket system, manages cyber range service requests.</li>
+<li><strong>Mattermost</strong>, a chat service for real-time communications. </li>
+<li><strong>Rocketchat</strong>, a chat service for real-time communications.</li>
+<li><strong>Roundcube</strong>, an email service, provides web-based email.</li>
+</ul>
+<h2 id="coding-a-topology">Coding a Topology</h2>
+<p><a href="caster/"><img alt="Caster Logo" src="assets/img/crucible-icon-caster.svg" style="height:75px;width:75px" /></a>
+Crucible’s <a href="caster/"><strong>Caster</strong></a> application enables the “coded” design and deployment of a cyber topology. Using Caster Designs, a novice content developer can avoid scripting OpenTofu code by simply defining variables within pre-configured OpenTofu modules. Caster supports the design and deployment of virtual environments to three types of hypervisors:</p>
+<ul>
+<li>VMware vSphere ESXi</li>
+<li>Microsoft Azure HyperV (public-cloud)</li>
+<li>Proxmox Virtual Environment KVM (open source)</li>
+</ul>
+<h3 id="open-source-integrations_1">Open-Source Integrations:</h3>
+<ul>
+<li><strong>OpenTofu</strong>, an “infrastructure-as-code” tool, enables scripted deployment of cyber infrastructure. </li>
+<li><strong>GitLab</strong>, a version control system and code-repository, is used to store OpenTofu modules.</li>
+</ul>
+<h2 id="crafting-a-scenario">Crafting a Scenario</h2>
+<p><a href="blueprint/"><img alt="Blueprint Logo" src="assets/img/blueprint-logo.png" /></a>
+Crucible’s <a href="blueprint/"><strong>Blueprint</strong></a> application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to specific simulation objectives. </p>
+<p><a href="steamfitter/"><img alt="Steamfitter Logo" src="assets/img/crucible-icon-steamfitter.svg" style="height:75px;width:75px" /></a>Crucible’s <a href="steamfitter/"><strong>Steamfitter</strong></a> application enables the organization and execution of scenario tasks on virtual machines.</p>
+<h3 id="open-source-integrations_2">Open-Source Integrations:</h3>
+<ul>
+<li><strong>StackStorm</strong>, an event-driven automation platform, scripts scenario events and senses the virtual environment.</li>
+<li><strong>Ansible</strong>, a software provisioning, configuration management, and application deployment tool, enables post-deployment provisioning of services to infrastructure.</li>
+</ul>
+<h2 id="animating-activity">Animating Activity</h2>
+<p><a href="https://cmu-sei.github.io/GHOSTS/"><img alt="GHOSTS Logo" src="assets/img/ghosts_new.png" style="height:75px;width:75px" /></a>Crucible’s <a href="https://cmu-sei.github.io/GHOSTS/"><strong>GHOSTS</strong></a> Non-Player Character (NPC) automation and orchestration framework deploys and shapes the activities of NPCs using Generative AI models.</p>
+<p>Open-Source Integrations:
+* <strong>Ollama</strong>, a platform designed to run llama 2, mistral, and other open source large language models locally on your machine.</p>
+<h2 id="evaluating-threats">Evaluating Threats</h2>
+<p><a href="cite/"><img alt="CITE Logo" src="assets/img/cite-logo.png" /></a>Crucible’s <a href="cite/index"><strong>Collaborative Incident Threat Evaluator (CITE)</strong></a> application enables participants from different organizations to evaluate, score, and comment on cyber incidents. CITE also provides a situational awareness dashboard that allows teams to track their internal actions and roles.</p>
+<h2 id="displaying-incident-information">Displaying Incident Information</h2>
+<p><a href="gallery/"><img alt="Gallery Logo" src="assets/img/gallery-logo.png" /></a>Crucible’s <a href="gallery/"><strong>Gallery</strong></a> application enables 
+participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector 
+or any other organization.</p>
+<h2 id="assessing-performance">Assessing Performance</h2>
+<p><img alt="SEER Logo" src="assets/img/crucible-icon-seer.svg" style="height:75px;width:75px" />
+Crucible’s <strong>SEER</strong> application enables assessment of team performance. Assessment reports map training objectives to scenario events to performance assessments.</p>
+<h3 id="open-source-integrations_3">Open-Source Integrations:</h3>
+<ul>
+<li><strong>Moodle/H5P</strong>, an interactive learning management system, eases the embedding of interactive quiz content. Assessments and other user-experience data can be recorded to a learning record store using the Experience API (xAPI).</li>
+<li><strong>TheHIVE</strong>, a scalable security incident response platform, is tightly integrated with the malware information sharing platform (MISP).</li>
+</ul>
+<h2 id="launching-a-simulation">Launching a Simulation</h2>
+<p><a href="alloy/"><img alt="Alloy Logo" src="assets/img/crucible-icon-alloy.svg" style="height:75px;width:75px" /></a>Crucible’s <a href="alloy/"><strong>Alloy</strong></a> application enables users to launch an on-demand event or join an instance of an already-running simulation. Following the event, reports can provide a summary of knowledge and performance assessments.</p>
+<h2 id="operational-deployment">Operational Deployment</h2>
+<p>Crucible applications implement the OpenID Connect authentication protocol and are integrated with <strong>Keycloak</strong>, an open-source identity authentication service.
+Crucible applications are deployed as <strong>Docker</strong> containers, which employ operating system level virtualization to isolate containers from each other. Container deployment, scaling, and management services are obtained using Kubernetes, a popular container-orchestration system. <strong>Kubernetes</strong> workflow and cluster management are performed using <strong>Argo</strong>, a popular open-source GitOps toolset.
+A pre-configured Crucible Appliance virtual machine is available for download.
+Beyond government-owned instances, the SEI owns and operates on-premises and cloud-based instances of Crucible:</p>
+<p><img alt="Fortress Logo" src="assets/img/fortress-app.svg" style="height:75px;width:75px" />
+<strong>Fortress</strong> <a href="https://fortress.sei.cmu.edu">fortress.sei.cmu.edu</a></p>
+<p><img alt="Gauntlet Logo" src="assets/img/gauntlet-app.svg" style="height:75px;width:75px" />
+<strong>Gauntlet</strong> <a href="https://gauntlet.sei.cmu.edu">gauntlet.sei.cmu.edu</a> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
