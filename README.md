@@ -2,23 +2,26 @@
 
 Developed by Carnegie Mellon University's Software Engineering Institute (SEI), Crucible is a modular framework for creating, deploying, and managing virtual environments to support training, education, and exercises. Within the Crucible framework are the following applications and plugins.
 
-## Core Applications
+## Applications
 
 ### Alloy
 
-Alloy joins the other independent Crucible apps together to provide a complete Crucible experience (i.e. labs, on-demand exercises, exercises, etc.). To get started with Alloy, see: 
+Crucible’s [**Alloy**](https://cmu-sei.github.io/crucible/alloy/) application enables users to launch an on-demand event or join an instance of an already-running simulation. Following the event, reports can provide a summary of knowledge and performance assessments.
+
 - [Alloy API Repository](https://github.com/cmu-sei/Alloy.Api)
 - [Alloy UI Repository](https://github.com/cmu-sei/Alloy.ui)
 
 ### Caster
 
-Caster is the primary deployment component of the Crucible framework. Caster is built upon [Terraform](https://www.terraform.io/), an open source "Infrastructure as Code" tool. Caster provides a web interface that gives exercise developers a way to create, share, and manage topology configurations. To get started with Caster, see:
+Crucible’s [**Caster**](https://cmu-sei.github.io/crucible/caster/) application enables the “coded” design and deployment of a cyber topology. Using Caster Designs, a novice content developer can avoid scripting OpenTofu code by simply defining variables within pre-configured OpenTofu modules. Caster supports the design and deployment of virtual environments to three types of hypervisors:
+
 - [Caster API Repository](https://github.com/cmu-sei/Caster.Api)
 - [Caster UI Repository](https://github.com/cmu-sei/Caster.Ui)
 
 ### Player
 
-Player is the centralized interface where users, teams, and administrators go to participate in the cyber exercise. To get started with the various components of Player, see: 
+Crucible’s [**Player**](https://cmu-sei.github.io/crucible/player/) application is the user’s window into the virtual environment. Player enables 
+assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.
 
 - [Player API Repository](https://github.com/cmu-sei/Player.Api)
 - [Player Console UI Repository](https://github.com/cmu-sei/Console.Ui)
@@ -28,12 +31,50 @@ Player is the centralized interface where users, teams, and administrators go to
 
 ### Steamfitter
 
-Steamfitter gives exercise developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and injects which run against virtual machines in an exercise. To get started with Steamfitter, see: 
+Crucible’s [**Steamfitter**](https://cmu-sei.github.io/crucible/steamfitter/) application enables the organization and execution of scenario tasks on virtual machines.
 
 - [Steamfitter API Repository](https://github.com/cmu-sei/Steamfitter.Api)
 - [Steamfitter UI Repository](https://github.com/cmu-sei/Steamfitter.Ui)
 
 Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source event-driven platform used to automate workflows, to execute commands.
+
+### Topomojo
+
+Crucible’s [**TopoMojo**](https://cmu-sei.github.io/crucible/topomojo/about/) application enables designing simple labs and challenges using form based configurations. Select and configure virtual machines, define networks, and write a guide.
+
+- [Topomojo API Repository](https://github.com/cmu-sei/TopoMojo)
+- [Topomojo UI Repository](https://github.com/cmu-sei/topomojo-ui)
+
+### Gameboard
+
+Crucible’s [**Gameboard**](https://cmu-sei.github.io/crucible/gameboard/) application provides game design capabilities and a competition-ready user interface for running your own cybersecurity game.
+
+- [Gameboard API Repository](https://github.com/cmu-sei/Gameboard)
+- [Gameboard UI Repository](https://github.com/cmu-sei/gameboard-ui)
+
+### Blueprint
+
+Crucible’s [**Blueprint**](https://cmu-sei.github.io/crucible/blueprint/) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to specific simulation objectives. 
+
+- [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api)
+- [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui)
+
+### Gallery
+
+Crucible’s [**Gallery**](https://cmu-sei.github.io/crucible/gallery/) application enables 
+participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector 
+or any other organization.
+
+- [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
+- [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui)
+
+### CITE
+
+Crucible’s [**Collaborative Incident Threat Evaluator (CITE)**](https://cmu-sei.github.io/crucible/cite/) application enables participants from different organizations to evaluate, score, and comment on cyber incidents. CITE also provides a situational awareness dashboard that allows teams to track their internal actions and roles.
+
+- [CITE API Repository](https://github.com/cmu-sei/CITE.Api)
+- [CITE UI Repository](https://github.com/cmu-sei/CITE.Ui)
+
 
 ## Crucible Appliance
 
@@ -71,11 +112,6 @@ This is the [Terraform](https://www.terraform.io/) Provider for [Identity](https
 
 - [Terraform Provider Identity Repository](https://github.com/cmu-sei/terraform-provider-identity)
 
-### Welder
-
-Welder is a simple application that can be added to an exercise; Welder allows users to dynamically load a VM workstation. To get started with Welder, see:
-- [Welder Repository](https://github.com/cmu-sei/Welder)
-
 ## Documentation
 
 You can find documentation on Crucible and all of its components [here](https://cmu-sei.github.io/crucible/).
@@ -92,4 +128,4 @@ Include the reasons why you're requesting the new feature and how it might benef
 
 ## License
 
-Copyright 2021 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/main/LICENSE.md) file for details.
+Copyright 2024 Carnegie Mellon University. See the [LICENSE.md](https://github.com/cmu-sei/crucible/blob/main/LICENSE.md) file for details.
