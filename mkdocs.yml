@@ -1,4 +1,8 @@
 site_name: Crucible Documentation
+site_description: "CRUCIBLE is an open-source application framework for creating and managing virtual environments and events."
+site_author: "Crucible Team"
+copyright: >
+  Copyright &copy; 2024 Carnegie Mellon University. All rights reserved.
 extra_css:
   - stylesheets/extra.css
 theme:
@@ -39,6 +43,29 @@ markdown_extensions:
   - pymdownx.superfences
   - admonition
   - attr_list
+extra:
+  social:
+    - icon: material/message-question
+      link: https://github.com/cmu-sei/Crucible/issues/new?template=question.md
+      name: Ask a Question
+    - icon: fontawesome/solid/bug
+      link: https://github.com/cmu-sei/crucible/issues/new?template=bug_report.md
+      name: Report a Problem
+    - icon: material/lightbulb-on
+      link: https://github.com/cmu-sei/crucible/issues/new?template=feature_request.md
+      name: Request a Feature
+    - icon: fontawesome/regular/comments
+      link: https://github.com/cmu-sei/crucible/discussions
+      name: Community Discussions
+    - icon: fontawesome/brands/github
+      link: https://github.com/cmu-sei/crucible
+      name: cmu-sei/Crucible on Github
+    - icon: fontawesome/regular/envelope
+      link: mailto:info@sei.cmu.edu?subject=Crucible%20Feedback
+      name: Email Crucible Team
+    - icon: fontawesome/solid/house
+      link: https://www.sei.cmu.edu/
+      name: Software Engineering Institute
 nav:
   - Home: index.md
   - Player: player/index.md
@@ -86,3 +113,5 @@ nav:
   - Gallery: gallery/index.md
   - Integrations: integrations/index.md
   - Overview Install: install/index.md
+repo_url: "https://github.com/cmu-sei/crucible"
+repo_name: "cmu-sei/Crucible"
