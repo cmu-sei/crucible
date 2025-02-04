@@ -1,8 +1,9 @@
 # Contributing
 
 If you are developing within the Crucible Framework or building an application to work alongside the Crucible Framework, please consider contributing documentation back to this repository. The documentation contained within is written in Markdown. The static site to display it is built using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and GitHub Pages.
+If you are developing within the [Crucible Framework](https://github.com/cmu-sei/crucible) or building an application to work alongside the Crucible Framework, please consider contributing documentation to this repository. The documentation contained within is written in Markdown. The static site generator used to display it is [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and the documentation is hosted by [GitHub Pages](https://pages.github.com/).
 
-## Documentation Contribution Process
+## Using GitHub DevContainers
 
 ### GitHub Dev Containers
 
@@ -16,6 +17,39 @@ The easiest way to contribute is to use GitHub dev containers to setup a develop
 6. When you are ready to submit your documentation for review, cancel the `mkdocs` command in the terminal with `ctrl+c`. Commit and push changes to your branch: `git add *`, `git commit -m "[description commit message]"`, `git push --set-upstream origin [your branch name]`
 7. Return to the main Crucible repo and switch to your branch. Click the green "Compare & Pull Request" button. Make any necessary changes to the PR title and comments, and click the green "Create Pull Request" button.
 8. A Crucible maintainer will review your pull request and accept or reject changes.
+The easiest way to contribute to the docs is to use **GitHub DevContainers** to setup a development environment accessible through your browser. In that environment, you can create a new branch, make changes, preview changes, and create pull requests (PR) to the main repository.
+
+1. On the main page of this repo, click the green **Code** button, **Codespaces** tab, then **Create codespace on main** button. This opens the new codespace on a new tab in your browser.
+2. Wait for the codespace to finish building. Once completed, you have an in-browser Visual Studio Code (VSCode) editor with a terminal open at the bottom. Watch the terminal for setup commands to finish running, and `pip3` will install several prerequisites. When finished, the terminal shows something like:
+
+```bash
+[@your-username -> /workspaces/crucible (main)
+```
+
+3. Using the terminal, create a new branch:
+
+```bash
+git checkout -b [your-branch-name]
+```
+
+4. Run `mkdocs serve` to build and serve the documentation site locally in your devcontainer. After a few seconds the command will complete, and you should see a message in the bottom-right corner that says: *Your application (mkdocs) running on port 8000 is available.*
+5. Click the green **Open in Browser** button to see the Crucible Documentation site in a new tab. As long as you don't cancel the command in the terminal, the docs site automatically updates any time a change is made to `mkdocs.yml` or any file in the `docs/` directory.
+
+   > If you keep the terminal open, you'll see the build commands running every time you make a change.  If you need to run more terminal commands, use `ctrl+c` to cancel. When you need to preview changes, run `mkdocs serve` again.
+
+6. Edit the documentation as necessary, previewing your changes as you go.
+7. When ready to submit your documentation for review, stop the `mkdocs` command by pressing `Ctrl+C` in the terminal.
+8. Stage, commit, and push the changes to your branch:
+
+```bash
+git add *
+git commit -m "[description commit message]"
+git push --set-upstream origin [your branch name]
+```
+
+9. Return to the main Crucible repo and switch to your branch. Click the green **Compare & Pull Request** button. Edit the PR title and comments (if needed) and click the **Create Pull Request**.
+
+A Crucible maintainer will review your PR and accept or reject your changes. Thank you!
 
 ### Fork
 
