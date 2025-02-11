@@ -1,6 +1,6 @@
 # Gameboard Roles
 
-The following is a list of roles in the gameboard. Note that these roles aren't additive -- they are independent. Therefore, each role has to be added individually and a single user can have multiple roles. Each assigned role only grants the privileges for that role. Roles do not inherit permissions from other roles.
+The following is a list of roles in the Gameboard. Note that these roles aren't additive -- they are independent. Therefore, each role has to be added individually and a single user can have multiple roles. Each assigned role only grants the privileges for that role. Roles do not inherit permissions from other roles.
 
 ## Gameboard privileges by role
 

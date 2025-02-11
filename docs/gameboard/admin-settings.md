@@ -5,7 +5,7 @@ You arrive at the **Admin Game Settings** by creating a new game or by editing a
 - click **+ New Game** to create a new game, or
 - hover over an existing game card and click **Settings**
 
-**Game id:** The game id is a unique string of alpha numeric characters displayed here and in the game URL. It is the primary key for a game in the database. The game id is automatically generated upon creating a new game and really only becomes important when an admin needs to investigate an issue in the database. 
+**Game id:** The game id is a unique string of alpha numeric characters displayed here and in the game URL. It is the primary key for a game in the database. The game id is automatically generated upon creating a new game and really only becomes important when an admin needs to investigate an issue in the database.
 
 ## Metadata
 
@@ -37,27 +37,27 @@ You arrive at the **Admin Game Settings** by creating a new game or by editing a
 
 **Lobby Markdown:** Using Markdown enter any information you would like players to see when they enter the game lobby. For help with Markdown syntax, see this [Markdown Guide](https://www.markdownguide.org/).
 
-**Feedback Questions:** It's possible -- but not required -- to create questions to capture participant feedback on the game and individual challenges. Create your feedback questions here using Yaml. For help with the feedback feature, see the [Feedback Form documentation](admin-feedback-form.md).
+**Feedback Questions:** It's possible -- but not required -- to create questions to capture participant feedback on the game and individual challenges. Create your feedback questions here using YAML. For help with the feedback feature, see the [Feedback Form documentation](admin-feedback-form.md).
 
 **About feedback templates:** This modal provides instructions for configuring questions presented to players after they complete a challenge or game.
 
 **Paste Example Configuration:** Pastes sample feedback configuration into the Feedback Questions field for you to modify and use for your own needs.
 
-**Certificate Template:** Design a certificate template here by entering HTML into the Certificate Template field. More information on certificates can be found in the [Playing in the Gameboard](participating.md) documentation under "The Profile screen" heading. For your convenience, selecting the **i** button displays instructions for designing a certificate that can dynamically display information related to a game, such as leaderboard rankings, player scores, and other details.
+**Certificate Template:** Design a certificate template here by entering HTML into the Certificate Template field. More information on certificates can be found in the [Playing in the Gameboard](participating.md) documentation under "The Profile screen" heading. For your convenience, selecting the **i** button displays instructions for designing a certificate that can dynamically display information related to a game, such as leader board rankings, player scores, and other details.
 
 ## Modes
 
-**Player Mode:** Toggle to set the game to **Competition** or **Practice**. When at least *one* game is set to Practice in your environment, a link to Practice is visible in the top-right corner of gameboard for authenticated players. Players can click the Practice link and select a challenge start their practice session.
+**Player Mode:** Toggle to set the game to **Competition** or **Practice**. When at least *one* game is set to Practice in your environment, a link to Practice is visible in the top-right corner of Gameboard for authenticated players. Players can click the Practice link and select a challenge start their practice session.
 
-**Require Synchronized Start:** Toggle on to require the game to have a synchronized start. When enabled, no player can start a session until *all* players have indicated that they are "ready to play" in the game lobby. Use this feature for games when you want all players to start at the same time and end at the same time. Synchronized start adheres to other gameboard settings: for example, team size minimum and maximum.
+**Require Synchronized Start:** Toggle on to require the game to have a synchronized start. When enabled, no player can start a session until *all* players have indicated that they are "ready to play" in the game lobby. Use this feature for games when you want all players to start at the same time and end at the same time. Synchronized start adheres to other Gameboard settings: for example, team size minimum and maximum.
 
 !!! note
 
     The Admin Start feature bypasses the "ready to play" feature; that is, users assigned the `Admin` role can Admin Start regardless of whether all players have "readied up" or not.
 
-**Show On Homepage When In Practice Mode:** 
+**Show On Homepage When In Practice Mode:**
 
-**Engine Mode:** Specify the game mode (Standard, External, Legacy Unity Games). In VM mode, the gameboard reaches out to TopoMojo to start the VMs.
+**Engine Mode:** Specify the game mode (Standard, External, Legacy Unity Games). In VM mode, the Gameboard reaches out to TopoMojo to start the VMs.
 
 ## Settings
 
@@ -73,7 +73,7 @@ These settings pertain to registration, execution, and general game and challeng
 
 **Session Limit:** The maximum number of sessions -- a session is when a game is started and challenges can be deployed and solved -- per game.
 
-**Gamespace Limit:** The maximum number of concurrent "gamespaces" allowed. A *gamespace* is the virtual environment that participants use to compete in a challenge. The default value is 0; the value that you enter here is inherited by a newly created board. For example, if you set this value to 5 in the game, any board created will inherit the 5 concurrent gamespace setting. 
+**Gamespace Limit:** The maximum number of concurrent "gamespaces" allowed. A *gamespace* is the virtual environment that participants use to compete in a challenge. The default value is 0; the value that you enter here is inherited by a newly created board. For example, if you set this value to 5 in the game, any board created will inherit the 5 concurrent gamespace setting.
 
 **Max Submissions:** The maximum number of solutions a participant can send to the grading server per challenge---whether that submission is correct, incorrect, or blank. Once the submission amount is reached, the competitor is locked out of further submissions for that challenge.
 
@@ -93,7 +93,7 @@ Offering a different execution period from registration period is an option. Thi
 
 **Closes:** The date and the time that your registration period ends.
 
-**Team Size:** This is self-explanatory. A matching *minimum* and *maximum* of one means that the challenge is a single player challenge. That is, a "team" of one. In a true team tournament, two or more would probably be the minimum. 
+**Team Size:** This is self-explanatory. A matching *minimum* and *maximum* of one means that the challenge is a single player challenge. That is, a "team" of one. In a true team tournament, two or more would probably be the minimum.
 
 **Team Sponsorship:** Toggle *Open* or *Required*.  When required, members on a team must have the same sponsor. Team sponsors are chosen during enrollment. For more information on sponsors, see [Gameboard Administration](admin.md).
 
@@ -125,7 +125,7 @@ Selecting a challenge from the search results adds it to the Edit icon.
 
 **Remove This Challenge:** Removes the challenge from the game.
 
-##### Prereqs
+##### Prerequisites
 
 Prerequisites are for challenges that unlock other challenges. For example: Your game has two challenges tagged **c01** and **c02**. You want to force participants to score 500 points on c01 before c02 is unlocked for them to attempt. Challenge c02 will not be available to deploy until the prerequisite condition is met. Complete the fields so that `c02 requires 500 on c01`.
 
@@ -133,7 +133,7 @@ Prerequisites are for challenges that unlock other challenges. For example: Your
 
 Gameboard can automatically award bonus points to teams and players based on the order in which they solve a challenge. For instance, the first team to solve a challenge can earn an extra 100 points, the second team 50 points, and so on. To configure this, use the YAML format specified below.
 
-**Paste this example configuration:** Click to paste the "hint" text contained in the textbox. This is a useful starting point for creating your own bonus structure YAML configuration.
+**Paste this example configuration:** Click to paste the "hint" text contained in the text box. This is a useful starting point for creating your own bonus structure YAML configuration.
 
 **Import this configuration:** When you have finished editing your YAML, click to commit it to Gameboard.
 
@@ -141,7 +141,7 @@ Gameboard can automatically award bonus points to teams and players based on the
 
 Here is where the visual representation of the game is arranged.  Challenges are placed on the game map here. The challenges you selected appear as hotspots on the map. Drag them into position on the map.
 
-**Show Grid:** Each map has a grid. By selecting Show Grid, you can toggle displaying the grid. When enabled, the grid overlays the map image and makes it easier for you place your challenge hotspots. 
+**Show Grid:** Each map has a grid. By selecting Show Grid, you can toggle displaying the grid. When enabled, the grid overlays the map image and makes it easier for you place your challenge hotspots.
 
 **Browse:** Select **Browse** to search for an image that will serve as a backdrop to your map.
 

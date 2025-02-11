@@ -19,7 +19,7 @@ Gamespaces in the table show the gamespace id or support code in Gameboard (e.g.
 - **stop:** Stops a powered on VM.
 - **revert:** Reverts to last saved state.
 - **delete:** Deletes a running VM instance.
-- **Json:** Shows detailed information about the gamespace, including: answers to questions, variables associated with the challenge, submitted answers, challenge questions and expected answers, and if questions were answered correctly or incorrectly.
+- **JSON:** Shows detailed information about the gamespace, including: answers to questions, variables associated with the challenge, submitted answers, challenge questions and expected answers, and if questions were answered correctly or incorrectly.
 - **Dispatcher:** Used to issue commands to a VM from TopoMojo provided that the TopoMojo agent program is running on that VM. The VM requires an internet connection which allows the agent program to establish a connection with TopoMojo. `target` is the hostname of the VM that you want to run the command on. `command` is any command you wish to run. See TopoMojo's [GitHub repository](https://github.com/cmu-sei/TopoMojo/tree/main/src/TopoMojo.Agent) for more information on TopoMojo's agent.
 
 ## Delete

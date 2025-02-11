@@ -1,6 +1,6 @@
 # Admin Users
 
-The **Users** tab is where Topo users are listed, created, and assigned permissions. The **Search** feature allows Topo admins to search on the name of a Topo user. To search for a user across all of TopoMojo, enter the term into the **Search** field or filter by *role* or *audience*. 
+The **Users** tab is where TopoMojo users are listed, created, and assigned permissions. The **Search** feature allows TopoMojo admins to search on the name of a TopoMojo user. To search for a user across all of TopoMojo, enter the term into the **Search** field or filter by *role* or *audience*. 
 
 Recall from workspace Settings that "audience" is a list of clients who can launch the workspace as a gamespace. Selecting an audience filter results in users who are part of that audience.
 

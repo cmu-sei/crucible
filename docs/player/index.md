@@ -1,10 +1,10 @@
 # ![Player Logo](../assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"} **Player:** Designing User Interfaces
 
-## Overview 
+## Overview
 
 **Player** is the centralized interface where participants, teams, and administrators go to engage in a cyber event. In Player, participants view teams, applications, virtual environments, and third-party applications. The event experience is highly customizable by content developers.
 
-Think of Player as the front door to an event running on Crucible. Player is meant to: 
+Think of Player as the front door to an event running on Crucible. Player is meant to:
 
 - Provide a platform for individual participants on a team to view content in an exercise.
 - Allow for quick navigation between various applications in the Crucible framework.
@@ -50,9 +50,9 @@ If you have not already done so, in the dropdown next to your username, select *
 
 ![newviewapps](../assets/img/new view apps.png)
 
-1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template. 
+1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template.
     - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
-     - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view. 
+     - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view.
      ![newviewapptemplate](../assets/img/new view app template.png)
 2. Click **Teams**.
 
@@ -72,7 +72,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 5. Click the **User** icon to select users to add to the new team.
 
-   - **Search** for the user whom you want to add. 
+   - **Search** for the user whom you want to add.
    - Click **Add User** to move the user from All Users to Team Users.
    - Under Team Users, you can assign a **Role** to the user at this time.
    - Click **Done** when you are finished adding users to the team.
@@ -83,11 +83,11 @@ If you have not already done so, in the dropdown next to your username, select *
 
 #### Upload Files
 
-In this step, View Administrators upload a single file or multiple files simultaneously to a View which can be added as an application and attached to a team. 
+In this step, View Administrators upload a single file or multiple files simultaneously to a View which can be added as an application and attached to a team.
 
 ![newviewaddfile](../assets/img/new view add file.png)
 
-1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files - it has not been uploaded yet. 
+1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files - it has not been uploaded yet.
 2. Select the **Team(s)** that you want to access the file and click **Upload Staged File(s)**.
 3. The file appears under **Uploaded Files**. From here, you can: **Download** the file, **Delete** the file, **Copy Link** to the file, **Edit** the name and team of the file, and **Add File as Application**.
 4. After adding the file as an application you have to return to **Step 3 Teams** and add that application - the _newly_ uploaded file - to a team just as you would add any new application.
@@ -95,11 +95,11 @@ In this step, View Administrators upload a single file or multiple files simulta
 
 ### Configure Users
 
-Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:** 
+Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:**
 
 #### Assign Roles
 
-Users and/or teams can be assigned to a **Role**, which is a group of permissions. More about roles as future Player development is completed. Only a SystemAdmin can create roles. 
+Users and/or teams can be assigned to a **Role**, which is a group of permissions. More about roles as future Player development is completed. Only a SystemAdmin can create roles.
 
 #### Assign Permissions
 
@@ -120,11 +120,11 @@ If you have not already done so, in the dropdown next to your username, select *
 ![player-new-application-template](../assets/img/player-new-application-template.png)
 
 1. Under the Administration nav panel, select **Application Templates**.
-2. Click **Add Application Template**. 
+2. Click **Add Application Template**.
       - Enter a **Name** for the app template.
       - Enter a **URL** for the app template.
       - Enter the path for the icon.
-3. Enable **embeddable** if desired. Ebeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames.  The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
+3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames.  The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads.  This is important for some apps that may require some initialization.
 
 ### Define Roles and Permissions
@@ -147,14 +147,14 @@ Subscriptions allow a Player administrator to configure client applications to b
 
 When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured, Player notifies VM API of the new View and it ensures that any Maps that were set up for the parent View are made available in the newly created View. This allows for Maps to be used in on-demand events.
 
-When the event is ended, it recieves the ViewDeleted notification and cleans up. Similarly any application can be configured to subscribe to these notifications and support on-demand events without Player code having to be added for each application specifically.
+When the event is ended, it receives the ViewDeleted notification and cleans up. Similarly any application can be configured to subscribe to these notifications and support on-demand events without Player code having to be added for each application specifically.
 
 When adding a Subscription, you must specify:
 
 1. Name - The name of the Subscription, for display purposes
-2. Callback URL - The URL that the recieving application expects notifications from Player to be sent to
+2. Callback URL - The URL that the receiving application expects notifications from Player to be sent to
 3. Client ID - The ID of a client in the OAuth2/OIDC server that is used for authentication in the environment. This client should support the Client Credentials grant and be authorized to include whatever scopes the receiving application requires to call it's Callback URL endpoint. For the VM API, it's default required scope is player-vm-privileged. This is the privileged scope that has elevated permissions and should not be the same as the scope used by the normal VM UI client.
-4. Client Secret - The secret required to authenticate witht he Client ID specified
+4. Client Secret - The secret required to authenticate with the Client ID specified
 5. Events - The Player events that this application would like to be notified about, such as ViewCreated and ViewDeleted
 
 ## User Guide
@@ -165,7 +165,7 @@ When adding a Subscription, you must specify:
 
 The top bar displays the current *view name*, *team*, and the *menu select* dropdown (your username in the top right).
 
-Player fully supports users who are on multiple teams.  Any such user, when logged in, can switch their team by using the *team* drop-down. 
+Player fully supports users who are on multiple teams.  Any such user, when logged in, can switch their team by using the *team* drop-down.
 
 ### Application Navigation Bar
 
@@ -198,16 +198,16 @@ Assuming that View Administrator permissions have been granted, in Player add th
 
 1. In the newly created Map application, in the right pane, select **New Map**.
 2. Complete the following fields:
-   - **Name:** the name of the map.   
-   - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.   
-   - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.   
-   - **Teams:** only the teams selected here will see the new map.   
+   - **Name:** the name of the map.
+   - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.
+   - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.
+   - **Teams:** only the teams selected here will see the new map.
       > Note that you can select more than one team here.
 3. Click **Submit**. The image of the new map appears in the right pane.
 
 **Editing a map**
 
-1. In Player's left navigation pane, click the **Map application**. 
+1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click the **Edit** icon. From here, you can:
    - **Edit Properties:** allows you to change the name, images, and teams of the map.
@@ -219,10 +219,10 @@ Assuming that View Administrator permissions have been granted, in Player add th
 
 A _click point_ is a location on the map that, when clicked by Player user, launches a resource like a virtual machine in a new tab. To add a click point to the map:
 
-1. In Player's left navigation pane, click the **Map application**. 
+1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click the **Edit** icon.
-4. Click anywhere in the map to launch the **Add Click Point** modal. If your map is a network topology diagram with network elements--routers, switches, firewalls, servers, etc.--then you may want to click on an element that represents the VM resource you want the user to launch. 
+4. Click anywhere in the map to launch the **Add Click Point** modal. If your map is a network topology diagram with network elements--routers, switches, firewalls, servers, etc.--then you may want to click on an element that represents the VM resource you want the user to launch.
    - **Radius:** by default, the value is 3.
    - **Resource:** this is the virtual machine (or another map) that launches when clicked. The VMs that appear here are the VMs from the VM application in the current view.
    - **Enter Custom Resource URL:** enable this if you want to link to something other than the view's VMs and maps that are available above. For example, you could place a click point labeled "Linux Help" that links to relevant Linux documentation.
@@ -232,7 +232,7 @@ A _click point_ is a location on the map that, when clicked by Player user, laun
 
 **Deleting a click point**
 
-1. In Player's left navigation pane, click the **Map application**. 
+1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click the **Edit** icon.
 4. Click an existing click point.
@@ -240,7 +240,7 @@ A _click point_ is a location on the map that, when clicked by Player user, laun
 
 **Deleting a map**
 
-1. In Player's left navigation pane, click the **Map application**. 
+1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click **Delete Map**.
 
@@ -308,7 +308,7 @@ osTicket (https://osticket.com/), a widely-used open source support ticket syste
 
 #### Chat
 
-Mattermost (https://mattermost.com/), an open source messaging platform can be configured and deployed to provide an "off the shelf" chat system for users. 
+Mattermost (https://mattermost.com/), an open source messaging platform can be configured and deployed to provide an "off the shelf" chat system for users.
 
 <!---#### Email-->
 
@@ -352,7 +352,7 @@ Procedures assume you are in the Player VM Console app.
 
 ### Power a Virtual Machine On or Off
 
-The procedures below show you how to remotely power a VM on or off from within the Player VM Console app. These procedures assume you are in the Player VM Console app. 
+The procedures below show you how to remotely power a VM on or off from within the Player VM Console app. These procedures assume you are in the Player VM Console app.
 
 1. In the Player VM Console app, select the virtual machine you want.
 2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
@@ -372,7 +372,7 @@ These procedures assume you are in the Player VM Console app.
 > Select __Enter VM Credentials__. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Click **Done**.
 > Any user registered for the exercise will have the virtual machine credentials.
 
-3. After entering your credentials, select the __Send File to VM__ option (this should no longer be grayed out). 
+3. After entering your credentials, select the __Send File to VM__ option (this should no longer be grayed out).
 4. Select the file from your local machine that you want to upload.
 5. Click __Open__. This will copy the file to the destination folder specified in the VM Send File Settings window.
 
@@ -399,17 +399,17 @@ To follow another participant:
 
 1. In Player, in the left sidebar, select the **Virtual Machines** application.
 2. In the main Player window, select **User List**.
->If you are a View Administrator (_ViewAdmin_), then you will see *all* the teams and *all* the participants. Otherwise, you will just see the team you are on and your teammates. 
+>If you are a View Administrator (_ViewAdmin_), then you will see *all* the teams and *all* the participants. Otherwise, you will just see the team you are on and your teammates.
 3. Locate the participant in the scenario.
    - Use the **Search** feature to search on a participant's username if you know it.
    - Click **Expand All** to expand the teams to see all of the participants.
    - Click **Collapse All** to collapse the teams.
    - Select a team to expand it and see its participants.
    - Check **Hide Inactive** to display _only_ those participants who are working in a virtual machine at the moment.
-4. Click the participant’s name. Now, you can see the console display for the virtual machine that the person is on in the main Player window. 
-5. Click the icon next to the participant's name to follow that participant in a new browser tab. 
+4. Click the participant’s name. Now, you can see the console display for the virtual machine that the person is on in the main Player window.
+5. Click the icon next to the participant's name to follow that participant in a new browser tab.
 
-If the person switches virtual machines then your display automatically follows them. You can’t interact with them while following; and, if their virtual machine goes out of focus then following stops. 
+If the person switches virtual machines then your display automatically follows them. You can’t interact with them while following; and, if their virtual machine goes out of focus then following stops.
 
 Clicking the **gear icon** in the upper left of the display you are following gives you the options to **Open In New Tab** and **Reconnect**. If you are already in a new browser tab, then you will see the **Fullscreen** option.
 

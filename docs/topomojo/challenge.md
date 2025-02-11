@@ -1,6 +1,6 @@
 # Challenge tab
 
-The *Challenge* tab in the Topo workspace is used when both Gameboard and TopoMojo are integrated to execute a cyber competition. More information on linking those two applications together can be found elsewhere in the Foundry documentation. The Challenge tab is where you create random key/values, embed them in a *gamespace* at deploy time, and ask questions and answers of competitors (players).
+The *Challenge* tab in the TopoMojo workspace is used when both Gameboard and TopoMojo are integrated to execute a cyber competition. More information on linking those two applications together can be found elsewhere in the Foundry documentation. The Challenge tab is where you create random key/values, embed them in a *gamespace* at deploy time, and ask questions and answers of competitors (players).
 
 ## Transforms
 

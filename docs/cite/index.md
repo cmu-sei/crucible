@@ -18,10 +18,10 @@ For installation, refer to these GitHub repositories.
 - [CITE API Repository](https://github.com/cmu-sei/CITE.Api)
 
 ### CITE Permissions
- 
- In order to use CITE, a user must be assigned a scoring permission. 
 
- There are three levels of permissions in CITE that affect the way a team score is collaborated on and edited. 
+ In order to use CITE, a user must be assigned a scoring permission.
+
+ There are three levels of permissions in CITE that affect the way a team score is collaborated on and edited.
 
  - [Basic](#glossary): Can only view the team score.
  - [Modify](#glossary): Can view and edit the team score.
@@ -29,8 +29,8 @@ For installation, refer to these GitHub repositories.
 
  Most users will have the modify-level permission; however, one or two users per team have submit-level permission, meaning that only one or two users per team can edit and/or submit on the team score.
 
- However, participants who can submit scores on behalf of their team can also add suggested actions and participant roles to the CITE Dashboard. 
- 
+ However, participants who can submit scores on behalf of their team can also add suggested actions and participant roles to the CITE Dashboard.
+
  Refer to this section [Actions to Consider](#actions-to-consider) for more information.
 
 ## User Guide
@@ -47,7 +47,7 @@ When in Dashboard view, users will have two features to interact with moves:
 
 ### CITE Landing Page
 
-The landing page of CITE provides a central approach to recopiling all evaluations that the user is a participant of into just one display.
+The landing page of CITE provides a central approach to recompiling all evaluations that the user is a participant of into just one display.
 
 ![CITE Landing Page OE](../assets/img/CITELandingPage.png)
 
@@ -67,7 +67,7 @@ The following image will show some important hotspots about the CITE Dashboard. 
 ![CITE Dashboard OE](../assets/img/CITE-Dashboard-v3.png)
 
 #### Active Events & Moves
-*Hotspot 1:* 
+*Hotspot 1:*
 
 The name of the active event and the move number currently displayed.
 
@@ -93,14 +93,14 @@ Users can see the different actions necessary to be executed during the exercise
 These are added to guide users on an appropriate course of action during an exercise. However, these actions are not connected to the scoresheet.
 
 #### Roles
-*Hotspot 5:* 
+*Hotspot 5:*
 
 The roles are added so that each team member will have a clear path of their responsibilities during the exercise. For this, roles can be customized for each team and then the team members decide what role each user should be assigned to.
 
 #### Score Summary
 *Hotspot 6:*
 
-Displays the various scores at the appropriate severity level for the disaplyed move. Here, scores are always visible.
+Displays the various scores at the appropriate severity level for the displayed move. Here, scores are always visible.
 
 #### Team Selection
 *Hotspot 7:*
@@ -121,7 +121,7 @@ By using this icon, users can toggle between the CITE Dashboard and the CITE Sco
 
 ### CITE Scoresheet
 
-The CITE Scoresheet compares participant scores to organization scores, group average scores, and the oficial score.
+The CITE Scoresheet compares participant scores to organization scores, group average scores, and the official score.
 
 The following image will show some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to know more about each section.
 
@@ -140,7 +140,7 @@ The move currently displayed on the screen. Clicking < displays previous moves. 
 #### Scoring Features
 *Hotspot 3:*
 
-- **User:** This is the participant's personal score for their reference only. The user score will also appear under the Score Summary range. 
+- **User:** This is the participant's personal score for their reference only. The user score will also appear under the Score Summary range.
 
 - **Team:** Toggling the Team icon, displays how the team has scored this move so far. This is the score that the team collaborates on and submits for the current move. This score will be compared to the official score. The Team score appears under the Score Summary range.
 
@@ -152,7 +152,7 @@ The move currently displayed on the screen. Clicking < displays previous moves. 
 
 - **Submit:** Submits the score indicating that the user is done scoring the current move. Click Yes or No. If the user clicks Yes, but changes their mind, click Reopen to edit the scoring.
 
-- **Clear:** Clears any selections the user has checked but does not clear comments enterred. Selecting Clear returns to a score of 0.00.
+- **Clear:** Clears any selections the user has checked but does not clear comments entered. Selecting Clear returns to a score of 0.00.
 
 - **Preset:** Sets the user's selections to the previous move score to use as a starting point for the current move.
 
@@ -208,13 +208,13 @@ The following image shows the Evaluations Administration Page. Here, administrat
 
 ![Evaluations Admin OE](../assets/img/EvaluationsAdmin-v3.png)
 
-**Add an Evaluation** 
+**Add an Evaluation**
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Evaluation.
 
 ![Add Evaluation OE](../assets/img/AddEvaluation-v5.png)
 
-1. Under the Evaluation Administration View, click **+ Icon**. 
+1. Under the Evaluation Administration View, click **+ Icon**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -224,7 +224,7 @@ Field       | Data Type     | Description  | Example
 **Evaluation Description** | String | Details, characteristics and information of the evaluation | NCISS Demonstration
 **Scoring Model** | Dropdown Text | Scoring model to be used in the evaluation | CISA NCISS
 **Evaluation Status** | Dropdown Text | Status of the evaluation after configuration | Active
-**Gallery Exhibit ID** | guid | ID of the Gallery exhibit, if using Gallery during an exercise | 81a623e3-faeb-4a56-8b4d-0d42f90b6829
+**Gallery Exhibit ID** | GUID | ID of the Gallery exhibit, if using Gallery during an exercise | 81a623e3-faeb-4a56-8b4d-0d42f90b6829
 **Current Move** | Integer | Current move of the evaluation | 0
 **Situation Date/Time** | Datetime | Evaluation situation date/time | 1/23/2024, 14:22:40
 **Situation Description** | Rich Text | Additional details, characteristics and information of the evaluation | Agency has been hacked with a ransomware attack...
@@ -402,7 +402,7 @@ Field       | Data Type     | Description  | Example
 **Display Comments as Textboxes** | Boolean | Provide a larger textbox on Scoresheet for lengthy responses | True
 **Display Scoring Categories by Move Number** | Boolean | Display different sets of scoring categories per move, instead of all at once | True
 **Show Past Situation Descriptions** | Boolean | Display situation descriptions from past moves in a list format | True
-**Right Side Display** | Dropdown Text | Select what to display (Score Summary, Scoresheet, Html Block, Embedded Url, None) | Scoresheet
+**Right Side Display** | Dropdown Text | Select what to display (Score Summary, Scoresheet, HTML Block, Embedded Url, None) | Scoresheet
 
 To save these settings, click **Save**.
 
@@ -414,7 +414,7 @@ When adding a Scoring Model, an administrator is required to add a defined equat
 - **{minPossible}:** The minimum possible value of the submission.
 - **{maxPossible}:** The maximum possible value of the submission.
 
-Aside from these variables, **>** can be used to set clipping values for the equation. 
+Aside from these variables, **>** can be used to set clipping values for the equation.
 
 - **Example:** 100 > equation > 20 will force the value of the submission to be between 100 and 20.
 
@@ -466,7 +466,7 @@ To delete a scoring model, follow these steps:
 
 #### Scoring Categories
 
-To configure a Scoring Model to be used for an exercise, administrators will need to add [Scoring Categories](#glossary). 
+To configure a Scoring Model to be used for an exercise, administrators will need to add [Scoring Categories](#glossary).
 
 Within a Scoring Model, an administrator can add one or more Scoring Categories.  To do this, follow these steps.
 
@@ -494,7 +494,7 @@ Field       | Data Type     | Description  | Example
 
 To save these settings, click **Save**.
 
-A Scoring Category may have zero or more [Modifiers](#glossary). If a Scoring Category has Modifiers, a Modifier selection can be required or optional. If no Modifier is selected when optional, a default value of 1.0 is used in the Scoring Category calculation. 
+A Scoring Category may have zero or more [Modifiers](#glossary). If a Scoring Category has Modifiers, a Modifier selection can be required or optional. If no Modifier is selected when optional, a default value of 1.0 is used in the Scoring Category calculation.
 
 Additionally, a Scoring Category has an admin defined equation to calculate the submission score from the category scores and can contain the following variables:
 
@@ -665,7 +665,7 @@ The following image shows the Submissions Administration Page. Here, administrat
 
 Additional functionalities include copying the entire score, as well as deleting a score submitted by a team.
 
-![Submissiosn Admin OE](../assets/img/submissionsAdmin-v2.png)
+![Submissions Admin OE](../assets/img/submissionsAdmin-v2.png)
 
 ### Team Types
 
@@ -679,7 +679,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Team Type OE](../assets/img/addTeamType.png)
 
-1. Under the Team Type Administration View, click on the **+** icon. 
+1. Under the Team Type Administration View, click on the **+** icon.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -712,9 +712,9 @@ To delete a team type, follow these steps:
 
 ### Users
 
-The following image shows the Users Administration Page. Here, administrators can add and delete users. Additionally, administrators will be able to assign the necessary permissions to each user. 
+The following image shows the Users Administration Page. Here, administrators can add and delete users. Additionally, administrators will be able to assign the necessary permissions to each user.
 
-The available permissions are: 
+The available permissions are:
 
 - **System Admin:** Permission that will grant a user all administration privileges on the CITE application.
 - **Content Developer:** Will be provided the permission to manage other CITE admin pages except the Users Admin page and their permissions.
@@ -737,7 +737,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 Field       | Data Type     | Description  | Example
 ------------ | ------------- | ------------ | -----------
-**User ID** | guid | User ID that identifies the user | 81a623e3-faeb-4a56-8b4d-0d42f90b6829
+**User ID** | GUID | User ID that identifies the user | 81a623e3-faeb-4a56-8b4d-0d42f90b6829
 **User Name** | string | User name that identifies the user | user-1
 
 To save these settings, click **Save** and select the desired permissions to be assigned by clicking on the checkboxes next to the user.
@@ -752,9 +752,9 @@ To delete a user, follow these steps:
 
 ## Glossary
 
-The following glossary provides a brief definition of key terms and concepts as they are used in the context of the CITE application. 
+The following glossary provides a brief definition of key terms and concepts as they are used in the context of the CITE application.
 
-1. **Actions**: Series of steps to guide users on an appropriate course of action during an exercise. 
+1. **Actions**: Series of steps to guide users on an appropriate course of action during an exercise.
 2. **Basic-Level Permission**: Can only view the team score.
 3. **CITE**: Web application that allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents.
 4. **CITE Dashboard**: Shows exercise details.
@@ -766,7 +766,7 @@ The following glossary provides a brief definition of key terms and concepts as 
 10. **Moves**: A defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
 11. **Observer Role**: Individuals who are tasked with impartially and objectively monitoring teams during an exercise.
 12. **Roles**: Provide a set of responsibilities assigned to a user during an exercise.
-13. **Scoring Category**: Has a defined equation used to calculate the submission score from the categroy scores. Additionally, the category has a weight which will multiply the score obtained.
+13. **Scoring Category**: Has a defined equation used to calculate the submission score from the category scores. Additionally, the category has a weight which will multiply the score obtained.
 14. **Scoring Model**: Tool used to assign a comparative value, takes into account the totality of the data points, their relative weights, and the scores for each of their range values.
 15. **Scoring Options**: Has a preset value which will be used to calculate the submission score for the Scoring Category it is part of.
 16. **Submission**: Act of providing a score or response for an evaluation in relation to an incident presented during the current move.

@@ -1,8 +1,8 @@
-The **Files** page in the Topo workspace allows you to upload files from your system to TopoMojo to include in your lab. These files are used as ISOs that can be attached to VMs in the workspace. If your files aren’t already in an ISO file format, TopoMojo wraps them in an ISO after upload.
+The **Files** page in the TopoMojo workspace allows you to upload files from your system to TopoMojo to include in your lab. These files are used as ISOs that can be attached to VMs in the workspace. If your files aren’t already in an ISO file format, TopoMojo wraps them in an ISO after upload.
 
 !!! note
 
-    For ISO uploads to work, TopoMojo needs an NFS (Network File System) datastore presented to vSphere and Topo must be able to access it. 
+    For ISO uploads to work, TopoMojo needs an NFS (Network File System) datastore presented to vSphere and TopoMojo must be able to access it. 
 
 The **Files** tab in TopoMojo is where ISO files are uploaded to attach to virtual machines. Supply the ISO that you want to attach to your VM here to provide additional resources to a VM that might not be included in the original VM. ISO files are disk images that can be mounted as virtual CD drives on the VM. You want to attach an ISO when you need additional software, datasets, or other resources.
 

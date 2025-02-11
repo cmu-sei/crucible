@@ -4,11 +4,11 @@ TopoMojo has an admin interface called **Admin Dashboard**. To access the Admin 
 
 ### Hub Connections
 
-**Hub connections** informs Topo admins about which users are currently logged into TopoMojo.
+**Hub connections** informs TopoMojo admins about which users are currently logged into TopoMojo.
 
 ### Announcement
 
-The **Announcement** feature allows Topo admins to broadcast important messages to everyone in TopoMojo. Announcements appear in the Topo interface. In the Message field, enter the content of the announcement and click **Send**.
+The **Announcement** feature allows TopoMojo admins to broadcast important messages to everyone in TopoMojo. Announcements appear in the TopoMojo interface. In the Message field, enter the content of the announcement and click **Send**.
 
 ### Import/Export
 

@@ -9,7 +9,7 @@
 ## Recommended
 
 - Helm
-- oAuth Provider
+- OAuth Provider
   + We currently use [IdentityServer](https://identityserver4.readthedocs.io/en/latest/) and [Keycloak](https://www.keycloak.org/documentation)
 
 ## Crucible Applications and GitHub Pages
@@ -49,7 +49,7 @@
 - [Rancher](https://github.com/rancher/charts)
 - [Longhorn](https://github.com/longhorn/charts)
 - [StackStorm](https://github.com/StackStorm/stackstorm-k8s)
-- [Rocketchat](https://github.com/RocketChat/helm-charts)
+- [RocketChat](https://github.com/RocketChat/helm-charts)
 - [Moodle](https://github.com/bitnami/charts/tree/main/bitnami/moodle)
 - [Webmail](https://github.com/cmu-sei/helm-charts/tree/main/charts/webmail)
 - [Keycloak](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
@@ -64,12 +64,12 @@ We primarily use these images in setting up a email server. The above Helm chart
 
 - [ClamAV](https://hub.docker.com/r/clamav/clamav/)
 - [MISP](https://github.com/coolacid/docker-misp)
- 
+
 ## Infrastructure
 
 Not all applications require virtualization. Gallery, CITE, Blueprint, Player and Steamfitter all can be ran without a hypervisor.
 
-You are able to run the full Crucible stack on minimal hardware. We usually run on four nodes: one server and three agents. Each node has around 100-250 GB of storage, 8GB RAM, 2 Cores. This is mainly for Longhorn and Stackstorm which takes a lot of resources even when limiting their availability. This is only what we recommend. As stated before, you can run this on one node outside of production. The only concern would be storage space.
+You are able to run the full Crucible stack on minimal hardware. We usually run on four nodes: one server and three agents. Each node has around 100-250 GB of storage, 8GB RAM, 2 Cores. This is mainly for Longhorn and StackStorm which takes a lot of resources even when limiting their availability. This is only what we recommend. As stated before, you can run this on one node outside of production. The only concern would be storage space.
 
 # Install Overview
 
@@ -108,9 +108,9 @@ This stack is very dependent on TLS. Please create certificates and add them as 
     kubectl create secret generic appliance-root-ca --from-file=appliance-root-ca=certificates/root-ca.pem --dry-run=client -o yaml | kubectl apply -f -
     ```
 
-## Loadbalancer
+## Load Balancer
 
-If you're using a cloud provider for your Kubernetes cluster, you do not have to worry about supplying your own loadbalancer. If you are installing this on bare metal, which would be a majority of the time if you are testing the software, you will have to provide a loadbalancer. We recommend using MetalLB. The documentation will guide you on how to install this into your cluster.
+If you're using a cloud provider for your Kubernetes cluster, you do not have to worry about supplying your own load balancer. If you are installing this on bare metal, which would be a majority of the time if you are testing the software, you will have to provide a load balancer. We recommend using MetalLB. The documentation will guide you on how to install this into your cluster.
 
 - [Helm Install MetalLB](https://metallb.universe.tf/installation/#installation-with-helm)
 - [Configuring MetalLB](https://metallb.universe.tf/configuration/)
@@ -123,7 +123,7 @@ If you're using a cloud provider for your Kubernetes cluster, you do not have to
 
 ## Ingress
 
-In order to access these services, you need to be able to communicate to the cluster. The easiest way to do this is to add `ingress-nginx` to your cluster. Before you install this, you have to have an active loadbalancer. Here's a one liner using Helm to install `ingress-nginx`:
+In order to access these services, you need to be able to communicate to the cluster. The easiest way to do this is to add `ingress-nginx` to your cluster. Before you install this, you have to have an active load balancer. Here's a one liner using Helm to install `ingress-nginx`:
 
 ??? example
 
@@ -143,12 +143,12 @@ K3s is created by Rancher but Rancher itself is a GUI to help configure your Kub
 
 ## Longhorn
 
-Longhorn is used to easily manage, create, and backup persistent volumes and persistent volume claims. You do not have to install this but you will have to manage your own PV's and PVC's if you are not using a cloud provider.
+Longhorn is used to easily manage, create, and backup persistent volumes (PVs) and persistent volume claims (PVCs). You do not have to install this but you will have to manage your own PVs and PVCs if you are not using a cloud provider.
 
 ??? example
 
     ``` bash
-    helm upgrade -i longhorn longhorn/longhorn --namespace longhorn-system --create-namespace --set persistance.defaultClassReplicaCount=1 --wait
+    helm upgrade -i longhorn longhorn/longhorn --namespace longhorn-system --create-namespace --set persistence.defaultClassReplicaCount=1 --wait
     ```
 
 ## PostgreSQL and pgAdmin
@@ -171,7 +171,7 @@ Majority of the applications above use PostgreSQL. We also use pgAdmin to help m
 
 ## Crucible Installation
 
-All of the Crucible applications have their settings on the GitHub page and can be modified in the values yaml file on the corresponding Helm chart. There are settings within each application you do have to set up in order for communication. We have populated environment files and scripts that help guide you with this part of the installation. These are located at these two GitHub pages:
+All of the Crucible applications have their settings on the GitHub page and can be modified in the values YAML file on the corresponding Helm chart. There are settings within each application you do have to set up in order for communication. We have populated environment files and scripts that help guide you with this part of the installation. These are located at these two GitHub pages:
 
 - [k3s-install](https://github.com/avershave/k3s-install)
 - [k3s-production](https://github.com/sei-noconnor/k3s-production)
