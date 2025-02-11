@@ -93,6 +93,7 @@ nav:
     - Copy and paste: topomojo/copy-paste.md
   - Gameboard:
     - About the Gameboard: gameboard/index.md
+    - Profile screen: gameboard/profile.md
     - Participating in a game: gameboard/participating.md
     - Practicing challenges: gameboard/practice-area.md
     - Using integrated support: gameboard/support.md
@@ -105,7 +106,7 @@ nav:
       - Observe mode: gameboard/admin-observe.md
       - Settings: gameboard/admin-settings.md
       - Feedback form: gameboard/admin-feedback-form.md
-      - Completion Certificates: gameboard/completion-certificates.md
+      - Configuring Certificate Templates: gameboard/completion-certificates.md
       - Clone, yaml, and json options: gameboard/admin-clone-yaml-json.md
     - Administering with Game Center [BETA]: gameboard/game-center.md
   - Blueprint: blueprint/index.md
