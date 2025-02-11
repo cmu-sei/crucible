@@ -1,14 +1,30 @@
-name: build-mkdocs
+name: Verify, Build and Deploy
+
+# Run CI on a push to any branch and PRs against the main branch
 on:
   push:
-    branches:
-      - main
+    branches: ["**"]
+  pull_request:
+    branches: ["main"]
 jobs:
-  deploy:
+  # Use Vale via the official action to lint files
+  vale:
+    name: Vale Linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+      - uses: errata-ai/vale-action@v2.1.1
+        with:
+          fail_on_error: true
+  # Build and deploy docs using material for mkdocs
+  # This only runs when the branch is main
+  deploy:
+    runs-on: ubuntu-latest
+    # Only run on a push to the main branch (not PRs)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
