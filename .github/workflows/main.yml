@@ -16,6 +16,7 @@ jobs:
       - uses: errata-ai/vale-action@v2.1.1
         with:
           fail_on_error: true
+          reporter: github-check
   # Build and deploy docs using material for mkdocs
   # This only runs when the branch is main
   deploy:
