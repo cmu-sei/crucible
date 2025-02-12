@@ -1,6 +1,6 @@
 # The Profile screen
 
-Participants access their *Profile* by browsing to the gameboard's designated URL and logging in. By default, authenticated participants land in the Profile screen if they haven't registered for a game yet. Otherwise, click **Profile** in the top navigation.
+Participants access their *Profile* by browsing to the Gameboard's designated URL and logging in. By default, authenticated participants land in the Profile screen if they haven't registered for a game yet. Otherwise, click **Profile** in the top navigation.
 
 ![profile link in nav](img/profile-profile.png)
 
@@ -16,7 +16,7 @@ Select *your* organization. Gameboard admins define who the sponsors are, and wh
 
 ## Certificates tab
 
-View and print a certificate as proof of participation in a game. This feature allows players to provide a record of achievements to friends, colleagues, and organizations to validate professional development time. 
+View and print a certificate as proof of participation in a game. This feature allows players to provide a record of achievements to friends, colleagues, and organizations to validate professional development time.
 
 Select **Competitive** to find and print certificates which validate player performance in a *game*. Competitive certificates become available when the game’s execution period ends.
 
@@ -57,7 +57,7 @@ View game history, including where you finished on the scoreboard and whether it
 
 ## Settings tab
 
-Users granted a role with the appropriate permissions can view the **Settings tab**. Here, they may opt to receive browser notifications when support tickets are opened, closed, and updated. Users can choose to play an audio alert when a browser notification is received. 
+Users granted a role with the appropriate permissions can view the **Settings tab**. Here, they may opt to receive browser notifications when support tickets are opened, closed, and updated. Users can choose to play an audio alert when a browser notification is received.
 
 !!! note
 

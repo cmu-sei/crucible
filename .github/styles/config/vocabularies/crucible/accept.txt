@@ -66,3 +66,5 @@ sublicense
 sublicense
 API(?:'s|s)?
 Traefik
+(?i)templatized
+(?i)unpublishing
