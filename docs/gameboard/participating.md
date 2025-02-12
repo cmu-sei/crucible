@@ -108,7 +108,7 @@ Only feedback that has been submitted can be viewed in the reports. Once feedbac
 
     "In progress" feedback is feedback a participant has begun in some capacity that triggered the autosave feature at least once but they have not clicked the **Submit** button yet. "In progress" feedback (i.e., *autosaved* feedback) and "submitted" feedback are both stored in the database; however, only submitted feedback is queried for the reports.
 
-This documentation assumes that you you are logged into a game and successfully enrolled. To view the *game* feedback as a participant:
+This documentation assumes that you are logged into a game and successfully enrolled. To view the *game* feedback as a participant:
 
 Select a game tile then click **Start**, then **Confirm** to start the session.
 

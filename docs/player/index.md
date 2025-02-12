@@ -135,6 +135,7 @@ Define Roles
 Users and/or teams can be assigned to a Role, which is a group of permissions. Roles are a predefined set of permissions that admin can create for ease of administrating.
 
 Define Permissions
+
 Permissions can be created by admin as well. Player uses two established permissions, SystemAdmin and ViewAdmin.
 
 SystemAdmin: can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
@@ -276,7 +277,7 @@ For the Multi-Select option above, the following options are available:
 
 **Sort by Team (View Admin Only)**
 
-The sort by team option can be checked that will rearrange all VM's in expansion panels based on the the teams that have access to the VM's. In the example shown here, each team can be expanded to show what VM's they have access to. This is especially useful for View Admins when verifying if a specific VM is accessible (or not accessible) for a specific team.
+The sort by team option can be checked that will rearrange all VM's in expansion panels based on the teams that have access to the VM's. In the example shown here, each team can be expanded to show what VM's they have access to. This is especially useful for View Admins when verifying if a specific VM is accessible (or not accessible) for a specific team.
 
 ![vm-app-5](../assets/img/vm-app-5.png)
 
@@ -389,7 +390,7 @@ These procedures describe how to upload files from a local machine to be mounted
    > Note that there are two file areas: Team Files and Public Files. Files can be mounted for only your team (under __Team Files__) or any team (under __Public Files__).
 
 6. Click __Mount__. This process automatically mounts the file as a DVD Drive ISO.
-7. After the ISO has been mounted/used for file copy, right-click the DVD Drive ISO and and select __Eject__ to eject the ISO.
+7. After the ISO has been mounted/used for file copy, right-click the DVD Drive ISO and select __Eject__ to eject the ISO.
 
 ### Follow Another Player
 
