@@ -18,7 +18,7 @@ For more information on native Terraform constructs used in Caster, please refer
 
 ### Users
 
-![caster-users](../assets/img/caster-users.PNG)
+![Caster users](../assets/img/caster-users.PNG)
 
 Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:**
 
@@ -36,7 +36,7 @@ A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to 
 
 ### Modules
 
-![caster-modules](../assets/img/caster-modules.PNG)
+![Caster modules](../assets/img/caster-modules.PNG)
 
 [Modules](https://www.terraform.io/docs/glossary.html#module) are a Terraform construct:
 
@@ -83,7 +83,7 @@ Upon **Submit**, Caster generates the Terraform code that can be copied into a c
 
 ### VLANs
 
-![caster-VLANs](../assets/img/caster-VLANs.PNG)
+![Caster VLANs](../assets/img/caster-VLANs.PNG)
 
 Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and sub-divided into Partitions. A VLAN can then be requested by a user from a Partition, and they will receive an unused VLAN id, which will then be marked as used until they release it. Projects can be assigned Partition's and a system-wide default Partition can be set for users to request VLAN Ids from their Project's Partition or the default as well.
 
@@ -126,7 +126,7 @@ See the official [Terraform Documentation](https://www.terraform.io/docs/index.h
 
 ### Workspaces
 
-![caster-workspaces](../assets/img/caster-workspaces.PNG)
+![Caster workspaces](../assets/img/caster-workspaces.PNG)
 
 A *workspace* represents a specific instance of a deployed Terraform configuration. The same configuration can be used to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example: a configuration for an enclave in a Cyber Flag exercise may be defined once, and then deployed to `flag00` through `flag30` workspaces - each creating a copy of the enclave.
 
