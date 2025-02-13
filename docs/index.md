@@ -6,10 +6,10 @@ Since 2018, Crucible has effectively enabled large-scale Department of Defense (
 ### Key Features
 * Open-source cyber-range application framework
 * Modular design with extensive application programming interfaces
-* Customizable, immersive, browser-based user interface 
+* Customizable, immersive, browser-based user interface
 * “Infrastructure as code” approach to topology building—enabling scalability, iteration, and reuse
-* Flexible integration of powerful, third-party, open-source tools 
-* Scenario-based exercising 
+* Flexible integration of powerful, third-party, open-source tools
+* Scenario-based exercising
 * Efficiency through automation
 * Interoperability through open standards
 
@@ -24,13 +24,13 @@ Crucible automates creation of virtual cyber environments featuring modeled topo
 
 ## Designing User Interfaces
 [![Player Logo](assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"}](player/index.md)
-Crucible’s [**Player**](player/index.md) application is the user’s window into the virtual environment. Player enables 
+Crucible’s [**Player**](player/index.md) application is the user’s window into the virtual environment. Player enables
 assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.
 
 ### Open-Source Integrations:
 * **osTicket**, a support ticket system, manages cyber range service requests.
-* **Mattermost**, a chat service for real-time communications. 
-* **Rocketchat**, a chat service for real-time communications.
+* **Mattermost**, a chat service for real-time communications.
+* **RocketChat**, a chat service for real-time communications.
 * **Roundcube**, an email service, provides web-based email.
 
 ## Coding a Topology
@@ -42,12 +42,12 @@ Crucible’s [**Caster**](caster/index.md) application enables the “coded” d
 * Proxmox Virtual Environment KVM (open source)
 
 ### Open-Source Integrations:
-* **OpenTofu**, an “infrastructure-as-code” tool, enables scripted deployment of cyber infrastructure. 
+* **OpenTofu**, an “infrastructure-as-code” tool, enables scripted deployment of cyber infrastructure.
 * **GitLab**, a version control system and code-repository, is used to store OpenTofu modules.
 
 ## Crafting a Scenario
 [![Blueprint Logo](assets/img/blueprint-logo.png)](blueprint/index.md)
-Crucible’s [**Blueprint**](blueprint/index.md) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to specific simulation objectives. 
+Crucible’s [**Blueprint**](blueprint/index.md) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to specific simulation objectives.
 
 [![Steamfitter Logo](assets/img/crucible-icon-steamfitter.svg){: style="height:75px;width:75px"}](steamfitter/index.md)Crucible’s [**Steamfitter**](steamfitter/index.md) application enables the organization and execution of scenario tasks on virtual machines.
 
@@ -65,8 +65,8 @@ Open-Source Integrations:
 [![CITE Logo](assets/img/cite-logo.png)](cite/index.md)Crucible’s [**Collaborative Incident Threat Evaluator (CITE)**](cite/index) application enables participants from different organizations to evaluate, score, and comment on cyber incidents. CITE also provides a situational awareness dashboard that allows teams to track their internal actions and roles.
 
 ## Displaying Incident Information
-[![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md)Crucible’s [**Gallery**](gallery/index.md) application enables 
-participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector 
+[![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md)Crucible’s [**Gallery**](gallery/index.md) application enables
+participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector
 or any other organization.
 
 ## Assessing Performance
@@ -82,7 +82,7 @@ Crucible’s **SEER** application enables assessment of team performance. Assess
 
 ## Operational Deployment
 Crucible applications implement the OpenID Connect authentication protocol and are integrated with **Keycloak**, an open-source identity authentication service.
-Crucible applications are deployed as **Docker** containers, which employ operating system level virtualization to isolate containers from each other. Container deployment, scaling, and management services are obtained using Kubernetes, a popular container-orchestration system. **Kubernetes** workflow and cluster management are performed using **Argo**, a popular open-source GitOps toolset.
+Crucible applications are deployed as **Docker** containers, which employ operating system level virtualization to isolate containers from each other. Container deployment, scaling, and management services are obtained using Kubernetes, a popular container-orchestration system. **Kubernetes** workflow and cluster management are performed using **Argo**, a popular open-source GitOps tool set.
 A pre-configured Crucible Appliance virtual machine is available for download.
 Beyond government-owned instances, the SEI owns and operates on-premises and cloud-based instances of Crucible:
 
@@ -90,7 +90,7 @@ Beyond government-owned instances, the SEI owns and operates on-premises and clo
 **Fortress** [fortress.sei.cmu.edu](https://fortress.sei.cmu.edu)
 
 ![Gauntlet Logo](assets/img/gauntlet-app.svg){: style="height:75px;width:75px"}
-**Gauntlet** [gauntlet.sei.cmu.edu](https://gauntlet.sei.cmu.edu) 
+**Gauntlet** [gauntlet.sei.cmu.edu](https://gauntlet.sei.cmu.edu)
 
 
 

@@ -20,8 +20,7 @@ Crucible’s [**Caster**](https://cmu-sei.github.io/crucible/caster/) applicatio
 
 ### Player
 
-Crucible’s [**Player**](https://cmu-sei.github.io/crucible/player/) application is the user’s window into the virtual environment. Player enables 
-assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.
+Crucible’s [**Player**](https://cmu-sei.github.io/crucible/player/) application is the user’s window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.
 
 - [Player API Repository](https://github.com/cmu-sei/Player.Api)
 - [Player Console UI Repository](https://github.com/cmu-sei/Console.Ui)
@@ -38,31 +37,31 @@ Crucible’s [**Steamfitter**](https://cmu-sei.github.io/crucible/steamfitter/) 
 
 Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source event-driven platform used to automate workflows, to execute commands.
 
-### Topomojo
+### TopoMojo
 
 Crucible’s [**TopoMojo**](https://cmu-sei.github.io/crucible/topomojo/about/) application enables designing simple labs and challenges using form based configurations. Select and configure virtual machines, define networks, and write a guide.
 
-- [Topomojo API Repository](https://github.com/cmu-sei/TopoMojo)
-- [Topomojo UI Repository](https://github.com/cmu-sei/topomojo-ui)
+- [TopoMojo API Repository](https://github.com/cmu-sei/TopoMojo)
+- [TopoMojo UI Repository](https://github.com/cmu-sei/topomojo-ui)
 
 ### Gameboard
 
-Crucible’s [**Gameboard**](https://cmu-sei.github.io/crucible/gameboard/) application provides game design capabilities and a competition-ready user interface for running your own cybersecurity game.
+Crucible’s [**Gameboard**](https://cmu-sei.github.io/crucible/Gameboard/) application provides game design capabilities and a competition-ready user interface for running your own cybersecurity game.
 
 - [Gameboard API Repository](https://github.com/cmu-sei/Gameboard)
-- [Gameboard UI Repository](https://github.com/cmu-sei/gameboard-ui)
+- [Gameboard UI Repository](https://github.com/cmu-sei/Gameboard-ui)
 
 ### Blueprint
 
-Crucible’s [**Blueprint**](https://cmu-sei.github.io/crucible/blueprint/) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to specific simulation objectives. 
+Crucible’s [**Blueprint**](https://cmu-sei.github.io/crucible/blueprint/) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to specific simulation objectives.
 
 - [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api)
 - [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui)
 
 ### Gallery
 
-Crucible’s [**Gallery**](https://cmu-sei.github.io/crucible/gallery/) application enables 
-participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector 
+Crucible’s [**Gallery**](https://cmu-sei.github.io/crucible/gallery/) application enables
+participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector
 or any other organization.
 
 - [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
@@ -102,13 +101,13 @@ osTicket (https://osticket.com/) is a widely-used open source support ticket sys
 
 ### Terraform Provider for Crucible
 
-This is the [Terraform](https://www.terraform.io/) Provider for Crucible which is used to create many Crucible resource types (e.g., Player Virtual Machines, Views, Applications, and others). For more information, see: 
+This is the [Terraform](https://www.terraform.io/) Provider for Crucible which is used to create many Crucible resource types (e.g., Player Virtual Machines, Views, Applications, and others). For more information, see:
 
 - [Terraform Provider Crucible Repository](https://github.com/cmu-sei/terraform-provider-crucible)
 
 ### Terraform Provider for Identity
 
-This is the [Terraform](https://www.terraform.io/) Provider for [Identity](https://github.com/cmu-sei/Identity) that creates and manages user accounts and other resources  using the Identity API. For additional information, see: 
+This is the [Terraform](https://www.terraform.io/) Provider for [Identity](https://github.com/cmu-sei/Identity) that creates and manages user accounts and other resources  using the Identity API. For additional information, see:
 
 - [Terraform Provider Identity Repository](https://github.com/cmu-sei/terraform-provider-identity)
 
@@ -118,11 +117,11 @@ You can find documentation on Crucible and all of its components [here](https://
 
 ## Reporting bugs and requesting features
 
-Think you found a bug? Please report all Crucible bugs - including bugs for the individual Crucible apps - in the [cmu-sei/crucible issue tracker](https://github.com/cmu-sei/crucible/issues). 
+Think you found a bug? Please report all Crucible bugs - including bugs for the individual Crucible apps - in the [cmu-sei/Crucible issue tracker](https://github.com/cmu-sei/crucible/issues).
 
 Include as much detail as possible including steps to reproduce, specific app involved, and any error messages you may have received.
 
-Have a good idea for a new feature? Submit all new feature requests through the [cmu-sei/crucible issue tracker](https://github.com/cmu-sei/crucible/issues). 
+Have a good idea for a new feature? Submit all new feature requests through the [cmu-sei/Crucible issue tracker](https://github.com/cmu-sei/crucible/issues).
 
 Include the reasons why you're requesting the new feature and how it might benefit other Crucible users.
 

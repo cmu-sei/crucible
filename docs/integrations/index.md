@@ -6,17 +6,17 @@ The Crucible Framework provides users the necessary tools and resources for inte
 
 Additionally, the platform can be tailored to the user's needs by allowing administrators to add applications that will leverage and integrated with the necessary features needed for an exercise. This enables administrators to provide a more personalized experience with the platform and to use applications that are specifically designed to meet their unique needs.
 
-By allowing customization, the platform can become more valuable to users, as it can adapt to their evolving needs and preferences. This can lead to a more engaged user base and a more successful paltform overall.
+By allowing customization, the platform can become more valuable to users, as it can adapt to their evolving needs and preferences. This can lead to a more engaged user base and a more successful platform overall.
 
 ## Third-Party Integration Guide
 
-To be able to add third-party applications to the Crucible Framework, the user must have a System Admin permission. 
+To be able to add third-party applications to the Crucible Framework, the user must have a System Admin permission.
 
-To integrate a third-party application to the Crucible Framework, follow these next steps: 
+To integrate a third-party application to the Crucible Framework, follow these next steps:
 
 ![Crucible View Admin OE](../assets/img/viewAdmin.png)
 
-1. Click on your username in the top right corner of the screen. 
+1. Click on your username in the top right corner of the screen.
 2. Select **Administration**.
 3. Click on **Application Templates**.
 4. Click on **Add Application Template**.
@@ -30,11 +30,11 @@ After these steps, administrators should follow the Crucible Admin Guide to add 
 
 ## Third-Party Applications
 
-The following are third-party applications that have already been tested and used within the Crucible Framework. 
+The following are third-party applications that have already been tested and used within the Crucible Framework.
 
-### Mattermost 
+### Mattermost
 
-Mattermost is an open-source, self-hostable online chat service with file sharing, search, and integrations. It is designed as an internal chat for organisations and companies.
+Mattermost is an open-source, self-hostable online chat service with file sharing, search, and integrations. It is designed as an internal chat for organizations and companies.
 
 To know more about the application: [Mattermost Documentation](https://docs.mattermost.com)
 
@@ -50,7 +50,7 @@ For installation instructions: [Moodle Installation](https://docs.moodle.org/401
 
 #### - Crucible Plugin for Moodle
 
-This activity plugin, developed by the Software Engineering Institute (SEI), allows Crucible labs and exercises to be integrated into the Moodle LMS. The Moodle activity may embed the Crucible VM app into an iframe or may provide a link for the student to open the full Crucible lab player window in a new tab or window. With this functionality, Crucible labs can be started, accessed and stopeed from a Moodle course.
+This activity plugin, developed by the Software Engineering Institute (SEI), allows Crucible labs and exercises to be integrated into the Moodle LMS. The Moodle activity may embed the Crucible VM app into an iframe or may provide a link for the student to open the full Crucible lab player window in a new tab or window. With this functionality, Crucible labs can be started, accessed and stopped from a Moodle course.
 
 To know more about the plugin and installation instructions: [Moodle Crucible Plugin Documentation](https://github.com/cmu-sei/moodle-mod_crucible)
 
@@ -64,7 +64,7 @@ For installation instructions: [osTicket Installation](https://docs.osticket.com
 
 #### - Crucible Plugin for osTicket
 
-A plugin, developed by the Software Engineering Institute (SEI), that provides authentication against an OAuth2 Ideneity Server and posts ticket event notifications to the Crucible API.
+A plugin, developed by the Software Engineering Institute (SEI), that provides authentication against an OAuth2 Identity Server and posts ticket event notifications to the Crucible API.
 
 For installation and configuration instructions: [osTicket Crucible Plugin](https://github.com/cmu-sei/osticket-crucible)
 
@@ -76,9 +76,9 @@ To know more about the application: [Rocket.Chat Documentation](https://docs.roc
 
 For installation instructions: [Rocket.Chat Installation](https://github.com/RocketChat/helm-charts)
 
-### Roundcube 
+### Roundcube
 
-Roundcube is a web-based IMAP email client. It provides full functionality you expect from an email client, including MIME support, address book, folder manipulation, message searching and spell checking. 
+Roundcube is a web-based IMAP email client. It provides full functionality you expect from an email client, including MIME support, address book, folder manipulation, message searching and spell checking.
 
 To know more about the application: [Roundcube Documentation](https://docs.roundcube.net/doc/help/1.1/en_US/)
 

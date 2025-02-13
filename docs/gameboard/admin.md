@@ -6,10 +6,10 @@ The Admin function of Gameboard helps those with the admin role:
 - Manage users
 - Observe participants
 - Enter sponsor information
-- Run and export user, gameboard, challenge, and feedback reports
+- Run and export user, Gameboard, challenge, and feedback reports
 - Broadcast messages to all game participants
 
-After logging into the gameboard app with the appropriate role, click **Admin**. By default, you land on the **Games** tab.
+After logging into the Gameboard app with the appropriate role, click **Admin**. By default, you land on the **Games** tab.
 
 ## Search
 
@@ -30,7 +30,7 @@ When games are toggled to display as *Cards*,  you can hover over the game to se
 - **Players:** Refer to the help documentation on [Players](admin-players.md). Players on the game card are only players who have enrolled in that game.
 - **Observe:** Refer to the help documentation on [Observe Mode](admin-observe.md).
 - **Settings:** Refer to the help documentation on [Admin Game Settings](admin-settings.md).
-- **Clone, yaml, and json:** Refer to the help documentation on [Clone, yaml, and json options](admin-clone-yaml-json.md).
+- **Clone, YAML, and JSON:** Refer to the help documentation on [Clone, YAML, and JSON options](admin-clone-yaml-json.md).
 - **Delete:** Deletes the game.
 
 ## Administration tabs
@@ -43,7 +43,7 @@ The **Admin Overview** tab allows game administrators to click **Live Stats** (e
 
 #### Send Announcement
 
-The **Announcement** feature allows game administrators to broadcast important messages to all participants within a game. Among other uses, these could be messages regarding gameboard issues, challenge issues, and changes to logistics. 
+The **Announcement** feature allows game administrators to broadcast important messages to all participants within a game. Among other uses, these could be messages regarding Gameboard issues, challenge issues, and changes to logistics.
 
 In the Announcement field, enter the content of the announcement and click **Announce**.
 
@@ -67,23 +67,23 @@ To search for a user across the whole of Gameboard, enter a term into the **Sear
 
 ### Approving and disapproving requested display names
 
-After registering for a new account, participants must choose a default name for public display. Participants are expected to refrain from any names that are controversial in nature. Admins approve participant names before the names can appear on the scoreboard here. 
+After registering for a new account, participants must choose a default name for public display. Participants are expected to refrain from any names that are controversial in nature. Admins approve participant names before the names can appear on the scoreboard here.
 
 To approve a requested display name, click **Has Pending Name**. That gives you a list of participants waiting for display name approval. Find the user in the list, select **Approve** or **Disapprove**.
 
-In the screen capture below, Tom Bombadil is requesting a name change to "Treebeard."
+In the screen capture below, `Tom Bombadil` is requesting a name change to `Treebeard`.
 
 ![admin-pending](img/admin-pending.png)
 
 If *approved*, the name moves from the **Has Pending Name** list. From the user's point of view, the *requested* display name becomes the display name.
 
-If *disapproved*, you can provide a reason (`disallowed`, `disallowed_pii`, `disallowed_unit`, etc.). The disallowed requested name moves from **Has Pending Name** to **Has Disallowed Name**. From the player's point of view in this instance the *requested* name remains Treebeard, the *approved* name remains Tom Bombadil, and the *display name status* is disallowed.
+If *disapproved*, you can provide a reason (`disallowed`, `disallowed_pii`, `disallowed_unit`, etc.). The disallowed requested name moves from **Has Pending Name** to **Has Disallowed Name**. From the player's point of view in this instance the *requested* name remains `Treebeard`, the *approved* name remains `Tom Bombadil`, and the *display name status* is disallowed.
 
 ### Players
 
-A *Player* is a person enrolled in a game. Like a user, a player also has a name. These names can be the same, or they can be different. For example, Tom Bombadil's user name can be `Treebeard`, but when Tom enrolls in a game, he wants his name to display on the scoreboard as `Bombadillo`, so he changes his **Game Display Name** in the game's lobby.
+A *Player* is a person enrolled in a game. Like a user, a player also has a name. These names can be the same, or they can be different. For example, `Tom Bombadil's` user name can be `Treebeard`, but when Tom enrolls in a game, he wants his name to display on the scoreboard as `Bombadillo`, so he changes his **Game Display Name** in the game's lobby.
 
-Searching the "global" **Players** tab lists the first 200 players who match the search, or 200 arbitrary players until you refine the search terms. Players on this tab are *all* players across *all* games. 
+Searching the "global" **Players** tab lists the first 200 players who match the search, or 200 arbitrary players until you refine the search terms. Players on this tab are *all* players across *all* games.
 
 Filter by player names pending approval or player names disallowed by a game admin.
 
@@ -92,7 +92,7 @@ Filter by player names pending approval or player names disallowed by a game adm
 This is where admins define who the sponsors are and what logo to associate with each. To create a new sponsor:
 
 1. Click the **plus** sign, then upload a logo file.
-2. Enter a sponsor **Name**. 
+2. Enter a sponsor **Name**.
 3. Select a **Parent Sponsor** if appropriate.
 4. Click **Save**.
 
@@ -106,7 +106,7 @@ The Challenges tab is largely for game admins to troubleshoot problems with chal
 
 **Current:** *Active* challenges have a green dot next them. Active indicates a challenge has *not* yet been solved correctly, maximum submissions have *not* been attempted, or a session has *not* expired. A challenge is active until one of those three criteria are met; then, the challenge is over and *inactive*. When a challenge is inactive, it still counts towards total score, rank, cumulative time.
 
-A challenge is *current* and not *archived* because it has not been reset when the Reset Session button is clicked. 
+A challenge is *current* and not *archived* because it has not been reset when the Reset Session button is clicked.
 
 **Archived:** When a participant clicks **Reset Session**, before the session is deleted, historical information from participant and challenge event is archived. This archived session information is available here for the game admin to access.
 
@@ -114,11 +114,11 @@ A challenge is *current* and not *archived* because it has not been reset when t
 
 **Game Engine Audit:** Clicking **Audit from game engine?** queries the game engine (if you're using the Foundry stack, this is TopoMojo) to provide its list of submitted answers. The purpose of game engine audit is to compare Gameboard's record of submissions to the game engine's record of submissions.
 
-**Regrade:** Clicking **Regrade** has the gameboard check all submissions by a player against expected answers again. Regrade is used when a challenge has two possible answers or players submit in a format that is correct, but that was unexpected by game or challenge developers. When this happens, the TopoMojo workspace is updated manually to include the new correct answers. Then, the challenge is regraded and the player's score updated if a previously entered incorrect answer is now correct.
+**Regrade:** Clicking **Regrade** has the Gameboard check all submissions by a player against expected answers again. Regrade is used when a challenge has two possible answers or players submit in a format that is correct, but that was unexpected by game or challenge developers. When this happens, the TopoMojo workspace is updated manually to include the new correct answers. Then, the challenge is regraded and the player's score updated if a previously entered incorrect answer is now correct.
 
 ### Support Settings
 
-**Greeting:** Text entered here appears as a banner on the Support page to provide any pertinent information related to competition customer support. Enter your customized message. The greeting supports Markdown formatting. 
+**Greeting:** Text entered here appears as a banner on the Support page to provide any pertinent information related to competition customer support. Enter your customized message. The greeting supports Markdown formatting.
 
 ### Notifications
 
