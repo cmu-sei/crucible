@@ -1,4 +1,4 @@
-# Using the Integrated Support feature
+# Getting in-game support
 
 The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist competitors and players. This way, Gameboard is a "one-stop shop" and no outside apps or systems are required to track and measure issues reported by participants.
 
@@ -30,7 +30,7 @@ From the Support page, use the dropdowns and the **Search** field to locate exis
 - Not Closed (*Open* plus *In Progress*)
 - Closed
 
-Filter by *Assigned to me*, *Unassigned*, and *Any Assignment*. Finally, you can also *filter by labels*.
+Filter by *Assigned to me*, *Unassigned*, and *Any Assignment*. Finally, you can also *Filter by labels*. Filtering by labels returns tickets with only a specific label attached.
 
 Search by entering terms. Search covers ticket description, label, user, challenge title, and player.
 

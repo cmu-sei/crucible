@@ -77,7 +77,8 @@ In the Player view context menu (the "three vertical dots") you'll notice four d
 ![reset unenroll](img/context-reset.png)
 
 !!! info
-        A "session" is when a game is started and challenges can be deployed and solved.
+    
+    A "session" is when a game is started and challenges can be deployed and solved.
 
 - **Unenroll:** If a player has registered, but has not started a session, you can *unenroll* them from the game. They will need to re-enroll to play again.
 - **Reset Session (Preserve Challenges):** If a player has registered, and has started playing the game (i.e., they have a game session), you can reset their session *and not* archive any challenges, started or completed. Use of this option should be limited to very specific situations like testing and QA.

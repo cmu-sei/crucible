@@ -72,3 +72,7 @@ ODX(?:'s|s)?
 sublicense
 API(?:'s|s)?
 Traefik
+(?i)templatized
+(?i)unpublishing
+(?i)unsubmitted
+(?i)dev container
