@@ -1,4 +1,12 @@
 Crucible
+TopoMojo
+Gameboard
+Alloy
+Blueprint
+Caster
+Steamfitter
+CITE
+Gallery
 (?i)cyber
 \wGitHub\w
 Mattermost
@@ -8,7 +16,6 @@ OAuth
 GUID
 (?i)URL
 [Gg]amespace(?:s)?
-Gameboard
 ISO(?:s)
 MSEL(?:'s|s)?
 [Hh]otspot(?:s)?
@@ -60,7 +67,6 @@ PDF(?:s)?
 (?i)unpublish
 (?i)textbox(?:es)?
 ODX(?:'s|s)?
-sublicense
 (?i)workspace(?:'s|s)?
 (?i)namespace(?:s)?
 sublicense

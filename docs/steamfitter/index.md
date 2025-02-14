@@ -6,7 +6,7 @@ Steamfitter gives content developers the ability to create scenarios consisting 
 
 In the Steamfitter UI, there are four major functional sections:
 
-- Scenario Templates: Used to organize tasks into groups that that can be reused on demand.
+- Scenario Templates: Used to organize tasks into groups that can be reused on demand.
 - Scenarios: Displays all planned, running, and completed scenarios.
 - Tasks: User tasks used to create and execute ad-hoc tasks.
 - History: Displays the results of all tasks executed by all users.

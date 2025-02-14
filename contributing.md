@@ -2,9 +2,9 @@
 
 If you are developing within the [Crucible Framework](https://github.com/cmu-sei/crucible) or building an application to work alongside the Crucible Framework, please consider contributing documentation to this repository. The documentation contained within is written in Markdown. The static site generator used to display it is [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and the documentation is hosted by [GitHub Pages](https://pages.github.com/).
 
-## Using GitHub DevContainers
+## Using GitHub Dev Containers
 
-The easiest way to contribute to the docs is to use **GitHub DevContainers** to setup a development environment accessible through your browser. In that environment, you can create a new branch, make changes, preview changes, and create pull requests (PR) to the main repository.
+The easiest way to contribute to the docs is to use **GitHub Dev Containers** to setup a development environment accessible through your browser. In that environment, you can create a new branch, make changes, preview changes, and create pull requests (PR) to the main repository.
 
 1. On the main page of this repo, click the green **Code** button, **Codespaces** tab, then **Create codespace on main** button. This opens the new codespace on a new tab in your browser.
 2. Wait for the codespace to finish building. Once completed, you have an in-browser Visual Studio Code (VSCode) editor with a terminal open at the bottom. Watch the terminal for setup commands to finish running, and `pip3` will install several prerequisites. When finished, the terminal shows something like:
@@ -19,10 +19,10 @@ The easiest way to contribute to the docs is to use **GitHub DevContainers** to 
    git checkout -b [your-branch-name]
    ```
 
-4. Run `mkdocs serve` to build and serve the documentation site locally in your devcontainer. After a few seconds the command will complete, and you should see a message in the bottom-right corner that says: *Your application (mkdocs) running on port 8000 is available.* 
+4. Run `mkdocs serve` to build and serve the documentation site locally in your dev container. After a few seconds the command will complete, and you should see a message in the bottom-right corner that says: *Your application (mkdocs) running on port 8000 is available.*
 5. Click the green **Open in Browser** button to see the Crucible Documentation site in a new tab. As long as you don't cancel the command in the terminal, the docs site automatically updates any time a change is made to `mkdocs.yml` or any file in the `docs/` directory.
 
-   >If you keep the terminal open, you'll see the build commands running every time you make a change.  If you need to run more terminal commands, use `ctrl+c` to cancel. When you need to preview changes, run `mkdocs serve` again. 
+   >If you keep the terminal open, you'll see the build commands running every time you make a change.  If you need to run more terminal commands, use `ctrl+c` to cancel. When you need to preview changes, run `mkdocs serve` again.
 
 6. Edit the documentation as necessary, previewing your changes as you go.
 7. When ready to submit your documentation for review, stop the `mkdocs` command by pressing `Ctrl+C` in the terminal.
