@@ -92,12 +92,14 @@ nav:
       - Log: topomojo/admin-log.md    
     - Copy and paste: topomojo/copy-paste.md
   - Gameboard:
-    - About the Gameboard: gameboard/index.md
-    - Profile screen: gameboard/profile.md
-    - Participating in a game: gameboard/participating.md
-    - Practicing challenges: gameboard/practice-area.md
-    - Using integrated support: gameboard/support.md
-    - Using Reports: gameboard/reports-beta.md
+    - Playing games:
+      - About the Gameboard: gameboard/index.md
+      - Profile screen: gameboard/profile.md
+      - Home screen and Lobby: gameboard/home-and-lobby.md
+      - Giving feedback: gameboard/player-feedback-form.md
+      - Practicing challenges: gameboard/practice-area.md
+      - Getting in-game support: gameboard/support.md
+      - Using Reports: gameboard/reports-beta.md
     - Administering games: 
       - Administration: gameboard/admin.md
       - Practice: gameboard/admin-practice-area.md
