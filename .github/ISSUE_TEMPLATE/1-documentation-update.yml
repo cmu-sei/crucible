@@ -1,0 +1,38 @@
+name: "Documentation Update"
+description: "Request an update to the documentation."
+body:
+  - type: checkboxes
+    id: application
+    attributes:
+      label: "Application"
+      description: "Select the applications related to this documentation update."
+      options:
+        - label: "Alloy"
+        - label: "Blueprint"
+        - label: "Caster"
+        - label: "CITE"
+        - label: "Gallery"
+        - label: "Gameboard"
+        - label: "Player"
+        - label: "Steamfitter"
+        - label: "TopoMojo"
+        - label: "General Docs Update - Not Application Specific"
+
+  - type: checkboxes
+    id: update_type
+    attributes:
+      label: "Type of Update"
+      description: "Select the type of documentation update."
+      options:
+        - label: "New feature"
+        - label: "Correction"
+        - label: "Enhancement"
+        - label: "Other"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Provide details about the documentation update."
+    validations:
+      required: true
