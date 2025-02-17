@@ -25,34 +25,34 @@ jobs:
         run: |
           LABELS=""
 
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Alloy"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Alloy"; then
             LABELS="$LABELS Alloy"
           fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Blueprint"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Blueprint"; then
             LABELS="$LABELS Blueprint"
           fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Caster"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Caster"; then
             LABELS="$LABELS Caster"
           fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] CITE"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] CITE"; then
             LABELS="$LABELS CITE"
           fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Gallery"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Gallery"; then
             LABELS="$LABELS Gallery"
           fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Gameboard"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Gameboard"; then
             LABELS="$LABELS Gameboard"
           fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Player"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Player"; then
             LABELS="$LABELS Player"
           fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Steamfitter"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Steamfitter"; then
             LABELS="$LABELS Steamfitter"
           fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] TopoMojo"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] TopoMojo"; then
             LABELS="$LABELS TopoMojo"
           fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] General"; then
+          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] General"; then
             LABELS="$LABELS General"
           fi
 
