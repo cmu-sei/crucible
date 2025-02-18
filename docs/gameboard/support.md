@@ -1,36 +1,46 @@
 # Getting in-game support
 
-The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist competitors and players. This way, Gameboard is a "one-stop shop" and no outside apps or systems are required to track and measure issues reported by participants.
-
-You must have either the `Support` role or `Admin` role to use the support feature and manage tickets. Assuming you have been granted the appropriate role in Gameboard, select **Support**.
+The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist players and teams. Gameboard is a "one-stop shop" and no outside apps or systems are required to track and measure issues reported by participants. Users who have been granted a role with the appropriate permissions can use the support feature to manage tickets. 
 
 ## Support from participant point-of-view
 
 ### Creating new support ticket
 
-You can create tickets from two places: the *Support* page or a challenge screen. In both cases you click the blue **Create Ticket** button to get started. If you are coming from the challenge screen, then the Support Code, player id, and challenge id are automatically generated; if you are not, then this information can be added later.
+You can create tickets from two places: the Support screen and the challenge screen. If you are coming from the challenge screen, then the Support Code, player id, and challenge id are automatically generated; if you are not, then this information can be added later.
 
-In the **Summary**, enter a brief statement of the problem.
+From the Support screen:
 
-In the **Description**, enter a more detailed statement of your problem. Include error messages and other pertinent details.
+1. In the top navigation, click **Support**.
+2. Click **Create Ticket**.
+3. In the **Summary**, enter a brief statement of the problem.
+4. In the **Description**, enter a more detailed statement of your problem. Include error messages and other pertinent details.
+5. Under **Attachments**, attach files (especially screen shots) here.
+6. Click **Submit**.
 
-Under **Attachments**, attach files--especially screen shots--here.
+After submitting the ticket, you can always **add a comment** and attach another file. Updates to a ticket are tracked under Activity. View a status change or an assignment change here too.
 
-Click **Submit**.
+From a challenge screen:
 
-After submitting the ticket, you can always **add a comment** and attach another file. Updates to a ticket are tracked under Activity. View a status change or an assignment change here.
+These instructions assume you have enrolled in a game, started a session, and started a challenge. 
+
+1. In the *started* challenge, scroll to the bottom of the challenge instructions.
+2. Click **Create Ticket**. Notice that the challenge is automatically populated in the **Challenge** field.
+3. In the **Summary**, enter a brief statement of the problem.
+4. In the **Description**, enter a more detailed statement of your problem. Include error messages and other pertinent details.
+5. Under **Attachments**, attach files (especially screen shots) here.
+6. Click **Submit**. Because you are coming from the challenge screen, a link to the game lobby is generated and Support Code is provided.
 
 ### Finding an existing ticket
 
-From the Support page, use the dropdowns and the **Search** field to locate existing tickets. Filter tickets by status:
+From the Support page, use the dropdowns and the **Search** field to locate specific tickets from *all* of the tickets you have submitted.
+
+Filter tickets by status:
 
 - Any Status
 - Open
-- In progress
+- In Progress
 - Not Closed (*Open* plus *In Progress*)
 - Closed
-
-Filter by *Assigned to me*, *Unassigned*, and *Any Assignment*. Finally, you can also *Filter by labels*. Filtering by labels returns tickets with only a specific label attached.
 
 Search by entering terms. Search covers ticket description, label, user, challenge title, and player.
 
