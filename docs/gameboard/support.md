@@ -1,6 +1,6 @@
 # Getting in-game support
 
-The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist players and teams. Gameboard is a "one-stop shop" and no outside apps or systems are required to track and measure issues reported by participants. Users who have been granted a role with the appropriate permissions can use the support feature to manage tickets. 
+The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist players and teams. Gameboard is a "one-stop shop" and no outside apps or systems are required to track and measure issues reported by participants. Users who have been granted a role with the appropriate permissions can use the support feature to manage tickets.
 
 ## Support from participant point-of-view
 
@@ -21,7 +21,7 @@ After submitting the ticket, you can always **add a comment** and attach another
 
 From a challenge screen:
 
-These instructions assume you have enrolled in a game, started a session, and started a challenge. 
+These instructions assume you have enrolled in a game, started a session, and started a challenge.
 
 1. In the *started* challenge, scroll to the bottom of the challenge instructions.
 2. Click **Create Ticket**. Notice that the challenge is automatically populated in the **Challenge** field.
@@ -48,7 +48,7 @@ Search by entering terms. Search covers ticket description, label, user, challen
 
 Click the links in the ticket header to instantly jump to the player's *Game* and *Challenge* details.
 
-### Creating new support ticket
+### Creating new support ticket (support staff)
 
 The procedure for support staff (i.e., users given the `Support` role) to create a tickets is very similar to procedure for participants to create a ticket (see above). However, after a ticket has been created users with the `Support` role have more options to manage the tickets.
 
