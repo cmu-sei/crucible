@@ -2,85 +2,43 @@ name: Auto-label Documentation Update Issues
 
 on:
   issues:
-    types:
-      - opened
+    types: [ opened ]
+
+permissions:
+  contents: read
 
 jobs:
-  add-labels:
+  label-issue:
     runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Extract issue body
-        id: extract_body
-        uses: actions/github-script@v7
+      - name: Parse issue form
+        uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser
         with:
-          script: |
-            const issueBody = context.payload.issue.body;
-            return issueBody;
+          template-path: .github/ISSUE_TEMPLATE/1-documentation-update.yml
 
-      - name: Determine labels
-        id: determine_labels
-        run: |
-          LABELS=""
-
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Alloy"; then
-            LABELS="$LABELS Alloy"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Blueprint"; then
-            LABELS="$LABELS Blueprint"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Caster"; then
-            LABELS="$LABELS Caster"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] CITE"; then
-            LABELS="$LABELS CITE"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Gallery"; then
-            LABELS="$LABELS Gallery"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Gameboard"; then
-            LABELS="$LABELS Gameboard"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Player"; then
-            LABELS="$LABELS Player"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] Steamfitter"; then
-            LABELS="$LABELS Steamfitter"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] TopoMojo"; then
-            LABELS="$LABELS TopoMojo"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -Fq "- \[x\] General"; then
-            LABELS="$LABELS General"
-          fi
-
-
-
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] New feature"; then
-            LABELS="$LABELS New feature"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Correction"; then
-            LABELS="$LABELS Correction"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Enhancement"; then
-            LABELS="$LABELS Enhancement"
-          fi
-          if echo "${{ steps.extract_body.outputs.result }}" | grep -q "- \[x\] Other"; then
-            LABELS="$LABELS Other"
-          fi
-
-          echo "LABELS=$(echo $LABELS | xargs)" >> $GITHUB_ENV
-
-      - name: Add labels to issue
-        uses: actions/github-script@v7
+      - name: Set labels based on application field
+        uses: redhat-plumbers-in-action/advanced-issue-labeler@v3
         with:
-          script: |
-            const labels = process.env.LABELS.split(' ');
-            github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              labels: labels
-            });
+          issue-form: ${{ steps.issue-parser.outputs.jsonString }}
+          section: application
+          block-list: |
+            None
+            General Docs Update - Not Application Specific
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set labels based on update_type field
+        uses: redhat-plumbers-in-action/advanced-issue-labeler@v3
+        with:
+          issue-form: ${{ steps.issue-parser.outputs.jsonString }}
+          section: update_type
+          block-list: |
+            None
+            Other
+          token: ${{ secrets.GITHUB_TOKEN }}
