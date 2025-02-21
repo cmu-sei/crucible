@@ -46,11 +46,11 @@ Search by entering terms. Search covers ticket description, label, user, challen
 
 ## Support from the Support role point-of-view
 
-Click the links in the ticket header to instantly jump to the player's *Game* and *Challenge* details.
+This section is meant for "support staff" - the people who are tasked with resolving customer service and technical support issues during a game. When we say "support staff" in the documentation, we mean those users given the `Support` role or a role that permits them to edit support settings, manage tickets, and view tickets such as `Admin` and `Director`.
 
 ### Creating new support ticket (support staff)
 
-The procedure for support staff (i.e., users given the `Support` role) to create a tickets is very similar to procedure for participants to create a ticket (see above). However, after a ticket has been created users with the `Support` role have more options to manage the tickets.
+The procedure for support staff to create a tickets is very similar to procedure for participants to create a ticket (see above). However, after a ticket has been created users with the `Support` role have more options to manage the tickets.
 
 ### Managing support tickets
 
@@ -60,13 +60,13 @@ From the Ticket management side-bar:
 
 **Status:** Move the ticket through the support workflow. Tickets are `Open`, `In progress`, or `Closed`.
 
-- **Open** - Indicates that ticket has been reported, but not yet acted upon by support staff. The ticket is "waiting" on an action.
-- **In progress** - The ticket is actively being worked on.
-- **Closed** - The ticket has been resolved and no longer requires action from support or participants.
+- **Open:** Indicates that ticket has been reported, but not yet acted upon by support staff. The ticket is "waiting" on an action.
+- **In progress:** The ticket is actively being worked on.
+- **Closed:** - The ticket has been resolved and no longer requires action from support or participants.
 
 **Labels:** Labels are tags or keywords used to categorize the ticket. A label is like a hashtag (#) used on Twitter, Facebook, and other social apps. Labels help when searching for an issue; labels also help when reporting on metrics from your competition.
 
-**Challenge:** When a ticket is associated with a challenge--meaning that the ticket was created from within the specific challenge--the challenge support code is shown here. If the challenge field is blank, you can view the challenge(s) the player is a part of in the Challenge dropdown. Attach the correct challenge from here.
+**Challenge:** When a ticket is associated with a challenge - meaning that the ticket was created from within the specific challenge - the challenge support code is shown here. If the challenge field is blank, you can view the challenge(s) the player is a part of in the Challenge dropdown. Attach the correct challenge from here.
 
 **Player:** When a ticket is associated with a challenge it is also linked to a team or player. If the challenge is a team challenge, then all of the members of the team can view the ticket.
 
@@ -79,3 +79,5 @@ The **Copy to markdown** icon allows you to copy support ticket content to Markd
 ## Support-related Reporting
 
 Support-related reporting provides you with a way to manage workloads and track trends during your competition. In the main menu, select **Reports**. Then click **Support** in the Reports screen.
+
+See [Using Reports](reports.md) for help understanding the Support reports.

@@ -24,7 +24,7 @@ TopoMojo appends the isolation tag of the workspace/gamespace to network names t
 
 TopoMojo does not append the isolation tag to persistent/shared networks listed here; the VM will be connected to the existing shared/persistent network.
 
-For more information on *isolation tags*, see "Isolation tags" in [TopoMojo concepts](index.md).
+For more information on *isolation tags*, see "Isolation tags" in [TopoMojo concepts](about.md/#isolation-tag).
 
 **Guest Settings:** List key value pairs in the form of `key=value` to pass data into deployed VMs via VMware guestinfo Variables. The **Guest Settings** field uses VMware Guest Info Variables to inject content into virtual machines. Key/value pairs are placed here. The *key* is the name of the guest variable you want to define, and the *value* is value, information, setting, of the variable.  For example, `var1=test` is a guest setting named “var1” with a value of “test”.
 

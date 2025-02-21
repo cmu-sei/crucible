@@ -62,7 +62,7 @@ Open-Source Integrations:
 * **Ollama**, a platform designed to run llama 2, mistral, and other open source large language models locally on your machine.
 
 ## Evaluating Threats
-[![CITE Logo](assets/img/cite-logo.png)](cite/index.md)Crucible’s [**Collaborative Incident Threat Evaluator (CITE)**](cite/index) application enables participants from different organizations to evaluate, score, and comment on cyber incidents. CITE also provides a situational awareness dashboard that allows teams to track their internal actions and roles.
+[![CITE Logo](assets/img/cite-logo.png)](cite/index.md)Crucible’s [**Collaborative Incident Threat Evaluator (CITE)**](cite/index.md) application enables participants from different organizations to evaluate, score, and comment on cyber incidents. CITE also provides a situational awareness dashboard that allows teams to track their internal actions and roles.
 
 ## Displaying Incident Information
 [![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md)Crucible’s [**Gallery**](gallery/index.md) application enables

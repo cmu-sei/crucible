@@ -21,8 +21,26 @@ To start a practice session:
 1. Select a challenge, then click **Start Practice Session**, and **Confirm**. You can only launch *one* practice challenge at a time.
 2. Read the challenge guide. The challenge guide provides details and instructions for completing the practice challenge.
 3. Read the solution guide (optional). Solution guide URLs must be configured by Gameboard administrators; not every challenge or lab has a solution guide.
-4. Launch the challenge consoles. Clicking a challenge console opens it in a new web browser tab. Challenge consoles allow players to directly interact with the virtual machines as they complete the practice challenge. Click [here](../topomojo/copy-paste.md) for instructions on using copy and paste in the challenge consoles.
+4. Launch the challenge consoles. Clicking a challenge console opens it in a new web browser tab. Challenge consoles allow players to directly interact with the virtual machines as they complete the practice challenge.
 5. Answer the challenge questions. Enter your answers for each question and click **Submit My Answers**, and **Confirm** to submit your answer.
+
+## Using copy/paste in the consoles
+
+Follow the steps below to transfer text between your local machine (*out of game*) and a virtual machine (*in game*).
+
+### Local to VM  
+
+1. Copy text from your local machine.  
+2. In the VM console, open **Tools** (cog icon) and paste into the **Clipboard**.  
+3. In the VM, select a destination and click **Paste**.
+
+### VM to Local  
+
+1. Copy text inside the VM.  
+2. In **Tools**, place your cursor in the **Clipboard**, then click **Copy**.
+3. Paste into a local application.
+
+For additional information on how copy/paste works in the VM consoles, see this [Copy and paste](../topomojo/copy-paste.md) article.
 
 ## Extending time or ending the session
 
