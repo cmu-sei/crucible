@@ -1,0 +1,30 @@
+policy:
+  - section:
+      - id: [application]
+        label:
+          - name: "Alloy"
+            keys: ["Alloy"]
+          - name: "Blueprint"
+            keys: ["Blueprint"]
+          - name: "Caster"
+            keys: ["Caster"]
+          - name: "CITE"
+            keys: ["CITE"]
+          - name: "Gallery"
+            keys: ["Gallery"]
+          - name: "Gameboard"
+            keys: ["Gameboard"]
+          - name: "Player"
+            keys: ["Player"]
+          - name: "Steamfitter"
+            keys: ["Steamfitter"]
+          - name: "TopoMojo"
+            keys: ["TopoMojo"]
+      - id: [type]
+        label:
+          - name: "New Feature"
+            keys: ["New Feature"]
+          - name: "Correction"
+            keys: ["Correction"]
+          - name: "Enhancement"
+            keys: ["Enhancement"]
