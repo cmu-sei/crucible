@@ -2,7 +2,7 @@
 
 ## What's new
 
-Get the latest TopoMojo source code and its accompanying release notes [here](github.com/cmu-sei/TopoMojo/releases).
+Get the latest TopoMojo source code and its accompanying release notes [here](https://github.com/cmu-sei/TopoMojo).
 
 ## Installing
 

@@ -49,7 +49,7 @@ When in Dashboard view, users will have two features to interact with moves:
 
 The landing page of CITE provides a central approach to recompiling all evaluations that the user is a participant of into just one display.
 
-![CITE Landing Page OE](../assets/img/CITELandingPage.png)
+![CITE Landing Page OE](../assets/img/citeLandingPage.png)
 
 *Search for an Evaluation*
 

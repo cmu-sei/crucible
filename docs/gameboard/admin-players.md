@@ -43,7 +43,7 @@ Events seen on the player timeline are:
 
 ### Session Extension
 
-Extends the player's session by a specified duration.
+Extends the player's session by a specified duration. Gameboard will display a warning when an extension exceeds the game's end time. When the game ends, any player who does not have permission to participate outside of the execution period will be unable to submit answers. The warning includes a recommended game end date.
 
 ### Other tools
 
@@ -85,4 +85,4 @@ In the Player view context menu (the "three vertical dots") you'll notice four d
 - **Reset Session:** If a player has registered and has started playing the game (i.e. they have a game session), you can reset their session. This deletes any challenge data they generated while playing but leaves enrollment and team membership intact. If they wish to play again, they'll need to start a new session.
 - **Reset Session & Unenroll:** If a player has registered, and has started a session, you can *reset* their session and *unenroll* them from the game. Players will need to re-enroll to play again. Teams are essentially dissolved and will need to reform and re-enroll to play. This is the same functionality as when a player unenrolls from the game lobby or resets their session (when enabled by an admin).
 
-Players can also unenroll themselves from the game lobby or reset their session if the admin setting **Allow Reset** is set to **Allowed** for their game. For the player perspective, see: [Participating in a game](participating.md).
+Players can also unenroll themselves from the game lobby or reset their session if the admin setting **Allow Reset** is set to **Allowed** for their game. For the player perspective, see the [Game Lobby](home-and-lobby.md) documentation.

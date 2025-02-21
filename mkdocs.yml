@@ -99,18 +99,18 @@ nav:
       - Giving feedback: gameboard/player-feedback-form.md
       - Practicing challenges: gameboard/practice-area.md
       - Getting in-game support: gameboard/support.md
-      - Using Reports: gameboard/reports-beta.md
+      - Using Reports: gameboard/reports.md
     - Administering games: 
       - Administration: gameboard/admin.md
+      - Game Center: gameboard/game-center.md
       - Practice: gameboard/admin-practice-area.md
+      - Users: gameboard/admin-users.md
       - Roles: gameboard/admin-roles.md
       - Players: gameboard/admin-players.md
       - Observe mode: gameboard/admin-observe.md
       - Settings: gameboard/admin-settings.md
       - Feedback form: gameboard/admin-feedback-form.md
-      - Configuring Certificate Templates: gameboard/completion-certificates.md
-      - Clone, yaml, and json options: gameboard/admin-clone-yaml-json.md
-    - Administering with Game Center [BETA]: gameboard/game-center.md
+      - Configuring Certificate Templates: gameboard/completion-certificates.md     
   - Blueprint: blueprint/index.md
   - CITE: cite/index.md
   - Gallery: gallery/index.md

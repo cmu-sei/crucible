@@ -43,7 +43,7 @@ You arrive at the **Admin Game Settings** by creating a new game or by editing a
 
 **Paste Example Configuration:** Pastes sample feedback configuration into the Feedback Questions field for you to modify and use for your own needs.
 
-**Certificate Template:** Design a certificate template here by entering HTML into the Certificate Template field. More information on certificates can be found in the [Playing in the Gameboard](participating.md) documentation under "The Profile screen" heading. For your convenience, selecting the **i** button displays instructions for designing a certificate that can dynamically display information related to a game, such as leader board rankings, player scores, and other details.
+**Certificate Template:** Design a certificate template here by entering HTML into the Certificate Template field. More information on certificates can be found in the [Profile screen](profile.md) documentation. For your convenience, selecting the **i** button displays instructions for designing a certificate that can dynamically display information related to a game, such as leader board rankings, player scores, and other details.
 
 ## Modes
 
