@@ -13,7 +13,7 @@ Mattermost
 osTicket
 (?i)cybersecurity
 OAuth
-GUID
+GUID(?:'s|s)?
 (?i)URL
 [Gg]amespace(?:s)?
 ISO(?:s)
