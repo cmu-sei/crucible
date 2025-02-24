@@ -1,4 +1,4 @@
-# Feedback Form
+# Configuring feedback templates
 
 In the Gameboard application, it is possible to create feedback forms to capture participant feedback on the game and individual challenges. Collecting and analyzing participant feedback can help you refine and improve your games and challenges.
 

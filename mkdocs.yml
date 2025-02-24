@@ -109,8 +109,8 @@ nav:
       - Players: gameboard/admin-players.md
       - Observe mode: gameboard/admin-observe.md
       - Settings: gameboard/admin-settings.md
-      - Feedback form: gameboard/admin-feedback-form.md
-      - Configuring Certificate Templates: gameboard/completion-certificates.md     
+      - Configuring Player Feedback Templates: gameboard/admin-feedback-form.md
+      - Configuring Certificate Templates: gameboard/admin-completion-certificates.md     
   - Blueprint: blueprint/index.md
   - CITE: cite/index.md
   - Gallery: gallery/index.md

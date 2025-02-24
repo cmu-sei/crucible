@@ -25,6 +25,8 @@ In the Announcement field, enter the content of the announcement and click **Ann
 
 The **Games** tab is the landing page when you select **Admin** from the top navigation menu. By default, the games are displayed as cards.
 
+### The Game Center
+
 Select a game card to access that game in the **Game Center**. The Game Center is the one-stop-shop where games are configured, managed, and observed. See the [Game Center documentation](game-center.md) for a full explanation of the Game Center.
 
 Note the **game info icons** at the bottom of the game cards. When hovered over, these icons provide information about the game.
@@ -80,6 +82,6 @@ Deleting a game deletes it from the Gameboard app.
 
 1. On the game card, select the **3 dot context** menu, then **Delete**.
 
-!!! note
+!!! warning
 
-    Games can't be deleted if they contain registered users.
+    Games that contain registered players *can* be deleted by users who have the appropriate role permission (i.e., Admin and Director).
