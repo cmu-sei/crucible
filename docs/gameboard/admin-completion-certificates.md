@@ -1,6 +1,6 @@
 # Configuring certificate templates
 
-Game participants can view, share, and print certificates of completion as proof of participation in a game. To do so, certificate templates must be configured in a game's Metadata settings. Game organizers (i.e., users who have been granted a role with the appropriate permissions) configure certificate templates to customize the appearance of these completion certificates.
+testGame participants can view, share, and print certificates of completion as proof of participation in a game. To do so, certificate templates must be configured in a game's Metadata settings. Game organizers (i.e., users who have been granted a role with the appropriate permissions) configure certificate templates to customize the appearance of these completion certificates.
 
 This topic assumes you have been granted a role with the appropriate permissions in Gameboard, you are logged in, and you have a game created.
 
