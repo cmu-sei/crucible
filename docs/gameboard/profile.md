@@ -49,7 +49,7 @@ The new name entered on the certificate is temporary and *only for printing purp
 
 ### Creating certificate templates
 
-Game organizers with the appropriate role/permissions create completion certificate templates in the game Metadata settings. See [Configuring certificate templates](completion-certificates.md) in the *Administering games* section of the Gameboard docs.
+Game organizers with the appropriate role/permissions create completion certificate templates in the game Metadata settings. See [Configuring certificate templates](admin-completion-certificates.md) in the *Administering games* section of the Gameboard docs.
 
 ## History tab
 
@@ -62,3 +62,4 @@ Users granted a role with the appropriate permissions can view the **Settings ta
 !!! note
 
     Browser notifications are subject to OS-level settings which may need to be changed and browser site settings for pop-ups and redirects which need to be allowed.
+    

@@ -2,10 +2,6 @@
 
 Game participants can view, share, and print certificates of completion as proof of participation in a game. To do so, certificate templates must be configured in a game's Metadata settings. Game organizers (i.e., users who have been granted a role with the appropriate permissions) configure certificate templates to customize the appearance of these completion certificates.
 
-To create a *certificate template*, you must have the *Administrator* role in the Gameboard. For more information about roles, please see the [Gameboard Roles Guide](C:\Users\rgreeder\OneDrive - Software Engineering Institute\Desktop\Gameboard-docs).
-This topic assumes you have been granted a role with the appropriate permissions in Gameboard, you are logged in, and you have a game created.
-Game participants can view, share, and print certificates of completion as proof of participation in a game. To do so, certificate templates must be configured in a game's Metadata settings. Game organizers (i.e., users who have been granted a role with the appropriate permissions) configure certificate templates to customize the appearance of these completion certificates.
-
 This topic assumes you have been granted a role with the appropriate permissions in Gameboard, you are logged in, and you have a game created.
 
 1. In the top navigation, select **Admin**.
