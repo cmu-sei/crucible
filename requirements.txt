@@ -2,3 +2,4 @@ mkdocs-material
 Pygments
 pillow
 cairosvg
+vale
