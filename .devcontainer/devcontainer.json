@@ -22,7 +22,10 @@
 				"DavidAnson.vscode-markdownlint",
 				"bierner.markdown-emoji",
 				"streetsidesoftware.code-spell-checker",
-				"GitHub.vscode-pull-request-github"
+				"GitHub.vscode-pull-request-github",
+				"shardulm94.trailing-spaces",
+				"chrischinchilla.vale-vscode",
+				"shd101wyy.markdown-preview-enhanced"
 			]
 		}
 	},
