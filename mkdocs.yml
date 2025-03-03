@@ -89,7 +89,7 @@ nav:
       - Templates: topomojo/admin-templates.md
       - Machines: topomojo/admin-machines.md
       - Users: topomojo/admin-users.md
-      - Log: topomojo/admin-log.md    
+      - Log: topomojo/admin-log.md
     - Copy and paste: topomojo/copy-paste.md
   - Gameboard:
     - Playing games:
@@ -100,17 +100,21 @@ nav:
       - Practicing challenges: gameboard/practice-area.md
       - Getting in-game support: gameboard/support.md
       - Using Reports: gameboard/reports.md
-    - Administering games: 
+    - Administering games:
       - Administration: gameboard/admin.md
       - Game Center: gameboard/game-center.md
-      - Practice: gameboard/admin-practice-area.md
+      - Practice Area: gameboard/admin-practice-area.md
       - Users: gameboard/admin-users.md
-      - Roles: gameboard/admin-roles.md
       - Players: gameboard/admin-players.md
+      - Sponsors: gameboard/admin-sponsor.md
+      - Challenges: gameboard/admin-challenges.md
+      - Support: gameboard/admin-support.md
+      - Notifications: gameboard/admin-notifications.md
+      - Permissions: gameboard/admin-roles.md
       - Observe mode: gameboard/admin-observe.md
       - Settings: gameboard/admin-settings.md
       - Configuring Player Feedback Templates: gameboard/admin-feedback-form.md
-      - Configuring Certificate Templates: gameboard/admin-completion-certificates.md     
+      - Configuring Certificate Templates: gameboard/admin-completion-certificates.md
   - Blueprint: blueprint/index.md
   - CITE: cite/index.md
   - Gallery: gallery/index.md
