@@ -53,7 +53,7 @@ This section assumes you have been granted a role with the appropriate permissio
 
 !!! warning
 
- There is no additional confirmation when deleting a certificate template. Clicking **Delete** does indeed delete your certificate template!
+    There is no additional confirmation when deleting a certificate template. Clicking **Delete** does indeed delete your certificate template!
 
 ## Configuration YAML
 
