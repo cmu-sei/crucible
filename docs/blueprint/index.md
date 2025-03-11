@@ -54,7 +54,7 @@ This option is visible to users who hold administrative roles or are content dev
 #### End Event
 For those launched events, an extra Blueprint functionality is going to be added to the Player View, where users can manage their event. This feature further enables users to invite others to the event or even end the event after the user has completed the exercise.
 
-![Blueprint End Event OE](../assets/img/blueprintEndEvent.png)
+![Blueprint End Event OE](../assets/img/blueprintEndEvent-v2.png)
 
 *Launched Event User Invitations*
 
@@ -92,7 +92,7 @@ The MSEL Catalog shows created MSELs. Here, users are able to select the desired
 
 The following image will show some important hotspots about the MSEL Catalog. Reference the number on the hotspot to know more about this section.
 
-![Blueprint Dashboard OE](../assets/img/blueprintDashboard-v3.png)
+![Blueprint Dashboard OE](../assets/img/blueprintDashboard-v4.png)
 
 #### Add Blank MSEL
 *Hotspot 1:*
@@ -172,7 +172,7 @@ With this functionality, users can now edit the same MSEL, instead of each user 
 
 On this tab, users will be able to edit and configure MSEL settings, as well as enable/disable integrations.
 
-![Blueprint Info Tab OE](../assets/img/blueprintBasicInfo-v4.png)
+![Blueprint Info Tab OE](../assets/img/blueprintBasicInfo-v5.png)
 
 To edit the MSEL's basic information and configuration, follow these next steps:
 
@@ -211,7 +211,7 @@ Integrations:
 
 On this tab, users can add notes to the MSEL to be worked and accessed by other team members with appropriate permissions.
 
-![Blueprint Notes Tab OE](../assets/img/blueprintNotes-v2.png)
+![Blueprint Notes Tab OE](../assets/img/blueprintNotes-v3.png)
 
 To add MSEL notes, follow these next steps:
 
@@ -233,7 +233,7 @@ After all changes have been added, click on the **checkmark** to save the page.
 
 On this tab, users will be able to add and assign contributor teams, as well as their respective roles related to the creation and management of the MSEL. Assigned teams will be able to view and edit the MSEL.
 
-![Blueprint Contributors Tab OE](../assets/img/blueprintAddContributors.png)
+![Blueprint Contributors Tab OE](../assets/img/blueprintAddContributors-v2.png)
 
 *Add a Contributor*
 
@@ -265,7 +265,7 @@ The available roles are:
 
 On this tab, users will be able to add and assign teams, as well as their respective roles during an event to the MSEL.
 
-![Blueprint Teams Tab OE](../assets/img/blueprintAddTeams-v2.png)
+![Blueprint Teams Tab OE](../assets/img/blueprintAddTeams-v3.png)
 
 *Add a Team*
 
@@ -296,7 +296,7 @@ The available roles are:
 
 On this tab, users will be able to add data fields that are going to be used on the MSEL. These [data fields](#glossary) can be compared to the column fields used on Excel spreadsheets.
 
-![Blueprint Data Fields Tab OE](../assets/img/blueprintDataFields-v4.png)
+![Blueprint Data Fields Tab OE](../assets/img/blueprintDataFields-v5.png)
 
 As it can be seen, there are two categories of Data Fields.
 
@@ -357,7 +357,7 @@ To search for a specific Data Field, follow these steps:
 
 On this tab, users will be able to add all the related [organizations](#glossary) that are going to be used on the MSEL, as well as on the live exercise. Here, organizations with their information are added. Additionally, users can create organizations from scratch or from a template.
 
-![Blueprint Organizations Tab OE](../assets/img/blueprintOrganizations-v3.png)
+![Blueprint Organizations Tab OE](../assets/img/blueprintOrganizations-v4.png)
 
 *Add an Organization Card From Scratch*
 
@@ -419,7 +419,7 @@ To search for a specific organization, follow these steps:
 
 On this tab, users will be able to add all the related exercise [moves](#glossary) to the MSEL.
 
-![Blueprint Moves Tab OE](../assets/img/blueprintMoves-v3.png)
+![Blueprint Moves Tab OE](../assets/img/blueprintMoves-v4.png)
 
 *Add a Move*
 
@@ -574,7 +574,7 @@ In the Invitations tab, users who possess roles as Administrators or Content Dev
 
 To facilitate this process, email domains are specified on these invitations, along with a maximum number of users who may use these invitations. Furthermore, these invitations are associated with specific teams that have been integrated into the MSEL. Consequently, upon joining the event using the invitation, the user will be automatically affiliated with the corresponding team for the duration of the event.
 
-![Blueprint Invitations OE](../assets/img/blueprintInvitations.png)
+![Blueprint Invitations OE](../assets/img/blueprintInvitations-v2.png)
 
 *Add an Invitation*
 
@@ -654,7 +654,7 @@ After all desired configurations have been added, click **Save**.
 
 Next, roles should be assigned to each member of the team. To do this, follow these steps:
 
-![CITE Team Roles OE](../assets/img/citeTeamRoles.png)
+![CITE Team Roles OE](../assets/img/citeTeamRoles-v2.png)
 
 1. Navigate to the **Teams** tab.
 2. Select the desired team, and click on it to expand its configurations.
@@ -664,7 +664,7 @@ Next, roles should be assigned to each member of the team. To do this, follow th
 
 On this tab, [CITE Actions](#glossary) can be added to be pushed from Blueprint. These actions will allow team members to customize their response by tracking tasks during the exercise.
 
-![Blueprint CITE Actions OE](../assets/img/blueprintCiteActions-v2.png)
+![Blueprint CITE Actions OE](../assets/img/blueprintCiteActions-v3.png)
 
 *Add a CITE Action*
 
@@ -721,7 +721,7 @@ To search for a specific action, follow these steps:
 
 On this tab, [CITE Roles](#glossary) can be added to be pushed from Blueprint. These roles will allow team members to customize their response by tracking their responsibilities during an exercise.
 
-![Blueprint CITE Roles OE](../assets/img/blueprintCiteRoles-v2.png)
+![Blueprint CITE Roles OE](../assets/img/blueprintCiteRoles-v3.png)
 
 *Add a CITE Role*
 
@@ -782,7 +782,7 @@ To enable the full Gallery integration functionality the following tabs should b
 
 On the Data Fields tab, additional data fields should be configured to be able to push MSEL information to Gallery.
 
-![Blueprint Data Fields Tab OE](../assets/img/blueprintDataFields-v4.png)
+![Blueprint Data Fields Tab OE](../assets/img/blueprintDataFields-v5.png)
 
 Data fields that should be added are:
 
@@ -867,11 +867,11 @@ To enable the full Player integration functionality the following tabs should be
 
 On this tab, [Player Apps](#glossary) configurations can be added to be pushed from Blueprint. These are the different applications accessible from the [Player View](#glossary).
 
-![Player Apps OE](../assets/img/blueprintPlayerApps-v2.png)
+![Player Apps OE](../assets/img/blueprintPlayerApps-v3.png)
 
 *Add a Player App*
 
-![Blueprint Add Player App OE](../assets/img/blueprintAddPlayerApp-v2.png)
+![Blueprint Add Player App OE](../assets/img/blueprintAddPlayerApp-v3.png)
 
 To add a Player App, follow these steps:
 
@@ -951,7 +951,7 @@ To remove MSEL information from the applications, follow these steps:
 ### Units
 The following image shows the Units Administration Page. Here, administrators can add, edit, and delete units. To be able to use the Blueprint application, the administrator should assign a unit to desired users.
 
-![Blueprint Teams Admin OE](../assets/img/blueprintUnits.png)
+![Blueprint Teams Admin OE](../assets/img/blueprintUnits-v2.png)
 
 **Add a Unit**
 
@@ -1000,7 +1000,7 @@ To search for a specific unit, follow these steps:
 
 To configure a unit for an exercise, administrators will need to add users to their respective units. To do this, follow these steps.
 
-![Configure Blueprint Teams OE](../assets/img/blueprintConfigureUnits.png)
+![Configure Blueprint Teams OE](../assets/img/blueprintConfigureUnits-v2.png)
 
 1. Select the unit to be configured and click on it to expand its configuration details.
 2. Under the **All Users** tab, users that have not been assigned to the unit will be shown. To add them to the unit, click on **Add User**.
