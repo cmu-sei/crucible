@@ -49,7 +49,7 @@ When in Dashboard view, users will have two features to interact with moves:
 
 The landing page of CITE provides a central approach to recompiling all evaluations that the user is a participant of into just one display.
 
-![CITE Landing Page OE](../assets/img/citeLandingPage.png)
+![CITE Landing Page OE](../assets/img/citeLandingPage-v2.png)
 
 *Search for an Evaluation*
 
@@ -206,7 +206,7 @@ The following image will shows the CITE Report. Here, users can view and/or prin
 ### Evaluations
 The following image shows the Evaluations Administration Page. Here, administrators can add, edit, upload, download, copy, and delete [evaluations](#glossary).
 
-![Evaluations Admin OE](../assets/img/EvaluationsAdmin-v3.png)
+![Evaluations Admin OE](../assets/img/EvaluationsAdmin-v4.png)
 
 **Add an Evaluation**
 
@@ -722,7 +722,7 @@ The available permissions are:
 - **Can Modify:** The user is allowed to modify a score for previous moves on an exercise.
 - **Can Increment Move:** The user is given the permission to increment the current move during an exercise.
 
-![Users Admin OE](../assets/img/usersAdmin.png)
+![Users Admin OE](../assets/img/usersAdmin-v2.png)
 
 **Add a User**
 
