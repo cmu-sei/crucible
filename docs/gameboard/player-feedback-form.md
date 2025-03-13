@@ -1,8 +1,8 @@
-## Giving feedback as a player
+# Giving feedback as a player
 
 Provided that a Gameboard administrator has enabled and configured the *feedback* feature, players are permitted **one** feedback submission per game and/or per challenge. Every member of a team is permitted to provide individual feedback. The feedback form is available at any time after a session has started. This way, if participants quit the game before time expires they still have the opportunity to submit feedback.
 
-*The screen print below shows an example of a **challenge** feedback form as a player would see it.*
+The screen print below shows an example of a **challenge** feedback form as a player would see it.
 
 ![challenge form](img/challenge-feedback.png)
 
@@ -13,7 +13,7 @@ Unsubmitted feedback and submitted feedback can be viewed in the reports. Once f
 This documentation assumes the player is logged into a game and successfully enrolled. To view the *game* feedback as a participant:
 
 1. From the game lobby, select **Start Session**, then click through the confirmations to start the session.
-2. Scroll down to the Feedback form and complete the survey. 
+2. Scroll down to the Feedback form and complete the survey.
 3. Click **Submit**, then **Confirm** when finished. Responses can't be edited after clicking **Submit**. Game feedback responses do auto-save.
 
 To view the *challenge* feedback as a participant:

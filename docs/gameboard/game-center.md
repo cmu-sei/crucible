@@ -1,4 +1,4 @@
-# Game Center [BETA]
+# Game Center
 
 The **Game Center** is the game administrator's one stop shop when administering a live game. The Game Center unifies various Gameboard administrative and support elements such as game and challenge settings, player information, live sessions, support tickets, observe mode, and more.
 
@@ -40,13 +40,17 @@ In the Game Center header, game metadata and settings information is displayed, 
 
 **Lobby Markdown:** Using Markdown enter any information you would like players to see when they enter the game lobby. For help with Markdown syntax, see this [Markdown Guide](https://www.markdownguide.org/).
 
-**Feedback Questions:** It's possible -- but not required -- to create questions to capture participant feedback on the game and individual challenges. Create your feedback questions here using YAML. For help with the feedback feature, see the [Feedback Form documentation](admin-feedback-form.md).
+#### Player Feedback
 
-**About feedback templates:** This modal provides instructions for configuring questions presented to players after they complete a challenge or game.
+It's possible (but not required) to create questions to capture participant feedback on games and challenges. Create your feedback form template here.
 
-**Paste Example Configuration:** Pastes sample feedback configuration into the Feedback Questions field for you to modify and use for your own needs.
+For a full treatment of Gameboard's feedback feature, please see the [Configuring feedback templates](admin-feedback-form.md) section of the docs.
 
-**Certificate Template:** Design a certificate template here by entering HTML into the Certificate Template field. More information on certificates can be found in the [Profile screen](profile.md) documentation. For your convenience, selecting the **i** button displays instructions for designing a certificate that can dynamically display information related to a game, such as leader board rankings, player scores, and other details.
+#### Completion Certificates
+
+It's possible (again, not required) to design certificate of completion templates so participants can view, share, and print certificates as proof of their participation in a game.
+
+For a full treatment of how to design completion certificates, please see the [Configuring certificate templates](admin-completion-certificates.md) section of the docs.
 
 ### Modes
 

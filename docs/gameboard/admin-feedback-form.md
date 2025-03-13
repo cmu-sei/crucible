@@ -1,55 +1,66 @@
-# Feedback Form
+# Feedback Templates
 
-In the Gameboard application, it is possible to create feedback forms to capture participant feedback on the game and individual challenges. Collecting and analyzing participant feedback can help you refine and improve your games and challenges.
+In the Gameboard application, it is possible to use feedback forms to capture participant feedback on a game and challenges. Collecting and analyzing participant feedback can help you refine and improve your user experiences. Feedback *forms* are generated from feedback *templates*.
 
-To create a feedback form, you must have the *Administrator* role in the Gameboard. For more information about roles, please see the [Gameboard Roles Guide](admin-roles.md).
+- Feedback templates are created by users who are granted a role with elevated permissions (`Admin`, `Director`).
+- Feedback forms are completed by participants or players in the game.
+- Feedback reports are reviewed by users who are granted a role with the appropriate permission (`Admin`, `Director`, and `Support`).
 
-Creating a feedback form is not required to build a game or challenge. It is up to you whether or not you choose to implement it. If feedback is not configured in the Gameboard administration section, then the feedback form does not appear for the participant. You can create questions for *just* a game, *just* challenges, or *both* game and challenges. See the "Configuration YAML" sections below for additional detail.
+Creating a feedback template is not required to build a game or challenge. It's up to you whether or not you choose to implement feedback. If a feedback template is not configured in the Gameboard administration menu, then the feedback form does not appear for the participant.
 
-## Creating feedback form for the game
+You can create questions for *just* a game, *just* challenges, or *both* game and challenges. When you create a feedback template for a game or one of its challenges, you can use that template in other games and challenges too.
 
-This documentation assumes that you have been granted the Administrator role in Gameboard, you are logged in, and you have a game created.
+It is not possible to change a feedback template after responses have been submitted.
 
-In the top-right corner, click **Admin**.
+This section assumes you have been granted a role with the appropriate permissions in Gameboard, you are logged in, and you have a game created.
 
-Hover over an existing game, then click **Settings**.
+1. In the top navigation, select **Admin**.
+2. Select an existing game, then select the **Settings cog**. Under Metadata, see the Player Feedback section. Here you can select an existing feedback template and *add*, *preview*, *edit*, *copy*, and *delete* feedback templates.
 
-Scroll down to the **Feedback Questions** sections. If this is blank, then you will have to add your own YAML here. The YAML format has to be correct and there is some validation built in.
+![feedback template icons](img/feedback-temp-icons.png)
 
-**Feedback Questions** is blank when:
+## Selecting a feedback template
 
-- no defaults are set and a new game is created
+1. In the game's Metadata settings, under Player Feedback, choose an existing certificate template from the dropdowns.
 
-**Feedback Questions** is populated when:
+## Adding a feedback template
 
-- some YAML has been saved from a previous session
-- defaults have been established and a new game is created
-- a game is cloned where original game contained save YAML
+1. In the game's Metadata settings, under Player Feedback, select the **+** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**.
+2. In the **Create Template** window, enter a **Name** for your certificate template.
+3. In the **Help Text** field, enter a brief explanatory message that guides users on how to complete the feedback form.
+4. In the **Template** box, specify the feedback questions in YAML. For guidance, see the [Configuration YAML](#configuration-yaml) section below.
+5. You can use the **Copy from:** feature to paste an example configuration into the **Template** field. In the **Copy from:** dropdown, select a template to copy from and then click **Paste Example Configuration**.
+6. Click **OK**.
 
-!!! note
+## Previewing a feedback template
 
-    When cloning a game, the feedback YAML will always be copied *exactly* from the original game, even if the game's feedback YAML is blank. In this instance, the default template is never used.
+1. In the game's Metadata settings, under Player Feedback, select the **eye** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The feedback template preview launches.
+2. Click **OK** to dismiss it.
 
-If your questions are built correctly, you will see a message confirming this:
+## Editing a feedback template
 
-`x game, y challenge questions configured`
+1. In the game's Metadata settings, under Player Feedback, select the **Edit** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The **Edit Template** window is launched.
+2. Make any updates in the **Name**, **Help Text**, and **Template** fields, then click **OK**.
 
-Where `x` and `y` are the numbers of questions in your YAML template.
+## Copying a feedback template
 
-If your questions are not built correctly, you will see a message stating:
+1. In the game's Metadata settings, under Player Feedback, select the **Copy** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The template's YAML configuration is copied to your clipboard.
+2. Paste the YAML into the location of your choice.
 
-`Invalid YAML format`
+## Deleting a feedback template
 
-Invalid YAML format prevents the feedback form from appearing on a game or challenge to a participant. Invalid YAML format does not prevent saving the game. The game is saved - the Gameboard functions as expected - however, it will look to participants as if no questions were configured.
+1. In the game's Metadata settings, under Player Feedback, select the **Delete** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The feedback template is deleted.
 
-### Configuration YAML
+!!! warning
 
-Review the following sample YAML for a *game* feedback form to understand the keys and their values. Notice in the example below there is `game:` but not `challenge:`. The feedback questions are for the game only; no questions appear for challenges.
+    There is no additional confirmation when deleting a certificate template. Clicking **Delete** does indeed delete your certificate template!
+
+## Configuration YAML
+
+Review the following sample YAML feedback form to understand the keys and their values.
 
 ```yaml
-# Default Template for Game and Challenge Feedback
-message: This feedback is not monitored during competition.
-game:
+questions:
 - id: q1
   prompt: Please rate the difficulty of this game.
   shortName: Difficulty
@@ -63,8 +74,7 @@ game:
   type: text
 ```
 
-- `message`: in the example above, _message_ is a communication meant for the participants; here the message informs participants that the feedback form is not monitored by competition user support. They would need to seek technical support through other established channels. Message is configurable and can be left blank. If left blank, no message appears to the participants.
-- `id`: *ids* must be unique within the `game` list or `challenge` list; i.e., game and challenge could each have a `q1` id. If ids in a single list are not unique, you are presented with a warning. The warning does not prevent saving the configuration and the feedback form is still visible to a participant.
+- `id`: *ids* must be unique within the template. If ids in a single list are not unique, you are presented with a warning.
 - `prompt`: this is the question you want the participant to answer or the property you want them to rate.
 - `shortName`: an abbreviated version of the prompt. `shortName` is optional, but is helpful for use in tables as the column header. Good examples are "Difficult" or "Quality".
 - `type`: `likert` or `text`; if the type is `Likert`, then defining the scale (`max`, `minLabel`, `maxLabel`) of how much a participant can agree or disagree with your prompt is required. If the type is `text`, a participant is free to answer your prompt however they like. Text type questions have a 2,000 character limit.
@@ -73,86 +83,8 @@ game:
 - `maxLabel`: specify the labels for the extremes of your `Likert` scale; examples of the positive extreme might be " very difficult", "strongly agree", or "very satisfied".
 - `required`: this key is optional; set `required` to `true` if you want to make your question required.
 
-## Creating feedback form for a challenge
+## Reporting on feedback
 
-The procedure for creating challenge feedback questions is the same as creating game feedback questions, except that you specify `challenge` in the YAML template. Review the following sample YAML with *game* and *challenge* feedback questions specified. You could specify `challenge:` and omit `game:` here. In that case, no questions would appear for the game; just the challenges.
+Viewing and exporting responses to feedback is also a function of roles with some elevated permissions. Assuming that you are logged into Gameboard as a user with the `Admin`, `Director`, or `Support` role, in the top navigation select **Reports**. Then select **Feedback Report**.
 
-You can't configure a unique set of questions for each challenge. Each challenge in a game gets the same questions as defined in the YAML template. So, `Challenge abc` gets the same set of questions as `Challenge xyz` provided that `Challenge abc` and `Challenge xyz`  are attached to the same game.
-
-```yaml
-# Default Template for Game and Challenge Feedback
-message: This feedback is not monitored during competition.
-game:
-- id: q1
-  prompt: Please rate the difficulty of this game.
-  shortName: Difficulty
-  type: likert
-  max: 10
-  minLabel: Very Easy
-  maxLabel: Very Difficult
-  required: true
-- id: q2
-  prompt: Please rate the quality of this game.
-  shortName: Quality
-  type: likert
-  max: 5
-  minLabel: Low Quality
-  maxLabel: High Quality
-challenge:
-- id: q1
-  prompt: Please rate the difficulty of this challenge.
-  shortName: Difficulty
-  type: likert
-  max: 5
-  minLabel: Low Quality
-  maxLabel: High Quality
-- id: q2
-  prompt: Please rate the quality of this challenge.
-  shortName: Quality
-  type: likert
-  max: 10
-  minLabel: Very Easy
-  maxLabel: Very Difficult
-```
-
-## Changing questions mid-game
-
-It is possible to change these keys in the YAML question configuration at any point during a game: `prompt`, `shortName`, `minLabel`, and `maxLabel`.  These keys are for display purposes, and the administrator should be able to fix a typo or a spelling error on the fly.
-
-Do not change these keys in the YAML question configuration during a game, especially if participants have already submitted feedback: question `id`, `type`, `max` (when `likert`), the order of questions, or the number of questions in the list.
-
-## Configuration settings
-
-**Defaults_FeedbackTemplateFile** is the file name/location in the app directory where the default YAML file is found. To configure the **Defaults_FeedbackTemplateFile**:
-
-1. Create a YAML file with the template that is desired to be the default of any new games.
-2. Add that file to app files prior to deployment.
-3. In `appsettings.conf` or via whatever method you choose to set environment variables, set **Defaults_FeedbackTemplateFile** as the file name of the new file (for example: `default-template.yaml`).
-
-### Additional notes
-
-Configuring default questions is completely optional and not required to have feedback working in a deployment. It is an additional feature to make things more efficient, especially in the case where it is likely all games will use the same or similar questions. It could also be used as an example of valid YAML with placeholder values that the creator needs to change like "prompt 1 here".
-
-If no defaults are set (i.e., there is no YAML file and no environment variable set), then any new game will have a blank text area to start from or to copy/paste something into. If there is a default question file provided, any new game is created with the contents of the default questions copied into the text area for YAML.
-
-Once a game is created, changing the feedback questions of a game does not change the original defaults of the app for any new games, and questions can be completely changed or removed. Finally, changing the default feedback question file after a game is created (this is only done at deployment) does not change the questions of any existing game as the YAML was copied and not linked to it anymore.
-
-## Reporting
-
-Viewing and exporting survey responses is also a function of the Administrator role. Assuming that you are logged into Gameboard as an administrator, in the top-right corner, select **Admin**. Then click **Reports**, and **Feedback Reports**.
-
-To view *game* feedback, toggle **Game Feedback**, and select a game. Game feedback refers to feedback at the game level; it does not include challenge-specific feedback.
-
-- **Game Overview:**  Provides some general metrics like the count of configured questions, types, and required and the number of responses **submitted**, **in progress**, and **not started**. **Not started** indicates participants who started a game and the survey was available to them, but they chose not to respond.
-- **Question Summary:** Provides metrics for the numerical questions like **Average** (based upon submitted responses), **Lowest Rating**, **Highest Rating** and a count of questions answered. All aggregates are based on submitted only, even min and max which are "Lowest Rating" and "Highest Rating".
-- **Export to CSV (summary):** Allows you to export summary statistics per question as a comma-separated values file. From here, you can perform more detailed analysis.
-- **Individual Submissions:** Provides a list of questions and answers by player.
-  - **Export to CSV (submission):** Allows you to export submitted feedback report results as a comma-separated values file. From here, you can perform more detailed analysis. Each row is a single user's response. The number of columns depends on the number of questions configured.
-
-To view *challenge* feedback, toggle **Challenge Feedback**, then select a game and a challenge. Selecting **All Challenges** here aggregates the feedback for all challenges for a particular game.
-
-- **Challenge Overview:**  Provides some general metrics like the count of configured questions, types, and required versus the number of responses **submitted**, **in progress**, and **not started**. **Not started** indicates participants who started a challenge and the survey was available to them, but they chose not to respond.
-- **Question Summary:** Provides metrics for the numerical questions like **Average** (based upon submitted responses), **Lowest Rating**, **Highest Rating** and a count of questions answered.
-  - **Export to CSV (summary):** Allows you to export summary statistics per question as a comma-separated values file. From here, you can perform more detailed analysis.
-- **Individual Submissions:** Provides a list of questions and answers by player.
-  - **Export to CSV (submission):** Allows you to export submitted feedback report results as a comma-separated values file. From here, you can perform more detailed analysis. Each row is a single user's response. The number of columns depends on the number of questions configured.
+Feedback Reports are documented in the [Using Reports](reports.md) section of the docs.
