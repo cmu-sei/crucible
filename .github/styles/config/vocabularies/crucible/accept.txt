@@ -76,3 +76,5 @@ Traefik
 (?i)unpublishing
 (?i)unsubmitted
 (?i)dev container
+(?i)hotspot(?:s)?
+(?i)gridlines(?:s)?

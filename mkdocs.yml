@@ -106,13 +106,11 @@ nav:
       - Practice Area: gameboard/admin-practice-area.md
       - Users: gameboard/admin-users.md
       - Players: gameboard/admin-players.md
-      - Sponsors: gameboard/admin-sponsor.md
+      - Sponsors: gameboard/admin-sponsors.md
       - Challenges: gameboard/admin-challenges.md
       - Support: gameboard/admin-support.md
       - Notifications: gameboard/admin-notifications.md
       - Permissions: gameboard/admin-roles.md
-      - Observe mode: gameboard/admin-observe.md
-      - Settings: gameboard/admin-settings.md
       - Configuring Player Feedback Templates: gameboard/admin-feedback-form.md
       - Configuring Certificate Templates: gameboard/admin-completion-certificates.md
   - Blueprint: blueprint/index.md
