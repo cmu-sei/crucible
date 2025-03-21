@@ -16,7 +16,7 @@ In the Game Center header, game metadata and settings information is displayed, 
 
 !!! info
 
-    When a game is hidden, a user with permissions that can view both hidden and visible games -- such as Designer or Tester -- will see the game card on the Home screen; however, the game card appears with an "eye-slash" icon to denote that it is hidden.
+    When a game is hidden, a user with permissions that can view both hidden and visible games--such as Designer or Tester--will see the game card on the Home screen; however, the game card appears with an "eye-slash" icon to denote that it is hidden.
 
 **Feature:** Toggle *Normal* or *Featured*. When *Featured*, the game appears under Featured Games at the top of the Gameboard home page.
 
@@ -78,11 +78,11 @@ These settings pertain to registration, execution, and general game and challeng
 
 **Session Duration:** The duration of game session in minutes. Games are created with a default session time of 60 minutes.
 
-**Session Limit:** The maximum number of sessions -- a session is when a game is started and challenges can be deployed and solved -- per game.
+**Session Limit:** The maximum number of sessions--a session is when a game is started and challenges can be deployed and solved--per game.
 
 **Gamespace Limit:** The maximum number of concurrent "gamespaces" allowed. A *gamespace* is the virtual environment that participants use to compete in a challenge. The default value is 0; the value that you enter here is inherited by a newly created board. For example, if you set this value to 5 in the game, any board created will inherit the 5 concurrent gamespace setting.
 
-**Max Submissions:** The maximum number of solutions a participant can send to the grading server per challenge---whether that submission is correct, incorrect, or blank. Once the submission amount is reached, the competitor is locked out of further submissions for that challenge.
+**Max Submissions:** The maximum number of solutions a participant can send to the grading server per challenge--whether that submission is correct, incorrect, or blank. Once the submission amount is reached, the competitor is locked out of further submissions for that challenge.
 
 **Allow Preview:** Toggle *Hidden* or *Visible* to allow participants to view a challenge and documentation prior to starting. You may want to prevent too much information from being given away before a challenge start.
 
@@ -122,7 +122,7 @@ Selecting a challenge from the search results adds it to the Edit icon.
 
 **Sync with Source:** Synchronizes the Gameboard challenge markdown guide with the TopoMojo challenge markdown guide so that the content is the same in both apps.
 
-**Support Key:** Assign a unique "key" here that gets appended to a TopoMojo gamespace id to help troubleshoot problems during competition. For example: `b28c7911 a03` -- **b28c7911** is the uniquely generated gamespace ID from TopoMojo; **a03** is the support key *manually* assigned here to a challenge. For more information on support keys, see [Gameboard Administration](admin.md).
+**Support Key:** Assign a unique "key" here that gets appended to a TopoMojo gamespace id to help troubleshoot problems during competition. For example: `b28c7911 a03`--**b28c7911** is the uniquely generated gamespace ID from TopoMojo; **a03** is the support key *manually* assigned here to a challenge. For more information on support keys, see [Gameboard Administration](admin.md).
 
 **Points:** Assign a point value to your challenge here.
 
