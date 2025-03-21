@@ -30,7 +30,7 @@ For your convenience, here are several variables you can include in your templat
 - `{{track}}`: The track the challenge was originally placed in competitive mode
 - `{{time}}`: The amount of time the player spent solving the challenge
 
-Additional information about using these variables can be found by clicking the *How do I create a certificate template?* link.
+Additional information about creating certificate templates can be found in the [Configuring Certificate Templates](admin-completion-certificates.md) topic.
 
 ## Session Limits
 

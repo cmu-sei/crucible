@@ -10,7 +10,7 @@ You can **search** for a challenge to practice on.
 
 ![practice search](img/practice-search.png)
 
-You can copy a link to your search by selecting the **clipboard icon** next to the search field. In the example above, you may want to share the list of challenges/labs that have "firewall" content with another Gameboard user.
+You can copy a link to your search by selecting the **copy icon** next to the search field. In the example above, you may want to share the list of challenges/labs that have "ransomware" content with another Gameboard user.
 
 Under *Need a place to start?* the Gameboard admin may have configured some suggested searches for participants. Players can select one of these tags to be directed to a set of available practice challenges. Gameboard admins should refer to "Suggested searches" in the [Admin Practice Area](admin-practice-area.md).
 
@@ -28,15 +28,15 @@ To start a practice session:
 
 Follow the steps below to transfer text between your local machine (*out of game*) and a virtual machine (*in game*).
 
-### Local to VM  
+### Local to VM
 
-1. Copy text from your local machine.  
-2. In the VM console, open **Tools** (cog icon) and paste into the **Clipboard**.  
+1. Copy text from your local machine.
+2. In the VM console, open **Tools** (cog icon) and paste into the **Clipboard**.
 3. In the VM, select a destination and click **Paste**.
 
-### VM to Local  
+### VM to Local
 
-1. Copy text inside the VM.  
+1. Copy text inside the VM.
 2. In **Tools**, place your cursor in the **Clipboard**, then click **Copy**.
 3. Paste into a local application.
 

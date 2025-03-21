@@ -6,7 +6,7 @@ To access the Game Center for a given game, click **Admin**, hover over a game c
 
 In the Game Center header, game metadata and settings information is displayed, including: name, modes, series, season, track, and execution dates.
 
-## The Gear tab
+## Gear tab
 
 ### Metadata
 
@@ -16,7 +16,7 @@ In the Game Center header, game metadata and settings information is displayed, 
 
 !!! info
 
-    When a game is hidden, a user with permissions that can view both hidden and visible games -- such as Designer or Tester -- will see the game card on the Home screen; however, the game card appears with an "eye-slash" icon to denote that it is hidden.
+    When a game is hidden, a user with permissions that can view both hidden and visible games--such as Designer or Tester--will see the game card on the Home screen; however, the game card appears with an "eye-slash" icon to denote that it is hidden.
 
 **Feature:** Toggle *Normal* or *Featured*. When *Featured*, the game appears under Featured Games at the top of the Gameboard home page.
 
@@ -64,7 +64,7 @@ For a full treatment of how to design completion certificates, please see the [C
 
 **Show On Homepage When In Practice Mode:**  Toggle *Yes* to make the game's game card visible on the home page even when the game is in Practice mode.
 
-**Engine Mode:** Specify the game mode (Standard, External, Legacy Unity Games). In VM mode, the Gameboard reaches out to TopoMojo to start the VMs.
+**Engine Mode:** Choose between *Standard* and *External Host*. The vast majority of games use the Standard mode, where Gameboard submits answers to the game engine (usually TopoMojo) for grading. Choose External Host for specialized scenarios where players use an external client (e.g., a Unity game) to interact with the challenges.
 
 ### Settings
 
@@ -78,11 +78,11 @@ These settings pertain to registration, execution, and general game and challeng
 
 **Session Duration:** The duration of game session in minutes. Games are created with a default session time of 60 minutes.
 
-**Session Limit:** The maximum number of sessions -- a session is when a game is started and challenges can be deployed and solved -- per game.
+**Session Limit:** The maximum number of sessions--a session is when a game is started and challenges can be deployed and solved--per game.
 
 **Gamespace Limit:** The maximum number of concurrent "gamespaces" allowed. A *gamespace* is the virtual environment that participants use to compete in a challenge. The default value is 0; the value that you enter here is inherited by a newly created board. For example, if you set this value to 5 in the game, any board created will inherit the 5 concurrent gamespace setting.
 
-**Max Submissions:** The maximum number of solutions a participant can send to the grading server per challenge---whether that submission is correct, incorrect, or blank. Once the submission amount is reached, the competitor is locked out of further submissions for that challenge.
+**Max Submissions:** The maximum number of solutions a participant can send to the grading server per challenge--whether that submission is correct, incorrect, or blank. Once the submission amount is reached, the competitor is locked out of further submissions for that challenge.
 
 **Allow Preview:** Toggle *Hidden* or *Visible* to allow participants to view a challenge and documentation prior to starting. You may want to prevent too much information from being given away before a challenge start.
 
@@ -108,7 +108,7 @@ Offering a different execution period from registration period is an option. Thi
 
 **Registration Markdown:** Using Markdown enter any information you would like players to see when they register for the game. For help with Markdown syntax, see this [Markdown Guide](https://www.markdownguide.org/).
 
-## The Challenges tab
+## Challenges tab
 
 ### Search
 
@@ -122,7 +122,7 @@ Selecting a challenge from the search results adds it to the Edit icon.
 
 **Sync with Source:** Synchronizes the Gameboard challenge markdown guide with the TopoMojo challenge markdown guide so that the content is the same in both apps.
 
-**Support Key:** Assign a unique "key" here that gets appended to a TopoMojo gamespace id to help troubleshoot problems during competition. For example: `b28c7911 a03` -- **b28c7911** is the uniquely generated gamespace ID from TopoMojo; **a03** is the support key *manually* assigned here to a challenge. For more information on support keys, see [Gameboard Administration](admin.md).
+**Support Key:** Assign a unique "key" here that gets appended to a TopoMojo gamespace id to help troubleshoot problems during competition. For example: `b28c7911 a03`--**b28c7911** is the uniquely generated gamespace ID from TopoMojo; **a03** is the support key *manually* assigned here to a challenge. For more information on support keys, see [Gameboard Administration](admin.md).
 
 **Points:** Assign a point value to your challenge here.
 
@@ -150,26 +150,136 @@ Gameboard can automatically award bonus points to teams and players based on the
 
 Here is where the visual representation of the game is arranged.  Challenges are placed on the game map here. The challenges you selected appear as hotspots on the map. Drag them into position on the map.
 
-**Show Grid:** Each map has a grid. By selecting Show Grid, you can toggle displaying the grid. When enabled, the grid overlays the map image and makes it easier for you place your challenge hotspots.
+**Show Gridlines:** Each map has a grid. By selecting Show Gridlines, you can toggle displaying the grid. When enabled, the grid overlays the map image and makes it easier for you place your challenge hotspots.
 
-**Browse:** Select **Browse** to search for an image that will serve as a backdrop to your map.
+**Upload New Map Image:** Search for an image that will serve as a backdrop to your map.
 
-**Reset:** Removes the image from your map. Reset does not remove challenge hotspots.
+**Reset to Default Map Image:** Removes the image from your map. Reset does not remove challenge hotspots.
 
 ## Teams/Players tab
 
-The **Teams/Players** tab contains the list of game players. If the game is a *team* game, then you will see the Teams tab. If the game is an *individual* game then you will see the Players tab. Select **Use legacy player list** to view the player list in traditional mode (as if you navigated to **Games**, then hovered over a game card and selected **Players**).
+The **Teams/Players** tab contains the list of game teams/players. If the game is a **team** game, then you will see the *Teams* tab. If the game is an **individual** game then you will see the *Players* tab.
 
 Here you can search, see who advanced to the next game and who did not, who started, who is currently playing, who finished, and sort by rank, name, and time remaining.
 
+If any registered players have requested a name change, you’ll see a warning message here to let you know.
+
+- **Select All team/players:** Allows you to choose all of the team/players in the game.
+
+- **Rerank:** Forces a manual recalculation of the scores in the game.
+
+- **Advance selected teams/players:** Advances the team/player to a different game, probably a successive round. Optionally, teams/players can be advanced with their score intact by checking **Include scores during advancement**. The advance function is useful when your competition is set up like a tournament where teams/players advance in progressive rounds. Teams/players may only be advanced to games which have an execution window equal to the current time or later.
+
+- **Deploy game resources for selected:** Pre-generates challenge VMs for selected teams/players. This strategy is useful for an event where pre-generating challenges averts the risk of many participants launching challenges simultaneously and encountering problems. By building the gamespace resources in advance, the environment can be verified in advance, issues can be resolved early, and players can start without delay.
+
+- **Extend Sessions:** Extends the team/player's session by a specified number of minutes.
+
+- **Copy all team/players to CSV:** Copies all selected team/player data to your clipboard in .CSV format.
+
+- **Copy all team/players to mail format:** Copies metadata about the selected players in JSON format for use with a mail app.
+
+- **Add team/player:** Adds a new team (i.e., multiple players) or new player to the game. When adding, these players are not created from scratch in the Game Center. They must exist as a Gameboard user and must *not* be enrolled in the game.
+
+- **Search team/players:** Enter keywords or phrases to find specific teams/players within the Gameboard.
+
+- **Filters:** Helps refine search results based on `advancement`, `status`, and `pending name`.
+
+- **Sort by:** Sort search results based on`rank`, `name`, `start time`, `time remaining`.
+
+### The Team/Player Window
+
+In the search results, select a team or a player. Information about that team/player is found in the team/player window. The screen print below shows the **Player** window.
+
+![team-player-window](img/team-player-window.png)
+
+#### Team Management
+
+**Override Name:** Enter a name here to *override* the existing team or player name.
+
+**Status:** *Approve* the override name here or apply a *disallowed reason* (`disallowed`, `disallowed_pii`, `disallowed_unit`, etc.).
+
+#### Session
+
+**Extend:** To add more time to a team or player's session, enter the extension duration in minutes and click **Extend**.
+
+#### Timeline
+
+The **Player Timeline** is a visual representation of the sequence of session events distributed chronologically along a line. It shows the order and timing of game occurrences where events have dates and times. Events on the timeline are clickable and copy information about the event to your clipboard in Markdown format. The **Gamespace On** event is not clickable.
+
+Events seen on the player timeline are:
+
+- **Challenge Started:** Shows when (date and time) a challenge has been launched.
+- **Gamespace On:** Shows when a gamespace was activated. This event is not clickable.
+- **Challenge Completed:** Shows when a challenge has been completed and includes the number of attempts used and final score.
+- **Submission:** Shows when a token or answer has been submitted and includes the number of attempts used, points awarded after the attempt, and any submitted answers.
+- **Active Ticket:** Shows when the team or player opened a support ticket.
+
+!!! tip
+
+    Selecting one of the buttons removes that type of event from the player timeline. If you only wanted to see **Submissions**, for example, you could remove the other event types.
+
+#### Announce
+
+The **Announcement** feature allows you to broadcast messages to just a player or team within the game. Among other uses, these could be messages regarding Gameboard issues, challenge issues, and changes to scores or time. In the **Announcement** field, enter the content of the announcement and click **Announce**.
+
+### "3-dot" Context Menu
+
+Each player or team has a "3-dot"context menu on their card, offering different options based on their status—whether they haven't started, are actively playing, or have finished.
+
+- **View:** Opens the Team/Player modal discussed above.
+- **View Team IDs:** Opens a modal that provides convenient copy access to **player ID** and **user ID** for support purposes.
+- **Copy Player ID / Team ID / User ID:** Again, convenient copy access for support purposes.
+- **View Certificate:** View a player's certificate if published and the game is over.
+- **Manual Bonuses:** Manually award bonus points to a player or team score. This is useful if bonus points were earned during a challenge and need to be added. A challenge must be at least started prior to awarding bonus points.
+- **Manage Challenges:** Launch, start/stop challenge resources, or completely purge a challenge attempt on behalf of the player. Purging a challenge erases all progress a player has made on it.
+- **Reset Session(Preserve Challenges):** If a player has registered, and has started playing the game (i.e., they have a game session), you can reset their session *and not* archive any challenges, started or completed. Use of this option should be limited to very specific situations like testing and QA.
+- **Reset Session:** If a player has registered and has started playing the game (i.e. they have a game session), you can reset their session. This deletes any challenge data they generated while playing but leaves enrollment and team membership intact. If they wish to play again, they'll need to start a new session.
+- **Reset Session & Unenroll:** If a player has registered, and has started a session, you can *reset* their session and *unenroll* them from the game. Players will need to re-enroll to play again. Teams are essentially dissolved and will need to reform and re-enroll to play. This is the same functionality as when a player unenrolls from the game lobby or resets their session (when enabled by an admin).
+
+## Practice tab
+
+The Practice tab appears only in games where Player Mode is set to **Practice** (this setting is found on the Gear tab under **Modes**). It lists all users who have played any challenge in practice mode, with exactly one row per user. Clicking a row opens an attempt summary window  for that user. If the user is actively playing, the **3-Dot** context menu provides an option to quick-jump to observe their session.
+
+![practice attempt summary window](img/practice-summary.png)
+
 ## Observe tab
 
-The observation functionality found here is the same observe capability documented here: [Observe Mode](admin-observe.md).
+The **Observe tab** allows a user with elevated permissions to see participant VMs during a particular game. Observers do not have the ability to interact with, or interfere with, the VM they are observing.
+
+**Search:** The Search feature is relative to the screen you are viewing when performing the search. Searching on the Observe Challenges screen means you're searching that list of challenges for some criteria (name, challenge, tag, id). Searching on the Observe Teams screen means you're searching that list of teams/players for some criteria (team name/player name, team id).
+
+### Observe Challenges
+
+When **Challenges** is selected, the list of all challenges for all players in one table for that game is shown. The console grid for this contains all VMs for a challenge - whether active or not.
+
+![observe with challenge in focus](img/observe-challenges-in-focus.png)
+
+Select the grid icon to view active VMs in a grid view side-by-side according to player or team. Minimize and maximize the consoles within the grid as you observe. When the grid containing the consoles is open, the observe mode updates in real-time.
+
+Selecting the **four-square** icon allows you to view the consoles of another player or team. Multiple observers can be on the same VM.
+
+VM name (*win10-workstation*) and player display name (*Wolverine 3*)  help observers identify the console they are viewing, especially if there are many players with many challenges. Click the **pop-out** icon to open the console in a new browser tab.
+
+![observe-pop-out](img/observe-pop-out.png)
+
+**Name:** Sort the consoles alphabetically by the Team/Player and then by challenge name.
+
+**Rank:** Sort the consoles by scoreboard rank.
+
+You can move a row to the top and "pin" it there to keep it in place. You can pin multiple rows at the top as well. This is useful when you are interested in following a certain few teams, players, or challenges. This is also useful after you have searched--you can pin results at the top where you can reference them frequently.
+
+![observe-pin](img/observe-pin.png)
+
+### Observe Teams
+
+**Observe Teams** is a list of all players/teams for the game. The list of players/teams matches the entries on the scoreboard and contains "live" sessions; that is, sessions that are started. The console grid is one rectangle per user on a team. Users may not be on a VM at all yet or two users could be looking at the same VM.
+
+Other than the difference described above, Observe Teams functions the same as Observe Challenges.
+
+## Scoreboard tab
+
+The scoreboard found here is the same publicly accessible scoreboard you would find if you clicked the Scoreboard link in a game lobby. Users who have elevated permissions can see breakdowns for any team even if the game isn’t over yet.
 
 ## Tickets tab
 
 The support ticketing functionality found here is the same as the interface documented here: [Using the Integrated Support feature](support.md). However, the support tickets are constrained to the game you viewing. You can perform all of the usual support ticket actions here (filter, search, export tickets) except for creating a new ticket.
-
-## Scoreboard tab
-
-The scoreboard found here is the same scoreboard you would find if you clicked the Scoreboard link in a game lobby.
