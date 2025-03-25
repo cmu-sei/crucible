@@ -78,3 +78,5 @@ Traefik
 (?i)dev container
 (?i)hotspot(?:s)?
 (?i)gridlines(?:s)?
+LLaMA
+Mistral

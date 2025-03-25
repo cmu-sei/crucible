@@ -17,7 +17,7 @@ The **Live** tab allows game administrators to select **Live Stats** (e.g., the 
 
 ### Send Announcement
 
-The **Announcement** feature allows game administrators to broadcast important messages to all players within a game. Among other uses, these could be messages regarding Gameboard issues, challenge issues, and changes to logistics.
+The **Announcement** feature lets Admins and Directors send important messages to users who are currently logged into Gameboard. Messages can go to everyone online or just a specific team. They are useful for updates about Gameboard issues, challenge problems, or schedule changes.
 
 In the Announcement field, enter the content of the announcement and click **Announce**.
 
