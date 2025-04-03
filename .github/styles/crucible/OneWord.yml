@@ -1,6 +1,4 @@
-#
-# Enforces the use of one/two-word words
-#
+# Description: Enforces the use of one/two-word words
 extends: substitution
 message: "'%s' should be written as '%s'."
 level: error
@@ -10,4 +8,4 @@ swap:
   "end point": "endpoint"
   "datapoint": "data point"
   "object oriented": "object-oriented"
-  "webserver" : "web server"
+  "webserver": "web server"

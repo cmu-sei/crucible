@@ -1,7 +1,4 @@
-#
-# Enforces the use of Oxford Commas
-# From the Microsoft Style Guide: https://github.com/errata-ai/Microsoft
-#
+# Description: Enforces the use of Oxford Commas
 extends: existence
 message: "Use the Oxford comma in '%s'."
 link: https://docs.microsoft.com/en-us/style-guide/punctuation/commas

@@ -1,5 +1,3 @@
----
-# Source: Vale at Red Hat
 # Description: Converts smart quotes to straight quotes
 extends: substitution
 message: Do not use smart quotation marks. Use %s rather than %s.
