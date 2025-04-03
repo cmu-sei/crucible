@@ -1,9 +1,9 @@
 #
-# Checks that there is no whitespace at the end of lines.
+# Checks that there is no useless space at the end of lines.
 #
 # For a list of all options, see https://vale.sh/docs/topics/styles/
 extends: existence
-message: "Remove whitespace characters from the end of the line."
+message: "Remove space characters from the end of the line."
 vocab: false
 level: error
 scope: raw
