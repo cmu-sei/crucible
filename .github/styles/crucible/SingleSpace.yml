@@ -1,7 +1,6 @@
 # Description: Checks for double spacing and prompts to remove if found.
 extends: existence
 message: "'%s' should have one space."
-link: "https://developers.google.com/style/sentence-spacing"
 level: error
 nonword: true
 action:

@@ -1,7 +1,6 @@
 # Description: Enforces the use of Oxford Commas
 extends: existence
 message: "Use the Oxford comma in '%s'."
-link: https://docs.microsoft.com/en-us/style-guide/punctuation/commas
 scope: sentence
 level: error
 nonword: true
