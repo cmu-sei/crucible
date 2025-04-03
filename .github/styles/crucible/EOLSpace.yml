@@ -1,0 +1,8 @@
+# Description: Checks that there is no useless space at the end of lines.
+extends: existence
+message: "Remove space characters from the end of the line."
+vocab: false
+level: error
+scope: raw
+raw:
+  - ' +\n'

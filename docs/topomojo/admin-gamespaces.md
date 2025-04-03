@@ -10,7 +10,7 @@ Gamespaces in the table show the gamespace id or support code in Gameboard (e.g.
 
 ![admin gamespaces](img/admin-gamespaces.png)
 
-## View (expanded)
+## View (Expanded)
 
 **View:** Selecting **View** expands the gamespace information where a list of all the VMs associated with the gamespace and their state. Additional information on how the View works is found below.
 

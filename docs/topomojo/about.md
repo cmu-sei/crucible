@@ -12,7 +12,7 @@ New topologies can be rapidly deployed using existing templates or built from th
 
 **Go to the TopoMojo repository:** [github.com/cmu-sei/TopoMojo](https://github.com/cmu-sei/TopoMojo).
 
-## TopoMojo concepts
+## TopoMojo Concepts
 
 ### Workspace and Gamespace
 

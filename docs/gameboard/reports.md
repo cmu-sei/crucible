@@ -6,16 +6,16 @@ The **Reports** module is available to users who have the `Reports` permission. 
 - **Enrollment Report:** View a summary of player enrollment data; who enrolled when, which sponsors do they represent, and how many played challenges.
 - **Feedback Report:** View all feedback for a specific feedback template across every game or challenge where the template is used.
 - **Feedback(Legacy) Report:** View all player feedback for games played *before* the feedback template feature was added to Gameboard. This option requires configuration of feedback in the Game Center.
-- **Players Report:** View data on player activity. A “player” is a person with an account on the Gameboard site (i.e., a "user").
+- **Players Report:** View data on player activity. A "player" is a person with an account on the Gameboard site (i.e., a "user").
 - **Practice Area Report:** View metrics on players who are spending free time honing their skills in Gameboard. See which challenges are practiced most, have the best success rates, and which players are accessing the Gameboard to complete challenges in practice.
 - **Site Usage Report:** View a high-level overview of user activity in the Gameboard. This report, optionally filtered by date range and sponsor, offers a digestible view of data related to players, sponsors, and challenges. Each statistic within the report contains a modal view for more detailed information. Note that the Site Usage Report can't be exported.
 - **Support Report:** View a summary of support tickets created in Gameboard; including ticket creation and assignment details, ticket categories, and tickets attached to games/challenges.
 
 ## Legacy Reports
 
-The legacy reporting functionality has not yet been deprecated; these reports are still available at the bottom of the Reports screen. Legacy reports won’t get future fixes or enhancements. Eventually, they will be removed from the Gameboard application.
+The legacy reporting functionality has not yet been deprecated; these reports are still available at the bottom of the Reports screen. Legacy reports won't get future fixes or enhancements. Eventually, they will be removed from the Gameboard application.
 
-## Common report characteristics
+## Common Report Characteristics
 
 Each report shares common characteristics.
 
@@ -32,7 +32,7 @@ Each report shares common characteristics.
 
 ![three-dot context menu](img/reports-3dot-context.png)
 
-## Drilling down in results
+## Drilling down in Results
 
 In some places in the report results, you can "drill down" by clicking a link in the metrics. A modal window displays a more granular view within the same data. For example: in the Enrollment Report, in the Performance category, some data points are links. See *screen print 1* below. Clicking that link goes deeper into that element. See *screen print 2* below.
 
@@ -63,10 +63,10 @@ The **Enrollment** report shows information about players who are enrolled in co
 
 The screen print below shows a summary of a typical game. The summary shows:
 
-1. 1390 different players (people, “users”, with an account in Gameboard) enrolled in our example game. The Department of Defense, the Leading Sponsor, leads enrollment with 1069 players enrolled.
+1. 1390 different players (people, "users", with an account in Gameboard) enrolled in our example game. The Department of Defense, the Leading Sponsor, leads enrollment with 1069 players enrolled.
 2. Those 1390 players created 1422 teams.
 
-   - The number of teams is higher than the number of players here because some people played in more than one “track” of the competition. Therefore, they have more than one “team” attached to one player/person/user.
+   - The number of teams is higher than the number of players here because some people played in more than one "track" of the competition. Therefore, they have more than one "team" attached to one player/person/user.
    - This number can also be higher than the number of players if the competition contains several rounds. So, if your filters are looking at a Round 1 and a Round 2, there are some teams in both and counted twice.
 
 3. 25 different sponsors participated in this example game.

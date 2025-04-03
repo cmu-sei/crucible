@@ -6,7 +6,7 @@ To access the Game Center for a given game, click **Admin**, hover over a game c
 
 In the Game Center header, game metadata and settings information is displayed, including: name, modes, series, season, track, and execution dates.
 
-## Gear tab
+## Gear Tab
 
 ### Metadata
 
@@ -104,11 +104,11 @@ Offering a different execution period from registration period is an option. Thi
 
 **Team Size:** This is self-explanatory. A matching *minimum* and *maximum* of one means that the challenge is a single player challenge. That is, a "team" of one. In a true team tournament, two or more would probably be the minimum.
 
-**Team Sponsorship:** Toggle *Open* or *Required*.  When required, members on a team must have the same sponsor. Team sponsors are chosen during enrollment. For more information on sponsors, see [Gameboard Administration](admin.md).
+**Team Sponsorship:** Toggle *Open* or *Required*. When required, members on a team must have the same sponsor. Team sponsors are chosen during enrollment. For more information on sponsors, see [Gameboard Administration](admin.md).
 
 **Registration Markdown:** Using Markdown enter any information you would like players to see when they register for the game. For help with Markdown syntax, see this [Markdown Guide](https://www.markdownguide.org/).
 
-## Challenges tab
+## Challenges Tab
 
 ### Search
 
@@ -128,7 +128,7 @@ Selecting a challenge from the search results adds it to the Edit icon.
 
 **Solution Guide URL:** Add links to challenge solution guides here for *practice mode* challenges. When added here, the link to the solution guide is available to players in the challenge instructions. Enabling **Show Solution Guide in Competitive Mode** permits the link to a solution guide to be available to players in a *competitive* game.
 
-**Disabled:** Check to disable this challenge in the game without removing it. Disabled challenges are unavailable to players, don't count toward scores, and are not deployed when an admin initiates deployment on a player’s behalf. Essentially, disabling a challenge removes the spec from the game without deleting any underlying data.
+**Disabled:** Check to disable this challenge in the game without removing it. Disabled challenges are unavailable to players, don't count toward scores, and are not deployed when an admin initiates deployment on a player's behalf. Essentially, disabling a challenge removes the spec from the game without deleting any underlying data.
 
 **Hidden:** Hidden challenges can't be manually deployed by players and don't count toward scores. However, they are deployed when an admin initiates deployment on a player's behalf or if the game configured in External mode. The need for a hidden challenge is typically related to the implementation details of an externally hosted game and is not useful for the vast majority of games.
 
@@ -148,7 +148,7 @@ Gameboard can automatically award bonus points to teams and players based on the
 
 ### Map
 
-Here is where the visual representation of the game is arranged.  Challenges are placed on the game map here. The challenges you selected appear as hotspots on the map. Drag them into position on the map.
+Here is where the visual representation of the game is arranged. Challenges are placed on the game map here. The challenges you selected appear as hotspots on the map. Drag them into position on the map.
 
 **Show Gridlines:** Each map has a grid. By selecting Show Gridlines, you can toggle displaying the grid. When enabled, the grid overlays the map image and makes it easier for you place your challenge hotspots.
 
@@ -156,13 +156,13 @@ Here is where the visual representation of the game is arranged.  Challenges are
 
 **Reset to Default Map Image:** Removes the image from your map. Reset does not remove challenge hotspots.
 
-## Teams/Players tab
+## Teams/Players Tab
 
 The **Teams/Players** tab contains the list of game teams/players. If the game is a **team** game, then you will see the *Teams* tab. If the game is an **individual** game then you will see the *Players* tab.
 
 Here you can search, see who advanced to the next game and who did not, who started, who is currently playing, who finished, and sort by rank, name, and time remaining.
 
-If any registered players have requested a name change, you’ll see a warning message here to let you know.
+If any registered players have requested a name change, you'll see a warning message here to let you know.
 
 - **Select All team/players:** Allows you to choose all of the team/players in the game.
 
@@ -222,7 +222,7 @@ Events seen on the player timeline are:
 
 The **Announcement** feature allows you to broadcast messages to just a player or team within the game. Among other uses, these could be messages regarding Gameboard issues, challenge issues, and changes to scores or time. In the **Announcement** field, enter the content of the announcement and click **Announce**.
 
-### "3-dot" Context Menu
+### "3-Dot" Context Menu
 
 Each player or team has a "3-dot"context menu on their card, offering different options based on their status—whether they haven't started, are actively playing, or have finished.
 
@@ -236,13 +236,13 @@ Each player or team has a "3-dot"context menu on their card, offering different 
 - **Reset Session:** If a player has registered and has started playing the game (i.e. they have a game session), you can reset their session. This deletes any challenge data they generated while playing but leaves enrollment and team membership intact. If they wish to play again, they'll need to start a new session.
 - **Reset Session & Unenroll:** If a player has registered, and has started a session, you can *reset* their session and *unenroll* them from the game. Players will need to re-enroll to play again. Teams are essentially dissolved and will need to reform and re-enroll to play. This is the same functionality as when a player unenrolls from the game lobby or resets their session (when enabled by an admin).
 
-## Practice tab
+## Practice Tab
 
 The Practice tab appears only in games where Player Mode is set to **Practice** (this setting is found on the Gear tab under **Modes**). It lists all users who have played any challenge in practice mode, with exactly one row per user. Clicking a row opens an attempt summary window  for that user. If the user is actively playing, the **3-Dot** context menu provides an option to quick-jump to observe their session.
 
 ![practice attempt summary window](img/practice-summary.png)
 
-## Observe tab
+## Observe Tab
 
 The **Observe tab** allows a user with elevated permissions to see participant VMs during a particular game. Observers do not have the ability to interact with, or interfere with, the VM they are observing.
 
@@ -276,10 +276,10 @@ You can move a row to the top and "pin" it there to keep it in place. You can pi
 
 Other than the difference described above, Observe Teams functions the same as Observe Challenges.
 
-## Scoreboard tab
+## Scoreboard Tab
 
-The scoreboard found here is the same publicly accessible scoreboard you would find if you clicked the Scoreboard link in a game lobby. Users who have elevated permissions can see breakdowns for any team even if the game isn’t over yet.
+The scoreboard found here is the same publicly accessible scoreboard you would find if you clicked the Scoreboard link in a game lobby. Users who have elevated permissions can see breakdowns for any team even if the game isn't over yet.
 
-## Tickets tab
+## Tickets Tab
 
 The support ticketing functionality found here is the same as the interface documented here: [Using the Integrated Support feature](support.md). However, the support tickets are constrained to the game you viewing. You can perform all of the usual support ticket actions here (filter, search, export tickets) except for creating a new ticket.

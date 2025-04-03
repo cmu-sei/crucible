@@ -1,16 +1,16 @@
-The **Files** page in the TopoMojo workspace allows you to upload files from your system to TopoMojo to include in your lab. These files are used as ISOs that can be attached to VMs in the workspace. If your files aren’t already in an ISO file format, TopoMojo wraps them in an ISO after upload.
+The **Files** page in the TopoMojo workspace allows you to upload files from your system to TopoMojo to include in your lab. These files are used as ISOs that can be attached to VMs in the workspace. If your files aren't already in an ISO file format, TopoMojo wraps them in an ISO after upload.
 
 !!! note
 
-    For ISO uploads to work, TopoMojo needs an NFS (Network File System) datastore presented to vSphere and TopoMojo must be able to access it. 
+    For ISO uploads to work, TopoMojo needs an NFS (Network File System) datastore presented to vSphere and TopoMojo must be able to access it.
 
 The **Files** tab in TopoMojo is where ISO files are uploaded to attach to virtual machines. Supply the ISO that you want to attach to your VM here to provide additional resources to a VM that might not be included in the original VM. ISO files are disk images that can be mounted as virtual CD drives on the VM. You want to attach an ISO when you need additional software, datasets, or other resources.
 
 **Drag and Drop:** Admins drag their ISO file into the box on Files tab or browse to locate it on their own device.
 
-By default, the **Local** filter is applied so it only displays ISOs available in the current workspace. 
+By default, the **Local** filter is applied so it only displays ISOs available in the current workspace.
 
-When you upload an ISO file in the box, TopoMojo creates a folder with *this* GUID--called out in green in screen print 1 below--in the folder name in the NFS datastore. TopoMojo puts your ISO in that folder. Only the current workspace, that is, *your* workspace has access to the ISO file. 
+When you upload an ISO file in the box, TopoMojo creates a folder with *this* GUID--called out in green in screen print 1 below--in the folder name in the NFS datastore. TopoMojo puts your ISO in that folder. Only the current workspace, that is, *your* workspace has access to the ISO file.
 
 *Screen print 1: GUID and Local filter applied*
 

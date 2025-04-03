@@ -8,7 +8,7 @@ Let's say you have a user named `Ned-Stark` in the Gameboard whose user id is `4
 
 !!! note
 
-    Ned can optionally choose a different player name (for example, `EddardS`) for each game before beginning play. Therefore, you will see entries on this screen with the same user id (`4b427a66`, but different player names (`Ned-Stark` and `EddardS`).
+    Ned can optionally choose a different player name (for example, `EddardS`) for each game before beginning play. Therefore, you will see entries on this screen with the same user id (`4b427a66`), but different player names (`Ned-Stark` and `EddardS`).
 
 ## Search
 
@@ -20,7 +20,7 @@ To search for a player across the whole of Gameboard enter a term into the **Sea
 
 In the player search results, select the game link to go to that game's Game Center. Select `user id`, `player id`, `team id`, and `game id` to copy it to the clipboard.
 
-## Player session status
+## Player Session Status
 
 Information about the player's session appears here.
 

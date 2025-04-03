@@ -35,7 +35,7 @@ YAML
 pgAdmin
 Keycloak
 StackStorm
-RocketChat
+Rocket\.Chat
 Moodle
 Webmail
 Roundcube

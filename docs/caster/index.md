@@ -62,15 +62,15 @@ Modules allow for endless flexibility for developers to wrap whatever configurat
 
 Caster makes it easier to search for and use modules when building a Terraform configuration.
 
-Caster supports modules created as GitLab projects that are visible to the GitLabToken defined in the API settings with at least one version defined.  All versions will be shown in Caster when the project is added/refreshed to Caster.
+Caster supports modules created as GitLab projects that are visible to the GitLabToken defined in the API settings with at least one version defined. All versions will be shown in Caster when the project is added/refreshed to Caster.
 
 >**Note:**  Caster requires that the inputs file and the outputs file be written in JSON (that is, `variables.tf.json` and `ouptuts.tf.json`).
 
 There are three ways that the a module can be added/refreshed to Caster:
 
-- Every time that the modules list is requested, Caster API checks for updated modules in the **Terraform-Modules** group (the group ID is a Caster API setting) or any of its sub-groups.  If you add a module or version, you may have to refresh your Caster UI browser to see the change.
+- Every time that the modules list is requested, Caster API checks for updated modules in the **Terraform-Modules** group (the group ID is a Caster API setting) or any of its sub-groups. If you add a module or version, you may have to refresh your Caster UI browser to see the change.
 
-- Because the Caster UI uses its internal modified date to determine if there are any "new" changes, the Caster dates could get out of sync with the GitLab dates.  In this case, an administrator can force an update of all of the modules.
+- Because the Caster UI uses its internal modified date to determine if there are any "new" changes, the Caster dates could get out of sync with the GitLab dates. In this case, an administrator can force an update of all of the modules.
 
 - An administrator can also individually add/refresh a module using its GitLab Project ID, whether or not it is underneath the Terraform-Modules group.
 
@@ -180,7 +180,7 @@ Documentation describing this can be found in **HashiCorp's Terraform** document
 
 For your reference, below is the `.terraformrc` file currently implemented in the SEI's CyberForce instance of Caster.
 
-In the SEI's instance, we want to be able to use any plugins in the `sei` or `mastercard` namespace that have been downloaded locally.  In addition, any of the `hashicorp` namespace providers in the `direct` section can be downloaded directly from the Internet without any operator intervention.
+In the SEI's instance, we want to be able to use any plugins in the `sei` or `mastercard` namespace that have been downloaded locally. In addition, any of the `hashicorp` namespace providers in the `direct` section can be downloaded directly from the Internet without any operator intervention.
 
 These plugins are then all cached in the `plugin_cache_dir` section, to save from downloading the providers during every Terraform `plan` and `apply`.
 

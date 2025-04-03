@@ -1,0 +1,12 @@
+# Description: Enforces proper use of an em dash
+extends: existence
+message: "Don't put a space before or after a dash."
+nonword: true
+level: error
+action:
+  name: edit
+  params:
+    - trim
+    - " "
+tokens:
+  - '\s[—–]\s'

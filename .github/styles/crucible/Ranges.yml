@@ -1,0 +1,6 @@
+extends: existence
+message: "Don't add words such as 'from' or 'between' to describe a range of numbers."
+nonword: true
+level: error
+tokens:
+  - '(?:from|between)\s\d+\s?-\s?\d+'

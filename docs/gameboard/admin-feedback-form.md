@@ -19,11 +19,11 @@ This section assumes you have been granted a role with the appropriate permissio
 
 ![feedback template icons](img/feedback-temp-icons.png)
 
-## Selecting a feedback template
+## Selecting a Feedback Template
 
 1. In the game's Metadata settings, under Player Feedback, choose an existing certificate template from the dropdowns.
 
-## Adding a feedback template
+## Adding a Feedback Template
 
 1. In the game's Metadata settings, under Player Feedback, select the **+** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**.
 2. In the **Create Template** window, enter a **Name** for your certificate template.
@@ -32,22 +32,22 @@ This section assumes you have been granted a role with the appropriate permissio
 5. You can use the **Copy from:** feature to paste an example configuration into the **Template** field. In the **Copy from:** dropdown, select a template to copy from and then click **Paste Example Configuration**.
 6. Click **OK**.
 
-## Previewing a feedback template
+## Previewing a Feedback Template
 
 1. In the game's Metadata settings, under Player Feedback, select the **eye** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The feedback template preview launches.
 2. Click **OK** to dismiss it.
 
-## Editing a feedback template
+## Editing a Feedback Template
 
 1. In the game's Metadata settings, under Player Feedback, select the **Edit** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The **Edit Template** window is launched.
 2. Make any updates in the **Name**, **Help Text**, and **Template** fields, then click **OK**.
 
-## Copying a feedback template
+## Copying a Feedback Template
 
 1. In the game's Metadata settings, under Player Feedback, select the **Copy** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The template's YAML configuration is copied to your clipboard.
 2. Paste the YAML into the location of your choice.
 
-## Deleting a feedback template
+## Deleting a Feedback Template
 
 1. In the game's Metadata settings, under Player Feedback, select the **Delete** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The feedback template is deleted.
 
@@ -83,7 +83,7 @@ questions:
 - `maxLabel`: specify the labels for the extremes of your `Likert` scale; examples of the positive extreme might be " very difficult", "strongly agree", or "very satisfied".
 - `required`: this key is optional; set `required` to `true` if you want to make your question required.
 
-## Reporting on feedback
+## Reporting on Feedback
 
 Viewing and exporting responses to feedback is also a function of roles with some elevated permissions. Assuming that you are logged into Gameboard as a user with the `Admin`, `Director`, or `Support` role, in the top navigation select **Reports**. Then select **Feedback Report**.
 

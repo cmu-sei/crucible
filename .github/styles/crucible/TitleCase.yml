@@ -1,0 +1,9 @@
+# Description: Titles should use Chicago-style title case
+extends: capitalization
+message: "'%s' should be in Chicago-style title case"
+level: error
+scope: heading
+match: $title
+style: Chicago
+exceptions:
+  - "style="

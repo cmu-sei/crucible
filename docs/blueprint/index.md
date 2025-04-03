@@ -2,7 +2,7 @@
 
 ## Overview
 
-### What is Blueprint?
+### What Is Blueprint?
 
 [**Blueprint**](#glossary) is a web application created to make the development of a [Master Scenario Event List (MSEL)](#glossary) and [events](#glossary) easier. With this application, it will further simplify the creation and visualization of the MSEL, allowing the user to select/define the simulated entities, attacks, timeframe, and regulators impacted by the scenario, etc. Additionally, it will leverage many advantages over the traditional method of using an excel spreadsheet by facilitating the collaboration between exercise designers belonging to multiple teams.
 
@@ -141,7 +141,7 @@ Users with the proper administrative permissions will be able to use this featur
 
 **Download**
 
-If users desire to have an offline copy of any desired MSEL, they will have the ability to download a copy to their devices by using the Download feature. If by any chance users don’t have an internet connection, this feature will be useful since they will be able to work offline on the MSEL and then upload the MSEL back to the application, so that other users can see any changes made. Although users can work on the MSEL offline, it is not recommended since they will be missing on all of the helpful features that Blueprint offers.
+If users desire to have an offline copy of any desired MSEL, they will have the ability to download a copy to their devices by using the Download feature. If by any chance users don't have an internet connection, this feature will be useful since they will be able to work offline on the MSEL and then upload the MSEL back to the application, so that other users can see any changes made. Although users can work on the MSEL offline, it is not recommended since they will be missing on all of the helpful features that Blueprint offers.
 
 **Upload**
 
@@ -254,7 +254,7 @@ Now the unit has been added to the MSEL and members will be able to view and edi
 
 The available roles are:
 
-- **[Editor](#glossary):** Edit the events that they are assigned to, but not other events.  They cannot delete them or create new ones.
+- **[Editor](#glossary):** Edit the events that they are assigned to, but not other events. They cannot delete them or create new ones.
 - **[Approver](#glossary):** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
 - **[Move Editor](#glossary):** Can edit moves on the MSEL, as well as increment them during an exercise.
 - **[Owner](#glossary):** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).
@@ -693,8 +693,8 @@ To edit the CITE Action's details, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
 2. Select the desired action to be edited and click on the **Edit** icon next to the action.
-4. Here, users will be prompted the same action's edit component as when adding a new action.
-5. After doing all the necessary edits, click **Save**.
+3. Here, users will be prompted the same action's edit component as when adding a new action.
+4. After doing all the necessary edits, click **Save**.
 
 *Delete a CITE Action*
 
@@ -748,8 +748,8 @@ To edit the CITE Role's details, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
 2. Select the desired role to be edited and click on the **Edit** icon next to the role.
-4. Here, users will be prompted the same role's edit component as when adding a new role.
-5. After doing all the necessary edits, click **Save**.
+3. Here, users will be prompted the same role's edit component as when adding a new role.
+4. After doing all the necessary edits, click **Save**.
 
 *Delete a CITE Role*
 
@@ -840,8 +840,8 @@ To edit the Gallery card's details, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
 2. Select the desired card to be edited and click on the **Edit** icon next to the card.
-4. Here, users will be prompted the same card's edit component as when adding a new card.
-5. After doing all the necessary edits, click **Save**.
+3. Here, users will be prompted the same card's edit component as when adding a new card.
+4. After doing all the necessary edits, click **Save**.
 
 *Delete a Gallery Card*
 
@@ -878,7 +878,7 @@ To add a Player App, follow these steps:
 1. Navigate to the **Player Apps** tab.
 2. Click on the **+** icon.
 3. Select an app template from the provided list.
-3. Fill the fields as necessary following the Data Format Table specifications.
+4. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
 
@@ -907,8 +907,8 @@ To edit the Player app's details, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
 2. Select the desired app to be edited and click on the **Edit** icon next to the app.
-4. Here, users will be prompted the same app's edit component as when adding a new app.
-5. After doing all the necessary edits, click **Save**.
+3. Here, users will be prompted the same app's edit component as when adding a new app.
+4. After doing all the necessary edits, click **Save**.
 
 *Delete a Player App*
 
@@ -978,8 +978,8 @@ To edit the unit's details, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Units Administration View, select the unit to be edited and click on the **Edit Icon** next to the unit.
-4. Here, users will be prompted the same unit's edit component as when adding a new unit.
-5. After doing all the necessary edits, click **Save**.
+3. Here, users will be prompted the same unit's edit component as when adding a new unit.
+4. After doing all the necessary edits, click **Save**.
 
 **Delete a Unit**
 
@@ -1082,8 +1082,8 @@ To edit the organization template's details, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Organizations Administration View, select the organization to be edited and click on the **Edit Icon** next to the organization template.
-4. Here, users will be prompted the same organization's edit component as when adding a new organization template.
-5. After doing all the necessary edits, click **Save**.
+3. Here, users will be prompted the same organization's edit component as when adding a new organization template.
+4. After doing all the necessary edits, click **Save**.
 
 **Delete an Organization Template**
 
@@ -1129,8 +1129,8 @@ To edit the Gallery card template's details, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Gallery Cards Administration View, select the card template to be edited and click on the **Edit Icon** next to the Gallery card template.
-4. Here, users will be prompted the same Gallery card's edit component as when adding a new card template.
-5. After doing all the necessary edits, click **Save**.
+3. Here, users will be prompted the same Gallery card's edit component as when adding a new card template.
+4. After doing all the necessary edits, click **Save**.
 
 **Delete a Gallery Card Template**
 
@@ -1175,8 +1175,8 @@ To edit the CITE action template's details, follow these steps:
 
 1. Click on the **Settings Cog** found in the top-right corner of the screen.
 2. Under the CITE Actions Administration View, select the action template to be edited and click on the **Edit Icon** next to the action template.
-4. Here, users will be prompted the same CITE action's edit component as when adding a new action template.
-5. After doing all the necessary edits, click **Save**.
+3. Here, users will be prompted the same CITE action's edit component as when adding a new action template.
+4. After doing all the necessary edits, click **Save**.
 
 **Delete a CITE Action Template**
 
@@ -1246,30 +1246,30 @@ The following glossary provides a brief definition of key terms and concepts as 
 2. **Blueprint**: Web application created to make the development of a MSEL and events easier.
 3. **CITE:** Web application that allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents.
 4. **CITE Action:** Series of steps to guide users on an appropriate course of action during an exercise.
-6. **CITE Role:** Provide a set of responsibilities assigned to a user during an exercise.
-7. **Content Developer Permission:** Can view, edit, create, and approve events on the MSEL.
-8. **Data Fields:** Structured components containing essential information about the event's characteristics, context, and implications.
-9. **Editor Role:** Edit the events that they are assigned to, but not other events.  They cannot delete them or create new ones.
-10. **Events**: Specific scenario events or messages within the scenario that prompt users to implement designated actions.
-11. **Exercises**: Structured and simulated activity designed to assess, train, or evaluate the capabilities, preparedness, and responses of individuals, teams, or organizations in dealing with various situations, especially emergencies or crisis scenarios.
-12. **Evaluator Permission**: Manages the exercise, can advance moves, execute events, and check events as completed.
-13. **Gallery:** Web application where participants receive incident information.
-14. **Gallery Card:** Groups articles into their respective categories, the categories can be defined in the administration panel.
-15. **`Incrementer` Role:** When the CITE integration is enabled, this role will a allow a user to advance the current move.
-14. **`Inviter` Role:** This role will allow a user to invite others to the MSEL event.
-15. **Modifier Role:** When the CITE integration is enabled, this role will allow a user to modify the team's score.
-16. **Move Editor:** Can edit moves on the MSEL, as well as increment them during an exercise.
-17. **Moves:** A defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
-18. **MSEL:** (Master Scenario Events List) provides a timeline for all expected events, affiliated users and organizations during an exercise.
-15. **Observer Role:** When Gallery or CITE integrations are enabled, this role will allow a user to observe other team's progress on CITE and Gallery applications.
-18. **Organizations:** Entities within an exercise with defined roles, responsibilities, and functions.
-20. **Owner Role:** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).
-21. **Player:** Centralized web interface where participants, teams, and administrators go to engage in a cyber event.
-22. **Player Apps:** List of applications accessible from the same Player view.
-23. **Player View:** These are the settings associated with building a view. A view can be edited, cloned, and deleted.
-24. **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
-25. **Submitter Role:** When the CITE integration is enabled, this role will allow a user to submit the team's score.
-25. **System Admin Permission:** Can add users to a team, as well as assign the required permissions.
-26. **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
-27. **User Defined Data Fields:** These are added by the user on an as-needed basis.
-28. **Viewer Role:** Can view the MSEL, but can't do any edits to it.
+5. **CITE Role:** Provide a set of responsibilities assigned to a user during an exercise.
+6. **Content Developer Permission:** Can view, edit, create, and approve events on the MSEL.
+7. **Data Fields:** Structured components containing essential information about the event's characteristics, context, and implications.
+8. **Editor Role:** Edit the events that they are assigned to, but not other events. They cannot delete them or create new ones.
+9. **Events**: Specific scenario events or messages within the scenario that prompt users to implement designated actions.
+10. **Exercises**: Structured and simulated activity designed to assess, train, or evaluate the capabilities, preparedness, and responses of individuals, teams, or organizations in dealing with various situations, especially emergencies or crisis scenarios.
+11. **Evaluator Permission**: Manages the exercise, can advance moves, execute events, and check events as completed.
+12. **Gallery:** Web application where participants receive incident information.
+13. **Gallery Card:** Groups articles into their respective categories, the categories can be defined in the administration panel.
+14. **`Incrementer` Role:** When the CITE integration is enabled, this role will a allow a user to advance the current move.
+15. **`Inviter` Role:** This role will allow a user to invite others to the MSEL event.
+16. **Modifier Role:** When the CITE integration is enabled, this role will allow a user to modify the team's score.
+17. **Move Editor:** Can edit moves on the MSEL, as well as increment them during an exercise.
+18. **Moves:** A defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
+19. **MSEL:** (Master Scenario Events List) provides a timeline for all expected events, affiliated users and organizations during an exercise.
+20. **Observer Role:** When Gallery or CITE integrations are enabled, this role will allow a user to observe other team's progress on CITE and Gallery applications.
+21. **Organizations:** Entities within an exercise with defined roles, responsibilities, and functions.
+22. **Owner Role:** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).
+23. **Player:** Centralized web interface where participants, teams, and administrators go to engage in a cyber event.
+24. **Player Apps:** List of applications accessible from the same Player view.
+25. **Player View:** These are the settings associated with building a view. A view can be edited, cloned, and deleted.
+26. **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
+27. **Submitter Role:** When the CITE integration is enabled, this role will allow a user to submit the team's score.
+28. **System Admin Permission:** Can add users to a team, as well as assign the required permissions.
+29. **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
+30. **User Defined Data Fields:** These are added by the user on an as-needed basis.
+31. **Viewer Role:** Can view the MSEL, but can't do any edits to it.
