@@ -47,7 +47,9 @@ This **Search** feature allows game administrators to search on name, season, tr
 
 ### Toggle Cards and Table
 
-Toggle between the view of games displayed as game *cards* or rows in a *table*.
+Toggle between the view of games displayed as game *cards* or rows in a *table*. The **Table view** shows the same game information—like enrollment, mode, and settings—in a table with rows and columns. Each row has a **3-dot context menu** that lets those users with elevated permissions open the game in the Game Center, clone it, export it, or delete it. The icons and options are the same as in **Card view**, but Table view makes it easier to scan and work with a lot of game data at once.
+
+![toggle table view](img/new-game-table-view2.png)
 
 ### New Game
 
