@@ -2,12 +2,12 @@
 
 The Home screen is where you start a "live" game, preview upcoming games, and view completed games. Hover over a game card and select **Open Game**. Click **Enroll** to proceed to the game lobby.
 
-# The Game lobby
+## The Game lobby
 
-This is the staging area where players join team members (if playing on a team) and get organized before starting a game session. Information about the session and enrollment appears here: e.g., "Enrollment closes in 2101d 17h." 
+This is the staging area where players join team members (if playing on a team) and get organized before starting a game session. Information about the session and enrollment appears here: e.g., "Enrollment closes in 2101d 17h."
 
-- A yellow light indicates a player is registered to play but hasn't started a session. 
-- A green light indicates a player is active (i.e., has started a session). 
+- A yellow light indicates a player is registered to play but hasn't started a session.
+- A green light indicates a player is active (i.e., has started a session).
 - A red light indicates that player's session has ended.
 
 This player is active:
