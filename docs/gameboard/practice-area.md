@@ -14,7 +14,7 @@ You can copy a link to your search by selecting the **copy icon** next to the se
 
 Under *Need a place to start?* the Gameboard admin may have configured some suggested searches for participants. Players can select one of these tags to be directed to a set of available practice challenges. Gameboard admins should refer to "Suggested searches" in the [Admin Practice Area](admin-practice-area.md).
 
-## Starting a practice session
+## Starting a Practice Session
 
 To start a practice session:
 
@@ -24,7 +24,7 @@ To start a practice session:
 4. Launch the challenge consoles. Clicking a challenge console opens it in a new web browser tab. Challenge consoles allow players to directly interact with the virtual machines as they complete the practice challenge.
 5. Answer the challenge questions. Enter your answers for each question and click **Submit My Answers**, and **Confirm** to submit your answer.
 
-## Using copy/paste in the consoles
+## Using Copy/Paste in the Consoles
 
 Follow the steps below to transfer text between your local machine (*out of game*) and a virtual machine (*in game*).
 
@@ -42,7 +42,7 @@ Follow the steps below to transfer text between your local machine (*out of game
 
 For additional information on how copy/paste works in the VM consoles, see this [Copy and paste](../topomojo/copy-paste.md) article.
 
-## Extending time or ending the session
+## Extending Time or Ending the Session
 
 To add more time to your session, click **Extend Session**, and **Confirm** to extend the amount of time remaining.
 
@@ -62,13 +62,13 @@ Select **Click here to deactivate the sticky challenge panel** to turn off the S
 
 ![Disable Sticky Challenge Panel](img/disable-sticky-challenge-panel.png)
 
-## Creating a practice challenge support ticket
+## Creating a Practice Challenge Support Ticket
 
 Click **Create Ticket** to create a support ticket if you are experiencing a technical difficulty.
 
 For a full treatment of Gameboard's Support feature, please see the [Using the Integrated Support Feature](support.md) section of the docs.
 
-## Obtaining a completion certificate
+## Obtaining a Completion Certificate
 
 You can view and print any certificate you earned in competition or in practice at any time from your Profile screen. In the main navigation, click **Profile**. Then, select the **Certificates** link.
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-An Alloy Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable.  Events can be scheduled to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
+An Alloy Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable. Events can be scheduled to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
 
 ## Administrator Guide
 
@@ -70,15 +70,15 @@ To give the user the ability to end the implementation or lab from inside Player
 
 When launching an implementation from a definition, the Alloy API goes through the following process:
 
-1.  Clones the definition Player exercise into a new Player exercise and adds the Player exercise ID to the Alloy implementation.
-2.  Creates a Steamfitter session from the definition Steamfitter scenario and adds the Steamfitter scenario ID to the Alloy implementation.
-3.  Creates a Caster workspace in the definition Caster directory and adds the Caster Workspace ID to the Alloy implementation.
-4.  Creates a Terraform `auto.tfvars` file in the Caster workspace that contains the following:
+1. Clones the definition Player exercise into a new Player exercise and adds the Player exercise ID to the Alloy implementation.
+2. Creates a Steamfitter session from the definition Steamfitter scenario and adds the Steamfitter scenario ID to the Alloy implementation.
+3. Creates a Caster workspace in the definition Caster directory and adds the Caster Workspace ID to the Alloy implementation.
+4. Creates a Terraform `auto.tfvars` file in the Caster workspace that contains the following:
     - Exercise ID
     - Team Name and ID of every team in the exercise
     - User Name and ID
-5.  Plans and applies the Caster workspace to deploy the infrastructure.
-6.  Starts the Steamfitter scenario.
+5. Plans and applies the Caster workspace to deploy the infrastructure.
+6. Starts the Steamfitter scenario.
 
 **Understanding the end process**
 

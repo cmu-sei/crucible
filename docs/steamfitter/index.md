@@ -25,7 +25,7 @@ In order to use Steamfitter, a user must be given **Content Developer** permissi
 ### StackStorm Integration
 
 
-Behind the scenes Steamfitter uses StackStorm ([`stackstorm.com`](https://stackstorm.com/)) to execute these tasks.  StackStorm is an open source application that can connect applications, services, and workflows. Steamfitter uses StackStorm to send commands to the guest VMs using the StackStorm vSphere Action Pack, so that none of the communication for the tasks run by StackStorm occurs over the network.
+Behind the scenes Steamfitter uses StackStorm ([`stackstorm.com`](https://stackstorm.com/)) to execute these tasks. StackStorm is an open source application that can connect applications, services, and workflows. Steamfitter uses StackStorm to send commands to the guest VMs using the StackStorm vSphere Action Pack, so that none of the communication for the tasks run by StackStorm occurs over the network.
 
 ## Administrator Guide
 
@@ -48,7 +48,7 @@ Add tasks in the Scenario Templates screen by clicking the **+** ("plus") icon. 
 
 Scenarios are groupings of predefined tasks that can be executed against a required view's VMs.
 
-After the tasks are defined in the scenario template the next step is to create the *scenario*.  Keep in mind that the scenario template is the *plan*; the scenario is the actual *instance*. Multiple scenarios can be created from one template; those scenarios can then be associated with different Player views.
+After the tasks are defined in the scenario template the next step is to create the *scenario*. Keep in mind that the scenario template is the *plan*; the scenario is the actual *instance*. Multiple scenarios can be created from one template; those scenarios can then be associated with different Player views.
 
 In the **Scenarios** screen, the created scenario is named `scenario template name` - `your username` by default.
 
@@ -151,4 +151,3 @@ The default History view shows task results for the current user sorted in rever
 **StackStorm:** an open source application that can connect applications, services, and workflows
 
 **Task:** an action or command that can be executed against one or more topology resources
-

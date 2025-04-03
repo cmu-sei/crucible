@@ -1,0 +1,10 @@
+---
+# Source: SEI
+# Description: Counts the number of words in a sentence. Flags if more than 30.
+extends: occurrence
+message: "Try to keep your sentence length to 25 words or fewer."
+level: suggestion
+scope: sentence
+ignorecase: false
+max: 25
+token: \b(\w+)\b

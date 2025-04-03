@@ -1,10 +1,10 @@
-# Getting in-game support
+# Getting In-Game Support
 
 The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist players and teams. Gameboard is a "one-stop shop" and no outside apps or systems are required to track and measure issues reported by participants. Users who have been granted a role with the appropriate permissions can use the support feature to manage tickets.
 
-## Support from participant point-of-view
+## Support from the Participant Point-of-View
 
-### Creating new support ticket
+### Creating New Support Ticket
 
 You can create tickets from two places: the Support screen and the challenge screen. If you are coming from the challenge screen, then the Support Code, player id, and challenge id are automatically generated; if you are not, then this information can be added later.
 
@@ -30,7 +30,7 @@ These instructions assume you have enrolled in a game, started a session, and st
 5. Under **Attachments**, attach files (especially screen shots) here.
 6. Click **Submit**. Because you are coming from the challenge screen, a link to the game lobby is generated and Support Code is provided.
 
-### Finding an existing ticket
+### Finding an Existing Ticket
 
 From the Support page, use the dropdowns and the **Search** field to locate specific tickets from *all* of the tickets you have submitted.
 
@@ -44,15 +44,15 @@ Filter tickets by status:
 
 Search by entering terms. Search covers ticket description, label, user, challenge title, and player.
 
-## Support from the Support role point-of-view
+## Support from the Support Role Point-of-View
 
 This section is meant for "support staff" - the people who are tasked with resolving customer service and technical support issues during a game. When we say "support staff" in the documentation, we mean those users given the `Support` role or a role that permits them to edit support settings, manage tickets, and view tickets such as `Admin` and `Director`.
 
-### Creating new support ticket (support staff)
+### Creating New support Ticket (Support Staff)
 
 The procedure for support staff to create a tickets is very similar to procedure for participants to create a ticket (see above). However, after a ticket has been created users with the `Support` role have more options to manage the tickets.
 
-### Managing support tickets
+### Managing Support Tickets
 
 From the Ticket management side-bar:
 
@@ -72,11 +72,11 @@ From the Ticket management side-bar:
 
 Add a **comment** to communicate with the participant.
 
-### Copy to markdown
+### Copy to Markdown
 
 The **Copy to markdown** icon allows you to copy support ticket content to Markdown. You can paste it anywhere, including into a messaging app or email, with nicely formatted text, avoiding the need for links or logins to the Gameboard.
 
-## Support-related Reporting
+## Support-Related Reporting
 
 Support-related reporting provides you with a way to manage workloads and track trends during your competition. In the main menu, select **Reports**. Then click **Support** in the Reports screen.
 

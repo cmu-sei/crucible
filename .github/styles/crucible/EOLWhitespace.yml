@@ -5,7 +5,7 @@
 extends: existence
 message: "Remove whitespace characters from the end of the line."
 vocab: false
-level: warning
+level: error
 scope: raw
 raw:
   - ' +\n'

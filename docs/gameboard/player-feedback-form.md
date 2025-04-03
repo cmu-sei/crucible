@@ -1,4 +1,4 @@
-# Giving feedback as a player
+# Giving Feedback as a Player
 
 Provided that a Gameboard administrator has enabled and configured the *feedback* feature, players are permitted **one** feedback submission per game and/or per challenge. Every member of a team is permitted to provide individual feedback. The feedback form is available at any time after a session has started. This way, if participants quit the game before time expires they still have the opportunity to submit feedback.
 
