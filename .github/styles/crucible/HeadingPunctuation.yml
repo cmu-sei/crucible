@@ -1,0 +1,12 @@
+extends: existence
+message: "Don't use punctuation at the end of a heading."
+nonword: true
+level: error
+scope: heading
+action:
+  name: edit
+  params:
+    - trim_right
+    - "."
+tokens:
+  - '[a-z0-9][.]\s*$'
