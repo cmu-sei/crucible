@@ -4,7 +4,7 @@ The *Challenge* tab in the TopoMojo workspace is used when both Gameboard and To
 
 ## Transforms
 
-**Transforms** allow you to define dynamic variables that are generated based on certain criteria or types. Transforms are also a key/value pair definition – the **key** is the name of your transform and the **value** is the type of the transform. The screen print below shows a transform named "token1" that will have a value of 8 random hexadecimal characters.
+**Transforms** allow you to define dynamic variables that are generated based on certain criteria or types. Transforms are also a key/value pair definition –- the **key** is the name of your transform and the **value** is the type of the transform. The screen print below shows a transform named "token1" that will have a value of 8 random hexadecimal characters.
 
 *Screen print 1:*
 

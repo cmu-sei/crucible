@@ -379,7 +379,7 @@ These procedures assume you are in the Player VM Console app.
 
 **Upload files and mount ISO**
 
-These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine – it's a two-step process). This is useful for installers and uploading larger files (such as ISO files).
+These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine -– it's a two-step process). This is useful for installers and uploading larger files (such as ISO files).
 
 1. In the VM List screen, click __Upload File__.
 2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).
