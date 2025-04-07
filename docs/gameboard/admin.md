@@ -17,7 +17,7 @@ The **Live** tab allows game administrators to select **Live Stats** (e.g., the 
 
 ### Send Announcement
 
-The **Announcement** feature allows game administrators to broadcast important messages to all players within a game. Among other uses, these could be messages regarding Gameboard issues, challenge issues, and changes to logistics.
+The **Announcement** feature lets Admins and Directors send important messages to users who are currently logged into Gameboard. Messages can go to everyone online or just a specific team. They are useful for updates about Gameboard issues, challenge problems, or schedule changes.
 
 In the Announcement field, enter the content of the announcement and click **Announce**.
 
@@ -47,7 +47,9 @@ This **Search** feature allows game administrators to search on name, season, tr
 
 ### Toggle Cards and Table
 
-Toggle between the view of games displayed as game *cards* or rows in a *table*.
+Toggle between the view of games displayed as game *cards* or rows in a *table*. The **Table view** shows the same game information—like enrollment, mode, and settings—in a table with rows and columns. Each row has a **3-dot context menu** that lets those users with elevated permissions open the game in the Game Center, clone it, export it, or delete it. The icons and options are the same as in **Card view**, but Table view makes it easier to scan and work with a lot of game data at once.
+
+![toggle table view](img/new-game-table-view2.png)
 
 ### New Game
 
