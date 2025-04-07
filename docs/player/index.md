@@ -42,7 +42,7 @@ If you have not already done so, in the dropdown next to your username, select *
 1. Under Views, click **Add New View**.
 2. Add a **Name** and **View Description**.
 3. In the Status dropdown, select **Active** or **Inactive**.
-      -  `Active` means that the new view is available for use immediately.
+      - `Active` means that the new view is available for use immediately.
       - `Inactive` means that the new view will be cloned in Alloy.
 4. Select **Applications**.
 
@@ -51,9 +51,11 @@ If you have not already done so, in the dropdown next to your username, select *
 ![newviewapps](../assets/img/new view apps.png)
 
 1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template.
-    - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
-     - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view.
-     ![newviewapptemplate](../assets/img/new view app template.png)
+   - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
+   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view.
+
+    ![newviewapptemplate](../assets/img/new view app template.png)
+
 2. Click **Teams**.
 
 #### Add Teams
@@ -68,7 +70,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 4. Assign **Permissions** to the team. Each team can be assigned special permissions. You may want to have a team of "admins" who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
 
-![newviewnewteamadduser](../assets/img/new view new team add user.png)
+    ![newviewnewteamadduser](../assets/img/new view new team add user.png)
 
 5. Click the **User** icon to select users to add to the new team.
 
@@ -107,7 +109,10 @@ Users and/or teams can be assigned to a **Role**, which is a group of permission
 - **ViewAdmin:** can edit anything within a View that they have permissions.
 
 A SystemAdmin creates the View and assigns ViewAdmin permissions to specific teams who can now edit that View.
-> **Important!** Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Views, Users, Application Templates, Roles / Permissions).
+
+!!! important
+
+    Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Views, Users, Application Templates, Roles / Permissions).
 
 ### Create Application Templates
 
@@ -182,19 +187,20 @@ View Admins may use the Map application to display a map for a team (e.g. a netw
 
 Clicking the Map application will open up the assigned map. Users can click on pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
 
-**Creating and Managing Maps**
+##### Creating and Managing Maps
 
 The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view, to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
 
 Assuming that View Administrator permissions have been granted, in Player add the map application to the view.
 
-**Adding the Map application to the view**
+##### Adding the Map application to the view
 
 1. In Player, in your present view, select your user name and then **Edit View**.
 2. Under Applications, select **Add New Application** then **Templates**, then **Map**.
 3. The Select Map dropdown and the New Map icon appear in the right pane.
 
-**Creating a new map**
+##### Creating a new map
+
 ![player-new-map](../assets/img/player-new-map.png)
 
 1. In the newly created Map application, in the right pane, select **New Map**.
@@ -202,11 +208,10 @@ Assuming that View Administrator permissions have been granted, in Player add th
    - **Name:** the name of the map.
    - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.
    - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.
-   - **Teams:** only the teams selected here will see the new map.
-      > Note that you can select more than one team here.
+   - **Teams:** only the teams selected here will see the new map. You can select more than one team here.
 3. Click **Submit**. The image of the new map appears in the right pane.
 
-**Editing a map**
+##### Editing a map
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -216,9 +221,9 @@ Assuming that View Administrator permissions have been granted, in Player add th
    - **Save:** saves your map.
    - Click in the map to **add a click point**.
 
-**Adding a click point**
+##### Adding a click point
 
-A _click point_ is a location on the map that, when clicked by Player user, launches a resource like a virtual machine in a new tab. To add a click point to the map:
+A *click point* is a location on the map that, when clicked by Player user, launches a resource like a virtual machine in a new tab. To add a click point to the map:
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -231,7 +236,7 @@ A _click point_ is a location on the map that, when clicked by Player user, laun
 5. Click **Save** to save the new click point in the map.
 6. Click **Save** again to save the map.
 
-**Deleting a click point**
+##### Deleting a click point
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -239,7 +244,7 @@ A _click point_ is a location on the map that, when clicked by Player user, laun
 4. Click an existing click point.
 5. In the Edit Click Point modal, click **Delete**.
 
-**Deleting a map**
+##### Deleting a map
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -249,17 +254,17 @@ A _click point_ is a location on the map that, when clicked by Player user, laun
 
 The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system allows the VM to be opened similar to an application, within a tab on the same screen or popped out into a new browser tab using the icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
 
-**File Upload**
+##### File Upload
 
 A View Admin can upload images and documents for a specific View in Player that provides authentication to download. In addition, that document can be setup to show up as an application in the left hand menu of Player.
 
 ![vm-app-1](../assets/img/vm-app-1.png)
 
-From the File Upload section of the Edit View panel, a View Admin can Download, Delete, Copy Link, Edit Name and Add as App. When adding the file as a Player View application, a prompt will be shown that verifies which teams in the View will see the file get added as an application. Note that it is important that the View Admin gives permission for the file to be viewed by any team that they wish to add the application otherwise the user will not be authorized to view the file.
+From the File Upload section of the Edit View panel, a View Admin can Download, Delete, Copy Link, Edit Name and Add as App. When adding the file as a Player View application, a prompt will be shown that verifies which teams in the View will see the file get added as an application. The View Admin must grant permission for the file to be viewed by any team they want to add the application to. Otherwise, users on that team won't be authorized to access the file.
 
 ![vm-app-2](../assets/img/vm-app-2.png)
 
-**Multi-Select VMs**
+##### Multi-Select VMs
 
 A user can run operations on multiple VM's by first using the mouse to click and drag a box around the VM's that they would like to select. In addition, the user can use the ctrl+click to select or unselect a previously selected VM. Once the user has selected the VM's that they want to perform an operation, the ![vm-app-3](../assets/img/vm-app-3.png) button can be used to display the menu of available options.
 
@@ -267,33 +272,33 @@ A user can run operations on multiple VM's by first using the mouse to click and
 
 For the Multi-Select option above, the following options are available:
 
- - Clear Selections - Unselects all selected VM's
- -  Power On - Makes an API call to power on the selected VM's
- - Power Off - Makes an API call to power off the selected VM's
- - Reboot - Makes an API call to perform an operating system reboot of the selected VM's
- - Shutdown - Makes an API call to perform an operating system shutdown of the selected VM's
- - Open in Player tab - Will create a tab within Player that opens each of the selected VM's
- - Open in browser tab - Creates a web browser tab that opens each of the selected VM's
+- **Clear Selections:** Unselects all selected VMs
+- **Power On:** Makes an API call to power on the selected VMs
+- **Power Off:** Makes an API call to power off the selected VMs
+- **Reboot:** Makes an API call to perform an operating system reboot of the selected VMs
+- **Shutdown:** Makes an API call to perform an operating system shutdown of the selected VMs
+- **Open in Player tab:** Will create a tab within Player that opens each of the selected VMs
+- **Open in browser tab:** Creates a web browser tab that opens each of the selected VMs
 
-**Sort by Team (View Admin Only)**
+##### Sort by Team (View Admin Only)
 
 The sort by team option can be checked that will rearrange all VM's in expansion panels based on the teams that have access to the VM's. In the example shown here, each team can be expanded to show what VM's they have access to. This is especially useful for View Admins when verifying if a specific VM is accessible (or not accessible) for a specific team.
 
 ![vm-app-5](../assets/img/vm-app-5.png)
 
-**Filter by Powered State**
+##### Filter by Powered State
 
 VM's can not be filtered by powered status. By clicking the ![vm-app-6](../assets/img/vm-app-6.png) dropdown, the user can select to display only the Powered On, Powered Off, or Suspended VM's.
 
 ![vm-app-7](../assets/img/vm-app-7.png)
 
-**User List**
+##### User List
 
-The User List in Player allows for a user to view the teams and its members that the user has permissions to see.  Note that View Admins can always see all teams that are a part of the View. Using expansion panels, the user can expand the team and view each member of that team. If a team member is working within a VM, the name of the VM will be displayed with a link to open that VM in Read-Only mode. When in Read-Only mode, the user will not be allowed to gain any keyboard or mouse control.
+The User List in Player allows for a user to view the teams and its members that the user has permissions to see. View Admins can always see all teams that are a part of the View. Using expansion panels, the user can expand the team and view each member of that team. If a team member is working within a VM, the name of the VM will be displayed with a link to open that VM in Read-Only mode. When in Read-Only mode, the user will not be allowed to gain any keyboard or mouse control.
 
 ![vm-app-8](../assets/img/vm-app-8.png)
 
-**VM Usage Logging (View Admin Only)**
+##### VM Usage Logging (View Admin Only)
 
 The VM Usage Logging function is a administrative feature that when configured, will record the user activity of when a user interacts with a VM. The configuration must be setup by an administrator to records the specific teams in the view over a specific time period.
 
@@ -317,7 +322,9 @@ Mattermost (https://mattermost.com/), an open source messaging platform can be c
 
 Receive and read notifications here.
 
-> Tip! If your browser is set up to allow notifications you can receive Player notifications that way too.
+!!! tip
+
+    If your browser is set up to allow notifications you can receive Player notifications that way too.
 
 ## Player Tips
 
@@ -334,21 +341,23 @@ The procedures below show you how to:
 
 Procedures assume you are in the Player VM Console app.
 
-**From local to Player VM**
+#### From local to Player VM
 
-> Note: There is a 64K size limitation to the text block users can copy into and out of Player.
+!!! info
+
+    There is a 64K size limitation to the text block users can copy into and out of Player.
 
 1. On your local machine, open a text file or Word file.
 2. Select and copy the text you want to place into a Player virtual machine.
 3. In the Player VM Console app, select the virtual machine you want.
 4. Select where in the virtual machine you want the copied text to go (this can be a new file or an open application).
-5. At the top of the Player window, click __Paste__. This inserts the copied text into the virtual machine.
+5. At the top of the Player window, click **Paste**. This inserts the copied text into the virtual machine.
 
-**From Player VM to local**
+#### From Player VM to local
 
 1. In the Player VM Console app, select the virtual machine you want.
 2. On the virtual machine, select the text you would like to copy. Copy your text first to the virtual machine’s clipboard (how you do this depends upon the application you’re using).
-3. Once you’ve copied your text to the virtual machine clipboard, click __Copy__ at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
+3. Once you’ve copied your text to the virtual machine clipboard, click **Copy** at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
 4. On your local machine, paste the copied text into a Notepad file or Word file.
 
 ### Power a Virtual Machine On or Off
@@ -358,39 +367,41 @@ The procedures below show you how to remotely power a VM on or off from within t
 1. In the Player VM Console app, select the virtual machine you want.
 2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
 
-### Upload Files
+### Uploading Files
 
-**Upload from local to VM**
+#### Upload from local to VM
 
-These procedures describe how to upload files from a local machine (an _out-of-game_ computer) to a virtual machine in the Player VM Console app. Please note the **Send File to VM** option should only be used for uploading small files.
+These procedures describe how to upload files from a local machine (an *out-of-game* computer) to a virtual machine in the Player VM Console app. The **Send File to VM** option should only be used for uploading small files.
 
 These procedures assume you are in the Player VM Console app.
 
 1. In the Player VM Console app, in the VM List, launch the virtual machine you want.
-2. On the VM tab, click the **gear icon**, and then select __Files__, **Send File to VM**.
+2. On the VM tab, click the **gear icon**, and then select **Files^^, **Send File to VM**.
 
-> If the **Send File to VM** option is grayed out you will have to enter the credentials used to log into the virtual machine.
-> Select __Enter VM Credentials__. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Click **Done**.
-> Any user registered for the exercise will have the virtual machine credentials.
+!!! note
 
-3. After entering your credentials, select the __Send File to VM__ option (this should no longer be grayed out).
+    If the **Send File to VM** option is grayed out you will have to enter the credentials used to log into the virtual machine.Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
+
+3. After entering your credentials, select the **Send File to VM** option (this should no longer be grayed out).
 4. Select the file from your local machine that you want to upload.
-5. Click __Open__. This will copy the file to the destination folder specified in the VM Send File Settings window.
+5. Click **Open**. This will copy the file to the destination folder specified in the VM Send File Settings window.
 
-**Upload files and mount ISO**
+#### Upload files and mount ISO
 
 These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine – it’s a two-step process). This is useful for installers and uploading larger files (such as ISO files).
 
-1. In the VM List screen, click __Upload File__.
+1. In the VM List screen, click **Upload File**.
 2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).
-3. Click __Open__.
-4. On the VM tab, click the **gear icon**, and then select __Files__, __Mount File to DVD__.
+3. Click **Open**.
+4. On the VM tab, click the **gear icon**, and then select **Files**, **Mount File to DVD**.
 5. In the Search box that opens look for and select the uploaded file that you now want to mount.
 
-   > Note that there are two file areas: Team Files and Public Files. Files can be mounted for only your team (under __Team Files__) or any team (under __Public Files__).
+    !!! note
 
-6. Click __Mount__. This process automatically mounts the file as a DVD Drive ISO.
-7. After the ISO has been mounted/used for file copy, right-click the DVD Drive ISO and select __Eject__ to eject the ISO.
+        There are two file areas: Team Files and Public Files. Files can be mounted for only your team (under Team Files) or any team (under Public Files).
+
+6. Click **Mount**. This process automatically mounts the file as a DVD Drive ISO.
+7. After the ISO has been mounted/used for file copy, right-click the DVD Drive ISO and select **Eject** to eject the ISO.
 
 ### Follow Another Player
 
@@ -400,7 +411,11 @@ To follow another participant:
 
 1. In Player, in the left sidebar, select the **Virtual Machines** application.
 2. In the main Player window, select **User List**.
->If you are a View Administrator (_ViewAdmin_), then you will see *all* the teams and *all* the participants. Otherwise, you will just see the team you are on and your teammates.
+
+    !!! info
+
+        If you are a View Administrator (*ViewAdmin*), then you will see *all* the teams and *all* the participants. Otherwise, you will just see the team you are on and your teammates.
+
 3. Locate the participant in the scenario.
    - Use the **Search** feature to search on a participant's username if you know it.
    - Click **Expand All** to expand the teams to see all of the participants.
@@ -434,8 +449,7 @@ The following glossary provides a brief definition of key terms and concepts as 
 
 **Team:** A group of logged in users who are associated with a view. Each team can be configured to view a particular set of applications and be granted team-level roles/permissions.
 
-**User:** A user who is identified in an Identity Server configured for the Player system is automatically added into Player upon the first login. In addition, users can be pre-loaded into Player using the Player API.
-  > Note: IdentityServer4 is an OAuth 2.0 framework that is used by the Software Engineering Institute to authenticate users. Some Identity servers are configured to authenticate using CAC cards while others are user/password based - depending upon the location of the system.
+**User:** A user who is identified in an identity server configured for the Player system is automatically added into Player upon the first login. In addition, users can be pre-loaded into Player using the Player API.
 
 **View:** These are the settings associated with building a view. A view can be edited, cloned, and deleted.
 
