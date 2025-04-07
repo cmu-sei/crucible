@@ -29,4 +29,4 @@ To create a new notification:
 
     In Gameboard, Announcements and Notifications both share important messages, but they work differently. Announcements go to users who are currently logged in and can be sent to everyone or just a specific team. These are best for real-time updates, like system issues or challenge changes.
 
-    Notifications, however, appear as banners when users log in and stay until dismissed. They ensure everyone sees the message, even if they weren’t online logged into Gameboard when it was posted. Use Announcements for immediate alerts and Notifications for updates that need to reach all users over time.
+    Notifications, however, appear as banners when users log in and stay until dismissed. They ensure everyone sees the message, even if they weren't online logged into Gameboard when it was posted. Use Announcements for immediate alerts and Notifications for updates that need to reach all users over time.
