@@ -193,13 +193,13 @@ The **Maps** application allows Player users who have View Administrator (*ViewA
 
 Assuming that View Administrator permissions have been granted, in Player add the map application to the view.
 
-##### Adding the Map application to the view
+##### Adding the Map Application to the View
 
 1. In Player, in your present view, select your user name and then **Edit View**.
 2. Under Applications, select **Add New Application** then **Templates**, then **Map**.
 3. The Select Map dropdown and the New Map icon appear in the right pane.
 
-##### Creating a new map
+##### Creating a New Map
 
 ![player-new-map](../assets/img/player-new-map.png)
 
@@ -211,7 +211,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
    - **Teams:** only the teams selected here will see the new map. You can select more than one team here.
 3. Click **Submit**. The image of the new map appears in the right pane.
 
-##### Editing a map
+##### Editing a Map
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -221,7 +221,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
    - **Save:** saves your map.
    - Click in the map to **add a click point**.
 
-##### Adding a click point
+##### Adding a Click Point
 
 A *click point* is a location on the map that, when clicked by Player user, launches a resource like a virtual machine in a new tab. To add a click point to the map:
 
@@ -236,7 +236,7 @@ A *click point* is a location on the map that, when clicked by Player user, laun
 5. Click **Save** to save the new click point in the map.
 6. Click **Save** again to save the map.
 
-##### Deleting a click point
+##### Deleting a Click Point
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -244,7 +244,7 @@ A *click point* is a location on the map that, when clicked by Player user, laun
 4. Click an existing click point.
 5. In the Edit Click Point modal, click **Delete**.
 
-##### Deleting a map
+##### Deleting a Map
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -356,8 +356,8 @@ Procedures assume you are in the Player VM Console app.
 #### From Player VM to local
 
 1. In the Player VM Console app, select the virtual machine you want.
-2. On the virtual machine, select the text you would like to copy. Copy your text first to the virtual machine’s clipboard (how you do this depends upon the application you’re using).
-3. Once you’ve copied your text to the virtual machine clipboard, click **Copy** at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
+2. On the virtual machine, select the text you would like to copy. Copy your text first to the virtual machine's clipboard (how you do this depends upon the application you're using).
+3. Once you've copied your text to the virtual machine clipboard, click **Copy** at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
 4. On your local machine, paste the copied text into a Notepad file or Word file.
 
 ### Power a Virtual Machine On or Off
@@ -386,7 +386,7 @@ These procedures assume you are in the Player VM Console app.
 4. Select the file from your local machine that you want to upload.
 5. Click **Open**. This will copy the file to the destination folder specified in the VM Send File Settings window.
 
-#### Upload files and mount ISO
+#### Upload Files and Mount ISO
 
 These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine -– it's a two-step process). This is useful for installers and uploading larger files (such as ISO files).
 
