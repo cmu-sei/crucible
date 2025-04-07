@@ -2,7 +2,7 @@
 
 ## Overview
 
-### What is CITE?
+### What Is CITE?
 
 [**CITE**](#glossary) is a web application created to integrate with the Crucible Framework and allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents. CITE compares a user's score to their organization's score, group average scores, and the official exercise score. Scores are submitted for each [move](#glossary) as the exercise progresses and each of the historical scores can be recalled for reference at any time.
 
@@ -463,12 +463,11 @@ To delete a scoring model, follow these steps:
 2. Navigate to the **Scoring Models** tab.
 3. Select the scoring model to be deleted and click on the **Trash Can Icon** next to the scoring model.
 
-
 #### Scoring Categories
 
 To configure a Scoring Model to be used for an exercise, administrators will need to add [Scoring Categories](#glossary).
 
-Within a Scoring Model, an administrator can add one or more Scoring Categories.  To do this, follow these steps.
+Within a Scoring Model, an administrator can add one or more Scoring Categories. To do this, follow these steps.
 
 ![Configure Scoring Model OE](../assets/img/configureScoringModel.png)
 

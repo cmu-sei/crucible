@@ -8,7 +8,7 @@ The **Workspaces** tab is where the admin can search for workspaces and perform 
 
 In the left navigation pane, you can use the **Search** field to locate a workspace. However, searching here only returns workspaces you have created or have been invited to join.
 
-**Create:** Create a new workspace from the Admin Workspaces panel.For additional help, see [Building a new workspace](building-a-workspace.md).
+**Create:** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](building-a-workspace.md).
 
 Selecting a workspace takes you the **Settings** tab of that particular workspace where you can edit it. For additional help on the **Settings** tab, see [Building a new workspace](building-a-workspace.md).
 
@@ -16,7 +16,7 @@ The *workspace identifier* is present here too. The workspace identifier matches
 
 ![tm-wksp-iden](img/wksp-iden.png)
 
-## View (expanded)
+## View (Expanded)
 
 **Template Limit:** Defines the number of VMs that can be in the workspace.
 
@@ -25,9 +25,9 @@ The *workspace identifier* is present here too. The workspace identifier matches
 **Audience:** Limits who can deploy a gamespace as a workspace.
 
 **VMs:** Refresh, deploy, view the console, start/stop, revert and delete from here.
-- **Refresh**: Queries the state of the VM from the hypervisor.
-- **Deploy**: Deploys that virtual machine into your workspace.
-- **Console:** Opens the console for the virtual machine.
-- **Stop/Start:** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state.  Clicking **start** powers on the deployed VM.
-- **Revert:** Reverts the VM to its last saved state. All changes made since the last commit are lost.
-- **Delete:** Deletes a running VM instance.
+    - **Refresh**: Queries the state of the VM from the hypervisor.
+    - **Deploy**: Deploys that virtual machine into your workspace.
+    - **Console:** Opens the console for the virtual machine.
+    - **Stop/Start:** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state. Clicking **start** powers on the deployed VM.
+    - **Revert:** Reverts the VM to its last saved state. All changes made since the last commit are lost.
+    - **Delete:** Deletes a running VM instance.

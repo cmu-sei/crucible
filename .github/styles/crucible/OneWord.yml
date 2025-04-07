@@ -1,0 +1,11 @@
+# Description: Enforces the use of one/two-word words
+extends: substitution
+message: "'%s' should be written as '%s'."
+level: error
+ignorecase: true
+swap:
+  "data set": "dataset"
+  "end point": "endpoint"
+  "datapoint": "data point"
+  "object oriented": "object-oriented"
+  "webserver": "web server"

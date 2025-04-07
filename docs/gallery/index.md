@@ -2,7 +2,7 @@
 
 ## Overview
 
-### What is Gallery?
+### What Is Gallery?
 
 [**Gallery**](#glossary) is a web application where participants receive incident information.
 

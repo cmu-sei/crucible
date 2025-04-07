@@ -11,7 +11,7 @@ The Admin function of Gameboard helps those with the `Admin` role:
 
 After logging into the Gameboard app with the appropriate role, click **Admin**. By default, you land on the **Games** tab.
 
-## The Live tab
+## The Live Tab
 
 The **Live** tab allows game administrators to select **Live Stats** (e.g., the number of *Active Competitive Challenges* deployed, the number of *Active Practice Challenges* deployed, etc.) and take certain actions, such as copy player or team IDs, view challenge states, view sessions, observe, and view games.
 
@@ -21,7 +21,7 @@ The **Announcement** feature lets Admins and Directors send important messages t
 
 In the Announcement field, enter the content of the announcement and click **Announce**.
 
-## The Games tab (landing page)
+## The Games Tab (Landing Page)
 
 The **Games** tab is the landing page when you select **Admin** from the top navigation menu. By default, the games are displayed as cards.
 
@@ -57,7 +57,7 @@ Click **+ New Game** to create a new game, or upload or drop a package. Packages
 
 After creating a new game, the screen changes to that of the Game Center where games are configured, managed, and observed. See the [Game Center documentation](game-center.md) to finish configuring your newly added game.
 
-### Upload a game package
+### Upload a Game Package
 
 Another way to create a new game is to *export* a game package from an existing game and *import* its package as a new game.
 
@@ -72,13 +72,13 @@ To import (upload) a game package:
 
 ![upload a package](img/dropzone.png)
 
-### Cloning a game
+### Cloning a Game
 
 Cloning creates a copy of the game that replicates most of the original game.
 
 1. On the game card, select the **3 dot context** menu, then **Clone**.
 
-### Deleting a game
+### Deleting a Game
 
 Deleting a game deletes it from the Gameboard app.
 

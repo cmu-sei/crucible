@@ -2,7 +2,7 @@
 
 To access the **Administration**, **Users** screen click **Admin** in the top navigation menu, then click **Users**. This is where users can be created, updated, deleted, assigned roles, and given API keys. Participant names are approved or disapproved here too. In Gameboard, a *user* is a person and a user has a *Name*.
 
-## Searching, filtering, and sorting
+## Searching, Filtering, and Sorting
 
 To search for a user across the whole of Gameboard enter a term into the **Search** field.
 
@@ -14,7 +14,7 @@ To filter your results, select **Has Elevated Role**, **Has Pending Name**, or *
 
 To sort your results, select **Name**, **Last Login**, or **Created On**. Click once to sort in **ascending** order (A → Z, oldest to newest). Click again to sort in **descending** order (Z → A, newest to oldest). The arrow (▲ or ▼), appears in the sort button to show the current sorting direction.
 
-## Viewing a user card
+## Viewing a User Card
 
 Select **View** in a user's record to show the user's card. Here you can delete a user from Gameboard, change their approved name, add a disapproved reason, and even change their role.
 

@@ -16,7 +16,7 @@ Player is ***not*** meant to:
 
 - Control any authentication or content within any application that it displays in a content panel.
 - Provide any mechanisms for individual applications to communicate with each other.
-- Provide any default applications.  However, some common applications can be consumed within an exercise.
+- Provide any default applications. However, some common applications can be consumed within an exercise.
 
 ## Administrator User Guide
 
@@ -129,8 +129,8 @@ If you have not already done so, in the dropdown next to your username, select *
       - Enter a **Name** for the app template.
       - Enter a **URL** for the app template.
       - Enter the path for the icon.
-3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames.  The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
-4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads.  This is important for some apps that may require some initialization.
+3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames. The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
+4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads. This is important for some apps that may require some initialization.
 
 ### Define Roles and Permissions
 
@@ -141,7 +141,7 @@ Users and/or teams can be assigned to a Role, which is a group of permissions. R
 
 Define Permissions
 
-Permissions can be created by admin as well. Player uses two established permissions, SystemAdmin and ViewAdmin.
+Permissions can be created by admin as well. Player uses two established permissions, SystemAdmin, and ViewAdmin.
 
 SystemAdmin: can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
 
@@ -171,7 +171,7 @@ When adding a Subscription, you must specify:
 
 The top bar displays the current *view name*, *team*, and the *menu select* dropdown (your username in the top right).
 
-Player fully supports users who are on multiple teams.  Any such user, when logged in, can switch their team by using the *team* drop-down.
+Player fully supports users who are on multiple teams. Any such user, when logged in, can switch their team by using the *team* drop-down.
 
 ### Application Navigation Bar
 
@@ -179,7 +179,7 @@ In the view, the navigation bar on the left contains applications.
 
 #### Documentation
 
-Any documents or files  - PDF, PNG, etc. - that can be served on the web can be easily set up as an application for viewing.  This is particularly helpful for displaying instructions, intel, maps, and other information.
+Any documents or files  - PDF, PNG, etc. - that can be served on the web can be easily set up as an application for viewing. This is particularly helpful for displaying instructions, intel, maps, and other information.
 
 #### Maps
 
@@ -193,13 +193,13 @@ The **Maps** application allows Player users who have View Administrator (*ViewA
 
 Assuming that View Administrator permissions have been granted, in Player add the map application to the view.
 
-##### Adding the Map application to the view
+##### Adding the Map Application to the View
 
 1. In Player, in your present view, select your user name and then **Edit View**.
 2. Under Applications, select **Add New Application** then **Templates**, then **Map**.
 3. The Select Map dropdown and the New Map icon appear in the right pane.
 
-##### Creating a new map
+##### Creating a New Map
 
 ![player-new-map](../assets/img/player-new-map.png)
 
@@ -211,7 +211,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
    - **Teams:** only the teams selected here will see the new map. You can select more than one team here.
 3. Click **Submit**. The image of the new map appears in the right pane.
 
-##### Editing a map
+##### Editing a Map
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -221,7 +221,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
    - **Save:** saves your map.
    - Click in the map to **add a click point**.
 
-##### Adding a click point
+##### Adding a Click Point
 
 A *click point* is a location on the map that, when clicked by Player user, launches a resource like a virtual machine in a new tab. To add a click point to the map:
 
@@ -236,7 +236,7 @@ A *click point* is a location on the map that, when clicked by Player user, laun
 5. Click **Save** to save the new click point in the map.
 6. Click **Save** again to save the map.
 
-##### Deleting a click point
+##### Deleting a Click Point
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -244,7 +244,7 @@ A *click point* is a location on the map that, when clicked by Player user, laun
 4. Click an existing click point.
 5. In the Edit Click Point modal, click **Delete**.
 
-##### Deleting a map
+##### Deleting a Map
 
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
@@ -328,7 +328,7 @@ Receive and read notifications here.
 
 ## Player Tips
 
-### Taking Advantage of screen real estate
+### Taking Advantage of Screen Real Estate
 
 Player and its component applications (as well as any third party application linked through Player) can take advantage of any monitor setup. Any application in the application bar can be opened up in a new window or a new tab by clicking the [>] button on the right side of the application card. Virtual machine consoles can similarly be opened up in a new window or tab. This allows users to be very flexible with how they display the information presented in Player. Pull up documentation or a lab guide on one monitor while your virtual machine is on another. Use multiple windows with your ultra-wide to see everything at once. The possibilities are endless!
 
@@ -356,8 +356,8 @@ Procedures assume you are in the Player VM Console app.
 #### From Player VM to local
 
 1. In the Player VM Console app, select the virtual machine you want.
-2. On the virtual machine, select the text you would like to copy. Copy your text first to the virtual machine’s clipboard (how you do this depends upon the application you’re using).
-3. Once you’ve copied your text to the virtual machine clipboard, click **Copy** at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
+2. On the virtual machine, select the text you would like to copy. Copy your text first to the virtual machine's clipboard (how you do this depends upon the application you're using).
+3. Once you've copied your text to the virtual machine clipboard, click **Copy** at the top of the Player window. You should then see a `Copied Virtual Machine Clipboard` confirmation message.
 4. On your local machine, paste the copied text into a Notepad file or Word file.
 
 ### Power a Virtual Machine On or Off
@@ -386,9 +386,9 @@ These procedures assume you are in the Player VM Console app.
 4. Select the file from your local machine that you want to upload.
 5. Click **Open**. This will copy the file to the destination folder specified in the VM Send File Settings window.
 
-#### Upload files and mount ISO
+#### Upload Files and Mount ISO
 
-These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine – it’s a two-step process). This is useful for installers and uploading larger files (such as ISO files).
+These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine -– it's a two-step process). This is useful for installers and uploading larger files (such as ISO files).
 
 1. In the VM List screen, click **Upload File**.
 2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).
@@ -405,7 +405,7 @@ These procedures describe how to upload files from a local machine to be mounted
 
 ### Follow Another Player
 
-The **user follow** feature in Player allows you to virtually look over a participant’s shoulder during a scenario. This is a useful feature when helping someone troubleshoot and for team members who are geographically separated. This can also be used by observers when evaluating or watching teams perform during an event.
+The **user follow** feature in Player allows you to virtually look over a participant's shoulder during a scenario. This is a useful feature when helping someone troubleshoot and for team members who are geographically separated. This can also be used by observers when evaluating or watching teams perform during an event.
 
 To follow another participant:
 
@@ -422,10 +422,10 @@ To follow another participant:
    - Click **Collapse All** to collapse the teams.
    - Select a team to expand it and see its participants.
    - Check **Hide Inactive** to display _only_ those participants who are working in a virtual machine at the moment.
-4. Click the participant’s name. Now, you can see the console display for the virtual machine that the person is on in the main Player window.
+4. Click the participant's name. Now, you can see the console display for the virtual machine that the person is on in the main Player window.
 5. Click the icon next to the participant's name to follow that participant in a new browser tab.
 
-If the person switches virtual machines then your display automatically follows them. You can’t interact with them while following; and, if their virtual machine goes out of focus then following stops.
+If the person switches virtual machines then your display automatically follows them. You can't interact with them while following; and, if their virtual machine goes out of focus then following stops.
 
 Clicking the **gear icon** in the upper left of the display you are following gives you the options to **Open In New Tab** and **Reconnect**. If you are already in a new browser tab, then you will see the **Fullscreen** option.
 
@@ -435,7 +435,7 @@ The following glossary provides a brief definition of key terms and concepts as 
 
 **Apps:** A website a participant in a view can open within Player or in a separate browser tab. A common example of an app used in Player is the Mattermost messaging platform.
 
-**App Template:** The settings associated with an app that is added to a team's View.  An app template can be created for common apps that are added to a view with default settings that an administrator can override if needed.
+**App Template:** The settings associated with an app that is added to a team's View. An app template can be created for common apps that are added to a view with default settings that an administrator can override if needed.
 
 **Authentication:** Player uses IdentityServer 4 to authenticate users. Authentication gets a user into Player. However, to determine what a user can open and/or edit within Player, administrators need to set the required permissions within the Player Administration View under the Users Administrator tab.
 

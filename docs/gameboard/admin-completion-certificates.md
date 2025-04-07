@@ -1,4 +1,4 @@
-# Configuring certificate templates
+# Configuring Certificate Templates
 
 Game participants can view, share, and print certificates of completion as proof of participation in a game. To do so, certificate templates must be configured in a game's Metadata settings. Game organizers (i.e., users who have been granted a role with the appropriate permissions) configure certificate templates to customize the appearance of these completion certificates.
 
@@ -13,13 +13,13 @@ Certificates are "templatized", allowing a single certificate template to be use
 
 The keywords, which should be enclosed in `{{double braces}}`, are as follows: `date`, `division`, `challengeDescription`, `challengeName`, `gameName`, `playerName`, `rank`, `score`, `season`, `series`, `teamName`, `totalPlayerCount`, `totalTeamCount`, `time`, `track`, and `userName`.
 
-## Selecting a certificate template
+## Selecting a Certificate Template
 
-Players can view a list of past certificates from their Gameboard Profile page too. In Gameboard, click **Profile**. Then click **Certificates**.  A table view of all game certificates is displayed. You can view and print the certificate as a .PDF from the table view.
+Players can view a list of past certificates from their Gameboard Profile page too. In Gameboard, click **Profile**. Then click **Certificates**. A table view of all game certificates is displayed. You can view and print the certificate as a .PDF from the table view.
 
 1. In the game's Metadata settings, under Completion Certificates, choose an existing certificate template from the dropdowns.
 
-## Adding a certificate template
+## Adding a Certificate Template
 
 1. In the game's Metadata settings, under Completion Certificates, select the **+** icon.
 2. In the **Create Certificate Template** window, enter a **Name** for your certificate template.
@@ -32,23 +32,23 @@ Players can view a list of past certificates from their Gameboard Profile page t
 
 4. Click **OK**.
 
-## Previewing a certificate template
+## Previewing a Certificate Template
 
 This section assumes that you have been granted the Administrator role in Gameboard, you are logged in, and you have a game created.
 
 1. In the game's Metadata settings, under Completion Certificates, select the **eye** icon. The certificate preview launches in a new browser tab.
 
-## Editing a certificate template
+## Editing a Certificate Template
 
 1. In the game's Metadata settings, under Completion Certificates, select the **Edit** icon. The **Edit Certificate Template** window is launched.
 2. Make any updates in the **Name** and **Template** fields, then click **OK**.
 
-## Copying a certificate template
+## Copying a Certificate Template
 
 1. In the game's Metadata settings, under Completion Certificates, select the **Copy** icon. The template's HTML configuration is copied to your clipboard.
 2. Paste the HTML into the location of your choice.
 
-## Deleting a certificate template
+## Deleting a Certificate Template
 
 1. In the game's Metadata settings, under Completion Certificates, select the **Delete** icon. The certificate template is deleted.
 

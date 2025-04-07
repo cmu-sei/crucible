@@ -1,0 +1,13 @@
+# Description: Enforces the use of industry preferred terms.
+extends: substitution
+message: "Use '%s' instead of '%s'."
+ignorecase: true
+level: error
+action:
+  name: replace
+swap:
+  "black[ -]?list?": blocklist
+  "black[ -]?list(?:ing)": blocklisting
+  "white[ -]?list?": allowlist
+  "white[ -]?list(?:ing)": allowlisting
+  "slave": secondary

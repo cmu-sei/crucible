@@ -1,6 +1,6 @@
-# Getting started
+# Getting Started
 
-## What's new
+## What's New
 
 Get the latest TopoMojo source code and its accompanying release notes [here](https://github.com/cmu-sei/TopoMojo).
 

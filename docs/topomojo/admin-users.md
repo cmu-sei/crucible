@@ -1,6 +1,6 @@
 # Admin Users
 
-The **Users** tab is where TopoMojo users are listed, created, and assigned permissions. The **Search** feature allows TopoMojo admins to search on the name of a TopoMojo user. To search for a user across all of TopoMojo, enter the term into the **Search** field or filter by *role* or *audience*. 
+The **Users** tab is where TopoMojo users are listed, created, and assigned permissions. The **Search** feature allows TopoMojo admins to search on the name of a TopoMojo user. To search for a user across all of TopoMojo, enter the term into the **Search** field or filter by *role* or *audience*.
 
 Recall from workspace Settings that "audience" is a list of clients who can launch the workspace as a gamespace. Selecting an audience filter results in users who are part of that audience.
 
@@ -10,7 +10,7 @@ Recall from workspace Settings that "audience" is a list of clients who can laun
 
 ## Roles
 
-All permissions are *additive*; meaning a Creator can do everything a Builder can do and an Observer can do everything a Builder and Creator can do. 
+All permissions are *additive*; meaning a Creator can do everything a Builder can do and an Observer can do everything a Builder and Creator can do.
 
 - **Admin:** Highest level of permission in TopoMojo; can do everything the other roles can do.
 - **Observer:** Allows a user to view and use the Gamespaces tab. Access is limited by the *scope* of the user (see below). An observer can deploy gamespaces with a matching *audience* and these are the only gamespaces the user can observe.
@@ -19,7 +19,7 @@ All permissions are *additive*; meaning a Creator can do everything a Builder ca
 - **User:** No extra permissions in TopoMojo. This is the TopoMojo default.
 - **Disabled:** No permissions in TopoMojo.
 
-## Create a new User
+## Create a New User
 
 **Name:** Enter a new user name here.
 

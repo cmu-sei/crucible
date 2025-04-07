@@ -1,8 +1,8 @@
-# The Home screen
+# The Home Screen
 
 The Home screen is where you start a "live" game, preview upcoming games, and view completed games. Hover over a game card and select **Open Game**. Click **Enroll** to proceed to the game lobby.
 
-## The Game lobby
+## The Game Lobby
 
 This is the staging area where players join team members (if playing on a team) and get organized before starting a game session. Information about the session and enrollment appears here: e.g., "Enrollment closes in 2101d 17h."
 
@@ -32,7 +32,7 @@ This player is active:
 
 Setting a new team display name here also renames the captain player's display name. Make sure this is what you intend before changing the team display name.
 
-## Organizing a team
+### Organizing a Team
 
 If the game is a team game, you organize your team in the game lobby. Under **Set Team Display Name**, enter a team name for the scoreboard. If you're the team captain, generate an invitation for your teammates. Copy the invitation code and distribute it to your teammates. Team members redeem your invitation code here too.
 
@@ -40,7 +40,7 @@ If the game is a team game, you organize your team in the game lobby. Under **Se
 
     Team captains: generating a new invitation code invalidates previous invitation codes.
 
-## Starting a challenge
+### Starting a Challenge
 
 After your session is started, select **Continue to Gameboard**. To start a challenge, select a hot spot on the Gameboard. Select **Start Challenge** and click through the confirmation messages.
 
@@ -54,7 +54,7 @@ Administrators may set a limit on the number of challenges a player can have dep
 
 ![destroy deploy under gamespace resources](img/destroy-button.png)
 
-## Getting support in-game
+### Getting In-Game Support
 
 Players can get to the in-game support feature from the launched challenge screen below the challenge questions and the Support link in the top navigation.
 

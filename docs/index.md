@@ -1,19 +1,20 @@
 # ![An icon representing the Crucible application suite icon](assets/img/home/cruciblelogo.svg "Crucible Application Suite Icon"){: style="height:75px;width:75px"} Introducing Crucible
 
-**Crucible** is an open-source application framework for operating a cyber range. Crucible aims to be both simple and powerful, highly extensible, and cost effective. Since 2018, Crucible has effectively enabled large-scale Department of Defense (DoD) cyber exercises to increase operator performance. Crucible is now available to the public under open-source licensing.
+**Crucible** is an open-source application framework for operating a cyber range. Crucible aims to be both simple and powerful, highly extensible, and cost effective.
+Since 2018, Crucible has effectively enabled large-scale Department of Defense (DoD) cyber exercises to increase operator performance. Crucible is now available to the public under open-source licensing.
 
-## Key Features
+### Key Features
 
 - Open-source cyber-range application framework
 - Modular design with extensive application programming interfaces
 - Customizable, immersive, browser-based user interface
-- “Infrastructure as code” approach to topology building—enabling scalability, iteration, and reuse
+- "Infrastructure as code" approach to topology building—enabling scalability, iteration, and reuse
 - Flexible integration of powerful, third-party, open-source tools
 - Scenario-based exercising
 - Efficiency through automation
 - Interoperability through open standards
 
-## Addressing Persistent Challenges
+### Addressing Persistent Challenges
 
 Cyber range administrators confront persistent challenges:
 
@@ -27,7 +28,7 @@ Crucible automates creation of virtual cyber environments featuring modeled topo
 
 ## Designing User Interfaces
 
-[![Player Logo](assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"}](player/index.md) Crucible’s [**Player**](player/index.md) application is the user’s window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.
+[![Player Logo](assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"}](player/index.md) Crucible's [**Player**](player/index.md) application is the user's window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.
 
 ### Player Open-Source Integrations
 
@@ -38,7 +39,7 @@ Crucible automates creation of virtual cyber environments featuring modeled topo
 
 ## Coding a Topology
 
-[![Caster Logo](assets/img/crucible-icon-caster.svg){: style="height:75px;width:75px"}](caster/index.md) Crucible’s [**Caster**](caster/index.md) application enables the “coded” design and deployment of a cyber topology. Using Caster Designs, a novice content developer can avoid scripting OpenTofu code by simply defining variables within pre-configured OpenTofu modules. Caster supports the design and deployment of virtual environments to three types of hypervisors:
+[![Caster Logo](assets/img/crucible-icon-caster.svg){: style="height:75px;width:75px"}](caster/index.md) Crucible's [**Caster**](caster/index.md) application enables the "coded" design and deployment of a cyber topology. Using Caster Designs, a novice content developer can avoid scripting OpenTofu code by simply defining variables within pre-configured OpenTofu modules. Caster supports the design and deployment of virtual environments to three types of hypervisors:
 
 - VMware vSphere ESXi
 - Microsoft Azure HyperV (public-cloud)
@@ -46,14 +47,14 @@ Crucible automates creation of virtual cyber environments featuring modeled topo
 
 ### Caster Open-Source Integrations
 
-- **OpenTofu**, an “infrastructure-as-code” tool, enables scripted deployment of cyber infrastructure
+- **OpenTofu**, an "infrastructure-as-code" tool, enables scripted deployment of cyber infrastructure
 - **GitLab**, a version control system and code-repository, is used to store OpenTofu modules.
 
 ## Crafting a Scenario
 
-[![Blueprint Logo](assets/img/blueprint-logo.png)](blueprint/index.md) Crucible’s [**Blueprint**](blueprint/index.md) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to specific simulation objectives.
+[![Blueprint Logo](assets/img/blueprint-logo.png)](blueprint/index.md) Crucible's [**Blueprint**](blueprint/index.md) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to specific simulation objectives.
 
-[![Steamfitter Logo](assets/img/crucible-icon-steamfitter.svg){: style="height:75px;width:75px"}](steamfitter/index.md) Crucible’s [**Steamfitter**](steamfitter/index.md) application enables the organization and execution of scenario tasks on virtual machines.
+[![Steamfitter Logo](assets/img/crucible-icon-steamfitter.svg){: style="height:75px;width:75px"}](steamfitter/index.md) Crucible's [**Steamfitter**](steamfitter/index.md) application enables the organization and execution of scenario tasks on virtual machines.
 
 ### Scenario Open-Source Integrations
 
@@ -62,7 +63,7 @@ Crucible automates creation of virtual cyber environments featuring modeled topo
 
 ## Animating Activity
 
-[![GHOSTS Logo](assets/img/ghosts_new.png){: style="height:75px;width:75px"}](https://cmu-sei.github.io/GHOSTS/) Crucible’s [**GHOSTS**](https://cmu-sei.github.io/GHOSTS/) Non-Player Character (NPC) automation and orchestration framework deploys and shapes the activities of NPCs using Generative AI models.
+[![GHOSTS Logo](assets/img/ghosts_new.png){: style="height:75px;width:75px"}](https://cmu-sei.github.io/GHOSTS/) Crucible's [**GHOSTS**](https://cmu-sei.github.io/GHOSTS/) Non-Player Character (NPC) automation and orchestration framework deploys and shapes the activities of NPCs using Generative AI models.
 
 ### GHOSTS Open-Source Integrations
 
@@ -70,15 +71,15 @@ Crucible automates creation of virtual cyber environments featuring modeled topo
 
 ## Evaluating Threats
 
-[![CITE Logo](assets/img/cite-logo.png)](cite/index.md) Crucible’s [**Collaborative Incident Threat Evaluator (CITE)**](cite/index.md) application enables participants from different organizations to evaluate, score, and comment on cyber incidents. CITE also provides a situational awareness dashboard that allows teams to track their internal actions and roles.
+[![CITE Logo](assets/img/cite-logo.png)](cite/index.md) Crucible's [**Collaborative Incident Threat Evaluator (CITE)**](cite/index.md) application enables participants from different organizations to evaluate, score, and comment on cyber incidents. CITE also provides a situational awareness dashboard that allows teams to track their internal actions and roles.
 
 ## Displaying Incident Information
 
-[![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md) Crucible’s [**Gallery**](gallery/index.md) application enables participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector or any other organization.
+[![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md) Crucible's [**Gallery**](gallery/index.md) application enables participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector or any other organization.
 
 ## Assessing Performance
 
-![SEER Logo](assets/img/crucible-icon-seer.svg){: style="height:75px;width:75px"} Crucible’s **SEER** application enables assessment of team performance. Assessment reports map training objectives to scenario events to performance assessments.
+![SEER Logo](assets/img/crucible-icon-seer.svg){: style="height:75px;width:75px"} Crucible's **SEER** application enables assessment of team performance. Assessment reports map training objectives to scenario events to performance assessments.
 
 ### SEER Open-Source Integrations
 
@@ -87,7 +88,7 @@ Crucible automates creation of virtual cyber environments featuring modeled topo
 
 ## Launching a Simulation
 
-[![Alloy Logo](assets/img/crucible-icon-alloy.svg){: style="height:75px;width:75px"}](alloy/index.md) Crucible’s [**Alloy**](alloy/index.md) application enables users to launch an on-demand event or join an instance of an already-running simulation. Following the event, reports can provide a summary of knowledge and performance assessments.
+[![Alloy Logo](assets/img/crucible-icon-alloy.svg){: style="height:75px;width:75px"}](alloy/index.md) Crucible's [**Alloy**](alloy/index.md) application enables users to launch an on-demand event or join an instance of an already-running simulation. Following the event, reports can provide a summary of knowledge and performance assessments.
 
 ## Operational Deployment
 
