@@ -1,0 +1,162 @@
+# This is the configuration file for Markdownlint - A markdown linting project.
+# You can find Markdownlint here: https://github.com/DavidAnson/markdownlint
+# This config file is assuming the use of markdownlint-cli2:
+
+config:
+  # Do not allow headings to increase more than 1 level at a time
+  MD001: true
+
+  # Headings should use atx style (using # characters)
+  MD003:
+    style: atx
+
+  # Use dashes as the prefix for unordered lists
+  MD004:
+    style: dash
+
+  # List indentation should be consistent
+  MD005: true
+
+  # List item indentation requires 2 spaces
+  MD007: true
+
+  # Triggered by lines that end with unexpected white space and
+  # too many unexpected line breaks
+  MD009: true
+
+  # Allow hard tab characters
+  MD010: false
+
+  # Catches links that are rendered incorrectly
+  MD011: true
+
+  # Triggered when there are too many blank lines in a row (more than 2)
+  MD012:
+    maximum: 2
+
+  # Don't enforce max line length
+  MD013: false
+
+  # Code blocks showing commands should not include unnecessary $ characters
+  # Commands not showing output should not have a leading $
+  MD014: true
+
+  # Headings should have exactly 1 space after the #
+  # This rule errors on less than 1 space detected.
+  MD018: true
+
+  # Headings should have exactly 1 space after the #
+  # This rule errors on more than 1 space detected.
+  MD019: true
+
+  # Headings should be surrounded by exactly 1 blank line above/below
+  MD022:
+    lines_above: 1
+    lines_below: 1
+
+  # Headings should be at the beginning of a line (not indented)
+  MD023: true
+
+  # Allow multiple headings to have the same content
+  MD024: false
+
+  # Allows multiple H1 headings in a document
+  MD025: false
+
+  # Headings should not end with punctuation
+  MD026:
+    punctuation: .,;:!。，；：！
+
+  # Block quotes should have no more than 1 space after the >
+  MD027: true
+
+  # Two block quotes are accidentally next to each other
+  # or there's an unclear blank line in the middle of one
+  MD028: true
+
+  # Ordered lists should be formatted with proper item prefixes
+  MD029: true
+
+  # List item prefixes should be followed by 1 space
+  MD030:
+    ul_single: 1
+    ol_single: 1
+    ul_multi: 1
+    ol_multi: 1
+
+  # Code fences should be surrounded by 1 blank line above/below
+  # An exception is made when a code fence appears in a list
+  MD031:
+    list_items: false
+
+  # Lists should be surrounded by 1 blank line above/below
+  MD032: true
+
+  # Allows in-line HTML
+  MD033: false
+
+  # URLs should be rendered as links or placed inside a code span
+  MD034: true
+
+  # Horizontal rules should be formatted consistently
+  MD035: true
+
+  # Actual headings should be used instead of bold/italics
+  MD036: false
+
+  # Catches instances where bold/italics might be rendered incorrectly
+  # This happens when there are spaces around the emphasis markers
+  MD037: true
+
+  # Code Spans should not have a space immediately before/after
+  # the closing/opening markers
+  MD038: true
+
+  # Links should not have spaces immediately before/after
+  # the closing/opening markers
+  MD039: true
+
+  # Code blocks should have a language specified
+  MD040: true
+
+  # The first line in a file should be a top level heading
+  MD041: true
+
+  # Links should not be empty
+  MD042: true
+
+  # Images should have alternate text to enhance readability
+  MD045: true
+
+  # Code blocks should use a "fenced" style (triple backticks with a language defined)
+  MD046:
+    style: fenced
+
+  # File should end with a new line character
+  MD047: true
+
+  # Code blocks should be defined by triple backtick characters
+  MD048:
+    style: backtick
+
+  # Italics should be formatted with an underscore
+  MD049:
+    style: asterisk
+
+  # Bold should be formatted with two (2) asterisks
+  MD050:
+    style: asterisk
+
+  # Links to headers in this document should be valid
+  MD051:
+    ignore_case: false
+
+  # Markdown tables should be formatted with leading/trailing | characters
+  MD055:
+    style: leading_and_trailing
+
+  # Tables should have the same number of columns in every row
+  MD056: true
+
+  # Tables should be surrounded by exactly 1 blank line above/below
+  MD058: true
