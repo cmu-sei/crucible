@@ -1,3 +1,5 @@
+# Files
+
 The **Files** page in the TopoMojo workspace allows you to upload files from your system to TopoMojo to include in your lab. These files are used as ISOs that can be attached to VMs in the workspace. If your files aren't already in an ISO file format, TopoMojo wraps them in an ISO after upload.
 
 !!! note
@@ -10,7 +12,7 @@ The **Files** tab in TopoMojo is where ISO files are uploaded to attach to virtu
 
 By default, the **Local** filter is applied so it only displays ISOs available in the current workspace.
 
-When you upload an ISO file in the box, TopoMojo creates a folder with *this* GUID--called out in green in screen print 1 below--in the folder name in the NFS datastore. TopoMojo puts your ISO in that folder. Only the current workspace, that is, *your* workspace has access to the ISO file.
+When you upload an ISO file, TopoMojo creates a folder with *this* GUID--called out in green in screen print 1 below--in the folder name in the NFS datastore. TopoMojo puts your ISO in that folder. Only the current workspace, that is, *your* workspace has access to the ISO file.
 
 *Screen print 1: GUID and Local filter applied*
 

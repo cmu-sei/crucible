@@ -60,9 +60,7 @@ Crucible's [**Blueprint**](https://cmu-sei.github.io/crucible/blueprint/) applic
 
 ### Gallery
 
-Crucible's [**Gallery**](https://cmu-sei.github.io/crucible/gallery/) application enables
-participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector
-or any other organization.
+Crucible's [**Gallery**](https://cmu-sei.github.io/crucible/gallery/) application enables participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector or any other organization.
 
 - [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
 - [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui)

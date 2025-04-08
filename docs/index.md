@@ -3,7 +3,7 @@
 **Crucible** is an open-source application framework for operating a cyber range. Crucible aims to be both simple and powerful, highly extensible, and cost effective.
 Since 2018, Crucible has effectively enabled large-scale Department of Defense (DoD) cyber exercises to increase operator performance. Crucible is now available to the public under open-source licensing.
 
-### Key Features
+## Key Features
 
 - Open-source cyber-range application framework
 - Modular design with extensive application programming interfaces
@@ -14,7 +14,7 @@ Since 2018, Crucible has effectively enabled large-scale Department of Defense (
 - Efficiency through automation
 - Interoperability through open standards
 
-### Addressing Persistent Challenges
+## Addressing Persistent Challenges
 
 Cyber range administrators confront persistent challenges:
 

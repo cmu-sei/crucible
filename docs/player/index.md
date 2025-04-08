@@ -151,7 +151,7 @@ ViewAdmin: can edit anything within a View that they have permissions.
 
 Subscriptions allow a Player administrator to configure client applications to be notified when supported actions occur within the Player API. Also known as Webhooks, this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy. For example, the VM API supports subscribing to ViewCreated and ViewDeleted in Player.
 
-When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured, Player notifies VM API of the new View and it ensures that any Maps that were set up for the parent View are made available in the newly created View. This allows for Maps to be used in on-demand events.
+When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured, Player notifies the VM API of the new View. The VM API then ensures that any Maps set up for the parent View are available in the newly created View. This allows for Maps to be used in on-demand events.
 
 When the event is ended, it receives the ViewDeleted notification and cleans up. Similarly any application can be configured to subscribe to these notifications and support on-demand events without Player code having to be added for each application specifically.
 
@@ -388,7 +388,7 @@ These procedures assume you are in the Player VM Console app.
 
 #### Upload Files and Mount ISO
 
-These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine -– it's a two-step process). This is useful for installers and uploading larger files (such as ISO files).
+These procedures describe how to upload files from a local machine to be mounted as a DVD. Files are not uploaded directly to a virtual machine-–it is a two-step process. This is useful for installers and uploading larger files (such as ISO files).
 
 1. In the VM List screen, click **Upload File**.
 2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).

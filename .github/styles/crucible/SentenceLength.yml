@@ -1,8 +1,8 @@
 # Description: Counts the number of words in a sentence. Flags if more than 30.
 extends: occurrence
-message: "Try to keep your sentence length to 25 words or fewer."
+message: "Try to keep your sentence length to 30 words or fewer."
 level: suggestion
 scope: sentence
 ignorecase: false
-max: 25
+max: 30
 token: \b(\w+)\b
