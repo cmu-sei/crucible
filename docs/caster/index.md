@@ -6,9 +6,9 @@ Caster is the primary deployment component of the Crucible simulation framework.
 
 Caster is meant to provide a web interface that gives exercise developers a powerful and flexible way to create, share, and manage topology configurations.
 
-Initial versions of Caster focus on a web front-end for raw Terraform configurations and outputs. This gives advanced developers easier access to a powerful deployment tool. Targeted improvements to the experience for these users will be made in the future. Eventually, this system will be used to underpin a more user-friendly interface that will allow configurations to be pieced together with less or no writing of Terraform code directly.
+Initial versions of Caster focused on a web front-end for raw Terraform configurations and outputs. This gave advanced developers easier access to a powerful deployment tool. Targeted improvements to the experience for these users will be made in the future. Eventually, this system will be used to underpin a more user-friendly interface that will allow configurations to be pieced together with less or no writing of Terraform code directly.
 
-The goal is to create a tool that gives advanced users the power and flexibility that they desire, while also allowing novice users to take advantage of complex topologies created by advanced users or create their own simple ones easily.
+Caster should give experts the control they need, while also making it easy for beginners to use expert setups or create simple ones on their own.
 
 **Terraform Integration**
 
@@ -32,7 +32,10 @@ Users and/or teams can be assigned to a **Role**, which is a group of permission
 - **ContentDeveloper:** can edit anything within a Directory that they have permissions.
 
 A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to specific teams who can now edit that Directory.
-> **Important!** Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Users, Modules, Workspaces).
+
+!!! important
+
+    Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Users, Modules, Workspaces).
 
 ### Modules
 
@@ -40,23 +43,28 @@ A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to 
 
 [Modules](https://www.terraform.io/docs/glossary.html#module) are a Terraform construct:
 
-> A module is a container for multiple resources that are used together. Modules can be used to create lightweight abstractions, so that you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
+!!! info
+
+    A module is a container for multiple resources that are used together. Modules can be used to create lightweight abstractions, so that you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
 
 Modules are very powerful and allow for complex configurations to be made simpler and more easily shared and used. A module takes any Terraform configuration consisting of any number of resources and turns it into a single block, exposing required and/or optional variables. Some examples include:
 
-- A generic virtual machine module that abstracts away commonly used parameters into variables such as:
+1. A generic virtual machine module that abstracts away commonly used parameters into variables such as:
 
     - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
     - **Networks:** creates a NIC for each specified network and assigns it to the specified network vlan.
     - **ExerciseId:** appends the `exerciseId` to the name of the vm for use with ODX's where unique naming is required.
     - Other simplified variable names based on the target audience.
-- A module to create a very specific type of virtual machine resource, such as a domain controller, that points to a known good VMware template/base disk and an Ansible playbook that requires variables such as:
+
+2. A module to create a very specific type of virtual machine resource, such as a domain controller, that points to a known good VMware template/base disk and an Ansible playbook that requires variables such as:
+
     - Domain Name
     - IP Address
     - DomainAdminUser
     - DomainAdminPass
-- A module to define an entire Cyber Flag enclave.
-- A module to define a generic GreySpace that accepts variables to configure GreyBox, TopGen, etc.
+
+3. A module to define an entire Cyber Flag enclave.
+4. A module to define a generic GreySpace that accepts variables to configure GreyBox, TopGen, etc.
 
 Modules allow for endless flexibility for developers to wrap whatever configuration they can create into a small package and describe to consumers of the module exactly what it does and what values it requires to function.
 
@@ -64,7 +72,9 @@ Caster makes it easier to search for and use modules when building a Terraform c
 
 Caster supports modules created as GitLab projects that are visible to the GitLabToken defined in the API settings with at least one version defined. All versions will be shown in Caster when the project is added/refreshed to Caster.
 
->**Note:**  Caster requires that the inputs file and the outputs file be written in JSON (that is, `variables.tf.json` and `ouptuts.tf.json`).
+!!! note
+
+    Caster requires that the inputs file and the outputs file be written in JSON (that is, `variables.tf.json` and `ouptuts.tf.json`).
 
 There are three ways that the a module can be added/refreshed to Caster:
 
@@ -96,7 +106,7 @@ Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and sub-
 
 ### Project
 
-The top-level construct in Caster is called a *project*. The _project_ is a way to organize and categorize similar environments for multiple s and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
+The top-level construct in Caster is called a *project*. The *project* is a way to organize and categorize similar environments for multiple s and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
 
 A project is meant to:
 
@@ -120,7 +130,9 @@ Add Directory lets you create a new directory at the same level as the above pro
 - `.tf` A configuration file that defines resources, variables, etc., in a Terraform configuration.
 - `.auto.tfvars` Contains the values to be used for variables defined in `.tf` files.
 
->**Note:** When working with Files in Caster **CTRL+L** locks/unlocks a file to prevent others from editing that file simultaneously. When locked, the file icon appears as a dashed line. When unlocked, the file icon appears solid. Files can also be locked by an administrator. A file is *administratively locked* to prevent anyone from changing that file. A lock icon in the top right corner of the file edit screen denotes that the file is administratively locked. **CTRL+S** saves a file.
+!!! note
+
+    When working with files in Caster **CTRL+L** locks/unlocks a file to prevent others from editing that file simultaneously. When locked, the file icon appears as a dashed line. When unlocked, the file icon appears solid. Files can also be locked by an administrator. A file is *administratively locked* to prevent anyone from changing that file. A lock icon in the top right corner of the file edit screen denotes that the file is administratively locked. **CTRL+S** saves a file.
 
 See the official [Terraform Documentation](https://www.terraform.io/docs/index.html) for more details on supported file types and extensions. In the future, Caster may provide more guidance on what types of files can be created and what their contents are expected to be.
 
@@ -128,7 +140,7 @@ See the official [Terraform Documentation](https://www.terraform.io/docs/index.h
 
 ![Caster workspaces](../assets/img/caster-workspaces.PNG)
 
-A *workspace* represents a specific instance of a deployed Terraform configuration. The same configuration can be used to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example: a configuration for an enclave in a Cyber Flag exercise may be defined once, and then deployed to `flag00` through `flag30` workspaces - each creating a copy of the enclave.
+A *workspace* represents a specific instance of a deployed Terraform configuration. The same configuration can be used to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example, a configuration for an enclave in a Cyber Flag exercise may be defined once, and then deployed to `flag00` through `flag30` workspaces - each creating a copy of the enclave.
 
 Workspaces can contain files, which extend the configuration of the directory for that specific workspace. This might include files specifying values for variables defined in the directory, or additional resources to be deployed only for that workspace.
 
@@ -138,7 +150,7 @@ A workspace is where users:
 - Run their plans (*Runs* are a specific instance of a Terraform plan; explained [here](#run-plan-and-apply))
 - Manage the differences and the variables in their environments
 
-Users can access workspaces from a project's navigation pane in Caster. Users can add additional files, but _not_ additional directories, to a workspace. The workspace view allows users to see all the runs that have been planned and applied. Runs shaded in red are destroyed operations, while runs in white signify various other status classifications.
+Users can access workspaces from a project's navigation pane in Caster. Users can add additional files, but *not* additional directories, to a workspace. The workspace view allows users to see all the runs that have been planned and applied. Runs shaded in red are destroyed operations, while runs in white signify various other status classifications.
 
 Users can `Plan`, `Destroy`, `Apply`, `Taint`, and `Reject` operations in real time in the workspace view.
 
@@ -146,7 +158,7 @@ Users can `Plan`, `Destroy`, `Apply`, `Taint`, and `Reject` operations in real t
 
 In order to avoid this, a System Administrator should follow these steps in the Caster UI before stopping the `Caster.Api` container:
 
-- Navigate to Administration > Workspaces
+- Navigate to Administration, Workspaces
 - Disable Workspace Operations by clicking the toggle button
 - Wait until all Active Runs are completed
 
@@ -156,9 +168,7 @@ The top-level construct within a project is called a *directory*. A project can 
 
 **Directory Hierarchies**
 
-Directories can contain sub-directories to create a _hierarchy_ of directories and the configuration files contained within them. When a run is created in a workspace, the files in the workspace, the workspace's directory, ***and all parent directories*** are merged together and passed to Terraform as a single configuration. This eliminates redundancy when developing many environments that are largely the same, or sharing a set of common variables or data across many configurations.
-
-> For example, a large deployment might have a top-level directory that defines global variables like `vlan ids` and `team ids` in use, and then sub-directories that define resources that use those variables.
+Directories can contain sub-directories to create a *hierarchy* of directories and the configuration files contained within them. When a run is created in a workspace, the files in the workspace, the workspace's directory, ***and all parent directories*** are merged together and passed to Terraform as a single configuration. This eliminates redundancy when developing many environments that are largely the same, or sharing a set of common variables or data across many configurations. For example, a large deployment might have a top-level directory that defines global variables like `vlan ids` and `team ids` in use, and then sub-directories that define resources that use those variables.
 
 Users can add, rename, delete, or export a directory from the navigation panel on a project's main Caster page.
 
@@ -176,7 +186,7 @@ When you open a project, you can create a design and add modules backed by git t
 
 This topic is for anyone who manages a Crucible instance who wants to configure their Terraform provider installation for Caster. Terraform can be configured to only allow certain providers to be downloaded from the Internet and used from a local File store.
 
-Documentation describing this can be found in **HashiCorp's Terraform** documentation: **CLI Configuration File** > [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
+Documentation describing this can be found in **HashiCorp's Terraform** documentation: **CLI Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
 
 For your reference, below is the `.terraformrc` file currently implemented in the SEI's CyberForce instance of Caster.
 
@@ -186,7 +196,7 @@ These plugins are then all cached in the `plugin_cache_dir` section, to save fro
 
 **Sample Caster Terraform Configuration**
 
-```
+```text
 plugin_cache_dir = "/terraform/plugin-cache"
 provider_installation {
 	filesystem_mirror {
@@ -258,7 +268,7 @@ This output always ends with a summary of the form `Plan: x to add, y to change,
 
 **Apply**
 
-_Apply_ takes a run, executes `Terraform apply` on the previously generated plan and deploys the resources for a workspace. The `Apply` command:
+*Apply* takes a run, executes `Terraform apply` on the previously generated plan and deploys the resources for a workspace. The `Apply` command:
 
 - Deploys a workspace run
 - Releases plan tools such as network resources and virtual machines into vCenter
@@ -267,13 +277,11 @@ Within the workspace view users can see all the runs that have been planned and 
 
 **Destroy**
 
-Selecting destroy instead of plan is largely the same, except the plan generated is one that will destroy all of the previously deployed resources in the workspace, rather than making the infrastructure match the current configuration. That is, _Destroy_ creates a plan that will destroy all of the previously deployed resources in a workspace.
+Selecting destroy instead of plan is largely the same, except the plan generated is one that will destroy all of the previously deployed resources in the workspace, rather than making the infrastructure match the current configuration. That is, *Destroy* creates a plan that will destroy all of the previously deployed resources in a workspace.
 
->Note: If a resource is defined in the configuration and created in a run and then deleted from the configuration, it is destroyed upon the next plan or destroy run. This is because a Terraform run always tries to match the infrastructure to the current configuration.
+If a resource is defined in the configuration and created in a run and then deleted from the configuration, it is destroyed upon the next plan or destroy run. This is because a Terraform run always tries to match the infrastructure to the current configuration.
 
->Note: Only one run can be in progress at a time per workspace. Terraform locks the state of the workspace and only a single operation can be performed at a time.
->Developers may wish to break up large deployments into multiple directories and workspaces to operate on different parts of the deployments simultaneously.
->For example: User enclaves may be broken out so developers can perform actions on other parts of a network without (potentially) waiting a long time to redeploy user machines.
+Only one run can be in progress at a time per workspace. Terraform locks the state of the workspace and only a single operation can be performed at a time. Developers may wish to break up large deployments into multiple directories and workspaces to operate on different parts of the deployments simultaneously. For example, user enclaves may be broken out so developers can perform actions on other parts of a network without (potentially) waiting a long time to redeploy user machines.
 
 The workspace view allows users to see a table with all the runs that have been planned and applied within that directory. Runs highlighted in red are destroyed operations.
 
@@ -283,7 +291,7 @@ This infrastructure as code approach is different than many developers may be us
 
 **Taint**
 
-_Taint_ is a flag on a resource that tells Terraform to destroy and recreate a new instance on the next plan-and-apply cycle.
+*Taint* is a flag on a resource that tells Terraform to destroy and recreate a new instance on the next plan-and-apply cycle.
 
 Taint allows users to redeploy resources. For example, if a user needs to redeploy a series of virtual machines, the user can:
 
