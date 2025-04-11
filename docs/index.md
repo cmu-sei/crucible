@@ -1,6 +1,7 @@
 # ![An icon representing the Crucible application suite icon](assets/img/home/cruciblelogo.svg "Crucible Application Suite Icon"){: style="height:75px;width:75px"} Introducing Crucible
 
 **Crucible** is an open-source application framework for operating a cyber range. Crucible aims to be both simple and powerful, highly extensible, and cost effective.
+
 Since 2018, Crucible has effectively enabled large-scale Department of Defense (DoD) cyber exercises to increase operator performance. Crucible is now available to the public under open-source licensing.
 
 ## Key Features
@@ -75,7 +76,7 @@ Crucible automates creation of virtual cyber environments featuring modeled topo
 
 ## Displaying Incident Information
 
-[![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md) Crucible's [**Gallery**](gallery/index.md) application enables participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector or any other organization.
+[![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md) Crucible's [**Gallery**](gallery/index.md) application enables participants to review cyber incident data by source type, organized by critical infrastructure sector or other categories. Examples of cyber incident data source types include: intelligence, reporting, orders, news, social media, telephone, and email.
 
 ## Assessing Performance
 

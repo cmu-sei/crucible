@@ -18,7 +18,7 @@ Installing TopoMojo is a matter of installing the Helm chart found [here](https:
 
 Having a persistent/shared network available to all TopoMojo workspaces/gamespaces is recommended. The persistent/shared network is defined by an administrator at the time the TopoMojo API is deployed.
 
-Use case: create a persistent/shared network that provides internet access to all TopoMojo VMs that specify the network name (e.g., `bridge-net` signifies bridging the traditionally isolated TopoMojo VM to the internet).
+For example, you could create a persistent/shared network that provides internet access to all TopoMojo VMs that specify the network name. `bridge-net` typically signifies bridging the traditionally isolated TopoMojo VM to the internet.
 
 Use the `Pod__Vlan__Reservations` environment variable to define the name of a persistent/shared network. See screen print 1 below.
 

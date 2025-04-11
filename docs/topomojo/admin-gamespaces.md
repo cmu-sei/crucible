@@ -6,7 +6,14 @@ The **Gamespaces** tab is where the admin can search for, and filter by, **activ
 
 **Delete Selected:** Check the box next to **All** to select all gamespaces for deletion or check a box next to individual gamespaces to select for deletion.
 
-Gamespaces in the table show the gamespace id or support code in Gameboard (e.g. `e9416013`), the time remaining (if active), the user who is interacting with (or *had* interacted with) the gamespace; and the title of the *workspace* that the *gamespace* was deployed from. The screen print below, several active and inactive gamespaces are shown. User names have been redacted.
+Gamespaces in the table show the following information:
+
+- Gamespace id or support code in Gameboard (e.g. `e9416013`)
+- Time remaining (if active)
+- User who is interacting with (or *had* interacted with) the gamespace
+- Title of the *workspace* that the *gamespace* was deployed from
+
+The screen print below shows several active and inactive gamespaces. User names have been redacted.
 
 ![admin gamespaces](img/admin-gamespaces.png)
 

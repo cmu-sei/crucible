@@ -9,8 +9,7 @@
 ## Recommended
 
 - Helm
-- OAuth Provider
-  + We currently use [IdentityServer](https://identityserver4.readthedocs.io/en/latest/) and [Keycloak](https://www.keycloak.org/documentation)
+- OAuth Provider: We use [IdentityServer](https://identityserver4.readthedocs.io/en/latest/) and [Keycloak](https://www.keycloak.org/documentation)
 
 ## Crucible Applications and GitHub Pages
 

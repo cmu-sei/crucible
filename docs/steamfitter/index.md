@@ -20,12 +20,14 @@ In order to use Steamfitter, a user must be given **Content Developer** permissi
 2. Check the **ContentDeveloper** box next to the name of the user.
 3. Select your user name then **Exit Administration**.
 
-> Content Developer and System Administrator within Steamfitter only apply to the Steamfitter application - not to any other application in the Crucible framework.
+!!! note
+
+    Content Developer and System Administrator within Steamfitter only apply to the Steamfitter application - not to any other application in the Crucible framework.
 
 ### StackStorm Integration
 
 
-Behind the scenes Steamfitter uses StackStorm ([`stackstorm.com`](https://stackstorm.com/)) to execute these tasks. StackStorm is an open source application that can connect applications, services, and workflows. Steamfitter uses StackStorm to send commands to the guest VMs using the StackStorm vSphere Action Pack, so that none of the communication for the tasks run by StackStorm occurs over the network.
+Behind the scenes Steamfitter uses StackStorm ([`stackstorm.com`](https://stackstorm.com/)) to execute these tasks. StackStorm is an open source application that can connect applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This is so no communication for the tasks run by StackStorm occurs over the network.
 
 ## Administrator Guide
 
@@ -56,13 +58,17 @@ Select the newly added scenario from the scenario list. Now, you can edit the **
 
 **Start** and **End** dates and times can be changed here.
 
-> As you would expect, the same tasks you attached to the scenario template appear in the scenario. Editing them in the scenario only changes them in this scenario. If you want the tasks to be changed for all scenarios based upon the template, then you will have to edit the tasks in the scenario template.
+!!! success
+
+    As you would expect, the same tasks you attached to the scenario template appear in the scenario. Editing them in the scenario only changes them in this scenario. If you want the tasks to be changed for all scenarios based upon the template, then you will have to edit the tasks in the scenario template.
 
 #### Starting a Scenario
 
 In order for tasks to execute, a task has to be started.
 
-> If the Start Scenario button is not enabled that means that you have not associated it to a Player view.
+!!! info
+
+    If the Start Scenario button is not enabled that means that you have not associated it to a Player view.
 
 Once started, the scenario status is now **Active** and a new **Execute** option is available in the Task context menu.
 
@@ -85,42 +91,39 @@ A task can have multiple results:
 
 #### Adding a Task
 
-*Name:* What this task is supposed to do.
+- **Name:** What this task is supposed to do.
+- **Description:** Additional details about what the task does.
 
-*Description:* Additional details about what the task does.
+##### Action
 
-**Action**
+- **Select an Action:** Power on a VM, power off a VM, read a file, etc. An *action* is the name StackStorm gives to a single Task/Command.
+- **Trigger Condition:**
 
-- *Select an Action:* Power on a VM, power off a VM, read a file, etc. An *action* is the name StackStorm gives to a single Task/Command.
+       - *Time:* A *timed* trigger is executed automatically after a set *delay* in seconds. A timed trigger can have multiple *iterations* executed on a specific interval.
+       - *Manual:* A *manual* trigger condition is executed by manual intervention - clicking a button, for example, to fire off a task. It's up to a user to intervene to execute the task.
+       - *Completion:* When the parent task completes the dependent task runs - regardless of success or failure.
+       - *Success:* If the expected output is contained in the actual output then the dependent task runs.
+       - *Failure:* Only runs if the expected output is not contained within the actual output.
 
-- *Trigger Condition:*
+- **Expected Output:** Whatever you type here, if the actual output contains that text, then it is considered a success. If the output does not contain what is typed here, then it is considered a failure.
 
-   - *Time:* A *timed* trigger is executed automatically after a set *delay* in seconds. A timed trigger can have multiple *iterations* executed on a specific interval.
-   - *Manual:* A *manual* trigger condition is executed by manual intervention - clicking a button, for example, to fire off a task. It's up to a user to intervene to execute the task.
-   - *Completion:* When the parent task completes the dependent task runs - regardless of success or failure.
-   - *Success:* If the expected output is contained in the actual output then the dependent task runs.
-   - *Failure:* Only runs if the expected output is not contained within the actual output.
+##### Delay / Iteration / Expiration
 
+- **Delay:** Set in seconds before the task executes.
+- **Number of Iterations:** An *iteration* is an execution of a task when the task is configured to iterate for *x* number of times. Enter the number of times you want the task to execute here.
+- **Interval Between Iterations:** The time in seconds in between iterations.
+- **Iteration Termination:**
 
-*Expected Output:* Whatever you type here, if the actual output contains that text, then it is considered a success. If the output does not contain what is typed here, then it is considered a failure.
-
-**Delay / Iteration / Expiration**
-
-
-- *Delay:* Set in seconds before the task executes.
-- *Number of Iterations:* An *iteration* is an execution of a task when the task is configured to iterate for *x* number of times. Enter the number of times you want the task to execute here.
-- *Interval Between Iterations:* The time in seconds in between iterations.
-- *Iteration Termination:*
       - *IterationCountTask:* The task will execute until exactly the number of iteration times specified above; regardless of whether the task succeeds or fails.
       - *UntilSuccess:* The task will iterate until the command has a successful completion.
       - *UntilFailure:* The task will iterate until the command fails.
 
-- *Expiration Timeout:* The time, in seconds, where if no response has been received the task expires (times out).
+- **Expiration Timeout:** The time, in seconds, where if no response has been received the task expires (times out).
 
-**VM Selection**
+##### VM Selection
 
-- *VM Mask:* Tasks will run against Player VMs that include the text typed here.
-- *Choose Actual VMs:* Enable Choose Actual VMs to select specific VMs; these are the VMs found in the selected Player view.
+- **VM Mask:** Tasks will run against Player VMs that include the text typed here.
+- **Choose Actual VMs:** Enable Choose Actual VMs to select specific VMs; these are the VMs found in the selected Player view.
 
 #### Task Menu and Dependent Tasks
 
@@ -131,8 +134,6 @@ A task can be copied and pasted from any other scenario template, scenario, and 
 ### History
 
 The default History view shows task results for the current user sorted in reverse chronological order. However, you can also view history by **User**, **View**, and **VM**. Sorting and filtering are also available in the history results.
-
-<!--- Steamfitter Tips --->
 
 ## Glossary
 

@@ -2,13 +2,9 @@
 
 ## Overview
 
-### What Is Blueprint?
+[**Blueprint**](#glossary) is a web app that helps users create a [Master Scenario Event List (MSEL)](#glossary) and [events](#glossary) more easily. It lets users choose and define simulated entities, attacks, time frames, and regulators affected by the scenario. Users can view, edit, create, and approve events in the MSEL using Blueprint.
 
-[**Blueprint**](#glossary) is a web application created to make the development of a [Master Scenario Event List (MSEL)](#glossary) and [events](#glossary) easier. With this application, it will further simplify the creation and visualization of the MSEL, allowing the user to select/define the simulated entities, attacks, timeframe, and regulators impacted by the scenario, etc. Additionally, it will leverage many advantages over the traditional method of using an excel spreadsheet by facilitating the collaboration between exercise designers belonging to multiple teams.
-
-Additionally, Blueprint can be integrated with Player, Gallery, CITE and Steamfitter. Integrating Blueprint with these applications will automate the configuration process for an [exercise](#glossary).
-
-In summary, Blueprint will allow users to view, edit, create, and approve events on the MSEL.
+Blueprint makes it easier to build and view the MSEL compared to using an Excel spreadsheet. It also helps teams collaborate, even if they are from different teams. Blueprint can connect with Player, Gallery, CITE, and Steamfitter to help automate exercise setup.
 
 For installation, refer to these GitHub repositories.
 
@@ -59,7 +55,7 @@ For those launched events, an extra Blueprint functionality is going to be added
 
 ![Blueprint End Event OE](../assets/img/blueprintEndEvent-v2.png)
 
-*Launched Event User Invitations*
+##### Launched Event User Invitations
 
 To invite other users to the launched event, follow these steps:
 
@@ -69,7 +65,7 @@ To invite other users to the launched event, follow these steps:
 2. Click on **Invite Others**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -81,7 +77,7 @@ To invite other users to the launched event, follow these steps:
 
 After all desired configurations have been added, click **Save**.
 
-*Ending a Launched Event*
+##### Ending a Launched Event
 
 To end an event, follow these steps:
 
@@ -99,57 +95,57 @@ The following image will show some important hotspots about the MSEL Catalog. Re
 
 #### Add Blank MSEL
 
-*Hotspot 1:*
+##### Hotspot 1
 
 One of the main features of Blueprint is the ability to be able to create a MSEL from scratch via the application. This feature is helpful for users since it will eliminate the hassle of using Excel spreadsheets and provide a more user-friendly application that will provide an easier visualization of the information.
 
 #### Upload an Existing MSEL
 
-*Hotspot 2:*
+##### Hotspot 2
 
 If creating a new MSEL from scratch is not desired, users can upload a pre-existing MSEL and continue editing it on the application by using this functionality. This is useful to share existing MSEL work without having to add the pieces of information to a blank MSEL one by one.
 
 #### Filter Display
 
-**Types**
+##### Types
 
-*Hotspot 3:*
+###### Hotspot 3
 
 Users can use this filter to narrow down MSELs presented on the dashboard based on their categorization. Selections available are: All Types, Templates, and Not Templates.
 
-**Statuses**
+##### Statuses
 
-*Hotspot 4:*
+###### Hotspot 4
 
 Users can use this filter to narrow down MSELs presented on the dashboard based on their current status. Selections available are: All Statuses, Pending, Entered, Approved, and Completed.
 
-**Search**
+##### Search
 
-*Hotspot 5:*
+##### Hotspot 5
 
 This functionality will enable users to search for a specific MSEL, in case it is not presented at the top on the dashboard.
 
-**Load All MSELs**
+#### Load All MSELs
 
-*Hotspot 6:*
+##### Hotspot 6
 
 This functionality will enable users with the proper administrative permissions to load and view all MSELs created.
 
-**Settings Cog**
+#### Settings Cog
 
-*Hotspot 7:*
+##### Hotspot 7
 
 Users with the proper administrative permissions will be able to use this feature to access Blueprint's administrative settings.
 
 #### Manage MSEL
 
-Hotspot 8:*
+##### Hotspot 8
 
-**Download**
+#### Download
 
 If users desire to have an offline copy of any desired MSEL, they will have the ability to download a copy to their devices by using the Download feature. If by any chance users don't have an internet connection, this feature will be useful since they will be able to work offline on the MSEL and then upload the MSEL back to the application, so that other users can see any changes made. Although users can work on the MSEL offline, it is not recommended since they will be missing on all of the helpful features that Blueprint offers.
 
-**Upload**
+#### Upload
 
 With the Upload feature, users can update the information from the MSEL Card with the new uploaded information. This feature will modify all the existing information with the one found on the .xlsx file.
 
@@ -157,25 +153,23 @@ With the Upload feature, users can update the information from the MSEL Card wit
 
     When engaging in the export and import process of MSELs from the Blueprint application, it is imperative to ensure that events and settings of the MSEL align with your particular preferences. It is worth noting that on occasion, during the import process of MSELs into the application, it may be necessary to reconfigure settings and specific fields.
 
-**Delete**
+#### Delete
 
 With the Delete feature, users will be able to delete existing MSEL Cards. By deleting the MSEL Card, all the information that was included in the MSEL will be deleted too.
 
-**Copy**
+#### Copy
 
-With the Copy feature, users will be able to create a copy of an existing MSEL Card. With this feature, users will be able to modify the copy, instead of the original. This is useful if the user isn't sure of any new changes or to have a foothold of the information that is needed, instead of creating a new MSEL from scratch.
+The Copy feature lets users duplicate an existing MSEL Card and modify the copy instead of the original. This helps when unsure about new changes or starting from a known reference.
 
 #### MSEL Cards
 
-*Hotspot 9:*
+##### Hotspot 9
 
-Click on the desire MSEL card to access its information. Here, users can also edit or update the existing information. Changes made will be seen live by other users without the need of sharing a new document every time.
+Click the desired MSEL card to access its information. Here, users can also edit or update the existing information. Changes made will be seen live by other users without the need of sharing a new document every time.
 
 ### MSEL Definition
 
-After uploading or creating a MSEL, users will be given the ability to edit any desired information, as well as add additional information to the MSEL.
-
-With this functionality, users can now edit the same MSEL, instead of each user having their own copy and then sending their edits to the individual responsible of recompiling all the edits. By allowing users to access the MSEL on-the-fly, this will ensure that everyone will have the same copy of the MSEL on the day of the live scenario.
+After uploading or creating a MSEL, users can edit any information and add additional information to the MSEL. Users edit the same MSEL, instead of working on separate copies and sending edits to one person. This ensures everyone has the same version during the live scenario.
 
 #### Basic Information
 
@@ -189,7 +183,7 @@ To edit the MSEL's basic information and configuration, follow these next steps:
 2. Be sure to be in the **Config** section.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -208,7 +202,7 @@ To edit the MSEL's basic information and configuration, follow these next steps:
 
 To save these settings, click the **checkmark** at the top.
 
-Integrations:
+#### Integrations
 
 - **[Gallery](#glossary):** Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To know more about this integration reference this section [Gallery](#gallery).
 - **[CITE](#glossary):** Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL. To know more about this integration reference this section [CITE](#cite).
@@ -226,7 +220,7 @@ To add MSEL notes, follow these next steps:
 2. Click on **Add Page**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -242,7 +236,7 @@ On this tab, users will be able to add and assign contributor teams, as well as 
 
 ![Blueprint Contributors Tab OE](../assets/img/blueprintAddContributors-v2.png)
 
-*Add a Contributor*
+##### Add a Contributor
 
 To add a contributor unit to the MSEL, follow these steps:
 
@@ -250,7 +244,7 @@ To add a contributor unit to the MSEL, follow these steps:
 2. Click on the **Add a Contributor Unit** button and then select the desired unit to be added.
 3. After selecting the unit, click on the **+** button.
 
-*Remove a Contributor*
+##### Remove a Contributor
 
 To remove a contributor unit from the MSEL, follow these steps:
 
@@ -274,7 +268,7 @@ On this tab, users will be able to add and assign teams, as well as their respec
 
 ![Blueprint Teams Tab OE](../assets/img/blueprintAddTeams-v3.png)
 
-*Add a Team*
+##### Add a Team
 
 To add a team to the MSEL, follow these steps:
 
@@ -282,7 +276,7 @@ To add a team to the MSEL, follow these steps:
 2. Click on the **Add a Team** button and then select the desired team to be added.
 3. After selecting the team, click on the **+** button.
 
-*Remove a Team*
+##### Remove a Team
 
 To remove a team from the MSEL, follow these steps:
 
@@ -310,7 +304,7 @@ As it can be seen, there are two categories of Data Fields.
 - **[System Defined](#glossary):** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
 - **[User Defined](#glossary):** These are added by the user on an as-needed basis.
 
-*Add a Data Field*
+##### Add a Data Field
 
 ![Blueprint Add Data Fields OE](../assets/img/blueprintAddDataField.png)
 
@@ -320,7 +314,7 @@ To add a Data Field to the MSEL, follow these steps:
 2. Click on the **+** icon from the top left of the screen.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -338,14 +332,14 @@ To add a Data Field to the MSEL, follow these steps:
 
 After all desired configurations have been added, click **Save**.
 
-*Delete a Data Field*
+##### Delete a Data Field
 
 To delete a Data Field from the MSEL, follow these steps:
 
 1. Navigate to the **Data Fields** tab.
 2. Select the desired data field to be deleted and click on the **Trash Can** icon.
 
-*Edit a Data Field*
+##### Edit a Data Field
 
 To edit an existing Data Field, follow these steps:
 
@@ -353,7 +347,7 @@ To edit an existing Data Field, follow these steps:
 2. Select the data field to be edited and click on the **Edit** button to make any changes to the existing configurations.
 3. After making all the necessary changes, click on the **checkmark** to save them.
 
-*Search For a Data Field*
+##### Search For a Data Field
 
 To search for a specific Data Field, follow these steps:
 
@@ -366,7 +360,7 @@ On this tab, users will be able to add all the related [organizations](#glossary
 
 ![Blueprint Organizations Tab OE](../assets/img/blueprintOrganizations-v4.png)
 
-*Add an Organization Card From Scratch*
+##### Add an Organization Card From Scratch
 
 ![Blueprint Add Organization OE](../assets/img/blueprintAddOrganization-v2.png)
 
@@ -377,7 +371,7 @@ To add an Organization Card from scratch, follow these steps:
 3. Select **New Organization** from the dropdown.
 4. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -389,7 +383,7 @@ To add an Organization Card from scratch, follow these steps:
 
 After all desired configurations have been added, click **Save**.
 
-*Add an Organization Card From Template*
+##### Add an Organization Card From Template
 
 To create an organization from a template, follow these steps:
 
@@ -399,7 +393,7 @@ To create an organization from a template, follow these steps:
 4. Here, users will be able to edit all necessary information to create a new organization.
 5. After modifying the desired details, click **Save**.
 
-*Edit an Organization*
+##### Edit an Organization
 
 To edit an existing organization, follow these steps:
 
@@ -408,7 +402,7 @@ To edit an existing organization, follow these steps:
 3. Here, users will be able to edit all necessary information.
 4. Click **Save**.
 
-*Delete an Organization*
+##### Delete an Organization
 
 To delete an organization, follow these steps:
 
@@ -428,7 +422,7 @@ On this tab, users will be able to add all the related exercise [moves](#glossar
 
 ![Blueprint Moves Tab OE](../assets/img/blueprintMoves-v4.png)
 
-*Add a Move*
+##### Add a Move
 
 ![Blueprint Add Moves OE](../assets/img/blueprintAddMove-v3.png)
 
@@ -438,7 +432,7 @@ To add a move, follow these steps:
 2. Click on the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -450,7 +444,7 @@ To add a move, follow these steps:
 
 After all desired configurations have been added, click **Save**.
 
-*Edit a Move*
+##### Edit a Move
 
 To edit the move's details, follow these steps:
 
@@ -459,7 +453,7 @@ To edit the move's details, follow these steps:
 3. Here, users will be able to edit all the desired details.
 4. Click **Save**.
 
-*Delete a Move*
+##### Delete a Move
 
 To delete a move from the MSEL, follow these steps:
 
@@ -479,7 +473,7 @@ On this tab, users will be able to add all the related events to the MSEL.
 
 ![Blueprint Events Tab OE](../assets/img/blueprintInjects-v2.png)
 
-*Add an Event*
+##### Add an Event
 
 To add a new event, follow these steps:
 
@@ -491,7 +485,7 @@ On the **Default** tab, fill the fields as necessary following the Data Format T
 
 ![Blueprint Add Event OE](../assets/img/blueprintAddInjects-v3.png)
 
-**Data Format Table**
+##### Data Format Table
 
 | Field       | Data Type     | Description  | Example    |
 | ----------- | ------------- | ------------ | ---------- |
@@ -509,9 +503,9 @@ If not already completed on the previous tab, fill the fields from the **Advance
 
 ![Blueprint Add Event Advanced OE](../assets/img/blueprintAddInjectsAdvanced.png)
 
-**Data Format Table**
+##### Data Format Table
 
-F| Field      | Data Type  | Description | Example    |
+| Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 **Exercise Date/Time** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27
 **Row Metadata** | Integer |  Defines the size of this event on the Events and Exercise View tabs | 15,199,21,133
@@ -520,7 +514,7 @@ If Gallery integration is enabled and not already completed on the Default tab, 
 
 ![Blueprint Add Event Gallery OE](../assets/img/blueprintAddInjectsGallery.png)
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -536,7 +530,7 @@ If Gallery integration is enabled and not already completed on the Default tab, 
 
 After all desired configurations have been added, click **Save**.
 
-*Add Color to an Event*
+##### Add Color to an Event
 
 To add a color to an existing event, follow these steps:
 
@@ -545,7 +539,7 @@ To add a color to an existing event, follow these steps:
 3. Hover over **Highlight**.
 4. Here, users will be able to select the desired color.
 
-*Edit an Event*
+##### Edit an Event
 
 To edit the event's details, follow these steps:
 
@@ -555,14 +549,14 @@ To edit the event's details, follow these steps:
 4. Here, users will be prompted the same event's edit component as when adding a new event.
 5. After doing all the necessary edits, click **Save**.
 
-*Delete an Event*
+##### Delete an Event
 
 To delete an event, follow these steps:
 
 1. Navigate to the **Events** tab.
 2. Select the desired event to be deleted and click on the **Trash Can** icon next to the event.
 
-*Search For an Event*
+##### Search for an Event
 
 To search for a specific event, follow these steps:
 
@@ -571,7 +565,7 @@ To search for a specific event, follow these steps:
 
 #### Exercise View
 
-Whereas the Events tab is for MSEL Owners and Content Developers to add, edit, and delete MSEL events, the Exercise View tab is meant to be used to allow participants access to MSEL events on-the-fly in a read-only format. This will allow the tracking of current and future events to be executed during an exercise.
+While the Events tab lets MSEL owners and content developers manage events, the Exercise View tab gives participants read-only access to track current and future events during an exercise.
 
 ![Blueprint Exercise View OE](../assets/img/blueprintExerciseView-v3.png)
 

@@ -60,7 +60,7 @@ Crucible's [**Blueprint**](https://cmu-sei.github.io/crucible/blueprint/) applic
 
 ### Gallery
 
-Crucible's [**Gallery**](https://cmu-sei.github.io/crucible/gallery/) application enables participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector or any other organization.
+Crucible's [**Gallery**](https://cmu-sei.github.io/crucible/gallery/) application enables participants to review cyber incident data by source type. Source type examples include: intelligence, reporting, orders, news, social media, telephone, and email. Information is grouped by critical infrastructure sector or other organizational categories.
 
 - [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
 - [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui)
@@ -84,6 +84,7 @@ The Crucible appliance is an environment that includes everything needed to inst
 ### Crucible Common Modules
 
 Crucible common modules are a set of Angular modules that are common between Crucible apps. For more information, see:
+
 - [Crucible Common Modules Repository](https://github.com/cmu-sei/Crucible.Common.Ui)
 
 ### Crucible Plugin for Moodle
@@ -94,7 +95,7 @@ The Crucible plugin for Moodle is an activity plugin that allows Crucible labs a
 
 ### osTicket
 
-osTicket (https://osticket.com/) is a widely-used open source support ticket system that can be configured and deployed for an exercise. To get started with the Crucible plugin for osTicket, see:
+[osTicket](https://osticket.com/) is a widely-used open source support ticket system that can be configured and deployed for an exercise. To get started with the Crucible plugin for osTicket, see:
 
 - [osTicket Repository](https://github.com/cmu-sei/osticket-crucible)
 
@@ -116,7 +117,7 @@ You can find documentation on Crucible and all of its components [here](https://
 
 ## Reporting Bugs and Requesting Features
 
-Think you found a bug? Please report all Crucible bugs - including bugs for the individual Crucible apps - in the [cmu-sei/Crucible issue tracker](https://github.com/cmu-sei/crucible/issues).
+:bug: Think you found a bug? Please report all Crucible bugs - including bugs for the individual Crucible apps - in the [cmu-sei/Crucible issue tracker](https://github.com/cmu-sei/crucible/issues).
 
 Include as much detail as possible including steps to reproduce, specific app involved, and any error messages you may have received.
 
