@@ -14,10 +14,10 @@ To integrate a third-party application to the Crucible Framework, follow these n
 
 ![Crucible View Admin OE](../assets/img/viewAdmin.png)
 
-1. Click on your username in the top right corner of the screen.
+1. Click your username in the top right corner of the screen.
 2. Select **Administration**.
-3. Click on **Application Templates**.
-4. Click on **Add Application Template**.
+3. Click **Application Templates**.
+4. Click **Add Application Template**.
 5. Add the **Name** for the application.
 6. Add the **Url** of the application.
 7. Add an **icon path** to add the logo of the application.
