@@ -1,0 +1,7 @@
+# Description: Use 'click' instead of 'click on'
+extends: substitution
+message: "Use '%s' instead of '%s'"
+level: error
+ignorecase: true
+swap:
+  "click on": "click"

@@ -52,7 +52,7 @@ The landing page of CITE provides a central approach to recompiling all evaluati
 To search for an evaluation, follow these steps:
 
 1. Navigate to CITE's landing page.
-2. Click on the Search Bar and add the name of the name of the evaluation.
+2. Click the Search Bar and add the name of the name of the evaluation.
 
 ### CITE Dashboard
 
@@ -242,9 +242,9 @@ To save these settings, click **Save**.
 
 To edit an evaluation, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to be edited and click on the **Edit Icon** next to the evaluation.
+3. Select the evaluation to be edited and click the **Edit Icon** next to the evaluation.
 4. Here, users will be prompted the same evaluation's edit component as when adding a new evaluation.
 5. After doing all the necessary edits, click **Save**.
 
@@ -252,35 +252,35 @@ To edit an evaluation, follow these steps:
 
 To delete an evaluation, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to be deleted and click on the **Trash Can Icon** next to the evaluation.
+3. Select the evaluation to be deleted and click the **Trash Can Icon** next to the evaluation.
 
 #### Upload an Evaluation
 
 To upload an evaluation, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Click on the **Up Arrow** next to the + Icon.
+3. Click the **Up Arrow** next to the + Icon.
 4. Select the evaluation JSON file to be uploaded.
 
 #### Download an Evaluation
 
 To download an evaluation, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Click on the **Down Arrow** next to the evaluation to be downloaded.
+3. Click the **Down Arrow** next to the evaluation to be downloaded.
 4. Look for the JSON file in your Downloads folder.
 
 #### Copy an Evaluation
 
 To copy an evaluation, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Click on the **Copy Icon** next to the evaluation to be copied.
+3. Click the **Copy Icon** next to the evaluation to be copied.
 4. Look for the evaluation name with the user's name.
 
 #### Configure an Evaluation
@@ -293,7 +293,7 @@ To configure an evaluation to be used for an exercise, administrators will need 
 
 ![Moves OE](../assets/img/moves-v3.png)
 
-1. Click on the **+** on the Moves section.
+1. Click the **+** on the Moves section.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -311,10 +311,10 @@ To save these settings, click **Save**.
 
 To edit a move, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to be edited and click on the **Moves** tab.
-4. Select the move to be edited, and click on the **Edit Icon** next to the move.
+3. Select the evaluation to be edited and click the **Moves** tab.
+4. Select the move to be edited, and click the **Edit Icon** next to the move.
 5. Here, users will be prompted the same move's edit component as when adding a new move.
 6. After doing all the necessary edits, click **Save**.
 
@@ -322,16 +322,16 @@ To edit a move, follow these steps:
 
 To delete a move, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to be edited and click on the **Moves** tab.
-4. Select the move to be deleted and click on the **Trash Can Icon** next to the move.
+3. Select the evaluation to be edited and click the **Moves** tab.
+4. Select the move to be deleted and click the **Trash Can Icon** next to the move.
 
 ### Teams
 
 ![Teams OE](../assets/img/teams-v3.png)
 
-1. Click on the **+** on the Teams section.
+1. Click the **+** on the Teams section.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -349,10 +349,10 @@ To save these settings, click **Save**.
 
 To edit a team, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to be edited and click on the **Teams** tab.
-4. Select the team to be edited, and click on the **Edit Icon** next to the team.
+3. Select the evaluation to be edited and click the **Teams** tab.
+4. Select the team to be edited, and click the **Edit Icon** next to the team.
 5. Here, users will be prompted the same team's edit component as when adding a new team.
 6. After doing all the necessary edits, click **Save**.
 
@@ -360,22 +360,22 @@ To edit a team, follow these steps:
 
 To delete a team, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to be edited and click on the **Teams** tab.
-4. Select the team to be deleted and click on the **Trash Can Icon** next to the team.
+3. Select the evaluation to be edited and click the **Teams** tab.
+4. Select the team to be deleted and click the **Trash Can Icon** next to the team.
 
 ### Observers
 
 To assign the [Observer Role](#glossary) to a user:
 
 1. Under **Evaluation Users**, search for the desired user.
-2. Once the user has been found, click on **Add**.
+2. Once the user has been found, click **Add**.
 
 To remove the Observer Role from a user:
 
 1. Under **Observers**, search for the desired user.
-2. Once the user has been found, click on **Remove**.
+2. Once the user has been found, click **Remove**.
 
 ### Scoring Models
 
@@ -429,9 +429,9 @@ Aside from these variables, **>** can be used to set clipping values for the equ
 
 To edit a scoring model, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to be edited, and click on the **Edit Icon** next to the scoring model.
+3. Select the scoring model to be edited, and click the **Edit Icon** next to the scoring model.
 4. Here, users will be prompted the same scoring model's edit component as when adding a new scoring model.
 5. After doing all the necessary edits, click **Save**.
 
@@ -439,36 +439,36 @@ To edit a scoring model, follow these steps:
 
 To upload a scoring model, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Click on the **Up Arrow** next to the + Icon.
+3. Click the **Up Arrow** next to the + Icon.
 4. Select the scoring model JSON file to be uploaded.
 
 #### Download a Scoring Model
 
 To download a scoring model, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Click on the **Down Arrow** next to the scoring model to be downloaded.
+3. Click the **Down Arrow** next to the scoring model to be downloaded.
 4. Look for the JSON file in your Downloads folder.
 
 #### Copy a Scoring Model
 
 To copy a scoring model, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Click on the **Copy Icon** next to the scoring model to be copied.
+3. Click the **Copy Icon** next to the scoring model to be copied.
 4. Look for the scoring model name with the user's name.
 
 #### Delete a Scoring Model
 
 To delete a scoring model, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to be deleted and click on the **Trash Can Icon** next to the scoring model.
+3. Select the scoring model to be deleted and click the **Trash Can Icon** next to the scoring model.
 
 ### Scoring Categories
 
@@ -482,7 +482,7 @@ Within a Scoring Model, an administrator can add one or more Scoring Categories.
 
 ![Scoring Categories OE](../assets/img/scoringCategories-v3.png)
 
-1. Click on the **+** on the Scoring Categories section.
+1. Click the **+** on the Scoring Categories section.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -516,10 +516,10 @@ Last but not least, a Scoring Category has a weight which will multiply the scor
 
 To edit a scoring category, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to be edited, and click on the **Scoring Categories** tab.
-4. Select the scoring category to be edited, and click on the **Edit Icon** next to the scoring category.
+3. Select the scoring model to be edited, and click the **Scoring Categories** tab.
+4. Select the scoring category to be edited, and click the **Edit Icon** next to the scoring category.
 5. Here, users will be prompted the same scoring category's edit component as when adding a new scoring category.
 6. After doing all the necessary edits, click **Save**.
 
@@ -527,10 +527,10 @@ To edit a scoring category, follow these steps:
 
 To delete a scoring model, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to be edited, and click on the **Scoring Categories** tab.
-4. Select the scoring category to be deleted and click on the **Trash Can Icon** next to the scoring category.
+3. Select the scoring model to be edited, and click the **Scoring Categories** tab.
+4. Select the scoring category to be deleted and click the **Trash Can Icon** next to the scoring category.
 
 ### Scoring Options
 
@@ -540,7 +540,7 @@ Within a Scoring Category, an administrator can add one or more [Scoring Options
 
 ![Scoring Options OE](../assets/img/scoringOptions.png)
 
-1. Click on the **+** on the Scoring Options section.
+1. Click the **+** on the Scoring Options section.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -558,11 +558,11 @@ To save these settings, click **Save**.
 
 To edit a scoring option, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to be edited, and click on the **Scoring Categories** tab.
-4. Select the scoring category to be edited, and click on the **Scoring Options** tab.
-5. Select the scoring option to be edited, and click on the **Edit Icon** next to the scoring option.
+3. Select the scoring model to be edited, and click the **Scoring Categories** tab.
+4. Select the scoring category to be edited, and click the **Scoring Options** tab.
+5. Select the scoring option to be edited, and click the **Edit Icon** next to the scoring option.
 6. Here, users will be prompted the same scoring option's edit component as when adding a new scoring option.
 7. After doing all the necessary edits, click **Save**.
 
@@ -570,11 +570,11 @@ To edit a scoring option, follow these steps:
 
 To delete a scoring option, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to be edited, and click on the **Scoring Categories** tab.
-4. Select the scoring category to be edited, and click on the **Scoring Options** tab.
-5. Select the scoring option to be deleted and click on the **Trash Can Icon** next to the scoring option.
+3. Select the scoring model to be edited, and click the **Scoring Categories** tab.
+4. Select the scoring category to be edited, and click the **Scoring Options** tab.
+5. Select the scoring option to be deleted and click the **Trash Can Icon** next to the scoring option.
 
 ### Actions
 
@@ -590,9 +590,9 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Action OE](../assets/img/addAction-v3.png)
 
-1. Under the Actions Administration View, click on the **Move** dropdown and select the desired move.
-2. Click on the **Team** dropdown and select the desired team.
-3. Click on the **+** icon to add an Action.
+1. Under the Actions Administration View, click the **Move** dropdown and select the desired move.
+2. Click the **Team** dropdown and select the desired team.
+3. Click the **+** icon to add an Action.
 4. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -607,9 +607,9 @@ To save these settings, click **Save**.
 
 To edit an action, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Actions** tab.
-3. Select the action to be edited, and click on the **Edit Icon** next to the action.
+3. Select the action to be edited, and click the **Edit Icon** next to the action.
 4. Here, users will be prompted the same action's edit component as when adding a new action.
 5. After doing all the necessary edits, click **Save**.
 
@@ -617,9 +617,9 @@ To edit an action, follow these steps:
 
 To delete an action, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Action** tab.
-3. Select the action to be deleted and click on the **Trash Can Icon** next to the action.
+3. Select the action to be deleted and click the **Trash Can Icon** next to the action.
 
 ### Roles
 
@@ -635,8 +635,8 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Role OE](../assets/img/addRole-v3.png)
 
-1. Under the Roles Administration View, click on the **Team** dropdown and select the desired team.
-2. Click on the **+** icon to add a Role.
+1. Under the Roles Administration View, click the **Team** dropdown and select the desired team.
+2. Click the **+** icon to add a Role.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -651,9 +651,9 @@ To save these settings, click **Save**.
 
 To edit a role, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Roles** tab.
-3. Select the role to be edited, and click on the **Edit Icon** next to the role.
+3. Select the role to be edited, and click the **Edit Icon** next to the role.
 4. Here, users will be prompted the same role's edit component as when adding a new role.
 5. After doing all the necessary edits, click **Save**.
 
@@ -661,9 +661,9 @@ To edit a role, follow these steps:
 
 To delete a role, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Roles** tab.
-3. Select the role to be deleted and click on the **Trash Can Icon** next to the role.
+3. Select the role to be deleted and click the **Trash Can Icon** next to the role.
 
 ### Submissions
 
@@ -685,7 +685,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Team Type OE](../assets/img/addTeamType.png)
 
-1. Under the Team Type Administration View, click on the **+** icon.
+1. Under the Team Type Administration View, click the **+** icon.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -702,9 +702,9 @@ To save these settings, click **Save**.
 
 To edit a team type, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Team Types** tab.
-3. Select the team type to be edited, and click on the **Edit Icon** next to the team type.
+3. Select the team type to be edited, and click the **Edit Icon** next to the team type.
 4. Here, users will be prompted the same team type's edit component as when adding a new team type.
 5. After doing all the necessary edits, click **Save**.
 
@@ -712,9 +712,9 @@ To edit a team type, follow these steps:
 
 To delete a team type, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Team Types** tab.
-3. Select the team type to be deleted and click on the **Trash Can Icon** next to the team type.
+3. Select the team type to be deleted and click the **Trash Can Icon** next to the team type.
 
 ### Users
 
@@ -752,9 +752,9 @@ To save these settings, click **Save** and select the desired permissions to be 
 
 To delete a user, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Users** tab.
-3. Select the users to be deleted and click on the **Trash Can Icon** next to the user.
+3. Select the users to be deleted and click the **Trash Can Icon** next to the user.
 
 ## Glossary
 

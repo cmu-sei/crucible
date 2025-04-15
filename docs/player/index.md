@@ -185,7 +185,7 @@ Any documents or files  - PDF, PNG, etc. - that can be served on the web can be 
 
 View Admins may use the Map application to display a map for a team (e.g. a network map of a lab).
 
-Clicking the Map application will open up the assigned map. Users can click on pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
+Clicking the Map application will open up the assigned map. Users can click pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
 
 ##### Creating and Managing Maps
 
@@ -228,7 +228,7 @@ A *click point* is a location on the map that, when clicked by Player user, laun
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click the **Edit** icon.
-4. Click anywhere in the map to launch the **Add Click Point** modal. If your map is a network topology diagram with network elements--routers, switches, firewalls, servers, etc.--then you may want to click on an element that represents the VM resource you want the user to launch.
+4. Click anywhere in the map to launch the **Add Click Point** modal. If your map is a network topology diagram with network elements--routers, switches, firewalls, servers, etc.--then you may want to click an element that represents the VM resource you want the user to launch.
    - **Radius:** by default, the value is 3.
    - **Resource:** this is the virtual machine (or another map) that launches when clicked. The VMs that appear here are the VMs from the VM application in the current view.
    - **Enter Custom Resource URL:** enable this if you want to link to something other than the view's VMs and maps that are available above. For example, you could place a click point labeled "Linux Help" that links to relevant Linux documentation.

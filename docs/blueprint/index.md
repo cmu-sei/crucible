@@ -62,7 +62,7 @@ To invite other users to the launched event, follow these steps:
 ![Blueprint Launched Event Invites OE](../assets/img/blueprintEventInvitations.png)
 
 1. Navigate to the **Manage Event** application from Player's side panel.
-2. Click on **Invite Others**.
+2. Click **Invite Others**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 ##### Data Format Table
@@ -82,7 +82,7 @@ After all desired configurations have been added, click **Save**.
 To end an event, follow these steps:
 
 1. Navigate to the **Manage Event** application from Player's side panel.
-2. Click on **End Event**.
+2. Click **End Event**.
 3. On the confirmation screen, click **Yes** to successfully end the event.
 
 ### MSEL Catalog
@@ -217,7 +217,7 @@ On this tab, users can add notes to the MSEL to be worked and accessed by other 
 To add MSEL notes, follow these next steps:
 
 1. Navigate to the **Info** tab.
-2. Click on **Add Page**.
+2. Click **Add Page**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -228,7 +228,7 @@ To add MSEL notes, follow these next steps:
 | **All MSEL users can view this page** | Boolean | Enable other users who don't have elevated permissions to access this page | True |
 | **Notes** | Rich Text | Field to add page notes | Next meeting is on 12/7 at 0800 |
 
-After all changes have been added, click on the **checkmark** to save the page.
+After all changes have been added, click the **checkmark** to save the page.
 
 #### Contributors
 
@@ -241,15 +241,15 @@ On this tab, users will be able to add and assign contributor teams, as well as 
 To add a contributor unit to the MSEL, follow these steps:
 
 1. Navigate to the **Contributors** tab.
-2. Click on the **Add a Contributor Unit** button and then select the desired unit to be added.
-3. After selecting the unit, click on the **+** button.
+2. Click the **Add a Contributor Unit** button and then select the desired unit to be added.
+3. After selecting the unit, click the **+** button.
 
 ##### Remove a Contributor
 
 To remove a contributor unit from the MSEL, follow these steps:
 
 1. Navigate to the **Contributors** tab.
-2. Select the desired team to be removed and click on the **-** button.
+2. Select the desired team to be removed and click the **-** button.
 
 Now the unit has been added to the MSEL and members will be able to view and edit the MSEL based on the role assigned to each unit member.
 
@@ -273,15 +273,15 @@ On this tab, users will be able to add and assign teams, as well as their respec
 To add a team to the MSEL, follow these steps:
 
 1. Navigate to the **Teams** tab.
-2. Click on the **Add a Team** button and then select the desired team to be added.
-3. After selecting the team, click on the **+** button.
+2. Click the **Add a Team** button and then select the desired team to be added.
+3. After selecting the team, click the **+** button.
 
 ##### Remove a Team
 
 To remove a team from the MSEL, follow these steps:
 
 1. Navigate to the **Teams** tab.
-2. Select the desired team to be removed and click on the **-** button.
+2. Select the desired team to be removed and click the **-** button.
 
 Now the team has been added to the MSEL and members will be able to participate on the MSEL event based on the role assigned to each team member.
 
@@ -311,7 +311,7 @@ As it can be seen, there are two categories of Data Fields.
 To add a Data Field to the MSEL, follow these steps:
 
 1. Navigate to the **Data Fields** tab.
-2. Click on the **+** icon from the top left of the screen.
+2. Click the **+** icon from the top left of the screen.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -337,22 +337,22 @@ After all desired configurations have been added, click **Save**.
 To delete a Data Field from the MSEL, follow these steps:
 
 1. Navigate to the **Data Fields** tab.
-2. Select the desired data field to be deleted and click on the **Trash Can** icon.
+2. Select the desired data field to be deleted and click the **Trash Can** icon.
 
 ##### Edit a Data Field
 
 To edit an existing Data Field, follow these steps:
 
 1. Navigate to the **Data Fields** tab.
-2. Select the data field to be edited and click on the **Edit** button to make any changes to the existing configurations.
-3. After making all the necessary changes, click on the **checkmark** to save them.
+2. Select the data field to be edited and click the **Edit** button to make any changes to the existing configurations.
+3. After making all the necessary changes, click the **checkmark** to save them.
 
 ##### Search For a Data Field
 
 To search for a specific Data Field, follow these steps:
 
 1. Navigate to the **Data Fields** tab.
-2. Click on the **Search Bar** and add the name of the data field desired.
+2. Click the **Search Bar** and add the name of the data field desired.
 
 #### Organizations
 
@@ -367,7 +367,7 @@ On this tab, users will be able to add all the related [organizations](#glossary
 To add an Organization Card from scratch, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Click on **Add Organization**.
+2. Click **Add Organization**.
 3. Select **New Organization** from the dropdown.
 4. Fill the fields as necessary following the Data Format Table specifications.
 
@@ -388,7 +388,7 @@ After all desired configurations have been added, click **Save**.
 To create an organization from a template, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Click on **Add Organization**.
+2. Click **Add Organization**.
 3. Select the desired template to be used from the dropdown.
 4. Here, users will be able to edit all necessary information to create a new organization.
 5. After modifying the desired details, click **Save**.
@@ -398,7 +398,7 @@ To create an organization from a template, follow these steps:
 To edit an existing organization, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Select the desired card to be edited and click on the **Edit** button next to the organization name.
+2. Select the desired card to be edited and click the **Edit** button next to the organization name.
 3. Here, users will be able to edit all necessary information.
 4. Click **Save**.
 
@@ -407,14 +407,14 @@ To edit an existing organization, follow these steps:
 To delete an organization, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Select the desired card to be deleted and click on the **Trash Can** icon next to the organization name.
+2. Select the desired card to be deleted and click the **Trash Can** icon next to the organization name.
 
 *Search for an Organization*
 
 To search for a specific organization, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Click on the **Search Bar** and type the name of the desired organization.
+2. Click the **Search Bar** and type the name of the desired organization.
 
 #### Moves
 
@@ -429,7 +429,7 @@ On this tab, users will be able to add all the related exercise [moves](#glossar
 To add a move, follow these steps:
 
 1. Navigate to the **Moves** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 ##### Data Format Table
@@ -449,7 +449,7 @@ After all desired configurations have been added, click **Save**.
 To edit the move's details, follow these steps:
 
 1. Navigate to the **Moves** tab.
-2. Select the move you want to edit and click on the **Edit** button for the corresponding move.
+2. Select the move you want to edit and click the **Edit** button for the corresponding move.
 3. Here, users will be able to edit all the desired details.
 4. Click **Save**.
 
@@ -458,14 +458,14 @@ To edit the move's details, follow these steps:
 To delete a move from the MSEL, follow these steps:
 
 1. Navigate to the **Moves** tab.
-2. Select the move you want to delete and click on the **Trash Can** button for the corresponding move.
+2. Select the move you want to delete and click the **Trash Can** button for the corresponding move.
 
 *Search For a Move*
 
 To search for a specific move, follow these steps:
 
 1. Navigate to the **Moves** tab.
-2. Click on the **Search Bar** and type the name of the desired move.
+2. Click the **Search Bar** and type the name of the desired move.
 
 #### Scenario Events
 
@@ -478,8 +478,8 @@ On this tab, users will be able to add all the related events to the MSEL.
 To add a new event, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Click on the **Hamburger** icon found on the top left.
-3. Click on **Add New Event**.
+2. Click the **Hamburger** icon found on the top left.
+3. Click **Add New Event**.
 
 On the **Default** tab, fill the fields as necessary following the Data Format Table specifications.
 
@@ -535,7 +535,7 @@ After all desired configurations have been added, click **Save**.
 To add a color to an existing event, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Select the desired event to be edited and click on the **Hamburger** icon next to the event.
+2. Select the desired event to be edited and click the **Hamburger** icon next to the event.
 3. Hover over **Highlight**.
 4. Here, users will be able to select the desired color.
 
@@ -544,8 +544,8 @@ To add a color to an existing event, follow these steps:
 To edit the event's details, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Select the desired event to be edited and click on the **Hamburger** icon next to the event.
-3. Click on **Edit**.
+2. Select the desired event to be edited and click the **Hamburger** icon next to the event.
+3. Click **Edit**.
 4. Here, users will be prompted the same event's edit component as when adding a new event.
 5. After doing all the necessary edits, click **Save**.
 
@@ -554,14 +554,14 @@ To edit the event's details, follow these steps:
 To delete an event, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Select the desired event to be deleted and click on the **Trash Can** icon next to the event.
+2. Select the desired event to be deleted and click the **Trash Can** icon next to the event.
 
 ##### Search for an Event
 
 To search for a specific event, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Click on the **Search Bar** and type the name of the desired event.
+2. Click the **Search Bar** and type the name of the desired event.
 
 #### Exercise View
 
@@ -584,7 +584,7 @@ To facilitate this process, email domains are specified on these invitations, al
 To add a new invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
-2. Click on the **Invite Others** button.
+2. Click the **Invite Others** button.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -604,7 +604,7 @@ After all desired configurations have been added, click **Save**.
 To edit an invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
-2. Select the desired invitation to be edited and click on the **Edit Icon** next to the invitation.
+2. Select the desired invitation to be edited and click the **Edit Icon** next to the invitation.
 3. Here, users will be prompted the same invitation's edit component as when adding a new invitation.
 4. After doing all the necessary edits, click **Save**.
 
@@ -613,14 +613,14 @@ To edit an invitation, follow these steps:
 To delete an invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
-2. Select the desired invitation to be deleted and click on the **Trash Can Icon** next to the invitation.
+2. Select the desired invitation to be deleted and click the **Trash Can Icon** next to the invitation.
 
 *Search For an Invitation*
 
 To search for a specific invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
-2. Click on the **Search Bar** and type the name of the team tied to the invitation.
+2. Click the **Search Bar** and type the name of the team tied to the invitation.
 
 ### Integrations
 
@@ -641,7 +641,7 @@ First, a CITE Team Type should be assigned to each team. To do this, follow thes
 ![CITE Team Type OE](../assets/img/citeTeamType.png)
 
 1. Navigate to the **Teams** tab.
-2. Select the desired team and click on the **Edit Icon**.
+2. Select the desired team and click the **Edit Icon**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -658,7 +658,7 @@ Next, roles should be assigned to each member of the team. To do this, follow th
 ![CITE Team Roles OE](../assets/img/citeTeamRoles-v2.png)
 
 1. Navigate to the **Teams** tab.
-2. Select the desired team, and click on it to expand its configurations.
+2. Select the desired team, and click it to expand its configurations.
 3. Assign the necessary roles to each team member.
 
 ##### CITE Actions
@@ -674,7 +674,7 @@ On this tab, [CITE Actions](#glossary) can be added to be pushed from Blueprint.
 To add a CITE Action, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -693,7 +693,7 @@ After all desired configurations have been added, click **Save**.
 To edit the CITE Action's details, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
-2. Select the desired action to be edited and click on the **Edit** icon next to the action.
+2. Select the desired action to be edited and click the **Edit** icon next to the action.
 3. Here, users will be prompted the same action's edit component as when adding a new action.
 4. After doing all the necessary edits, click **Save**.
 
@@ -702,7 +702,7 @@ To edit the CITE Action's details, follow these steps:
 To delete a CITE Action, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
-2. Select the desired action to be deleted and click on the **Trash Can** icon next to the action.
+2. Select the desired action to be deleted and click the **Trash Can** icon next to the action.
 
 *Filter Actions by Team*
 
@@ -716,7 +716,7 @@ To filter CITE Actions by teams, follow these steps:
 To search for a specific action, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
-2. Click on the **Search Bar** and type the name of the desired action.
+2. Click the **Search Bar** and type the name of the desired action.
 
 ##### CITE Roles
 
@@ -731,7 +731,7 @@ On this tab, [CITE Roles](#glossary) can be added to be pushed from Blueprint. T
 To add a CITE Role, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -748,7 +748,7 @@ After all desired configurations have been added, click **Save**.
 To edit the CITE Role's details, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
-2. Select the desired role to be edited and click on the **Edit** icon next to the role.
+2. Select the desired role to be edited and click the **Edit** icon next to the role.
 3. Here, users will be prompted the same role's edit component as when adding a new role.
 4. After doing all the necessary edits, click **Save**.
 
@@ -757,7 +757,7 @@ To edit the CITE Role's details, follow these steps:
 To delete a CITE Role, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
-2. Select the desired role to be deleted and click on the **Trash Can** icon next to the role.
+2. Select the desired role to be deleted and click the **Trash Can** icon next to the role.
 
 *Filter Roles by Team*
 
@@ -771,7 +771,7 @@ To filter Roles by team, follow these steps:
 To search for a specific role, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
-2. Click on the **Search Bar** and type the name of the desired role.
+2. Click the **Search Bar** and type the name of the desired role.
 
 #### Gallery
 
@@ -822,7 +822,7 @@ On this tab, [Gallery Cards](#glossary) can be added to be pushed from Blueprint
 To add a Gallery card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 **Data Format Table**
@@ -840,7 +840,7 @@ After all desired configurations have been added, click **Save**.
 To edit the Gallery card's details, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
-2. Select the desired card to be edited and click on the **Edit** icon next to the card.
+2. Select the desired card to be edited and click the **Edit** icon next to the card.
 3. Here, users will be prompted the same card's edit component as when adding a new card.
 4. After doing all the necessary edits, click **Save**.
 
@@ -849,14 +849,14 @@ To edit the Gallery card's details, follow these steps:
 To delete a Gallery card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
-2. Select the desired card to be deleted and click on the **Trash Can** icon next to the card.
+2. Select the desired card to be deleted and click the **Trash Can** icon next to the card.
 
 *Search For a Gallery Card*
 
 To search for a specific card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
-2. Click on the **Search Bar** and type the name of the desired card.
+2. Click the **Search Bar** and type the name of the desired card.
 
 #### Player
 
@@ -877,7 +877,7 @@ On this tab, [Player Apps](#glossary) configurations can be added to be pushed f
 To add a Player App, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Select an app template from the provided list.
 4. Fill the fields as necessary following the Data Format Table specifications.
 
@@ -907,7 +907,7 @@ After all desired configurations have been added, click **Save**.
 To edit the Player app's details, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Select the desired app to be edited and click on the **Edit** icon next to the app.
+2. Select the desired app to be edited and click the **Edit** icon next to the app.
 3. Here, users will be prompted the same app's edit component as when adding a new app.
 4. After doing all the necessary edits, click **Save**.
 
@@ -916,14 +916,14 @@ To edit the Player app's details, follow these steps:
 To delete a Player App, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Select the desired app to be deleted and click on the **Trash Can** icon next to the app.
+2. Select the desired app to be deleted and click the **Trash Can** icon next to the app.
 
 *Search For a Player App*
 
 To search for a specific app, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Click on the **Search Bar** and type the name of the desired app.
+2. Click the **Search Bar** and type the name of the desired app.
 
 #### Push Integrations
 
@@ -961,7 +961,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Blueprint Add Team OE](../assets/img/blueprintAddUnit.png)
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Units Administration View, click **+**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
@@ -978,8 +978,8 @@ After all desired configurations have been added, click **Save**.
 
 To edit the unit's details, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Units Administration View, select the unit to be edited and click on the **Edit Icon** next to the unit.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Units Administration View, select the unit to be edited and click the **Edit Icon** next to the unit.
 3. Here, users will be prompted the same unit's edit component as when adding a new unit.
 4. After doing all the necessary edits, click **Save**.
 
@@ -987,15 +987,15 @@ To edit the unit's details, follow these steps:
 
 To delete a unit, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Units Administration View, select the unit to be deleted and click on the **Trash Can Icon** next to the unit.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Units Administration View, select the unit to be deleted and click the **Trash Can Icon** next to the unit.
 
 **Search For a Unit**
 
 To search for a specific unit, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Units Administration View, click on the **Search Bar** and type the name of the desired unit.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Units Administration View, click the **Search Bar** and type the name of the desired unit.
 
 **Add/Remove Users From a Unit**
 
@@ -1003,9 +1003,9 @@ To configure a unit for an exercise, administrators will need to add users to th
 
 ![Configure Blueprint Teams OE](../assets/img/blueprintConfigureUnits-v2.png)
 
-1. Select the unit to be configured and click on it to expand its configuration details.
-2. Under the **All Users** tab, users that have not been assigned to the unit will be shown. To add them to the unit, click on **Add User**.
-3. Under the **Unit Users** tab, users that have already been assigned to the unit will be shown. To remove a user from the unit, click on **Remove**.
+1. Select the unit to be configured and click it to expand its configuration details.
+2. Under the **All Users** tab, users that have not been assigned to the unit will be shown. To add them to the unit, click **Add User**.
+3. Under the **Unit Users** tab, users that have already been assigned to the unit will be shown. To remove a user from the unit, click **Remove**.
 
 ### Users
 
@@ -1040,15 +1040,15 @@ Click **Save** represented by a user with a + sign and select the desired permis
 
 To delete a user, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Users Administration View, select the user to be deleted and click on the **Trash Can Icon** next to the user.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Users Administration View, select the user to be deleted and click the **Trash Can Icon** next to the user.
 
 **Search For a User**
 
 To search for a specific user, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Users Administration View, click on the **Search Bar** and type the name of the desired user.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Users Administration View, click the **Search Bar** and type the name of the desired user.
 
 ### Organization Templates
 
@@ -1081,8 +1081,8 @@ After all desired configurations have been added, click **Save**.
 
 To edit the organization template's details, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Organizations Administration View, select the organization to be edited and click on the **Edit Icon** next to the organization template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Organizations Administration View, select the organization to be edited and click the **Edit Icon** next to the organization template.
 3. Here, users will be prompted the same organization's edit component as when adding a new organization template.
 4. After doing all the necessary edits, click **Save**.
 
@@ -1090,15 +1090,15 @@ To edit the organization template's details, follow these steps:
 
 To delete an organization template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Organizations Administration View, select the organization to be deleted and click on the **Trash Can Icon** next to the organization template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Organizations Administration View, select the organization to be deleted and click the **Trash Can Icon** next to the organization template.
 
 **Search For an Organization Template**
 
 To search for a specific organization template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Organizations Administration View, click on the **Search Bar** and type the name of the desired organization template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Organizations Administration View, click the **Search Bar** and type the name of the desired organization template.
 
 ### Gallery Card Templates
 
@@ -1128,8 +1128,8 @@ After all desired configurations have been added, click **Save**.
 
 To edit the Gallery card template's details, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Gallery Cards Administration View, select the card template to be edited and click on the **Edit Icon** next to the Gallery card template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Gallery Cards Administration View, select the card template to be edited and click the **Edit Icon** next to the Gallery card template.
 3. Here, users will be prompted the same Gallery card's edit component as when adding a new card template.
 4. After doing all the necessary edits, click **Save**.
 
@@ -1137,15 +1137,15 @@ To edit the Gallery card template's details, follow these steps:
 
 To delete an Gallery card template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Gallery Cards Administration View, select the card template to be deleted and click on the **Trash Can Icon** next to the card template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Gallery Cards Administration View, select the card template to be deleted and click the **Trash Can Icon** next to the card template.
 
 **Search For a Gallery Card Template**
 
 To search for a specific Gallery card template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Gallery Cards Administration View, click on the **Search Bar** and type the name of the desired card template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Gallery Cards Administration View, click the **Search Bar** and type the name of the desired card template.
 
 ### CITE Actions Templates
 
@@ -1174,8 +1174,8 @@ After all desired configurations have been added, click **Save**.
 
 To edit the CITE action template's details, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Actions Administration View, select the action template to be edited and click on the **Edit Icon** next to the action template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Actions Administration View, select the action template to be edited and click the **Edit Icon** next to the action template.
 3. Here, users will be prompted the same CITE action's edit component as when adding a new action template.
 4. After doing all the necessary edits, click **Save**.
 
@@ -1183,15 +1183,15 @@ To edit the CITE action template's details, follow these steps:
 
 To delete an CITE action template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Actions Administration View, select the action template to be deleted and click on the **Trash Can Icon** next to the action template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Actions Administration View, select the action template to be deleted and click the **Trash Can Icon** next to the action template.
 
 **Search For a CITE Action Template**
 
 To search for a specific CITE action template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Actions Administration View, click on the **Search Bar** and type the name of the desired action template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Actions Administration View, click the **Search Bar** and type the name of the desired action template.
 
 ### CITE Roles Templates
 
@@ -1220,8 +1220,8 @@ After all desired configurations have been added, click **Save**.
 
 To edit the CITE role template's details, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Roles Administration View, select the role template to be edited and click on the **Edit Icon** next to the role template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Roles Administration View, select the role template to be edited and click the **Edit Icon** next to the role template.
 3. Here, users will be prompted the same CITE role's edit component as when adding a new role template.
 4. After doing all the necessary edits, click **Save**.
 
@@ -1229,15 +1229,15 @@ To edit the CITE role template's details, follow these steps:
 
 To delete a CITE role template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Roles Administration View, select the role template to be deleted and click on the **Trash Can Icon** next to the role template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Roles Administration View, select the role template to be deleted and click the **Trash Can Icon** next to the role template.
 
 **Search For a CITE Role Template**
 
 To search for a specific CITE role template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Roles Administration View, click on the **Search Bar** and type the name of the desired role template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Roles Administration View, click the **Search Bar** and type the name of the desired role template.
 
 ## Glossary
 
