@@ -1,6 +1,4 @@
-# **Third-Party Applications**
-
-*Integrate Applications in the Crucible Framework*
+# Third-Party Applications
 
 The Crucible Framework provides users the necessary tools and resources for integrating open-source third-party applications with the platform's features and data. By leveraging open-source resources, users can save time and resources, and benefit from the expertise of the open-source community.
 
@@ -48,9 +46,9 @@ To know more about the application: [Moodle Documentation](https://docs.moodle.o
 
 For installation instructions: [Moodle Installation](https://docs.moodle.org/401/en/Installation_quick_guide)
 
-#### - Crucible Plugin for Moodle
+#### Crucible Plugin for Moodle
 
-This activity plugin, developed by the Software Engineering Institute (SEI), allows Crucible labs and exercises to be integrated into the Moodle LMS. The Moodle activity may embed the Crucible VM app into an iframe or may provide a link for the student to open the full Crucible lab player window in a new tab or window. With this functionality, Crucible labs can be started, accessed and stopped from a Moodle course.
+This activity plugin allows Crucible labs and exercises to be integrated into the Moodle LMS. The Moodle activity can either embed the Crucible VM app in an iframe or link to open the full Crucible lab player in a new tab or window. With this plugin, Crucible labs can be started, accessed, and stopped from a Moodle course.
 
 To know more about the plugin and installation instructions: [Moodle Crucible Plugin Documentation](https://github.com/cmu-sei/moodle-mod_crucible)
 
@@ -62,7 +60,7 @@ To know more about the application: [osTicket Documentation](https://docs.ostick
 
 For installation instructions: [osTicket Installation](https://docs.osticket.com/en/latest/Getting%20Started/Installation.html)
 
-#### - Crucible Plugin for osTicket
+#### Crucible Plugin for osTicket
 
 A plugin, developed by the Software Engineering Institute (SEI), that provides authentication against an OAuth2 Identity Server and posts ticket event notifications to the Crucible API.
 

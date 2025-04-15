@@ -37,7 +37,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 #### Enter View Information
 
-![newviewinfo](../assets/img/new view info.png)
+![new view info](../assets/img/new view info.png)
 
 1. Under Views, click **Add New View**.
 2. Add a **Name** and **View Description**.
@@ -70,7 +70,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 4. Assign **Permissions** to the team. Each team can be assigned special permissions. You may want to have a team of "admins" who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
 
-    ![newviewnewteamadduser](../assets/img/new view new team add user.png)
+    ![new view new team add user](../assets/img/new view new team add user.png)
 
 5. Click the **User** icon to select users to add to the new team.
 
@@ -92,7 +92,7 @@ In this step, View Administrators upload a single file or multiple files simulta
 1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files - it has not been uploaded yet.
 2. Select the **Team(s)** that you want to access the file and click **Upload Staged File(s)**.
 3. The file appears under **Uploaded Files**. From here, you can: **Download** the file, **Delete** the file, **Copy Link** to the file, **Edit** the name and team of the file, and **Add File as Application**.
-4. After adding the file as an application you have to return to **Step 3 Teams** and add that application - the _newly_ uploaded file - to a team just as you would add any new application.
+4. After adding the file as an application you have to return to **Step 3 Teams** and add that application - the *newly* uploaded file - to a team just as you would add any new application.
 5. Click **Done** when you are finished adding or updating the view.
 
 ### Configure Users
@@ -151,7 +151,7 @@ ViewAdmin: can edit anything within a View that they have permissions.
 
 Subscriptions allow a Player administrator to configure client applications to be notified when supported actions occur within the Player API. Also known as Webhooks, this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy. For example, the VM API supports subscribing to ViewCreated and ViewDeleted in Player.
 
-When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured, Player notifies VM API of the new View and it ensures that any Maps that were set up for the parent View are made available in the newly created View. This allows for Maps to be used in on-demand events.
+When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured, Player notifies the VM API of the new View. The VM API then ensures that any Maps set up for the parent View are available in the newly created View. This allows for Maps to be used in on-demand events.
 
 When the event is ended, it receives the ViewDeleted notification and cleans up. Similarly any application can be configured to subscribe to these notifications and support on-demand events without Player code having to be added for each application specifically.
 
@@ -252,7 +252,7 @@ A *click point* is a location on the map that, when clicked by Player user, laun
 
 #### Virtual Machine Applications
 
-The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system allows the VM to be opened similar to an application, within a tab on the same screen or popped out into a new browser tab using the icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
+The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system lets users open a VM like an app—either in a tab on the same screen or in a new browser tab using the pop-out icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
 
 ##### File Upload
 
@@ -304,19 +304,17 @@ The VM Usage Logging function is a administrative feature that when configured, 
 
 ![vm-app-9](../assets/img/vm-app-9.png)
 
-Once data has been collected, an View Admin can then download a CSV file that contains the timestamps and the VM machine name that a specific user had accessed during the start and end time of the user logging session.
+After data collection, a View Admin can download a CSV showing timestamps and VM names accessed by a user during the start and end of their session.
 
 ![vm-app-10](../assets/img/vm-app-10.png)
 
 #### Service Support Tickets
 
-osTicket (https://osticket.com/), a widely-used open source support ticket system, can be configured and deployed for an exercise. Using this "built-in" help desk, participants can submit help requests to event administrators.
+osTicket (`osticket.com`), a widely-used open source support ticket system, can be configured and deployed for an exercise. Using this "built-in" help desk, participants can submit help requests to event administrators.
 
 #### Chat
 
-Mattermost (https://mattermost.com/), an open source messaging platform can be configured and deployed to provide an "off the shelf" chat system for users.
-
-<!---#### Email-->
+Mattermost (`mattermost.com`), an open source messaging platform can be configured and deployed to provide an "off the shelf" chat system for users.
 
 #### Notifications
 
@@ -388,7 +386,7 @@ These procedures assume you are in the Player VM Console app.
 
 #### Upload Files and Mount ISO
 
-These procedures describe how to upload files from a local machine to be mounted as a DVD (files are not uploaded directly to a virtual machine -– it's a two-step process). This is useful for installers and uploading larger files (such as ISO files).
+These procedures describe how to upload files from a local machine to be mounted as a DVD. Files are not uploaded directly to a virtual machine-–it is a two-step process. This is useful for installers and uploading larger files (such as ISO files).
 
 1. In the VM List screen, click **Upload File**.
 2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).
@@ -421,7 +419,7 @@ To follow another participant:
    - Click **Expand All** to expand the teams to see all of the participants.
    - Click **Collapse All** to collapse the teams.
    - Select a team to expand it and see its participants.
-   - Check **Hide Inactive** to display _only_ those participants who are working in a virtual machine at the moment.
+   - Check **Hide Inactive** to display *only* those participants who are working in a virtual machine at the moment.
 4. Click the participant's name. Now, you can see the console display for the virtual machine that the person is on in the main Player window.
 5. Click the icon next to the participant's name to follow that participant in a new browser tab.
 

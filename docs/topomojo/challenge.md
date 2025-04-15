@@ -12,7 +12,7 @@ The *Challenge* tab in the TopoMojo workspace is used when both Gameboard and To
 
 To access transforms, use the referenced "*double-pounder-key* (`##key##`)" notation. When TopoMojo deploys a gamespace, the engine generates the random values for all transforms, looks for double-pounder-keys, then replaces them with the randomly generated values for that deployment.
 
-Any of the sections on the Challenge tab (e.g., Transforms, Markdown, Questions, Answers) can contain *double-pounder-keys* that will be replaced with transform values at deploy time. You can also use transform *double-pounder-keys* in the *Guest Settings* field of a template to inject random variables into VM guest info variables when deploying a gamespace (transforms aren't generated when deploying workspace VMs, so the value of the variable will be the *double-pounder-key*).
+Any of the sections on the Challenge tab (e.g., Transforms, Markdown, Questions, Answers) can contain *double-pounder-keys* that will be replaced with transform values at deploy time. You can also use transform *double-pounder-keys* in the *Guest Settings* field of a template to inject random variables into VM guest info variables when deploying a gamespace. (Transforms aren't generated when deploying workspace VMs, so the value of the variable will be the *double-pounder-key*.)
 
 The screen print below shows the Guest Settings of a VM template configured to use two guest info variables: `var1` and `token1`. `Var1` has a value of "test" and `token1` will have a random 8-character hexadecimal string assigned when a gamespace is deployed.
 
@@ -49,7 +49,7 @@ These options are revealed when **Detail** is selected.
 - `MatchAll`: The submission must match all of the pipe-delimited answers in the **Answer** field. Use this when a list of answers to a question is expected.
 - `MatchAlpha`: The submission must exactly match what is in the **Answer** field *after* all non-alphanumeric characters are removed. This is useful if the user might submit symbols that don't affect the validity of an answer. For example, `C:/Users` and `C:\Users` are both valid answers and the symbols (`/` vs `\`) don't matter.
 
-All four graders are case-insensitive, meaning that all answers and submissions are converted to lower-case by the grader before the submission is compared to the expected answer in all grader types.
+All four graders are case-insensitive; answers and submissions are converted to lowercase before being compared to the expected answer, regardless of which grader type is used.
 
 ### Weight
 

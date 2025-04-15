@@ -1,12 +1,10 @@
-# ![Gallery Logo](../assets/img/gallery-logo.png) **Gallery:** Keeping You in the Know!
+# ![Gallery Logo](../assets/img/gallery-logo.png) **Gallery:** Keeping You in the Know
 
 ## Overview
 
-### What Is Gallery?
-
 [**Gallery**](#glossary) is a web application where participants receive incident information.
 
-In the Gallery User Interface, there are two major functional sections:
+In the Gallery user interface, there are two major functional sections:
 
 - [Gallery Wall](#glossary): The dashboard that displays ["cards"](#glossary) to help participants visualize the incident.
 - [Gallery Archive](#glossary): A collection of information that contains relevant reporting, intelligence, news, and social media.
@@ -14,7 +12,6 @@ In the Gallery User Interface, there are two major functional sections:
 For installation, refer to these GitHub repositories.
 
 - [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui)
-
 - [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
 
 ## User Guide
@@ -25,7 +22,7 @@ The landing page of Gallery provides a central approach to recompiling all colle
 
 ![Gallery Landing Page OE](../assets/img/galleryLandingPage.png)
 
-First, users should select the collection they want to access from the dropdown, then a list of exhibits will be shown where the user will be able to select the one desired to be accessed.
+First, users select a collection from the dropdown; then, they choose an exhibit from the displayed list.
 
 *Search for an Exhibit*
 
@@ -49,37 +46,44 @@ The following image will show some important hotspots about the Gallery Wall. Re
 ![Gallery Wall OE](../assets/img/galleryWall-v2.png)
 
 #### Title
-*Hotspot 1:*
+
+##### Hotspot 1
 
 The title of the card.
 
 #### Description
-*Hotspot 2:*
+
+##### Hotspot 2
 
 A brief description of the event.
 
 #### Date Posted
-*Hotspot 3:*
+
+##### Hotspot 3
 
 The date and time the card was last updated.
 
 #### Unread Articles
-*Hotspot 4:*
+
+##### Hotspot 4
 
 The number of [articles](#glossary) left to read from the event.
 
 #### Details
-*Hotspot 5:*
+
+##### Hotspot 5
 
 Provides additional details than those provided in the Gallery Wall. All articles related to the event will be filtered and shown to provide more information.
 
 #### Team Selection
-*Hotspot 6:*
+
+##### Hotspot 6
 
 This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user will be able to see how other teams progress during the exercise, as well as participate on their own team.
 
 #### Wall & Archive Toggle
-*Hotspot 7:*
+
+##### Hotspot 7
 
 By using this icon, users can toggle between the Gallery Wall and Gallery Archive.
 
@@ -92,31 +96,36 @@ The following image will show some important hotspots about the Gallery Archive.
 ![Gallery Archive OE](../assets/img/galleryArchive-v2.png)
 
 #### Add an Article
-*Hotspot 1:*
+
+##### Hotspot 1
 
 Users assigned the appropriate permissions can add articles to the Archive related to the exercise current events.
 
-To add an article, refer to this section [Add Articles During an Exercise](#add-articles-during-an-exercise).
+To add an article, refer to this section, [Add Articles During an Exercise](#add-articles-during-an-exercise).
 
 #### Search
-*Hotspot 2:*
+
+##### Hotspot 2
 
 The archive contains all "move" data that has been shared up to this point in the exercise. Users can search, sort, and filter information in the archive.
 
 To search the archive, enter the terms in the **Search the Archive** field. The search feature automatically narrows down the results.
 
 #### Cards Filter
-*Hotspot 3:*
+
+##### Hotspot 3
 
 Users can use this dropdown to further filter intelligence information. Users can sort the Gallery articles based on their card categories. This will be useful for users that are searching for information from a specific category.
 
 #### Source Filters
-*Hotspot 4:*
+
+##### Hotspot 4
 
 These articles come from different categories of sources: [reporting](#glossary), [news](#glossary), [orders](#glossary), [phone](#glossary), [email](#glossary), [intel](#glossary), and [social media](#glossary). Users can select one or multiple filters to display only the cards that belong to those filter categorizations.
 
 #### Article Information
-*Hotspot 5:*
+
+##### Hotspot 5
 
 The information in the Gallery Archive is displayed in articles. Each article contains the Title, Source Type, Source Name, and Date Posted.
 
@@ -128,17 +137,20 @@ For the information included on the article:
 - **Date Posted:** The date and timestamp of when the intelligence report was posted.
 
 #### View
-*Hotspot 6:*
+
+##### Hotspot 6
 
 View the full article in a pop up page or open the article in a new tab for better visualization.
 
 #### Read
-*Hotspot 7:*
+
+##### Hotspot 7
 
 After reading an article, mark it as read to keep track of new articles.
 
 #### Share
-*Hotspot 8:*
+
+##### Hotspot 8
 
 With this feature, users can share an article with other users using a mail service.
 
@@ -149,23 +161,26 @@ To share an article with another team, click **Share**. In the **Share Article**
 3. Click **Share**.
 
 #### More
-*Hotspot 9:*
+
+##### Hotspot 9
 
 When enabled, attached documents with additional information will be provided for users to access and read.
 
 #### Team Selection
-*Hotspot 10:*
+
+##### Hotspot 10
 
 This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user will be able to see how other teams progress during the exercise, as well as participate on their own team.
 
 #### Wall & Archive Toggle
-*Hotspot 11:*
+
+##### Hotspot 11
 
 By using this icon, users can toggle between the Gallery Wall and Gallery Archive.
 
 ### Add Articles During an Exercise
 
-Users with the appropriate ContentDeveloper permissions, can add articles to the Gallery Archive throughout the course of exercise events.
+Users with the appropriate Content Developer permissions, can add articles to the Gallery Archive throughout the course of exercise events.
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an article during an exercise.
 
@@ -174,17 +189,17 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. On the Gallery Archive section, click on **+** to add an article.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
-Field      | Data Type     | Description  | Example
------------- | ------------- | ------------ | -----------
-**Name**         | String        | Name of the article | No cell phone connectivity
-**Summary** | String | Short summary of the article | No cell phone connectivity after pass of Hurricane Delta
-**Description** | Rich Text | Description with characteristics and details of the article | In a world driven by constant connectivity, the sudden absence of cell phone signals...
-**Url for more info** | String | If additional details are necessary, provide the URL | www.bbcnews.com/hurricane-delta
-**Open URL in new tab** | Boolean | Select if URL provided should be opened in a new tab | True
-**Card** | Dropdown Text | Article's classification amongst Gallery cards | Communications Sector
-**Status** | Dropdown Text | Status of how the article affects the exercise situation | Affected
+| Field      | Data Type  | Description | Example    |
+| ---------- | ---------- | ----------- | ---------- |
+| **Name**         | String        | Name of the article | No cell phone connectivity |
+| **Summary** | String | Short summary of the article | No cell phone connectivity after pass of Hurricane Delta |
+| **Description** | Rich Text | Description with characteristics and details of the article | In a world driven by constant connectivity, the sudden absence of cell phone signals... |
+| **Url for more info** | String | If additional details are necessary, provide the URL | `www.bbcnews.com/hurricane-delta` |
+| **Open URL in new tab** | Boolean | Select if URL provided should be opened in a new tab | True |
+| **Card** | Dropdown Text | Article's classification amongst Gallery cards | Communications Sector |
+| **Status** | Dropdown Text | Status of how the article affects the exercise situation | Affected |
 
 To save these settings, click **Save**.
 
@@ -192,7 +207,7 @@ After creating your article, it will be displayed in the Gallery Archive in the 
 
 ![Article Created OE](../assets/img/createdArticle.png)
 
-**Edit an Article**
+#### Edit an Article
 
 To edit an article, follow these steps:
 
@@ -200,7 +215,7 @@ To edit an article, follow these steps:
 2. Here, users will be prompted the same article's edit component as when adding a new article.
 3. After doing all the necessary edits, click **Save**.
 
-**Delete an Article**
+#### Delete an Article
 
 To delete an article, follow these steps:
 
@@ -221,7 +236,7 @@ Most users won't have any permissions assigned in this application.
 
 ![Gallery Users Admin OE](../assets/img/galleryUsersAdmin.png)
 
-**Add a User**
+#### Add a User
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a user.
 
@@ -230,27 +245,27 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the Users Administration View, click **Add User**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
-Field       | Data Type     | Description  | Example
------------- | ------------- | ------------ | -----------
-**Name**         | String        | Name or username that identifies the user | user-1
-**ID** | GUID | Unique ID for the user | 9dd4e3d8-5098-4b0a-9216-697cda5553f8
-**Email** | String | User's email contact | user@this.ws
+| Field      | Data Type  | Description | Example    |
+| ---------- | ---------- | ----------- | ---------- |
+| **Name**         | String        | Name or username that identifies the user | user-1 |
+| **ID** | GUID | Unique ID for the user | 9dd4e3d8-5098-4b0a-9216-697cda5553f8 |
+| **Email** | String | User's email contact | `user@this.ws` |
 
 To save these settings, click **Save** and select the desired permissions to be assigned by clicking on the checkbox next to the user.
 
-**Edit User's Information**
+#### Edit User's Information
 
 To edit a user, follow these steps:
 
 1. Click on the **Settings Cog**.
 2. Navigate to the **Users** tab.
 3. Select the user to be edited and click on the **Edit Icon** next to the user.
-2. Here, users will be prompted the same user's edit component as when adding a new user.
-3. After doing all the necessary edits, click **Save**.
+4. Here, users will be prompted the same user's edit component as when adding a new user.
+5. After doing all the necessary edits, click **Save**.
 
-**Delete a User**
+#### Delete a User
 
 To delete a user, follow these steps:
 
@@ -264,7 +279,7 @@ The following image shows the Collections Administration Page. Here, administrat
 
 ![Collections Admin OE](../assets/img/collectionsAdmin-v2.png)
 
-**Add a Collection**
+#### Add a Collection
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a collection.
 
@@ -273,26 +288,26 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the Collections Administration View, click **+ Icon**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
-Field       | Data Type     | Description  | Example
------------- | ------------- | ------------ | -----------
-**Name**         | String        | Name of the collection | NCIS Demonstration
-**Description** | String | Details, characteristics and information of the collection | This is a collection created for demo purposes.
+| Field      | Data Type  | Description | Example    |
+| ---------- | ---------- | ----------- | ---------- |
+| **Name**         | String        | Name of the collection | NCIS Demonstration |
+| **Description** | String | Details, characteristics and information of the collection | This is a collection created for demo purposes. |
 
 To save these settings, click **Save**.
 
-**Edit a Collection**
+#### Edit a Collection
 
 To edit a collection, follow these steps:
 
 1. Click on the **Settings Cog**.
 2. Navigate to the **Collections** tab.
 3. Select the collection to be edited and click on the **Edit Icon** next to the collection.
-2. Here, users will be prompted the same collection's edit component as when adding a new collection.
-3. After doing all the necessary edits, click **Save**.
+4. Here, users will be prompted the same collection's edit component as when adding a new collection.
+5. After doing all the necessary edits, click **Save**.
 
-**Delete a Collection**
+#### Delete a Collection
 
 To delete a collection, follow these steps:
 
@@ -300,7 +315,7 @@ To delete a collection, follow these steps:
 2. Navigate to the **Collections** tab.
 3. Select the collection to be deleted and click on the **Trash Can Icon** next to the collection.
 
-**Upload a Collection**
+#### Upload a Collection
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to upload a collection.
 
@@ -309,7 +324,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 3. Click on the **Up Arrow** next to the + Icon.
 4. Select the collection JSON file to be uploaded.
 
-**Download a Collection**
+#### Download a Collection
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to download a collection.
 
@@ -318,7 +333,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 3. Click on the **Down Arrow** next to the collection to be downloaded.
 4. Look for the JSON file in your Downloads folder.
 
-**Copy a Collection**
+#### Copy a Collection
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to copy a collection.
 
@@ -333,7 +348,7 @@ The following image shows the Cards Administration Page. Here, administrators ca
 
 ![Cards Admin OE](../assets/img/cardsAdmin.png)
 
-**Add a Card**
+#### Add a Card
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a card.
 
@@ -342,27 +357,27 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the Cards Administration View, click **Add Card**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
-Field      | Data Type     | Description  | Example
------------- | ------------- | ------------ | -----------
-**Name**         | String        | Name of the card | Information Technology Sector
-**Description** | String | Details, characteristics and information of the card | This card is created to provide additional information related to the IT sector.
-**Collection** | Dropdown Text | Select the collection this card should be part of | Demonstration #1
+| Field      | Data Type  | Description | Example    |
+| ---------- | ---------- | ----------- | ---------- |
+| **Name**   | String     | Name of the card | Information Technology Sector |
+| **Description** | String | Details, characteristics and information of the card | This card is created to provide additional information related to the IT sector. |
+| **Collection** | Dropdown Text | Select the collection this card should be part of | Demonstration #1 |
 
 To save these settings, click **Save**.
 
-**Edit a Card**
+#### Edit a Card
 
 To edit a card, follow these steps:
 
 1. Click on the **Settings Cog**.
 2. Navigate to the **Cards** tab.
 3. Select the card to be edited and click on the **Edit Icon** next to the card.
-2. Here, users will be prompted the same card's edit component as when adding a new card.
-3. After doing all the necessary edits, click **Save**.
+4. Here, users will be prompted the same card's edit component as when adding a new card.
+5. After doing all the necessary edits, click **Save**.
 
-**Delete a Card**
+#### Delete a Card
 
 To delete a card, follow these steps:
 
@@ -376,7 +391,7 @@ The following image shows the Articles Administration Page. Here, administrators
 
 ![Articles Admin OE](../assets/img/articlesAdmin.png)
 
-**Add an Article**
+#### Add an Article
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an article.
 
@@ -385,36 +400,36 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the Article Administration View, click **Add Article**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
-Field       | Data Type     | Description  | Example
------------- | ------------- | ------------ | -----------
-**Name**         | String        | Name of the article | Hurricane Delta has landed in Fort Myers
-**Summary** | String | Short summary and details of the article | Hurricane Delta has caused major damages
-**Description** | Rich Text | Details, characteristics and information of the article | Hurricane Delta, Category 5 hurricane, has caused major damages in Fort Myers...
-**Card** | Dropdown Text | Select the card this article should be categorized with | Energy Sector
-**Status** | Dropdown Text | Select the article's status on how it affects the exercise | Critical
-**Source Type** | Dropdown Text | Select the source or author type of the article | Intel
-**Source Name** | String | Name or author of the article | BBC News
-**URL for more info** | String | URL if additional information is provided to participants | www.bbcnews.com/hurricane-delta
-**Open URL in new tab** | Boolean | If URL is provided, select if it should be opened in a new tab | True
-**Move** | Integer | Move number this article should be part of | 1
-**Inject** | Integer | Inject number this article should be part of | 1
-**Posted Date/Time** | Datetime | Date/Time when this article was posted | 08/02/2021, 15:12:49
+| Field      | Data Type  | Description | Example    |
+| ---------- | ---------- | ----------- | ---------- |
+| **Name**   | String     | Name of the article | Hurricane Delta has landed in Fort Myers |
+| **Summary** | String | Short summary and details of the article | Hurricane Delta has caused major damages |
+| **Description** | Rich Text | Details, characteristics and information of the article | Hurricane Delta, Category 5 hurricane, has caused major damages in Fort Myers... |
+| **Card** | Dropdown Text | Select the card this article should be categorized with | Energy Sector |
+| **Status** | Dropdown Text | Select the article's status on how it affects the exercise | Critical |
+| **Source Type** | Dropdown Text | Select the source or author type of the article | Intel |
+| **Source Name** | String | Name or author of the article | BBC News |
+| **URL for more info** | String | URL if additional information is provided to participants | `www.bbcnews.com/hurricane-delta` |
+| **Open URL in new tab** | Boolean | If URL is provided, select if it should be opened in a new tab | True |
+| **Move** | Integer | Move number this article should be part of | 1 |
+| **Inject** | Integer | Inject number this article should be part of | 1 |
+| **Posted Date/Time** | Datetime | Date/Time when this article was posted | 08/02/2021, 15:12:49 |
 
 To save these settings, click **Save**.
 
-**Edit an Article**
+#### Edit an Article
 
 To edit an article, follow these steps:
 
 1. Click on the **Settings Cog**.
 2. Navigate to the **Articles** tab.
 3. Select the article to be edited and click on the **Edit Icon** next to the article.
-2. Here, users will be prompted the same article's edit component as when adding a new article.
-3. After doing all the necessary edits, click **Save**.
+4. Here, users will be prompted the same article's edit component as when adding a new article.
+5. After doing all the necessary edits, click **Save**.
 
-**Delete an Article**
+#### Delete an Article
 
 To delete an article, follow these steps:
 
@@ -428,7 +443,7 @@ The following image shows the Exhibits Administration Page. Here, administrators
 
 ![Exhibits Admin OE](../assets/img/exhibitsAdmin-v3.png)
 
-**Add an Exhibit**
+#### Add an Exhibit
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an [exhibit](#glossary).
 
@@ -437,27 +452,27 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the Exhibit Administration View, click **+ Icon**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
-Field      | Data Type     | Description  | Example
------------- | ------------- | ------------ | -----------
-**Current Move** | Integer | Number of the current move | 1
-**Current Inject** | Integer | Number of the inject within the move | 2
-**Scenario ID** | GUID | ID value for the scenario | Automatically generated by the system
+| Field      | Data Type  | Description | Example    |
+| ---------- | ---------- | ----------- | ---------- |
+| **Current Move** | Integer | Number of the current move | 1 |
+| **Current Inject** | Integer | Number of the inject within the move | 2 |
+| **Scenario ID** | GUID | ID value for the scenario | Automatically generated by the system |
 
 To save these settings, click **Save**.
 
-**Edit an Exhibit**
+#### Edit an Exhibit
 
 To edit an exhibit, follow these steps:
 
 1. Click on the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
 3. Select the exhibit to be edited and click on the **Edit Icon** next to the exhibit.
-2. Here, users will be prompted the same exhibit's edit component as when adding a new exhibit.
-3. After doing all the necessary edits, click **Save**.
+4. Here, users will be prompted the same exhibit's edit component as when adding a new exhibit.
+5. After doing all the necessary edits, click **Save**.
 
-**Delete an Exhibit**
+#### Delete an Exhibit
 
 To delete an exhibit, follow these steps:
 
@@ -465,7 +480,7 @@ To delete an exhibit, follow these steps:
 2. Navigate to the **Exhibits** tab.
 3. Select the exhibit to be deleted and click on the **Trash Can Icon** next to the exhibit.
 
-**Upload an Exhibit**
+#### Upload an Exhibit
 
 To upload an exhibit, follow these steps:
 
@@ -474,9 +489,11 @@ To upload an exhibit, follow these steps:
 3. Click on the **Up Arrow** next to the + Icon.
 4. Select the exhibit JSON file to be uploaded.
 
-**Note:** When adding a new exhibit, a new collection with the uploaded exhibit will be created. To view the uploaded exhibit, navigate to the collection using the dropdown and select the collection with the same name as the file uploaded.
+!!! note
 
-**Download an Exhibit**
+​    When adding a new exhibit, a new collection with the uploaded exhibit will be created. To view the uploaded exhibit, navigate to the collection using the dropdown and select the collection with the same name as the file uploaded.
+
+#### Download an Exhibit
 
 To download an exhibit, follow these steps:
 
@@ -485,7 +502,7 @@ To download an exhibit, follow these steps:
 3. Click on the **Down Arrow** next to the exhibit to be downloaded.
 4. Look for the JSON file in your Downloads folder.
 
-**Copy an Exhibit**
+#### Copy an Exhibit
 
 To copy an exhibit, follow these steps:
 
@@ -494,13 +511,13 @@ To copy an exhibit, follow these steps:
 3. Click on the **Copy Icon** next to the exhibit to be copied.
 4. Look for the exhibit name with the user's name.
 
-**Configure an Exhibit**
+#### Configure an Exhibit
 
 To configure an exhibit to be used for an exercise, administrators will need to add Exhibit Teams, Card Teams, Article Teams, as well as assign the respective Observers (if desired). To do this, follow these steps.
 
 ![Configure Exhibit OE](../assets/img/configureExhibit-v2.png)
 
-*Exhibit Teams*
+#### Add a Team to an Exhibit
 
 To add a team to the Exhibit, follow these steps.
 
@@ -509,13 +526,13 @@ To add a team to the Exhibit, follow these steps.
 1. Click on the **+** icon.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
-Field      | Data Type     | Description  | Example
------------- | ------------- | ------------ | -----------
-**Name** | String | Full name of the team | Carnegie Mellon University
-**Short Name** | String | Short name of the team, such as an acronym | CMU
-**Email** | String | Team's email contact | sei@cmu.edu
+| Field      | Data Type  | Description | Example    |
+| ---------- | ---------- | ----------- | ---------- |
+| **Name** | String | Full name of the team | Carnegie Mellon University |
+| **Short Name** | String | Short name of the team, such as an acronym | CMU |
+| **Email** | String | Team's email contact | `sei@cmu.edu` |
 
 To save these settings, click **Save**.
 
@@ -528,7 +545,7 @@ To configure a team, follow these steps.
 3. Under the **Team Users** tab, users that have already been assigned to the team will be shown. To remove a user from the team, click on **Remove**.
 4. If desired, check the **Observer** checkbox to assign that role to the user during the exercise.
 
-*Card Teams*
+#### Add a Team Card to an Exhibit
 
 To add a Team Card to the Exhibit, follow these steps.
 
@@ -537,20 +554,20 @@ To add a Team Card to the Exhibit, follow these steps.
 1. Click on the **+** on the Card Teams section.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
-Field       | Data Type     | Description  | Example
------------- | ------------- | ------------ | -----------
-**Team** | Dropdown Text | Team the card should be part of | CMU - Carnegie Mellon University
-**Card** | Dropdown Text | Gallery card to be assigned | Communications Sector
-**Move** | Integer | Move number the card is part of | 1
-**Inject** | Integer | Inject number the card is part of | 2
-**Is Shown On Wall** | Boolean | Select whether the card should be shown on the Gallery Wall for the team | True
-**Can Post New Articles** | Boolean | Select whether the team can add new articles to this card | True
+| Field      | Data Type  | Description | Example    |
+| ---------- | ---------- | ----------- | ---------- |
+| **Team** | Dropdown Text | Team the card should be part of | CMU - Carnegie Mellon University |
+| **Card** | Dropdown Text | Gallery card to be assigned | Communications Sector |
+| **Move** | Integer | Move number the card is part of | 1 |
+| **Inject** | Integer | Inject number the card is part of | 2 |
+| **Is Shown On Wall** | Boolean | Select whether the card should be shown on the Gallery Wall for the team | True |
+| **Can Post New Articles** | Boolean | Select whether the team can add new articles to this card | True |
 
 To save these settings, click **Save**.
 
-*Article Teams*
+#### Add an Article to a Team
 
 To add an article to a team, follow these steps.
 
@@ -560,7 +577,7 @@ To add an article to a team, follow these steps.
 2. Under the **Exhibit Teams** tab, teams that haven't been assigned to an article will be shown. To add them to the Article Teams, click on **Add**.
 3. Under the **Article Teams** tab, teams that have already been assigned will be shown. To remove a team, click on **Remove**.
 
-*Observers*
+#### The Observer Role
 
 To assign the [Observer Role](#glossary) to a user:
 

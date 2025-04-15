@@ -28,11 +28,11 @@ The default setting for the maximum number of active events per user is **two**.
 
 ### Manage Event Templates
 
-An Alloy _event template_ is used to associate one or more of the individual Crucible applications, including a Player view, Caster directory, and Steamfitter scenario template. When an event template is launched, a new event is created.
+An Alloy *event template* is used to associate one or more of the individual Crucible applications, including a Player view, Caster directory, and Steamfitter scenario template. When an event template is launched, a new event is created.
 
 Only a **system admin** or a **content developer** can create or modify event templates in the Alloy administrator user interface. **System admin** and **content developer** permissions are granted to users in the Player administrator user interface.
 
-Once the event template has been created, it can be used to create an Alloy _event_. The event is the actual running of a simulation.
+Once the event template has been created, it can be used to create an Alloy *event*. The event is the actual running of a simulation.
 
 When the event template is launched, Alloy:
 
@@ -51,7 +51,9 @@ The Alloy user interface as viewed by a user consists of two screens:
 - **Labs:** contains a list of event templates and labs available to the user.
 - **Launch:** contains a view of a specific event template or lab. Here, the user can **Launch** an event if no active event exists for this user and event template combination. If an active event already exists, then the user can open it in Player or end it.
 
-> **Note:** Currently, there is **no** error reporting when launching an event template or lab. If an error occurs, the user is returned to the Launch screen.
+!!! warning
+
+    There is no error reporting when launching an event template or lab. If an error occurs, the user is returned to the Launch screen.
 
 ### Deploy an Event/Exercise
 
@@ -83,8 +85,9 @@ When launching an implementation from a definition, the Alloy API goes through t
 **Understanding the end process**
 
 There are two ways the end process can be triggered:
-- user initiated, and
-- `AlloyQueryService` of the Alloy API initiated because expiration time has been reached.
+
+- user-initiated
+- `AlloyQueryService` of Alloy API initiated (because expiration time has been reached)
 
 When the end process is initiated, the Alloy API goes through the following process:
 

@@ -37,6 +37,9 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.details
@@ -44,6 +47,8 @@ markdown_extensions:
   - admonition
   - attr_list
 extra:
+  features:
+    - content.icons
   social:
     - icon: material/message-question
       link: https://github.com/cmu-sei/Crucible/issues/new?template=question.md

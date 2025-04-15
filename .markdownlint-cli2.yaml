@@ -128,9 +128,8 @@ config:
   # Images should have alternate text to enhance readability
   MD045: true
 
-  # Code blocks should use a "fenced" style (triple backticks with a language defined)
-  MD046:
-    style: fenced
+  # Disable code block rules to support Material for MkDocs admonitions
+  MD046: false
 
   # File should end with a new line character
   MD047: true

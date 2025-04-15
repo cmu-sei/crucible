@@ -33,15 +33,15 @@ The id's used for isolation tags uniquely identify each workspace and gamespace 
 
 For example: a VM named `challenge-sever` in the gamespace with id (isolation tag) `18048abc66f142e1804732082f4051d2`, has the name `challenge-server#18048abc66f142e1804732082f4051d2`. Appending the isolation tag to workspace/gamespace resources ensures environment isolation -- VMs and networks cannot have the same name, so there will never be accidental sharing of VM/network resources.
 
-*Screen print 1:*
+*Screen print 1*
 
 ![workspace isolation tag](img/iso-tag-ws.png)
 
-*Screen print 2:*
+*Screen print 2*
 
 ![gamespace isolation tag](img/iso-tag-gs.png)
 
-*Screen print 3:*
+*Screen print 3*
 
 ![isolation tag url](img/iso-tag-url.png)
 

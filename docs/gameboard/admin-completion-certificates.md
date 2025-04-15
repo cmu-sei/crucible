@@ -25,10 +25,10 @@ Players can view a list of past certificates from their Gameboard Profile page t
 2. In the **Create Certificate Template** window, enter a **Name** for your certificate template.
 3. In the **Template** box, specify the certificate template in HTML. You should not include the entire HTML document (i.e., don't add `<!DOCTYPE html>`, `<html>`, `<head>`, or `<body>` tags). Just provide the essential HTML content, such as `<div>` and `<p>` elements.
 
-- Gameboard automatically inserts your content into a pre-existing, correctly formatted HTML document for display.
-- You can use the **Copy from:** feature to paste an example certificate HTML configuration into the **Template** field. In the **Copy from:** dropdown, select a template to copy from and then click **Copy**.
-- You can include `<style>` blocks to define CSS styles and apply them to your custom HTML elements.
-- You can set a background image for your certificate by using the `.gameboard-print-html` CSS class. Gameboard generates this element when rendering the certificate, and any styles you apply to it (like `background-image`) are used automatically.
+   - Gameboard automatically inserts your content into a pre-existing, correctly formatted HTML document for display.
+   - You can use the **Copy from:** feature to paste an example certificate HTML configuration into the **Template** field. In the **Copy from:** dropdown, select a template to copy from and then click **Copy**.
+   - You can include `<style>` blocks to define CSS styles and apply them to your custom HTML elements.
+   - You can set a background image for your certificate by using the `.gameboard-print-html` CSS class. Gameboard generates this element when rendering the certificate, and any styles you apply to it (like `background-image`) are used automatically.
 
 4. Click **OK**.
 

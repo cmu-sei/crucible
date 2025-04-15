@@ -1,3 +1,5 @@
+# Play
+
 The **Play** page is where you can interact with your lab in the same way others will when they launch your content or "play" through your challenge. Play deploys a read-only copy of all virtual machines in the workspace; this gives the player their own deployed configurations.
 
 **Variant:** Specify which variant of the challenge you wish to play (if it is a *variant* challenge).
