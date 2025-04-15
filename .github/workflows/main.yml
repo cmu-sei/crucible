@@ -8,15 +8,22 @@ on:
     branches: ["main"]
 jobs:
   # Use Vale via the official action to lint files
-  vale:
-    name: Vale Linting
+  lint:
+    name: Lint markdown files using Vale and Markdownlint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: errata-ai/vale-action@v2.1.1
+
+      # Run Vale
+      - uses: errata-ai/vale-action@v2
         with:
           fail_on_error: true
           reporter: github-check
+
+      # Run markdownlint-cli2
+      - uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          globs: "**/*.md"
   # Build and deploy docs using material for mkdocs
   # This only runs when the branch is main
   deploy:
