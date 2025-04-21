@@ -14,7 +14,7 @@ By default, the **Local** filter is applied so it only displays ISOs available i
 
 When you upload an ISO file, TopoMojo creates a folder with *this* GUID--called out in green in screen print 1 below--in the folder name in the NFS datastore. TopoMojo puts your ISO in that folder. Only the current workspace, that is, *your* workspace has access to the ISO file.
 
-*Screen print 1: GUID and Local filter applied*
+Screen print 1: GUID and Local filter applied
 
 ![iso-drag](img/iso-drag.png)
 

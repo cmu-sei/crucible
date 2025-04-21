@@ -1,8 +1,8 @@
-# ![Blueprint Logo](../assets/img/blueprint-logo.png) **Blueprint:** Building a MSEL
+# ![Blueprint Logo](../assets/img/blueprint-logo.png) Blueprint: Building a MSEL
 
 ## Overview
 
-[**Blueprint**](#glossary) is a web app that helps users create a [Master Scenario Event List (MSEL)](#glossary) and [events](#glossary) more easily. It lets users choose and define simulated entities, attacks, time frames, and regulators affected by the scenario. Users can view, edit, create, and approve events in the MSEL using Blueprint.
+[Blueprint](#glossary) is a web app that helps users create a [Master Scenario Event List (MSEL)](#glossary) and [events](#glossary) more easily. It lets users choose and define simulated entities, attacks, time frames, and regulators affected by the scenario. Users can view, edit, create, and approve events in the MSEL using Blueprint.
 
 Blueprint makes it easier to build and view the MSEL compared to using an Excel spreadsheet. It also helps teams collaborate, even if they are from different teams. Blueprint can connect with Player, Gallery, CITE, and Steamfitter to help automate exercise setup.
 
@@ -409,7 +409,7 @@ To delete an organization, follow these steps:
 1. Navigate to the **Organizations** tab.
 2. Select the desired card to be deleted and click the **Trash Can** icon next to the organization name.
 
-*Search for an Organization*
+##### Search for an Organization
 
 To search for a specific organization, follow these steps:
 
@@ -460,7 +460,7 @@ To delete a move from the MSEL, follow these steps:
 1. Navigate to the **Moves** tab.
 2. Select the move you want to delete and click the **Trash Can** button for the corresponding move.
 
-*Search For a Move*
+##### Search for a Move
 
 To search for a specific move, follow these steps:
 
@@ -507,8 +507,8 @@ If not already completed on the previous tab, fill the fields from the **Advance
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
-**Exercise Date/Time** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27
-**Row Metadata** | Integer |  Defines the size of this event on the Events and Exercise View tabs | 15,199,21,133
+| **Exercise Date/Time** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
+| **Row Metadata** | Integer |  Defines the size of this event on the Events and Exercise View tabs | 15,199,21,133 |
 
 If Gallery integration is enabled and not already completed on the Default tab, fill the fields from the **Gallery** tab following the Data Format Table specifications. This tab focuses on the Gallery fields necessary for the integration to work.
 
@@ -577,7 +577,7 @@ To facilitate this process, email domains are specified on these invitations, al
 
 ![Blueprint Invitations OE](../assets/img/blueprintInvitations-v2.png)
 
-*Add an Invitation*
+##### Add an Invitation
 
 ![Blueprint Add Invitations OE](../assets/img/blueprintAddInvitations.png)
 
@@ -587,7 +587,7 @@ To add a new invitation, follow these steps:
 2. Click the **Invite Others** button.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -599,7 +599,7 @@ To add a new invitation, follow these steps:
 
 After all desired configurations have been added, click **Save**.
 
-*Edit an Invitation*
+##### Edit an Invitation
 
 To edit an invitation, follow these steps:
 
@@ -608,14 +608,14 @@ To edit an invitation, follow these steps:
 3. Here, users will be prompted the same invitation's edit component as when adding a new invitation.
 4. After doing all the necessary edits, click **Save**.
 
-*Delete an Invitation*
+##### Delete an Invitation
 
 To delete an invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
 2. Select the desired invitation to be deleted and click the **Trash Can Icon** next to the invitation.
 
-*Search For an Invitation*
+##### Search for an Invitation
 
 To search for a specific invitation, follow these steps:
 
@@ -628,7 +628,7 @@ Integrations to the following applications have been added to facilitate the ext
 
 #### CITE
 
-If enabled, Blueprint will be able to push MSEL information to the CITE Application. For this, additional tabs will be added to the Blueprint side panel, which will be needed to be configured.
+If enabled, Blueprint will be able to push MSEL information to the CITE application. For this, additional tabs will be added to the Blueprint side panel, which will be needed to be configured.
 
 To enable the full CITE integration functionality the following tabs should be configured.
 
@@ -644,7 +644,7 @@ First, a CITE Team Type should be assigned to each team. To do this, follow thes
 2. Select the desired team and click the **Edit Icon**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -667,7 +667,7 @@ On this tab, [CITE Actions](#glossary) can be added to be pushed from Blueprint.
 
 ![Blueprint CITE Actions OE](../assets/img/blueprintCiteActions-v3.png)
 
-*Add a CITE Action*
+##### Add a CITE Action
 
 ![Blueprint Add CITE Actions OE](../assets/img/blueprintAddCiteActions.png)
 
@@ -677,7 +677,7 @@ To add a CITE Action, follow these steps:
 2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -688,7 +688,7 @@ To add a CITE Action, follow these steps:
 
 After all desired configurations have been added, click **Save**.
 
-*Edit a CITE Action*
+##### Edit a CITE Action
 
 To edit the CITE Action's details, follow these steps:
 
@@ -697,21 +697,21 @@ To edit the CITE Action's details, follow these steps:
 3. Here, users will be prompted the same action's edit component as when adding a new action.
 4. After doing all the necessary edits, click **Save**.
 
-*Delete a CITE Action*
+##### Delete a CITE Action
 
 To delete a CITE Action, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
 2. Select the desired action to be deleted and click the **Trash Can** icon next to the action.
 
-*Filter Actions by Team*
+##### Filter Actions by Team
 
 To filter CITE Actions by teams, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
 2. On the **Team** dropdown, select the desired team to filter by.
 
-*Search For an Action*
+##### Search for an Action
 
 To search for a specific action, follow these steps:
 
@@ -724,17 +724,17 @@ On this tab, [CITE Roles](#glossary) can be added to be pushed from Blueprint. T
 
 ![Blueprint CITE Roles OE](../assets/img/blueprintCiteRoles-v3.png)
 
-*Add a CITE Role*
+##### Add a CITE Role
 
 ![Blueprint Add CITE Roles OE](../assets/img/blueprintAddCiteRoles.png)
 
-To add a CITE Role, follow these steps:
+To add a CITE role, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
 2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -743,7 +743,7 @@ To add a CITE Role, follow these steps:
 
 After all desired configurations have been added, click **Save**.
 
-*Edit a CITE Role*
+##### Edit a CITE Role
 
 To edit the CITE Role's details, follow these steps:
 
@@ -752,21 +752,21 @@ To edit the CITE Role's details, follow these steps:
 3. Here, users will be prompted the same role's edit component as when adding a new role.
 4. After doing all the necessary edits, click **Save**.
 
-*Delete a CITE Role*
+##### Delete a CITE Role
 
 To delete a CITE Role, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
 2. Select the desired role to be deleted and click the **Trash Can** icon next to the role.
 
-*Filter Roles by Team*
+##### Filter Roles by Team
 
 To filter Roles by team, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
 2. On the **Team** dropdown, select the desired team to filter by.
 
-*Search For a Role*
+##### Search for a Role
 
 To search for a specific role, follow these steps:
 
@@ -787,7 +787,7 @@ On the Data Fields tab, additional data fields should be configured to be able t
 
 Data fields that should be added are:
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -815,7 +815,7 @@ On this tab, [Gallery Cards](#glossary) can be added to be pushed from Blueprint
 
 ![Blueprint Gallery Cards OE](../assets/img/blueprintGalleryCards-v2.png)
 
-*Add a Gallery Card*
+##### Add a Gallery Card
 
 ![Blueprint Add Gallery Cards OE](../assets/img/blueprintAddGalleryCards.png)
 
@@ -825,7 +825,7 @@ To add a Gallery card, follow these steps:
 2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -835,7 +835,7 @@ To add a Gallery card, follow these steps:
 
 After all desired configurations have been added, click **Save**.
 
-*Edit a Gallery Card*
+##### Edit a Gallery Card
 
 To edit the Gallery card's details, follow these steps:
 
@@ -844,14 +844,14 @@ To edit the Gallery card's details, follow these steps:
 3. Here, users will be prompted the same card's edit component as when adding a new card.
 4. After doing all the necessary edits, click **Save**.
 
-*Delete a Gallery Card*
+##### Delete a Gallery Card
 
 To delete a Gallery card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
 2. Select the desired card to be deleted and click the **Trash Can** icon next to the card.
 
-*Search For a Gallery Card*
+##### Search For a Gallery Card
 
 To search for a specific card, follow these steps:
 
@@ -870,7 +870,7 @@ On this tab, [Player Apps](#glossary) configurations can be added to be pushed f
 
 ![Player Apps OE](../assets/img/blueprintPlayerApps-v3.png)
 
-*Add a Player App*
+##### Add a Player App
 
 ![Blueprint Add Player App OE](../assets/img/blueprintAddPlayerApp-v3.png)
 
@@ -881,7 +881,7 @@ To add a Player App, follow these steps:
 3. Select an app template from the provided list.
 4. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -891,7 +891,7 @@ To add a Player App, follow these steps:
 | **Embeddable** | Boolean | Select whether the app should be embedded in Player's iframe | True |
 | **Load in Background** | Boolean | Select whether the app should load in the background | True |
 
-**URL Parameters**
+##### URL Parameters
 
 URL Parameters can be added in the URL to point to a specific CITE evaluation, Gallery exhibit, Player view, etc. To do this, the variables should be added in braces in the URL when adding a new application. For this, take into considerations the following variables:
 
@@ -902,7 +902,7 @@ URL Parameters can be added in the URL to point to a specific CITE evaluation, G
 
 After all desired configurations have been added, click **Save**.
 
-*Edit a Player App*
+##### Edit a Player App
 
 To edit the Player app's details, follow these steps:
 
@@ -911,14 +911,14 @@ To edit the Player app's details, follow these steps:
 3. Here, users will be prompted the same app's edit component as when adding a new app.
 4. After doing all the necessary edits, click **Save**.
 
-*Delete a Player App*
+##### Delete a Player App
 
 To delete a Player App, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
 2. Select the desired app to be deleted and click the **Trash Can** icon next to the app.
 
-*Search For a Player App*
+##### Search for a Player App
 
 To search for a specific app, follow these steps:
 
@@ -955,7 +955,7 @@ The following image shows the Units Administration Page. Here, administrators ca
 
 ![Blueprint Teams Admin OE](../assets/img/blueprintUnits-v2.png)
 
-**Add a Unit**
+#### Add a Unit
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a unit.
 
@@ -965,7 +965,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 2. Under the Units Administration View, click **+**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -974,7 +974,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 After all desired configurations have been added, click **Save**.
 
-**Edit a Unit**
+#### Edit a Unit
 
 To edit the unit's details, follow these steps:
 
@@ -983,21 +983,21 @@ To edit the unit's details, follow these steps:
 3. Here, users will be prompted the same unit's edit component as when adding a new unit.
 4. After doing all the necessary edits, click **Save**.
 
-**Delete a Unit**
+#### Delete a Unit
 
 To delete a unit, follow these steps:
 
 1. Click the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Units Administration View, select the unit to be deleted and click the **Trash Can Icon** next to the unit.
 
-**Search For a Unit**
+#### Search for a Unit
 
 To search for a specific unit, follow these steps:
 
 1. Click the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Units Administration View, click the **Search Bar** and type the name of the desired unit.
 
-**Add/Remove Users From a Unit**
+#### Add/Remove Users from a Unit
 
 To configure a unit for an exercise, administrators will need to add users to their respective units. To do this, follow these steps.
 
@@ -1018,7 +1018,7 @@ The available permissions are:
 
 ![Blueprint Users Admin OE](../assets/img/blueprintUsersAdmin-v4.png)
 
-**Add a User**
+#### Add a User
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a user.
 
@@ -1027,7 +1027,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the Users Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -1036,14 +1036,14 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 Click **Save** represented by a user with a + sign and select the desired permissions to be assigned by clicking on the checkboxes next to the user.
 
-**Delete a User**
+#### Delete a User
 
 To delete a user, follow these steps:
 
 1. Click the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Users Administration View, select the user to be deleted and click the **Trash Can Icon** next to the user.
 
-**Search For a User**
+#### Search for a User
 
 To search for a specific user, follow these steps:
 
@@ -1056,7 +1056,7 @@ The following image shows the Organization Templates Administration Page. Here, 
 
 ![Blueprint Organizations Admin OE](../assets/img/blueprintOrganizationsAdmin-v2.png)
 
-**Add an Organization Template**
+#### Add an Organization Template
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an organization template.
 
@@ -1065,7 +1065,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the Organizations Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -1077,7 +1077,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 After all desired configurations have been added, click **Save**.
 
-**Edit an Organization Template**
+#### Edit an Organization Template
 
 To edit the organization template's details, follow these steps:
 
@@ -1086,14 +1086,14 @@ To edit the organization template's details, follow these steps:
 3. Here, users will be prompted the same organization's edit component as when adding a new organization template.
 4. After doing all the necessary edits, click **Save**.
 
-**Delete an Organization Template**
+#### Delete an Organization Template
 
 To delete an organization template, follow these steps:
 
 1. Click the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Organizations Administration View, select the organization to be deleted and click the **Trash Can Icon** next to the organization template.
 
-**Search For an Organization Template**
+#### Search For an Organization Template
 
 To search for a specific organization template, follow these steps:
 
@@ -1106,7 +1106,7 @@ The following image shows the Gallery Card Templates Administration Page. Here, 
 
 ![Blueprint Cards Admin OE](../assets/img/blueprintCardsAdmin-v2.png)
 
-**Add a Gallery Card Template**
+#### Add a Gallery Card Template
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Gallery card template.
 
@@ -1115,7 +1115,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the Gallery Cards Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -1124,7 +1124,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 After all desired configurations have been added, click **Save**.
 
-**Edit a Gallery Card Template**
+#### Edit a Gallery Card Template
 
 To edit the Gallery card template's details, follow these steps:
 
@@ -1133,14 +1133,14 @@ To edit the Gallery card template's details, follow these steps:
 3. Here, users will be prompted the same Gallery card's edit component as when adding a new card template.
 4. After doing all the necessary edits, click **Save**.
 
-**Delete a Gallery Card Template**
+#### Delete a Gallery Card Template**
 
 To delete an Gallery card template, follow these steps:
 
 1. Click the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Gallery Cards Administration View, select the card template to be deleted and click the **Trash Can Icon** next to the card template.
 
-**Search For a Gallery Card Template**
+#### Search for a Gallery Card Template
 
 To search for a specific Gallery card template, follow these steps:
 
@@ -1149,11 +1149,11 @@ To search for a specific Gallery card template, follow these steps:
 
 ### CITE Actions Templates
 
-The following image shows the CITE Action Templates Administration Page. Here, administrators can add and delete CITE action templates.
+The following image shows the CITE Action Templates administration page. Here, administrators can add and delete CITE action templates.
 
 ![Blueprint Actions Admin OE](../assets/img/blueprintActionsAdmin-v2.png)
 
-**Add a CITE Action Template**
+#### Add a CITE Action Template
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a CITE action template.
 
@@ -1162,7 +1162,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the CITE Actions Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -1170,7 +1170,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 After all desired configurations have been added, click **Save**.
 
-**Edit a CITE Action Template**
+#### Edit a CITE Action Template
 
 To edit the CITE action template's details, follow these steps:
 
@@ -1179,14 +1179,14 @@ To edit the CITE action template's details, follow these steps:
 3. Here, users will be prompted the same CITE action's edit component as when adding a new action template.
 4. After doing all the necessary edits, click **Save**.
 
-**Delete a CITE Action Template**
+#### Delete a CITE Action Template
 
 To delete an CITE action template, follow these steps:
 
 1. Click the **Settings Cog** found in the top-right corner of the screen.
 2. Under the CITE Actions Administration View, select the action template to be deleted and click the **Trash Can Icon** next to the action template.
 
-**Search For a CITE Action Template**
+#### Search for a CITE Action Template
 
 To search for a specific CITE action template, follow these steps:
 
@@ -1199,7 +1199,7 @@ The following image shows the CITE Roles Templates Administration Page. Here, ad
 
 ![Blueprint Roles Admin OE](../assets/img/blueprintRolesAdmin-v2.png)
 
-**Add a CITE Role Template**
+#### Add a CITE Role Template
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a CITE role template.
 
@@ -1208,7 +1208,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 1. Under the CITE Roles Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -1216,7 +1216,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 After all desired configurations have been added, click **Save**.
 
-**Edit a CITE Role Template**
+#### Edit a CITE Role Template
 
 To edit the CITE role template's details, follow these steps:
 
@@ -1225,14 +1225,14 @@ To edit the CITE role template's details, follow these steps:
 3. Here, users will be prompted the same CITE role's edit component as when adding a new role template.
 4. After doing all the necessary edits, click **Save**.
 
-**Delete a CITE Role Template**
+#### Delete a CITE Role Template
 
 To delete a CITE role template, follow these steps:
 
 1. Click the **Settings Cog** found in the top-right corner of the screen.
 2. Under the CITE Roles Administration View, select the role template to be deleted and click the **Trash Can Icon** next to the role template.
 
-**Search For a CITE Role Template**
+#### Search For a CITE Role Template
 
 To search for a specific CITE role template, follow these steps:
 

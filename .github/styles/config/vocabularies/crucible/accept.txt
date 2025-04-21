@@ -80,3 +80,11 @@ Traefik
 (?i)gridlines(?:s)?
 LLaMA
 Mistral
+Suricata
+subnet(?:'s|s)?
+IP(?:'s|s)?
+[Cc]alc
+[Ss]rc
+Kibana
+Dionaea
+Wireshark

@@ -24,7 +24,7 @@ The landing page of Gallery provides a central approach to recompiling all colle
 
 First, users select a collection from the dropdown; then, they choose an exhibit from the displayed list.
 
-*Search for an Exhibit*
+#### Search for an Exhibit
 
 To search for an exhibit, follow these steps:
 
