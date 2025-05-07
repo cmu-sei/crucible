@@ -16,7 +16,7 @@ New topologies can be rapidly deployed using existing templates or built from th
 
 ### Workspace and Gamespace
 
-You build your content in a *workspace*, but you "play" (complete the lab, do the activity) in a *gamespace*. The workspace is where a virtual topology is built. Here engineers and lab developers add VMs, save updates, author a guide in Markdown, and configure questions/answers to turn the topology into a lab or *challenge*.
+You build your content in a *workspace*, but you "play" (complete the lab, do the activity) in a *gamespace*. In the workspace, engineers and lab developers add VMs, save updates, author a guide in Markdown, and configure questions/answers to turn the topology into a lab or *challenge*.
 
 A *gamespace* is where someone else plays through the lab. They get their own, isolated, read-only copies of all workspace resources. Players in a gamespace can interact with VMs and answer questions to complete a lab, but they can't save anything in the environment.
 
@@ -47,4 +47,4 @@ Screen print 3
 
 ### Challenge
 
-The term *challenge* refers to when both Gameboard and TopoMojo are integrated to execute a cyber competition. In this scenario, Gameboard is a consumer of content made in TopoMojo. More information on that is available elsewhere in the Foundry documentation.
+The term *challenge* refers to when users integrate Gameboard and TopoMojo to execute a cyber competition. In this scenario, Gameboard is a consumer of content made in TopoMojo. More information on that is available elsewhere in the documentation.

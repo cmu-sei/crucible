@@ -1,6 +1,6 @@
 # Admin Features
 
-TopoMojo has an admin interface called **Admin Dashboard**. To access the Admin Dashboard, you'll need the `admin` role. In the top-right corner, click the **Admin** button. The initial `admin` role is given to the first user who authenticates successfully.
+TopoMojo has an admin interface called **Admin Dashboard**. To access the Admin Dashboard, you'll need the `admin` role. In the top-right corner, click the **Admin** button. TopoMojo provides the initial `admin` role to the first user who authenticates successfully.
 
 ## Hub Connections
 

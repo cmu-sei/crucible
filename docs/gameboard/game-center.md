@@ -4,7 +4,9 @@ The **Game Center** is the game administrator's one stop shop when administering
 
 To access the Game Center for a given game, click **Admin**, hover over a game card, and click **Game Center**. Users must have the `Admin` role to access a game center.
 
-In the Game Center header, game metadata and settings information is displayed, including: name, modes, series, season, track, and execution dates.
+The Game Center header displays game metadata and settings, including the name, modes, series, season, track, and execution dates.
+
+Would you like to tighten it even further or keep that level of detail?
 
 ## Gear Tab
 
@@ -282,4 +284,4 @@ The scoreboard found here is the same publicly accessible scoreboard you would f
 
 ## Tickets Tab
 
-The support ticketing functionality found here is the same as the interface documented here: [Using the Integrated Support feature](support.md). However, the support tickets are constrained to the game you viewing. You can perform all of the usual support ticket actions here (filter, search, export tickets) except for creating a new ticket.
+The support ticketing functionality found here is the same as the interface documented here: [Using the Integrated Support feature](support.md). However, the Gameboard only allows you to interact with support tickets for the game you're viewing. You can perform all of the usual support ticket actions here (filter, search, export tickets) except for creating a new ticket.
