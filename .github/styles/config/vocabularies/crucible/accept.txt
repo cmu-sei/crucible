@@ -88,3 +88,4 @@ IP(?:'s|s)?
 Kibana
 Dionaea
 Wireshark
+[Cc]allout(?:s)?
