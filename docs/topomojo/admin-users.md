@@ -1,10 +1,10 @@
 # Admin Users
 
-The **Users** tab is where TopoMojo users are listed, created, and assigned permissions. The **Search** feature allows TopoMojo admins to search on the name of a TopoMojo user. To search for a user across all of TopoMojo, enter the term into the **Search** field or filter by *role* or *audience*.
+The **Users** tab shows all current TopoMojo users. You can create new users here and assign them permissions. The **Search** feature allows TopoMojo admins to search on the name of a TopoMojo user. To search for a user across all of TopoMojo, enter the term into the **Search** field or filter by *role* or *audience*.
 
 Recall from workspace Settings that "audience" is a list of clients who can launch the workspace as a gamespace. Selecting an audience filter results in users who are part of that audience.
 
-**View:** Select **View** to see the properties for the user. The properties are defined under "Create a new User" below.
+**View:** Select **View** to see the properties for the user.
 
 **Delete:** Deletes the user.
 
@@ -13,7 +13,7 @@ Recall from workspace Settings that "audience" is a list of clients who can laun
 All permissions are *additive*; meaning a Creator can do everything a Builder can do and an Observer can do everything a Builder and Creator can do.
 
 - **Admin:** Highest level of permission in TopoMojo; can do everything the other roles can do.
-- **Observer:** Allows a user to view and use the Gamespaces tab. Access is limited by the *scope* of the user (see below). An observer can deploy gamespaces with a matching *audience* and these are the only gamespaces the user can observe.
+- **Observer:** Allows a user to view and use the Gamespaces tab. However, the *scope* of the user (see below) limits access too. An observer can deploy gamespaces with a matching *audience* and these are the only gamespaces the user can observe.
 - **Creator:** Can have as many workspaces and templates as wanted.
 - **Builder:** Can connect to bridge-net.
 - **User:** No extra permissions in TopoMojo. This is the TopoMojo default.
@@ -31,6 +31,6 @@ All permissions are *additive*; meaning a Creator can do everything a Builder ca
 
 **Gamespace Max Duration:** The maximum amount of minutes allowed for a gamespace.
 
-**Gamespace Cleanup Grace time:** The number of "grace" minutes between the time the gamespace expires and when it is torn down.
+**Gamespace Cleanup Grace time:** The number of "grace" minutes between the time the gamespace expires and when TopoMojo tears it down.
 
 **Generate ApiKey:** Generate API keys here. This allows users to programmatically interact with the TopoMojo API without needing to log in.

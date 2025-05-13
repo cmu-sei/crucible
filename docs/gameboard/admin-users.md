@@ -12,7 +12,7 @@ To filter your results, select **Has Elevated Role**, **Has Pending Name**, or *
 - **Has Pending Name:** contains only those participants whose display names are pending approval or disapproval from an admin.
 - **Has Disallowed Name:** contains only those participants whose display names have been disapproved by an admin.
 
-To sort your results, select **Name**, **Last Login**, or **Created On**. Click once to sort in **ascending** order (A → Z, oldest to newest). Click again to sort in **descending** order (Z → A, newest to oldest). The arrow (▲ or ▼), appears in the sort button to show the current sorting direction.
+To sort your results, select **Name**, **Last Login**, or **Created On**. Click to sort in **ascending** order (A → Z, oldest to newest). Click again to sort in **descending** order (Z → A, newest to oldest). The arrow (▲ or ▼), appears in the sort button to show the current sorting direction.
 
 ## Viewing a User Card
 

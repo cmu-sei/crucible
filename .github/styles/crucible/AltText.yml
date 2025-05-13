@@ -1,0 +1,7 @@
+extends: existence
+message: "Alt text for image is missing. Add descriptive text inside the brackets."
+level: error
+nonword: true
+scope: raw
+tokens:
+  - '!\[\s*\]\([^)]+\)'

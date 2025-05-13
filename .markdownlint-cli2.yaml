@@ -2,6 +2,9 @@
 # You can find Markdownlint here: https://github.com/DavidAnson/markdownlint
 # This config file is assuming the use of markdownlint-cli2:
 
+ignores:
+  - LICENSE.md
+
 config:
   # Do not allow headings to increase more than 1 level at a time
   MD001: true
@@ -102,7 +105,7 @@ config:
   MD035: true
 
   # Actual headings should be used instead of bold/italics
-  MD036: false
+  MD036: true
 
   # Catches instances where bold/italics might be rendered incorrectly
   # This happens when there are spaces around the emphasis markers

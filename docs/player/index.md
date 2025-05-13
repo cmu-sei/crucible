@@ -4,23 +4,23 @@
 
 **Player** is the centralized interface where participants, teams, and administrators go to engage in a cyber event. In Player, participants view teams, applications, virtual environments, and third-party applications. The event experience is highly customizable by content developers.
 
-Think of Player as the front door to an event running on Crucible. Player is meant to:
+Think of Player as the front door to an event running on Crucible. Player:
 
-- Provide a platform for individual participants on a team to view content in an exercise.
-- Allow for quick navigation between various applications in the Crucible framework.
-- Allow administrators to set what teams can see what applications.
+- Provides a platform for individual participants on a team to view content in an exercise.
+- Allows for quick navigation between various applications in the Crucible framework.
+- Lets administrators set what teams can see what applications.
 
-Applications can use Player roles and permissions as needed. Notifications can be sent to individual users, teams, or the entire exercise by an administrator or an application with proper permissions.
+Applications can use Player roles and permissions as needed. An administrator or an application with proper permissions can send notifications to individual users, teams, or the entire exercise.
 
 Player is ***not*** meant to:
 
 - Control any authentication or content within any application that it displays in a content panel.
 - Provide any mechanisms for individual applications to communicate with each other.
-- Provide any default applications. However, some common applications can be consumed within an exercise.
+- Provide any default applications. However, an exercise can consume some common applications.
 
 ## Administrator User Guide
 
-![adminbutton](../assets/img/admin button.png)
+![admin button](../assets/img/admin button.png)
 
 A Player administrator will see the **Administration navigation bar** on the left. If you have the appropriate permissions, here are the steps to switch to the administrator view in Player:
 
@@ -29,9 +29,9 @@ A Player administrator will see the **Administration navigation bar** on the lef
 
 ### Manage Views
 
-![adminview](../assets/img/admin view.png)
+![admin view](../assets/img/admin view.png)
 
-Views is where a Player view administrator adds a new view and browses existing views. Follow the procedures below to create a new view in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
+Views is where a Player view administrator adds a new view and browses existing views. Follow the procedures below to create a new view in Player. These instructions assume that you have the appropriate permissions in Player to create a view.
 
 If you have not already done so, in the dropdown next to your username, select **Administration**.
 
@@ -43,32 +43,32 @@ If you have not already done so, in the dropdown next to your username, select *
 2. Add a **Name** and **View Description**.
 3. In the Status dropdown, select **Active** or **Inactive**.
       - `Active` means that the new view is available for use immediately.
-      - `Inactive` means that the new view will be cloned in Alloy.
+      - `Inactive` means that Alloy will clone the new view.
 4. Select **Applications**.
 
 #### Assign Application Templates
 
-![newviewapps](../assets/img/new view apps.png)
+![new view apps](../assets/img/new view apps.png)
 
 1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template.
-   - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. These settings can't be applied in another view; they are one-time use only.
-   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The configuration settings are set in the template; the template can be used many times. Application template settings can be overridden for a particular view.
+   - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. You can't apply these in another view; they are one-time use only.
+   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The template contains the configuration settings and you can use the template many times.
 
-    ![newviewapptemplate](../assets/img/new view app template.png)
+    ![new view app template](../assets/img/new view app template.png)
 
 2. Click **Teams**.
 
 #### Add Teams
 
-![newviewnewteam](../assets/img/new view new team.png)
+![new view new team](../assets/img/new view new team.png)
 
-1. Click **Add New Team**. Multiple teams can be added to a view.
+1. Click **Add New Team**. You can add multiple teams to a view.
 
 2. Enter a **Team Name**.
 
 3. Assign a **Role** to the team.
 
-4. Assign **Permissions** to the team. Each team can be assigned special permissions. You may want to have a team of "admins" who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
+4. Assign **Permissions** to the team. You can assign each team special permissions. You may want to have a team of "admins" who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
 
     ![new view new team add user](../assets/img/new view new team add user.png)
 
@@ -77,7 +77,7 @@ If you have not already done so, in the dropdown next to your username, select *
    - **Search** for the user whom you want to add.
    - Click **Add User** to move the user from All Users to Team Users.
    - Under Team Users, you can assign a **Role** to the user at this time.
-   - Click **Done** when you are finished adding users to the team.
+   - Click **Done** when finished adding users to the team.
 
 6. Assign applications to the new team.
 
@@ -85,27 +85,27 @@ If you have not already done so, in the dropdown next to your username, select *
 
 #### Upload Files
 
-In this step, View Administrators upload a single file or multiple files simultaneously to a View which can be added as an application and attached to a team.
+In this step, View Administrators upload a single file or multiple files simultaneously to a View which they can add as an application and attach to a team.
 
-![newviewaddfile](../assets/img/new view add file.png)
+![new view add file](../assets/img/new view add file.png)
 
-1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files - it has not been uploaded yet.
+1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files because you have not uploaded it yet.
 2. Select the **Team(s)** that you want to access the file and click **Upload Staged File(s)**.
 3. The file appears under **Uploaded Files**. From here, you can: **Download** the file, **Delete** the file, **Copy Link** to the file, **Edit** the name and team of the file, and **Add File as Application**.
 4. After adding the file as an application you have to return to **Step 3 Teams** and add that application - the *newly* uploaded file - to a team just as you would add any new application.
-5. Click **Done** when you are finished adding or updating the view.
+5. Click **Done** when finished adding or updating the view.
 
 ### Configure Users
 
-Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:**
+Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. You can assign users and/or teams any set of **Permissions:**
 
 #### Assign Roles
 
-Users and/or teams can be assigned to a **Role**, which is a group of permissions. More about roles as future Player development is completed. Only a SystemAdmin can create roles.
+A **Role** is a group of permissions. You assign roles to users and/or teams. Only a SystemAdmin can create roles.
 
 #### Assign Permissions
 
-- **SystemAdmin:** can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
+- **SystemAdmin:** can edit anything in Player; existing users with SystemAdmin permissions assign new SystemAdmin permissions.
 - **ViewAdmin:** can edit anything within a View that they have permissions.
 
 A SystemAdmin creates the View and assigns ViewAdmin permissions to specific teams who can now edit that View.
@@ -116,52 +116,52 @@ A SystemAdmin creates the View and assigns ViewAdmin permissions to specific tea
 
 ### Create Application Templates
 
-An app template contains the settings associated with an app that is added to a team's view. An app template can be created for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. An app template can be used by any view admin when adding apps to a particular view. Think of app templates as helpers for configuring common Crucible apps.
+An app template contains the settings associated with an app added to a team's view. You can create an app template for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. Any view admin can use an app template when adding apps to a particular view. Think of app templates as helpers for configuring common Crucible apps.
 
-Follow the procedures below to create a new app template in Player. These instructions assume that you have been given the appropriate permissions in Player to create a view.
+Follow the procedures below to create a new app template in Player. These instructions assume you have the appropriate permissions in Player to create a view.
 
 If you have not already done so, in the dropdown next to your username, select **View Administration**.
 
-![player-new-application-template](../assets/img/player-new-application-template.png)
+![player new application template](../assets/img/player-new-application-template.png)
 
 1. Under the Administration nav panel, select **Application Templates**.
 2. Click **Add Application Template**.
       - Enter a **Name** for the app template.
       - Enter a **URL** for the app template.
       - Enter the path for the icon.
-3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether or not the app is supported by iFrames. The Mattermost chat, for example, is not embeddable and must be opened in a separate browser tab.
+3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether or not iFrames supports the app. For example, the Mattermost chat doesn't support embedding, so users must open it in a separate browser tab.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads. This is important for some apps that may require some initialization.
 
 ### Define Roles and Permissions
 
-From the Administration section of Player, users and/or teams can be assigned any set of Permissions:
+The Administration section of Player is where you assign users and/or teams a set of Permissions.
 
-Define Roles
-Users and/or teams can be assigned to a Role, which is a group of permissions. Roles are a predefined set of permissions that admin can create for ease of administrating.
+#### Define Roles
 
-Define Permissions
+Roles are a predefined set of permissions that admin can create for ease of administrating. Assign users and/or teams a role.
 
-Permissions can be created by admin as well. Player uses two established permissions, SystemAdmin, and ViewAdmin.
+#### Define Permissions
 
-SystemAdmin: can edit anything in Player; SystemAdmin permissions are given by existing SystemAdmin.
+Admins can create permissions as well. Player uses two established permissions: SystemAdmin and ViewAdmin.
 
-ViewAdmin: can edit anything within a View that they have permissions.
+- **SystemAdmin:** can edit anything in Player; an existing SystemAdmin gives SystemAdmin permissions.
+- **ViewAdmin:** can edit anything within a View that they have permissions.
 
 ### Subscriptions
 
-Subscriptions allow a Player administrator to configure client applications to be notified when supported actions occur within the Player API. Also known as Webhooks, this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy. For example, the VM API supports subscribing to ViewCreated and ViewDeleted in Player.
+Subscriptions allow a Player administrator to configure client applications so that the Player API notifies them when supported actions occur. Also known as Webhooks, this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy. For example, the VM API supports subscribing to ViewCreated and ViewDeleted in Player.
 
-When an on-demand event is started in Alloy, it creates a new View in Player. If a subscription is configured, Player notifies the VM API of the new View. The VM API then ensures that any Maps set up for the parent View are available in the newly created View. This allows for Maps to be used in on-demand events.
+When an on-demand event starts in Alloy, it creates a new View in Player. If a Player administrator configured a subscription, Player notifies the VM API of the new View. The VM API then ensures that any Maps set up for the parent View are available in the newly created View. This enables the use of Maps in on-demand events.
 
-When the event is ended, it receives the ViewDeleted notification and cleans up. Similarly any application can be configured to subscribe to these notifications and support on-demand events without Player code having to be added for each application specifically.
+When the event ends, it receives the ViewDeleted notification and cleans up. Similarly, Player administrators can configure any application to subscribe to these notifications and support on-demand events without adding Player code for each application specifically.
 
 When adding a Subscription, you must specify:
 
-1. Name - The name of the Subscription, for display purposes
-2. Callback URL - The URL that the receiving application expects notifications from Player to be sent to
-3. Client ID - The ID of a client in the OAuth2/OIDC server that is used for authentication in the environment. This client should support the Client Credentials grant and be authorized to include whatever scopes the receiving application requires to call it's Callback URL endpoint. For the VM API, it's default required scope is player-vm-privileged. This is the privileged scope that has elevated permissions and should not be the same as the scope used by the normal VM UI client.
-4. Client Secret - The secret required to authenticate with the Client ID specified
-5. Events - The Player events that this application would like to be notified about, such as ViewCreated and ViewDeleted
+1. **Name:** The name of the Subscription, for display purposes.
+2. **Callback URL:** The URL where the receiving application expects Player to send notifications.
+3. **Client ID:** The ID of a client in the OAuth2/OIDC server used for authentication in the environment. You should configure this client to support the Client Credentials grant and authorize it to include whatever scopes the receiving application requires to call its Callback URL endpoint. For the VM API, its default required scope is player-vm-privileged. This is the privileged scope that has elevated permissions and should not be the same as the scope used by the normal VM UI client.
+4. **Client Secret:** The secret required to authenticate with the Client ID specified.
+5. **Events:** The Player events to notify this application about, such as ViewCreated and ViewDeleted.
 
 ## User Guide
 
@@ -179,19 +179,19 @@ In the view, the navigation bar on the left contains applications.
 
 #### Documentation
 
-Any documents or files  - PDF, PNG, etc. - that can be served on the web can be easily set up as an application for viewing. This is particularly helpful for displaying instructions, intel, maps, and other information.
+Any documents or files (PDF, PNG, etc.) that the web can serve set up as an application for viewing. This is particularly helpful for displaying instructions, intel, maps, and other information.
 
 #### Maps
 
 View Admins may use the Map application to display a map for a team (e.g. a network map of a lab).
 
-Clicking the Map application will open up the assigned map. Users can click on pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
+Clicking the Map application will open up the assigned map. Users can click pre-configured points on the map to open up Virtual Machine consoles, other layers of the map, or any arbitrary URL that a View Admin adds.
 
 ##### Creating and Managing Maps
 
 The **Maps** application allows Player users who have View Administrator (*ViewAdmin*) permissions on the view, to create, edit, and delete "clickable" maps of systems and environments in a simulation. A common example of a map is a network topology where selecting a system on the topology launches the associated VM.
 
-Assuming that View Administrator permissions have been granted, in Player add the map application to the view.
+Assuming you have View Administrator permissions in Player, add the map application to the view.
 
 ##### Adding the Map Application to the View
 
@@ -207,7 +207,7 @@ Assuming that View Administrator permissions have been granted, in Player add th
 2. Complete the following fields:
    - **Name:** the name of the map.
    - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.
-   - **External Image URL:** enter the URL of an external image if no image has been attached to the view or if you want to use a different image than what is available.
+   - **External Image URL:** enter the URL of an external image if the view has no image attached image or if you want to use a different image than what is available.
    - **Teams:** only the teams selected here will see the new map. You can select more than one team here.
 3. Click **Submit**. The image of the new map appears in the right pane.
 
@@ -228,11 +228,11 @@ A *click point* is a location on the map that, when clicked by Player user, laun
 1. In Player's left navigation pane, click the **Map application**.
 2. In the right pane, select a map from the **Select Map** dropdown.
 3. Click the **Edit** icon.
-4. Click anywhere in the map to launch the **Add Click Point** modal. If your map is a network topology diagram with network elements--routers, switches, firewalls, servers, etc.--then you may want to click on an element that represents the VM resource you want the user to launch.
+4. Click anywhere in the map to launch the **Add Click Point** modal. If your map is a network topology diagram with network elements--routers, switches, firewalls, servers, etc.--then you may want to click an element that represents the VM resource you want the user to launch.
    - **Radius:** by default, the value is 3.
    - **Resource:** this is the virtual machine (or another map) that launches when clicked. The VMs that appear here are the VMs from the VM application in the current view.
    - **Enter Custom Resource URL:** enable this if you want to link to something other than the view's VMs and maps that are available above. For example, you could place a click point labeled "Linux Help" that links to relevant Linux documentation.
-   - **Label:** this is how the click point is labeled on the map. If your click point is over top of an element that launches a Windows 10 Administrator Workstation, then it makes sense to label it "Win 10 Admin".
+   - **Label:** this is the click point label on the map. If your click point is over top of an element that launches a Windows 10 Administrator Workstation, then it makes sense to label it *Win 10 Admin*.
 5. Click **Save** to save the new click point in the map.
 6. Click **Save** again to save the map.
 
@@ -252,7 +252,7 @@ A *click point* is a location on the map that, when clicked by Player user, laun
 
 #### Virtual Machine Applications
 
-The **VM List** is set up to provide links to any virtual machines that the user has permission to view. The tabular system lets users open a VM like an app—either in a tab on the same screen or in a new browser tab using the pop-out icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
+The **VM List** provides links to any virtual machines that the user has permission to view. The tabular system lets users open a VM like an app--either in a tab on the same screen or in a new browser tab using the pop-out icon. Users can also run commands on one or more virtual machines by dragging a box and shift clicking.
 
 ##### File Upload
 
@@ -260,13 +260,13 @@ A View Admin can upload images and documents for a specific View in Player that 
 
 ![vm-app-1](../assets/img/vm-app-1.png)
 
-From the File Upload section of the Edit View panel, a View Admin can Download, Delete, Copy Link, Edit Name and Add as App. When adding the file as a Player View application, a prompt will be shown that verifies which teams in the View will see the file get added as an application. The View Admin must grant permission for the file to be viewed by any team they want to add the application to. Otherwise, users on that team won't be authorized to access the file.
+From the File Upload section of the Edit View panel, a View Admin can Download, Delete, Copy Link, Edit Name and Add as App. When adding the file as a Player View application, a prompt verifies which teams in the View see the file get added as an application. The View Admin must grant permission for any team to view the file they want to add the application to. Otherwise, users on that team can't access the file.
 
 ![vm-app-2](../assets/img/vm-app-2.png)
 
 ##### Multi-Select VMs
 
-A user can run operations on multiple VM's by first using the mouse to click and drag a box around the VM's that they would like to select. In addition, the user can use the ctrl+click to select or unselect a previously selected VM. Once the user has selected the VM's that they want to perform an operation, the ![vm-app-3](../assets/img/vm-app-3.png) button can be used to display the menu of available options.
+A user can run operations on multiple VM's by first using the mouse to click and drag a box around the VM's that they would like to select. In addition, the user can use `ctrl+click` to select or unselect a previously selected VM. Once the user has selected the VM's that they want to perform an operation, they can use the ![vm-app-3](../assets/img/vm-app-3.png) button to display the menu of available options.
 
 ![vm-app-4](../assets/img/vm-app-4.png)
 
@@ -282,19 +282,19 @@ For the Multi-Select option above, the following options are available:
 
 ##### Sort by Team (View Admin Only)
 
-The sort by team option can be checked that will rearrange all VM's in expansion panels based on the teams that have access to the VM's. In the example shown here, each team can be expanded to show what VM's they have access to. This is especially useful for View Admins when verifying if a specific VM is accessible (or not accessible) for a specific team.
+The sort by team option rearranges all VM's in expansion panels based on the teams that have access to the VM's. In the example shown here, you can expand each team to show what VM's they have access to. This is especially useful for View Admins when verifying if a specific VM is accessible (or not accessible) for a specific team.
 
 ![vm-app-5](../assets/img/vm-app-5.png)
 
 ##### Filter by Powered State
 
-VM's can not be filtered by powered status. By clicking the ![vm-app-6](../assets/img/vm-app-6.png) dropdown, the user can select to display only the Powered On, Powered Off, or Suspended VM's.
+You cannot filter VM's by powered status. By clicking the ![vm-app-6](../assets/img/vm-app-6.png) dropdown, the user can select to display only the Powered On, Powered Off, or Suspended VM's.
 
 ![vm-app-7](../assets/img/vm-app-7.png)
 
 ##### User List
 
-The User List in Player allows for a user to view the teams and its members that the user has permissions to see. View Admins can always see all teams that are a part of the View. Using expansion panels, the user can expand the team and view each member of that team. If a team member is working within a VM, the name of the VM will be displayed with a link to open that VM in Read-Only mode. When in Read-Only mode, the user will not be allowed to gain any keyboard or mouse control.
+The User List in Player allows for a user to view the teams and its members that the user has permissions to see. View Admins can always see all teams that are a part of the View. Using expansion panels, the user can expand the team and view each member of that team. If a team member is working within a VM, the system displays the VM's name with a link to open it in Read-Only mode. When in Read-Only mode, the user can't gain any keyboard or mouse control.
 
 ![vm-app-8](../assets/img/vm-app-8.png)
 
@@ -310,11 +310,11 @@ After data collection, a View Admin can download a CSV showing timestamps and VM
 
 #### Service Support Tickets
 
-osTicket (`osticket.com`), a widely-used open source support ticket system, can be configured and deployed for an exercise. Using this "built-in" help desk, participants can submit help requests to event administrators.
+osTicket (`osticket.com`) is a widely-used open source support ticket system. You can configure and deploy it for an exercise to provide a built-in help desk. Participants can then submit help requests directly to event administrators.
 
 #### Chat
 
-Mattermost (`mattermost.com`), an open source messaging platform can be configured and deployed to provide an "off the shelf" chat system for users.
+Mattermost (`mattermost.com`) is an open source messaging platform you can configure and deploy to provide an "off the shelf" chat system for users.
 
 #### Notifications
 
@@ -322,13 +322,13 @@ Receive and read notifications here.
 
 !!! tip
 
-    If your browser is set up to allow notifications you can receive Player notifications that way too.
+    If your browser allows notifications you can receive Player notifications that way too.
 
 ## Player Tips
 
 ### Taking Advantage of Screen Real Estate
 
-Player and its component applications (as well as any third party application linked through Player) can take advantage of any monitor setup. Any application in the application bar can be opened up in a new window or a new tab by clicking the [>] button on the right side of the application card. Virtual machine consoles can similarly be opened up in a new window or tab. This allows users to be very flexible with how they display the information presented in Player. Pull up documentation or a lab guide on one monitor while your virtual machine is on another. Use multiple windows with your ultra-wide to see everything at once. The possibilities are endless!
+Player and its component applications (as well as any third-party application linked through Player) can use any monitor setup. You can open any application in the application bar in a new window or tab by clicking the [>] button on the right side of the application card. You can also open virtual machine consoles in a new window or tab. This setup gives you flexibility in how you display information in Player. For example, you could view documentation or a lab guide on one monitor while you use your virtual machine on another. You could use multiple windows with an ultra-wide to see everything at once.
 
 ### Copy and Paste Text
 
@@ -369,7 +369,7 @@ The procedures below show you how to remotely power a VM on or off from within t
 
 #### Upload from local to VM
 
-These procedures describe how to upload files from a local machine (an *out-of-game* computer) to a virtual machine in the Player VM Console app. The **Send File to VM** option should only be used for uploading small files.
+These procedures describe how to upload files from a local machine (an *out-of-game* computer) to a virtual machine in the Player VM Console app. You should use the **Send File to VM** option for uploading small files.
 
 These procedures assume you are in the Player VM Console app.
 
@@ -380,13 +380,13 @@ These procedures assume you are in the Player VM Console app.
 
     If the **Send File to VM** option is grayed out you will have to enter the credentials used to log into the virtual machine.Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
 
-3. After entering your credentials, select the **Send File to VM** option (this should no longer be grayed out).
+3. After entering your credentials, select the **Send File to VM** option (this should no longer appear grayed out).
 4. Select the file from your local machine that you want to upload.
 5. Click **Open**. This will copy the file to the destination folder specified in the VM Send File Settings window.
 
 #### Upload Files and Mount ISO
 
-These procedures describe how to upload files from a local machine to be mounted as a DVD. Files are not uploaded directly to a virtual machine-–it is a two-step process. This is useful for installers and uploading larger files (such as ISO files).
+These procedures describe how to upload files from a local machine to mount as a DVD. Files are not uploaded directly to a virtual machine-–it is a two-step process. This is useful for installers and uploading larger files (such as ISO files).
 
 1. In the VM List screen, click **Upload File**.
 2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).
@@ -396,14 +396,14 @@ These procedures describe how to upload files from a local machine to be mounted
 
     !!! note
 
-        There are two file areas: Team Files and Public Files. Files can be mounted for only your team (under Team Files) or any team (under Public Files).
+        There are two file areas: Team Files and Public Files. You can mount files for only your team (under Team Files) or for any team (under Public Files).
 
 6. Click **Mount**. This process automatically mounts the file as a DVD Drive ISO.
-7. After the ISO has been mounted/used for file copy, right-click the DVD Drive ISO and select **Eject** to eject the ISO.
+7. After you have mounted/used the ISO for file copy, right-click the DVD Drive ISO and select **Eject** to eject the ISO.
 
 ### Follow Another Player
 
-The **user follow** feature in Player allows you to virtually look over a participant's shoulder during a scenario. This is a useful feature when helping someone troubleshoot and for team members who are geographically separated. This can also be used by observers when evaluating or watching teams perform during an event.
+The **user follow** feature in Player allows you to virtually look over a participant's shoulder during a scenario. This is a useful feature when helping someone troubleshoot and for team members who are geographically separated. Observers can also use this feature when evaluating or watching teams perform during an event.
 
 To follow another participant:
 
@@ -429,26 +429,26 @@ Clicking the **gear icon** in the upper left of the display you are following gi
 
 ## Glossary
 
-The following glossary provides a brief definition of key terms and concepts as they are used in the context of the Player application.
+The glossary below defines key terms and concepts as they apply to the Player application.
 
-**Apps:** A website a participant in a view can open within Player or in a separate browser tab. A common example of an app used in Player is the Mattermost messaging platform.
+**Apps:** A website a participant in a view can open within Player or in a separate browser tab. A common example of an app in Player is the Mattermost messaging platform.
 
-**App Template:** The settings associated with an app that is added to a team's View. An app template can be created for common apps that are added to a view with default settings that an administrator can override if needed.
+**App Template:** The settings associated with an app added to a team's View. You can create an app template for common apps in a view with default settings that an administrator can override if needed.
 
 **Authentication:** Player uses IdentityServer 4 to authenticate users. Authentication gets a user into Player. However, to determine what a user can open and/or edit within Player, administrators need to set the required permissions within the Player Administration View under the Users Administrator tab.
 
 **Focused Application Panel:** The focused app panel displays the selected application in an iFrame. The iFrame points to the URL specified by the application template. The application within the focused app panel is responsible for authentication and content. Player displays content but has no control of the application running within the focused app panel.
 
-**Notification:** A message sent to a specific user, team, or view from an Administrator or an app that has been given permission.
+**Notification:** A message sent to a specific user, team, or view from an Administrator or an app with the permission.
 
-**Permission:** A key/value pair that can be created and used by any application given permission within the system. A permission can be assigned to a user or a team. Some permissions such as `SystemAdmin` are read-only. `ExerciseAdmin` and `SystemAdmin` are permanent permissions that cannot be edited or deleted.
+**Permission:** A key/value pair any application can create and use if the system grants it permission. Administrators can assign permissions to users or teams. Some permissions, such as `SystemAdmin`, are "read-only". The system designates `ExerciseAdmin` and `SystemAdmin` as permanent permissions, which no one can edit or delete.
 
-**Role:** A set of permissions that can be grouped together and assigned to a user or team.
+**Role:** A set of permissions grouped together and assigned to a user or team.
 
-**Team:** A group of logged in users who are associated with a view. Each team can be configured to view a particular set of applications and be granted team-level roles/permissions.
+**Team:** A group of logged in users associated with a view. Teams can view a particular set of applications and have team-level roles/permissions.
 
-**User:** A user who is identified in an identity server configured for the Player system is automatically added into Player upon the first login. In addition, users can be pre-loaded into Player using the Player API.
+**User:** A user identified in an identity server configured for the Player system is automatically added into Player upon the first login. In addition, users can be pre-loaded into Player using the Player API.
 
-**View:** These are the settings associated with building a view. A view can be edited, cloned, and deleted.
+**View:** These are the settings associated with building a view. Edit, clone, and delete a view.
 
 **Views:** The collection of content a participant can interact with during a cyber simulation. Depending upon your role (end-user vs administrator) a view will look different.

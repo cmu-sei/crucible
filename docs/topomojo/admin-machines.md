@@ -1,6 +1,6 @@
 # Admin Machines
 
-This tab provides a list of all VMs TopoMojo is tracking and the gamespaces they are attached to without the use of the vSphere Client.
+This tab lists all VMs TopoMojo is tracking and the gamespaces they belong to, without using the vSphere Client.
 
 ![admin machine explanation](img/admin-machine.png)
 
@@ -12,6 +12,6 @@ The **Machines** tab is helpful when you want to find all the VMs related to a g
 
 ## "Orphaned" VMs
 
-VMs tagged with `__orphaned` are VMs that still exist; however, they are not connected to anything. They could have been attached to a gamespace that has since expired, and when TopoMojo asked vSphere to remove these VMs, an issue prevented vSphere from responding. Orphaned VMs should be manually deleted in vSphere.
+VMs tagged with `__orphaned` are VMs that still exist; however, they are not connected to anything. TopoMojo may have attached these VMs to an expired gamespace, and when it tried to remove them vSphere failed to respond. Orphaned VMs should be manually deleted in vSphere.
 
 To identify orphaned VMs, search for "orphaned" in the Search field, identify the VMs to clean up in vSphere, and delete them. Once deleted in vSphere, they won't appear on the **Machines** tab again.

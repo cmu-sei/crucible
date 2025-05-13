@@ -16,7 +16,7 @@ New topologies can be rapidly deployed using existing templates or built from th
 
 ### Workspace and Gamespace
 
-You build your content in a *workspace*, but you "play" (complete the lab, do the activity) in a *gamespace*. The workspace is where a virtual topology is built. Here engineers and lab developers add VMs, save updates, author a guide in Markdown, and configure questions/answers to turn the topology into a lab or *challenge*.
+You build your content in a *workspace*, but you "play" (complete the lab, do the activity) in a *gamespace*. In the workspace, engineers and lab developers add VMs, save updates, author a guide in Markdown, and configure questions/answers to turn the topology into a lab or *challenge*.
 
 A *gamespace* is where someone else plays through the lab. They get their own, isolated, read-only copies of all workspace resources. Players in a gamespace can interact with VMs and answer questions to complete a lab, but they can't save anything in the environment.
 
@@ -33,18 +33,18 @@ The id's used for isolation tags uniquely identify each workspace and gamespace 
 
 For example: a VM named `challenge-sever` in the gamespace with id (isolation tag) `18048abc66f142e1804732082f4051d2`, has the name `challenge-server#18048abc66f142e1804732082f4051d2`. Appending the isolation tag to workspace/gamespace resources ensures environment isolation -- VMs and networks cannot have the same name, so there will never be accidental sharing of VM/network resources.
 
-*Screen print 1*
+Screen print 1
 
 ![workspace isolation tag](img/iso-tag-ws.png)
 
-*Screen print 2*
+Screen print 2
 
 ![gamespace isolation tag](img/iso-tag-gs.png)
 
-*Screen print 3*
+Screen print 3
 
 ![isolation tag url](img/iso-tag-url.png)
 
 ### Challenge
 
-The term *challenge* refers to when both Gameboard and TopoMojo are integrated to execute a cyber competition. In this scenario, Gameboard is a consumer of content made in TopoMojo. More information on that is available elsewhere in the Foundry documentation.
+The term *challenge* refers to when users integrate Gameboard and TopoMojo to execute a cyber competition. In this scenario, Gameboard is a consumer of content made in TopoMojo. More information on that is available elsewhere in the documentation.

@@ -4,23 +4,23 @@ The **Reports** module is available to users who have the `Reports` permission. 
 
 - **Challenges Report:** View information about the challenges configured in the Gameboard app. This report is good for site utilization metrics related to challenges, challenge deploys, and challenge solves.
 - **Enrollment Report:** View a summary of player enrollment data; who enrolled when, which sponsors do they represent, and how many played challenges.
-- **Feedback Report:** View all feedback for a specific feedback template across every game or challenge where the template is used.
-- **Feedback(Legacy) Report:** View all player feedback for games played *before* the feedback template feature was added to Gameboard. This option requires configuration of feedback in the Game Center.
+- **Feedback Report:** View all feedback for a specific feedback template across every game or challenge that uses the template.
+- **Feedback(Legacy) Report:** View all player feedback for games played *before* Gameboard included the feedback template feature. This option requires configuration of feedback in the Game Center.
 - **Players Report:** View data on player activity. A "player" is a person with an account on the Gameboard site (i.e., a "user").
-- **Practice Area Report:** View metrics on players who are spending free time honing their skills in Gameboard. See which challenges are practiced most, have the best success rates, and which players are accessing the Gameboard to complete challenges in practice.
-- **Site Usage Report:** View a high-level overview of user activity in the Gameboard. This report, optionally filtered by date range and sponsor, offers a digestible view of data related to players, sponsors, and challenges. Each statistic within the report contains a modal view for more detailed information. Note that the Site Usage Report can't be exported.
+- **Practice Area Report:** View metrics on players who are spending free time honing their skills in Gameboard. See which challenges get practiced most, have the best success rates, and which players are accessing the Gameboard to complete challenges in practice.
+- **Site Usage Report:** View a high-level overview of user activity in the Gameboard. This report, optionally filtered by date range and sponsor, offers a digestible view of data related to players, sponsors, and challenges. Each statistic within the report contains a modal view for more detailed information. You can't export the Site Usage Report.
 - **Support Report:** View a summary of support tickets created in Gameboard; including ticket creation and assignment details, ticket categories, and tickets attached to games/challenges.
 
 ## Legacy Reports
 
-The legacy reporting functionality has not yet been deprecated; these reports are still available at the bottom of the Reports screen. Legacy reports won't get future fixes or enhancements. Eventually, they will be removed from the Gameboard application.
+The legacy reporting functionality is available at the bottom of the Reports screen. Legacy reports won't get future fixes or enhancements. Eventually, we will remove them from the Gameboard application.
 
 ## Common Report Characteristics
 
 Each report shares common characteristics.
 
-- **Filter controls:** Dedicated filter controls allow users to narrow down or restrict the data displayed on a report. For example, if you're interested in seeing enrollments from a given sponsor in the Enrollment Report, use the **Sponsors** filter to select the sponsor(s) you're interested in. If you don't select any values in a filter, all data from that filter is included in the results.
-- **Copy link to report:** When a report is run, the browser generates a link that represents filter selections for the current report. Select the **clipboard icon** to copy the current report and share it with another Gameboard user. The user whom you are sharing with must have the appropriate Gameboard role and must be logged into Gameboard. You can also copy the link in your browser's address bar and share.
+- **Filter controls:** Dedicated filter controls allow users to narrow down or restrict the data displayed on a report. For example, if you're interested in seeing enrollments from a given sponsor in the Enrollment Report, use the **Sponsors** filter to select the sponsor(s) you're interested in. If you don't select any values in a filter, the results include all data from that filter.
+- **Copy link to report:** When you run a report, the browser generates a link that reflects your current filter selections. Select the **clipboard icon** to copy the current report and share it with another Gameboard user. The user you are sharing with must log into Gameboard and have the appropriate Gameboard role. You can also copy the link in your browser's address bar and share.
 
 !!! tip
     Bookmark useful filters via the browser so you can return to them quickly.
@@ -46,20 +46,20 @@ Click **300** to view the detailed information that comprises score in the summa
 
 ![score detailed](img/breakdown.png)
 
-In this view, the challenges and scores this player achieved are displayed. Now, you can see the details that make up the score.
+In this view, you can see the challenges the player completed and the scores they achieved. Now, you can see the details that make up the score.
 
 ## Challenges Report
 
 The **Challenges** report answers questions like these:
 
-1. How many different challenges are configured?
-2. How many competitive challenges have been deployed?
-3. How many practice area challenges have been deployed?
+1. How many different challenges does the game include?
+2. How many competitive challenges did players deploy?
+3. How many practice area challenges did players deploy?
 4. What are the most popular competitive/practice mode challenges?
 
 ## Enrollment Report
 
-The **Enrollment** report shows information about players who are enrolled in competitive-mode games on the Gameboard. You can filter this report to show enrollment numbers for each game. You can filter this report to only show information about challenges from specific games and seasons. You can also filter this report by Sponsor.
+The **Enrollment** report shows information about players enrolled in competitive-mode games on the Gameboard. You can filter this report to show enrollment numbers for each game. You can filter this report to only show information about challenges from specific games and seasons. You can also filter this report by Sponsor.
 
 The screen print below shows a summary of a typical game. The summary shows:
 
@@ -79,7 +79,7 @@ The screen print below shows a summary of a typical game. The summary shows:
 
 The **Feedback Report** answers questions like these:
 
-1. How are our games and challenges being received by players and participants?
+1. How are our games and challenges received by players and participants?
 2. What could "we" (meaning the game and challenge/lab content developers) improve upon?
 3. What insights can we gain from  players' experiences and perspectives?
 
@@ -97,9 +97,9 @@ You can also filter the Players report by *Account Creation Date* to understand 
 
 The **Practice Area** report answers questions like these:
 
-1. How many practice challenges have been deployed?
+1. How many practice challenges deployed?
 2. How many practice challenges achieved a full solve?
-3. How many different challenges have been deployed via the practice area?
+3. How many different challenges deployed via the practice area?
 4. How many users have deployed a practice challenge?
 5. How many different sponsors have deployed a practice challenge?
 
@@ -110,8 +110,8 @@ The **Site Usage** report answers questions like these:
 1. How many players are active in the Gameboard in a given period of time?
 2. How many sponsors had active players and how many players represented each?
 3. How many players are competitive players versus how many players are practice-only players?
-4. How many unique challenges versus how many total challenges were attempted in a given period of time?
-5. How many hours were spent playing games?
+4. How many unique challenges versus how many total attempted challenges in a given period of time?
+5. How many hours did players spend playing games?
 
 ## Support Report
 

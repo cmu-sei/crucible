@@ -1,8 +1,8 @@
-# ![Blueprint Logo](../assets/img/blueprint-logo.png) **Blueprint:** Building a MSEL
+# ![Blueprint Logo](../assets/img/blueprint-logo.png) Blueprint: Building a MSEL
 
 ## Overview
 
-[**Blueprint**](#glossary) is a web app that helps users create a [Master Scenario Event List (MSEL)](#glossary) and [events](#glossary) more easily. It lets users choose and define simulated entities, attacks, time frames, and regulators affected by the scenario. Users can view, edit, create, and approve events in the MSEL using Blueprint.
+[Blueprint](#glossary) is a web app that helps users create a [Master Scenario Event List (MSEL)](#glossary) and [events](#glossary) more easily. It lets users choose and define simulated entities, attacks, time frames, and regulators affected by the scenario. Users can view, edit, create, and approve events in the MSEL using Blueprint.
 
 Blueprint makes it easier to build and view the MSEL compared to using an Excel spreadsheet. It also helps teams collaborate, even if they are from different teams. Blueprint can connect with Player, Gallery, CITE, and Steamfitter to help automate exercise setup.
 
@@ -13,7 +13,7 @@ For installation, refer to these GitHub repositories.
 
 ### Blueprint Permissions
 
-To use Blueprint, a user must be assigned Content Developer permissions and be added to their respective team.
+To use Blueprint, a System Admin must assign Content Developer permissions to the user and add them to a team.
 
 There are three levels of permissions in Blueprint that affect the way a user interacts with the Blueprint application and collaborates on the MSEL creation.
 
@@ -21,7 +21,7 @@ There are three levels of permissions in Blueprint that affect the way a user in
 - [Content Developer](#glossary): Can view, edit, create, and approve events on the MSEL.
 - [Facilitator](#glossary): Manages the exercise, can advance moves, execute events, and check events as completed.
 
-Most users will have the Content Developer permission, since that is all that is required to be able to create and collaborate with other teams on the MSEL creation.
+Most users will have the Content Developer permission, because it is the minimum required permission to create and collaborate with other teams on MSEL creation.
 
 Refer to this section [Administrator Guide](#administrator-guide) for more information on additional administrative actions.
 
@@ -35,54 +35,52 @@ The landing page of Blueprint provides a variety of interaction modalities for e
 
 #### Join Event
 
-This feature becomes available when an event is in progress and the user has either been invited or is a member of the participating team. In such cases, the user is able to access and join the ongoing event.
-
-After clicking on Join Event, users will be redirected to a page where all ongoing events that the user has been invited to are going to be shown. Here, an event should be selected, then the user will be redirected to Player where all exercise information and applications involved can be found.
+Users with an invitation or membership on a participating team can join an event already in progress. Users click **Join Event** to open a page that lists all ongoing events available to them. They select an event to proceed to Player, where they access exercise information and related applications.
 
 #### Start Event
 
-Users who have been invited to an exercise MSEL designated as a template possess the capability to initiate the event and engage with the exercise.
+Users with an invitation to an exercise MSEL designated as a template can initiate the event and engage with the exercise.
 
-After clicking on Start Event, users will be redirected to a page where all available templates that the user has been invited to are going to be shown. Here, an event should be selected, then the user will be able to launch the event and get redirected to Player where all exercise information and applications involved can be found once deployed.
+After users click **Start Event**, the system redirects them to a page listing all available events other users have invited them to. They should select a template to launch the event and proceed to Player, where they can access all exercise information and deployed applications.
 
 #### Manage an Event
 
-This option is visible to users who hold administrative roles or are content developers within Blueprint, or have been assigned as contributors to the exercise MSEL. Such users are empowered to continue developing the current MSEL or to create new ones.
+Users with administrative roles, content developer permissions, or contributor designation on the MSEL can see this option. They can continue developing the current MSEL or create a new one.
 
-#### End Event
+### Player Manage Event Page
 
-For those launched events, an extra Blueprint functionality is going to be added to the Player View, where users can manage their event. This feature further enables users to invite others to the event or even end the event after the user has completed the exercise.
+When a user starts an event (as described above), Blueprint adds a **Manage Event** application to the left side panel of the Player view. The Manage Event application lets the user change the event end time, end the event, and invite others to join.
 
 ![Blueprint End Event OE](../assets/img/blueprintEndEvent-v2.png)
 
-##### Launched Event User Invitations
+#### Launched Event User Invitations
 
 To invite other users to the launched event, follow these steps:
 
 ![Blueprint Launched Event Invites OE](../assets/img/blueprintEventInvitations.png)
 
 1. Navigate to the **Manage Event** application from Player's side panel.
-2. Click on **Invite Others**.
+2. Click **Invite Others**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-##### Data Format Table
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
-| **Team**         | Dropdown Text | Team user should be assigned to | SEI - Software Engineering Institute |
+| **Team**         | Dropdown Text | User's team | SEI - Software Engineering Institute |
 | **Email Domain** | String | User's email domain tied to the invitation | @sei.cmu.edu |
 | **Expiration Date/Time** | Datetime | Date/Time when the invitation should expire | 04/20/2024 11:17:25 |
 | **Maximum Number of Users Allowed to Use this Invitation** | Integer | Number of users allowed to use the invitation | 5 |
-| **Can Invite Others to this team** | Boolean | Permission to be assigned to allow new users to invite others to the exercise | False |
+| **Can Invite Others to this team** | Boolean | Allows new users to invite others to the exercise | False |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-##### Ending a Launched Event
+#### Ending a Launched Event
 
 To end an event, follow these steps:
 
 1. Navigate to the **Manage Event** application from Player's side panel.
-2. Click on **End Event**.
+2. Click **End Event**.
 3. On the confirmation screen, click **Yes** to successfully end the event.
 
 ### MSEL Catalog
@@ -97,7 +95,7 @@ The following image will show some important hotspots about the MSEL Catalog. Re
 
 ##### Hotspot 1
 
-One of the main features of Blueprint is the ability to be able to create a MSEL from scratch via the application. This feature is helpful for users since it will eliminate the hassle of using Excel spreadsheets and provide a more user-friendly application that will provide an easier visualization of the information.
+Blueprint lets users create a MSEL from scratch directly in the application. This removes the hassle of Excel and makes visualizing information easier.
 
 #### Upload an Existing MSEL
 
@@ -143,7 +141,7 @@ Users with the proper administrative permissions will be able to use this featur
 
 #### Download
 
-If users desire to have an offline copy of any desired MSEL, they will have the ability to download a copy to their devices by using the Download feature. If by any chance users don't have an internet connection, this feature will be useful since they will be able to work offline on the MSEL and then upload the MSEL back to the application, so that other users can see any changes made. Although users can work on the MSEL offline, it is not recommended since they will be missing on all of the helpful features that Blueprint offers.
+Users can download a copy of any MSEL for offline use using the Download feature. This is useful if they lack internet access, allowing them to work on the MSEL offline and upload changes later. However, offline work is not recommended as users will miss Blueprint's features and updates.
 
 #### Upload
 
@@ -155,7 +153,7 @@ With the Upload feature, users can update the information from the MSEL Card wit
 
 #### Delete
 
-With the Delete feature, users will be able to delete existing MSEL Cards. By deleting the MSEL Card, all the information that was included in the MSEL will be deleted too.
+The Delete feature lets users remove existing MSEL cards including all associated information.
 
 #### Copy
 
@@ -165,7 +163,7 @@ The Copy feature lets users duplicate an existing MSEL Card and modify the copy 
 
 ##### Hotspot 9
 
-Click the desired MSEL card to access its information. Here, users can also edit or update the existing information. Changes made will be seen live by other users without the need of sharing a new document every time.
+Click a MSEL card to view its information. Users can also edit or update the existing information, and changes appear live for others without needing to share a new document.
 
 ### MSEL Definition
 
@@ -198,7 +196,7 @@ To edit the MSEL's basic information and configuration, follow these next steps:
 | **Select Scoring Model** | Dropdown Text | Select a CITE Scoring Model | CISA NCISS |
 | **Integrate Steamfitter** | Boolean | Add Steamfitter integration functionality to the MSEL | False |
 | **MSEL Status** | Dropdown Text | Select MSEL status designation | Active |
-| **Header Row Metadata (Height)** | Integer | An integer value that defines the height of the header row when this MSEL is exported as an .xlsx file | 30 |
+| **Header Row Metadata (Height)** | Integer | An integer value that defines the height of the header row when exporting this MSEL as an .xlsx file | 30 |
 
 To save these settings, click the **checkmark** at the top.
 
@@ -210,14 +208,14 @@ To save these settings, click the **checkmark** at the top.
 
 #### Add Page
 
-On this tab, users can add notes to the MSEL to be worked and accessed by other team members with appropriate permissions.
+On this tab, users can add notes to the MSEL for team members with the appropriate permissions to work and access.
 
 ![Blueprint Notes Tab OE](../assets/img/blueprintNotes-v3.png)
 
 To add MSEL notes, follow these next steps:
 
 1. Navigate to the **Info** tab.
-2. Click on **Add Page**.
+2. Click **Add Page**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -228,7 +226,7 @@ To add MSEL notes, follow these next steps:
 | **All MSEL users can view this page** | Boolean | Enable other users who don't have elevated permissions to access this page | True |
 | **Notes** | Rich Text | Field to add page notes | Next meeting is on 12/7 at 0800 |
 
-After all changes have been added, click on the **checkmark** to save the page.
+After you've made your changes, click the **checkmark** to save the page.
 
 #### Contributors
 
@@ -241,21 +239,21 @@ On this tab, users will be able to add and assign contributor teams, as well as 
 To add a contributor unit to the MSEL, follow these steps:
 
 1. Navigate to the **Contributors** tab.
-2. Click on the **Add a Contributor Unit** button and then select the desired unit to be added.
-3. After selecting the unit, click on the **+** button.
+2. Click the **Add a Contributor Unit** button, then select the unit you want to add.
+3. After selecting the unit, click the **+** button.
 
 ##### Remove a Contributor
 
 To remove a contributor unit from the MSEL, follow these steps:
 
 1. Navigate to the **Contributors** tab.
-2. Select the desired team to be removed and click on the **-** button.
+2. Select the team you want to remove and click the **-** button.
 
-Now the unit has been added to the MSEL and members will be able to view and edit the MSEL based on the role assigned to each unit member.
+Now that you've added the unit to the MSEL, members can view and edit it based on each unit member's role.
 
 The available roles are:
 
-- **[Editor](#glossary):** Edit the events that they are assigned to, but not other events. They cannot delete them or create new ones.
+- **[Editor](#glossary):** Can edit the events assigned to them by the MSEL owner, but not other events. They cannot delete events or create new events.
 - **[Approver](#glossary):** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
 - **[Move Editor](#glossary):** Can edit moves on the MSEL, as well as increment them during an exercise.
 - **[Owner](#glossary):** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).
@@ -273,36 +271,36 @@ On this tab, users will be able to add and assign teams, as well as their respec
 To add a team to the MSEL, follow these steps:
 
 1. Navigate to the **Teams** tab.
-2. Click on the **Add a Team** button and then select the desired team to be added.
-3. After selecting the team, click on the **+** button.
+2. Click the **Add a Team** button, then select the team you want to add.
+3. After selecting the team, click the **+** button.
 
 ##### Remove a Team
 
 To remove a team from the MSEL, follow these steps:
 
 1. Navigate to the **Teams** tab.
-2. Select the desired team to be removed and click on the **-** button.
+2. Select the team you want to remove and click the **-** button.
 
-Now the team has been added to the MSEL and members will be able to participate on the MSEL event based on the role assigned to each team member.
+Now that you've added the team to the MSEL, members can participate on the MSEL event based on each team member's assigned role.
 
 The available roles are:
 
 - **[`Inviter`](#glossary):** This role will allow a user to invite others to the MSEL event.
-- **[`Observer`](#glossary):** When Gallery or CITE integrations are enabled, this role will allow a user to observe other team's progress on CITE and Gallery applications.
-- **[`Incremeter`](#glossary):** When the CITE integration is enabled, this role will allow a user to advance the current move.
-- **[`Modifier`](#glossary):** When the CITE integration is enabled, this role will allow a user to modify the team's score.
-- **[`Submitter`](#glossary):** When the CITE integration is enabled, this role will allow a user to submit the team's score.
+- **[`Observer`](#glossary):** When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
+- **[`Incrementer`](#glossary):** When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.
+- **[`Modifier`](#glossary):** When the MSEL owner has enabled CITE integration, this role allows a user to modify the team's score.
+- **[`Submitter`](#glossary):**When the MSEL owner has enabled integration, this role allows a user to submit the team's score.
 
 #### Data Fields
 
-On this tab, users will be able to add data fields that are going to be used on the MSEL. These [data fields](#glossary) can be compared to the column fields used on Excel spreadsheets.
+On this tab, users can add data fields used on the MSEL. Compare these [data fields](#glossary) to the column fields on Excel spreadsheets.
 
 ![Blueprint Data Fields Tab OE](../assets/img/blueprintDataFields-v5.png)
 
-As it can be seen, there are two categories of Data Fields.
+There are two categories of Data Fields:
 
 - **[System Defined](#glossary):** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
-- **[User Defined](#glossary):** These are added by the user on an as-needed basis.
+- **[User Defined](#glossary):** Added by the user on an as-needed basis.
 
 ##### Add a Data Field
 
@@ -311,7 +309,7 @@ As it can be seen, there are two categories of Data Fields.
 To add a Data Field to the MSEL, follow these steps:
 
 1. Navigate to the **Data Fields** tab.
-2. Click on the **+** icon from the top left of the screen.
+2. Click the **+** icon from the top left of the screen.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -321,7 +319,7 @@ To add a Data Field to the MSEL, follow these steps:
 | **Display Order** | Integer | Indicate the order of the data field | 1 |
 | **Name** | String | Name of the data field | Description |
 | **Data Type** | Dropdown Text | Data type for the data field | String |
-| **Use Option List** | Boolean | Add options to be selected when adding an event | True |
+| **Use Option List** | Boolean | Add options to select when adding an event | True |
 | **Display on the Events list** | Boolean | Display this data field on the Events list tab | True |
 | **Display on the Exercise View** | Boolean | Display this data field on the Exercise View tab | True |
 | **Display on "Advanced" edit tab** | Boolean | Display this data field on the data field edit component Advanced tab | True |
@@ -330,33 +328,33 @@ To add a Data Field to the MSEL, follow these steps:
 | **Column Metadata (Width)** | Integer | Width of the column when displayed | 30 |
 | **Cell Metadata (Color, Tint, Font-Weight)** | String | Column color and font style | (Red, 20%, bold) |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
 ##### Delete a Data Field
 
 To delete a Data Field from the MSEL, follow these steps:
 
 1. Navigate to the **Data Fields** tab.
-2. Select the desired data field to be deleted and click on the **Trash Can** icon.
+2. Select the data field you want to delete and click the **Trash Can** icon.
 
 ##### Edit a Data Field
 
 To edit an existing Data Field, follow these steps:
 
 1. Navigate to the **Data Fields** tab.
-2. Select the data field to be edited and click on the **Edit** button to make any changes to the existing configurations.
-3. After making all the necessary changes, click on the **checkmark** to save them.
+2. Select the data field you wish to edit and click the **Edit** button to make any changes to the existing configurations.
+3. After making all the necessary changes, click the **checkmark** to save them.
 
 ##### Search For a Data Field
 
 To search for a specific Data Field, follow these steps:
 
 1. Navigate to the **Data Fields** tab.
-2. Click on the **Search Bar** and add the name of the data field desired.
+2. Click the **Search Bar** and add the name of the data field desired.
 
 #### Organizations
 
-On this tab, users will be able to add all the related [organizations](#glossary) that are going to be used on the MSEL, as well as on the live exercise. Here, organizations with their information are added. Additionally, users can create organizations from scratch or from a template.
+On this tab, users add all related [organizations](#glossary) (with their information) used on the MSEL and the live exercise. Users can create organizations from scratch or from a template.
 
 ![Blueprint Organizations Tab OE](../assets/img/blueprintOrganizations-v4.png)
 
@@ -367,7 +365,7 @@ On this tab, users will be able to add all the related [organizations](#glossary
 To add an Organization Card from scratch, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Click on **Add Organization**.
+2. Click **Add Organization**.
 3. Select **New Organization** from the dropdown.
 4. Fill the fields as necessary following the Data Format Table specifications.
 
@@ -381,15 +379,15 @@ To add an Organization Card from scratch, follow these steps:
 | **Email** | String | Organization's email contact | `user@twitter.com` |
 | **Description** | Rich Text | Information, details, and characteristics of the organization | Twitter is a micro-blogging and social networking service on which users post and interact with messages known as "tweets", owned by American company Twitter, Inc. |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
 ##### Add an Organization Card From Template
 
 To create an organization from a template, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Click on **Add Organization**.
-3. Select the desired template to be used from the dropdown.
+2. Click **Add Organization**.
+3. Select the template you want to use from the dropdown.
 4. Here, users will be able to edit all necessary information to create a new organization.
 5. After modifying the desired details, click **Save**.
 
@@ -398,7 +396,7 @@ To create an organization from a template, follow these steps:
 To edit an existing organization, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Select the desired card to be edited and click on the **Edit** button next to the organization name.
+2. Select the card you want to edit and click the **Edit** button next to the organization name.
 3. Here, users will be able to edit all necessary information.
 4. Click **Save**.
 
@@ -407,14 +405,14 @@ To edit an existing organization, follow these steps:
 To delete an organization, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Select the desired card to be deleted and click on the **Trash Can** icon next to the organization name.
+2. Select the card you want to delete and click the **Trash Can** icon next to the organization name.
 
-*Search for an Organization*
+##### Search for an Organization
 
 To search for a specific organization, follow these steps:
 
 1. Navigate to the **Organizations** tab.
-2. Click on the **Search Bar** and type the name of the desired organization.
+2. Click the **Search Bar** and type the name of the desired organization.
 
 #### Moves
 
@@ -429,7 +427,7 @@ On this tab, users will be able to add all the related exercise [moves](#glossar
 To add a move, follow these steps:
 
 1. Navigate to the **Moves** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
 ##### Data Format Table
@@ -442,14 +440,14 @@ To add a move, follow these steps:
 | **Situation Date/Time** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
 | **Situation Description** | Rich Text | Information, details, and characteristics of the exercise | Hurricane Delta has landed in Fort Myers |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
 ##### Edit a Move
 
 To edit the move's details, follow these steps:
 
 1. Navigate to the **Moves** tab.
-2. Select the move you want to edit and click on the **Edit** button for the corresponding move.
+2. Select the move you want to edit and click the **Edit** button for the corresponding move.
 3. Here, users will be able to edit all the desired details.
 4. Click **Save**.
 
@@ -458,14 +456,14 @@ To edit the move's details, follow these steps:
 To delete a move from the MSEL, follow these steps:
 
 1. Navigate to the **Moves** tab.
-2. Select the move you want to delete and click on the **Trash Can** button for the corresponding move.
+2. Select the move you want to delete and click the **Trash Can** button for the corresponding move.
 
-*Search For a Move*
+##### Search for a Move
 
 To search for a specific move, follow these steps:
 
 1. Navigate to the **Moves** tab.
-2. Click on the **Search Bar** and type the name of the desired move.
+2. Click the **Search Bar** and type the name of the desired move.
 
 #### Scenario Events
 
@@ -478,8 +476,8 @@ On this tab, users will be able to add all the related events to the MSEL.
 To add a new event, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Click on the **Hamburger** icon found on the top left.
-3. Click on **Add New Event**.
+2. Click the **Hamburger** icon found on the top left.
+3. Click **Add New Event**.
 
 On the **Default** tab, fill the fields as necessary following the Data Format Table specifications.
 
@@ -491,13 +489,13 @@ On the **Default** tab, fill the fields as necessary following the Data Format T
 | ----------- | ------------- | ------------ | ---------- |
 | **Control Number** | String | Event control number, used to identify and categorize events | ADMIN-1 |
 | **Description** | String |  Information, details, and characteristics of the event | STARTEX |
-| **Status** | Dropdown Text | Approval status of the event to be used on the MSEL | Approved |
+| **Status** | Dropdown Text | Approval status of the event used on the MSEL | Approved |
 | **Time** | Datetime | Start date/time of the move real-time | 11/20/2023, 09:00:00 |
 | **Move** | Dropdown Text | Move number the event is part of | 1 |
 | **Group** | Integer | Groups events within a move, often times executed within the same time range | 1 |
 | **Exercise Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
 | **Type** | String | Source type for the event | Email |
-| **Delivery Method** | Dropdown Text | How is the event going to be delivered to participants | Email |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants | Email |
 
 If not already completed on the previous tab, fill the fields from the **Advanced** tab following the Data Format Table specifications. This tab focuses on the MSEL's metadata and style.
 
@@ -507,10 +505,10 @@ If not already completed on the previous tab, fill the fields from the **Advance
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
-**Exercise Date/Time** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27
-**Row Metadata** | Integer |  Defines the size of this event on the Events and Exercise View tabs | 15,199,21,133
+| **Exercise Date/Time** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
+| **Row Metadata** | Integer |  Defines the size of this event on the Events and Exercise View tabs | 15,199,21,133 |
 
-If Gallery integration is enabled and not already completed on the Default tab, fill the fields from the **Gallery** tab following the Data Format Table specifications. This tab focuses on the Gallery fields necessary for the integration to work.
+If the MSEL owner enabled Gallery integration, the user should verify that all fields on the Gallery tab are complete, following the Data Format Table specifications below. This tab includes the fields required for the Gallery integration to function properly.
 
 ![Blueprint Add Event Gallery OE](../assets/img/blueprintAddInjectsGallery.png)
 
@@ -519,23 +517,23 @@ If Gallery integration is enabled and not already completed on the Default tab, 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Description** | String |  Information, details, and characteristics of the event | STARTEX |
-| **Status** | Dropdown Text | Approval status of the event to be used on the MSEL | Approved |
+| **Status** | Dropdown Text | Approval status of the event used on the MSEL | Approved |
 | **Move** | Dropdown Text | Move number the event is part of | 1 |
 | **Group** | Integer | Groups events within a move, often times executed within the same time range | 1 |
 | **Exercise Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
-| **Delivery Method** | Dropdown Text | How is the event going to be delivered to participants | Gallery |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants | Gallery |
 | **Title** | String | Title of the event | Bank Consortium Falls Victim to Ransomware Attack |
 | **From Org** | Dropdown Text | Select the organization that sends this event | CC News |
 | **To Org** | Dropdown Text | Select the organization that receives this event | ALL |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
 ##### Add Color to an Event
 
 To add a color to an existing event, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Select the desired event to be edited and click on the **Hamburger** icon next to the event.
+2. Select the event you want to edit and click the **Hamburger** icon next to the event.
 3. Hover over **Highlight**.
 4. Here, users will be able to select the desired color.
 
@@ -544,24 +542,24 @@ To add a color to an existing event, follow these steps:
 To edit the event's details, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Select the desired event to be edited and click on the **Hamburger** icon next to the event.
-3. Click on **Edit**.
-4. Here, users will be prompted the same event's edit component as when adding a new event.
-5. After doing all the necessary edits, click **Save**.
+2. Select the event you want to edit and click the **Hamburger** icon next to it.
+3. Click **Edit**.
+4. The system opens the same edit component used when creating a new event.
+5. Make your changes, then click **Save**.
 
 ##### Delete an Event
 
 To delete an event, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Select the desired event to be deleted and click on the **Trash Can** icon next to the event.
+2. Select the event you want to delete and click the **Trash Can** icon next to the event.
 
 ##### Search for an Event
 
 To search for a specific event, follow these steps:
 
 1. Navigate to the **Events** tab.
-2. Click on the **Search Bar** and type the name of the desired event.
+2. Click the **Search Bar** and type the name of the desired event.
 
 #### Exercise View
 
@@ -571,23 +569,23 @@ While the Events tab lets MSEL owners and content developers manage events, the 
 
 #### Invitations
 
-In the Invitations tab, users who possess roles as Administrators or Content Developers, or those who have been designated as contributors to the MSEL, have the capability to create invitations. These invitations permit other users to either join or start the MSEL event.
+Users with Administrator, Content Developer, or designated MSEL contributors can create invitations from the Invitations tab. These invitations allow others to join or start the MSEL event.
 
-To facilitate this process, email domains are specified on these invitations, along with a maximum number of users who may use these invitations. Furthermore, these invitations are associated with specific teams that have been integrated into the MSEL. Consequently, upon joining the event using the invitation, the user will be automatically affiliated with the corresponding team for the duration of the event.
+You can specify email domains and a maximum number of users on the invitations. Invitations link to specific teams added to the MSEL. When users join the event using an invitation, the system assigns them to the corresponding team for the duration of the event.
 
 ![Blueprint Invitations OE](../assets/img/blueprintInvitations-v2.png)
 
-*Add an Invitation*
+##### Add an Invitation
 
 ![Blueprint Add Invitations OE](../assets/img/blueprintAddInvitations.png)
 
 To add a new invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
-2. Click on the **Invite Others** button.
+2. Click the **Invite Others** button.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -597,337 +595,335 @@ To add a new invitation, follow these steps:
 | **Maximum Number of Users Allowed to Use this Invitation** | Integer | Number of users that can use the invitation | 5 |
 | **Can Invite others to this Team** | Boolean | Permission to add others to the team | False |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-*Edit an Invitation*
+##### Edit an Invitation
 
 To edit an invitation, follow these steps:
 
-1. Navigate to the **Invitations** tab.
-2. Select the desired invitation to be edited and click on the **Edit Icon** next to the invitation.
-3. Here, users will be prompted the same invitation's edit component as when adding a new invitation.
-4. After doing all the necessary edits, click **Save**.
+1. Navigate to the Invitations tab.
+2. Select the invitation you want to edit and click the **Edit** icon.
+3. The system opens the same edit component used when creating a new invitation.
+4. Make your changes, then click **Save**.
 
-*Delete an Invitation*
+##### Delete an Invitation
 
 To delete an invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
-2. Select the desired invitation to be deleted and click on the **Trash Can Icon** next to the invitation.
+2. Select the invitation you want to deleted and click the **Trash Can** icon next to the invitation.
 
-*Search For an Invitation*
+##### Search for an Invitation
 
 To search for a specific invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
-2. Click on the **Search Bar** and type the name of the team tied to the invitation.
+2. Click the **Search Bar** and type the name of the team tied to the invitation.
 
 ### Integrations
 
-Integrations to the following applications have been added to facilitate the extra configurations that should be done in each of these applications. With this functionality, no more repetitive steps are needed to be done in multiple applications.
+Integrations with the following applications simplify extra configuration steps. This functionality eliminates the need to repeat the same steps in multiple applications.
 
 #### CITE
 
-If enabled, Blueprint will be able to push MSEL information to the CITE Application. For this, additional tabs will be added to the Blueprint side panel, which will be needed to be configured.
-
-To enable the full CITE integration functionality the following tabs should be configured.
+If enabled, Blueprint can push MSEL information to the CITE application. When the MSEL owner enables CITE integration, additional tabs appear in the Blueprint side panel. The MSEL owner must configure the additional tabs to complete the integration. To enable full CITE integration, the MSEL owner must configure the following tabs.
 
 ##### Teams
 
-On the Teams tab, extra CITE configurations should be done on teams that have been added to the MSEL. To do so, follow these steps.
+Use the **Teams** tab to configure CITE settings for teams added to the MSEL. To do this, follow these steps.
 
-First, a CITE Team Type should be assigned to each team. To do this, follow these steps:
+First, assign a CITE Team Type to each team.
 
 ![CITE Team Type OE](../assets/img/citeTeamType.png)
 
 1. Navigate to the **Teams** tab.
-2. Select the desired team and click on the **Edit Icon**.
+2. Select the desired team and click the **Edit Icon**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Team Email** | String | Team's email contact | `seicmu@cmu.edu` |
 | **CITE Team Type** | Dropdown Text | Classifies the team within a certain type | Individual Organization |
 
-After all desired configurations have been added, click **Save**.
+After you've made all desired configurations, click **Save**.
 
-Next, roles should be assigned to each member of the team. To do this, follow these steps:
+Next, assign roles to each member of the team. To do this, follow these steps:
 
 ![CITE Team Roles OE](../assets/img/citeTeamRoles-v2.png)
 
 1. Navigate to the **Teams** tab.
-2. Select the desired team, and click on it to expand its configurations.
+2. Select the desired team, and click it to expand its configurations.
 3. Assign the necessary roles to each team member.
 
 ##### CITE Actions
 
-On this tab, [CITE Actions](#glossary) can be added to be pushed from Blueprint. These actions will allow team members to customize their response by tracking tasks during the exercise.
+On this tab, the MSEL owner can add [CITE Actions](#glossary) to push from Blueprint. These actions allow team members to customize their response by tracking tasks during the exercise.
 
 ![Blueprint CITE Actions OE](../assets/img/blueprintCiteActions-v3.png)
 
-*Add a CITE Action*
+##### Add a CITE Action
 
 ![Blueprint Add CITE Actions OE](../assets/img/blueprintAddCiteActions.png)
 
 To add a CITE Action, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
-| **Move** | Dropdown Text | Select the move where this action should be displayed | 0 - Hurricane Delta Scene Setter |
+| **Move** | Dropdown Text | Select the move to display this action | 0 - Hurricane Delta Scene Setter |
 | **Team** | Dropdown Text | Select the team this action applies to | Conference of State Bank Supervisors |
-| **Display Order** | Integer | Indicates the order this action should be displayed on the CITE Dashboard | 1 |
+| **Display Order** | Integer | Indicates the order to display this action on the CITE Dashboard | 1 |
 | **Description of the Action** | String |  Information, details, and characteristics of the action | Assign users to roles |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-*Edit a CITE Action*
+##### Edit a CITE Action
 
 To edit the CITE Action's details, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
-2. Select the desired action to be edited and click on the **Edit** icon next to the action.
-3. Here, users will be prompted the same action's edit component as when adding a new action.
-4. After doing all the necessary edits, click **Save**.
+1. Navigate to the CITE Actions tab.
+2. Select the action you want to edit and click the **Edit** icon next to it.
+3. The system opens the same edit component used when creating a new action.
+4. Make your changes, then click Save.
 
-*Delete a CITE Action*
+##### Delete a CITE Action
 
 To delete a CITE Action, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
-2. Select the desired action to be deleted and click on the **Trash Can** icon next to the action.
+2. Select the action you want to delete and click the **Trash Can** icon next to the action.
 
-*Filter Actions by Team*
+##### Filter Actions by Team
 
 To filter CITE Actions by teams, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
 2. On the **Team** dropdown, select the desired team to filter by.
 
-*Search For an Action*
+##### Search for an Action
 
 To search for a specific action, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
-2. Click on the **Search Bar** and type the name of the desired action.
+2. Click the **Search Bar** and type the name of the desired action.
 
 ##### CITE Roles
 
-On this tab, [CITE Roles](#glossary) can be added to be pushed from Blueprint. These roles will allow team members to customize their response by tracking their responsibilities during an exercise.
+On this tab, the MSEL owner can add [CITE Roles](#glossary) push from Blueprint. These roles will allow team members to customize their response by tracking their responsibilities during an exercise.
 
 ![Blueprint CITE Roles OE](../assets/img/blueprintCiteRoles-v3.png)
 
-*Add a CITE Role*
+##### Add a CITE Role
 
 ![Blueprint Add CITE Roles OE](../assets/img/blueprintAddCiteRoles.png)
 
-To add a CITE Role, follow these steps:
+To add a CITE role, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Name** | String| Name of the role | Team Leader |
 | **Team** | Dropdown Text | Select the team this role applies to | Conference of State Bank Supervisors |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-*Edit a CITE Role*
+##### Edit a CITE Role
 
 To edit the CITE Role's details, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
-2. Select the desired role to be edited and click on the **Edit** icon next to the role.
-3. Here, users will be prompted the same role's edit component as when adding a new role.
-4. After doing all the necessary edits, click **Save**.
+1. Navigate to the CITE Roles tab.
+2. Select the role you want to edit and click the **Edit** icon next to it.
+3. The system opens the same edit component used when creating a new role.
+4. Make your changes, then click **Save**.
 
-*Delete a CITE Role*
+##### Delete a CITE Role
 
 To delete a CITE Role, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
-2. Select the desired role to be deleted and click on the **Trash Can** icon next to the role.
+2. Select the role you want to delete and click the **Trash Can** icon next to the role.
 
-*Filter Roles by Team*
+##### Filter Roles by Team
 
 To filter Roles by team, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
 2. On the **Team** dropdown, select the desired team to filter by.
 
-*Search For a Role*
+##### Search for a Role
 
 To search for a specific role, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
-2. Click on the **Search Bar** and type the name of the desired role.
+2. Click the **Search Bar** and type the name of the desired role.
 
 #### Gallery
 
-If enabled, Blueprint will be able to push MSEL information to the Gallery application. For this, additional tabs will be added to the Blueprint side panel, which will be needed to be configured.
+If enabled, Blueprint can push MSEL information to the Gallery application. When the MSEL owner enables Gallery integration, additional tabs appear in the Blueprint side panel. The MSEL owner must configure the additional tabs to complete the integration.
 
-To enable the full Gallery integration functionality the following tabs should be configured.
+To enable full Gallery integration, the MSEL owner should configure the following tabs.
 
 ##### Gallery Data Fields
 
-On the Data Fields tab, additional data fields should be configured to be able to push MSEL information to Gallery.
+On the Data Fields tab, configure additional data fields to push MSEL information to Gallery.
 
 ![Blueprint Data Fields Tab OE](../assets/img/blueprintDataFields-v5.png)
 
-Data fields that should be added are:
+The MSEL owner should add these fields:
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Description** | String |  Information, details, and characteristics of the event | STARTEX |
-| **Date Posted** | Datetime | Date of when the event was posted | 1/24/2024, 14:18:27 |
-| **Delivery Method** | Dropdown Text | How is the event going to be delivered to participants | Gallery |
+| **Date Posted** | Datetime | Posted date of the event | 1/24/2024, 14:18:27 |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants | Gallery |
 | **Name** | String | Name of the event | Common Operating Picture 1 |
 | **From Org** | Dropdown Text | Select the organization that sends this event | CC News |
 | **To Org** | Dropdown Text | Select the organization that receives this event | ALL |
-| **Summary** | Rich Text | Complete information and details of the event | Bank XYZ has been affected by a ransomware attack... |
-| **Card** | Dropdown Text | Select the Gallery Card this event should be categorized with | Information Technology Sector |
-| **Status** | Dropdown Text | Approval status of the event to be used on the MSEL | Approved |
+| **Summary** | Rich Text | Complete information and details of the event | A ransomware attack affected Bank XYZ... |
+| **Card** | Dropdown Text | Select the Gallery Card to categorize this event | Information Technology Sector |
+| **Status** | Dropdown Text | Approval status of the event used on the MSEL | Approved |
 | **Source Type** | Dropdown Text | Select from where the event's details come from | News |
 | **Source Name** | String | Add the author of the event | BBC News |
 | **Move** | Dropdown Text | Move number the event is part of | 1 |
 | **Group** | Integer | Groups events within a move, often times executed within the same time range | 1 |
 | **Url** | String | Provide a URL if more information is necessary for participants to access | `www.bbcnews.com/ransomware-attack-xyzbank` |
-| **Open in a New Tab** | Boolean | If a URL was provided, select this option if desired to open the URL in a new tab | True |
+| **Open in a New Tab** | Boolean | Use this option to open the URL in a new tab | True |
 
-After adding these data fields, these should be mapped to their appropriate Gallery field. This can be done by selecting an option from the **Gallery Article Parameter** dropdown when adding/editing a data field.
+After adding data fields, map each one to the appropriate Gallery field by selecting an option from the **Gallery Article Parameter** dropdown when adding or editing the field.
 
 ##### Gallery Cards
 
-On this tab, [Gallery Cards](#glossary) can be added to be pushed from Blueprint. These are the different cards presented in the Gallery Wall and where different articles related to that card can be found.
+On this tab, the MSEL owner can add [Gallery Cards](#glossary) to push from Blueprint. These are the different cards in the Gallery Wall. You can also find articles related to that card here.
 
 ![Blueprint Gallery Cards OE](../assets/img/blueprintGalleryCards-v2.png)
 
-*Add a Gallery Card*
+##### Add a Gallery Card
 
 ![Blueprint Add Gallery Cards OE](../assets/img/blueprintAddGalleryCards.png)
 
 To add a Gallery card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Name** | String | Name of the Gallery card | Energy Sector |
 | **Card Description** | String |  Information, details, and characteristics of the Gallery card | The current state of the Energy Sector |
-| **Move** | Dropdown Text | Select the move where this Gallery card should be displayed | 0 |
+| **Move** | Dropdown Text | Select the move to display this Gallery card | 0 |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-*Edit a Gallery Card*
+##### Edit a Gallery Card
 
-To edit the Gallery card's details, follow these steps:
+To edit a Gallery card:
 
-1. Navigate to the **Gallery Cards** tab.
-2. Select the desired card to be edited and click on the **Edit** icon next to the card.
-3. Here, users will be prompted the same card's edit component as when adding a new card.
-4. After doing all the necessary edits, click **Save**.
+1. Navigate to the Gallery Cards tab.
+2. Select the card you want to edit and click the **Edit** icon next to it.
+3. The system opens the same edit component used when creating a new card.
+4. Make your changes, then click **Save**.
 
-*Delete a Gallery Card*
+##### Delete a Gallery Card
 
 To delete a Gallery card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
-2. Select the desired card to be deleted and click on the **Trash Can** icon next to the card.
+2. Select the card you want to delete and click the **Trash Can** icon next to the card.
 
-*Search For a Gallery Card*
+##### Search For a Gallery Card
 
 To search for a specific card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
-2. Click on the **Search Bar** and type the name of the desired card.
+2. Click the **Search Bar** and type the name of the desired card.
 
 #### Player
 
-If enabled, Blueprint will be able to push MSEL information to the Player application. For this, additional tabs will be added to the Blueprint side panel, which will be needed to be configured.
+If enabled, Blueprint pushes MSEL information to the Player application. The system adds additional tabs to the Blueprint side panel, which the MSEL owner will need to configure.
 
-To enable the full Player integration functionality the following tabs should be configured.
+To enable the full Player integration, configure the following tabs.
 
 ##### Player Apps
 
-On this tab, [Player Apps](#glossary) configurations can be added to be pushed from Blueprint. These are the different applications accessible from the [Player View](#glossary).
+On the [Player Apps](#glossary) tab, the MSEL owner can add configurations to push from Blueprint. These are the different applications accessible from the [Player View](#glossary).
 
 ![Player Apps OE](../assets/img/blueprintPlayerApps-v3.png)
 
-*Add a Player App*
+##### Add a Player App
 
 ![Blueprint Add Player App OE](../assets/img/blueprintAddPlayerApp-v3.png)
 
 To add a Player App, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Click on the **+** icon.
+2. Click the **+** icon.
 3. Select an app template from the provided list.
 4. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+##### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Name** | String | Name of the application | Chat |
 | **Url** | String | URL of the application | `roundcube.hamilton.treasury.gov` |
 | **Icon Url** | String | URL of the application's icon | `roundcube.hamilton.treasury.gov/roundcube.png` |
-| **Embeddable** | Boolean | Select whether the app should be embedded in Player's iframe | True |
+| **Embeddable** | Boolean | Select whether to embed the app in Player's iframe | True |
 | **Load in Background** | Boolean | Select whether the app should load in the background | True |
 
-**URL Parameters**
+##### URL Parameters
 
-URL Parameters can be added in the URL to point to a specific CITE evaluation, Gallery exhibit, Player view, etc. To do this, the variables should be added in braces in the URL when adding a new application. For this, take into considerations the following variables:
+You can add URL parameters to point to a specific CITE evaluation, Gallery exhibit, Player view, or other content. To do this, include the variables in braces when adding a new application. Consider using the following variables:
 
 - **{citeEvaluationId}:** Add this variable to the URL to point to a specific CITE evaluation.
 - **{galleryExhibitId}:** Add this variable to the URL to point to a specific Gallery exhibit.
 - **{steamFitterScenarioId}:** Add this variable to the URL to point to a specific Steamfitter scenario.
 - **{playerViewId}:** Add this variable to the URL to point to a specific Player view.
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-*Edit a Player App*
+##### Edit a Player App
 
-To edit the Player app's details, follow these steps:
+To edit a Player app:
 
-1. Navigate to the **Player Apps** tab.
-2. Select the desired app to be edited and click on the **Edit** icon next to the app.
-3. Here, users will be prompted the same app's edit component as when adding a new app.
-4. After doing all the necessary edits, click **Save**.
+1. Navigate to the Player Apps tab.
+2. Select the app you want to edit and click the **Edit** icon next to it.
+3. The system opens the same edit component used when creating a new app.
+4. Make your changes, then click **Save**.
 
-*Delete a Player App*
+##### Delete a Player App
 
 To delete a Player App, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Select the desired app to be deleted and click on the **Trash Can** icon next to the app.
+2. Select the app you want to delete and click the **Trash Can** icon next to the app.
 
-*Search For a Player App*
+##### Search for a Player App
 
 To search for a specific app, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Click on the **Search Bar** and type the name of the desired app.
+2. Click the **Search Bar** and type the name of the desired app.
 
 #### Push Integrations
 
-After adding all of the MSEL information and performing all of the configurations necessary, information from the different enabled integrations can be pushed to their respective applications.
+After adding all of the MSEL information and performing all of the configurations necessary, you can push information from enabled integrations to their respective applications.
 
 ![Blueprint Push Integrations OE](../assets/img/pushIntegrations-v2.png)
 
@@ -938,7 +934,7 @@ To push MSEL information to their respective applications, follow these steps:
 
 #### Remove Integrations
 
-If desired, MSEL information can be removed after being pushed to their respective applications
+If desired, the MSEL owner can remove MSEL information after the enabled integrations have pushed it to their respective applications.
 
 ![Blueprint Remove Integrations OE](../assets/img/removeIntegrations-v2.png)
 
@@ -955,57 +951,57 @@ The following image shows the Units Administration Page. Here, administrators ca
 
 ![Blueprint Teams Admin OE](../assets/img/blueprintUnits-v2.png)
 
-**Add a Unit**
+#### Add a Unit
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a unit.
+If the exercise administrator has granted the appropriate permissions, follow these steps to add a unit.
 
 ![Blueprint Add Team OE](../assets/img/blueprintAddUnit.png)
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
 2. Under the Units Administration View, click **+**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Name** | String | Name for the unit | Carnegie Mellon University |
 | **Short Name** | String | Short name for the unit | CMU |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-**Edit a Unit**
+#### Edit a Unit
 
-To edit the unit's details, follow these steps:
+To edit a unit:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Units Administration View, select the unit to be edited and click on the **Edit Icon** next to the unit.
-3. Here, users will be prompted the same unit's edit component as when adding a new unit.
-4. After doing all the necessary edits, click **Save**.
+1. Click the **Settings cog** in the top-right corner of the screen.
+2. Under Units Administration View, select the unit you want to edit and click the **Edit** icon next to it.
+3. The system opens the same edit component used when creating a new unit.
+4. Make your changes, then click **Save**.
 
-**Delete a Unit**
+#### Delete a Unit
 
 To delete a unit, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Units Administration View, select the unit to be deleted and click on the **Trash Can Icon** next to the unit.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Units Administration View, select the unit you want to delete and click the **Trash Can** icon next to the unit.
 
-**Search For a Unit**
+#### Search for a Unit
 
 To search for a specific unit, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Units Administration View, click on the **Search Bar** and type the name of the desired unit.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Units Administration View, click the **Search Bar** and type the name of the desired unit.
 
-**Add/Remove Users From a Unit**
+#### Add/Remove Users from a Unit
 
-To configure a unit for an exercise, administrators will need to add users to their respective units. To do this, follow these steps.
+To configure a unit for an exercise, administrators add users to their respective units. To do this, follow these steps.
 
 ![Configure Blueprint Teams OE](../assets/img/blueprintConfigureUnits-v2.png)
 
-1. Select the unit to be configured and click on it to expand its configuration details.
-2. Under the **All Users** tab, users that have not been assigned to the unit will be shown. To add them to the unit, click on **Add User**.
-3. Under the **Unit Users** tab, users that have already been assigned to the unit will be shown. To remove a user from the unit, click on **Remove**.
+1. Select the unit you want to configure and click to expand its configuration details.
+2. The **All Users** tab shows *unassigned* users. To add them to the unit, click **Add User**.
+3. The **Unit Users** tab shows *assigned* users. To remove a user from the unit, click **Remove**.
 
 ### Users
 
@@ -1018,37 +1014,37 @@ The available permissions are:
 
 ![Blueprint Users Admin OE](../assets/img/blueprintUsersAdmin-v4.png)
 
-**Add a User**
+#### Add a User
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a user.
+If the exercise administrator has granted the appropriate permissions, follow these steps to add a user.
 
 ![Blueprint Add User OE](../assets/img/blueprintAddUser-v3.png)
 
 1. Under the Users Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **User ID** | GUID | Unique ID for the user | 9dd4e3d8-5098-4b0a-9216-697cda5553f8 |
 | **User Name** | String | User name identifier  | user-2 |
 
-Click **Save** represented by a user with a + sign and select the desired permissions to be assigned by clicking on the checkboxes next to the user.
+Click the **Save** icon (a user with a + sign), then select the permissions you want to assign by checking the boxes next to the user's name.
 
-**Delete a User**
+#### Delete a User
 
 To delete a user, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Users Administration View, select the user to be deleted and click on the **Trash Can Icon** next to the user.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Users Administration View, select the user you want to delete and click the **Trash Can** icon next to the user.
 
-**Search For a User**
+#### Search for a User
 
 To search for a specific user, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Users Administration View, click on the **Search Bar** and type the name of the desired user.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Users Administration View, click the **Search Bar** and type the name of the desired user.
 
 ### Organization Templates
 
@@ -1056,16 +1052,16 @@ The following image shows the Organization Templates Administration Page. Here, 
 
 ![Blueprint Organizations Admin OE](../assets/img/blueprintOrganizationsAdmin-v2.png)
 
-**Add an Organization Template**
+#### Add an Organization Template
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an organization template.
+If the exercise administrator has granted the appropriate permissions, follow these steps to add an organization template.
 
 ![Blueprint Add Organization Template OE](../assets/img/blueprintAddOrgTemplate.png)
 
 1. Under the Organizations Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
@@ -1075,30 +1071,30 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 | **Email** | String | Organization's email contact | `john@cisa.gov` |
 | **Description** | Rich Text | Information, details, and characteristics of the organization | The Cybersecurity and Infrastructure Security Agency (CISA) is an agency of the DHS that is responsible for strengthening cybersecurity and infrastructure protection. |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-**Edit an Organization Template**
+#### Edit an Organization Template
 
-To edit the organization template's details, follow these steps:
+To edit an organization template:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Organizations Administration View, select the organization to be edited and click on the **Edit Icon** next to the organization template.
-3. Here, users will be prompted the same organization's edit component as when adding a new organization template.
-4. After doing all the necessary edits, click **Save**.
+1. Click the **Settings cog** in the top-right corner of the screen.
+2. Under Organizations Administration View, select the organization you want to edit and click the **Edit** icon next to the organization template.
+3. The system opens the same edit form used when creating a new organization template.
+4. Make your changes, then click **Save**.
 
-**Delete an Organization Template**
+#### Delete an Organization Template
 
 To delete an organization template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Organizations Administration View, select the organization to be deleted and click on the **Trash Can Icon** next to the organization template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Organizations Administration View, select the organization you want to delete and click the **Trash Can** icon next to the organization template.
 
-**Search For an Organization Template**
+#### Search For an Organization Template
 
 To search for a specific organization template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Organizations Administration View, click on the **Search Bar** and type the name of the desired organization template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Organizations Administration View, click the **Search Bar** and type the name of the desired organization template.
 
 ### Gallery Card Templates
 
@@ -1106,92 +1102,92 @@ The following image shows the Gallery Card Templates Administration Page. Here, 
 
 ![Blueprint Cards Admin OE](../assets/img/blueprintCardsAdmin-v2.png)
 
-**Add a Gallery Card Template**
+#### Add a Gallery Card Template
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Gallery card template.
+If the exercise administrator has granted the appropriate permissions, follow these steps to add a Gallery card template.
 
 ![Blueprint Add Card Template OE](../assets/img/blueprintAddCardTemplate.png)
 
 1. Under the Gallery Cards Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Name** | String | Gallery card name | Information Technology Sector |
 | **Card Description** | String |  Information, details, and characteristics of the Gallery card | Status of the Information Technology Sector |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-**Edit a Gallery Card Template**
+#### Edit a Gallery Card Template
 
-To edit the Gallery card template's details, follow these steps:
+To edit a Gallery card template:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Gallery Cards Administration View, select the card template to be edited and click on the **Edit Icon** next to the Gallery card template.
-3. Here, users will be prompted the same Gallery card's edit component as when adding a new card template.
-4. After doing all the necessary edits, click **Save**.
+1. Click the **Settings cog** in the top-right corner of the screen.
+2. Under Gallery Cards Administration View, select the card template you want to edit and click the **Edit** icon next to it.
+3. The system opens the same edit component used when creating a new card template.
+4. Make your changes, then click **Save**.
 
-**Delete a Gallery Card Template**
+#### Delete a Gallery Card Template
 
 To delete an Gallery card template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Gallery Cards Administration View, select the card template to be deleted and click on the **Trash Can Icon** next to the card template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Gallery Cards Administration View, select the card template you want to delete and click the **Trash Can** icon next to the card template.
 
-**Search For a Gallery Card Template**
+#### Search for a Gallery Card Template
 
 To search for a specific Gallery card template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the Gallery Cards Administration View, click on the **Search Bar** and type the name of the desired card template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the Gallery Cards Administration View, click the **Search Bar** and type the name of the desired card template.
 
 ### CITE Actions Templates
 
-The following image shows the CITE Action Templates Administration Page. Here, administrators can add and delete CITE action templates.
+The following image shows the CITE Action Templates administration page. Here, administrators can add and delete CITE action templates.
 
 ![Blueprint Actions Admin OE](../assets/img/blueprintActionsAdmin-v2.png)
 
-**Add a CITE Action Template**
+#### Add a CITE Action Template
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a CITE action template.
+If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE action template.
 
 ![Blueprint CITE Action Template OE](../assets/img/AddCITEActionTemplate.png)
 
 1. Under the CITE Actions Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Description of the Action** | String |  Information, details, and characteristics of the CITE action | Score the incident |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-**Edit a CITE Action Template**
+#### Edit a CITE Action Template
 
-To edit the CITE action template's details, follow these steps:
+To edit a CITE action template:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Actions Administration View, select the action template to be edited and click on the **Edit Icon** next to the action template.
-3. Here, users will be prompted the same CITE action's edit component as when adding a new action template.
-4. After doing all the necessary edits, click **Save**.
+1. Click the **Settings cog** in the top-right corner of the screen.
+2. Under CITE Actions Administration View, select the action template you want to edit and click the **Edit** icon next to it.
+3. The system opens the same edit component used when creating a new action template.
+4. Make your changes, then click **Save**.
 
-**Delete a CITE Action Template**
+#### Delete a CITE Action Template
 
 To delete an CITE action template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Actions Administration View, select the action template to be deleted and click on the **Trash Can Icon** next to the action template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Actions Administration View, select the action template you want to delete and click the **Trash Can** icon next to the action template.
 
-**Search For a CITE Action Template**
+#### Search for a CITE Action Template
 
 To search for a specific CITE action template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Actions Administration View, click on the **Search Bar** and type the name of the desired action template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Actions Administration View, click the **Search Bar** and type the name of the desired action template.
 
 ### CITE Roles Templates
 
@@ -1199,49 +1195,49 @@ The following image shows the CITE Roles Templates Administration Page. Here, ad
 
 ![Blueprint Roles Admin OE](../assets/img/blueprintRolesAdmin-v2.png)
 
-**Add a CITE Role Template**
+#### Add a CITE Role Template
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a CITE role template.
+If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE role template.
 
 ![Blueprint CITE Role Template OE](../assets/img/AddCITERoleTemplate.png)
 
 1. Under the CITE Roles Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-**Data Format Table**
+#### Data Format Table
 
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Name** | String |  Name of the role | Reviewer |
 
-After all desired configurations have been added, click **Save**.
+After you've added all desired configurations, click **Save**.
 
-**Edit a CITE Role Template**
+#### Edit a CITE Role Template
 
-To edit the CITE role template's details, follow these steps:
+To edit a CITE role template:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Roles Administration View, select the role template to be edited and click on the **Edit Icon** next to the role template.
-3. Here, users will be prompted the same CITE role's edit component as when adding a new role template.
-4. After doing all the necessary edits, click **Save**.
+1. Click the **Settings cog** in the top-right corner of the screen.
+2. Under CITE Roles Administration View, select the role template you want to edit and click the **Edit** icon next to it.
+3. The system opens the same edit component used when creating a new role template.
+4. Make your changes, then click **Save**.
 
-**Delete a CITE Role Template**
+#### Delete a CITE Role Template
 
 To delete a CITE role template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Roles Administration View, select the role template to be deleted and click on the **Trash Can Icon** next to the role template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Roles Administration View, select the role template you want to delete and click the **Trash Can** icon next to the role template.
 
-**Search For a CITE Role Template**
+#### Search For a CITE Role Template
 
 To search for a specific CITE role template, follow these steps:
 
-1. Click on the **Settings Cog** found in the top-right corner of the screen.
-2. Under the CITE Roles Administration View, click on the **Search Bar** and type the name of the desired role template.
+1. Click the **Settings Cog** found in the top-right corner of the screen.
+2. Under the CITE Roles Administration View, click the **Search Bar** and type the name of the desired role template.
 
 ## Glossary
 
-The following glossary provides a brief definition of key terms and concepts as they are used in the context of the Blueprint application.
+This glossary defines key terms and concepts used in the Blueprint application.
 
 1. **Approver Role:** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
 2. **Blueprint**: Web application created to make the development of a MSEL and events easier.
@@ -1250,27 +1246,27 @@ The following glossary provides a brief definition of key terms and concepts as 
 5. **CITE Role:** Provide a set of responsibilities assigned to a user during an exercise.
 6. **Content Developer Permission:** Can view, edit, create, and approve events on the MSEL.
 7. **Data Fields:** Structured components containing essential information about the event's characteristics, context, and implications.
-8. **Editor Role:** Edit the events that they are assigned to, but not other events. They cannot delete them or create new ones.
+8. **Editor Role:** Can edit the events assigned to them by the MSEL owner, but not other events. They cannot delete events or create new events.
 9. **Events**: Specific scenario events or messages within the scenario that prompt users to implement designated actions.
 10. **Exercises**: Structured and simulated activity designed to assess, train, or evaluate the capabilities, preparedness, and responses of individuals, teams, or organizations in dealing with various situations, especially emergencies or crisis scenarios.
 11. **Evaluator Permission**: Manages the exercise, can advance moves, execute events, and check events as completed.
 12. **Gallery:** Web application where participants receive incident information.
-13. **Gallery Card:** Groups articles into their respective categories, the categories can be defined in the administration panel.
-14. **`Incrementer` Role:** When the CITE integration is enabled, this role will a allow a user to advance the current move.
+13. **Gallery Card:** The Gallery wall displays Gallery cards. Each Gallery card represents an article category. Cards show a background color based on the most recent article's status and the number of unread articles. Content developers define cards within each Gallery collection.
+14. **`Incrementer` Role:** When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.
 15. **`Inviter` Role:** This role will allow a user to invite others to the MSEL event.
-16. **Modifier Role:** When the CITE integration is enabled, this role will allow a user to modify the team's score.
+16. **Modifier Role:** When the MSEL owner has enabled CITE integration, this role allows a user to modify the team's score.
 17. **Move Editor:** Can edit moves on the MSEL, as well as increment them during an exercise.
-18. **Moves:** A defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
+18. **Moves:** A defined period of time during an exercise, where exercise organizers distribute a series of events for users to discuss and assess current incident severity.
 19. **MSEL:** (Master Scenario Events List) provides a timeline for all expected events, affiliated users and organizations during an exercise.
-20. **Observer Role:** When Gallery or CITE integrations are enabled, this role will allow a user to observe other team's progress on CITE and Gallery applications.
+20. **Observer Role:**  When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
 21. **Organizations:** Entities within an exercise with defined roles, responsibilities, and functions.
 22. **Owner Role:** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).
 23. **Player:** Centralized web interface where participants, teams, and administrators go to engage in a cyber event.
 24. **Player Apps:** List of applications accessible from the same Player view.
-25. **Player View:** These are the settings associated with building a view. A view can be edited, cloned, and deleted.
+25. **Player View:** These are the settings associated with building a view. You can edit, clone, and delete a view.
 26. **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
-27. **Submitter Role:** When the CITE integration is enabled, this role will allow a user to submit the team's score.
+27. **Submitter Role:** When the MSEL owner has enabled CITE integration, this role allows a user to submit the team's score.
 28. **System Admin Permission:** Can add users to a team, as well as assign the required permissions.
 29. **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
-30. **User Defined Data Fields:** These are added by the user on an as-needed basis.
+30. **User Defined Data Fields:** The user adds on an as-needed basis.
 31. **Viewer Role:** Can view the MSEL, but can't do any edits to it.

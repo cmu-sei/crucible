@@ -10,7 +10,7 @@ Initial versions of Caster focused on a web front-end for raw Terraform configur
 
 Caster should give experts the control they need, while also making it easy for beginners to use expert setups or create simple ones on their own.
 
-**Terraform Integration**
+### Terraform Integration
 
 For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html).
 
@@ -166,7 +166,7 @@ In order to avoid this, a System Administrator should follow these steps in the 
 
 The top-level construct within a project is called a *directory*. A project can contain many directories. Directories contain files that make up a particular Terraform configuration, workspaces that represent a specific instance of that configuration, and sub-directories. Directories are meant to be used primarily for organization and shared resources.
 
-**Directory Hierarchies**
+#### Directory Hierarchies
 
 Directories can contain sub-directories to create a *hierarchy* of directories and the configuration files contained within them. When a run is created in a workspace, the files in the workspace, the workspace's directory, ***and all parent directories*** are merged together and passed to Terraform as a single configuration. This eliminates redundancy when developing many environments that are largely the same, or sharing a set of common variables or data across many configurations. For example, a large deployment might have a top-level directory that defines global variables like `vlan ids` and `team ids` in use, and then sub-directories that define resources that use those variables.
 
@@ -194,32 +194,33 @@ In the SEI's instance, we want to be able to use any plugins in the `sei` or `ma
 
 These plugins are then all cached in the `plugin_cache_dir` section, to save from downloading the providers during every Terraform `plan` and `apply`.
 
-**Sample Caster Terraform Configuration**
 
-```text
-plugin_cache_dir = "/terraform/plugin-cache"
-provider_installation {
-	filesystem_mirror {
-		path = "/terraform/plugins/linux_amd64"
-        include = [
-        	"registry.terraform.local/sei/*",
-        	"registry.terraform.local/mastercard/*"
-        ]
-     }
-     direct {
-     	include = [
-        "hashicorp/vsphere",
-        "hashicorp/aws",
-        "hashicorp/azurerm",
-        "hashicorp/azuread",
-        "hashicorp/null",
-        "hashicorp/random",
-        "hashicorp/template",
-        "hashicorp/cloudinit"
-       ]
-      }
-     }
-```
+!!! example
+
+    ```text
+    plugin_cache_dir = "/terraform/plugin-cache"
+    provider_installation {
+	    filesystem_mirror {
+		    path = "/terraform/plugins/linux_amd64"
+            include = [
+        	    "registry.terraform.local/sei/*",
+        	    "registry.terraform.local/mastercard/*"
+            ]
+        }
+         direct {
+     	    include = [
+            "hashicorp/vsphere",
+            "hashicorp/aws",
+            "hashicorp/azurerm",
+            "hashicorp/azuread",
+            "hashicorp/null",
+            "hashicorp/random",
+            "hashicorp/template",
+            "hashicorp/cloudinit"
+            ]
+        }
+        }
+    ```
 
 ### Hosts
 
@@ -231,7 +232,7 @@ Along with all of the files normally added to the run, Caster will create a `gen
 
 When the workspace is deleted after an on-demand exercise (ODX) is finished, the host's resources will be released. If a run attempts to deploy more virtual machines than there is capacity for in the available hosts, the run will fail.
 
-**On-Demand Exercise functionality**
+#### On-Demand Exercise Functionality
 
 Caster is called by Alloy in order to deploy resources for lab or ODX-style functionality. Caster itself does not differ in its main functionality of deploying workspaces and lets Alloy handle most of the ODX functionality.
 
@@ -250,7 +251,7 @@ A *run* is a specific instance of the Terraform *plan* and *apply* process for a
 
 *Plan* and *apply* are specific Terraform terminologies. Every run is made up of a plan and an apply step.
 
-**Plan**
+#### Plan
 
 Clicking Plan will create a new Run and execute the "terraform plan" command on the given configuration. This raw Terraform output is shown to the user, and describes:
 
@@ -266,7 +267,7 @@ This output always ends with a summary of the form `Plan: x to add, y to change,
 - Choosing **apply** creates an apply for the run and executes `terraform apply` on the previously generated plan. This causes Terraform to actually make the changes described.
 - Choosing **reject** invalidates the plan. No changes are made to the infrastructure.
 
-**Apply**
+#### Apply
 
 *Apply* takes a run, executes `Terraform apply` on the previously generated plan and deploys the resources for a workspace. The `Apply` command:
 
@@ -275,7 +276,7 @@ This output always ends with a summary of the form `Plan: x to add, y to change,
 
 Within the workspace view users can see all the runs that have been planned and applied.
 
-**Destroy**
+#### Destroy
 
 Selecting destroy instead of plan is largely the same, except the plan generated is one that will destroy all of the previously deployed resources in the workspace, rather than making the infrastructure match the current configuration. That is, *Destroy* creates a plan that will destroy all of the previously deployed resources in a workspace.
 
@@ -289,7 +290,7 @@ Within the workspace view users can click `Destroy` to destroy live Terraform ap
 
 This infrastructure as code approach is different than many developers may be used to. The general approach here is to define a configuration and apply it in its entirety, rather than selecting individual pieces to be deployed. There are some ways to target individual pieces of a configuration, but they are recommended by Terraform to be the exception rather than the rule and are not yet fully implemented in Caster.
 
-**Taint**
+#### Taint
 
 *Taint* is a flag on a resource that tells Terraform to destroy and recreate a new instance on the next plan-and-apply cycle.
 

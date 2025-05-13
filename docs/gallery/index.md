@@ -24,13 +24,13 @@ The landing page of Gallery provides a central approach to recompiling all colle
 
 First, users select a collection from the dropdown; then, they choose an exhibit from the displayed list.
 
-*Search for an Exhibit*
+#### Search for an Exhibit
 
 To search for an exhibit, follow these steps:
 
 1. Navigate to Gallery's landing page.
 2. Select a collection from the dropdown.
-3. Click on the **Search Bar** and add the name of the creator of the exhibit.
+3. Click the **Search Bar** and add the name of the creator of the exhibit.
 
 ### Gallery Wall
 
@@ -186,7 +186,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 ![Add Articles Exercise OE](../assets/img/addArticleExercise.png)
 
-1. On the Gallery Archive section, click on **+** to add an article.
+1. On the Gallery Archive section, click **+** to add an article.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -211,7 +211,7 @@ After creating your article, it will be displayed in the Gallery Archive in the 
 
 To edit an article, follow these steps:
 
-1. On the Gallery Archive section, select the article to be edited and click on the **Edit Icon** on the article's card.
+1. On the Gallery Archive section, select the article to be edited and click the **Edit Icon** on the article's card.
 2. Here, users will be prompted the same article's edit component as when adding a new article.
 3. After doing all the necessary edits, click **Save**.
 
@@ -219,7 +219,7 @@ To edit an article, follow these steps:
 
 To delete an article, follow these steps:
 
-1. On the Gallery Archive section, select the article to be deleted and click on the **Trash Can Icon** on the article's card.
+1. On the Gallery Archive section, select the article to be deleted and click the **Trash Can Icon** on the article's card.
 
 ## Administrator Guide
 
@@ -259,9 +259,9 @@ To save these settings, click **Save** and select the desired permissions to be 
 
 To edit a user, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Users** tab.
-3. Select the user to be edited and click on the **Edit Icon** next to the user.
+3. Select the user to be edited and click the **Edit Icon** next to the user.
 4. Here, users will be prompted the same user's edit component as when adding a new user.
 5. After doing all the necessary edits, click **Save**.
 
@@ -269,9 +269,9 @@ To edit a user, follow these steps:
 
 To delete a user, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Users** tab.
-3. Select the user to be deleted and click on the **Trash Can Icon** next to the user.
+3. Select the user to be deleted and click the **Trash Can Icon** next to the user.
 
 ### Collections
 
@@ -301,9 +301,9 @@ To save these settings, click **Save**.
 
 To edit a collection, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Select the collection to be edited and click on the **Edit Icon** next to the collection.
+3. Select the collection to be edited and click the **Edit Icon** next to the collection.
 4. Here, users will be prompted the same collection's edit component as when adding a new collection.
 5. After doing all the necessary edits, click **Save**.
 
@@ -311,35 +311,35 @@ To edit a collection, follow these steps:
 
 To delete a collection, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Select the collection to be deleted and click on the **Trash Can Icon** next to the collection.
+3. Select the collection to be deleted and click the **Trash Can Icon** next to the collection.
 
 #### Upload a Collection
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to upload a collection.
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Click on the **Up Arrow** next to the + Icon.
+3. Click the **Up Arrow** next to the + Icon.
 4. Select the collection JSON file to be uploaded.
 
 #### Download a Collection
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to download a collection.
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Click on the **Down Arrow** next to the collection to be downloaded.
+3. Click the **Down Arrow** next to the collection to be downloaded.
 4. Look for the JSON file in your Downloads folder.
 
 #### Copy a Collection
 
 Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to copy a collection.
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Click on the **Copy Icon** next to the collection to be copied.
+3. Click the **Copy Icon** next to the collection to be copied.
 4. Look for the collection name with the user's name.
 
 ### Cards
@@ -371,9 +371,9 @@ To save these settings, click **Save**.
 
 To edit a card, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Cards** tab.
-3. Select the card to be edited and click on the **Edit Icon** next to the card.
+3. Select the card to be edited and click the **Edit Icon** next to the card.
 4. Here, users will be prompted the same card's edit component as when adding a new card.
 5. After doing all the necessary edits, click **Save**.
 
@@ -381,9 +381,9 @@ To edit a card, follow these steps:
 
 To delete a card, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Cards** tab.
-3. Select the card to be deleted and click on the **Trash Can Icon** next to the card.
+3. Select the card to be deleted and click the **Trash Can Icon** next to the card.
 
 ### Articles
 
@@ -423,9 +423,9 @@ To save these settings, click **Save**.
 
 To edit an article, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Articles** tab.
-3. Select the article to be edited and click on the **Edit Icon** next to the article.
+3. Select the article to be edited and click the **Edit Icon** next to the article.
 4. Here, users will be prompted the same article's edit component as when adding a new article.
 5. After doing all the necessary edits, click **Save**.
 
@@ -433,9 +433,9 @@ To edit an article, follow these steps:
 
 To delete an article, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Articles** tab.
-3. Select the article to be deleted and click on the **Trash Can Icon** next to the article.
+3. Select the article to be deleted and click the **Trash Can Icon** next to the article.
 
 ### Exhibits
 
@@ -466,9 +466,9 @@ To save these settings, click **Save**.
 
 To edit an exhibit, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
-3. Select the exhibit to be edited and click on the **Edit Icon** next to the exhibit.
+3. Select the exhibit to be edited and click the **Edit Icon** next to the exhibit.
 4. Here, users will be prompted the same exhibit's edit component as when adding a new exhibit.
 5. After doing all the necessary edits, click **Save**.
 
@@ -476,17 +476,17 @@ To edit an exhibit, follow these steps:
 
 To delete an exhibit, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
-3. Select the exhibit to be deleted and click on the **Trash Can Icon** next to the exhibit.
+3. Select the exhibit to be deleted and click the **Trash Can Icon** next to the exhibit.
 
 #### Upload an Exhibit
 
 To upload an exhibit, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
-3. Click on the **Up Arrow** next to the + Icon.
+3. Click the **Up Arrow** next to the + Icon.
 4. Select the exhibit JSON file to be uploaded.
 
 !!! note
@@ -497,18 +497,18 @@ To upload an exhibit, follow these steps:
 
 To download an exhibit, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
-3. Click on the **Down Arrow** next to the exhibit to be downloaded.
+3. Click the **Down Arrow** next to the exhibit to be downloaded.
 4. Look for the JSON file in your Downloads folder.
 
 #### Copy an Exhibit
 
 To copy an exhibit, follow these steps:
 
-1. Click on the **Settings Cog**.
+1. Click the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
-3. Click on the **Copy Icon** next to the exhibit to be copied.
+3. Click the **Copy Icon** next to the exhibit to be copied.
 4. Look for the exhibit name with the user's name.
 
 #### Configure an Exhibit
@@ -523,7 +523,7 @@ To add a team to the Exhibit, follow these steps.
 
 ![Add Teams Exhibit OE](../assets/img/addTeamsExhibit.png)
 
-1. Click on the **+** icon.
+1. Click the **+** icon.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -540,9 +540,9 @@ To configure a team, follow these steps.
 
 ![Exhibit Teams OE](../assets/img/exhibitTeams-v2.png)
 
-1. Select the team to be configured and click on it to expand its configuration details.
-2. Under the **All Users** tab, users that have not been assigned to the team will be shown. To add them to the team, click on **Add User**.
-3. Under the **Team Users** tab, users that have already been assigned to the team will be shown. To remove a user from the team, click on **Remove**.
+1. Select the team to be configured and click it to expand its configuration details.
+2. Under the **All Users** tab, users that have not been assigned to the team will be shown. To add them to the team, click **Add User**.
+3. Under the **Team Users** tab, users that have already been assigned to the team will be shown. To remove a user from the team, click **Remove**.
 4. If desired, check the **Observer** checkbox to assign that role to the user during the exercise.
 
 #### Add a Team Card to an Exhibit
@@ -551,7 +551,7 @@ To add a Team Card to the Exhibit, follow these steps.
 
 ![Card Teams OE](../assets/img/cardTeams-v2.png)
 
-1. Click on the **+** on the Card Teams section.
+1. Click the **+** on the Card Teams section.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
@@ -574,8 +574,8 @@ To add an article to a team, follow these steps.
 ![Article Teams OE](../assets/img/articleTeams.png)
 
 1. Select the **Card** to be configured.
-2. Under the **Exhibit Teams** tab, teams that haven't been assigned to an article will be shown. To add them to the Article Teams, click on **Add**.
-3. Under the **Article Teams** tab, teams that have already been assigned will be shown. To remove a team, click on **Remove**.
+2. Under the **Exhibit Teams** tab, teams that haven't been assigned to an article will be shown. To add them to the Article Teams, click **Add**.
+3. Under the **Article Teams** tab, teams that have already been assigned will be shown. To remove a team, click **Remove**.
 
 #### The Observer Role
 
@@ -584,12 +584,12 @@ To assign the [Observer Role](#glossary) to a user:
 ![Exhibit Observers OE](../assets/img/exhibitObservers.png)
 
 1. Under **Evaluation Users**, search for the desired user.
-2. Once the user has been found, click on **Add**.
+2. Once the user has been found, click **Add**.
 
 To remove the Observer Role from a user:
 
 1. Under **Observers**, search for the desired user.
-2. Once the user has been found, click on **Remove**.
+2. Once the user has been found, click **Remove**.
 
 ## Glossary
 
