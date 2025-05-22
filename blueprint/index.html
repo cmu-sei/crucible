@@ -1,0 +1,5481 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="CRUCIBLE is an open-source application framework for creating and managing virtual environments and events.">
+      
+      
+        <meta name="author" content="Crucible Team">
+      
+      
+      
+        <link rel="prev" href="../gameboard/admin-completion-certificates/">
+      
+      
+        <link rel="next" href="../cite/">
+      
+      
+      <link rel="icon" href="../assets/img/crucible-icon-c-alpha.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Blueprint - Crucible Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+
+  <!-- Determine title -->
+  
+  
+    
+  
+
+  <!-- The image needs to have an absolute URL -->
+  
+
+  <!-- Open graph meta tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Crucible Documentation - Blueprint" />
+  <meta property="og:description" content="CRUCIBLE is an open-source application framework for creating and managing virtual environments and events." />
+  <meta property="og:url" content="None" />
+  <meta property="og:image" content="Noneassets/images/illustrations/banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="568" />
+
+  <!-- google-site-verification meta-tag -->
+  <meta name="google-site-verification" content="-Rj8YMCn9uu5IwOFdC-WfAzXp4ZOMJtYKxU40ZgcJIU" />
+
+<!-- Extra stylesheets -->
+<!--  <link
+    rel="stylesheet"
+    href="../assets/stylesheets/overrides.css"
+  />-->
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#blueprint-building-a-msel" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Crucible Documentation" class="md-header__button md-logo" aria-label="Crucible Documentation" data-md-component="logo">
+      
+  <img src="../assets/img/crucible-icon-c-alpha.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Crucible Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Blueprint
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cmu-sei/crucible" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cmu-sei/Crucible
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../player/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Player
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../caster/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Caster
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../steamfitter/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Steamfitter
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../alloy/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Alloy
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../topomojo/about/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  TopoMojo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../gameboard/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Gameboard
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Blueprint
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cite/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CITE
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../gallery/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Gallery
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../integrations/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Integrations
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Overview Install
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Crucible Documentation" class="md-nav__button md-logo" aria-label="Crucible Documentation" data-md-component="logo">
+      
+  <img src="../assets/img/crucible-icon-c-alpha.svg" alt="logo">
+
+    </a>
+    Crucible Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cmu-sei/crucible" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cmu-sei/Crucible
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../player/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Player
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../caster/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Caster
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../steamfitter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Steamfitter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alloy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alloy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TopoMojo
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            TopoMojo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting started with TopoMojo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/finding-a-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Finding an existing space
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Building a new space
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            Building a new space
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/building-a-workspace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings and Templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/lab-document/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Document
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/challenge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Challenge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/play/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Play
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Admin features
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            Admin features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/admin-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Admin Dashboard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/admin-gamespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gamespaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/admin-workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workspaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/admin-templates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/admin-machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Machines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/admin-users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Users
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/admin-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Log
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topomojo/copy-paste/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Copy and paste
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gameboard
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Gameboard
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../gameboard/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Playing games
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Playing games
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Profile screen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/home-and-lobby/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home screen and Lobby
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/player-feedback-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Giving feedback
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/practice-area/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practicing challenges
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting in-game support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/reports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using Reports
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Administering games
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Administering games
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/game-center/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Game Center
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-practice-area/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practice Area
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Users
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-players/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Players
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-sponsors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sponsors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-challenges/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Challenges
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notifications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-feedback-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuring Player Feedback Templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-completion-certificates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuring Certificate Templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Blueprint
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blueprint
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blueprint-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blueprint Permissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blueprint-landing-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blueprint Landing Page
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Blueprint Landing Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#join-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Join Event
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start Event
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage an Event
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player-manage-event-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Player Manage Event Page
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Player Manage Event Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launched-event-user-invitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launched Event User Invitations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ending-a-launched-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ending a Launched Event
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#msel-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      MSEL Catalog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MSEL Catalog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-blank-msel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Blank MSEL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Blank MSEL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotspot-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotspot 1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-an-existing-msel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upload an Existing MSEL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Upload an Existing MSEL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotspot-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotspot 2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-display" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter Display
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filter Display">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotspot-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotspot 3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statuses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statuses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Statuses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotspot-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotspot 4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hotspot-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotspot 5
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-all-msels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load All MSELs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Load All MSELs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotspot-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotspot 6
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings-cog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings Cog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Settings Cog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotspot-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotspot 7
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-msel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage MSEL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manage MSEL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotspot-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotspot 8
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#download" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upload
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#msel-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      MSEL Cards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MSEL Cards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotspot-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotspot 9
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#msel-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      MSEL Definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MSEL Definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Information
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contributors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-contributor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Contributor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-a-contributor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remove a Contributor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teams" class="md-nav__link">
+    <span class="md-ellipsis">
+      Teams
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Teams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Team
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-a-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remove a Team
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Fields
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-data-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Data Field
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Format Table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-data-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a Data Field
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-data-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a Data Field
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-data-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search For a Data Field
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organizations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Organizations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-an-organization-card-from-scratch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add an Organization Card From Scratch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-an-organization-card-from-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add an Organization Card From Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-an-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit an Organization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-an-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete an Organization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-an-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for an Organization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moves" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moves
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Moves">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Move
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a Move
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a Move
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for a Move
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scenario Events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scenario Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add an Event
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-color-to-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Color to an Event
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit an Event
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete an Event
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for an Event
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise View
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invitations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Invitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-an-invitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add an Invitation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-an-invitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit an Invitation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-an-invitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete an Invitation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-an-invitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for an Invitation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cite" class="md-nav__link">
+    <span class="md-ellipsis">
+      CITE
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CITE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teams_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Teams
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cite-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      CITE Actions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-cite-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a CITE Action
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-cite-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a CITE Action
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-cite-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a CITE Action
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-actions-by-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter Actions by Team
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-an-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for an Action
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cite-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      CITE Roles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-cite-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a CITE Role
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-cite-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a CITE Role
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-cite-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a CITE Role
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-roles-by-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter Roles by Team
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for a Role
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gallery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gallery
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gallery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gallery-data-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gallery Data Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gallery-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gallery Cards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-gallery-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Gallery Card
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-gallery-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a Gallery Card
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-gallery-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a Gallery Card
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-gallery-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search For a Gallery Card
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player" class="md-nav__link">
+    <span class="md-ellipsis">
+      Player
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Player">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#player-apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Player Apps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-player-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Player App
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#url-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      URL Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-player-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a Player App
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-player-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a Player App
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-player-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for a Player App
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Push Integrations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remove Integrations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#administrator-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Administrator Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Administrator Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#units" class="md-nav__link">
+    <span class="md-ellipsis">
+      Units
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Units">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Unit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a Unit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a Unit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for a Unit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addremove-users-from-a-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add/Remove Users from a Unit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Users
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a User
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a User
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for a User
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organization-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organization Templates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Organization Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-an-organization-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add an Organization Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-an-organization-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit an Organization Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-an-organization-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete an Organization Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-an-organization-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search For an Organization Template
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gallery-card-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gallery Card Templates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gallery Card Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-gallery-card-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Gallery Card Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-gallery-card-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a Gallery Card Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-gallery-card-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a Gallery Card Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-gallery-card-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for a Gallery Card Template
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cite-actions-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      CITE Actions Templates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CITE Actions Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-cite-action-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a CITE Action Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-cite-action-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a CITE Action Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-cite-action-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a CITE Action Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-cite-action-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search for a CITE Action Template
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cite-roles-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      CITE Roles Templates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CITE Roles Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-cite-role-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a CITE Role Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-format-table_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Format Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-a-cite-role-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a CITE Role Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-cite-role-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a CITE Role Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-for-a-cite-role-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search For a CITE Role Template
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#glossary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Glossary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CITE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gallery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gallery
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Integrations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="blueprint-building-a-msel"><img alt="Blueprint Logo" src="../assets/img/blueprint-logo.png" /> Blueprint: Building a MSEL</h1>
+<h2 id="overview">Overview</h2>
+<p><a href="#glossary">Blueprint</a> is a web app that helps users create a <a href="#glossary">Master Scenario Event List (MSEL)</a> and <a href="#glossary">events</a> more easily. It lets users choose and define simulated entities, attacks, time frames, and regulators affected by the scenario. Users can view, edit, create, and approve events in the MSEL using Blueprint.</p>
+<p>Blueprint makes it easier to build and view the MSEL compared to using an Excel spreadsheet. It also helps teams collaborate, even if they are from different teams. Blueprint can connect with Player, Gallery, CITE, and Steamfitter to help automate exercise setup.</p>
+<p>For installation, refer to these GitHub repositories.</p>
+<ul>
+<li><a href="https://github.com/cmu-sei/Blueprint.Ui">Blueprint UI Repository</a></li>
+<li><a href="https://github.com/cmu-sei/Blueprint.Api">Blueprint API Repository</a></li>
+</ul>
+<h3 id="blueprint-permissions">Blueprint Permissions</h3>
+<p>To use Blueprint, a System Admin must assign Content Developer permissions to the user and add them to a team.</p>
+<p>There are three levels of permissions in Blueprint that affect the way a user interacts with the Blueprint application and collaborates on the MSEL creation.</p>
+<ul>
+<li><a href="#glossary">System Admin</a>: Can add users to a team, as well as assign the required permissions to users. Additionally, users with this permission can view, edit, create, and approve events on the MSEL.</li>
+<li><a href="#glossary">Content Developer</a>: Can view, edit, create, and approve events on the MSEL.</li>
+<li><a href="#glossary">Facilitator</a>: Manages the exercise, can advance moves, execute events, and check events as completed.</li>
+</ul>
+<p>Most users will have the Content Developer permission, because it is the minimum required permission to create and collaborate with other teams on MSEL creation.</p>
+<p>Refer to this section <a href="#administrator-guide">Administrator Guide</a> for more information on additional administrative actions.</p>
+<h2 id="user-guide">User Guide</h2>
+<h3 id="blueprint-landing-page">Blueprint Landing Page</h3>
+<p>The landing page of Blueprint provides a variety of interaction modalities for exercises, tailored according to the permissions assigned to each user. The functionalities available are as follows:</p>
+<p><img alt="Blueprint Landing Page OE" src="../assets/img/blueprintLandingPage.png" /></p>
+<h4 id="join-event">Join Event</h4>
+<p>Users with an invitation or membership on a participating team can join an event already in progress. Users click <strong>Join Event</strong> to open a page that lists all ongoing events available to them. They select an event to proceed to Player, where they access exercise information and related applications.</p>
+<h4 id="start-event">Start Event</h4>
+<p>Users with an invitation to an exercise MSEL designated as a template can initiate the event and engage with the exercise.</p>
+<p>After users click <strong>Start Event</strong>, the system redirects them to a page listing all available events other users have invited them to. They should select a template to launch the event and proceed to Player, where they can access all exercise information and deployed applications.</p>
+<h4 id="manage-an-event">Manage an Event</h4>
+<p>Users with administrative roles, content developer permissions, or contributor designation on the MSEL can see this option. They can continue developing the current MSEL or create a new one.</p>
+<h3 id="player-manage-event-page">Player Manage Event Page</h3>
+<p>When a user starts an event (as described above), Blueprint adds a <strong>Manage Event</strong> application to the left side panel of the Player view. The Manage Event application lets the user change the event end time, end the event, and invite others to join.</p>
+<p><img alt="Blueprint End Event OE" src="../assets/img/blueprintEndEvent-v2.png" /></p>
+<h4 id="launched-event-user-invitations">Launched Event User Invitations</h4>
+<p>To invite other users to the launched event, follow these steps:</p>
+<p><img alt="Blueprint Launched Event Invites OE" src="../assets/img/blueprintEventInvitations.png" /></p>
+<ol>
+<li>Navigate to the <strong>Manage Event</strong> application from Player's side panel.</li>
+<li>Click <strong>Invite Others</strong>.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Team</strong></td>
+<td>Dropdown Text</td>
+<td>User's team</td>
+<td>SEI - Software Engineering Institute</td>
+</tr>
+<tr>
+<td><strong>Email Domain</strong></td>
+<td>String</td>
+<td>User's email domain tied to the invitation</td>
+<td>@sei.cmu.edu</td>
+</tr>
+<tr>
+<td><strong>Expiration Date/Time</strong></td>
+<td>Datetime</td>
+<td>Date/Time when the invitation should expire</td>
+<td>04/20/2024 11:17:25</td>
+</tr>
+<tr>
+<td><strong>Maximum Number of Users Allowed to Use this Invitation</strong></td>
+<td>Integer</td>
+<td>Number of users allowed to use the invitation</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Can Invite Others to this team</strong></td>
+<td>Boolean</td>
+<td>Allows new users to invite others to the exercise</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h4 id="ending-a-launched-event">Ending a Launched Event</h4>
+<p>To end an event, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Manage Event</strong> application from Player's side panel.</li>
+<li>Click <strong>End Event</strong>.</li>
+<li>On the confirmation screen, click <strong>Yes</strong> to successfully end the event.</li>
+</ol>
+<h3 id="msel-catalog">MSEL Catalog</h3>
+<p>The MSEL Catalog shows created MSELs. Here, users are able to select the desired MSEL to work on, as well as create or delete them.</p>
+<p>The following image will show some important hotspots about the MSEL Catalog. Reference the number on the hotspot to know more about this section.</p>
+<p><img alt="Blueprint Dashboard OE" src="../assets/img/blueprintDashboard-v4.png" /></p>
+<h4 id="add-blank-msel">Add Blank MSEL</h4>
+<h5 id="hotspot-1">Hotspot 1</h5>
+<p>Blueprint lets users create a MSEL from scratch directly in the application. This removes the hassle of Excel and makes visualizing information easier.</p>
+<h4 id="upload-an-existing-msel">Upload an Existing MSEL</h4>
+<h5 id="hotspot-2">Hotspot 2</h5>
+<p>If creating a new MSEL from scratch is not desired, users can upload a pre-existing MSEL and continue editing it on the application by using this functionality. This is useful to share existing MSEL work without having to add the pieces of information to a blank MSEL one by one.</p>
+<h4 id="filter-display">Filter Display</h4>
+<h5 id="types">Types</h5>
+<h6 id="hotspot-3">Hotspot 3</h6>
+<p>Users can use this filter to narrow down MSELs presented on the dashboard based on their categorization. Selections available are: All Types, Templates, and Not Templates.</p>
+<h5 id="statuses">Statuses</h5>
+<h6 id="hotspot-4">Hotspot 4</h6>
+<p>Users can use this filter to narrow down MSELs presented on the dashboard based on their current status. Selections available are: All Statuses, Pending, Entered, Approved, and Completed.</p>
+<h5 id="search">Search</h5>
+<h5 id="hotspot-5">Hotspot 5</h5>
+<p>This functionality will enable users to search for a specific MSEL, in case it is not presented at the top on the dashboard.</p>
+<h4 id="load-all-msels">Load All MSELs</h4>
+<h5 id="hotspot-6">Hotspot 6</h5>
+<p>This functionality will enable users with the proper administrative permissions to load and view all MSELs created.</p>
+<h4 id="settings-cog">Settings Cog</h4>
+<h5 id="hotspot-7">Hotspot 7</h5>
+<p>Users with the proper administrative permissions will be able to use this feature to access Blueprint's administrative settings.</p>
+<h4 id="manage-msel">Manage MSEL</h4>
+<h5 id="hotspot-8">Hotspot 8</h5>
+<h4 id="download">Download</h4>
+<p>Users can download a copy of any MSEL for offline use using the Download feature. This is useful if they lack internet access, allowing them to work on the MSEL offline and upload changes later. However, offline work is not recommended as users will miss Blueprint's features and updates.</p>
+<h4 id="upload">Upload</h4>
+<p>With the Upload feature, users can update the information from the MSEL Card with the new uploaded information. This feature will modify all the existing information with the one found on the .xlsx file.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When engaging in the export and import process of MSELs from the Blueprint application, it is imperative to ensure that events and settings of the MSEL align with your particular preferences. It is worth noting that on occasion, during the import process of MSELs into the application, it may be necessary to reconfigure settings and specific fields.</p>
+</div>
+<h4 id="delete">Delete</h4>
+<p>The Delete feature lets users remove existing MSEL cards including all associated information.</p>
+<h4 id="copy">Copy</h4>
+<p>The Copy feature lets users duplicate an existing MSEL Card and modify the copy instead of the original. This helps when unsure about new changes or starting from a known reference.</p>
+<h4 id="msel-cards">MSEL Cards</h4>
+<h5 id="hotspot-9">Hotspot 9</h5>
+<p>Click a MSEL card to view its information. Users can also edit or update the existing information, and changes appear live for others without needing to share a new document.</p>
+<h3 id="msel-definition">MSEL Definition</h3>
+<p>After uploading or creating a MSEL, users can edit any information and add additional information to the MSEL. Users edit the same MSEL, instead of working on separate copies and sending edits to one person. This ensures everyone has the same version during the live scenario.</p>
+<h4 id="basic-information">Basic Information</h4>
+<p>On this tab, users will be able to edit and configure MSEL settings, as well as enable/disable integrations.</p>
+<p><img alt="Blueprint Info Tab OE" src="../assets/img/blueprintBasicInfo-v5.png" /></p>
+<p>To edit the MSEL's basic information and configuration, follow these next steps:</p>
+<ol>
+<li>Navigate to the <strong>Info</strong> tab.</li>
+<li>Be sure to be in the <strong>Config</strong> section.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table_1">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Name of the MSEL</td>
+<td>Hurricane Delta MSEL</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>String</td>
+<td>Details and or characteristics of the MSEL</td>
+<td>Hurricane Delta Fort Myers Scenario</td>
+</tr>
+<tr>
+<td><strong>Start Date/Time</strong></td>
+<td>Datetime</td>
+<td>Start date/time of the MSEL</td>
+<td>09/10/2024 20:00:00</td>
+</tr>
+<tr>
+<td><strong>End Date/Time</strong></td>
+<td>Datetime</td>
+<td>End date/time of the MSEL</td>
+<td>10/10/2024 08:00:00</td>
+</tr>
+<tr>
+<td><strong>Is a Template</strong></td>
+<td>Boolean</td>
+<td>Designate if this MSEL should be a system template</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Integrate Player</strong></td>
+<td>Boolean</td>
+<td>Add Player integration functionality to the MSEL</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Integrate Gallery</strong></td>
+<td>Boolean</td>
+<td>Add Gallery integration functionality to the MSEL</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Integrate CITE</strong></td>
+<td>Boolean</td>
+<td>Add CITE integration functionality to the MSEL</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Select Scoring Model</strong></td>
+<td>Dropdown Text</td>
+<td>Select a CITE Scoring Model</td>
+<td>CISA NCISS</td>
+</tr>
+<tr>
+<td><strong>Integrate Steamfitter</strong></td>
+<td>Boolean</td>
+<td>Add Steamfitter integration functionality to the MSEL</td>
+<td>False</td>
+</tr>
+<tr>
+<td><strong>MSEL Status</strong></td>
+<td>Dropdown Text</td>
+<td>Select MSEL status designation</td>
+<td>Active</td>
+</tr>
+<tr>
+<td><strong>Header Row Metadata (Height)</strong></td>
+<td>Integer</td>
+<td>An integer value that defines the height of the header row when exporting this MSEL as an .xlsx file</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>To save these settings, click the <strong>checkmark</strong> at the top.</p>
+<h4 id="integrations">Integrations</h4>
+<ul>
+<li><strong><a href="#glossary">Gallery</a>:</strong> Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To know more about this integration reference this section <a href="#gallery">Gallery</a>.</li>
+<li><strong><a href="#glossary">CITE</a>:</strong> Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL. To know more about this integration reference this section <a href="#cite">CITE</a>.</li>
+<li><strong><a href="#glossary">Player</a> &amp; <a href="#glossary">Steamfitter</a>:</strong> Blueprint will automate the adding of events specified on the MSEL, as well as configure exercise details in Player.</li>
+</ul>
+<h4 id="add-page">Add Page</h4>
+<p>On this tab, users can add notes to the MSEL for team members with the appropriate permissions to work and access.</p>
+<p><img alt="Blueprint Notes Tab OE" src="../assets/img/blueprintNotes-v3.png" /></p>
+<p>To add MSEL notes, follow these next steps:</p>
+<ol>
+<li>Navigate to the <strong>Info</strong> tab.</li>
+<li>Click <strong>Add Page</strong>.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table_2">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Page Name</strong></td>
+<td>String</td>
+<td>Name of the Page</td>
+<td>Core Planning Group Notes</td>
+</tr>
+<tr>
+<td><strong>All MSEL users can view this page</strong></td>
+<td>Boolean</td>
+<td>Enable other users who don't have elevated permissions to access this page</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Notes</strong></td>
+<td>Rich Text</td>
+<td>Field to add page notes</td>
+<td>Next meeting is on 12/7 at 0800</td>
+</tr>
+</tbody>
+</table>
+<p>After you've made your changes, click the <strong>checkmark</strong> to save the page.</p>
+<h4 id="contributors">Contributors</h4>
+<p>On this tab, users will be able to add and assign contributor teams, as well as their respective roles related to the creation and management of the MSEL. Assigned teams will be able to view and edit the MSEL.</p>
+<p><img alt="Blueprint Contributors Tab OE" src="../assets/img/blueprintAddContributors-v2.png" /></p>
+<h5 id="add-a-contributor">Add a Contributor</h5>
+<p>To add a contributor unit to the MSEL, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Contributors</strong> tab.</li>
+<li>Click the <strong>Add a Contributor Unit</strong> button, then select the unit you want to add.</li>
+<li>After selecting the unit, click the <strong>+</strong> button.</li>
+</ol>
+<h5 id="remove-a-contributor">Remove a Contributor</h5>
+<p>To remove a contributor unit from the MSEL, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Contributors</strong> tab.</li>
+<li>Select the team you want to remove and click the <strong>-</strong> button.</li>
+</ol>
+<p>Now that you've added the unit to the MSEL, members can view and edit it based on each unit member's role.</p>
+<p>The available roles are:</p>
+<ul>
+<li><strong><a href="#glossary">Editor</a>:</strong> Can edit the events assigned to them by the MSEL owner, but not other events. They cannot delete events or create new events.</li>
+<li><strong><a href="#glossary">Approver</a>:</strong> Can view and edit the MSEL, but will have the added feature of approving a MSEL.</li>
+<li><strong><a href="#glossary">Move Editor</a>:</strong> Can edit moves on the MSEL, as well as increment them during an exercise.</li>
+<li><strong><a href="#glossary">Owner</a>:</strong> Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).</li>
+<li><strong><a href="#glossary">Evaluator</a>:</strong> Manages the exercise, can advance moves, execute events, and check events as completed.</li>
+<li><strong><a href="#glossary">Viewer</a>:</strong> Can view the MSEL, but can't do any edits to it.</li>
+</ul>
+<h4 id="teams">Teams</h4>
+<p>On this tab, users will be able to add and assign teams, as well as their respective roles during an event to the MSEL.</p>
+<p><img alt="Blueprint Teams Tab OE" src="../assets/img/blueprintAddTeams-v3.png" /></p>
+<h5 id="add-a-team">Add a Team</h5>
+<p>To add a team to the MSEL, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Teams</strong> tab.</li>
+<li>Click the <strong>Add a Team</strong> button, then select the team you want to add.</li>
+<li>After selecting the team, click the <strong>+</strong> button.</li>
+</ol>
+<h5 id="remove-a-team">Remove a Team</h5>
+<p>To remove a team from the MSEL, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Teams</strong> tab.</li>
+<li>Select the team you want to remove and click the <strong>-</strong> button.</li>
+</ol>
+<p>Now that you've added the team to the MSEL, members can participate on the MSEL event based on each team member's assigned role.</p>
+<p>The available roles are:</p>
+<ul>
+<li><strong><a href="#glossary"><code>Inviter</code></a>:</strong> This role will allow a user to invite others to the MSEL event.</li>
+<li><strong><a href="#glossary"><code>Observer</code></a>:</strong> When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.</li>
+<li><strong><a href="#glossary"><code>Incrementer</code></a>:</strong> When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.</li>
+<li><strong><a href="#glossary"><code>Modifier</code></a>:</strong> When the MSEL owner has enabled CITE integration, this role allows a user to modify the team's score.</li>
+<li><strong><a href="#glossary"><code>Submitter</code></a>:</strong>When the MSEL owner has enabled integration, this role allows a user to submit the team's score.</li>
+</ul>
+<h4 id="data-fields">Data Fields</h4>
+<p>On this tab, users can add data fields used on the MSEL. Compare these <a href="#glossary">data fields</a> to the column fields on Excel spreadsheets.</p>
+<p><img alt="Blueprint Data Fields Tab OE" src="../assets/img/blueprintDataFields-v5.png" /></p>
+<p>There are two categories of Data Fields:</p>
+<ul>
+<li><strong><a href="#glossary">System Defined</a>:</strong> Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.</li>
+<li><strong><a href="#glossary">User Defined</a>:</strong> Added by the user on an as-needed basis.</li>
+</ul>
+<h5 id="add-a-data-field">Add a Data Field</h5>
+<p><img alt="Blueprint Add Data Fields OE" src="../assets/img/blueprintAddDataField.png" /></p>
+<p>To add a Data Field to the MSEL, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Data Fields</strong> tab.</li>
+<li>Click the <strong>+</strong> icon from the top left of the screen.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table_3">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Display Order</strong></td>
+<td>Integer</td>
+<td>Indicate the order of the data field</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Name of the data field</td>
+<td>Description</td>
+</tr>
+<tr>
+<td><strong>Data Type</strong></td>
+<td>Dropdown Text</td>
+<td>Data type for the data field</td>
+<td>String</td>
+</tr>
+<tr>
+<td><strong>Use Option List</strong></td>
+<td>Boolean</td>
+<td>Add options to select when adding an event</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Display on the Events list</strong></td>
+<td>Boolean</td>
+<td>Display this data field on the Events list tab</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Display on the Exercise View</strong></td>
+<td>Boolean</td>
+<td>Display this data field on the Exercise View tab</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Display on "Advanced" edit tab</strong></td>
+<td>Boolean</td>
+<td>Display this data field on the data field edit component Advanced tab</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Display for Content Developers and MSEL Owners ONLY!!!</strong></td>
+<td>Boolean</td>
+<td>Display this data field for users who are Content Developers or MSEL Owners only</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Gallery Article Parameter</strong></td>
+<td>Dropdown Text</td>
+<td>If using the Gallery integration, select the Gallery parameter that aligns with the data field</td>
+<td>Description</td>
+</tr>
+<tr>
+<td><strong>Column Metadata (Width)</strong></td>
+<td>Integer</td>
+<td>Width of the column when displayed</td>
+<td>30</td>
+</tr>
+<tr>
+<td><strong>Cell Metadata (Color, Tint, Font-Weight)</strong></td>
+<td>String</td>
+<td>Column color and font style</td>
+<td>(Red, 20%, bold)</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h5 id="delete-a-data-field">Delete a Data Field</h5>
+<p>To delete a Data Field from the MSEL, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Data Fields</strong> tab.</li>
+<li>Select the data field you want to delete and click the <strong>Trash Can</strong> icon.</li>
+</ol>
+<h5 id="edit-a-data-field">Edit a Data Field</h5>
+<p>To edit an existing Data Field, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Data Fields</strong> tab.</li>
+<li>Select the data field you wish to edit and click the <strong>Edit</strong> button to make any changes to the existing configurations.</li>
+<li>After making all the necessary changes, click the <strong>checkmark</strong> to save them.</li>
+</ol>
+<h5 id="search-for-a-data-field">Search For a Data Field</h5>
+<p>To search for a specific Data Field, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Data Fields</strong> tab.</li>
+<li>Click the <strong>Search Bar</strong> and add the name of the data field desired.</li>
+</ol>
+<h4 id="organizations">Organizations</h4>
+<p>On this tab, users add all related <a href="#glossary">organizations</a> (with their information) used on the MSEL and the live exercise. Users can create organizations from scratch or from a template.</p>
+<p><img alt="Blueprint Organizations Tab OE" src="../assets/img/blueprintOrganizations-v4.png" /></p>
+<h5 id="add-an-organization-card-from-scratch">Add an Organization Card From Scratch</h5>
+<p><img alt="Blueprint Add Organization OE" src="../assets/img/blueprintAddOrganization-v2.png" /></p>
+<p>To add an Organization Card from scratch, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Organizations</strong> tab.</li>
+<li>Click <strong>Add Organization</strong>.</li>
+<li>Select <strong>New Organization</strong> from the dropdown.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h5 id="data-format-table_4">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Name of the organization</td>
+<td>Twitter</td>
+</tr>
+<tr>
+<td><strong>Short Name</strong></td>
+<td>String</td>
+<td>Organization's short name, such as an acronym</td>
+<td>TW</td>
+</tr>
+<tr>
+<td><strong>Summary</strong></td>
+<td>String</td>
+<td>Organization's short summary</td>
+<td>Social media platform</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>String</td>
+<td>Organization's email contact</td>
+<td><code>user@twitter.com</code></td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Rich Text</td>
+<td>Information, details, and characteristics of the organization</td>
+<td>Twitter is a micro-blogging and social networking service on which users post and interact with messages known as "tweets", owned by American company Twitter, Inc.</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h5 id="add-an-organization-card-from-template">Add an Organization Card From Template</h5>
+<p>To create an organization from a template, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Organizations</strong> tab.</li>
+<li>Click <strong>Add Organization</strong>.</li>
+<li>Select the template you want to use from the dropdown.</li>
+<li>Here, users will be able to edit all necessary information to create a new organization.</li>
+<li>After modifying the desired details, click <strong>Save</strong>.</li>
+</ol>
+<h5 id="edit-an-organization">Edit an Organization</h5>
+<p>To edit an existing organization, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Organizations</strong> tab.</li>
+<li>Select the card you want to edit and click the <strong>Edit</strong> button next to the organization name.</li>
+<li>Here, users will be able to edit all necessary information.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<h5 id="delete-an-organization">Delete an Organization</h5>
+<p>To delete an organization, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Organizations</strong> tab.</li>
+<li>Select the card you want to delete and click the <strong>Trash Can</strong> icon next to the organization name.</li>
+</ol>
+<h5 id="search-for-an-organization">Search for an Organization</h5>
+<p>To search for a specific organization, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Organizations</strong> tab.</li>
+<li>Click the <strong>Search Bar</strong> and type the name of the desired organization.</li>
+</ol>
+<h4 id="moves">Moves</h4>
+<p>On this tab, users will be able to add all the related exercise <a href="#glossary">moves</a> to the MSEL.</p>
+<p><img alt="Blueprint Moves Tab OE" src="../assets/img/blueprintMoves-v4.png" /></p>
+<h5 id="add-a-move">Add a Move</h5>
+<p><img alt="Blueprint Add Moves OE" src="../assets/img/blueprintAddMove-v3.png" /></p>
+<p>To add a move, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Moves</strong> tab.</li>
+<li>Click the <strong>+</strong> icon.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h5 id="data-format-table_5">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Move Number</strong></td>
+<td>Integer</td>
+<td>Designated number for the move</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Start Date/Time</strong></td>
+<td>Datetime</td>
+<td>Start date/time of the move real-time</td>
+<td>11/20/2023, 09:00:00</td>
+</tr>
+<tr>
+<td><strong>Move Description</strong></td>
+<td>String</td>
+<td>Information, details, and characteristics of the move</td>
+<td>Scene Setter</td>
+</tr>
+<tr>
+<td><strong>Situation Date/Time</strong></td>
+<td>Datetime</td>
+<td>Start date/time of the move exercise-time</td>
+<td>1/24/2024, 14:18:27</td>
+</tr>
+<tr>
+<td><strong>Situation Description</strong></td>
+<td>Rich Text</td>
+<td>Information, details, and characteristics of the exercise</td>
+<td>Hurricane Delta has landed in Fort Myers</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h5 id="edit-a-move">Edit a Move</h5>
+<p>To edit the move's details, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Moves</strong> tab.</li>
+<li>Select the move you want to edit and click the <strong>Edit</strong> button for the corresponding move.</li>
+<li>Here, users will be able to edit all the desired details.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<h5 id="delete-a-move">Delete a Move</h5>
+<p>To delete a move from the MSEL, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Moves</strong> tab.</li>
+<li>Select the move you want to delete and click the <strong>Trash Can</strong> button for the corresponding move.</li>
+</ol>
+<h5 id="search-for-a-move">Search for a Move</h5>
+<p>To search for a specific move, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Moves</strong> tab.</li>
+<li>Click the <strong>Search Bar</strong> and type the name of the desired move.</li>
+</ol>
+<h4 id="scenario-events">Scenario Events</h4>
+<p>On this tab, users will be able to add all the related events to the MSEL.</p>
+<p><img alt="Blueprint Events Tab OE" src="../assets/img/blueprintInjects-v2.png" /></p>
+<h5 id="add-an-event">Add an Event</h5>
+<p>To add a new event, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Events</strong> tab.</li>
+<li>Click the <strong>Hamburger</strong> icon found on the top left.</li>
+<li>Click <strong>Add New Event</strong>.</li>
+</ol>
+<p>On the <strong>Default</strong> tab, fill the fields as necessary following the Data Format Table specifications.</p>
+<p><img alt="Blueprint Add Event OE" src="../assets/img/blueprintAddInjects-v3.png" /></p>
+<h5 id="data-format-table_6">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Control Number</strong></td>
+<td>String</td>
+<td>Event control number, used to identify and categorize events</td>
+<td>ADMIN-1</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>String</td>
+<td>Information, details, and characteristics of the event</td>
+<td>STARTEX</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>Dropdown Text</td>
+<td>Approval status of the event used on the MSEL</td>
+<td>Approved</td>
+</tr>
+<tr>
+<td><strong>Time</strong></td>
+<td>Datetime</td>
+<td>Start date/time of the move real-time</td>
+<td>11/20/2023, 09:00:00</td>
+</tr>
+<tr>
+<td><strong>Move</strong></td>
+<td>Dropdown Text</td>
+<td>Move number the event is part of</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Group</strong></td>
+<td>Integer</td>
+<td>Groups events within a move, often times executed within the same time range</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Exercise Date</strong></td>
+<td>Datetime</td>
+<td>Start date/time of the move exercise-time</td>
+<td>1/24/2024, 14:18:27</td>
+</tr>
+<tr>
+<td><strong>Type</strong></td>
+<td>String</td>
+<td>Source type for the event</td>
+<td>Email</td>
+</tr>
+<tr>
+<td><strong>Delivery Method</strong></td>
+<td>Dropdown Text</td>
+<td>How is the event delivered to participants</td>
+<td>Email</td>
+</tr>
+</tbody>
+</table>
+<p>If not already completed on the previous tab, fill the fields from the <strong>Advanced</strong> tab following the Data Format Table specifications. This tab focuses on the MSEL's metadata and style.</p>
+<p><img alt="Blueprint Add Event Advanced OE" src="../assets/img/blueprintAddInjectsAdvanced.png" /></p>
+<h5 id="data-format-table_7">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Exercise Date/Time</strong></td>
+<td>Datetime</td>
+<td>Start date/time of the move exercise-time</td>
+<td>1/24/2024, 14:18:27</td>
+</tr>
+<tr>
+<td><strong>Row Metadata</strong></td>
+<td>Integer</td>
+<td>Defines the size of this event on the Events and Exercise View tabs</td>
+<td>15,199,21,133</td>
+</tr>
+</tbody>
+</table>
+<p>If the MSEL owner enabled Gallery integration, the user should verify that all fields on the Gallery tab are complete, following the Data Format Table specifications below. This tab includes the fields required for the Gallery integration to function properly.</p>
+<p><img alt="Blueprint Add Event Gallery OE" src="../assets/img/blueprintAddInjectsGallery.png" /></p>
+<h5 id="data-format-table_8">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Description</strong></td>
+<td>String</td>
+<td>Information, details, and characteristics of the event</td>
+<td>STARTEX</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>Dropdown Text</td>
+<td>Approval status of the event used on the MSEL</td>
+<td>Approved</td>
+</tr>
+<tr>
+<td><strong>Move</strong></td>
+<td>Dropdown Text</td>
+<td>Move number the event is part of</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Group</strong></td>
+<td>Integer</td>
+<td>Groups events within a move, often times executed within the same time range</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Exercise Date</strong></td>
+<td>Datetime</td>
+<td>Start date/time of the move exercise-time</td>
+<td>1/24/2024, 14:18:27</td>
+</tr>
+<tr>
+<td><strong>Delivery Method</strong></td>
+<td>Dropdown Text</td>
+<td>How is the event delivered to participants</td>
+<td>Gallery</td>
+</tr>
+<tr>
+<td><strong>Title</strong></td>
+<td>String</td>
+<td>Title of the event</td>
+<td>Bank Consortium Falls Victim to Ransomware Attack</td>
+</tr>
+<tr>
+<td><strong>From Org</strong></td>
+<td>Dropdown Text</td>
+<td>Select the organization that sends this event</td>
+<td>CC News</td>
+</tr>
+<tr>
+<td><strong>To Org</strong></td>
+<td>Dropdown Text</td>
+<td>Select the organization that receives this event</td>
+<td>ALL</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h5 id="add-color-to-an-event">Add Color to an Event</h5>
+<p>To add a color to an existing event, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Events</strong> tab.</li>
+<li>Select the event you want to edit and click the <strong>Hamburger</strong> icon next to the event.</li>
+<li>Hover over <strong>Highlight</strong>.</li>
+<li>Here, users will be able to select the desired color.</li>
+</ol>
+<h5 id="edit-an-event">Edit an Event</h5>
+<p>To edit the event's details, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Events</strong> tab.</li>
+<li>Select the event you want to edit and click the <strong>Hamburger</strong> icon next to it.</li>
+<li>Click <strong>Edit</strong>.</li>
+<li>The system opens the same edit component used when creating a new event.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h5 id="delete-an-event">Delete an Event</h5>
+<p>To delete an event, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Events</strong> tab.</li>
+<li>Select the event you want to delete and click the <strong>Trash Can</strong> icon next to the event.</li>
+</ol>
+<h5 id="search-for-an-event">Search for an Event</h5>
+<p>To search for a specific event, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Events</strong> tab.</li>
+<li>Click the <strong>Search Bar</strong> and type the name of the desired event.</li>
+</ol>
+<h4 id="exercise-view">Exercise View</h4>
+<p>While the Events tab lets MSEL owners and content developers manage events, the Exercise View tab gives participants read-only access to track current and future events during an exercise.</p>
+<p><img alt="Blueprint Exercise View OE" src="../assets/img/blueprintExerciseView-v3.png" /></p>
+<h4 id="invitations">Invitations</h4>
+<p>Users with Administrator, Content Developer, or designated MSEL contributors can create invitations from the Invitations tab. These invitations allow others to join or start the MSEL event.</p>
+<p>You can specify email domains and a maximum number of users on the invitations. Invitations link to specific teams added to the MSEL. When users join the event using an invitation, the system assigns them to the corresponding team for the duration of the event.</p>
+<p><img alt="Blueprint Invitations OE" src="../assets/img/blueprintInvitations-v2.png" /></p>
+<h5 id="add-an-invitation">Add an Invitation</h5>
+<p><img alt="Blueprint Add Invitations OE" src="../assets/img/blueprintAddInvitations.png" /></p>
+<p>To add a new invitation, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Invitations</strong> tab.</li>
+<li>Click the <strong>Invite Others</strong> button.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h5 id="data-format-table_9">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Team</strong></td>
+<td>Dropdown Text</td>
+<td>Team tied to the invitation</td>
+<td>SEI - Software Engineering Institute</td>
+</tr>
+<tr>
+<td><strong>Email Domain</strong></td>
+<td>String</td>
+<td>User's email domain</td>
+<td><code>@sei.cmu.edu</code></td>
+</tr>
+<tr>
+<td><strong>Expiration Date/Time</strong></td>
+<td>Datetime</td>
+<td>Date and time of when should the invitation expire</td>
+<td>04/15/2024 15:12:03</td>
+</tr>
+<tr>
+<td><strong>Maximum Number of Users Allowed to Use this Invitation</strong></td>
+<td>Integer</td>
+<td>Number of users that can use the invitation</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Can Invite others to this Team</strong></td>
+<td>Boolean</td>
+<td>Permission to add others to the team</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h5 id="edit-an-invitation">Edit an Invitation</h5>
+<p>To edit an invitation, follow these steps:</p>
+<ol>
+<li>Navigate to the Invitations tab.</li>
+<li>Select the invitation you want to edit and click the <strong>Edit</strong> icon.</li>
+<li>The system opens the same edit component used when creating a new invitation.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h5 id="delete-an-invitation">Delete an Invitation</h5>
+<p>To delete an invitation, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Invitations</strong> tab.</li>
+<li>Select the invitation you want to deleted and click the <strong>Trash Can</strong> icon next to the invitation.</li>
+</ol>
+<h5 id="search-for-an-invitation">Search for an Invitation</h5>
+<p>To search for a specific invitation, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Invitations</strong> tab.</li>
+<li>Click the <strong>Search Bar</strong> and type the name of the team tied to the invitation.</li>
+</ol>
+<h3 id="integrations_1">Integrations</h3>
+<p>Integrations with the following applications simplify extra configuration steps. This functionality eliminates the need to repeat the same steps in multiple applications.</p>
+<h4 id="cite">CITE</h4>
+<p>If enabled, Blueprint can push MSEL information to the CITE application. When the MSEL owner enables CITE integration, additional tabs appear in the Blueprint side panel. The MSEL owner must configure the additional tabs to complete the integration. To enable full CITE integration, the MSEL owner must configure the following tabs.</p>
+<h5 id="teams_1">Teams</h5>
+<p>Use the <strong>Teams</strong> tab to configure CITE settings for teams added to the MSEL. To do this, follow these steps.</p>
+<p>First, assign a CITE Team Type to each team.</p>
+<p><img alt="CITE Team Type OE" src="../assets/img/citeTeamType.png" /></p>
+<ol>
+<li>Navigate to the <strong>Teams</strong> tab.</li>
+<li>Select the desired team and click the <strong>Edit Icon</strong>.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h5 id="data-format-table_10">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Team Email</strong></td>
+<td>String</td>
+<td>Team's email contact</td>
+<td><code>seicmu@cmu.edu</code></td>
+</tr>
+<tr>
+<td><strong>CITE Team Type</strong></td>
+<td>Dropdown Text</td>
+<td>Classifies the team within a certain type</td>
+<td>Individual Organization</td>
+</tr>
+</tbody>
+</table>
+<p>After you've made all desired configurations, click <strong>Save</strong>.</p>
+<p>Next, assign roles to each member of the team. To do this, follow these steps:</p>
+<p><img alt="CITE Team Roles OE" src="../assets/img/citeTeamRoles-v2.png" /></p>
+<ol>
+<li>Navigate to the <strong>Teams</strong> tab.</li>
+<li>Select the desired team, and click it to expand its configurations.</li>
+<li>Assign the necessary roles to each team member.</li>
+</ol>
+<h5 id="cite-actions">CITE Actions</h5>
+<p>On this tab, the MSEL owner can add <a href="#glossary">CITE Actions</a> to push from Blueprint. These actions allow team members to customize their response by tracking tasks during the exercise.</p>
+<p><img alt="Blueprint CITE Actions OE" src="../assets/img/blueprintCiteActions-v3.png" /></p>
+<h5 id="add-a-cite-action">Add a CITE Action</h5>
+<p><img alt="Blueprint Add CITE Actions OE" src="../assets/img/blueprintAddCiteActions.png" /></p>
+<p>To add a CITE Action, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>CITE Actions</strong> tab.</li>
+<li>Click the <strong>+</strong> icon.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h5 id="data-format-table_11">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Move</strong></td>
+<td>Dropdown Text</td>
+<td>Select the move to display this action</td>
+<td>0 - Hurricane Delta Scene Setter</td>
+</tr>
+<tr>
+<td><strong>Team</strong></td>
+<td>Dropdown Text</td>
+<td>Select the team this action applies to</td>
+<td>Conference of State Bank Supervisors</td>
+</tr>
+<tr>
+<td><strong>Display Order</strong></td>
+<td>Integer</td>
+<td>Indicates the order to display this action on the CITE Dashboard</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Description of the Action</strong></td>
+<td>String</td>
+<td>Information, details, and characteristics of the action</td>
+<td>Assign users to roles</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h5 id="edit-a-cite-action">Edit a CITE Action</h5>
+<p>To edit the CITE Action's details, follow these steps:</p>
+<ol>
+<li>Navigate to the CITE Actions tab.</li>
+<li>Select the action you want to edit and click the <strong>Edit</strong> icon next to it.</li>
+<li>The system opens the same edit component used when creating a new action.</li>
+<li>Make your changes, then click Save.</li>
+</ol>
+<h5 id="delete-a-cite-action">Delete a CITE Action</h5>
+<p>To delete a CITE Action, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>CITE Actions</strong> tab.</li>
+<li>Select the action you want to delete and click the <strong>Trash Can</strong> icon next to the action.</li>
+</ol>
+<h5 id="filter-actions-by-team">Filter Actions by Team</h5>
+<p>To filter CITE Actions by teams, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>CITE Actions</strong> tab.</li>
+<li>On the <strong>Team</strong> dropdown, select the desired team to filter by.</li>
+</ol>
+<h5 id="search-for-an-action">Search for an Action</h5>
+<p>To search for a specific action, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>CITE Actions</strong> tab.</li>
+<li>Click the <strong>Search Bar</strong> and type the name of the desired action.</li>
+</ol>
+<h5 id="cite-roles">CITE Roles</h5>
+<p>On this tab, the MSEL owner can add <a href="#glossary">CITE Roles</a> push from Blueprint. These roles will allow team members to customize their response by tracking their responsibilities during an exercise.</p>
+<p><img alt="Blueprint CITE Roles OE" src="../assets/img/blueprintCiteRoles-v3.png" /></p>
+<h5 id="add-a-cite-role">Add a CITE Role</h5>
+<p><img alt="Blueprint Add CITE Roles OE" src="../assets/img/blueprintAddCiteRoles.png" /></p>
+<p>To add a CITE role, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>CITE Roles</strong> tab.</li>
+<li>Click the <strong>+</strong> icon.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h5 id="data-format-table_12">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Name of the role</td>
+<td>Team Leader</td>
+</tr>
+<tr>
+<td><strong>Team</strong></td>
+<td>Dropdown Text</td>
+<td>Select the team this role applies to</td>
+<td>Conference of State Bank Supervisors</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h5 id="edit-a-cite-role">Edit a CITE Role</h5>
+<p>To edit the CITE Role's details, follow these steps:</p>
+<ol>
+<li>Navigate to the CITE Roles tab.</li>
+<li>Select the role you want to edit and click the <strong>Edit</strong> icon next to it.</li>
+<li>The system opens the same edit component used when creating a new role.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h5 id="delete-a-cite-role">Delete a CITE Role</h5>
+<p>To delete a CITE Role, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>CITE Roles</strong> tab.</li>
+<li>Select the role you want to delete and click the <strong>Trash Can</strong> icon next to the role.</li>
+</ol>
+<h5 id="filter-roles-by-team">Filter Roles by Team</h5>
+<p>To filter Roles by team, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>CITE Roles</strong> tab.</li>
+<li>On the <strong>Team</strong> dropdown, select the desired team to filter by.</li>
+</ol>
+<h5 id="search-for-a-role">Search for a Role</h5>
+<p>To search for a specific role, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>CITE Roles</strong> tab.</li>
+<li>Click the <strong>Search Bar</strong> and type the name of the desired role.</li>
+</ol>
+<h4 id="gallery">Gallery</h4>
+<p>If enabled, Blueprint can push MSEL information to the Gallery application. When the MSEL owner enables Gallery integration, additional tabs appear in the Blueprint side panel. The MSEL owner must configure the additional tabs to complete the integration.</p>
+<p>To enable full Gallery integration, the MSEL owner should configure the following tabs.</p>
+<h5 id="gallery-data-fields">Gallery Data Fields</h5>
+<p>On the Data Fields tab, configure additional data fields to push MSEL information to Gallery.</p>
+<p><img alt="Blueprint Data Fields Tab OE" src="../assets/img/blueprintDataFields-v5.png" /></p>
+<p>The MSEL owner should add these fields:</p>
+<h5 id="data-format-table_13">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Description</strong></td>
+<td>String</td>
+<td>Information, details, and characteristics of the event</td>
+<td>STARTEX</td>
+</tr>
+<tr>
+<td><strong>Date Posted</strong></td>
+<td>Datetime</td>
+<td>Posted date of the event</td>
+<td>1/24/2024, 14:18:27</td>
+</tr>
+<tr>
+<td><strong>Delivery Method</strong></td>
+<td>Dropdown Text</td>
+<td>How is the event delivered to participants</td>
+<td>Gallery</td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Name of the event</td>
+<td>Common Operating Picture 1</td>
+</tr>
+<tr>
+<td><strong>From Org</strong></td>
+<td>Dropdown Text</td>
+<td>Select the organization that sends this event</td>
+<td>CC News</td>
+</tr>
+<tr>
+<td><strong>To Org</strong></td>
+<td>Dropdown Text</td>
+<td>Select the organization that receives this event</td>
+<td>ALL</td>
+</tr>
+<tr>
+<td><strong>Summary</strong></td>
+<td>Rich Text</td>
+<td>Complete information and details of the event</td>
+<td>A ransomware attack affected Bank XYZ...</td>
+</tr>
+<tr>
+<td><strong>Card</strong></td>
+<td>Dropdown Text</td>
+<td>Select the Gallery Card to categorize this event</td>
+<td>Information Technology Sector</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>Dropdown Text</td>
+<td>Approval status of the event used on the MSEL</td>
+<td>Approved</td>
+</tr>
+<tr>
+<td><strong>Source Type</strong></td>
+<td>Dropdown Text</td>
+<td>Select from where the event's details come from</td>
+<td>News</td>
+</tr>
+<tr>
+<td><strong>Source Name</strong></td>
+<td>String</td>
+<td>Add the author of the event</td>
+<td>BBC News</td>
+</tr>
+<tr>
+<td><strong>Move</strong></td>
+<td>Dropdown Text</td>
+<td>Move number the event is part of</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Group</strong></td>
+<td>Integer</td>
+<td>Groups events within a move, often times executed within the same time range</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Url</strong></td>
+<td>String</td>
+<td>Provide a URL if more information is necessary for participants to access</td>
+<td><code>www.bbcnews.com/ransomware-attack-xyzbank</code></td>
+</tr>
+<tr>
+<td><strong>Open in a New Tab</strong></td>
+<td>Boolean</td>
+<td>Use this option to open the URL in a new tab</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<p>After adding data fields, map each one to the appropriate Gallery field by selecting an option from the <strong>Gallery Article Parameter</strong> dropdown when adding or editing the field.</p>
+<h5 id="gallery-cards">Gallery Cards</h5>
+<p>On this tab, the MSEL owner can add <a href="#glossary">Gallery Cards</a> to push from Blueprint. These are the different cards in the Gallery Wall. You can also find articles related to that card here.</p>
+<p><img alt="Blueprint Gallery Cards OE" src="../assets/img/blueprintGalleryCards-v2.png" /></p>
+<h5 id="add-a-gallery-card">Add a Gallery Card</h5>
+<p><img alt="Blueprint Add Gallery Cards OE" src="../assets/img/blueprintAddGalleryCards.png" /></p>
+<p>To add a Gallery card, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Gallery Cards</strong> tab.</li>
+<li>Click the <strong>+</strong> icon.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h5 id="data-format-table_14">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Name of the Gallery card</td>
+<td>Energy Sector</td>
+</tr>
+<tr>
+<td><strong>Card Description</strong></td>
+<td>String</td>
+<td>Information, details, and characteristics of the Gallery card</td>
+<td>The current state of the Energy Sector</td>
+</tr>
+<tr>
+<td><strong>Move</strong></td>
+<td>Dropdown Text</td>
+<td>Select the move to display this Gallery card</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h5 id="edit-a-gallery-card">Edit a Gallery Card</h5>
+<p>To edit a Gallery card:</p>
+<ol>
+<li>Navigate to the Gallery Cards tab.</li>
+<li>Select the card you want to edit and click the <strong>Edit</strong> icon next to it.</li>
+<li>The system opens the same edit component used when creating a new card.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h5 id="delete-a-gallery-card">Delete a Gallery Card</h5>
+<p>To delete a Gallery card, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Gallery Cards</strong> tab.</li>
+<li>Select the card you want to delete and click the <strong>Trash Can</strong> icon next to the card.</li>
+</ol>
+<h5 id="search-for-a-gallery-card">Search For a Gallery Card</h5>
+<p>To search for a specific card, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Gallery Cards</strong> tab.</li>
+<li>Click the <strong>Search Bar</strong> and type the name of the desired card.</li>
+</ol>
+<h4 id="player">Player</h4>
+<p>If enabled, Blueprint pushes MSEL information to the Player application. The system adds additional tabs to the Blueprint side panel, which the MSEL owner will need to configure.</p>
+<p>To enable the full Player integration, configure the following tabs.</p>
+<h5 id="player-apps">Player Apps</h5>
+<p>On the <a href="#glossary">Player Apps</a> tab, the MSEL owner can add configurations to push from Blueprint. These are the different applications accessible from the <a href="#glossary">Player View</a>.</p>
+<p><img alt="Player Apps OE" src="../assets/img/blueprintPlayerApps-v3.png" /></p>
+<h5 id="add-a-player-app">Add a Player App</h5>
+<p><img alt="Blueprint Add Player App OE" src="../assets/img/blueprintAddPlayerApp-v3.png" /></p>
+<p>To add a Player App, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Player Apps</strong> tab.</li>
+<li>Click the <strong>+</strong> icon.</li>
+<li>Select an app template from the provided list.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h5 id="data-format-table_15">Data Format Table</h5>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Name of the application</td>
+<td>Chat</td>
+</tr>
+<tr>
+<td><strong>Url</strong></td>
+<td>String</td>
+<td>URL of the application</td>
+<td><code>roundcube.hamilton.treasury.gov</code></td>
+</tr>
+<tr>
+<td><strong>Icon Url</strong></td>
+<td>String</td>
+<td>URL of the application's icon</td>
+<td><code>roundcube.hamilton.treasury.gov/roundcube.png</code></td>
+</tr>
+<tr>
+<td><strong>Embeddable</strong></td>
+<td>Boolean</td>
+<td>Select whether to embed the app in Player's iframe</td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Load in Background</strong></td>
+<td>Boolean</td>
+<td>Select whether the app should load in the background</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<h5 id="url-parameters">URL Parameters</h5>
+<p>You can add URL parameters to point to a specific CITE evaluation, Gallery exhibit, Player view, or other content. To do this, include the variables in braces when adding a new application. Consider using the following variables:</p>
+<ul>
+<li><strong>{citeEvaluationId}:</strong> Add this variable to the URL to point to a specific CITE evaluation.</li>
+<li><strong>{galleryExhibitId}:</strong> Add this variable to the URL to point to a specific Gallery exhibit.</li>
+<li><strong>{steamFitterScenarioId}:</strong> Add this variable to the URL to point to a specific Steamfitter scenario.</li>
+<li><strong>{playerViewId}:</strong> Add this variable to the URL to point to a specific Player view.</li>
+</ul>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h5 id="edit-a-player-app">Edit a Player App</h5>
+<p>To edit a Player app:</p>
+<ol>
+<li>Navigate to the Player Apps tab.</li>
+<li>Select the app you want to edit and click the <strong>Edit</strong> icon next to it.</li>
+<li>The system opens the same edit component used when creating a new app.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h5 id="delete-a-player-app">Delete a Player App</h5>
+<p>To delete a Player App, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Player Apps</strong> tab.</li>
+<li>Select the app you want to delete and click the <strong>Trash Can</strong> icon next to the app.</li>
+</ol>
+<h5 id="search-for-a-player-app">Search for a Player App</h5>
+<p>To search for a specific app, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Player Apps</strong> tab.</li>
+<li>Click the <strong>Search Bar</strong> and type the name of the desired app.</li>
+</ol>
+<h4 id="push-integrations">Push Integrations</h4>
+<p>After adding all of the MSEL information and performing all of the configurations necessary, you can push information from enabled integrations to their respective applications.</p>
+<p><img alt="Blueprint Push Integrations OE" src="../assets/img/pushIntegrations-v2.png" /></p>
+<p>To push MSEL information to their respective applications, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Info</strong> tab.</li>
+<li>Click the <strong>Push Integrations</strong> button.</li>
+</ol>
+<h4 id="remove-integrations">Remove Integrations</h4>
+<p>If desired, the MSEL owner can remove MSEL information after the enabled integrations have pushed it to their respective applications.</p>
+<p><img alt="Blueprint Remove Integrations OE" src="../assets/img/removeIntegrations-v2.png" /></p>
+<p>To remove MSEL information from the applications, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Info</strong> tab.</li>
+<li>Click the <strong>Remove Integrations</strong> button.</li>
+</ol>
+<h2 id="administrator-guide">Administrator Guide</h2>
+<h3 id="units">Units</h3>
+<p>The following image shows the Units Administration Page. Here, administrators can add, edit, and delete units. To be able to use the Blueprint application, the administrator should assign a unit to desired users.</p>
+<p><img alt="Blueprint Teams Admin OE" src="../assets/img/blueprintUnits-v2.png" /></p>
+<h4 id="add-a-unit">Add a Unit</h4>
+<p>If the exercise administrator has granted the appropriate permissions, follow these steps to add a unit.</p>
+<p><img alt="Blueprint Add Team OE" src="../assets/img/blueprintAddUnit.png" /></p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the Units Administration View, click <strong>+</strong>.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table_16">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Name for the unit</td>
+<td>Carnegie Mellon University</td>
+</tr>
+<tr>
+<td><strong>Short Name</strong></td>
+<td>String</td>
+<td>Short name for the unit</td>
+<td>CMU</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h4 id="edit-a-unit">Edit a Unit</h4>
+<p>To edit a unit:</p>
+<ol>
+<li>Click the <strong>Settings cog</strong> in the top-right corner of the screen.</li>
+<li>Under Units Administration View, select the unit you want to edit and click the <strong>Edit</strong> icon next to it.</li>
+<li>The system opens the same edit component used when creating a new unit.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h4 id="delete-a-unit">Delete a Unit</h4>
+<p>To delete a unit, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the Units Administration View, select the unit you want to delete and click the <strong>Trash Can</strong> icon next to the unit.</li>
+</ol>
+<h4 id="search-for-a-unit">Search for a Unit</h4>
+<p>To search for a specific unit, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the Units Administration View, click the <strong>Search Bar</strong> and type the name of the desired unit.</li>
+</ol>
+<h4 id="addremove-users-from-a-unit">Add/Remove Users from a Unit</h4>
+<p>To configure a unit for an exercise, administrators add users to their respective units. To do this, follow these steps.</p>
+<p><img alt="Configure Blueprint Teams OE" src="../assets/img/blueprintConfigureUnits-v2.png" /></p>
+<ol>
+<li>Select the unit you want to configure and click to expand its configuration details.</li>
+<li>The <strong>All Users</strong> tab shows <em>unassigned</em> users. To add them to the unit, click <strong>Add User</strong>.</li>
+<li>The <strong>Unit Users</strong> tab shows <em>assigned</em> users. To remove a user from the unit, click <strong>Remove</strong>.</li>
+</ol>
+<h3 id="users">Users</h3>
+<p>The following image shows the Users Administration Page. Here, administrators can add and delete users. Additionally, administrators will be able to assign the necessary permissions to each user.</p>
+<p>The available permissions are:</p>
+<ul>
+<li><strong>System Admin:</strong> Can use all administration privileges on the Blueprint application.</li>
+<li><strong>Content Developer:</strong> Can view, edit, create, and approve events on the MSEL.</li>
+</ul>
+<p><img alt="Blueprint Users Admin OE" src="../assets/img/blueprintUsersAdmin-v4.png" /></p>
+<h4 id="add-a-user">Add a User</h4>
+<p>If the exercise administrator has granted the appropriate permissions, follow these steps to add a user.</p>
+<p><img alt="Blueprint Add User OE" src="../assets/img/blueprintAddUser-v3.png" /></p>
+<ol>
+<li>Under the Users Administration View, click <strong>+</strong>.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table_17">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>User ID</strong></td>
+<td>GUID</td>
+<td>Unique ID for the user</td>
+<td>9dd4e3d8-5098-4b0a-9216-697cda5553f8</td>
+</tr>
+<tr>
+<td><strong>User Name</strong></td>
+<td>String</td>
+<td>User name identifier</td>
+<td>user-2</td>
+</tr>
+</tbody>
+</table>
+<p>Click the <strong>Save</strong> icon (a user with a + sign), then select the permissions you want to assign by checking the boxes next to the user's name.</p>
+<h4 id="delete-a-user">Delete a User</h4>
+<p>To delete a user, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the Users Administration View, select the user you want to delete and click the <strong>Trash Can</strong> icon next to the user.</li>
+</ol>
+<h4 id="search-for-a-user">Search for a User</h4>
+<p>To search for a specific user, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the Users Administration View, click the <strong>Search Bar</strong> and type the name of the desired user.</li>
+</ol>
+<h3 id="organization-templates">Organization Templates</h3>
+<p>The following image shows the Organization Templates Administration Page. Here, administrators can add and delete organization templates.</p>
+<p><img alt="Blueprint Organizations Admin OE" src="../assets/img/blueprintOrganizationsAdmin-v2.png" /></p>
+<h4 id="add-an-organization-template">Add an Organization Template</h4>
+<p>If the exercise administrator has granted the appropriate permissions, follow these steps to add an organization template.</p>
+<p><img alt="Blueprint Add Organization Template OE" src="../assets/img/blueprintAddOrgTemplate.png" /></p>
+<ol>
+<li>Under the Organizations Administration View, click <strong>+</strong>.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table_18">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Long Name</strong></td>
+<td>String</td>
+<td>Add the complete name for the organization</td>
+<td>Cybersecurity and Infrastructure Security Agency</td>
+</tr>
+<tr>
+<td><strong>Short Name</strong></td>
+<td>String</td>
+<td>Add a short name for the organization, such as an acronym</td>
+<td>CISA</td>
+</tr>
+<tr>
+<td><strong>Summary</strong></td>
+<td>String</td>
+<td>Organization's short summary</td>
+<td>Security agency</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>String</td>
+<td>Organization's email contact</td>
+<td><code>john@cisa.gov</code></td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Rich Text</td>
+<td>Information, details, and characteristics of the organization</td>
+<td>The Cybersecurity and Infrastructure Security Agency (CISA) is an agency of the DHS that is responsible for strengthening cybersecurity and infrastructure protection.</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h4 id="edit-an-organization-template">Edit an Organization Template</h4>
+<p>To edit an organization template:</p>
+<ol>
+<li>Click the <strong>Settings cog</strong> in the top-right corner of the screen.</li>
+<li>Under Organizations Administration View, select the organization you want to edit and click the <strong>Edit</strong> icon next to the organization template.</li>
+<li>The system opens the same edit form used when creating a new organization template.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h4 id="delete-an-organization-template">Delete an Organization Template</h4>
+<p>To delete an organization template, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the Organizations Administration View, select the organization you want to delete and click the <strong>Trash Can</strong> icon next to the organization template.</li>
+</ol>
+<h4 id="search-for-an-organization-template">Search For an Organization Template</h4>
+<p>To search for a specific organization template, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the Organizations Administration View, click the <strong>Search Bar</strong> and type the name of the desired organization template.</li>
+</ol>
+<h3 id="gallery-card-templates">Gallery Card Templates</h3>
+<p>The following image shows the Gallery Card Templates Administration Page. Here, administrators can add and delete Gallery card templates.</p>
+<p><img alt="Blueprint Cards Admin OE" src="../assets/img/blueprintCardsAdmin-v2.png" /></p>
+<h4 id="add-a-gallery-card-template">Add a Gallery Card Template</h4>
+<p>If the exercise administrator has granted the appropriate permissions, follow these steps to add a Gallery card template.</p>
+<p><img alt="Blueprint Add Card Template OE" src="../assets/img/blueprintAddCardTemplate.png" /></p>
+<ol>
+<li>Under the Gallery Cards Administration View, click <strong>+</strong>.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table_19">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Gallery card name</td>
+<td>Information Technology Sector</td>
+</tr>
+<tr>
+<td><strong>Card Description</strong></td>
+<td>String</td>
+<td>Information, details, and characteristics of the Gallery card</td>
+<td>Status of the Information Technology Sector</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h4 id="edit-a-gallery-card-template">Edit a Gallery Card Template</h4>
+<p>To edit a Gallery card template:</p>
+<ol>
+<li>Click the <strong>Settings cog</strong> in the top-right corner of the screen.</li>
+<li>Under Gallery Cards Administration View, select the card template you want to edit and click the <strong>Edit</strong> icon next to it.</li>
+<li>The system opens the same edit component used when creating a new card template.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h4 id="delete-a-gallery-card-template">Delete a Gallery Card Template</h4>
+<p>To delete an Gallery card template, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the Gallery Cards Administration View, select the card template you want to delete and click the <strong>Trash Can</strong> icon next to the card template.</li>
+</ol>
+<h4 id="search-for-a-gallery-card-template">Search for a Gallery Card Template</h4>
+<p>To search for a specific Gallery card template, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the Gallery Cards Administration View, click the <strong>Search Bar</strong> and type the name of the desired card template.</li>
+</ol>
+<h3 id="cite-actions-templates">CITE Actions Templates</h3>
+<p>The following image shows the CITE Action Templates administration page. Here, administrators can add and delete CITE action templates.</p>
+<p><img alt="Blueprint Actions Admin OE" src="../assets/img/blueprintActionsAdmin-v2.png" /></p>
+<h4 id="add-a-cite-action-template">Add a CITE Action Template</h4>
+<p>If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE action template.</p>
+<p><img alt="Blueprint CITE Action Template OE" src="../assets/img/AddCITEActionTemplate.png" /></p>
+<ol>
+<li>Under the CITE Actions Administration View, click <strong>+</strong>.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table_20">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Description of the Action</strong></td>
+<td>String</td>
+<td>Information, details, and characteristics of the CITE action</td>
+<td>Score the incident</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h4 id="edit-a-cite-action-template">Edit a CITE Action Template</h4>
+<p>To edit a CITE action template:</p>
+<ol>
+<li>Click the <strong>Settings cog</strong> in the top-right corner of the screen.</li>
+<li>Under CITE Actions Administration View, select the action template you want to edit and click the <strong>Edit</strong> icon next to it.</li>
+<li>The system opens the same edit component used when creating a new action template.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h4 id="delete-a-cite-action-template">Delete a CITE Action Template</h4>
+<p>To delete an CITE action template, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the CITE Actions Administration View, select the action template you want to delete and click the <strong>Trash Can</strong> icon next to the action template.</li>
+</ol>
+<h4 id="search-for-a-cite-action-template">Search for a CITE Action Template</h4>
+<p>To search for a specific CITE action template, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the CITE Actions Administration View, click the <strong>Search Bar</strong> and type the name of the desired action template.</li>
+</ol>
+<h3 id="cite-roles-templates">CITE Roles Templates</h3>
+<p>The following image shows the CITE Roles Templates Administration Page. Here, administrators can add and delete CITE roles templates.</p>
+<p><img alt="Blueprint Roles Admin OE" src="../assets/img/blueprintRolesAdmin-v2.png" /></p>
+<h4 id="add-a-cite-role-template">Add a CITE Role Template</h4>
+<p>If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE role template.</p>
+<p><img alt="Blueprint CITE Role Template OE" src="../assets/img/AddCITERoleTemplate.png" /></p>
+<ol>
+<li>Under the CITE Roles Administration View, click <strong>+</strong>.</li>
+<li>Fill the fields as necessary following the Data Format Table specifications.</li>
+</ol>
+<h4 id="data-format-table_21">Data Format Table</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>String</td>
+<td>Name of the role</td>
+<td>Reviewer</td>
+</tr>
+</tbody>
+</table>
+<p>After you've added all desired configurations, click <strong>Save</strong>.</p>
+<h4 id="edit-a-cite-role-template">Edit a CITE Role Template</h4>
+<p>To edit a CITE role template:</p>
+<ol>
+<li>Click the <strong>Settings cog</strong> in the top-right corner of the screen.</li>
+<li>Under CITE Roles Administration View, select the role template you want to edit and click the <strong>Edit</strong> icon next to it.</li>
+<li>The system opens the same edit component used when creating a new role template.</li>
+<li>Make your changes, then click <strong>Save</strong>.</li>
+</ol>
+<h4 id="delete-a-cite-role-template">Delete a CITE Role Template</h4>
+<p>To delete a CITE role template, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the CITE Roles Administration View, select the role template you want to delete and click the <strong>Trash Can</strong> icon next to the role template.</li>
+</ol>
+<h4 id="search-for-a-cite-role-template">Search For a CITE Role Template</h4>
+<p>To search for a specific CITE role template, follow these steps:</p>
+<ol>
+<li>Click the <strong>Settings Cog</strong> found in the top-right corner of the screen.</li>
+<li>Under the CITE Roles Administration View, click the <strong>Search Bar</strong> and type the name of the desired role template.</li>
+</ol>
+<h2 id="glossary">Glossary</h2>
+<p>This glossary defines key terms and concepts used in the Blueprint application.</p>
+<ol>
+<li><strong>Approver Role:</strong> Can view and edit the MSEL, but will have the added feature of approving a MSEL.</li>
+<li><strong>Blueprint</strong>: Web application created to make the development of a MSEL and events easier.</li>
+<li><strong>CITE:</strong> Web application that allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents.</li>
+<li><strong>CITE Action:</strong> Series of steps to guide users on an appropriate course of action during an exercise.</li>
+<li><strong>CITE Role:</strong> Provide a set of responsibilities assigned to a user during an exercise.</li>
+<li><strong>Content Developer Permission:</strong> Can view, edit, create, and approve events on the MSEL.</li>
+<li><strong>Data Fields:</strong> Structured components containing essential information about the event's characteristics, context, and implications.</li>
+<li><strong>Editor Role:</strong> Can edit the events assigned to them by the MSEL owner, but not other events. They cannot delete events or create new events.</li>
+<li><strong>Events</strong>: Specific scenario events or messages within the scenario that prompt users to implement designated actions.</li>
+<li><strong>Exercises</strong>: Structured and simulated activity designed to assess, train, or evaluate the capabilities, preparedness, and responses of individuals, teams, or organizations in dealing with various situations, especially emergencies or crisis scenarios.</li>
+<li><strong>Evaluator Permission</strong>: Manages the exercise, can advance moves, execute events, and check events as completed.</li>
+<li><strong>Gallery:</strong> Web application where participants receive incident information.</li>
+<li><strong>Gallery Card:</strong> The Gallery wall displays Gallery cards. Each Gallery card represents an article category. Cards show a background color based on the most recent article's status and the number of unread articles. Content developers define cards within each Gallery collection.</li>
+<li><strong><code>Incrementer</code> Role:</strong> When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.</li>
+<li><strong><code>Inviter</code> Role:</strong> This role will allow a user to invite others to the MSEL event.</li>
+<li><strong>Modifier Role:</strong> When the MSEL owner has enabled CITE integration, this role allows a user to modify the team's score.</li>
+<li><strong>Move Editor:</strong> Can edit moves on the MSEL, as well as increment them during an exercise.</li>
+<li><strong>Moves:</strong> A defined period of time during an exercise, where exercise organizers distribute a series of events for users to discuss and assess current incident severity.</li>
+<li><strong>MSEL:</strong> (Master Scenario Events List) provides a timeline for all expected events, affiliated users and organizations during an exercise.</li>
+<li><strong>Observer Role:</strong>  When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.</li>
+<li><strong>Organizations:</strong> Entities within an exercise with defined roles, responsibilities, and functions.</li>
+<li><strong>Owner Role:</strong> Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).</li>
+<li><strong>Player:</strong> Centralized web interface where participants, teams, and administrators go to engage in a cyber event.</li>
+<li><strong>Player Apps:</strong> List of applications accessible from the same Player view.</li>
+<li><strong>Player View:</strong> These are the settings associated with building a view. You can edit, clone, and delete a view.</li>
+<li><strong>Steamfitter:</strong> Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.</li>
+<li><strong>Submitter Role:</strong> When the MSEL owner has enabled CITE integration, this role allows a user to submit the team's score.</li>
+<li><strong>System Admin Permission:</strong> Can add users to a team, as well as assign the required permissions.</li>
+<li><strong>System Defined Data Fields:</strong> Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.</li>
+<li><strong>User Defined Data Fields:</strong> The user adds on an as-needed basis.</li>
+<li><strong>Viewer Role:</strong> Can view the MSEL, but can't do any edits to it.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Carnegie Mellon University. All rights reserved.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/Crucible/issues/new?template=question.md" target="_blank" rel="noopener" title="Ask a Question" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m-7 12h-2v-2h2zm1.8-5c-.3.4-.7.6-1.1.8-.3.2-.4.3-.5.5-.2.2-.2.4-.2.7h-2c0-.5.1-.8.3-1.1.2-.2.6-.5 1.1-.8.3-.1.5-.3.6-.5s.2-.5.2-.7c0-.3-.1-.5-.3-.7s-.5-.3-.8-.3-.5.1-.7.2q-.3.15-.3.6h-2c.1-.7.4-1.3.9-1.7s1.2-.5 2.1-.5 1.7.2 2.2.6.8 1 .8 1.7q.15.6-.3 1.2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/crucible/issues/new?template=bug_report.md" target="_blank" rel="noopener" title="Report a Problem" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M256 0c53 0 96 43 96 96v3.6c0 15.7-12.7 28.4-28.4 28.4H188.5c-15.7 0-28.4-12.7-28.4-28.4V96c0-53 43-96 96-96zM41.4 105.4c12.5-12.5 32.8-12.5 45.3 0l64 64c.7.7 1.3 1.4 1.9 2.1 14.2-7.3 30.4-11.4 47.5-11.4h112c17.1 0 33.2 4.1 47.5 11.4.6-.7 1.2-1.4 1.9-2.1l64-64c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-64 64c-.7.7-1.4 1.3-2.1 1.9 6.2 12 10.1 25.3 11.1 39.5h64.3c17.7 0 32 14.3 32 32s-14.3 32-32 32h-64c0 24.6-5.5 47.8-15.4 68.6q3.3 1.95 6 4.8l64 64c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-63.1-63.1c-24.5 21.8-55.8 36.2-90.3 39.6V240c0-8.8-7.2-16-16-16s-16 7.2-16 16v239.2c-34.5-3.4-65.8-17.8-90.3-39.6l-63.1 63c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l64-64c1.9-1.9 3.9-3.4 6-4.8C101.5 367.8 96 344.6 96 320H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h64.3c1.1-14.1 5-27.5 11.1-39.5-.7-.6-1.4-1.2-2.1-1.9l-64-64c-12.5-12.5-12.5-32.8 0-45.3z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/crucible/issues/new?template=feature_request.md" target="_blank" rel="noopener" title="Request a Feature" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 6a6 6 0 0 1 6 6c0 2.22-1.21 4.16-3 5.2V19a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6 6 0 0 1 6-6m2 15v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1zm6-10h3v2h-3zM1 11h3v2H1zM13 1v3h-2V1zM4.92 3.5l2.13 2.14-1.42 1.41L3.5 4.93zm12.03 2.13 2.12-2.13 1.43 1.43-2.13 2.12z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/crucible/discussions" target="_blank" rel="noopener" title="Community Discussions" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M88.2 309.1c9.8-18.3 6.8-40.8-7.5-55.8C59.4 230.9 48 204 48 176c0-63.5 63.8-128 160-128s160 64.5 160 128-63.8 128-160 128c-13.1 0-25.8-1.3-37.8-3.6-10.4-2-21.2-.6-30.7 4.2q-6.15 3.15-12.6 6c-16 7.2-32.9 13.5-49.9 18 2.8-4.6 5.4-9.1 7.9-13.6 1.1-1.9 2.2-3.9 3.2-5.9zM208 352c114.9 0 208-78.8 208-176S322.9 0 208 0 0 78.8 0 176c0 41.8 17.2 80.1 45.9 110.3-.9 1.7-1.9 3.5-2.8 5.1-10.3 18.4-22.3 36.5-36.6 52.1-6.6 7-8.3 17.2-4.6 25.9C5.8 378.3 14.4 384 24 384c43 0 86.5-13.3 122.7-29.7 4.8-2.2 9.6-4.5 14.2-6.8 15.1 3 30.9 4.5 47.1 4.5m224 128c16.2 0 31.9-1.6 47.1-4.5 4.6 2.3 9.4 4.6 14.2 6.8C529.5 498.7 573 512 616 512c9.6 0 18.2-5.7 22-14.5s2-19-4.6-25.9c-14.2-15.6-26.2-33.7-36.6-52.1-.9-1.7-1.9-3.4-2.8-5.1 28.8-30.3 46-68.6 46-110.4 0-94.4-87.9-171.5-198.2-175.8 4.1 15.2 6.2 31.2 6.2 47.8v.6c87.2 6.7 144 67.5 144 127.4 0 28-11.4 54.9-32.7 77.2-14.3 15-17.3 37.6-7.5 55.8 1.1 2 2.2 4 3.2 5.9 2.5 4.5 5.2 9 7.9 13.6-17-4.5-33.9-10.7-49.9-18q-6.45-2.85-12.6-6c-9.5-4.8-20.3-6.2-30.7-4.2-12.1 2.4-24.8 3.6-37.8 3.6-61.7 0-110-26.5-136.8-62.3-16 5.4-32.8 9.4-50 11.8C279 439.8 350 480 432 480"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/crucible" target="_blank" rel="noopener" title="cmu-sei/Crucible on Github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:info@sei.cmu.edu?subject=Crucible%20Feedback" target="_blank" rel="noopener" title="Email Crucible Team" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16v22.1l172.5 141.6c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16zM48 212.2V384c0 8.8 7.2 16 16 16h384c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0zM0 128c0-35.3 28.7-64 64-64h384c35.3 0 64 28.7 64 64v256c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.sei.cmu.edu/" target="_blank" rel="noopener" title="Software Engineering Institute" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1v16.2c0 22.1-17.9 40-40 40h-16c-1.1 0-2.2 0-3.3-.1-1.4.1-2.8.1-4.2.1L416 512h-24c-22.1 0-40-17.9-40-40v-88c0-17.7-14.3-32-32-32h-64c-17.7 0-32 14.3-32 32v88c0 22.1-17.9 40-40 40h-55.9c-1.5 0-3-.1-4.5-.2-1.2.1-2.4.2-3.6.2h-16c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9.1-2.8v-69.7h-32c-18 0-32-14-32-32.1 0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7l255.4 224.5c8 7 12 15 11 24"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
