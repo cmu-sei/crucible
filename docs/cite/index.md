@@ -244,8 +244,8 @@ To edit an evaluation, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to be edited and click the **Edit Icon** next to the evaluation.
-4. Here, users will be prompted the same evaluation's edit component as when adding a new evaluation.
+3. Select the evaluation you wish to edit and click the **Edit Icon** next to the evaluation.
+4. The system opens the same edit component used when creating a new evaluation.
 5. After doing all the necessary edits, click **Save**.
 
 #### Delete an Evaluation
@@ -314,8 +314,8 @@ To edit a move, follow these steps:
 1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
 3. Select the evaluation to be edited and click the **Moves** tab.
-4. Select the move to be edited, and click the **Edit Icon** next to the move.
-5. Here, users will be prompted the same move's edit component as when adding a new move.
+4. Select the move you wish to edit and click the **Edit Icon** next to the move.
+5. The system opens the same edit component used when creating a new move.
 6. After doing all the necessary edits, click **Save**.
 
 #### Delete a Move
@@ -352,8 +352,8 @@ To edit a team, follow these steps:
 1. Click the **Settings Cog**.
 2. Navigate to the **Evaluations** tab.
 3. Select the evaluation to be edited and click the **Teams** tab.
-4. Select the team to be edited, and click the **Edit Icon** next to the team.
-5. Here, users will be prompted the same team's edit component as when adding a new team.
+4. Select the team you wish to edit and click the **Edit Icon** next to the team.
+5. The system opens the same edit component used when creating a new team.
 6. After doing all the necessary edits, click **Save**.
 
 #### Delete a Team
@@ -431,8 +431,8 @@ To edit a scoring model, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to be edited, and click the **Edit Icon** next to the scoring model.
-4. Here, users will be prompted the same scoring model's edit component as when adding a new scoring model.
+3. Select the scoring model you wish to edit and click the **Edit Icon** next to the scoring model.
+4. The system opens the same edit component used when creating a new scoring model.
 5. After doing all the necessary edits, click **Save**.
 
 #### Upload a Scoring Model
@@ -519,8 +519,8 @@ To edit a scoring category, follow these steps:
 1. Click the **Settings Cog**.
 2. Navigate to the **Scoring Models** tab.
 3. Select the scoring model to be edited, and click the **Scoring Categories** tab.
-4. Select the scoring category to be edited, and click the **Edit Icon** next to the scoring category.
-5. Here, users will be prompted the same scoring category's edit component as when adding a new scoring category.
+4. Select the scoring category you wish to edit and click the **Edit Icon** next to the scoring category.
+5. The system opens the same edit component used when creating a new scoring category.
 6. After doing all the necessary edits, click **Save**.
 
 #### Delete a Scoring Category
@@ -562,8 +562,8 @@ To edit a scoring option, follow these steps:
 2. Navigate to the **Scoring Models** tab.
 3. Select the scoring model to be edited, and click the **Scoring Categories** tab.
 4. Select the scoring category to be edited, and click the **Scoring Options** tab.
-5. Select the scoring option to be edited, and click the **Edit Icon** next to the scoring option.
-6. Here, users will be prompted the same scoring option's edit component as when adding a new scoring option.
+5. Select the scoring option you wish to edit and click the **Edit Icon** next to the scoring option.
+6. The system opens the same edit component used when creating a new scoring option.
 7. After doing all the necessary edits, click **Save**.
 
 #### Delete a Scoring Option
@@ -609,8 +609,8 @@ To edit an action, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Actions** tab.
-3. Select the action to be edited, and click the **Edit Icon** next to the action.
-4. Here, users will be prompted the same action's edit component as when adding a new action.
+3. Select the action you wish to edit and click the **Edit Icon** next to the action.
+4. The system opens the same edit component used when creating a new action.
 5. After doing all the necessary edits, click **Save**.
 
 #### Delete an Action
@@ -653,8 +653,8 @@ To edit a role, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Roles** tab.
-3. Select the role to be edited, and click the **Edit Icon** next to the role.
-4. Here, users will be prompted the same role's edit component as when adding a new role.
+3. Select the role you wish to edit and click the **Edit Icon** next to the role.
+4. The system opens the same edit component used when creating a new role.
 5. After doing all the necessary edits, click **Save**.
 
 #### Delete a Role
@@ -704,8 +704,8 @@ To edit a team type, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Team Types** tab.
-3. Select the team type to be edited, and click the **Edit Icon** next to the team type.
-4. Here, users will be prompted the same team type's edit component as when adding a new team type.
+3. Select the team type you wish to edit and click the **Edit Icon** next to the team type.
+4. The system opens the same edit component used when creating a new team type.
 5. After doing all the necessary edits, click **Save**.
 
 #### Delete a Team Type
