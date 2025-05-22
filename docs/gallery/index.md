@@ -211,8 +211,8 @@ After creating your article, it will be displayed in the Gallery Archive in the 
 
 To edit an article, follow these steps:
 
-1. On the Gallery Archive section, select the article to be edited and click the **Edit Icon** on the article's card.
-2. Here, users will be prompted the same article's edit component as when adding a new article.
+1. On the Gallery Archive section, select the article you wish to edit and click the **Edit Icon** on the article's card.
+2. The system opens the same edit component used when creating a new article.
 3. After doing all the necessary edits, click **Save**.
 
 #### Delete an Article
@@ -261,8 +261,8 @@ To edit a user, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Users** tab.
-3. Select the user to be edited and click the **Edit Icon** next to the user.
-4. Here, users will be prompted the same user's edit component as when adding a new user.
+3. Select the user you wish to edit and click the **Edit Icon** next to the user.
+4. The system opens the same edit component used when creating a new user.
 5. After doing all the necessary edits, click **Save**.
 
 #### Delete a User
@@ -303,8 +303,8 @@ To edit a collection, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Select the collection to be edited and click the **Edit Icon** next to the collection.
-4. Here, users will be prompted the same collection's edit component as when adding a new collection.
+3. Select the collection you wish to edit and click the **Edit Icon** next to the collection.
+4. The system opens the same edit component used when creating a new collection.
 5. After doing all the necessary edits, click **Save**.
 
 #### Delete a Collection
@@ -373,8 +373,8 @@ To edit a card, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Cards** tab.
-3. Select the card to be edited and click the **Edit Icon** next to the card.
-4. Here, users will be prompted the same card's edit component as when adding a new card.
+3. Select the card you wish to edit and click the **Edit Icon** next to the card.
+4. The system opens the same edit component used when creating a new card.
 5. After doing all the necessary edits, click **Save**.
 
 #### Delete a Card
@@ -425,8 +425,8 @@ To edit an article, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Articles** tab.
-3. Select the article to be edited and click the **Edit Icon** next to the article.
-4. Here, users will be prompted the same article's edit component as when adding a new article.
+3. Select the article you wish to edit and click the **Edit Icon** next to the article.
+4. The system opens the same edit component used when creating a new article.
 5. After doing all the necessary edits, click **Save**.
 
 #### Delete an Article
@@ -468,8 +468,8 @@ To edit an exhibit, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
-3. Select the exhibit to be edited and click the **Edit Icon** next to the exhibit.
-4. Here, users will be prompted the same exhibit's edit component as when adding a new exhibit.
+3. Select the exhibit you wish to edit and click the **Edit Icon** next to the exhibit.
+4. The system opens the same edit component used when creating a new exhibit.
 5. After doing all the necessary edits, click **Save**.
 
 #### Delete an Exhibit

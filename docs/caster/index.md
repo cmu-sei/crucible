@@ -14,7 +14,7 @@ Caster should give experts the control they need, while also making it easy for 
 
 For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html).
 
-## Administrator User Guide
+## Administrator Guide
 
 ### Users
 

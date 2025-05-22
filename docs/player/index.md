@@ -18,7 +18,7 @@ Player is ***not*** meant to:
 - Provide any mechanisms for individual applications to communicate with each other.
 - Provide any default applications. However, an exercise can consume some common applications.
 
-## Administrator User Guide
+## Administrator Guide
 
 ![admin button](../assets/img/admin button.png)
 
