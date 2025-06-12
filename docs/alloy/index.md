@@ -2,7 +2,7 @@
 
 ## Overview
 
-An Alloy Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable. You can schedule an events can to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
+An **Alloy** Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable. Events can be scheduled to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
 
 ## Administrator Guide
 
@@ -22,15 +22,17 @@ When deploying the Alloy API, configure the `ResourceOwnerAuthorization` setting
 
 The default setting for the maximum number of active events per user is **two**. However, you can change this in the `MaxEventsForBasicUser` setting.
 
+```json
       "Resource": {
         "MaxEventsForBasicUser": 2
       }
+```
 
 ### Manage Event Templates
 
-An Alloy, you use an *event template* to associate one or more of the individual Crucible applications, including a Player view, Caster directory, and Steamfitter scenario template. A user can launch a new event from the defined event template.
+In Alloy, you use an *event template* to associate one or more of the individual Crucible applications, including a Player view, Caster directory, and Steamfitter scenario template. A user can launch a new event from the defined event template.
 
-Only a **system admin** or a **content developer** can create or modify event templates in the Alloy administrator user interface. A Player system admin grants **System admin** and **content developer** permissions in the Player administrator user interface.
+Only a **system admin** or a **content developer** can create or modify event templates in the Alloy administrator user interface. A Player system admin grants **system admin** and **content developer** permissions in the Player administrator user interface.
 
 Once the content developer creates the event template, a user can launch the Alloy *event* from the template. The event is the actual running of a simulation.
 
@@ -59,7 +61,7 @@ The Alloy user interface as viewed by a user consists of two screens:
 
 #### How to Create an Alloy Definition
 
-Before creating an Alloy definition content developers must complete the following in their respective Crucible apps:
+Before creating an Alloy definition, content developers must complete the following in their respective Crucible apps:
 
 - Player content developer creates the *Player exercise*
 - Caster content developer creates the *Caster directory*
@@ -90,7 +92,7 @@ When launching an implementation from a definition, the Alloy API goes through t
 
 #### Understanding the End Process
 
-A user can initiate the end process or, because time has expired, the `AlloyQueryService` can initiate the end process. Regardless of which method initiates the process the Alloy API does the following:
+A user can initiate the end process or, because time has expired, the `AlloyQueryService` can initiate the end process. Regardless of which method initiates the process, the Alloy API does the following:
 
  1. Deletes the Player exercise.
  2. Deletes the Steamfitter session.
@@ -102,6 +104,8 @@ A user can initiate the end process or, because time has expired, the `AlloyQuer
 <!-- ## Alloy Tips -->
 
 ## Glossary
+
+The following glossary provides a brief definition of key terms and concepts as they are used in the context of the Alloy application.
 
 **Definition:** The structure and build of the Alloy Exercise, usually contains some combination of a Player exercise, Caster directory, and Steamfitter scenario.
 
