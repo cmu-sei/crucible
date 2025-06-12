@@ -2,7 +2,7 @@
 
 ## Overview
 
-An **Alloy** Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable. Events can be scheduled to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
+An **Alloy** Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable. You can schedule an event to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
 
 ## Administrator Guide
 
@@ -105,7 +105,7 @@ A user can initiate the end process or, because time has expired, the `AlloyQuer
 
 ## Glossary
 
-The following glossary provides a brief definition of key terms and concepts as they are used in the context of the Alloy application.
+The following glossary provides a brief definition of key terms and concepts used in the context of the Alloy application.
 
 **Definition:** The structure and build of the Alloy Exercise, usually contains some combination of a Player exercise, Caster directory, and Steamfitter scenario.
 
