@@ -495,7 +495,7 @@ On the **Default** tab, fill the fields as necessary following the Data Format T
 | **Group** | Integer | Groups events within a move, often times executed within the same time range | 1 |
 | **Exercise Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
 | **Type** | String | Source type for the event | Email |
-| **Delivery Method** | Dropdown Text | How the event is delivered to participants | Email |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants | Email |
 
 If not already completed on the previous tab, fill the fields from the **Advanced** tab following the Data Format Table specifications. This tab focuses on the MSEL's metadata and style.
 
@@ -521,7 +521,7 @@ If the MSEL owner enabled Gallery integration, the user should verify that all f
 | **Move** | Dropdown Text | Move number that the event is part of | 1 |
 | **Group** | Integer | Groups events within a move, often times executed within the same time range | 1 |
 | **Exercise Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
-| **Delivery Method** | Dropdown Text | How the event is delivered to participants | Gallery |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants | Gallery |
 | **Title** | String | Title of the event | Bank Consortium Falls Victim to Ransomware Attack |
 | **From Org** | Dropdown Text | Select the organization that sends this event | CC News |
 | **To Org** | Dropdown Text | Select the organization that receives this event | ALL |
@@ -789,7 +789,7 @@ The MSEL owner should add these fields:
 | ---------- | ---------- | ----------- | ---------- |
 | **Description** | String |  Information, details, and characteristics of the event | STARTEX |
 | **Date Posted** | Datetime | Posted date of the event | 1/24/2024, 14:18:27 |
-| **Delivery Method** | Dropdown Text | How the event is delivered to participants | Gallery |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants | Gallery |
 | **Name** | String | Name of the event | Common Operating Picture 1 |
 | **From Org** | Dropdown Text | Select the organization that sends this event | CC News |
 | **To Org** | Dropdown Text | Select the organization that receives this event | ALL |
