@@ -1281,7 +1281,7 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **Organizations:** Entities within an exercise with defined roles, responsibilities, and functions.
 
-**`Owner` Role:** Owner of the MSEL, can view and edit as well as perform all of the functionalities that the MSEL provides (e.g., Add Teams, Add Integrations, Events).
+**`Owner` Role:** Owner of the MSEL, can view and edit as well as perform all functionality that the MSEL provides (e.g., Add Teams, Add Integrations, Events).
 
 **Player:** Centralized web interface where participants, teams, and administrators go to engage in a cyber event.
 
