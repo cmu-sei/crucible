@@ -495,7 +495,7 @@ On the **Default** tab, fill the fields as necessary following the Data Format T
 | **Group** | Integer | Groups events within a move, often times executed within the same time range | 1 |
 | **Exercise Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
 | **Type** | String | Source type for the event | Email |
-| **Delivery Method** | Dropdown Text | How the event will be delivered to participants | Email |
+| **Delivery Method** | Dropdown Text | How the event is delivered to participants | Email |
 
 If not already completed on the previous tab, fill the fields from the **Advanced** tab following the Data Format Table specifications. This tab focuses on the MSEL's metadata and style.
 
@@ -521,7 +521,7 @@ If the MSEL owner enabled Gallery integration, the user should verify that all f
 | **Move** | Dropdown Text | Move number that the event is part of | 1 |
 | **Group** | Integer | Groups events within a move, often times executed within the same time range | 1 |
 | **Exercise Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
-| **Delivery Method** | Dropdown Text | How the event will be delivered to participants | Gallery |
+| **Delivery Method** | Dropdown Text | How the event is delivered to participants | Gallery |
 | **Title** | String | Title of the event | Bank Consortium Falls Victim to Ransomware Attack |
 | **From Org** | Dropdown Text | Select the organization that sends this event | CC News |
 | **To Org** | Dropdown Text | Select the organization that receives this event | ALL |
@@ -789,7 +789,7 @@ The MSEL owner should add these fields:
 | ---------- | ---------- | ----------- | ---------- |
 | **Description** | String |  Information, details, and characteristics of the event | STARTEX |
 | **Date Posted** | Datetime | Posted date of the event | 1/24/2024, 14:18:27 |
-| **Delivery Method** | Dropdown Text | How the event will be delivered to participants | Gallery |
+| **Delivery Method** | Dropdown Text | How the event is delivered to participants | Gallery |
 | **Name** | String | Name of the event | Common Operating Picture 1 |
 | **From Org** | Dropdown Text | Select the organization that sends this event | CC News |
 | **To Org** | Dropdown Text | Select the organization that receives this event | ALL |
@@ -1257,7 +1257,7 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **Events**: Specific scenario events or messages within the scenario that prompt users to implement designated actions.
 
-**Exercises**: Structured and simulated activity designed to assess, train, or evaluate the capabilities, preparedness, and responses of individuals, teams, or organizations in dealing with various situations, especially emergencies or crisis scenarios.
+**Exercises**: Structured and simulated activity designed to assess, train, or evaluate the capabilities, preparedness, and responses of individuals, teams, or organizations in dealing with various scenarios, especially emergencies or crises.
 
 **Evaluator Permission**: Manages the exercise, can advance moves, execute events, and check events as completed.
 
@@ -1281,7 +1281,7 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **Organizations:** Entities within an exercise with defined roles, responsibilities, and functions.
 
-**`Owner` Role:** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g.: Add Teams, Add Integrations, Events, etc).
+**`Owner` Role:** Owner of the MSEL, can view and edit as well as perform all of the functionalities that the MSEL provides (e.g., Add Teams, Add Integrations, Events).
 
 **Player:** Centralized web interface where participants, teams, and administrators go to engage in a cyber event.
 
