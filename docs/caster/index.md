@@ -167,7 +167,7 @@ The top-level construct within a project is a *directory*. A project can contain
 
 #### Directory Hierarchies
 
-Directories can contain subdirectories to create a *hierarchy* of directories and the configuration files contained therein. When creating a run, the files in the workspace, the workspace's directory, ***and all parent directories*** are merged and passed to Terraform as a single configuration. This eliminates redundancy when developing many environments that are similar or share a set of common variables or data across many configurations. For example, a large deployment might have a top-level directory defining global variables `vlan ids` and `team ids`, and subdirectories defining resources using those variables.
+Directories can contain subdirectories to create a *hierarchy* of directories and the configuration files contained therein. When creating a run, the files in the workspace, the workspace's directory, ***and all parent directories*** merged and pass to Terraform as a single configuration. This eliminates redundancy when developing many environments that are similar or share a set of common variables or data across many configurations. For example, a large deployment might have a top-level directory defining global variables `vlan ids` and `team ids`, and subdirectories defining resources using those variables.
 
 Users can add, rename, delete, or export a directory from the navigation panel on a project's main Caster page.
 
@@ -185,11 +185,11 @@ When you open a project, you can create a design and add modules backed by Git t
 
 This topic is for anyone who manages a Crucible instance who wants to configure their Terraform provider installation for Caster. You can configure Terraform to only download certain providers from the Internet and use them from a local File store.
 
-Documentation describing is found in **HashiCorp's Terraform** documentation: **CLI Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
+Refer to **HashiCorp's Terraform** documentation: **CLI Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
 
 For your reference, below is the `.terraformrc` file currently implemented in the SEI's CyberForce instance of Caster.
 
-In the SEI's instance, we want to use any plugins in the `sei` or `mastercard` namespace that have been downloaded locally. In addition, we can download any of the `hashicorp` namespace providers in the `direct` section directly from the Internet without any operator intervention.
+In the SEI's instance, we want to use any locally downloaded plugins in the `sei` or `mastercard` namespace. In addition, we can download any of the `hashicorp` namespace providers in the `direct` section directly from the Internet without any operator intervention.
 
 These plugins are then cached in the `plugin_cache_dir` section, to save from downloading the providers during every Terraform `plan` and `apply`.
 
@@ -226,9 +226,9 @@ A *host* consists of a name, datastore, and maximum number of virtual machines t
 
 Workspaces have an additional property, `DynamicHost`, which is usually set to `false`. When Alloy creates a workspace, this is set to `true`, and changes the behavior of a run. When `DynamicHost` is `true`, Caster examines all of the hosts assigned to the current exercise and chooses the one with the least usage (the number of machines to deploy/maximum machines) to assign to the workspace.
 
-Along with all of the files normally added to the run, Caster will create a `generated_host_values.auto.tfvars` containing two variable values: `vsphere_host_name` and `vsphere_datastore`, which are set to the name and datastore of the selected host. When the run is applied, Caster tracks how many virtual machines are deployed to the host and uses it for future calculations.
+In addition to the normal run files, Caster creates a `generated_host_values.auto.tfvars` containing two variable values: `vsphere_host_name` and `vsphere_datastore`, set to the name and datastore of the selected host. Upon applying the run, Caster tracks how many VMs deployed to the host, and uses this for future calculations.
 
-When the workspace is deleted after an on-demand exercise (ODX) is finished, Caster releases the host's resources. If a run attempts to deploy more virtual machines than there is capacity for in the available hosts, the run will fail.
+After an on-demand exercise (ODX) finishes, Caster deletes the workspace and releases the host's resources. If a run attempts to deploy more virtual machines than there is capacity for in the available hosts, the run will fail.
 
 #### On-Demand Exercise Functionality
 
@@ -251,7 +251,7 @@ A *run* is a specific instance of the Terraform *plan* and *apply* process for a
 
 #### Plan
 
-Clicking Plan will create a new Run and execute the `terraform plan` command on the given configuration. This raw Terraform output is shown to the user, and describes:
+Clicking *plan* creates a new Run and executes the `terraform plan` command on the given configuration. This raw Terraform output, visible to the user, describes:
 
 - What actions Terraform will take
 - What resources to create
@@ -276,17 +276,17 @@ Within the workspace view users can see all the runs that have been planned and 
 
 #### Destroy
 
-Selecting destroy instead of plan is largely the same, except that the plan generated is one that will destroy all previously deployed resources in the workspace, rather than making the infrastructure match the current configuration. That is, *Destroy* creates a plan that will destroy all of the previously deployed resources in a workspace.
+Selecting destroy instead of plan is similar, but the generated plan will destroy all previously deployed resources in the workspace, rather than matching the infrastructure to the current configuration. That is, *Destroy* creates a plan that will destroy all of the previously deployed resources in a workspace.
 
 If a resource is defined in the configuration and created in a run and then deleted from the configuration, it is destroyed upon the next plan or destroy run. This is because a Terraform run always tries to match the infrastructure to the current configuration.
 
-There is only one run in progress at a time per workspace. Terraform locks the state of the workspace and only a single operation is performed at a time. Developers may wish to break up large deployments into multiple directories and workspaces to operate on different parts of the deployments simultaneously. For example, break out user enclaves so developers can perform actions on other parts of a network without (potentially) waiting a long time to redeploy user machines.
+There is only one run in progress at a time per workspace. Terraform locks the state of the workspace and only performs a single operation at a time. Developers may wish to break up large deployments into multiple directories and workspaces to operate on different parts of the deployments simultaneously. For example, break out user enclaves so developers can perform actions on other parts of a network without (potentially) waiting a long time to redeploy user machines.
 
 The workspace view allows users to see a table with all the runs that have been planned and applied within that directory. Runs highlighted in red are destroyed operations.
 
 Within the workspace view users can click `Destroy` to destroy live Terraform applications.
 
-This Infrastructure-as-Code approach is unfamiliar to some developers. It defines a configuration and applies it in its entirety, rather than selecting individual pieces for deployment. There are some ways to target individual pieces of a configuration, but they are recommended by Terraform as the exception rather than the rule and are not yet fully implemented in Caster.
+This Infrastructure-as-Code approach is unfamiliar to some developers. It defines a configuration and applies it in its entirety, rather than selecting individual pieces for deployment. There are some ways to target individual pieces of a configuration, but Terraform recommends this as the exception rather than the rule, and Caster does not fully implement this.
 
 #### Taint
 
@@ -299,7 +299,7 @@ Taint allows users to redeploy resources. For example, if a user needs to redepl
 
 Some resources are not in scope for taint, however.
 
-Users can taint resources within the workspace view. Once a resource is tainted it will display in red shading. Users can easily access the `Untaint` command while in workspace view before running another plan-and-apply cycle if they decide to keep the resource.
+Users can taint resources within the workspace view. A tainted resource will display in red shading. Users can easily access the `Untaint` command while in workspace view before running another plan-and-apply cycle if they decide to keep the resource.
 
 ## Glossary
 
