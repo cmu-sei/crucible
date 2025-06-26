@@ -20,11 +20,11 @@ For more information on native Terraform constructs used in Caster, please refer
 
 ![Caster users](../assets/img/caster-users.PNG)
 
-Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. **Permissions** are assigned to users and/or teams.
+Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. **Permissions** apply to users and/or teams.
 
 #### Assign Roles
 
-**Roles** are groups of permissions. Only a SystemAdmin can create roles and assign users and/or teams to them. More about roles as future Player development is completed.
+**Roles** are groups of permissions. Only a SystemAdmin can create roles and assign users and/or teams to them.
 
 #### Assign Permissions
 
@@ -45,7 +45,7 @@ A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to 
 
 !!! info
 
-    A module is a container for multiple resources that are used together. Modules are used to create lightweight abstractions, so that you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
+    A module is a container for multiple resources used together. Modules create lightweight abstractions, so you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
 
 Modules are very powerful and make complex configurations simpler and more easily shared and used. A module takes any Terraform configuration consisting of any number of resources and turns it into a single block, exposing required and/or optional variables. Some examples include:
 
@@ -70,7 +70,7 @@ Modules allow for endless flexibility for developers to wrap whatever configurat
 
 Caster makes it easier to search for and use modules when building a Terraform configuration.
 
-Caster supports modules created as GitLab projects that are visible to the GitLabToken defined in the API settings with at least one version defined. When adding/refreshing the project to Caster, all versions are shown.
+Caster supports modules created as GitLab projects that are visible to the GitLabToken defined in the API settings with at least one version defined. When adding/refreshing the project to Caster, Caster will show all versions.
 
 !!! note
 
@@ -94,7 +94,7 @@ Upon **Submit**, Caster generates the Terraform code to use the selected module 
 
 ![Caster VLANs](../assets/img/caster-VLANs.PNG)
 
-Adds the ability to manage VLAN ids. Pools of 4096 VLANs are created and subdivided into Partitions. A user can request a VLAN from a Partition and will receive an unused VLAN id, which is marked as used until they release it. A Partition is either assigned to a Project, or is a system-wide default. Users request VLAN ids either from their Project's Partition or from the default.
+Adds the ability to manage VLAN ids. Creates pools of 4096 VLANs and subdivides them into Partitions. A user can request a VLAN from a Partition and will receive an unused VLAN id, now marked as used until they release it. A Partition is either assigned to a Project, or is a system-wide default. Users request VLAN ids either from their Project's Partition or from the default.
 
 - VLANs can have tags for organizational purposes; users can request a VLAN by tag
 - Uses can request a VLAN by specific VLAN id within a Partition
@@ -105,7 +105,7 @@ Adds the ability to manage VLAN ids. Pools of 4096 VLANs are created and subdivi
 
 ### Project
 
-The top-level construct in Caster is called a *project*. The *project* is a way to organize and categorize similar environments for multiple files and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
+The top-level construct in Caster is a *project*. The *project* is a way to organize and categorize similar environments for multiple files and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
 
 A project can:
 
@@ -163,11 +163,11 @@ In order to avoid this, a System Administrator should follow these steps in the 
 
 ### Directories
 
-The top-level construct within a project is called a *directory*. A project can contain many directories. Directories contain files that make up a particular Terraform configuration, workspaces that represent a specific instance of that configuration, and subdirectories. Directories are used primarily for organization and shared resources.
+The top-level construct within a project is a *directory*. A project can contain many directories. Directories contain files that make up a particular Terraform configuration, workspaces that represent a specific instance of that configuration, and subdirectories. Directories are primarily for organization and shared resources.
 
 #### Directory Hierarchies
 
-Directories can contain subdirectories to create a *hierarchy* of directories and the configuration files contained within them. When a run is created in a workspace, the files in the workspace, the workspace's directory, ***and all parent directories*** are merged together and passed to Terraform as a single configuration. This eliminates redundancy when developing many environments that are largely the same, or share a set of common variables or data across many configurations. For example, a large deployment might have a top-level directory that defines global variables like `vlan ids` and `team ids`, and subdirectories that define resources using those variables.
+Directories can contain subdirectories to create a *hierarchy* of directories and the configuration files contained therein. When creating a run, the files in the workspace, the workspace's directory, ***and all parent directories*** are merged and passed to Terraform as a single configuration. This eliminates redundancy when developing many environments that are similar or share a set of common variables or data across many configurations. For example, a large deployment might have a top-level directory defining global variables `vlan ids` and `team ids`, and subdirectories defining resources using those variables.
 
 Users can add, rename, delete, or export a directory from the navigation panel on a project's main Caster page.
 
@@ -222,7 +222,7 @@ These plugins are then cached in the `plugin_cache_dir` section, to save from do
 
 ### Hosts
 
-A *host* consists of a name, datastore, and maximum number of virtual machines that it can support. Hosts are created and managed through the API, then assigned to exercises. An exercise can have many hosts.
+A *host* consists of a name, datastore, and maximum number of virtual machines that it can support. The API creates and manages hosts, then assigns them to exercises. An exercise can have many hosts.
 
 Workspaces have an additional property, `DynamicHost`, which is usually set to `false`. When Alloy creates a workspace, this is set to `true`, and changes the behavior of a run. When `DynamicHost` is `true`, Caster examines all of the hosts assigned to the current exercise and chooses the one with the least usage (the number of machines to deploy/maximum machines) to assign to the workspace.
 
@@ -232,7 +232,7 @@ When the workspace is deleted after an on-demand exercise (ODX) is finished, Cas
 
 #### On-Demand Exercise Functionality
 
-Caster is called by Alloy in order to deploy resources for lab or ODX-style functionality. Caster itself does not differ in its main functionality of deploying workspaces and lets Alloy handle most of the ODX functionality.
+Alloy calls Caster in order to deploy resources for lab or ODX-style functionality. Caster itself does not differ in its main functionality of deploying workspaces and lets Alloy handle most of the ODX functionality.
 
 However, in order to support this functionality Caster dynamically selects a host to deploy to.
 
@@ -313,7 +313,7 @@ This glossary defines key terms and concepts used in the Caster application.
 
 **Host:** consists of a name, datastore, and maximum number of virtual machines that it can support.
 
-**Module:** a container for multiple resources that are used together. Modules are used to create lightweight abstractions, so that you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
+**Module:** a container for multiple resources used together. Modules create lightweight abstractions, so you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
 
 **Project:** a way to organize and categorize similar environments for multiple workspaces and directories within Caster.
 
