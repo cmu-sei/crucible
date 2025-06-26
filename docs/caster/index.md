@@ -2,11 +2,11 @@
 
 ## Overview
 
-**Caster** is the primary deployment component of the Crucible simulation framework. Caster is built around [Terraform](https://www.terraform.io/), an open-source Infrastructure-as-Code tool.
+**Caster** is the primary deployment component of the Crucible simulation framework. [Terraform](https://www.terraform.io/), an open-source Infrastructure-as-Code tool, underlies Caster.
 
 Caster provides a web interface that gives exercise developers a powerful and flexible way to create, share, and manage topology configurations.
 
-Initial versions of Caster focused on a web front-end for raw Terraform configurations and outputs. This gave advanced developers easier access to a powerful deployment tool. Targeted improvements to the experience for these users will be made in the future. Eventually, this system will be used to underpin a more user-friendly interface that will allow configurations to be pieced together with less or no writing of Terraform code directly.
+Initial versions of Caster focused on a web front-end for raw Terraform configurations and outputs. This gave advanced developers easier access to a powerful deployment tool. Targeted improvements to the experience for these users are coming in the future. Eventually, this system will underpin a more user-friendly interface that will allow the piecing together of configurations with less or no writing of Terraform code directly.
 
 Caster gives experts the control they need, while also making it easy for beginners to use expert setups or create simple ones on their own.
 
@@ -20,11 +20,11 @@ For more information on native Terraform constructs used in Caster, please refer
 
 ![Caster users](../assets/img/caster-users.PNG)
 
-Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. Users and/or teams can be assigned any set of **Permissions:**
+Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. **Permissions** are assigned to users and/or teams.
 
 #### Assign Roles
 
-Users and/or teams can be assigned to a **Role**, which is a group of permissions. Only a SystemAdmin can create roles. More information about roles will follow as future Player development is completed.
+**Roles** are groups of permissions. Only a SystemAdmin can create roles and assign users and/or teams to them. More about roles as future Player development is completed.
 
 #### Assign Permissions
 
@@ -45,15 +45,15 @@ A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to 
 
 !!! info
 
-    A module is a container for multiple resources that are used together. Modules can be used to create lightweight abstractions, so that you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
+    A module is a container for multiple resources that are used together. Modules are used to create lightweight abstractions, so that you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
 
-Modules are very powerful and allow for complex configurations to be made simpler and more easily shared and used. A module takes any Terraform configuration consisting of any number of resources and turns it into a single block, exposing required and/or optional variables. Some examples include:
+Modules are very powerful and make complex configurations simpler and more easily shared and used. A module takes any Terraform configuration consisting of any number of resources and turns it into a single block, exposing required and/or optional variables. Some examples include:
 
 1. A generic virtual machine module that abstracts away commonly used parameters into variables such as:
 
     - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
     - **Networks:** creates a NIC for each specified network and assigns it to the specified network VLAN.
-    - **ExerciseId:** appends the `exerciseId` to the name of the VM for use with ODXs where unique naming is required.
+    - **ExerciseId:** appends the `exerciseId` to the name of the VM for use with ODXs requiring unique naming.
     - Other simplified variable names based on the target audience.
 
 2. A module to create a very specific type of virtual machine resource, such as a domain controller, that points to a known good VMware template/base disk and an Ansible playbook that requires variables such as:
@@ -70,35 +70,35 @@ Modules allow for endless flexibility for developers to wrap whatever configurat
 
 Caster makes it easier to search for and use modules when building a Terraform configuration.
 
-Caster supports modules created as GitLab projects that are visible to the GitLabToken defined in the API settings with at least one version defined. All versions will be shown in Caster when the project is added/refreshed to Caster.
+Caster supports modules created as GitLab projects that are visible to the GitLabToken defined in the API settings with at least one version defined. When adding/refreshing the project to Caster, all versions are shown.
 
 !!! note
 
-    Caster requires that the inputs file and the outputs file be written in JSON (that is, `variables.tf.json` and `ouptuts.tf.json`).
+    Caster requires that the inputs file and the outputs file are written in JSON (that is, `variables.tf.json` and `ouptuts.tf.json`).
 
 There are three ways to add/refresh a module in Caster:
 
-- Every time that the modules list is requested, Caster API checks for updated modules in the **Terraform-Modules** group (the group ID is a Caster API setting) or any of its subgroups. If you add a module or version, you may have to refresh your Caster UI browser to see the change.
+- For every modules list request, Caster API checks for updated modules in the **Terraform-Modules** group (the group ID is a Caster API setting) or any of its subgroups. If you add a module or version, you may have to refresh your Caster UI browser to see the change.
 
 - Because the Caster UI uses its internal modified date to determine if there are any new changes, the Caster dates may get out of sync with the GitLab dates. In this case, an administrator can force an update of all of the modules.
 
 - An administrator can also individually add/refresh a module using its GitLab Project ID, whether or not it is underneath the Terraform-Modules group.
 
-When editing a file in the Caster UI, a **Modules** sidebar can be opened to search through available modules.
+When editing a file in the Caster UI, users can open a **Modules** sidebar to search through available modules.
 
 Upon selecting a Module, a form opens that allows the user to select the Version of the Module, and then complete the version-specific variables that the Module expects.
 
-Upon **Submit**, Caster generates the Terraform code that can be copied into a configuration file to use the selected module with the selected variable values.
+Upon **Submit**, Caster generates the Terraform code to use the selected module with the selected variable values. The user can copy this code into a configuration file.
 
 ### VLANs
 
 ![Caster VLANs](../assets/img/caster-VLANs.PNG)
 
-Adds the ability to manage VLAN ids. Pools of 4096 VLANs can be created and subdivided into Partitions. A VLAN can be requested by a user from a Partition, and they will receive an unused VLAN id, which will be marked as used until they release it. Projects can be assigned Partitions, and a system-wide default Partition can be set for users to request VLAN ids from their Project's Partition or from the default.
+Adds the ability to manage VLAN ids. Pools of 4096 VLANs are created and subdivided into Partitions. A user can request a VLAN from a Partition and will receive an unused VLAN id, which is marked as used until they release it. A Partition is either assigned to a Project, or is a system-wide default. Users request VLAN ids either from their Project's Partition or from the default.
 
-- VLANs can have tags for organizational purposes and can be requested by tag
-- A VLAN can be requested by specific VLAN id within a Partition
-- VLANs can be marked as reserved (0, 1, and 4095 are reserved by default) so that they will never be used
+- VLANs can have tags for organizational purposes; users can request a VLAN by tag
+- Uses can request a VLAN by specific VLAN id within a Partition
+- VLANs marked as reserved (including 0, 1, and 4095, reserved by default) are never used
 - fixed modified properties in entity updated events to restore signalR functionality
 
 ## User Guide
@@ -112,7 +112,7 @@ A project can:
 - Categorize large events
 - House directories, workspaces, and subdirectories
 
-Users can add new projects, name projects, and save projects. A project's landing page in Caster has a navigation panel for easy movement within the project's files, workspaces, and directories. Projects can also be exported.
+Users can add new projects, name projects, save projects, and also export projects. A project's landing page in Caster has a navigation panel for easy movement within the project's files, workspaces, and directories.
 
 #### Export Project
 
@@ -124,24 +124,24 @@ Add Directory lets you create a new directory at the same level as the above pro
 
 ### Files
 
-*Files* represent text files that will eventually be put onto a file system and used with the Terraform command line tool. Files can be named and edited through Caster, but file extensions are important and have specific meaning to Terraform.
+*Files* represent text files to eventually put onto a file system and use with the Terraform command line tool. You can name and edit files through Caster, but file extensions are important and have specific meaning to Terraform.
 
 - `.tf` A configuration file that defines resources, variables, etc., in a Terraform configuration.
-- `.auto.tfvars` Contains the values to be used for variables defined in `.tf` files.
+- `.auto.tfvars` Contains the values used for variables defined in `.tf` files.
 
 !!! note
 
-    When working with files in Caster, **CTRL+L** locks/unlocks a file to prevent others from editing that file simultaneously. When locked, the file icon appears as a dashed line. When unlocked, the file icon appears solid. Files can also be locked by an administrator. A file is *administratively locked* to prevent anyone from changing that file. A lock icon in the top right corner of the file edit screen denotes that the file is administratively locked. **CTRL+S** saves a file.
+    When working with files in Caster, **CTRL+L** locks/unlocks a file to prevent others from editing that file simultaneously. When locked, the file icon appears as a dashed line. When unlocked, the file icon appears solid. Administrators can also lock files. A file is *administratively locked* to prevent anyone from changing that file. A lock icon in the top right corner of the file edit screen denotes that the file is administratively locked. **CTRL+S** saves a file.
 
-See the official [Terraform Documentation](https://www.terraform.io/docs/index.html) for more details on supported file types and extensions. In the future, Caster may provide more guidance on what types of files can be created and what their contents are expected to be.
+See the official [Terraform Documentation](https://www.terraform.io/docs/index.html) for more details on supported file types and extensions. In the future, Caster may provide more guidance on allowed types and content of files.
 
 ### Workspaces
 
 ![Caster workspaces](../assets/img/caster-workspaces.PNG)
 
-A *workspace* represents a specific instance of a deployed Terraform configuration. The same configuration can be used to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example, a configuration for an enclave in a Cyber Flag exercise may be defined once, and then deployed to `flag00` through `flag30` workspaces - each creating a copy of the enclave.
+A *workspace* represents a specific instance of a deployed Terraform configuration. Use the same configuration to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example, define a configuration once for an enclave in a Cyber Flag exercise, and then deploy to `flag00` through `flag30` workspaces - each creating a copy of the enclave.
 
-Workspaces can contain files, which extend the configuration of the directory for that specific workspace. This might include files specifying values for variables defined in the directory, or additional resources to be deployed only for that workspace.
+Workspaces can contain files, which extend the configuration of the directory for that specific workspace. This might include files specifying values for variables defined in the directory, or additional resources deployed only for that workspace.
 
 A workspace is where users:
 
@@ -177,19 +177,19 @@ Peer directories (directories that fall outside a parent directory) are not incl
 
 Designer provides a graphical user interface for creating and editing terraform deployments through the use of modules.
 
-When you open a project, you can create a design and add modules backed by Git to that design. You can also create variables to be used in the modules settings.
+When you open a project, you can create a design and add modules backed by Git to that design. You can also create variables for use in the modules settings.
 
 ## Caster Tips
 
 ### Crafting Terraform Code
 
-This topic is for anyone who manages a Crucible instance who wants to configure their Terraform provider installation for Caster. Terraform can be configured to only allow certain providers to be downloaded from the Internet and used from a local File store.
+This topic is for anyone who manages a Crucible instance who wants to configure their Terraform provider installation for Caster. You can configure Terraform to only download certain providers from the Internet and use them from a local File store.
 
-Documentation describing this can be found in **HashiCorp's Terraform** documentation: **CLI Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
+Documentation describing is found in **HashiCorp's Terraform** documentation: **CLI Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
 
 For your reference, below is the `.terraformrc` file currently implemented in the SEI's CyberForce instance of Caster.
 
-In the SEI's instance, we want to be able to use any plugins in the `sei` or `mastercard` namespace that have been downloaded locally. In addition, any of the `hashicorp` namespace providers in the `direct` section can be downloaded directly from the Internet without any operator intervention.
+In the SEI's instance, we want to use any plugins in the `sei` or `mastercard` namespace that have been downloaded locally. In addition, we can download any of the `hashicorp` namespace providers in the `direct` section directly from the Internet without any operator intervention.
 
 These plugins are then cached in the `plugin_cache_dir` section, to save from downloading the providers during every Terraform `plan` and `apply`.
 
@@ -222,13 +222,13 @@ These plugins are then cached in the `plugin_cache_dir` section, to save from do
 
 ### Hosts
 
-A *host* consists of a name, datastore, and maximum number of virtual machines that it can support. Hosts are created and managed through the API. After a host is created, it can be assigned to an exercise. An exercise can have many hosts.
+A *host* consists of a name, datastore, and maximum number of virtual machines that it can support. Hosts are created and managed through the API, then assigned to exercises. An exercise can have many hosts.
 
 Workspaces have an additional property, `DynamicHost`, which is usually set to `false`. When Alloy creates a workspace, this is set to `true`, and changes the behavior of a run. When `DynamicHost` is `true`, Caster examines all of the hosts assigned to the current exercise and chooses the one with the least usage (the number of machines to deploy/maximum machines) to assign to the workspace.
 
-Along with all of the files normally added to the run, Caster will create a `generated_host_values.auto.tfvars` containing two variable values: `vsphere_host_name` and `vsphere_datastore`, which will be set to the name and datastore of the selected host. When the run is applied, Caster tracks how many virtual machines are deployed to the host and uses it for future calculations.
+Along with all of the files normally added to the run, Caster will create a `generated_host_values.auto.tfvars` containing two variable values: `vsphere_host_name` and `vsphere_datastore`, which are set to the name and datastore of the selected host. When the run is applied, Caster tracks how many virtual machines are deployed to the host and uses it for future calculations.
 
-When the workspace is deleted after an on-demand exercise (ODX) is finished, the host's resources will be released. If a run attempts to deploy more virtual machines than there is capacity for in the available hosts, the run will fail.
+When the workspace is deleted after an on-demand exercise (ODX) is finished, Caster releases the host's resources. If a run attempts to deploy more virtual machines than there is capacity for in the available hosts, the run will fail.
 
 #### On-Demand Exercise Functionality
 
@@ -254,11 +254,11 @@ A *run* is a specific instance of the Terraform *plan* and *apply* process for a
 Clicking Plan will create a new Run and execute the `terraform plan` command on the given configuration. This raw Terraform output is shown to the user, and describes:
 
 - What actions Terraform will take
-- What resources will be created
-- What resources will be changed
-- What resources will be destroyed
+- What resources to create
+- What resources to change
+- What resources to destroy
 
-A plan shows the user what is going to be deployed.
+A plan shows the user what will deploy.
 
 This output always ends with a summary of the form `Plan: x to add, y to change, z to destroy`. The user reviews this and chooses to apply or reject the plan.
 
@@ -280,13 +280,13 @@ Selecting destroy instead of plan is largely the same, except that the plan gene
 
 If a resource is defined in the configuration and created in a run and then deleted from the configuration, it is destroyed upon the next plan or destroy run. This is because a Terraform run always tries to match the infrastructure to the current configuration.
 
-Only one run can be in progress at a time per workspace. Terraform locks the state of the workspace and only a single operation can be performed at a time. Developers may wish to break up large deployments into multiple directories and workspaces to operate on different parts of the deployments simultaneously. For example, user enclaves may be broken out so developers can perform actions on other parts of a network without (potentially) waiting a long time to redeploy user machines.
+There is only one run in progress at a time per workspace. Terraform locks the state of the workspace and only a single operation is performed at a time. Developers may wish to break up large deployments into multiple directories and workspaces to operate on different parts of the deployments simultaneously. For example, break out user enclaves so developers can perform actions on other parts of a network without (potentially) waiting a long time to redeploy user machines.
 
 The workspace view allows users to see a table with all the runs that have been planned and applied within that directory. Runs highlighted in red are destroyed operations.
 
 Within the workspace view users can click `Destroy` to destroy live Terraform applications.
 
-This Infrastructure-as-Code approach is different than many developers may be used to. The general approach is to define a configuration and apply it in its entirety, rather than selecting individual pieces to be deployed. There are some ways to target individual pieces of a configuration, but they are recommended by Terraform to be the exception rather than the rule and are not yet fully implemented in Caster.
+This Infrastructure-as-Code approach is unfamiliar to some developers. It defines a configuration and applies it in its entirety, rather than selecting individual pieces for deployment. There are some ways to target individual pieces of a configuration, but they are recommended by Terraform as the exception rather than the rule and are not yet fully implemented in Caster.
 
 #### Taint
 
@@ -297,7 +297,7 @@ Taint allows users to redeploy resources. For example, if a user needs to redepl
 1. Taint these resources
 2. Run another plan-and-apply cycle that will redeploy the instance as if new from a template
 
-Some resources can't be tainted, however.
+Some resources are not in scope for taint, however.
 
 Users can taint resources within the workspace view. Once a resource is tainted it will display in red shading. Users can easily access the `Untaint` command while in workspace view before running another plan-and-apply cycle if they decide to keep the resource.
 
@@ -309,11 +309,11 @@ This glossary defines key terms and concepts used in the Caster application.
 
 **Directory:** the outline of a project and the modules it contains.
 
-**File:** text files that will eventually be put onto a file system and used with the Terraform command line tool.
+**File:** text files to eventually put onto a file system and use with the Terraform command line tool.
 
 **Host:** consists of a name, datastore, and maximum number of virtual machines that it can support.
 
-**Module:** a container for multiple resources that are used together. Modules can be used to create lightweight abstractions, so that you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
+**Module:** a container for multiple resources that are used together. Modules are used to create lightweight abstractions, so that you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
 
 **Project:** a way to organize and categorize similar environments for multiple workspaces and directories within Caster.
 
