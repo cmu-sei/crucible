@@ -68,7 +68,7 @@ The following image shows some important hotspots about the CITE Dashboard. Refe
 
 The name of the active event and the move number currently displayed.
 
-If the Can Increment Move permission is assigned to the user, this section includes the "Advance Move" button option, which enables the user to advance CITE's current move, as well as go back and forth between moves using the arrows.
+Once the user obtains the Can Increment Move permission, the "Advance Move" button appears, enabling them to advance CITE's current move, and go back and forth between moves using the arrows.
 
 ![CITE Advance Move OE](../assets/img/advanceMoveButton.png)
 
@@ -90,13 +90,13 @@ Short description of the event. This section allows for the use of HTML elements
 
 Users can see the different actions necessary to execute during the exercise. These actions are for everyone on the team and are "per move", changing at each move of the exercise.
 
-These actions are added to guide users on an appropriate course of action during an exercise. However, these actions are not connected to the scoresheet.
+These actions guide users on an appropriate course of action during an exercise. However, these actions are not connected to the scoresheet.
 
 #### Roles
 
 ##### Hotspot 5
 
-The roles are added so that each team member has a clear understanding of their responsibilities during the exercise. Roles can be customized for each team, and the team members decide what role each user should be assigned to.
+The roles give each team member a clear understanding of their responsibilities during the exercise. Roles are customizable per team, and the team members decide what role to assign to each user.
 
 #### Score Summary
 
@@ -149,11 +149,11 @@ The move currently displayed on the screen. Clicking < displays previous moves. 
 ##### Hotspot 3
 
 - **User:** This is the participant's personal score for their reference only. The user score will also appear under the Score Summary range.
-- **Team:** Toggling the Team icon displays how the team has scored this move so far. This is the score that the team collaborates on and submits for the current move. This score will be compared to the official score. The Team score appears under the Score Summary range.
+- **Team:** Toggling the Team icon displays how the team scored this move so far. This is the score that the team collaborates on and submits for the current move. This score compares to the official score. The Team score appears under the Score Summary range.
 - **Team Avg:** The average for all of the users on the team. The Team Avg appears under the Score Summary range for all moves except the current move.
 - **Group Avg:** The average for all of the teams in the user's group. Group Avg appears under the Score Summary range for all moves except the current move.
 - **Official:** The potential score; that is, how the incident should have been scored had it been a real-life scenario. Official score appears under the Score Summary range for all moves except the current move.
-- **Submit:** Submits the score, indicating that the user is done scoring the current move. Click Yes or No. If the user clicks Yes but changes their mind, click Reopen to edit the scoring.
+- **Submit:** Submits the score, indicating that the user scored the current move. Click Yes or No. If the user clicks Yes but changes their mind, click Reopen to edit the scoring.
 - **Clear:** Clears any selections the user has checked but does not clear comments entered. Selecting Clear returns to a score of 0.00.
 - **Preset:** Sets the user's selections to the previous move score to use as a starting point for the current move.
 
@@ -161,7 +161,7 @@ The move currently displayed on the screen. Clicking < displays previous moves. 
 
 ##### Hotspot 4
 
-Categories that are individually scored based upon the current move situation. For each category, select one or more relevant options. Selecting options assigns points to each category, which are compiled to create the move score as defined by the [scoring model](#glossary).
+Categories are individually scored based upon the current move situation. For each category, select one or more relevant options. Selecting options assigns points to each category, which compile to create the move score as defined by the [scoring model](#glossary).
 
 #### Add, Edit, and Delete a Comment
 
@@ -201,7 +201,7 @@ By using this icon, users can toggle between the CITE Dashboard and the CITE Sco
 
 ### CITE Report
 
-The [CITE Report](#glossary) recollects all user responses into a single printable page version for users to reference or keep for their records, as well as for exercise administrators to obtain valuable insights from the exercise.
+The [CITE Report](#glossary) recollects all user responses into a single printable page. Users can reference this for their records, and exercise administrators can obtain valuable exercise insights from it.
 
 The following image shows the CITE Report. Here, users can view and/or print their own copy.
 
@@ -413,7 +413,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 To save these settings, click **Save**.
 
-When adding a Scoring Model, an administrator is required to add a defined equation to calculate the submission score from the category scores, which can contain the following variables:
+When adding a Scoring Model, an administrator adds a defined equation to calculate the submission score from the category scores, which can contain the following variables:
 
 - **{average}:** The average value of the Scoring Categories.
 - **{sum}:** The sum of the Scoring Categories.
@@ -500,7 +500,7 @@ Within a Scoring Model, an administrator can add one or more Scoring Categories.
 
 To save these settings, click **Save**.
 
-A Scoring Category may have zero or more required or optional [Modifiers](#glossary). If no optional Modifier is selected, a default value of 1.0 is used in the Scoring Category calculation.
+A Scoring Category may have zero or more required or optional [Modifiers](#glossary). If there is no optional Modifier, the Scoring Category calculation uses a default value of 1.0.
 
 Additionally, a Scoring Category has an admin defined equation to calculate the submission score from the category scores and can contain the following variables:
 
@@ -631,7 +631,7 @@ However, users who can submit scores on behalf of their team can also add partic
 
 #### Add a Role
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Role:
+Assuming that the exercise administrator granted the user the appropriate permissions, follow these steps to add a Role:
 
 ![Add Role OE](../assets/img/addRole-v3.png)
 
@@ -681,7 +681,7 @@ The following image shows the [Team Types](#glossary) Administration Page. Here,
 
 #### Add a Team Type
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Team Type:
+Assuming that the exercise administrator granted the user the appropriate permissions, follow these steps to add a Team Type:
 
 ![Add Team Type OE](../assets/img/addTeamType.png)
 
@@ -732,7 +732,7 @@ The available permissions are:
 
 #### Add a User
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a User:
+Assuming that the exercise administrator granted the user the appropriate permissions, follow these steps to add a User:
 
 ![Add User OE](../assets/img/addUser-v2.png)
 
@@ -774,13 +774,13 @@ This glossary defines key terms and concepts used in the CITE application.
 
 **Evaluation**: Defines the scoring model used, as well as the moves and teams who will be participating in the exercise.
 
-**Modifiers**: If enabled, this value is used in calculating the Scoring Category score. Depending on how the equation is written, the modifier can be used to add, subtract, multiply and/or divide within the equation.
+**Modifiers**: If enabled, the Scoring Category score will use this value in calculations, either to add, subtract, multiply and/or divide within the equation.
 
 **Modify-Level Permission**: Can view and edit the team score.
 
-**Moves**: A defined period of time during an exercise in which a series of events are distributed for users to discuss and assess the current incident severity.
+**Moves**: A defined period of time during an exercise in which a series of events occur for users to discuss and assess the current incident severity.
 
-**Observer Role**: Individuals who are tasked with impartially and objectively monitoring teams during an exercise.
+**Observer Role**: Individuals who impartially and objectively monitor teams during an exercise.
 
 **Roles**: Provide a set of responsibilities assigned to a user during an exercise.
 
@@ -788,7 +788,7 @@ This glossary defines key terms and concepts used in the CITE application.
 
 **Scoring Model**: Tool used to assign a comparative value, takes into account the totality of the data points, their relative weights, and the scores for each of their range values.
 
-**Scoring Options**: Has a preset value which will be used to calculate the submission score for the Scoring Category that it is part of.
+**Scoring Options**: Has a preset value for calculating the submission score for a given Scoring Category.
 
 **Submission**: Act of providing a score or response for an evaluation in relation to an incident presented during the current move.
 
