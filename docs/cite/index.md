@@ -68,7 +68,7 @@ The following image shows some important hotspots about the CITE Dashboard. Refe
 
 The name of the active event and the move number currently displayed.
 
-Once the user obtains the Can Increment Move permission, the "Advance Move" button appears, enabling them to advance CITE's current move, and go back and forth between moves using the arrows.
+Once the user obtains Can Increment Move permission, the "Advance Move" button appears. This enables the user to advance CITE's current move, and go back and forth between moves using the arrows.
 
 ![CITE Advance Move OE](../assets/img/advanceMoveButton.png)
 
