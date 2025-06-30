@@ -73,7 +73,7 @@ The number of [articles](#glossary) left to read from the event.
 
 ##### Hotspot 5
 
-Provides additional details beyond those provided in the Gallery Wall. Filtered articles related to the event are shown here.
+Provides additional details beyond those provided in the Gallery Wall, including filtered articles related to the event.
 
 #### Team Selection
 
@@ -127,7 +127,7 @@ These articles come from different categories of sources: [reporting](#glossary)
 
 ##### Hotspot 5
 
-The information in the Gallery Archive is displayed in articles. Each article contains the Title, Source Type, Source Name, and Date Posted.
+The Gallery Archive displays articles. Each article contains the Title, Source Type, Source Name, and Date Posted.
 
 For the information included on the article:
 
@@ -362,7 +362,7 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 | Field      | Data Type  | Description | Example    |
 | ---------- | ---------- | ----------- | ---------- |
 | **Name**   | String     | Name of the card | Information Technology Sector |
-| **Description** | String | Details, characteristics and information of the card | This card is created to provide additional information related to the IT sector. |
+| **Description** | String | Details, characteristics and information of the card | This card provides additional information related to the IT sector. |
 | **Collection** | Dropdown Text | Select the collection that this card belongs with | Demonstration #1 |
 
 To save these settings, click **Save**.
