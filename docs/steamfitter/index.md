@@ -115,7 +115,7 @@ A task can have multiple results:
       - *UntilSuccess:* The task will iterate until the command has a successful completion.
       - *UntilFailure:* The task will iterate until the command fails.
 
-- **Expiration Timeout:** The time in seconds where, if no response is received, the task expires (times out).
+- **Expiration Timeout:** The time in seconds where, in the absence of a response, the task expires (times out).
 
 ##### VM Selection
 
