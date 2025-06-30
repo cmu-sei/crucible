@@ -29,7 +29,7 @@ Behind the scenes, Steamfitter uses StackStorm ([`stackstorm.com`](https://stack
 
 ## Administrator Guide
 
-Steamfitter was developed as an administrative tool, and therefore can only be accessed with SystemAdmin permissions. Consequently, there is no user guide.
+Steamfitter is an administrative tool, and therefore is only accessed through SystemAdmin permissions. Consequently, there is no user guide.
 
 ### Scenario Templates
 
@@ -47,7 +47,7 @@ Add tasks in the Scenario Templates screen by clicking the **+** icon. Complete 
 
 Scenarios are groupings of predefined tasks that can be executed against a required view's VMs.
 
-After the tasks are defined in the scenario template, the next step is to create the *scenario*. Keep in mind that the scenario template is the *plan*; the scenario is the actual *instance*. Multiple scenarios can be created from one template; those scenarios can then be associated with different Player views.
+Define tasks in the scenario template, then create the *scenario*. Note that the scenario template is the *plan*; the scenario is the actual *instance*. One template can yield multiple scenarios. Associate these scenarios with one or more Player views.
 
 In the **Scenarios** screen, the created scenario is named `scenario template name` - `your username` by default.
 
@@ -69,7 +69,7 @@ In order for tasks to execute, a task has to be started.
 
 Once started, the scenario status is now **Active** and a new **Execute** option is available in the Task context menu.
 
-After tasks have been executed, results are displayed in the task details. Each task is expandable. You will see a result listed for every time that task is executed.
+After executing tasks, the results display in the task details. Each task is expandable. You will see a result listed for every execution of the task.
 
 #### Ending a Scenario
 
@@ -115,7 +115,7 @@ A task can have multiple results:
       - *UntilSuccess:* The task will iterate until the command has a successful completion.
       - *UntilFailure:* The task will iterate until the command fails.
 
-- **Expiration Timeout:** The time in seconds where, if no response has been received, the task expires (times out).
+- **Expiration Timeout:** The time in seconds where, if no response is received, the task expires (times out).
 
 ##### VM Selection
 
@@ -142,12 +142,12 @@ This glossary defines key terms and concepts used in the Steamfitter application
 
 **Expiration:** when a task times out.
 
-**Iteration:** an execution of a task when the task is configured to iterate for x number of times.
+**Iteration:** an execution of a task given the task specification to iterate x number of times.
 
-**Scenario:** groupings of predefined tasks that can be executed against a required view's VMs.
+**Scenario:** groupings of predefined tasks that execute against a required view's VMs.
 
-**Scenario Template:** where predefined tasks are grouped; scenario templates are used to create scenarios that can be run on-demand.
+**Scenario Template:** location for grouping predefined tasks; scenario templates create scenarios that can run on-demand.
 
 **StackStorm:** an open source application that can connect applications, services, and workflows.
 
-**Task:** an action or command that can be executed against one or more topology resources.
+**Task:** an action or command that executes against one or more topology resources.
