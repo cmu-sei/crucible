@@ -73,7 +73,7 @@ The number of [articles](#glossary) left to read from the event.
 
 ##### Hotspot 5
 
-Provides additional details beyond those provided in the Gallery Wall. All articles related to the event are filtered and shown here.
+Provides additional details beyond those provided in the Gallery Wall. Filtered articles related to the event are shown here.
 
 #### Team Selection
 
