@@ -256,7 +256,7 @@ The **VM List** provides links to any virtual machines that the user has permiss
 
 ##### File Upload
 
-A View Admin can upload images and documents for a specific View in Player that provides authentication to download. In addition, that document can be set up to show as an application in the left hand menu of Player.
+A View Admin can upload images and documents for a specific View in Player that provides authentication to download. It is also possible to configure a document to show as an application in the left hand menu of Player.
 
 ![vm-app-1](../assets/img/vm-app-1.png)
 
@@ -300,7 +300,7 @@ The User List in Player allows a user to view the teams and team members that th
 
 ##### VM Usage Logging (View Admin Only)
 
-The VM Usage Logging function is an administrative feature that, when configured, records the user activity when a user interacts with a VM. The configuration must be set up by an administrator to record the specific teams in the view over a specific time period.
+The VM Usage Logging function is an administrative feature that, when configured, records the user activity when a user interacts with a VM. An administrator sets up the configuration to record the specific teams in the view over a specific time period.
 
 ![vm-app-9](../assets/img/vm-app-9.png)
 
@@ -449,7 +449,7 @@ The glossary below defines key terms and concepts used in the Player application
 
 **Team:** A group of logged-in users associated with a view. Teams can view a particular set of applications and have team-level roles/permissions.
 
-**User:** A user identified in an identity server configured for the Player system is automatically added into Player upon the first login. In addition, users can be preloaded into Player using the Player API.
+**User:** Upon their first login, Player automatically adds users identified in an identity server configured for the Player system. Preload users into Player using the Player API.
 
 **View:** These are the settings associated with building a view. Edit, clone, and delete a view.
 
