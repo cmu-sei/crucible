@@ -73,7 +73,7 @@ The number of [articles](#glossary) left to read from the event.
 
 ##### Hotspot 5
 
-Provides additional details beyond those provided in the Gallery Wall. All articles related to the event will be filtered and shown here.
+Provides additional details beyond those provided in the Gallery Wall. All articles related to the event are filtered and shown here.
 
 #### Team Selection
 
@@ -134,7 +134,7 @@ For the information included on the article:
 - **Title:** The title of the intelligence report.
 - **Source Type:** The source of the intelligence report (News, Intel, Reporting, or Social Media).
 - **Source Name:** The specific person or agency who supplied the intelligence.
-- **Date Posted:** The date and timestamp when the intelligence report was posted.
+- **Date Posted:** The date and timestamp when the intelligence report posted.
 
 #### View
 
@@ -182,7 +182,7 @@ By using this icon, users can toggle between the Gallery Wall and Gallery Archiv
 
 Users with the appropriate Content Developer permissions can add articles to the Gallery Archive throughout the course of exercise events.
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an article during an exercise:
+Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an article during an exercise:
 
 ![Add Articles Exercise OE](../assets/img/addArticleExercise.png)
 
@@ -219,7 +219,7 @@ To edit an article, follow these steps:
 
 To delete an article, follow these steps:
 
-1. On the Gallery Archive section, select the article to be deleted and click the **Trash Can** on the article's card.
+1. On the Gallery Archive section, select the article to delete and click the **Trash Can** on the article's card.
 
 ## Administrator Guide
 
@@ -238,7 +238,7 @@ Most users won't have any permissions assigned in this application.
 
 #### Add a User
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a user:
+Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a user:
 
 ![Add Gallery User OE](../assets/img/addGalleryUser-v2.png)
 
@@ -275,13 +275,13 @@ To delete a user, follow these steps:
 
 ### Collections
 
-The following image shows the Collections Administration Page. Here, administrators can add, upload, download, copy, and delete [collections](#glossary). These are where the articles will be assigned, in case there are multiple exercises running at the same time.
+The following image shows the Collections Administration Page. Here, administrators can add, upload, download, copy, and delete [collections](#glossary). Assign articles here, in case multiple exercises are running at the same time.
 
 ![Collections Admin OE](../assets/img/collectionsAdmin-v2.png)
 
 #### Add a Collection
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a collection:
+Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a collection:
 
 ![Add Collection OE](../assets/img/addCollection-v2.png)
 
@@ -317,7 +317,7 @@ To delete a collection, follow these steps:
 
 #### Upload a Collection
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to upload a collection:
+Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to upload a collection:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
@@ -326,7 +326,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 #### Download a Collection
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to download a collection:
+Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to download a collection:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
@@ -335,11 +335,11 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 
 #### Copy a Collection
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to copy a collection:
+Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to copy a collection:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Click **Copy** next to the collection to be copied.
+3. Click **Copy** next to the collection to copy.
 4. Look for the collection name with the user's name.
 
 ### Cards
@@ -350,7 +350,7 @@ The following image shows the Cards Administration Page. Here, administrators ca
 
 #### Add a Card
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a card:
+Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a card:
 
 ![Add Card OE](../assets/img/addCard-v2.png)
 
@@ -393,7 +393,7 @@ The following image shows the Articles Administration Page. Here, administrators
 
 #### Add an Article
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an article:
+Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an article:
 
 ![Add Article OE](../assets/img/addArticle-v2.png)
 
@@ -407,7 +407,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 | **Name**   | String     | Name of the article | Hurricane Delta has landed in Fort Myers |
 | **Summary** | String | Short summary and details of the article | Hurricane Delta has caused major damages |
 | **Description** | Rich Text | Details, characteristics and information of the article | Hurricane Delta, Category 5 hurricane, has caused major damages in Fort Myers... |
-| **Card** | Dropdown Text | Select the card that this article should be categorized with | Energy Sector |
+| **Card** | Dropdown Text | Select the card with which to categorize this article | Energy Sector |
 | **Status** | Dropdown Text | Select the article's status of how it affects the exercise | Critical |
 | **Source Type** | Dropdown Text | Select the source or author type of the article | Intel |
 | **Source Name** | String | Name or author of the article | BBC News |
@@ -445,7 +445,7 @@ The following image shows the Exhibits Administration Page. Here, administrators
 
 #### Add an Exhibit
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an [exhibit](#glossary):
+Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an [exhibit](#glossary):
 
 ![Add Exhibit OE](../assets/img/addExhibit-v2.png)
 
@@ -513,7 +513,7 @@ To copy an exhibit, follow these steps:
 
 #### Configure an Exhibit
 
-To configure an exhibit to be used for an exercise, administrators will need to add Exhibit Teams, Card Teams, Article Teams, as well as assign the respective Observers (if desired). To do this, follow these steps:
+To configure an exhibit for an exercise, administrators will need to add Exhibit Teams, Card Teams, Article Teams, as well as assign the respective Observers (if desired). To do this, follow these steps:
 
 ![Configure Exhibit OE](../assets/img/configureExhibit-v2.png)
 
@@ -597,13 +597,13 @@ This glossary defines key terms and concepts used in the Gallery application.
 
 **Article**: A piece of writing that typically relates to a particular topic.
 
-**Card**: Groups articles into their respective categories, the categories can be defined in the administration panel.
+**Card**: Groups articles into their respective categories. Define categories in the administration panel.
 
 **Collection**: A set of articles.
 
 **Content Developer Permission**: Will grant a user the ability to manage other Gallery administration pages, except the users administration page and their permissions.
 
-**Email Filter**: Information that was gathered from messages distributed by electronic means.
+**Email Filter**: Information gathered from messages distributed by electronic means.
 
 **Exhibit**: The scheduled instance of a collection.
 
@@ -613,18 +613,18 @@ This glossary defines key terms and concepts used in the Gallery application.
 
 **Gallery Wall**: The dashboard that displays "cards" to help participants visualize the incident.
 
-**Intel Filter**: Information that was acquired by an intelligence agency.
+**Intel Filter**: Information acquired by an intelligence agency.
 
-**News Filter**: Information that was acquired by a broadcast or published report of news.
+**News Filter**: Information acquired by a broadcast or published report of news.
 
-**Observer Role**: Individuals who are tasked with impartially and objectively monitoring teams during an exercise.
+**Observer Role**: Individuals tasked with impartially and objectively monitoring teams during an exercise.
 
-**Orders Filter**: Information that was gathered based on a decision issued by an authoritative order.
+**Orders Filter**: Information gathered based on a decision issued by an authoritative order.
 
-**Phone Filter**: Information that was gathered from SMS messages and phone calls.
+**Phone Filter**: Information gathered from SMS messages and phone calls.
 
-**Reporting Filter**: Information that was gathered from a document in an organized and objective way, without analysis or recommendations.
+**Reporting Filter**: Information gathered from a document in an organized and objective way, without analysis or recommendations.
 
-**Social Media Filter**: Information that was acquired from multiple users on a social media platform.
+**Social Media Filter**: Information acquired from multiple users on a social media platform.
 
 **System Admin Permission**: Grants a user all administration privileges on the Gallery application.
