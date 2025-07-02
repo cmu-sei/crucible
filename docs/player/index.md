@@ -449,7 +449,7 @@ The glossary below defines key terms and concepts used in the Player application
 
 **Team:** A group of logged-in users associated with a view. Teams can view a particular set of applications and have team-level roles/permissions.
 
-**User:** Upon their first login, Player automatically adds users identified in an identity server configured for the Player system. Preload users into Player using the Player API.
+**User:** Upon their first login, Player automatically adds users identified in an identity server configured for the Player system. Pre-load users into Player using the Player API.
 
 **View:** These are the settings associated with building a view. Edit, clone, and delete a view.
 
