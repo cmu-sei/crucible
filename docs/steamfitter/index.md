@@ -2,7 +2,7 @@
 
 ## Overview
 
-Steamfitter gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and injects which run against virtual machines during an event. These scenarios enable the content developer to automate assessments and configurations.
+**Steamfitter** gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and injects which run against virtual machines during an event. These scenarios enable the content developer to automate assessments and configurations.
 
 In the Steamfitter UI, there are four major functional sections:
 
@@ -11,14 +11,13 @@ In the Steamfitter UI, there are four major functional sections:
 - Tasks: User tasks used to create and execute ad-hoc tasks.
 - History: Displays the results of all tasks executed by all users.
 
-
 ### Steamfitter Permissions
 
 In order to use Steamfitter, a user must be given **Content Developer** permissions by a Steamfitter System Admin. Any user who visits the Steamfitter URL is automatically added to the user list with no permissions. Only a Steamfitter System Admin can grant another user elevated permissions.
 
-1. In Steamfitter, in the top-right corner, select your user name then **Administration**.
+1. In Steamfitter, in the top-right corner, select your user name, then **Administration**.
 2. Check the **ContentDeveloper** box next to the name of the user.
-3. Select your user name then **Exit Administration**.
+3. Select your user name, then **Exit Administration**.
 
 !!! note
 
@@ -26,12 +25,11 @@ In order to use Steamfitter, a user must be given **Content Developer** permissi
 
 ### StackStorm Integration
 
-
-Behind the scenes Steamfitter uses StackStorm ([`stackstorm.com`](https://stackstorm.com/)) to execute these tasks. StackStorm is an open source application that can connect applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This is so no communication for the tasks run by StackStorm occurs over the network.
+Behind the scenes, Steamfitter uses StackStorm ([`stackstorm.com`](https://stackstorm.com/)) to execute these tasks. StackStorm is an open-source application that connects applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This ensures that no communication for the tasks run by StackStorm occurs over the network.
 
 ## Administrator Guide
 
-Steamfitter was developed as an administrative tool, and therefore only can be accesses with SystemAdmin permissions. Consequently, there is no user guide.
+Steamfitter is an administrative tool, and therefore is only accessed through SystemAdmin permissions. Consequently, there is no user guide.
 
 ### Scenario Templates
 
@@ -41,16 +39,15 @@ Scenario templates are where predefined tasks are grouped; scenario templates ar
 
 After adding the new scenario template, you can **Create a Scenario**, **Copy** a scenario template to create a duplicate, **Edit** it, and **Delete** it.
 
-Add tasks in the Scenario Templates screen by clicking the **+** ("plus") icon. Complete the same task information as you did when you created a new task.
+Add tasks in the Scenario Templates screen by clicking the **+** icon. Complete the same task information as you did to create a new task.
 
 ### Scenarios
-
 
 ![scenarios](../assets/img/scenarios.png)
 
 Scenarios are groupings of predefined tasks that can be executed against a required view's VMs.
 
-After the tasks are defined in the scenario template the next step is to create the *scenario*. Keep in mind that the scenario template is the *plan*; the scenario is the actual *instance*. Multiple scenarios can be created from one template; those scenarios can then be associated with different Player views.
+Define tasks in the scenario template, then create the *scenario*. Note that the scenario template is the *plan*; the scenario is the actual *instance*. One template can yield multiple scenarios. Associate these scenarios with one or more Player views.
 
 In the **Scenarios** screen, the created scenario is named `scenario template name` - `your username` by default.
 
@@ -68,11 +65,11 @@ In order for tasks to execute, a task has to be started.
 
 !!! info
 
-    If the Start Scenario button is not enabled that means that you have not associated it to a Player view.
+    If the Start Scenario button is not enabled, that means that you have not associated it to a Player view.
 
 Once started, the scenario status is now **Active** and a new **Execute** option is available in the Task context menu.
 
-After tasks have been executed results are displayed in the task details. Each task is expandable. You will see a result listed for every single time that task gets executed.
+After executing tasks, the results display in the task details. Each task is expandable. You will see a result listed for every execution of the task.
 
 #### Ending a Scenario
 
@@ -100,9 +97,9 @@ A task can have multiple results:
 - **Trigger Condition:**
 
        - *Time:* A *timed* trigger is executed automatically after a set *delay* in seconds. A timed trigger can have multiple *iterations* executed on a specific interval.
-       - *Manual:* A *manual* trigger condition is executed by manual intervention - clicking a button, for example, to fire off a task. It's up to a user to intervene to execute the task.
-       - *Completion:* When the parent task completes the dependent task runs - regardless of success or failure.
-       - *Success:* If the expected output is contained in the actual output then the dependent task runs.
+       - *Manual:* A *manual* trigger condition is executed by manual intervention - for example, clicking a button to fire off a task. It's up to a user to intervene to execute the task.
+       - *Completion:* When the parent task completes, the dependent task runs - regardless of success or failure.
+       - *Success:* If the expected output is contained in the actual output, then the dependent task runs.
        - *Failure:* Only runs if the expected output is not contained within the actual output.
 
 - **Expected Output:** Whatever you type here, if the actual output contains that text, then it is considered a success. If the output does not contain what is typed here, then it is considered a failure.
@@ -111,14 +108,14 @@ A task can have multiple results:
 
 - **Delay:** Set in seconds before the task executes.
 - **Number of Iterations:** An *iteration* is an execution of a task when the task is configured to iterate for *x* number of times. Enter the number of times you want the task to execute here.
-- **Interval Between Iterations:** The time in seconds in between iterations.
+- **Interval Between Iterations:** The time in seconds between iterations.
 - **Iteration Termination:**
 
       - *IterationCountTask:* The task will execute until exactly the number of iteration times specified above; regardless of whether the task succeeds or fails.
       - *UntilSuccess:* The task will iterate until the command has a successful completion.
       - *UntilFailure:* The task will iterate until the command fails.
 
-- **Expiration Timeout:** The time, in seconds, where if no response has been received the task expires (times out).
+- **Expiration Timeout:** The time in seconds where, in the absence of a response, the task expires (times out).
 
 ##### VM Selection
 
@@ -137,18 +134,20 @@ The default History view shows task results for the current user sorted in rever
 
 ## Glossary
 
-**Delay:** set in seconds before the task executes
+This glossary defines key terms and concepts used in the Steamfitter application.
 
-**Execute:** to carry out the task
+**Delay:** set in seconds before the task executes.
 
-**Expiration:** when a task times out
+**Execute:** to carry out the task.
 
-**Iteration:** an execution of a task when the task is configured to iterate for x number of times
+**Expiration:** when a task times out.
 
-**Scenario:** groupings of predefined tasks that can be executed against a required view's VMs
+**Iteration:** an execution of a task given the task specification to iterate x number of times.
 
-**Scenario Template:** where predefined tasks are grouped; scenario templates are used to create scenarios that can be run on-demand
+**Scenario:** groupings of predefined tasks that execute against a required view's VMs.
 
-**StackStorm:** an open source application that can connect applications, services, and workflows
+**Scenario Template:** location for grouping predefined tasks; scenario templates create scenarios that can run on-demand.
 
-**Task:** an action or command that can be executed against one or more topology resources
+**StackStorm:** an open source application that can connect applications, services, and workflows.
+
+**Task:** an action or command that executes against one or more topology resources.
