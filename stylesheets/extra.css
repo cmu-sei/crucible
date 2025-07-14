@@ -1,0 +1,323 @@
+.md-typeset__table {
+    min-width: 100%;
+}
+
+@media only screen and (min-width: 768px)
+{
+
+    td:nth-child(1){
+        white-space: nowrap;
+    }
+
+}
+
+@font-face {
+    font-family: Arial, Helvetica, sans-serif;
+    /*src: url("typography/Telegraf-Regular.otf");*/
+}
+
+@font-face {
+    font-family: Arial, Helvetica, sans-serif;
+    /*src: url("typography/Telegraf-UltraBold.otf");*/
+}
+
+/*.Telegraf-Regular{
+    font-family:Telegraf-Regular;
+}
+
+.Telegraf-UltraBold{
+    font-family:Telegraf-UltraBold;
+}*/
+
+* {
+
+    --md-primary-fg-color: #C41230
+
+    ;
+    --md-primary-fg-color--light: #C41230
+
+    ;
+    --md-primary-fg-color--dark:  #C41230
+
+    ;
+
+    --md-typeset-color:   var(--md-default-fg-color);
+    --md-typeset-a-color: var(--md-primary-fg-color--light);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --md-primary-fg-color: #181917;
+    --md-primary-fg-color--light: #9c0278;
+    --md-primary-fg-color--dark:  #535530;
+}
+
+:root>* {
+
+    --md-primary-bg-color:  white;
+
+    --md-typeset-color:   var(--md-default-fg-color);
+    --md-typeset-a-color: var(--md-primary-fg-color--light);
+}
+
+.tx-hero {
+    color: black !important;
+    justify-content: right;
+}
+
+.tx-hero .md-button {
+    margin-top: .5rem;
+    margin-right: .5rem;
+    color: black !important;
+}
+
+
+/*
+markdown and image alignment
+ALT tag and a CSS selector on the alt tag
+*/
+img[src*='#left'] {
+    float: left;
+}
+img[src*='#right'] {
+    float: right;
+}
+img[src*='#center'] {
+    display: block;
+    margin: auto;
+}
+
+img[alt*='OE'] {
+    border: solid;
+}
+
+
+img[alt='Add Evaluation OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Add Gallery User OE']{
+    width: 500px;
+    height: 400px;
+}
+
+img[alt='Add Collection OE']{
+    width: 350px;
+    height: 300px;
+}
+
+img[alt='Add Card OE']{
+    width: 350px;
+    height: 300px;
+}
+
+img[alt='Add Article OE']{
+    width: 500px;
+    height: 600px;
+}
+
+img[alt='Add Exhibit OE']{
+    width: 350px;
+    height: 300px;
+}
+
+img[alt='Card Teams OE']{
+    width: 400px;
+    height: 400px;
+}
+
+img[alt='Blueprint Add Team OE']{
+    width: 550px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add User OE']{
+    width: 550px;
+    height: 50px;
+}
+
+img[alt='Blueprint Add Organization OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Blueprint Add Moves OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Blueprint Add Event OE']{
+    width: 550px;
+    height: 600px;
+}
+
+img[alt='Add Scoring Model OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Scoring Categories OE']{
+    width: 400px;
+    height: 400px;
+}
+
+img[alt='Scoring Options OE']{
+    width: 600px;
+    height: 400px;
+}
+
+img[alt='Add Action OE']{
+    width: 700px;
+    height: 200px;
+}
+
+img[alt='Add Role OE']{
+    width: 700px;
+    height: 200px;
+}
+
+img[alt='Moves OE']{
+    width: 550px;
+    height: 400px;
+}
+
+img[alt='Teams OE']{
+    width: 550px;
+    height: 350px;
+}
+
+img[alt='Add Articles Exercise OE']{
+    width: 800px;
+    height: 700px;
+}
+
+img[alt='Article Created OE']{
+    width: 400px;
+    height: 200px;
+}
+
+img[alt='Add Teams Exhibit OE']{
+    width: 600px;
+    height: 300px;
+}
+
+img[alt='Blueprint Add Data Fields OE']{
+    width: 600px;
+    height: 500px;
+}
+
+img[alt='Blueprint Add CITE Actions OE']{
+    width: 600px;
+    height: 300px;
+}
+
+img[alt='Blueprint Add CITE Roles OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add Gallery Cards OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add Organization Template OE']{
+    width: 600px;
+    height: 600px;
+}
+
+img[alt='Configure Blueprint Teams OE']{
+    width: 800px;
+    height: 600px;
+}
+
+img[alt='Blueprint Add Card Template OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint CITE Action Template OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint CITE Role Template OE']{
+    width: 600px;
+    height: 200px;
+}
+
+img[alt='Blueprint Add Event Advanced OE']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='Blueprint Add Event Gallery OE']{
+    width: 500px;
+    height: 500px;
+}
+
+img[alt='Blueprint Add Player App OE']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='Blueprint Logo']{
+    width:80px;
+    height:80px;
+}
+
+img[alt='CITE Logo']{
+    width:80px;
+    height:80px;
+}
+
+img[alt='Gallery Logo']{
+    width:80px;
+    height:80px;
+}
+
+img[alt='Blueprint Launched Event Invites OE']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='CITE Team Type OE']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='Blueprint Add Invitations OE']{
+    width: 500px;
+    height: 300px;
+}
+
+img[alt='CITE Advance Move OE']{
+    width: 300px;
+    height: 50px;
+}
+
+/*
+Tables set to 100% width
+*/
+.md-typeset__table {
+    min-width: 100%;
+}
+
+.md-typeset table:not([class]) {
+    display: table;
+}
+
+/*
+Colors for First Steps
+custom code blocks coloring
+*/
+.fsg-timestamp {
+    color: grey;
+}
+.fsg-userinput {
+    color: cornflowerblue;
+}
+.fsg-path, .fsg-prompt {
+    color: mediumseagreen;
+}
