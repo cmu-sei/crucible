@@ -427,9 +427,7 @@ If the person switches virtual machines, then your display automatically follows
 
 Clicking the **gear icon** in the upper left of the display you are following gives you the options to **Open In New Tab** and **Reconnect**. If you are already in a new browser tab, you will see the **Fullscreen** option.
 
-<details>
-
-<summary><b><font size="+2">Glossary</font></b></summary>
+## Glossary
 
 The glossary below defines key terms and concepts used in the Player application.
 
@@ -454,5 +452,3 @@ The glossary below defines key terms and concepts used in the Player application
 **View:** These are the settings associated with building a view. Edit, clone, and delete a view.
 
 **Views:** The collection of content a participant can interact with during a cyber simulation. Depending upon your role (end-user vs administrator) a view will look different.
-
-</details>
