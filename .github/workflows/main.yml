@@ -21,7 +21,7 @@ jobs:
           reporter: github-check
 
       # Run markdownlint-cli2
-      - uses: DavidAnson/markdownlint-cli2-action@v19
+      - uses: DavidAnson/markdownlint-cli2-action@v20
         with:
           globs: "**/*.md"
   # Build and deploy docs using material for mkdocs
