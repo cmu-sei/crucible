@@ -6,8 +6,6 @@ To access the Game Center for a given game, click **Admin**, hover over a game c
 
 The Game Center header displays game metadata and settings, including the name, modes, series, season, track, and execution dates.
 
-Would you like to tighten it even further or keep that level of detail?
-
 ## Gear Tab
 
 ### Metadata
