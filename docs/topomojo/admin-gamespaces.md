@@ -1,3 +1,7 @@
+---
+title: TopoMojo — Gamespaces Tab
+---
+
 # Admin Gamespaces
 
 The **Gamespaces** tab is where the admin can search for, and filter by, **active** and **inactive** gamespaces. By default, the search is for *active* gamespaces. Green indicates *active* gamespaces and gray indicates *inactive* gamespaces.

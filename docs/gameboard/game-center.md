@@ -1,3 +1,7 @@
+---
+title: Gameboard — Game Center
+---
+
 # Game Center
 
 The **Game Center** is the game administrator's one stop shop when administering a live game. The Game Center unifies various Gameboard administrative and support elements such as game and challenge settings, player information, live sessions, support tickets, observe mode, and more.

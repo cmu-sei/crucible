@@ -1,3 +1,7 @@
+---
+title: TopoMojo — Users Tab
+---
+
 # Admin Users
 
 The **Users** tab shows all current TopoMojo users. You can create new users here and assign them permissions. The **Search** feature allows TopoMojo admins to search on the name of a TopoMojo user. To search for a user across all of TopoMojo, enter the term into the **Search** field or filter by *role* or *audience*.

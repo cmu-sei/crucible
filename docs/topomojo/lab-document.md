@@ -1,3 +1,7 @@
+---
+title: TopoMojo — Lab Document
+---
+
 # Lab Document
 
 The **Document** tab in a TopoMojo workspace is where you write the instructions that correspond with your lab. You author instructions in Markdown using TopoMojo's built-in editor. Authoring in Markdown enables you to create a nicely formatted document without writing HTML.

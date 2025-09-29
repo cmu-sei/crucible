@@ -1,3 +1,7 @@
+---
+title: TopoMojo — Gamespaces Tab
+---
+
 # Admin Workspaces
 
 The **Workspaces** tab is where the admin can search for workspaces and perform limited actions. Workspaces are where you build challenges and labs. Here, an admin can view every workspace.

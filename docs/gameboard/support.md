@@ -1,3 +1,7 @@
+---
+title: Gameboard - Support Module
+---
+
 # Getting In-Game Support
 
 The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist players and teams. Gameboard is a "one-stop shop" and no outside apps or systems are required to track and measure issues reported by participants. Users who have been granted a role with the appropriate permissions can use the support feature to manage tickets.
