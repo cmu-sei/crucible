@@ -8,7 +8,7 @@ An **Alloy** Definition brings together a Player View, a Caster Directory, and a
 
 - **Superadmin:** Has the rights to perform all actions in Alloy.
 - **Event Admin:** Create and manage event templates. This role requires Player permission integration to view the Player view tied to the template.
-- **Event Manager:** View and manage Alloy event templates that they are assigned to.
+- **Event Manager:** View and manage Alloy assigned event templates.
 - **User:** View Alloy event templates assigned directly to them.
 
 ## Administrator Guide

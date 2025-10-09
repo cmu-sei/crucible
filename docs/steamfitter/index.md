@@ -11,14 +11,14 @@ In the Steamfitter UI, there are four major functional sections:
 - Tasks: User tasks used to create and execute ad-hoc tasks.
 - History: Displays the results of all tasks executed by all users.
 
-## Roles and permissions
+## Roles and Permissions
 
 - **Superadmin:** Has the rights to perform all actions in Steamfitter.
 - **Rangetech Admin:** Create, manage, and import scenarios or scenario templates; assign and remove users from scenarios and scenario templates; and create or manage groups.
 - **Content Developer:** Create scenario templates and scenarios, and assign or remove users from the scenarios or templates they create.
 - **Read-Only User:** View only the projects they are assigned to. They are not allowed to edit any templates or run any tasks.
 
-### Steamfitter permissions
+### Steamfitter Permissions
 
 Any user who visits the Steamfitter URL is automatically added to the user list with no permissions. Only a Steamfitter Superadmin can grant another user elevated permissions.
 

@@ -1,6 +1,6 @@
 # Scenario Development
 
-This section covers reasoning, designing, and implementing automated cyber scenarios using Steamfitter’s orchestration capabilities.
+This section covers reasoning, designing, and implementing automated cyber scenarios using Steamfitter's orchestration capabilities.
 
 Steamfitter enables you to create dynamic, responsive scenarios that adapt to participant actions and progress through predetermined timelines. As a Range Builder, your goal is to combine **automation, decision points,** and **branching logic** to create engaging, realistic training experiences.
 
@@ -38,7 +38,7 @@ Organize activities into logical **phases**:
 |--------------------|-------------|----------|
 | **Sequential** | Tasks that must complete in order | Run scan → analyze results |
 | **Parallel** | Tasks that can occur simultaneously | Collect logs and review alerts concurrently |
-| **Conditional** | Triggered by specific outcomes | Continue only if “analysis complete” |
+| **Conditional** | Triggered by specific outcomes | Continue only if "analysis complete" |
 | **Recovery** | Activated when failure occurs | Launch fallback evidence-collection task |
 
 ---
@@ -56,7 +56,7 @@ Organize activities into logical **phases**:
 
 | Decision | Description | Trigger | Expected Outcome | Time Limit |
 |-----------|-------------|----------|------------------|-------------|
-| **Incident Classification** | Team classifies incident severity | Manual | “High severity” response selected | 30 minutes |
+| **Incident Classification** | Team classifies incident severity | Manual | "High severity" response selected | 30 minutes |
 | **Management Notification** | Notifies management if severity = high | Conditional | Notification sent | None |
 
 ---
@@ -65,8 +65,8 @@ Organize activities into logical **phases**:
 
 | Path | Description | Trigger | Action | Expected Result |
 |------|--------------|----------|---------|------------------|
-| **Success Path** | Containment verified | Success | Run containment verification script | “Contained” |
-| **Recovery Path** | Containment failed, escalate | Failure | Execute escalation procedure | “Escalated” |
+| **Success Path** | Containment verified | Success | Run containment verification script | "Contained" |
+| **Recovery Path** | Containment failed, escalate | Failure | Execute escalation procedure | "Escalated" |
 
 ---
 

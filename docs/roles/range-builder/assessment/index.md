@@ -43,10 +43,10 @@ When tasks are complex, allow flexibility in timing rather than enforcing strict
 
 Example (conceptual): Complex Analysis Task
 
-- **Purpose:** Provide learners adequate time for in-depth malware analysis  
-- **Trigger:** Manual (instructor or participant initiated)  
-- **Recommended Duration:** 60 minutes, with a 10-minute warning before expiration  
-- **Extensions:** Permitted when analysis is ongoing or productive  
+- **Purpose:** Provide learners adequate time for in-depth malware analysis
+- **Trigger:** Manual (instructor or participant initiated)
+- **Recommended Duration:** 60 minutes, with a 10-minute warning before expiration
+- **Extensions:** Permitted when analysis is ongoing or productive
 
 #### VM Targeting Issues
 
@@ -54,11 +54,11 @@ Ensure tasks align with the correct virtual machine or environment context.
 
 Example (conceptual): Targeted Task
 
-- **Purpose:** Deliver activity only to appropriate analyst systems  
-- **Target Type:** Analyst VM  
-- **Filters:**  
-  • Assigned team or role tags (e.g., `team_name`, `analyst`)  
-  • Active and powered-on systems only  
+- **Purpose:** Deliver activity only to appropriate analyst systems
+- **Target Type:** Analyst VM
+- **Filters:**
+  • Assigned team or role tags (e.g., `team_name`, `analyst`)
+  • Active and powered-on systems only
 
 #### Dependency Failures
 
@@ -68,14 +68,14 @@ Example (conceptual): Evidence Collection Workflow
 
 Primary Task:
 
-- **Action:** Automated evidence collection script (`auto_collect.sh`)  
-- **Expected Result:** Evidence successfully gathered  
+- **Action:** Automated evidence collection script (`auto_collect.sh`)
+- **Expected Result:** Evidence successfully gathered
 
 Fallback Task:
 
-- **Trigger:** Automation failure  
-- **Action:** Manual evidence collection procedure  
-- **Expected Result:** Evidence successfully gathered  
-- **Hint:** Reference manual collection steps in documentation  
+- **Trigger:** Automation failure
+- **Action:** Manual evidence collection procedure
+- **Expected Result:** Evidence successfully gathered
+- **Hint:** Reference manual collection steps in documentation
 
 These examples show how to anticipate and design around operational issues without requiring users to modify system configurations.

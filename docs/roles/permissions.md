@@ -1,6 +1,6 @@
 # Permissions
 
-The folowing grid aligns roles and their application-level permissions across:
+The following grid aligns roles and their application-level permissions across:
 
 - [Alloy](../alloy/)
 - [Player](../player/)

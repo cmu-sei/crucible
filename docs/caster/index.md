@@ -15,7 +15,7 @@ Caster gives experts the control they need, while also making it easy for beginn
 - **Superadmin:** Has the rights to perform all actions in Caster.
 - **Rangetech Admin:** Create, manage, and import projects; assign and remove users from projects; create and manage groups; and lock or unlock Caster files as an admin.
 - **Content Developer:** Create projects and assign or remove users from projects they created.
-- **Read-Only User:** View only the projects they are assigned to and are not allowed to edit code or run any workspaces.
+- **Read-Only User:** Can view only assigned projects but cannot edit code or run workspaces.
 
 ### Terraform Integration
 
@@ -75,7 +75,7 @@ Modules are very powerful and make complex configurations simpler and more easil
 3. A module to define an entire Cyber Flag enclave.
 4. A module to define a generic GreySpace that accepts variables to configure GreyBox, TopGen, etc.
 
-Modules allow for endless flexibility for developers to wrap whatever configuration they can create into a small package and describe to consumers of the module exactly what it does and what values it requires to function.
+Modules give developers unlimited flexibility to package configurations into small, reusable units that clearly describe their purpose and required values.
 
 Caster makes it easier to search for and use modules when building a Terraform configuration.
 
@@ -158,7 +158,9 @@ A workspace is where users:
 - Run their plans (*Runs* are a specific instance of a Terraform plan; explained [here](#run-plan-and-apply))
 - Manage the differences and the variables in their environments
 
-Users can access workspaces from a project's navigation pane in Caster. Users can add additional files, but *not* additional directories, to a workspace. The workspace view allows users to see all the runs that have been planned and applied. Runs shaded in red are destroyed operations, while runs in white signify various other status classifications.
+Users can access workspaces from a project's navigation pane in Caster. They can add additional files—but not directories—to a workspace.
+
+The workspace view displays all planned and applied runs. Runs shaded in red represent destroy operations, while runs in white indicate other status classifications.
 
 Users can `Plan`, `Destroy`, `Apply`, `Taint`, and `Reject` operations in real time in the workspace view.
 

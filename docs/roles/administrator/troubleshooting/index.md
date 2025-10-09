@@ -1,10 +1,10 @@
-# Troubleshooting playbook
+# Troubleshooting Playbook
 
 Use this playbook to triage common issues before escalating. Capture the findings in your operations log for future reference.
 
 ## Common Issues
 
-Services Won’t Start (Helm + k3s)
+Services Won't Start (Helm + k3s)
 
 1. Check cluster and node health
 
@@ -46,7 +46,7 @@ Services Won’t Start (Helm + k3s)
 - Check certificate validity dates
 - Ensure proper certificate chain
 
-## Environment health
+## Environment Health
 
 1. Run `kubectl get pods -A` to confirm control-plane and application pods are healthy.
 2. Check cluster events: `kubectl get events -A --sort-by=.lastTimestamp | tail`.
@@ -58,25 +58,25 @@ If pods are crash-looping:
 - Inspect container logs: `kubectl logs <name> -n <namespace> --tail=200`.
 - Compare with the last known good deployment manifest.
 
-## Identity or login failures
+## Identity or Login Failures
 
 - Verify Keycloak/IdP availability and certificate validity.
 - Confirm OAuth client secrets match the configuration in `values.yaml`.
 - Review Player API logs for `401`/`403` responses to determine whether scope assignments changed.
 
-## Application availability
+## Application Availability
 
 - Alloy events stuck in pending state often indicate Steamfitter or Caster API connectivity problems. Check service endpoints and network policies.
 - Range Builder reports of missing Player views commonly originate from misaligned permissions. Validate the affected team's View Admin or Content View User access.
 - Instructors unable to launch labs should confirm the event template still references valid Player exercises, Caster directories, and Steamfitter scenarios.
 
-## Data integrity
+## Data Integrity
 
 - For PostgreSQL incidents, use `pg_isready -U <user> -h <host>` to test connectivity.
 - Review backup job status to ensure a fallback snapshot exists before performing repair operations.
 - If object storage artifacts go missing, audit bucket lifecycle policies and recent delete events.
 
-## Escalation checklist
+## Escalation Checklist
 
 - Capture timestamps, affected users, and recent changes.
 - Note the exact error messages or logs collected.

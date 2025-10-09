@@ -10,7 +10,7 @@ Think of Player as the front door to an event running on Crucible. Player:
 - Allows for quick navigation between various applications in the Crucible framework.
 - Lets administrators set what teams can see what applications.
 
-## Roles and permissions
+## Roles and Permissions
 
 - **Superadmin:** Has the rights to perform all actions in Player.
 - **View Admin:** Create and manage views manually. This role can set a view to inactive and typically aligns with the Alloy Event Admin permission to keep launch states in sync.

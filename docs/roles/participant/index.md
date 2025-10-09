@@ -7,11 +7,11 @@
 
 ## Overview
 
-Participants engage directly with the Crucible training environment to **practice, demonstrate, and refine cyber defense skills**.  
+Participants engage directly with the Crucible training environment to **practice, demonstrate, and refine cyber defense skills**.
 
 This role maps to:
 
-- **Player** in the *Player* application  
+- **Player** in the *Player* application
 - **Competitor** in the *Gameboard* application
 
 ## What to Expect
@@ -28,7 +28,7 @@ You will typically:
 
 | Issue | Try This First | Then |
 |-------|----------------|------|
-| Platform won’t load | Refresh or try another browser | Check for maintenance notices |
+| Platform won't load | Refresh or try another browser | Check for maintenance notices |
 | VM or tool not responding | Restart or reconnect | Contact your instructor |
 | Disconnected during event | Log back in via portal | Notify Exercise Control if issues persist |
 | Scoring seems off | Refresh Gameboard | Report discrepancies to instructor |
@@ -38,7 +38,7 @@ You will typically:
 - **Engage actively**: Treat each inject or task as a real incident.
 - **Collaborate**: Coordinate with your teammates; range success is team success.
 - **Keep notes**: Document commands, discoveries, and fixes for your after-action review.
-- **Ask questions**: Clarify objectives early—ambiguity can be part of the challenge, but confusion isn’t.
+- **Ask questions**: Clarify objectives early—ambiguity can be part of the challenge, but confusion isn't.
 
 ## Support
 
