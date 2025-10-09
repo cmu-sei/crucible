@@ -155,5 +155,5 @@ Organize activities into logical **phases**:
 
 ---
 
-*For deeper insights on assessment and scenario evaluation, see:*  
+*For deeper insights on assessment and scenario evaluation, see:*
 **[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/){ target=_blank } :material-open-in-new:**
