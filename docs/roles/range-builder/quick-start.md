@@ -21,20 +21,20 @@ This guide walks you through building your first cyber range in 60 minutes using
 
 ### 1.1 Create Project and Directory
 
-1. Navigate to Caster → **Projects**  
-2. Click **Add New Project**  
-3. Enter:  
-   - **Name**: `PenTest-Lab-Basic`  
-   - **Description**: `Basic penetration testing laboratory`  
-4. Click **Save**  
-5. In the new project, click **Add Directory**  
-6. Enter:  
-   - **Name**: `pentest-topology`  
+1. Navigate to Caster → **Projects**
+2. Click **Add New Project**
+3. Enter:
+   - **Name**: `PenTest-Lab-Basic`
+   - **Description**: `Basic penetration testing laboratory`
+4. Click **Save**
+5. In the new project, click **Add Directory**
+6. Enter:
+   - **Name**: `pentest-topology`
    - **Description**: `Core network topology`
 
 ### 1.2 Create Base Configuration
 
-1. In the `pentest-topology` directory, click **Add New File**.  
+1. In the `pentest-topology` directory, click **Add New File**.
 2. Create `main.tf` with the following infrastructure definition:
 
    ```hcl
