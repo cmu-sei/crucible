@@ -2,7 +2,7 @@
 
 Build your first cyber range in 60 minutes using Crucible. This guide creates a basic penetration testing lab with automated scenario progression.
 
-## What You'll Build
+## What You Will Build
 
 - 3-VM network topology (attacker, target server, monitoring station)
 - Automated scenario with timed injects and manual checkpoints
