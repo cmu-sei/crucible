@@ -113,7 +113,7 @@ This is the [Terraform](https://www.terraform.io/) Provider for [Identity](https
 
 ## Documentation
 
-You can find documentation on Crucible and all of its components [here](https://cmu-sei.github.io/crucible/){ target=_blank }.
+You can find documentation on Crucible and all of its [components](https://cmu-sei.github.io/crucible/){ target=_blank } on GitHub Docs.
 
 ## Reporting Bugs and Requesting Features
 

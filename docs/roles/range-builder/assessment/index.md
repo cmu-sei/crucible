@@ -13,7 +13,7 @@
   | **Threat Classification** | 150    | Accuracy / Justification  | 80% / 20% |
   | **Mitigation Steps**      | 200    | Effectiveness / Speed     | 70% / 30% |
 
-2. Monitor participant progress throughout scenarios:
+1. Monitor participant progress throughout scenarios:
 
   | Element      | Description                                                  |
   | ------------ | ------------------------------------------------------------ |

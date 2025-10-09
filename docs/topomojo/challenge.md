@@ -24,7 +24,7 @@ The screen print below shows the Guest Settings of a VM template configured to u
 
 ![guest-settings](img/guest-settings.png)
 
-Click [here](building-a-workspace.md/#template-field-definitions) to learn more about Guest Settings.
+There is a detailed [Guest Settings](building-a-workspace.md/#template-field-definitions) portion of the Workspace documentation.
 
 ## Markdown
 
