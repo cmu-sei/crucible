@@ -10,7 +10,7 @@ Initial versions of Caster focused on a web front-end for raw Terraform configur
 
 Caster gives experts the control they need, while also making it easy for beginners to use expert setups or create simple ones on their own.
 
-## Roles and permissions
+## Roles and Permissions
 
 - **Superadmin:** Has the rights to perform all actions in Caster.
 - **Rangetech Admin:** Create, manage, and import projects; assign and remove users from projects; create and manage groups; and lock or unlock Caster files as an admin.

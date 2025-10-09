@@ -1,12 +1,12 @@
-# Getting Started with Crucible
+# Getting Started With Crucible
 
 Welcome to the Crucible Framework documentation! Crucible is a modular, open-source application framework designed for creating, deploying, and managing virtual environments to support cybersecurity training, education, and exercises.
 
-## What is Crucible?
+## What Is Crucible?
 
 Crucible provides a comprehensive platform for cybersecurity professionals, educators, and students to engage in hands-on learning and training through realistic virtual environments. The framework consists of multiple integrated applications that work together to deliver complete cyber range experiences.
 
-## Quick Start for Specific Roles
+## Quick Start For Specific Roles
 
 We provide detailed guides for the following roles within the Crucible ecosystem:
 
@@ -18,7 +18,7 @@ We provide detailed guides for the following roles within the Crucible ecosystem
 
 - **[Participant](../roles/participant/)**: Participants engage in Crucible exercises to develop and demonstrate cyber defense skills. They interact with simulated environments and apply techniques in realistic scenarios.
 
-## Documentation for Crucible Core Applications
+## Documentation For Crucible Core Applications
 
 Crucible consists of several integrated applications:
 

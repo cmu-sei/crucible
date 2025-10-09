@@ -2,7 +2,7 @@
 
 This guide provides detail for platform administrators, system operators, and technical staff responsible for Crucible deployment and ongoing maintenance.
 
-## :material-book: Overview
+## Overview
 
 As a Crucible Administrator, you're responsible for maintaining the platform's health, security, and performance. Your role differs from Range Builders (who create exercises) and Instructors (who deliver training) and encompasses platform-wide concerns including:
 
@@ -13,7 +13,7 @@ As a Crucible Administrator, you're responsible for maintaining the platform's h
 - Backup and recovery procedures
 - Application-specific configuration and integration management
 
-## :material-lock: API Permissions
+## API Permissions
 
 Each Crucible application has its own permission system. As an Administrator, you typically need the **Administrator** role in each application to manage users, roles, and system configuration. Below is more information on each application's permissions:
 
@@ -22,7 +22,7 @@ Each Crucible application has its own permission system. As an Administrator, yo
 - [Caster Permissions](https://github.com/cmu-sei/Caster.Api/blob/development/docs/Permissions.md){ target=_blank }
 - [Steamfitter Permissions](https://github.com/cmu-sei/Steamfitter.Api/commit/d5515ce341b76bf4089639ecca7e87280d7f73df){ target=_blank }
 
-## :material-map: Platform Architecture
+## Platform Architecture
 
 ### Core Components
 

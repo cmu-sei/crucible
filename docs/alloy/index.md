@@ -4,7 +4,7 @@
 
 An **Alloy** Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable. You can schedule an event to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
 
-## Roles and permissions
+## Roles and Permissions
 
 - **Superadmin:** Has the rights to perform all actions in Alloy.
 - **Event Admin:** Create and manage event templates. This role requires Player permission integration to view the Player view tied to the template.

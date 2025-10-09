@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Admin Notifications
+title: Gameboard-Admin Notifications
 ---
 
 # Notifications

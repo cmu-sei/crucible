@@ -2,7 +2,7 @@
 
 This guide provides administrators with the essential steps to get a Crucible deployment up and running quickly.
 
-## :material-check: Prerequisites
+## Prerequisites
 
 Before beginning your Crucible deployment, ensure you have:
 
@@ -10,7 +10,7 @@ Before beginning your Crucible deployment, ensure you have:
 - Git access to Crucible repositories
 - SSL certificates for domain(s)
 
-## :material-cog: Quick Deployment Steps
+## Quick Deployment Steps
 
 1. Initial Deployment
 
@@ -22,6 +22,6 @@ Before beginning your Crucible deployment, ensure you have:
     - Creating a test user account
     - Verifying all core applications are accessible
 
-## :material-help: Support
+## Support
 
 For additional help join the [community discussions](https://github.com/cmu-sei/crucible/discussions){ target=_blank }.
