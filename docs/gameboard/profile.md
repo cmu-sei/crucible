@@ -1,5 +1,5 @@
 ---
-title: Gameboard - Profile Screen
+title: Gameboard-Profile Screen
 ---
 
 # The Profile Screen

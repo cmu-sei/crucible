@@ -1,5 +1,5 @@
 ---
-title: Gameboard - Practice Area
+title: Gameboard-Practice Area
 ---
 
 # Practice Area

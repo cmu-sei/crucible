@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Challenge Tab
+title: TopoMojo-Challenge Tab
 ---
 
 # Challenge Tab

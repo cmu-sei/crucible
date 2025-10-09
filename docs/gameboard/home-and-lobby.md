@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Home and Lobby
+title: Gameboard-Home and Lobby
 ---
 
 # The Home Screen

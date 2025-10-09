@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Templates Tab
+title: TopoMojo-Templates Tab
 ---
 
 # Admin Templates

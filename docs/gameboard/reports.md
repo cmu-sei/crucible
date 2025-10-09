@@ -1,5 +1,5 @@
 ---
-title: Gameboard - Reports Module
+title: Gameboard-Reports Module
 ---
 
 # Reports

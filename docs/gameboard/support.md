@@ -1,5 +1,5 @@
 ---
-title: Gameboard - Support Module
+title: Gameboard-Support Module
 ---
 
 # Getting In-Game Support

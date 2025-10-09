@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Admin Dashboard
+title: TopoMojo-Admin Dashboard
 ---
 
 # Admin Features

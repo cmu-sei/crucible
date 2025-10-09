@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Lab Document
+title: TopoMojo-Lab Document
 ---
 
 # Lab Document

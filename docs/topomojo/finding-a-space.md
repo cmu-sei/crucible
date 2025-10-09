@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Finding an Existing Space
+title: TopoMojo-Finding an Existing Space
 ---
 
 # Finding a Space

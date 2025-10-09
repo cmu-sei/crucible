@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Users Tab
+title: TopoMojo-Users Tab
 ---
 
 # Admin Users

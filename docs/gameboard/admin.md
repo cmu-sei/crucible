@@ -1,5 +1,5 @@
 ---
-title: Gameboard - Admin Functions
+title: Gameboard-Admin Functions
 ---
 
 # Gameboard Administration

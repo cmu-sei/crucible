@@ -1,5 +1,5 @@
 ---
-title: Gameboard - Feedback Form
+title: Gameboard-Feedback Form
 ---
 
 # Giving Feedback as a Player

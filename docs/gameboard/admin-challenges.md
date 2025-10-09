@@ -1,5 +1,5 @@
 ---
-title: Gameboard - Admin Challenges
+title: Gameboard-Admin Challenges
 ---
 
 # Challenges

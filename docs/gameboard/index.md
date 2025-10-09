@@ -1,5 +1,5 @@
 ---
-title: Gameboard - About Gameboard
+title: Gameboard-About Gameboard
 ---
 
 # About the Gameboard

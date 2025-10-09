@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Game Center
+title: Gameboard-Game Center
 ---
 
 # Game Center

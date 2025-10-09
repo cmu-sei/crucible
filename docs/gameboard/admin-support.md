@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Admin Support Settings
+title: Gameboard-Admin Support Settings
 ---
 
 # Support Settings

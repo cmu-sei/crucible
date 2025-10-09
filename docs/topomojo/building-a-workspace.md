@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Building a Workspace
+title: TopoMojo-Building a Workspace
 ---
 
 # Building a New Workspace
