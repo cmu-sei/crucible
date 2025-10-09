@@ -155,7 +155,7 @@ Workspaces can contain files, which extend the configuration of the directory fo
 A workspace is where users:
 
 - Create an instance of a Terraform configuration
-- Run their plans (*Runs* are a specific instance of a Terraform plan; explained [here](#run-plan-and-apply))
+- Run their plans. (*[Runs](#run-plan-and-apply)* are a specific instance of a Terraform plan)
 - Manage the differences and the variables in their environments
 
 Users can access workspaces from a project's navigation pane in Caster. They can add additional files—but not directories—to a workspace.

@@ -4,16 +4,16 @@ This guide walks you through building your first cyber range in 60 minutes using
 
 What You'll Build:
 
-   - 3-VM network topology (attacker, target server, monitoring station)
-   - Automated scenario with timed injects and manual checkpoints
-   - Team-based Player interface with documentation and VM access
-   - Complete exercise ready for participant deployment
+- 3-VM network topology (attacker, target server, monitoring station)
+- Automated scenario with timed injects and manual checkpoints
+- Team-based Player interface with documentation and VM access
+- Complete exercise ready for participant deployment
 
 Prerequisites:
 
-   - [Content Developer permissions](../roles/permissions.md) in all Crucible applications
-   - Basic Terraform module available in [Caster](../../caster/index.md)
-   - Understanding of your virtualization environment
+- [Content Developer permissions](../roles/permissions.md) in all Crucible applications
+- Basic Terraform module available in [Caster](../../caster/index.md)
+- Understanding of your virtualization environment
 
 ## Step 1: Create Infrastructure (Caster) - 15 minutes
 

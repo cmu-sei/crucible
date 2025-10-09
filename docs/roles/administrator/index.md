@@ -26,7 +26,7 @@ Each Crucible application has its own permission system. As an Administrator, yo
 
 ### Core Components
 
-```
+```text
 Crucible Platform
 ├── Identity Management (Keycloak)
 ├── Container Orchestration (Kubernetes)

@@ -149,7 +149,7 @@
     }
     ```
 
-### Create Specific Modules for Common VM Roles:
+### Create Specific Modules for Common VM Roles
 
     (Domain Controller Module)
 
