@@ -1,3 +1,7 @@
+---
+title: Gameboard - Admin Challenges
+---
+
 # Challenges
 
 The Challenges tab is largely for users who have elevated permissions in Gameboard (e.g., Admin, Director, Support) troubleshoot problems with challenges.

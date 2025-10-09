@@ -8,8 +8,8 @@ Blueprint makes it easier to build and view the MSEL compared to using an Excel 
 
 For installation, refer to these GitHub repositories.
 
-- [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui)
-- [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api)
+- [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui){ target=_blank }
+- [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api){ target=_blank }
 
 ### Blueprint Permissions
 

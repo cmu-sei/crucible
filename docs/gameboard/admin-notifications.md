@@ -1,3 +1,7 @@
+---
+title: Gameboard — Admin Notifications
+---
+
 # Notifications
 
 The **Notifications** feature allows those users who have elevated permissions such as Admin and Director roles to post alerts and notices for users in the Gameboard system. When users log in, they will see a banner for each active notification. Once a user dismisses a notification, it does not appear again.

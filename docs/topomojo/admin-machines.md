@@ -1,3 +1,7 @@
+---
+title: TopoMojo — Machines Tab
+---
+
 # Admin Machines
 
 This tab lists all VMs TopoMojo is tracking and the gamespaces they belong to, without using the vSphere Client.

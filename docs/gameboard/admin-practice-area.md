@@ -1,3 +1,7 @@
+---
+title: Gameboard — Admin Practice Area
+---
+
 # Admin Practice Area
 
 Gameboard administrators configure the global Practice Area content here. In the main navigation bar, click **Admin**, then **Practice Area**.
@@ -6,7 +10,7 @@ Gameboard administrators configure the global Practice Area content here. In the
 
 The text here appears on the Practice Area page and introduces players to the Practice Area. The greeting is authored in Markdown, which allows you to create a nicely formatted message. Customize the greeting to meet your needs.
 
-More information about Markdown, including the syntax guide, can be found at [www.markdownguide.org](https://www.markdownguide.org).
+More information about Markdown, including the syntax guide, can be found at [www.markdownguide.org](https://www.markdownguide.org){ target=_blank }.
 
 ## Suggested Searches
 

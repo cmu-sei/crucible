@@ -1,3 +1,7 @@
+---
+title: TopoMojo — About
+---
+
 # TopoMojo Docs
 
 This documentation introduces users to the TopoMojo environment and provides information necessary to launch existing labs and create new topologies.
@@ -10,7 +14,7 @@ TopoMojo allows for the same functionality and connectivity that users would exp
 
 New topologies can be rapidly deployed using existing templates or built from the ground up with user-provided ISO's and VM specifications.
 
-**Go to the TopoMojo repository:** [github.com/cmu-sei/TopoMojo](https://github.com/cmu-sei/TopoMojo).
+**Go to the TopoMojo repository:** [github.com/cmu-sei/TopoMojo](https://github.com/cmu-sei/TopoMojo){ target=_blank }.
 
 ## TopoMojo Concepts
 

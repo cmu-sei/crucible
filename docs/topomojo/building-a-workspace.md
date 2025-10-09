@@ -1,3 +1,7 @@
+---
+title: TopoMojo — Building a Workspace
+---
+
 # Building a New Workspace
 
 The workspace interface contains six tabs: Settings, Templates,  Document, Challenge, Files, and Play. To build a new TopoMojo workspace click **Home**, then **New Workspace**.

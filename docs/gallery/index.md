@@ -11,8 +11,8 @@ In the Gallery user interface, there are two major functional sections:
 
 For installation, refer to these GitHub repositories.
 
-- [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui)
-- [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
+- [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui){ target=_blank }
+- [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api){ target=_blank }
 
 ## User Guide
 

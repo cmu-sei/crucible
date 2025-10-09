@@ -34,50 +34,50 @@ The following are third-party applications that have already been tested and use
 
 Mattermost is an open-source, self-hostable online chat service with file sharing, search, and integrations. It is designed as an internal chat for organizations and companies.
 
-To know more about the application: [Mattermost Documentation](https://docs.mattermost.com)
+To know more about the application: [Mattermost Documentation](https://docs.mattermost.com){ target=_blank }
 
-For installation instructions: [Mattermost Installation](https://github.com/cmu-sei/helm-charts/tree/main/charts/mattermost-team-edition)
+For installation instructions: [Mattermost Installation](https://github.com/cmu-sei/helm-charts/tree/main/charts/mattermost-team-edition){ target=_blank }
 
 ### Moodle
 
 Moodle is a free and open-source learning management system. Moodle is used for blended learning, distance education, flipped classroom and other online learning projects in schools, universities, workplaces and other sectors.
 
-To know more about the application: [Moodle Documentation](https://docs.moodle.org/401/en/Main_page)
+To know more about the application: [Moodle Documentation](https://docs.moodle.org/401/en/Main_page){ target=_blank }
 
-For installation instructions: [Moodle Installation](https://docs.moodle.org/401/en/Installation_quick_guide)
+For installation instructions: [Moodle Installation](https://docs.moodle.org/401/en/Installation_quick_guide){ target=_blank }
 
 #### Crucible Plugin for Moodle
 
 This activity plugin allows Crucible labs and exercises to be integrated into the Moodle LMS. The Moodle activity can either embed the Crucible VM app in an iframe or link to open the full Crucible lab player in a new tab or window. With this plugin, Crucible labs can be started, accessed, and stopped from a Moodle course.
 
-To know more about the plugin and installation instructions: [Moodle Crucible Plugin Documentation](https://github.com/cmu-sei/moodle-mod_crucible)
+To know more about the plugin and installation instructions: [Moodle Crucible Plugin Documentation](https://github.com/cmu-sei/moodle-mod_crucible){ target=_blank }
 
 ### osTicket
 
 osTicket is a widely-used open source support ticket system. It seamlessly integrates inquiries created via email, phone and web-based forms into a simple easy-to-use multi-user web interface. Manage, organize and archive all your support requests and responses in one place while providing your customers with accountability and responsiveness they deserve.
 
-To know more about the application: [osTicket Documentation](https://docs.osticket.com/en/latest/)
+To know more about the application: [osTicket Documentation](https://docs.osticket.com/en/latest/){ target=_blank }
 
-For installation instructions: [osTicket Installation](https://docs.osticket.com/en/latest/Getting%20Started/Installation.html)
+For installation instructions: [osTicket Installation](https://docs.osticket.com/en/latest/Getting%20Started/Installation.html){ target=_blank }
 
 #### Crucible Plugin for osTicket
 
 A plugin, developed by the Software Engineering Institute (SEI), that provides authentication against an OAuth2 Identity Server and posts ticket event notifications to the Crucible API.
 
-For installation and configuration instructions: [osTicket Crucible Plugin](https://github.com/cmu-sei/osticket-crucible)
+For installation and configuration instructions: [osTicket Crucible Plugin](https://github.com/cmu-sei/osticket-crucible){ target=_blank }
 
 ### Rocket.Chat
 
 Rocket.Chat is a customizable open-source communications platform for organizations with high data protection standards. It enables real-time conversations between colleagues, other companies, or your customers across web, desktop, or mobile devices.
 
-To know more about the application: [Rocket.Chat Documentation](https://docs.rocket.chat)
+To know more about the application: [Rocket.Chat Documentation](https://docs.rocket.chat){ target=_blank }
 
-For installation instructions: [Rocket.Chat Installation](https://github.com/RocketChat/helm-charts)
+For installation instructions: [Rocket.Chat Installation](https://github.com/RocketChat/helm-charts){ target=_blank }
 
 ### Roundcube
 
 Roundcube is a web-based IMAP email client. It provides full functionality you expect from an email client, including MIME support, address book, folder manipulation, message searching and spell checking.
 
-To know more about the application: [Roundcube Documentation](https://docs.roundcube.net/doc/help/1.1/en_US/)
+To know more about the application: [Roundcube Documentation](https://docs.roundcube.net/doc/help/1.1/en_US/){ target=_blank }
 
-For installation instructions: [Roundcube Installation](https://github.com/sei-npacheco/webmail)
+For installation instructions: [Roundcube Installation](https://github.com/sei-npacheco/webmail){ target=_blank }

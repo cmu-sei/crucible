@@ -1,3 +1,7 @@
+---
+title: Gameboard - Profile Screen
+---
+
 # The Profile Screen
 
 Participants access their *Profile* by browsing to the Gameboard's designated URL and logging in. By default, authenticated participants land in the Profile screen if they haven't registered for a game yet. Otherwise, click **Profile** in the top navigation.

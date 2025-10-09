@@ -1,10 +1,14 @@
+---
+title: TopoMojo — Lab Document
+---
+
 # Lab Document
 
 The **Document** tab in a TopoMojo workspace is where you write the instructions that correspond with your lab. You author instructions in Markdown using TopoMojo's built-in editor. Authoring in Markdown enables you to create a nicely formatted document without writing HTML.
 
 The TopoMojo editor is a collaborative editor. Multiple people can work on the documentation at the same time. As long as you are "connected" (see the top-right corner) TopoMojo saves your updates to the document.
 
-For more information about Markdown, including the syntax guide, see [markdownguide.org](https://www.markdownguide.org/).
+For more information about Markdown, including the syntax guide, see [markdownguide.org](https://www.markdownguide.org/){ target=_blank }.
 
 ## Inserting an Image
 

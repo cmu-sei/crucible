@@ -11,8 +11,8 @@ In the CITE User Interface, there are two major functional sections:
 
 For installation, refer to these GitHub repositories.
 
-- [CITE UI Repository](https://github.com/cmu-sei/CITE.Ui)
-- [CITE API Repository](https://github.com/cmu-sei/CITE.Api)
+- [CITE UI Repository](https://github.com/cmu-sei/CITE.Ui){ target=_blank }
+- [CITE API Repository](https://github.com/cmu-sei/CITE.Api){ target=_blank }
 
 ## CITE Permissions
 

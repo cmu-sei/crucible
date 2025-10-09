@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Caster** is the primary deployment component of the Crucible simulation framework. [Terraform](https://www.terraform.io/), an open-source Infrastructure-as-Code tool, underlies Caster.
+**Caster** is the primary deployment component of the Crucible simulation framework. [Terraform](https://www.terraform.io/){ target=_blank }, an open-source Infrastructure-as-Code tool, underlies Caster.
 
 Caster provides a web interface that gives exercise developers a powerful and flexible way to create, share, and manage topology configurations.
 
@@ -10,9 +10,16 @@ Initial versions of Caster focused on a web front-end for raw Terraform configur
 
 Caster gives experts the control they need, while also making it easy for beginners to use expert setups or create simple ones on their own.
 
+## Roles and permissions
+
+- **Superadmin:** Has the rights to perform all actions in Caster.
+- **Rangetech Admin:** Create, manage, and import projects; assign and remove users from projects; create and manage groups; and lock or unlock Caster files as an admin.
+- **Content Developer:** Create projects and assign or remove users from projects they created.
+- **Read-Only User:** View only the projects they are assigned to and are not allowed to edit code or run any workspaces.
+
 ### Terraform Integration
 
-For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html).
+For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html){ target=_blank }.
 
 ## Administrator Guide
 
@@ -24,24 +31,26 @@ Users are only available in Player after they have successfully authenticated vi
 
 #### Assign Roles
 
-**Roles** are groups of permissions. Only a SystemAdmin can create roles and assign users and/or teams to them.
+**Roles** are groups of permissions. Only a Superadmin can create roles and assign users and/or teams to them.
 
 #### Assign Permissions
 
-- **SystemAdmin:** can edit anything in Caster; SystemAdmin permissions are given by existing SystemAdmin.
-- **ContentDeveloper:** can edit anything within a Directory for which they have permissions.
+- **Superadmin:** Can edit anything in Caster; existing Superadmins grant this permission.
+- **Rangetech Admin:** Can create, manage, and import projects; manage groups; assign and remove users; and lock or unlock Caster files.
+- **Content Developer:** Can create projects and assign or remove users on the projects they created.
+- **Read-Only User:** Can view assigned projects but cannot edit code or run workspaces.
 
-A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to specific teams who can now edit that Directory.
+A Superadmin creates the directory and assigns Rangetech Admin or Content Developer permissions to specific teams who can now edit that directory.
 
 !!! important
 
-    Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Users, Modules, Workspaces).
+    Only users who have the Superadmin permission can view the Administration screen and the Administration nav bar (Users, Modules, Workspaces).
 
 ### Modules
 
 ![Caster modules](../assets/img/caster-modules.PNG)
 
-[Modules](https://www.terraform.io/docs/glossary.html#module) are a Terraform construct:
+[Modules](https://www.terraform.io/docs/glossary.html#module){ target=_blank } are a Terraform construct:
 
 !!! info
 
@@ -133,7 +142,7 @@ Add Directory lets you create a new directory at the same level as the above pro
 
     When working with files in Caster, **CTRL+L** locks/unlocks a file to prevent others from editing that file simultaneously. When locked, the file icon appears as a dashed line. When unlocked, the file icon appears solid. Administrators can also lock files. A file is *administratively locked* to prevent anyone from changing that file. A lock icon in the top right corner of the file edit screen denotes that the file is administratively locked. **CTRL+S** saves a file.
 
-See the official [Terraform Documentation](https://www.terraform.io/docs/index.html) for more details on supported file types and extensions. In the future, Caster may provide more guidance on allowed types and content of files.
+See the official [Terraform Documentation](https://www.terraform.io/docs/index.html){ target=_blank } for more details on supported file types and extensions. In the future, Caster may provide more guidance on allowed types and content of files.
 
 ### Workspaces
 
@@ -153,7 +162,7 @@ Users can access workspaces from a project's navigation pane in Caster. Users ca
 
 Users can `Plan`, `Destroy`, `Apply`, `Taint`, and `Reject` operations in real time in the workspace view.
 
-`Caster.Api` utilizes the Terraform binary in order to execute workspace operations. This binary is running inside of the `Caster.Api` service. *Restarting or stopping the `Caster.Api` Docker container while a Terraform operation is in progress can lead to a corrupted state.*
+`Caster.Api` utilizes the Terraform binary in order to execute workspace operations. This binary is running inside of the `Caster.Api` service. *Restarting or stopping the `Caster.Api` container while a Terraform operation is in progress can lead to a corrupted state.*
 
 In order to avoid this, a System Administrator should follow these steps in the Caster UI before stopping the `Caster.Api` container:
 
@@ -185,7 +194,7 @@ When you open a project, you can create a design and add modules backed by Git t
 
 This topic is for anyone who manages a Crucible instance who wants to configure their Terraform provider installation for Caster. You can configure Terraform to only download certain providers from the Internet and use them from a local File store.
 
-Refer to **HashiCorp's Terraform** documentation: **CLI Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
+Refer to **HashiCorp's Terraform** documentation: **CLI Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation){ target=_blank }.
 
 For your reference, below is the `.terraformrc` file currently implemented in the SEI's CyberForce instance of Caster.
 

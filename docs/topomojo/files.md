@@ -1,3 +1,7 @@
+---
+title: TopoMojo — Files Page
+---
+
 # Files
 
 The **Files** page in the TopoMojo workspace allows you to upload files from your system to TopoMojo to include in your lab. You can use these files as ISOs to attach to VMs in the workspace. If your files aren't already in an ISO file format, TopoMojo wraps them in an ISO after upload.

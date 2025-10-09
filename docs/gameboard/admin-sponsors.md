@@ -1,3 +1,7 @@
+---
+title: Gameboard — Admin Sponsors
+---
+
 # Sponsors
 
 This is where those users with the Admin and Director roles define who the sponsors are and what logo to associate with each. To access the **Sponsors** screen, click **Admin** in the top navigation menu, then click **Sponsors**.

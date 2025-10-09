@@ -11,25 +11,32 @@ In the Steamfitter UI, there are four major functional sections:
 - Tasks: User tasks used to create and execute ad-hoc tasks.
 - History: Displays the results of all tasks executed by all users.
 
-### Steamfitter Permissions
+## Roles and permissions
 
-In order to use Steamfitter, a user must be given **Content Developer** permissions by a Steamfitter System Admin. Any user who visits the Steamfitter URL is automatically added to the user list with no permissions. Only a Steamfitter System Admin can grant another user elevated permissions.
+- **Superadmin:** Has the rights to perform all actions in Steamfitter.
+- **Rangetech Admin:** Create, manage, and import scenarios or scenario templates; assign and remove users from scenarios and scenario templates; and create or manage groups.
+- **Content Developer:** Create scenario templates and scenarios, and assign or remove users from the scenarios or templates they create.
+- **Read-Only User:** View only the projects they are assigned to. They are not allowed to edit any templates or run any tasks.
+
+### Steamfitter permissions
+
+Any user who visits the Steamfitter URL is automatically added to the user list with no permissions. Only a Steamfitter Superadmin can grant another user elevated permissions.
 
 1. In Steamfitter, in the top-right corner, select your user name, then **Administration**.
-2. Check the **ContentDeveloper** box next to the name of the user.
+2. Check the boxes for **RangetechAdmin**, **ContentDeveloper**, or **ReadOnly** next to the name of the user, depending on the required access.
 3. Select your user name, then **Exit Administration**.
 
 !!! note
 
-    Content Developer and System Administrator within Steamfitter only apply to the Steamfitter application - not to any other application in the Crucible framework.
+    Steamfitter roles only apply to the Steamfitter application—they do not grant permissions in any other Crucible application.
 
 ### StackStorm Integration
 
-Behind the scenes, Steamfitter uses StackStorm ([`stackstorm.com`](https://stackstorm.com/)) to execute these tasks. StackStorm is an open-source application that connects applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This ensures that no communication for the tasks run by StackStorm occurs over the network.
+Behind the scenes, Steamfitter uses [StackStorm](https://stackstorm.com/){ target=_blank } to execute these tasks. StackStorm is an open-source application that connects applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This ensures that no communication for the tasks run by StackStorm occurs over the network.
 
 ## Administrator Guide
 
-Steamfitter is an administrative tool, and therefore is only accessed through SystemAdmin permissions. Consequently, there is no user guide.
+Steamfitter is primarily an administrative tool. Content Developers and Rangetech Admins manage templates and scenarios, while Read-Only Users can observe assigned projects without making changes.
 
 ### Scenario Templates
 

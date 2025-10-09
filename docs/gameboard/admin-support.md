@@ -1,3 +1,7 @@
+---
+title: Gameboard — Admin Support Settings
+---
+
 # Support Settings
 
 ## Greeting

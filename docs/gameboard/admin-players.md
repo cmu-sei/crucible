@@ -1,3 +1,7 @@
+---
+title: Gameboard — Admin Players
+---
+
 # Players
 
 To access the **Administration**, **Players** screen click **Admin** in the top navigation menu, then click **Players**. Most actions available in the Administration Players screen can also be performed in the Game Center under the **Players/Teams** tab. This screen serves as an alternative option.

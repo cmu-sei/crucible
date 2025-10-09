@@ -1,3 +1,7 @@
+---
+title: Gameboard — Permissions
+---
+
 # Permissions
 
 Gameboard uses a role-based permissions system to define what functions each role can access.
