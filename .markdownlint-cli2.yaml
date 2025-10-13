@@ -123,7 +123,7 @@ config:
   MD040: true
 
   # The first line in a file should be a top level heading
-  MD041: true
+  MD041: false
 
   # Links should not be empty
   MD042: true
