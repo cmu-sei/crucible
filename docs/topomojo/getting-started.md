@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Getting Started
+title: TopoMojo - Getting Started
 ---
 
 # Getting Started

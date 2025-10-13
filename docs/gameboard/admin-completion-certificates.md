@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Configuring Certificate Templates
+title: Gameboard - Configuring Certificate Templates
 ---
 
 # Configuring Certificate Templates

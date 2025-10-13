@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Permissions
+title: Gameboard - Permissions
 ---
 
 # Permissions

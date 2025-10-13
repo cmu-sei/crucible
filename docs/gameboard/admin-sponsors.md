@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Admin Sponsors
+title: Gameboard - Admin Sponsors
 ---
 
 # Sponsors

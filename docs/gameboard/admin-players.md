@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Admin Players
+title: Gameboard - Admin Players
 ---
 
 # Players

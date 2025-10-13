@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Log Tab
+title: TopoMojo - Log Tab
 ---
 
 # Admin Dashboard Log Tab

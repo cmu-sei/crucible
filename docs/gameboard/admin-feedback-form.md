@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Configuring Player Feedback Templates
+title: Gameboard - Configuring Player Feedback Templates
 ---
 
 # Feedback Templates

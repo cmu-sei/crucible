@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Gamespaces Tab
+title: TopoMojo - Gamespaces Tab
 ---
 
 # Admin Workspaces

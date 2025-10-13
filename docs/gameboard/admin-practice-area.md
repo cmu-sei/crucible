@@ -1,5 +1,5 @@
 ---
-title: Gameboard — Admin Practice Area
+title: Gameboard- Admin Practice Area
 ---
 
 # Admin Practice Area

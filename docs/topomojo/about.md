@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — About
+title: TopoMojo - About
 ---
 
 # TopoMojo Docs

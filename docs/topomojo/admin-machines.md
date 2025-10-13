@@ -1,5 +1,5 @@
 ---
-title: TopoMojo — Machines Tab
+title: TopoMojo - Machines Tab
 ---
 
 # Admin Machines
