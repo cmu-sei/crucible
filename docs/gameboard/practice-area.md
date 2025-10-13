@@ -1,3 +1,7 @@
+---
+title: Gameboard - Practice Area
+---
+
 # Practice Area
 
 The **Practice Area** is where Gameboard players can go to rehearse challenges and labs to become proficient in certain skills. Practice Area is a lightweight version of a formal competition.

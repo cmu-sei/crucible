@@ -1,3 +1,7 @@
+---
+title: TopoMojo - Templates Tab
+---
+
 # Admin Templates
 
 The **Templates** tab is where you can view all of the templates that exist in TopoMojo.

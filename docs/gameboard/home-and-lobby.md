@@ -1,3 +1,7 @@
+---
+title: Gameboard - Home and Lobby
+---
+
 # The Home Screen
 
 The Home screen is where you start a "live" game, preview upcoming games, and view completed games. Hover over a game card and select **Open Game**. Click **Enroll** to proceed to the game lobby.

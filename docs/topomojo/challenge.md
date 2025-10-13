@@ -1,3 +1,7 @@
+---
+title: TopoMojo - Challenge Tab
+---
+
 # Challenge Tab
 
 The *Challenge* tab in the TopoMojo workspace is where event organizers integrate Gameboard and TopoMojo to execute a cyber competition. Here, you create random key/values, embed them in a *gamespace* at deploy time, and ask questions and answers of competitors (players).

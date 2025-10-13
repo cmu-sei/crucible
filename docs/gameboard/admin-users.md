@@ -1,3 +1,7 @@
+---
+title: Gameboard - Admin Users
+---
+
 # Users
 
 To access the **Administration**, **Users** screen click **Admin** in the top navigation menu, then click **Users**. This is where users can be created, updated, deleted, assigned roles, and given API keys. Participant names are approved or disapproved here too. In Gameboard, a *user* is a person and a user has a *Name*.

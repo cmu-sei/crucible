@@ -1,3 +1,7 @@
+---
+title: Gameboard - Admin Functions
+---
+
 # Gameboard Administration
 
 The Admin function of Gameboard helps those with the `Admin` role:

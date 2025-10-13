@@ -1,3 +1,7 @@
+---
+title: TopoMojo - About
+---
+
 # TopoMojo Docs
 
 This documentation introduces users to the TopoMojo environment and provides information necessary to launch existing labs and create new topologies.

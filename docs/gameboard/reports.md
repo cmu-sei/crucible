@@ -1,3 +1,7 @@
+---
+title: Gameboard - Reports Module
+---
+
 # Reports
 
 The **Reports** module is available to users who have the `Reports` permission. To access the Reports area, in the main navigation bar select **Reports**. Eight report "cards" display available reports:

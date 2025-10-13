@@ -1,3 +1,7 @@
+---
+title: Gameboard- Admin Practice Area
+---
+
 # Admin Practice Area
 
 Gameboard administrators configure the global Practice Area content here. In the main navigation bar, click **Admin**, then **Practice Area**.
