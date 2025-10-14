@@ -6,11 +6,11 @@ title: TopoMojo - Getting Started
 
 ## What's New
 
-Get the latest TopoMojo source code and its accompanying release notes [here](https://github.com/cmu-sei/TopoMojo).
+Get the latest TopoMojo source code and its accompanying release notes from the [GitHub repository](https://github.com/cmu-sei/TopoMojo).
 
 ## Installing
 
-Installing TopoMojo is a matter of installing the Helm chart found [here](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo) on the SEI's GitHub page. The CMU-SEI Helm charts repo is a public repository on GitHub for anyone to access and use. The TopoMojo chart contains two sub-charts: `topomojo-api` and `topomojo-ui`. The `api` and the `ui` are different apps and you should deploy them separately.
+Installing TopoMojo is a matter of installing it's [Helm chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo) on the SEI's GitHub page. The CMU-SEI Helm charts repo is a public repository on GitHub for anyone to access and use. The TopoMojo chart contains two sub-charts: `topomojo-api` and `topomojo-ui`. The `api` and the `ui` are different apps and you should deploy them separately.
 
 !!! info
 

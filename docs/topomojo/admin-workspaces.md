@@ -28,10 +28,4 @@ The *workspace identifier* is present here too. The workspace identifier matches
 
 **Audience:** Limits who can deploy a gamespace as a workspace.
 
-**VMs:** Refresh, deploy, view the console, start/stop, revert and delete from here.
-    - **Refresh**: Queries the state of the VM from the hypervisor.
-    - **Deploy**: Deploys that virtual machine into your workspace.
-    - **Console:** Opens the console for the virtual machine.
-    - **Stop/Start:** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state. Clicking **start** powers on the deployed VM.
-    - **Revert:** Reverts the VM to its last saved state. You will lose all changes made since the last commit.
-    - **Delete:** Deletes a running VM instance.
+**VMs:** Refresh, deploy, view the console, start/stop, revert and delete from here. - **Refresh**: Queries the state of the VM from the hypervisor. - **Deploy**: Deploys that virtual machine into your workspace. - **Console:** Opens the console for the virtual machine. - **Stop/Start:** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state. Clicking **start** powers on the deployed VM. - **Revert:** Reverts the VM to its last saved state. You will lose all changes made since the last commit. - **Delete:** Deletes a running VM instance.

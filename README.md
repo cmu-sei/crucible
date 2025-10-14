@@ -72,7 +72,6 @@ Crucible's [**Collaborative Incident Threat Evaluator (CITE)**](https://cmu-sei.
 - [CITE API Repository](https://github.com/cmu-sei/CITE.Api)
 - [CITE UI Repository](https://github.com/cmu-sei/CITE.Ui)
 
-
 ## Crucible Appliance
 
 The Crucible appliance is an environment that includes everything needed to install and configure the core applications of the Crucible framework. The appliance application stack consists of a single-node Docker swarm utilizing a Traefik reverse proxy. They are assembled using Docker Compose files on an Ubuntu 20.04 operating system. To get started with the Crucible appliance, see:
@@ -107,13 +106,13 @@ This is the [Terraform](https://www.terraform.io/) Provider for Crucible which i
 
 ### Terraform Provider for Identity
 
-This is the [Terraform](https://www.terraform.io/) Provider for [Identity](https://github.com/cmu-sei/Identity) that creates and manages user accounts and other resources  using the Identity API. For additional information, see:
+This is the [Terraform](https://www.terraform.io/) Provider for [Identity](https://github.com/cmu-sei/Identity) that creates and manages user accounts and other resources using the Identity API. For additional information, see:
 
 - [Terraform Provider Identity Repository](https://github.com/cmu-sei/terraform-provider-identity)
 
 ## Documentation
 
-You can find documentation on Crucible and all of its components [here](https://cmu-sei.github.io/crucible/).
+You can find documentation on Crucible and all of its [components](https://cmu-sei.github.io/crucible/) on GitHub Docs.
 
 ## Reporting Bugs and Requesting Features
 

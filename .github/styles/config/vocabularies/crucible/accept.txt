@@ -89,3 +89,11 @@ Kibana
 Dionaea
 Wireshark
 [Cc]allout(?:s)?
+markdownlint
+toolchain
+[Ss]uperadmin(?:s)?
+Rangetech
+nginx
+Reframe
+reusability
+kubectl

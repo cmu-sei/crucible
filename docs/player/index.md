@@ -10,6 +10,14 @@ Think of Player as the front door to an event running on Crucible. Player:
 - Allows for quick navigation between various applications in the Crucible framework.
 - Lets administrators set what teams can see what applications.
 
+## Roles and Permissions
+
+- **Superadmin:** Has the rights to perform all actions in Player.
+- **View Admin:** Create and manage views manually. This role can set a view to inactive and typically aligns with the Alloy Event Admin permission to keep launch states in sync.
+- **Content View User:** Create views with Terraform. This role also manages the on-demand permissions for enabling ISO uploads and file uploads (toggle on and off).
+- **Instructor:** Revert snapshots on VMs through Player. This feature is new to Player and available only to this role.
+- **User:** View Player views assigned directly to them.
+
 Applications can use Player roles and permissions as needed. An administrator or an application with proper permissions can send notifications to individual users, teams, or the entire exercise.
 
 Player is ***not*** meant to:
@@ -22,7 +30,7 @@ Player is ***not*** meant to:
 
 ![admin button](../assets/img/admin button.png)
 
-A Player administrator will see the **Administration navigation bar** on the left. If you have the appropriate permissions, here are the steps to switch to the administrator view in Player:
+A Player superadmin or view admin will see the **Administration navigation bar** on the left. If you have the appropriate permissions, here are the steps to switch to the administrator view in Player:
 
 1. In the top-right corner, click the dropdown next to your username.
 2. Click **Administration**.
@@ -101,18 +109,18 @@ Users are only available in Player after they have successfully authenticated vi
 
 #### Assign Roles
 
-A **Role** is a group of permissions. You assign roles to users and/or teams. Only a SystemAdmin can create roles.
+A **Role** is a group of permissions. You assign roles to users and/or teams. Only a Superadmin can create roles.
 
 #### Assign Permissions
 
-- **SystemAdmin:** can edit anything in Player; existing users with SystemAdmin permissions assign new SystemAdmin permissions.
-- **ViewAdmin:** can edit anything within a View that they have permissions for.
+- **Superadmin:** can edit anything in Player; existing Superadmins delegate this permission.
+- **View Admin:** can edit anything within a view they are assigned to.
 
-A SystemAdmin creates the View and assigns ViewAdmin permissions to specific teams who can now edit that View.
+A Superadmin creates the view and assigns View Admin permissions to specific teams who can now edit that view.
 
 !!! important
 
-    Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Views, Users, Application Templates, Roles / Permissions).
+    Only users who have the Superadmin permission can view the Administration screen and the Administration nav bar (Views, Users, Application Templates, Roles / Permissions).
 
 ### Create Application Templates
 
@@ -134,18 +142,21 @@ If you have not already done so, in the dropdown next to your username, select *
 
 ### Define Roles and Permissions
 
-The Administration section of Player is where you assign users and/or teams a set of Permissions.
+The Administration section of Player is where you assign users and/or teams a set of permissions.
 
 #### Define Roles
 
-Roles are a predefined set of permissions that admin can create for ease of administrating. Assign users and/or teams a role.
+Roles are predefined sets of permissions that Superadmins create for ease of administration. Assign users and/or teams a role.
 
 #### Define Permissions
 
-Admins can create permissions as well. Player uses two established permissions: SystemAdmin and ViewAdmin.
+Player uses the following built-in permissions:
 
-- **SystemAdmin:** can edit anything in Player; an existing SystemAdmin gives SystemAdmin permissions.
-- **ViewAdmin:** can edit anything within a View that they have permissions for.
+- **Superadmin:** Can edit anything in Player and manage all other roles.
+- **View Admin:** Can edit anything within a view they administer.
+- **Content View User:** Can publish or update views through Terraform integration and control ISO/file upload toggles.
+- **Instructor:** Can revert VM snapshots inside Player when the feature is enabled.
+- **User:** Can view Player views assigned directly to them.
 
 ### Subscriptions
 
@@ -441,7 +452,7 @@ The glossary below defines key terms and concepts used in the Player application
 
 **Notification:** A message sent to a specific user, team, or view from an Administrator or an app with permission.
 
-**Permission:** A key/value pair that any application can create and use if the system grants it permission. Administrators can assign permissions to users or teams. Some permissions such as `SystemAdmin` are "read-only". The system designates `ExerciseAdmin` and `SystemAdmin` as permanent permissions, which no one can edit or delete.
+**Permission:** A key/value pair that any application can create and use if the system grants it permission. Administrators can assign permissions to users or teams. Some permissions such as `Superadmin` are "read-only". The system designates `ExerciseAdmin` and `Superadmin` as permanent permissions, which no one can edit or delete.
 
 **Role:** A set of permissions grouped together and assigned to a user or team.
 

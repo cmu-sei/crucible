@@ -10,6 +10,13 @@ Initial versions of Caster focused on a web front-end for raw Terraform configur
 
 Caster gives experts the control they need, while also making it easy for beginners to use expert setups or create simple ones on their own.
 
+## Roles and Permissions
+
+- **Superadmin:** Has the rights to perform all actions in Caster.
+- **Rangetech Admin:** Create, manage, and import projects; assign and remove users from projects; create and manage groups; and lock or unlock Caster files as an admin.
+- **Content Developer:** Create projects and assign or remove users from projects they created.
+- **Read-Only User:** Can view only assigned projects but cannot edit code or run workspaces.
+
 ### Terraform Integration
 
 For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html).
@@ -24,18 +31,20 @@ Users are only available in Player after they have successfully authenticated vi
 
 #### Assign Roles
 
-**Roles** are groups of permissions. Only a SystemAdmin can create roles and assign users and/or teams to them.
+**Roles** are groups of permissions. Only a Superadmin can create roles and assign users and/or teams to them.
 
 #### Assign Permissions
 
-- **SystemAdmin:** can edit anything in Caster; SystemAdmin permissions are given by existing SystemAdmin.
-- **ContentDeveloper:** can edit anything within a Directory for which they have permissions.
+- **Superadmin:** Can edit anything in Caster; existing Superadmins grant this permission.
+- **Rangetech Admin:** Can create, manage, and import projects; manage groups; assign and remove users; and lock or unlock Caster files.
+- **Content Developer:** Can create projects and assign or remove users on the projects they created.
+- **Read-Only User:** Can view assigned projects but cannot edit code or run workspaces.
 
-A SystemAdmin creates the Directory and assigns ContentDeveloper permissions to specific teams who can now edit that Directory.
+A Superadmin creates the directory and assigns Rangetech Admin or Content Developer permissions to specific teams who can now edit that directory.
 
 !!! important
 
-    Only users who have the SystemAdmin permission can view the Administration screen and the Administration nav bar (Users, Modules, Workspaces).
+    Only users who have the Superadmin permission can view the Administration screen and the Administration nav bar (Users, Modules, Workspaces).
 
 ### Modules
 
@@ -51,22 +60,22 @@ Modules are very powerful and make complex configurations simpler and more easil
 
 1. A generic virtual machine module that abstracts away commonly used parameters into variables such as:
 
-    - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
-    - **Networks:** creates a NIC for each specified network and assigns it to the specified network VLAN.
-    - **ExerciseId:** appends the `exerciseId` to the name of the VM for use with ODXs requiring unique naming.
-    - Other simplified variable names based on the target audience.
+   - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
+   - **Networks:** creates a NIC for each specified network and assigns it to the specified network VLAN.
+   - **ExerciseId:** appends the `exerciseId` to the name of the VM for use with ODXs requiring unique naming.
+   - Other simplified variable names based on the target audience.
 
 2. A module to create a very specific type of virtual machine resource, such as a domain controller, that points to a known good VMware template/base disk and an Ansible playbook that requires variables such as:
 
-    - Domain Name
-    - IP Address
-    - DomainAdminUser
-    - DomainAdminPass
+   - Domain Name
+   - IP Address
+   - DomainAdminUser
+   - DomainAdminPass
 
 3. A module to define an entire Cyber Flag enclave.
 4. A module to define a generic GreySpace that accepts variables to configure GreyBox, TopGen, etc.
 
-Modules allow for endless flexibility for developers to wrap whatever configuration they can create into a small package and describe to consumers of the module exactly what it does and what values it requires to function.
+Modules give developers unlimited flexibility to package configurations into small, reusable units that clearly describe their purpose and required values.
 
 Caster makes it easier to search for and use modules when building a Terraform configuration.
 
@@ -146,14 +155,16 @@ Workspaces can contain files, which extend the configuration of the directory fo
 A workspace is where users:
 
 - Create an instance of a Terraform configuration
-- Run their plans (*Runs* are a specific instance of a Terraform plan; explained [here](#run-plan-and-apply))
+- Run their plans. (*[Runs](#run-plan-and-apply)* are a specific instance of a Terraform plan)
 - Manage the differences and the variables in their environments
 
-Users can access workspaces from a project's navigation pane in Caster. Users can add additional files, but *not* additional directories, to a workspace. The workspace view allows users to see all the runs that have been planned and applied. Runs shaded in red are destroyed operations, while runs in white signify various other status classifications.
+Users can access workspaces from a project's navigation pane in Caster. They can add additional files—but not directories—to a workspace.
+
+The workspace view displays all planned and applied runs. Runs shaded in red represent destroy operations, while runs in white indicate other status classifications.
 
 Users can `Plan`, `Destroy`, `Apply`, `Taint`, and `Reject` operations in real time in the workspace view.
 
-`Caster.Api` utilizes the Terraform binary in order to execute workspace operations. This binary is running inside of the `Caster.Api` service. *Restarting or stopping the `Caster.Api` Docker container while a Terraform operation is in progress can lead to a corrupted state.*
+`Caster.Api` utilizes the Terraform binary in order to execute workspace operations. This binary is running inside of the `Caster.Api` service. *Restarting or stopping the `Caster.Api` container while a Terraform operation is in progress can lead to a corrupted state.*
 
 In order to avoid this, a System Administrator should follow these steps in the Caster UI before stopping the `Caster.Api` container:
 
@@ -198,8 +209,8 @@ These plugins are then cached in the `plugin_cache_dir` section, to save from do
     ```text
     plugin_cache_dir = "/terraform/plugin-cache"
     provider_installation {
-	    filesystem_mirror {
-		    path = "/terraform/plugins/linux_amd64"
+        filesystem_mirror {
+    	    path = "/terraform/plugins/linux_amd64"
             include = [
         	    "registry.terraform.local/sei/*",
         	    "registry.terraform.local/mastercard/*"

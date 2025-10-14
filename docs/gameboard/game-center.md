@@ -30,7 +30,7 @@ The Game Center header displays game metadata and settings, including the name, 
 
 **Track:** A course of action in your event. An event may have different categories for teams and individuals to compete in or an event may have an offensive skills track and defensive skills track.
 
-**Season:**  A fixed time period for when a series occurred. The *series* describes the event--for example, a fictitious "Cyber Cup". The *season* is the iteration of that event--Cyber Cup: Season 1, Cyber Cup: Season 2, and Cyber Cup: Season 3.
+**Season:** A fixed time period for when a series occurred. The *series* describes the event--for example, a fictitious "Cyber Cup". The *season* is the iteration of that event--Cyber Cup: Season 1, Cyber Cup: Season 2, and Cyber Cup: Season 3.
 
 **Division:** The tier or level of the audience participating in the event. Is this for working professionals or just students?
 
@@ -66,7 +66,7 @@ For a full treatment of how to design completion certificates, please see the [C
 
     The Admin Start feature bypasses the "ready to play" feature; that is, users assigned the `Admin` role can Admin Start regardless of whether all players have "readied up" or not.
 
-**Show On Homepage When In Practice Mode:**  Toggle *Yes* to make the game's game card visible on the home page even when the game is in Practice mode.
+**Show On Homepage When In Practice Mode:** Toggle *Yes* to make the game's game card visible on the home page even when the game is in Practice mode.
 
 **Engine Mode:** Choose between *Standard* and *External Host*. The vast majority of games use the Standard mode, where Gameboard submits answers to the game engine (usually TopoMojo) for grading. Choose External Host for specialized scenarios where players use an external client (e.g., a Unity game) to interact with the challenges.
 
@@ -242,7 +242,7 @@ Each player or team has a "3-dot"context menu on their card, offering different 
 
 ## Practice Tab
 
-The Practice tab appears only in games where Player Mode is set to **Practice** (this setting is found on the Gear tab under **Modes**). It lists all users who have played any challenge in practice mode, with exactly one row per user. Clicking a row opens an attempt summary window  for that user. If the user is actively playing, the **3-Dot** context menu provides an option to quick-jump to observe their session.
+The Practice tab appears only in games where Player Mode is set to **Practice** (this setting is found on the Gear tab under **Modes**). It lists all users who have played any challenge in practice mode, with exactly one row per user. Clicking a row opens an attempt summary window for that user. If the user is actively playing, the **3-Dot** context menu provides an option to quick-jump to observe their session.
 
 ![practice attempt summary window](img/practice-summary.png)
 
@@ -262,7 +262,7 @@ Select the grid icon to view active VMs in a grid view side-by-side according to
 
 Selecting the **four-square** icon allows you to view the consoles of another player or team. Multiple observers can be on the same VM.
 
-VM name (*win10-workstation*) and player display name (*Wolverine 3*)  help observers identify the console they are viewing, especially if there are many players with many challenges. Click the **pop-out** icon to open the console in a new browser tab.
+VM name (*win10-workstation*) and player display name (*Wolverine 3*) help observers identify the console they are viewing, especially if there are many players with many challenges. Click the **pop-out** icon to open the console in a new browser tab.
 
 ![observe-pop-out](img/observe-pop-out.png)
 

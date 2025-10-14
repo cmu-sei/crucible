@@ -4,20 +4,20 @@ title: Gameboard - Admin Challenges
 
 # Challenges
 
-The Challenges tab is largely for users who have elevated permissions in Gameboard (e.g., Admin, Director, Support) troubleshoot problems with challenges.
+The **Challenges** tab helps users with elevated permissions in Gameboard (e.g., Admin, Director, Support) troubleshoot challenge-related issues.
 
 After logging into the Gameboard app with the appropriate role, click **Admin**, then **Challenges**.
 
-**Search:** Search for specific teams, players, challenge ids, and tags.
+**Search:** Search for specific teams, players, challenge IDs, and tags.
 
-**Current:** Active challenges have a green dot next them. Active indicates a challenge has not yet been solved correctly, maximum submissions have not been attempted, or a session has not expired. A challenge is active until one of those three criteria are met; then, the challenge is over and inactive. When a challenge is inactive, it still counts towards total score, rank, cumulative time.
+**Current:** A green dot indicates an active challenge. A challenge remains active until one of three conditions occurs: a correct solution is submitted, the maximum number of submissions is reached, or the session expires. Once any of these conditions occur, the challenge becomes inactive. Inactive challenges still contribute to total score, rank, and cumulative time.
 
-A challenge is current and not archived because it has not been reset when the **Reset Session** button is clicked.
+A challenge remains current and not archived until the **Reset Session** button resets it.
 
-**Archived:** When a participant clicks **Reset Session**, before the session is deleted, historical information from participant and challenge event is archived. This archived session information is available here for the game admin to access.
+**Archived:** When a participant clicks **Reset Session**, Gameboard archives the participant and challenge event data before deleting the session. Admins can access this archived information here.
 
-**Submissions:** Displays a date and time stamp and the answers submitted by the player and stored in Gameboard.
+**Submissions:** Displays timestamps and the player's submitted answers stored in Gameboard.
 
-**Game Engine Audit:** Clicking **Audit from game engine?** queries the game engine (if you're using the Crucible stack, this is TopoMojo) to provide its list of submitted answers. The purpose of game engine audit is to compare Gameboard's record of submissions to the game engine's record of submissions.
+**Game Engine Audit:** Click **Audit from game engine?** to query the game engine (for Crucible, this is TopoMojo) and retrieve its record of submitted answers. Use this audit to compare Gameboard's submission records with the game engine's.
 
-**Regrade:** Clicking **Regrade** has the Gameboard check all submissions by a player against expected answers again. Regrade is used when a challenge has two possible answers or players submit in a format that is correct, but that was unexpected by game or challenge developers. When this happens, the TopoMojo workspace is updated manually to include the new correct answers. Then, the challenge is regraded and the player's score updated if a previously entered incorrect answer is now correct.
+**Regrade:** Click **Regrade** to have Gameboard recheck all player submissions against the current list of correct answers. Use regrade when a challenge gains new acceptable answers or when players submit correct answers in an unexpected format. After manually updating the TopoMojo workspace with the new correct answers, regrade the challenge to update player scores accordingly.

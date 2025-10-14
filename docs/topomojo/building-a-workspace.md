@@ -4,7 +4,7 @@ title: TopoMojo - Building a Workspace
 
 # Building a New Workspace
 
-The workspace interface contains six tabs: Settings, Templates,  Document, Challenge, Files, and Play. To build a new TopoMojo workspace click **Home**, then **New Workspace**.
+The workspace interface contains six tabs: Settings, Templates, Document, Challenge, Files, and Play. To build a new TopoMojo workspace click **Home**, then **New Workspace**.
 
 ## Settings
 
@@ -51,11 +51,11 @@ The list below explains the fields in the VM template.
 - **Networks:** The Networks fields allows you to add a space-delimited list of networks where the virtual machines connect. These names should be the same for all systems in your lab that need to connect to the same network.
 - **Guest Settings:** List key value pairs in the form of `key=value` to pass data into deployed VMs via VMware guestinfo Variables. The **Guest Settings** field uses VMware Guest Info Variables to inject content into virtual machines. Place key/value pairs here. The *key* is the name of the guest variable you want to define, and the *value* is the value, information, setting, of the variable. For example, `var1=test` is a guest setting named "var1" with a value of "test".
 
-    *Transforms* allow you to define dynamic variables that TopoMojo generates based on certain criteria or types. To add the concept of transforms here, select **Challenge** and see **Transforms**. The **info** icon in the Transforms section describes the transform types that are available. See also the "Transforms" topic [here](challenge.md/#transforms).
+  *Transforms* allow you to define dynamic variables that TopoMojo generates based on certain criteria or types. To add the concept of transforms here, select **Challenge** and see **Transforms**. The **info** icon in the Transforms section describes the transform types that are available. See also [TopoMojo Transforms](challenge.md/#transforms).
 
-    Use VMware Tools, such as `open-vm-tools` and the `vmtoolsd` command, to access guest info variables from a Gamespace VM. See [Open VM Tools](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html) and [VMware Tools daemon help](https://helpmanual.io/help/vmtoolsd/).
+  Use VMware Tools, such as `open-vm-tools` and the `vmtoolsd` command, to access guest info variables from a Gamespace VM. See [Open VM Tools](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html) and [VMware Tools daemon help](https://helpmanual.io/help/vmtoolsd/).
 
-    ![vm-ware-tools](img/vm-ware-tools.png)
+  ![vm-ware-tools](img/vm-ware-tools.png)
 
 - **Replicas:** Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a *gamespace*, set **Replicas** to "3". To deploy one copy of the VM template for each team member that TopoMojo starts the gamespace for, set **Replicas** to "-1".
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.

@@ -7,12 +7,14 @@ Developed by Carnegie Mellon University's Software Engineering Institute (SEI), 
 ### Alloy
 
 Alloy joins the other independent Crucible apps together to provide a complete Crucible experience (i.e. labs, on-demand exercises, exercises, etc.). To get started with Alloy, see: 
+
 - [Alloy API Repository](https://github.com/cmu-sei/Alloy.Api)
 - [Alloy UI Repository](https://github.com/cmu-sei/Alloy.ui)
 
 ### Caster
 
 Caster is the primary deployment component of the Crucible framework. Caster is built upon [Terraform](https://www.terraform.io/), an open source "Infrastructure as Code" tool. Caster provides a web interface that gives exercise developers a way to create, share, and manage topology configurations. To get started with Caster, see:
+
 - [Caster API Repository](https://github.com/cmu-sei/Caster.Api)
 - [Caster UI Repository](https://github.com/cmu-sei/Caster.Ui)
 
@@ -46,6 +48,7 @@ The Crucible appliance is an environment that includes everything needed to inst
 ### Crucible Common Modules
 
 Crucible common modules are a set of Angular modules that are common between Crucible apps. For more information, see:
+
 - [Crucible Common Modules Repository](https://github.com/cmu-sei/Crucible.Common.Ui)
 
 ### Crucible plugin for Moodle
@@ -57,6 +60,7 @@ The Crucible plugin for Moodle is an activity plugin that allows Crucible labs a
 ### osTicket
 
 osTicket (https://osticket.com/) is a widely-used open source support ticket system that can be configured and deployed for an exercise. To get started with the Crucible plugin for osTicket, see:
+
 - [osTicket Repository](https://github.com/cmu-sei/osticket-crucible)
 
 ### Terraform Provider for Crucible
@@ -74,6 +78,7 @@ This is the [Terraform](https://www.terraform.io/) Provider for [Identity](https
 ### Welder
 
 Welder is a simple application that can be added to an exercise; Welder allows users to dynamically load a VM workstation. To get started with Welder, see:
+
 - [Welder Repository](https://github.com/cmu-sei/Welder)
 
 ## Documentation

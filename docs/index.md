@@ -106,7 +106,3 @@ Beyond government-owned instances, the SEI owns and operates on-premises and clo
 **Fortress** [fortress.sei.cmu.edu](https://fortress.sei.cmu.edu)
 
 ![Fortress Logo](assets/img/fortress-app.svg){: style="height:75px;width:75px"}
-
-**Gauntlet** [gauntlet.sei.cmu.edu](https://gauntlet.sei.cmu.edu)
-
-![Gauntlet Logo](assets/img/gauntlet-app.svg){: style="height:75px;width:75px"}

@@ -191,15 +191,15 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name**         | String        | Name of the article | No cell phone connectivity |
-| **Summary** | String | Short summary of the article | No cell phone connectivity after pass of Hurricane Delta |
-| **Description** | Rich Text | Description with characteristics and details of the article | In a world driven by constant connectivity, the sudden absence of cell phone signals... |
-| **Url for more info** | String | If additional details are necessary, provide the URL | `www.bbcnews.com/hurricane-delta` |
-| **Open URL in new tab** | Boolean | Select if URL provided should be opened in a new tab | True |
-| **Card** | Dropdown Text | Article's classification amongst Gallery cards | Communications Sector |
-| **Status** | Dropdown Text | Status of how the article affects the exercise situation | Affected |
+| Field                   | Data Type     | Description                                                 | Example                                                                                 |
+| ----------------------- | ------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| **Name**                | String        | Name of the article                                         | No cell phone connectivity                                                              |
+| **Summary**             | String        | Short summary of the article                                | No cell phone connectivity after pass of Hurricane Delta                                |
+| **Description**         | Rich Text     | Description with characteristics and details of the article | In a world driven by constant connectivity, the sudden absence of cell phone signals... |
+| **Url for more info**   | String        | If additional details are necessary, provide the URL        | `www.bbcnews.com/hurricane-delta`                                                       |
+| **Open URL in new tab** | Boolean       | Select if URL provided should be opened in a new tab        | True                                                                                    |
+| **Card**                | Dropdown Text | Article's classification amongst Gallery cards              | Communications Sector                                                                   |
+| **Status**              | Dropdown Text | Status of how the article affects the exercise situation    | Affected                                                                                |
 
 To save these settings, click **Save**.
 
@@ -247,11 +247,11 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name**         | String        | Name or username that identifies the user | user-1 |
-| **ID** | GUID | Unique ID for the user | 9dd4e3d8-5098-4b0a-9216-697cda5553f8 |
-| **Email** | String | User's email contact | `user@this.ws` |
+| Field     | Data Type | Description                               | Example                              |
+| --------- | --------- | ----------------------------------------- | ------------------------------------ |
+| **Name**  | String    | Name or username that identifies the user | user-1                               |
+| **ID**    | GUID      | Unique ID for the user                    | 9dd4e3d8-5098-4b0a-9216-697cda5553f8 |
+| **Email** | String    | User's email contact                      | `user@this.ws`                       |
 
 To save these settings, click **Save** and select the desired permissions to assign by checking the box next to the user.
 
@@ -290,10 +290,10 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name**         | String        | Name of the collection | NCIS Demonstration |
-| **Description** | String | Details, characteristics and information of the collection | This is a collection created for demo purposes. |
+| Field           | Data Type | Description                                                | Example                                         |
+| --------------- | --------- | ---------------------------------------------------------- | ----------------------------------------------- |
+| **Name**        | String    | Name of the collection                                     | NCIS Demonstration                              |
+| **Description** | String    | Details, characteristics and information of the collection | This is a collection created for demo purposes. |
 
 To save these settings, click **Save**.
 
@@ -359,11 +359,11 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name**   | String     | Name of the card | Information Technology Sector |
-| **Description** | String | Details, characteristics and information of the card | This card provides additional information related to the IT sector. |
-| **Collection** | Dropdown Text | Select the collection that this card belongs with | Demonstration #1 |
+| Field           | Data Type     | Description                                          | Example                                                             |
+| --------------- | ------------- | ---------------------------------------------------- | ------------------------------------------------------------------- |
+| **Name**        | String        | Name of the card                                     | Information Technology Sector                                       |
+| **Description** | String        | Details, characteristics and information of the card | This card provides additional information related to the IT sector. |
+| **Collection**  | Dropdown Text | Select the collection that this card belongs with    | Demonstration #1                                                    |
 
 To save these settings, click **Save**.
 
@@ -402,20 +402,20 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name**   | String     | Name of the article | Hurricane Delta has landed in Fort Myers |
-| **Summary** | String | Short summary and details of the article | Hurricane Delta has caused major damages |
-| **Description** | Rich Text | Details, characteristics and information of the article | Hurricane Delta, Category 5 hurricane, has caused major damages in Fort Myers... |
-| **Card** | Dropdown Text | Select the card with which to categorize this article | Energy Sector |
-| **Status** | Dropdown Text | Select the article's status of how it affects the exercise | Critical |
-| **Source Type** | Dropdown Text | Select the source or author type of the article | Intel |
-| **Source Name** | String | Name or author of the article | BBC News |
-| **URL for more info** | String | URL if additional information is provided to participants | `www.bbcnews.com/hurricane-delta` |
-| **Open URL in new tab** | Boolean | If URL is provided, select if it should be opened in a new tab | True |
-| **Move** | Integer | Move number that this article should be part of | 1 |
-| **Inject** | Integer | Inject number that this article should be part of | 1 |
-| **Posted Date/Time** | Datetime | Date/Time when this article was posted | 08/02/2021, 15:12:49 |
+| Field                   | Data Type     | Description                                                    | Example                                                                          |
+| ----------------------- | ------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Name**                | String        | Name of the article                                            | Hurricane Delta has landed in Fort Myers                                         |
+| **Summary**             | String        | Short summary and details of the article                       | Hurricane Delta has caused major damages                                         |
+| **Description**         | Rich Text     | Details, characteristics and information of the article        | Hurricane Delta, Category 5 hurricane, has caused major damages in Fort Myers... |
+| **Card**                | Dropdown Text | Select the card with which to categorize this article          | Energy Sector                                                                    |
+| **Status**              | Dropdown Text | Select the article's status of how it affects the exercise     | Critical                                                                         |
+| **Source Type**         | Dropdown Text | Select the source or author type of the article                | Intel                                                                            |
+| **Source Name**         | String        | Name or author of the article                                  | BBC News                                                                         |
+| **URL for more info**   | String        | URL if additional information is provided to participants      | `www.bbcnews.com/hurricane-delta`                                                |
+| **Open URL in new tab** | Boolean       | If URL is provided, select if it should be opened in a new tab | True                                                                             |
+| **Move**                | Integer       | Move number that this article should be part of                | 1                                                                                |
+| **Inject**              | Integer       | Inject number that this article should be part of              | 1                                                                                |
+| **Posted Date/Time**    | Datetime      | Date/Time when this article was posted                         | 08/02/2021, 15:12:49                                                             |
 
 To save these settings, click **Save**.
 
@@ -454,11 +454,11 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Current Move** | Integer | Number of the current move | 1 |
-| **Current Inject** | Integer | Number of the inject within the move | 2 |
-| **Scenario ID** | GUID | ID value for the scenario | Automatically generated by the system |
+| Field              | Data Type | Description                          | Example                               |
+| ------------------ | --------- | ------------------------------------ | ------------------------------------- |
+| **Current Move**   | Integer   | Number of the current move           | 1                                     |
+| **Current Inject** | Integer   | Number of the inject within the move | 2                                     |
+| **Scenario ID**    | GUID      | ID value for the scenario            | Automatically generated by the system |
 
 To save these settings, click **Save**.
 
@@ -528,11 +528,11 @@ To add a team to the Exhibit, follow these steps:
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name** | String | Full name of the team | Carnegie Mellon University |
-| **Short Name** | String | Short name of the team, such as an acronym | CMU |
-| **Email** | String | Team's email contact | `sei@cmu.edu` |
+| Field          | Data Type | Description                                | Example                    |
+| -------------- | --------- | ------------------------------------------ | -------------------------- |
+| **Name**       | String    | Full name of the team                      | Carnegie Mellon University |
+| **Short Name** | String    | Short name of the team, such as an acronym | CMU                        |
+| **Email**      | String    | Team's email contact                       | `sei@cmu.edu`              |
 
 To save these settings, click **Save**.
 
@@ -556,14 +556,14 @@ To add a Team Card to the Exhibit, follow these steps:
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Team** | Dropdown Text | Team that the card should be part of | CMU - Carnegie Mellon University |
-| **Card** | Dropdown Text | Gallery card to be assigned | Communications Sector |
-| **Move** | Integer | Move number that the card is part of | 1 |
-| **Inject** | Integer | Inject number that the card is part of | 2 |
-| **Is Shown On Wall** | Boolean | Select whether the card should be shown on the Gallery Wall for the team | True |
-| **Can Post New Articles** | Boolean | Select whether the team can add new articles to this card | True |
+| Field                     | Data Type     | Description                                                              | Example                          |
+| ------------------------- | ------------- | ------------------------------------------------------------------------ | -------------------------------- |
+| **Team**                  | Dropdown Text | Team that the card should be part of                                     | CMU - Carnegie Mellon University |
+| **Card**                  | Dropdown Text | Gallery card to be assigned                                              | Communications Sector            |
+| **Move**                  | Integer       | Move number that the card is part of                                     | 1                                |
+| **Inject**                | Integer       | Inject number that the card is part of                                   | 2                                |
+| **Is Shown On Wall**      | Boolean       | Select whether the card should be shown on the Gallery Wall for the team | True                             |
+| **Can Post New Articles** | Boolean       | Select whether the team can add new articles to this card                | True                             |
 
 To save these settings, click **Save**.
 

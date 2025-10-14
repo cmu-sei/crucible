@@ -27,7 +27,7 @@ Each report shares common characteristics.
 - **Copy link to report:** When you run a report, the browser generates a link that reflects your current filter selections. Select the **clipboard icon** to copy the current report and share it with another Gameboard user. The user you are sharing with must log into Gameboard and have the appropriate Gameboard role. You can also copy the link in your browser's address bar and share.
 
 !!! tip
-    Bookmark useful filters via the browser so you can return to them quickly.
+Bookmark useful filters via the browser so you can return to them quickly.
 
 - **Export to CSV:** To export report results CSV, click **Export to CSV**.
 - **Reset Filters:** Deselecting filter values on multiple filters can be inconvenient. Click **Reset Filters** to deselect all filter values at once.
@@ -85,7 +85,7 @@ The **Feedback Report** answers questions like these:
 
 1. How are our games and challenges received by players and participants?
 2. What could "we" (meaning the game and challenge/lab content developers) improve upon?
-3. What insights can we gain from  players' experiences and perspectives?
+3. What insights can we gain from players' experiences and perspectives?
 
 ## Players Report
 

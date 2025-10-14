@@ -65,17 +65,17 @@ Review the following sample YAML feedback form to understand the keys and their 
 
 ```yaml
 questions:
-- id: q1
-  prompt: Please rate the difficulty of this game.
-  shortName: Difficulty
-  type: likert
-  max: 10
-  minLabel: Very Easy
-  maxLabel: Very Difficult
-  required: true
-- id: q2
-  prompt: What did you like about this game?
-  type: text
+  - id: q1
+    prompt: Please rate the difficulty of this game.
+    shortName: Difficulty
+    type: likert
+    max: 10
+    minLabel: Very Easy
+    maxLabel: Very Difficult
+    required: true
+  - id: q2
+    prompt: What did you like about this game?
+    type: text
 ```
 
 - `id`: *ids* must be unique within the template. If ids in a single list are not unique, you are presented with a warning.

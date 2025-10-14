@@ -62,6 +62,6 @@ Administrators may set a limit on the number of challenges a player can have dep
 
 Players can get to the in-game support feature from the launched challenge screen below the challenge questions and the Support link in the top navigation.
 
-From either of these locations, select **Create Ticket**. If you create a ticket from the challenge screen, then the Support Code, challenge information, Game Id,  Player Id, Team Id are automatically generated. If you create a ticket from the Support link, then this information can be added later.
+From either of these locations, select **Create Ticket**. If you create a ticket from the challenge screen, then the Support Code, challenge information, Game Id, Player Id, Team Id are automatically generated. If you create a ticket from the Support link, then this information can be added later.
 
 For a full treatment of Gameboard's Support feature, please see the [Using the Integrated Support Feature](support.md) section of the docs.

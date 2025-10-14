@@ -19,11 +19,11 @@ The procedures below show you how to:
 2. In the VM console tab, select the cog icon (the **Tools**). Under **Clipboard** paste in the clip using right-click Paste or `ctrl+V`.
 3. In the VM, select where you want the copied text to go (this can be a new file or an open application, etc.).
 4. Under **Clipboard**, click **Paste**. This inserts the copied content into the virtual machine.
-![console-paste](img/console-paste.png)
+   ![console-paste](img/console-paste.png)
 
 ## From "In Game" to "Out of Game"
 
 1. On the VM, select the content you would like to copy. Copy the content *first* to the VM's clipboard (right-click Copy or `ctrl+C`).
 2. Once you've copied your text to the VM clipboard select the cog icon (the **Tools**), place your cursor in that clipboard, and click **Copy**. This transfers the VM clip to your local clipboard.
-![console-copy](img/console-copy.png)
+   ![console-copy](img/console-copy.png)
 3. On your local machine, paste the copied text into an application using right-click Paste or `ctrl+V`.

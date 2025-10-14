@@ -19,9 +19,9 @@ To create a new notification:
 5. Optionally, set the **Availability dates**. These dates determine when the notification is visible. If set, the notification will appear to players only *after* the start date and *until* the end date.
 6. Optionally, check the **Dismissible?** box. When unchecked, players can't manually remove or dismiss the notification from their screen. The notification continues to appear every time they log in until the admin deletes the notification or the notification reaches its end date (if an end date is set).
 7. Select a **Type**:
-     - **General Info** (blue)
-     - **Warning** (yellow)
-     - **Emergency** (red)
+   - **General Info** (blue)
+   - **Warning** (yellow)
+   - **Emergency** (red)
 8. Click **Save**.
 
 ## Managing Notifications
