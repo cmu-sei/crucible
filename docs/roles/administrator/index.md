@@ -17,10 +17,10 @@ As a Crucible Administrator, you're responsible for maintaining the platform's h
 
 Each Crucible application has its own permission system. As an Administrator, you typically need the **Administrator** role in each application to manage users, roles, and system configuration. Below is more information on each application's permissions:
 
-- [Alloy Permissions](https://github.com/cmu-sei/Alloy.Api/blob/development/docs/Permissions.md){ target=_blank }
-- [Player Permissions](https://github.com/cmu-sei/Player.Api/blob/main/docs/Permissions.md){ target=_blank }
-- [Caster Permissions](https://github.com/cmu-sei/Caster.Api/blob/development/docs/Permissions.md){ target=_blank }
-- [Steamfitter Permissions](https://github.com/cmu-sei/Steamfitter.Api/commit/d5515ce341b76bf4089639ecca7e87280d7f73df){ target=_blank }
+- [Alloy Permissions](https://github.com/cmu-sei/Alloy.Api/blob/development/docs/Permissions.md)
+- [Player Permissions](https://github.com/cmu-sei/Player.Api/blob/main/docs/Permissions.md)
+- [Caster Permissions](https://github.com/cmu-sei/Caster.Api/blob/development/docs/Permissions.md)
+- [Steamfitter Permissions](https://github.com/cmu-sei/Steamfitter.Api/commit/d5515ce341b76bf4089639ecca7e87280d7f73df)
 
 ## Platform Architecture
 

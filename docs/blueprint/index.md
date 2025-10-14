@@ -8,8 +8,8 @@ Blueprint makes it easier to build and view the MSEL compared to using an Excel 
 
 For installation, refer to these GitHub repositories.
 
-- [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui){ target=_blank }
-- [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api){ target=_blank }
+- [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui)
+- [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api)
 
 ### Blueprint Permissions
 
@@ -65,13 +65,13 @@ To invite other users to the launched event, follow these steps:
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Team**         | Dropdown Text | User's team | SEI - Software Engineering Institute |
-| **Email Domain** | String | User's email domain tied to the invitation | @sei.cmu.edu |
-| **Expiration Date/Time** | Datetime | Date/Time when the invitation should expire | 04/20/2024 11:17:25 |
-| **Maximum Number of Users Allowed to Use this Invitation** | Integer | Number of users allowed to use the invitation | 5 |
-| **Can Invite Others to this team** | Boolean | Allows new users to invite others to the exercise | False |
+| Field                                                      | Data Type     | Description                                       | Example                              |
+| ---------------------------------------------------------- | ------------- | ------------------------------------------------- | ------------------------------------ |
+| **Team**                                                   | Dropdown Text | User's team                                       | SEI - Software Engineering Institute |
+| **Email Domain**                                           | String        | User's email domain tied to the invitation        | @sei.cmu.edu                         |
+| **Expiration Date/Time**                                   | Datetime      | Date/Time when the invitation should expire       | 04/20/2024 11:17:25                  |
+| **Maximum Number of Users Allowed to Use this Invitation** | Integer       | Number of users allowed to use the invitation     | 5                                    |
+| **Can Invite Others to this team**                         | Boolean       | Allows new users to invite others to the exercise | False                                |
 
 After you've added all desired configurations, click **Save**.
 
@@ -183,20 +183,20 @@ To edit the MSEL's basic information and configuration, follow these steps:
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name**         | String        | Name of the MSEL | Hurricane Delta MSEL |
-| **Description** | String | Details and/or characteristics of the MSEL | Hurricane Delta Fort Myers Scenario |
-| **Start Date/Time** | Datetime | Start date/time of the MSEL | 09/10/2024 20:00:00 |
-| **End Date/Time** | Datetime | End date/time of the MSEL | 10/10/2024 08:00:00 |
-| **Is a Template** | Boolean | Designate if this MSEL should be a system template | True |
-| **Integrate Player** | Boolean | Add Player integration functionality to the MSEL | True |
-| **Integrate Gallery**| Boolean | Add Gallery integration functionality to the MSEL | True |
-| **Integrate CITE** | Boolean | Add CITE integration functionality to the MSEL | True |
-| **Select Scoring Model** | Dropdown Text | Select a CITE Scoring Model | CISA NCISS |
-| **Integrate Steamfitter** | Boolean | Add Steamfitter integration functionality to the MSEL | False |
-| **MSEL Status** | Dropdown Text | Select MSEL status designation | Active |
-| **Header Row Metadata (Height)** | Integer | An integer value that defines the height of the header row when exporting this MSEL as an .xlsx file | 30 |
+| Field                            | Data Type     | Description                                                                                          | Example                             |
+| -------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| **Name**                         | String        | Name of the MSEL                                                                                     | Hurricane Delta MSEL                |
+| **Description**                  | String        | Details and/or characteristics of the MSEL                                                           | Hurricane Delta Fort Myers Scenario |
+| **Start Date/Time**              | Datetime      | Start date/time of the MSEL                                                                          | 09/10/2024 20:00:00                 |
+| **End Date/Time**                | Datetime      | End date/time of the MSEL                                                                            | 10/10/2024 08:00:00                 |
+| **Is a Template**                | Boolean       | Designate if this MSEL should be a system template                                                   | True                                |
+| **Integrate Player**             | Boolean       | Add Player integration functionality to the MSEL                                                     | True                                |
+| **Integrate Gallery**            | Boolean       | Add Gallery integration functionality to the MSEL                                                    | True                                |
+| **Integrate CITE**               | Boolean       | Add CITE integration functionality to the MSEL                                                       | True                                |
+| **Select Scoring Model**         | Dropdown Text | Select a CITE Scoring Model                                                                          | CISA NCISS                          |
+| **Integrate Steamfitter**        | Boolean       | Add Steamfitter integration functionality to the MSEL                                                | False                               |
+| **MSEL Status**                  | Dropdown Text | Select MSEL status designation                                                                       | Active                              |
+| **Header Row Metadata (Height)** | Integer       | An integer value that defines the height of the header row when exporting this MSEL as an .xlsx file | 30                                  |
 
 To save these settings, click the **checkmark** at the top.
 
@@ -220,11 +220,11 @@ To add MSEL notes, follow these steps:
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Page Name** | String | Name of the Page | Core Planning Group Notes |
-| **All MSEL users can view this page** | Boolean | Enable other users who don't have elevated permissions to access this page | True |
-| **Notes** | Rich Text | Field to add page notes | Next meeting is on 12/7 at 0800 |
+| Field                                 | Data Type | Description                                                                | Example                         |
+| ------------------------------------- | --------- | -------------------------------------------------------------------------- | ------------------------------- |
+| **Page Name**                         | String    | Name of the Page                                                           | Core Planning Group Notes       |
+| **All MSEL users can view this page** | Boolean   | Enable other users who don't have elevated permissions to access this page | True                            |
+| **Notes**                             | Rich Text | Field to add page notes                                                    | Next meeting is on 12/7 at 0800 |
 
 After you've made your changes, click the **checkmark** to save the page.
 
@@ -314,19 +314,19 @@ To add a Data Field to the MSEL, follow these steps:
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Display Order** | Integer | Indicate the order of the data field | 1 |
-| **Name** | String | Name of the data field | Description |
-| **Data Type** | Dropdown Text | Data type for the data field | String |
-| **Use Option List** | Boolean | Add options to select when adding an event | True |
-| **Display on the Events list** | Boolean | Display this data field on the Events list tab | True |
-| **Display on the Exercise View** | Boolean | Display this data field on the Exercise View tab | True |
-| **Display on "Advanced" edit tab** | Boolean | Display this data field on the data field edit component Advanced tab | True |
-| **Display for Content Developers and MSEL Owners ONLY!!!** | Boolean | Display this data field for users who are Content Developers or MSEL Owners only | True |
-| **Gallery Article Parameter** | Dropdown Text | If using the Gallery integration, select the Gallery parameter that aligns with the data field | Description |
-| **Column Metadata (Width)** | Integer | Width of the column when displayed | 30 |
-| **Cell Metadata (Color, Tint, Font-Weight)** | String | Column color and font style | (Red, 20%, bold) |
+| Field                                                      | Data Type     | Description                                                                                    | Example          |
+| ---------------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------- | ---------------- |
+| **Display Order**                                          | Integer       | Indicate the order of the data field                                                           | 1                |
+| **Name**                                                   | String        | Name of the data field                                                                         | Description      |
+| **Data Type**                                              | Dropdown Text | Data type for the data field                                                                   | String           |
+| **Use Option List**                                        | Boolean       | Add options to select when adding an event                                                     | True             |
+| **Display on the Events list**                             | Boolean       | Display this data field on the Events list tab                                                 | True             |
+| **Display on the Exercise View**                           | Boolean       | Display this data field on the Exercise View tab                                               | True             |
+| **Display on "Advanced" edit tab**                         | Boolean       | Display this data field on the data field edit component Advanced tab                          | True             |
+| **Display for Content Developers and MSEL Owners ONLY!!!** | Boolean       | Display this data field for users who are Content Developers or MSEL Owners only               | True             |
+| **Gallery Article Parameter**                              | Dropdown Text | If using the Gallery integration, select the Gallery parameter that aligns with the data field | Description      |
+| **Column Metadata (Width)**                                | Integer       | Width of the column when displayed                                                             | 30               |
+| **Cell Metadata (Color, Tint, Font-Weight)**               | String        | Column color and font style                                                                    | (Red, 20%, bold) |
 
 After you've added all desired configurations, click **Save**.
 
@@ -371,12 +371,12 @@ To add an Organization Card from scratch, follow these steps:
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name** | String | Name of the organization | Twitter |
-| **Short Name** | String | Organization's short name, such as an acronym | TW |
-| **Summary** | String | Organization's short summary | Social media platform |
-| **Email** | String | Organization's email contact | `user@twitter.com` |
+| Field           | Data Type | Description                                                   | Example                                                                                                                                                             |
+| --------------- | --------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**        | String    | Name of the organization                                      | Twitter                                                                                                                                                             |
+| **Short Name**  | String    | Organization's short name, such as an acronym                 | TW                                                                                                                                                                  |
+| **Summary**     | String    | Organization's short summary                                  | Social media platform                                                                                                                                               |
+| **Email**       | String    | Organization's email contact                                  | `user@twitter.com`                                                                                                                                                  |
 | **Description** | Rich Text | Information, details, and characteristics of the organization | Twitter is a micro-blogging and social networking service on which users post and interact with messages known as "tweets", owned by American company Twitter, Inc. |
 
 After you've added all desired configurations, click **Save**.
@@ -432,12 +432,12 @@ To add a move, follow these steps:
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Move Number** | Integer | Designated number for the move | 1 |
-| **Start Date/Time** | Datetime | Start date/time of the move real-time | 11/20/2023, 09:00:00 |
-| **Move Description** | String | Information, details, and characteristics of the move | Scene Setter |
-| **Situation Date/Time** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
+| Field                     | Data Type | Description                                               | Example                                  |
+| ------------------------- | --------- | --------------------------------------------------------- | ---------------------------------------- |
+| **Move Number**           | Integer   | Designated number for the move                            | 1                                        |
+| **Start Date/Time**       | Datetime  | Start date/time of the move real-time                     | 11/20/2023, 09:00:00                     |
+| **Move Description**      | String    | Information, details, and characteristics of the move     | Scene Setter                             |
+| **Situation Date/Time**   | Datetime  | Start date/time of the move exercise-time                 | 1/24/2024, 14:18:27                      |
 | **Situation Description** | Rich Text | Information, details, and characteristics of the exercise | Hurricane Delta has landed in Fort Myers |
 
 After you've added all desired configurations, click **Save**.
@@ -485,17 +485,17 @@ On the **Default** tab, fill the fields as necessary following the Data Format T
 
 ##### Data Format Table
 
-| Field       | Data Type     | Description  | Example    |
-| ----------- | ------------- | ------------ | ---------- |
-| **Control Number** | String | Event control number, used to identify and categorize events | ADMIN-1 |
-| **Description** | String |  Information, details, and characteristics of the event | STARTEX |
-| **Status** | Dropdown Text | Approval status of the event used on the MSEL | Approved |
-| **Time** | Datetime | Start date/time of the move real-time | 11/20/2023, 09:00:00 |
-| **Move** | Dropdown Text | Move number the event is part of | 1 |
-| **Group** | Integer | Groups events within a move, often times executed within the same time range | 1 |
-| **Exercise Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
-| **Type** | String | Source type for the event | Email |
-| **Delivery Method** | Dropdown Text | How is the event delivered to participants | Email |
+| Field               | Data Type     | Description                                                                  | Example              |
+| ------------------- | ------------- | ---------------------------------------------------------------------------- | -------------------- |
+| **Control Number**  | String        | Event control number, used to identify and categorize events                 | ADMIN-1              |
+| **Description**     | String        | Information, details, and characteristics of the event                       | STARTEX              |
+| **Status**          | Dropdown Text | Approval status of the event used on the MSEL                                | Approved             |
+| **Time**            | Datetime      | Start date/time of the move real-time                                        | 11/20/2023, 09:00:00 |
+| **Move**            | Dropdown Text | Move number the event is part of                                             | 1                    |
+| **Group**           | Integer       | Groups events within a move, often times executed within the same time range | 1                    |
+| **Exercise Date**   | Datetime      | Start date/time of the move exercise-time                                    | 1/24/2024, 14:18:27  |
+| **Type**            | String        | Source type for the event                                                    | Email                |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants                                   | Email                |
 
 If not already completed on the previous tab, fill the fields from the **Advanced** tab following the Data Format Table specifications. This tab focuses on the MSEL's metadata and style.
 
@@ -503,10 +503,10 @@ If not already completed on the previous tab, fill the fields from the **Advance
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Exercise Date/Time** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
-| **Row Metadata** | Integer |  Defines the size of this event on the Events and Exercise View tabs | 15,199,21,133 |
+| Field                  | Data Type | Description                                                         | Example             |
+| ---------------------- | --------- | ------------------------------------------------------------------- | ------------------- |
+| **Exercise Date/Time** | Datetime  | Start date/time of the move exercise-time                           | 1/24/2024, 14:18:27 |
+| **Row Metadata**       | Integer   | Defines the size of this event on the Events and Exercise View tabs | 15,199,21,133       |
 
 If the MSEL owner enabled Gallery integration, the user should verify that all fields on the **Gallery** tab are complete, following the Data Format Table specifications below. This tab includes the fields required for the Gallery integration to function properly.
 
@@ -514,17 +514,17 @@ If the MSEL owner enabled Gallery integration, the user should verify that all f
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Description** | String |  Information, details, and characteristics of the event | STARTEX |
-| **Status** | Dropdown Text | Approval status of the event used on the MSEL | Approved |
-| **Move** | Dropdown Text | Move number that the event is part of | 1 |
-| **Group** | Integer | Groups events within a move, often times executed within the same time range | 1 |
-| **Exercise Date** | Datetime | Start date/time of the move exercise-time | 1/24/2024, 14:18:27 |
-| **Delivery Method** | Dropdown Text | How is the event delivered to participants | Gallery |
-| **Title** | String | Title of the event | Bank Consortium Falls Victim to Ransomware Attack |
-| **From Org** | Dropdown Text | Select the organization that sends this event | CC News |
-| **To Org** | Dropdown Text | Select the organization that receives this event | ALL |
+| Field               | Data Type     | Description                                                                  | Example                                           |
+| ------------------- | ------------- | ---------------------------------------------------------------------------- | ------------------------------------------------- |
+| **Description**     | String        | Information, details, and characteristics of the event                       | STARTEX                                           |
+| **Status**          | Dropdown Text | Approval status of the event used on the MSEL                                | Approved                                          |
+| **Move**            | Dropdown Text | Move number that the event is part of                                        | 1                                                 |
+| **Group**           | Integer       | Groups events within a move, often times executed within the same time range | 1                                                 |
+| **Exercise Date**   | Datetime      | Start date/time of the move exercise-time                                    | 1/24/2024, 14:18:27                               |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants                                   | Gallery                                           |
+| **Title**           | String        | Title of the event                                                           | Bank Consortium Falls Victim to Ransomware Attack |
+| **From Org**        | Dropdown Text | Select the organization that sends this event                                | CC News                                           |
+| **To Org**          | Dropdown Text | Select the organization that receives this event                             | ALL                                               |
 
 After you've added all desired configurations, click **Save**.
 
@@ -587,13 +587,13 @@ To add a new invitation, follow these steps:
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Team** | Dropdown Text | Team tied to the invitation | SEI - Software Engineering Institute |
-| **Email Domain** | String | User's email domain | `@sei.cmu.edu` |
-| **Expiration Date/Time** | Datetime | Date and time when the invitation should expire | 04/15/2024 15:12:03 |
-| **Maximum Number of Users Allowed to Use this Invitation** | Integer | Number of users that can use the invitation | 5 |
-| **Can Invite others to this Team** | Boolean | Permission to add others to the team | False |
+| Field                                                      | Data Type     | Description                                     | Example                              |
+| ---------------------------------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------ |
+| **Team**                                                   | Dropdown Text | Team tied to the invitation                     | SEI - Software Engineering Institute |
+| **Email Domain**                                           | String        | User's email domain                             | `@sei.cmu.edu`                       |
+| **Expiration Date/Time**                                   | Datetime      | Date and time when the invitation should expire | 04/15/2024 15:12:03                  |
+| **Maximum Number of Users Allowed to Use this Invitation** | Integer       | Number of users that can use the invitation     | 5                                    |
+| **Can Invite others to this Team**                         | Boolean       | Permission to add others to the team            | False                                |
 
 After you've added all desired configurations, click **Save**.
 
@@ -642,9 +642,9 @@ First, assign a CITE Team Type to each team.
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Team Email** | String | Team's email contact | `seicmu@cmu.edu` |
+| Field              | Data Type     | Description                               | Example                 |
+| ------------------ | ------------- | ----------------------------------------- | ----------------------- |
+| **Team Email**     | String        | Team's email contact                      | `seicmu@cmu.edu`        |
 | **CITE Team Type** | Dropdown Text | Classifies the team within a certain type | Individual Organization |
 
 After you've made all desired configurations, click **Save**.
@@ -675,12 +675,12 @@ To add a CITE Action, follow these steps:
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Move** | Dropdown Text | Select the move to display this action | 0 - Hurricane Delta Scene Setter |
-| **Team** | Dropdown Text | Select the team this action applies to | Conference of State Bank Supervisors |
-| **Display Order** | Integer | Indicates the order to display this action on the CITE Dashboard | 1 |
-| **Description of the Action** | String |  Information, details, and characteristics of the action | Assign users to roles |
+| Field                         | Data Type     | Description                                                      | Example                              |
+| ----------------------------- | ------------- | ---------------------------------------------------------------- | ------------------------------------ |
+| **Move**                      | Dropdown Text | Select the move to display this action                           | 0 - Hurricane Delta Scene Setter     |
+| **Team**                      | Dropdown Text | Select the team this action applies to                           | Conference of State Bank Supervisors |
+| **Display Order**             | Integer       | Indicates the order to display this action on the CITE Dashboard | 1                                    |
+| **Description of the Action** | String        | Information, details, and characteristics of the action          | Assign users to roles                |
 
 After you've added all desired configurations, click **Save**.
 
@@ -732,9 +732,9 @@ To add a CITE role, follow these steps:
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name** | String| Name of the role | Team Leader |
+| Field    | Data Type     | Description                          | Example                              |
+| -------- | ------------- | ------------------------------------ | ------------------------------------ |
+| **Name** | String        | Name of the role                     | Team Leader                          |
 | **Team** | Dropdown Text | Select the team this role applies to | Conference of State Bank Supervisors |
 
 After you've added all desired configurations, click **Save**.
@@ -785,23 +785,23 @@ The MSEL owner should add these fields:
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Description** | String |  Information, details, and characteristics of the event | STARTEX |
-| **Date Posted** | Datetime | Posted date of the event | 1/24/2024, 14:18:27 |
-| **Delivery Method** | Dropdown Text | How is the event delivered to participants | Gallery |
-| **Name** | String | Name of the event | Common Operating Picture 1 |
-| **From Org** | Dropdown Text | Select the organization that sends this event | CC News |
-| **To Org** | Dropdown Text | Select the organization that receives this event | ALL |
-| **Summary** | Rich Text | Complete information and details of the event | A ransomware attack affected Bank XYZ... |
-| **Card** | Dropdown Text | Select the Gallery Card to categorize this event | Information Technology Sector |
-| **Status** | Dropdown Text | Approval status of the event used on the MSEL | Approved |
-| **Source Type** | Dropdown Text | Select where the event's details come from | News |
-| **Source Name** | String | Add the author of the event | BBC News |
-| **Move** | Dropdown Text | Move number that the event is part of | 1 |
-| **Group** | Integer | Groups events within a move, often executed within the same time range | 1 |
-| **Url** | String | Provide a URL if more information is necessary for participants to access | `www.bbcnews.com/ransomware-attack-xyzbank` |
-| **Open in a New Tab** | Boolean | Use this option to open the URL in a new tab | True |
+| Field                 | Data Type     | Description                                                               | Example                                     |
+| --------------------- | ------------- | ------------------------------------------------------------------------- | ------------------------------------------- |
+| **Description**       | String        | Information, details, and characteristics of the event                    | STARTEX                                     |
+| **Date Posted**       | Datetime      | Posted date of the event                                                  | 1/24/2024, 14:18:27                         |
+| **Delivery Method**   | Dropdown Text | How is the event delivered to participants                                | Gallery                                     |
+| **Name**              | String        | Name of the event                                                         | Common Operating Picture 1                  |
+| **From Org**          | Dropdown Text | Select the organization that sends this event                             | CC News                                     |
+| **To Org**            | Dropdown Text | Select the organization that receives this event                          | ALL                                         |
+| **Summary**           | Rich Text     | Complete information and details of the event                             | A ransomware attack affected Bank XYZ...    |
+| **Card**              | Dropdown Text | Select the Gallery Card to categorize this event                          | Information Technology Sector               |
+| **Status**            | Dropdown Text | Approval status of the event used on the MSEL                             | Approved                                    |
+| **Source Type**       | Dropdown Text | Select where the event's details come from                                | News                                        |
+| **Source Name**       | String        | Add the author of the event                                               | BBC News                                    |
+| **Move**              | Dropdown Text | Move number that the event is part of                                     | 1                                           |
+| **Group**             | Integer       | Groups events within a move, often executed within the same time range    | 1                                           |
+| **Url**               | String        | Provide a URL if more information is necessary for participants to access | `www.bbcnews.com/ransomware-attack-xyzbank` |
+| **Open in a New Tab** | Boolean       | Use this option to open the URL in a new tab                              | True                                        |
 
 After adding data fields, map each one to the appropriate Gallery field by selecting an option from the **Gallery Article Parameter** dropdown when adding or editing the field.
 
@@ -823,11 +823,11 @@ To add a Gallery card, follow these steps:
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name** | String | Name of the Gallery card | Energy Sector |
-| **Card Description** | String |  Information, details, and characteristics of the Gallery card | The current state of the Energy Sector |
-| **Move** | Dropdown Text | Select the move to display this Gallery card | 0 |
+| Field                | Data Type     | Description                                                   | Example                                |
+| -------------------- | ------------- | ------------------------------------------------------------- | -------------------------------------- |
+| **Name**             | String        | Name of the Gallery card                                      | Energy Sector                          |
+| **Card Description** | String        | Information, details, and characteristics of the Gallery card | The current state of the Energy Sector |
+| **Move**             | Dropdown Text | Select the move to display this Gallery card                  | 0                                      |
 
 After you've added all desired configurations, click **Save**.
 
@@ -879,13 +879,13 @@ To add a Player app, follow these steps:
 
 ##### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name** | String | Name of the application | Chat |
-| **Url** | String | URL of the application | `roundcube.hamilton.treasury.gov` |
-| **Icon Url** | String | URL of the application's icon | `roundcube.hamilton.treasury.gov/roundcube.png` |
-| **Embeddable** | Boolean | Select whether to embed the app in Player's iframe | True |
-| **Load in Background** | Boolean | Select whether the app should load in the background | True |
+| Field                  | Data Type | Description                                          | Example                                         |
+| ---------------------- | --------- | ---------------------------------------------------- | ----------------------------------------------- |
+| **Name**               | String    | Name of the application                              | Chat                                            |
+| **Url**                | String    | URL of the application                               | `roundcube.hamilton.treasury.gov`               |
+| **Icon Url**           | String    | URL of the application's icon                        | `roundcube.hamilton.treasury.gov/roundcube.png` |
+| **Embeddable**         | Boolean   | Select whether to embed the app in Player's iframe   | True                                            |
+| **Load in Background** | Boolean   | Select whether the app should load in the background | True                                            |
 
 ##### URL Parameters
 
@@ -963,10 +963,10 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name** | String | Name for the unit | Carnegie Mellon University |
-| **Short Name** | String | Short name for the unit | CMU |
+| Field          | Data Type | Description             | Example                    |
+| -------------- | --------- | ----------------------- | -------------------------- |
+| **Name**       | String    | Name for the unit       | Carnegie Mellon University |
+| **Short Name** | String    | Short name for the unit | CMU                        |
 
 After you've added all desired configurations, click **Save**.
 
@@ -1000,8 +1000,8 @@ To configure a unit for an exercise, administrators add users to their respectiv
 ![Configure Blueprint Teams OE](../assets/img/blueprintConfigureUnits-v2.png)
 
 1. Select the unit you want to configure and click to expand its configuration details.
-2. The **All Users** tab shows *unassigned* users. To add a user to the unit, click **Add User**.
-3. The **Unit Users** tab shows *assigned* users. To remove a user from the unit, click **Remove**.
+2. The **All Users** tab shows _unassigned_ users. To add a user to the unit, click **Add User**.
+3. The **Unit Users** tab shows _assigned_ users. To remove a user from the unit, click **Remove**.
 
 ### Users
 
@@ -1025,10 +1025,10 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **User ID** | GUID | Unique ID for the user | 9dd4e3d8-5098-4b0a-9216-697cda5553f8 |
-| **User Name** | String | User name identifier  | user-2 |
+| Field         | Data Type | Description            | Example                              |
+| ------------- | --------- | ---------------------- | ------------------------------------ |
+| **User ID**   | GUID      | Unique ID for the user | 9dd4e3d8-5098-4b0a-9216-697cda5553f8 |
+| **User Name** | String    | User name identifier   | user-2                               |
 
 Click the **Save** icon (a user with a **+** sign), then select the permissions you want to assign by checking the boxes next to the user's name.
 
@@ -1063,12 +1063,12 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Long Name** | String | Add the complete name for the organization | Cybersecurity and Infrastructure Security Agency |
-| **Short Name** | String | Add a short name for the organization, such as an acronym | CISA |
-| **Summary** | String | Organization's short summary | Security agency |
-| **Email** | String | Organization's email contact | `john@cisa.gov` |
+| Field           | Data Type | Description                                                   | Example                                                                                                                                                                |
+| --------------- | --------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Long Name**   | String    | Add the complete name for the organization                    | Cybersecurity and Infrastructure Security Agency                                                                                                                       |
+| **Short Name**  | String    | Add a short name for the organization, such as an acronym     | CISA                                                                                                                                                                   |
+| **Summary**     | String    | Organization's short summary                                  | Security agency                                                                                                                                                        |
+| **Email**       | String    | Organization's email contact                                  | `john@cisa.gov`                                                                                                                                                        |
 | **Description** | Rich Text | Information, details, and characteristics of the organization | The Cybersecurity and Infrastructure Security Agency (CISA) is an agency of the DHS that is responsible for strengthening cybersecurity and infrastructure protection. |
 
 After you've added all desired configurations, click **Save**.
@@ -1113,10 +1113,10 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name** | String | Gallery card name | Information Technology Sector |
-| **Card Description** | String |  Information, details, and characteristics of the Gallery card | Status of the Information Technology Sector |
+| Field                | Data Type | Description                                                   | Example                                     |
+| -------------------- | --------- | ------------------------------------------------------------- | ------------------------------------------- |
+| **Name**             | String    | Gallery card name                                             | Information Technology Sector               |
+| **Card Description** | String    | Information, details, and characteristics of the Gallery card | Status of the Information Technology Sector |
 
 After you've added all desired configurations, click **Save**.
 
@@ -1160,9 +1160,9 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Description of the Action** | String |  Information, details, and characteristics of the CITE action | Score the incident |
+| Field                         | Data Type | Description                                                  | Example            |
+| ----------------------------- | --------- | ------------------------------------------------------------ | ------------------ |
+| **Description of the Action** | String    | Information, details, and characteristics of the CITE action | Score the incident |
 
 After you've added all desired configurations, click **Save**.
 
@@ -1206,9 +1206,9 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 #### Data Format Table
 
-| Field      | Data Type  | Description | Example    |
-| ---------- | ---------- | ----------- | ---------- |
-| **Name** | String |  Name of the role | Reviewer |
+| Field    | Data Type | Description      | Example  |
+| -------- | --------- | ---------------- | -------- |
+| **Name** | String    | Name of the role | Reviewer |
 
 After you've added all desired configurations, click **Save**.
 
@@ -1277,7 +1277,7 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **MSEL:** (Master Scenario Events List) provides a timeline for all expected events, affiliated users and organizations during an exercise.
 
-**`Observer` Role:**  When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
+**`Observer` Role:** When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
 
 **Organizations:** Entities within an exercise with defined roles, responsibilities, and functions.
 

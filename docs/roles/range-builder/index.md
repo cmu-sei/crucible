@@ -28,52 +28,52 @@ There are many ways to structure cyber ranges depending on your training goals, 
 
 1. Basic Lab Environment
 
-    - Single team with individual workstations
-    - Pre-configured tools and documentation
-    - Self-paced learning objectives
+   - Single team with individual workstations
+   - Pre-configured tools and documentation
+   - Self-paced learning objectives
 
 2. Red vs Blue Exercise
 
-    - Opposing teams with different objectives
-    - Automated inject schedule
-    - Real-time monitoring and scoring
+   - Opposing teams with different objectives
+   - Automated inject schedule
+   - Real-time monitoring and scoring
 
 3. Incident Response Scenario
 
-    - Timeline-driven event progression
-    - Evidence discovery points
-    - Collaborative investigation tools
+   - Timeline-driven event progression
+   - Evidence discovery points
+   - Collaborative investigation tools
 
 4. Penetration Testing Lab
 
-    - Vulnerable target environment
-    - Progressive difficulty levels
-    - Documentation and reporting tools
+   - Vulnerable target environment
+   - Progressive difficulty levels
+   - Documentation and reporting tools
 
 ## Best Practices
 
 1. Infrastructure Design
 
-    - Use modular Terraform configurations
-    - Implement proper resource naming conventions
-    - Plan for scalability and resource limits
-    - Test destruction/cleanup procedures
+   - Use modular Terraform configurations
+   - Implement proper resource naming conventions
+   - Plan for scalability and resource limits
+   - Test destruction/cleanup procedures
 
 2. Scenario Development
 
-    - Start with simple manual tasks before automation
-    - Use clear, descriptive task names
-    - Create a clear timeline for all events and injects
-    - Test timing and dependencies thoroughly
-    - Provide meaningful feedback to participants
+   - Start with simple manual tasks before automation
+   - Use clear, descriptive task names
+   - Create a clear timeline for all events and injects
+   - Test timing and dependencies thoroughly
+   - Provide meaningful feedback to participants
 
 3. User Experience
 
-    - Design intuitive navigation paths
-    - Provide clear instructions and objectives
-    - Test from participant perspective
-    - Plan for different skill levels
+   - Design intuitive navigation paths
+   - Provide clear instructions and objectives
+   - Test from participant perspective
+   - Plan for different skill levels
 
 ## Support
 
-For additional help join the [community discussions](https://github.com/cmu-sei/crucible/discussions){ target=_blank }.
+For additional help join the [community discussions](https://github.com/cmu-sei/crucible/discussions).

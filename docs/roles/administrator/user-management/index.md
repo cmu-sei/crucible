@@ -8,8 +8,8 @@ Crucible uses an identity provider (typically Keycloak or IdentityServer) for ce
 
 ### Identity Provider Integration
 
-- **Keycloak** - [Documentation](https://www.keycloak.org/documentation){ target=_blank }
-- **IdentityServer** - [Documentation](https://identityserver4.readthedocs.io/en/latest/){ target=_blank }
+- **Keycloak** - [Documentation](https://www.keycloak.org/documentation)
+- **IdentityServer** - [Documentation](https://identityserver4.readthedocs.io/en/latest/)
 - Configure OIDC/OAuth2 settings in each Crucible application's Helm values
 
 ### Multi-Factor Authentication
@@ -22,10 +22,10 @@ Each Crucible application has its own permission system. As an Administrator, yo
 
 ### Permission Documentation
 
-- [Alloy Permissions](https://github.com/cmu-sei/Alloy.Api/blob/development/docs/Permissions.md){ target=_blank } - Event launching and exercise management
-- [Player Permissions](https://github.com/cmu-sei/Player.Api/blob/main/docs/Permissions.md){ target=_blank } - Virtual environment access and team membership
-- [Caster Permissions](https://github.com/cmu-sei/Caster.Api/blob/development/docs/Permissions.md){ target=_blank } - Infrastructure design and deployment
-- [Steamfitter Permissions](https://github.com/cmu-sei/Steamfitter.Api/commit/d5515ce341b76bf4089639ecca7e87280d7f73df){ target=_blank } - Scenario task organization and execution
+- [Alloy Permissions](https://github.com/cmu-sei/Alloy.Api/blob/development/docs/Permissions.md) - Event launching and exercise management
+- [Player Permissions](https://github.com/cmu-sei/Player.Api/blob/main/docs/Permissions.md) - Virtual environment access and team membership
+- [Caster Permissions](https://github.com/cmu-sei/Caster.Api/blob/development/docs/Permissions.md) - Infrastructure design and deployment
+- [Steamfitter Permissions](https://github.com/cmu-sei/Steamfitter.Api/commit/d5515ce341b76bf4089639ecca7e87280d7f73df) - Scenario task organization and execution
 
 ### Common Permission Roles
 

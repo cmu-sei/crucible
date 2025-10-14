@@ -3,55 +3,55 @@
 ## Requirements
 
 - Kubernetes
-  - For bare metal/lab installs, we recommend [K3s](https://docs.k3s.io/){ target=_blank }
+  - For bare metal/lab installs, we recommend [K3s](https://docs.k3s.io/)
 - vCenter/Proxmox (for virtualization)
 
 ## Recommended
 
 - Helm
-- OAuth Provider: We use [IdentityServer](https://identityserver4.readthedocs.io/en/latest/){ target=_blank } and [Keycloak](https://www.keycloak.org/documentation){ target=_blank }
+- OAuth Provider: We use [IdentityServer](https://identityserver4.readthedocs.io/en/latest/) and [Keycloak](https://www.keycloak.org/documentation)
 
 ## Crucible Applications and GitHub Pages
 
-- [Alloy API](https://github.com/cmu-sei/Alloy.Api){ target=_blank }
-- [Alloy UI](https://github.com/cmu-sei/Alloy.ui){ target=_blank }
-- [Caster API](https://github.com/cmu-sei/Caster.Api){ target=_blank }
-- [Caster UI](https://github.com/cmu-sei/Caster.Ui){ target=_blank }
-- [Player API](https://github.com/cmu-sei/Player.Api){ target=_blank }
-- [Player Console UI](https://github.com/cmu-sei/Console.Ui){ target=_blank }
-- [Player UI](https://github.com/cmu-sei/Player.Ui){ target=_blank }
-- [Player VM API](https://github.com/cmu-sei/Vm.Api){ target=_blank }
-- [Player VM UI](https://github.com/cmu-sei/Vm.Ui){ target=_blank }
-- [Steamfitter API](https://github.com/cmu-sei/Steamfitter.Api){ target=_blank }
-- [Steamfitter UI](https://github.com/cmu-sei/Steamfitter.Ui){ target=_blank }
-- [CITE API](https://github.com/cmu-sei/CITE.Api){ target=_blank }
-- [CITE UI](https://github.com/cmu-sei/CITE.Ui){ target=_blank }
-- [Gallery API](https://github.com/cmu-sei/Gallery.Api){ target=_blank }
-- [Gallery UI](https://github.com/cmu-sei/Gallery.Ui){ target=_blank }
-- [Blueprint API](https://github.com/cmu-sei/Blueprint.Api){ target=_blank }
-- [Blueprint UI](https://github.com/cmu-sei/Blueprint.Ui){ target=_blank }
+- [Alloy API](https://github.com/cmu-sei/Alloy.Api)
+- [Alloy UI](https://github.com/cmu-sei/Alloy.ui)
+- [Caster API](https://github.com/cmu-sei/Caster.Api)
+- [Caster UI](https://github.com/cmu-sei/Caster.Ui)
+- [Player API](https://github.com/cmu-sei/Player.Api)
+- [Player Console UI](https://github.com/cmu-sei/Console.Ui)
+- [Player UI](https://github.com/cmu-sei/Player.Ui)
+- [Player VM API](https://github.com/cmu-sei/Vm.Api)
+- [Player VM UI](https://github.com/cmu-sei/Vm.Ui)
+- [Steamfitter API](https://github.com/cmu-sei/Steamfitter.Api)
+- [Steamfitter UI](https://github.com/cmu-sei/Steamfitter.Ui)
+- [CITE API](https://github.com/cmu-sei/CITE.Api)
+- [CITE UI](https://github.com/cmu-sei/CITE.Ui)
+- [Gallery API](https://github.com/cmu-sei/Gallery.Api)
+- [Gallery UI](https://github.com/cmu-sei/Gallery.Ui)
+- [Blueprint API](https://github.com/cmu-sei/Blueprint.Api)
+- [Blueprint UI](https://github.com/cmu-sei/Blueprint.Ui)
 
 ## Crucible Helm Charts
 
-- [Alloy](https://github.com/cmu-sei/helm-charts/tree/main/charts/alloy){ target=_blank }
-- [Caster](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster){ target=_blank }
-- [Player](https://github.com/cmu-sei/helm-charts/tree/main/charts/player){ target=_blank }
-- [Steamfitter](https://github.com/cmu-sei/helm-charts/tree/main/charts/steamfitter){ target=_blank }
-- [CITE](https://github.com/cmu-sei/helm-charts/tree/main/charts/cite){ target=_blank }
-- [Gallery](https://github.com/cmu-sei/helm-charts/tree/main/charts/gallery){ target=_blank }
-- [Blueprint](https://github.com/cmu-sei/helm-charts/tree/main/charts/blueprint){ target=_blank }
+- [Alloy](https://github.com/cmu-sei/helm-charts/tree/main/charts/alloy)
+- [Caster](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster)
+- [Player](https://github.com/cmu-sei/helm-charts/tree/main/charts/player)
+- [Steamfitter](https://github.com/cmu-sei/helm-charts/tree/main/charts/steamfitter)
+- [CITE](https://github.com/cmu-sei/helm-charts/tree/main/charts/cite)
+- [Gallery](https://github.com/cmu-sei/helm-charts/tree/main/charts/gallery)
+- [Blueprint](https://github.com/cmu-sei/helm-charts/tree/main/charts/blueprint)
 
 ## Other Helm Charts
 
-- [MetalLB](https://github.com/metallb/metallb){ target=_blank }
-- [ingress-nginx](https://github.com/kubernetes/ingress-nginx){ target=_blank }
-- [Rancher](https://github.com/rancher/charts){ target=_blank }
-- [Longhorn](https://github.com/longhorn/charts){ target=_blank }
-- [StackStorm](https://github.com/StackStorm/stackstorm-k8s){ target=_blank }
-- [RocketChat](https://github.com/RocketChat/helm-charts){ target=_blank }
-- [Moodle](https://github.com/bitnami/charts/tree/main/bitnami/moodle){ target=_blank }
-- [Webmail](https://github.com/cmu-sei/helm-charts/tree/main/charts/webmail){ target=_blank }
-- [Keycloak](https://github.com/bitnami/charts/tree/main/bitnami/keycloak){ target=_blank }
+- [MetalLB](https://github.com/metallb/metallb)
+- [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+- [Rancher](https://github.com/rancher/charts)
+- [Longhorn](https://github.com/longhorn/charts)
+- [StackStorm](https://github.com/StackStorm/stackstorm-k8s)
+- [RocketChat](https://github.com/RocketChat/helm-charts)
+- [Moodle](https://github.com/bitnami/charts/tree/main/bitnami/moodle)
+- [Webmail](https://github.com/cmu-sei/helm-charts/tree/main/charts/webmail)
+- [Keycloak](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
 
 ## Docker Images
 
@@ -61,8 +61,8 @@
 
 We primarily use these images in setting up a email server. The above Helm charts will pull the correct Docker images. This is completely optional but is what we use during certain exercises.
 
-- [ClamAV](https://hub.docker.com/r/clamav/clamav/){ target=_blank }
-- [MISP](https://github.com/coolacid/docker-misp){ target=_blank }
+- [ClamAV](https://hub.docker.com/r/clamav/clamav/)
+- [MISP](https://github.com/coolacid/docker-misp)
 
 ## Infrastructure
 
@@ -111,8 +111,8 @@ This stack is very dependent on TLS. Please create certificates and add them as 
 
 If you're using a cloud provider for your Kubernetes cluster, you do not have to worry about supplying your own load balancer. If you are installing this on bare metal, which would be a majority of the time if you are testing the software, you will have to provide a load balancer. We recommend using MetalLB. The documentation will guide you on how to install this into your cluster.
 
-- [Helm Install MetalLB](https://metallb.universe.tf/installation/#installation-with-helm){ target=_blank }
-- [Configuring MetalLB](https://metallb.universe.tf/configuration/){ target=_blank }
+- [Helm Install MetalLB](https://metallb.universe.tf/installation/#installation-with-helm)
+- [Configuring MetalLB](https://metallb.universe.tf/configuration/)
 
 ??? example
 
@@ -160,7 +160,7 @@ Majority of the applications above use PostgreSQL. We also use pgAdmin to help m
     helm upgrade -i postgresql bitnami/postgresql --set global.storageClass=longhorn --set global.postgresql.auth.postgresPassword=$POSTGRES_PASS
     ```
 
-[Here's the chart for pgAdmin that we use.](https://github.com/rowanruseler/helm-charts/blob/master/charts/pgadmin4/values.yaml){ target=_blank }
+[Here's the chart for pgAdmin that we use.](https://github.com/rowanruseler/helm-charts/blob/master/charts/pgadmin4/values.yaml)
 
 ??? example
 
@@ -172,7 +172,7 @@ Majority of the applications above use PostgreSQL. We also use pgAdmin to help m
 
 All of the Crucible applications have their settings on the GitHub page and can be modified in the values YAML file on the corresponding Helm chart. There are settings within each application you do have to set up in order for communication. We have populated environment files and scripts that help guide you with this part of the installation. These are located at these two GitHub pages:
 
-- [k3s-install](https://github.com/avershave/k3s-install){ target=_blank }
-- [k3s-production](https://github.com/sei-noconnor/k3s-production){ target=_blank }
+- [k3s-install](https://github.com/avershave/k3s-install)
+- [k3s-production](https://github.com/sei-noconnor/k3s-production)
 
 These contain the necessary values and setup procedures to install the entire Crucible stack. More information on these settings can be located on the individual GitHub pages.

@@ -1,7 +1,7 @@
 # Instructor Guide
 
 ???+ warning "Caution"
-    Crucible environments are often customized. Procedures, scoring, and user interfaces may vary by deployment. Review local documentation or range notes before facilitating exercises.
+Crucible environments are often customized. Procedures, scoring, and user interfaces may vary by deployment. Review local documentation or range notes before facilitating exercises.
 
 ## Overview
 
@@ -59,11 +59,11 @@ Reflection is where insight turns into understanding. Your debrief sets the tone
 ### Feedback and Assessment
 
 ???+ tip "Deep Dive into CERT Research"
-    Our own experience with team-based assessments is documented in :material-book: *[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/){ target=_blank }*.
+Our own experience with team-based assessments is documented in :material-book: _[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/)_.
 
 - Provide feedback that is **specific, encouraging, and forward-looking**.
 - Emphasize growth over grading.
-- Use formative observations—what participants *did and thought*—to inform next steps.
+- Use formative observations—what participants _did and thought_—to inform next steps.
 - Encourage participants to document what they learned or would do differently next time.
 
 ## Supporting Learners
@@ -72,12 +72,12 @@ Crucible exercises can be intense. Participants benefit from instructors who are
 
 ### Common Support Situations
 
-| Challenge | Instructor Focus |
-|------------|------------------|
-| Confusion about goals | Reframe the task; remind them what success looks like. |
-| Technical problems | Keep them moving—note the issue and escalate if needed. |
-| Frustration or fatigue | Pause for perspective; celebrate small wins. |
-| Off-topic exploration | Redirect by asking how their path relates to the mission. |
+| Challenge              | Instructor Focus                                          |
+| ---------------------- | --------------------------------------------------------- |
+| Confusion about goals  | Reframe the task; remind them what success looks like.    |
+| Technical problems     | Keep them moving—note the issue and escalate if needed.   |
+| Frustration or fatigue | Pause for perspective; celebrate small wins.              |
+| Off-topic exploration  | Redirect by asking how their path relates to the mission. |
 
 ### Encouraging Collaboration
 

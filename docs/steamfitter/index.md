@@ -32,7 +32,7 @@ Any user who visits the Steamfitter URL is automatically added to the user list 
 
 ### StackStorm Integration
 
-Behind the scenes, Steamfitter uses [StackStorm](https://stackstorm.com/){ target=_blank } to execute these tasks. StackStorm is an open-source application that connects applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This ensures that no communication for the tasks run by StackStorm occurs over the network.
+Behind the scenes, Steamfitter uses [StackStorm](https://stackstorm.com/) to execute these tasks. StackStorm is an open-source application that connects applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This ensures that no communication for the tasks run by StackStorm occurs over the network.
 
 ## Administrator Guide
 
@@ -54,7 +54,7 @@ Add tasks in the Scenario Templates screen by clicking the **+** icon. Complete 
 
 Scenarios are groupings of predefined tasks that can be executed against a required view's VMs.
 
-Define tasks in the scenario template, then create the *scenario*. Note that the scenario template is the *plan*; the scenario is the actual *instance*. One template can yield multiple scenarios. Associate these scenarios with one or more Player views.
+Define tasks in the scenario template, then create the _scenario_. Note that the scenario template is the _plan_; the scenario is the actual _instance_. One template can yield multiple scenarios. Associate these scenarios with one or more Player views.
 
 In the **Scenarios** screen, the created scenario is named `scenario template name` - `your username` by default.
 
@@ -84,7 +84,7 @@ Scenarios can also be ended. When a scenario is started, the Start Scenario butt
 
 ### Tasks
 
-A *task* is an action or command that can be executed against one or more topology resources (that is, a VM). Each task has a *result*. A result is a single output that is generated when a task is executed against a single topology resource - like a single VM. A result indicates success or failure and typically includes some text describing the outcome.
+A _task_ is an action or command that can be executed against one or more topology resources (that is, a VM). Each task has a _result_. A result is a single output that is generated when a task is executed against a single topology resource - like a single VM. A result indicates success or failure and typically includes some text describing the outcome.
 
 A task has no results until it is executed.
 
@@ -100,7 +100,7 @@ A task can have multiple results:
 
 ##### Action
 
-- **Select an Action:** Power on a VM, power off a VM, read a file, etc. An *action* is the name StackStorm gives to a single Task/Command.
+- **Select an Action:** Power on a VM, power off a VM, read a file, etc. An _action_ is the name StackStorm gives to a single Task/Command.
 - **Trigger Condition:**
 
        - *Time:* A *timed* trigger is executed automatically after a set *delay* in seconds. A timed trigger can have multiple *iterations* executed on a specific interval.
@@ -114,7 +114,7 @@ A task can have multiple results:
 ##### Delay / Iteration / Expiration
 
 - **Delay:** Set in seconds before the task executes.
-- **Number of Iterations:** An *iteration* is an execution of a task when the task is configured to iterate for *x* number of times. Enter the number of times you want the task to execute here.
+- **Number of Iterations:** An _iteration_ is an execution of a task when the task is configured to iterate for _x_ number of times. Enter the number of times you want the task to execute here.
 - **Interval Between Iterations:** The time in seconds between iterations.
 - **Iteration Termination:**
 
@@ -131,7 +131,7 @@ A task can have multiple results:
 
 #### Task Menu and Dependent Tasks
 
-Clicking the Task Menu on the newly created task will give you the context menu for the task: **Edit**, **Copy**, **Cut**, **New**, **Delete**, and **Execute**. Selecting **New** here, however, creates a new *dependent* task. A dependent task does not execute until the condition on the parent task is met.
+Clicking the Task Menu on the newly created task will give you the context menu for the task: **Edit**, **Copy**, **Cut**, **New**, **Delete**, and **Execute**. Selecting **New** here, however, creates a new _dependent_ task. A dependent task does not execute until the condition on the parent task is met.
 
 A task can be copied and pasted from any other scenario template, scenario, and task.
 

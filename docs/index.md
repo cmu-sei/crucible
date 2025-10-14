@@ -103,6 +103,6 @@ A pre-configured Crucible Appliance virtual machine is available for download.
 
 Beyond government-owned instances, the SEI owns and operates on-premises and cloud-based instances of Crucible:
 
-**Fortress** [fortress.sei.cmu.edu](https://fortress.sei.cmu.edu){ target=_blank }
+**Fortress** [fortress.sei.cmu.edu](https://fortress.sei.cmu.edu)
 
 ![Fortress Logo](assets/img/fortress-app.svg){: style="height:75px;width:75px"}

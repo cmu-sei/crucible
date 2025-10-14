@@ -21,9 +21,9 @@ We provide detailed guides for the following roles within the Crucible ecosystem
 For ease of use reasons, the documentation for participants is largely covered within the applications that they are interacting with directly.
 
 ???+ tip "Deep Dive into CERT Research"
-    For more background, CERT has a long history of building cyber ranges and training/exercise/challenge environments. Some of our relevant research publications include:
+For more background, CERT has a long history of building cyber ranges and training/exercise/challenge environments. Some of our relevant research publications include:
 
-    - :material-book: *[Challenge Development Guidelines for Cybersecurity Competitions](https://www.sei.cmu.edu/library/challenge-development-guidelines-for-cybersecurity-competitions/){ target=_blank }*
-    - :material-book: *[Foundation of Cyber Ranges](https://www.sei.cmu.edu/library/foundation-of-cyber-ranges/){ target=_blank }*
-    - :material-book: *[R-EACTR: A Framework for Designing Realistic Cyber Warfare Exercises](https://www.sei.cmu.edu/library/r-eactr-a-framework-for-designing-realistic-cyber-warfare-exercises/){ target=_blank }*
-    - :material-book: *[The CERT Approach to Cybersecurity Workforce Development](https://www.sei.cmu.edu/library/the-cert-approach-to-cybersecurity-workforce-development/){ target=_blank }*
+    - :material-book: *[Challenge Development Guidelines for Cybersecurity Competitions](https://www.sei.cmu.edu/library/challenge-development-guidelines-for-cybersecurity-competitions/)*
+    - :material-book: *[Foundation of Cyber Ranges](https://www.sei.cmu.edu/library/foundation-of-cyber-ranges/)*
+    - :material-book: *[R-EACTR: A Framework for Designing Realistic Cyber Warfare Exercises](https://www.sei.cmu.edu/library/r-eactr-a-framework-for-designing-realistic-cyber-warfare-exercises/)*
+    - :material-book: *[The CERT Approach to Cybersecurity Workforce Development](https://www.sei.cmu.edu/library/the-cert-approach-to-cybersecurity-workforce-development/)*

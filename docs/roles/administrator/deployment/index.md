@@ -14,7 +14,7 @@ For complete installation instructions, follow the [installation guide](../../in
 - **Database** - PostgreSQL and pgAdmin installation
 - **Crucible Applications** - Helm chart deployment for all framework components
 
-The installation guide includes example configurations and links to the [k3s-install](https://github.com/avershave/k3s-install){ target=_blank } and [k3s-production](https://github.com/sei-noconnor/k3s-production){ target=_blank } repositories containing production-ready values and setup scripts.
+The installation guide includes example configurations and links to the [k3s-install](https://github.com/avershave/k3s-install) and [k3s-production](https://github.com/sei-noconnor/k3s-production) repositories containing production-ready values and setup scripts.
 
 ## Deployment Architecture
 
@@ -36,12 +36,12 @@ See the [Administrator Guide](../index.md) for more information.
 
 Each Crucible application has specific configuration requirements documented in their respective GitHub repositories:
 
-- [Alloy API Settings](https://github.com/cmu-sei/Alloy.Api){ target=_blank }
-- [Caster API Settings](https://github.com/cmu-sei/Caster.Api){ target=_blank }
-- [Player API Settings](https://github.com/cmu-sei/Player.Api){ target=_blank }
-- [Steamfitter API Settings](https://github.com/cmu-sei/Steamfitter.Api){ target=_blank }
+- [Alloy API Settings](https://github.com/cmu-sei/Alloy.Api)
+- [Caster API Settings](https://github.com/cmu-sei/Caster.Api)
+- [Player API Settings](https://github.com/cmu-sei/Player.Api)
+- [Steamfitter API Settings](https://github.com/cmu-sei/Steamfitter.Api)
 
-Helm chart values for each application are available in the [helm-charts repository](https://github.com/cmu-sei/helm-charts){ target=_blank }.
+Helm chart values for each application are available in the [helm-charts repository](https://github.com/cmu-sei/helm-charts).
 
 ### Secrets Management
 

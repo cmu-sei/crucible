@@ -1,28 +1,28 @@
 # Assessment Integration
 
 ???+ tip "Deep Dive into CERT Research"
-    Our own experience with team-based assessments is documented in :material-book: *[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/){ target=_blank }*.
+Our own experience with team-based assessments is documented in :material-book: _[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/)_.
 
 ## Suggestions for Scoring
 
 1. Implement scoring based on task completion:
 
-  | Task                  | Points | Criteria                  | Weights   |
-  | --------------------- | ------ | ------------------------- | --------- |
-  | **Evidence Collection**   | 100    | Completeness / Timeliness | 60% / 40% |
-  | **Threat Classification** | 150    | Accuracy / Justification  | 80% / 20% |
-  | **Mitigation Steps**      | 200    | Effectiveness / Speed     | 70% / 30% |
+| Task                      | Points | Criteria                  | Weights   |
+| ------------------------- | ------ | ------------------------- | --------- |
+| **Evidence Collection**   | 100    | Completeness / Timeliness | 60% / 40% |
+| **Threat Classification** | 150    | Accuracy / Justification  | 80% / 20% |
+| **Mitigation Steps**      | 200    | Effectiveness / Speed     | 70% / 30% |
 
 1. Monitor participant progress throughout scenarios:
 
-  | Element      | Description                                                  |
-  | ------------ | ------------------------------------------------------------ |
-  | **Name**     | Progress Checkpoint                                          |
-  | **Purpose**  | Track participant progress                                   |
-  | **Trigger**  | Time-based (every 10 minutes)                                |
-  | **Duration** | 2-hour scenario (12 intervals)                               |
-  | **Metrics**  | Tasks completed, time per task, accuracy rate, help requests |
-  | **Result**   | Progress data recorded                                       |
+| Element      | Description                                                  |
+| ------------ | ------------------------------------------------------------ |
+| **Name**     | Progress Checkpoint                                          |
+| **Purpose**  | Track participant progress                                   |
+| **Trigger**  | Time-based (every 10 minutes)                                |
+| **Duration** | 2-hour scenario (12 intervals)                               |
+| **Metrics**  | Tasks completed, time per task, accuracy rate, help requests |
+| **Result**   | Progress data recorded                                       |
 
 ## Testing and Validation
 

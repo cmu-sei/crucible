@@ -14,14 +14,14 @@ Before beginning your Crucible deployment, ensure you have:
 
 1. Initial Deployment
 
-    Follow the details of our [installation guide](../install/index.md).
+   Follow the details of our [installation guide](../install/index.md).
 
 2. Verify your deployment by:
 
-    - Logging in as an administrator
-    - Creating a test user account
-    - Verifying all core applications are accessible
+   - Logging in as an administrator
+   - Creating a test user account
+   - Verifying all core applications are accessible
 
 ## Support
 
-For additional help join the [community discussions](https://github.com/cmu-sei/crucible/discussions){ target=_blank }.
+For additional help join the [community discussions](https://github.com/cmu-sei/crucible/discussions).
