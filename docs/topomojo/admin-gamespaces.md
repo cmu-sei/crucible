@@ -1,10 +1,10 @@
 ---
-title: TopoMojo-Gamespaces Tab
+title: TopoMojo - Gamespaces Tab
 ---
 
 # Admin Gamespaces
 
-The **Gamespaces** tab is where the admin can search for, and filter by, **active** and **inactive** gamespaces. By default, the search is for *active* gamespaces. Green indicates *active* gamespaces and gray indicates *inactive* gamespaces.
+The **Gamespaces** tab is where the admin can search for, and filter by, **active** and **inactive** gamespaces. By default, the search is for _active_ gamespaces. Green indicates _active_ gamespaces and gray indicates _inactive_ gamespaces.
 
 **Refresh:** Refreshes your search.
 
@@ -14,8 +14,8 @@ Gamespaces in the table show the following information:
 
 - Gamespace id or support code in Gameboard (e.g. `e9416013`)
 - Time remaining (if active)
-- User who is interacting with (or *had* interacted with) the gamespace
-- Title of the *workspace* that deployed the *gamespace*
+- User who is interacting with (or _had_ interacted with) the gamespace
+- Title of the _workspace_ that deployed the _gamespace_
 
 The screen print below shows several active and inactive gamespaces (usernames redacted).
 

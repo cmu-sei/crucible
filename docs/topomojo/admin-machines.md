@@ -1,5 +1,5 @@
 ---
-title: TopoMojo-Machines Tab
+title: TopoMojo - Machines Tab
 ---
 
 # Admin Machines
@@ -8,7 +8,7 @@ This tab lists all VMs TopoMojo is tracking and the gamespaces they belong to, w
 
 ![admin machine explanation](img/admin-machine.png)
 
-- `gamespace` tells you this is a *gamespace* VM.
+- `gamespace` tells you this is a _gamespace_ VM.
 - `pc5-ubuntu-server-2204-594` is the name of the VM.
 - `#d9b090c92728424781537c66b3ee2f4b` after the hash tag is the gamespace GUID.
 

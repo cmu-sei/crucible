@@ -1,5 +1,5 @@
 ---
-title: TopoMojo-Gamespaces Tab
+title: TopoMojo - Gamespaces Tab
 ---
 
 # Admin Workspaces
@@ -16,7 +16,7 @@ In the left navigation pane, you can use the **Search** field to locate a worksp
 
 Selecting a workspace takes you the **Settings** tab of that particular workspace where you can edit it. For additional help on the **Settings** tab, see [Building a new workspace](building-a-workspace.md).
 
-The *workspace identifier* is present here too. The workspace identifier matches the directory name used to store workspace files like unlinked virtual machines, Markdown documents, images, etc. Copying it to the clipboard is useful if you need to use it in a terminal when navigating the filesystem.
+The _workspace identifier_ is present here too. The workspace identifier matches the directory name used to store workspace files like unlinked virtual machines, Markdown documents, images, etc. Copying it to the clipboard is useful if you need to use it in a terminal when navigating the filesystem.
 
 ![workspace identifier](img/wksp-iden.png)
 
@@ -28,10 +28,4 @@ The *workspace identifier* is present here too. The workspace identifier matches
 
 **Audience:** Limits who can deploy a gamespace as a workspace.
 
-**VMs:** Refresh, deploy, view the console, start/stop, revert and delete from here.
-    - **Refresh**: Queries the state of the VM from the hypervisor.
-    - **Deploy**: Deploys that virtual machine into your workspace.
-    - **Console:** Opens the console for the virtual machine.
-    - **Stop/Start:** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state. Clicking **start** powers on the deployed VM.
-    - **Revert:** Reverts the VM to its last saved state. You will lose all changes made since the last commit.
-    - **Delete:** Deletes a running VM instance.
+**VMs:** Refresh, deploy, view the console, start/stop, revert and delete from here. - **Refresh**: Queries the state of the VM from the hypervisor. - **Deploy**: Deploys that virtual machine into your workspace. - **Console:** Opens the console for the virtual machine. - **Stop/Start:** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state. Clicking **start** powers on the deployed VM. - **Revert:** Reverts the VM to its last saved state. You will lose all changes made since the last commit. - **Delete:** Deletes a running VM instance.

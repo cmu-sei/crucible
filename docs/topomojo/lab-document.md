@@ -1,5 +1,5 @@
 ---
-title: TopoMojo-Lab Document
+title: TopoMojo - Lab Document
 ---
 
 # Lab Document
@@ -8,7 +8,7 @@ The **Document** tab in a TopoMojo workspace is where you write the instructions
 
 The TopoMojo editor is a collaborative editor. Multiple people can work on the documentation at the same time. As long as you are "connected" (see the top-right corner) TopoMojo saves your updates to the document.
 
-For more information about Markdown, including the syntax guide, see [markdownguide.org](https://www.markdownguide.org/){ target=_blank }.
+For more information about Markdown, including the syntax guide, see [markdownguide.org](https://www.markdownguide.org/).
 
 ## Inserting an Image
 

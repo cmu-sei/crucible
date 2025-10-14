@@ -1,5 +1,5 @@
 ---
-title: Gameboard-Home and Lobby
+title: Gameboard - Home and Lobby
 ---
 
 # The Home Screen
@@ -18,7 +18,7 @@ This player is active:
 
 ![green light](img/active-player.png)
 
-**Start Session:** A *session* is when a game is started and challenges can be deployed and solved. To start your session, select **Start Session** and click through the confirmation messages. Sessions can't be paused or stopped after they have started.
+**Start Session:** A _session_ is when a game is started and challenges can be deployed and solved. To start your session, select **Start Session** and click through the confirmation messages. Sessions can't be paused or stopped after they have started.
 
 !!! warning
 
@@ -32,7 +32,7 @@ This player is active:
 
 **Unenroll:** A registered player who has not started a session can unenroll from the game. Re-enrolling is required to play again.
 
-**Set Game Display Name/Set Team Display Name:** The game display name chosen here is used to represent an individual player or a team (based on the competition type) on the public scoreboard for a particular game. This display name is the same as your profile display name by default, but you can change the name of your player/team for a specific game if you choose. Like your *profile* display name, your *game* or *team* display name is subject to approval.
+**Set Game Display Name/Set Team Display Name:** The game display name chosen here is used to represent an individual player or a team (based on the competition type) on the public scoreboard for a particular game. This display name is the same as your profile display name by default, but you can change the name of your player/team for a specific game if you choose. Like your _profile_ display name, your _game_ or _team_ display name is subject to approval.
 
 Setting a new team display name here also renames the captain player's display name. Make sure this is what you intend before changing the team display name.
 
@@ -50,11 +50,11 @@ After your session is started, select **Continue to Gameboard**. To start a chal
 
 Administrators may set a limit on the number of challenges a player can have deployed at once, known as the **Gamespace Limit**. When the gamespace limit has been met, and a player tries to launch an additional challenge, the following message is displayed:
 
-*Unable to deploy resources for this challenge because you've reached the gamespace limit for the game. Complete or destroy the resources of other challenges to work on this one.*
+_Unable to deploy resources for this challenge because you've reached the gamespace limit for the game. Complete or destroy the resources of other challenges to work on this one._
 
 **Destroy/Deploy:** To destroy a challenge to open another select the **Destroy** button under Gamespace Resources in the challenge instructions. If you wish to return to the challenge later, select the **Deploy** button under Gamespace Resources. Destroying the challenge resets the challenge to its original state. Any partial credit earned remains, but changes made to VMs are undone. The challenge timer continues to accumulate after you destroy the challenge.
 
-*Location of the Destroy button in context:*
+_Location of the Destroy button in context:_
 
 ![destroy deploy under gamespace resources](img/destroy-button.png)
 
@@ -62,6 +62,6 @@ Administrators may set a limit on the number of challenges a player can have dep
 
 Players can get to the in-game support feature from the launched challenge screen below the challenge questions and the Support link in the top navigation.
 
-From either of these locations, select **Create Ticket**. If you create a ticket from the challenge screen, then the Support Code, challenge information, Game Id,  Player Id, Team Id are automatically generated. If you create a ticket from the Support link, then this information can be added later.
+From either of these locations, select **Create Ticket**. If you create a ticket from the challenge screen, then the Support Code, challenge information, Game Id, Player Id, Team Id are automatically generated. If you create a ticket from the Support link, then this information can be added later.
 
 For a full treatment of Gameboard's Support feature, please see the [Using the Integrated Support Feature](support.md) section of the docs.

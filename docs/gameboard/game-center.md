@@ -1,5 +1,5 @@
 ---
-title: Gameboard-Game Center
+title: Gameboard - Game Center
 ---
 
 # Game Center
@@ -16,21 +16,21 @@ The Game Center header displays game metadata and settings, including the name, 
 
 **Name:** The title of your game. Displayed in the game lobby and on the scoreboard.
 
-**Publish:** Toggle *Hidden* or *Visible* to make the game visible to players on the Home screen.
+**Publish:** Toggle _Hidden_ or _Visible_ to make the game visible to players on the Home screen.
 
 !!! info
 
     When a game is hidden, a user with permissions that can view both hidden and visible games--such as Designer or Tester--will see the game card on the Home screen; however, the game card appears with an "eye-slash" icon to denote that it is hidden.
 
-**Feature:** Toggle *Normal* or *Featured*. When *Featured*, the game appears under Featured Games at the top of the Gameboard home page.
+**Feature:** Toggle _Normal_ or _Featured_. When _Featured_, the game appears under Featured Games at the top of the Gameboard home page.
 
-**Key:** A short, unique key distinguishing *this* event.
+**Key:** A short, unique key distinguishing _this_ event.
 
-**Series:** The name of the series; perhaps the same event is run annually making it a *series*.
+**Series:** The name of the series; perhaps the same event is run annually making it a _series_.
 
 **Track:** A course of action in your event. An event may have different categories for teams and individuals to compete in or an event may have an offensive skills track and defensive skills track.
 
-**Season:**  A fixed time period for when a series occurred. The *series* describes the event--for example, a fictitious "Cyber Cup". The *season* is the iteration of that event--Cyber Cup: Season 1, Cyber Cup: Season 2, and Cyber Cup: Season 3.
+**Season:** A fixed time period for when a series occurred. The _series_ describes the event--for example, a fictitious "Cyber Cup". The _season_ is the iteration of that event--Cyber Cup: Season 1, Cyber Cup: Season 2, and Cyber Cup: Season 3.
 
 **Division:** The tier or level of the audience participating in the event. Is this for working professionals or just students?
 
@@ -58,17 +58,17 @@ For a full treatment of how to design completion certificates, please see the [C
 
 ### Modes
 
-**Player Mode:** Toggle to set the game to **Competition** or **Practice**. When at least *one* game is set to Practice in your environment, a link to Practice is visible in the top-right corner of Gameboard for authenticated players. Players can click the Practice link and select a challenge start their practice session.
+**Player Mode:** Toggle to set the game to **Competition** or **Practice**. When at least _one_ game is set to Practice in your environment, a link to Practice is visible in the top-right corner of Gameboard for authenticated players. Players can click the Practice link and select a challenge start their practice session.
 
-**Require Synchronized Start:** Toggle on to require the game to have a synchronized start. When enabled, no player can start a session until *all* players have indicated that they are "ready to play" in the game lobby. Use this feature for games when you want all players to start at the same time and end at the same time. Synchronized start adheres to other Gameboard settings: for example, team size minimum and maximum.
+**Require Synchronized Start:** Toggle on to require the game to have a synchronized start. When enabled, no player can start a session until _all_ players have indicated that they are "ready to play" in the game lobby. Use this feature for games when you want all players to start at the same time and end at the same time. Synchronized start adheres to other Gameboard settings: for example, team size minimum and maximum.
 
 !!! note
 
     The Admin Start feature bypasses the "ready to play" feature; that is, users assigned the `Admin` role can Admin Start regardless of whether all players have "readied up" or not.
 
-**Show On Homepage When In Practice Mode:**  Toggle *Yes* to make the game's game card visible on the home page even when the game is in Practice mode.
+**Show On Homepage When In Practice Mode:** Toggle _Yes_ to make the game's game card visible on the home page even when the game is in Practice mode.
 
-**Engine Mode:** Choose between *Standard* and *External Host*. The vast majority of games use the Standard mode, where Gameboard submits answers to the game engine (usually TopoMojo) for grading. Choose External Host for specialized scenarios where players use an external client (e.g., a Unity game) to interact with the challenges.
+**Engine Mode:** Choose between _Standard_ and _External Host_. The vast majority of games use the Standard mode, where Gameboard submits answers to the game engine (usually TopoMojo) for grading. Choose External Host for specialized scenarios where players use an external client (e.g., a Unity game) to interact with the challenges.
 
 ### Settings
 
@@ -84,31 +84,31 @@ These settings pertain to registration, execution, and general game and challeng
 
 **Session Limit:** The maximum number of sessions--a session is when a game is started and challenges can be deployed and solved--per game.
 
-**Gamespace Limit:** The maximum number of concurrent "gamespaces" allowed. A *gamespace* is the virtual environment that participants use to compete in a challenge. The default value is 0; the value that you enter here is inherited by a newly created board. For example, if you set this value to 5 in the game, any board created will inherit the 5 concurrent gamespace setting.
+**Gamespace Limit:** The maximum number of concurrent "gamespaces" allowed. A _gamespace_ is the virtual environment that participants use to compete in a challenge. The default value is 0; the value that you enter here is inherited by a newly created board. For example, if you set this value to 5 in the game, any board created will inherit the 5 concurrent gamespace setting.
 
 **Max Submissions:** The maximum number of solutions a participant can send to the grading server per challenge--whether that submission is correct, incorrect, or blank. Once the submission amount is reached, the competitor is locked out of further submissions for that challenge.
 
-**Allow Preview:** Toggle *Hidden* or *Visible* to allow participants to view a challenge and documentation prior to starting. You may want to prevent too much information from being given away before a challenge start.
+**Allow Preview:** Toggle _Hidden_ or _Visible_ to allow participants to view a challenge and documentation prior to starting. You may want to prevent too much information from being given away before a challenge start.
 
-**Allow Reset:** Toggle *Forbidden* or *Allowed* to permit participants to restart their game and attempt challenges again. This option is generally allowed on a "practice" game since that game is meant to help users get their bearings on how a competition works; however, you may decide players will be forbidden to reset an "official" game.
+**Allow Reset:** Toggle _Forbidden_ or _Allowed_ to permit participants to restart their game and attempt challenges again. This option is generally allowed on a "practice" game since that game is meant to help users get their bearings on how a competition works; however, you may decide players will be forbidden to reset an "official" game.
 
-**Allow Late Starts:** Toggle *Forbidden* or *Allowed* to permit players to start within a session length of the execution period end. When toggled to allow, players whose session would end prematurely due to the execution window closing will be allowed to play; however, their session will be shortened to match the end of the game.
+**Allow Late Starts:** Toggle _Forbidden_ or _Allowed_ to permit players to start within a session length of the execution period end. When toggled to allow, players whose session would end prematurely due to the execution window closing will be allowed to play; however, their session will be shortened to match the end of the game.
 
-**Allow Public Scoreboard Access:** Toggle *Forbidden* or *Allowed* to permit players to view the complete scoreboard after the game ends. Not that the scoreboard itself is public, but if toggled to forbid, players can't view detailed score information for competing players.
+**Allow Public Scoreboard Access:** Toggle _Forbidden_ or _Allowed_ to permit players to view the complete scoreboard after the game ends. Not that the scoreboard itself is public, but if toggled to forbid, players can't view detailed score information for competing players.
 
 #### Registration
 
 Offering a different execution period from registration period is an option. This gives participants the opportunity to register for a period of time prior to round one of the competition getting underway. No need for a registration period for later rounds where a competitor would have had to qualify for the next round to even continue.
 
-**Access:** *None* means players can't register themselves for a game. An administrator must add players to the game or advance players from another game. *Open* means players can register themselves within the specified registration period.
+**Access:** _None_ means players can't register themselves for a game. An administrator must add players to the game or advance players from another game. _Open_ means players can register themselves within the specified registration period.
 
 **Opens:** The date and the time that your registration period begins.
 
 **Closes:** The date and the time that your registration period ends.
 
-**Team Size:** This is self-explanatory. A matching *minimum* and *maximum* of one means that the challenge is a single player challenge. That is, a "team" of one. In a true team tournament, two or more would probably be the minimum.
+**Team Size:** This is self-explanatory. A matching _minimum_ and _maximum_ of one means that the challenge is a single player challenge. That is, a "team" of one. In a true team tournament, two or more would probably be the minimum.
 
-**Team Sponsorship:** Toggle *Open* or *Required*. When required, members on a team must have the same sponsor. Team sponsors are chosen during enrollment. For more information on sponsors, see [Gameboard Administration](admin.md).
+**Team Sponsorship:** Toggle _Open_ or _Required_. When required, members on a team must have the same sponsor. Team sponsors are chosen during enrollment. For more information on sponsors, see [Gameboard Administration](admin.md).
 
 **Registration Markdown:** Using Markdown enter any information you would like players to see when they register for the game. For help with Markdown syntax, see this [Markdown Guide](https://www.markdownguide.org/).
 
@@ -116,7 +116,7 @@ Offering a different execution period from registration period is an option. Thi
 
 ### Search
 
-Search for challenges on TopoMojo to place in the game. *Search* here is limited by *Audience* on the workspace Settings in TopoMojo.
+Search for challenges on TopoMojo to place in the game. _Search_ here is limited by _Audience_ on the workspace Settings in TopoMojo.
 
 ### Edit
 
@@ -126,11 +126,11 @@ Selecting a challenge from the search results adds it to the Edit icon.
 
 **Sync with Source:** Synchronizes the Gameboard challenge markdown guide with the TopoMojo challenge markdown guide so that the content is the same in both apps.
 
-**Support Key:** Assign a unique "key" here that gets appended to a TopoMojo gamespace id to help troubleshoot problems during competition. For example: `b28c7911 a03`--**b28c7911** is the uniquely generated gamespace ID from TopoMojo; **a03** is the support key *manually* assigned here to a challenge. For more information on support keys, see [Gameboard Administration](admin.md).
+**Support Key:** Assign a unique "key" here that gets appended to a TopoMojo gamespace id to help troubleshoot problems during competition. For example: `b28c7911 a03`--**b28c7911** is the uniquely generated gamespace ID from TopoMojo; **a03** is the support key _manually_ assigned here to a challenge. For more information on support keys, see [Gameboard Administration](admin.md).
 
 **Points:** Assign a point value to your challenge here.
 
-**Solution Guide URL:** Add links to challenge solution guides here for *practice mode* challenges. When added here, the link to the solution guide is available to players in the challenge instructions. Enabling **Show Solution Guide in Competitive Mode** permits the link to a solution guide to be available to players in a *competitive* game.
+**Solution Guide URL:** Add links to challenge solution guides here for _practice mode_ challenges. When added here, the link to the solution guide is available to players in the challenge instructions. Enabling **Show Solution Guide in Competitive Mode** permits the link to a solution guide to be available to players in a _competitive_ game.
 
 **Disabled:** Check to disable this challenge in the game without removing it. Disabled challenges are unavailable to players, don't count toward scores, and are not deployed when an admin initiates deployment on a player's behalf. Essentially, disabling a challenge removes the spec from the game without deleting any underlying data.
 
@@ -162,7 +162,7 @@ Here is where the visual representation of the game is arranged. Challenges are 
 
 ## Teams/Players Tab
 
-The **Teams/Players** tab contains the list of game teams/players. If the game is a **team** game, then you will see the *Teams* tab. If the game is an **individual** game then you will see the *Players* tab.
+The **Teams/Players** tab contains the list of game teams/players. If the game is a **team** game, then you will see the _Teams_ tab. If the game is an **individual** game then you will see the _Players_ tab.
 
 Here you can search, see who advanced to the next game and who did not, who started, who is currently playing, who finished, and sort by rank, name, and time remaining.
 
@@ -182,7 +182,7 @@ If any registered players have requested a name change, you'll see a warning mes
 
 - **Copy all team/players to mail format:** Copies metadata about the selected players in JSON format for use with a mail app.
 
-- **Add team/player:** Adds a new team (i.e., multiple players) or new player to the game. When adding, these players are not created from scratch in the Game Center. They must exist as a Gameboard user and must *not* be enrolled in the game.
+- **Add team/player:** Adds a new team (i.e., multiple players) or new player to the game. When adding, these players are not created from scratch in the Game Center. They must exist as a Gameboard user and must _not_ be enrolled in the game.
 
 - **Search team/players:** Enter keywords or phrases to find specific teams/players within the Gameboard.
 
@@ -198,9 +198,9 @@ In the search results, select a team or a player. Information about that team/pl
 
 #### Team Management
 
-**Override Name:** Enter a name here to *override* the existing team or player name.
+**Override Name:** Enter a name here to _override_ the existing team or player name.
 
-**Status:** *Approve* the override name here or apply a *disallowed reason* (`disallowed`, `disallowed_pii`, `disallowed_unit`, etc.).
+**Status:** _Approve_ the override name here or apply a _disallowed reason_ (`disallowed`, `disallowed_pii`, `disallowed_unit`, etc.).
 
 #### Session
 
@@ -236,13 +236,13 @@ Each player or team has a "3-dot"context menu on their card, offering different 
 - **View Certificate:** View a player's certificate if published and the game is over.
 - **Manual Bonuses:** Manually award bonus points to a player or team score. This is useful if bonus points were earned during a challenge and need to be added. A challenge must be at least started prior to awarding bonus points.
 - **Manage Challenges:** Launch, start/stop challenge resources, or completely purge a challenge attempt on behalf of the player. Purging a challenge erases all progress a player has made on it.
-- **Reset Session(Preserve Challenges):** If a player has registered, and has started playing the game (i.e., they have a game session), you can reset their session *and not* archive any challenges, started or completed. Use of this option should be limited to very specific situations like testing and QA.
+- **Reset Session(Preserve Challenges):** If a player has registered, and has started playing the game (i.e., they have a game session), you can reset their session _and not_ archive any challenges, started or completed. Use of this option should be limited to very specific situations like testing and QA.
 - **Reset Session:** If a player has registered and has started playing the game (i.e. they have a game session), you can reset their session. This deletes any challenge data they generated while playing but leaves enrollment and team membership intact. If they wish to play again, they'll need to start a new session.
-- **Reset Session & Unenroll:** If a player has registered, and has started a session, you can *reset* their session and *unenroll* them from the game. Players will need to re-enroll to play again. Teams are essentially dissolved and will need to reform and re-enroll to play. This is the same functionality as when a player unenrolls from the game lobby or resets their session (when enabled by an admin).
+- **Reset Session & Unenroll:** If a player has registered, and has started a session, you can _reset_ their session and _unenroll_ them from the game. Players will need to re-enroll to play again. Teams are essentially dissolved and will need to reform and re-enroll to play. This is the same functionality as when a player unenrolls from the game lobby or resets their session (when enabled by an admin).
 
 ## Practice Tab
 
-The Practice tab appears only in games where Player Mode is set to **Practice** (this setting is found on the Gear tab under **Modes**). It lists all users who have played any challenge in practice mode, with exactly one row per user. Clicking a row opens an attempt summary window  for that user. If the user is actively playing, the **3-Dot** context menu provides an option to quick-jump to observe their session.
+The Practice tab appears only in games where Player Mode is set to **Practice** (this setting is found on the Gear tab under **Modes**). It lists all users who have played any challenge in practice mode, with exactly one row per user. Clicking a row opens an attempt summary window for that user. If the user is actively playing, the **3-Dot** context menu provides an option to quick-jump to observe their session.
 
 ![practice attempt summary window](img/practice-summary.png)
 
@@ -262,7 +262,7 @@ Select the grid icon to view active VMs in a grid view side-by-side according to
 
 Selecting the **four-square** icon allows you to view the consoles of another player or team. Multiple observers can be on the same VM.
 
-VM name (*win10-workstation*) and player display name (*Wolverine 3*)  help observers identify the console they are viewing, especially if there are many players with many challenges. Click the **pop-out** icon to open the console in a new browser tab.
+VM name (_win10-workstation_) and player display name (_Wolverine 3_) help observers identify the console they are viewing, especially if there are many players with many challenges. Click the **pop-out** icon to open the console in a new browser tab.
 
 ![observe-pop-out](img/observe-pop-out.png)
 

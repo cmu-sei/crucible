@@ -1,14 +1,14 @@
 ---
-title: Gameboard-Admin Players
+title: Gameboard - Admin Players
 ---
 
 # Players
 
 To access the **Administration**, **Players** screen click **Admin** in the top navigation menu, then click **Players**. Most actions available in the Administration Players screen can also be performed in the Game Center under the **Players/Teams** tab. This screen serves as an alternative option.
 
-The **Players** screen shows one *player* record for each time a *user* plays in a game. Remember, *players* are users who play in, or participate in, a game. A *user* is the real person in Gameboard.
+The **Players** screen shows one _player_ record for each time a _user_ plays in a game. Remember, _players_ are users who play in, or participate in, a game. A _user_ is the real person in Gameboard.
 
-Let's say you have a user named `Ned-Stark` in the Gameboard whose user id is `4b427a66`. If Ned has registered for three games in Gameboard, Ned appears on this screen three times: once for each of the three games. Ned will have a unique *player id* for each time he appears, but his *user id* is always `4b427a66`.
+Let's say you have a user named `Ned-Stark` in the Gameboard whose user id is `4b427a66`. If Ned has registered for three games in Gameboard, Ned appears on this screen three times: once for each of the three games. Ned will have a unique _player id_ for each time he appears, but his _user id_ is always `4b427a66`.
 
 !!! note
 

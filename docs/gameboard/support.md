@@ -1,5 +1,5 @@
 ---
-title: Gameboard-Support Module
+title: Gameboard - Support Module
 ---
 
 # Getting In-Game Support
@@ -27,7 +27,7 @@ From a challenge screen:
 
 These instructions assume you have enrolled in a game, started a session, and started a challenge.
 
-1. In the *started* challenge, scroll to the bottom of the challenge instructions.
+1. In the _started_ challenge, scroll to the bottom of the challenge instructions.
 2. Click **Create Ticket**. Notice that the challenge is automatically populated in the **Challenge** field.
 3. In the **Summary**, enter a brief statement of the problem.
 4. In the **Description**, enter a more detailed statement of your problem. Include error messages and other pertinent details.
@@ -36,14 +36,14 @@ These instructions assume you have enrolled in a game, started a session, and st
 
 ### Finding an Existing Ticket
 
-From the Support page, use the dropdowns and the **Search** field to locate specific tickets from *all* of the tickets you have submitted.
+From the Support page, use the dropdowns and the **Search** field to locate specific tickets from _all_ of the tickets you have submitted.
 
 Filter tickets by status:
 
 - Any Status
 - Open
 - In Progress
-- Not Closed (*Open* plus *In Progress*)
+- Not Closed (_Open_ plus _In Progress_)
 - Closed
 
 Search by entering terms. Search covers ticket description, label, user, challenge title, and player.

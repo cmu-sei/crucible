@@ -1,5 +1,5 @@
 ---
-title: Gameboard-Admin Practice Area
+title: Gameboard - Admin Practice Area
 ---
 
 # Admin Practice Area
@@ -10,7 +10,7 @@ Gameboard administrators configure the global Practice Area content here. In the
 
 The text here appears on the Practice Area page and introduces players to the Practice Area. The greeting is authored in Markdown, which allows you to create a nicely formatted message. Customize the greeting to meet your needs.
 
-More information about Markdown, including the syntax guide, can be found at [www.markdownguide.org](https://www.markdownguide.org){ target=_blank }.
+More information about Markdown, including the syntax guide, can be found at [www.markdownguide.org](https://www.markdownguide.org){ target=\_blank }.
 
 ## Suggested Searches
 
@@ -41,5 +41,5 @@ Additional information about creating certificate templates can be found in the 
 Admins use these controls to set limits on practice sessions, including:
 
 - **Maximum Concurrent Users:** How many players can be active at once
-- **Default Session Length:**  How long in minutes practice sessions are by default
+- **Default Session Length:** How long in minutes practice sessions are by default
 - **Maximum Session Length:** How long in minutes the maximum length a single practice session lasts

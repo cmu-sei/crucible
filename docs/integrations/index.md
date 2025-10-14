@@ -1,16 +1,12 @@
 # Third-Party Applications
 
-The Crucible Framework provides users the necessary tools and resources for integrating open-source third-party applications with the platform's features and data. By leveraging open-source resources, users can save time and resources, and benefit from the expertise of the open-source community.
+The Crucible Framework provides users with the necessary tools and resources for integrating open-source third-party applications with the platform's features and data. By leveraging open-source resources, users can save time and resources, and benefit from the expertise of the open-source community.
 
-Additionally, the platform can be tailored to the user's needs by allowing administrators to add applications that will leverage and integrated with the necessary features needed for an exercise. This enables administrators to provide a more personalized experience with the platform and to use applications that are specifically designed to meet their unique needs.
-
-By allowing customization, the platform can become more valuable to users, as it can adapt to their evolving needs and preferences. This can lead to a more engaged user base and a more successful platform overall.
+Administrators can customize the Crucible platform by adding applications that integrate with the features needed for specific exercises. This flexibility allows them to tailor the platform to their organization's needs and use tools built for their training goals. As a result, the platform stays useful and relevant as user needs change over time.
 
 ## Third-Party Integration Guide
 
-To be able to add third-party applications to the Crucible Framework, the user must have a System Admin permission.
-
-To integrate a third-party application to the Crucible Framework, follow these next steps:
+Crucible system admin permissions are required to add third-party applications to the Crucible Framework. Assuming you have the correct permissions, follow the steps below to integrate a third-party application to the Crucible Framework.
 
 ![Crucible View Admin OE](../assets/img/viewAdmin.png)
 
@@ -24,7 +20,7 @@ To integrate a third-party application to the Crucible Framework, follow these n
 8. If desired to be **Embeddable**, check the box.
 9. If desired to be **Loaded in the Background**, check the box.
 
-After these steps, administrators should follow the Crucible Admin Guide to add the application to the desired set of users and/or teams.
+After completing these steps, admins should refer to the _Crucible Admin Guides_ to add the application to the desired set of users and/or teams.
 
 ## Third-Party Applications
 
@@ -34,50 +30,80 @@ The following are third-party applications that have already been tested and use
 
 Mattermost is an open-source, self-hostable online chat service with file sharing, search, and integrations. It is designed as an internal chat for organizations and companies.
 
-To know more about the application: [Mattermost Documentation](https://docs.mattermost.com){ target=_blank }
-
-For installation instructions: [Mattermost Installation](https://github.com/cmu-sei/helm-charts/tree/main/charts/mattermost-team-edition){ target=_blank }
+🔗 [Mattermost Documentation](https://docs.mattermost.com) and [installation instructions](https://github.com/cmu-sei/helm-charts/tree/main/charts/mattermost-team-edition)
 
 ### Moodle
 
 Moodle is a free and open-source learning management system. Moodle is used for blended learning, distance education, flipped classroom and other online learning projects in schools, universities, workplaces and other sectors.
 
-To know more about the application: [Moodle Documentation](https://docs.moodle.org/401/en/Main_page){ target=_blank }
+🔗 [Moodle Documentation](https://docs.moodle.org/401/en/Main_page) and [installation instructions](https://docs.moodle.org/401/en/Installation_quick_guide)
 
-For installation instructions: [Moodle Installation](https://docs.moodle.org/401/en/Installation_quick_guide){ target=_blank }
+### Moodle Crucible Plugins
 
-#### Crucible Plugin for Moodle
+These Moodle plugins connect Moodle to the Crucible apps like TopoMojo. The plugins allow users to find Crucible apps, launch labs, collaborate on quizzes linked to live lab environments, and manage learning plans without leaving Moodle. Each plugin has its own GitHub repository with installation and usage details.
 
-This activity plugin allows Crucible labs and exercises to be integrated into the Moodle LMS. The Moodle activity can either embed the Crucible VM app in an iframe or link to open the full Crucible lab player in a new tab or window. With this plugin, Crucible labs can be started, accessed, and stopped from a Moodle course.
+#### Crucible Applications Landing Page Block
 
-To know more about the plugin and installation instructions: [Moodle Crucible Plugin Documentation](https://github.com/cmu-sei/moodle-mod_crucible){ target=_blank }
+The **Crucible Applications Landing Page Block** plugin adds a simple dashboard block that lists all the Crucible apps (i.e., Gameboard, TopoMojo, Player, Steamfitter, etc.) a user can access from within Moodle. It automatically shows only the applications the user has permission to use, with clear icons and links. The block makes it easy to find and open everything from one place, without having to remember multiple web addresses.
+
+🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-block_crucible)
+
+#### Crucible Plugin
+
+The **Crucible Plugin** connects Moodle courses to Crucible, allowing students to launch and work through interactive cybersecurity exercises directly from Moodle. Instructors can add Crucible labs as activities, and students can open the full Crucible lab player either inside Moodle or in a new browser tab.
+
+🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-mod_crucible)
+
+#### Group Quiz Plugin
+
+The **Group Quiz Plugin** lets students work together on the same quiz in real time. Each group shares a single quiz attempt, so everyone can see answers as teammates enter them and receive the same final grade. Instructors can set time limits, open and close dates, and review options similar to Moodle's standard quiz activity.
+
+🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-mod_groupquiz)
+
+#### Learning Plan Template Manager
+
+The **Learning Plan Template Manager** is a plugin for Moodle that allows for the import, export, and automatic creation of learning plan templates from a competency framework. This plugin was specifically developed for work roles in the NIST NICE Cybersecurity Framework.
+
+🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-tool_lptmanager)
+
+#### TopoMojo Plugin
+
+The **TopoMojo Plugin** is an activity plugin that integrates TopoMojo labs and exercises into Moodle. It enables users to access virtual labs, view Markdown content, and complete challenge questions directly from within Moodle.
+
+🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-mod_topomojo)
+
+#### TopoMojo Question Behavior Plugin
+
+The **TopoMojo Question Behavior** plugin lets Moodle retrieve correct answers from TopoMojo during a live quiz attempt. It works with the TopoMojo Question Type Plugin (`qtype_mojomatch`) and is used in conjunction with the TopoMojo Activity Plugin (`mod_topomojo`) for lab-based activities.
+
+🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-qbehaviour_mojomatch)
+
+#### TopoMojo Question Type Plugin
+
+The **TopoMojo Question Type** plugin adds a custom short-answer question type with extra matching options. It can connect to TopoMojo to pull answers from a live gamespace during an activity. This plugin works together with the TopoMojo Activity Plugin (`mod_topomojo`) and the TopoMojo Question Behavior Plugin (`qbehaviour_mojomatch`).
+
+🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-qtype_mojomatch)
 
 ### osTicket
 
 osTicket is a widely-used open source support ticket system. It seamlessly integrates inquiries created via email, phone and web-based forms into a simple easy-to-use multi-user web interface. Manage, organize and archive all your support requests and responses in one place while providing your customers with accountability and responsiveness they deserve.
 
-To know more about the application: [osTicket Documentation](https://docs.osticket.com/en/latest/){ target=_blank }
-
-For installation instructions: [osTicket Installation](https://docs.osticket.com/en/latest/Getting%20Started/Installation.html){ target=_blank }
+🔗 [osTicket Documentation](https://docs.osticket.com/en/latest/) and [installation instructions](https://docs.osticket.com/en/latest/Getting%20Started/Installation.html)
 
 #### Crucible Plugin for osTicket
 
-A plugin, developed by the Software Engineering Institute (SEI), that provides authentication against an OAuth2 Identity Server and posts ticket event notifications to the Crucible API.
+The **Crucible Plugin for osTicket** provides authentication against an OAuth2 Identity Server and posts ticket event notifications to the Crucible API.
 
-For installation and configuration instructions: [osTicket Crucible Plugin](https://github.com/cmu-sei/osticket-crucible){ target=_blank }
+🔗 [GitHub Repository](https://github.com/cmu-sei/osticket-crucible)
 
 ### Rocket.Chat
 
 Rocket.Chat is a customizable open-source communications platform for organizations with high data protection standards. It enables real-time conversations between colleagues, other companies, or your customers across web, desktop, or mobile devices.
 
-To know more about the application: [Rocket.Chat Documentation](https://docs.rocket.chat){ target=_blank }
-
-For installation instructions: [Rocket.Chat Installation](https://github.com/RocketChat/helm-charts){ target=_blank }
+🔗 [Rocket.Chat Documentation](https://docs.rocket.chat) and [installation instructions](https://github.com/RocketChat/helm-charts)
 
 ### Roundcube
 
 Roundcube is a web-based IMAP email client. It provides full functionality you expect from an email client, including MIME support, address book, folder manipulation, message searching and spell checking.
 
-To know more about the application: [Roundcube Documentation](https://docs.roundcube.net/doc/help/1.1/en_US/){ target=_blank }
-
-For installation instructions: [Roundcube Installation](https://github.com/sei-npacheco/webmail){ target=_blank }
+🔗 [Roundcube Documentation](https://docs.roundcube.net/doc/help/1.1/en_US/) and [installation instructions](https://github.com/sei-npacheco/webmail)

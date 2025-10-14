@@ -1,10 +1,10 @@
 ---
-title: TopoMojo-Users Tab
+title: TopoMojo - Users Tab
 ---
 
 # Admin Users
 
-The **Users** tab shows all current TopoMojo users. You can create new users here and assign them permissions. The **Search** feature allows TopoMojo admins to search on the name of a TopoMojo user. To search for a user across all of TopoMojo, enter the term into the **Search** field or filter by *role* or *audience*.
+The **Users** tab shows all current TopoMojo users. You can create new users here and assign them permissions. The **Search** feature allows TopoMojo admins to search on the name of a TopoMojo user. To search for a user across all of TopoMojo, enter the term into the **Search** field or filter by _role_ or _audience_.
 
 Recall from workspace Settings that "audience" is a list of clients who can launch the workspace as a gamespace. Selecting an audience filter results in users who are part of that audience.
 
@@ -14,10 +14,10 @@ Recall from workspace Settings that "audience" is a list of clients who can laun
 
 ## Roles
 
-All permissions are *additive*; meaning a Creator can do everything a Builder can do and an Observer can do everything a Builder and Creator can do.
+All permissions are _additive_; meaning a Creator can do everything a Builder can do and an Observer can do everything a Builder and Creator can do.
 
 - **Admin:** Highest level of permission in TopoMojo; can do everything the other roles can do.
-- **Observer:** Allows a user to view and use the Gamespaces tab. However, the *scope* of the user (see below) limits access too. An observer can deploy gamespaces with a matching *audience* and these are the only gamespaces the user can observe.
+- **Observer:** Allows a user to view and use the Gamespaces tab. However, the _scope_ of the user (see below) limits access too. An observer can deploy gamespaces with a matching _audience_ and these are the only gamespaces the user can observe.
 - **Creator:** Can have as many workspaces and templates as wanted.
 - **Builder:** Can connect to bridge-net.
 - **User:** No extra permissions in TopoMojo. This is the TopoMojo default.
@@ -27,7 +27,7 @@ All permissions are *additive*; meaning a Creator can do everything a Builder ca
 
 **Name:** Enter a new user name here.
 
-**Scope:** A space-delimited list of administrator-defined groups the user belongs to. Administrators can define a *scope* with any name here. A user's scope determines which workspaces they have permission to deploy gamespaces from. Users can only deploy a gamespace from a workspace if the user has a *scope* that matches an *audience* defined in the workspace. See also: [Building a new workspace](building-a-workspace.md).
+**Scope:** A space-delimited list of administrator-defined groups the user belongs to. Administrators can define a _scope_ with any name here. A user's scope determines which workspaces they have permission to deploy gamespaces from. Users can only deploy a gamespace from a workspace if the user has a _scope_ that matches an _audience_ defined in the workspace. See also: [Building a new workspace](building-a-workspace.md).
 
 **Workspace Limit:** The maximum number of workspaces this user can manage.
 

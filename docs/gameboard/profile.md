@@ -1,10 +1,10 @@
 ---
-title: Gameboard-Profile Screen
+title: Gameboard - Profile Screen
 ---
 
 # The Profile Screen
 
-Participants access their *Profile* by browsing to the Gameboard's designated URL and logging in. By default, authenticated participants land in the Profile screen if they haven't registered for a game yet. Otherwise, click **Profile** in the top navigation.
+Participants access their _Profile_ by browsing to the Gameboard's designated URL and logging in. By default, authenticated participants land in the Profile screen if they haven't registered for a game yet. Otherwise, click **Profile** in the top navigation.
 
 ![profile link in nav](img/profile-profile.png)
 
@@ -16,17 +16,17 @@ Set a default name for public display that is suitable for all audiences. This n
 
 ### Sponsoring Organization
 
-Select *your* organization. Gameboard admins define who the sponsors are, and what image to associate with each.
+Select _your_ organization. Gameboard admins define who the sponsors are, and what image to associate with each.
 
 ## Certificates Tab
 
 View and print a certificate as proof of participation in a game. This feature allows players to provide a record of achievements to friends, colleagues, and organizations to validate professional development time.
 
-Select **Competitive** to find and print certificates which validate player performance in a *game*. Competitive certificates become available when the game's execution period ends.
+Select **Competitive** to find and print certificates which validate player performance in a _game_. Competitive certificates become available when the game's execution period ends.
 
-Select **Practice** to find and print certificates which validate player performance in a *practice challenge*. You can also save them as PDFs. Practice certificates are available immediately upon full completion of a practice challenge.
+Select **Practice** to find and print certificates which validate player performance in a _practice challenge_. You can also save them as PDFs. Practice certificates are available immediately upon full completion of a practice challenge.
 
-**Publish/Unpublish:** Optionally, players can *publish* a certificate on a per-certificate basis. Publishing a certificate means it will become public. Players can send the certificate link (click **Copy**) to anyone including non-Gameboard users. Players can *unpublish* a certificate at any time removing access to the certificate. Unpublishing a certificate means it will become private once again.
+**Publish/Unpublish:** Optionally, players can _publish_ a certificate on a per-certificate basis. Publishing a certificate means it will become public. Players can send the certificate link (click **Copy**) to anyone including non-Gameboard users. Players can _unpublish_ a certificate at any time removing access to the certificate. Unpublishing a certificate means it will become private once again.
 
 **Open:** Launches the certificate in a new tab in the browser. Here players can print their certificate and change the username on the certificate.
 
@@ -49,11 +49,11 @@ To regenerate your certificate with a different name (e.g., your real name inste
 2. In the **Name** field, enter the name you want to appear on your certificate.
 3. Click **OK**.
 
-The new name entered on the certificate is temporary and *only for printing purposes*. If you close and reopen the certificate, the new name reverts to the original Gameboard display name. If the certificate is published, viewers will see your Gameboard display name, not the temporary name.
+The new name entered on the certificate is temporary and _only for printing purposes_. If you close and reopen the certificate, the new name reverts to the original Gameboard display name. If the certificate is published, viewers will see your Gameboard display name, not the temporary name.
 
 ### Creating Certificate Templates
 
-Game organizers with the appropriate role/permissions create completion certificate templates in the game Metadata settings. See [Configuring certificate templates](admin-completion-certificates.md) in the *Administering games* section of the Gameboard docs.
+Game organizers with the appropriate role/permissions create completion certificate templates in the game Metadata settings. See [Configuring certificate templates](admin-completion-certificates.md) in the _Administering games_ section of the Gameboard docs.
 
 ## History Tab
 

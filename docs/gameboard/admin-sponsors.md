@@ -1,5 +1,5 @@
 ---
-title: Gameboard-Admin Sponsors
+title: Gameboard - Admin Sponsors
 ---
 
 # Sponsors
@@ -15,7 +15,7 @@ To create a new sponsor:
 3. Select a **Parent Sponsor** if appropriate.
 4. Click **Save**.
 
-Sponsor logo files may be in any of the following formats: *.png, .jpeg, .jpg, .gif, .webp,* and *.svg*. Your new sponsor appears in the list of sponsors. You can **edit** and **delete** sponsors from the list.
+Sponsor logo files may be in any of the following formats: _.png, .jpeg, .jpg, .gif, .webp,_ and _.svg_. Your new sponsor appears in the list of sponsors. You can **edit** and **delete** sponsors from the list.
 
 ## Existing Sponsors
 
