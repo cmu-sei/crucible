@@ -1000,8 +1000,8 @@ To configure a unit for an exercise, administrators add users to their respectiv
 ![Configure Blueprint Teams OE](../assets/img/blueprintConfigureUnits-v2.png)
 
 1. Select the unit you want to configure and click to expand its configuration details.
-2. The **All Users** tab shows _unassigned_ users. To add a user to the unit, click **Add User**.
-3. The **Unit Users** tab shows _assigned_ users. To remove a user from the unit, click **Remove**.
+2. The **All Users** tab shows *unassigned* users. To add a user to the unit, click **Add User**.
+3. The **Unit Users** tab shows *assigned* users. To remove a user from the unit, click **Remove**.
 
 ### Users
 

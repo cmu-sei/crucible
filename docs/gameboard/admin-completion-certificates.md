@@ -9,7 +9,7 @@ Game participants can view, share, and print certificates of completion as proof
 This topic assumes you have been granted a role with the appropriate permissions in Gameboard, you are logged in, and you have a game created.
 
 1. In the top navigation, select **Admin**.
-2. Select an existing game, then Select the **Settings cog**. Under Metadata, see the Completion Certificates section. Here you can select an existing certificate template and _add_, _preview_, _edit_, _copy_, and _delete_ completion certificate templates.
+2. Select an existing game, then Select the **Settings cog**. Under Metadata, see the Completion Certificates section. Here you can select an existing certificate template and *add*, *preview*, *edit*, *copy*, and *delete* completion certificate templates.
 
 ![certificate template icons](img/cert-temp-icons.png)
 

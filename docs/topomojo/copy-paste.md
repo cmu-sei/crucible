@@ -6,10 +6,10 @@ title: TopoMojo - Copy and Paste
 
 The procedures below show you how to:
 
-- Copy text from a local machine (an _out of game_ computer) and paste it into an _in game_ virtual machine
+- Copy text from a local machine (an *out of game* computer) and paste it into an *in game* virtual machine
 - Copy text from a virtual machine and paste it into a local machine
 
-_The VM console cog icon:_
+*The VM console cog icon:*
 
 ![console-cog](img/console-cog.png)
 
@@ -23,7 +23,7 @@ _The VM console cog icon:_
 
 ## From "In Game" to "Out of Game"
 
-1. On the VM, select the content you would like to copy. Copy the content _first_ to the VM's clipboard (right-click Copy or `ctrl+C`).
+1. On the VM, select the content you would like to copy. Copy the content *first* to the VM's clipboard (right-click Copy or `ctrl+C`).
 2. Once you've copied your text to the VM clipboard select the cog icon (the **Tools**), place your cursor in that clipboard, and click **Copy**. This transfers the VM clip to your local clipboard.
    ![console-copy](img/console-copy.png)
 3. On your local machine, paste the copied text into an application using right-click Paste or `ctrl+V`.

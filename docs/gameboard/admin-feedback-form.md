@@ -4,7 +4,7 @@ title: Gameboard - Configuring Player Feedback Templates
 
 # Feedback Templates
 
-In the Gameboard application, it is possible to use feedback forms to capture participant feedback on a game and challenges. Collecting and analyzing participant feedback can help you refine and improve your user experiences. Feedback _forms_ are generated from feedback _templates_.
+In the Gameboard application, it is possible to use feedback forms to capture participant feedback on a game and challenges. Collecting and analyzing participant feedback can help you refine and improve your user experiences. Feedback *forms* are generated from feedback *templates*.
 
 - Feedback templates are created by users who are granted a role with elevated permissions (`Admin`, `Director`).
 - Feedback forms are completed by participants or players in the game.
@@ -12,14 +12,14 @@ In the Gameboard application, it is possible to use feedback forms to capture pa
 
 Creating a feedback template is not required to build a game or challenge. It's up to you whether or not you choose to implement feedback. If a feedback template is not configured in the Gameboard administration menu, then the feedback form does not appear for the participant.
 
-You can create questions for _just_ a game, _just_ challenges, or _both_ game and challenges. When you create a feedback template for a game or one of its challenges, you can use that template in other games and challenges too.
+You can create questions for *just* a game, *just* challenges, or *both* game and challenges. When you create a feedback template for a game or one of its challenges, you can use that template in other games and challenges too.
 
 It is not possible to change a feedback template after responses have been submitted.
 
 This section assumes you have been granted a role with the appropriate permissions in Gameboard, you are logged in, and you have a game created.
 
 1. In the top navigation, select **Admin**.
-2. Select an existing game, then select the **Settings cog**. Under Metadata, see the Player Feedback section. Here you can select an existing feedback template and _add_, _preview_, _edit_, _copy_, and _delete_ feedback templates.
+2. Select an existing game, then select the **Settings cog**. Under Metadata, see the Player Feedback section. Here you can select an existing feedback template and *add*, *preview*, *edit*, *copy*, and *delete* feedback templates.
 
 ![feedback template icons](img/feedback-temp-icons.png)
 
@@ -78,7 +78,7 @@ questions:
     type: text
 ```
 
-- `id`: _ids_ must be unique within the template. If ids in a single list are not unique, you are presented with a warning.
+- `id`: *ids* must be unique within the template. If ids in a single list are not unique, you are presented with a warning.
 - `prompt`: this is the question you want the participant to answer or the property you want them to rate.
 - `shortName`: an abbreviated version of the prompt. `shortName` is optional, but is helpful for use in tables as the column header. Good examples are "Difficult" or "Quality".
 - `type`: `likert` or `text`; if the type is `Likert`, then defining the scale (`max`, `minLabel`, `maxLabel`) of how much a participant can agree or disagree with your prompt is required. If the type is `text`, a participant is free to answer your prompt however they like. Text type questions have a 2,000 character limit.

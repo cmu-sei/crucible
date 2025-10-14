@@ -17,7 +17,7 @@ After logging into the Gameboard app with the appropriate role, click **Admin**.
 
 ## The Live Tab
 
-The **Live** tab allows game administrators to select **Live Stats** (e.g., the number of _Active Competitive Challenges_ deployed, the number of _Active Practice Challenges_ deployed, etc.) and take certain actions, such as copy player or team IDs, view challenge states, view sessions, observe, and view games.
+The **Live** tab allows game administrators to select **Live Stats** (e.g., the number of *Active Competitive Challenges* deployed, the number of *Active Practice Challenges* deployed, etc.) and take certain actions, such as copy player or team IDs, view challenge states, view sessions, observe, and view games.
 
 ### Send Announcement
 
@@ -51,7 +51,7 @@ This **Search** feature allows game administrators to search on name, season, tr
 
 ### Toggle Cards and Table
 
-Toggle between the view of games displayed as game _cards_ or rows in a _table_. The **Table view** shows the same game information—like enrollment, mode, and settings—in a table with rows and columns. Each row has a **3-dot context menu** that lets those users with elevated permissions open the game in the Game Center, clone it, export it, or delete it. The icons and options are the same as in **Card view**, but Table view makes it easier to scan and work with a lot of game data at once.
+Toggle between the view of games displayed as game *cards* or rows in a *table*. The **Table view** shows the same game information—like enrollment, mode, and settings—in a table with rows and columns. Each row has a **3-dot context menu** that lets those users with elevated permissions open the game in the Game Center, clone it, export it, or delete it. The icons and options are the same as in **Card view**, but Table view makes it easier to scan and work with a lot of game data at once.
 
 ![toggle table view](img/new-game-table-view2.png)
 
@@ -63,12 +63,12 @@ After creating a new game, the screen changes to that of the Game Center where g
 
 ### Upload a Game Package
 
-Another way to create a new game is to _export_ a game package from an existing game and _import_ its package as a new game.
+Another way to create a new game is to *export* a game package from an existing game and *import* its package as a new game.
 
 To export a game package:
 
 1. On the game card, select the **3 dot context** menu, then **Export Package**. The export process packages the game configuration and assets (such as the card image and map image) into a ZIP file.
-2. _Exported packages are not readily accessible from the Gameboard web client._ To locate the newly exported package, browse to `wwwroot/export/packages` on the API app server.
+2. *Exported packages are not readily accessible from the Gameboard web client.* To locate the newly exported package, browse to `wwwroot/export/packages` on the API app server.
 
 To import (upload) a game package:
 

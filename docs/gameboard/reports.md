@@ -9,7 +9,7 @@ The **Reports** module is available to users who have the `Reports` permission. 
 - **Challenges Report:** View information about the challenges configured in the Gameboard app. This report is good for site utilization metrics related to challenges, challenge deploys, and challenge solves.
 - **Enrollment Report:** View a summary of player enrollment data; who enrolled when, which sponsors do they represent, and how many played challenges.
 - **Feedback Report:** View all feedback for a specific feedback template across every game or challenge that uses the template.
-- **Feedback(Legacy) Report:** View all player feedback for games played _before_ Gameboard included the feedback template feature. This option requires configuration of feedback in the Game Center.
+- **Feedback(Legacy) Report:** View all player feedback for games played *before* Gameboard included the feedback template feature. This option requires configuration of feedback in the Game Center.
 - **Players Report:** View data on player activity. A "player" is a person with an account on the Gameboard site (i.e., a "user").
 - **Practice Area Report:** View metrics on players who are spending free time honing their skills in Gameboard. See which challenges get practiced most, have the best success rates, and which players are accessing the Gameboard to complete challenges in practice.
 - **Site Usage Report:** View a high-level overview of user activity in the Gameboard. This report, optionally filtered by date range and sponsor, offers a digestible view of data related to players, sponsors, and challenges. Each statistic within the report contains a modal view for more detailed information. You can't export the Site Usage Report.
@@ -38,15 +38,15 @@ Bookmark useful filters via the browser so you can return to them quickly.
 
 ## Drilling down in Results
 
-In some places in the report results, you can "drill down" by clicking a link in the metrics. A modal window displays a more granular view within the same data. For example: in the Enrollment Report, in the Performance category, some data points are links. See _screen print 1_ below. Clicking that link goes deeper into that element. See _screen print 2_ below.
+In some places in the report results, you can "drill down" by clicking a link in the metrics. A modal window displays a more granular view within the same data. For example: in the Enrollment Report, in the Performance category, some data points are links. See *screen print 1* below. Clicking that link goes deeper into that element. See *screen print 2* below.
 
-_Screen print 1: Summary Table:_
+*Screen print 1: Summary Table:*
 
 ![score summary](img/score.png)
 
 Click **300** to view the detailed information that comprises score in the summary.
 
-_Screen print 2: Data breakdown:_
+*Screen print 2: Data breakdown:*
 
 ![score detailed](img/breakdown.png)
 
@@ -75,7 +75,7 @@ The screen print below shows a summary of a typical game. The summary shows:
 
 3. 25 different sponsors participated in this example game.
 
-_Screen print 3: Sample Enrollment report:_
+*Screen print 3: Sample Enrollment report:*
 
 ![sample enrollment](img/sample-enroll-report.png)
 
@@ -95,7 +95,7 @@ The **Players** report is good for viewing site utilization metrics. This report
 2. How many users have deployed competitive and practice area challenges?
 3. How many users have achieved a full solve on at least one competitive and/or practice area challenge?
 
-You can also filter the Players report by _Account Creation Date_ to understand when players create accounts. For example, it may be useful for you to know many users created an account since January 1, 2024 (or any date you prefer).
+You can also filter the Players report by *Account Creation Date* to understand when players create accounts. For example, it may be useful for you to know many users created an account since January 1, 2024 (or any date you prefer).
 
 ## Practice Area Report
 

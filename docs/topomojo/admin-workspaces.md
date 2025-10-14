@@ -16,7 +16,7 @@ In the left navigation pane, you can use the **Search** field to locate a worksp
 
 Selecting a workspace takes you the **Settings** tab of that particular workspace where you can edit it. For additional help on the **Settings** tab, see [Building a new workspace](building-a-workspace.md).
 
-The _workspace identifier_ is present here too. The workspace identifier matches the directory name used to store workspace files like unlinked virtual machines, Markdown documents, images, etc. Copying it to the clipboard is useful if you need to use it in a terminal when navigating the filesystem.
+The *workspace identifier* is present here too. The workspace identifier matches the directory name used to store workspace files like unlinked virtual machines, Markdown documents, images, etc. Copying it to the clipboard is useful if you need to use it in a terminal when navigating the filesystem.
 
 ![workspace identifier](img/wksp-iden.png)
 

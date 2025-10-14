@@ -16,13 +16,13 @@ You can **search** for a challenge to practice on.
 
 You can copy a link to your search by selecting the **copy icon** next to the search field. In the example above, you may want to share the list of challenges/labs that have "ransomware" content with another Gameboard user.
 
-Under _Need a place to start?_ the Gameboard admin may have configured some suggested searches for participants. Players can select one of these tags to be directed to a set of available practice challenges. Gameboard admins should refer to "Suggested searches" in the [Admin Practice Area](admin-practice-area.md).
+Under *Need a place to start?* the Gameboard admin may have configured some suggested searches for participants. Players can select one of these tags to be directed to a set of available practice challenges. Gameboard admins should refer to "Suggested searches" in the [Admin Practice Area](admin-practice-area.md).
 
 ## Starting a Practice Session
 
 To start a practice session:
 
-1. Select a challenge, then click **Start Practice Session**, and **Confirm**. You can only launch _one_ practice challenge at a time.
+1. Select a challenge, then click **Start Practice Session**, and **Confirm**. You can only launch *one* practice challenge at a time.
 2. Read the challenge guide. The challenge guide provides details and instructions for completing the practice challenge.
 3. Read the solution guide (optional). Solution guide URLs must be configured by Gameboard administrators; not every challenge or lab has a solution guide.
 4. Launch the challenge consoles. Clicking a challenge console opens it in a new web browser tab. Challenge consoles allow players to directly interact with the virtual machines as they complete the practice challenge.
@@ -30,7 +30,7 @@ To start a practice session:
 
 ## Using Copy/Paste in the Consoles
 
-Follow the steps below to transfer text between your local machine (_out of game_) and a virtual machine (_in game_).
+Follow the steps below to transfer text between your local machine (*out of game*) and a virtual machine (*in game*).
 
 ### Local to VM
 
@@ -76,7 +76,7 @@ For a full treatment of Gameboard's Support feature, please see the [Using the I
 
 You can view and print any certificate you earned in competition or in practice at any time from your Profile screen. In the main navigation, click **Profile**. Then, select the **Certificates** link.
 
-If your attempt to solve the practice challenge is _unsuccessful_ (you've run out of time or used your allotted submissions), you can try the challenge again or return to the Practice Area to find another challenge. No certificates are awarded for partially completing a practice challenge.
+If your attempt to solve the practice challenge is *unsuccessful* (you've run out of time or used your allotted submissions), you can try the challenge again or return to the Practice Area to find another challenge. No certificates are awarded for partially completing a practice challenge.
 
 For additional information on obtaining completion certificates, please see the [Profile screen](profile.md) section of the docs.
 

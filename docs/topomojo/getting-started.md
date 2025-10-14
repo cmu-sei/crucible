@@ -35,6 +35,6 @@ You can define more than one shared/persistent network by incrementing the varia
 
     "bridge-net" is not always reserved. It is reserved by the SEI because we configured it that way, and it is convenient to refer to in the TopoMojo documentation.
 
-_Screen print 1:_
+*Screen print 1:*
 
 ![bridge-net](img/bridge-net.png)

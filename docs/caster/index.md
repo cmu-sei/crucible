@@ -114,7 +114,7 @@ Adds the ability to manage VLAN ids. Creates pools of 4096 VLANs and subdivides 
 
 ### Project
 
-The top-level construct in Caster is a _project_. The _project_ is a way to organize and categorize similar environments for multiple files and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
+The top-level construct in Caster is a *project*. The *project* is a way to organize and categorize similar environments for multiple files and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
 
 A project can:
 
@@ -133,7 +133,7 @@ Add Directory lets you create a new directory at the same level as the above pro
 
 ### Files
 
-_Files_ represent text files to eventually put onto a file system and use with the Terraform command line tool. You can name and edit files through Caster, but file extensions are important and have specific meaning to Terraform.
+*Files* represent text files to eventually put onto a file system and use with the Terraform command line tool. You can name and edit files through Caster, but file extensions are important and have specific meaning to Terraform.
 
 - `.tf` A configuration file that defines resources, variables, etc., in a Terraform configuration.
 - `.auto.tfvars` Contains the values used for variables defined in `.tf` files.
@@ -148,14 +148,14 @@ See the official [Terraform Documentation](https://www.terraform.io/docs/index.h
 
 ![Caster workspaces](../assets/img/caster-workspaces.PNG)
 
-A _workspace_ represents a specific instance of a deployed Terraform configuration. Use the same configuration to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example, define a configuration once for an enclave in a Cyber Flag exercise, and then deploy to `flag00` through `flag30` workspaces - each creating a copy of the enclave.
+A *workspace* represents a specific instance of a deployed Terraform configuration. Use the same configuration to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example, define a configuration once for an enclave in a Cyber Flag exercise, and then deploy to `flag00` through `flag30` workspaces - each creating a copy of the enclave.
 
 Workspaces can contain files, which extend the configuration of the directory for that specific workspace. This might include files specifying values for variables defined in the directory, or additional resources deployed only for that workspace.
 
 A workspace is where users:
 
 - Create an instance of a Terraform configuration
-- Run their plans. (_[Runs](#run-plan-and-apply)_ are a specific instance of a Terraform plan)
+- Run their plans. (*[Runs](#run-plan-and-apply)* are a specific instance of a Terraform plan)
 - Manage the differences and the variables in their environments
 
 Users can access workspaces from a project's navigation pane in Caster. They can add additional files—but not directories—to a workspace.
@@ -164,7 +164,7 @@ The workspace view displays all planned and applied runs. Runs shaded in red rep
 
 Users can `Plan`, `Destroy`, `Apply`, `Taint`, and `Reject` operations in real time in the workspace view.
 
-`Caster.Api` utilizes the Terraform binary in order to execute workspace operations. This binary is running inside of the `Caster.Api` service. _Restarting or stopping the `Caster.Api` container while a Terraform operation is in progress can lead to a corrupted state._
+`Caster.Api` utilizes the Terraform binary in order to execute workspace operations. This binary is running inside of the `Caster.Api` service. *Restarting or stopping the `Caster.Api` container while a Terraform operation is in progress can lead to a corrupted state.*
 
 In order to avoid this, a System Administrator should follow these steps in the Caster UI before stopping the `Caster.Api` container:
 
@@ -174,11 +174,11 @@ In order to avoid this, a System Administrator should follow these steps in the 
 
 ### Directories
 
-The top-level construct within a project is a _directory_. A project can contain many directories. Directories contain files that make up a particular Terraform configuration, workspaces that represent a specific instance of that configuration, and subdirectories. Directories are primarily for organization and shared resources.
+The top-level construct within a project is a *directory*. A project can contain many directories. Directories contain files that make up a particular Terraform configuration, workspaces that represent a specific instance of that configuration, and subdirectories. Directories are primarily for organization and shared resources.
 
 #### Directory Hierarchies
 
-Directories can contain subdirectories to create a _hierarchy_ of directories and the configuration files contained therein. When creating a run, the files in the workspace, the workspace's directory, **_and all parent directories_** merged and pass to Terraform as a single configuration. This eliminates redundancy when developing many environments that are similar or share a set of common variables or data across many configurations. For example, a large deployment might have a top-level directory defining global variables `vlan ids` and `team ids`, and subdirectories defining resources using those variables.
+Directories can contain subdirectories to create a *hierarchy* of directories and the configuration files contained therein. When creating a run, the files in the workspace, the workspace's directory, ***and all parent directories*** merged and pass to Terraform as a single configuration. This eliminates redundancy when developing many environments that are similar or share a set of common variables or data across many configurations. For example, a large deployment might have a top-level directory defining global variables `vlan ids` and `team ids`, and subdirectories defining resources using those variables.
 
 Users can add, rename, delete, or export a directory from the navigation panel on a project's main Caster page.
 
@@ -233,7 +233,7 @@ These plugins are then cached in the `plugin_cache_dir` section, to save from do
 
 ### Hosts
 
-A _host_ consists of a name, datastore, and maximum number of virtual machines that it can support. The API creates and manages hosts, then assigns them to exercises. An exercise can have many hosts.
+A *host* consists of a name, datastore, and maximum number of virtual machines that it can support. The API creates and manages hosts, then assigns them to exercises. An exercise can have many hosts.
 
 Workspaces have an additional property, `DynamicHost`, which is usually set to `false`. When Alloy creates a workspace, this is set to `true`, and changes the behavior of a run. When `DynamicHost` is `true`, Caster examines all of the hosts assigned to the current exercise and chooses the one with the least usage (the number of machines to deploy/maximum machines) to assign to the workspace.
 
@@ -247,22 +247,22 @@ Alloy calls Caster in order to deploy resources for lab or ODX-style functionali
 
 However, in order to support this functionality Caster dynamically selects a host to deploy to.
 
-Normally, the cluster or host to deploy to is embedded in the configuration - either directly or as a variable - and Caster doesn't concern itself with this. For ODX's, Caster _does_ need to concern itself with:
+Normally, the cluster or host to deploy to is embedded in the configuration - either directly or as a variable - and Caster doesn't concern itself with this. For ODX's, Caster *does* need to concern itself with:
 
 - ensuring that resources are deployed evenly to the available hosts, and
 - more ODXs than the hardware can deploy are not deployed.
 
-To address these concerns the concept of a _host_ was added to Caster.
+To address these concerns the concept of a *host* was added to Caster.
 
 ### Run, Plan, and Apply
 
-A _run_ is a specific instance of the Terraform _plan_ and _apply_ process for a workspace. The run is how the configuration in a directory is instantiated into deployed resources within a workspace. Upon opening a workspace, a list of runs is displayed. This is where plan or destroy operations are started.
+A *run* is a specific instance of the Terraform *plan* and *apply* process for a workspace. The run is how the configuration in a directory is instantiated into deployed resources within a workspace. Upon opening a workspace, a list of runs is displayed. This is where plan or destroy operations are started.
 
-_Plan_ and _apply_ are specific Terraform terminologies. Every run is made up of a plan and an apply step.
+*Plan* and *apply* are specific Terraform terminologies. Every run is made up of a plan and an apply step.
 
 #### Plan
 
-Clicking _plan_ creates a new Run and executes the `terraform plan` command on the given configuration. This raw Terraform output, visible to the user, describes:
+Clicking *plan* creates a new Run and executes the `terraform plan` command on the given configuration. This raw Terraform output, visible to the user, describes:
 
 - What actions Terraform will take
 - What resources to create
@@ -278,7 +278,7 @@ This output always ends with a summary of the form `Plan: x to add, y to change,
 
 #### Apply
 
-_Apply_ takes a run, executes `terraform apply` on the previously generated plan and deploys the resources for a workspace. The `Apply` command:
+*Apply* takes a run, executes `terraform apply` on the previously generated plan and deploys the resources for a workspace. The `Apply` command:
 
 - Deploys a workspace run
 - Releases plan tools such as network resources and virtual machines into vCenter
@@ -287,7 +287,7 @@ Within the workspace view users can see all the runs that have been planned and 
 
 #### Destroy
 
-Selecting destroy instead of plan is similar, but the generated plan will destroy all previously deployed resources in the workspace, rather than matching the infrastructure to the current configuration. That is, _Destroy_ creates a plan that will destroy all of the previously deployed resources in a workspace.
+Selecting destroy instead of plan is similar, but the generated plan will destroy all previously deployed resources in the workspace, rather than matching the infrastructure to the current configuration. That is, *Destroy* creates a plan that will destroy all of the previously deployed resources in a workspace.
 
 If a resource is defined in the configuration and created in a run and then deleted from the configuration, it is destroyed upon the next plan or destroy run. This is because a Terraform run always tries to match the infrastructure to the current configuration.
 
@@ -301,7 +301,7 @@ This Infrastructure-as-Code approach is unfamiliar to some developers. It define
 
 #### Taint
 
-_Taint_ is a flag on a resource that tells Terraform to destroy and recreate a new instance on the next plan-and-apply cycle.
+*Taint* is a flag on a resource that tells Terraform to destroy and recreate a new instance on the next plan-and-apply cycle.
 
 Taint allows users to redeploy resources. For example, if a user needs to redeploy a series of virtual machines, the user can:
 

@@ -20,7 +20,7 @@ Crucible system admin permissions are required to add third-party applications t
 8. If desired to be **Embeddable**, check the box.
 9. If desired to be **Loaded in the Background**, check the box.
 
-After completing these steps, admins should refer to the _Crucible Admin Guides_ to add the application to the desired set of users and/or teams.
+After completing these steps, admins should refer to the *Crucible Admin Guides* to add the application to the desired set of users and/or teams.
 
 ## Third-Party Applications
 

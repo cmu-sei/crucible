@@ -718,7 +718,7 @@ To delete a team type, follow these steps:
 
 ### Users
 
-The following image shows the _Users Administration_ page. Here, administrators can add and delete users, and assign the necessary permissions to each user.
+The following image shows the *Users Administration* page. Here, administrators can add and delete users, and assign the necessary permissions to each user.
 
 The available permissions are:
 
