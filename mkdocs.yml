@@ -17,6 +17,7 @@ theme:
     - toc.integrate
     - content.code.copy
     - content.code.annotate
+    - content.external_links
   logo: assets/img/crucible-icon-c-alpha.svg
   favicon: assets/img/crucible-icon-c-alpha.svg
   palette:
