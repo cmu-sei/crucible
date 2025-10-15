@@ -1,7 +1,7 @@
 # Instructor Guide
 
 ???+ warning "Caution"
-  Crucible environments are often customized. Procedures, scoring, and user interfaces may vary by deployment. Review local documentation or range notes before facilitating exercises.
+    Crucible environments are often customized. Procedures, scoring, and user interfaces may vary by deployment. Review local documentation or range notes before facilitating exercises.
 
 ## Overview
 
