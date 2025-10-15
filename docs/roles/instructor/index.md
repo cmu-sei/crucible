@@ -59,7 +59,7 @@ Reflection is where insight turns into understanding. Your debrief sets the tone
 ### Feedback and Assessment
 
 ???+ tip "Deep Dive into CERT Research"
-Our own experience with team-based assessments is documented in :material-book: *[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/)*.
+        Our own experience with team-based assessments is documented in :material-book: *[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/)*.
 
 - Provide feedback that is **specific, encouraging, and forward-looking**.
 - Emphasize growth over grading.
