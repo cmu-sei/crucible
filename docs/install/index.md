@@ -31,6 +31,10 @@
 - [Blueprint API](https://github.com/cmu-sei/Blueprint.Api)
 - [Blueprint UI](https://github.com/cmu-sei/Blueprint.Ui)
 
+## Crucible Terraform Provider
+
+- [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-sei/crucible/latest/docs)
+
 ## Crucible Helm Charts
 
 - [Alloy](https://github.com/cmu-sei/helm-charts/tree/main/charts/alloy)

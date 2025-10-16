@@ -21,6 +21,8 @@ Caster gives experts the control they need, while also making it easy for beginn
 
 For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html).
 
+The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-sei/crucible/latest/docs) enables programmatic management of Crucible resources through Terraform configurations.
+
 ## Administrator Guide
 
 ### Users
