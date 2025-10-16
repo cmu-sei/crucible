@@ -27,6 +27,14 @@ Cyber range administrators confront persistent challenges:
 
 Crucible automates creation of virtual cyber environments featuring modeled topologies, simulated user activity, and scripted scenario events. These environments power individual labs, team-based exercises, and operational experimentation. These simulations can be fully automated or facilitated. Crucible content developers create new templates by specifying a topology, scenario, assessments, and user interfaces. Participants are challenged to perform mission-essential tasks and individual qualification requirements. Each Crucible application is built using the open-source Angular and .NET Core software frameworks.
 
+## Going Simple: Labs/Challenges
+
+[![TopoMojo Logo](assets/img/crucible-icon-topomojo.svg){: style="height:75px;width:75px"}](topomojo/index.md) Crucible’s [**TopoMojo**](/topomojo/index.md) application enables design of simple labs and challenges using form-based configurations. Select and configure virtual machines, define networks, and write a guide. Novice Crucible content developers can easily get productive by using TopoMojo. Choose this app when the benefits of more advanced “infrastructure as code” automation are not needed. TopoMojo supports the configuration and deployment of small virtual environments to two types of hypervisors: VMware vSphere ESXi and Proxmox Virtual Environment KVM (open source). 
+
+## Crafting a Challenge Competition
+
+[![Gameboard Logo](assets/img/crucible-icon-gameboard.svg){: style="height:75px;width:75px"}](gameboard/index.md) Crucible’s [**Gameboard**](gameboard/index.md) application provides game design capabilities and a competition-ready user interface for running your own cybersecurity game. A Crucible content developer can create, clone, manage, and delete games and challenges—for competition or practice.
+
 ## Designing User Interfaces
 
 [![Player Logo](assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"}](player/index.md) Crucible's [**Player**](player/index.md) application is the user's window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.
