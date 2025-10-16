@@ -31,11 +31,11 @@ Crucible automates creation of virtual cyber environments featuring modeled topo
 
 ### Going Simple: Labs/Challenges
 
-[![TopoMojo Logo](assets/img/crucible-icon-topomojo.svg){: style="height:75px;width:75px"}](topomojo/about) Crucible’s [**TopoMojo**](topomojo/about) application enables design of simple labs and challenges using form-based configurations. Select and configure virtual machines, define networks, and write a guide. Novice Crucible content developers can easily get productive by using TopoMojo. Choose this app when the benefits of more advanced “infrastructure as code” automation are not needed. TopoMojo supports the configuration and deployment of small virtual environments to two types of hypervisors: VMware vSphere ESXi and Proxmox Virtual Environment KVM (open source). 
+[![TopoMojo Logo](assets/img/crucible-icon-topomojo.svg){: style="height:75px;width:75px"}](topomojo/about) Crucible's [**TopoMojo**](topomojo/about) application enables design of simple labs and challenges using form-based configurations. Select and configure virtual machines, define networks, and write a guide. Novice Crucible content developers can easily get productive by using TopoMojo. Choose this app when the benefits of more advanced "infrastructure as code" automation are not needed. TopoMojo supports the configuration and deployment of small virtual environments to two types of hypervisors: VMware vSphere ESXi and Proxmox Virtual Environment KVM (open source). 
 
 ### Crafting a Challenge Competition
 
-[![Gameboard Logo](assets/img/crucible-icon-gameboard.svg){: style="height:75px;width:75px"}](gameboard/index.md) Crucible’s [**Gameboard**](gameboard/index.md) application provides game design capabilities and a competition-ready user interface for running your own cybersecurity game. A Crucible content developer can create, clone, manage, and delete games and challenges—for competition or practice.
+[![Gameboard Logo](assets/img/crucible-icon-gameboard.svg){: style="height:75px;width:75px"}](gameboard/index.md) Crucible's [**Gameboard**](gameboard/index.md) application provides game design capabilities and a competition-ready user interface for running your own cybersecurity game. A Crucible content developer can create, clone, manage, and delete games and challenges—for competition or practice.
 
 ## TEAM EXERCISING
 
