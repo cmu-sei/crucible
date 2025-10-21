@@ -107,7 +107,7 @@ To add an article, refer to the [Add Articles During an Exercise](#add-articles-
 
 ##### Hotspot 2
 
-The archive contains all "move" data that has been shared up to this point in the exercise. Users can search, sort, and filter information in the archive.
+The archive contains all "move" data that teams have shared up to this point in the exercise. Users can search, sort, and filter information in the archive.
 
 To search the archive, enter the terms in the **Search the Archive** field. The search feature automatically narrows down the results.
 
@@ -164,7 +164,7 @@ To share an article with another team, click **Share**. In the **Share Article**
 
 ##### Hotspot 9
 
-When enabled, attached documents with additional information will be provided for users to access and read.
+When enabled, the system provides attached documents with additional information for users to access and read.
 
 #### Team Selection
 
@@ -197,13 +197,13 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 | **Summary**             | String        | Short summary of the article                                | No cell phone connectivity after pass of Hurricane Delta                                |
 | **Description**         | Rich Text     | Description with characteristics and details of the article | In a world driven by constant connectivity, the sudden absence of cell phone signals... |
 | **Url for more info**   | String        | If additional details are necessary, provide the URL        | `www.bbcnews.com/hurricane-delta`                                                       |
-| **Open URL in new tab** | Boolean       | Select if URL provided should be opened in a new tab        | True                                                                                    |
+| **Open URL in new tab** | Boolean       | Select this option to open the URL in a new tab             | True                                                                                    |
 | **Card**                | Dropdown Text | Article's classification amongst Gallery cards              | Communications Sector                                                                   |
 | **Status**              | Dropdown Text | Status of how the article affects the exercise situation    | Affected                                                                                |
 
 To save these settings, click **Save**.
 
-After creating your article, it will be displayed in the Gallery Archive in the following way.
+After you create your article, the Gallery Archive displays it in the following way.
 
 ![Article Created OE](../assets/img/createdArticle.png)
 
@@ -313,7 +313,7 @@ To delete a collection, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Select the collection to be deleted and click the **Trash Can Icon** next to the collection.
+3. Select the collection you plan to delete and click the **Trash Can Icon** next to the collection.
 
 #### Upload a Collection
 
@@ -322,7 +322,7 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
 3. Click the **Up Arrow** next to the **+**.
-4. Select the collection JSON file to be uploaded.
+4. Select the collection JSON file you want to upload.
 
 #### Download a Collection
 
@@ -330,8 +330,8 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Click the **Down Arrow** next to the collection to be downloaded.
-4. Look for the JSON file in your Downloads folder.
+3. Click the **Down Arrow** next to the collection and download the JSON file.
+4. Open your Downloads folder to confirm it finished downloading.
 
 #### Copy a Collection
 
@@ -339,12 +339,11 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
-3. Click **Copy** next to the collection to copy.
-4. Look for the collection name with the user's name.
+3. Click **Copy** next to the collection and review the new entry that includes your username.
 
 ### Cards
 
-The following image shows the Cards Administration Page. Here, administrators can add and delete cards. These are the different cards presented in the Gallery Wall and where different articles related to that card can be found.
+The following image shows the Cards Administration Page. Here, administrators can add and delete cards. Each card appears in the Gallery Wall and stores articles related to that card.
 
 ![Cards Admin OE](../assets/img/cardsAdmin.png)
 
@@ -411,11 +410,11 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 | **Status**              | Dropdown Text | Select the article's status of how it affects the exercise     | Critical                                                                         |
 | **Source Type**         | Dropdown Text | Select the source or author type of the article                | Intel                                                                            |
 | **Source Name**         | String        | Name or author of the article                                  | BBC News                                                                         |
-| **URL for more info**   | String        | URL if additional information is provided to participants      | `www.bbcnews.com/hurricane-delta`                                                |
-| **Open URL in new tab** | Boolean       | If URL is provided, select if it should be opened in a new tab | True                                                                             |
-| **Move**                | Integer       | Move number that this article should be part of                | 1                                                                                |
-| **Inject**              | Integer       | Inject number that this article should be part of              | 1                                                                                |
-| **Posted Date/Time**    | Datetime      | Date/Time when this article was posted                         | 08/02/2021, 15:12:49                                                             |
+| **URL for more info**   | String        | Provide the URL if participants need additional information    | `www.bbcnews.com/hurricane-delta`                                                |
+| **Open URL in new tab** | Boolean       | Choose this option to open the URL in a new tab                | True                                                                             |
+| **Move**                | Integer       | Record the move that includes this article                     | 1                                                                                |
+| **Inject**              | Integer       | Record the inject that includes this article                   | 1                                                                                |
+| **Posted Date/Time**    | Datetime      | Capture the date and time when you posted this article         | 08/02/2021, 15:12:49                                                             |
 
 To save these settings, click **Save**.
 
@@ -439,7 +438,7 @@ To delete an article, follow these steps:
 
 ### Exhibits
 
-The following image shows the Exhibits Administration Page. Here, administrators configure the actual exercise to be run based on the teams, collections and articles previously configured.
+The following image shows the Exhibits Administration Page. Here, administrators configure the actual exercise and run it based on the teams, collections, and articles they previously configured.
 
 ![Exhibits Admin OE](../assets/img/exhibitsAdmin-v3.png)
 
@@ -487,11 +486,11 @@ To upload an exhibit, follow these steps:
 1. Click the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
 3. Click the **Up Arrow** next to the **+**.
-4. Select the exhibit JSON file to be uploaded.
+4. Select the exhibit JSON file you want to upload.
 
 !!! note
 
-    When adding a new exhibit, a new collection with the uploaded exhibit will be created. To view the uploaded exhibit, navigate to the collection using the dropdown and select the collection with the same name as the file uploaded.
+    When you add a new exhibit, the system creates a new collection with the uploaded exhibit. To view the uploaded exhibit, navigate to the collection using the dropdown and select the collection with the same name as the file you uploaded.
 
 #### Download an Exhibit
 
@@ -499,8 +498,8 @@ To download an exhibit, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
-3. Click the **Down Arrow** next to the exhibit to be downloaded.
-4. Look for the JSON file in your Downloads folder.
+3. Click the **Down Arrow** next to the exhibit and download the JSON file.
+4. Open your Downloads folder to confirm it finished downloading.
 
 #### Copy an Exhibit
 
@@ -508,8 +507,7 @@ To copy an exhibit, follow these steps:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Exhibits** tab.
-3. Click **Copy** next to the exhibit to copy.
-4. Look for the exhibit name with the user's name.
+3. Click **Copy** next to the exhibit and review the new entry that includes your username.
 
 #### Configure an Exhibit
 
@@ -540,9 +538,9 @@ To configure a team, follow these steps:
 
 ![Exhibit Teams OE](../assets/img/exhibitTeams-v2.png)
 
-1. Select the team to be configured and click it to expand its configuration details.
-2. Under the **All Users** tab, users that have not been assigned to the team will be shown. To add them to the team, click **Add User**.
-3. Under the **Team Users** tab, users that have already been assigned to the team will be shown. To remove a user from the team, click **Remove**.
+1. Select the team you want to configure and click it to expand its configuration details.
+2. Under the **All Users** tab, review the users who do not yet belong to the team. To add them to the team, click **Add User**.
+3. Under the **Team Users** tab, review the users who already belong to the team. To remove a user from the team, click **Remove**.
 4. If desired, check the **Observer** box to assign that role to the user during the exercise.
 
 #### Add a Team Card to an Exhibit
@@ -558,12 +556,12 @@ To add a Team Card to the Exhibit, follow these steps:
 
 | Field                     | Data Type     | Description                                                              | Example                          |
 | ------------------------- | ------------- | ------------------------------------------------------------------------ | -------------------------------- |
-| **Team**                  | Dropdown Text | Team that the card should be part of                                     | CMU - Carnegie Mellon University |
-| **Card**                  | Dropdown Text | Gallery card to be assigned                                              | Communications Sector            |
-| **Move**                  | Integer       | Move number that the card is part of                                     | 1                                |
-| **Inject**                | Integer       | Inject number that the card is part of                                   | 2                                |
-| **Is Shown On Wall**      | Boolean       | Select whether the card should be shown on the Gallery Wall for the team | True                             |
-| **Can Post New Articles** | Boolean       | Select whether the team can add new articles to this card                | True                             |
+| **Team**                  | Dropdown Text | Choose the team that owns the card                                       | CMU - Carnegie Mellon University |
+| **Card**                  | Dropdown Text | Choose the Gallery card you want to assign                               | Communications Sector            |
+| **Move**                  | Integer       | Record the move that includes this card                                  | 1                                |
+| **Inject**                | Integer       | Record the inject that includes this card                                | 2                                |
+| **Show On Wall**          | Boolean       | Select this option to show the card on the Gallery Wall for the team     | True                             |
+| **Can Post New Articles** | Boolean       | Select this option to allow the team to add new articles to this card    | True                             |
 
 To save these settings, click **Save**.
 
@@ -573,9 +571,9 @@ To add an article to a team, follow these steps:
 
 ![Article Teams OE](../assets/img/articleTeams.png)
 
-1. Select the **Card** to be configured.
-2. Under the **Exhibit Teams** tab, teams that haven't been assigned to an article will be shown. To add them to the Article Teams, click **Add**.
-3. Under the **Article Teams** tab, teams that have already been assigned will be shown. To remove a team, click **Remove**.
+1. Select the **Card** you want to configure.
+2. Under the **Exhibit Teams** tab, identify the teams without an article assignment. To add them to the Article Teams, click **Add**.
+3. Under the **Article Teams** tab, review the teams that already have assignments. To remove a team, click **Remove**.
 
 #### The Observer Role
 
@@ -584,12 +582,12 @@ To assign the [Observer Role](#glossary) to a user:
 ![Exhibit Observers OE](../assets/img/exhibitObservers.png)
 
 1. Under **Evaluation Users**, search for the desired user.
-2. Once the user has been found, click **Add**.
+2. After you find the user, click **Add**.
 
 To remove the Observer Role from a user:
 
 1. Under **Observers**, search for the desired user.
-2. Once the user has been found, click **Remove**.
+2. After you find the user, click **Remove**.
 
 ## Glossary
 

@@ -12,7 +12,7 @@ We provide detailed guides for the following roles within the Crucible ecosystem
 
 ## Instructor
 
-[Instructors](instructor/) lead and execute Crucible exercises and training sessions. They guide participants, evaluate performance, and ensure learning objectives are met.
+[Instructors](instructor/) lead and execute Crucible exercises and training sessions. They guide participants, evaluate performance, and ensure teams meet learning objectives.
 
 ## Participant
 

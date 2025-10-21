@@ -15,8 +15,8 @@ Since 2018, Crucible has enabled large-scale United States (US) Department of De
 - Efficiency through automation
 - Interoperability through open standards
 - Options for building cyber terrain:
-    - "Infrastructure-as-code" for scalability, iteration, and reuse
-    - Form-based configuration for simple and quick
+  - "Infrastructure-as-code" for scalability, iteration, and reuse
+  - Form-based configuration for simple and quick
 
 ## Addressing Persistent Challenges
 
@@ -47,28 +47,28 @@ Crucible can also support more advanced needs commonly found within concept expe
 
 ### Designing User Experiences
 
-[![Player Logo](assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"}](player/index.md) Crucible's [**Player**](player/index.md) application is the exerciser's window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user interfaces using various integrated applications. A Crucible content developer can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.
+[![Player Logo](assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"}](player/index.md) Crucible's [**Player**](player/index.md) application is the exerciser's window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user interfaces using various integrated applications. A Crucible content developer can shape how integrated applications present scenario information, assessments, and virtual environments.
 
 #### Open-Source Integrations
 
 - **osTicket**, a support ticket system, manages cyber range service requests.
-- **Mattermost, Rocketchat, Nextcloud Talk** chat services.
+- **Mattermost, Rocket.Chat, Nextcloud Talk** chat services.
 - **Stalwart, Roundcube**, web-based email service.
 
 ### Coding a Topology
 
 [![Caster Logo](assets/img/crucible-icon-caster.svg){: style="height:75px;width:75px"}](caster/index.md) Crucible's [**Caster**](caster/index.md) application enables coding design and deployment of a cyber topology. With Caster Designs, an intermediate content developer can avoid scripting Terraform code and simply define variables within pre-configured Terraform modules.
 
-Caster supports the design and deployment of virtual environments to a variety of hypervisors: VMware vSphere ESXi, Microsoft Azure HyperV (public-cloud), Amazon Web Services Xen/Nitro (public-cloud), and Proxmox Virtual Environment KVM (open source).
+Caster supports the design and deployment of virtual environments to a variety of hypervisors. Supported platforms include VMware vSphere ESXi, Microsoft Azure HyperV (public-cloud), Amazon Web Services Xen/Nitro (public-cloud), and Proxmox Virtual Environment KVM (open source).
 
 #### Open-Source Integrations
 
 - **Terraform/OpenTofu**, an "infrastructure-as-code" tool, enables scripted deployment of cyber infrastructure.
-- **GitLab**, a version control system and code-repository, is used to store Terraform/OpenTofu modules.
+- **GitLab**, a version control system and code-repository, stores Terraform/OpenTofu modules.
 
 ### Crafting a Scenario
 
-[![Blueprint Logo](assets/img/blueprint-logo.png)](blueprint/index.md) Crucible's [**Blueprint**](blueprint/index.md) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to simulation objectives.
+[![Blueprint Logo](assets/img/blueprint-logo.png)](blueprint/index.md) Crucible's [**Blueprint**](blueprint/index.md) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Blueprint maps scenario events to simulation objectives.
 
 [![Steamfitter Logo](assets/img/crucible-icon-steamfitter.svg){: style="height:75px;width:75px"}](steamfitter/index.md) Crucible's [**Steamfitter**](steamfitter/index.md) application enables the organization and execution of tasks on virtual machines.
 
@@ -83,7 +83,7 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 #### Open-Source Integrations
 
-- **Ollama**, a platform designed to run llama, mistral, and other open source large language models locally.
+- **Ollama**, a platform designed to run LLaMA, Mistral, and other open source large language models locally.
 
 ### Evaluating Threats
 
@@ -91,11 +91,11 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 ### Displaying Incident Information
 
-[![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md) Crucible's [**Gallery**](gallery/index.md) application enables participants to review cyber incident information based on source type (intelligence, reporting, orders, news, social media, telephone, email) categorized by critical infrastructure sector or any other organization.
+[![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md) Crucible's [**Gallery**](gallery/index.md) application enables participants to review cyber incident information by source type (intelligence, reporting, orders, news, social media, telephone, email). Gallery groups that information by critical infrastructure sector or any other organization.
 
 ### Assessing Performance
 
-![SEER Logo](assets/img/crucible-icon-seer.svg){: style="height:75px;width:75px"} Crucible's **SEER** application enables assessment of team performance. During events, participants are challenged to perform mission-essential tasks and individual qualification requirements. Map performance assessments to training objectives to scenario events.
+![SEER Logo](assets/img/crucible-icon-seer.svg){: style="height:75px;width:75px"} Crucible's **SEER** application enables assessment of team performance. During events, participants tackle mission-essential tasks and individual qualification requirements. Map performance assessments to training objectives to scenario events.
 
 ### Launching an On-Demand Exercise
 
@@ -103,15 +103,15 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 ### Operational Deployment
 
-Crucible applications implement the OpenID Connect authentication protocol and are integrated with **Keycloak**, an open-source identity authentication service.
+Crucible applications implement the OpenID Connect authentication protocol and integrate with **Keycloak**, an open-source identity authentication service.
 
-Crucible applications are deployed as **Docker** containers, which employ operating system level virtualization to isolate containers from each other. Container deployment, scaling, and management services are obtained using **Kubernetes**, a popular container-orchestration system. Kubernetes workflow and cluster management are performed using **Argo CD**, a popular open-source GitOps toolset.
+Crucible teams deploy applications as **Docker** containers, which employ operating system level virtualization to isolate containers from each other. They rely on **Kubernetes**, a popular container-orchestration system, to provide container deployment, scaling, and management services. Teams use **Argo CD**, a popular open-source GitOps tool set, to perform Kubernetes workflow and cluster management.
 
 A pre-configured Crucible Appliance virtual machine is available for download.
 
 The SEI owns and operates an on-premises instance of Crucible that can deploy virtual environments to VMware, Proxmox, or to a cloud provider:
 
-**Fortress**
+#### Fortress
 
 [fortress.sei.cmu.edu](https://fortress.sei.cmu.edu)
 

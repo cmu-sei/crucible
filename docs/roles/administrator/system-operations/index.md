@@ -74,7 +74,7 @@ Before updating:
 
 ### Database Maintenance
 
-PostgreSQL databases should be maintained regularly:
+Maintain PostgreSQL databases regularly:
 
 - Use **pgAdmin** (if installed per [installation guide](../../install/index.md#postgresql-and-pgadmin)) for visual database management
 - Run `VACUUM ANALYZE` periodically to optimize database performance
@@ -179,5 +179,5 @@ Follow your organization's incident response procedures. Key steps:
 1. Identify and contain the incident using Kubernetes tools
 2. Review application and audit logs for the timeframe
 3. Use `kubectl` to isolate affected pods if needed
-4. Restore from backups if data integrity is compromised
+4. Restore from backups if you detect a data integrity compromise
 5. Document findings and remediation steps
