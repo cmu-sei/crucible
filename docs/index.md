@@ -52,7 +52,7 @@ Crucible can also support more advanced needs commonly found within concept expe
 #### Open-Source Integrations
 
 - **osTicket**, a support ticket system, manages cyber range service requests.
-- **Mattermost, Rocketchat, Nextcloud Talk** chat services.
+- **Mattermost, Rocket.Chat, Nextcloud Talk** chat services.
 - **Stalwart, Roundcube**, web-based email service.
 
 ### Coding a Topology
@@ -83,7 +83,7 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 #### Open-Source Integrations
 
-- **Ollama**, a platform designed to run llama, mistral, and other open source large language models locally.
+- **Ollama**, a platform designed to run LLaMA, Mistral, and other open source large language models locally.
 
 ### Evaluating Threats
 
@@ -105,7 +105,7 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 Crucible applications implement the OpenID Connect authentication protocol and are integrated with **Keycloak**, an open-source identity authentication service.
 
-Crucible applications are deployed as **Docker** containers, which employ operating system level virtualization to isolate containers from each other. Container deployment, scaling, and management services are obtained using **Kubernetes**, a popular container-orchestration system. Kubernetes workflow and cluster management are performed using **Argo CD**, a popular open-source GitOps toolset.
+Crucible applications are deployed as **Docker** containers, which employ operating system level virtualization to isolate containers from each other. Container deployment, scaling, and management services are obtained using **Kubernetes**, a popular container-orchestration system. Kubernetes workflow and cluster management are performed using **Argo CD**, a popular open-source GitOps tool set.
 
 A pre-configured Crucible Appliance virtual machine is available for download.
 

@@ -2,14 +2,14 @@
 
 **Welcome to the Crucible Framework documentation!** Crucible is a modular, open-source application framework designed for creating, deploying, and managing virtual environments to support cybersecurity training, education, and exercises. The framework consists of multiple integrated applications that work together to deliver complete cyber range experiences.
 
-## Not sure where to begin?
+## Not Sure Where to Begin?
 
 1. If you are looking for installation requirements and instructions, see our [Installation Guide](../install/index.md).
 2. If you are looking for role-based documentation, select your role below to access guides for *Infrastructure Administrators*, *Range Builders*, *Instructors*, and *Participants*.
 3. If you are looking for documentation on Crucible's core applications (Player, Caster, Steamfitter, Alloy, TopoMojo, Gameboard, Blueprint, Gallery, and CITE), see our [core application guides](../landing/index.md).
 4. If you are looking for documentation on integrating open-source third-party applications with the Crucible Framework, see our [Third-Party Integration Guide](../integrations/index.md).
 
-## Role-based Guides
+## Role-Based Guides
 
 We provide detailed guides for the following roles within the Crucible ecosystem.
 
