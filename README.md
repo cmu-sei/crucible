@@ -20,7 +20,7 @@ Crucible's [**Caster**](https://cmu-sei.github.io/crucible/caster/) application 
 
 ### Player
 
-Crucible's [**Player**](https://cmu-sei.github.io/crucible/player/) application is the user's window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how scenario information, assessments, and virtual environments are presented through the use of integrated applications.
+Crucible's [**Player**](https://cmu-sei.github.io/crucible/player/) application is the user's window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user-interfaces using various integrated applications. A Crucible system administrator can shape how integrated applications present scenario information, assessments, and virtual environments.
 
 - [Player API Repository](https://github.com/cmu-sei/Player.Api)
 - [Player Console UI Repository](https://github.com/cmu-sei/Console.Ui)
@@ -53,14 +53,14 @@ Crucible's [**Gameboard**](https://cmu-sei.github.io/crucible/Gameboard/) applic
 
 ### Blueprint
 
-Crucible's [**Blueprint**](https://cmu-sei.github.io/crucible/blueprint/) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Scenario events are mapped to specific simulation objectives.
+Crucible's [**Blueprint**](https://cmu-sei.github.io/crucible/blueprint/) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Blueprint maps scenario events to specific simulation objectives.
 
 - [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api)
 - [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui)
 
 ### Gallery
 
-Crucible's [**Gallery**](https://cmu-sei.github.io/crucible/gallery/) application enables participants to review cyber incident data by source type. Source type examples include: intelligence, reporting, orders, news, social media, telephone, and email. Information is grouped by critical infrastructure sector or other organizational categories.
+Crucible's [**Gallery**](https://cmu-sei.github.io/crucible/gallery/) application enables participants to review cyber incident data by source type. Source type examples include: intelligence, reporting, orders, news, social media, telephone, and email. Gallery groups information by critical infrastructure sector or other organizational categories.
 
 - [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
 - [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui)
@@ -74,7 +74,7 @@ Crucible's [**Collaborative Incident Threat Evaluator (CITE)**](https://cmu-sei.
 
 ## Crucible Appliance
 
-The Crucible appliance is an environment that includes everything needed to install and configure the core applications of the Crucible framework. The appliance application stack consists of a single-node Docker swarm utilizing a Traefik reverse proxy. They are assembled using Docker Compose files on an Ubuntu 20.04 operating system. To get started with the Crucible appliance, see:
+The Crucible appliance is an environment that includes everything needed to install and configure the core applications of the Crucible framework. The appliance application stack consists of a single-node Docker swarm utilizing a Traefik reverse proxy. Docker Compose files assemble them on an Ubuntu 20.04 operating system. To get started with the Crucible appliance, see:
 
 - [Crucible Appliance Repository](https://github.com/cmu-sei/Crucible.Appliance)
 
@@ -88,19 +88,19 @@ Crucible common modules are a set of Angular modules that are common between Cru
 
 ### Crucible Plugin for Moodle
 
-The Crucible plugin for Moodle is an activity plugin that allows Crucible labs and exercises to be accessed from the Moodle open-source learning management system. For more information, see:
+The Crucible plugin for Moodle is an activity plugin that allows Moodle users to access Crucible labs and exercises from the Moodle open-source learning management system. For more information, see:
 
 - [Crucible plugin for Moodle Repository](https://github.com/cmu-sei/moodle-mod_crucible)
 
 ### osTicket
 
-[osTicket](https://osticket.com/) is a widely-used open source support ticket system that can be configured and deployed for an exercise. To get started with the Crucible plugin for osTicket, see:
+[osTicket](https://osticket.com/) is a widely-used open source support ticket system that you can configure and deploy for an exercise. To get started with the Crucible plugin for osTicket, see:
 
 - [osTicket Repository](https://github.com/cmu-sei/osticket-crucible)
 
 ### Terraform Provider for Crucible
 
-This is the [Terraform](https://www.terraform.io/) Provider for Crucible which is used to create many Crucible resource types (e.g., Player Virtual Machines, Views, Applications, and others). For more information, see:
+This is the [Terraform](https://www.terraform.io/) Provider for Crucible which creates many Crucible resource types (e.g., Player Virtual Machines, Views, Applications, and others). For more information, see:
 
 - [Terraform Provider Crucible Repository](https://github.com/cmu-sei/terraform-provider-crucible)
 
