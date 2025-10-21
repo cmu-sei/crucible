@@ -1,0 +1,3052 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="CRUCIBLE is an open-source application framework for creating and managing virtual environments and events.">
+      
+      
+        <meta name="author" content="Crucible Team">
+      
+      
+      
+        <link rel="prev" href="../alloy/">
+      
+      
+        <link rel="next" href="../gameboard/">
+      
+      
+      <link rel="icon" href="../assets/img/crucible-icon-c-alpha.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>TopoMojo - Crucible Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+
+  <!-- Determine title -->
+  
+  
+    
+  
+
+  <!-- The image needs to have an absolute URL -->
+  
+
+  <!-- Open graph meta tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Crucible Documentation - TopoMojo" />
+  <meta property="og:description" content="CRUCIBLE is an open-source application framework for creating and managing virtual environments and events." />
+  <meta property="og:url" content="None" />
+  <meta property="og:image" content="Noneassets/images/illustrations/banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="568" />
+
+  <!-- google-site-verification meta-tag -->
+  <meta name="google-site-verification" content="-Rj8YMCn9uu5IwOFdC-WfAzXp4ZOMJtYKxU40ZgcJIU" />
+
+<!-- Extra stylesheets -->
+<!--  <link
+    rel="stylesheet"
+    href="../assets/stylesheets/overrides.css"
+  />-->
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#topomojo" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Crucible Documentation" class="md-header__button md-logo" aria-label="Crucible Documentation" data-md-component="logo">
+      
+  <img src="../assets/img/crucible-icon-c-alpha.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Crucible Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TopoMojo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cmu-sei/crucible" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cmu-sei/Crucible
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation Guide
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../landing/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Core Application Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../roles/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Role-Based Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../integrations/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  3rd-Party Integrations
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Crucible Documentation" class="md-nav__button md-logo" aria-label="Crucible Documentation" data-md-component="logo">
+      
+  <img src="../assets/img/crucible-icon-c-alpha.svg" alt="logo">
+
+    </a>
+    Crucible Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cmu-sei/crucible" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cmu-sei/Crucible
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../landing/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Core Application Guides
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Core Application Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../player/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Player
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../caster/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Caster
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../steamfitter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Steamfitter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alloy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alloy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    TopoMojo
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    TopoMojo
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topomojo-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      TopoMojo Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TopoMojo Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workspace-and-gamespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workspace and Gamespace
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isolation-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolation Tag
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenge
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's New
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persistentshared-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Persistent/Shared Networks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-a-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finding a Space
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-a-new-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building a New Workspace
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building a New Workspace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Templates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-and-editing-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding and Editing Templates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-field-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Field Definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-and-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refresh and Deploy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save" class="md-nav__link">
+    <span class="md-ellipsis">
+      Save
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lab Document
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab Document">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inserting-an-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inserting an Image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#previewing-the-doc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Previewing the Doc
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenge-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenge Tab
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Challenge Tab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transforms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Markdown
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      Question Set
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Question Set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#weight" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weight
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#play" class="md-nav__link">
+    <span class="md-ellipsis">
+      Play
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#administrator-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Administrator Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Administrator Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hub-connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hub Connections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#announcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Announcement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importexport" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import/Export
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#janitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Janitor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gamespaces-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gamespaces Tab
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gamespaces Tab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#view-expanded" class="md-nav__link">
+    <span class="md-ellipsis">
+      View (Expanded)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workspaces-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workspaces Tab
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workspaces Tab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#view-expanded_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      View (Expanded)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#templates-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Templates Tab
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Templates Tab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Properties
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#machines-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Machines Tab
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Machines Tab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#orphaned-vms" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Orphaned" VMs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#users-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Users Tab
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Users Tab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-new-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a New User
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Log Tab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-and-paste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy and Paste
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Copy and Paste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-local-out-of-game-to-in-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Local ("Out of Game") to "In Game"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-in-game-to-out-of-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      From "In Game" to "Out of Game"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gameboard
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            Gameboard
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../gameboard/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Playing games
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_7_1" id="__nav_4_7_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Playing games
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Profile screen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/home-and-lobby/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home screen and Lobby
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/player-feedback-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Giving feedback
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/practice-area/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practicing challenges
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting in-game support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/reports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using Reports
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7_2" id="__nav_4_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Administering games
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Administering games
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/game-center/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Game Center
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-practice-area/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practice Area
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Users
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-players/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Players
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-sponsors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sponsors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-challenges/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Challenges
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notifications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-feedback-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuring Player Feedback Templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gameboard/admin-completion-certificates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuring Certificate Templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blueprint
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CITE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gallery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gallery
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../roles/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Role-Based Guides
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Role-Based Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../roles/administrator/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Infrastructure Administrator
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Infrastructure Administrator
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/administrator/quick-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/administrator/deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/administrator/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/administrator/system-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    System Operations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/administrator/user-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User Management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/administrator/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../roles/range-builder/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Range Builder
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Range Builder
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/range-builder/quick-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/range-builder/infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Infrastructure Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/range-builder/scenarios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scenario Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roles/range-builder/assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../roles/instructor/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Instructor
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Instructor
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../roles/participant/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Participant
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            Participant
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3rd-Party Integrations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="topomojo">TopoMojo</h1>
+<p>This documentation introduces users to the TopoMojo environment and provides information necessary to launch existing labs and create new topologies.</p>
+<h2 id="overview">Overview</h2>
+<p>TopoMojo is a web application used for creating and delivering cybersecurity training labs and exercises. With TopoMojo, users can build and deploy labs in an isolated and secure virtual-machine environment.</p>
+<p>TopoMojo allows for the same functionality and connectivity that users would experience with real, physical devices. Network topologies can utilize not only IP and Ethernet, but also custom protocol solutions like 802.11 wireless packet simulation.</p>
+<p>New topologies can be rapidly deployed using existing templates or built from the ground up with user-provided ISO's and VM specifications.</p>
+<p>Go to the TopoMojo repository: <a href="https://github.com/cmu-sei/TopoMojo">github.com/cmu-sei/TopoMojo</a>.</p>
+<h2 id="topomojo-concepts">TopoMojo Concepts</h2>
+<h3 id="workspace-and-gamespace">Workspace and Gamespace</h3>
+<p>You build your content in a <em>workspace</em>, but you "play" (complete the lab, do the activity) in a <em>gamespace</em>. In the workspace, engineers and lab developers add VMs, save updates, author a guide in Markdown, and configure questions/answers to turn the topology into a lab or <em>challenge</em>.</p>
+<p>A <em>gamespace</em> is where someone else plays through the lab. They get their own, isolated, read-only copies of all workspace resources. Players in a gamespace can interact with VMs and answer questions to complete a lab, but they can't save anything in the environment.</p>
+<p>In short: a <em>gamespace</em> is a read-only copy of a <em>workspace</em> where a player (user) interacts with the lab content.</p>
+<h3 id="isolation-tag">Isolation Tag</h3>
+<p>A unique identifier TopoMojo uses to identify a workspace or gamespace.</p>
+<ul>
+<li>For a workspace: the <em>isolation tag</em> is the workspace id visible above the Workspace Title when viewing the workspace. See screen print 1.</li>
+<li>For a gamespace: the <em>isolation tag</em> is the gamespace id partially visible from the <strong>Admin</strong>, <strong>Gamespaces</strong> view (see screen print 2) and fully visible in the URL bar when viewing a VM console that belongs to a gamespace (highlighted in screen print 3).</li>
+</ul>
+<p>The id's used for isolation tags uniquely identify each workspace and gamespace in the TopoMojo database. Additionally, each resource (e.g., virtual machine, virtual network, etc.) associated with a workspace or gamespace will have the isolation tag appended to the resource name.</p>
+<p>For example: a VM named <code>challenge-sever</code> in the gamespace with id (isolation tag) <code>18048abc66f142e1804732082f4051d2</code>, has the name <code>challenge-server#18048abc66f142e1804732082f4051d2</code>. Appending the isolation tag to workspace/gamespace resources ensures environment isolation -- VMs and networks cannot have the same name, so there will never be accidental sharing of VM/network resources.</p>
+<p>Screen print 1</p>
+<p><img alt="workspace isolation tag" src="img/iso-tag-ws.png" /></p>
+<p>Screen print 2</p>
+<p><img alt="gamespace isolation tag" src="img/iso-tag-gs.png" /></p>
+<p>Screen print 3</p>
+<p><img alt="isolation tag url" src="img/iso-tag-url.png" /></p>
+<h3 id="challenge">Challenge</h3>
+<p>The term <em>challenge</em> refers to when users integrate Gameboard and TopoMojo to execute a cyber competition. In this scenario, Gameboard is a consumer of content made in TopoMojo. More information on that is available elsewhere in the documentation.</p>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="whats-new">What's New</h3>
+<p>Get the latest TopoMojo source code and its accompanying release notes from the <a href="https://github.com/cmu-sei/TopoMojo">GitHub repository</a>.</p>
+<h3 id="installing">Installing</h3>
+<p>Installing TopoMojo is a matter of installing it's <a href="https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo">Helm chart</a> on the SEI's GitHub page. The CMU-SEI Helm charts repo is a public repository on GitHub for anyone to access and use. The TopoMojo chart contains two sub-charts: <code>topomojo-api</code> and <code>topomojo-ui</code>. The <code>api</code> and the <code>ui</code> are different apps and you should deploy them separately.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This structure is consistent with the other Foundry apps: there is an <code>api</code> piece and a <code>ui</code> piece.</p>
+</div>
+<p><strong><code>TopoMojo values.yaml</code>:</strong> Contains default configurations for the <code>api</code> and the <code>ui</code>. To deploy TopoMojo, configure the <strong><code>Values.yaml</code></strong> file according to your needs and <code>helm install</code> TopoMojo.</p>
+<h3 id="persistentshared-networks">Persistent/Shared Networks</h3>
+<p>We recommend having a persistent/shared network available to all TopoMojo workspaces/gamespaces. The administrator defines a persistent/shared network at the time they deploy the TopoMojo API.</p>
+<p>For example, you could create a persistent/shared network that provides internet access to all TopoMojo VMs that specify the network name. <code>bridge-net</code> typically signifies bridging the traditionally isolated TopoMojo VM to the internet.</p>
+<p>Use the <code>Pod__Vlan__Reservations</code> environment variable to define the name of a persistent/shared network. See screen print 1 below.</p>
+<ul>
+<li><code>Pod__Vlan__Reservations__0__Id:</code> defines the vlan Id (from the hypervisor) that corresponds to the shared/persistent network.</li>
+<li><code>Pod__Vlan__Reservations__0__Name:</code> defines the name of the persistent/shared network.</li>
+</ul>
+<p>You can define more than one shared/persistent network by incrementing the variable name (<code>Pod__Vlan__Reservations__1__Id</code> and <code>Pod__Vlan__Reservations__1__Name</code>). To connect VMs to shared/persistent networks, users must have at least <strong>Builder</strong> permissions.</p>
+<div class="admonition note">
+<p class="admonition-title">A note about bridge-net</p>
+<p>"bridge-net" is not always reserved. It is reserved by the SEI because we configured it that way, and it is convenient to refer to in the TopoMojo documentation.</p>
+</div>
+<p><em>Screen print 1:</em></p>
+<p><img alt="bridge-net" src="img/bridge-net.png" /></p>
+<h2 id="finding-a-space">Finding a Space</h2>
+<p>Once you're in TopoMojo, you can browse for existing TopoMojo workspaces and gamespaces. In the left panel (<code>Ctrl-L</code>) , enter terms into the <strong>Search</strong> field. TopoMojo automatically searches for a workspace or a gamespace that matches your terms. Click <strong>workspace</strong> or <strong>gamespace</strong> to filter results. TopoMojo sorts labs alphabetically by name.</p>
+<p>Select a gamespace, then click <strong>Start</strong>. You can "play" the lab now -- start by reading the instructions and launching a gamespace resource. You can end play by clicking <strong>End</strong>. You can invite others to play in your gamespace. Click <strong>Invite</strong> to copy an invitation link. Provide the other person(s) with the link.</p>
+<p><img alt="end and invite" src="img/end-invite-timer.png" /></p>
+<p>The timer counts down how much remaining time you have before the gamespace expires.</p>
+<h2 id="building-a-new-workspace">Building a New Workspace</h2>
+<p>The workspace interface contains six tabs: Settings, Templates, Document, Challenge, Files, and Play. To build a new TopoMojo workspace click <strong>Home</strong>, then <strong>New Workspace</strong>.</p>
+<h3 id="settings">Settings</h3>
+<p>The Settings tab holds the metadata for your lab.</p>
+<p><strong>Title:</strong> The title of your workspace; remember that the title should be unique.</p>
+<p><strong>Description:</strong> A brief description of your workspace to display when browsing titles. The <strong>Description</strong> is viewable to everyone, and when used in conjunction with Gameboard, visible there too.</p>
+<p><strong>Tags:</strong> Internal metadata to add data about the lab; for example, if using for a cyber competition, then your tag may be something like <code>cyber-cup c01</code>. Now, you can search for that challenge (or lab) using that tag.</p>
+<p><strong>Authorship:</strong> Your name and the names of others who may have assisted you.</p>
+<p><strong>Audience:</strong> A space-delimited list of administrator-defined groups that have permission to deploy gamespaces from the workspace. Administrators define an <em>audience</em> with any name here. Users can deploy gamespaces from the workspace only if their <em>scope</em> matches one of the provided <em>audiences</em>. <code>Everyone</code> is the global audience that allows all users to deploy gamespaces from the workspace. For more information, see the <a href="admin-users.md">Admin Dashboard - Users</a> documentation.</p>
+<p><strong>Duration:</strong> Recommended length of time in minutes that it takes to play through a gamespace launched from your workspace.</p>
+<p><strong>Collaboration:</strong> To share your workspace with others click <strong>Generate invitation</strong>. Paste the link into an email and send. TopoMojo shows Collaborators here alongside the author. When a collaborator connects to your workspace, you'll see them <code>connected</code> in the top right corner of the workspace.</p>
+<p><strong>Clone:</strong> Clones your workspace; TopoMojo appends <code>-CLONE</code> to the title of the new workspace.</p>
+<p><strong>Delete:</strong> Deletes an existing workspace.</p>
+<h3 id="templates">Templates</h3>
+<p>The template selector allows you to add virtual machine templates to your workspace. The templates here are "starting point" virtual machines that you can customize. There are blank disc templates for installing your own operating system plus other VMs with operating systems pre-installed.</p>
+<h4 id="adding-and-editing-templates">Adding and Editing Templates</h4>
+<p>To add a template to your workspace:</p>
+<ol>
+<li>On the Templates tab, click <strong>Add Templates</strong>.</li>
+<li>Search for and add the templates you need for your topology.</li>
+<li>Click the <strong>edit</strong> icon to expand the template(s) to make changes.</li>
+</ol>
+<p><img alt="templates-edit" src="img/templates-edit.png" /></p>
+<h4 id="template-field-definitions">Template Field Definitions</h4>
+<p>The list below explains the fields in the VM template.</p>
+<ul>
+<li><strong>Name:</strong> Edit the name here. Remember that the name should be unique within the workspace.</li>
+<li><strong>Description:</strong> The Description should contain the credentials for the virtual machine and the purpose of the virtual machine.</li>
+<li><strong>Networks:</strong> The Networks fields allows you to add a space-delimited list of networks where the virtual machines connect. These names should be the same for all systems in your lab that need to connect to the same network.</li>
+<li><strong>Guest Settings:</strong> List key value pairs in the form of <code>key=value</code> to pass data into deployed VMs via VMware guestinfo Variables. The <strong>Guest Settings</strong> field uses VMware Guest Info Variables to inject content into virtual machines. Place key/value pairs here. The <em>key</em> is the name of the guest variable you want to define, and the <em>value</em> is the value, information, setting, of the variable. For example, <code>var1=test</code> is a guest setting named "var1" with a value of "test".</li>
+</ul>
+<p><em>Transforms</em> allow you to define dynamic variables that TopoMojo generates based on certain criteria or types. To add the concept of transforms here, select <strong>Challenge</strong> and see <strong>Transforms</strong>. The <strong>info</strong> icon in the Transforms section describes the transform types that are available. See also <a href="challenge.md/#transforms">TopoMojo Transforms</a>.</p>
+<p>Use VMware Tools, such as <code>open-vm-tools</code> and the <code>vmtoolsd</code> command, to access guest info variables from a Gamespace VM. See <a href="https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html">Open VM Tools</a> and <a href="https://helpmanual.io/help/vmtoolsd/">VMware Tools daemon help</a>.</p>
+<p><img alt="vm-ware-tools" src="img/vm-ware-tools.png" /></p>
+<ul>
+<li><strong>Replicas:</strong> Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a <em>gamespace</em>, set <strong>Replicas</strong> to "3". To deploy one copy of the VM template for each team member that TopoMojo starts the gamespace for, set <strong>Replicas</strong> to "-1".</li>
+<li><strong>Variant:</strong> Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.</li>
+<li><strong>ISO:</strong> Use the ISO Selector to attach an ISO image to your virtual machine.</li>
+<li><strong>Console Access:</strong> Toggle <strong>Hidden</strong> to hide a specific VM from being accessible by the person completing the lab. This is useful for systems like a DHCP server that do not require user interaction.</li>
+<li><strong>Linked:</strong> <em>Unlinking</em> creates a new a new copy of the template which you can save and customize. Toggle <strong>Unlink</strong> for any virtual machine that will not use the default disk included with the template.</li>
+<li><strong>Delete Template:</strong> Deletes the template.</li>
+</ul>
+<h4 id="refresh-and-deploy">Refresh and Deploy</h4>
+<p><img alt="refresh-deploy" src="img/refresh-deploy.png" /></p>
+<p>Once the template is in the appropriate state:</p>
+<ul>
+<li><strong>Refresh</strong>: (arrows) Refresh queries the state of the VM from the hypervisor. This is useful if you run a <code>shutdown</code> command in the VM and the TopoMojo UI icons haven't updated to reflect the powered-off state of the VM yet.</li>
+<li><strong>Deploy</strong>: (lightning bolt) Deploys that virtual machine into your workspace.</li>
+</ul>
+<p>The deployed virtual machine displays the following additional icons from left to right:</p>
+<p><img alt="other-icons" src="img/other-icons.png" /></p>
+<ul>
+<li><strong>Console:</strong> Opens the console for the virtual machine.</li>
+<li><strong>Stop/Start:</strong> Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking <strong>stop</strong> results in the hypervisor showing a deployed VM in a powered-off state. Clicking <strong>start</strong> powers on the deployed VM.</li>
+<li><strong>Revert:</strong> Reverts the VM to its last saved state. You lose all changes made since the last commit.</li>
+<li><strong>Delete:</strong> Deletes a running VM instance. Before you click <strong>delete</strong>, make sure you have saved any changes to the disk.</li>
+</ul>
+<h4 id="save">Save</h4>
+<p><img alt="templates save" src="img/templates-save.png" /></p>
+<p>The <strong>save</strong> icon only when you're using an unlinked disk, since you can't save changes to a linked disk. Clicking <strong>save</strong> removes the last snapshot and creates a new one with all VM changes.</p>
+<h2 id="lab-document">Lab Document</h2>
+<p>The <strong>Document</strong> tab in a TopoMojo workspace is where you write the instructions that correspond with your lab. You author instructions in Markdown using TopoMojo's built-in editor. Authoring in Markdown enables you to create a nicely formatted document without writing HTML.</p>
+<p>The TopoMojo editor is a collaborative editor. Multiple people can work on the documentation at the same time. As long as you are "connected" (see the top-right corner) TopoMojo saves your updates to the document.</p>
+<p>For more information about Markdown, including the syntax guide, see <a href="https://www.markdownguide.org/">markdownguide.org</a>.</p>
+<h3 id="inserting-an-image">Inserting an Image</h3>
+<p>To insert an image into your document:</p>
+<ol>
+<li>Click <strong>Images</strong>, then click <strong>Browse</strong> (you can drag and drop too).</li>
+<li>After browsing to upload an image, you should see a preview of the image.</li>
+<li>Place your cursor in the document where you want the image, hover over the image, and click <strong>Insert</strong>.</li>
+</ol>
+<h3 id="previewing-the-doc">Previewing the Doc</h3>
+<p>To see how your instructions will look to players when they "play" your lab, click the <strong>Preview</strong> button. The first screen capture shows the Markdown editor. The second screen capture shows the document in preview mode.</p>
+<p><img alt="markdown-editor" src="img/markdown-editor.png" /></p>
+<p>and</p>
+<p><img alt="markdown-preview" src="img/markdown-preview.png" /></p>
+<h2 id="challenge-tab">Challenge Tab</h2>
+<p>The <em>Challenge</em> tab in the TopoMojo workspace is where event organizers integrate Gameboard and TopoMojo to execute a cyber competition. Here, you create random key/values, embed them in a <em>gamespace</em> at deploy time, and ask questions and answers of competitors (players).</p>
+<h3 id="transforms">Transforms</h3>
+<p><strong>Transforms</strong> allow you to define dynamic variables that TopoMojo generates based on certain criteria or types. Transforms are also a key/value pair definition –- the <strong>key</strong> is the name of your transform and the <strong>value</strong> is the type of the transform. The screen print below shows a transform named "token1" that will have a value of 8 random hexadecimal characters.</p>
+<p><em>Screen print 1:</em></p>
+<p><img alt="transforms" src="img/transforms.png" /></p>
+<p>To access transforms, use the referenced "<em>double-pounder-key</em> (<code>##key##</code>)" notation. When TopoMojo deploys a gamespace, the engine generates the random values for all transforms, looks for double-pounder-keys, then replaces them with the randomly generated values for that deployment.</p>
+<p>Any of the sections on the Challenge tab (e.g., Transforms, Markdown, Questions, Answers) can contain <em>double-pounder-keys</em> that TopoMojo replaces with transform values at deploy time. You can also use transform <em>double-pounder-keys</em> in the <em>Guest Settings</em> field of a template to inject random variables into VM guest info variables when deploying a gamespace. (Transforms aren't generated when deploying workspace VMs, so the value of the variable will be the <em>double-pounder-key</em>.)</p>
+<p>The screen print below shows the Guest Settings of a VM template configured to use two guest info variables: <code>var1</code> and <code>token1</code>. <code>Var1</code> has a value of "test" and <code>token1</code> will have a random 8-character hexadecimal string assigned when TopoMojo deploys a gamespace.</p>
+<p><em>Screen print 2:</em></p>
+<p><img alt="guest-settings" src="img/guest-settings.png" /></p>
+<p>There is a detailed <a href="building-a-workspace.md/#template-field-definitions">Guest Settings</a> portion of the Workspace documentation.</p>
+<h3 id="markdown">Markdown</h3>
+<p>The markdown you enter here gets appended to the gamespace document.</p>
+<h3 id="variants">Variants</h3>
+<p>A <em>variant</em> describes a different version of a challenge. Variants can contain different ISO attachments, different virtual machines, and different questions and answers. Each time TopoMojo deploys a challenge, a variant is randomly selected for the deployment. For example, two competitors can attempt the same challenge, but one competitor may receive <em>variant #1</em> and the other competitor may receive <em>variant #2</em>. When creating a challenge using variants, make sure all variants test the same competitor skills at the same difficulty level. That is, variant #1 should test the same skills as variant #2 and one variant shouldn't be harder to solve than another variant.</p>
+<h3 id="question-set">Question Set</h3>
+<p><strong>Move Up, Move Down, Remove:</strong> These functions are self-explanatory. Use them to position the question in the sequence of questions for that set or remove it.</p>
+<p><strong>Question:</strong> Enter the question you expect the participant to answer here. Your question should be specific, so that there is only one correct answer.</p>
+<p><strong>Answer:</strong> Enter the correct answer that the competitor must submit to earn a score.</p>
+<p>You will see these options when you select <strong>Detail</strong>.</p>
+<p><strong>Hidden:</strong> Select <strong>Hidden</strong> to prevent the question from appearing when playing the challenge. Hidden questions do not appear when playing in TopoMojo or via Gameboard.</p>
+<p><strong>Grader:</strong> Select the grading type here. The Grader determines if players submitted the correct answer to a question. Select one of four types:</p>
+<ul>
+<li><code>Match</code>: The submission must exactly match what is in the <strong>Answer</strong> field. Use this when there is exactly one possible answer to a question.</li>
+<li><code>MatchAny</code>: The submission must match one of the pipe-delimited answers in the <strong>Answer</strong> field. Use this when there is more than one possible answer to a question.</li>
+<li><code>MatchAll</code>: The submission must match all of the pipe-delimited answers in the <strong>Answer</strong> field. Use this for questions expecting a list of answers.</li>
+<li><code>MatchAlpha</code>: The submission must exactly match what is in the <strong>Answer</strong> field <em>after</em> the grader removes all non-alphanumeric characters. This is useful if the user might submit symbols that don't affect the validity of an answer. For example, <code>C:/Users</code> and <code>C:\Users</code> are both valid answers and the symbols (<code>/</code> vs <code>\</code>) don't matter.</li>
+</ul>
+<p>The Grader converts all answers and submissions to lowercase before comparing them to the expected answer. All four grader types are case-insensitive.</p>
+<h4 id="weight">Weight</h4>
+<p>Weight is the percentage of total for this question. The value should be between <code>0 and 1</code> or <code>0 and 100</code>. The weights of all questions within the set must add up to 100% or one (1). TopoMojo calculates zero (<code>0</code>) values evenly.</p>
+<h4 id="example">Example</h4>
+<p>Providing an example answer helps players understand the required answer format. For instance, sometimes a file needs both the name and the extension, while other times only the name is necessary.</p>
+<h2 id="files">Files</h2>
+<p>The <strong>Files</strong> page in the TopoMojo workspace allows you to upload files from your system to TopoMojo to include in your lab. You can use these files as ISOs to attach to VMs in the workspace. If your files aren't already in an ISO file format, TopoMojo wraps them in an ISO after upload.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For ISO uploads to work, TopoMojo needs an NFS (Network File System) datastore presented to vSphere and TopoMojo must be able to access it.</p>
+</div>
+<p>The <strong>Files</strong> tab in TopoMojo is where you upload ISO files to attach to virtual machines. Supply the ISO you want to attach to your VM. The ISO adds extra resources that the original VM might not include. ISO files are disk images TopoMojo mounts as virtual CD drives on the VM. You want to attach an ISO when you need additional software, datasets, or other resources.</p>
+<p><strong>Drag and Drop:</strong> Admins drag their ISO file into the box on Files tab or browse to locate it on their own device.</p>
+<p>By default, the <strong>Local</strong> filter only displays ISOs available in the current workspace.</p>
+<p>When you upload an ISO file, TopoMojo creates a folder with <em>this</em> GUID--called out in green in screen print 1 below--in the folder name in the NFS datastore. TopoMojo puts your ISO in that folder. Only the current workspace, that is, <em>your</em> workspace has access to the ISO file.</p>
+<p>Screen print 1: GUID and Local filter applied</p>
+<p><img alt="iso-drag" src="img/iso-drag.png" /></p>
+<p>When you remove the <strong>Local</strong> filter, you can see <em>all</em> of the ISOs in the global folder on the NFS data store. (The folder name will contain a GUID of all zeros.) These global ISOs are available to every workspace in TopoMojo.</p>
+<p>You can attach an ISO to a VM in the challenge workspace <strong>Templates</strong> tab. See "Adding and editing templates" in the <a href="building-a-workspace.md">Building a new Workspace</a> chapter of this guide. When you select an ISO here, TopoMojo attaches the ISO to the VM upon its deployment.</p>
+<p>You can also attach an ISO to a VM using the workspace <strong>Challenge</strong> tab's <strong>Variant Detail</strong> function. This "dynamic ISO attachment" gives you the ability to attach a variant-specific ISO file to a template. You <em>must</em> specify a target(s) here. See also "Variants" in the <a href="challenge.md">Challenge tab</a> chapter of this guide.</p>
+<h2 id="play">Play</h2>
+<p>The <strong>Play</strong> page is where you can interact with your lab in the same way others will when they launch your content or "play" through your challenge. Play deploys a read-only copy of all virtual machines in the workspace; this gives the player their own deployed configurations.</p>
+<p><strong>Variant:</strong> Specify which variant of the challenge you wish to play (if it is a <em>variant</em> challenge).</p>
+<p><strong>Max Attempts:</strong> The maximum number of submission attempts allowed when answering questions.</p>
+<p><strong>Max Minutes:</strong> The maximum number of minutes permitted to play before the gamespace expires.</p>
+<p><strong>Point Value:</strong> The point value assigned for this challenge when used with Gameboard in a cyber competition scenario. <!--need more detail here.--></p>
+<p><strong>Start:</strong> Starts up the gamespace which includes setting the timer, deploying virtual machines, displaying the Markdown document, and making challenge questions available. Individuals get their own Play tab, so when playing, the gamespace environment is unique to you.</p>
+<p><strong>Reset:</strong> Resets the gamespace.</p>
+<h2 id="administrator-guide">Administrator Guide</h2>
+<p>TopoMojo has an admin interface called <strong>Admin Dashboard</strong>. To access the Admin Dashboard, you'll need the <code>admin</code> role. In the top-right corner, click the <strong>Admin</strong> button. TopoMojo provides the initial <code>admin</code> role to the first user who authenticates successfully.</p>
+<h3 id="hub-connections">Hub Connections</h3>
+<p><strong>Hub connections</strong> informs TopoMojo admins about which users are currently logged into TopoMojo.</p>
+<h3 id="announcement">Announcement</h3>
+<p>The <strong>Announcement</strong> feature allows TopoMojo admins to broadcast important messages to everyone in TopoMojo. Announcements appear in the TopoMojo interface. In the Message field, enter the content of the announcement and click <strong>Send</strong>.</p>
+<h3 id="importexport">Import/Export</h3>
+<p>This is future functionality for the TopoMojo UI. The API equivalent of import/export is available for use.</p>
+<h3 id="janitor">Janitor</h3>
+<p>The <strong>Janitor</strong> service cleans up unused resources (e.g., a workspace VM that has been idle for a long time) in TopoMojo.</p>
+<p><strong>Cleanup Report:</strong> Provides a log of the Janitor's activity.</p>
+<h3 id="gamespaces-tab">Gamespaces Tab</h3>
+<p>The <strong>Gamespaces</strong> tab is where the admin can search for, and filter by, <strong>active</strong> and <strong>inactive</strong> gamespaces. By default, the search is for <em>active</em> gamespaces. Green indicates <em>active</em> gamespaces and gray indicates <em>inactive</em> gamespaces.</p>
+<p><strong>Refresh:</strong> Refreshes your search.</p>
+<p><strong>Delete Selected:</strong> Check the box next to <strong>All</strong> to select all gamespaces for deletion or check a box next to individual gamespaces to select for deletion.</p>
+<p>Gamespaces in the table show the following information:</p>
+<ul>
+<li>Gamespace id or support code in Gameboard (e.g. <code>e9416013</code>)</li>
+<li>Time remaining (if active)</li>
+<li>User who is interacting with (or <em>had</em> interacted with) the gamespace</li>
+<li>Title of the <em>workspace</em> that deployed the <em>gamespace</em></li>
+</ul>
+<p>The screen print below shows several active and inactive gamespaces (usernames redacted).</p>
+<p><img alt="admin gamespaces" src="img/admin-gamespaces.png" /></p>
+<h4 id="view-expanded">View (Expanded)</h4>
+<p><strong>View:</strong> Selecting <strong>View</strong> expands the gamespace information where a list of all the VMs associated with the gamespace and their state.</p>
+<ul>
+<li><strong>refresh:</strong> Refreshes the VM instance.</li>
+<li><strong>console:</strong> Allows you to interact with the VM (a user's gamespace).</li>
+<li><strong>stop:</strong> Stops a powered on VM.</li>
+<li><strong>revert:</strong> Reverts to last saved state.</li>
+<li><strong>delete:</strong> Deletes a running VM instance.</li>
+<li><strong>JSON:</strong> Shows detailed information about the gamespace, including: answers to questions, variables associated with the challenge, submitted answers, challenge questions and expected answers, and if the participant answered questions correctly or incorrectly.</li>
+<li><strong>Dispatcher:</strong> Used to issue commands to a VM from TopoMojo provided that the TopoMojo agent program is running on that VM. The VM requires an internet connection which allows the agent program to establish a connection with TopoMojo. <code>target</code> is the hostname of the VM that you want to run the command on. <code>command</code> is any command you wish to run. See TopoMojo's <a href="https://github.com/cmu-sei/TopoMojo/tree/main/src/TopoMojo.Agent">GitHub repository</a> for more information on TopoMojo's agent.</li>
+</ul>
+<h4 id="delete">Delete</h4>
+<p><strong>Delete:</strong> As you would expect, deletes the gamespace and associated VMs.</p>
+<h3 id="workspaces-tab">Workspaces Tab</h3>
+<p>The <strong>Workspaces</strong> tab is where the admin can search for workspaces and perform limited actions. Workspaces are where you build challenges and labs. Here, an admin can view every workspace.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only users who are admins can view the list of workspaces on the Admin panel. Non-admin users will use the search feature on the left navigation pane.</p>
+</div>
+<p>In the left navigation pane, you can use the <strong>Search</strong> field to locate a workspace. However, searching here only returns workspaces you created or workspaces others invited you to join.</p>
+<p><strong>Create:</strong> Create a new workspace from the Admin Workspaces panel. For additional help, see <a href="building-a-workspace.md">Building a new workspace</a>.</p>
+<p>Selecting a workspace takes you the <strong>Settings</strong> tab of that particular workspace where you can edit it. For additional help on the <strong>Settings</strong> tab, see <a href="building-a-workspace.md">Building a new workspace</a>.</p>
+<p>The <em>workspace identifier</em> is present here too. The workspace identifier matches the directory name used to store workspace files like unlinked virtual machines, Markdown documents, images, etc. Copying it to the clipboard is useful if you need to use it in a terminal when navigating the filesystem.</p>
+<p><img alt="workspace identifier" src="img/wksp-iden.png" /></p>
+<h4 id="view-expanded_1">View (Expanded)</h4>
+<p><strong>Template Limit:</strong> Defines the number of VMs that can be in the workspace.</p>
+<p><strong>Template Scope:</strong> Limits a workspace to using templates that have the given scope.</p>
+<p><strong>Audience:</strong> Limits who can deploy a gamespace as a workspace.</p>
+<p><strong>VMs:</strong> Refresh, deploy, view the console, start/stop, revert and delete from here. - <strong>Refresh</strong>: Queries the state of the VM from the hypervisor. - <strong>Deploy</strong>: Deploys that virtual machine into your workspace. - <strong>Console:</strong> Opens the console for the virtual machine. - <strong>Stop/Start:</strong> Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking <strong>stop</strong> results in the hypervisor showing a deployed VM in a powered-off state. Clicking <strong>start</strong> powers on the deployed VM. - <strong>Revert:</strong> Reverts the VM to its last saved state. You will lose all changes made since the last commit. - <strong>Delete:</strong> Deletes a running VM instance.</p>
+<h3 id="templates-tab">Templates Tab</h3>
+<p>The <strong>Templates</strong> tab is where you can view all of the templates that exist in TopoMojo.</p>
+<p><strong>Search:</strong> Search for templates by workspace. Notice that you can apply filters here to further narrow down your search. In the screen print below, the filter is for linked VMs with a parent template of a VM called <code>kali-201901</code>.</p>
+<p><img alt="templates filter" src="img/templates-filter.png" /></p>
+<p>You can filter for specific workspaces here too. Clicking the <em>name</em> of the of the workspace takes you directly to the workspace.</p>
+<div class="admonition note">
+<p class="admonition-title">Linked and unlinked templates</p>
+<p>The chain link icon next to a template name indicates the VM is <em>linked</em>. Use linked VMs when the prebuilt, stock templates included with TopoMojo meet your needs. Linked VMs save resources when VMs don't require custom configurations when deployed. Changes can't be saved to linked VMs when deployed. Changes can only be saved to <em>unlinked</em> VMs.</p>
+</div>
+<h4 id="template-properties">Template Properties</h4>
+<p><strong>Name:</strong> The VM name can't contain spaces; TopoMojo will replace spaces in a name with a <code>-</code>.</p>
+<p><strong>Description:</strong> Not visible to users; use the <em>Description</em> in a way that meets your needs. For example, include VM credentials here.</p>
+<p><strong>Networks:</strong> A space delimited list of network names. When TopoMojo deploys a VM, it will have <em>one</em> network interface for each of the named networks. TopoMojo creates networks on the hypervisor at VM-deploy time if they don't already exist.</p>
+<p>TopoMojo appends the isolation tag of the workspace/gamespace to network names to ensure network isolation.</p>
+<p>TopoMojo does not append the isolation tag to persistent/shared networks listed here; the VM connects to the existing shared/persistent network.</p>
+<p>For more information on <em>isolation tags</em>, see "Isolation tags" in <a href="about.md/#isolation-tag">TopoMojo concepts</a>.</p>
+<p><strong>Guest Settings:</strong> List key value pairs in the form of <code>key=value</code> to pass data into deployed VMs via VMware guestinfo Variables. The <strong>Guest Settings</strong> field uses VMware Guest Info Variables to inject content into virtual machines. Place key/value pairs here. The <em>key</em> is the name of the guest variable you want to define, and the <em>value</em> is value, information, setting, of the variable. For example, <code>var1=test</code> is a guest setting named "var1" with a value of "test".</p>
+<p><strong>Replicas:</strong> <em>Replicas</em> indicates how many copies of the VM get deployed in a gamespace. This will vary according to your needs. You may need two copies of the VM per gamespace or you may need 10. E.g.: two users are working a TopoMojo lab together; we want to set Replicas to <code>2</code> to ensure that each user has their own VM to work with. If set to <code>1</code>, then the two users could encroach on each other's work on the single VM.</p>
+<p>When deciding how many replicas you need, keep resources in mind. If, as in our example above, we only need two copies of the VM at any given time don't set Replicas to <code>5</code>. TopoMojo will deploy five, two will get used, and the other three won't get used.</p>
+<p><code>-1</code>: Setting Replicas to <code>-1</code> means TopoMojo will deploy one VM template copy per user. If there are two users, then TopoMojo deploys two copies; if there are 10 users, then 10 copies. TopoMojo does not deploy extra VMs. Use this setting in conjunction with the Gameboard app, where Gameboard informs TopoMojo on how many copies to make based upon the Gameboard team size.</p>
+<p>The value set in <strong>Replicas</strong> only applies to the template you are editing; not every template in the workspace. So, if you want the same number of copies deployed in a gamespace for each template, you'll have to edit each template individually.</p>
+<h3 id="machines-tab">Machines Tab</h3>
+<p>This tab lists all VMs TopoMojo is tracking and the gamespaces they belong to, without using the vSphere Client.</p>
+<p><img alt="admin machine explanation" src="img/admin-machine.png" /></p>
+<ul>
+<li><code>gamespace</code> tells you this is a <em>gamespace</em> VM.</li>
+<li><code>pc5-ubuntu-server-2204-594</code> is the name of the VM.</li>
+<li><code>#d9b090c92728424781537c66b3ee2f4b</code> after the hash tag is the gamespace GUID.</li>
+</ul>
+<p>The <strong>Machines</strong> tab is helpful when you want to find all the VMs related to a gamespace (e.g., <code>PC6 Stock Topology v1</code> in the screen print above). You can copy the gamespace GUID and paste it into the <strong>Search</strong> field. Note that you cannot interact with the VMs from this tab.</p>
+<h4 id="orphaned-vms">"Orphaned" VMs</h4>
+<p>VMs tagged with <code>__orphaned</code> are VMs that still exist; however, they are not connected to anything. TopoMojo may have attached these VMs to an expired gamespace, and when it tried to remove them vSphere failed to respond. Orphaned VMs should be manually deleted in vSphere.</p>
+<p>To identify orphaned VMs, search for "orphaned" in the Search field, identify the VMs to clean up in vSphere, and delete them. Once deleted in vSphere, they won't appear on the <strong>Machines</strong> tab again.</p>
+<h3 id="users-tab">Users Tab</h3>
+<p>The <strong>Users</strong> tab shows all current TopoMojo users. You can create new users here and assign them permissions. The <strong>Search</strong> feature allows TopoMojo admins to search on the name of a TopoMojo user. To search for a user across all of TopoMojo, enter the term into the <strong>Search</strong> field or filter by <em>role</em> or <em>audience</em>.</p>
+<p>Recall from workspace Settings that "audience" is a list of clients who can launch the workspace as a gamespace. Selecting an audience filter results in users who are part of that audience.</p>
+<p><strong>View:</strong> Select <strong>View</strong> to see the properties for the user.</p>
+<p><strong>Delete:</strong> Deletes the user.</p>
+<h4 id="roles">Roles</h4>
+<p>All permissions are <em>additive</em>; meaning a Creator can do everything a Builder can do and an Observer can do everything a Builder and Creator can do.</p>
+<ul>
+<li><strong>Admin:</strong> Highest level of permission in TopoMojo; can do everything the other roles can do.</li>
+<li><strong>Observer:</strong> Allows a user to view and use the Gamespaces tab. However, the <em>scope</em> of the user (see below) limits access too. An observer can deploy gamespaces with a matching <em>audience</em> and these are the only gamespaces the user can observe.</li>
+<li><strong>Creator:</strong> Can have as many workspaces and templates as wanted.</li>
+<li><strong>Builder:</strong> Can connect to bridge-net.</li>
+<li><strong>User:</strong> No extra permissions in TopoMojo. This is the TopoMojo default.</li>
+<li><strong>Disabled:</strong> No permissions in TopoMojo.</li>
+</ul>
+<h4 id="create-a-new-user">Create a New User</h4>
+<p><strong>Name:</strong> Enter a new user name here.</p>
+<p><strong>Scope:</strong> A space-delimited list of administrator-defined groups the user belongs to. Administrators can define a <em>scope</em> with any name here. A user's scope determines which workspaces they have permission to deploy gamespaces from. Users can only deploy a gamespace from a workspace if the user has a <em>scope</em> that matches an <em>audience</em> defined in the workspace. See also: <a href="building-a-workspace.md">Building a new workspace</a>.</p>
+<p><strong>Workspace Limit:</strong> The maximum number of workspaces this user can manage.</p>
+<p><strong>Gamespace Limit:</strong> The maximum number of concurrent gamespaces allowed for this user.</p>
+<p><strong>Gamespace Max Duration:</strong> The maximum amount of minutes allowed for a gamespace.</p>
+<p><strong>Gamespace Cleanup Grace time:</strong> The number of "grace" minutes between the time the gamespace expires and when TopoMojo tears it down.</p>
+<p><strong>Generate ApiKey:</strong> Generate API keys here. This allows users to programmatically interact with the TopoMojo API without needing to log in.</p>
+<h3 id="log-tab">Log Tab</h3>
+<p>The <strong>Log</strong> tab is useful from the admin point of view when trying to troubleshoot. The Log tab only shows errors here, not every log line.</p>
+<h3 id="copy-and-paste">Copy and Paste</h3>
+<p>The procedures below show you how to:</p>
+<ul>
+<li>Copy text from a local machine (an <em>out of game</em> computer) and paste it into an <em>in game</em> virtual machine</li>
+<li>Copy text from a virtual machine and paste it into a local machine</li>
+</ul>
+<p><em>The VM console cog icon:</em></p>
+<p><img alt="console-cog" src="img/console-cog.png" /></p>
+<h4 id="from-local-out-of-game-to-in-game">From Local ("Out of Game") to "In Game"</h4>
+<ol>
+<li>On your local machine select, then copy, the content you want to place into a launched virtual machine.</li>
+<li>In the VM console tab, select the cog icon (the <strong>Tools</strong>). Under <strong>Clipboard</strong> paste in the clip using right-click Paste or <code>ctrl+V</code>.</li>
+<li>In the VM, select where you want the copied text to go (this can be a new file or an open application, etc.).</li>
+<li>Under <strong>Clipboard</strong>, click <strong>Paste</strong>. This inserts the copied content into the virtual machine.
+   <img alt="console-paste" src="img/console-paste.png" /></li>
+</ol>
+<h4 id="from-in-game-to-out-of-game">From "In Game" to "Out of Game"</h4>
+<ol>
+<li>On the VM, select the content you would like to copy. Copy the content <em>first</em> to the VM's clipboard (right-click Copy or <code>ctrl+C</code>).</li>
+<li>Once you've copied your text to the VM clipboard select the cog icon (the <strong>Tools</strong>), place your cursor in that clipboard, and click <strong>Copy</strong>. This transfers the VM clip to your local clipboard.
+   <img alt="console-copy" src="img/console-copy.png" /></li>
+<li>On your local machine, paste the copied text into an application using right-click Paste or <code>ctrl+V</code>.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 Carnegie Mellon University. All rights reserved.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/Crucible/issues/new?template=question.md" target="_blank" rel="noopener" title="Ask a Question" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m-7 12h-2v-2h2zm1.8-5c-.3.4-.7.6-1.1.8-.3.2-.4.3-.5.5-.2.2-.2.4-.2.7h-2c0-.5.1-.8.3-1.1.2-.2.6-.5 1.1-.8.3-.1.5-.3.6-.5s.2-.5.2-.7c0-.3-.1-.5-.3-.7s-.5-.3-.8-.3-.5.1-.7.2q-.3.15-.3.6h-2c.1-.7.4-1.3.9-1.7s1.2-.5 2.1-.5 1.7.2 2.2.6.8 1 .8 1.7q.15.6-.3 1.2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/crucible/issues/new?template=bug_report.md" target="_blank" rel="noopener" title="Report a Problem" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M192 96c0-53 43-96 96-96s96 43 96 96v3.6c0 15.7-12.7 28.4-28.4 28.4H220.5c-15.7 0-28.4-12.7-28.4-28.4V96zm345.6 12.8c10.6 14.1 7.7 34.2-6.4 44.8l-97.8 73.3c5.3 8.9 9.3 18.7 11.8 29.1H544c17.7 0 32 14.3 32 32s-14.3 32-32 32h-96v32c0 2.6-.1 5.3-.2 7.9l83.4 62.5c14.1 10.6 17 30.7 6.4 44.8s-30.7 17-44.8 6.4l-63.1-47.3c-23.2 44.2-66.5 76.2-117.7 83.9V280c0-13.3-10.7-24-24-24s-24 10.7-24 24v230.2c-51.2-7.7-94.5-39.7-117.7-83.9l-63.1 47.3c-14.1 10.6-34.2 7.7-44.8-6.4s-7.7-34.2 6.4-44.8l83.4-62.5c-.1-2.6-.2-5.2-.2-7.9v-32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h98.8c2.5-10.4 6.5-20.2 11.8-29.1l-97.8-73.3c-14.1-10.6-17-30.7-6.4-44.8s30.7-17 44.8-6.4L192 184c12.3-5.1 25.8-8 40-8h112c14.2 0 27.7 2.8 40 8l108.8-81.6c14.1-10.6 34.2-7.7 44.8 6.4"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/crucible/issues/new?template=feature_request.md" target="_blank" rel="noopener" title="Request a Feature" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 6a6 6 0 0 1 6 6c0 2.22-1.21 4.16-3 5.2V19a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6 6 0 0 1 6-6m2 15v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1zm6-10h3v2h-3zM1 11h3v2H1zM13 1v3h-2V1zM4.92 3.5l2.13 2.14-1.42 1.41L3.5 4.93zm12.03 2.13 2.12-2.13 1.43 1.43-2.13 2.12z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/crucible/discussions" target="_blank" rel="noopener" title="Community Discussions" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M76.2 258.7c6.1-15.2 4-32.6-5.6-45.9C56.1 192.7 48 169.1 48 144c0-66.8 60.5-128 144-128s144 61.2 144 128-60.5 128-144 128c-15.9 0-31.1-2.3-45.3-6.5-10.3-3.1-21.4-2.5-31.4 1.5l-50.4 20.2 11.4-28.5zM0 144c0 35.8 11.6 69.1 31.7 96.8L1.9 315.2c-1.3 3.2-1.9 6.6-1.9 10C0 340 12 352 26.8 352c3.4 0 6.8-.7 10-1.9l96.3-38.5c18.6 5.5 38.4 8.4 58.9 8.4 106 0 192-78.8 192-176S298-32 192-32 0 46.8 0 144m384 368c20.6 0 40.3-3 58.9-8.4l96.3 38.5c3.2 1.3 6.6 1.9 10 1.9 14.8 0 26.8-12 26.8-26.8 0-3.4-.7-6.8-1.9-10l-29.7-74.4c20-27.8 31.7-61.1 31.7-96.8 0-82.4-61.7-151.5-145-170.7-1.6 16.3-5.1 31.9-10.1 46.9 63.9 14.8 107.2 67.3 107.2 123.9 0 25.1-8.1 48.7-22.6 68.8-9.6 13.3-11.7 30.6-5.6 45.9l11.4 28.5-50.4-20.2c-10-4-21.1-4.5-31.4-1.5-14.2 4.2-29.4 6.5-45.3 6.5-72.2 0-127.1-45.7-140.7-101.2-15.6 3.2-31.7 5-48.1 5.2 16.4 81.9 94.7 144 188.8 144z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cmu-sei/crucible" target="_blank" rel="noopener" title="cmu-sei/Crucible on Github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:info@sei.cmu.edu?subject=Crucible%20Feedback" target="_blank" rel="noopener" title="Email Crucible Team" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M61.4 64C27.5 64 0 91.5 0 125.4c0 .9 0 1.7.1 2.6H0v256c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V128h-.1c0-.9.1-1.7.1-2.6 0-33.9-27.5-61.4-61.4-61.4zM464 192.3V384c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192.3l154.8 117.4c31.4 23.9 74.9 23.9 106.4 0zM48 125.4c0-7.4 6-13.4 13.4-13.4h389.2c7.4 0 13.4 6 13.4 13.4 0 4.2-2 8.2-5.3 10.7L280.2 271.5c-14.3 10.8-34.1 10.8-48.4 0L53.3 136.1c-3.3-2.5-5.3-6.5-5.3-10.7"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.sei.cmu.edu/" target="_blank" rel="noopener" title="Software Engineering Institute" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272h16v176c0 35.3 28.7 64 64 64h288c35.3 0 64-28.7 64-64V272h16c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1zM240 320h32c26.5 0 48 21.5 48 48v96H192v-96c0-26.5 21.5-48 48-48"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "toc.integrate", "content.code.copy", "content.code.annotate", "content.external_links"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
