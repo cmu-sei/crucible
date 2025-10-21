@@ -15,8 +15,8 @@ Since 2018, Crucible has enabled large-scale United States (US) Department of De
 - Efficiency through automation
 - Interoperability through open standards
 - Options for building cyber terrain:
-    - "Infrastructure-as-code" for scalability, iteration, and reuse
-    - Form-based configuration for simple and quick
+  - "Infrastructure-as-code" for scalability, iteration, and reuse
+  - Form-based configuration for simple and quick
 
 ## Addressing Persistent Challenges
 
@@ -111,7 +111,7 @@ A pre-configured Crucible Appliance virtual machine is available for download.
 
 The SEI owns and operates an on-premises instance of Crucible that can deploy virtual environments to VMware, Proxmox, or to a cloud provider:
 
-**Fortress**
+#### Fortress
 
 [fortress.sei.cmu.edu](https://fortress.sei.cmu.edu)
 
