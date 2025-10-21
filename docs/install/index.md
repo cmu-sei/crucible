@@ -70,7 +70,7 @@ We primarily use these images in setting up a email server. The above Helm chart
 
 ## Infrastructure
 
-Not all applications require virtualization. Gallery, CITE, Blueprint, Player and Steamfitter all can be ran without a hypervisor.
+Not all applications require virtualization. Gallery, CITE, Blueprint, Player, and Steamfitter all can run without a hypervisor.
 
 You are able to run the full Crucible stack on minimal hardware. We usually run on four nodes: one server and three agents. Each node has around 100-250 GB of storage, 8 GB RAM, 2 Cores. This is mainly for Longhorn and StackStorm which takes a lot of resources even when limiting their availability. This is only what we recommend. As stated before, you can run this on one node outside of production. The only concern would be storage space.
 
@@ -136,7 +136,7 @@ In order to access these services, you need to be able to communicate to the clu
 
 ## Rancher
 
-K3s is created by Rancher but Rancher itself is a GUI to help configure your Kubernetes cluster if you are already using K3s. If you are not using K3s, please do not install this application. Rancher will also help you get to and configure Longhorn.
+Rancher created K3s, but Rancher itself is a GUI that helps configure your Kubernetes cluster if you already use K3s. If you are not using K3s, please do not install this application. Rancher will also help you get to and configure Longhorn.
 
 ??? example
 
@@ -146,7 +146,7 @@ K3s is created by Rancher but Rancher itself is a GUI to help configure your Kub
 
 ## Longhorn
 
-Longhorn is used to easily manage, create, and backup persistent volumes (PVs) and persistent volume claims (PVCs). You do not have to install this but you will have to manage your own PVs and PVCs if you are not using a cloud provider.
+Use Longhorn to manage, create, and back up persistent volumes (PVs) and persistent volume claims (PVCs). You do not have to install this but you will have to manage your own PVs and PVCs if you are not using a cloud provider.
 
 ??? example
 
@@ -174,9 +174,9 @@ Majority of the applications above use PostgreSQL. We also use pgAdmin to help m
 
 ## Crucible Installation
 
-All of the Crucible applications have their settings on the GitHub page and can be modified in the values YAML file on the corresponding Helm chart. There are settings within each application you do have to set up in order for communication. We have populated environment files and scripts that help guide you with this part of the installation. These are located at these two GitHub pages:
+All of the Crucible applications document their settings on the GitHub page, and you can modify them in the values YAML file on the corresponding Helm chart. Each application includes settings you must configure to enable communication. We have populated environment files and scripts that help guide you with this part of the installation. You can find them on these two GitHub pages:
 
 - [k3s-install](https://github.com/avershave/k3s-install)
 - [k3s-production](https://github.com/sei-noconnor/k3s-production)
 
-These contain the necessary values and setup procedures to install the entire Crucible stack. More information on these settings can be located on the individual GitHub pages.
+These contain the necessary values and setup procedures to install the entire Crucible stack. Visit the individual GitHub pages for more information on these settings.

@@ -172,7 +172,7 @@ In order to avoid this, a System Administrator should follow these steps in the 
 
 - Navigate to Administration, Workspaces
 - Disable Workspace Operations by clicking the toggle button
-- Wait until all Active Runs are completed
+- Wait until all Active Runs complete
 
 ### Directories
 
@@ -237,7 +237,7 @@ These plugins are then cached in the `plugin_cache_dir` section, to save from do
 
 A *host* consists of a name, datastore, and maximum number of virtual machines that it can support. The API creates and manages hosts, then assigns them to exercises. An exercise can have many hosts.
 
-Workspaces have an additional property, `DynamicHost`, which is usually set to `false`. When Alloy creates a workspace, this is set to `true`, and changes the behavior of a run. When `DynamicHost` is `true`, Caster examines all of the hosts assigned to the current exercise and chooses the one with the least usage (the number of machines to deploy/maximum machines) to assign to the workspace.
+Workspaces include an additional property, `DynamicHost`, which usually defaults to `false`. When Alloy creates a workspace, it sets `DynamicHost` to `true` and changes the behavior of a run. When `DynamicHost` equals `true`, Caster examines all of the hosts assigned to the current exercise. It chooses the host with the least usage (the number of machines to deploy/maximum machines) and assigns that host to the workspace.
 
 In addition to the normal run files, Caster creates a `generated_host_values.auto.tfvars` containing two variable values: `vsphere_host_name` and `vsphere_datastore`, set to the name and datastore of the selected host. Upon applying the run, Caster tracks how many VMs deployed to the host, and uses this for future calculations.
 
@@ -249,18 +249,18 @@ Alloy calls Caster in order to deploy resources for lab or ODX-style functionali
 
 However, in order to support this functionality Caster dynamically selects a host to deploy to.
 
-Normally, the cluster or host to deploy to is embedded in the configuration - either directly or as a variable - and Caster doesn't concern itself with this. For ODX's, Caster *does* need to concern itself with:
+Normally, the configuration embeds the cluster or host to deploy to, either directly or as a variable, and Caster doesn't concern itself with this. For ODX's, Caster *does* need to concern itself with:
 
-- ensuring that resources are deployed evenly to the available hosts, and
-- more ODXs than the hardware can deploy are not deployed.
+- ensuring that the system deploys resources evenly to the available hosts, and
+- preventing the hardware from attempting to deploy more ODXs than it can support.
 
-To address these concerns the concept of a *host* was added to Caster.
+To address these concerns the team added the concept of a *host* to Caster.
 
 ### Run, Plan, and Apply
 
-A *run* is a specific instance of the Terraform *plan* and *apply* process for a workspace. The run is how the configuration in a directory is instantiated into deployed resources within a workspace. Upon opening a workspace, a list of runs is displayed. This is where plan or destroy operations are started.
+A *run* is a specific instance of the Terraform *plan* and *apply* process for a workspace. The run instantiates the configuration in a directory as deployed resources within a workspace. Upon opening a workspace, the interface displays a list of runs. Users start plan or destroy operations there.
 
-*Plan* and *apply* are specific Terraform terminologies. Every run is made up of a plan and an apply step.
+*Plan* and *apply* are specific Terraform terminologies. Every run includes a plan step and an apply step.
 
 #### Plan
 
@@ -276,7 +276,7 @@ A plan shows the user what will deploy.
 This output always ends with a summary of the form `Plan: x to add, y to change, z to destroy`. The user reviews this and chooses to apply or reject the plan.
 
 - Choosing **apply** creates an apply for the run and executes `terraform apply` on the previously generated plan. This causes Terraform to make the changes described.
-- Choosing **reject** invalidates the plan. No changes are made to the infrastructure.
+- Choosing **reject** invalidates the plan. It leaves the infrastructure unchanged.
 
 #### Apply
 
@@ -285,17 +285,17 @@ This output always ends with a summary of the form `Plan: x to add, y to change,
 - Deploys a workspace run
 - Releases plan tools such as network resources and virtual machines into vCenter
 
-Within the workspace view users can see all the runs that have been planned and applied.
+Within the workspace view users can see every run they have planned and applied.
 
 #### Destroy
 
 Selecting destroy instead of plan is similar, but the generated plan will destroy all previously deployed resources in the workspace, rather than matching the infrastructure to the current configuration. That is, *Destroy* creates a plan that will destroy all of the previously deployed resources in a workspace.
 
-If a resource is defined in the configuration and created in a run and then deleted from the configuration, it is destroyed upon the next plan or destroy run. This is because a Terraform run always tries to match the infrastructure to the current configuration.
+If the configuration defines a resource, a run creates it, and you later delete that resource from the configuration, the next plan or destroy run removes it. Terraform always tries to match the infrastructure to the current configuration.
 
 There is only one run in progress at a time per workspace. Terraform locks the state of the workspace and only performs a single operation at a time. Developers may wish to break up large deployments into multiple directories and workspaces to operate on different parts of the deployments simultaneously. For example, break out user enclaves so developers can perform actions on other parts of a network without (potentially) waiting a long time to redeploy user machines.
 
-The workspace view allows users to see a table with all the runs that have been planned and applied within that directory. Runs highlighted in red are destroyed operations.
+The workspace view shows a table with all the runs the directory has planned and applied. Caster highlights destroy operations in red.
 
 Within the workspace view users can click `Destroy` to destroy live Terraform applications.
 

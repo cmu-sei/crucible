@@ -6,7 +6,7 @@ Administrators can customize the Crucible platform by adding applications that i
 
 ## Third-Party Integration Guide
 
-Crucible system admin permissions are required to add third-party applications to the Crucible Framework. Assuming you have the correct permissions, follow the steps below to integrate a third-party application to the Crucible Framework.
+You need Crucible system admin permissions to add third-party applications to the Crucible Framework. Assuming you have the correct permissions, follow the steps below to integrate a third-party application to the Crucible Framework.
 
 ![Crucible View Admin OE](../assets/img/viewAdmin.png)
 
@@ -17,24 +17,24 @@ Crucible system admin permissions are required to add third-party applications t
 5. Add the **Name** for the application.
 6. Add the **Url** of the application.
 7. Add an **icon path** to add the logo of the application.
-8. If desired to be **Embeddable**, check the box.
-9. If desired to be **Loaded in the Background**, check the box.
+8. If you want to embed the application, check **Embeddable**.
+9. If you want the application to load in the background, check **Loaded in the Background**.
 
 After completing these steps, admins should refer to the *Crucible Admin Guides* to add the application to the desired set of users and/or teams.
 
 ## Third-Party Applications
 
-The following are third-party applications that have already been tested and used within the Crucible Framework.
+We have already tested and used the following third-party applications within the Crucible Framework.
 
 ### Mattermost
 
-Mattermost is an open-source, self-hostable online chat service with file sharing, search, and integrations. It is designed as an internal chat for organizations and companies.
+Mattermost is an open-source, self-hostable online chat service with file sharing, search, and integrations. It serves as an internal chat for organizations and companies.
 
 🔗 [Mattermost Documentation](https://docs.mattermost.com) and [installation instructions](https://github.com/cmu-sei/helm-charts/tree/main/charts/mattermost-team-edition)
 
 ### Moodle
 
-Moodle is a free and open-source learning management system. Moodle is used for blended learning, distance education, flipped classroom and other online learning projects in schools, universities, workplaces and other sectors.
+Moodle is a free and open-source learning management system. Schools, universities, workplaces, and other sectors use Moodle for blended learning, distance education, flipped classrooms, and other online learning projects.
 
 🔗 [Moodle Documentation](https://docs.moodle.org/401/en/Main_page) and [installation instructions](https://docs.moodle.org/401/en/Installation_quick_guide)
 
@@ -44,7 +44,7 @@ These Moodle plugins connect Moodle to the Crucible apps like TopoMojo. The plug
 
 #### Crucible Applications Landing Page Block
 
-The **Crucible Applications Landing Page Block** plugin adds a simple dashboard block that lists all the Crucible apps (i.e., Gameboard, TopoMojo, Player, Steamfitter, etc.) a user can access from within Moodle. It automatically shows only the applications the user has permission to use, with clear icons and links. The block makes it easy to find and open everything from one place, without having to remember multiple web addresses.
+The **Crucible Applications Landing Page Block** plugin adds a dashboard block that lists the Crucible apps (for example, Gameboard, TopoMojo, Player, and Steamfitter) available in Moodle. It shows only the applications the user can access. Each entry includes a clear icon and link, so users can open everything from one place without memorizing multiple web addresses.
 
 🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-block_crucible)
 
@@ -74,7 +74,7 @@ The **TopoMojo Plugin** is an activity plugin that integrates TopoMojo labs and 
 
 #### TopoMojo Question Behavior Plugin
 
-The **TopoMojo Question Behavior** plugin lets Moodle retrieve correct answers from TopoMojo during a live quiz attempt. It works with the TopoMojo Question Type Plugin (`qtype_mojomatch`) and is used in conjunction with the TopoMojo Activity Plugin (`mod_topomojo`) for lab-based activities.
+The **TopoMojo Question Behavior** plugin lets Moodle retrieve correct answers from TopoMojo during a live quiz attempt. It works with the TopoMojo Question Type Plugin (`qtype_mojomatch`) and pairs with the TopoMojo Activity Plugin (`mod_topomojo`) for lab-based activities.
 
 🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-qbehaviour_mojomatch)
 

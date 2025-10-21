@@ -19,7 +19,7 @@ Infrastructure administrators should maintain a repeatable security posture for 
 
 - Schedule recurring PostgreSQL backups and test restore procedures.
 - Encrypt object storage buckets that hold artifacts, uploads, or logs.
-- Verify that tenant data is separated through namespaces, dedicated databases, or policy enforcement.
+- Verify that your design separates tenant data through namespaces, dedicated databases, or policy enforcement.
 
 ## Incident Readiness
 

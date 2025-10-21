@@ -1,16 +1,16 @@
 # Overview
 
-Developed by Carnegie Mellon University's [Software Engineering Institute](https://github.com/cmu-sei){ target=\_blank } (SEI), Gameboard is a flexible web platform that provides game design capabilities and a competition-ready user interface. The *Gameboard Administrator Guide* explains how to implement it when you want to run your own cybersecurity game.
+Carnegie Mellon University's [Software Engineering Institute](https://github.com/cmu-sei){ target=\_blank } (SEI) developed Gameboard as a flexible web platform with game design capabilities and a competition-ready user interface. Use the *Gameboard Administrator Guide* to configure Gameboard when you want to run your own cybersecurity game.
 
 ## Gameboard Concepts
 
-*User* vs. *player* vs. *competitor*: A user is the real person who has an account on Gameboard (this requires a person to log into the Gameboard application using their Identity account). Players, participants, and competitors are users who are enrolled in a game. "Competitor" is not a term that appears in the Gameboard UI.
+*User* vs. *player* vs. *competitor*: A user is the real person who holds an account on Gameboard and logs in with their Identity account. Players, participants, and competitors are users who enroll in a game. "Competitor" does not appear in the Gameboard UI.
 
-*Enrolled*: As a user who will play, compete, or otherwise participate in a game within the competition you must "join" or *enroll* in a game. When a user *enrolls* in a game, they become a *player* of that game.
+*Enrolled*: Users who plan to play, compete, or otherwise participate in a competition must "join" or *enroll* in a game. Once a user enrolls, Gameboard treats them as a *player* of that game.
 
-*Participated* vs. *played*: These terms are interchangeable -- a user who has enrolled in a game and launched a challenge has participated or played.
+*Participated* vs. *played*: We use these terms interchangeably—after a user enrolls in a game and launches a challenge, that user has participated or played.
 
-*Sponsor*: Describes the organization a player is associated with. In a government-sponsored competition like the President's Cup, a sponsor may be a department (e.g., Department of Homeland Security, Department of Defense). In a school-sponsored competition, you may choose to have different universities represented as sponsors (e.g., Carnegie Mellon University, University of Pittsburgh).
+*Sponsor*: The sponsor identifies the organization that supports a player. In a government-sponsored competition like the President's Cup, a sponsor may be a department (e.g., Department of Homeland Security, Department of Defense). In a school-sponsored competition, you might represent different universities as sponsors (e.g., Carnegie Mellon University, University of Pittsburgh).
 
 ## Administrator Guide
 
@@ -27,7 +27,7 @@ After logging into the Gameboard app with the appropriate role, click **Admin**.
 
 ### The Live Tab
 
-The **Live** tab allows game administrators to select **Live Stats** (e.g., the number of *Active Competitive Challenges* deployed, the number of *Active Practice Challenges* deployed, etc.) and take certain actions, such as copy player or team IDs, view challenge states, view sessions, observe, and view games.
+The **Live** tab lets game administrators review **Live Stats** such as the number of Active Competitive Challenges or Active Practice Challenges. Administrators can also copy player or team IDs, view challenge states, inspect sessions, observe, and open games.
 
 #### Send Announcement
 
@@ -37,11 +37,11 @@ In the Announcement field, enter the content of the announcement and click **Ann
 
 ### The Games Tab (Landing Page)
 
-The **Games** tab is the landing page when you select **Admin** from the top navigation menu. By default, the games are displayed as cards.
+The **Games** tab is the landing page when you select **Admin** from the top navigation menu. By default, Gameboard displays the games as cards.
 
 #### The Game Center
 
-Select a game card to access that game in the **Game Center**. The Game Center is the one-stop-shop where games are configured, managed, and observed. See the [Game Center documentation](game-center.md) for a full explanation of the Game Center.
+Select a game card to access that game in the **Game Center**. Use the Game Center to configure, manage, and observe games. See the [Game Center documentation](game-center.md) for a full explanation of the Game Center.
 
 Note the **game info icons** at the bottom of the game cards. When hovered over, these icons provide information about the game.
 
@@ -57,19 +57,19 @@ Note the **game info icons** at the bottom of the game cards. When hovered over,
 
 #### Search
 
-This **Search** feature allows game administrators to search on name, season, track, etc., of the game tiles that appear here.
+Use the **Search** feature to locate game tiles by name, season, track, and other fields.
 
 #### Toggle Cards and Table
 
-Toggle between the view of games displayed as game *cards* or rows in a *table*. The **Table view** shows the same game information—like enrollment, mode, and settings—in a table with rows and columns. Each row has a **3-dot context menu** that lets those users with elevated permissions open the game in the Game Center, clone it, export it, or delete it. The icons and options are the same as in **Card view**, but Table view makes it easier to scan and work with a lot of game data at once.
+Toggle between games shown as *cards* or rows in a *table*. The **Table view** presents the same game information—such as enrollment, mode, and settings—in rows and columns. Each row has a **3-dot context menu** that lets users with elevated permissions open the game in the Game Center, clone it, export it, or delete it. The icons and options match the **Card view**, but Table view makes it easier to scan and manage large sets of game data.
 
 ![toggle table view](img/new-game-table-view2.png)
 
 #### New Game
 
-Click **+ New Game** to create a new game, or upload or drop a package. Packages are created by exporting them from a current game.
+Click **+ New Game** to create a new game, or upload or drop a package. Export a current game to create a package.
 
-After creating a new game, the screen changes to that of the Game Center where games are configured, managed, and observed. See the [Game Center documentation](game-center.md) to finish configuring your newly added game.
+After you create a new game, Gameboard opens the Game Center so you can configure, manage, and observe it. See the [Game Center documentation](game-center.md) to finish configuring your newly added game.
 
 #### Upload a Game Package
 
@@ -126,7 +126,7 @@ The Game Center header displays game metadata and settings, including the name, 
 
 **Key:** A short, unique key distinguishing *this* event.
 
-**Series:** The name of the series; perhaps the same event is run annually making it a *series*.
+**Series:** The name of the series; perhaps you run the same event annually, which makes it a *series*.
 
 **Track:** A course of action in your event. An event may have different categories for teams and individuals to compete in or an event may have an offensive skills track and defensive skills track.
 
@@ -158,7 +158,7 @@ For a full treatment of how to design completion certificates, please see the [C
 
 #### Modes
 
-**Player Mode:** Toggle to set the game to **Competition** or **Practice**. When at least *one* game is set to Practice in your environment, a link to Practice is visible in the top-right corner of Gameboard for authenticated players. Players can click the Practice link and select a challenge start their practice session.
+**Player Mode:** Toggle to set the game to **Competition** or **Practice**. When you set at least one game to Practice in your environment, Gameboard shows a Practice link in the top-right corner for authenticated players. Players can click the Practice link and select a challenge to start their practice session.
 
 **Require Synchronized Start:** Toggle on to require the game to have a synchronized start. When enabled, no player can start a session until *all* players have indicated that they are "ready to play" in the game lobby. Use this feature for games when you want all players to start at the same time and end at the same time. Synchronized start adheres to other Gameboard settings: for example, team size minimum and maximum.
 
@@ -180,21 +180,21 @@ These settings pertain to registration, execution, and general game and challeng
 
 **Closes:** The date and the time that your game ends.
 
-**Session Duration:** The duration of game session in minutes. Games are created with a default session time of 60 minutes.
+**Session Duration:** The duration of a game session in minutes. Gameboard sets a default session time of 60 minutes.
 
-**Session Limit:** The maximum number of sessions--a session is when a game is started and challenges can be deployed and solved--per game.
+**Session Limit:** The maximum number of sessions per game. A session begins when a player starts the game and deploys challenges to solve.
 
-**Gamespace Limit:** The maximum number of concurrent "gamespaces" allowed. A *gamespace* is the virtual environment that participants use to compete in a challenge. The default value is 0; the value that you enter here is inherited by a newly created board. For example, if you set this value to 5 in the game, any board created will inherit the 5 concurrent gamespace setting.
+**Gamespace Limit:** The maximum number of concurrent "gamespaces" allowed. A *gamespace* is the virtual environment that participants use to compete in a challenge. The default value is 0; Gameboard applies the value that you enter here to any newly created board. For example, if you set this value to 5 in the game, Gameboard assigns the 5 concurrent gamespace setting to every new board.
 
-**Max Submissions:** The maximum number of solutions a participant can send to the grading server per challenge--whether that submission is correct, incorrect, or blank. Once the submission amount is reached, the competitor is locked out of further submissions for that challenge.
+**Max Submissions:** The maximum number of solutions a participant can send to the grading server per challenge—whether the submission is correct, incorrect, or blank. After a participant reaches this number, Gameboard locks them out of further submissions for that challenge.
 
-**Allow Preview:** Toggle *Hidden* or *Visible* to allow participants to view a challenge and documentation prior to starting. You may want to prevent too much information from being given away before a challenge start.
+**Allow Preview:** Toggle *Hidden* or *Visible* to control whether participants can view a challenge and its documentation before starting. You may want to prevent the system from revealing too much information before a challenge starts.
 
-**Allow Reset:** Toggle *Forbidden* or *Allowed* to permit participants to restart their game and attempt challenges again. This option is generally allowed on a "practice" game since that game is meant to help users get their bearings on how a competition works; however, you may decide players will be forbidden to reset an "official" game.
+**Allow Reset:** Toggle *Forbidden* or *Allowed* to decide whether participants can restart their game and attempt challenges again. Most "practice" games allow resets so users can learn how the competition works, but you can still forbid resets in an "official" game.
 
-**Allow Late Starts:** Toggle *Forbidden* or *Allowed* to permit players to start within a session length of the execution period end. When toggled to allow, players whose session would end prematurely due to the execution window closing will be allowed to play; however, their session will be shortened to match the end of the game.
+**Allow Late Starts:** Toggle *Forbidden* or *Allowed* to decide whether players can start within a session length of the execution period end. When you allow late starts, players whose sessions would otherwise end prematurely can still play, but Gameboard shortens their remaining time to match the end of the game.
 
-**Allow Public Scoreboard Access:** Toggle *Forbidden* or *Allowed* to permit players to view the complete scoreboard after the game ends. Not that the scoreboard itself is public, but if toggled to forbid, players can't view detailed score information for competing players.
+**Allow Public Scoreboard Access:** Toggle *Forbidden* or *Allowed* to decide whether players can view the complete scoreboard after the game ends. If you forbid access, players cannot view detailed score information for competing players even though the scoreboard exists.
 
 ##### Registration
 
@@ -208,7 +208,7 @@ Offering a different execution period from registration period is an option. Thi
 
 **Team Size:** This is self-explanatory. A matching *minimum* and *maximum* of one means that the challenge is a single player challenge. That is, a "team" of one. In a true team tournament, two or more would probably be the minimum.
 
-**Team Sponsorship:** Toggle *Open* or *Required*. When required, members on a team must have the same sponsor. Team sponsors are chosen during enrollment. For more information on sponsors, see [Gameboard Administration](admin.md).
+**Team Sponsorship:** Toggle *Open* or *Required*. When required, members on a team must have the same sponsor. Players choose team sponsors during enrollment. For more information on sponsors, see [Gameboard Administration](admin.md).
 
 **Registration Markdown:** Using Markdown enter any information you would like players to see when they register for the game. For help with Markdown syntax, see this [Markdown Guide](https://www.markdownguide.org/).
 
@@ -216,7 +216,7 @@ Offering a different execution period from registration period is an option. Thi
 
 #### Search
 
-Search for challenges on TopoMojo to place in the game. *Search* here is limited by *Audience* on the workspace Settings in TopoMojo.
+Search for challenges on TopoMojo to place in the game. The *Audience* setting on the workspace in TopoMojo limits the results you see here.
 
 #### Edit
 
@@ -230,17 +230,17 @@ Selecting a challenge from the search results adds it to the Edit icon.
 
 **Points:** Assign a point value to your challenge here.
 
-**Solution Guide URL:** Add links to challenge solution guides here for *practice mode* challenges. When added here, the link to the solution guide is available to players in the challenge instructions. Enabling **Show Solution Guide in Competitive Mode** permits the link to a solution guide to be available to players in a *competitive* game.
+**Solution Guide URL:** Add links to challenge solution guides here for *practice mode* challenges. When you populate this field, Gameboard shows the solution guide link in the challenge instructions. Enable **Show Solution Guide in Competitive Mode** if you want players in a *competitive* game to see the link as well.
 
-**Disabled:** Check to disable this challenge in the game without removing it. Disabled challenges are unavailable to players, don't count toward scores, and are not deployed when an admin initiates deployment on a player's behalf. Essentially, disabling a challenge removes the spec from the game without deleting any underlying data.
+**Disabled:** Check to disable this challenge in the game without removing it. Disabled challenges stay unavailable to players, do not count toward scores, and never deploy when an admin initiates deployment on a player's behalf. Disabling a challenge removes the spec from active play without deleting any underlying data.
 
-**Hidden:** Hidden challenges can't be manually deployed by players and don't count toward scores. However, they are deployed when an admin initiates deployment on a player's behalf or if the game configured in External mode. The need for a hidden challenge is typically related to the implementation details of an externally hosted game and is not useful for the vast majority of games.
+**Hidden:** Hidden challenges can't be manually deployed by players and don't count toward scores. However, Gameboard deploys them when an admin initiates deployment on a player's behalf or if the game runs in External mode. Hidden challenges usually support externally hosted games and rarely help in standard scenarios.
 
 **Remove This Challenge:** Removes the challenge from the game.
 
 ##### Prerequisites
 
-Prerequisites are for challenges that unlock other challenges. For example: Your game has two challenges tagged **c01** and **c02**. You want to force participants to score 500 points on c01 before c02 is unlocked for them to attempt. Challenge c02 will not be available to deploy until the prerequisite condition is met. Complete the fields so that `c02 requires 500 on c01`.
+Prerequisites unlock other challenges. For example, suppose your game includes challenges **c01** and **c02**. You want participants to score 500 points on c01 before they can attempt c02. In that case, Gameboard keeps c02 unavailable until participants satisfy the prerequisite. Complete the fields so that `c02 requires 500 on c01`.
 
 ##### Automatic Bonuses
 
@@ -252,7 +252,7 @@ Gameboard can automatically award bonus points to teams and players based on the
 
 #### Map
 
-Here is where the visual representation of the game is arranged. Challenges are placed on the game map here. The challenges you selected appear as hotspots on the map. Drag them into position on the map.
+Use this area to arrange the visual representation of the game. Place challenges on the game map here. The challenges you select appear as hotspots on the map, and you can drag them into position.
 
 **Show Gridlines:** Each map has a grid. By selecting Show Gridlines, you can toggle displaying the grid. When enabled, the grid overlays the map image and makes it easier for you place your challenge hotspots.
 
@@ -264,7 +264,7 @@ Here is where the visual representation of the game is arranged. Challenges are 
 
 The **Teams/Players** tab contains the list of game teams/players. If the game is a **team** game, then you will see the *Teams* tab. If the game is an **individual** game then you will see the *Players* tab.
 
-Here you can search, see who advanced to the next game and who did not, who started, who is currently playing, who finished, and sort by rank, name, and time remaining.
+Use this tab to search for teams or players, see who advanced, check who started or is still playing, review who finished, and sort by rank, name, or time remaining.
 
 If any registered players have requested a name change, you'll see a warning message here to let you know.
 
@@ -272,9 +272,9 @@ If any registered players have requested a name change, you'll see a warning mes
 
 - **Rerank:** Forces a manual recalculation of the scores in the game.
 
-- **Advance selected teams/players:** Advances the team/player to a different game, probably a successive round. Optionally, teams/players can be advanced with their score intact by checking **Include scores during advancement**. The advance function is useful when your competition is set up like a tournament where teams/players advance in progressive rounds. Teams/players may only be advanced to games which have an execution window equal to the current time or later.
+- **Advance selected teams/players:** Use this action to move the team or player to a different game, usually the next round. Optionally, check **Include scores during advancement** to carry their score forward. The advance function works well when you set up your competition like a tournament with progressive rounds. Advance teams only into games whose execution window matches the current time or occurs later.
 
-- **Deploy game resources for selected:** Pre-generates challenge VMs for selected teams/players. This strategy is useful for an event where pre-generating challenges averts the risk of many participants launching challenges simultaneously and encountering problems. By building the gamespace resources in advance, the environment can be verified in advance, issues can be resolved early, and players can start without delay.
+- **Deploy game resources for selected:** Pre-generates challenge VMs for selected teams or players. This strategy is useful for events where pre-generating challenges averts the risk of many participants launching challenges simultaneously and encountering problems. By building the gamespace resources in advance, you can verify the environment early, resolve issues ahead of time, and let players start without delay.
 
 - **Extend Sessions:** Extends the team/player's session by a specified number of minutes.
 
@@ -282,7 +282,7 @@ If any registered players have requested a name change, you'll see a warning mes
 
 - **Copy all team/players to mail format:** Copies metadata about the selected players in JSON format for use with a mail app.
 
-- **Add team/player:** Adds a new team (i.e., multiple players) or new player to the game. When adding, these players are not created from scratch in the Game Center. They must exist as a Gameboard user and must *not* be enrolled in the game.
+- **Add team/player:** Adds a new team (i.e., multiple players) or new player to the game. When you add teams or players here, Gameboard does not create new accounts in the Game Center. The users must already exist in Gameboard and must remain unenrolled in the game.
 
 - **Search team/players:** Enter keywords or phrases to find specific teams/players within the Gameboard.
 
@@ -292,7 +292,7 @@ If any registered players have requested a name change, you'll see a warning mes
 
 #### The Team/Player Window
 
-In the search results, select a team or a player. Information about that team/player is found in the team/player window. The screen print below shows the **Player** window.
+In the search results, select a team or a player. The team/player window displays information about that selection. The screen print below shows the **Player** window.
 
 ![team-player-window](img/team-player-window.png)
 
@@ -312,10 +312,10 @@ The **Player Timeline** is a visual representation of the sequence of session ev
 
 Events seen on the player timeline are:
 
-- **Challenge Started:** Shows when (date and time) a challenge has been launched.
-- **Gamespace On:** Shows when a gamespace was activated. This event is not clickable.
-- **Challenge Completed:** Shows when a challenge has been completed and includes the number of attempts used and final score.
-- **Submission:** Shows when a token or answer has been submitted and includes the number of attempts used, points awarded after the attempt, and any submitted answers.
+- **Challenge Started:** Shows the date and time when the player launched a challenge.
+- **Gamespace On:** Shows the moment when Gameboard activated a gamespace. This event is not clickable.
+- **Challenge Completed:** Shows the date and time when the player finished a challenge and includes the number of attempts used and final score.
+- **Submission:** Shows when the player submitted a token or answer and includes the number of attempts used, points awarded after the attempt, and any submitted answers.
 - **Active Ticket:** Shows when the team or player opened a support ticket.
 
 !!! tip
@@ -328,21 +328,21 @@ The **Announcement** feature allows you to broadcast messages to just a player o
 
 #### "3-Dot" Context Menu
 
-Each player or team has a "3-dot"context menu on their card, offering different options based on their status—whether they haven't started, are actively playing, or have finished.
+Each player or team has a "3-dot"context menu on their card. The available options change based on whether they haven't started, are actively playing, or have finished.
 
 - **View:** Opens the Team/Player modal discussed above.
 - **View Team IDs:** Opens a modal that provides convenient copy access to **player ID** and **user ID** for support purposes.
 - **Copy Player ID / Team ID / User ID:** Again, convenient copy access for support purposes.
 - **View Certificate:** View a player's certificate if published and the game is over.
-- **Manual Bonuses:** Manually award bonus points to a player or team score. This is useful if bonus points were earned during a challenge and need to be added. A challenge must be at least started prior to awarding bonus points.
+- **Manual Bonuses:** Manually award bonus points to a player or team score. This option helps when a challenge produced bonus points that you need to record. Make sure the player has started the challenge before you award manual bonuses.
 - **Manage Challenges:** Launch, start/stop challenge resources, or completely purge a challenge attempt on behalf of the player. Purging a challenge erases all progress a player has made on it.
-- **Reset Session(Preserve Challenges):** If a player has registered, and has started playing the game (i.e., they have a game session), you can reset their session *and not* archive any challenges, started or completed. Use of this option should be limited to very specific situations like testing and QA.
+- **Reset Session(Preserve Challenges):** If a player has registered and started playing the game (i.e., they have a game session), you can reset their session *without* archiving started or completed challenges. Use this option only in specific situations like testing and QA.
 - **Reset Session:** If a player has registered and has started playing the game (i.e. they have a game session), you can reset their session. This deletes any challenge data they generated while playing but leaves enrollment and team membership intact. If they wish to play again, they'll need to start a new session.
-- **Reset Session & Unenroll:** If a player has registered, and has started a session, you can *reset* their session and *unenroll* them from the game. Players will need to re-enroll to play again. Teams are essentially dissolved and will need to reform and re-enroll to play. This is the same functionality as when a player unenrolls from the game lobby or resets their session (when enabled by an admin).
+- **Reset Session & Unenroll:** If a player has registered and started a session, you can *reset* their session and *unenroll* them from the game. Players must re-enroll to play again. This action effectively dissolves teams, so they need to reform and re-enroll to continue. This option matches the functionality a player sees when they unenroll from the game lobby or reset their own session (when enabled by an admin).
 
 ### Practice Tab
 
-The Practice tab appears only in games where Player Mode is set to **Practice** (this setting is found on the Gear tab under **Modes**). It lists all users who have played any challenge in practice mode, with exactly one row per user. Clicking a row opens an attempt summary window for that user. If the user is actively playing, the **3-Dot** context menu provides an option to quick-jump to observe their session.
+The Practice tab appears only in games where you set Player Mode to **Practice** (find this setting on the Gear tab under **Modes**). It lists all users who have played any challenge in practice mode, with exactly one row per user. Clicking a row opens an attempt summary window for that user. If the user is actively playing, the **3-Dot** context menu provides an option to quick-jump to observe their session.
 
 ![practice attempt summary window](img/practice-summary.png)
 
@@ -354,7 +354,7 @@ The **Observe tab** allows a user with elevated permissions to see participant V
 
 #### Observe Challenges
 
-When **Challenges** is selected, the list of all challenges for all players in one table for that game is shown. The console grid for this contains all VMs for a challenge - whether active or not.
+When you select **Challenges**, Gameboard shows a table containing every challenge for every player in that game. The console grid lists all VMs for a challenge—whether active or not.
 
 ![observe with challenge in focus](img/observe-challenges-in-focus.png)
 
@@ -370,13 +370,13 @@ VM name (*win10-workstation*) and player display name (*Wolverine 3*) help obser
 
 **Rank:** Sort the consoles by scoreboard rank.
 
-You can move a row to the top and "pin" it there to keep it in place. You can pin multiple rows at the top as well. This is useful when you are interested in following a certain few teams, players, or challenges. This is also useful after you have searched--you can pin results at the top where you can reference them frequently.
+You can move a row to the top and "pin" it there to keep it in place. Pin multiple rows if you want to follow a specific group of teams, players, or challenges. Pinning also helps after you run a search because you can keep the results at the top for quick reference.
 
 ![observe-pin](img/observe-pin.png)
 
 #### Observe Teams
 
-**Observe Teams** is a list of all players/teams for the game. The list of players/teams matches the entries on the scoreboard and contains "live" sessions; that is, sessions that are started. The console grid is one rectangle per user on a team. Users may not be on a VM at all yet or two users could be looking at the same VM.
+**Observe Teams** is a list of all players/teams for the game. The list of players/teams matches the entries on the scoreboard and contains "live" sessions; that is, sessions that players have already started. The console grid is one rectangle per user on a team. Users may not be on a VM at all yet or two users could be looking at the same VM.
 
 Other than the difference described above, Observe Teams functions the same as Observe Challenges.
 
@@ -394,21 +394,21 @@ Gameboard administrators configure the global Practice Area content here. In the
 
 #### Practice Page Greeting
 
-The text here appears on the Practice Area page and introduces players to the Practice Area. The greeting is authored in Markdown, which allows you to create a nicely formatted message. Customize the greeting to meet your needs.
+The text here appears on the Practice Area page and introduces players to the Practice Area. Author the greeting in Markdown to create a nicely formatted message. Customize the greeting to meet your needs.
 
-More information about Markdown, including the syntax guide, can be found at [www.markdownguide.org](https://www.markdownguide.org){ target=\_blank }.
+For more information about Markdown and its syntax, visit [www.markdownguide.org](https://www.markdownguide.org){ target=\_blank }.
 
 #### Suggested Searches
 
-Suggested searches appear on the Practice Area homepage just below the greeting and direct players to useful or interesting subsets of available practice challenges. These searches act as filters for tags attached to a challenge. (When a challenge is created, the developer can optionally add tags that describe the skills needed to solve the challenge.)
+Suggested searches appear on the Practice Area homepage just below the greeting and direct players to useful or interesting subsets of available practice challenges. These searches act as filters for tags attached to a challenge. (When developers create a challenge, they can optionally add tags that describe the skills needed to solve the challenge.)
 
-Only tags that match the suggested searches are displayed to the player when browsing the Practice Area. This ensures players see relevant tags that help them find the challenges they are interested in.
+Gameboard displays only the tags that match the suggested searches when players browse the Practice Area. This approach keeps the list relevant so players can find the challenges that interest them.
 
 To enter suggested searches, list one search term per line.
 
 #### Certificate Template
 
-Admins configure the certificate template here by entering HTML into the **Certificate Template** field. Players save certificates in PDF format for each practice challenge they fully complete. More information on certificates can be found in the [Profile screen](profile.md) documentation.
+Admins configure the certificate template here by entering HTML into the **Certificate Template** field. Players save certificates in PDF format for each practice challenge they fully complete. For more information on certificates, see the [Profile screen](profile.md) documentation.
 
 For your convenience, here are several variables you can include in your template to display information about the player's performance on a practice challenge.
 
@@ -420,7 +420,7 @@ For your convenience, here are several variables you can include in your templat
 - `{{track}}`: The track the challenge was originally placed in competitive mode
 - `{{time}}`: The amount of time the player spent solving the challenge
 
-Additional information about creating certificate templates can be found in the [Configuring Certificate Templates](admin-completion-certificates.md) topic.
+For additional guidance on creating certificate templates, see the [Configuring Certificate Templates](admin-completion-certificates.md) topic.
 
 #### Session Limits
 
@@ -432,7 +432,7 @@ Admins use these controls to set limits on practice sessions, including:
 
 ### Users
 
-To access the **Administration**, **Users** screen click **Admin** in the top navigation menu, then click **Users**. This is where users can be created, updated, deleted, assigned roles, and given API keys. Participant names are approved or disapproved here too. In Gameboard, a *user* is a person and a user has a *Name*.
+To access the **Administration**, **Users** screen click **Admin** in the top navigation menu, then click **Users**. Use this screen to create, update, delete, and assign roles to users, as well as issue API keys. Approve or disapprove participant names here too. In Gameboard, a *user* is a person and a user has a *Name*.
 
 #### Searching, Filtering, and Sorting
 
@@ -440,9 +440,9 @@ To search for a user across the whole of Gameboard enter a term into the **Searc
 
 To filter your results, select **Has Elevated Role**, **Has Pending Name**, or **Has Disallowed Name**.
 
-- **Has Elevated Role:** contains only those participants who have been granted roles with additional permissions (Admin, Director, Support, Tester).
-- **Has Pending Name:** contains only those participants whose display names are pending approval or disapproval from an admin.
-- **Has Disallowed Name:** contains only those participants whose display names have been disapproved by an admin.
+- **Has Elevated Role:** contains only participants who received roles with additional permissions (Admin, Director, Support, Tester).
+- **Has Pending Name:** contains only participants whose display names await approval or disapproval from an admin.
+- **Has Disallowed Name:** contains only participants whose display names an admin disapproved.
 
 To sort your results, select **Name**, **Last Login**, or **Created On**. Click to sort in **ascending** order (A → Z, oldest to newest). Click again to sort in **descending** order (Z → A, newest to oldest). The arrow (▲ or ▼), appears in the sort button to show the current sorting direction.
 
@@ -459,14 +459,14 @@ Here you can also generate an API Key for the user.
 
 #### Adding Users
 
-Administrators can create Gameboard user accounts in advance. Typically, users would register through an identity provider and their Gameboard account is generated at first login. Users select a sponsor and display name.
+Administrators can create Gameboard user accounts in advance. Typically, users register through an identity provider and Gameboard creates their account at first login. Users select a sponsor and display name.
 
 However, administrators can create Gameboard accounts proactively for users who already have an identity account. This is useful for events where pre-registered participants need to complete a specific set challenges or play in the Practice Area.
 
 To add a new user in the Gameboard:
 
 1. On the Users screen, click **Add Users**.
-2. In the **Create Users** window, in the field, enter space- or line-delimited user GUIDs (globally unique identifiers) to create Gameboard user accounts. In this way, multiple accounts can be created at the same time. Example settings to configure initial user settings are provided.
+2. In the **Create Users** window, in the field, enter space- or line-delimited user GUIDs (globally unique identifiers) to create Gameboard user accounts. This approach lets you create multiple accounts at the same time. Example settings that configure initial user options appear below the field.
 3. Under **Settings**, enable **Show an error if one of these IDs already exists** and/or **Don't force users to select their sponsor before playing** depending upon your needs.
 4. Select a role to assign to the users.
 5. Select a sponsor to assign to the users.
@@ -475,7 +475,7 @@ To add a new user in the Gameboard:
 
 ### Players
 
-To access the **Administration**, **Players** screen click **Admin** in the top navigation menu, then click **Players**. Most actions available in the Administration Players screen can also be performed in the Game Center under the **Players/Teams** tab. This screen serves as an alternative option.
+To access the **Administration**, **Players** screen click **Admin** in the top navigation menu, then click **Players**. You will find the same actions in the Game Center under the **Players/Teams** tab, which serves as an alternative option.
 
 The **Players** screen shows one *player* record for each time a *user* plays in a game. Remember, *players* are users who play in, or participate in, a game. A *user* is the real person in Gameboard.
 
@@ -491,7 +491,7 @@ To search for a player across the whole of Gameboard enter a term into the **Sea
 
 **names-pending:** filters by those participants whose display names are pending approval or disapproval.
 
-**names-disallowed:** filters by those participants whose display names have been disapproved.
+**names-disallowed:** filters by participants whose display names an admin disapproved.
 
 In the player search results, select the game link to go to that game's Game Center. Select `user id`, `player id`, `team id`, and `game id` to copy it to the clipboard.
 
@@ -499,7 +499,7 @@ In the player search results, select the game link to go to that game's Game Cen
 
 Information about the player's session appears here.
 
-- A yellow light indicates a player is registered to play but hasn't started a session.
+- A yellow light indicates a player who has registered to play but hasn't started a session.
 - A green light indicates a player is active (i.e., has started a session).
 - A red light indicates that player's session has ended.
 
@@ -542,7 +542,7 @@ After logging into the Gameboard app with the appropriate role, click **Admin**,
 
 **Search:** Search for specific teams, players, challenge IDs, and tags.
 
-**Current:** A green dot indicates an active challenge. A challenge remains active until one of three conditions occurs: a correct solution is submitted, the maximum number of submissions is reached, or the session expires. Once any of these conditions occur, the challenge becomes inactive. Inactive challenges still contribute to total score, rank, and cumulative time.
+**Current:** A green dot indicates an active challenge. A challenge remains active until one of three conditions occurs: the player submits a correct solution, the player reaches the maximum number of submissions, or the session expires. Once any of these conditions occur, the challenge becomes inactive. Inactive challenges still contribute to total score, rank, and cumulative time.
 
 A challenge remains current and not archived until the **Reset Session** button resets it.
 
@@ -562,13 +562,13 @@ In the **Greeting** field, enter a message. Your message appears as a banner on 
 
 #### Ticket Auto-Labeling
 
-This feature automatically assigns labels to tickets based on specific criteria, such as the play mode, game, challenge, or sponsor associated with the player who generated the ticket. Using the ticket auto-labeling option does categorize incoming tickets automatically by specific factors, which helps to streamline the ticket management process and making it easier to track and manage them.
+This feature automatically assigns labels to tickets based on specific criteria, such as the play mode, game, challenge, or sponsor associated with the player who generated the ticket. Auto-labeling streamlines ticket management because Gameboard categorizes incoming tickets by those factors, making them easier to track.
 
 ### Notifications
 
 The **Notifications** feature allows those users who have elevated permissions such as Admin and Director roles to post alerts and notices for users in the Gameboard system. When users log in, they will see a banner for each active notification. Once a user dismisses a notification, it does not appear again.
 
-This topic assumes you have been granted a role with the appropriate permissions in Gameboard, you are logged in, and you have a game created.
+This topic assumes you hold a role with the appropriate permissions in Gameboard, already created a game, and have logged in.
 
 #### Creating a Notification
 
@@ -579,7 +579,7 @@ To create a new notification:
 3. Enter a **Title**.
 4. Enter the **Content** of the notification. The content supports Markdown formatting.
 5. Optionally, set the **Availability dates**. These dates determine when the notification is visible. If set, the notification will appear to players only *after* the start date and *until* the end date.
-6. Optionally, check the **Dismissible?** box. When unchecked, players can't manually remove or dismiss the notification from their screen. The notification continues to appear every time they log in until the admin deletes the notification or the notification reaches its end date (if an end date is set).
+6. Optionally, check the **Dismissible?** box. When unchecked, players can't manually remove or dismiss the notification from their screen. The notification continues to appear every time they log in until the admin deletes it or the notification reaches its end date (if you configure an end date).
 7. Select a **Type**:
    - **General Info** (blue)
    - **Warning** (yellow)
@@ -589,7 +589,7 @@ To create a new notification:
 #### Managing Notifications
 
 - You can **edit** or **delete** existing notifications from the list.
-- If no availability dates are set, the notification remains visible until a player dismisses it.
+- If you leave the availability dates blank, the notification remains visible until a player dismisses it.
 
 !!! note "Announcements vs. Notifications: When to Use Each"
 
@@ -610,7 +610,7 @@ There are five roles: **Admin**, **Director**, **Support**, **Tester**, and "par
 
 If you're Support, Director, or Admin, you can go to **Admin**, **Permissions** in the top navigation to check your role and see what each role can do.
 
-Only Admins can change the permissions of other users and at least one Admin is required. To assign roles, go to **Admin**, **Permissions** in the top navigation.
+Only Admins can change the permissions of other users, and you must keep at least one Admin active. To assign roles, go to **Admin**, **Permissions** in the top navigation.
 
 The table below outlines the permissions associated with different roles in the Gameboard across various functions.
 
@@ -624,10 +624,10 @@ The table below outlines the permissions associated with different roles in the 
 | GAMES                                                                                                                                      |         |          |         |         |
 | Create/edit/delete games: Create, edit, and delete games. Add and remove challenges, set their scoring properties, and add manual bonuses. | **Yes** | **Yes**  | No      | No      |
 | Set players to ready: Change player status to ready/not ready in sync-start games                                                          | **Yes** | **Yes**  | No      | No      |
-| View hidden games and practice challenges: View games and practice challenges which have been hidden from players by their creator         | **Yes** | **Yes**  | **Yes** | **Yes** |
+| View hidden games and practice challenges: View games and practice challenges that their creator hid from players                          | **Yes** | **Yes**  | **Yes** | **Yes** |
 | PLAY                                                                                                                                       |         |          |         |         |
 | Ignore registration/execution windows: Ignore registration and execution window settings when enrolling in and starting games              | **Yes** | **Yes**  | **Yes** | **Yes** |
-| Ignore session reset settings: Reset their session, even in games where session reset is prohibited                                        | **Yes** | **Yes**  | **Yes** | **Yes** |
+| Ignore session reset settings: Reset their session, even in games that prohibit session reset                                              | **Yes** | **Yes**  | **Yes** | **Yes** |
 | Select challenge variants: Choose any variant of a challenge when deploying (rather than random assignment)                                | **Yes** | **Yes**  | **Yes** | **Yes** |
 | PRACTICE                                                                                                                                   |         |          |         |         |
 | Practice Area: Edit settings for the Practice Area                                                                                         | **Yes** | **Yes**  | No      | No      |
@@ -653,11 +653,11 @@ The table below outlines the permissions associated with different roles in the 
 | Assign roles: Assign roles to other users                                                                                                  | **Yes** | No       | No      | No      |
 | Create users manually: Create and edit users manually (currently available only as an API call)                                            | **Yes** | No       | No      | No      |
 
-After logging into Gameboard, but before playing a game or completing a lab users have to *enroll* in the game lobby. Users log into Gameboard, select a game on the **Home** page, and **Enroll** and **confirm** to start the session. The Enroll button appears when the user has set a display name and a sponsoring organization in their Profile and registration for that game is "open" (open and close dates and times are defined in the Admin Game Settings).
+Before players start a game or lab, they must *enroll* in the game lobby. After logging in, they select a game on the **Home** page, click **Enroll**, and confirm to start the session. The **Enroll** button appears only after they set a display name and sponsoring organization in their profile. The game's registration window must also be open, as defined in the Admin Game Settings.
 
 If a user has an elevated role, then the **Admin Enroll** button appears next to the **Enroll** button. See the screen print below.
 
-**Admin Enroll** allows a user with an elevated role to bypass the restrictions of time for registration, but it does *not* allow the user to bypass display name and sponsoring organization requirements. Those still need to be set prior to game play. **Admin Enroll** is useful for testing, troubleshooting, and customer support purposes.
+**Admin Enroll** allows a user with an elevated role to bypass registration timing restrictions. It does *not* bypass display-name and sponsoring-organization requirements, so set those before gameplay. Use **Admin Enroll** for testing, troubleshooting, and customer support.
 
 !!! note
 
@@ -669,19 +669,19 @@ If a user has an elevated role, then the **Admin Enroll** button appears next to
 
 ### Feedback Templates
 
-In the Gameboard application, it is possible to use feedback forms to capture participant feedback on a game and challenges. Collecting and analyzing participant feedback can help you refine and improve your user experiences. Feedback *forms* are generated from feedback *templates*.
+In the Gameboard application, you can use feedback forms to capture participant feedback on a game and challenges. Collecting and analyzing participant feedback can help you refine and improve your user experiences. Gameboard generates feedback *forms* from feedback *templates*.
 
-- Feedback templates are created by users who are granted a role with elevated permissions (`Admin`, `Director`).
-- Feedback forms are completed by participants or players in the game.
-- Feedback reports are reviewed by users who are granted a role with the appropriate permission (`Admin`, `Director`, and `Support`).
+- Users with elevated permissions (`Admin`, `Director`) create feedback templates.
+- Participants or players in the game complete feedback forms.
+- Users who hold the appropriate permission (`Admin`, `Director`, `Support`) review feedback reports.
 
 Creating a feedback template is not required to build a game or challenge. It's up to you whether or not you choose to implement feedback. If a feedback template is not configured in the Gameboard administration menu, then the feedback form does not appear for the participant.
 
 You can create questions for *just* a game, *just* challenges, or *both* game and challenges. When you create a feedback template for a game or one of its challenges, you can use that template in other games and challenges too.
 
-It is not possible to change a feedback template after responses have been submitted.
+After participants submit responses, you can no longer change the feedback template.
 
-This section assumes you have been granted a role with the appropriate permissions in Gameboard, you are logged in, and you have a game created.
+This section assumes you hold a role with the appropriate permissions in Gameboard, already created a game, and have logged in.
 
 1. In the top navigation, select **Admin**.
 2. Select an existing game, then select the **Settings cog**. Under Metadata, see the Player Feedback section. Here you can select an existing feedback template and *add*, *preview*, *edit*, *copy*, and *delete* feedback templates.
@@ -703,22 +703,22 @@ This section assumes you have been granted a role with the appropriate permissio
 
 #### Previewing a Feedback Template
 
-1. In the game's Metadata settings, under Player Feedback, select the **eye** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The feedback template preview launches.
+1. In the game's Metadata settings, under Player Feedback, select the **eye** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. Gameboard opens the feedback template preview.
 2. Click **OK** to dismiss it.
 
 #### Editing a Feedback Template
 
-1. In the game's Metadata settings, under Player Feedback, select the **Edit** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The **Edit Template** window is launched.
+1. In the game's Metadata settings, under Player Feedback, select the **Edit** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. Gameboard opens the **Edit Template** window.
 2. Make any updates in the **Name**, **Help Text**, and **Template** fields, then click **OK**.
 
 #### Copying a Feedback Template
 
-1. In the game's Metadata settings, under Player Feedback, select the **Copy** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The template's YAML configuration is copied to your clipboard.
+1. In the game's Metadata settings, under Player Feedback, select the **Copy** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. Gameboard copies the template's YAML configuration to your clipboard.
 2. Paste the YAML into the location of your choice.
 
 #### Deleting a Feedback Template
 
-1. In the game's Metadata settings, under Player Feedback, select the **Delete** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. The feedback template is deleted.
+1. In the game's Metadata settings, under Player Feedback, select the **Delete** icon next to **Game Feedback Template** and/or **Challenges Feedback Template**. Gameboard deletes the feedback template.
 
 !!! warning
 
@@ -743,10 +743,10 @@ questions:
     type: text
 ```
 
-- `id`: *ids* must be unique within the template. If ids in a single list are not unique, you are presented with a warning.
+- `id`: *ids* must be unique within the template. If ids in a single list are not unique, Gameboard presents a warning.
 - `prompt`: this is the question you want the participant to answer or the property you want them to rate.
 - `shortName`: an abbreviated version of the prompt. `shortName` is optional, but is helpful for use in tables as the column header. Good examples are "Difficult" or "Quality".
-- `type`: `likert` or `text`; if the type is `Likert`, then defining the scale (`max`, `minLabel`, `maxLabel`) of how much a participant can agree or disagree with your prompt is required. If the type is `text`, a participant is free to answer your prompt however they like. Text type questions have a 2,000 character limit.
+- `type`: `likert` or `text`; if you choose `Likert`, define the scale (`max`, `minLabel`, `maxLabel`) that measures how much a participant can agree or disagree with your prompt. If you choose `text`, a participant is free to answer your prompt however they like. Text type questions have a 2,000 character limit.
 - `max`: this is the upper extreme of your `Likert` scale; 10 is the recommended upper limit. Any integer greater than 1 will work, but a scale that goes past 10 may become unwieldy or awkward.
 - `minLabel`: specify the labels for the extremes of your `Likert` scale; examples of the negative extreme might be "very easy", "strongly disagree", or "very dissatisfied".
 - `maxLabel`: specify the labels for the extremes of your `Likert` scale; examples of the positive extreme might be " very difficult", "strongly agree", or "very satisfied".
@@ -754,28 +754,28 @@ questions:
 
 #### Reporting on Feedback
 
-Viewing and exporting responses to feedback is also a function of roles with some elevated permissions. Assuming that you are logged into Gameboard as a user with the `Admin`, `Director`, or `Support` role, in the top navigation select **Reports**. Then select **Feedback Report**.
+Viewing and exporting responses to feedback requires elevated permissions. If you have the `Admin`, `Director`, or `Support` role and have logged into Gameboard, select **Reports** in the top navigation. Then select **Feedback Report**.
 
-Feedback Reports are documented in the [Using Reports](reports.md) section of the docs.
+The [Using Reports](reports.md) section of the docs documents the Feedback Reports feature.
 
 ### Configuring Certificate Templates
 
-Game participants can view, share, and print certificates of completion as proof of participation in a game. To do so, certificate templates must be configured in a game's Metadata settings. Game organizers (i.e., users who have been granted a role with the appropriate permissions) configure certificate templates to customize the appearance of these completion certificates.
+Game participants can view, share, and print certificates of completion as proof of participation in a game. To enable that capability, configure certificate templates in a game's Metadata settings. Game organizers (i.e., users who hold a role with the appropriate permissions) customize those templates to control the appearance of completion certificates.
 
-This topic assumes you have been granted a role with the appropriate permissions in Gameboard, you are logged in, and you have a game created.
+This topic assumes you hold a role with the appropriate permissions in Gameboard, already created a game, and have logged in.
 
 1. In the top navigation, select **Admin**.
 2. Select an existing game, then Select the **Settings cog**. Under Metadata, see the Completion Certificates section. Here you can select an existing certificate template and *add*, *preview*, *edit*, *copy*, and *delete* completion certificate templates.
 
 ![certificate template icons](img/cert-temp-icons.png)
 
-Certificates are "templatized", allowing a single certificate template to be used across multiple games. Competitive certificate templates and practice certificate templates share a unified set of fields that can be incorporated to display relevant information on the completion certificate generated by the participant.
+Certificates are "templatized", allowing you to reuse a single certificate template across multiple games. Competitive certificate templates and practice certificate templates share a unified set of fields that you can incorporate to display relevant information on the completion certificate generated by the participant.
 
-The keywords, which should be enclosed in `{{double braces}}`, are as follows: `date`, `division`, `challengeDescription`, `challengeName`, `gameName`, `playerName`, `rank`, `score`, `season`, `series`, `teamName`, `totalPlayerCount`, `totalTeamCount`, `time`, `track`, and `userName`.
+Enclose the following keywords in `{{double braces}}`: `date`, `division`, `challengeDescription`, `challengeName`, `gameName`, `playerName`, `rank`, `score`, `season`, `series`, `teamName`, `totalPlayerCount`, `totalTeamCount`, `time`, `track`, and `userName`.
 
 #### Selecting a Certificate Template
 
-Players can view a list of past certificates from their Gameboard Profile page too. In Gameboard, click **Profile**. Then click **Certificates**. A table view of all game certificates is displayed. You can view and print the certificate as a .PDF from the table view.
+Players can view a list of past certificates from their Gameboard Profile page too. In Gameboard, click **Profile**. Then click **Certificates**. Gameboard displays a table view of all game certificates. You can view and print the certificate as a .PDF from the table view.
 
 1. In the game's Metadata settings, under Completion Certificates, choose an existing certificate template from the dropdowns.
 
@@ -788,29 +788,29 @@ Players can view a list of past certificates from their Gameboard Profile page t
    - Gameboard automatically inserts your content into a pre-existing, correctly formatted HTML document for display.
    - You can use the **Copy from:** feature to paste an example certificate HTML configuration into the **Template** field. In the **Copy from:** dropdown, select a template to copy from and then click **Copy**.
    - You can include `<style>` blocks to define CSS styles and apply them to your custom HTML elements.
-   - You can set a background image for your certificate by using the `.gameboard-print-html` CSS class. Gameboard generates this element when rendering the certificate, and any styles you apply to it (like `background-image`) are used automatically.
+   - You can set a background image for your certificate by using the `.gameboard-print-html` CSS class. Gameboard generates this element when rendering the certificate and automatically applies any styles you add to it (like `background-image`).
 
 4. Click **OK**.
 
 #### Previewing a Certificate Template
 
-This section assumes that you have been granted the Administrator role in Gameboard, you are logged in, and you have a game created.
+This section assumes that you already hold the Administrator role in Gameboard, already created a game, and have logged in.
 
-1. In the game's Metadata settings, under Completion Certificates, select the **eye** icon. The certificate preview launches in a new browser tab.
+1. In the game's Metadata settings, under Completion Certificates, select the **eye** icon. Gameboard opens the certificate preview in a new browser tab.
 
 #### Editing a Certificate Template
 
-1. In the game's Metadata settings, under Completion Certificates, select the **Edit** icon. The **Edit Certificate Template** window is launched.
+1. In the game's Metadata settings, under Completion Certificates, select the **Edit** icon. Gameboard opens the **Edit Certificate Template** window.
 2. Make any updates in the **Name** and **Template** fields, then click **OK**.
 
 #### Copying a Certificate Template
 
-1. In the game's Metadata settings, under Completion Certificates, select the **Copy** icon. The template's HTML configuration is copied to your clipboard.
+1. In the game's Metadata settings, under Completion Certificates, select the **Copy** icon. Gameboard copies the template's HTML configuration to your clipboard.
 2. Paste the HTML into the location of your choice.
 
 #### Deleting a Certificate Template
 
-1. In the game's Metadata settings, under Completion Certificates, select the **Delete** icon. The certificate template is deleted.
+1. In the game's Metadata settings, under Completion Certificates, select the **Delete** icon. Gameboard deletes the certificate template.
 
 !!! warning
 
@@ -865,7 +865,7 @@ To regenerate your certificate with a different name (e.g., your real name inste
 2. In the **Name** field, enter the name you want to appear on your certificate.
 3. Click **OK**.
 
-The new name entered on the certificate is temporary and *only for printing purposes*. If you close and reopen the certificate, the new name reverts to the original Gameboard display name. If the certificate is published, viewers will see your Gameboard display name, not the temporary name.
+The new name you enter on the certificate is temporary and applies *only to printing*. If you close and reopen the certificate, Gameboard restores the original display name. If you publish the certificate, viewers see your Gameboard display name, not the temporary name.
 
 ##### Creating Certificate Templates
 
@@ -877,11 +877,11 @@ View game history, including where you finished on the scoreboard and whether it
 
 #### Settings Tab
 
-Users granted a role with the appropriate permissions can view the **Settings tab**. Here, they may opt to receive browser notifications when support tickets are opened, closed, and updated. Users can choose to play an audio alert when a browser notification is received.
+Users who have the appropriate role can view the **Settings tab**. Here, they may opt to receive browser notifications when support tickets open, close, or update. Users can choose to play an audio alert when Gameboard sends a browser notification.
 
 !!! note
 
-    Browser notifications are subject to OS-level settings which may need to be changed and browser site settings for pop-ups and redirects which need to be allowed.
+    OS-level settings and browser site settings for pop-ups and redirects control whether Gameboard can show browser notifications. Update those settings if notifications do not appear.
 
 ### The Home Screen
 
@@ -891,7 +891,7 @@ The Home screen is where you start a "live" game, preview upcoming games, and vi
 
 This is the staging area where players join team members (if playing on a team) and get organized before starting a game session. Information about the session and enrollment appears here: e.g., "Enrollment closes in 2101d 17h."
 
-- A yellow light indicates a player is registered to play but hasn't started a session.
+- A yellow light indicates a player who has registered to play but hasn't started a session.
 - A green light indicates a player is active (i.e., has started a session).
 - A red light indicates that player's session has ended.
 
@@ -899,7 +899,7 @@ This player is active:
 
 ![green light](img/active-player.png)
 
-**Start Session:** A *session* is when a game is started and challenges can be deployed and solved. To start your session, select **Start Session** and click through the confirmation messages. Sessions can't be paused or stopped after they have started.
+**Start Session:** A *session* begins when you start a game and deploy challenges to solve. To start your session, select **Start Session** and click through the confirmation messages. You can't pause or stop sessions after they start.
 
 !!! warning
 
@@ -909,17 +909,17 @@ This player is active:
 
 !!! note "A note about session time and game execution time"
 
-    When a session extends beyond the game's availability period, administrators can choose to prevent players from starting. If this restriction (called **Allow Late Starts** in the game administration settings) is applied, the session can't begin. If it is not applied, a warning appears, indicating that the session time will be shorter due to the late start.
+    When a session extends beyond the game's availability period, administrators can choose to prevent players from starting. If you apply this restriction (called **Allow Late Starts** in the game administration settings), the session can't begin. If you leave it disabled, Gameboard displays a warning that the session time will be shorter because of the late start.
 
-**Unenroll:** A registered player who has not started a session can unenroll from the game. Re-enrolling is required to play again.
+**Unenroll:** A registered player who has not started a session can unenroll from the game. To play again, the player must re-enroll.
 
-**Set Game Display Name/Set Team Display Name:** The game display name chosen here is used to represent an individual player or a team (based on the competition type) on the public scoreboard for a particular game. This display name is the same as your profile display name by default, but you can change the name of your player/team for a specific game if you choose. Like your *profile* display name, your *game* or *team* display name is subject to approval.
+**Set Game Display Name/Set Team Display Name:** Use this option to choose the display name that represents an a player/team on the public scoreboard. The game display name matches your profile display name by default. You can request a customized display name per game. Gameboard requires approval for game display name change requests.
 
-Setting a new team display name here also renames the captain player's display name. Make sure this is what you intend before changing the team display name.
+Setting a new team display name also renames the captain player's display name. Make sure this is what you intend before changing the team display name.
 
 ##### Organizing a Team
 
-If the game is a team game, you organize your team in the game lobby. Under **Set Team Display Name**, enter a team name for the scoreboard. If you're the team captain, generate an invitation for your teammates. Copy the invitation code and distribute it to your teammates. Team members redeem your invitation code here too.
+If the game uses teams, organize the team in the game lobby. Under **Set Team Display Name**, enter a team name for the scoreboard. If you're the team captain, generate an invitation code for your teammates, copy it, and share it with them. Team members redeem the invitation code in this area.
 
 !!! warning
 
@@ -927,13 +927,13 @@ If the game is a team game, you organize your team in the game lobby. Under **Se
 
 ##### Starting a Challenge
 
-After your session is started, select **Continue to Gameboard**. To start a challenge, select a hot spot on the Gameboard. Select **Start Challenge** and click through the confirmation messages.
+After you start your session, select **Continue to Gameboard**. To start a challenge, select a hot spot on the Gameboard. Select **Start Challenge** and click through the confirmation messages.
 
-Administrators may set a limit on the number of challenges a player can have deployed at once, known as the **Gamespace Limit**. When the gamespace limit has been met, and a player tries to launch an additional challenge, the following message is displayed:
+Administrators may set a limit on the number of challenges a player can have deployed at once, known as the **Gamespace Limit**. When a player reaches the gamespace limit and tries to launch another challenge, Gameboard displays the following message:
 
 *Unable to deploy resources for this challenge because you've reached the gamespace limit for the game. Complete or destroy the resources of other challenges to work on this one.*
 
-**Destroy/Deploy:** To destroy a challenge to open another select the **Destroy** button under Gamespace Resources in the challenge instructions. If you wish to return to the challenge later, select the **Deploy** button under Gamespace Resources. Destroying the challenge resets the challenge to its original state. Any partial credit earned remains, but changes made to VMs are undone. The challenge timer continues to accumulate after you destroy the challenge.
+**Destroy/Deploy:** To destroy a challenge so you can open another, select the **Destroy** button under Gamespace Resources in the challenge instructions. If you want to return to the challenge later, select the **Deploy** button under Gamespace Resources. Destroying the challenge resets it to its original state. Any partial credit earned remains, but the system reverses your VM changes. The challenge timer continues to accumulate after you destroy the challenge.
 
 *Location of the Destroy button in context:*
 
@@ -943,34 +943,34 @@ Administrators may set a limit on the number of challenges a player can have dep
 
 Players can get to the in-game support feature from the launched challenge screen below the challenge questions and the Support link in the top navigation.
 
-From either of these locations, select **Create Ticket**. If you create a ticket from the challenge screen, then the Support Code, challenge information, Game Id, Player Id, Team Id are automatically generated. If you create a ticket from the Support link, then this information can be added later.
+From either of these locations, select **Create Ticket**. When you create a ticket from the challenge screen, Gameboard automatically populates the Support Code, challenge information, Game ID, Player ID, and Team ID. If you create a ticket from the Support link, you can add this information later.
 
 For a full treatment of Gameboard's Support feature, please see the [Using the Integrated Support Feature](support.md) section of the docs.
 
 ### Giving Feedback as a Player
 
-Provided that a Gameboard administrator has enabled and configured the *feedback* feature, players are permitted **one** feedback submission per game and/or per challenge. Every member of a team is permitted to provide individual feedback. The feedback form is available at any time after a session has started. This way, if participants quit the game before time expires they still have the opportunity to submit feedback.
+When a Gameboard administrator enables the *feedback* feature, each player may submit **one** feedback response per game and/or per challenge. Every team member may provide individual feedback. Gameboard keeps the feedback form available at any time after a session starts so participants who quit early still have the opportunity to respond.
 
 The screen print below shows an example of a **challenge** feedback form as a player would see it.
 
 ![challenge form](img/challenge-feedback.png)
 
-Completing a challenge is not a requirement for submitting challenge feedback. Participants are able to begin a challenge, go through it, not make any submissions and still provide feedback. Perhaps the challenge was either too difficult for them or they just went down the wrong path. Either way, collecting their feedback is valuable.
+You do not have to complete a challenge to submit challenge feedback. Participants can begin a challenge, explore it without submitting answers, and still respond. Perhaps the challenge felt too difficult or they chose the wrong approach; either way, their feedback remains valuable.
 
-Unsubmitted feedback and submitted feedback can be viewed in the reports. Once feedback has been submitted, a participant cannot go back and edit their feedback.
+Reports show both unsubmitted and submitted feedback. Once a participant submits feedback, they cannot return to edit it.
 
-This documentation assumes the player is logged into a game and successfully enrolled. To view the *game* feedback as a participant:
+This documentation assumes the player has logged into a game and successfully enrolled. To view the *game* feedback as a participant:
 
 1. From the game lobby, select **Start Session**, then click through the confirmations to start the session.
 2. Scroll down to the Feedback form and complete the survey.
-3. Click **Submit**, then **Confirm** when finished. Responses can't be edited after clicking **Submit**. Game feedback responses do auto-save.
+3. Click **Submit**, then **Confirm** when finished. You can't edit responses after clicking **Submit**. Game feedback responses auto-save.
 
 To view the *challenge* feedback as a participant:
 
 1. From the game lobby, select **Start Session**, then click through the confirmations to start the session.
 2. Select **Continue to Gameboard** and start a challenge.
 3. Scroll down to the Feedback form and complete the survey.
-4. Click **Submit**, then **Confirm** when finished. Responses can't be edited after clicking **Submit**. Challenge feedback responses do auto-save.
+4. Click **Submit**, then **Confirm** when finished. You can't edit responses after clicking **Submit**. Challenge feedback responses auto-save.
 
 ### Practice Area
 
@@ -978,7 +978,7 @@ The **Practice Area** is where Gameboard players can go to rehearse challenges a
 
 After logging into Gameboard, click **Practice** in the main navigation.
 
-The Practice Area contains a greeting configured by a Gameboard admin for your organization or environment and a list of challenges designated for practice.
+A Gameboard admin configures the Practice Area greeting for your organization or environment, and the page lists the challenges designated for practice.
 
 You can **search** for a challenge to practice on.
 
@@ -986,7 +986,7 @@ You can **search** for a challenge to practice on.
 
 You can copy a link to your search by selecting the **copy icon** next to the search field. In the example above, you may want to share the list of challenges/labs that have "ransomware" content with another Gameboard user.
 
-Under *Need a place to start?* the Gameboard admin may have configured some suggested searches for participants. Players can select one of these tags to be directed to a set of available practice challenges. Gameboard admins should refer to "Suggested searches" in the [Admin Practice Area](admin-practice-area.md).
+Under *Need a place to start?* the Gameboard admin may have configured suggested searches for participants. Players can select one of these tags to jump directly to a set of available practice challenges. Gameboard admins should refer to "Suggested searches" in the [Admin Practice Area](admin-practice-area.md).
 
 #### Starting a Practice Session
 
@@ -994,7 +994,7 @@ To start a practice session:
 
 1. Select a challenge, then click **Start Practice Session**, and **Confirm**. You can only launch *one* practice challenge at a time.
 2. Read the challenge guide. The challenge guide provides details and instructions for completing the practice challenge.
-3. Read the solution guide (optional). Solution guide URLs must be configured by Gameboard administrators; not every challenge or lab has a solution guide.
+3. Read the solution guide (optional). Gameboard administrators must configure solution guide URLs, and not every challenge or lab includes one.
 4. Launch the challenge consoles. Clicking a challenge console opens it in a new web browser tab. Challenge consoles allow players to directly interact with the virtual machines as they complete the practice challenge.
 5. Answer the challenge questions. Enter your answers for each question and click **Submit My Answers**, and **Confirm** to submit your answer.
 
@@ -1024,13 +1024,13 @@ To close this practice challenge and try a different one, click **End Session**,
 
 #### Using the Sticky Challenge Panel
 
-Challenge consoles and challenge questions are located at the bottom of the **Active Practice Challenge** screen by default. Players using devices with large screens can take advantage of the Sticky Challenge Panel.
+Challenge consoles and challenge questions appear at the bottom of the **Active Practice Challenge** screen by default. Players using devices with large screens can take advantage of the Sticky Challenge Panel.
 
-Click **Turn on the Sticky Challenge Panel** at the top of the screen or click **Use Sticky Challenge Panel** at the bottom of the screen to attach a panel to the side of the challenge guide. This panel contains the challenge consoles and challenge questions.
+Click **Turn on the Sticky Challenge Panel** at the top of the screen. You can also click **Use Sticky Challenge Panel** at the bottom of the screen. Gameboard then attaches a panel with the challenge consoles and challenge questions to the side of the challenge guide.
 
 ![Enabled Sticky Challenge Panel](img/enabled-sticky-challenge-panel.png)
 
-The Sticky Challenge Panel is used to reduce scrolling when entering answers when a practice challenge has a lengthy challenge guide.
+Use the Sticky Challenge Panel to reduce scrolling when you enter answers for practice challenges with lengthy guides.
 
 Select **Click here to deactivate the sticky challenge panel** to turn off the Sticky Challenge Panel.
 
@@ -1046,7 +1046,7 @@ For a full treatment of Gameboard's Support feature, please see the [Using the I
 
 You can view and print any certificate you earned in competition or in practice at any time from your Profile screen. In the main navigation, click **Profile**. Then, select the **Certificates** link.
 
-If your attempt to solve the practice challenge is *unsuccessful* (you've run out of time or used your allotted submissions), you can try the challenge again or return to the Practice Area to find another challenge. No certificates are awarded for partially completing a practice challenge.
+If you run out of time or use all allotted submissions, the attempt counts as *unsuccessful*. Try the challenge again or return to the Practice Area to find another option. Gameboard does not award certificates for partially completing a practice challenge.
 
 For additional information on obtaining completion certificates, please see the [Profile screen](profile.md) section of the docs.
 
@@ -1056,13 +1056,13 @@ Gameboard administrators configure global Practice Area settings including: a pr
 
 ### Getting In-Game Support
 
-The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist players and teams. Gameboard is a "one-stop shop" and no outside apps or systems are required to track and measure issues reported by participants. Users who have been granted a role with the appropriate permissions can use the support feature to manage tickets.
+The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist players and teams. Gameboard is a "one-stop shop" and you don't need outside apps or systems to track and measure issues reported by participants. Users who hold a role with the appropriate permissions can use the support feature to manage tickets.
 
 #### Support from the Participant Point-of-View
 
 ##### Creating New Support Ticket
 
-You can create tickets from two places: the Support screen and the challenge screen. If you are coming from the challenge screen, then the Support Code, player id, and challenge id are automatically generated; if you are not, then this information can be added later.
+You can create tickets from two places: the Support screen and the challenge screen. When you open the form from a challenge, Gameboard automatically fills in the Support Code, player ID, and challenge ID. If you launch the form from the Support screen, you can add that information manually.
 
 From the Support screen:
 
@@ -1073,7 +1073,7 @@ From the Support screen:
 5. Under **Attachments**, attach files (especially screen shots) here.
 6. Click **Submit**.
 
-After submitting the ticket, you can always **add a comment** and attach another file. Updates to a ticket are tracked under Activity. View a status change or an assignment change here too.
+After submitting the ticket, you can always **add a comment** and attach another file. Gameboard tracks updates to a ticket under Activity, where you can view status changes and assignment changes.
 
 From a challenge screen:
 
@@ -1084,7 +1084,7 @@ These instructions assume you have enrolled in a game, started a session, and st
 3. In the **Summary**, enter a brief statement of the problem.
 4. In the **Description**, enter a more detailed statement of your problem. Include error messages and other pertinent details.
 5. Under **Attachments**, attach files (especially screen shots) here.
-6. Click **Submit**. Because you are coming from the challenge screen, a link to the game lobby is generated and Support Code is provided.
+6. Click **Submit**. Because you opened the form from a challenge, Gameboard generates a link to the game lobby and provides the Support Code automatically.
 
 ##### Finding an Existing Ticket
 
@@ -1102,29 +1102,29 @@ Search by entering terms. Search covers ticket description, label, user, challen
 
 #### Support from the Support Role Point-of-View
 
-This section is meant for "support staff" - the people who are tasked with resolving customer service and technical support issues during a game. When we say "support staff" in the documentation, we mean those users given the `Support` role or a role that permits them to edit support settings, manage tickets, and view tickets such as `Admin` and `Director`.
+This section focuses on "support staff"—the people who resolve customer service and technical support issues during a game. In this documentation, "support staff" refers to users who hold the `Support` role or another role (such as `Admin` or `Director`) that permits them to edit support settings, manage tickets, and view tickets.
 
 ##### Creating New support Ticket (Support Staff)
 
-The procedure for support staff to create a tickets is very similar to procedure for participants to create a ticket (see above). However, after a ticket has been created users with the `Support` role have more options to manage the tickets.
+Support staff create tickets by following almost the same steps that participants use (see above). After support staff create a ticket, they have additional options to manage it.
 
 ##### Managing Support Tickets
 
 From the Ticket management side-bar:
 
-**Assigned to:** Assign the ticket to another support person. The dropdown is filtered by users who have been granted the support role.
+**Assigned to:** Assign the ticket to another support person. The dropdown lists users who hold the support role.
 
 **Status:** Move the ticket through the support workflow. Tickets are `Open`, `In progress`, or `Closed`.
 
-- **Open:** Indicates that ticket has been reported, but not yet acted upon by support staff. The ticket is "waiting" on an action.
-- **In progress:** The ticket is actively being worked on.
-- **Closed:** - The ticket has been resolved and no longer requires action from support or participants.
+- **Open:** Indicates that support staff have received the ticket but have not acted on it yet. The ticket is "waiting" on an action.
+- **In progress:** Indicates that support staff are actively working on the ticket.
+- **Closed:** Indicates that support staff have resolved the ticket and no longer need to take action.
 
 **Labels:** Labels are tags or keywords used to categorize the ticket. A label is like a hashtag (#) used on Twitter, Facebook, and other social apps. Labels help when searching for an issue; labels also help when reporting on metrics from your competition.
 
-**Challenge:** When a ticket is associated with a challenge - meaning that the ticket was created from within the specific challenge - the challenge support code is shown here. If the challenge field is blank, you can view the challenge(s) the player is a part of in the Challenge dropdown. Attach the correct challenge from here.
+**Challenge:** If you create a ticket from within a challenge, Gameboard associates it with that challenge and shows the challenge support code here. If the challenge field is blank, open the Challenge dropdown to view the player's challenge list and attach the correct challenge.
 
-**Player:** When a ticket is associated with a challenge it is also linked to a team or player. If the challenge is a team challenge, then all of the members of the team can view the ticket.
+**Player:** When a ticket ties to a challenge, Gameboard also links it to a team or player. In a team challenge, every team member can view the ticket.
 
 Add a **comment** to communicate with the participant.
 

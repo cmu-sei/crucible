@@ -14,7 +14,7 @@ Services Won't Start (Helm + k3s)
 
 2. Verify Helm deployment
 
-    - `helm list -A` to ensure the release is deployed.
+    - `helm list -A` to ensure the release deployed.
     - `helm status <release-name>` to see resource state and notes.
 
 3. Inspect failing services

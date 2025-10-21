@@ -114,7 +114,7 @@ A **Role** is a group of permissions. You assign roles to users and/or teams. On
 #### Assign Permissions
 
 - **Superadmin:** can edit anything in Player; existing Superadmins delegate this permission.
-- **View Admin:** can edit anything within a view they are assigned to.
+- **View Admin:** can edit anything within a view they manage.
 
 A Superadmin creates the view and assigns View Admin permissions to specific teams who can now edit that view.
 
@@ -146,7 +146,7 @@ The Administration section of Player is where you assign users and/or teams a se
 
 #### Define Roles
 
-Roles are predefined sets of permissions that Superadmins create for ease of administration. Assign users and/or teams a role.
+Superadmins define roles as predefined sets of permissions to simplify administration. Assign users and/or teams a role.
 
 #### Define Permissions
 
@@ -155,7 +155,7 @@ Player uses the following built-in permissions:
 - **Superadmin:** Can edit anything in Player and manage all other roles.
 - **View Admin:** Can edit anything within a view they administer.
 - **Content View User:** Can publish or update views through Terraform integration and control ISO/file upload toggles.
-- **Instructor:** Can revert VM snapshots inside Player when the feature is enabled.
+- **Instructor:** Can revert VM snapshots inside Player when you enable the feature.
 - **User:** Can view Player views assigned directly to them.
 
 ### Subscriptions

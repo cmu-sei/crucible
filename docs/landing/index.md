@@ -2,7 +2,7 @@
 
 We provide comprehensive user and administrator guides for each core application, covering setup, configuration, and day-to-day use within the Crucible Framework.
 
-- *[Alloy Guide](../alloy/)*: Alloy is used for on-demand event launching and exercise management with reporting.
+- *[Alloy Guide](../alloy/)*: Use Alloy for on-demand event launching and exercise management with reporting.
 
 - *[Blueprint Guide](../blueprint/)*: Blueprint supports collaborative Master Scenario Event List (MSEL) creation.
 
@@ -18,4 +18,4 @@ We provide comprehensive user and administrator guides for each core application
 
 - *[Steamfitter Guide](../steamfitter/)*: Steamfitter handles scenario task organization and execution via StackStorm.
 
-- *[TopoMojo Guide](../topomojo/)*: TopoMojo is used for form-based lab and challenge creation with virtual machine configuration.
+- *[TopoMojo Guide](../topomojo/)*: Use TopoMojo for form-based lab and challenge creation with virtual machine configuration.
