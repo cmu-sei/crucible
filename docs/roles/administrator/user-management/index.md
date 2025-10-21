@@ -55,7 +55,7 @@ To grant permissions in Crucible applications:
 1. Ensure users exist in your identity provider
 2. Access each application's admin interface (requires Administrator permission)
 3. Assign application-specific permissions following the permission documentation above
-4. Permissions may also be managed via application APIs for bulk operations
+4. You can also manage permissions via application APIs for bulk operations
 
 ### Team Management
 

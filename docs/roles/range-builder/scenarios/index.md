@@ -74,7 +74,7 @@ Organize activities into logical **phases**:
 
 | Assessment Task               | Description                                 | Trigger | Points |
 | ----------------------------- | ------------------------------------------- | ------- | ------ |
-| **Evidence Collection Check** | Verify that evidence was gathered correctly | Manual  | 25     |
+| **Evidence Collection Check** | Verify that the team gathered evidence correctly | Manual  | 25     |
 | **Timeline Reconstruction**   | Evaluate accuracy of event timeline         | Success | 30     |
 
 ---
