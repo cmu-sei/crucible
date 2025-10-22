@@ -39,7 +39,7 @@ Steamfitter relies upon [StackStorm](https://stackstorm.com/), an open source ev
 
 ### TopoMojo
 
-Crucible's [**TopoMojo**](https://cmu-sei.github.io/crucible/topomojo/about/) application enables designing simple labs and challenges using form based configurations. Select and configure virtual machines, define networks, and write a guide.
+Crucible's [**TopoMojo**](https://cmu-sei.github.io/crucible/topomojo/) application enables designing simple labs and challenges using form based configurations. Select and configure virtual machines, define networks, and write a guide.
 
 - [TopoMojo API Repository](https://github.com/cmu-sei/TopoMojo)
 - [TopoMojo UI Repository](https://github.com/cmu-sei/topomojo-ui)
