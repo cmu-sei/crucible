@@ -112,7 +112,7 @@ The Settings tab holds the metadata for your lab.
 
 **Authorship:** Your name and the names of others who may have assisted you.
 
-**Audience:** A space-delimited list of administrator-defined groups that have permission to deploy gamespaces from the workspace. Administrators define an *audience* with any name here. Users can deploy gamespaces from the workspace only if their *scope* matches one of the provided *audiences*. `Everyone` is the global audience that allows all users to deploy gamespaces from the workspace. For more information, see the [Admin Dashboard - Users](admin-users.md) documentation.
+**Audience:** A space-delimited list of administrator-defined groups that have permission to deploy gamespaces from the workspace. Administrators define an *audience* with any name here. Users can deploy gamespaces from the workspace only if their *scope* matches one of the provided *audiences*. `Everyone` is the global audience that allows all users to deploy gamespaces from the workspace.
 
 **Duration:** Recommended length of time in minutes that it takes to play through a gamespace launched from your workspace.
 
@@ -145,7 +145,7 @@ The list below explains the fields in the VM template.
 - **Networks:** The Networks fields allows you to add a space-delimited list of networks where the virtual machines connect. These names should be the same for all systems in your lab that need to connect to the same network.
 - **Guest Settings:** List key value pairs in the form of `key=value` to pass data into deployed VMs via VMware guestinfo Variables. The **Guest Settings** field uses VMware Guest Info Variables to inject content into virtual machines. Place key/value pairs here. The *key* is the name of the guest variable you want to define, and the *value* is the value, information, setting, of the variable. For example, `var1=test` is a guest setting named "var1" with a value of "test".
 
-  *Transforms* allow you to define dynamic variables that TopoMojo generates based on certain criteria or types. To add the concept of transforms here, select **Challenge** and see **Transforms**. The **info** icon in the Transforms section describes the transform types that are available. See also [TopoMojo Transforms](challenge.md/#transforms).
+  *Transforms* allow you to define dynamic variables that TopoMojo generates based on certain criteria or types. To add the concept of transforms here, select **Challenge** and see **Transforms**. The **info** icon in the Transforms section describes the transform types that are available. See also [TopoMojo Transforms](#transforms).
 
   Use VMware Tools, such as `open-vm-tools` and the `vmtoolsd` command, to access guest info variables from a Gamespace VM. See [Open VM Tools](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html) and [VMware Tools daemon help](https://helpmanual.io/help/vmtoolsd/).
 
@@ -230,7 +230,7 @@ The screen print below shows the Guest Settings of a VM template configured to u
 
 ![guest-settings](img/guest-settings.png)
 
-There is a detailed [Guest Settings](building-a-workspace.md/#template-field-definitions) portion of the Workspace documentation.
+There is a detailed [Guest Settings](#template-field-definitions) portion of the Workspace documentation.
 
 ### Markdown
 
@@ -291,9 +291,9 @@ Screen print 1: GUID and Local filter applied
 
 When you remove the **Local** filter, you can see *all* of the ISOs in the global folder on the NFS data store. (The folder name will contain a GUID of all zeros.) These global ISOs are available to every workspace in TopoMojo.
 
-You can attach an ISO to a VM in the challenge workspace **Templates** tab. See "Adding and editing templates" in the [Building a new Workspace](building-a-workspace.md) chapter of this guide. When you select an ISO here, TopoMojo attaches the ISO to the VM upon its deployment.
+You can attach an ISO to a VM in the challenge workspace **Templates** tab. See the [Adding and editing templates](#adding-and-editing-templates) section of this guide. When you select an ISO here, TopoMojo attaches the ISO to the VM upon its deployment.
 
-You can also attach an ISO to a VM using the workspace **Challenge** tab's **Variant Detail** function. This "dynamic ISO attachment" gives you the ability to attach a variant-specific ISO file to a template. You *must* specify a target(s) here. See also "Variants" in the [Challenge tab](challenge.md) chapter of this guide.
+You can also attach an ISO to a VM using the workspace **Challenge** tab's **Variant Detail** function. This "dynamic ISO attachment" gives you the ability to attach a variant-specific ISO file to a template. You *must* specify a target(s) here. See the [Variants](#variants) section of this guide.
 
 ## Play
 
@@ -378,9 +378,9 @@ The **Workspaces** tab is where the admin can search for workspaces and perform 
 
 In the left navigation pane, you can use the **Search** field to locate a workspace. However, searching here only returns workspaces you created or workspaces others invited you to join.
 
-**Create:** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](building-a-workspace.md).
+**Create:** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](#building-a-new-workspace).
 
-Selecting a workspace takes you the **Settings** tab of that particular workspace where you can edit it. For additional help on the **Settings** tab, see [Building a new workspace](building-a-workspace.md).
+Selecting a workspace takes you the **Settings** tab of that particular workspace where you can edit it. For additional help on the **Settings** tab, see [Building a new workspace](#building-a-new-workspace).
 
 The *workspace identifier* is present here too. The workspace identifier matches the directory name used to store workspace files like unlinked virtual machines, Markdown documents, images, etc. Copying it to the clipboard is useful if you need to use it in a terminal when navigating the filesystem.
 
@@ -422,7 +422,7 @@ TopoMojo appends the isolation tag of the workspace/gamespace to network names t
 
 TopoMojo does not append the isolation tag to persistent/shared networks listed here; the VM connects to the existing shared/persistent network.
 
-For more information on *isolation tags*, see "Isolation tags" in [TopoMojo concepts](about.md/#isolation-tag).
+For more information on *isolation tags*, see the [Isolation Tag](#isolation-tag) section.
 
 **Guest Settings:** List key value pairs in the form of `key=value` to pass data into deployed VMs via VMware guestinfo Variables. The **Guest Settings** field uses VMware Guest Info Variables to inject content into virtual machines. Place key/value pairs here. The *key* is the name of the guest variable you want to define, and the *value* is value, information, setting, of the variable. For example, `var1=test` is a guest setting named "var1" with a value of "test".
 
@@ -477,7 +477,7 @@ All permissions are *additive*; meaning a Creator can do everything a Builder ca
 
 **Name:** Enter a new user name here.
 
-**Scope:** A space-delimited list of administrator-defined groups the user belongs to. Administrators can define a *scope* with any name here. A user's scope determines which workspaces they have permission to deploy gamespaces from. Users can only deploy a gamespace from a workspace if the user has a *scope* that matches an *audience* defined in the workspace. See also: [Building a new workspace](building-a-workspace.md).
+**Scope:** A space-delimited list of administrator-defined groups the user belongs to. Administrators can define a *scope* with any name here. A user's scope determines which workspaces they have permission to deploy gamespaces from. Users can only deploy a gamespace from a workspace if the user has a *scope* that matches an *audience* defined in the workspace. See also: [Building a new workspace](#building-a-new-workspace).
 
 **Workspace Limit:** The maximum number of workspaces this user can manage.
 

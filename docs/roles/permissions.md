@@ -2,10 +2,10 @@
 
 The following grid aligns roles and their application-level permissions across:
 
-- [Alloy](../alloy/)
-- [Player](../player/)
-- [Caster](../caster/)
-- [Steamfitter](../steamfitter/)
+- [Alloy](../alloy/index.md)
+- [Player](../player/index.md)
+- [Caster](../caster/index.md)
+- [Steamfitter](../steamfitter/index.md)
 
 <div class="roles-matrix">
   <table>

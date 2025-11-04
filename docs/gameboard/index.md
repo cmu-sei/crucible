@@ -41,7 +41,7 @@ The **Games** tab is the landing page when you select **Admin** from the top nav
 
 #### The Game Center
 
-Select a game card to access that game in the **Game Center**. Use the Game Center to configure, manage, and observe games. See the [Game Center documentation](game-center.md) for a full explanation of the Game Center.
+Select a game card to access that game in the **Game Center**. Use the Game Center to configure, manage, and observe games. See the [Game Center documentation](#game-center) for a full explanation of the Game Center.
 
 Note the **game info icons** at the bottom of the game cards. When hovered over, these icons provide information about the game.
 
@@ -69,7 +69,7 @@ Toggle between games shown as *cards* or rows in a *table*. The **Table view** p
 
 Click **+ New Game** to create a new game, or upload or drop a package. Export a current game to create a package.
 
-After you create a new game, Gameboard opens the Game Center so you can configure, manage, and observe it. See the [Game Center documentation](game-center.md) to finish configuring your newly added game.
+After you create a new game, Gameboard opens the Game Center so you can configure, manage, and observe it. See the [Game Center documentation](#game-center) to finish configuring your newly added game.
 
 #### Upload a Game Package
 
@@ -148,13 +148,13 @@ The Game Center header displays game metadata and settings, including the name, 
 
 It's possible (but not required) to create questions to capture participant feedback on games and challenges. Create your feedback form template here.
 
-For a full treatment of Gameboard's feedback feature, please see the [Configuring feedback templates](admin-feedback-form.md) section of the docs.
+For a full treatment of Gameboard's feedback feature, please see the [Feedback Templates](#feedback-templates) section of the docs.
 
 ##### Completion Certificates
 
 It's possible (again, not required) to design certificate of completion templates so participants can view, share, and print certificates as proof of their participation in a game.
 
-For a full treatment of how to design completion certificates, please see the [Configuring certificate templates](admin-completion-certificates.md) section of the docs.
+For a full treatment of how to design completion certificates, please see the [Configuring Certificate Templates](#configuring-certificate-templates) section of the docs.
 
 #### Modes
 
@@ -208,7 +208,7 @@ Offering a different execution period from registration period is an option. Thi
 
 **Team Size:** This is self-explanatory. A matching *minimum* and *maximum* of one means that the challenge is a single player challenge. That is, a "team" of one. In a true team tournament, two or more would probably be the minimum.
 
-**Team Sponsorship:** Toggle *Open* or *Required*. When required, members on a team must have the same sponsor. Players choose team sponsors during enrollment. For more information on sponsors, see [Gameboard Administration](admin.md).
+**Team Sponsorship:** Toggle *Open* or *Required*. When required, members on a team must have the same sponsor. Players choose team sponsors during enrollment. For more information on sponsors, see [Sponsors](#sponsors).
 
 **Registration Markdown:** Using Markdown enter any information you would like players to see when they register for the game. For help with Markdown syntax, see this [Markdown Guide](https://www.markdownguide.org/).
 
@@ -226,7 +226,7 @@ Selecting a challenge from the search results adds it to the Edit icon.
 
 **Sync with Source:** Synchronizes the Gameboard challenge markdown guide with the TopoMojo challenge markdown guide so that the content is the same in both apps.
 
-**Support Key:** Assign a unique "key" here that gets appended to a TopoMojo gamespace id to help troubleshoot problems during competition. For example: `b28c7911 a03`--**b28c7911** is the uniquely generated gamespace ID from TopoMojo; **a03** is the support key *manually* assigned here to a challenge. For more information on support keys, see [Gameboard Administration](admin.md).
+**Support Key:** Assign a unique "key" here that gets appended to a TopoMojo gamespace id to help troubleshoot problems during competition. For example: `b28c7911 a03`--**b28c7911** is the uniquely generated gamespace ID from TopoMojo; **a03** is the support key *manually* assigned here to a challenge.
 
 **Points:** Assign a point value to your challenge here.
 
@@ -386,7 +386,7 @@ The scoreboard found here is the same publicly accessible scoreboard you would f
 
 ### Tickets Tab
 
-The support ticketing functionality found here is the same as the interface documented here: [Using the Integrated Support feature](support.md). However, the Gameboard only allows you to interact with support tickets for the game you're viewing. You can perform all of the usual support ticket actions here (filter, search, export tickets) except for creating a new ticket.
+The support ticketing functionality found here is the same as the interface documented here: [Getting In-Game Support](#getting-in-game-support). However, the Gameboard only allows you to interact with support tickets for the game you're viewing. You can perform all of the usual support ticket actions here (filter, search, export tickets) except for creating a new ticket.
 
 ### Admin Practice Area
 
@@ -408,7 +408,7 @@ To enter suggested searches, list one search term per line.
 
 #### Certificate Template
 
-Admins configure the certificate template here by entering HTML into the **Certificate Template** field. Players save certificates in PDF format for each practice challenge they fully complete. For more information on certificates, see the [Profile screen](profile.md) documentation.
+Admins configure the certificate template here by entering HTML into the **Certificate Template** field. Players save certificates in PDF format for each practice challenge they fully complete. For more information on certificates, see the [Profile screen](#the-profile-screen) documentation.
 
 For your convenience, here are several variables you can include in your template to display information about the player's performance on a practice challenge.
 
@@ -420,7 +420,7 @@ For your convenience, here are several variables you can include in your templat
 - `{{track}}`: The track the challenge was originally placed in competitive mode
 - `{{time}}`: The amount of time the player spent solving the challenge
 
-For additional guidance on creating certificate templates, see the [Configuring Certificate Templates](admin-completion-certificates.md) topic.
+For additional guidance on creating certificate templates, see the [Configuring Certificate Templates](#configuring-certificate-templates) topic.
 
 #### Session Limits
 
@@ -756,7 +756,7 @@ questions:
 
 Viewing and exporting responses to feedback requires elevated permissions. If you have the `Admin`, `Director`, or `Support` role and have logged into Gameboard, select **Reports** in the top navigation. Then select **Feedback Report**.
 
-The [Using Reports](reports.md) section of the docs documents the Feedback Reports feature.
+The [Reports](#reports) section of the docs documents the Feedback Reports feature.
 
 ### Configuring Certificate Templates
 
@@ -869,7 +869,7 @@ The new name you enter on the certificate is temporary and applies *only to prin
 
 ##### Creating Certificate Templates
 
-Game organizers with the appropriate role/permissions create completion certificate templates in the game Metadata settings. See [Configuring certificate templates](admin-completion-certificates.md) in the *Administering games* section of the Gameboard docs.
+Game organizers with the appropriate role/permissions create completion certificate templates in the game Metadata settings. See [Configuring Certificate Templates](#configuring-certificate-templates) in the *Administrator Guide* section of the Gameboard docs.
 
 #### History Tab
 
@@ -939,13 +939,13 @@ Administrators may set a limit on the number of challenges a player can have dep
 
 ![destroy deploy under gamespace resources](img/destroy-button.png)
 
-##### Getting In-Game Support
+##### Creating a Support Ticket
 
 Players can get to the in-game support feature from the launched challenge screen below the challenge questions and the Support link in the top navigation.
 
 From either of these locations, select **Create Ticket**. When you create a ticket from the challenge screen, Gameboard automatically populates the Support Code, challenge information, Game ID, Player ID, and Team ID. If you create a ticket from the Support link, you can add this information later.
 
-For a full treatment of Gameboard's Support feature, please see the [Using the Integrated Support Feature](support.md) section of the docs.
+For a full treatment of Gameboard's Support feature, please see the [Getting In-Game Support](#getting-in-game-support) section of the docs.
 
 ### Giving Feedback as a Player
 
@@ -986,7 +986,7 @@ You can **search** for a challenge to practice on.
 
 You can copy a link to your search by selecting the **copy icon** next to the search field. In the example above, you may want to share the list of challenges/labs that have "ransomware" content with another Gameboard user.
 
-Under *Need a place to start?* the Gameboard admin may have configured suggested searches for participants. Players can select one of these tags to jump directly to a set of available practice challenges. Gameboard admins should refer to "Suggested searches" in the [Admin Practice Area](admin-practice-area.md).
+Under *Need a place to start?* the Gameboard admin may have configured suggested searches for participants. Players can select one of these tags to jump directly to a set of available practice challenges. Gameboard admins should refer to "Suggested searches" in the [Admin Practice Area](#admin-practice-area).
 
 #### Starting a Practice Session
 
@@ -1014,8 +1014,6 @@ Follow the steps below to transfer text between your local machine (*out of game
 2. In **Tools**, place your cursor in the **Clipboard**, then click **Copy**.
 3. Paste into a local application.
 
-For additional information on how copy/paste works in the VM consoles, see this [Copy and paste](../topomojo/copy-paste.md) article.
-
 #### Extending Time or Ending the Session
 
 To add more time to your session, click **Extend Session**, and **Confirm** to extend the amount of time remaining.
@@ -1040,7 +1038,7 @@ Select **Click here to deactivate the sticky challenge panel** to turn off the S
 
 Click **Create Ticket** to create a support ticket if you are experiencing a technical difficulty.
 
-For a full treatment of Gameboard's Support feature, please see the [Using the Integrated Support Feature](support.md) section of the docs.
+For a full treatment of Gameboard's Support feature, please see the [Getting In-Game Support](#getting-in-game-support) section of the docs.
 
 #### Obtaining a Completion Certificate
 
@@ -1048,11 +1046,9 @@ You can view and print any certificate you earned in competition or in practice 
 
 If you run out of time or use all allotted submissions, the attempt counts as *unsuccessful*. Try the challenge again or return to the Practice Area to find another option. Gameboard does not award certificates for partially completing a practice challenge.
 
-For additional information on obtaining completion certificates, please see the [Profile screen](profile.md) section of the docs.
-
 #### Administering the Practice Area
 
-Gameboard administrators configure global Practice Area settings including: a practice page greeting, certificate template, and session limits in the Gameboard Administration settings. For help on configuring these settings, see the [Admin Practice Area](./admin-practice-area.md) documentation.
+Gameboard administrators configure global Practice Area settings including: a practice page greeting, certificate template, and session limits in the Gameboard Administration settings. For help on configuring these settings, see the [Admin Practice Area](#admin-practice-area) documentation.
 
 ### Getting In-Game Support
 
@@ -1136,7 +1132,7 @@ The **Copy to markdown** icon allows you to copy support ticket content to Markd
 
 Support-related reporting provides you with a way to manage workloads and track trends during your competition. In the main menu, select **Reports**. Then click **Support** in the Reports screen.
 
-See [Using Reports](reports.md) for help understanding the Support reports.
+See [Reports](#reports) for help understanding the Support reports.
 
 ### Reports
 
@@ -1163,7 +1159,8 @@ Each report shares common characteristics.
 - **Copy link to report:** When you run a report, the browser generates a link that reflects your current filter selections. Select the **clipboard icon** to copy the current report and share it with another Gameboard user. The user you are sharing with must log into Gameboard and have the appropriate Gameboard role. You can also copy the link in your browser's address bar and share.
 
 !!! tip
-Bookmark useful filters via the browser so you can return to them quickly.
+
+     Bookmark useful filters via the browser so you can return to them quickly.
 
 - **Export to CSV:** To export report results CSV, click **Export to CSV**.
 - **Reset Filters:** Deselecting filter values on multiple filters can be inconvenient. Click **Reset Filters** to deselect all filter values at once.
