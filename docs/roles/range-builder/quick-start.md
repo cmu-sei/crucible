@@ -11,7 +11,7 @@ Build your first cyber range in 60 minutes using Crucible. This guide creates a 
 
 ## Prerequisites
 
-- [Content Developer permissions](../roles/permissions.md) in all Crucible applications
+- [Content Developer permissions](../../roles/permissions.md) in all Crucible applications
 - Basic Terraform module available in [Caster](../../caster/index.md)
 - Understanding of your virtualization environment
 

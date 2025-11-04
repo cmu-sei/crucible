@@ -1,6 +1,6 @@
 # Infrastructure Development
 
-[Caster](../../caster/index.md) provides the foundation for all cyber range infrastructure through Terraform/OpenTofu integration. As a Range Builder, you'll design and implement network topologies that support your training objectives while maintaining flexibility and reusability.
+[Caster](../../../caster/index.md) provides the foundation for all cyber range infrastructure through Terraform/OpenTofu integration. As a Range Builder, you'll design and implement network topologies that support your training objectives while maintaining flexibility and reusability.
 
 The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-sei/crucible/latest/docs) allows you to manage Crucible resources directly through Terraform configurations.
 

@@ -12,15 +12,15 @@ Before beginning your Crucible deployment, ensure you have:
 
 ## Quick Deployment Steps
 
-1. Initial Deployment
+1. Initial Deployment:
 
-   Follow the details of our [installation guide](../install/index.md).
+    - Follow the details found in our [Installation Guide](../../install/index.md).
 
 2. Verify your deployment by:
 
-   - Logging in as an administrator
-   - Creating a test user account
-   - Verifying all core applications are accessible
+    - Logging in as an administrator
+    - Creating a test user account
+    - Verifying all core applications are accessible
 
 ## Support
 

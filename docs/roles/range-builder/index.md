@@ -8,10 +8,10 @@ This guide provides step-by-step instructions for building complete cyber ranges
 
 As a Range Builder, you'll work with four primary Crucible applications:
 
-- **[Alloy](../alloy/)**: Event orchestration and team management
-- **[Caster](../caster/)**: Infrastructure-as-code topology deployment
-- **[Steamfitter](../steamfitter/)**: Automated scenario injection and task execution
-- **[Player](../player/)**: User interface and exercise delivery
+- **[Alloy](../../alloy/index.md)**: Event orchestration and team management
+- **[Caster](../../caster/index.md)**: Infrastructure-as-code topology deployment
+- **[Steamfitter](../../steamfitter/index.md)**: Automated scenario injection and task execution
+- **[Player](../../player/index.md)**: User interface and exercise delivery
 
 ## Prerequisites
 
