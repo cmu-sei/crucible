@@ -18,8 +18,8 @@ theme:
     - content.code.copy
     - content.code.annotate
     - content.external_links
-  logo: assets/img/crucible-icon-c-alpha.svg
-  favicon: assets/img/crucible-icon-c-alpha.svg
+  logo: assets/img/home/cruciblelogo.svg
+  favicon: assets/img/home/cruciblelogo.svg
   palette:
     # Palette toggle for light mode
     - scheme: default
