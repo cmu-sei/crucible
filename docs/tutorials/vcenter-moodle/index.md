@@ -1,6 +1,6 @@
 # Crucible Range Build Guide: ODX consumed via Moodle
 
-Goal: From a clean, default Crucible stack to a working on‑demand exercise delivered through Moodle. Assumes the platform (minimum of [Caster](../caster/), [Player](../player/), [Alloy](../alloy/)) is deployed with defaults and [the Crucible plugin](https://github.com/cmu-sei/moodle-mod_crucible) is already installed on [Moodle](../integrations/#moodle).
+Goal: From a clean, default Crucible stack to a working on‑demand exercise delivered through Moodle. Assumes an already-deployed platform (minimum of [Caster](../caster/), [Player](../player/), [Alloy](../alloy/)) with defaults and [the Crucible plugin](https://github.com/cmu-sei/moodle-mod_crucible) is already installed on [Moodle](../integrations/#moodle).
 
 ## Scope & Terminology
 
