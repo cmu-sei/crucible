@@ -5,7 +5,9 @@
 		"crucible-docs"
 	],
 	"build": {
-		// Path is relative to the devcontainer.json file.
+		// set build context to parent directory
+		"context": "..",
+		// Dockerfile is relative to the current directory
 		"dockerfile": "Dockerfile"
 	},
 	// Features to add to the dev container. More info: https://containers.dev/features.
@@ -13,10 +15,7 @@
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"configureZshAsDefaultShell": true
 		},
-		"ghcr.io/devcontainers-extra/features/markdownlint-cli2:1": {},
-		"ghcr.io/shinepukur/devcontainer-features/vale:1": {},
-		"ghcr.io/devcontainers/features/github-cli:1": {},
-		"ghcr.io/devcontainers-community/npm-features/prettier:1": {}
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 	"customizations": {
 		"vscode": {
@@ -32,10 +31,15 @@
 			],
 			"settings": {
 				"editor.formatOnSave": true,
+				"editor.tabSize": 2,
 				"files.insertFinalNewline": true,
 				"files.eol": "\n",
 				"files.trimTrailingWhitespace": true,
-				"npm.packageManager": "npm"
+				"security.workspace.trust.enabled": true,
+				"security.workspace.trust.startupPrompt": "never",
+				"security.workspace.trust.untrustedFiles": "open",
+				"extensions.autoUpdate": true,
+				"extensions.autoCheckUpdates": true
 			}
 		}
 	},
@@ -45,5 +49,5 @@
 			"onAutoForward": "notify"
 		}
 	},
-	"postCreateCommand": "bash -l .devcontainer/postcreate.sh",
+	"postCreateCommand": "bash -l .devcontainer/postcreate.sh"
 }
