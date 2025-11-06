@@ -5,7 +5,7 @@ This tutorial walks you through creating and configuring a cybersecurity competi
 ## Prerequisites
 
 - Access to a Gameboard instance
-- Required role permissions assigned to your account (Admin access)
+- Required permissions to create and manage games (Gameboard Admin role)
 - Challenges already created in TopoMojo (see [TopoMojo Challenge Tutorial](/tutorials/topomojo-challenge/))
 - Basic understanding of competition structure
 
@@ -194,7 +194,7 @@ The maximum number of players or teams that can play simultaneously.
 - 100 for individual competition
 - 30 for team-based competition
 
-### Game Space Limit
+### Deployment Limits
 
 The maximum number of challenges each team or player can deploy at once.
 
@@ -410,7 +410,7 @@ Before going live, verify:
 - [ ] Feedback questions configured
 - [ ] Certificate template tested
 
-## Step 15: Publish and Monitor
+## Step 15: Go-Live and Monitor
 
 1. Save all settings
 2. Announce the competition to participants
