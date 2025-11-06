@@ -26,19 +26,19 @@ This guide is vendor‑neutral where possible and uses opinionated defaults that
 
 ## Step 1: Create the Player Exercise or "View"
 
-0. In Player, switch to `Administration`
-0. `Views` -> `Add New View`; enter Name/Description and set Status
-0. `Add Applications` (either from app templates or as blank apps)
-0. `Add Teams`, assign roles/permissions, and add apps to each team
-0. (Optional) `Configure Subscriptions` (webhooks) so apps (e.g., VM API, Maps) react when Alloy creates/deletes views for on-demand events
+1. In Player, switch to `Administration`
+1. `Views` -> `Add New View`; enter Name/Description and set Status
+1. `Add Applications` (either from app templates or as blank apps)
+1. `Add Teams`, assign roles/permissions, and add apps to each team
+1. (Optional) `Configure Subscriptions` (webhooks) so apps (e.g., VM API, Maps) react when Alloy creates/deletes views for on-demand events
 
 **Tip**: This is the exercise UI learners will open; Alloy will clone this view per event.
 
 ## Step 2: Prepare Caster Content (Directory)
 
-0. In Caster, create a `Project` and add a Directory that contains your Terraform configuration (modules, variables).
-0. You do not need to create a workspace here for ODX; Alloy will create a workspace under the directory when an event launches.
-0. Ensure your configuration is ready to plan/apply in vCenter.
+1. In Caster, create a `Project` and add a Directory that contains your Terraform configuration (modules, variables).
+1. You do not need to create a workspace here for ODX; Alloy will create a workspace under the directory when an event launches.
+1. Ensure your configuration is ready to plan/apply in vCenter.
 
 **ODX Specific**: When Alloy creates a workspace, Caster sets `DynamicHost=true`, chooses the least-loaded host among those assigned to the exercise, and writes a `generated_host_values.auto.tfvars` with `vsphere_host_name` and `vsphere_datastore`. After the event ends, the workspace is deleted and host usage is released.
 
@@ -48,13 +48,13 @@ Create a `Scenario Template` and/or `Scenario` to run tasks/injects during the e
 
 ## Step 4: Create the Alloy Definition (Template)
 
-0. In Alloy (Admin), add a new `Definition`
-0. Set `Name`, `Description`, `Duration`
-0. Paste the IDs for:
-    0. Player exercise (the view you built)
-    0. Caster directory (from Step 2)
-    0. Steamfitter scenario (Step 3, optional)
-0. Save
+1. In Alloy (Admin), add a new `Definition`
+1. Set `Name`, `Description`, `Duration`
+1. Paste the IDs for:
+    1. Player exercise (the view you built)
+    1. Caster directory (from Step 2)
+    1. Steamfitter scenario (Step 3, optional)
+1. Save
 
 What happens at launch in Alloy:
 
