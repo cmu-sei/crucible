@@ -27,7 +27,7 @@ Fill out the essential game details:
 
 This is the title players will see in the game lobby.
 
-**Example:** "Cyber Cup 2024"
+**Example:** "Cyber Cup 2026"
 
 ### Track
 
@@ -48,7 +48,7 @@ Marks which iteration of your game this is.
 
 - Season 1
 - Season 2
-- 2024 Spring
+- 2026 Spring
 
 ### Division
 
@@ -93,7 +93,7 @@ You can use Markdown formatting to create:
 **Example:**
 
 ```markdown
-## Welcome to Cyber Cup 2024!
+## Welcome to Cyber Cup 6!
 
 This competition tests your skills across:
 
@@ -103,9 +103,10 @@ This competition tests your skills across:
 - Incident response
 
 ### Important Dates
-- Registration Opens: March 1, 2024
-- Competition Start: March 15, 2024
-- Competition End: March 16, 2024
+
+- Registration Opens: March 1, 2026
+- Competition Start: March 15, 2026
+- Competition End: March 16, 2026
 
 Good luck!
 ```
@@ -146,7 +147,7 @@ Design certificates in HTML to recognize participant achievements.
   <h1>Certificate of Achievement</h1>
   <p>This certifies that</p>
   <h2>{{player_name}}</h2>
-  <p>participated in the Cyber Cup 2024</p>
+  <p>participated in the Cyber Cup 2026</p>
   <p>Final Score: {{player_score}}</p>
   <p>Date: {{completion_date}}</p>
 </div>
@@ -274,6 +275,7 @@ Provide formatted instructions on how to sign up for your game using Markdown.
 4. Submit your registration
 
 ### Team Requirements
+
 - All team members must have the same sponsor
 - Minimum team size: 2
 - Maximum team size: 4

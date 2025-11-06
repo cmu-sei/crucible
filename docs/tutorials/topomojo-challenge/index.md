@@ -7,7 +7,7 @@ This tutorial walks through creating a cybersecurity challenge in [TopoMojo](../
 - Access to a TopoMojo instance
 - Required role permissions for creating workspaces
 - Basic understanding of virtualization and networking concepts
-- Familiarity with VMware vCenter (For this tutorial, TopoMojo uses vCenter as the hypervisor)
+- Familiarity with VMware vCenter (for this tutorial, we use VMware vCenter as the hypervisor, but TopoMojo also supports other hypervisors like Proxmox)
 
 ## Overview
 
@@ -92,7 +92,7 @@ To save changes made to a VM:
 2. This creates a new disk on the backend
 3. Any changes you make are now saved to that disk
 
-**Important:** If you don't unlink the VM, changes are not saved.
+**Important:** Click **Unlink** before modifying a VM. If you don't unlink, your changes won't persist.
 
 **Warning for this demo:** The demo will not click Unlink to avoid creating unnecessary backend storage.
 
@@ -252,7 +252,7 @@ TOKEN1=$(vmware-toolsd --cmd "info-get guestinfo.token1")
 echo $TOKEN1
 ```
 
-Note: Specific command syntax may vary by VMware tools version
+Note: Specific command syntax may vary by VMware tools version (`vmware-toolsd` vs. `vmtoolsd`).
 
 ## Step 7: The Challenge Server
 
