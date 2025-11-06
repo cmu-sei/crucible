@@ -2,7 +2,7 @@
 
 This [dev container](https://containers.dev/) makes it easy to edit and test changes to the [Crucible documentation](https://cmu-sei.github.io/crucible/).
 
-For more information about dev containers, read the [documentation for using dev containers with VSCode](https://code.visualstudio.com/docs/devcontainers/containers), the documentation for the [VSCode Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), or the [dev containers homepage](https://containers.dev/)
+For more information about dev containers, read the [documentation for using dev containers with VSCode](https://code.visualstudio.com/docs/devcontainers/containers), the documentation for the [VSCode Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), or the [dev containers homepage](https://containers.dev/).
 
 ## Key Features
 
