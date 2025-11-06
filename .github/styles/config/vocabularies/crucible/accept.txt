@@ -100,4 +100,3 @@ kubectl
 Nextcloud
 (?i)gameplay
 Zscaler
-[Dd]evcontainer
