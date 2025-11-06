@@ -8,7 +8,7 @@ Goal: From a clean, default Crucible stack to a working on‑demand exercise del
 
 [Alloy](../../alloy/): Provisioning/orchestration service that translates exercise manifests to cloud/virtualization backends (here: vCenter).
 
-[Player](../../player/): Run‑time coordination and telemetry for live exercises (session lifecycle, scoring, capture, teardown hooks).
+[Player](../../player/): Run‑time coordination and telemetry for live exercises (session lifecycle, scoring, capture, tear down hooks).
 
 [Crucible Moodle plugin](https://github.com/cmu-sei/moodle-mod_crucible): Launches a Player session from a Moodle activity; handles user mapping and grade return.
 
@@ -23,7 +23,7 @@ This guide is vendor‑neutral where possible and uses opinionated defaults that
     - Steamfitter Content Developer
 - vCenter capacity sized for On-Demand (ODX) behavior (Caster can dynamically select hosts per exercise)
 - Moodle's Crucible activity plugin available in your Learning Management System (LMS)
-    
+
 ## Step 1: Create the Player Exercise or "View"
 
 0. In Player, switch to `Administration`
