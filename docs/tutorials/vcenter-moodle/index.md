@@ -26,17 +26,17 @@ This guide is vendor‑neutral where possible and uses opinionated defaults that
 
 ## Step 1: Create the Player Exercise or "View"
 
-1. In Player, switch to `Administration`
-1. `Views` -> `Add New View`; enter Name/Description and set Status
-1. `Add Applications` (either from app templates or as blank apps)
-1. `Add Teams`, assign roles/permissions, and add apps to each team
-1. (Optional) `Configure Subscriptions` (webhooks) so apps (e.g., VM API, Maps) react when Alloy creates/deletes views for on-demand events
+1. In Player, switch to **Administration**
+1. **Views** -> **Add New View**; enter Name/Description and set Status
+1. **Add Applications** (either from app templates or as blank apps)
+1. **Add Teams**, assign roles/permissions, and add apps to each team
+1. (Optional) **Configure Subscriptions** (webhooks) so apps (e.g., VM API, Maps) react when Alloy creates/deletes views for on-demand events
 
 **Tip**: This is the exercise UI learners will open; Alloy will clone this view per event.
 
 ## Step 2: Prepare Caster Content (Directory)
 
-1. In Caster, create a `Project` and add a Directory that contains your Terraform configuration (modules, variables).
+1. In Caster, create a new **Project** and add a **Directory** that contains your Terraform configuration (modules, variables).
 1. Ensure that your virtual machine names are unique, as required by vCenter. Typically, we recommend appending the `view_id` to the virtual machine name, as Alloy will fill in the variable with the cloned View's Id.
 1. You do not need to create a workspace here for ODX; Alloy will create a workspace under the directory when an event launches.
 1. Ensure your configuration is ready to plan/apply in vCenter.
@@ -45,12 +45,12 @@ This guide is vendor‑neutral where possible and uses opinionated defaults that
 
 ## Step 3: (Optional) Author a Steamfitter Scenario
 
-Create a `Scenario Template` and/or `Scenario` to run tasks/injects during the event. [Steamfitter](../../steamfitter/) integrates with StackStorm for guest-VM actions and supports scheduled/manual tasks and injects.
+Create a **Scenario Template** and/or **Scenario** to run tasks/injects during the event. [Steamfitter](../../steamfitter/) integrates with StackStorm for guest-VM actions and supports scheduled/manual tasks and injects.
 
 ## Step 4: Create the Alloy Definition (Template)
 
-1. In Alloy (Admin), add a new `Definition`
-1. Set `Name`, `Description`, `Duration`
+1. In Alloy (Admin), add a new **Definition**
+1. Set **Name**, **Description**, **Duration**
 1. Select from the dropdown or paste the IDs for:
     1. Player exercise (the view you built)
     1. Caster directory (from Step 2)
@@ -61,7 +61,7 @@ What happens at launch in Alloy:
 
 - Player exercise cloned into a new exercise
 - Steamfitter session created (if provided)
-- Caster workspace created in the chosen directory and `auto.tfvars` is written with Exercise/Team/User context
+- Caster workspace created in the chosen directory and it writes `auto.tfvars` with Exercise/Team/User context
 - The workspace planned and applied
 - The Steamfitter scenario starts
 
@@ -77,7 +77,7 @@ Use the Crucible Plugin for Moodle activity to start, access, and stop Crucible 
 
 ## Step 6: Launch and Validate
 
-As a user (or instructor), open Alloy -> `Labs/Launch`, select the event template (Definition), and `Launch`. If an active event exists for that user/template, open or end it instead.
+As a user (or instructor), open Alloy -> **Labs/Launch**, select the event template (Definition), and **Launch**. If an active event exists for that user/template, open or end it instead.
 
 Observe the lifecycle:
 
@@ -90,6 +90,6 @@ From Player, interact with the apps you assigned (VMs, chat, tickets, etc.).
 
 ## Troubleshooting / Ops Notes
 
-If you must stop `Caster.Api`, first disable Workspace Operations in Administration -> `Workspaces` and wait for active runs to complete (avoids state corruption).
+If you must stop `Caster.Api`, first disable Workspace Operations in Administration -> **Workspaces** and wait for active runs to complete (avoids state corruption).
 
 For ODX capacity issues, check the available hosts, since excessive VM counts against constrained resources will fail the run.
