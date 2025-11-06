@@ -17,10 +17,10 @@ This guide is vendor‑neutral where possible and uses opinionated defaults that
 ## Prerequisites
 
 - Appropriate roles across apps:
-    - Alloy `Superadmin/Event Admin`
-    - Player `SystemAdmin/ViewAdmin`
-    - Caster permissions
-    - Steamfitter Content Developer
+  - Alloy: `Administrator` or `Content Developer`
+  - Player: `Administrator` or `Content Developer`
+  - Caster: `Administrator` or `Content Developer`
+  - Steamfitter: `Administrator` or `Content Developer`
 - vCenter capacity sized for On-Demand (ODX) behavior (Caster can dynamically select hosts per exercise)
 - Moodle's Crucible activity plugin available in your Learning Management System (LMS)
 
@@ -37,10 +37,11 @@ This guide is vendor‑neutral where possible and uses opinionated defaults that
 ## Step 2: Prepare Caster Content (Directory)
 
 1. In Caster, create a `Project` and add a Directory that contains your Terraform configuration (modules, variables).
+1. Ensure that your virtual machine names are unique, as required by vCenter. Typically, we recommend appending the `view_id` to the virtual machine name, as Alloy will fill in the variable with the cloned View's Id.
 1. You do not need to create a workspace here for ODX; Alloy will create a workspace under the directory when an event launches.
 1. Ensure your configuration is ready to plan/apply in vCenter.
 
-**ODX Specific**: When Alloy creates a workspace, Caster sets `DynamicHost=true`, chooses the least-loaded host among those assigned to the exercise, and writes a `generated_host_values.auto.tfvars` with `vsphere_host_name` and `vsphere_datastore`. After the event ends, the workspace is deleted and host usage is released.
+**ODX Specific**: For vCenter *with* cluster licensing,	do not enable Dynamic Host. Point Terraform at the vCenter cluster and let vCenter handle host placement. For a vCenter *without* cluster licensing, enable Dynamic Host in Alloy so Caster selects a host at launch. When Alloy creates a workspace, Caster sets `DynamicHost=true`, chooses the least-loaded host among those assigned to the exercise, and writes a `generated_host_values.auto.tfvars` with `vsphere_host_name` and `vsphere_datastore`. In either licensing model, when the event ends, the system deletes the workspace and releases the host usage.
 
 ## Step 3: (Optional) Author a Steamfitter Scenario
 
