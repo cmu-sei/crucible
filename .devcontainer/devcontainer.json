@@ -34,9 +34,6 @@
 				"files.insertFinalNewline": true,
 				"files.eol": "\n",
 				"files.trimTrailingWhitespace": true,
-				"security.workspace.trust.enabled": true,
-				"security.workspace.trust.startupPrompt": "never",
-				"security.workspace.trust.untrustedFiles": "open",
 				"extensions.autoUpdate": true,
 				"extensions.autoCheckUpdates": true
 			}

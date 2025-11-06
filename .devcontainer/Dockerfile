@@ -52,4 +52,4 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --no-input -r requirements.txt
 
 # Install linting alias
-RUN echo "alias lint='bash /workspace/crucible-docs/lint-docs.sh'" >> /etc/bash.bashrc
+RUN echo "\n# Custom alias for lint-docs.sh\nalias lint='bash /workspace/../lint-docs.sh'" >> /etc/zsh/zshrc
