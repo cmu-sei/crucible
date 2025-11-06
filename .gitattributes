@@ -1,0 +1,34 @@
+# Enforce LF for all text files across platforms
+* text=auto eol=lf
+
+# Common text types (explicit for clarity)
+*.sh text
+*.bash text
+*.py text
+*.toml text
+*.json text
+*.yml text
+*.yaml text
+*.md text
+*.cfg text
+*.ini text
+Dockerfile text
+Makefile text
+makefile text
+
+# Windows-only scripts (if ever added)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files (no line ending normalization)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.tgz binary
+*.xz binary
