@@ -4,23 +4,23 @@
 
 **Steamfitter** gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and injects which run against virtual machines during an event. These scenarios enable the content developer to automate assessments and configurations.
 
-In the Steamfitter UI, there are four major functional sections:
+In the Steamfitter UI, four major functional sections help you manage content:
 
-- Scenario Templates: Used to organize tasks into groups that can be reused on demand.
-- Scenarios: Displays all planned, running, and completed scenarios.
-- Tasks: User tasks used to create and execute ad-hoc tasks.
-- History: Displays the results of all tasks executed by all users.
+- Scenario Templates: Organize tasks into groups that you can reuse on demand.
+- Scenarios: Display all planned, running, and completed scenarios.
+- Tasks: Let users create and execute ad-hoc tasks.
+- History: Shows the results of all tasks executed by all users.
 
 ## Roles and Permissions
 
 - **Superadmin:** Has the rights to perform all actions in Steamfitter.
 - **Rangetech Admin:** Create, manage, and import scenarios or scenario templates; assign and remove users from scenarios and scenario templates; and create or manage groups.
 - **Content Developer:** Create scenario templates and scenarios, and assign or remove users from the scenarios or templates they create.
-- **Read-Only User:** View only the projects they are assigned to. They are not allowed to edit any templates or run any tasks.
+- **Read-Only User:** View only the projects assigned to them. They cannot edit any templates or run tasks.
 
 ### Steamfitter Permissions
 
-Any user who visits the Steamfitter URL is automatically added to the user list with no permissions. Only a Steamfitter Superadmin can grant another user elevated permissions.
+When a user visits the Steamfitter URL, Steamfitter automatically adds them to the user list with no permissions. Only a Steamfitter Superadmin can grant another user elevated permissions.
 
 1. In Steamfitter, in the top-right corner, select your user name, then **Administration**.
 2. Check the boxes for **RangetechAdmin**, **ContentDeveloper**, or **ReadOnly** next to the name of the user, depending on the required access.
@@ -42,7 +42,7 @@ Steamfitter is primarily an administrative tool. Content Developers and Rangetec
 
 ![scenariotemplate](../assets/img/scenario templates.png)
 
-Scenario templates are where predefined tasks are grouped; scenario templates are used to create scenarios that can be run on-demand. All that is required to enter a new scenario template is a **Name**, **Description**, and **Duration**.
+Scenario templates group predefined tasks so you can create scenarios and run them on demand. To create a new scenario template, provide a **Name**, **Description**, and **Duration**.
 
 After adding the new scenario template, you can **Create a Scenario**, **Copy** a scenario template to create a duplicate, **Edit** it, and **Delete** it.
 
@@ -52,88 +52,88 @@ Add tasks in the Scenario Templates screen by clicking the **+** icon. Complete 
 
 ![scenarios](../assets/img/scenarios.png)
 
-Scenarios are groupings of predefined tasks that can be executed against a required view's VMs.
+Scenarios group predefined tasks that you can execute against a required view's VMs.
 
 Define tasks in the scenario template, then create the *scenario*. Note that the scenario template is the *plan*; the scenario is the actual *instance*. One template can yield multiple scenarios. Associate these scenarios with one or more Player views.
 
-In the **Scenarios** screen, the created scenario is named `scenario template name` - `your username` by default.
+In the **Scenarios** screen, Steamfitter names the created scenario `scenario template name` - `your username` by default.
 
-Select the newly added scenario from the scenario list. Now, you can edit the **Name** and **Description** and you also have the **View** dropdown. A scenario must be associated with one specific Player view.
+Select the newly added scenario from the scenario list. You can edit the **Name** and **Description** and use the **View** dropdown. Associate each scenario with one specific Player view.
 
-**Start** and **End** dates and times can be changed here.
+You can change the **Start** and **End** dates and times here.
 
 !!! success
 
-    As you would expect, the same tasks you attached to the scenario template appear in the scenario. Editing them in the scenario only changes them in this scenario. If you want the tasks to be changed for all scenarios based upon the template, then you will have to edit the tasks in the scenario template.
+    The scenario inherits the tasks you attached to the scenario template. If you edit them in the scenario, the changes apply only to that scenario. To update every scenario based on the template, edit the tasks in the scenario template.
 
 #### Starting a Scenario
 
-In order for tasks to execute, a task has to be started.
+Start the scenario to execute its tasks.
 
 !!! info
 
-    If the Start Scenario button is not enabled, that means that you have not associated it to a Player view.
+    If the **Start Scenario** button stays disabled, you have not associated the scenario with a Player view.
 
-Once started, the scenario status is now **Active** and a new **Execute** option is available in the Task context menu.
+When you start the scenario, Steamfitter marks it **Active** and adds a new **Execute** option to the Task context menu.
 
-After executing tasks, the results display in the task details. Each task is expandable. You will see a result listed for every execution of the task.
+After you execute tasks, the results display in the task details. Each task is expandable. You will see a result listed for every execution of the task.
 
 #### Ending a Scenario
 
-Scenarios can also be ended. When a scenario is started, the Start Scenario button changes to **End Scenario Now**.
+You can also end scenarios. After you start a scenario, the **Start Scenario** button changes to **End Scenario Now**.
 
 ### Tasks
 
-A *task* is an action or command that can be executed against one or more topology resources (that is, a VM). Each task has a *result*. A result is a single output that is generated when a task is executed against a single topology resource - like a single VM. A result indicates success or failure and typically includes some text describing the outcome.
+A *task* is an action or command that executes against one or more topology resources (that is, a VM). Each task has a *result*. The result captures the output generated when the task runs against a single topology resource—such as one VM—and indicates success or failure. The output typically includes text describing the outcome.
 
-A task has no results until it is executed.
+A task has no results until you execute it.
 
-A task can have multiple results:
+A task can produce multiple results:
 
-- a task defined to run against one VM will have one result for each time the task is executed
-- a task defined to run against multiple VMs will have on result per VM - each time the task is executed. So, a task that runs against four VMs and is executed three times yields 12 results.
+- a task defined to run against one VM generates one result for each execution
+- a task defined to run against multiple VMs generates one result per VM each time the task runs. For example, a task that targets four VMs and runs three times yields 12 results.
 
 #### Adding a Task
 
-- **Name:** What this task is supposed to do.
-- **Description:** Additional details about what the task does.
+- **Name:** Describe what this task does.
+- **Description:** Provide additional details about the task.
 
 ##### Action
 
-- **Select an Action:** Power on a VM, power off a VM, read a file, etc. An *action* is the name StackStorm gives to a single Task/Command.
+- **Select an Action:** Power on a VM, power off a VM, read a file, etc. StackStorm refers to a single task/command as an *action*.
 - **Trigger Condition:**
 
-       - *Time:* A *timed* trigger is executed automatically after a set *delay* in seconds. A timed trigger can have multiple *iterations* executed on a specific interval.
-       - *Manual:* A *manual* trigger condition is executed by manual intervention - for example, clicking a button to fire off a task. It's up to a user to intervene to execute the task.
-       - *Completion:* When the parent task completes, the dependent task runs - regardless of success or failure.
-       - *Success:* If the expected output is contained in the actual output, then the dependent task runs.
-       - *Failure:* Only runs if the expected output is not contained within the actual output.
+       - *Time:* Steamfitter executes a timed trigger automatically after the specified *delay* in seconds. A timed trigger can run multiple *iterations* on a specific interval.
+       - *Manual:* A manual trigger runs only when a user intervenes—for example, by clicking a button to fire off a task.
+       - *Completion:* When the parent task completes, the dependent task runs—regardless of success or failure.
+       - *Success:* If the actual output contains the expected output, the dependent task runs.
+       - *Failure:* Runs only when the actual output does not include the expected output.
 
-- **Expected Output:** Whatever you type here, if the actual output contains that text, then it is considered a success. If the output does not contain what is typed here, then it is considered a failure.
+- **Expected Output:** Enter the text that indicates success. If the actual output contains that text, the task counts as a success; otherwise it counts as a failure.
 
 ##### Delay / Iteration / Expiration
 
-- **Delay:** Set in seconds before the task executes.
-- **Number of Iterations:** An *iteration* is an execution of a task when the task is configured to iterate for *x* number of times. Enter the number of times you want the task to execute here.
-- **Interval Between Iterations:** The time in seconds between iterations.
+- **Delay:** Specify the number of seconds before the task executes.
+- **Number of Iterations:** Enter how many times you want the task to execute when you configure it to iterate.
+- **Interval Between Iterations:** Specify the time in seconds between iterations.
 - **Iteration Termination:**
 
-      - *IterationCountTask:* The task will execute until exactly the number of iteration times specified above; regardless of whether the task succeeds or fails.
-      - *UntilSuccess:* The task will iterate until the command has a successful completion.
-      - *UntilFailure:* The task will iterate until the command fails.
+      - *IterationCountTask:* The task executes exactly the number of iteration times specified above, regardless of success or failure.
+      - *UntilSuccess:* The task iterates until the command completes successfully.
+      - *UntilFailure:* The task iterates until the command fails.
 
 - **Expiration Timeout:** The time in seconds where, in the absence of a response, the task expires (times out).
 
 ##### VM Selection
 
-- **VM Mask:** Tasks will run against Player VMs that include the text typed here.
-- **Choose Actual VMs:** Enable Choose Actual VMs to select specific VMs; these are the VMs found in the selected Player view.
+- **VM Mask:** Steamfitter runs tasks against Player VMs that include the text you enter here.
+- **Choose Actual VMs:** Enable Choose Actual VMs to select specific VMs from the Player view.
 
 #### Task Menu and Dependent Tasks
 
-Clicking the Task Menu on the newly created task will give you the context menu for the task: **Edit**, **Copy**, **Cut**, **New**, **Delete**, and **Execute**. Selecting **New** here, however, creates a new *dependent* task. A dependent task does not execute until the condition on the parent task is met.
+Clicking the Task Menu on the newly created task opens the context menu: **Edit**, **Copy**, **Cut**, **New**, **Delete**, and **Execute**. Selecting **New** here creates a new *dependent* task, which waits to run until the parent task meets its condition.
 
-A task can be copied and pasted from any other scenario template, scenario, and task.
+You can copy and paste a task between scenario templates, scenarios, or other tasks.
 
 ### History
 

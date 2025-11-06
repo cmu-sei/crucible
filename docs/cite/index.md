@@ -2,7 +2,7 @@
 
 ## Overview
 
-[**CITE**](#glossary) is a web application created to integrate with the Crucible Framework and allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents. CITE compares a user's score to their organization's score, group average scores, and the official exercise score. Scores are submitted for each [move](#glossary) as the exercise progresses and each of the historical scores can be recalled for reference at any time.
+[**CITE**](#glossary) integrates with the Crucible Framework and allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents. CITE compares a user's score to their organization's score, group average scores, and the official exercise score. Participants submit a score for each [move](#glossary) as the exercise progresses, and they can recall each historical score for reference at any time.
 
 In the CITE User Interface, there are two major functional sections:
 
@@ -16,15 +16,15 @@ For installation, refer to these GitHub repositories.
 
 ## CITE Permissions
 
-In order to use CITE, a user must be assigned a scoring permission.
+In order to use CITE, an administrator assigns each user a scoring permission.
 
-There are three levels of permissions in CITE that affect the way a team score is collaborated on and edited.
+There are three levels of permissions in CITE that shape how a team collaborates on and edits a score.
 
 - [Basic](#glossary): Can only view the team score.
 - [Modify](#glossary): Can view and edit the team score.
 - [Submit](#glossary): Can view, edit, and submit the team score.
 
-Most users will have modify-level permission; however, one or two users per team will have submit-level permission, enabling them to edit and/or submit on the team score.
+Most users hold modify-level permission; however, one or two users per team hold submit-level permission, enabling them to edit and submit the team score.
 
 Additionally, participants who can submit scores on behalf of their team can also add suggested actions and participant roles to the CITE Dashboard.
 
@@ -34,12 +34,12 @@ Refer to the [Actions to Consider](#actions-to-consider) section for more inform
 
 ### Moves
 
-In CITE, a move is a defined period of time during an exercise, in which a series of events are distributed for users to discuss and assess the current incident severity.
+In CITE, a move is a defined exercise period. During that period the system distributes events for users to discuss and assess the current incident severity.
 
 When in Dashboard view, users have two options for interacting with moves:
 
-- **Displayed Move:** Move that will be currently displayed on the screen. Here, users can see responses to previous moves and scores, but users will not be able to edit a response.
-- **Current Move:** Move that is currently active. There are cases where the Displayed Move and the Current Move might be the same. Here, users are allowed to edit the category of the move.
+- **Displayed Move:** Move currently shown on the screen. Here, users can see responses to previous moves and scores, but they cannot edit a response.
+- **Current Move:** Move that is currently active. In some cases the Displayed Move and the Current Move match. Here, users can edit the category of the move.
 
 ### CITE Landing Page
 
@@ -152,7 +152,7 @@ The move currently displayed on the screen. Clicking < displays previous moves. 
 - **Team:** Toggling the Team icon displays how the team scored this move so far. This is the score that the team collaborates on and submits for the current move. This score compares to the official score. The Team score appears under the Score Summary range.
 - **Team Avg:** The average for all of the users on the team. The Team Avg appears under the Score Summary range for all moves except the current move.
 - **Group Avg:** The average for all of the teams in the user's group. Group Avg appears under the Score Summary range for all moves except the current move.
-- **Official:** The potential score; that is, how the incident should have been scored had it been a real-life scenario. Official score appears under the Score Summary range for all moves except the current move.
+- **Official:** The potential score; that is, how the incident would score in a real-life scenario. Official score appears under the Score Summary range for all moves except the current move.
 - **Submit:** Submits the score, indicating that the user scored the current move. Click Yes or No. If the user clicks Yes but changes their mind, click Reopen to edit the scoring.
 - **Clear:** Clears any selections the user has checked but does not clear comments entered. Selecting Clear returns to a score of 0.00.
 - **Preset:** Sets the user's selections to the previous move score to use as a starting point for the current move.
@@ -177,13 +177,13 @@ When finished scoring the categories and adding comments, click Submit to submit
 
 ##### Hotspot 5
 
-Displays the various scores at the appropriate severity level for the displayed move so the scores are always visible.
+The Score Summary panel displays the various scores at the appropriate severity level for the displayed move, keeping the data visible at all times.
 
 #### Team Selection
 
 ##### Hotspot 6
 
-This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
+This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When the administrator assigns an observer role, the user can see other teams' progress during the exercise as well as participate on their own team.
 
 #### CITE Report Toggle
 
@@ -217,7 +217,7 @@ The following image shows the Evaluations Administration Page. Here, administrat
 
 #### Add an Evaluation
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Evaluation.
+If the exercise administrator grants the appropriate permissions, follow these steps to add an Evaluation.
 
 ![Add Evaluation OE](../assets/img/AddEvaluation-v5.png)
 
@@ -234,7 +234,7 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 | **Gallery Exhibit ID**     | GUID          | ID of the Gallery exhibit, if using Gallery during an exercise        | 81a623e3-faeb-4a56-8b4d-0d42f90b6829               |
 | **Current Move**           | Integer       | Current move of the evaluation                                        | 0                                                  |
 | **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | 1/23/2024, 14:22:40                                |
-| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | Agency has been hacked with a ransomware attack... |
+| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | Ransomware attackers compromised the agency's network... |
 
 To save these settings, click **Save**.
 
@@ -340,7 +340,7 @@ To delete a move, follow these steps:
 | ------------------- | ------------- | -------------------------------------------------------------- | -------------------------- |
 | **Name**            | String        | Name for the team                                              | Carnegie Mellon University |
 | **Short Name**      | String        | Short name for the team, such as an acronym                    | CMU                        |
-| **Team Type**       | Dropdown Text | Select what type should be assigned to the team                | Individual Organization    |
+| **Team Type**       | Dropdown Text | Select the type that applies to the team                       | Individual Organization    |
 | **Hide Scoresheet** | Boolean       | Select whether to hide CITE Scoresheet from that specific team | False                      |
 
 To save these settings, click **Save**.
@@ -370,12 +370,12 @@ To delete a team, follow these steps:
 To assign the [Observer Role](#glossary) to a user:
 
 1. Under **Evaluation Users**, search for the desired user.
-2. Once the user has been found, click **Add**.
+2. After you find the user, click **Add**.
 
 To remove the Observer Role from a user:
 
 1. Under **Observers**, search for the desired user.
-2. Once the user has been found, click **Remove**.
+2. After you find the user, click **Remove**.
 
 ### Scoring Models
 
@@ -385,7 +385,7 @@ The following image shows the [Scoring Models](#glossary) Administration Page. H
 
 #### Add a Scoring Model
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add a Scoring Model.
+If the exercise administrator grants the appropriate permissions, follow these steps to add a Scoring Model.
 
 ![Add Scoring Model OE](../assets/img/addScoringModel-v4.png)
 
@@ -399,11 +399,11 @@ Assuming that the user has been granted the appropriate permissions by the exerc
 | **Scoring Model Description**                 | String        | Details, characteristics and information of the scoring model                      | NCISS Scoring Model |
 | **Scoring Model Status**                      | Dropdown Text | Status of the scoring model after configuration                                    | Active              |
 | **Calculation Equation**                      | Varchar       | Equation used to evaluate participant scores                                       | {sum}               |
-| **Use Individual User Scoring**               | Boolean       | If selected, the User score is displayed                                           | False               |
-| **Use Team Scoring**                          | Boolean       | If selected, the Team score is displayed                                           | True                |
-| **Use Official Scoring**                      | Boolean       | If selected, the Official score is displayed                                       | False               |
-| **Use Team Average Scoring**                  | Boolean       | If selected, the Team Average score is displayed                                   | False               |
-| **Use Type Average Scoring**                  | Boolean       | If selected, the Type Average score is displayed                                   | False               |
+| **Use Individual User Scoring**               | Boolean       | Select this option to display the User score                                       | False               |
+| **Use Team Scoring**                          | Boolean       | Select this option to display the Team score                                       | True                |
+| **Use Official Scoring**                      | Boolean       | Select this option to display the Official score                                   | False               |
+| **Use Team Average Scoring**                  | Boolean       | Select this option to display the Team Average score                               | False               |
+| **Use Type Average Scoring**                  | Boolean       | Select this option to display the Type Average score                               | False               |
 | **Use Submit**                                | Boolean       | Setting to add Submit button to CITE Scoresheet                                    | False               |
 | **Hide Scores on Scoresheet**                 | Boolean       | Don't show scores on Scoresheet                                                    | True                |
 | **Display Comments as Textboxes**             | Boolean       | Provide a larger textbox on Scoresheet for lengthy responses                       | True                |
@@ -421,7 +421,7 @@ When adding a Scoring Model, an administrator adds a defined equation to calcula
 - **{minPossible}:** The minimum possible value of the submission.
 - **{maxPossible}:** The maximum possible value of the submission.
 
-Aside from these variables, **>** can be used to set clipping values for the equation.
+Aside from these variables, use **>** to set clipping values for the equation.
 
 - **Example:** 100 > equation > 20 will constrain the value of the submission between 100 and 20.
 
@@ -491,12 +491,12 @@ Within a Scoring Model, an administrator can add one or more Scoring Categories.
 | --------------------------------- | ------------- | ------------------------------------------------------------------------------------------------ | ------------------ |
 | **Scoring Category Description**  | String        | Details, characteristics and information of the scoring category                                 | Information Impact |
 | **Display Order**                 | Integer       | Scoring category display order on CITE Scoresheet                                                | 1                  |
-| **First Move to Display**         | Integer       | Move number the scoring category should be first displayed                                       | 1                  |
-| **Last Move to Display**          | Integer       | Move number the scoring category should be last displayed                                        | 1                  |
+| **First Move to Display**         | Integer       | Move number where the scoring category first appears                                             | 1                  |
+| **Last Move to Display**          | Integer       | Move number where the scoring category appears for the final time                                | 1                  |
 | **Calculation Equation**          | Varchar       | Equation used to evaluate participant's scores                                                   | {sum}              |
 | **Calculation Weight**            | Integer       | Weight of the score compared to other categories                                                 | 1                  |
-| **Scoring Option Selection Type** | Dropdown Text | Determine whether the checkboxes should be shown for scoring from Single, Multiple, None options | Single             |
-| **Modifier Selection Required**   | Boolean       | Modifiers can be added to add an alternate value to the calculation                              | True               |
+| **Scoring Option Selection Type** | Dropdown Text | Determine whether the scoring checkboxes show Single, Multiple, or None options                  | Single             |
+| **Modifier Selection Required**   | Boolean       | Select this option to require modifiers that supply alternate values                             | True               |
 
 To save these settings, click **Save**.
 
@@ -550,7 +550,7 @@ Within a Scoring Category, an administrator can add one or more [Scoring Options
 | **Scoring Option Description** | String    | Details, characteristics and information of the scoring option      | No Impact |
 | **Display Order**              | Integer   | Scoring option display order on CITE Scoresheet                     | 1         |
 | **Value**                      | Integer   | The scoring option's value for participant score                    | 0         |
-| **Is a Modifier**              | Boolean   | Modifiers can be added to add an alternate value to the calculation | True      |
+| **Is a Modifier**              | Boolean   | Select this option to treat the scoring option as a modifier        | True      |
 
 To save these settings, click **Save**.
 
@@ -580,13 +580,13 @@ To delete a scoring option, follow these steps:
 
 The following image shows the Actions Administration Page. Here, administrators can add, edit, and delete actions.
 
-However, users who can submit scores on behalf of their team can also add suggested actions to the CITE Dashboard. The use of actions allows team members to customize their response by tracking tasks during the exercise. These actions remain internal to the team and will not be visible to other participants.
+However, users who can submit scores on behalf of their team can also add suggested actions to the CITE Dashboard. The use of actions allows team members to customize their response by tracking tasks during the exercise. The system keeps these actions internal to the team and hides them from other participants.
 
 ![Actions Admin OE](../assets/img/actionsAdmin-v2.png)
 
 #### Add an Action
 
-Assuming that the user has been granted the appropriate permissions by the exercise administrator, follow these steps to add an Action.
+If the exercise administrator grants the appropriate permissions, follow these steps to add an Action.
 
 ![Add Action OE](../assets/img/addAction-v3.png)
 
@@ -625,13 +625,13 @@ To delete an action, follow these steps:
 
 The following image shows the Roles Administration Page. Here, administrators can add, edit, and delete roles.
 
-However, users who can submit scores on behalf of their team can also add participant roles to the CITE Dashboard. The use of roles allows team members to customize their response by tracking their responsibilities during an exercise. These roles remain internal to the team and will not be visible to other participants.
+However, users who can submit scores on behalf of their team can also add participant roles to the CITE Dashboard. The use of roles allows team members to customize their response by tracking their responsibilities during an exercise. These roles remain internal to the team and stay hidden from other participants.
 
 ![Roles Admin OE](../assets/img/rolesAdmin-v2.png)
 
 #### Add a Role
 
-Assuming that the exercise administrator granted the user the appropriate permissions, follow these steps to add a Role:
+If the exercise administrator grants the appropriate permissions, follow these steps to add a Role:
 
 ![Add Role OE](../assets/img/addRole-v3.png)
 
@@ -681,7 +681,7 @@ The following image shows the [Team Types](#glossary) Administration Page. Here,
 
 #### Add a Team Type
 
-Assuming that the exercise administrator granted the user the appropriate permissions, follow these steps to add a Team Type:
+If the exercise administrator grants the appropriate permissions, follow these steps to add a Team Type:
 
 ![Add Team Type OE](../assets/img/addTeamType.png)
 
@@ -693,8 +693,8 @@ Assuming that the exercise administrator granted the user the appropriate permis
 | Field                          | Data Type | Description                                                   | Example                 |
 | ------------------------------ | --------- | ------------------------------------------------------------- | ----------------------- |
 | **TeamType Name**              | String    | Name of the team type                                         | Individual Organization |
-| **Official Score Contributor** | Boolean   | Select if the team should contribute to CITE's official score | True                    |
-| **Show TeamType Average**      | Boolean   | Select if the score average should be available to the team   | True                    |
+| **Official Score Contributor** | Boolean   | Select this option for teams that contribute to CITE's official score | True                    |
+| **Show TeamType Average**      | Boolean   | Select this option to make the score average available to the team   | True                    |
 
 To save these settings, click **Save**.
 
@@ -723,10 +723,10 @@ The following image shows the *Users Administration* page. Here, administrators 
 The available permissions are:
 
 - **System Admin:** Permission that will grant a user all administration privileges on the CITE application.
-- **Content Developer:** Will be provided the permission to manage other CITE admin pages except the Users Admin page and their permissions.
-- **Can Submit:** The user is allowed to submit a score for the different moves on an exercise.
-- **Can Modify:** The user is allowed to modify a score for previous moves on an exercise.
-- **Can Increment Move:** The user is given the permission to increment the current move during an exercise.
+- **Content Developer:** Receives permission to manage other CITE admin pages except the Users Admin page and their permissions.
+- **Can Submit:** This permission lets the user submit a score for the different moves during an exercise.
+- **Can Modify:** This permission lets the user modify a score for previous moves during an exercise.
+- **Can Increment Move:** Grant this permission to allow the user to increment the current move during an exercise.
 
 ![Users Admin OE](../assets/img/usersAdmin-v2.png)
 
@@ -772,7 +772,7 @@ This glossary defines key terms and concepts used in the CITE application.
 
 **CITE Scoresheet**: Compares participant scores to organizations scores, group average scores, and the official score.
 
-**Evaluation**: Defines the scoring model used, as well as the moves and teams who will be participating in the exercise.
+**Evaluation**: Defines the scoring model used, as well as the moves and teams who will participate in the exercise.
 
 **Modifiers**: If enabled, the Scoring Category score will use this value in calculations, either to add, subtract, multiply and/or divide within the equation.
 

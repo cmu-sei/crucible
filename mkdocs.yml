@@ -2,7 +2,7 @@ site_name: Crucible Documentation
 site_description: "CRUCIBLE is an open-source application framework for creating and managing virtual environments and events."
 site_author: "Crucible Team"
 copyright: >
-  Copyright &copy; 2024 Carnegie Mellon University. All rights reserved.
+  Copyright &copy; 2025-2026 Carnegie Mellon University. All rights reserved.
 extra_css:
   - https://fonts.googleapis.com/icon?family=Material+Icons
   - stylesheets/extra.css
@@ -18,8 +18,8 @@ theme:
     - content.code.copy
     - content.code.annotate
     - content.external_links
-  logo: assets/img/crucible-icon-c-alpha.svg
-  favicon: assets/img/crucible-icon-c-alpha.svg
+  logo: assets/img/home/cruciblelogo.svg
+  favicon: assets/img/home/cruciblelogo.svg
   palette:
     # Palette toggle for light mode
     - scheme: default
@@ -76,54 +76,15 @@ extra:
 nav:
   - Home: index.md
   - Getting Started: getting-started/index.md
-  - Integrations: integrations/index.md
-  - Install Guide: install/index.md
-  - Crucible Applications:
+  - Installation Guide: install/index.md
+  - Core Application Guides:
+      - Landing: landing/index.md
       - Player: player/index.md
       - Caster: caster/index.md
       - Steamfitter: steamfitter/index.md
       - Alloy: alloy/index.md
-      - TopoMojo:
-          - About: topomojo/about.md
-          - Getting started with TopoMojo: topomojo/getting-started.md
-          - Finding an existing space: topomojo/finding-a-space.md
-          - Building a new space:
-              - Settings and Templates: topomojo/building-a-workspace.md
-              - Document: topomojo/lab-document.md
-              - Challenge: topomojo/challenge.md
-              - Files: topomojo/files.md
-              - Play: topomojo/play.md
-          - Admin features:
-              - Admin Dashboard: topomojo/admin-dashboard.md
-              - Gamespaces: topomojo/admin-gamespaces.md
-              - Workspaces: topomojo/admin-workspaces.md
-              - Templates: topomojo/admin-templates.md
-              - Machines: topomojo/admin-machines.md
-              - Users: topomojo/admin-users.md
-              - Log: topomojo/admin-log.md
-          - Copy and paste: topomojo/copy-paste.md
-      - Gameboard:
-          - Playing games:
-              - About the Gameboard: gameboard/index.md
-              - Profile screen: gameboard/profile.md
-              - Home screen and Lobby: gameboard/home-and-lobby.md
-              - Giving feedback: gameboard/player-feedback-form.md
-              - Practicing challenges: gameboard/practice-area.md
-              - Getting in-game support: gameboard/support.md
-              - Using Reports: gameboard/reports.md
-          - Administering games:
-              - Administration: gameboard/admin.md
-              - Game Center: gameboard/game-center.md
-              - Practice Area: gameboard/admin-practice-area.md
-              - Users: gameboard/admin-users.md
-              - Players: gameboard/admin-players.md
-              - Sponsors: gameboard/admin-sponsors.md
-              - Challenges: gameboard/admin-challenges.md
-              - Support: gameboard/admin-support.md
-              - Notifications: gameboard/admin-notifications.md
-              - Permissions: gameboard/admin-roles.md
-              - Configuring Player Feedback Templates: gameboard/admin-feedback-form.md
-              - Configuring Certificate Templates: gameboard/admin-completion-certificates.md
+      - TopoMojo: topomojo/index.md
+      - Gameboard: gameboard/index.md
       - Blueprint: blueprint/index.md
       - CITE: cite/index.md
       - Gallery: gallery/index.md
@@ -148,6 +109,7 @@ nav:
           - Overview: roles/instructor/index.md
       - Participant:
           - Overview: roles/participant/index.md
+  - 3rd-Party Integrations: integrations/index.md
 
 repo_url: "https://github.com/cmu-sei/crucible"
 repo_name: "cmu-sei/Crucible"

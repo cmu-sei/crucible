@@ -1,7 +1,7 @@
 # Instructor Guide
 
 ???+ warning "Caution"
-Crucible environments are often customized. Procedures, scoring, and user interfaces may vary by deployment. Review local documentation or range notes before facilitating exercises.
+    Crucible environments are often customized. Procedures, scoring, and user interfaces may vary by deployment. Review local documentation or range notes before facilitating exercises.
 
 ## Overview
 
@@ -13,7 +13,7 @@ Use this stage to **understand what learners will encounter** and **set them up 
 
 ### Preparation Focus Areas
 
-- **Understand objectives**: Know what skills or decisions the exercise is meant to build.
+- **Understand objectives**: Know what skills or decisions the exercise aims to build.
 - **Preview the flow**: Familiarize yourself with scenario structure, milestones, and transitions.
 - **Check access**: Verify that participants can reach their environments and accounts.
 - **Align expectations**: Communicate timing, format, and support options.
@@ -23,7 +23,7 @@ Use this stage to **understand what learners will encounter** and **set them up 
 - Share a **clear, welcoming introduction** that frames the exercise as exploration.
 - Anticipate common hurdles and decide what level of help you'll provide.
 - Encourage learners to take responsibility for preparation (accounts, tools, readings).
-- Coordinate with Range Builders or Admins if technical issues are anticipated.
+- Coordinate with Range Builders or Admins if you anticipate technical issues.
 
 ## During the Exercise
 
@@ -59,7 +59,7 @@ Reflection is where insight turns into understanding. Your debrief sets the tone
 ### Feedback and Assessment
 
 ???+ tip "Deep Dive into CERT Research"
-Our own experience with team-based assessments is documented in :material-book: *[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/)*.
+    We documented our own experience with team-based assessments in :material-book: *[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/)*.
 
 - Provide feedback that is **specific, encouraging, and forward-looking**.
 - Emphasize growth over grading.

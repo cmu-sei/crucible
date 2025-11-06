@@ -17,9 +17,9 @@ System operations for Crucible include:
 
 Monitor your Crucible deployment using Kubernetes tools:
 
-- **kubectl** - Command-line status checks: `kubectl get pods -A`, `kubectl describe pod <name>`, `kubectl logs <pod>`
-- **Rancher** (if installed) - Web-based cluster monitoring and management (see [installation guide](../../install/index.md#rancher))
-- **Kubernetes Dashboard** - Alternative web interface for cluster monitoring
+- **kubectl:** Command-line status checks: `kubectl get pods -A`, `kubectl describe pod <name>`, `kubectl logs <pod>`
+- **Rancher** (if installed): Web-based cluster monitoring and management (see the [Installation Guide](../../../install/index.md#rancher))
+- **Kubernetes Dashboard:** Alternative web interface for cluster monitoring
 
 ### Application Health
 
@@ -42,7 +42,7 @@ Key metrics to monitor on your Kubernetes cluster:
 
 - CPU and memory utilization per node (`kubectl top nodes`)
 - Disk space on nodes (check via node access or monitoring tools)
-- PostgreSQL database performance (via pgAdmin if installed per [installation guide](../../install/index.md#postgresql-and-pgadmin))
+- PostgreSQL database performance (via pgAdmin if installed per the [Installation Guide](../../../install/index.md#postgresql-and-pgadmin))
 - Storage usage if using Longhorn (accessible via Rancher or Longhorn UI)
 
 ### Log Management
@@ -74,9 +74,9 @@ Before updating:
 
 ### Database Maintenance
 
-PostgreSQL databases should be maintained regularly:
+Maintain PostgreSQL databases regularly:
 
-- Use **pgAdmin** (if installed per [installation guide](../../install/index.md#postgresql-and-pgadmin)) for visual database management
+- Use **pgAdmin** (if installed per the [Installation Guide](../../../install/index.md#postgresql-and-pgadmin)) for visual database management
 - Run `VACUUM ANALYZE` periodically to optimize database performance
 - Monitor database size and connection counts
 - Configure automated backups using Kubernetes CronJobs or external backup solutions
@@ -124,7 +124,7 @@ Most Crucible applications support horizontal scaling:
 - Kubernetes will distribute load across replicas automatically
 - Scale databases vertically by adjusting PostgreSQL resource allocations
 
-Refer to the [installation guide](../../install/index.md#infrastructure) for minimum hardware requirements and scaling considerations.
+Refer to the [Installation Guide](../../../install/index.md#infrastructure) for minimum hardware requirements and scaling considerations.
 
 ## Troubleshooting
 
@@ -179,5 +179,5 @@ Follow your organization's incident response procedures. Key steps:
 1. Identify and contain the incident using Kubernetes tools
 2. Review application and audit logs for the timeframe
 3. Use `kubectl` to isolate affected pods if needed
-4. Restore from backups if data integrity is compromised
+4. Restore from backups if you detect a data integrity compromise
 5. Document findings and remediation steps

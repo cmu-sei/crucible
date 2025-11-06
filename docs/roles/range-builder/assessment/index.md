@@ -1,7 +1,7 @@
 # Assessment Integration
 
 ???+ tip "Deep Dive into CERT Research"
-Our own experience with team-based assessments is documented in :material-book: *[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/)*.
+    We documented our own experience with team-based assessments in :material-book: *[Self-Assessment in Training and Exercise](https://sei.cmu.edu/library/self-assessment-in-training-and-exercise/)*.
 
 ## Suggestions for Scoring
 

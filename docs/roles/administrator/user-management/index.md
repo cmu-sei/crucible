@@ -4,7 +4,7 @@ Infrastructure administrators are responsible for managing user access, permissi
 
 ## Authentication and Identity
 
-Crucible uses an identity provider (typically Keycloak or IdentityServer) for centralized authentication. Configure your identity provider following the [installation guide's OAuth provider recommendations](../../install/index.md#recommended).
+Crucible uses an identity provider (typically Keycloak or IdentityServer) for centralized authentication. Configure your identity provider following our *Installation Guide*'s [OAuth provider recommendations](../../../install/index.md#recommended).
 
 ### Identity Provider Integration
 
@@ -55,7 +55,7 @@ To grant permissions in Crucible applications:
 1. Ensure users exist in your identity provider
 2. Access each application's admin interface (requires Administrator permission)
 3. Assign application-specific permissions following the permission documentation above
-4. Permissions may also be managed via application APIs for bulk operations
+4. You can also manage permissions via application APIs for bulk operations
 
 ### Team Management
 
@@ -64,7 +64,7 @@ To grant permissions in Crucible applications:
 - Create teams for exercises and events
 - Assign users to teams
 - Manage team membership during active exercises
-- See [Player documentation](../../player/index.md) for team management details
+- See [Player documentation](../../../player/index.md) for team management details
 
 ## Security Considerations
 
@@ -96,7 +96,7 @@ Range Builders need permissions in:
 - **Steamfitter** - To create scenario tasks
 - **Player** - To view and test exercises
 
-See the [Range Builder Guide](../range-builder/index.md) for their typical workflows.
+See the [Range Builder Guide](../../range-builder/index.md) for their typical workflows.
 
 ### For Instructors
 
@@ -106,7 +106,7 @@ Instructors primarily interact with:
 - **Player** - To monitor participant progress
 - **Gameboard** (if used) - To manage competitions
 
-See the [Instructor Guide](../instructor/index.md) for their typical workflows.
+See the [Instructor Guide](../../instructor/index.md) for their typical workflows.
 
 ## Troubleshooting
 

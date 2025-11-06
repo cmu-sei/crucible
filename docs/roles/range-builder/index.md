@@ -2,16 +2,16 @@
 
 Range Builders create and deploy cyber ranges using Crucible platform components. They design infrastructure, scenarios, and user experiences to deliver engaging material that meets training, exercise, or challenge objectives.
 
-This guide provides step-by-step instructions for building complete cyber ranges using the Crucible stack—Alloy for team management, Caster for infrastructure deployment, Steamfitter for automated scenario events, and Player for exercise delivery.
+This guide provides step-by-step instructions for building complete cyber ranges using the Crucible stack. Rely on Alloy for team management, Caster for infrastructure deployment, Steamfitter for automated scenario events, and Player for exercise delivery.
 
 ## Overview
 
 As a Range Builder, you'll work with four primary Crucible applications:
 
-- **[Alloy](../alloy/)**: Event orchestration and team management
-- **[Caster](../caster/)**: Infrastructure-as-code topology deployment
-- **[Steamfitter](../steamfitter/)**: Automated scenario injection and task execution
-- **[Player](../player/)**: User interface and exercise delivery
+- **[Alloy](../../alloy/index.md)**: Event orchestration and team management
+- **[Caster](../../caster/index.md)**: Infrastructure-as-code topology deployment
+- **[Steamfitter](../../steamfitter/index.md)**: Automated scenario injection and task execution
+- **[Player](../../player/index.md)**: User interface and exercise delivery
 
 ## Prerequisites
 
