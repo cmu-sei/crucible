@@ -89,6 +89,6 @@ From Player, interact with the apps you assigned (VMs, chat, tickets, etc.).
 
 ## Troubleshooting / Ops Notes
 
-If you must stop Caster.Api, first disable Workspace Operations in Administration -> `Workspaces` and wait for active runs to complete (avoids state corruption).
+If you must stop `Caster.Api`, first disable Workspace Operations in Administration -> `Workspaces` and wait for active runs to complete (avoids state corruption).
 
 For ODX capacity issues, check the available hosts, since excessive VM counts against constrained resources will fail the run.
