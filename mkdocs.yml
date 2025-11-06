@@ -112,6 +112,8 @@ nav:
   - Tutorials:
       - Overview: tutorials/index.md
       - ODX consumed via Moodle: tutorials/vcenter-moodle/index.md
+      - TopoMojo Challenge: tutorials/topomojo-challenge/index.md
+      - Games Within Gameboard: tutorials/gameboard-build/index.md
   - 3rd-Party Integrations: integrations/index.md
 
 repo_url: "https://github.com/cmu-sei/crucible"
