@@ -22,7 +22,7 @@ For more information about dev containers, read the [documentation for using dev
 mkdocs serve
 ```
 
-Serving the documentation in this way will automatically forward a port from the container to your host so you can visit the site from your web browser. The contents of the site will automatically update as changes are made to files.
+Serving the documentation in this way will automatically forward a port from the container to your host so you can visit the site from your web browser. The contents of the site will automatically update with changes to files.
 
 ### To Run Markdown File Linting Locally
 
