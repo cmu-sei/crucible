@@ -30,7 +30,7 @@ Serving the documentation in this way will automatically forward a port from the
 lint
 ```
 
-The above `lint` command is installed as an alias to the `/workspaces/crucible-docs/lint-docs.sh` script.
+The above `lint` command is an alias to the `/workspaces/crucible-docs/lint-docs.sh` script.
 
 Linting markdown files locally is helpful to understand what types of errors the repository's CI job might flag.
 
