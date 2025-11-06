@@ -51,7 +51,7 @@ Create a `Scenario Template` and/or `Scenario` to run tasks/injects during the e
 
 1. In Alloy (Admin), add a new `Definition`
 1. Set `Name`, `Description`, `Duration`
-1. Paste the IDs for:
+1. Select from the dropdown or paste the IDs for:
     1. Player exercise (the view you built)
     1. Caster directory (from Step 2)
     1. Steamfitter scenario (Step 3, optional)
