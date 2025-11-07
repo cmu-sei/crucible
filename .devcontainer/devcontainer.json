@@ -1,24 +1,23 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-	"name": "MkDocs",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	//"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+	"name": "crucible-docs",
+	"runArgs": [
+		"--name",
+		"crucible-docs"
+	],
 	"build": {
-        // Path is relative to the devcontainer.json file.
-        "dockerfile": "Dockerfile"
-    },
-
+		// set build context to parent directory
+		"context": "..",
+		// Dockerfile is relative to the current directory
+		"dockerfile": "Dockerfile"
+	},
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-		"ghcr.io/devcontainers-extra/features/markdownlint-cli2:1": {}
-	  },
-
-	// Configure tool-specific properties.
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"configureZshAsDefaultShell": true
+		}
+	},
 	"customizations": {
-		// Configure properties specific to VS Code.
 		"vscode": {
-			"settings": {},
 			"extensions": [
 				"yzhang.markdown-all-in-one",
 				"DavidAnson.vscode-markdownlint",
@@ -28,25 +27,23 @@
 				"shardulm94.trailing-spaces",
 				"chrischinchilla.vale-vscode",
 				"shd101wyy.markdown-preview-enhanced"
-			]
+			],
+			"settings": {
+				"editor.formatOnSave": true,
+				"editor.tabSize": 2,
+				"files.insertFinalNewline": true,
+				"files.eol": "\n",
+				"files.trimTrailingWhitespace": true,
+				"extensions.autoUpdate": true,
+				"extensions.autoCheckUpdates": true
+			}
 		}
 	},
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [9000],
-
-	// Use 'portsAttributes' to set default properties for specific forwarded ports.
-	// More info: https://containers.dev/implementors/json_reference/#port-attributes
 	"portsAttributes": {
 		"8000": {
 			"label": "mkdocs",
 			"onAutoForward": "notify"
 		}
 	},
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pip3 install -r requirements.txt"
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"postCreateCommand": "bash -l .devcontainer/postcreate.sh"
 }

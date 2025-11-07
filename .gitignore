@@ -2,3 +2,6 @@ package-lock.json
 package.json
 settings.local.json
 site/
+
+# devcontainer certs
+.devcontainer/certs/*.crt
