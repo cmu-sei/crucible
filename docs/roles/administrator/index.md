@@ -56,4 +56,4 @@ Crucible Platform
 
 - [Range Builder Guide](../range-builder/index.md) - For understanding exercise creation
 - [Instructor Guide](../instructor/index.md) - For understanding instructor workflows
-- [Troubleshooting Reference](troubleshooting/index.md) - Further help on resolving problems
+- [Troubleshooting Playbook](troubleshooting/index.md) - Further help on resolving problems

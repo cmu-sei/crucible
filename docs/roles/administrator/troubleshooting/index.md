@@ -1,6 +1,6 @@
 # Troubleshooting Playbook
 
-Use this playbook to triage common issues before escalating. Capture the findings in your operations log for future reference.
+Use this playbook to triage common issues before escalating. Capture your findings in the operations log for future reference.
 
 ## Common Issues
 

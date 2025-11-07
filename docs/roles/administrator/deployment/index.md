@@ -1,6 +1,6 @@
 # Deployment Management
 
-This section walks infrastructure administrators through deploying and configuring Crucible, referencing the detailed installation guide and architecture documentation.
+This section walks infrastructure administrators through deploying and configuring Crucible, referencing the detailed [Installation Guide](../../../install/index.md) and architecture documentation.
 
 ## Installation
 
@@ -14,7 +14,7 @@ For complete installation instructions, follow the [Installation Guide](../../..
 - **Database:** PostgreSQL and pgAdmin installation
 - **Crucible Applications:** Helm chart deployment for all framework components
 
-The installation guide includes example configurations and links to the [k3s-install](https://github.com/avershave/k3s-install) and [k3s-production](https://github.com/sei-noconnor/k3s-production) repositories containing production-ready values and setup scripts.
+The *Installation Guide* includes example configurations and links to the [k3s-install](https://github.com/avershave/k3s-install) and [k3s-production](https://github.com/sei-noconnor/k3s-production) repositories containing production-ready values and setup scripts.
 
 ## Deployment Architecture
 
@@ -24,11 +24,11 @@ Crucible's architecture consists of:
 
 - **Identity Management:** Keycloak for authentication
 - **Container Orchestration:** Kubernetes (K3s recommended for bare metal)
-- **Application Services:** Player, Caster, Steamfitter, Alloy, TopoMojo, Gameboard, Blueprint, Gallery, CITE
+- **Application Services:** Alloy, Blueprint, Caster, CITE, Gameboard, Gallery, Player, Steamfitter, TopoMojo
 - **Supporting Services:** PostgreSQL, Redis, File Storage (S3/MinIO), Message Queue
 - **Infrastructure:** Load balancers, SSL termination, monitoring, and logging
 
-See the [Administrator Guide](../index.md) for more information.
+See the [Infrastructure Administrator Guide](../index.md) for more information.
 
 ## Configuration Management
 
@@ -83,5 +83,5 @@ Refer to the [Troubleshooting Guide](../troubleshooting/index.md) for procedures
 
 For deployment security considerations, see:
 
-- [Security and Compliance Checklist](../security/index.md) - TLS configuration, network policies, audit logging
-- [Installation Guide SSL/TLS Section](../../../install/index.md#certificates) - Certificate setup procedures
+- [Security and Compliance Checklist](../security/index.md): TLS configuration, network policies, audit logging
+- [Installation Guide SSL/TLS Section](../../../install/index.md#certificates): Certificate setup procedures
