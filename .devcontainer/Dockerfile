@@ -45,7 +45,7 @@ RUN set -euo pipefail; \
 # Install markdownlint-cli2
 RUN npm config -g set fund false && npm install -g markdownlint-cli2@0.18.1
 
-WORKDIR /workspace
+WORKDIR /tmp
 COPY ../requirements.txt requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --upgrade pip && \

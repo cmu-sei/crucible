@@ -1,5 +1,7 @@
 {
 	"name": "crucible-docs",
+	"workspaceFolder": "/workspaces/crucible-docs",
+	"workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/workspaces/crucible-docs",
 	"runArgs": [
 		"--name",
 		"crucible-docs"
