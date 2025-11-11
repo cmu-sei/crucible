@@ -1,18 +1,6 @@
 # Crucible Range Build Guide: ODX consumed via Moodle
 
-Goal: From a clean, default Crucible stack to a working on‑demand exercise delivered through Moodle. Assumes an already-deployed platform (minimum of [Caster](../caster/), [Player](../player/), [Alloy](../alloy/)) with defaults and [the Crucible plugin](https://github.com/cmu-sei/moodle-mod_crucible) is already installed on [Moodle](../integrations/#moodle).
-
-## Scope & Terminology
-
-[Caster](../../caster/): Content registry for exercises, images, datasets, and manifests.
-
-[Alloy](../../alloy/): Provisioning/orchestration service that translates exercise manifests to cloud/virtualization backends (here: vCenter).
-
-[Player](../../player/): Run‑time coordination and telemetry for live exercises (session lifecycle, scoring, capture, tear down hooks).
-
-[Crucible Moodle plugin](https://github.com/cmu-sei/moodle-mod_crucible): Launches a Player session from a Moodle activity; handles user mapping and grade return.
-
-This guide is vendor‑neutral where possible and uses opinionated defaults that match the stock SEI deployment.
+This tutorial walks you from having a clean, default Crucible stack to a working on‑demand exercise (ODX) delivered through Moodle. Assumes an already-deployed platform (minimum of [Caster](../caster/), [Player](../player/), [Alloy](../alloy/)) with defaults and [the Crucible plugin](https://github.com/cmu-sei/moodle-mod_crucible) is already installed on [Moodle](../integrations/#moodle).
 
 ## Prerequisites
 
