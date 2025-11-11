@@ -16,8 +16,8 @@ TopoMojo is a lab builder and player application for developing cybersecurity ch
 ## Step 1: Create a New Workspace
 
 1. Log into TopoMojo
-2. Click the **Create New Workspace** button
-3. You'll get an empty workspace - this is where you'll build your challenge
+1. Click the **Create New Workspace** button
+1. You'll get an empty workspace - this is where you'll build your challenge
 
 ## Step 2: Configure Workspace Metadata
 
@@ -55,8 +55,8 @@ You can configure a time limit for the challenge. This field is optional.
 ## Step 3: Add Virtual Machines (Templates)
 
 1. Navigate to the **Templates** section
-2. Click to add VMs to your workspace
-3. For each VM, provide a descriptive name
+1. Click to add VMs to your workspace
+1. For each VM, provide a descriptive name
 
 ### VM Naming Best Practices
 
@@ -80,7 +80,7 @@ You can include challenge IDs since users won't see these:
 For infrastructure machines that users shouldn't directly access:
 
 1. Select the VM in the templates list
-2. Toggle the **Hidden** option to ON
+1. Toggle the **Hidden** option to ON
 
 When hidden, users won't see a console button for that VM in the deployed challenge. **Note:** This only hides the console - the VM is still accessible on the network.
 
@@ -88,27 +88,28 @@ When hidden, users won't see a console button for that VM in the deployed challe
 
 To save changes made to a VM:
 
-1. Click the **Unlink** button for that VM
-2. This creates a new disk on the backend
-3. Any changes you make are now saved to that disk
+1. Click the **Unlink** button for that Template
+1. In simple terms, this creates a new disk on the backend (More specifically, "Unlink" creates a new clone of the parent disk in VMware or a clone of the parent template in Proxmox)
+1. Now, be sure to click **Save** in order for your changes to persist
 
-**Important:** Click **Unlink** before modifying a VM. If you don't unlink, your changes won't persist.
+**Important:** Click **Unlink** before modifying a VM. If you don't unlink, your changes won't persist. Also, you will have to remove a running linked VM (therefore losing all changes you made) in order to unlink a template, so be sure to unlink before modifying.
 
-**Warning for this demo:** The demo will not click Unlink to avoid creating unnecessary backend storage.
+**Warning for this demo:** The demo will not click Unlink to avoid consuming unnecessary backend storage.
 
 ## Step 4: Configure Challenge Questions and Transforms
 
 ### Transforms
 
-Transforms are dynamically generated values (like tokens) that make each deployed challenge unique. This prevents answer sharing between users.
+Transforms are dynamically generated values (like tokens) that make each deployed challenge unique. Unique challenge deployments increase the reusability value of challenges by avoiding cases where users already know the answers and prevents answer sharing between users.
 
 ### Setting Up Transforms
 
 1. Navigate to the **Challenge** section
-2. Click **Transforms** to see available types
-3. Common transform types:
+1. Click **Transforms** to see available types
 
-#### Hex Transform (Recommended)
+### Common transform types:
+
+#### Hex Transform
 
 Generates random hexadecimal characters:
 
@@ -116,21 +117,110 @@ Generates random hexadecimal characters:
 **Value:** `hex` (generates 8 hex characters)
 **Value:** `hex:16` (generates 16 hex characters)
 
-**Why hex?** It's the safest transform type. Other types like base64 can include special characters that break bash scripts and cause random failures.
+**Note:** Other types like Base64 can include special characters that may break bash scripts or cause execution failures.
 
 #### List Transform
 
-Picks a random item from a list:
+Multi-Word List Transforms
 
-**Key:** `token2`
-**Value:** `list:item1,item2,item3`
+Random words from a list.
 
-This is useful for randomly assigning IP addresses, hostnames, or other predetermined values.
+**Key:** `list`
+**Value:** `list:red blue green	one item`
+
+**Key:** `list2`
+**Value:** `list2:alpha beta gamma delta	two items (##key_1##, ##key_2##)`
+
+**Key:** `list3`
+**Value:** `list3:one two three four	three items`
+
+Use for human-readable tokens or phrases. Participants can select more than one item from a list type transform.
+
+#### ID Transform
+
+Tracks the running exercise instance.
+
+**Key:** `token_id`
+**Value:** `id`
+
+Useful for logging, tagging resources, or embedding run metadata into scripts.
+
+#### Variant Transform
+
+Provides the variant index for exercises with multiple versions.
+
+**Key:** `variant_id`
+**Value:** `variant`
+
+Use when rotating content variants (e.g., different flag locations, tool versions).
+
+#### Base64 Transform
+
+Generates a random Base64-encoded token.
+
+**Key:** `token_b64`
+**Value:** `b64` (24 chars)
+**Value:** `b64:16` (16 chars)
+
+Avoid in shell-sensitive contexts—Base64 may include +, /, =.
+
+#### UUID Transform
+
+**Key:** `token_uuid`
+**Value:** `uuid` (decimal string)
+**Value:** `uid` (full GUID)
+
+Ideal for correlation IDs inside services or audit trails.
+
+#### Integer Range Transform
+
+Random integer in a specified range.
+
+**Key:** `rand_int`
+**Value:** `int:999-9999` (999–9999)
+
+Use for randomized port suffixes, team numbers, usernames.
+
+#### App URL Transform
+
+Reference the app URL from within a challenge (UI-side only).
+
+**Key:** `lab_url`
+**Value:** `app_url`
+
+Not exposed to participants; useful in internal scripts or callback endpoints.
+
+#### Grader URL Transform
+
+Injects the grading endpoint for automated scoring flows.
+
+**Key:** `grade_cb`
+**Value:** `grader_url`
+
+#### API Key / Grader Key Transform
+
+Internal environment-side access tokens.
+
+**Keys:** `apikey_key`, `grader_key`
+**Values:** `same key name`
+
+For backend validation, not participant-visible.
+
+#### IPv4 Transform
+
+Random IP address assignment from CIDR.
+
+**Key:** `target_ip`
+**Value:** `ipv4:10.0.2.0/24`
+
+Example output: 10.0.2.137
+
+Use for hiding static answers in networking labs.
 
 ### Creating Challenge Questions
 
 1. In the Challenge section, add questions that users will answer
-2. Reference transform variables using double-pound notation: `##variable_name##`
+1. Reference transform variables using double-pound notation: `##variable_name##`
 
 **Example Questions:**
 
@@ -217,18 +307,18 @@ Use variants when you need different VM configurations or questions for differen
 ### Creating Variants
 
 1. Click **Add Variant** or **Clone Variant**
-2. Clone Variant copies all settings from an existing variant
-3. Modify questions or configurations as needed
-4. System randomly deploys one variant when a user starts the challenge
+1. Clone Variant copies all settings from an existing variant
+1. Modify questions or configurations as needed
+1. System randomly deploys one variant when a user starts the challenge
 
 ## Step 6: Configure Guest Settings (Passing Transforms to VMs)
 
 To use transform values inside your VMs, pass them as **guest info variables** (VMware guestinfo).
 
 1. Expand a VM template's options
-2. Add **Guest Settings**
-3. Left side: Guest info variable name
-4. Right side: Transform variable name
+1. Add **Guest Settings**
+1. Left side: Guest info variable name
+1. Right side: Transform variable name
 
 **Example:**
 
@@ -439,9 +529,9 @@ else:
 For team-based challenges where multiple team members need to work simultaneously:
 
 1. Select the VM that team members will use (e.g., an analyzer workstation)
-2. Set **Replicas** to `-1`
-3. With replicas set to -1, each team member gets their own copy:
-   - Team of 3 � 3 copies: analyzer_1, analyzer_2, analyzer_3
+1. Set **Replicas** to `-1`
+1. With replicas set to -1, each team member gets their own copy:
+   - Team of 3 x 3 copies: analyzer_1, analyzer_2, analyzer_3
    - Each replica has identical configuration and guest info variables
 
 **Important:** Replicas all share the same guest info variables (tokens), so they have the same answers.
@@ -479,8 +569,8 @@ Let's take a moment to review:
 ## Step 12: Save and Deploy
 
 1. Save your workspace changes
-2. Set the **Audience** field to make it visible to the appropriate Gameboard instance
-3. In Gameboard, search for your challenge and add it to a game
+1. Set the **Audience** field to make it visible to the appropriate Gameboard instance
+1. In Gameboard, search for your challenge and add it to a game
 
 ## Common Issues and Troubleshooting
 

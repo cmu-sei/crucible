@@ -73,7 +73,7 @@ What happens at end:
 
 ## Step 5: Expose the Exercise in Moodle
 
-Use the Crucible Plugin for Moodle activity to start, access, and stop Crucible labs/exercises from a Moodle course. The activity can embed the Crucible VM app in an iframe or link out to the full Player experience. Follow the plugin's documentation for installation and activity configuration.
+Use the [Crucible Plugin for Moodle](https://github.com/cmu-sei/moodle-mod_crucible) activity to start, access, and stop Crucible labs/exercises from a Moodle course. The activity can embed the Crucible VM app in an iframe or link out to the full Player experience. Follow [the plugin's documentation](https://cmu-sei.github.io/crucible/integrations/#moodle) for installation and activity configuration.
 
 ## Step 6: Launch and Validate
 

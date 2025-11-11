@@ -16,8 +16,8 @@ Gameboard is the platform for orchestrating cybersecurity competitions. It allow
 ## Step 1: Create a New Game
 
 1. Log into Gameboard
-2. Click **Admin** in the navigation
-3. Click **New Game**
+1. Click **Admin** in the navigation
+1. Click **New Game**
 
 ## Step 2: Basic Game Information
 
@@ -70,8 +70,8 @@ The game card is what players see when browsing available competitions.
 Upload a card image to visually represent your game:
 
 1. Click the image upload area
-2. Select your image file
-3. **Recommended dimensions:** 750 x 1080 pixels
+1. Select your image file
+1. **Recommended dimensions:** 750 x 1080 pixels
 
 ### Card Text
 
@@ -270,9 +270,9 @@ Provide formatted instructions on how to sign up for your game using Markdown.
 ## How to Register
 
 1. Create an account or log in
-2. Complete your player profile
-3. Form your team (see requirements below)
-4. Submit your registration
+1. Complete your player profile
+1. Form your team (see requirements below)
+1. Submit your registration
 
 ### Team Requirements
 
@@ -311,8 +311,8 @@ Now add challenges from TopoMojo to your game:
 ### Searching for Challenges
 
 1. Navigate to the **Challenges** section
-2. Use the search function to find challenges from TopoMojo
-3. Filter by:
+1. Use the search function to find challenges from TopoMojo
+1. Filter by:
    - Challenge name
    - Tags
    - Difficulty
@@ -333,7 +333,7 @@ If they don't match, the challenge won't be visible in Gameboard.
 ### Adding a Challenge
 
 1. Click **Add Challenge** or select from search results
-2. Configure challenge settings:
+1. Configure challenge settings:
 
 **Points:**
 
@@ -366,9 +366,9 @@ Challenges can be:
 Create a visual representation of your game:
 
 1. Navigate to the **Map** section
-2. Upload a map image
-3. Place challenge click points on the map
-4. Link each point to a specific challenge
+1. Upload a map image
+1. Place challenge click points on the map
+1. Link each point to a specific challenge
 
 ### Tips for Map Creation
 
@@ -384,8 +384,8 @@ Gap: Specific key combinations for map editing may vary by browser/OS
 Before launching, preview what players will see:
 
 1. Navigate to the **Settings** tab
-2. Click the **Lobby** link
-3. This opens the player-facing view
+1. Click the **Lobby** link
+1. This opens the player-facing view
 
 Review:
 
@@ -413,8 +413,8 @@ Before going live, verify:
 ## Step 15: Go-Live and Monitor
 
 1. Save all settings
-2. Announce the competition to participants
-3. Monitor during the competition:
+1. Announce the competition to participants
+1. Monitor during the competition:
    - Player registrations
    - Active game spaces
    - Infrastructure load
@@ -475,12 +475,12 @@ Consider modifying some settings during the competition if necessary:
 ### Post-Competition Tasks
 
 1. **Close registration and competition**
-2. **Review feedback** from player surveys
-3. **Generate certificates** for participants
-4. **Export final scoreboard** for records
-5. **Document lessons learned** for future competitions
-6. **Release solution guides** (if appropriate)
-7. **Archive game data** for future reference
+1. **Review feedback** from player surveys
+1. **Generate certificates** for participants
+1. **Export final scoreboard** for records
+1. **Document lessons learned** for future competitions
+1. **Release solution guides** (if appropriate)
+1. **Archive game data** for future reference
 
 ### Analyzing Results
 
