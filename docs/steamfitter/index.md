@@ -53,7 +53,7 @@ Steamfitter is primarily an administrative tool. Content Developers and Rangetec
 
 ### Scenario Templates
 
-![scenariotemplate](../assets/img/scenario%20templates.png)
+![scenario template](../assets/img/scenario%20templates.png)
 
 Scenario templates group predefined tasks so you can create scenarios and run them on demand. To create a new scenario template, provide a **Name**, **Description**, and **Duration**.
 

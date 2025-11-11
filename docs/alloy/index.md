@@ -23,7 +23,7 @@ There are many more permissions available. View them in the **Roles** section of
 You apply permissions to *users* by grouping them into *roles*. Each user can have a *system role* applied giving them global permissions across all of Alloy. The three default system roles are:
 
 ⦁	**Administrator:** All permissions within the system
-⦁	**Content Developer:** Has `CreateEventTemplates`, `CreateEvents`, `ExecuteEvents` permissions; users with the Content Developer role can create and manage their own Event Templates and Events, but can't affect any global settings or other user's Event Templates and Events.
+⦁	**Content Developer:** Has `CreateEventTemplates`, `CreateEvents`, and `ExecuteEvents` permissions. They can manage their own Event Templates and Events but cannot change global settings or other users' assets.
 ⦁	**Observer:** Has `ViewEventTemplates`, `ViewEvents`, `ViewUsers`, `ViewRoles`, and `ViewGroups` permissions; users with the Observer role can view all these areas, but can't make changes.
 
 Users who have the `ManageRoles` permission can create custom system roles. Do this in the **Roles** section of the **Administration** area.

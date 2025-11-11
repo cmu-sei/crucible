@@ -5,7 +5,7 @@ When we discuss "roles" in Crucible, we're discussing two concepts:
 1. **Organizational roles:** That is, what a *person* does in their program (e.g., Infrastructure Administrator, Range Builder, Instructor, and Participant).
 2. **Application roles:** Permission bundles applied to *users* in each application (e.g., Administrator, Content Developer, Observer, View Admin, View Member).
 
-A *Permission* defines what action (or actions) a user is allowed to perform within a Crucible application. For example: an Alloy Content Developer can create an Event Template.
+A *Permission* defines what action (or actions) a user can perform within a Crucible application. For example: an Alloy Content Developer can create an Event Template.
 
 In the *Role-Based Guides* we provide detailed information for the following organizational roles within a typical Crucible ecosystem:
 
@@ -41,7 +41,7 @@ In the *Core Application Guides* we provide detailed information on each applica
 3. [Caster Roles and Permissions](../caster/index.md#permissions-and-roles)
 4. [Steamfitter Roles and Permissions](../steamfitter/index.md#permissions-and-roles)
 
-The table below shows how each Crucible organizational role matches the roles and permissions in Alloy, Player, Caster, and Steamfitter, so you can see what each person can do in each application.
+The table below maps each Crucible organizational role to its Alloy, Player, Caster, and Steamfitter permissions. Use it to see what each person can do in each application.
 
 | Role | Alloy | Player | Caster | Steamfitter |
 |------|--------|---------|---------|--------------|
