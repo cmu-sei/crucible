@@ -107,7 +107,7 @@ Transforms are dynamically generated values (like tokens) that make each deploye
 1. Navigate to the **Challenge** section
 1. Click **Transforms** to see available types
 
-### Common transform types:
+### Common Transform Types
 
 #### Hex Transform
 
