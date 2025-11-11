@@ -4,12 +4,31 @@
 
 An **Alloy** Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable. You can schedule an event to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
 
-## Roles and Permissions
+## Permissions and Roles
 
-- **Superadmin:** Has the rights to perform all actions in Alloy.
-- **Event Admin:** Create and manage event templates. This role requires Player permission integration to view the Player view tied to the template.
-- **Event Manager:** View and manage Alloy assigned event templates.
-- **User:** View Alloy event templates assigned directly to them.
+### Permissions
+
+Sets of *permissions* govern access to features of Alloy. Permissions can apply globally or per Event Template/Event. Examples of global permissions include:
+
+- `CreateEventTemplates`: Create new Event Templates
+- `ViewEvents`: View all Events and event Users and Groups
+- `ManageUsers`: Make changes to Users
+
+Users with View or Manage permissions for an administration function (for example, `ViewRoles` or `ManageGroups`) can open the **Administration** area. However, they see only the sections they have permission to access in the sidebar menu.
+
+There are many more permissions available. View them in the **Roles** section of the **Administration** area.
+
+### Roles
+
+You apply permissions to *users* by grouping them into *roles*. Each user can have a *system role* applied giving them global permissions across all of Alloy. The three default system roles are:
+
+⦁	**Administrator:** All permissions within the system
+⦁	**Content Developer:** Has `CreateEventTemplates`, `CreateEvents`, `ExecuteEvents` permissions; users with the Content Developer role can create and manage their own Event Templates and Events, but can't affect any global settings or other user's Event Templates and Events.
+⦁	**Observer:** Has `ViewEventTemplates`, `ViewEvents`, `ViewUsers`, `ViewRoles`, and `ViewGroups` permissions; users with the Observer role can view all these areas, but can't make changes.
+
+Users who have the `ManageRoles` permission can create custom system roles. Do this in the **Roles** section of the **Administration** area.
+
+Admins apply roles to users in the **Users** section of the **Administration** area.
 
 ## Administrator Guide
 

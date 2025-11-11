@@ -10,12 +10,51 @@ Initial versions of Caster focused on a web front-end for raw Terraform configur
 
 Caster gives experts the control they need, while also making it easy for beginners to use expert setups or create simple ones on their own.
 
-## Roles and Permissions
+## Permissions and Roles
 
-- **Superadmin:** Has the rights to perform all actions in Caster.
-- **Rangetech Admin:** Create, manage, and import projects; assign and remove users from projects; create and manage groups; and lock or unlock Caster files as an admin.
-- **Content Developer:** Create projects and assign or remove users from projects they created.
-- **Read-Only User:** Can view only assigned projects but cannot edit code or run workspaces.
+### Permissions
+
+Sets of *permissions* control access to features in Caster. Permissions can apply globally or per *Project*.
+
+Examples of global permissions include:
+
+- `CreateProjects`: Create new Projects
+- `ViewProjects`: View all Projects and their Users and Groups
+- `ManageUsers`: Make changes to Users
+
+Users with View or Manage permissions for an administration function (for example, `ViewVLANs` or `ManageWorkspaces`) can open the **Administration** area. However, they see only the sections they have permission to access in the sidebar menu.
+
+You can view all available permissions in the **Roles** section of the **Administration** area.
+
+### Roles
+
+You apply permissions to *users* by grouping them into *roles*. Caster supports two types of roles: **System Roles** and **Project Roles**.
+
+#### System Roles
+
+Each user can have one *system role* that provides global permissions across all of Caster.
+
+Default system roles:
+
+- **Administrator:** All permissions within the system.
+- **Content Developer:** Has the `CreateProjects` permission. Users with this role can create and manage their own Projects, but cannot change global settings or other users' Projects.
+- **Observer:** Has all view permissions. Users with this role can view everything in the system, but cannot make changes.
+
+Users with the `ManageRoles` permission can create custom system roles in the **Roles** section of the **Administration** area.
+
+#### Project Roles
+
+When you add a user to a Project, you assign a *project role* that defines what they can do within that specific Project.
+
+Available project roles:
+
+- **Manager:** Perform all Project actions, including managing user access. When someone creates a new Project, they automatically become the Manager for that Project.
+- **Member:** View and edit all objects within the Project.
+- **Observer:** View all objects within the Project, but cannot make changes.
+
+You can't create custom project roles.
+
+Admins assign roles to users in the **Users** section of the **Administration** area.
 
 ### Terraform Integration
 
