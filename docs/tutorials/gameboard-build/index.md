@@ -6,7 +6,7 @@ This tutorial walks you through creating and configuring a cybersecurity competi
 
 - Access to a Gameboard instance
 - Required permissions to create and manage games (Gameboard Admin role)
-- Challenges already created in TopoMojo (see [TopoMojo Challenge Tutorial](/tutorials/topomojo-challenge/))
+- Challenges already created in TopoMojo (see [TopoMojo Challenge Tutorial](../topomojo-challenge/index.md))
 - Basic understanding of competition structure
 
 ## Overview
@@ -497,9 +497,9 @@ Use this data to improve future competitions.
 ## Additional Resources
 
 - [Gameboard GitHub Repository](https://github.com/cmu-sei/Gameboard)
-- [TopoMojo Tutorial](/tutorials/topomojo-challenge/) - Learn to create challenges
+- [TopoMojo Tutorial](../topomojo-challenge/index.md) - Learn to create challenges
 - [CMU SEI Challenge Development Guidelines](https://resources.sei.cmu.edu/library/asset-view.cfm?assetID=889267) - Best practices for competition design
-- Crucible Documentation: [Full Documentation Site](/)
+- Crucible Documentation: [Full Documentation Site](../../index.md)
 
 ## Summary
 

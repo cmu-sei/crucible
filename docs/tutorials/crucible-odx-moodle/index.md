@@ -1,6 +1,6 @@
 # Crucible Range Build Guide: ODX consumed via Moodle
 
-This tutorial walks you from having a clean, default Crucible stack to a working on‑demand exercise (ODX) delivered through Moodle. Assumes an already-deployed platform (minimum of [Caster](../caster/), [Player](../player/), [Alloy](../alloy/)) with defaults and [the Crucible plugin](https://github.com/cmu-sei/moodle-mod_crucible) is already installed on [Moodle](../integrations/#moodle).
+This tutorial walks you from having a clean, default Crucible stack to a working on‑demand exercise (ODX) delivered through Moodle. Assumes an already-deployed platform (minimum of [Caster](../../caster/index.md), [Player](../../player/index.md), [Alloy](../../alloy/index.md)) with defaults and [the Crucible plugin](https://github.com/cmu-sei/moodle-mod_crucible) is already installed on [Moodle](../../integrations/index.md#moodle).
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ This tutorial walks you from having a clean, default Crucible stack to a working
 
 ## Step 3: (Optional) Author a Steamfitter Scenario
 
-Create a **Scenario Template** and/or **Scenario** to run tasks/injects during the event. [Steamfitter](../../steamfitter/) integrates with StackStorm for guest-VM actions and supports scheduled/manual tasks and injects.
+Create a **Scenario Template** and/or **Scenario** to run tasks/injects during the event. [Steamfitter](../../steamfitter/index.md) integrates with StackStorm for guest-VM actions and supports scheduled/manual tasks and injects.
 
 ## Step 4: Create the Alloy Definition (Template)
 

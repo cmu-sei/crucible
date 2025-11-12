@@ -149,5 +149,5 @@ Developers should prefer using transforms instead of variants. Using variants ca
 
 - [TopoMojo GitHub Repository](https://github.com/cmu-sei/TopoMojo)
 - [TopoMojo Documentation](../../topomojo/index.md)
-- [Crucible Documentation](/)
+- [Crucible Documentation](../../index.md)
 - [CMU SEI Challenge Development Guidelines](https://resources.sei.cmu.edu/library/asset-view.cfm?assetID=889267) - Technical report with best practices
