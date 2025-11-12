@@ -1,518 +1,117 @@
 # Tutorial: Creating a Game in Gameboard
 
-This tutorial walks you through creating and configuring a cybersecurity competition game in the Gameboard application, from initial setup to adding challenges and publishing.
+This tutorial walks you through creating and configuring a cybersecurity competition game in [Gameboard](../../gameboard/index.md), from initial setup to adding challenges and publishing.
 
 ## Prerequisites
 
-- Access to a Gameboard instance
-- Required permissions to create and manage games (Gameboard Admin role)
-- Challenges already created in TopoMojo (see [TopoMojo Challenge Tutorial](../topomojo-challenge/index.md))
-- Basic understanding of competition structure
+- Access to a Gameboard instance with a TopoMojo game engine
+- Required permissions to create and manage games in Gameboard (**Director** or **Admin** role)
+- TopoMojo challenges accessible to Gameboard (see [TopoMojo Challenge Tutorial](../topomojo-challenge/index.md))
+
 
 ## Overview
 
-Gameboard is the platform for orchestrating cybersecurity competitions. It allows you to create games (competitions) that can be team-based or individual, single or multi-round, and contain multiple challenges that players attempt to solve.
+Gameboard is a platform for orchestrating cybersecurity competitions. Admins can create games (competitions) for users to participate in. Users complete challenges as part of games or practice their skills in the **Practice Area**. Review [Gameboard Key Concepts](../../gameboard/index.md#gameboard-concepts) before reading this guide.
 
-## Step 1: Create a New Game
+## Table of Contents
 
-1. Log into Gameboard
-1. Click **Admin** in the navigation
-1. Click **New Game**
+- [Tutorial: Creating a Game in Gameboard](#tutorial-creating-a-game-in-gameboard)
+  - [Prerequisites](#prerequisites)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Create a New Game](#create-a-new-game)
+    - [Configure Game Metadata](#configure-game-metadata)
+    - [Configure Game Settings](#configure-game-settings)
+    - [Add Challenges to the Game](#add-challenges-to-the-game)
+    - [Configure the Game Map](#configure-the-game-map)
+    - [Game Modes](#game-modes)
+  - [Facilitating a Game](#facilitating-a-game)
+  - [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
+    - [Issue: Challenge Not Appearing in Search](#issue-challenge-not-appearing-in-search)
+    - [Issue: Players Can't Deploy Challenges](#issue-players-cant-deploy-challenges)
+  - [Additional Resources](#additional-resources)
 
-## Step 2: Basic Game Information
+## Create a New Game
 
-Fill out the essential game details:
+1. Log into Gameboard.
+2. Click **Admin** in the navigation bar.
+3. Click **New Game**. This takes you to **Game Center** for the new game.
 
-### Game Name
+### Configure Game Metadata
 
-This is the title players will see in the game lobby.
+Click the **Settings Cog** from **Game Center** to configure the game settings. The first configuration area is for game metadata. Descriptions of a few key settings are below; see the [Gameboard documentation on the Game Center Settings](../../gameboard/index.md#metadata) for full details and additional settings.
 
-**Example:** "Cyber Cup 2026"
+1. **Name**: Name of the game that players will see on the home page and game lobby.
+2. **Card Image**: Give this game a uniquely identifiable graphic. The suggested image size for cards is `750x1080`.
+3. **Publish**: Toggle the game to **Visible** when you are ready for users to see it. Keep the game **Hidden** while you are still configuring.
+4. **Lobby Markdown**: Include a markdown-formatted welcome message that users will see when they enter the game.
+5. **Feedback Templates**: Optionally configure Game- and Challenge-level feedback. Feedback is useful for getting user thoughts on the competition and collecting demographic information (e.g., years of experience).
+6. **Completion Certificate**: Optionally configure a completion certificate that users are automatically awarded. Users can earn a different certificate for competing in the competitive-mode game and for completing challenges in the **Practice Area**.
 
-### Track
+### Configure Game Settings
 
-A category for your game, indicating the focus area.
+Scroll down and click to expand **Settings**. This area configures game execution and registration settings. Descriptions of a few key settings are below; see the [Gameboard documentation on the Game Center Settings](../../gameboard/index.md#settings) for full details and additional settings.
 
-**Examples:**
+1. **Execution Open / Close**: The time window when users can play the game. Users cannot play the game beyond the end of the execution window. Users with active sessions will have their game session end at the close of the execution period. Games will automatically become available for users to begin playing at the start of the execution window.
+2. **Registration Open / Close**: The time window when users can register to play the game. After registration closes, users cannot enroll in the game. Close registration before the execution period begins if you want to lock enrollment before the competition starts. Allow registration to continue to the end of the execution period to encourage users to play even if the game has already started. Open registration before the execution period begins to give users time to enroll and read instructions. Set registration to **None** to prevent users from self-enrolling; in this case, administrators will enroll users on their behalf.
+3. **Session Duration**: The number of minutes users will have to compete in the game.
+4. **Session Limit**: The number of teams that can play simultaneously. For example, set Session Limit to `5` to allow five teams to play at the same time; the sixth team to attempt will see a "Capacity full. Try again later." message until another team finishes their session. Limiting the number of simultaneous sessions can help manage infrastructure load.
+5. **Gamespace Limit**: The number of challenges that each team can have open at one time. Set this to `1` to force teams to focus on a single challenge at a time, encouraging team focus and collaboration. Set this to `5` to allow teams to work on five challenges at once, encouraging a "divide and conquer" strategy. Limiting the number of challenges a team can deploy at once can help manage infrastructure load.
+6. **Max Submissions**: The number of times a team can attempt submitting answers to a challenge. When a team uses all submission attempts, the team cannot submit more answers. *Note: clicking the **Submit** button submits answers for all questions in a challenge. You cannot submit an answer to an individual challenge question.*
+7. **Team Size**: Set the minimum and maximum number of players that a team can have in the game. Set both the minimum and maximum to `1` to create an individual game. Set the minimum to `2` and the maximum to `5` to allow teams of between two and five players.
 
-- Offensive Skills
-- Defensive Skills
-- Mixed Operations
-- Incident Response
+### Add Challenges to the Game
 
-### Season
+Challenges come from TopoMojo. The Gameboard instance requires a TopoMojo game engine configured with permissions to access challenges via an assigned **Scope** for the Gameboard user. See the [TopoMojo documentation on creating a workspace](../../topomojo/index.md#settings) and the [TopoMojo administrator guide](../../topomojo/index.md#users-tab) for more details.
 
-Marks which iteration of your game this is.
+1. Navigate to the **Challenges** tab of the **Game Center**.
+2. Select **Search** and search for the challenges to add to the game. You can search by various TopoMojo workspace fields (e.g., title, description, tag). *Recall that the workspace must have an **audience** that matches the Gameboard user's **scope** for challenges to be visible to Gameboard.*
+3. Click the challenge to add it to the game.
+4. After adding all challenges to the game, click **Edit** on the left to adjust challenge configurations.
+   1. **Points**: Assign the number of points this challenge is worth. Best practice is to award more points for challenges that are harder or take more time.
+   2. **Solution Guide URL**: Optionally add a URL to a challenge solution guide. This solution guide will appear for all users when the game is in practice mode and shown to competitive mode users if you select the option to **Show Solution Guide in Competitive Mode**.
 
-**Examples:**
+### Configure the Game Map
 
-- Season 1
-- Season 2
-- 2026 Spring
+Gameboard provides a default grid where challenge click-points (where the users click to select a challenge) are overlaid, but best practice is to upload a custom map image. Click **Map** from the **Game Center Challenges** tab to upload a map image and rearrange the challenge click points.
 
-### Division
+### Game Modes
 
-Designates your target audience.
+Gameboard supports two game modes. Competitive mode configures a timed competition where users solve as many challenges as possible in the allotted time to earn their spot on the leaderboard. Practice mode places the challenges in this game in the **Practice Area** where users can play the challenges as many times as they'd like to hone their skills.
 
-**Examples:**
+Configure the **Game Mode** by selecting **Modes** from the **Game Center** settings area. See the [Gameboard documentation on the Practice Area](../../gameboard/index.md#practice-area) for more details.
 
-- Professionals
-- Students
-- Open (any participant level)
-- Advanced
 
-## Step 3: Game Card Visuals
+## Facilitating a Game
 
-The game card is what players see when browsing available competitions.
+Administrators have several options for monitoring and supporting an ongoing game. Brief overviews of a few key points are below. See the [Gameboard administrator documentation](../../gameboard/index.md#administrator-guide) for more details.
 
-### Card Image
+1. Navigate to **Admin > Live** for a live look at activity on Gameboard (e.g., active players, active challenges, etc.).
+2. Use **Observe** from the **Game Center** to watch player consoles as they solve challenges. More details in the [Observe Challenges documentation](../../gameboard/index.md#observe-tab).
+3. Support the competition by responding to user inquiries using the integrated **Support Area**. More details in the [Support Area documentation](../../gameboard/index.md#getting-in-game-support).
+4. Monitor game / site / user metrics / feedback by clicking **Reports** in the navigation bar. More details about reports are available in the [Reports documentation](../../gameboard/index.md#reports).
 
-Upload a card image to visually represent your game:
-
-1. Click the image upload area
-1. Select your image file
-1. **Recommended dimensions:** 750 x 1080 pixels
-
-### Card Text
-
-Optionally add text fields to provide additional information displayed on the card. This might include a brief description or key dates.
-
-## Step 4: Lobby Markdown
-
-The **Lobby Markdown** section allows you to provide detailed information that players see when they enter the game lobby.
-
-You can use Markdown formatting to create:
-
-- Headings
-- Lists
-- Bold/italic text
-- Links
-- Tables
-- Code blocks
-
-**Example:**
-
-```markdown
-## Welcome to Cyber Cup 6!
-
-This competition tests your skills across:
-
-- Network forensics
-- Malware analysis
-- Web application security
-- Incident response
-
-### Important Dates
-
-- Registration Opens: March 1, 2026
-- Competition Start: March 15, 2026
-- Competition End: March 16, 2026
-
-Good luck!
-```
-
-## Step 5: Feedback Configuration
-
-Create feedback questions using YAML to gather insights from players after the competition.
-
-**Example YAML:**
-
-```yaml
-questions:
-  - id: difficulty
-    text: "How would you rate the overall difficulty?"
-    type: scale
-    min: 1
-    max: 5
-
-  - id: favorite
-    text: "Which challenge did you enjoy most?"
-    type: text
-
-  - id: improvements
-    text: "What could we improve?"
-    type: textarea
-```
-
-This allows you to collect structured feedback to improve future competitions.
-
-## Step 6: Certificate Templates
-
-Design certificates in HTML to recognize participant achievements.
-
-**Example HTML Certificate:**
-
-```html
-<div style="text-align: center; padding: 50px;">
-  <h1>Certificate of Achievement</h1>
-  <p>This certifies that</p>
-  <h2>{{player_name}}</h2>
-  <p>participated in the Cyber Cup 2026</p>
-  <p>Final Score: {{player_score}}</p>
-  <p>Date: {{completion_date}}</p>
-</div>
-```
-
-Variables like `{{player_name}}` will be automatically filled in for each participant.
-
-## Step 7: Game Mode Selection
-
-Choose between two game modes:
-
-### Competitive Mode
-
-- Timed competition
-- Scoring and rankings matter
-- Limited time to complete challenges
-
-### Practice Mode
-
-- Non-competitive learning environment
-- No time pressure
-- Players can access solution guides
-- Good for training and skill development
-
-Toggle the mode switch based on your needs.
-
-## Step 8: Settings - Game Execution
-
-Configure when and how the game runs:
-
-### Execution Dates
-
-Set the start and end date/time for when the competition is active:
-
-- **Start Date/Time:** When players can begin attempting challenges
-- **End Date/Time:** When the competition closes
-
-### Session Limit
-
-The maximum number of players or teams that can play simultaneously.
-
-**Example:**
-
-- 100 for individual competition
-- 30 for team-based competition
-
-### Deployment Limits
-
-The maximum number of challenges each team or player can deploy at once.
-
-**Example:**
-
-- Set to 3 if you want players to focus on a few challenges at a time
-- Set to 10 if you want them to have many challenges available simultaneously
-
-**Note:** This helps manage infrastructure resources.
-
-### Submission Attempts
-
-Limit how many times a participant can submit answers for a challenge.
-
-**Examples:**
-
-- Unlimited (-1)
-- 5 attempts per challenge
-- 10 attempts per challenge
-
-**Tip:** Unlimited attempts encourages learning, while limited attempts adds difficulty.
-
-## Step 9: Settings - Gameplay Options
-
-### Preview Option
-
-Enable to let players see challenge details and instructions before starting.
-
-**Use case:** Allows players to read challenge requirements and decide which ones to attempt based on their skills.
-
-### Allow Resets
-
-Decide if players can restart their game progress.
-
-**Use case:** In practice mode, this allows players to retry challenges. Be sure to review this value in competitive mode, as it may not be desirable.
-
-### Allow Late Starts
-
-Let players join after the game has begun.
-
-**Use case:** Useful for multi-day competitions where staggered entry is acceptable.
-
-### Public Scoreboard Access
-
-Enable this to allow players to see everyone's scores.
-
-**Options:**
-
-- During competition: Can create competitive atmosphere but might discourage trailing participants
-- After competition: Standard practice to show final rankings
-- Never: For scenarios where anonymity is important
-
-## Step 10: Registration Settings
-
-Configure how players sign up for the competition:
-
-### Registration Dates
-
-Define the registration window:
-
-- **Registration Opens:** When players can begin registering
-- **Registration Closes:** Deadline for registration
-
-**Tip:** Close registration before the competition starts to finalize team counts.
-
-### Registration Markdown
-
-Provide formatted instructions on how to sign up for your game using Markdown.
-
-**Example:**
-
-```markdown
-## How to Register
-
-1. Create an account or log in
-1. Complete your player profile
-1. Form your team (see requirements below)
-1. Submit your registration
-
-### Team Requirements
-
-- All team members must have the same sponsor
-- Minimum team size: 2
-- Maximum team size: 4
-```
-
-### Team Size Configuration
-
-**Minimum Team Size:**
-
-- Set to **1** for individual competition
-- Set to **2 or more** for team competition
-
-**Maximum Team Size:**
-
-Define the largest allowed team size.
-
-**Examples:**
-
-- Min: 1, Max: 1 = Individual game
-- Min: 2, Max: 4 = Team game with 2-4 members
-- Min: 3, Max: 5 = Team game with 3-5 members
-
-### Team Sponsorship Requirement
-
-Enable this if team members must share the same sponsor organization.
-
-**Use case:** For government or organizational competitions where teams must be from the same agency/company.
-
-## Step 11: Adding Challenges
-
-Now add challenges from TopoMojo to your game:
-
-### Searching for Challenges
-
-1. Navigate to the **Challenges** section
-1. Use the search function to find challenges from TopoMojo
-1. Filter by:
-   - Challenge name
-   - Tags
-   - Difficulty
-   - NICE Framework work roles
-
-### Important: Audience Matching
-
-**Critical:** The TopoMojo workspace **audience** must match the Gameboard's configured TopoMojo scope.
-
-If they don't match, the challenge won't be visible in Gameboard.
-
-**Example:**
-
-- TopoMojo workspace audience: "PresCup"
-- Gameboard TopoMojo scope: "PresCup"
-- Challenge will be visible
-
-### Adding a Challenge
-
-1. Click **Add Challenge** or select from search results
-1. Configure challenge settings:
-
-**Points:**
-
-Assign point values based on difficulty and time required.
-
-**Examples:**
-
-- Easy challenges: 100-300 points
-- Medium challenges: 400-700 points
-- Hard challenges: 800-1000 points
-
-**Tip:** Follow guidelines from challenge testing to set appropriate point values.
-
-**Solution Guide Links (Practice Mode):**
-If running in practice mode, you can provide links to solution guides to help players learn.
-
-Repeat for all challenges you want in the game
-
-### Challenge Organization
-
-Challenges can be:
-
-- Organized by difficulty
-- Grouped by NICE Framework work role
-- Mixed to create varied experiences
-- Tagged with specific themes or scenarios
-
-## Step 12: Map Configuration (Optional)
-
-Create a visual representation of your game:
-
-1. Navigate to the **Map** section
-1. Upload a map image
-1. Place challenge click points on the map
-1. Link each point to a specific challenge
-
-### Tips for Map Creation
-
-- Use Ctrl+Click or press and hold **Alt** key to resize challenge click points
-- Position points to create a logical flow
-- Keep challenge representations consistent
-- Test click areas to ensure they're accessible
-
-Gap: Specific key combinations for map editing may vary by browser/OS
-
-## Step 13: Preview Your Game
-
-Before launching, preview what players will see:
-
-1. Navigate to the **Settings** tab
-1. Click the **Lobby** link
-1. This opens the player-facing view
-
-Review:
-
-- Game card appearance
-- Lobby information clarity
-- Challenge list and descriptions
-- All settings are correct
-
-## Step 14: Final Checklist
-
-Before going live, verify:
-
-- [ ] Game name, track, season, and division are correct
-- [ ] Card image uploaded and displays properly
-- [ ] Lobby markdown formatted and informative
-- [ ] Execution dates set correctly
-- [ ] Session and game space limits appropriate for your infrastructure
-- [ ] Registration dates configured
-- [ ] Team size requirements match your competition type
-- [ ] All challenges added with appropriate point values
-- [ ] Preview shows everything correctly
-- [ ] Feedback questions configured
-- [ ] Certificate template tested
-
-## Step 15: Go-Live and Monitor
-
-1. Save all settings
-1. Announce the competition to participants
-1. Monitor during the competition:
-   - Player registrations
-   - Active game spaces
-   - Infrastructure load
-   - Scoreboard progress
 
 ## Common Issues and Troubleshooting
 
-Issue: Challenge not appearing in search
+### Issue: Challenge Not Appearing in Search
 
-- **Solution:** Check that TopoMojo workspace audience matches Gameboard's TopoMojo scope configuration
+1. Verify that Gameboard can reach the TopoMojo API over the network.
+2. Verify that the TopoMojo workspace audience matches Gameboard's TopoMojo scope configuration.
+3. Observe Gameboard and TopoMojo API logs for more information.
 
-Issue: Players can't deploy challenges
+### Issue: Players Can't Deploy Challenges
 
-- **Solution:** Verify session limit and game space limit aren't exceeded
-
-Issue: Certificate not generating
-
-- **Solution:** Check HTML template syntax and verify all variable spelling
-
-Issue: Scoreboard not updating
-
-- **Solution:** Verify Gameboard's connection to TopoMojo and that it is receiving scoring data
-
-## Competition Game Management
-
-### Monitoring Player Progress
-
-Track in real-time:
-
-- Number of registered players/teams
-- Active challenges deployed
-- Completion rates
-- Current standings
-
-### Handling Support Requests
-
-Players may need help with:
-
-- Challenge deployment issues
-- Connection problems
-- Clarification on challenge requirements
-- Technical difficulties
-
-Have a support plan ready with clear communication channels.
-
-### Adjusting Settings
-
-Consider modifying some settings during the competition if necessary:
-
-- Extending time limits
-- Adjusting point values (use cautiously)
-- Changing submission attempt limits
-
-**Warning:** Major changes during competition can affect fairness. Make adjustments carefully and communicate them to all participants.
-
-## After the Competition
-
-### Post-Competition Tasks
-
-1. **Close registration and competition**
-1. **Review feedback** from player surveys
-1. **Generate certificates** for participants
-1. **Export final scoreboard** for records
-1. **Document lessons learned** for future competitions
-1. **Release solution guides** (if appropriate)
-1. **Archive game data** for future reference
-
-### Analyzing Results
-
-Review:
-
-- Which challenges had highest/lowest completion rates
-- Time spent on each challenge
-- Point distribution fairness
-- Player feedback themes
-- Technical issues encountered
-
-Use this data to improve future competitions.
+1. Verify that the user has an active session in the game.
+2. Verify that the game execution window in ongoing.
+3. Verify that the user has not reached the game space limit.
+4. Verify that Gameboard is able to reach the TopoMojo API over the network.
+5. Observe Gameboard and TopoMojo API logs for more information.
 
 ## Additional Resources
 
 - [Gameboard GitHub Repository](https://github.com/cmu-sei/Gameboard)
+- [Gameboard Documentation](../../gameboard/index.md)
 - [TopoMojo Tutorial](../topomojo-challenge/index.md) - Learn to create challenges
 - [CMU SEI Challenge Development Guidelines](https://resources.sei.cmu.edu/library/asset-view.cfm?assetID=889267) - Best practices for competition design
 - Crucible Documentation: [Full Documentation Site](../../index.md)
-
-## Summary
-
-You've learned how to:
-
-- Create a new game in Gameboard
-- Configure game metadata and visuals
-- Set up game execution parameters
-- Configure registration and team settings
-- Add challenges from TopoMojo
-- Create maps and visual representations
-- Preview and publish your competition
-- Monitor and manage an active game
-- Handle post-competition tasks
-
-**Have fun creating your game, and good luck!**
