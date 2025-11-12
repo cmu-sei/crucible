@@ -77,7 +77,7 @@ Gameboard provides a default grid where challenge click-points (where the users 
 
 ### Game Modes
 
-Gameboard supports two game modes. Competitive mode configures a timed competition where users solve as many challenges as possible in the allotted time to earn their spot on the leaderboard. Practice mode places the challenges in this game in the **Practice Area** where users can play the challenges as many times as they'd like to hone their skills.
+Gameboard supports two game modes. Competitive mode configures a timed competition where users solve as many challenges as possible in the allotted time to earn their spot on the scoreboard. Practice mode places the challenges in this game in the **Practice Area** where users can play the challenges as many times as they'd like to hone their skills.
 
 Configure the **Game Mode** by selecting **Modes** from the **Game Center** settings area. See the [Gameboard documentation on the Practice Area](../../gameboard/index.md#practice-area) for more details.
 
