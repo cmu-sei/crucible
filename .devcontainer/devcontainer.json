@@ -1,5 +1,7 @@
 {
 	"name": "crucible-docs",
+	"workspaceFolder": "/workspaces/crucible-docs",
+	"workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/workspaces/crucible-docs",
 	"runArgs": [
 		"--name",
 		"crucible-docs"
@@ -14,7 +16,8 @@
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"configureZshAsDefaultShell": true
-		}
+		},
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 	"customizations": {
 		"vscode": {

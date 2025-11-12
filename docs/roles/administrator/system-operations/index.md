@@ -130,7 +130,7 @@ Refer to the [Installation Guide](../../../install/index.md#infrastructure) for 
 
 ### Common Operational Issues
 
-For detailed troubleshooting procedures, see the [Troubleshooting Guide](../troubleshooting/index.md).
+For detailed troubleshooting procedures, see the [Troubleshooting Playbook](../troubleshooting/index.md).
 
 Common issues include:
 

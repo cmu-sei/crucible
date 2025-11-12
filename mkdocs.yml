@@ -90,7 +90,6 @@ nav:
       - Gallery: gallery/index.md
   - Role-Based Guides:
       - Overview: roles/index.md
-      - Permissions: roles/permissions.md
       - Infrastructure Administrator:
           - Overview: roles/administrator/index.md
           - Quick Start Guide: roles/administrator/quick-start.md

@@ -11,24 +11,37 @@ In the Steamfitter UI, four major functional sections help you manage content:
 - Tasks: Let users create and execute ad-hoc tasks.
 - History: Shows the results of all tasks executed by all users.
 
-## Roles and Permissions
+## Permissions and Roles
 
-- **Superadmin:** Has the rights to perform all actions in Steamfitter.
-- **Rangetech Admin:** Create, manage, and import scenarios or scenario templates; assign and remove users from scenarios and scenario templates; and create or manage groups.
-- **Content Developer:** Create scenario templates and scenarios, and assign or remove users from the scenarios or templates they create.
-- **Read-Only User:** View only the projects assigned to them. They cannot edit any templates or run tasks.
+### Permissions
 
-### Steamfitter Permissions
+Sets of *permissions* control access to features in Steamfitter. Permissions apply globally or per **Scenario Template** or **Scenario**.
 
-When a user visits the Steamfitter URL, Steamfitter automatically adds them to the user list with no permissions. Only a Steamfitter Superadmin can grant another user elevated permissions.
+Examples of global permissions include:
 
-1. In Steamfitter, in the top-right corner, select your user name, then **Administration**.
-2. Check the boxes for **RangetechAdmin**, **ContentDeveloper**, or **ReadOnly** next to the name of the user, depending on the required access.
-3. Select your user name, then **Exit Administration**.
+- `CreateScenarioTemplates`: Create new Scenario Templates
+- `ViewScenarios`: View all Scenarios and their Users and Groups
+- `ManageUsers`: Change User accounts
 
-!!! note
+Users who have View or Manage permissions for an administration function (for example, `ViewScenarioTemplates` or `ManageGroups`) can open the **Administration** area. They see only the sections their permissions allow in the sidebar menu.
 
-    Steamfitter roles only apply to the Steamfitter application—they do not grant permissions in any other Crucible application.
+View all available permissions in the **Roles** section of the **Administration** area.
+
+### Roles
+
+Roles group permissions and apply them to *users*. Steamfitter includes **System Roles** that define global access across the application.
+
+#### System Roles
+
+Each user can have one *system role* that provides global permissions across Steamfitter.
+
+Default system roles:
+
+- **Administrator:** Has all permissions in the system.
+- **Content Developer:** Has `CreateScenarioTemplates`, `CreateScenarios`, `ExecuteScenarios`, `ManageTasks`, `ViewUsers`, and `ViewGroups` permissions. Users with this role create and manage their own Scenario Templates and Scenarios but can't change global settings or other users' content.
+- **Observer:** Has `ViewScenarioTemplates` and `ViewScenarios` permissions. Users with this role can view all Scenario Templates and Scenarios but can't make changes.
+
+Users who have the `ManageRoles` permission can create custom system roles in the **Roles** section of the **Administration** area.
 
 ### StackStorm Integration
 
@@ -40,7 +53,7 @@ Steamfitter is primarily an administrative tool. Content Developers and Rangetec
 
 ### Scenario Templates
 
-![scenariotemplate](../assets/img/scenario templates.png)
+![scenario template](../assets/img/scenario%20templates.png)
 
 Scenario templates group predefined tasks so you can create scenarios and run them on demand. To create a new scenario template, provide a **Name**, **Description**, and **Duration**.
 
