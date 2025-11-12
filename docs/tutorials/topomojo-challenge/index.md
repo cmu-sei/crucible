@@ -1,619 +1,153 @@
 # Tutorial: Creating a Challenge in TopoMojo
 
-This tutorial walks through creating a cybersecurity challenge in [TopoMojo](../../topomojo/index.md), from creating a workspace to configuring grading and deployment.
+This tutorial walks through creating a cybersecurity challenge in [TopoMojo](../../topomojo/index.md) - a virtual lab builder and player.
+
 
 ## Prerequisites
 
 - Access to a TopoMojo instance
 - Required role permissions for creating workspaces
 - Basic understanding of virtualization and networking concepts
-- Familiarity with VMware vCenter (for this tutorial, we use VMware vCenter as the hypervisor, but TopoMojo also supports other hypervisors like Proxmox)
+- Familiarity with supported hypervisors (VMware or Proxmox)
+
 
 ## Overview
 
-TopoMojo is a lab builder and player application for developing cybersecurity challenges. Each challenge lives in its own **workspace** that contains all virtual machines, artifacts, and configuration. When a user starts a challenge, the system deploys a read-only copy called a **game space** for participants to interact with.
+TopoMojo is a lab builder and player application for developing cybersecurity challenges. Each challenge lives in its own **workspace** that contains all virtual machines, artifacts, and configuration. When a user starts a challenge, the system deploys a read-only copy called a **gamespace** for participants to interact with.
 
-## Step 1: Create a New Workspace
+For more detailed documentation on TopoMojo, visit [TopoMojo's documentation page](../../topomojo/index.md).
+
+## Table of Contents
+
+- [Tutorial: Creating a Challenge in TopoMojo](#tutorial-creating-a-challenge-in-topomojo)
+  - [Prerequisites](#prerequisites)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Create and Configure a Workspace](#create-and-configure-a-workspace)
+  - [Add Virtual Machine Templates](#add-virtual-machine-templates)
+    - [Saving Template Changes](#saving-template-changes)
+    - [Guest Settings](#guest-settings)
+    - [Template Replicas](#template-replicas)
+    - [Template Best Practices](#template-best-practices)
+  - [Configure Transforms](#configure-transforms)
+  - [Create Challenge Questions](#create-challenge-questions)
+  - [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
+    - [Issue: Changes to VM Are Not Saving](#issue-changes-to-vm-are-not-saving)
+    - [Issue: Transform Values Not Appearing in VMs](#issue-transform-values-not-appearing-in-vms)
+  - [Additional Resources](#additional-resources)
+
+
+## Create and Configure a Workspace
 
 1. Log into TopoMojo
-1. Click the **Create New Workspace** button
-1. You'll get an empty workspace - this is where you'll build your challenge
+2. Click the **Create New Workspace** button to create an empty workspace for building your challenge
+3. Configure Workspace Metadata. Descriptions of a few key settings are below; see the [TopoMojo documentation on building a workspace](../../topomojo/index.md#building-a-new-workspace) for full details and additional settings.
+   1. **Workspace Title**: Set a title that identifies your challenge (e.g., "Network Traffic Analysis")
+   2. **Description**: Provide a short (1-3 sentence) description of the challenge.
+   3. **Tags**: Add a few tags that make this challenge easily searchable. This field is a space-delimited list (e.g., "cyber-defense-analysis incident-response")
+   4. **Audience**: Set the audience to control which users can view/play this challenge. See the [TopoMojo documentation](../../topomojo/index.md#template-field-definitions) for additional details.
 
-## Step 2: Configure Workspace Metadata
 
-### Workspace Title
+## Add Virtual Machine Templates
 
-The workspace title should be the actual challenge title that players will see. For example: "Network Traffic Analysis" or "Malware Removal".
+TopoMojo Templates are starting point virtual machines that you can customize. When a user deploys a Gamespace, they will receive read-only copies of all templates in the workspace from their last saved state. See the [TopoMojo documentation on configuring templates](../../topomojo/index.md#templates-tab) for full details and settings.
 
-### Description Field (Tags)
+Navigate to the **Templates** section of the workspace to add VMs to your challenge. Deploy VMs from templates and access the console to make changes to workspace VMs.
 
-We suggest adding searchable tags in the description field to make challenges easier to find:
+### Saving Template Changes
 
-- Competition abbreviation (e.g., "PC" for Presidents Cup)
-- Season identifier (e.g., "PC4" for Presidents Cup Season 4)
-- Challenge ID (e.g., "PC4-001")
-- Any other relevant keywords
+A template must be "unlinked" to allow saving changes. **You must unlink before making changes to a VM - you will lose any changes made to a deployed VM from a linked template.**
 
-### Author
+Unlinking a template creates a new clone of the parent VMDK when using VMware and makes a clone of the parent Proxmox VM Template when using Proxmox.
 
-Optionally add your name in the author field.
+After unlinking the UI will show a **Save** button for the template. Clicking **Save** will create a VM Snapshot on the hypervisor. TopoMojo only supports one snapshot; saving will overwrite the previous saved state.
 
-### Audience
+### Guest Settings
 
-The **audience** field controls which users can access your challenge:
+**Guest Settings** use VMware guestinfo variables or the QEMU Firmware Configuration Device for Proxmox to pass information/variables to deployed VMs. Expand a template's options to configure guest settings using a `key=value` format. You can use [transforms](#configure-transforms) to insert randomized values.
 
-- **Empty**: Challenge is not visible to any Gameboard instance (useful during development)
-- **Specific audience** (e.g., "PresCup"): Challenge is visible to the production Gameboard
-- **Playtest audience**: Challenge is visible to the Playtest Gameboard instance
-
-**Tip:** Leave the audience empty while developing to prevent premature access.
-
-### Duration
-
-You can configure a time limit for the challenge. This field is optional.
-
-## Step 3: Add Virtual Machines (Templates)
-
-1. Navigate to the **Templates** section
-1. Click to add VMs to your workspace
-1. For each VM, provide a descriptive name
-
-### VM Naming Best Practices
-
-**For user-facing machines:**
-
-Use clean, descriptive names without challenge IDs, such as:
-
-- Workstation
-- File-Server
-- Web-Server
-
-**For challenge infrastructure machines:**
-
-You can include challenge IDs since users won't see these:
-
-- challenge-server-g01
-- challenge-server-pc4-001
-
-### Hidden VMs
-
-For infrastructure machines that users shouldn't directly access:
-
-1. Select the VM in the templates list
-1. Toggle the **Hidden** option to ON
-
-When hidden, users won't see a console button for that VM in the deployed challenge. **Note:** This only hides the console - the VM is still accessible on the network.
-
-### Saving VM Changes
-
-To save changes made to a VM:
-
-1. Click the **Unlink** button for that Template
-1. In simple terms, this creates a new disk on the backend (More specifically, "Unlink" creates a new clone of the parent disk in VMware or a clone of the parent template in Proxmox)
-1. Now, be sure to click **Save** in order for your changes to persist
-
-**Important:** Click **Unlink** before modifying a VM. If you don't unlink, your changes won't persist. Also, you will have to remove a running linked VM (therefore losing all changes you made) in order to unlink a template, so be sure to unlink before modifying.
-
-**Warning for this demo:** The demo will not click Unlink to avoid consuming unnecessary backend storage.
-
-## Step 4: Configure Challenge Questions and Transforms
-
-### Transforms
-
-Transforms are dynamically generated values (like tokens) that make each deployed challenge unique. Unique challenge deployments increase the reusability value of challenges by avoiding cases where users already know the answers and prevents answer sharing between users.
-
-### Setting Up Transforms
-
-1. Navigate to the **Challenge** section
-1. Click **Transforms** to see available types
-
-### Common Transform Types
-
-#### Hex Transform
-
-Generates random hexadecimal characters:
-
-**Key:** `token1`
-**Value:** `hex` (generates 8 hex characters)
-**Value:** `hex:16` (generates 16 hex characters)
-
-**Note:** Other types like Base64 can include special characters that may break bash scripts or cause execution failures.
-
-#### List Transform
-
-Multi-Word List Transforms
-
-Random words from a list.
-
-**Key:** `list`
-**Value:** `list:red blue green	one item`
-
-**Key:** `list2`
-**Value:** `list2:alpha beta gamma delta	two items (##key_1##, ##key_2##)`
-
-**Key:** `list3`
-**Value:** `list3:one two three four	three items`
-
-Use for human-readable tokens or phrases. Participants can select more than one item from a list type transform.
-
-#### ID Transform
-
-Tracks the running exercise instance.
-
-**Key:** `token_id`
-**Value:** `id`
-
-Useful for logging, tagging resources, or embedding run metadata into scripts.
-
-#### Variant Transform
-
-Provides the variant index for exercises with multiple versions.
-
-**Key:** `variant_id`
-**Value:** `variant`
-
-Use when rotating content variants (e.g., different flag locations, tool versions).
-
-#### Base64 Transform
-
-Generates a random Base64-encoded token.
-
-**Key:** `token_b64`
-**Value:** `b64` (24 chars)
-**Value:** `b64:16` (16 chars)
-
-Avoid in shell-sensitive contexts—Base64 may include +, /, =.
-
-#### UUID Transform
-
-**Key:** `token_uuid`
-**Value:** `uuid` (decimal string)
-**Value:** `uid` (full GUID)
-
-Ideal for correlation IDs inside services or audit trails.
-
-#### Integer Range Transform
-
-Random integer in a specified range.
-
-**Key:** `rand_int`
-**Value:** `int:999-9999` (999–9999)
-
-Use for randomized port suffixes, team numbers, usernames.
-
-#### App URL Transform
-
-Reference the app URL from within a challenge (UI-side only).
-
-**Key:** `lab_url`
-**Value:** `app_url`
-
-Not exposed to participants; useful in internal scripts or callback endpoints.
-
-#### Grader URL Transform
-
-Injects the grading endpoint for automated scoring flows.
-
-**Key:** `grade_cb`
-**Value:** `grader_url`
-
-#### API Key / Grader Key Transform
-
-Internal environment-side access tokens.
-
-**Keys:** `apikey_key`, `grader_key`
-**Values:** `same key name`
-
-For backend validation, not participant-visible.
-
-#### IPv4 Transform
-
-Random IP address assignment from CIDR.
-
-**Key:** `target_ip`
-**Value:** `ipv4:10.0.2.0/24`
-
-Example output: 10.0.2.137
-
-Use for hiding static answers in networking labs.
-
-### Creating Challenge Questions
-
-1. In the Challenge section, add questions that users will answer
-1. Reference transform variables using double-pound notation: `##variable_name##`
-
-**Example Questions:**
-
-**Question 1:**
+Example:
 
 ```text
-Text: "Enter token one"
-Answer: ##token1##
+token1=##token1##
+ipaddr=1.2.3.4
 ```
 
-**Question 2:**
+VMs can use scripts to access guest settings using hypervisor-specific commands:
 
-```text
-Text: "Enter token two"
-Answer: ##token2##
-```
-
-When the challenge deploys, TopoMojo replaces the `##token1##` and `##token2##` placeholders with the actual generated values.
-
-### Question Weights
-
-You can assign different point values to questions:
-
-- **Default (0):** All questions worth equal points
-- **Percentage (0-100):** Question worth that percentage of total points
-- **Decimal (0-1):** Also supported for percentage
-
-**Example:**
-
-- Question 1: Weight = 60 (worth 60% of points)
-- Question 2: Weight = 40 (worth 40% of points)
-
-### Example Answers
-
-Always provide an example answer for each question showing the expected format.
-
-**Examples:**
-
-- For hex token: `a1b2c3d4e5f6`
-- For IP address: `192.168.1.100`
-
-### Grader Types
-
-Select how to validate answers:
-
-**Match:** Exact answer required (most common for transforms)
-
-**Match Any:** Accept any of multiple answers separated by pipes
-
-```text
-Answer: Robert|Bob
-```
-
-User can enter either "Robert" OR "Bob"
-
-**Match All:** Require all answers separated by pipes (in any order)
-
-```text
-Answer: Robert|Bob
-```
-
-User must enter "Robert|Bob" or "Bob|Robert"
-
-**Match Alpha:** Strips special characters and matches only letters/numbers. Good for file paths:
-
-```text
-Answer: C:\Users\Desktop
-```
-
-Accepts `C:\Users\Desktop` or `C:/Users/Desktop`
-
-## Step 5: Challenge Variants
-
-Use variants when you need different VM configurations or questions for different deployments.
-
-**Use variants when the following is true:**
-
-- Different deployed VMs for different versions
-- Different attached artifacts
-- Different answers based on configuration
-
-**Tip:** Try to avoid variants when possible. Use transforms and dynamic configuration instead.
-
-### Creating Variants
-
-1. Click **Add Variant** or **Clone Variant**
-1. Clone Variant copies all settings from an existing variant
-1. Modify questions or configurations as needed
-1. System randomly deploys one variant when a user starts the challenge
-
-## Step 6: Configure Guest Settings (Passing Transforms to VMs)
-
-To use transform values inside your VMs, pass them as **guest info variables** (VMware guestinfo).
-
-1. Expand a VM template's options
-1. Add **Guest Settings**
-1. Left side: Guest info variable name
-1. Right side: Transform variable name
-
-**Example:**
-
-```text
-guestinfo.token1 = ##token1##
-guestinfo.token2 = ##token2##
-```
-
-### Accessing Guest Info Inside VMs
-
-From within the VM, query guest info using VMware tools:
+Querying VMware guestinfo variables
 
 ```bash
-vmware-toolsd --cmd "info-get guestinfo.token1"
+vmware-toolsd --cmd "info-get guestinfo.<variable-name>"
 ```
 
-Or for cleaner syntax:
+Querying the QEMU Firmware Configuration Device for Proxmox
 
 ```bash
-TOKEN1=$(vmware-toolsd --cmd "info-get guestinfo.token1")
-echo $TOKEN1
+sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.<variable-name>/raw
 ```
 
-Note: Specific command syntax may vary by VMware tools version (`vmware-toolsd` vs. `vmtoolsd`).
+### Template Replicas
 
-## Step 7: The Challenge Server
+You can configure **Replicas** for team-based challenges where multiple team members need to work simultaneously. All replicas will have the same starting state, configurations, and guest settings. TopoMojo will deploy the specified number of replicas of the VM template in gamespaces. Running VMs using replicas have a `_#` suffix applied to their names (e.g., `kali_1`, `kali_2`). It is a best practice to set the replica count to `-1` to deploy a replica of the VM for each member of the team that owns the gamespace. This avoids deploying more replicas that there are team members to use the VMs.
 
-The challenge server is a special VM that handles:
+### Template Best Practices
 
-- **Startup configuration**: Running scripts to configure other VMs when challenge starts
-- **Grading**: Running scripts to verify user actions and provide tokens
-- **DNS/DHCP**: Providing network services via dnsmasq
-- **File hosting**: Serving files that users need to download
+1. **Unlinking Templates**: Use linked templates as much as possible. Using linked templates reduces storage on the backend and facilitates a shared/common VM/environment that the user can become comfortable with across challenges.
+2. **Use a "Challenge Server"**: A "Challenge Server" is a VM that serves as the brains of a challenge. It can facilitate startup scripts that reconfigure VMs at boot, host a grading script/website, collect logs, and more. This allows developers to maximize linked VMs by placing all configuration/automation/grading on a single unlinked VM. CMU SEI publishes our [Challenge Server on GitHub](https://github.com/cmu-sei/Challenge-Server).
+3. **Template Visibility**: Templates can be "visible" or "hidden". Visible templates will have a UI console accessible to the user. Hidden VMs will not show a UI console to the user, but may still be accessible to the user over the network. Hide VMs that you do not want users to have direct access to. For example, in a challenge where the user must identify the source of a live cyber attack, you should hide any VMs related to the attack/attacker.
+4. **Template Naming**: Templates should have clean, descriptive names. Visible templates should not have names with tags, IDs, or other details that are not meaningful to the end user. It can be helpful to name hidden templates with unique identifiers that allow administrators to quickly isolate/identify resources in the backend while troubleshooting. It is best when templates for a challenge have unique names to help with each of search, but uniqueness across workspaces is not enforced.
+5. **Template Count**: Add VM templates only when required. Keeping the VM template count low reduces infrastructure resource requirements and minimizes challenge complexity.
+6. **Clean Before Saving**: Developers should clean up all development artifacts before saving templates. This includes: clearing command/browser history, deleting logs, and removing development artifacts/files. If left behind, users can find undesired hints and shortcuts to solving the challenge.
 
-### Challenge Server Setup
 
-The challenge server typically:
+## Configure Transforms
 
-- Is **hidden** from users (no console access)
-- Has an **unlinked** disk to save changes
-- Contains scripts in `/challenge-server/custom-scripts/`
-- Configured via `/challenge-server/config.yaml`
+The **Challenge** tab of a workspace allows configuration of transforms and challenge questions.
 
-### Configuration File
+Transforms are dynamically generated values (like tokens) that make each deployed challenge unique. TopoMojo creates randomized values for configured transforms at gamespace deploy time. Creating unique challenge deployments using transforms increases reusable value of challenge by avoiding cases where users already know the answers. Challenges with unique/dynamic answers prevents answer sharing between users.
 
-**Startup Scripts:**
+Most text fields on the **Challenge** tab support transform substitution via a "double-pound" variable notation (e.g., `##transform-name##`). The **Markdown** section and **Variant Markdown** sections add additional markdown to the challenge document that can contain transforms for dynamic challenge documents. Challenge questions and answers can contain dynamic text/answers using transforms. See the [Guest Settings section](#guest-settings) for applying transforms in template guest settings.
 
-```yaml
-startup_scripts:
-  - my-startup.sh
-```
+See the [TopoMojo documentation on transforms](../../topomojo/index.md#transforms) for additional details.
 
-**Hosted Files:**
 
-```yaml
-hosted_files:
-  enabled: true
-```
+## Create Challenge Questions
 
-Files in `/challenge-server/hosted-files/` will be available for download
+In the Challenge section, add questions that users will answer. Challenge questions should always have an example answer configured to help users understand the answer's expected format.
 
-**Grading:**
+Challenge questions can optionally specify a weight to change the percentage of points allocated to the question. By default, all questions will have a weight of `0`, meaning all questions have an equal share of the challenge's total points. Use values `0-100` to define the percentage of points to allocate (e.g., a question with a weight of `60` will hold 60% of the points for the challenge). **Challenges with question weights that do not add up to 100 may experience undesired behavior.**
 
-```yaml
-grading:
-  enabled: true
-  mode: button  # Options: button, cron, text, text-single
-```
+All questions one of the "Grader Types" which defines to how determine correct answers. See the [TopoMojo Documentation](../../topomojo/index.md#question-set) for more details on the supported grader types.
 
-**Grading Modes:**
+You can reference transform variables in question text and answers as described in the [transforms section](#configure-transforms). Using transforms allows for unique questions/answers per challenge deployments.
 
-- **button:** User clicks "Grade Challenge" button to run grading script
-- **cron:** Grading runs automatically at intervals
-- **text:** Provides text input for answers inside the environment
-- **text-single:** Single text box regardless of number of questions
+You can optionally use **Variants** to randomize challenges in a more prescribed way than using transforms. Variants can have different documentation, ISOs attached to VMs, and questions/answers. TopoMojo will randomly choose a variant when deploying a gamespace. See the [TopoMojo documentation on variants](../../topomojo/index.md#variants) for more details.
 
-**Note:** For most challenges, use Gameboard's built-in question/answer system rather than text-based grading in the environment.
+Developers should prefer using transforms instead of variants. Using variants can increase challenge development and testing because of the need to develop an test all variants. Typical use cases for variants include:
 
-### Grading Configuration
+1. Challenge artifacts that cannot be dynamically modified in a predictable way by scripting/transforms
+2. VMs must have different configurations where scripting the changes at boot is not feasible
 
-```yaml
-grading_script: example-grading.py
-token_location: guestinfo  # Read tokens from guest info variables
-
-checks:
-  - part_key: grading-check-1
-    text: "Description shown to user"
-    token_name: token1
-  - part_key: grading-check-2
-    text: "Another grading check"
-    token_name: token2
-```
-
-## Step 8: Startup Scripts
-
-Startup scripts configure your challenge environment when it's deployed. They run on the challenge server.
-
-### Basic Startup Script Structure
-
-```bash
-#!/bin/bash
-
-# Get transform values from guest info
-TOKEN1=$(vmware-toolsd --cmd "info-get guestinfo.token1")
-
-# SSH to another machine and configure it
-ssh -i /root/.ssh/key user@hostname << EOF
-  echo "$TOKEN1" > /tmp/token.txt
-  # Additional configuration commands
-EOF
-
-# Log the result
-echo "SSH command return value: $?"
-echo "Done with startup configuration"
-```
-
-### Important Notes
-
-- All startup scripts must be **executable**: `chmod +x script.sh`
-- Scripts must be in `/challenge-server/custom-scripts/`
-- Scripts run as **root** user
-- Non-zero exit codes indicate failure
-- All stdout/stderr logged to systemd journal
-
-### Accessing Logs
-
-View challenge server logs:
-
-```bash
-sudo journalctl -u challenge-server
-```
-
-### Restarting the Challenge Server Service
-
-After modifying config.yaml:
-
-```bash
-sudo systemctl restart challenge-server.service
-```
-
-### Testing Scripts
-
-**Important:** Test scripts by running them as root (since the challenge server service runs as root):
-
-```bash
-sudo /challenge-server/custom-scripts/my-startup.sh
-```
-
-## Step 9: Grading Scripts
-
-Grading scripts verify that users completed required tasks.
-
-### Grading Script Output Format
-
-Your grading script must output results in this format:
-
-```text
-key: status message
-```
-
-**Success requires the word "success" in the value:**
-
-```text
-part-one: success
-part-two: success - Configuration is correct
-```
-
-**Failure is anything without "success":**
-
-```text
-part-three: failure - Configuration file is invalid
-```
-
-### Example Grading Script (Python)
-
-```python
-#!/usr/bin/env python3
-
-import subprocess
-
-# Check if process is running
-result = subprocess.run(['pgrep', 'malware.exe'], capture_output=True)
-
-if result.returncode != 0:
-    print("grading-check-1: success - Malware process stopped")
-else:
-    print("grading-check-1: failure - Malware process still running")
-
-# Check if file exists
-result = subprocess.run(['ssh', 'user@target', 'test -f /tmp/malware.exe'],
-                       capture_output=True)
-
-if result.returncode != 0:
-    print("grading-check-2: success - Malware file removed")
-else:
-    print("grading-check-2: failure - Malware executable still present")
-```
-
-### Grading Best Practices
-
-- Make scripts robust with good error handling
-- Log all actions and results
-- Provide helpful failure messages to guide users
-- Test scripts thoroughly before deployment
-
-## Step 10: Team Challenges and Replicas
-
-For team-based challenges where multiple team members need to work simultaneously:
-
-1. Select the VM that team members will use (e.g., an analyzer workstation)
-1. Set **Replicas** to `-1`
-1. With replicas set to -1, each team member gets their own copy:
-   - Team of 3 x 3 copies: analyzer_1, analyzer_2, analyzer_3
-   - Each replica has identical configuration and guest info variables
-
-**Important:** Replicas all share the same guest info variables (tokens), so they have the same answers.
-
-## Step 11: Cleanup and Preparation for Deployment
-
-Before marking your challenge as ready:
-
-### Clear Logs
-
-Run the cleanup script to remove development logs:
-
-```bash
-/challenge-server/cleanup-journalctl.sh
-```
-
-This removes all systemd journal logs so users don't see your development debugging.
-
-### Review Checklist
-
-Let's take a moment to review:
-
-- [ ] All VMs properly named
-- [ ] Hidden VMs are actually hidden
-- [ ] Unlinked challenge server disk
-- [ ] All startup scripts are executable
-- [ ] All scripts tested and working
-- [ ] Transforms configured correctly
-- [ ] Questions have example answers
-- [ ] Grading scripts tested
-- [ ] Logs cleared
-- [ ] No command history or shortcuts left behind
-- [ ] Audience field set appropriately
-
-## Step 12: Save and Deploy
-
-1. Save your workspace changes
-1. Set the **Audience** field to make it visible to the appropriate Gameboard instance
-1. In Gameboard, search for your challenge and add it to a game
 
 ## Common Issues and Troubleshooting
 
 ### Issue: Changes to VM Are Not Saving
 
-- Solution: Click the Unlink button for that VM
-
-### Issue: Startup Script Fails
-
-- Check logs: `sudo journalctl -u challenge-server`
-- Verify script is executable: `ls -la /challenge-server/custom-scripts/`
-- Test as root: `sudo /challenge-server/custom-scripts/script.sh`
+1. Confirm you have unlinked the template.
+2. Confirm clicking the "Save" button does not show an error in the TopoMojo UI.
+3. Check TopoMojo API and hypervisor (VMware or Proxmox) logs to find errors saving VMs.
 
 ### Issue: Transform Values Not Appearing in VMs
 
-- Verify properly configured guest settings
-- Check variable names match (case-sensitive)
-- Deploy a new game space (old one may have cached values)
+1. Because TopoMojo populates transform values at gamespace deploy time, transform values will not appear in workspaces.
+2. Confirm you have configured guest settings as desired. Variable names are case sensitive.
+3. Confirm you are using the [correct command for your hypervisor](#guest-settings).
 
-### Issue: Grading Script Doesn't Provide Tokens
-
-- Verify output format includes the exact key names from config.yaml
-- Check that success messages contain the word "success"
-- Review logs: `sudo journalctl -u challenge-server`
 
 ## Additional Resources
 
 - [TopoMojo GitHub Repository](https://github.com/cmu-sei/TopoMojo)
-- [Gameboard Documentation](https://github.com/cmu-sei/Gameboard)
+- [TopoMojo Documentation](../../topomojo/index.md)
+- [Crucible Documentation](/)
 - [CMU SEI Challenge Development Guidelines](https://resources.sei.cmu.edu/library/asset-view.cfm?assetID=889267) - Technical report with best practices
-- Crucible Documentation: [Full Documentation Site](/)
-
-## Summary
-
-You've learned how to:
-
-- Create a workspace in TopoMojo
-- Add and configure VMs
-- Set up transforms for unique challenge instances
-- Create challenge questions with dynamic answers
-- Configure the challenge server for startup and grading
-- Write startup and grading scripts
-- Prepare challenges for team competitions
-- Clean up and deploy your challenge
-
-**Next Steps:** Try creating a simple challenge following these steps, then explore more advanced features like variants and complex grading scenarios.
