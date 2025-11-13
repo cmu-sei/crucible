@@ -124,7 +124,7 @@ Caster supports modules created as GitLab projects that are visible to the GitLa
 
 !!! note
 
-    Caster requires that the inputs file and the outputs file are written in JSON (that is, `variables.tf.json` and `ouptuts.tf.json`).
+    Caster requires that the inputs file and the outputs file are written in JSON (that is, `variables.tf.json` and `outputs.tf.json`).
 
 There are three ways to add/refresh a module in Caster:
 
