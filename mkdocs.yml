@@ -1,5 +1,5 @@
 site_name: Crucible Documentation
-site_description: "CRUCIBLE is an open-source application framework for creating and managing virtual environments and events."
+site_description: "Crucible is an open-source application framework for creating and managing virtual environments and events."
 site_author: "Crucible Team"
 copyright: >
   Copyright &copy; 2025-2026 Carnegie Mellon University. All rights reserved.
@@ -110,9 +110,9 @@ nav:
           - Overview: roles/participant/index.md
   - Tutorials:
       - Overview: tutorials/index.md
-      - ODX consumed via Moodle: tutorials/crucible-odx-moodle/index.md
-      - TopoMojo Challenge: tutorials/topomojo-challenge/index.md
-      - Games Within Gameboard: tutorials/gameboard-build/index.md
+      - Build an On Demand Exercise delivered via Moodle: tutorials/odx-moodle/index.md
+      - Build a TopoMojo Challenge: tutorials/topomojo-challenge/index.md
+      - Build Games in Gameboard: tutorials/gameboard-build/index.md
   - 3rd-Party Integrations: integrations/index.md
 
 repo_url: "https://github.com/cmu-sei/crucible"

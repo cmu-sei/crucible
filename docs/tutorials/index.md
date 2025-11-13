@@ -1,13 +1,7 @@
 # Tutorials
 
-[1. Building an On-Demand Exercise (ODX) consumed via Moodle](crucible-odx-moodle/index.md)
+[1. Creating an On Demand Exercise Using Caster, Player, Alloy, Steamfitter, and Moodle](odx-moodle/index.md) - Build an on‑demand exercise using [Caster](../caster/index.md), [Player](../player/index.md), [Alloy](../alloy/index.md) and [Steamfitter](../steamfitter/index.md), using [Moodle](../integrations/index.md#moodle) for delivery.
 
-Goal: From a clean, default Crucible stack to a working on‑demand exercise delivered through Moodle. Assumes already-deployed platform (minimum of [Caster](../caster/index.md), [Player](../player/index.md), [Alloy](../alloy/index.md)) with defaults and [the Crucible plugin](https://github.com/cmu-sei/moodle-mod_crucible) is already installed on [Moodle](../integrations/index.md#moodle).
+[2. Creating a Challenge in TopoMojo](topomojo-challenge/index.md) - Build a cybersecurity challenge in [TopoMojo](../topomojo/index.md) using Virtual Machines, dynamic tokens (transforms) and challenge questions.
 
-[2. Creating a Challenge in TopoMojo](topomojo-challenge/index.md)
-
-Goal: Learn to build a cybersecurity challenge in [TopoMojo](../topomojo/index.md) from start to finish. Covers workspace creation, VM configuration, challenge questions with dynamic tokens (transforms) and deployment preparation. Includes best practices for token generation, grading methods, and team challenge configuration.
-
-[3. Creating a Game in Gameboard](gameboard-build/index.md)
-
-Goal: Create and configure a cybersecurity competition using [Gameboard](../gameboard/index.md). Covers game setup, metadata configuration, challenge selection from TopoMojo, point allocation, team settings, game execution parameters, and competition management. Learn to build both competitive and practice mode games with proper registration, scoring, and certificate generation.
+[3. Creating a Game in Gameboard](gameboard-build/index.md) - Create and configure a cybersecurity competition using [Gameboard](../gameboard/index.md).
