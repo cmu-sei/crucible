@@ -31,7 +31,7 @@ ESXi
 guestinfo
 [Dd]atastore
 JSON
-YAML
+(?i)yaml
 pgAdmin
 Keycloak
 StackStorm
@@ -99,4 +99,10 @@ reusability
 kubectl
 Nextcloud
 (?i)gameplay
+Playtest
+(?i)hostnames
+dnsmasq
+cron
+systemd
+guestinfo
 Zscaler

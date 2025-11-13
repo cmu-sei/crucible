@@ -36,7 +36,7 @@ Mattermost is an open-source, self-hostable online chat service with file sharin
 
 Moodle is a free and open-source learning management system. Schools, universities, workplaces, and other sectors use Moodle for blended learning, distance education, flipped classrooms, and other online learning projects.
 
-🔗 [Moodle Documentation](https://docs.moodle.org/401/en/Main_page) and [installation instructions](https://docs.moodle.org/401/en/Installation_quick_guide)
+🔗 [Moodle Documentation](https://docs.moodle.org/501/en/Main_page) and [installation instructions](https://docs.moodle.org/501/en/Installation_quick_guide)
 
 ### Moodle Crucible Plugins
 
