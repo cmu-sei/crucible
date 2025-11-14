@@ -1,4 +1,4 @@
-# ![An icon representing the Crucible application suite icon](assets/img/home/cruciblelogo.svg "Crucible Application Suite Icon"){: style="height:75px;width:75px"} Introducing Crucible
+# ![An icon representing the Crucible application suite icon](assets/cruciblelogo.svg "Crucible Application Suite Icon"){: style="height:75px;width:75px"} Introducing Crucible
 
 **Crucible** is an open-source application framework for creating and managing virtual environments and events.
 
@@ -31,13 +31,13 @@ Crucible can be a platform for individual practice or competition. These platfor
 
 ### Going Simple: Labs/Challenges
 
-[![TopoMojo Logo](assets/img/crucible-icon-topomojo.svg){: style="height:75px;width:75px"}](topomojo/index.md)Crucible's [**TopoMojo**](topomojo/index.md) application enables design of simple labs and challenges using form-based configurations. Select and configure virtual machines, define networks, and write a guide.
+[![TopoMojo Logo](assets/topomojo-logo.svg){: style="height:75px;width:75px"}](topomojo/index.md)Crucible's [**TopoMojo**](topomojo/index.md) application enables design of simple labs and challenges using form-based configurations. Select and configure virtual machines, define networks, and write a guide.
 
 Novice Crucible content developers can easily get productive by using TopoMojo. Choose this app when the benefits of more advanced "infrastructure as code" automation are not needed. TopoMojo supports the configuration and deployment of small virtual environments to two types of hypervisors: VMware vSphere ESXi and Proxmox Virtual Environment KVM (open source).
 
 ### Crafting a Challenge Competition
 
-[![Gameboard Logo](assets/img/crucible-icon-gameboard.svg){: style="height:75px;width:75px"}](gameboard/index.md) Crucible's [**Gameboard**](gameboard/index.md) application provides game design capabilities and a competition-ready user interface for running your own cybersecurity game.
+[![Gameboard Logo](assets/gameboard-logo.svg){: style="height:75px;width:75px"}](gameboard/index.md) Crucible's [**Gameboard**](gameboard/index.md) application provides game design capabilities and a competition-ready user interface for running your own cybersecurity game.
 
 A Crucible content developer can create, clone, manage, and delete games and challenges—for competition or practice.
 
@@ -47,7 +47,7 @@ Crucible can also support more advanced needs commonly found within concept expe
 
 ### Designing User Experiences
 
-[![Player Logo](assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"}](player/index.md) Crucible's [**Player**](player/index.md) application is the exerciser's window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user interfaces using various integrated applications. A Crucible content developer can shape how integrated applications present scenario information, assessments, and virtual environments.
+[![Player Logo](assets/player-logo.svg){: style="height:75px;width:75px"}](player/index.md) Crucible's [**Player**](player/index.md) application is the exerciser's window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user interfaces using various integrated applications. A Crucible content developer can shape how integrated applications present scenario information, assessments, and virtual environments.
 
 #### Open-Source Integrations
 
@@ -57,7 +57,7 @@ Crucible can also support more advanced needs commonly found within concept expe
 
 ### Coding a Topology
 
-[![Caster Logo](assets/img/crucible-icon-caster.svg){: style="height:75px;width:75px"}](caster/index.md) Crucible's [**Caster**](caster/index.md) application enables coding design and deployment of a cyber topology. With Caster Designs, an intermediate content developer can avoid scripting Terraform code and simply define variables within pre-configured Terraform modules.
+[![Caster Logo](assets/caster-logo.svg){: style="height:75px;width:75px"}](caster/index.md) Crucible's [**Caster**](caster/index.md) application enables coding design and deployment of a cyber topology. With Caster Designs, an intermediate content developer can avoid scripting Terraform code and simply define variables within pre-configured Terraform modules.
 
 Caster supports the design and deployment of virtual environments to a variety of hypervisors. Supported platforms include VMware vSphere ESXi, Microsoft Azure HyperV (public-cloud), Amazon Web Services Xen/Nitro (public-cloud), and Proxmox Virtual Environment KVM (open source).
 
@@ -68,9 +68,9 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 ### Crafting a Scenario
 
-[![Blueprint Logo](assets/img/blueprint-logo.png)](blueprint/index.md) Crucible's [**Blueprint**](blueprint/index.md) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Blueprint maps scenario events to simulation objectives.
+[![Blueprint Logo](assets/blueprint-logo.png)](blueprint/index.md) Crucible's [**Blueprint**](blueprint/index.md) application enables the collaborative creation and visualization of a master scenario event list (MSEL) for an exercise. Blueprint maps scenario events to simulation objectives.
 
-[![Steamfitter Logo](assets/img/crucible-icon-steamfitter.svg){: style="height:75px;width:75px"}](steamfitter/index.md) Crucible's [**Steamfitter**](steamfitter/index.md) application enables the organization and execution of tasks on virtual machines.
+[![Steamfitter Logo](assets/steamfitter-logo.svg){: style="height:75px;width:75px"}](steamfitter/index.md) Crucible's [**Steamfitter**](steamfitter/index.md) application enables the organization and execution of tasks on virtual machines.
 
 #### Open-Source Integrations
 
@@ -79,7 +79,7 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 ### Animating Activity
 
-[![GHOSTS Logo](assets/img/ghosts_new.png){: style="height:75px;width:75px"}](https://cmu-sei.github.io/GHOSTS/) Crucible's [**GHOSTS**](https://cmu-sei.github.io/GHOSTS/) Non-Player Character (NPC) automation and orchestration framework deploys and shapes the activities of NPCs using GenAI.
+[![GHOSTS Logo](assets/ghosts_new.png){: style="height:75px;width:75px"}](https://cmu-sei.github.io/GHOSTS/) Crucible's [**GHOSTS**](https://cmu-sei.github.io/GHOSTS/) Non-Player Character (NPC) automation and orchestration framework deploys and shapes the activities of NPCs using GenAI.
 
 #### Open-Source Integrations
 
@@ -87,19 +87,19 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 ### Evaluating Threats
 
-[![CITE Logo](assets/img/cite-logo.png)](cite/index.md) Crucible's [**Collaborative Incident Threat Evaluator (CITE)**](cite/index.md) application enables participants from different organizations to evaluate, score, and comment on cyber incidents. CITE's situational awareness dashboard allows teams to track internal actions and roles.
+[![CITE Logo](assets/cite-logo.png)](cite/index.md) Crucible's [**Collaborative Incident Threat Evaluator (CITE)**](cite/index.md) application enables participants from different organizations to evaluate, score, and comment on cyber incidents. CITE's situational awareness dashboard allows teams to track internal actions and roles.
 
 ### Displaying Incident Information
 
-[![Gallery Logo](assets/img/gallery-logo.png)](gallery/index.md) Crucible's [**Gallery**](gallery/index.md) application enables participants to review cyber incident information by source type (intelligence, reporting, orders, news, social media, telephone, email). Gallery groups that information by critical infrastructure sector or any other organization.
+[![Gallery Logo](assets/gallery-logo.png)](gallery/index.md) Crucible's [**Gallery**](gallery/index.md) application enables participants to review cyber incident information by source type (intelligence, reporting, orders, news, social media, telephone, email). Gallery groups that information by critical infrastructure sector or any other organization.
 
 ### Assessing Performance
 
-![SEER Logo](assets/img/crucible-icon-seer.svg){: style="height:75px;width:75px"} Crucible's **SEER** application enables assessment of team performance. During events, participants tackle mission-essential tasks and individual qualification requirements. Map performance assessments to training objectives to scenario events.
+![SEER Logo](assets/seer-logo.svg){: style="height:75px;width:75px"} Crucible's **SEER** application enables assessment of team performance. During events, participants tackle mission-essential tasks and individual qualification requirements. Map performance assessments to training objectives to scenario events.
 
 ### Launching an On-Demand Exercise
 
-[![Alloy Logo](assets/img/crucible-icon-alloy.svg){: style="height:75px;width:75px"}](alloy/index.md) Crucible's [**Alloy**](alloy/index.md) application enables users to launch an on-demand event or join an instance of an already-running exercise. Following an event, Alloy can also provide a summary of knowledge and performance assessments.
+[![Alloy Logo](assets/alloy-logo.svg){: style="height:75px;width:75px"}](alloy/index.md) Crucible's [**Alloy**](alloy/index.md) application enables users to launch an on-demand event or join an instance of an already-running exercise. Following an event, Alloy can also provide a summary of knowledge and performance assessments.
 
 ### Operational Deployment
 
@@ -115,4 +115,4 @@ The SEI owns and operates an on-premises instance of Crucible that can deploy vi
 
 [fortress.sei.cmu.edu](https://fortress.sei.cmu.edu)
 
-![Fortress Logo](assets/img/fortress-app.svg){: style="height:75px;width:75px"}
+![Fortress Logo](assets/fortress-app.svg){: style="height:75px;width:75px"}

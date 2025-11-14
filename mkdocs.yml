@@ -19,8 +19,8 @@ theme:
     - content.code.copy
     - content.code.annotate
     - content.external_links
-  logo: assets/img/home/cruciblelogo.svg
-  favicon: assets/img/home/cruciblelogo.svg
+  logo: assets/cruciblelogo.svg
+  favicon: assets/cruciblelogo.svg
   palette:
     # Palette toggle for light mode
     - scheme: default
@@ -80,15 +80,15 @@ nav:
   - Installation Guide: install/index.md
   - Core Application Guides:
       - Landing: landing/index.md
-      - Player: player/index.md
-      - Caster: caster/index.md
-      - Steamfitter: steamfitter/index.md
       - Alloy: alloy/index.md
-      - TopoMojo: topomojo/index.md
-      - Gameboard: gameboard/index.md
       - Blueprint: blueprint/index.md
+      - Caster: caster/index.md
       - CITE: cite/index.md
       - Gallery: gallery/index.md
+      - Gameboard: gameboard/index.md
+      - Player: player/index.md
+      - Steamfitter: steamfitter/index.md
+      - TopoMojo: topomojo/index.md
   - Role-Based Guides:
       - Overview: roles/index.md
       - Infrastructure Administrator:
