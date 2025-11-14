@@ -8,7 +8,7 @@ Administrators can customize the Crucible platform by adding applications that i
 
 You need Crucible system admin permissions to add third-party applications to the Crucible Framework. Assuming you have the correct permissions, follow the steps below to integrate a third-party application to the Crucible Framework.
 
-![Crucible View Admin OE](../assets/img/viewAdmin.png)
+![Crucible View Admin OE](img/viewAdmin.png)
 
 1. Click your username in the top right corner of the screen.
 2. Select **Administration**.

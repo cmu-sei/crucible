@@ -1,4 +1,4 @@
-# ![Gallery Logo](../assets/img/gallery-logo.png) **Gallery:** Keeping You in the Know
+# ![Gallery Logo](../assets/gallery-logo.png) **Gallery:** Keeping You in the Know
 
 ## Overview
 
@@ -20,7 +20,7 @@ For installation, refer to these GitHub repositories.
 
 The Gallery landing page provides a central approach to recompiling all collections and exhibits that the user is a participant on into a single display.
 
-![Gallery Landing Page OE](../assets/img/galleryLandingPage.png)
+![Gallery Landing Page OE](img/galleryLandingPage.png)
 
 First, users select a collection from the dropdown; then, they choose an exhibit from the displayed list.
 
@@ -43,7 +43,7 @@ The Gallery Wall is a dashboard with red, orange, yellow, and green status indic
 
 The following image shows some important hotspots about the Gallery Wall. Reference the number on the hotspot to learn more about this section.
 
-![Gallery Wall OE](../assets/img/galleryWall-v2.png)
+![Gallery Wall OE](img/galleryWall-v2.png)
 
 #### Title
 
@@ -93,7 +93,7 @@ The Gallery Archive is a collection of information that contains relevant report
 
 The following image shows some important hotspots about the Gallery Archive. Reference the number on the hotspot to learn more about this section.
 
-![Gallery Archive OE](../assets/img/galleryArchive-v2.png)
+![Gallery Archive OE](img/galleryArchive-v2.png)
 
 #### Add an Article
 
@@ -184,7 +184,7 @@ Users with the appropriate Content Developer permissions can add articles to the
 
 Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an article during an exercise:
 
-![Add Articles Exercise OE](../assets/img/addArticleExercise.png)
+![Add Articles Exercise OE](img/addArticleExercise.png)
 
 1. On the Gallery Archive section, click **+** to add an article.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -205,7 +205,7 @@ To save these settings, click **Save**.
 
 After you create your article, the Gallery Archive displays it in the following way.
 
-![Article Created OE](../assets/img/createdArticle.png)
+![Article Created OE](img/createdArticle.png)
 
 #### Edit an Article
 
@@ -234,13 +234,13 @@ The available permissions are:
 
 Most users won't have any permissions assigned in this application.
 
-![Gallery Users Admin OE](../assets/img/galleryUsersAdmin.png)
+![Gallery Users Admin OE](img/galleryUsersAdmin.png)
 
 #### Add a User
 
 Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a user:
 
-![Add Gallery User OE](../assets/img/addGalleryUser-v2.png)
+![Add Gallery User OE](img/addGalleryUser-v2.png)
 
 1. Under the Users Administration View, click **Add User**.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -277,13 +277,13 @@ To delete a user, follow these steps:
 
 The following image shows the Collections Administration Page. Here, administrators can add, upload, download, copy, and delete [collections](#glossary). Assign articles here, in case multiple exercises are running at the same time.
 
-![Collections Admin OE](../assets/img/collectionsAdmin-v2.png)
+![Collections Admin OE](img/collectionsAdmin-v2.png)
 
 #### Add a Collection
 
 Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a collection:
 
-![Add Collection OE](../assets/img/addCollection-v2.png)
+![Add Collection OE](img/addCollection-v2.png)
 
 1. Under the Collections Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -345,13 +345,13 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 The following image shows the Cards Administration Page. Here, administrators can add and delete cards. Each card appears in the Gallery Wall and stores articles related to that card.
 
-![Cards Admin OE](../assets/img/cardsAdmin.png)
+![Cards Admin OE](img/cardsAdmin.png)
 
 #### Add a Card
 
 Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a card:
 
-![Add Card OE](../assets/img/addCard-v2.png)
+![Add Card OE](img/addCard-v2.png)
 
 1. Under the Cards Administration View, click **Add Card**.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -388,13 +388,13 @@ To delete a card, follow these steps:
 
 The following image shows the Articles Administration Page. Here, administrators can add and delete articles. These articles provide supplemental information from different sources to keep the exercise going.
 
-![Articles Admin OE](../assets/img/articlesAdmin.png)
+![Articles Admin OE](img/articlesAdmin.png)
 
 #### Add an Article
 
 Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an article:
 
-![Add Article OE](../assets/img/addArticle-v2.png)
+![Add Article OE](img/addArticle-v2.png)
 
 1. Under the Article Administration View, click **Add Article**.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -440,13 +440,13 @@ To delete an article, follow these steps:
 
 The following image shows the Exhibits Administration Page. Here, administrators configure the actual exercise and run it based on the teams, collections, and articles they previously configured.
 
-![Exhibits Admin OE](../assets/img/exhibitsAdmin-v3.png)
+![Exhibits Admin OE](img/exhibitsAdmin-v3.png)
 
 #### Add an Exhibit
 
 Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an [exhibit](#glossary):
 
-![Add Exhibit OE](../assets/img/addExhibit-v2.png)
+![Add Exhibit OE](img/addExhibit-v2.png)
 
 1. Under the Exhibit Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -513,13 +513,13 @@ To copy an exhibit, follow these steps:
 
 To configure an exhibit for an exercise, administrators will need to add Exhibit Teams, Card Teams, Article Teams, as well as assign the respective Observers (if desired). To do this, follow these steps:
 
-![Configure Exhibit OE](../assets/img/configureExhibit-v2.png)
+![Configure Exhibit OE](img/configureExhibit-v2.png)
 
 #### Add a Team to an Exhibit
 
 To add a team to the Exhibit, follow these steps:
 
-![Add Teams Exhibit OE](../assets/img/addTeamsExhibit.png)
+![Add Teams Exhibit OE](img/addTeamsExhibit.png)
 
 1. Click the **+** icon.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -536,7 +536,7 @@ To save these settings, click **Save**.
 
 To configure a team, follow these steps:
 
-![Exhibit Teams OE](../assets/img/exhibitTeams-v2.png)
+![Exhibit Teams OE](img/exhibitTeams-v2.png)
 
 1. Select the team you want to configure and click it to expand its configuration details.
 2. Under the **All Users** tab, review the users who do not yet belong to the team. To add them to the team, click **Add User**.
@@ -547,7 +547,7 @@ To configure a team, follow these steps:
 
 To add a Team Card to the Exhibit, follow these steps:
 
-![Card Teams OE](../assets/img/cardTeams-v2.png)
+![Card Teams OE](img/cardTeams-v2.png)
 
 1. Click **+** on the Card Teams section.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -569,7 +569,7 @@ To save these settings, click **Save**.
 
 To add an article to a team, follow these steps:
 
-![Article Teams OE](../assets/img/articleTeams.png)
+![Article Teams OE](img/articleTeams.png)
 
 1. Select the **Card** you want to configure.
 2. Under the **Exhibit Teams** tab, identify the teams without an article assignment. To add them to the Article Teams, click **Add**.
@@ -579,7 +579,7 @@ To add an article to a team, follow these steps:
 
 To assign the [Observer Role](#glossary) to a user:
 
-![Exhibit Observers OE](../assets/img/exhibitObservers.png)
+![Exhibit Observers OE](img/exhibitObservers.png)
 
 1. Under **Evaluation Users**, search for the desired user.
 2. After you find the user, click **Add**.

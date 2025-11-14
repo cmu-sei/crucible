@@ -773,6 +773,8 @@ Certificates are "templatized", allowing you to reuse a single certificate templ
 
 Enclose the following keywords in `{{double braces}}`: `date`, `division`, `challengeDescription`, `challengeName`, `gameName`, `playerName`, `rank`, `score`, `season`, `series`, `teamName`, `totalPlayerCount`, `totalTeamCount`, `time`, `track`, and `userName`.
 
+[An example certificate is viewable here](img/sample-cert-template.html)
+
 #### Selecting a Certificate Template
 
 Players can view a list of past certificates from their Gameboard Profile page too. In Gameboard, click **Profile**. Then click **Certificates**. Gameboard displays a table view of all game certificates. You can view and print the certificate as a .PDF from the table view.

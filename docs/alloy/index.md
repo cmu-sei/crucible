@@ -1,4 +1,4 @@
-# ![Alloy Logo](../assets/img/crucible-icon-alloy.svg){: style="height:75px;width:75px"} **Alloy:** Conducting a Simulation
+# ![Alloy Logo](../assets/alloy-logo.svg){: style="height:75px;width:75px"} **Alloy:** Conducting a Simulation
 
 ## Overview
 
