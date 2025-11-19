@@ -48,7 +48,7 @@ Key metrics to monitor on your Kubernetes cluster:
 ### Log Management
 
 - **Application logs** - Access via `kubectl logs` for each pod
-- **Audit logs** - Configure in each Crucible application's Helm values; forward to SIEM as described in [security guide](../security/index.md)
+- **Audit logs** - Configure in each Crucible application's Helm values; forward to Security Information and Event Management (SIEM) as described in [security guide](../security/index.md)
 - **Kubernetes events** - View with `kubectl get events -A`
 
 ## Maintenance Procedures

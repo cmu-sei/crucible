@@ -1,0 +1,39 @@
+# Expand acronyms on their first appearance.
+
+extends: conditional
+message: "'%s' has no definition. Expand acronyms on their first appearance."
+level: error
+scope: text
+ignorecase: false
+first: '\b([A-Z]{3,5})\b'
+second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{3,5})\)'
+# ... with the exception of these:
+exceptions:
+  - CMU
+  - SEI
+  - QEMU
+  - ISO
+  - VMDK
+  - DHCP
+  - NFS
+  - CSS
+  - OIDC
+  - PNG
+  - DVD
+  - CERT
+  - MFA
+  - CPU
+  - SSL
+  - TLS
+  - RAM
+  - IMAP
+  - KVM
+  - NET
+  - SEER
+  - GUI
+  - MISP
+  - SMS
+  - PEM
+  - MIME
+  - NIST
+  - NICE

@@ -7,7 +7,7 @@ Infrastructure administrators should maintain a repeatable security posture for 
 - Enforce TLS certificates for all public endpoints; rotate them at least annually.
 - Restrict administrative portals (Keycloak, Rancher, monitoring) to approved network ranges.
 - Configure Kubernetes network policies so only required namespaces can reach platform services.
-- Enable audit logging across Alloy, Player, Caster, and Steamfitter; forward logs to your SIEM.
+- Enable audit logging across Alloy, Player, Caster, and Steamfitter; forward logs to your Security Information and Event Management (SIEM).
 
 ## Identity Management
 

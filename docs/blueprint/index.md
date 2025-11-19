@@ -193,7 +193,7 @@ To edit the MSEL's basic information and configuration, follow these steps:
 | **Integrate Player**             | Boolean       | Add Player integration functionality to the MSEL                                                     | True                                |
 | **Integrate Gallery**            | Boolean       | Add Gallery integration functionality to the MSEL                                                    | True                                |
 | **Integrate CITE**               | Boolean       | Add CITE integration functionality to the MSEL                                                       | True                                |
-| **Select Scoring Model**         | Dropdown Text | Select a CITE Scoring Model                                                                          | CISA NCISS                          |
+| **Select Scoring Model**         | Dropdown Text | Select a CITE Scoring Model                                                                          | `CISA NCISS`                        |
 | **Integrate Steamfitter**        | Boolean       | Add Steamfitter integration functionality to the MSEL                                                | False                               |
 | **MSEL Status**                  | Dropdown Text | Select MSEL status designation                                                                       | Active                              |
 | **Header Row Metadata (Height)** | Integer       | An integer value that defines the height of the header row when exporting this MSEL as an .xlsx file | 30                                  |
@@ -323,7 +323,7 @@ To add a Data Field to the MSEL, follow these steps:
 | **Display on the Events list**                             | Boolean       | Display this data field on the Events list tab                                                 | True             |
 | **Display on the Exercise View**                           | Boolean       | Display this data field on the Exercise View tab                                               | True             |
 | **Display on "Advanced" edit tab**                         | Boolean       | Display this data field on the data field edit component Advanced tab                          | True             |
-| **Display for Content Developers and MSEL Owners ONLY!!!** | Boolean       | Display this data field for users who are Content Developers or MSEL Owners only               | True             |
+| **Display for Content Developers and MSEL Owners Only!!!** | Boolean       | Display this data field for users who are Content Developers or MSEL Owners only               | True             |
 | **Gallery Article Parameter**                              | Dropdown Text | If using the Gallery integration, select the Gallery parameter that aligns with the data field | Description      |
 | **Column Metadata (Width)**                                | Integer       | Width of the column when displayed                                                             | 30               |
 | **Cell Metadata (Color, Tint, Font-Weight)**               | String        | Column color and font style                                                                    | (Red, 20%, bold) |
@@ -485,17 +485,17 @@ On the **Default** tab, fill the fields as necessary following the Data Format T
 
 ##### Data Format Table
 
-| Field               | Data Type     | Description                                                                  | Example              |
-| ------------------- | ------------- | ---------------------------------------------------------------------------- | -------------------- |
-| **Control Number**  | String        | Event control number, used to identify and categorize events                 | ADMIN-1              |
-| **Description**     | String        | Information, details, and characteristics of the event                       | STARTEX              |
-| **Status**          | Dropdown Text | Approval status of the event used on the MSEL                                | Approved             |
-| **Time**            | Datetime      | Start date/time of the move real-time                                        | 11/20/2023, 09:00:00 |
-| **Move**            | Dropdown Text | Move number the event is part of                                             | 1                    |
-| **Group**           | Integer       | Groups events within a move, often times executed within the same time range | 1                    |
-| **Exercise Date**   | Datetime      | Start date/time of the move exercise-time                                    | 1/24/2024, 14:18:27  |
-| **Type**            | String        | Source type for the event                                                    | Email                |
-| **Delivery Method** | Dropdown Text | How is the event delivered to participants                                   | Email                |
+| Field               | Data Type     | Description                                                                  | Example                |
+| ------------------- | ------------- | ---------------------------------------------------------------------------- | ---------------------- |
+| **Control Number**  | String        | Event control number, used to identify and categorize events                 | `ADMIN-1`              |
+| **Description**     | String        | Information, details, and characteristics of the event                       | `STARTEX`              |
+| **Status**          | Dropdown Text | Approval status of the event used on the MSEL                                | `Approved`             |
+| **Time**            | Datetime      | Start date/time of the move real-time                                        | `11/20/2023, 09:00:00` |
+| **Move**            | Dropdown Text | Move number the event is part of                                             | `1`                    |
+| **Group**           | Integer       | Groups events within a move, often times executed within the same time range | `1`                    |
+| **Exercise Date**   | Datetime      | Start date/time of the move exercise-time                                    | `1/24/2024, 14:18:27`  |
+| **Type**            | String        | Source type for the event                                                    | `Email`                |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants                                   | `Email`                |
 
 If not already completed on the previous tab, fill the fields from the **Advanced** tab following the Data Format Table specifications. This tab focuses on the MSEL's metadata and style.
 
@@ -524,7 +524,7 @@ If the MSEL owner enabled Gallery integration, the user should verify that all f
 | **Delivery Method** | Dropdown Text | How is the event delivered to participants                                   | Gallery                                           |
 | **Title**           | String        | Title of the event                                                           | Bank Consortium Falls Victim to Ransomware Attack |
 | **From Org**        | Dropdown Text | Select the organization that sends this event                                | CC News                                           |
-| **To Org**          | Dropdown Text | Select the organization that receives this event                             | ALL                                               |
+| **To Org**          | Dropdown Text | Select the organization that receives this event                             | All                                               |
 
 After you've added all desired configurations, click **Save**.
 
@@ -787,21 +787,21 @@ The MSEL owner should add these fields:
 
 | Field                 | Data Type     | Description                                                               | Example                                     |
 | --------------------- | ------------- | ------------------------------------------------------------------------- | ------------------------------------------- |
-| **Description**       | String        | Information, details, and characteristics of the event                    | STARTEX                                     |
-| **Date Posted**       | Datetime      | Posted date of the event                                                  | 1/24/2024, 14:18:27                         |
-| **Delivery Method**   | Dropdown Text | How is the event delivered to participants                                | Gallery                                     |
-| **Name**              | String        | Name of the event                                                         | Common Operating Picture 1                  |
-| **From Org**          | Dropdown Text | Select the organization that sends this event                             | CC News                                     |
-| **To Org**            | Dropdown Text | Select the organization that receives this event                          | ALL                                         |
-| **Summary**           | Rich Text     | Complete information and details of the event                             | A ransomware attack affected Bank XYZ...    |
-| **Card**              | Dropdown Text | Select the Gallery Card to categorize this event                          | Information Technology Sector               |
-| **Status**            | Dropdown Text | Approval status of the event used on the MSEL                             | Approved                                    |
-| **Source Type**       | Dropdown Text | Select where the event's details come from                                | News                                        |
-| **Source Name**       | String        | Add the author of the event                                               | BBC News                                    |
-| **Move**              | Dropdown Text | Move number that the event is part of                                     | 1                                           |
-| **Group**             | Integer       | Groups events within a move, often executed within the same time range    | 1                                           |
+| **Description**       | String        | Information, details, and characteristics of the event                    | `STARTEX`                                     |
+| **Date Posted**       | Datetime      | Posted date of the event                                                  | `1/24/2024, 14:18:27`                         |
+| **Delivery Method**   | Dropdown Text | How is the event delivered to participants                                | `Gallery`                                     |
+| **Name**              | String        | Name of the event                                                         | `Common Operating Picture 1`                  |
+| **From Org**          | Dropdown Text | Select the organization that sends this event                             | `CC News`                                     |
+| **To Org**            | Dropdown Text | Select the organization that receives this event                          | `All`                                         |
+| **Summary**           | Rich Text     | Complete information and details of the event                             | `A ransomware attack affected Bank XYZ...`    |
+| **Card**              | Dropdown Text | Select the Gallery Card to categorize this event                          | `Information Technology Sector`               |
+| **Status**            | Dropdown Text | Approval status of the event used on the MSEL                             | `Approved`                                    |
+| **Source Type**       | Dropdown Text | Select where the event's details come from                                | `News`                                        |
+| **Source Name**       | String        | Add the author of the event                                               | `BBC News`                                    |
+| **Move**              | Dropdown Text | Move number that the event is part of                                     | `1`                                           |
+| **Group**             | Integer       | Groups events within a move, often executed within the same time range    | `1`                                           |
 | **Url**               | String        | Provide a URL if more information is necessary for participants to access | `www.bbcnews.com/ransomware-attack-xyzbank` |
-| **Open in a New Tab** | Boolean       | Use this option to open the URL in a new tab                              | True                                        |
+| **Open in a New Tab** | Boolean       | Use this option to open the URL in a new tab                              | `True`                                        |
 
 After adding data fields, map each one to the appropriate Gallery field by selecting an option from the **Gallery Article Parameter** dropdown when adding or editing the field.
 
@@ -1066,10 +1066,10 @@ If the exercise administrator has granted the appropriate permissions, follow th
 | Field           | Data Type | Description                                                   | Example                                                                                                                                                                |
 | --------------- | --------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Long Name**   | String    | Add the complete name for the organization                    | Cybersecurity and Infrastructure Security Agency                                                                                                                       |
-| **Short Name**  | String    | Add a short name for the organization, such as an acronym     | CISA                                                                                                                                                                   |
+| **Short Name**  | String    | Add a short name for the organization, such as an acronym     | `CISA`                                                                                                                                                                   |
 | **Summary**     | String    | Organization's short summary                                  | Security agency                                                                                                                                                        |
 | **Email**       | String    | Organization's email contact                                  | `john@cisa.gov`                                                                                                                                                        |
-| **Description** | Rich Text | Information, details, and characteristics of the organization | The Cybersecurity and Infrastructure Security Agency (CISA) is an agency of the DHS that is responsible for strengthening cybersecurity and infrastructure protection. |
+| **Description** | Rich Text | Information, details, and characteristics of the organization | The Cybersecurity and Infrastructure Security Agency (CISA) is an agency of the Department of Homeland Security (DHS) that is responsible for strengthening cybersecurity and infrastructure protection. |
 
 After you've added all desired configurations, click **Save**.
 

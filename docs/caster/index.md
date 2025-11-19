@@ -102,7 +102,7 @@ Modules are very powerful and make complex configurations simpler and more easil
 1. A generic virtual machine module that abstracts away commonly used parameters into variables such as:
 
    - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
-   - **Networks:** creates a NIC for each specified network and assigns it to the specified network VLAN.
+   - **Networks:** creates a Network Interface Card (NIC) for each specified network and assigns it to the specified network VLAN.
    - **ExerciseId:** appends the `exerciseId` to the name of the VM for use with ODXs requiring unique naming.
    - Other simplified variable names based on the target audience.
 
@@ -237,7 +237,7 @@ When you open a project, you can create a design and add modules backed by Git t
 
 This topic is for anyone who manages a Crucible instance who wants to configure their Terraform provider installation for Caster. You can configure Terraform to only download certain providers from the Internet and use them from a local File store.
 
-Refer to **HashiCorp's Terraform** documentation: **CLI Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
+Refer to **HashiCorp's Terraform** documentation: **Command Line Interface (CLI) Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
 
 For your reference, below is the `.terraformrc` file currently implemented in the SEI's CyberForce instance of Caster.
 
