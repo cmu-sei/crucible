@@ -21,7 +21,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           result-encoding: string
           script: |
-            const baseTag = `${{ toJSON(steps.release_tag.outputs.value) }}`;
+            const baseTag = '${{ steps.release_tag.outputs.value }}';
             const regex = new RegExp(`^${baseTag}(?:-(\\d+))?$`);
             const releases = await github.paginate(github.rest.repos.listReleases, {
               owner: context.repo.owner,
