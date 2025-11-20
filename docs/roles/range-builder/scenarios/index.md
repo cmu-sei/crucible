@@ -83,13 +83,13 @@ Organize activities into logical **phases**:
 
 ### Incident Response Scenario
 
-| Phase             | Task                 | Description                  | Trigger               | Notes                          |
-| ----------------- | -------------------- | ---------------------------- | --------------------- | ------------------------------ |
-| **Detection**     | Intrusion Detection System (IDS) Alert Generation | Generate initial alert       | Time-based (3 min in) | Alert appears on dashboard |
-| **Detection**     | Dashboard Notification     | Display alert to analysts    | After IDS alert       | Confirms visibility            |
-| **Investigation** | Initial Triage       | Analyst acknowledges alert   | Manual                | 10-min limit                   |
-| **Investigation** | Log Analysis         | Collect logs for review      | After triage          | Automated collection           |
-| **Investigation** | Artifact Analysis    | Review artifacts for malware | After log analysis    | 30-min limit                   |
+| Phase             | Task                                                | Description                  | Trigger               | Notes                          |
+| ----------------- | --------------------------------------------------- | ---------------------------- | --------------------- | ------------------------------ |
+| **Detection**     | Intrusion Detection System (IDS) Alert Generation   | Generate initial alert       | Time-based (3 min in) | Alert appears on dashboard     |
+| **Detection**     | Dashboard Notification                              | Display alert to analysts    | After IDS alert       | Confirms visibility            |
+| **Investigation** | Initial Triage                                      | Analyst acknowledges alert   | Manual                | 10-min limit                   |
+| **Investigation** | Log Analysis                                        | Collect logs for review      | After triage          | Automated collection           |
+| **Investigation** | Artifact Analysis                                   | Review artifacts for malware | After log analysis    | 30-min limit                   |
 
 ---
 
@@ -138,9 +138,9 @@ Organize activities into logical **phases**:
 
 ### Cross-Team Interaction
 
-| Task                             | Description                          | Team | Trigger     | Delay | Outcome             |
-| -------------------------------- | ------------------------------------ | ---- | ----------- | ----- | ------------------- |
-| **Red Team: Network Compromise** | Red team compromises network segment | Red  | Manual      | —     | Network compromised |
+| Task                             | Description                          | Team | Trigger     | Delay | Outcome                                                         |
+| -------------------------------- | ------------------------------------ | ---- | ----------- | ----- | --------------------------------------------------------------- |
+| **Red Team: Network Compromise** | Red team compromises network segment | Red  | Manual      | —     | Network compromised                                             |
 | **Blue Team: Alert Generation**  | Alert triggered by Red activity      | Blue | Red success | 5 min | Alert sent to Security Information and Event Management (SIEM)  |
 
 ---

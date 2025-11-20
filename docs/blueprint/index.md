@@ -785,8 +785,8 @@ The MSEL owner should add these fields:
 
 ##### Data Format Table
 
-| Field                 | Data Type     | Description                                                               | Example                                     |
-| --------------------- | ------------- | ------------------------------------------------------------------------- | ------------------------------------------- |
+| Field                 | Data Type     | Description                                                               | Example                                       |
+| --------------------- | ------------- | ------------------------------------------------------------------------- | --------------------------------------------- |
 | **Description**       | String        | Information, details, and characteristics of the event                    | `STARTEX`                                     |
 | **Date Posted**       | Datetime      | Posted date of the event                                                  | `1/24/2024, 14:18:27`                         |
 | **Delivery Method**   | Dropdown Text | How is the event delivered to participants                                | `Gallery`                                     |
@@ -800,7 +800,7 @@ The MSEL owner should add these fields:
 | **Source Name**       | String        | Add the author of the event                                               | `BBC News`                                    |
 | **Move**              | Dropdown Text | Move number that the event is part of                                     | `1`                                           |
 | **Group**             | Integer       | Groups events within a move, often executed within the same time range    | `1`                                           |
-| **Url**               | String        | Provide a URL if more information is necessary for participants to access | `www.bbcnews.com/ransomware-attack-xyzbank` |
+| **Url**               | String        | Provide a URL if more information is necessary for participants to access | `www.bbcnews.com/ransomware-attack-xyzbank`   |
 | **Open in a New Tab** | Boolean       | Use this option to open the URL in a new tab                              | `True`                                        |
 
 After adding data fields, map each one to the appropriate Gallery field by selecting an option from the **Gallery Article Parameter** dropdown when adding or editing the field.
@@ -1063,12 +1063,12 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 #### Data Format Table
 
-| Field           | Data Type | Description                                                   | Example                                                                                                                                                                |
-| --------------- | --------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Long Name**   | String    | Add the complete name for the organization                    | Cybersecurity and Infrastructure Security Agency                                                                                                                       |
-| **Short Name**  | String    | Add a short name for the organization, such as an acronym     | `CISA`                                                                                                                                                                   |
-| **Summary**     | String    | Organization's short summary                                  | Security agency                                                                                                                                                        |
-| **Email**       | String    | Organization's email contact                                  | `john@cisa.gov`                                                                                                                                                        |
+| Field           | Data Type | Description                                                   | Example                                                                                                                                                                                                  |
+| --------------- | --------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Long Name**   | String    | Add the complete name for the organization                    | Cybersecurity and Infrastructure Security Agency                                                                                                                                                         |
+| **Short Name**  | String    | Add a short name for the organization, such as an acronym     | `CISA`                                                                                                                                                                                                   |
+| **Summary**     | String    | Organization's short summary                                  | Security agency                                                                                                                                                                                          |
+| **Email**       | String    | Organization's email contact                                  | `john@cisa.gov`                                                                                                                                                                                          |
 | **Description** | Rich Text | Information, details, and characteristics of the organization | The Cybersecurity and Infrastructure Security Agency (CISA) is an agency of the Department of Homeland Security (DHS) that is responsible for strengthening cybersecurity and infrastructure protection. |
 
 After you've added all desired configurations, click **Save**.

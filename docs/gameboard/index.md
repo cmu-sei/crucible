@@ -616,32 +616,32 @@ The table below outlines the permissions associated with different roles in the 
 
 | Permission / Role                                                                                                                          | Admin   | Director | Support | Tester  |
 | ------------------------------------------------------------------------------------------------------------------------------------------ | ------- | -------- | ------- | ------- |
-| **Admin**                                                                                                                                      |         |          |         |         |
+| **Admin**                                                                                                                                  |         |          |         |         |
 | Admin Area: Access the Admin area                                                                                                          | **Yes** | **Yes**  | **Yes** | No      |
 | Create/edit sponsors: Create and edit sponsor organizations                                                                                | **Yes** | **Yes**  | No      | No      |
 | Manage API Keys: Can generate API keys for any user and revoke their access                                                                | **Yes** | No       | No      | No      |
 | Manage system notifications: Create, edit, and delete notifications which appear at the top of the app                                     | **Yes** | **Yes**  | No      | No      |
-| **Games**                                                                                                                                      |         |          |         |         |
+| **Games**                                                                                                                                  |         |          |         |         |
 | Create/edit/delete games: Create, edit, and delete games. Add and remove challenges, set their scoring properties, and add manual bonuses. | **Yes** | **Yes**  | No      | No      |
 | Set players to ready: Change player status to ready/not ready in sync-start games                                                          | **Yes** | **Yes**  | No      | No      |
 | View hidden games and practice challenges: View games and practice challenges that their creator hid from players                          | **Yes** | **Yes**  | **Yes** | **Yes** |
-| **Play**                                                                                                                                       |         |          |         |         |
+| **Play**                                                                                                                                   |         |          |         |         |
 | Ignore registration/execution windows: Ignore registration and execution window settings when enrolling in and starting games              | **Yes** | **Yes**  | **Yes** | **Yes** |
 | Ignore session reset settings: Reset their session, even in games that prohibit session reset                                              | **Yes** | **Yes**  | **Yes** | **Yes** |
 | Select challenge variants: Choose any variant of a challenge when deploying (rather than random assignment)                                | **Yes** | **Yes**  | **Yes** | **Yes** |
-| **Practice**                                                                                                                                   |         |          |         |         |
+| **Practice**                                                                                                                               |         |          |         |         |
 | Practice Area: Edit settings for the Practice Area                                                                                         | **Yes** | **Yes**  | No      | No      |
-| **Reports**                                                                                                                                    |         |          |         |         |
+| **Reports**                                                                                                                                |         |          |         |         |
 | Reports: Run, view, and share reports                                                                                                      | **Yes** | **Yes**  | **Yes** | No      |
-| **Scoring**                                                                                                                                    |         |          |         |         |
+| **Scoring**                                                                                                                                |         |          |         |         |
 | Award manual bonuses: Award manual bonuses to individual players or teams                                                                  | **Yes** | **Yes**  | No      | No      |
 | Revise scores: Manually initiate re-ranking of games and regrading of challenges                                                           | **Yes** | **Yes**  | No      | No      |
 | View scores live: View scores for all players and teams (even before the game has ended)                                                   | **Yes** | **Yes**  | **Yes** | No      |
-| **Support**                                                                                                                                    |         |          |         |         |
+| **Support**                                                                                                                                |         |          |         |         |
 | Edit Support settings: Edit support settings (e.g. support page greeting)                                                                  | **Yes** | **Yes**  | **Yes** | No      |
 | Manage tickets: Manage, edit, assign, and respond to tickets                                                                               | **Yes** | **Yes**  | **Yes** | No      |
 | View tickets: View all tickets in the app                                                                                                  | **Yes** | **Yes**  | **Yes** | No      |
-| **Teams**                                                                                                                                      |         |          |         |         |
+| **Teams**                                                                                                                                  |         |          |         |         |
 | Administer sessions: Manually end and extend team play sessions                                                                            | **Yes** | **Yes**  | No      | No      |
 | Approve name changes: Approve name change requests for users and players                                                                   | **Yes** | **Yes**  | **Yes** | No      |
 | Create/delete challenge instances: Start and purge an instance of a challenge on behalf of any team                                        | **Yes** | No       | No      | No      |
@@ -649,7 +649,7 @@ The table below outlines the permissions associated with different roles in the 
 | Enroll Players: Enroll players in games on their behalf                                                                                    | **Yes** | **Yes**  | **Yes** | No      |
 | Observe: See information about all active challenges and teams                                                                             | **Yes** | **Yes**  | **Yes** | No      |
 | Send announcements: Send announcements to all players (or individual players and teams)                                                    | **Yes** | **Yes**  | No      | No      |
-| **Users**                                                                                                                                      |         |          |         |         |
+| **Users**                                                                                                                                  |         |          |         |         |
 | Assign roles: Assign roles to other users                                                                                                  | **Yes** | No       | No      | No      |
 | Create users manually: Create and edit users manually (currently available only as an API call)                                            | **Yes** | No       | No      | No      |
 
