@@ -41,7 +41,7 @@ Novice Crucible content developers can easily get productive by using TopoMojo. 
 
 A Crucible content developer can create, clone, manage, and delete games and challenges—for competition or practice.
 
-## TEAM EXERCISING
+## Team Exercising
 
 Crucible can also support more advanced needs commonly found within concept experimentation and team exercising (table-top, functional, and full)—using some of the following ten applications:
 

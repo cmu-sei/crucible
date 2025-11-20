@@ -292,7 +292,7 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 | Field           | Data Type | Description                                                | Example                                         |
 | --------------- | --------- | ---------------------------------------------------------- | ----------------------------------------------- |
-| **Name**        | String    | Name of the collection                                     | NCIS Demonstration                              |
+| **Name**        | String    | Name of the collection                                     | Demonstration                                   |
 | **Description** | String    | Details, characteristics and information of the collection | This is a collection created for demo purposes. |
 
 To save these settings, click **Save**.
@@ -409,7 +409,7 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 | **Card**                | Dropdown Text | Select the card with which to categorize this article          | Energy Sector                                                                    |
 | **Status**              | Dropdown Text | Select the article's status of how it affects the exercise     | Critical                                                                         |
 | **Source Type**         | Dropdown Text | Select the source or author type of the article                | Intel                                                                            |
-| **Source Name**         | String        | Name or author of the article                                  | BBC News                                                                         |
+| **Source Name**         | String        | Name or author of the article                                  | `BBC News`                                                                       |
 | **URL for more info**   | String        | Provide the URL if participants need additional information    | `www.bbcnews.com/hurricane-delta`                                                |
 | **Open URL in new tab** | Boolean       | Choose this option to open the URL in a new tab                | True                                                                             |
 | **Move**                | Integer       | Record the move that includes this article                     | 1                                                                                |

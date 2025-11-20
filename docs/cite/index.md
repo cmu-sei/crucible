@@ -226,15 +226,15 @@ If the exercise administrator grants the appropriate permissions, follow these s
 
 #### Data Format Table
 
-| Field                      | Data Type     | Description                                                           | Example                                                  |
-| -------------------------- | ------------- | --------------------------------------------------------------------- | -------------------------------------------------------- |
-| **Evaluation Description** | String        | Details, characteristics and information of the evaluation            | NCISS Demonstration                                      |
-| **Scoring Model**          | Dropdown Text | Scoring model to use in the evaluation                                | CISA NCISS                                               |
-| **Evaluation Status**      | Dropdown Text | Status of the evaluation after configuration                          | Active                                                   |
-| **Gallery Exhibit ID**     | GUID          | ID of the Gallery exhibit, if using Gallery during an exercise        | 81a623e3-faeb-4a56-8b4d-0d42f90b6829                     |
-| **Current Move**           | Integer       | Current move of the evaluation                                        | 0                                                        |
-| **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | 1/23/2024, 14:22:40                                      |
-| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | Ransomware attackers compromised the agency's network... |
+| Field                      | Data Type     | Description                                                           | Example                                                    |
+| -------------------------- | ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **Evaluation Description** | String        | Details, characteristics and information of the evaluation            | `NCISS Demonstration`                                      |
+| **Scoring Model**          | Dropdown Text | Scoring model to use in the evaluation                                | `CISA NCISS`                                               |
+| **Evaluation Status**      | Dropdown Text | Status of the evaluation after configuration                          | `Active`                                                   |
+| **Gallery Exhibit ID**     | GUID          | ID of the Gallery exhibit, if using Gallery during an exercise        | `81a623e3-faeb-4a56-8b4d-0d42f90b6829`                     |
+| **Current Move**           | Integer       | Current move of the evaluation                                        | `0`                                                        |
+| **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | `1/23/2024, 14:22:40`                                      |
+| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | `Ransomware attackers compromised the agency's network...` |
 
 To save these settings, click **Save**.
 
@@ -298,12 +298,12 @@ To configure an evaluation to use for an exercise, administrators will need to a
 
 #### Data Format Table
 
-| Field                     | Data Type | Description                                                     | Example                               |
-| ------------------------- | --------- | --------------------------------------------------------------- | ------------------------------------- |
-| **Move Number**           | Integer   | Move number to add                                              | 0                                     |
-| **Move Description**      | String    | Details, characteristics and information of the move            | The exercise will begin at 0900 EST   |
-| **Situation Date/Time**   | Datetime  | Situation date/time for the move                                | 1/23/2024, 14:30:21                   |
-| **Situation Description** | Rich Text | Additional details, characteristics and information of the move | The objectives of the exercise are... |
+| Field                     | Data Type | Description                                                     | Example                                 |
+| ------------------------- | --------- | --------------------------------------------------------------- | --------------------------------------- |
+| **Move Number**           | Integer   | Move number to add                                              | `0`                                     |
+| **Move Description**      | String    | Details, characteristics and information of the move            | `The exercise will begin at 0900 EST`   |
+| **Situation Date/Time**   | Datetime  | Situation date/time for the move                                | `1/23/2024, 14:30:21`                   |
+| **Situation Description** | Rich Text | Additional details, characteristics and information of the move | `The objectives of the exercise are...` |
 
 To save these settings, click **Save**.
 
@@ -394,22 +394,22 @@ If the exercise administrator grants the appropriate permissions, follow these s
 
 #### Data Format Table
 
-| Field                                         | Data Type     | Description                                                                        | Example             |
-| --------------------------------------------- | ------------- | ---------------------------------------------------------------------------------- | ------------------- |
-| **Scoring Model Description**                 | String        | Details, characteristics and information of the scoring model                      | NCISS Scoring Model |
-| **Scoring Model Status**                      | Dropdown Text | Status of the scoring model after configuration                                    | Active              |
-| **Calculation Equation**                      | Varchar       | Equation used to evaluate participant scores                                       | {sum}               |
-| **Use Individual User Scoring**               | Boolean       | Select this option to display the User score                                       | False               |
-| **Use Team Scoring**                          | Boolean       | Select this option to display the Team score                                       | True                |
-| **Use Official Scoring**                      | Boolean       | Select this option to display the Official score                                   | False               |
-| **Use Team Average Scoring**                  | Boolean       | Select this option to display the Team Average score                               | False               |
-| **Use Type Average Scoring**                  | Boolean       | Select this option to display the Type Average score                               | False               |
-| **Use Submit**                                | Boolean       | Setting to add Submit button to CITE Scoresheet                                    | False               |
-| **Hide Scores on Scoresheet**                 | Boolean       | Don't show scores on Scoresheet                                                    | True                |
-| **Display Comments as Textboxes**             | Boolean       | Provide a larger textbox on Scoresheet for lengthy responses                       | True                |
-| **Display Scoring Categories by Move Number** | Boolean       | Display different sets of scoring categories per move, instead of all at once      | True                |
-| **Show Past Situation Descriptions**          | Boolean       | Display situation descriptions from past moves in a list format                    | True                |
-| **Right Side Display**                        | Dropdown Text | Select what to display (Score Summary, Scoresheet, HTML Block, Embedded Url, None) | Scoresheet          |
+| Field                                         | Data Type     | Description                                                                        | Example               |
+| --------------------------------------------- | ------------- | ---------------------------------------------------------------------------------- | --------------------- |
+| **Scoring Model Description**                 | String        | Details, characteristics and information of the scoring model                      | `NCISS Scoring Model` |
+| **Scoring Model Status**                      | Dropdown Text | Status of the scoring model after configuration                                    | `Active`              |
+| **Calculation Equation**                      | Varchar       | Equation used to evaluate participant scores                                       | `{sum}`               |
+| **Use Individual User Scoring**               | Boolean       | Select this option to display the User score                                       | `False`               |
+| **Use Team Scoring**                          | Boolean       | Select this option to display the Team score                                       | `True`                |
+| **Use Official Scoring**                      | Boolean       | Select this option to display the Official score                                   | `False`               |
+| **Use Team Average Scoring**                  | Boolean       | Select this option to display the Team Average score                               | `False`               |
+| **Use Type Average Scoring**                  | Boolean       | Select this option to display the Type Average score                               | `False`               |
+| **Use Submit**                                | Boolean       | Setting to add Submit button to CITE Scoresheet                                    | `False`               |
+| **Hide Scores on Scoresheet**                 | Boolean       | Don't show scores on Scoresheet                                                    | `True`                |
+| **Display Comments as Textboxes**             | Boolean       | Provide a larger textbox on Scoresheet for lengthy responses                       | `True`                |
+| **Display Scoring Categories by Move Number** | Boolean       | Display different sets of scoring categories per move, instead of all at once      | `True`                |
+| **Show Past Situation Descriptions**          | Boolean       | Display situation descriptions from past moves in a list format                    | `True`                |
+| **Right Side Display**                        | Dropdown Text | Select what to display (Score Summary, Scoresheet, HTML Block, Embedded Url, None) | `Scoresheet`          |
 
 To save these settings, click **Save**.
 
