@@ -14,6 +14,51 @@ jobs:
         id: release_tag
         run: echo "value=$(date +'%m.%d.%Y')" >> "$GITHUB_OUTPUT"
 
+      - name: Remove existing release and tag (if present)
+        uses: actions/github-script@v7
+        env:
+          TAG_NAME: ${{ steps.release_tag.outputs.value }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const tag = process.env.TAG_NAME;
+            // Delete an existing release for today's tag if present
+            try {
+              const release = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag,
+              });
+              core.info(`Found existing release for ${tag}; deleting release ${release.data.id}.`);
+              await github.rest.repos.deleteRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                release_id: release.data.id,
+              });
+            } catch (error) {
+              if (error.status === 404) {
+                core.info(`No release found for ${tag}.`);
+              } else {
+                throw error;
+              }
+            }
+
+            // Delete the tag ref so it can be recreated
+            try {
+              await github.rest.git.deleteRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `tags/${tag}`,
+              });
+              core.info(`Deleted existing tag ${tag}.`);
+            } catch (error) {
+              if (error.status === 404) {
+                core.info(`No tag ref found for ${tag}.`);
+              } else {
+                throw error;
+              }
+            }
+
       - name: Create release
         uses: actions/create-release@v1
         with:
