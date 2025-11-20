@@ -1,0 +1,22 @@
+name: Lint Docs
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint markdown files using Vale and Markdownlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: errata-ai/vale-action@v2
+        with:
+          fail_on_error: true
+          reporter: github-check
+
+      - uses: DavidAnson/markdownlint-cli2-action@v21
+        with:
+          globs: "**/*.md"

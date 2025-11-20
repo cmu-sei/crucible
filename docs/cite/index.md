@@ -226,15 +226,15 @@ If the exercise administrator grants the appropriate permissions, follow these s
 
 #### Data Format Table
 
-| Field                      | Data Type     | Description                                                           | Example                                            |
-| -------------------------- | ------------- | --------------------------------------------------------------------- | -------------------------------------------------- |
-| **Evaluation Description** | String        | Details, characteristics and information of the evaluation            | `NCISS Demonstration`                                |
-| **Scoring Model**          | Dropdown Text | Scoring model to use in the evaluation                                | `CISA NCISS`                                         |
-| **Evaluation Status**      | Dropdown Text | Status of the evaluation after configuration                          | `Active`                                             |
-| **Gallery Exhibit ID**     | GUID          | ID of the Gallery exhibit, if using Gallery during an exercise        | `81a623e3-faeb-4a56-8b4d-0d42f90b6829`               |
-| **Current Move**           | Integer       | Current move of the evaluation                                        | `0`                                                  |
-| **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | `1/23/2024, 14:22:40`                                |
-| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | `Ransomware attackers compromised the agency's` network... |
+| Field                      | Data Type     | Description                                                           | Example                                                    |
+| -------------------------- | ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **Evaluation Description** | String        | Details, characteristics and information of the evaluation            | `NCISS Demonstration`                                      |
+| **Scoring Model**          | Dropdown Text | Scoring model to use in the evaluation                                | `CISA NCISS`                                               |
+| **Evaluation Status**      | Dropdown Text | Status of the evaluation after configuration                          | `Active`                                                   |
+| **Gallery Exhibit ID**     | GUID          | ID of the Gallery exhibit, if using Gallery during an exercise        | `81a623e3-faeb-4a56-8b4d-0d42f90b6829`                     |
+| **Current Move**           | Integer       | Current move of the evaluation                                        | `0`                                                        |
+| **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | `1/23/2024, 14:22:40`                                      |
+| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | `Ransomware attackers compromised the agency's network...` |
 
 To save these settings, click **Save**.
 
@@ -690,11 +690,11 @@ If the exercise administrator grants the appropriate permissions, follow these s
 
 #### Data Format Table
 
-| Field                          | Data Type | Description                                                   | Example                 |
-| ------------------------------ | --------- | ------------------------------------------------------------- | ----------------------- |
-| **TeamType Name**              | String    | Name of the team type                                         | Individual Organization |
+| Field                          | Data Type | Description                                                           | Example                 |
+| ------------------------------ | --------- | --------------------------------------------------------------------- | ----------------------- |
+| **TeamType Name**              | String    | Name of the team type                                                 | Individual Organization |
 | **Official Score Contributor** | Boolean   | Select this option for teams that contribute to CITE's official score | True                    |
-| **Show TeamType Average**      | Boolean   | Select this option to make the score average available to the team   | True                    |
+| **Show TeamType Average**      | Boolean   | Select this option to make the score average available to the team    | True                    |
 
 To save these settings, click **Save**.
 

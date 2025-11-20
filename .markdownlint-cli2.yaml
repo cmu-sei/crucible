@@ -162,3 +162,6 @@ config:
 
   # Tables should be surrounded by exactly 1 blank line above/below
   MD058: true
+
+  # Table columns should be aligned neatly
+  MD060: any
