@@ -1,0 +1,32 @@
+name: Release and Deploy Docs
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Determine release tag
+        id: release_tag
+        run: echo "value=$(date +'%m.%d.%Y')" >> "$GITHUB_OUTPUT"
+
+      - name: Create release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.release_tag.outputs.value }}
+          release_name: ${{ steps.release_tag.outputs.value }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Deploy to GH Pages
+      - uses: actions/setup-python@v6
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material
+      - run: mkdocs gh-deploy --force --clean --verbose
