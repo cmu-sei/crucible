@@ -27,7 +27,7 @@ You will typically:
 ## Quick Reference
 
 | Issue | Try This First | Then |
-|-------|----------------|------|
+| ------- | ---------------- | ------ |
 | Platform won't load | Refresh or try another browser | Check for maintenance notices |
 | VM or tool not responding | Restart or reconnect | Contact your instructor |
 | Disconnected during event | Log back in via portal | Notify Exercise Control if issues persist |
