@@ -6,10 +6,10 @@
 
 In the Steamfitter UI, four major functional sections help you manage content:
 
-- Scenario Templates: Organize tasks into groups that you can reuse on demand.
-- Scenarios: Display all planned, running, and completed scenarios.
-- Tasks: Let users create and execute ad-hoc tasks.
-- History: Shows the results of all tasks executed by all users.
+- **Scenario Templates:** Organize tasks into groups that you can reuse on demand.
+- **Scenarios:** Display all planned, running, and completed scenarios.
+- **Tasks:** Let users create and execute ad-hoc tasks.
+- **History:** Shows the results of all tasks executed by all users.
 
 ## Permissions and Roles
 
@@ -49,7 +49,7 @@ Behind the scenes, Steamfitter uses [StackStorm](https://stackstorm.com/) to exe
 
 ## Administrator Guide
 
-Steamfitter is primarily an administrative tool. Content Developers and Rangetech Admins manage templates and scenarios, while Read-Only Users can observe assigned projects without making changes.
+Steamfitter is primarily an administrative tool. Content developers and "Range tech" Admins manage templates and scenarios, while read-only users can observe assigned projects without making changes.
 
 ### Scenario Templates
 

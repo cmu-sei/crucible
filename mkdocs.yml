@@ -108,7 +108,7 @@ nav:
           - Overview: roles/instructor/index.md
       - Participant:
           - Overview: roles/participant/index.md
-  - 3rd-Party Integrations: integrations/index.md
+  - Third-Party Integrations: integrations/index.md
 
 repo_url: "https://github.com/cmu-sei/crucible"
 repo_name: "cmu-sei/Crucible"
