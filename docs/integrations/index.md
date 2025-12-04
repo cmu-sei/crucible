@@ -8,7 +8,7 @@ Administrators can customize the Crucible platform by adding applications that i
 
 You need Crucible system admin permissions to add third-party applications to the Crucible Framework. Assuming you have the correct permissions, follow the steps below to integrate a third-party application to the Crucible Framework.
 
-![Crucible View Admin OE](../assets/img/viewAdmin.png)
+![Crucible View Admin OE](img/viewAdmin.png)
 
 1. Click your username in the top right corner of the screen.
 2. Select **Administration**.
@@ -36,7 +36,7 @@ Mattermost is an open-source, self-hostable online chat service with file sharin
 
 Moodle is a free and open-source learning management system. Schools, universities, workplaces, and other sectors use Moodle for blended learning, distance education, flipped classrooms, and other online learning projects.
 
-🔗 [Moodle Documentation](https://docs.moodle.org/401/en/Main_page) and [installation instructions](https://docs.moodle.org/401/en/Installation_quick_guide)
+🔗 [Moodle Documentation](https://docs.moodle.org/501/en/Main_page) and [installation instructions](https://docs.moodle.org/501/en/Installation_quick_guide)
 
 ### Moodle Crucible Plugins
 

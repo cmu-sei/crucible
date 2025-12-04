@@ -1,4 +1,4 @@
-# ![Steamfitter Logo](../assets/img/crucible-icon-steamfitter.svg){: style="height:75px;width:75px"} **Steamfitter:** Crafting a Scenario
+# ![Steamfitter Logo](../assets/steamfitter-logo.svg){: style="height:75px;width:75px"} **Steamfitter:** Crafting a Scenario
 
 ## Overview
 
@@ -53,7 +53,7 @@ Steamfitter is primarily an administrative tool. Content developers and "Range t
 
 ### Scenario Templates
 
-![scenario template](../assets/img/scenario%20templates.png)
+![scenario template](img/scenario-templates.png)
 
 Scenario templates group predefined tasks so you can create scenarios and run them on demand. To create a new scenario template, provide a **Name**, **Description**, and **Duration**.
 
@@ -63,7 +63,7 @@ Add tasks in the Scenario Templates screen by clicking the **+** icon. Complete 
 
 ### Scenarios
 
-![scenarios](../assets/img/scenarios.png)
+![scenarios](img/scenarios.png)
 
 Scenarios group predefined tasks that you can execute against a required view's VMs.
 

@@ -43,7 +43,7 @@ RUN set -euo pipefail; \
     vale --version
 
 # Install markdownlint-cli2
-RUN npm config -g set fund false && npm install -g markdownlint-cli2@0.18.1
+RUN npm config -g set fund false && npm install -g markdownlint-cli2@0.19.0
 
 WORKDIR /tmp
 COPY ../requirements.txt requirements.txt

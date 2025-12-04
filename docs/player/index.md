@@ -1,4 +1,4 @@
-# ![Player Logo](../assets/img/crucible-icon-player.svg){: style="height:75px;width:75px"} **Player:** Designing User Interfaces
+# ![Player Logo](../assets/player-logo.svg){: style="height:75px;width:75px"} **Player:** Designing User Interfaces
 
 ## Overview
 
@@ -67,7 +67,7 @@ Applications can use Player roles and permissions as needed. An administrator or
 
 ## Administrator Guide
 
-![admin button](../assets/img/admin%20button.png)
+![admin button](img/admin-button.png)
 
 A Player superadmin or view admin will see the **Administration navigation bar** on the left. If you have the appropriate permissions, here are the steps to switch to the administrator view in Player:
 
@@ -76,7 +76,7 @@ A Player superadmin or view admin will see the **Administration navigation bar**
 
 ### Manage Views
 
-![admin view](../assets/img/admin%20view.png)
+![admin view](img/admin-view.png)
 
 Views is where a Player view administrator adds a new view and browses existing views. Follow the procedures below to create a new view in Player. These instructions assume that you have the appropriate permissions in Player to create a view.
 
@@ -84,7 +84,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 #### Enter View Information
 
-![new view info](../assets/img/new%20view%20info.png)
+![new view info](img/new-view-info.png)
 
 1. Under Views, click **Add New View**.
 2. Add a **Name** and **View Description**.
@@ -95,19 +95,19 @@ If you have not already done so, in the dropdown next to your username, select *
 
 #### Assign Application Templates
 
-![new view apps](../assets/img/new%20view%20apps.png)
+![new view apps](img/new-view-apps.png)
 
 1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template.
    - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. You can't apply these in another view; they are one-time use only.
    - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The template contains the configuration settings and you can use the template many times.
 
-    ![new view app template](../assets/img/new%20view%20app%20template.png)
+    ![new view app template](img/new-view-app-template.png)
 
 2. Click **Teams**.
 
 #### Add Teams
 
-![new view new team](../assets/img/new%20view%20new%20team.png)
+![new view new team](img/new-view-new-team.png)
 
 1. Click **Add New Team**. You can add multiple teams to a view.
 
@@ -117,7 +117,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 4. Assign **Permissions** to the team. You can assign each team special permissions. You may want to have a team of "admins" who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
 
-    ![new view new team add user](../assets/img/new%20view%20new%20team%20add%20user.png)
+    ![new view new team add user](img/new-view-new-team-add-user.png)
 
 5. Click **User** to select users to add to the new team.
 
@@ -134,7 +134,7 @@ If you have not already done so, in the dropdown next to your username, select *
 
 In this step, View Administrators upload a single file or multiple files simultaneously to a View which they can add as an application and attach to a team.
 
-![new view add file](../assets/img/new%20view%20add%20file.png)
+![new view add file](img/new-view-add-file.png)
 
 1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files because you have not uploaded it yet.
 2. Select the **Team(s)** that you want to access the file and click **Upload Staged File(s)**.
@@ -169,7 +169,7 @@ Follow the procedures below to create a new app template in Player. These instru
 
 If you have not already done so, in the dropdown next to your username, select **View Administration**.
 
-![player new application template](../assets/img/player-new-application-template.png)
+![player new application template](img/player-new-application-template.png)
 
 1. Under the Administration nav panel, select **Application Templates**.
 2. Click **Add Application Template**.
@@ -215,7 +215,7 @@ When adding a Subscription, you must specify:
 
 ## User Guide
 
-![player-user-view](../assets/img/player-user-view.png)
+![player-user-view](img/player-user-view.png)
 
 ### Top Bar
 
@@ -251,7 +251,7 @@ Assuming you have View Administrator permissions in Player, add the map applicat
 
 ##### Creating a New Map
 
-![player-new-map](../assets/img/player-new-map.png)
+![player-new-map](img/player-new-map.png)
 
 1. In the newly created Map application, in the right pane, select **New Map**.
 2. Complete the following fields:
@@ -308,17 +308,17 @@ The **VM List** provides links to any virtual machines that the user has permiss
 
 A View Admin can upload images and documents for a specific View in Player that provides authentication to download. It is also possible to configure a document to show as an application in the left hand menu of Player.
 
-![vm-app-1](../assets/img/vm-app-1.png)
+![vm-app-1](img/vm-app-1.png)
 
 From the File Upload section of the Edit View panel, a View Admin can Download, Delete, Copy Link, Edit Name, and Add as App. When adding the file as a Player View application, a prompt verifies which teams in the View see the file added as an application. The View Admin must grant permission for any team to view the file they want to add the application to. Otherwise, users on that team can't access the file.
 
-![vm-app-2](../assets/img/vm-app-2.png)
+![vm-app-2](img/vm-app-2.png)
 
 ##### Multi-Select VMs
 
-A user can run operations on multiple VMs by first using the mouse to click and drag a box around the VMs that they would like to select. In addition, the user can use `ctrl+click` to select or unselect a previously selected VM. Once the user has selected the VMs that they want to perform an operation on, they can use the ![vm-app-3](../assets/img/vm-app-3.png) button to display the menu of available options.
+A user can run operations on multiple VMs by first using the mouse to click and drag a box around the VMs that they would like to select. In addition, the user can use `ctrl+click` to select or unselect a previously selected VM. Once the user has selected the VMs that they want to perform an operation on, they can use the ![vm-app-3](img/vm-app-3.png) button to display the menu of available options.
 
-![vm-app-4](../assets/img/vm-app-4.png)
+![vm-app-4](img/vm-app-4.png)
 
 For the Multi-Select option above, the following options are available:
 
@@ -334,29 +334,29 @@ For the Multi-Select option above, the following options are available:
 
 The sort by team option rearranges all VMs in expansion panels based on the teams that have access to the VMs. In the example shown here, you can expand each team to show what VMs they have access to. This is especially useful for View Admins when verifying if a specific VM is accessible for a specific team.
 
-![vm-app-5](../assets/img/vm-app-5.png)
+![vm-app-5](img/vm-app-5.png)
 
 ##### Filter by Powered State
 
-You cannot filter VMs by powered status. By clicking the ![vm-app-6](../assets/img/vm-app-6.png) dropdown, the user can select to display only the Powered On, Powered Off, or Suspended VMs.
+You cannot filter VMs by powered status. By clicking the ![vm-app-6](img/vm-app-6.png) dropdown, the user can select to display only the Powered On, Powered Off, or Suspended VMs.
 
-![vm-app-7](../assets/img/vm-app-7.png)
+![vm-app-7](img/vm-app-7.png)
 
 ##### User List
 
 The User List in Player allows a user to view the teams and team members that the user has permissions to see. View Admins can always see all teams that are a part of the View. Using expansion panels, the user can expand the team and view each member of that team. If a team member is working within a VM, the system displays the VM's name with a link to open it in Read-Only mode. When in Read-Only mode, the user can't gain any keyboard or mouse control.
 
-![vm-app-8](../assets/img/vm-app-8.png)
+![vm-app-8](img/vm-app-8.png)
 
 ##### VM Usage Logging (View Admin Only)
 
 The VM Usage Logging function is an administrative feature that, when configured, records the user activity when a user interacts with a VM. An administrator sets up the configuration to record the specific teams in the view over a specific time period.
 
-![vm-app-9](../assets/img/vm-app-9.png)
+![vm-app-9](img/vm-app-9.png)
 
 After data collection, a View Admin can download a CSV showing timestamps and VM names accessed by a user during the start and end of their session.
 
-![vm-app-10](../assets/img/vm-app-10.png)
+![vm-app-10](img/vm-app-10.png)
 
 #### Service Support Tickets
 

@@ -1,4 +1,4 @@
-# ![Caster Logo](../assets/img/crucible-icon-caster.svg){: style="height:75px;width:75px"} **Caster:** Coding a Topology
+# ![Caster Logo](../assets/caster-logo.svg){: style="height:75px;width:75px"} **Caster:** Coding a Topology
 
 ## Overview
 
@@ -66,7 +66,7 @@ The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-se
 
 ### Users
 
-![Caster users](../assets/img/caster-users.PNG)
+![Caster users](img/caster-users.PNG)
 
 Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. **Permissions** apply to users and/or teams.
 
@@ -89,7 +89,7 @@ A Superadmin creates the directory and assigns Rangetech Admin or Content Develo
 
 ### Modules
 
-![Caster modules](../assets/img/caster-modules.PNG)
+![Caster modules](img/caster-modules.PNG)
 
 [Modules](https://www.terraform.io/docs/glossary.html#module) are a Terraform construct:
 
@@ -102,7 +102,7 @@ Modules are very powerful and make complex configurations simpler and more easil
 1. A generic virtual machine module that abstracts away commonly used parameters into variables such as:
 
    - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
-   - **Networks:** creates a NIC for each specified network and assigns it to the specified network VLAN.
+   - **Networks:** creates a Network Interface Card (NIC) for each specified network and assigns it to the specified network VLAN.
    - **ExerciseId:** appends the `exerciseId` to the name of the VM for use with ODXs requiring unique naming.
    - Other simplified variable names based on the target audience.
 
@@ -124,7 +124,7 @@ Caster supports modules created as GitLab projects that are visible to the GitLa
 
 !!! note
 
-    Caster requires that the inputs file and the outputs file are written in JSON (that is, `variables.tf.json` and `ouptuts.tf.json`).
+    Caster requires that the inputs file and the outputs file are written in JSON (that is, `variables.tf.json` and `outputs.tf.json`).
 
 There are three ways to add/refresh a module in Caster:
 
@@ -142,7 +142,7 @@ Upon **Submit**, Caster generates the Terraform code to use the selected module 
 
 ### VLANs
 
-![Caster VLANs](../assets/img/caster-VLANs.PNG)
+![Caster VLANs](img/caster-VLANs.PNG)
 
 Adds the ability to manage VLAN ids. Creates pools of 4096 VLANs and subdivides them into Partitions. A user can request a VLAN from a Partition and will receive an unused VLAN id, now marked as used until they release it. A Partition is either assigned to a Project, or is a system-wide default. Users request VLAN ids either from their Project's Partition or from the default.
 
@@ -187,7 +187,7 @@ See the official [Terraform Documentation](https://www.terraform.io/docs/index.h
 
 ### Workspaces
 
-![Caster workspaces](../assets/img/caster-workspaces.PNG)
+![Caster workspaces](img/caster-workspaces.PNG)
 
 A *workspace* represents a specific instance of a deployed Terraform configuration. Use the same configuration to deploy virtual machines to multiple workspaces that differ only by the values set to certain variables. For example, define a configuration once for an enclave in a Cyber Flag exercise, and then deploy to `flag00` through `flag30` workspaces - each creating a copy of the enclave.
 
@@ -237,7 +237,7 @@ When you open a project, you can create a design and add modules backed by Git t
 
 This topic is for anyone who manages a Crucible instance who wants to configure their Terraform provider installation for Caster. You can configure Terraform to only download certain providers from the Internet and use them from a local File store.
 
-Refer to **HashiCorp's Terraform** documentation: **CLI Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
+Refer to **HashiCorp's Terraform** documentation: **Command Line Interface (CLI) Configuration File** [Provider Installation](https://www.terraform.io/docs/cli/config/config-file.html#provider-installation).
 
 For your reference, below is the `.terraformrc` file currently implemented in the SEI's CyberForce instance of Caster.
 

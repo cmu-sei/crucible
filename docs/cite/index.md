@@ -1,4 +1,4 @@
-# ![CITE Logo](../assets/img/cite-logo.png) **CITE:** Evaluating Threats
+# ![CITE Logo](../assets/cite-logo.png) **CITE:** Evaluating Threats
 
 ## Overview
 
@@ -45,7 +45,7 @@ When in Dashboard view, users have two options for interacting with moves:
 
 The CITE landing page provides a central approach to recompiling all evaluations that the user is a participant on into a single display.
 
-![CITE Landing Page OE](../assets/img/citeLandingPage-v2.png)
+![CITE Landing Page OE](img/citeLandingPage-v2.png)
 
 #### Search for an Evaluation
 
@@ -60,7 +60,7 @@ The CITE Dashboard shows exercise details like date and time, incident summary, 
 
 The following image shows some important hotspots about the CITE Dashboard. Reference the number on the hotspot to learn more about this section.
 
-![CITE Dashboard OE](../assets/img/CITE-Dashboard-v3.png)
+![CITE Dashboard OE](img/CITE-Dashboard-v3.png)
 
 #### Active Events & Moves
 
@@ -70,7 +70,7 @@ The name of the active event and the move number currently displayed.
 
 Once the user obtains Can Increment Move permission, the "Advance Move" button appears. This enables the user to advance CITE's current move, and go back and forth between moves using the arrows.
 
-![CITE Advance Move OE](../assets/img/advanceMoveButton.png)
+![CITE Advance Move OE](img/advanceMoveButton.png)
 
 #### Situation Date & Time
 
@@ -130,7 +130,7 @@ The CITE Scoresheet compares participant scores to organization scores, group av
 
 The following image shows some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to learn more about this section.
 
-![CITE Scoresheet OE](../assets/img/CITE-Scoresheet-v3.png)
+![CITE Scoresheet OE](img/CITE-Scoresheet-v3.png)
 
 #### Event Name
 
@@ -167,9 +167,9 @@ Categories are individually scored based upon the current move situation. For ea
 
 When scoring a move, the user can attach a comment (or multiple comments) to a category.
 
-- To add a comment, click ![Comment OE](../assets/img/comment.png). Enter the comment and click Save.
-- To edit an existing comment, click ![Edit OE](../assets/img/edit.png). Make any changes, then click Save.
-- To delete an existing comment, click ![Trash OE](../assets/img/trash.png). Click Yes to delete the comment.
+- To add a comment, click ![Comment OE](img/comment.png). Enter the comment and click Save.
+- To edit an existing comment, click ![Edit OE](img/edit.png). Make any changes, then click Save.
+- To delete an existing comment, click ![Trash OE](img/trash.png). Click Yes to delete the comment.
 
 When finished scoring the categories and adding comments, click Submit to submit the scores.
 
@@ -205,7 +205,7 @@ The [CITE Report](#glossary) recollects all user responses into a single printab
 
 The following image shows the CITE Report. Here, users can view and/or print their own copy.
 
-![CITE Report OE](../assets/img/CITE-Report.png)
+![CITE Report OE](img/CITE-Report.png)
 
 ## Administrator Guide
 
@@ -213,28 +213,28 @@ The following image shows the CITE Report. Here, users can view and/or print the
 
 The following image shows the Evaluations Administration Page. Here, administrators can add, edit, upload, download, copy, and delete [evaluations](#glossary).
 
-![Evaluations Admin OE](../assets/img/EvaluationsAdmin-v4.png)
+![Evaluations Admin OE](img/EvaluationsAdmin-v4.png)
 
 #### Add an Evaluation
 
 If the exercise administrator grants the appropriate permissions, follow these steps to add an Evaluation.
 
-![Add Evaluation OE](../assets/img/AddEvaluation-v5.png)
+![Add Evaluation OE](img/AddEvaluation-v5.png)
 
 1. Under the Evaluation Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
 
-| Field                      | Data Type     | Description                                                           | Example                                            |
-| -------------------------- | ------------- | --------------------------------------------------------------------- | -------------------------------------------------- |
-| **Evaluation Description** | String        | Details, characteristics and information of the evaluation            | NCISS Demonstration                                |
-| **Scoring Model**          | Dropdown Text | Scoring model to use in the evaluation                                | CISA NCISS                                         |
-| **Evaluation Status**      | Dropdown Text | Status of the evaluation after configuration                          | Active                                             |
-| **Gallery Exhibit ID**     | GUID          | ID of the Gallery exhibit, if using Gallery during an exercise        | 81a623e3-faeb-4a56-8b4d-0d42f90b6829               |
-| **Current Move**           | Integer       | Current move of the evaluation                                        | 0                                                  |
-| **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | 1/23/2024, 14:22:40                                |
-| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | Ransomware attackers compromised the agency's network... |
+| Field                      | Data Type     | Description                                                           | Example                                                    |
+| -------------------------- | ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **Evaluation Description** | String        | Details, characteristics and information of the evaluation            | `NCISS Demonstration`                                      |
+| **Scoring Model**          | Dropdown Text | Scoring model to use in the evaluation                                | `CISA NCISS`                                               |
+| **Evaluation Status**      | Dropdown Text | Status of the evaluation after configuration                          | `Active`                                                   |
+| **Gallery Exhibit ID**     | GUID          | ID of the Gallery exhibit, if using Gallery during an exercise        | `81a623e3-faeb-4a56-8b4d-0d42f90b6829`                     |
+| **Current Move**           | Integer       | Current move of the evaluation                                        | `0`                                                        |
+| **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | `1/23/2024, 14:22:40`                                      |
+| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | `Ransomware attackers compromised the agency's network...` |
 
 To save these settings, click **Save**.
 
@@ -287,23 +287,23 @@ To copy an evaluation, follow these steps:
 
 To configure an evaluation to use for an exercise, administrators will need to add moves and teams to the evaluation. To do this, follow these steps:
 
-![Configure Evaluation OE](../assets/img/ConfigureEvaluations-v2.png)
+![Configure Evaluation OE](img/ConfigureEvaluations-v2.png)
 
 ### Moves
 
-![Moves OE](../assets/img/moves-v3.png)
+![Moves OE](img/moves-v3.png)
 
 1. Click **+** on the Moves section.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
 
-| Field                     | Data Type | Description                                                     | Example                               |
-| ------------------------- | --------- | --------------------------------------------------------------- | ------------------------------------- |
-| **Move Number**           | Integer   | Move number to add                                              | 0                                     |
-| **Move Description**      | String    | Details, characteristics and information of the move            | The exercise will begin at 0900 EST   |
-| **Situation Date/Time**   | Datetime  | Situation date/time for the move                                | 1/23/2024, 14:30:21                   |
-| **Situation Description** | Rich Text | Additional details, characteristics and information of the move | The objectives of the exercise are... |
+| Field                     | Data Type | Description                                                     | Example                                 |
+| ------------------------- | --------- | --------------------------------------------------------------- | --------------------------------------- |
+| **Move Number**           | Integer   | Move number to add                                              | `0`                                     |
+| **Move Description**      | String    | Details, characteristics and information of the move            | `The exercise will begin at 0900 EST`   |
+| **Situation Date/Time**   | Datetime  | Situation date/time for the move                                | `1/23/2024, 14:30:21`                   |
+| **Situation Description** | Rich Text | Additional details, characteristics and information of the move | `The objectives of the exercise are...` |
 
 To save these settings, click **Save**.
 
@@ -329,7 +329,7 @@ To delete a move, follow these steps:
 
 ### Teams
 
-![Teams OE](../assets/img/teams-v3.png)
+![Teams OE](img/teams-v3.png)
 
 1. Click **+** on the Teams section.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -381,35 +381,35 @@ To remove the Observer Role from a user:
 
 The following image shows the [Scoring Models](#glossary) Administration Page. Here, administrators can add, edit, copy, download, upload, and delete scoring models.
 
-![Scoring Models Admin OE](../assets/img/scoringModelsAdmin-v3.png)
+![Scoring Models Admin OE](img/scoringModelsAdmin-v3.png)
 
 #### Add a Scoring Model
 
 If the exercise administrator grants the appropriate permissions, follow these steps to add a Scoring Model.
 
-![Add Scoring Model OE](../assets/img/addScoringModel-v4.png)
+![Add Scoring Model OE](img/addScoringModel-v4.png)
 
 1. Under the Scoring Model Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
 
-| Field                                         | Data Type     | Description                                                                        | Example             |
-| --------------------------------------------- | ------------- | ---------------------------------------------------------------------------------- | ------------------- |
-| **Scoring Model Description**                 | String        | Details, characteristics and information of the scoring model                      | NCISS Scoring Model |
-| **Scoring Model Status**                      | Dropdown Text | Status of the scoring model after configuration                                    | Active              |
-| **Calculation Equation**                      | Varchar       | Equation used to evaluate participant scores                                       | {sum}               |
-| **Use Individual User Scoring**               | Boolean       | Select this option to display the User score                                       | False               |
-| **Use Team Scoring**                          | Boolean       | Select this option to display the Team score                                       | True                |
-| **Use Official Scoring**                      | Boolean       | Select this option to display the Official score                                   | False               |
-| **Use Team Average Scoring**                  | Boolean       | Select this option to display the Team Average score                               | False               |
-| **Use Type Average Scoring**                  | Boolean       | Select this option to display the Type Average score                               | False               |
-| **Use Submit**                                | Boolean       | Setting to add Submit button to CITE Scoresheet                                    | False               |
-| **Hide Scores on Scoresheet**                 | Boolean       | Don't show scores on Scoresheet                                                    | True                |
-| **Display Comments as Textboxes**             | Boolean       | Provide a larger textbox on Scoresheet for lengthy responses                       | True                |
-| **Display Scoring Categories by Move Number** | Boolean       | Display different sets of scoring categories per move, instead of all at once      | True                |
-| **Show Past Situation Descriptions**          | Boolean       | Display situation descriptions from past moves in a list format                    | True                |
-| **Right Side Display**                        | Dropdown Text | Select what to display (Score Summary, Scoresheet, HTML Block, Embedded Url, None) | Scoresheet          |
+| Field                                         | Data Type     | Description                                                                        | Example               |
+| --------------------------------------------- | ------------- | ---------------------------------------------------------------------------------- | --------------------- |
+| **Scoring Model Description**                 | String        | Details, characteristics and information of the scoring model                      | `NCISS Scoring Model` |
+| **Scoring Model Status**                      | Dropdown Text | Status of the scoring model after configuration                                    | `Active`              |
+| **Calculation Equation**                      | Varchar       | Equation used to evaluate participant scores                                       | `{sum}`               |
+| **Use Individual User Scoring**               | Boolean       | Select this option to display the User score                                       | `False`               |
+| **Use Team Scoring**                          | Boolean       | Select this option to display the Team score                                       | `True`                |
+| **Use Official Scoring**                      | Boolean       | Select this option to display the Official score                                   | `False`               |
+| **Use Team Average Scoring**                  | Boolean       | Select this option to display the Team Average score                               | `False`               |
+| **Use Type Average Scoring**                  | Boolean       | Select this option to display the Type Average score                               | `False`               |
+| **Use Submit**                                | Boolean       | Setting to add Submit button to CITE Scoresheet                                    | `False`               |
+| **Hide Scores on Scoresheet**                 | Boolean       | Don't show scores on Scoresheet                                                    | `True`                |
+| **Display Comments as Textboxes**             | Boolean       | Provide a larger textbox on Scoresheet for lengthy responses                       | `True`                |
+| **Display Scoring Categories by Move Number** | Boolean       | Display different sets of scoring categories per move, instead of all at once      | `True`                |
+| **Show Past Situation Descriptions**          | Boolean       | Display situation descriptions from past moves in a list format                    | `True`                |
+| **Right Side Display**                        | Dropdown Text | Select what to display (Score Summary, Scoresheet, HTML Block, Embedded Url, None) | `Scoresheet`          |
 
 To save these settings, click **Save**.
 
@@ -476,11 +476,11 @@ To configure a Scoring Model to use for an exercise, administrators will need to
 
 Within a Scoring Model, an administrator can add one or more Scoring Categories. To do this, follow these steps:
 
-![Configure Scoring Model OE](../assets/img/configureScoringModel.png)
+![Configure Scoring Model OE](img/configureScoringModel.png)
 
 #### Add Scoring Category
 
-![Scoring Categories OE](../assets/img/scoringCategories-v3.png)
+![Scoring Categories OE](img/scoringCategories-v3.png)
 
 1. Click **+** on the Scoring Categories section.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -538,7 +538,7 @@ Within a Scoring Category, an administrator can add one or more [Scoring Options
 
 #### Add Scoring Options
 
-![Scoring Options OE](../assets/img/scoringOptions.png)
+![Scoring Options OE](img/scoringOptions.png)
 
 1. Click **+** on the Scoring Options section.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -582,13 +582,13 @@ The following image shows the Actions Administration Page. Here, administrators 
 
 However, users who can submit scores on behalf of their team can also add suggested actions to the CITE Dashboard. The use of actions allows team members to customize their response by tracking tasks during the exercise. The system keeps these actions internal to the team and hides them from other participants.
 
-![Actions Admin OE](../assets/img/actionsAdmin-v2.png)
+![Actions Admin OE](img/actionsAdmin-v2.png)
 
 #### Add an Action
 
 If the exercise administrator grants the appropriate permissions, follow these steps to add an Action.
 
-![Add Action OE](../assets/img/addAction-v3.png)
+![Add Action OE](img/addAction-v3.png)
 
 1. Under the Actions Administration View, click the **Move** dropdown and select the desired move.
 2. Click the **Team** dropdown and select the desired team.
@@ -627,13 +627,13 @@ The following image shows the Roles Administration Page. Here, administrators ca
 
 However, users who can submit scores on behalf of their team can also add participant roles to the CITE Dashboard. The use of roles allows team members to customize their response by tracking their responsibilities during an exercise. These roles remain internal to the team and stay hidden from other participants.
 
-![Roles Admin OE](../assets/img/rolesAdmin-v2.png)
+![Roles Admin OE](img/rolesAdmin-v2.png)
 
 #### Add a Role
 
 If the exercise administrator grants the appropriate permissions, follow these steps to add a Role:
 
-![Add Role OE](../assets/img/addRole-v3.png)
+![Add Role OE](img/addRole-v3.png)
 
 1. Under the Roles Administration View, click the **Team** dropdown and select the desired team.
 2. Click **+** to add a Role.
@@ -671,30 +671,30 @@ The following image shows the Submissions Administration Page. Here, administrat
 
 Additional functionalities include copying the entire score, as well as deleting a score submitted by a team.
 
-![Submissions Admin OE](../assets/img/submissionsAdmin-v2.png)
+![Submissions Admin OE](img/submissionsAdmin-v2.png)
 
 ### Team Types
 
 The following image shows the [Team Types](#glossary) Administration Page. Here, administrators can create different types of teams to use during an exercise. This allows administrators to classify the different teams on the platform based on common characteristics and/or organizations.
 
-![Team Types Admin OE](../assets/img/teamTypesAdmin.png)
+![Team Types Admin OE](img/teamTypesAdmin.png)
 
 #### Add a Team Type
 
 If the exercise administrator grants the appropriate permissions, follow these steps to add a Team Type:
 
-![Add Team Type OE](../assets/img/addTeamType.png)
+![Add Team Type OE](img/addTeamType.png)
 
 1. Under the Team Type Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
 
-| Field                          | Data Type | Description                                                   | Example                 |
-| ------------------------------ | --------- | ------------------------------------------------------------- | ----------------------- |
-| **TeamType Name**              | String    | Name of the team type                                         | Individual Organization |
+| Field                          | Data Type | Description                                                           | Example                 |
+| ------------------------------ | --------- | --------------------------------------------------------------------- | ----------------------- |
+| **TeamType Name**              | String    | Name of the team type                                                 | Individual Organization |
 | **Official Score Contributor** | Boolean   | Select this option for teams that contribute to CITE's official score | True                    |
-| **Show TeamType Average**      | Boolean   | Select this option to make the score average available to the team   | True                    |
+| **Show TeamType Average**      | Boolean   | Select this option to make the score average available to the team    | True                    |
 
 To save these settings, click **Save**.
 
@@ -728,13 +728,13 @@ The available permissions are:
 - **Can Modify:** This permission lets the user modify a score for previous moves during an exercise.
 - **Can Increment Move:** Grant this permission to allow the user to increment the current move during an exercise.
 
-![Users Admin OE](../assets/img/usersAdmin-v2.png)
+![Users Admin OE](img/usersAdmin-v2.png)
 
 #### Add a User
 
 Assuming that the exercise administrator granted the user the appropriate permissions, follow these steps to add a User:
 
-![Add User OE](../assets/img/addUser-v2.png)
+![Add User OE](img/addUser-v2.png)
 
 1. Under the Users Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.

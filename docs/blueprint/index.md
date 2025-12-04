@@ -1,4 +1,4 @@
-# ![Blueprint Logo](../assets/img/blueprint-logo.png) Blueprint: Building a MSEL
+# ![Blueprint Logo](../assets/blueprint-logo.png) Blueprint: Building a MSEL
 
 ## Overview
 
@@ -31,7 +31,7 @@ Refer to this section [Administrator Guide](#administrator-guide) for more infor
 
 The landing page of Blueprint provides a variety of interaction modalities for exercises, tailored according to the permissions assigned to each user. The functionalities available are as follows:
 
-![Blueprint Landing Page OE](../assets/img/blueprintLandingPage.png)
+![Blueprint Landing Page OE](img/blueprintLandingPage.png)
 
 #### Join an Event
 
@@ -51,13 +51,13 @@ Users with administrative roles, content developer permissions, or contributor d
 
 When a user starts an event (as described above), Blueprint adds a **Manage Event** application to the left side panel of the Player view. The Manage Event application lets the user change the event end time, end the event, and invite others to join.
 
-![Blueprint End Event OE](../assets/img/blueprintEndEvent-v2.png)
+![Blueprint End Event OE](img/blueprintEndEvent-v2.png)
 
 #### Launched Event User Invitations
 
 To invite other users to the launched event, follow these steps:
 
-![Blueprint Launched Event Invites OE](../assets/img/blueprintEventInvitations.png)
+![Blueprint Launched Event Invites OE](img/blueprintEventInvitations.png)
 
 1. Navigate to the **Manage Event** application from Player's side panel.
 2. Click **Invite Others**.
@@ -89,7 +89,7 @@ The MSEL Catalog shows created MSELs. Here, users are able to select the desired
 
 The following image shows some important hotspots about the MSEL Catalog. Reference the number on the hotspot to learn more about this section.
 
-![Blueprint Dashboard OE](../assets/img/blueprintDashboard-v4.png)
+![Blueprint Dashboard OE](img/blueprintDashboard-v4.png)
 
 #### Add Blank MSEL
 
@@ -173,7 +173,7 @@ After uploading or creating a MSEL, users can edit any information and add addit
 
 On this tab, users can edit and configure MSEL settings, as well as enable/disable integrations.
 
-![Blueprint Info Tab OE](../assets/img/blueprintBasicInfo-v5.png)
+![Blueprint Info Tab OE](img/blueprintBasicInfo-v5.png)
 
 To edit the MSEL's basic information and configuration, follow these steps:
 
@@ -193,7 +193,7 @@ To edit the MSEL's basic information and configuration, follow these steps:
 | **Integrate Player**             | Boolean       | Add Player integration functionality to the MSEL                                                     | True                                |
 | **Integrate Gallery**            | Boolean       | Add Gallery integration functionality to the MSEL                                                    | True                                |
 | **Integrate CITE**               | Boolean       | Add CITE integration functionality to the MSEL                                                       | True                                |
-| **Select Scoring Model**         | Dropdown Text | Select a CITE Scoring Model                                                                          | CISA NCISS                          |
+| **Select Scoring Model**         | Dropdown Text | Select a CITE Scoring Model                                                                          | `CISA NCISS`                        |
 | **Integrate Steamfitter**        | Boolean       | Add Steamfitter integration functionality to the MSEL                                                | False                               |
 | **MSEL Status**                  | Dropdown Text | Select MSEL status designation                                                                       | Active                              |
 | **Header Row Metadata (Height)** | Integer       | An integer value that defines the height of the header row when exporting this MSEL as an .xlsx file | 30                                  |
@@ -210,7 +210,7 @@ To save these settings, click the **checkmark** at the top.
 
 On this tab, users can add notes to the MSEL for team members with the appropriate permissions to work on and access.
 
-![Blueprint Notes Tab OE](../assets/img/blueprintNotes-v3.png)
+![Blueprint Notes Tab OE](img/blueprintNotes-v3.png)
 
 To add MSEL notes, follow these steps:
 
@@ -232,7 +232,7 @@ After you've made your changes, click the **checkmark** to save the page.
 
 On this tab, users can add and assign contributor teams, as well as their respective roles related to the creation and management of the MSEL. Assigned teams can view and edit the MSEL.
 
-![Blueprint Contributors Tab OE](../assets/img/blueprintAddContributors-v2.png)
+![Blueprint Contributors Tab OE](img/blueprintAddContributors-v2.png)
 
 ##### Add a Contributor
 
@@ -264,7 +264,7 @@ The available roles are:
 
 On this tab, users can add and assign teams as well as their respective roles during an event to the MSEL.
 
-![Blueprint Teams Tab OE](../assets/img/blueprintAddTeams-v3.png)
+![Blueprint Teams Tab OE](img/blueprintAddTeams-v3.png)
 
 ##### Add a Team
 
@@ -295,7 +295,7 @@ The available roles are:
 
 On this tab, users can add data fields used on the MSEL. Compare these [data fields](#glossary) to the column fields on Excel spreadsheets.
 
-![Blueprint Data Fields Tab OE](../assets/img/blueprintDataFields-v5.png)
+![Blueprint Data Fields Tab OE](img/blueprintDataFields-v5.png)
 
 There are two categories of Data Fields:
 
@@ -304,7 +304,7 @@ There are two categories of Data Fields:
 
 ##### Add a Data Field
 
-![Blueprint Add Data Fields OE](../assets/img/blueprintAddDataField.png)
+![Blueprint Add Data Fields OE](img/blueprintAddDataField.png)
 
 To add a Data Field to the MSEL, follow these steps:
 
@@ -323,7 +323,7 @@ To add a Data Field to the MSEL, follow these steps:
 | **Display on the Events list**                             | Boolean       | Display this data field on the Events list tab                                                 | True             |
 | **Display on the Exercise View**                           | Boolean       | Display this data field on the Exercise View tab                                               | True             |
 | **Display on "Advanced" edit tab**                         | Boolean       | Display this data field on the data field edit component Advanced tab                          | True             |
-| **Display for Content Developers and MSEL Owners ONLY!!!** | Boolean       | Display this data field for users who are Content Developers or MSEL Owners only               | True             |
+| **Display for Content Developers and MSEL Owners Only!!!** | Boolean       | Display this data field for users who are Content Developers or MSEL Owners only               | True             |
 | **Gallery Article Parameter**                              | Dropdown Text | If using the Gallery integration, select the Gallery parameter that aligns with the data field | Description      |
 | **Column Metadata (Width)**                                | Integer       | Width of the column when displayed                                                             | 30               |
 | **Cell Metadata (Color, Tint, Font-Weight)**               | String        | Column color and font style                                                                    | (Red, 20%, bold) |
@@ -356,11 +356,11 @@ To search for a specific Data Field, follow these steps:
 
 On this tab, users add all related [organizations](#glossary) (with their information) used on the MSEL and the live exercise. Users can create organizations from scratch or from a template.
 
-![Blueprint Organizations Tab OE](../assets/img/blueprintOrganizations-v4.png)
+![Blueprint Organizations Tab OE](img/blueprintOrganizations-v4.png)
 
 ##### Add an Organization Card From Scratch
 
-![Blueprint Add Organization OE](../assets/img/blueprintAddOrganization-v2.png)
+![Blueprint Add Organization OE](img/blueprintAddOrganization-v2.png)
 
 To add an Organization Card from scratch, follow these steps:
 
@@ -418,11 +418,11 @@ To search for a specific organization, follow these steps:
 
 On this tab, users can add all related exercise [moves](#glossary) to the MSEL.
 
-![Blueprint Moves Tab OE](../assets/img/blueprintMoves-v4.png)
+![Blueprint Moves Tab OE](img/blueprintMoves-v4.png)
 
 ##### Add a Move
 
-![Blueprint Add Moves OE](../assets/img/blueprintAddMove-v3.png)
+![Blueprint Add Moves OE](img/blueprintAddMove-v3.png)
 
 To add a move, follow these steps:
 
@@ -469,7 +469,7 @@ To search for a specific move, follow these steps:
 
 On this tab, users can add all related events to the MSEL.
 
-![Blueprint Events Tab OE](../assets/img/blueprintInjects-v2.png)
+![Blueprint Events Tab OE](img/blueprintInjects-v2.png)
 
 ##### Add an Event
 
@@ -481,25 +481,25 @@ To add a new event, follow these steps:
 
 On the **Default** tab, fill the fields as necessary following the Data Format Table specifications.
 
-![Blueprint Add Event OE](../assets/img/blueprintAddInjects-v3.png)
+![Blueprint Add Event OE](img/blueprintAddInjects-v3.png)
 
 ##### Data Format Table
 
-| Field               | Data Type     | Description                                                                  | Example              |
-| ------------------- | ------------- | ---------------------------------------------------------------------------- | -------------------- |
-| **Control Number**  | String        | Event control number, used to identify and categorize events                 | ADMIN-1              |
-| **Description**     | String        | Information, details, and characteristics of the event                       | STARTEX              |
-| **Status**          | Dropdown Text | Approval status of the event used on the MSEL                                | Approved             |
-| **Time**            | Datetime      | Start date/time of the move real-time                                        | 11/20/2023, 09:00:00 |
-| **Move**            | Dropdown Text | Move number the event is part of                                             | 1                    |
-| **Group**           | Integer       | Groups events within a move, often times executed within the same time range | 1                    |
-| **Exercise Date**   | Datetime      | Start date/time of the move exercise-time                                    | 1/24/2024, 14:18:27  |
-| **Type**            | String        | Source type for the event                                                    | Email                |
-| **Delivery Method** | Dropdown Text | How is the event delivered to participants                                   | Email                |
+| Field               | Data Type     | Description                                                                  | Example                |
+| ------------------- | ------------- | ---------------------------------------------------------------------------- | ---------------------- |
+| **Control Number**  | String        | Event control number, used to identify and categorize events                 | `ADMIN-1`              |
+| **Description**     | String        | Information, details, and characteristics of the event                       | `STARTEX`              |
+| **Status**          | Dropdown Text | Approval status of the event used on the MSEL                                | `Approved`             |
+| **Time**            | Datetime      | Start date/time of the move real-time                                        | `11/20/2023, 09:00:00` |
+| **Move**            | Dropdown Text | Move number the event is part of                                             | `1`                    |
+| **Group**           | Integer       | Groups events within a move, often times executed within the same time range | `1`                    |
+| **Exercise Date**   | Datetime      | Start date/time of the move exercise-time                                    | `1/24/2024, 14:18:27`  |
+| **Type**            | String        | Source type for the event                                                    | `Email`                |
+| **Delivery Method** | Dropdown Text | How is the event delivered to participants                                   | `Email`                |
 
 If not already completed on the previous tab, fill the fields from the **Advanced** tab following the Data Format Table specifications. This tab focuses on the MSEL's metadata and style.
 
-![Blueprint Add Event Advanced OE](../assets/img/blueprintAddInjectsAdvanced.png)
+![Blueprint Add Event Advanced OE](img/blueprintAddInjectsAdvanced.png)
 
 ##### Data Format Table
 
@@ -510,7 +510,7 @@ If not already completed on the previous tab, fill the fields from the **Advance
 
 If the MSEL owner enabled Gallery integration, the user should verify that all fields on the **Gallery** tab are complete, following the Data Format Table specifications below. This tab includes the fields required for the Gallery integration to function properly.
 
-![Blueprint Add Event Gallery OE](../assets/img/blueprintAddInjectsGallery.png)
+![Blueprint Add Event Gallery OE](img/blueprintAddInjectsGallery.png)
 
 ##### Data Format Table
 
@@ -524,7 +524,7 @@ If the MSEL owner enabled Gallery integration, the user should verify that all f
 | **Delivery Method** | Dropdown Text | How is the event delivered to participants                                   | Gallery                                           |
 | **Title**           | String        | Title of the event                                                           | Bank Consortium Falls Victim to Ransomware Attack |
 | **From Org**        | Dropdown Text | Select the organization that sends this event                                | CC News                                           |
-| **To Org**          | Dropdown Text | Select the organization that receives this event                             | ALL                                               |
+| **To Org**          | Dropdown Text | Select the organization that receives this event                             | All                                               |
 
 After you've added all desired configurations, click **Save**.
 
@@ -565,7 +565,7 @@ To search for a specific event, follow these steps:
 
 While the **Events** tab lets MSEL owners and content developers manage events, the **Exercise View** tab gives participants read-only access to track current and future events during an exercise.
 
-![Blueprint Exercise View OE](../assets/img/blueprintExerciseView-v3.png)
+![Blueprint Exercise View OE](img/blueprintExerciseView-v3.png)
 
 #### Invitations
 
@@ -573,11 +573,11 @@ Users with Administrator, Content Developer, or designated MSEL contributor role
 
 You can specify email domains and a maximum number of users on the invitations. Invitations link to specific teams added to the MSEL. When users join the event using an invitation, the system assigns them to the corresponding team for the duration of the event.
 
-![Blueprint Invitations OE](../assets/img/blueprintInvitations-v2.png)
+![Blueprint Invitations OE](img/blueprintInvitations-v2.png)
 
 ##### Add an Invitation
 
-![Blueprint Add Invitations OE](../assets/img/blueprintAddInvitations.png)
+![Blueprint Add Invitations OE](img/blueprintAddInvitations.png)
 
 To add a new invitation, follow these steps:
 
@@ -634,7 +634,7 @@ Use the **Teams** tab to configure CITE settings for teams added to the MSEL. To
 
 First, assign a CITE Team Type to each team.
 
-![CITE Team Type OE](../assets/img/citeTeamType.png)
+![CITE Team Type OE](img/citeTeamType.png)
 
 1. Navigate to the **Teams** tab.
 2. Select the desired team and click **Edit**.
@@ -651,7 +651,7 @@ After you've made all desired configurations, click **Save**.
 
 Next, assign roles to each member of the team. To do this, follow these steps:
 
-![CITE Team Roles OE](../assets/img/citeTeamRoles-v2.png)
+![CITE Team Roles OE](img/citeTeamRoles-v2.png)
 
 1. Navigate to the **Teams** tab.
 2. Select the desired team, and click it to expand its configurations.
@@ -661,11 +661,11 @@ Next, assign roles to each member of the team. To do this, follow these steps:
 
 On this tab, the MSEL owner can add [CITE Actions](#glossary) to push from Blueprint. These actions allow team members to customize their response by tracking tasks during the exercise.
 
-![Blueprint CITE Actions OE](../assets/img/blueprintCiteActions-v3.png)
+![Blueprint CITE Actions OE](img/blueprintCiteActions-v3.png)
 
 ##### Add a CITE Action
 
-![Blueprint Add CITE Actions OE](../assets/img/blueprintAddCiteActions.png)
+![Blueprint Add CITE Actions OE](img/blueprintAddCiteActions.png)
 
 To add a CITE Action, follow these steps:
 
@@ -718,11 +718,11 @@ To search for a specific action, follow these steps:
 
 On this tab, the MSEL owner can add [CITE Roles](#glossary) to push from Blueprint. These roles allow team members to customize their response by tracking their responsibilities during an exercise.
 
-![Blueprint CITE Roles OE](../assets/img/blueprintCiteRoles-v3.png)
+![Blueprint CITE Roles OE](img/blueprintCiteRoles-v3.png)
 
 ##### Add a CITE Role
 
-![Blueprint Add CITE Roles OE](../assets/img/blueprintAddCiteRoles.png)
+![Blueprint Add CITE Roles OE](img/blueprintAddCiteRoles.png)
 
 To add a CITE role, follow these steps:
 
@@ -779,29 +779,29 @@ To enable full Gallery integration, the MSEL owner should configure the followin
 
 On the **Data Fields** tab, configure additional data fields to push MSEL information to Gallery.
 
-![Blueprint Data Fields Tab OE](../assets/img/blueprintDataFields-v5.png)
+![Blueprint Data Fields Tab OE](img/blueprintDataFields-v5.png)
 
 The MSEL owner should add these fields:
 
 ##### Data Format Table
 
-| Field                 | Data Type     | Description                                                               | Example                                     |
-| --------------------- | ------------- | ------------------------------------------------------------------------- | ------------------------------------------- |
-| **Description**       | String        | Information, details, and characteristics of the event                    | STARTEX                                     |
-| **Date Posted**       | Datetime      | Posted date of the event                                                  | 1/24/2024, 14:18:27                         |
-| **Delivery Method**   | Dropdown Text | How is the event delivered to participants                                | Gallery                                     |
-| **Name**              | String        | Name of the event                                                         | Common Operating Picture 1                  |
-| **From Org**          | Dropdown Text | Select the organization that sends this event                             | CC News                                     |
-| **To Org**            | Dropdown Text | Select the organization that receives this event                          | ALL                                         |
-| **Summary**           | Rich Text     | Complete information and details of the event                             | A ransomware attack affected Bank XYZ...    |
-| **Card**              | Dropdown Text | Select the Gallery Card to categorize this event                          | Information Technology Sector               |
-| **Status**            | Dropdown Text | Approval status of the event used on the MSEL                             | Approved                                    |
-| **Source Type**       | Dropdown Text | Select where the event's details come from                                | News                                        |
-| **Source Name**       | String        | Add the author of the event                                               | BBC News                                    |
-| **Move**              | Dropdown Text | Move number that the event is part of                                     | 1                                           |
-| **Group**             | Integer       | Groups events within a move, often executed within the same time range    | 1                                           |
-| **Url**               | String        | Provide a URL if more information is necessary for participants to access | `www.bbcnews.com/ransomware-attack-xyzbank` |
-| **Open in a New Tab** | Boolean       | Use this option to open the URL in a new tab                              | True                                        |
+| Field                 | Data Type     | Description                                                               | Example                                       |
+| --------------------- | ------------- | ------------------------------------------------------------------------- | --------------------------------------------- |
+| **Description**       | String        | Information, details, and characteristics of the event                    | `STARTEX`                                     |
+| **Date Posted**       | Datetime      | Posted date of the event                                                  | `1/24/2024, 14:18:27`                         |
+| **Delivery Method**   | Dropdown Text | How is the event delivered to participants                                | `Gallery`                                     |
+| **Name**              | String        | Name of the event                                                         | `Common Operating Picture 1`                  |
+| **From Org**          | Dropdown Text | Select the organization that sends this event                             | `CC News`                                     |
+| **To Org**            | Dropdown Text | Select the organization that receives this event                          | `All`                                         |
+| **Summary**           | Rich Text     | Complete information and details of the event                             | `A ransomware attack affected Bank XYZ...`    |
+| **Card**              | Dropdown Text | Select the Gallery Card to categorize this event                          | `Information Technology Sector`               |
+| **Status**            | Dropdown Text | Approval status of the event used on the MSEL                             | `Approved`                                    |
+| **Source Type**       | Dropdown Text | Select where the event's details come from                                | `News`                                        |
+| **Source Name**       | String        | Add the author of the event                                               | `BBC News`                                    |
+| **Move**              | Dropdown Text | Move number that the event is part of                                     | `1`                                           |
+| **Group**             | Integer       | Groups events within a move, often executed within the same time range    | `1`                                           |
+| **Url**               | String        | Provide a URL if more information is necessary for participants to access | `www.bbcnews.com/ransomware-attack-xyzbank`   |
+| **Open in a New Tab** | Boolean       | Use this option to open the URL in a new tab                              | `True`                                        |
 
 After adding data fields, map each one to the appropriate Gallery field by selecting an option from the **Gallery Article Parameter** dropdown when adding or editing the field.
 
@@ -809,11 +809,11 @@ After adding data fields, map each one to the appropriate Gallery field by selec
 
 On this tab, the MSEL owner can add [Gallery Cards](#glossary) to push from Blueprint. These are the different cards in the Gallery Wall. You can also find articles related to that card here.
 
-![Blueprint Gallery Cards OE](../assets/img/blueprintGalleryCards-v2.png)
+![Blueprint Gallery Cards OE](img/blueprintGalleryCards-v2.png)
 
 ##### Add a Gallery Card
 
-![Blueprint Add Gallery Cards OE](../assets/img/blueprintAddGalleryCards.png)
+![Blueprint Add Gallery Cards OE](img/blueprintAddGalleryCards.png)
 
 To add a Gallery card, follow these steps:
 
@@ -864,11 +864,11 @@ To enable the full Player integration, configure the following tabs.
 
 On the [Player Apps](#glossary) tab, the MSEL owner can add configurations to push from Blueprint. These are the different applications accessible from the [Player View](#glossary).
 
-![Player Apps OE](../assets/img/blueprintPlayerApps-v3.png)
+![Player Apps OE](img/blueprintPlayerApps-v3.png)
 
 ##### Add a Player App
 
-![Blueprint Add Player App OE](../assets/img/blueprintAddPlayerApp-v3.png)
+![Blueprint Add Player App OE](img/blueprintAddPlayerApp-v3.png)
 
 To add a Player app, follow these steps:
 
@@ -925,7 +925,7 @@ To search for a specific app, follow these steps:
 
 After adding all of the MSEL information and performing all necessary configurations, you can push information from enabled integrations to their respective applications.
 
-![Blueprint Push Integrations OE](../assets/img/pushIntegrations-v2.png)
+![Blueprint Push Integrations OE](img/pushIntegrations-v2.png)
 
 To push MSEL information to their respective applications, follow these steps:
 
@@ -936,7 +936,7 @@ To push MSEL information to their respective applications, follow these steps:
 
 If desired, the MSEL owner can remove MSEL information after the enabled integrations have pushed it to their respective applications.
 
-![Blueprint Remove Integrations OE](../assets/img/removeIntegrations-v2.png)
+![Blueprint Remove Integrations OE](img/removeIntegrations-v2.png)
 
 To remove MSEL information from the applications, follow these steps:
 
@@ -949,13 +949,13 @@ To remove MSEL information from the applications, follow these steps:
 
 The following image shows the Units Administration Page. Here, administrators can add, edit, and delete units. To use the Blueprint application, the administrator should assign a unit to desired users.
 
-![Blueprint Teams Admin OE](../assets/img/blueprintUnits-v2.png)
+![Blueprint Teams Admin OE](img/blueprintUnits-v2.png)
 
 #### Add a Unit
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a unit.
 
-![Blueprint Add Team OE](../assets/img/blueprintAddUnit.png)
+![Blueprint Add Team OE](img/blueprintAddUnit.png)
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the Units Administration View, click **+**.
@@ -997,7 +997,7 @@ To search for a specific unit, follow these steps:
 
 To configure a unit for an exercise, administrators add users to their respective units. To do this, follow these steps.
 
-![Configure Blueprint Teams OE](../assets/img/blueprintConfigureUnits-v2.png)
+![Configure Blueprint Teams OE](img/blueprintConfigureUnits-v2.png)
 
 1. Select the unit you want to configure and click to expand its configuration details.
 2. The **All Users** tab shows *unassigned* users. To add a user to the unit, click **Add User**.
@@ -1012,13 +1012,13 @@ The available permissions are:
 - **System Admin:** Can use all administration privileges on the Blueprint application.
 - **Content Developer:** Can view, edit, create, and approve events on the MSEL.
 
-![Blueprint Users Admin OE](../assets/img/blueprintUsersAdmin-v4.png)
+![Blueprint Users Admin OE](img/blueprintUsersAdmin-v4.png)
 
 #### Add a User
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a user.
 
-![Blueprint Add User OE](../assets/img/blueprintAddUser-v3.png)
+![Blueprint Add User OE](img/blueprintAddUser-v3.png)
 
 1. Under the Users Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -1050,26 +1050,26 @@ To search for a specific user, follow these steps:
 
 The following image shows the Organization Templates Administration Page. Here, administrators can add and delete organization templates.
 
-![Blueprint Organizations Admin OE](../assets/img/blueprintOrganizationsAdmin-v2.png)
+![Blueprint Organizations Admin OE](img/blueprintOrganizationsAdmin-v2.png)
 
 #### Add an Organization Template
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add an organization template.
 
-![Blueprint Add Organization Template OE](../assets/img/blueprintAddOrgTemplate.png)
+![Blueprint Add Organization Template OE](img/blueprintAddOrgTemplate.png)
 
 1. Under the Organizations Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
 #### Data Format Table
 
-| Field           | Data Type | Description                                                   | Example                                                                                                                                                                |
-| --------------- | --------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Long Name**   | String    | Add the complete name for the organization                    | Cybersecurity and Infrastructure Security Agency                                                                                                                       |
-| **Short Name**  | String    | Add a short name for the organization, such as an acronym     | CISA                                                                                                                                                                   |
-| **Summary**     | String    | Organization's short summary                                  | Security agency                                                                                                                                                        |
-| **Email**       | String    | Organization's email contact                                  | `john@cisa.gov`                                                                                                                                                        |
-| **Description** | Rich Text | Information, details, and characteristics of the organization | The Cybersecurity and Infrastructure Security Agency (CISA) is an agency of the DHS that is responsible for strengthening cybersecurity and infrastructure protection. |
+| Field           | Data Type | Description                                                   | Example                                                                                                                                                                                                  |
+| --------------- | --------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Long Name**   | String    | Add the complete name for the organization                    | Cybersecurity and Infrastructure Security Agency                                                                                                                                                         |
+| **Short Name**  | String    | Add a short name for the organization, such as an acronym     | `CISA`                                                                                                                                                                                                   |
+| **Summary**     | String    | Organization's short summary                                  | Security agency                                                                                                                                                                                          |
+| **Email**       | String    | Organization's email contact                                  | `john@cisa.gov`                                                                                                                                                                                          |
+| **Description** | Rich Text | Information, details, and characteristics of the organization | The Cybersecurity and Infrastructure Security Agency (CISA) is an agency of the Department of Homeland Security (DHS) that is responsible for strengthening cybersecurity and infrastructure protection. |
 
 After you've added all desired configurations, click **Save**.
 
@@ -1100,13 +1100,13 @@ To search for a specific organization template, follow these steps:
 
 The following image shows the Gallery Card Templates Administration Page. Here, administrators can add and delete Gallery card templates.
 
-![Blueprint Cards Admin OE](../assets/img/blueprintCardsAdmin-v2.png)
+![Blueprint Cards Admin OE](img/blueprintCardsAdmin-v2.png)
 
 #### Add a Gallery Card Template
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a Gallery card template.
 
-![Blueprint Add Card Template OE](../assets/img/blueprintAddCardTemplate.png)
+![Blueprint Add Card Template OE](img/blueprintAddCardTemplate.png)
 
 1. Under the Gallery Cards Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -1147,13 +1147,13 @@ To search for a specific Gallery card template, follow these steps:
 
 The following image shows the CITE Action Templates administration page. Here, administrators can add and delete CITE action templates.
 
-![Blueprint Actions Admin OE](../assets/img/blueprintActionsAdmin-v2.png)
+![Blueprint Actions Admin OE](img/blueprintActionsAdmin-v2.png)
 
 #### Add a CITE Action Template
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE action template.
 
-![Blueprint CITE Action Template OE](../assets/img/AddCITEActionTemplate.png)
+![Blueprint CITE Action Template OE](img/AddCITEActionTemplate.png)
 
 1. Under the CITE Actions Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
@@ -1193,13 +1193,13 @@ To search for a specific CITE action template, follow these steps:
 
 The following image shows the CITE Roles Templates Administration Page. Here, administrators can add and delete CITE roles templates.
 
-![Blueprint Roles Admin OE](../assets/img/blueprintRolesAdmin-v2.png)
+![Blueprint Roles Admin OE](img/blueprintRolesAdmin-v2.png)
 
 #### Add a CITE Role Template
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE role template.
 
-![Blueprint CITE Role Template OE](../assets/img/AddCITERoleTemplate.png)
+![Blueprint CITE Role Template OE](img/AddCITERoleTemplate.png)
 
 1. Under the CITE Roles Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.

@@ -84,7 +84,7 @@ Enable audit logging in each Crucible application to track:
 - Administrative actions
 - Exercise access and participation
 
-Configure audit log forwarding to your SIEM as described in the [security guide](../security/index.md).
+Configure audit log forwarding to your Security Information and Event Management (SIEM) as described in the [security guide](../security/index.md).
 
 ## User Workflows by Role
 
