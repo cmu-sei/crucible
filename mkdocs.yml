@@ -1,5 +1,5 @@
 site_name: Crucible Documentation
-site_description: "CRUCIBLE is an open-source application framework for creating and managing virtual environments and events."
+site_description: "Crucible is an open-source application framework for creating and managing virtual environments and events."
 site_author: "Crucible Team"
 site_url: https://cmu-sei.github.io/crucible/
 copyright: >
