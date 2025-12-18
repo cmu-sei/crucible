@@ -29,7 +29,7 @@ Examples of global permissions include:
 - `ViewScenarios`: Can view all Scenarios and their Users and Groups
 - `ManageUsers`: Can change User accounts
 
-Users who have View or Manage permissions for an administration function (for example, `ViewScenarioTemplates` or `ManageGroups`) can open the **Administration** area (the **gear** icon in the top-left corner of the Steamfitter screen). They see only the sections their permissions allow in the sidebar menu.
+Users who have View or Manage permissions for an administration function (for example, `ViewScenarioTemplates` or `ManageGroups`) can open the **Administration** area. Select the **gear** icon in the top-left corner of the Steamfitter screen to access it. They see only the sections their permissions allow in the sidebar menu.
 
 View all available permissions in the **Roles** section of the **Administration** area.
 
@@ -97,7 +97,7 @@ A user with the appropriate permissions defines tasks under a scenario. In Steam
    ![Scenario Task Edit icon](img/task-menu-icon.png)
 2. On the **Edit Task** screen:
    - **User Executable:** Check if you want Player to display this task on the Player view. When a user clicks it in the Player view, the system runs the action configured for that task.
-   - **Repeatable:** Check if you want to allow Steamfitter to execute this task more than once even when successful.  When unchecked, Steamfitter only permits you to execute it once, and then the task is unavailable.
+   - **Repeatable:** Check if you want to allow Steamfitter to execute this task more than once even when successful. When unchecked, Steamfitter only permits you to execute it once, and then the task is unavailable.
 
 !!! info
 
@@ -124,7 +124,7 @@ If no tasks in the scenario have points assigned, the score panel does not appea
 
 ##### What Happens When More Than One Scenario Uses the Same View?
 
-If more than one scenario is associated with the same Player view, Steamfitter can’t determine which scenario’s tasks to display. When this happens, the Tasks page appears blank because the system has no way to resolve the ambiguity.
+When more than one scenario shares the same Player view, Steamfitter can't determine which scenario's tasks to display. When this happens, the Tasks page appears blank because the system has no way to resolve the ambiguity.
 
 To prevent confusion, the system now displays an error message explaining that multiple scenarios share the same view and that it cannot display tasks for that view.
 
@@ -132,11 +132,11 @@ To prevent confusion, the system now displays an error message explaining that m
 
 To work around this issue, open the Tasks page using a scenario-based URL instead of a view-based URL.
 
-Instead of `/view/{viewId}`use `/scenario/{scenarioId}`. This URL tells Player exactly which scenario’s tasks to display and avoids the conflict.
+Instead of `/view/{viewId}` use `/scenario/{scenarioId}`. This URL tells Player exactly which scenario's tasks to display and avoids the conflict.
 
 !!! tip
 
-	Steamfitter lists tasks alphabetically by name. To control their display order, prefixed task names with labels such as   “Task 01,” “Task 02,” and so on. 
+	Steamfitter lists tasks alphabetically by name. To control their display order, prefix task names with labels such as "Task 01," "Task 02," and so on.
 
 #### Starting a Scenario
 

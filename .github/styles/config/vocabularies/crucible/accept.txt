@@ -106,3 +106,4 @@ cron
 systemd
 guestinfo
 Zscaler
+(?i)subtask(?:s)?
