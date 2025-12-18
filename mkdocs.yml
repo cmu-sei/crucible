@@ -80,15 +80,15 @@ nav:
   - Installation Guide: install/index.md
   - Core Application Guides:
       - Landing: landing/index.md
-      - Alloy: alloy/index.md
-      - Blueprint: blueprint/index.md
+      - Player: player/index.md
       - Caster: caster/index.md
+      - Steamfitter: steamfitter/index.md
+      - Alloy: alloy/index.md
+      - TopoMojo: topomojo/index.md
+      - Gameboard: gameboard/index.md
+      - Blueprint: blueprint/index.md
       - CITE: cite/index.md
       - Gallery: gallery/index.md
-      - Gameboard: gameboard/index.md
-      - Player: player/index.md
-      - Steamfitter: steamfitter/index.md
-      - TopoMojo: topomojo/index.md
   - Role-Based Guides:
       - Overview: roles/index.md
       - Infrastructure Administrator:
@@ -114,7 +114,7 @@ nav:
       - Build an On Demand Exercise delivered via Moodle: tutorials/odx-moodle/index.md
       - Build a TopoMojo Challenge: tutorials/topomojo-challenge/index.md
       - Build Games in Gameboard: tutorials/gameboard-build/index.md
-  - 3rd-Party Integrations: integrations/index.md
+  - Third-Party Integrations: integrations/index.md
 
 repo_url: "https://github.com/cmu-sei/crucible"
 repo_name: "cmu-sei/Crucible"
