@@ -1,4 +1,4 @@
-# ![Player Logo](../assets/player-logo.svg){: style="height:75px;width:75px"} **Player:** Designing User Interfaces
+# ![Player Logo](../assets/player-logo.svg){: style="height:75px;width:75px"} Player: Designing User Interfaces
 
 ## Overview
 
