@@ -79,7 +79,7 @@ nav:
   - Getting Started: getting-started/index.md
   - Installation Guide: install/index.md
   - Core Application Guides:
-      - Landing: landing/index.md
+      - Core App Guides: landing/index.md
       - Player: player/index.md
       - Caster: caster/index.md
       - Steamfitter: steamfitter/index.md
