@@ -16,11 +16,9 @@ Go to the TopoMojo repository: [github.com/cmu-sei/TopoMojo](https://github.com/
 
 ### Workspace and Gamespace
 
-You build your content in a *workspace*, but you "play" (complete the lab, do the activity) in a *gamespace*. In the workspace, engineers and lab developers add VMs, save updates, author a guide in Markdown, and configure questions/answers to turn the topology into a lab or *challenge*.
+In a *workspace*, engineers add VMs, save updates, author guides, and configure questions/answers to turn the topology into a lab or challenge.
 
-A *gamespace* is where someone else plays through the lab. They get their own, isolated, read-only copies of all workspace resources. Players in a gamespace can interact with VMs and answer questions to complete a lab, but they can't save anything in the environment.
-
-In short: a *gamespace* is a read-only copy of a *workspace* where a player (user) interacts with the lab content.
+Users play through a lab in a *gamespace*. Users get their own, isolated, read-only copies of all resources in the workspace. Players in a gamespace can interact with VMs and answer questions to complete the lab, but they cannot save changes to the environment.
 
 ### Isolation Tag
 
