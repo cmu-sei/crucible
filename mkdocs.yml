@@ -111,9 +111,9 @@ nav:
           - Overview: roles/participant/index.md
   - Tutorials:
       - Tutorials: tutorials/index.md
-      - Build an On Demand Exercise delivered via Moodle: tutorials/odx-moodle/index.md
-      - Build a TopoMojo Challenge: tutorials/topomojo-challenge/index.md
-      - Build Games in Gameboard: tutorials/gameboard-build/index.md
+      - Building an On-Demand Exercise delivered via Moodle: tutorials/odx-moodle/index.md
+      - Creating a TopoMojo Challenge: tutorials/topomojo-challenge/index.md
+      - Creating a Game in Gameboard: tutorials/gameboard-build/index.md
   - Third-Party Integrations: integrations/index.md
 
 repo_url: "https://github.com/cmu-sei/crucible"

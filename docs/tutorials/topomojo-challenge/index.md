@@ -1,153 +1,127 @@
-# Tutorial: Creating a Challenge in TopoMojo
+# Creating a TopoMojo Challenge
 
-This tutorial walks through creating a cybersecurity challenge in [TopoMojo](../../topomojo/index.md) - a virtual lab builder and player.
+This tutorial shows you how to create and configure a cybersecurity challenge in [TopoMojo](../../topomojo/index.md), from defining the workspace and resources to preparing the challenge for participant use.
 
+## Assumptions
 
-## Prerequisites
+This tutorial assumes the following:
 
-- Access to a TopoMojo instance
-- Required role permissions for creating workspaces
-- Basic understanding of virtualization and networking concepts
-- Familiarity with supported hypervisors (VMware or Proxmox)
+- You have access to a TopoMojo instance
+- You have the `Creator` role or greater in TopoMojo
+- You have a basic understanding of virtualization and networking concepts
+- You are familiar with supported hypervisors like VMWare and Proxmox
 
+:blue_book: As you work through this tutorial, you may want to learn more about the Crucible applications or features. If so, refer to the [Related Resources](#related-resources) section below for additional detail and reference information.
 
-## Overview
+## Step 1: Creating and Configuring Your Workspace
 
-TopoMojo is a lab builder and player application for developing cybersecurity challenges. Each challenge lives in its own **workspace** that contains all virtual machines, artifacts, and configuration. When a user starts a challenge, the system deploys a read-only copy called a **gamespace** for participants to interact with.
+1. Log in to your TopoMojo instance.
+2. Click **+New Workspace** to create an empty workspace for the challenge.
+3. Enter the workspace metadata. The list below describes some key settings. For additional detail, see the TopoMojo documentation, [Building a New Workspace](../../topomojo/index.md#building-a-new-workspace).
 
-For more detailed documentation on TopoMojo, visit [TopoMojo's documentation page](../../topomojo/index.md).
+   - **Title**: Enter a title that identifies the challenge (for example, "Network Traffic Analysis").
+   - **Description**: Enter a short description of the challenge (1–3 sentences).
+   - **Tags**: Add tags to make the challenge easier to find. Use a space-delimited list (for example, `cyber-defense-analysis incident-response`).
+   - **Audience**: Select the audience to control which users can view or play the challenge. For a complete list of the settings, see the TopoMojo documentation, [Settings](../../topomojo/index.md#settings).
 
-## Table of Contents
+## Step 2: Adding Virtual Machine Templates
 
-- [Tutorial: Creating a Challenge in TopoMojo](#tutorial-creating-a-challenge-in-topomojo)
-  - [Prerequisites](#prerequisites)
-  - [Overview](#overview)
-  - [Table of Contents](#table-of-contents)
-  - [Create and Configure a Workspace](#create-and-configure-a-workspace)
-  - [Add Virtual Machine Templates](#add-virtual-machine-templates)
-    - [Saving Template Changes](#saving-template-changes)
-    - [Guest Settings](#guest-settings)
-    - [Template Replicas](#template-replicas)
-    - [Template Best Practices](#template-best-practices)
-  - [Configure Transforms](#configure-transforms)
-  - [Create Challenge Questions](#create-challenge-questions)
-  - [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
-    - [Issue: Changes to VM Are Not Saving](#issue-changes-to-vm-are-not-saving)
-    - [Issue: Transform Values Not Appearing in VMs](#issue-transform-values-not-appearing-in-vms)
-  - [Additional Resources](#additional-resources)
+TopoMojo templates are starting-point virtual machines that you can customize. When a user deploys a gamespace, they receive read-only copies of all templates in the workspace from the template's last saved state. For full field descriptions and functions, see [Templates](../../topomojo/index.md#templates) in the TopoMojo Guide.
 
-
-## Create and Configure a Workspace
-
-1. Log into TopoMojo
-2. Click the **Create New Workspace** button to create an empty workspace for building your challenge
-3. Configure Workspace Metadata. Descriptions of a few key settings are below; see the [TopoMojo documentation on building a workspace](../../topomojo/index.md#building-a-new-workspace) for full details and additional settings.
-   1. **Workspace Title**: Set a title that identifies your challenge (e.g., "Network Traffic Analysis")
-   2. **Description**: Provide a short (1-3 sentence) description of the challenge.
-   3. **Tags**: Add a few tags that make this challenge easily searchable. This field is a space-delimited list (e.g., "cyber-defense-analysis incident-response")
-   4. **Audience**: Set the audience to control which users can view/play this challenge. See the [TopoMojo documentation](../../topomojo/index.md#template-field-definitions) for additional details.
-
-
-## Add Virtual Machine Templates
-
-TopoMojo Templates are starting point virtual machines that you can customize. When a user deploys a Gamespace, they will receive read-only copies of all templates in the workspace from their last saved state. See the [TopoMojo documentation on configuring templates](../../topomojo/index.md#templates-tab) for full details and settings.
-
-Navigate to the **Templates** section of the workspace to add VMs to your challenge. Deploy VMs from templates and access the console to make changes to workspace VMs.
+1. In your TopoMojo workspace, click the **Templates** tab.
+2. Click **+ Add Templates** to add VMs to your challenge.
+3. Deploy VMs from templates and access the console to make changes to workspace VMs.
 
 ### Saving Template Changes
 
-A template must be "unlinked" to allow saving changes. **You must unlink before making changes to a VM - you will lose any changes made to a deployed VM from a linked template.**
+A template must be *unlinked* to allow you to save changes. Unlinking a template creates a new clone of the parent VMDK on VMware and a new clone of the parent VM template on Proxmox.
 
-Unlinking a template creates a new clone of the parent VMDK when using VMware and makes a clone of the parent Proxmox VM Template when using Proxmox.
-
-After unlinking the UI will show a **Save** button for the template. Clicking **Save** will create a VM Snapshot on the hypervisor. TopoMojo only supports one snapshot; saving will overwrite the previous saved state.
+After unlinking, initializing, and deploying, the TopoMojo UI shows a **Save** icon for the template. Clicking **Save** creates a VM snapshot on the hypervisor. TopoMojo supports only one snapshot, and saving overwrites the previously saved state.
 
 ### Guest Settings
 
-**Guest Settings** use VMware guestinfo variables or the QEMU Firmware Configuration Device for Proxmox to pass information/variables to deployed VMs. Expand a template's options to configure guest settings using a `key=value` format. You can use [transforms](#configure-transforms) to insert randomized values.
+Guest Settings pass information to deployed VMs using VMware `guestinfo` variables or the QEMU firmware configuration device on Proxmox. Expand a template’s options to define guest settings using a `key=value` format. You can use transforms to insert randomized values.
 
-Example:
+!!! example
 
-```text
-token1=##token1##
-ipaddr=1.2.3.4
-```
+    ```text
+    token1=##token1##
+    ipaddr=1.2.3.4
+    ```
 
-VMs can use scripts to access guest settings using hypervisor-specific commands:
+VMs can use scripts to access guest settings using hypervisor-specific commands.
 
-Querying VMware guestinfo variables
+!!! example "Querying VMware guestinfo variables"
 
-```bash
-vmware-toolsd --cmd "info-get guestinfo.<variable-name>"
-```
+    ```bash
+    vmware-toolsd --cmd "info-get guestinfo.<variable-name>"
+    ```
 
-Querying the QEMU Firmware Configuration Device for Proxmox
+!!! example "Querying the QEMU firmware configuration device on Proxmox"
 
-```bash
-sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.<variable-name>/raw
-```
+    ```bash
+    sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.<variable-name>/raw
+    ```
 
 ### Template Replicas
 
-You can configure **Replicas** for team-based challenges where multiple team members need to work simultaneously. All replicas will have the same starting state, configurations, and guest settings. TopoMojo will deploy the specified number of replicas of the VM template in gamespaces. Running VMs using replicas have a `_#` suffix applied to their names (e.g., `kali_1`, `kali_2`). It is a best practice to set the replica count to `-1` to deploy a replica of the VM for each member of the team that owns the gamespace. This avoids deploying more replicas that there are team members to use the VMs.
+You can configure **Replicas** for team-based challenges where multiple team members work simultaneously. Each replica starts with the same state, configuration, and guest settings. TopoMojo deploys the specified number of VM replicas in each gamespace and appends a `_#` suffix to running VM names (for example, `kali_1`, `kali_2`). As a best practice, set the replica count to `-1` so TopoMojo deploys one replica per team member. This prevents deploying more replicas than the team can use.
 
-### Template Best Practices
+??? tip "Template Best Practices"
 
-1. **Unlinking Templates**: Use linked templates as much as possible. Using linked templates reduces storage on the backend and facilitates a shared/common VM/environment that the user can become comfortable with across challenges.
-2. **Use a "Challenge Server"**: A "Challenge Server" is a VM that serves as the brains of a challenge. It can facilitate startup scripts that reconfigure VMs at boot, host a grading script/website, collect logs, and more. This allows developers to maximize linked VMs by placing all configuration/automation/grading on a single unlinked VM. CMU SEI publishes our [Challenge Server on GitHub](https://github.com/cmu-sei/Challenge-Server).
-3. **Template Visibility**: Templates can be "visible" or "hidden". Visible templates will have a UI console accessible to the user. Hidden VMs will not show a UI console to the user, but may still be accessible to the user over the network. Hide VMs that you do not want users to have direct access to. For example, in a challenge where the user must identify the source of a live cyber attack, you should hide any VMs related to the attack/attacker.
-4. **Template Naming**: Templates should have clean, descriptive names. Visible templates should not have names with tags, IDs, or other details that are not meaningful to the end user. It can be helpful to name hidden templates with unique identifiers that allow administrators to quickly isolate/identify resources in the backend while troubleshooting. It is best when templates for a challenge have unique names to help with each of search, but uniqueness across workspaces is not enforced.
-5. **Template Count**: Add VM templates only when required. Keeping the VM template count low reduces infrastructure resource requirements and minimizes challenge complexity.
-6. **Clean Before Saving**: Developers should clean up all development artifacts before saving templates. This includes: clearing command/browser history, deleting logs, and removing development artifacts/files. If left behind, users can find undesired hints and shortcuts to solving the challenge.
+    - **Unlinking Templates:** Use linked templates whenever possible. Linked templates reduce backend storage use and provide a shared, consistent VM environment that users can become familiar with across challenges.
+    - **Use a Challenge Server:** Use a dedicated *challenge server* VM as the control point for the challenge. A challenge server can run startup scripts, host grading logic or websites, collect logs, and perform automation. This approach lets you maximize the use of linked templates by placing configuration, automation, and grading on a single unlinked VM. Carnegie Mellon University's Software Engineering Institute provides a reference challenge server on GitHub: [github.com/cmu-sei/Challenge-Server](https://github.com/cmu-sei/Challenge-Server).
+    - **Template Visibility:** Set templates as *visible* or *hidden*. Visible templates expose a UI console to users. Hidden templates do not expose a UI console but may remain accessible over the network. Hide templates that users should not access directly, such as attacker or backend systems.
+    - **Template Naming:** Use clean, descriptive names for templates. Avoid tags, IDs, or internal details in visible template names. Use unique or structured names for hidden templates to help administrators identify resources during troubleshooting.
+    - **Template Count:** Add VM templates only when required. Fewer templates reduce infrastructure usage and keep challenges easier to understand and maintain.
+    - **Clean Before Saving:** Clean templates before saving them. Remove command and browser history, delete logs, and remove development artifacts or files to prevent unintended hints or shortcuts.
 
+## Step 3: Configuring Transforms
 
-## Configure Transforms
+The **Challenge** tab lets you configure transforms and challenge questions.
 
-The **Challenge** tab of a workspace allows configuration of transforms and challenge questions.
+Transforms generate dynamic values, like tokens, that make each deployed challenge unique. TopoMojo creates randomized values for configured transforms when it deploys a gamespace. Using transforms increases challenge reusability by preventing users from relying on known answers and sharing solutions.
 
-Transforms are dynamically generated values (like tokens) that make each deployed challenge unique. TopoMojo creates randomized values for configured transforms at gamespace deploy time. Creating unique challenge deployments using transforms increases reusable value of challenge by avoiding cases where users already know the answers. Challenges with unique/dynamic answers prevents answer sharing between users.
+Most text fields on the Challenge tab support transform substitution using a double-pound notation (for example, `##transform-name##`). The **Markdown** and **Variant** sections let you add challenge content that also supports transforms, enabling dynamic challenge documents. Challenge questions and answers can include transforms to generate dynamic text and answers. For applying transforms in VM configuration, see the [Guest Settings](#guest-settings) section.
 
-Most text fields on the **Challenge** tab support transform substitution via a "double-pound" variable notation (e.g., `##transform-name##`). The **Markdown** section and **Variant Markdown** sections add additional markdown to the challenge document that can contain transforms for dynamic challenge documents. Challenge questions and answers can contain dynamic text/answers using transforms. See the [Guest Settings section](#guest-settings) for applying transforms in template guest settings.
+## Step 4: Adding Challenge Questions
 
-See the [TopoMojo documentation on transforms](../../topomojo/index.md#transforms) for additional details.
+Also on the Challenge tab, add the questions that users must answer. Always configure an example answer for each question to show the expected answer format.
 
+You can assign an optional **Weight** to each question to control how points are distributed. By default, questions have a weight of `0`, which gives all questions an equal share of the total points. Use values from `0–100` to allocate a percentage of the total score (for example, a weight of `60` assigns 60% of the challenge points to that question).
 
-## Create Challenge Questions
+!!! warning "Question Weights"
 
-In the Challenge section, add questions that users will answer. Challenge questions should always have an example answer configured to help users understand the answer's expected format.
+    If question weights do not add up to 100, the challenge may behave unexpectedly.
 
-Challenge questions can optionally specify a weight to change the percentage of points allocated to the question. By default, all questions will have a weight of `0`, meaning all questions have an equal share of the challenge's total points. Use values `0-100` to define the percentage of points to allocate (e.g., a question with a weight of `60` will hold 60% of the points for the challenge). **Challenges with question weights that do not add up to 100 may experience undesired behavior.**
+Each question uses a **Grader** type, which defines how the system evaluates answers. For additional details on supported grader types, see [Question Set](../../topomojo/index.md#question-set) in the *TopoMojo Guide*.
 
-All questions one of the "Grader Types" which defines to how determine correct answers. See the [TopoMojo Documentation](../../topomojo/index.md#question-set) for more details on the supported grader types.
+You can reference transform variables in question text and answers, as described in the [transforms section](#step-3-configuring-transforms). Transforms allow each challenge deployment to generate unique questions and answers.
 
-You can reference transform variables in question text and answers as described in the [transforms section](#configure-transforms). Using transforms allows for unique questions/answers per challenge deployments.
+You can also use variants to randomize challenges in a more controlled way than transforms. Variants can define different documentation, VM attachments (such as ISOs), and question sets. When deploying a gamespace, TopoMojo randomly selects a variant. For additional details, see [Variants](../../topomojo/index.md#variants) in the *TopoMojo Guide*.
 
-You can optionally use **Variants** to randomize challenges in a more prescribed way than using transforms. Variants can have different documentation, ISOs attached to VMs, and questions/answers. TopoMojo will randomly choose a variant when deploying a gamespace. See the [TopoMojo documentation on variants](../../topomojo/index.md#variants) for more details.
+Prefer transforms over variants. Variants increase development and testing effort because you must build and validate each variant. Use variants when:
 
-Developers should prefer using transforms instead of variants. Using variants can increase challenge development and testing because of the need to develop an test all variants. Typical use cases for variants include:
+1. Challenge artifacts can't change dynamically through scripting or transforms.
+2. VM configurations must differ in ways that scripting at boot can't support.
 
-1. Challenge artifacts that cannot be dynamically modified in a predictable way by scripting/transforms
-2. VMs must have different configurations where scripting the changes at boot is not feasible
+## Troubleshooting Common Issues
 
+### VM changes do not persist
 
-## Common Issues and Troubleshooting
+1. Confirm that you unlinked the template.
+2. Confirm that clicking **Save** does not produce an error in the TopoMojo UI.
+3. Review TopoMojo API logs and hypervisor logs (VMware or Proxmox) for errors related to saving the VM.
 
-### Issue: Changes to VM Are Not Saving
+### Transform values do not appear in VMs
 
-1. Confirm you have unlinked the template.
-2. Confirm clicking the "Save" button does not show an error in the TopoMojo UI.
-3. Check TopoMojo API and hypervisor (VMware or Proxmox) logs to find errors saving VMs.
+1. Remember that TopoMojo applies transform values at gamespace deploy time; they do not appear in workspaces.
+2. Confirm that you configured guest settings correctly and that variable names match exactly (case sensitive).
+3. Confirm that you use the [correct command for your hypervisor](#guest-settings).
 
-### Issue: Transform Values Not Appearing in VMs
+## Related Resources
 
-1. Because TopoMojo populates transform values at gamespace deploy time, transform values will not appear in workspaces.
-2. Confirm you have configured guest settings as desired. Variable names are case sensitive.
-3. Confirm you are using the [correct command for your hypervisor](#guest-settings).
-
-
-## Additional Resources
-
-- [TopoMojo GitHub Repository](https://github.com/cmu-sei/TopoMojo)
-- [TopoMojo Documentation](../../topomojo/index.md)
+- [Challenge Development Guidelines for Cybersecurity Competitions](https://www.sei.cmu.edu/library/challenge-development-guidelines-for-cybersecurity-competitions): This paper draws on the SEI’s experience to provide general-purpose guidelines and best practices for developing effective cybersecurity challenges.
 - [Crucible Documentation](../../index.md)
-- [CMU SEI Challenge Development Guidelines](https://resources.sei.cmu.edu/library/asset-view.cfm?assetID=889267) - Technical report with best practices
+- [TopoMojo Guide](../../topomojo/index.md)
+- [TopoMojo GitHub Repository](https://github.com/cmu-sei/TopoMojo)
