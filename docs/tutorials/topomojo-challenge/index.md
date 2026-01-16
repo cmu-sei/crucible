@@ -9,7 +9,7 @@ This tutorial assumes the following:
 - You have access to a TopoMojo instance
 - You have the `Creator` role or greater in TopoMojo
 - You have a basic understanding of virtualization and networking concepts
-- You are familiar with supported hypervisors like VMWare and Proxmox
+- You are familiar with supported hypervisors like VMware and Proxmox
 
 :blue_book: As you work through this tutorial, you may want to learn more about the Crucible applications or features. If so, refer to the [Related Resources](#related-resources) section below for additional detail and reference information.
 
@@ -34,13 +34,13 @@ TopoMojo templates are starting-point virtual machines that you can customize. W
 
 ### Saving Template Changes
 
-A template must be *unlinked* to allow you to save changes. Unlinking a template creates a new clone of the parent VMDK on VMware and a new clone of the parent VM template on Proxmox.
+*Unlink* the template to save changes. Unlinking a template creates a new clone of the parent VMDK on VMware and a new clone of the parent VM template on Proxmox.
 
 After unlinking, initializing, and deploying, the TopoMojo UI shows a **Save** icon for the template. Clicking **Save** creates a VM snapshot on the hypervisor. TopoMojo supports only one snapshot, and saving overwrites the previously saved state.
 
 ### Guest Settings
 
-Guest Settings pass information to deployed VMs using VMware `guestinfo` variables or the QEMU firmware configuration device on Proxmox. Expand a template’s options to define guest settings using a `key=value` format. You can use transforms to insert randomized values.
+Guest Settings pass information to deployed VMs using VMware `guestinfo` variables or the QEMU firmware configuration device on Proxmox. Expand a template's options to define guest settings using a `key=value` format. You can use transforms to insert randomized values.
 
 !!! example
 
@@ -88,7 +88,7 @@ Most text fields on the Challenge tab support transform substitution using a dou
 
 Also on the Challenge tab, add the questions that users must answer. Always configure an example answer for each question to show the expected answer format.
 
-You can assign an optional **Weight** to each question to control how points are distributed. By default, questions have a weight of `0`, which gives all questions an equal share of the total points. Use values from `0–100` to allocate a percentage of the total score (for example, a weight of `60` assigns 60% of the challenge points to that question).
+You can assign an optional **Weight** to each question to control how TopoMojo distributes points. By default, questions have a weight of `0`, which gives all questions an equal share of the total points. Use values from `0–100` to allocate a percentage of the total score (for example, a weight of `60` assigns 60% of the challenge points to that question).
 
 !!! warning "Question Weights"
 
@@ -107,13 +107,13 @@ Prefer transforms over variants. Variants increase development and testing effor
 
 ## Troubleshooting Common Issues
 
-### VM changes do not persist
+### VM Changes Don't Persist
 
 1. Confirm that you unlinked the template.
 2. Confirm that clicking **Save** does not produce an error in the TopoMojo UI.
 3. Review TopoMojo API logs and hypervisor logs (VMware or Proxmox) for errors related to saving the VM.
 
-### Transform values do not appear in VMs
+### Transform Values Don't Appear in VMs
 
 1. Remember that TopoMojo applies transform values at gamespace deploy time; they do not appear in workspaces.
 2. Confirm that you configured guest settings correctly and that variable names match exactly (case sensitive).
@@ -121,7 +121,7 @@ Prefer transforms over variants. Variants increase development and testing effor
 
 ## Related Resources
 
-- [Challenge Development Guidelines for Cybersecurity Competitions](https://www.sei.cmu.edu/library/challenge-development-guidelines-for-cybersecurity-competitions): This paper draws on the SEI’s experience to provide general-purpose guidelines and best practices for developing effective cybersecurity challenges.
+- [Challenge Development Guidelines for Cybersecurity Competitions](https://www.sei.cmu.edu/library/challenge-development-guidelines-for-cybersecurity-competitions): This paper draws on the SEI's experience to provide general-purpose guidelines and best practices for developing effective cybersecurity challenges.
 - [Crucible Documentation](../../index.md)
 - [TopoMojo Guide](../../topomojo/index.md)
 - [TopoMojo GitHub Repository](https://github.com/cmu-sei/TopoMojo)

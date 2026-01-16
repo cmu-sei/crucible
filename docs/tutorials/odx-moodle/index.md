@@ -8,7 +8,7 @@ This tutorial assumes the following:
 
 - You have a deployed Crucible platform
 - The Crucible platform contains Caster, Player, and Alloy
-- Crucible plugin is installed in Moodle
+- You have installed the Crucible plugin in Moodle
 - vCenter or Proxmox capacity sized for ODX behavior
 - You have the `Administrator` or `Content Developer` role in the Crucible apps
 
