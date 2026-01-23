@@ -1,29 +1,31 @@
 # System Operations
 
-Infrastructure administrators are responsible for the ongoing operational management of Crucible deployments. This guide walks through monitoring, maintenance, and troubleshooting using Kubernetes tools and Crucible application features.
+Infrastructure administrators manage the day-to-day operation of Crucible deployments. This procedural guide covers monitoring, maintenance, performance management, and operational troubleshooting using Kubernetes tooling and Crucible application features.
 
-## Overview
+## Operational Scope
 
 System operations for Crucible include:
 
-- **Monitoring and alerting** - Kubernetes cluster health and application status
-- **Maintenance procedures** - Updates, backups, and routine tasks
-- **Performance optimization** - Resource management and scaling
-- **Incident response** - Problem identification and resolution
+- **Monitoring and alerting** for cluster and application health
+- **Performing maintenance** such as updates and backups
+- **Managing performance and scale** through resource tuning
+- **Responding to incidents** and resolving operational issues
 
 ## Monitoring and Alerting
 
-### Kubernetes Monitoring
+### Monitoring Kubernetes
 
-Monitor your Crucible deployment using Kubernetes tools:
+Monitor Crucible using standard Kubernetes tools:
 
-- **kubectl:** Command-line status checks: `kubectl get pods -A`, `kubectl describe pod <name>`, `kubectl logs <pod>`
-- **Rancher** (if installed): Web-based cluster monitoring and management (see the [Installation Guide](../../../install/index.md#rancher))
-- **Kubernetes Dashboard:** Alternative web interface for cluster monitoring
+- **kubectl:** Command-line inspection and diagnostics (`kubectl get pods -A`, `kubectl describe pod <name>`, `kubectl logs <pod>`)
+- **Rancher** (if installed): Web-based cluster monitoring and management; see the [Installation Guide](../../../install/index.md#rancher)
+- **Kubernetes Dashboard:** Optional web interface for cluster visibility
 
-### Application Health
+### Monitoring Application Health
 
-Each Crucible application provides health endpoints. Check application status with:
+Each Crucible application exposes health and status information.
+
+Use Kubernetes tooling to inspect application state:
 
 ```bash
 # Check all pods across namespaces
@@ -36,26 +38,26 @@ kubectl logs -n <namespace> <pod-name>
 kubectl top pods -A
 ```
 
-### Infrastructure Monitoring
+### Monitoring Infrastructure
 
-Key metrics to monitor on your Kubernetes cluster:
+Track the following cluster metrics:
 
 - CPU and memory utilization per node (`kubectl top nodes`)
-- Disk space on nodes (check via node access or monitoring tools)
-- PostgreSQL database performance (via pgAdmin if installed per the [Installation Guide](../../../install/index.md#postgresql-and-pgadmin))
-- Storage usage if using Longhorn (accessible via Rancher or Longhorn UI)
+- Disk space on nodes
+- PostgreSQL performance and connection counts (via pgAdmin if installed per the [Installation Guide](../../../install/index.md#postgresql-and-pgadmin))
+- Persistent storage usage (via Longhorn UI or Rancher, if installed)
 
-### Log Management
+### Managing Logs
 
-- **Application logs** - Access via `kubectl logs` for each pod
-- **Audit logs** - Configure in each Crucible application's Helm values; forward to Security Information and Event Management (SIEM) as described in [security guide](../security/index.md)
-- **Kubernetes events** - View with `kubectl get events -A`
+- **Application logs:** Access per pod using `kubectl logs`
+- **Audit logs:** Configure via application Helm values and forward to your Security Information and Event Management (SIEM)
+- **Kubernetes events:** Review with `kubectl get events -A`
 
-## Maintenance Procedures
+## Performing Maintenance
 
-### Application Updates
+### Updating Applications
 
-Update Crucible applications by deploying new versions via Helm:
+Update Crucible applications using Helm:
 
 ```bash
 # Update a Crucible application to a new version
@@ -65,43 +67,43 @@ helm upgrade <release-name> cmu-sei/<chart-name> \
   --version <new-version>
 ```
 
-Before updating:
+Before applying updates:
 
-1. Review release notes in the application's GitHub repository
-2. Test updates in a non-production environment if available
-3. Ensure database backups are current
+1. Review application release notes
+2. Test changes in a non-production environment, if available
+3. Verify database backups are current
 4. Plan for brief service interruptions during pod restarts
 
-### Database Maintenance
+### Maintaining Databases
 
-Maintain PostgreSQL databases regularly:
+Perform regular PostgreSQL maintenance:
 
-- Use **pgAdmin** (if installed per the [Installation Guide](../../../install/index.md#postgresql-and-pgadmin)) for visual database management
-- Run `VACUUM ANALYZE` periodically to optimize database performance
-- Monitor database size and connection counts
-- Configure automated backups using Kubernetes CronJobs or external backup solutions
+- Manage databases using pgAdmin (if installed)
+- Run `VACUUM ANALYZE` periodically
+- Monitor database growth and active connections
+- Automate backups using Kubernetes CronJobs or external backup solutions
 
-### Backup and Recovery
+### Managing Backups and Recovery
 
 #### Backup Strategy
 
-- **Database backups** - Use `pg_dump` or PostgreSQL backup tools; schedule regular automated backups
-- **Persistent volume backups** - If using Longhorn, configure snapshot schedules through the Longhorn UI
-- **Configuration backups** - Store Helm values files and Kubernetes manifests in version control
+- Databases: Schedule PostgreSQL backups using `pg_dump` or equivalent tools
+- Persistent volumes: Configure snapshot schedules if using Longhorn
+- Configuration: Store Helm values and Kubernetes manifests in version control
 
 #### Recovery Procedures
 
-Restore from backups when needed:
+Restore services as needed:
 
-- **Database restore** - Use `pg_restore` with backup files
-- **Volume restore** - Use Longhorn snapshot restore or your storage provider's procedures
-- **Application redeployment** - Use Helm with backed-up values files
+- Database restores using `pg_restore`
+- Volume restores using storage provider or Longhorn snapshots
+- Application recovery using Helm and backed-up values files
 
-## Performance Optimization
+## Managing Performance and Scale
 
-### Resource Management
+### Managing Resources
 
-Adjust Kubernetes resource limits and requests in Helm values files:
+Tune Kubernetes resource requests and limits through Helm values:
 
 ```yaml
 # Example resource configuration in Helm values
@@ -114,34 +116,32 @@ resources:
     memory: 1Gi
 ```
 
-Monitor resource usage with `kubectl top pods` and `kubectl top nodes` to inform scaling decisions.
+Monitor usage with `kubectl top pods` and `kubectl top nodes` to guide adjustments.
 
-### Scaling
+### Scaling Applications
 
-Most Crucible applications support horizontal scaling:
+Most Crucible services support horizontal scaling:
 
-- Increase replica counts in Helm values: `replicaCount: 3`
-- Kubernetes will distribute load across replicas automatically
-- Scale databases vertically by adjusting PostgreSQL resource allocations
+- Increase `replicaCount` in Helm values
+- Kubernetes distributes load across replicas automatically
+- Scale PostgreSQL vertically by adjusting allocated resources
 
-Refer to the [Installation Guide](../../../install/index.md#infrastructure) for minimum hardware requirements and scaling considerations.
+Refer to the [Installation Guide](../../../install/index.md#postgresql-and-pgadmin) for minimum hardware requirements and scaling considerations.
 
-## Troubleshooting
+## Troubleshooting Operations
 
-### Common Operational Issues
+### Addressing Common Issues
 
-For detailed troubleshooting procedures, see the [Troubleshooting Playbook](../troubleshooting/index.md).
+For detailed troubleshooting tips, see the [Troubleshooting Playbook](../troubleshooting/index.md).
 
-Common issues include:
+Common operational issues include:
 
-- **Pod failures** - Check status with `kubectl describe pod <name>` and review logs
-- **Database connection issues** - Verify PostgreSQL pod is running and connection strings are correct in Helm values
-- **Certificate errors** - Verify certificate secrets exist: `kubectl get secrets`
-- **Resource exhaustion** - Check node and pod resource usage with `kubectl top`
+- **Pod failures:** Check status with `kubectl describe pod <name>` and review logs
+- **Database connectivity issues:** Verify PostgreSQL pod is running and connection strings are correct in Helm values
+- **Certificate errors:** Verify certificate secrets exist: `kubectl get secrets`
+- **Resource exhaustion:** Check node and pod resource usage with `kubectl top`
 
-### Diagnostic Commands
-
-Basic Kubernetes diagnostic commands:
+### Using Basic Kubernetes Diagnostic Commands
 
 ```bash
 # Check all pods and their status
@@ -161,18 +161,18 @@ kubectl top pods -A
 kubectl get events -A --sort-by='.lastTimestamp'
 ```
 
-## Security Operations
+## Managing Security Operations
 
-### Security Monitoring
+### Monitoring Security
 
-Review the [Security and Compliance Checklist](../security/index.md) for:
+Use the [Security and Compliance Checklist](../security/index.md) to verify:
 
-- Audit log forwarding to SIEM
+- Audit log forwarding to Security Information and Event Management (SIEM)
 - Failed authentication monitoring
 - Network policy enforcement
 - Regular access reviews
 
-### Incident Response
+### Responding to Incidents
 
 Follow your organization's incident response procedures. Key steps:
 

@@ -1,21 +1,25 @@
 # Infrastructure Administrator Guide
 
-This guide provides detail for platform administrators, system operators, and technical staff responsible for Crucible deployment and ongoing maintenance.
+This guide helps infrastructure administrators, system operators, and technical staff deploy, operate, and maintain Crucible platforms.
 
 ## Overview
 
-As a Crucible Administrator, you're responsible for maintaining the platform's health, security, and performance. Your role differs from Range Builders (who create exercises) and Instructors (who deliver training) and encompasses platform-wide concerns including:
+As an *Infrastructure Administrator*, you are responsible for the overall health, security, and reliability of the Crucible platform. This role is distinct from *Range Builders*, who create exercises, and *Instructors*, who deliver training. Your responsibilities focus on platform-wide operations rather than exercise content.
+
+Key responsibilities include:
 
 - Infrastructure planning and capacity management
-- User account management and permissions assignment
+- User account provisioning and permission management
 - System monitoring, maintenance, and troubleshooting
 - Security policy enforcement and compliance oversight
-- Backup and recovery procedures
-- Application-specific configuration and integration management
+- Backup, recovery, and disaster preparedness
+- Application-level configuration and integration management
 
 ## API Permissions
 
-Each Crucible application has its own permission system. As an Administrator, you typically need the **Administrator** role in each application to manage users, roles, and system configuration. Below is more information on each application's permissions:
+Each Crucible application maintains its own permission model. Infrastructure Administrators typically require an Administrator role within each application to manage users, roles, and system-level configuration.
+
+Refer to the following documentation for application-specific permission details:
 
 - [Alloy Permissions](https://github.com/cmu-sei/Alloy.Api/blob/development/docs/Permissions.md)
 - [Player Permissions](https://github.com/cmu-sei/Player.Api/blob/main/docs/Permissions.md)
@@ -54,6 +58,6 @@ Crucible Platform
 
 ## Related Resources
 
-- [Range Builder Guide](../range-builder/index.md) - For understanding exercise creation
-- [Instructor Guide](../instructor/index.md) - For understanding instructor workflows
-- [Troubleshooting Playbook](troubleshooting/index.md) - Further help on resolving problems
+- [Range Builder Guide](../range-builder/index.md): Learn how to create and deploy exercises using Crucible components.
+- [Instructor Guide](../instructor/index.md): Learn how instructors manage and deliver Crucible training.
+- [Troubleshooting Playbook](troubleshooting/index.md): Learn how to diagnose and resolve common platform issues.

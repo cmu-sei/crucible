@@ -1,27 +1,27 @@
-# Administrator Quick Start Guide
+# Administrator Quick Start Checklist
 
-This guide provides administrators with the essential steps to get a Crucible deployment up and running quickly.
+Use this checklist to bring a Crucible deployment online and verify basic functionality.
 
 ## Prerequisites
 
-Before beginning your Crucible deployment, ensure you have:
+Confirm you have the following before starting:
 
-- Administrative access to target infrastructure (cloud or on-premises)
-- Git access to Crucible repositories
-- SSL certificates for domain(s)
+- ✅ Administrative access to target infrastructure (cloud or on-premises)
+- ✅ Git access to Crucible repositories
+- ✅ SSL certificates for required domain(s)
 
-## Quick Deployment Steps
+## Deployment
 
-1. Initial Deployment:
+- ✅ Complete the initial deployment using the [Installation Guide](../../install/index.md)
 
-    - Follow the details found in our [Installation Guide](../../install/index.md).
+## Post-Deployment Verification
 
-2. Verify your deployment by:
+Verify the deployment is operational:
 
-    - Logging in as an administrator
-    - Creating a test user account
-    - Verifying all core applications are accessible
+- ✅ Log in as an administrator
+- ✅ Create a test user account
+- ✅ Confirm all core applications are accessible
 
 ## Support
 
-For additional help join the [community discussions](https://github.com/cmu-sei/crucible/discussions).
+- ✅ Join the [Crucible community discussions](https://github.com/cmu-sei/crucible/discussions)

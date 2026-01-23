@@ -1,8 +1,8 @@
-# Deployment Management
+# Managing Deployment
 
-This section walks infrastructure administrators through deploying and configuring Crucible, referencing the detailed [Installation Guide](../../../install/index.md) and architecture documentation.
+This section serves as a *procedural guide* for infrastructure administrators deploying and configuring Crucible, referencing the detailed [Installation Guide](../../../install/index.md) and architecture documentation.
 
-## Installation
+## Installing Crucible
 
 For complete installation instructions, follow the [Installation Guide](../../../install/index.md), which covers:
 
@@ -16,7 +16,7 @@ For complete installation instructions, follow the [Installation Guide](../../..
 
 The *Installation Guide* includes example configurations and links to the [k3s-install](https://github.com/avershave/k3s-install) and [k3s-production](https://github.com/sei-noconnor/k3s-production) repositories containing production-ready values and setup scripts.
 
-## Deployment Architecture
+## Understanding Deployment Architecture
 
 ### Core Services
 
@@ -30,11 +30,11 @@ Crucible's architecture consists of:
 
 See the [Infrastructure Administrator Guide](../index.md) for more information.
 
-## Configuration Management
+## Managing Configuration
 
-### Application Configuration
+### Configuring Applications
 
-Each Crucible application has specific configuration requirements documented in their respective GitHub repositories:
+Each Crucible application has specific configuration requirements documented in its GitHub repository:
 
 - [Alloy API Settings](https://github.com/cmu-sei/Alloy.Api)
 - [Caster API Settings](https://github.com/cmu-sei/Caster.Api)
@@ -43,23 +43,15 @@ Each Crucible application has specific configuration requirements documented in 
 
 Helm chart values for each application are available in the [helm-charts repository](https://github.com/cmu-sei/helm-charts).
 
-### Secrets Management
+## Scaling and Optimizing Performance
 
-For sensitive configuration:
-
-- Store secrets in Kubernetes secrets or external secret managers
-- Use the certificate procedures from the [Installation Guide](../../../install/index.md#certificates)
-- Rotate credentials regularly following security best practices
-
-## Scaling and Performance
-
-### Scaling Considerations
+### Planning for Scaling
 
 - **Horizontal Scaling:** Most Crucible applications are stateless and can scale horizontally by increasing replica counts in Helm values
 - **Vertical Scaling:** Adjust resource limits and requests in Helm chart values based on workload requirements
-- **Storage Planning:** The installation guide notes that minimal hardware configurations start at 100-250 GB storage, 8 GB RAM, and 2 cores per node
+- **Storage Planning:** The installation guide notes that minimal hardware configurations start at 100–250 GB storage, 8 GB RAM, and 2 cores per node
 
-### Resource Optimization
+### Optimizing Resources
 
 Monitor resource utilization through:
 
@@ -67,19 +59,19 @@ Monitor resource utilization through:
 - PostgreSQL query performance
 - Storage usage via Longhorn (if installed)
 
-## Monitoring and Troubleshooting
+## Monitoring and Troubleshooting Deployments
 
-### Health Monitoring
+### Monitoring System Health
 
 - Use Kubernetes health checks and readiness probes defined in Helm charts
 - Monitor application logs via `kubectl logs` or centralized logging solutions
 - Check service status with `kubectl get pods -A`
 
-### Common Issues
+### Resolving Common Issues
 
-Refer to the [Troubleshooting Guide](../troubleshooting/index.md) for procedures and solutions to aid in common deployment problems.
+Refer to the [Troubleshooting Playbook](../troubleshooting/index.md) for procedures and solutions to common deployment problems.
 
-## Security
+## Securing Deployments
 
 For deployment security considerations, see:
 
