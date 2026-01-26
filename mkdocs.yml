@@ -101,7 +101,7 @@ nav:
           - Troubleshooting Playbook: roles/administrator/troubleshooting/index.md
       - Range Builder:
           - Overview: roles/range-builder/index.md
-          - Quick Start Guide: roles/range-builder/quick-start.md
+          - Range Builder Quick Start Guide: roles/range-builder/quick-start.md
           - Infrastructure Development: roles/range-builder/infrastructure/index.md
           - Scenario Development: roles/range-builder/scenarios/index.md
           - Assessment: roles/range-builder/assessment/index.md
