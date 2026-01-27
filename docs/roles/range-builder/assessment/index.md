@@ -6,7 +6,7 @@
 
 ## Suggestions for Scoring
 
-1. Implement scoring based on task completion:
+Implement scoring based on task completion:
 
 | Task                      | Points | Criteria                  | Weights   |
 | ------------------------- | ------ | ------------------------- | --------- |
@@ -14,7 +14,7 @@
 | **Threat Classification** | 150    | Accuracy / Justification  | 80% / 20% |
 | **Mitigation Steps**      | 200    | Effectiveness / Speed     | 70% / 30% |
 
-1. Monitor participant progress throughout scenarios:
+Monitor participant progress throughout scenarios:
 
 | Element      | Description                                                  |
 | ------------ | ------------------------------------------------------------ |
@@ -58,8 +58,8 @@ Example (conceptual): Targeted Task
 - **Purpose:** Deliver activity only to appropriate analyst systems
 - **Target Type:** Analyst VM
 - **Filters:**
-  • Assigned team or role tags (e.g., `team_name`, `analyst`)
-  • Active and powered-on systems only
+      - Assigned team or role tags (e.g., `team_name`, `analyst`)
+      - Active and powered-on systems only
 
 #### Dependency Failures
 

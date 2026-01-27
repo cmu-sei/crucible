@@ -8,10 +8,10 @@ This procedural guide provides step-by-step direction for building complete cybe
 
 Refer to the following core application guides for detailed procedures:
 
-- **[Alloy Guide](../../alloy/index.md):** Event orchestration and team management
-- **[Caster Guide](../../caster/index.md):** Infrastructure-as-code topology deployment
-- **[Steamfitter Guide](../../steamfitter/index.md):** Automated scenario injection and task execution
-- **[Player Guide](../../player/index.md):** Participant interface and exercise delivery
+- **[Alloy Guide:](../../alloy/index.md)** Event orchestration and team management
+- **[Caster Guide:](../../caster/index.md)** Infrastructure-as-code topology deployment
+- **[Steamfitter Guide:](../../steamfitter/index.md)** Automated scenario injection and task execution
+- **[Player Guide:](../../player/index.md)** Participant interface and exercise delivery
 
 ## Prerequisites
 
