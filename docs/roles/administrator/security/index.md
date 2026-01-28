@@ -4,25 +4,25 @@ Infrastructure administrators should maintain a repeatable security posture for 
 
 ## Hardening Priorities
 
-- Enforce TLS certificates for all public endpoints; rotate them at least annually.
-- Restrict administrative portals (Keycloak, Rancher, monitoring) to approved network ranges.
-- Configure Kubernetes network policies so only required namespaces can reach platform services.
-- Enable audit logging across Alloy, Player, Caster, and Steamfitter; forward logs to your Security Information and Event Management (SIEM).
+- ✅ Enforce TLS certificates for all public endpoints and rotate them at least annually.
+- ✅ Restrict administrative portals (Keycloak, Rancher, monitoring) to approved network ranges.
+- ✅ Configure Kubernetes network policies so that only required namespaces can reach platform services.
+- ✅ Enable audit logging across Alloy, Player, Caster, and Steamfitter, and forward logs to your Security Information and Event Management (SIEM) system.
 
 ## Identity Management
 
-- Integrate Crucible with your enterprise IdP and require MFA for all administrative roles.
-- Review role mappings quarterly to confirm the Principle of Least Privilege.
-- Disable or rotate shared service accounts and update any stored credentials in secrets management.
+- ✅ Integrate Crucible with your enterprise identity provider (IdP) and require MFA for all administrative roles.
+- ✅ Review role mappings quarterly to confirm adherence to the principle of least privilege.
+- ✅ Disable or rotate shared service accounts and update stored credentials in secrets management.
 
 ## Data Protection
 
-- Schedule recurring PostgreSQL backups and test restore procedures.
-- Encrypt object storage buckets that hold artifacts, uploads, or logs.
-- Verify that your design separates tenant data through namespaces, dedicated databases, or policy enforcement.
+- ✅ Schedule recurring PostgreSQL backups and regularly test restore procedures.
+- ✅ Encrypt object storage buckets that hold artifacts, uploads, or logs.
+- ✅ Verify that your design separates tenant data through namespaces, dedicated databases, or policy enforcement.
 
 ## Incident Readiness
 
-- Document escalation paths for platform outages, security incidents, and learner-impacting issues.
-- Maintain an emergency contact list for range builders and instructional staff.
-- Run tabletop exercises twice per year to practice recovery patterns and communications.
+- ✅ Document escalation paths for platform outages, security incidents, and learner-impacting issues.
+- ✅ Maintain an emergency contact list for range builders and instructional staff.
+- ✅ Run tabletop exercises at least twice per year to practice recovery procedures and communications.

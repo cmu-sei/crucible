@@ -8,23 +8,23 @@ The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-se
 
 ### Projects and Directories
 
-    - **Projects**: Top-level organizational containers
-    - **Directories**: Hierarchical configuration structure
-    - **Workspaces**: Deployed instances of configurations
-    - **Files**: Individual Terraform configuration components
+- **Projects:** Top-level organizational containers
+- **Directories:** Hierarchical configuration structure
+- **Workspaces:** Deployed instances of configurations
+- **Files:** Individual Terraform configuration components
 
 ### Module-Based Architecture
 
-  Caster promotes modular design through reusable Terraform modules:
+Caster promotes modular design through reusable Terraform modules:
 
-    - Virtual machine modules with standardized configurations
-    - Network topology modules for common patterns
-    - Security tool modules with preconfigured services
-    - Assessment modules for automated scoring
+- Virtual machine modules with standardized configurations
+- Network topology modules for common patterns
+- Security tool modules with pre-configured services
+- Assessment modules for automated scoring
 
 ### Hierarchical Organization
 
-    ```
+    ```text
     project-name/
     ├── global/                    # Global variables and data sources
     │   ├── variables.tf
@@ -46,7 +46,7 @@ The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-se
 
 ### Variable Management
 
-    Use consistent variable patterns across all modules:
+Use consistent variable patterns across all modules:
 
     ```hcl
     # Standard variables for all modules
@@ -83,7 +83,7 @@ The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-se
 
 ### Standardize VM Modules
 
-    Create reusable VM modules that include common configurations:
+Create reusable VM modules that include common configurations:
 
     ```hcl
     # modules/vm-standard/main.tf
@@ -153,7 +153,7 @@ The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-se
 
 ### Create Specific Modules for Common VM Roles
 
-    (Domain Controller Module)
+Domain Controller Module
 
     ```hcl
     # modules/vm-domain-controller/main.tf

@@ -5,6 +5,7 @@
         "Gameboard",
         "gamespace",
         "geoip",
+        "guestinfo",
         "hashlist",
         "hostable",
         "hotspot",

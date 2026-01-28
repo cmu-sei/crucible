@@ -1,4 +1,4 @@
-# TopoMojo
+# ![TopoMojo Logo](../assets/topomojo-logo.svg){: style="height:75px;width:75px"} TopoMojo: Building Virtual Labs
 
 This documentation introduces users to the TopoMojo environment and provides information necessary to launch existing labs and create new topologies.
 

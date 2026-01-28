@@ -1,28 +1,22 @@
-# Participant
+# Participant Guide
 
-???+ warning "Caution"
-    Always check the help documentation within your Crucible environment. Instructors and range builders often highly customize exercises and user interfaces. The guidance below provides general expectations but may not reflect your specific configuration.
+!!! warning
 
-    **Typically, participant-facing documentation is integrated directly into the applications used. Refer to in-app help for environment-specific instructions and resources.**
+     Always check the help documentation within your Crucible environment. Instructors and range builders often highly customize exercises and user interfaces. The guidance below provides general expectations but may not reflect your specific configuration. Typically, participant-facing documentation is integrated directly into the applications used. Refer to "in-app" help for environment-specific instructions and resources.
 
 ## Overview
 
-Participants engage directly with the Crucible training environment to **practice, demonstrate, and refine cyber defense skills**.
-
-This role maps to:
-
-- **Player** in the *Player* application
-- **Competitor** in the *Gameboard* application
+Participants engage directly with the Crucible training environment to practice, demonstrate, and refine a broad range of cyber skills. This role maps to **Player** in the Player application and **Competitor** in the Gameboard application.
 
 ## What to Expect
 
 You will typically:
 
-- Join exercises through **Player** or **Gameboard** or a **Learning Portal**
-- Access virtual machines, networks, or scenario provisioned for your team
-- Follow instructions from your **Instructor**
-- Submit answers, artifacts, or defensive actions as required
-- Receive feedback or scoring through the exercise interface
+- Join exercises through Player or Gameboard or a learning portal.
+- Access virtual machines, networks, or scenarios provisioned for your team.
+- Follow instructions from *your* instructor.
+- Submit answers, artifacts, or defensive actions as required.
+- Receive feedback or scoring through the exercise interface.
 
 ## Quick Reference
 
@@ -35,10 +29,10 @@ You will typically:
 
 ## Learning Best Practices
 
-- **Engage actively**: Treat each inject or task as a real incident.
-- **Collaborate**: Coordinate with your teammates; range success is team success.
-- **Keep notes**: Document commands, discoveries, and fixes for your after-action review.
-- **Ask questions**: Clarify objectives early—ambiguity can be part of the challenge, but confusion isn't.
+- **Engage actively:** Treat each inject or task as a real incident.
+- **Collaborate:** Coordinate with your teammates; range success is team success.
+- **Keep notes:** Document commands, discoveries, and fixes for your after-action review.
+- **Ask questions:** Clarify objectives early—ambiguity can be part of the challenge, but confusion isn't.
 
 ## Support
 

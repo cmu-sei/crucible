@@ -79,7 +79,7 @@ nav:
   - Getting Started: getting-started/index.md
   - Installation Guide: install/index.md
   - Core Application Guides:
-      - Landing: landing/index.md
+      - Core App Guides: landing/index.md
       - Player: player/index.md
       - Caster: caster/index.md
       - Steamfitter: steamfitter/index.md
@@ -90,18 +90,18 @@ nav:
       - CITE: cite/index.md
       - Gallery: gallery/index.md
   - Role-Based Guides:
-      - Overview: roles/index.md
+      - Role-Based Guides: roles/index.md
       - Infrastructure Administrator:
           - Overview: roles/administrator/index.md
-          - Quick Start Guide: roles/administrator/quick-start.md
-          - Deployment: roles/administrator/deployment/index.md
+          - Infrastructure Admin Checklist: roles/administrator/quick-start.md
+          - Managing Deployment: roles/administrator/deployment/index.md
           - Security: roles/administrator/security/index.md
           - System Operations: roles/administrator/system-operations/index.md
           - User Management: roles/administrator/user-management/index.md
-          - Troubleshooting: roles/administrator/troubleshooting/index.md
+          - Troubleshooting Playbook: roles/administrator/troubleshooting/index.md
       - Range Builder:
           - Overview: roles/range-builder/index.md
-          - Quick Start Guide: roles/range-builder/quick-start.md
+          - Range Builder Quick Start Guide: roles/range-builder/quick-start.md
           - Infrastructure Development: roles/range-builder/infrastructure/index.md
           - Scenario Development: roles/range-builder/scenarios/index.md
           - Assessment: roles/range-builder/assessment/index.md
@@ -110,10 +110,10 @@ nav:
       - Participant:
           - Overview: roles/participant/index.md
   - Tutorials:
-      - Overview: tutorials/index.md
-      - Build an On Demand Exercise delivered via Moodle: tutorials/odx-moodle/index.md
-      - Build a TopoMojo Challenge: tutorials/topomojo-challenge/index.md
-      - Build Games in Gameboard: tutorials/gameboard-build/index.md
+      - Tutorials: tutorials/index.md
+      - Building an On-Demand Exercise delivered via Moodle: tutorials/odx-moodle/index.md
+      - Creating a TopoMojo Challenge: tutorials/topomojo-challenge/index.md
+      - Creating a Game in Gameboard: tutorials/gameboard-build/index.md
   - Third-Party Integrations: integrations/index.md
 
 repo_url: "https://github.com/cmu-sei/crucible"

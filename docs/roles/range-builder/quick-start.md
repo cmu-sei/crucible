@@ -1,40 +1,55 @@
-# Range Builder Quick Start
+# Range Builder Quick Start Guide
 
-Build your first cyber range in 60 minutes using Crucible. This guide creates a basic penetration testing lab with automated scenario progression.
+Build your first cyber range in 60 minutes using Crucible. This quick start walks through creating a basic penetration testing lab with automated scenario progression in five steps. These steps are:
+
+1. [**Step 1:**](#step-1-create-the-infrastructure-caster-15-minutes) Build the infrastructure in Caster by creating a project, directory, and Terraform files for a 3‑VM topology.
+2. [**Step 2:**](#step-2-create-player-view-10-minutes) Create a Player view with applications and teams to present the lab experience.
+3. [**Step 3:**](#step-3-create-scenario-steamfitter-20-minutes) Define a Steamfitter scenario with a sequence of manual and timed tasks.
+4. [**Step 4:**](#step-4-create-alloy-definition-5-minutes) Create an Alloy event definition that links the Player view, Caster directory, and Steamfitter scenario.
+5. [**Step 5:**](#step-5-test-deployment-10-minutes) Launch and validate a test event end‑to‑end, then end it and confirm cleanup.
 
 ## What You Will Build
 
-- 3-VM network topology (attacker, target server, monitoring station)
-- Automated scenario with timed injects and manual checkpoints
-- Team-based Player interface with documentation and VM access
-- Deployable exercise ready for participants
+Upon completion of this quick start, you will have:
+
+- 3-VM network topology (attacker, target server, monitoring station).
+- Automated scenario with timed injects and manual checkpoints.
+- Team-based Player interface with documentation and VM access.
+- Deployable exercise ready for participants.
 
 ## Prerequisites
 
-- [Content Developer permissions](../index.md) in all Crucible applications
-- Basic Terraform module available in [Caster](../../caster/index.md)
-- Understanding of your virtualization environment
+Before starting, confirm the following:
 
-## Step 1: Create Infrastructure (Caster)-15 minutes
+- Content Developer permissions in all required Crucible applications.
+- Access to a basic Terraform module in Caster.
+- Familiarity with the target virtualization environment.
 
-### 1.1 Create Project and Directory
+## Step 1: Create the Infrastructure (Caster) ~15 minutes
 
-1. Navigate to Caster → **Projects**
-2. Click **Add New Project**
-3. Enter:
-   - **Name**: `PenTest-Lab-Basic`
-   - **Description**: `Basic penetration testing laboratory`
-4. Click **Save**
-5. In the new project, click **Add Directory**
-6. Enter:
-   - **Name**: `pentest-topology`
-   - **Description**: `Core network topology`
+### Create a Project and Directory
 
-### 1.2 Create Base Configuration
+1. Navigate to Caster, **Projects**.
+2. Click **Add New Project** and enter:
+
+     - **Name:** `PenTest-Lab-Basic`
+     - **Description:** `Basic penetration testing laboratory`
+
+3. Save the project.
+4. In the new project, click **Add Directory** and enter:
+
+     - **Name:** `pentest-topology`
+     - **Description:** `Core network topology`
+
+### Create the Base Configuration
 
 In the `pentest-topology` directory, create three files:
 
-**main.tf** - Core infrastructure:
+1. `main.tf`: core infrastructure
+2. `variables.tf`: configuration parameters
+3. `data.tf`: environment references
+
+#### Main.tf
 
 ```hcl
 # Basic 3-VM topology for penetration testing
@@ -108,7 +123,7 @@ resource "vsphere_virtual_machine" "monitor_vm" {
 }
 ```
 
-**variables.tf** - Configuration parameters:
+#### Variables.tf
 
 ```hcl
 variable "exercise_id" {
@@ -132,7 +147,7 @@ variable "vsphere_datastore" {
 }
 ```
 
-**data.tf** - Environment references:
+#### Data.tf
 
 ```hcl
 data "vsphere_datacenter" "dc" {
@@ -170,205 +185,214 @@ data "vsphere_virtual_machine" "template_monitor" {
 }
 ```
 
-## Step 2: Create Player View-10 minutes
+## Step 2: Create Player View ~10 minutes
 
-### 2.1 Create New View
+### Create a New View
 
-1. Navigate to Player → **Administration** → **Views**
-2. Click **Add New View**
+1. Navigate to **Player**, **Administration**, **Views**.
+2. Click **Add New View**.
 3. Enter:
-   - **Name**: `PenTest Lab - Basic`
-   - **Description**: `Basic penetration testing laboratory`
-   - **Status**: Active
 
-### 2.2 Add Applications
+     - **Name:** `PenTest Lab - Basic`
+     - **Description:** `Basic penetration testing laboratory`
+     - **Status:** Active
 
-VM List Application:
+### Add Applications
 
-1. Click **Applications** tab
-2. Click **Add New Application**
-3. Select **Template** → **VM List**
+#### VM List Application
+
+1. Open the **Applications** tab.
+2. Click **Add New Application**.
+3. Select **Template**, **VM List**.
 4. Enter:
-   - **Name**: `Virtual Machines`
-   - **Icon**: `fas fa-desktop`
 
-Documentation Application:
+     - **Name:** `Virtual Machines`
+     - **Icon:** `fas fa-desktop`
 
-1. Click **Add New Application**
-2. Select **Blank Application**
+#### Documentation Application
+
+1. Click **Add New Application**.
+2. Select **Blank Application**.
 3. Enter:
-   - **Name**: `Lab Guide`
-   - **URL**: `https://your-lab-guide-url.com`
-   - **Icon**: `fas fa-book`
 
-### 2.3 Create Teams
+     - **Name:** `Lab Guide`
+     - **URL:** `https://your-lab-guide-url.com`
+     - **Icon:** `fas fa-book`
 
-1. Click **Teams** tab
-2. Click **Add New Team**
+### Create a Team
+
+1. Open the **Teams** tab.
+2. Click **Add New Team**.
 3. Enter:
-   - **Team Name**: `Red Team`
-   - **Role**: `Participant`
-4. Add both applications (`Virtual Machines` and `Lab Guide`)
-5. Add users to team using search function
 
-## Step 3: Create Scenario (Steamfitter)-20 minutes
+     - **Team Name:** `Red Team`
+     - **Role:** `Participant`
 
-### 3.1 Create Scenario Template
+4. Assign both applications, `Virtual Machines` and `Lab Guide`.
+5. Add users to the team using the search function.
 
-1. Navigate to Steamfitter → **Scenario Templates**
-2. Click **Add New Scenario Template**
+## Step 3: Create Scenario (Steamfitter) ~20 minutes
+
+### Create a Scenario Template
+
+1. Navigate to **Steamfitter**, **Scenario Templates**.
+2. Click **Add New Scenario Template**.
 3. Enter:
-   - **Name**: `PenTest-Basic-Scenario`
-   - **Description**: `Basic penetration testing scenario with automated progression`
-   - **Duration**: `3600` (1 hour)
 
-### 3.2 Add Tasks
+     - **Name:** `PenTest-Basic-Scenario`
+     - **Description:** `Basic penetration testing scenario with automated progression`
+     - **Duration:** `3600` (1 hour)
 
-Create tasks in this sequence to build progression:
+### Add Scenario Tasks
+
+Create the following tasks in order to build scenario progression.
 
 Task 1: Initial Setup (Manual)
 
-- **Name**: `Environment Setup Complete`
-- **Description**: `Confirm all systems are online and accessible`
-- **Action**: `Manual Task`
-- **Trigger Condition**: `Manual`
-- **VM Mask**: `attacker`
-- **Expected Output**: `ready`
+- **Name:** `Environment Setup Complete`
+- **Description:** `Confirm all systems are online and accessible`
+- **Action:** `Manual Task`
+- **Trigger Condition:** `Manual`
+- **VM Mask:** `attacker`
+- **Expected Output:** `ready`
 
 Task 2: Discovery Phase (Timed)
 
-- **Name**: `Start Network Discovery`
-- **Description**: `Begin network reconnaissance phase`
-- **Action**: `guest.run_command`
-- **Trigger Condition**: `Success` (depends on Task 1)
-- **Delay**: `300` (5 minutes after setup)
-- **VM Mask**: `attacker`
-- **Command**: `nmap -sn 192.168.1.0/24`
-- **Expected Output**: `192.168.1`
+- **Name:** `Start Network Discovery`
+- **Description:** `Begin network reconnaissance phase`
+- **Action:** `guest.run_command`
+- **Trigger Condition:** `Success` (depends on previous task)
+- **Delay:** `300` (5 minutes after setup)
+- **VM Mask:** `attacker`
+- **Command:** `nmap -sn 192.168.1.0/24`
+- **Expected Output:** `192.168.1`
 
 Task 3: Vulnerability Scanning (Timed)
 
-- **Name**: `Vulnerability Scan`
-- **Description**: `Scan target for vulnerabilities`
-- **Action**: `guest.run_command`
-- **Trigger Condition**: `Success` (depends on Task 2)
-- **Delay**: `600` (10 minutes after discovery)
-- **VM Mask**: `attacker`
-- **Command**: `nmap -sV -O target-ip`
-- **Expected Output**: `open`
+- **Name:** `Vulnerability Scan`
+- **Description:** `Scan target for vulnerabilities`
+- **Action:** `guest.run_command`
+- **Trigger Condition:** `Success` (depends on previous task)
+- **Delay:** `600` (10 minutes after discovery)
+- **VM Mask:** `attacker`
+- **Command:** `nmap -sV -O target-ip`
+- **Expected Output:** `open`
 
 Task 4: Exploitation Checkpoint (Manual)
 
-- **Name**: `Exploitation Attempt`
-- **Description**: `Manual exploitation phase - report findings`
-- **Action**: `Manual Task`
-- **Trigger Condition**: `Success` (depends on Task 3)
-- **VM Mask**: `attacker`
-- **Expected Output**: `exploited`
+- **Name:** `Exploitation Attempt`
+- **Description:** `Manual exploitation phase - report findings`
+- **Action:** `Manual Task`
+- **Trigger Condition:** `Success` (depends on previous task)
+- **VM Mask:** `attacker`
+- **Expected Output:** `exploited`
 
 Task 5: Monitoring Alert (Timed)
 
-- **Name**: `Security Alert Generated`
-- **Description**: `Generate security alert on monitoring system`
-- **Action**: `guest.run_command`
-- **Trigger Condition**: `Time`
-- **Delay**: `1800` (30 minutes from scenario start)
-- **VM Mask**: `monitor`
-- **Command**: `logger "ALERT: Suspicious network activity detected"`
-- **Expected Output**: `ALERT`
+- **Name:** `Security Alert Generated`
+- **Description:** `Generate security alert on monitoring system`
+- **Action:** `guest.run_command`
+- **Trigger Condition:** `Time`
+- **Delay:** `1800` (30 minutes from scenario start)
+- **VM Mask:** `monitor`
+- **Command:** `logger "ALERT: Suspicious network activity detected"`
+- **Expected Output:** `ALERT`
 
-## Step 4: Create Alloy Definition-5 minutes
+## Step 4: Create Alloy Definition ~5 minutes
 
-### 4.1 Create Definition
+### Create an Event Definition
 
-1. Navigate to Alloy → **Administration** → **Event Templates**
-2. Click **Add New Definition**
+1. Navigate to **Alloy**, **Administration**, **Event Templates**.
+2. Click **Add New Definition**.
 3. Enter:
-   - **Name**: `PenTest Lab - Basic Event`
-   - **Description**: `Complete basic penetration testing exercise`
-   - **Duration**: `3600`
 
-### 4.2 Link Components
+     - **Name:** `PenTest Lab - Basic Event`
+     - **Description:** `Complete basic penetration testing exercise`
+     - **Duration:** `3600`
 
-Connect your range components:
+### Link Range Components
 
-1. **Player Exercise ID**: Copy View ID from Player (found in view details or URL)
-2. **Caster Directory ID**: Copy Directory ID from `pentest-topology` in Caster
-3. **Steamfitter Scenario ID**: Copy ID from `PenTest-Basic-Scenario` in Steamfitter
-4. Click **Save Definition**
+Connect the range components to the event definition:
 
-## Step 5: Test Deployment-10 minutes
+1. **Player Exercise ID:** Copy the View ID from Player (available in the view details or URL).
+2. **Caster Directory ID:** Copy the Directory ID from `pentest-topology` in Caster.
+3. **Steamfitter Scenario ID:** Copy the Scenario ID from `PenTest-Basic-Scenario` in Steamfitter.
+4. Click **Save Definition**.
 
-### 5.1 Launch Test Event
+## Step 5: Test Deployment ~10 minutes
 
-1. In Alloy user interface, find your definition
-2. Click **Launch**
-3. Monitor deployment:
-   - Caster workspace creation
-   - Terraform plan and apply
-   - Steamfitter scenario start
-   - Player exercise clone
+### Launch a Test Event
 
-### 5.2 Validate Components
+1. In Alloy, locate your event definition.
+2. Click **Launch**.
+3. Monitor deployment progress:
 
-**Infrastructure Check:**
+     - Caster workspace creation
+     - Terraform plan and apply
+     - Steamfitter scenario start
+     - Player exercise clone
 
-- Navigate to Caster workspace
-- Verify all VMs deployed successfully
-- Check resource states show healthy
+### Validate Components
 
-**Player Access:**
+#### Infrastructure
 
-- Open Player as test user
-- Confirm VM list displays all machines
-- Test VM console access
+- Navigate to the Caster workspace.
+- Verify all virtual machines deploy successfully.
+- Confirm resource states report healthy.
 
-**Scenario Execution:**
+#### Player Access
 
-- Navigate to Steamfitter scenario
-- Verify manual tasks appear for participants
-- Confirm timed tasks show countdown
+- Open Player as a test user.
+- Confirm the VM list displays all machines.
+- Verify VM console access.
 
-### 5.3 End Test Event
+#### Scenario Execution
 
-1. Return to Alloy
-2. Click **End Event**
+- Navigate to the Steamfitter scenario.
+- Confirm manual tasks appear for participants.
+- Verify timed tasks display countdowns.
+
+### End the Test Event
+
+1. Return to Alloy.
+2. Click End Event.
 3. Verify cleanup:
-   - VMs destroyed in Caster
-   - Steamfitter scenario ended
-   - Player exercise removed
 
-## You're Done
+     - Caster destroys all virtual machines.
+     - Steamfitter ends the scenario.
+     - Player removes the exercise.
 
-Your basic penetration testing lab is complete with:
+## Lab Complete
 
-- Automated infrastructure deployment
-- Progressive scenario with timed events
-- Team-based user interface
-- Full exercise lifecycle management
+This quick start results in a basic penetration testing lab that includes:
+
+- Automated infrastructure deployment.
+- Scenario progression with timed events.
+- Team-based user interface.
+- Full exercise lifecycle management.
 
 ## Next Steps
 
-**Enhance Infrastructure:**
+### Enhance Infrastructure
 
-- Add complex networking topologies
-- Include additional security tools
-- Implement realistic enterprise environment
+- Add more complex networking topologies.
+- Include additional security tools.
+- Implement a realistic enterprise environment.
 
-**Expand Scenario:**
+### Expand the Scenario
 
-- Add conditional branching based on participant actions
-- Create multiple difficulty paths
-- Include assessment and scoring
+- Add conditional branching based on participant actions.
+- Create multiple difficulty paths.
+- Include assessment and scoring.
 
-**Improve User Experience:**
+### Improve User Experience
 
-- Add custom maps and navigation
-- Create comprehensive documentation
-- Set up chat and collaboration tools
+- Add custom maps and navigation.
+- Create comprehensive documentation.
+- Set up chat and collaboration tools.
 
-**Scale for Multiple Teams:**
+### Scale for Multiple Teams
 
-- Create team-specific variations
-- Implement competitive elements
-- Add real-time monitoring and analytics
+- Create team-specific variations.
+- Implement competitive elements.
+- Add real-time monitoring and analytics.
