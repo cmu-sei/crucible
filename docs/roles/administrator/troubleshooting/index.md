@@ -2,83 +2,81 @@
 
 Use this playbook to triage common issues before escalating. Capture your findings in the operations log for future reference.
 
-## Common Issues
-
-Services Won't Start (Helm + k3s)
+## Services Won't Start (Helm + k3s)
 
 1. Check cluster and node health
 
-    - `kubectl get nodes`
-    - `kubectl get pods -A`
-    - `kubectl describe node <node-name>` to inspect resource or scheduling issues.
+     - `kubectl get nodes`
+     - `kubectl get pods -A`
+     - `kubectl describe node <node-name>` to inspect resource or scheduling issues
 
 2. Verify Helm deployment
 
-    - `helm list -A` to ensure the release deployed.
-    - `helm status <release-name>` to see resource state and notes.
+     - `helm list -A` to ensure the release deployed
+     - `helm status <release-name>` to review resource state and notes
 
 3. Inspect failing services
 
-    - `kubectl get pods -n <namespace>`
-    - `kubectl describe pod <pod-name>` for events and errors.
-    - `kubectl logs <pod-name> [-c <container-name>]` to view logs.
+     - `kubectl get pods -n <namespace>`
+     - `kubectl describe pod <pod-name>` for events and errors
+     - `kubectl logs <pod-name> [-c <container-name>]` to view logs
 
 4. Check configurations and manifests
 
-    - `helm get values <release-name>` for current config.
-    - Validate any YAML files with `kubectl apply --dry-run=client -f <file.yaml>`.
+     - `helm get values <release-name>` for current configuration
+     - Validate YAML files with `kubectl apply --dry-run=client -f <file.yaml>`
 
 5. Confirm networking and ports
 
-    - `kubectl get svc -n <namespace>` for service exposure.
-    - `kubectl port-forward` or `curl` to test access.
-    - Ensure no host-level firewall or port conflict.
+     - `kubectl get svc -n <namespace>` for service exposure
+     - Use `kubectl port-forward` or `curl` to test access
+     - Ensure no host-level firewall or port conflict exists
 
-### Database Connection Issues
+## Database Connection Issues
 
-- Verify database is running
+- Verify the database service is running
 - Check connection string format
 - Confirm network connectivity
 
-### SSL Certificate Problems
+## SSL Certificate Problems
 
-- Verify certificate paths in configuration
+- Verify certificate paths in application configuration
 - Check certificate validity dates
-- Ensure proper certificate chain
+- Ensure the full certificate chain is present and trusted
 
 ## Environment Health
 
-1. Run `kubectl get pods -A` to confirm control-plane and application pods are healthy.
-2. Check cluster events: `kubectl get events -A --sort-by=.lastTimestamp | tail`.
-3. Review monitoring dashboards (Prometheus/Grafana) for resource saturation.
+1. Run `kubectl get pods -A` to confirm control-plane and application pods are healthy
+2. Review recent cluster events: `kubectl get events -A --sort-by=.lastTimestamp | tail`
+3. Check monitoring dashboards (Prometheus/Grafana) for resource saturation
 
 If pods are crash-looping:
 
-- Describe the pod for error output: `kubectl describe pod <name> -n <namespace>`.
-- Inspect container logs: `kubectl logs <name> -n <namespace> --tail=200`.
-- Compare with the last known good deployment manifest.
+- Describe the pod for error output: `kubectl describe pod <name> -n <namespace>`
+- Inspect container logs: `kubectl logs <name> -n <namespace> --tail=200`
+- Compare with the last known good deployment manifest
 
 ## Identity or Login Failures
 
-- Verify Keycloak/IdP availability and certificate validity.
-- Confirm OAuth client secrets match the configuration in `values.yaml`.
-- Review Player API logs for `401`/`403` responses to determine whether scope assignments changed.
+- Verify Keycloak or identity provider availability and certificate validity
+- Confirm OAuth client secrets match values in `values.yaml`
+- Review Player API logs for `401` or `403` responses to identify scope or role changes
 
 ## Application Availability
 
-- Alloy events stuck in pending state often indicate Steamfitter or Caster API connectivity problems. Check service endpoints and network policies.
-- Range Builder reports of missing Player views commonly originate from misaligned permissions. Validate the affected team's View Admin or Content View User access.
-- Instructors unable to launch labs should confirm the event template still references valid Player exercises, Caster directories, and Steamfitter scenarios.
+- Alloy events stuck in a pending state often indicate Steamfitter or Caster API connectivity issues; verify service endpoints and network policies
+- Missing Player views reported by Range Builders commonly originate from misaligned permissions; confirm View Admin or Content View User access
+- Instructors unable to launch labs should confirm event templates reference valid Player exercises, Caster directories, and Steamfitter scenarios
 
 ## Data Integrity
 
-- For PostgreSQL incidents, use `pg_isready -U <user> -h <host>` to test connectivity.
-- Review backup job status to ensure a fallback snapshot exists before performing repair operations.
-- If object storage artifacts go missing, audit bucket lifecycle policies and recent delete events.
+- For PostgreSQL issues, test connectivity using `pg_isready -U <user> -h <host>`
+- Verify backup job status before performing repair operations
+- Audit object storage lifecycle policies and recent delete events if artifacts are missing
 
 ## Escalation Checklist
 
-- Capture timestamps, affected users, and recent changes.
-- Note the exact error messages or logs collected.
-- Reference mitigation steps attempted and their outcomes.
-- Page the on-call Range Builder or teaching staff when learner-facing content is at risk.
+- ✅ Capture timestamps, affected users, and recent changes
+- ✅ Record exact error messages and relevant logs
+- ✅ Note mitigation steps attempted and their outcomes
+- ✅ Contact the on-call Range Builder or instructional staff when learner-facing content is at risk

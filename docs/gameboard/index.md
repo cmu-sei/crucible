@@ -1,4 +1,6 @@
-# Overview
+# ![Gameboard Logo](../assets/gameboard-logo.svg){: style="height:75px;width:75px"} Gameboard: Designing a Cybersecurity Competition
+
+## Overview
 
 Carnegie Mellon University's [Software Engineering Institute](https://github.com/cmu-sei){ target=\_blank } (SEI) developed Gameboard as a flexible web platform with game design capabilities and a competition-ready user interface. Use the *Gameboard Administrator Guide* to configure Gameboard when you want to run your own cybersecurity game.
 
