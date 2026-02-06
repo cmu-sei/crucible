@@ -53,6 +53,7 @@ CSV
 (?i)codespace(?:s)?
 (?i)dev
 VSCode
+(?i)walkthroughs?
 (?i)misconfiguration(?:s)?
 (?i)repo
 (?i)timeframe
