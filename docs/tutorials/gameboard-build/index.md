@@ -68,7 +68,7 @@ Expand **Settings** to configure game execution and registration behavior. Descr
 - **Allow Reset:** Lets players reset their progress. Use **Allow Reset** for tutorial, practice, or test games when you want users to reset their session and start over as if they have never played before.
 - **Late Start** Controls whether players can begin a session when less time remains than the full session duration. If enabled, a player can start shortly before the game ends, even though they will not receive the full session time.
 - **Team Size:** Set the minimum and maximum number of players per team.
-- **Registration Markdown:** Enter additional markdown instructions here. The markdown you enter here should be related to registering for your game. For example, enter: `Please read the rules before registering!`.
+- **Registration Markdown:** Enter additional markdown instructions here. Write markdown that covers registration details for your game. For example, enter: `Please read the rules before registering!`.
 
 For additional details on game settings, see [Game Center Settings](../../gameboard/index.md#settings) in the *Gameboard Guide*.
 
