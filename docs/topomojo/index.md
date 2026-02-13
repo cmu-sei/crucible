@@ -24,22 +24,22 @@ Users play through a lab in a *gamespace*. Users get their own, isolated, read-o
 
 A unique identifier TopoMojo uses to identify a workspace or gamespace.
 
-- For a workspace: the *isolation tag* is the workspace id visible above the Workspace Title when viewing the workspace. See screen print 1.
-- For a gamespace: the *isolation tag* is the gamespace id partially visible from the **Admin**, **Gamespaces** view (see screen print 2) and fully visible in the URL bar when viewing a VM console that belongs to a gamespace (highlighted in screen print 3).
+- For a workspace: the *isolation tag* is the workspace id visible above the Workspace Title when viewing the workspace. See screenshot 1.
+- For a gamespace: the *isolation tag* is the gamespace id partially visible from the **Admin**, **Gamespaces** view (see screenshot 2) and fully visible in the URL bar when viewing a VM console that belongs to a gamespace (highlighted in screenshot 3).
 
 The id's used for isolation tags uniquely identify each workspace and gamespace in the TopoMojo database. Additionally, each resource (e.g., virtual machine, virtual network, etc.) associated with a workspace or gamespace will have the isolation tag appended to the resource name.
 
 For example: a VM named `challenge-sever` in the gamespace with id (isolation tag) `18048abc66f142e1804732082f4051d2`, has the name `challenge-server#18048abc66f142e1804732082f4051d2`. Appending the isolation tag to workspace/gamespace resources ensures environment isolation -- VMs and networks cannot have the same name, so there will never be accidental sharing of VM/network resources.
 
-Screen print 1
+screenshot 1
 
 ![workspace isolation tag](img/iso-tag-ws.png)
 
-Screen print 2
+screenshot 2
 
 ![gamespace isolation tag](img/iso-tag-gs.png)
 
-Screen print 3
+screenshot 3
 
 ![isolation tag url](img/iso-tag-url.png)
 
@@ -69,7 +69,7 @@ We recommend having a persistent/shared network available to all TopoMojo worksp
 
 For example, you could create a persistent/shared network that provides internet access to all TopoMojo VMs that specify the network name. `bridge-net` typically signifies bridging the traditionally isolated TopoMojo VM to the internet.
 
-Use the `Pod__Vlan__Reservations` environment variable to define the name of a persistent/shared network. See screen print 1 below.
+Use the `Pod__Vlan__Reservations` environment variable to define the name of a persistent/shared network. See screenshot 1 below.
 
 - `Pod__Vlan__Reservations__0__Id:` defines the vlan Id (from the hypervisor) that corresponds to the shared/persistent network.
 - `Pod__Vlan__Reservations__0__Name:` defines the name of the persistent/shared network.
@@ -80,7 +80,7 @@ You can define more than one shared/persistent network by incrementing the varia
 
     "bridge-net" is not always reserved. It is reserved by the SEI because we configured it that way, and it is convenient to refer to in the TopoMojo documentation.
 
-*Screen print 1:*
+*screenshot 1:*
 
 ![bridge-net](img/bridge-net.png)
 
@@ -162,8 +162,8 @@ The list below explains the fields in the VM template.
 
 Once the template is in the appropriate state:
 
-- **Refresh**: (arrows) Refresh queries the state of the VM from the hypervisor. This is useful if you run a `shutdown` command in the VM and the TopoMojo UI icons haven't updated to reflect the powered-off state of the VM yet.
-- **Deploy**: (lightning bolt) Deploys that virtual machine into your workspace.
+- **Refresh:** (arrows) Refresh queries the state of the VM from the hypervisor. This is useful if you run a `shutdown` command in the VM and the TopoMojo UI icons haven't updated to reflect the powered-off state of the VM yet.
+- **Deploy:** (lightning bolt) Deploys that virtual machine into your workspace.
 
 The deployed virtual machine displays the following additional icons from left to right:
 
@@ -212,9 +212,9 @@ The *Challenge* tab in the TopoMojo workspace is where event organizers integrat
 
 ### Transforms
 
-**Transforms** allow you to define dynamic variables that TopoMojo generates based on certain criteria or types. Transforms are also a key/value pair definition –- the **key** is the name of your transform and the **value** is the type of the transform. The screen print below shows a transform named "token1" that will have a value of 8 random hexadecimal characters.
+**Transforms** allow you to define dynamic variables that TopoMojo generates based on certain criteria or types. Transforms are also a key/value pair definition –- the **key** is the name of your transform and the **value** is the type of the transform. The screenshot below shows a transform named "token1" that will have a value of 8 random hexadecimal characters.
 
-*Screen print 1:*
+*screenshot 1:*
 
 ![transforms](img/transforms.png)
 
@@ -222,9 +222,9 @@ To access transforms, use the referenced "*double-pounder-key* (`##key##`)" nota
 
 Any of the sections on the Challenge tab (e.g., Transforms, Markdown, Questions, Answers) can contain *double-pounder-keys* that TopoMojo replaces with transform values at deploy time. You can also use transform *double-pounder-keys* in the *Guest Settings* field of a template to inject random variables into VM guest info variables when deploying a gamespace. (Transforms aren't generated when deploying workspace VMs, so the value of the variable will be the *double-pounder-key*.)
 
-The screen print below shows the Guest Settings of a VM template configured to use two guest info variables: `var1` and `token1`. `Var1` has a value of "test" and `token1` will have a random 8-character hexadecimal string assigned when TopoMojo deploys a gamespace.
+The screenshot below shows the Guest Settings of a VM template configured to use two guest info variables: `var1` and `token1`. `Var1` has a value of "test" and `token1` will have a random 8-character hexadecimal string assigned when TopoMojo deploys a gamespace.
 
-*Screen print 2:*
+*screenshot 2:*
 
 ![guest-settings](img/guest-settings.png)
 
@@ -281,9 +281,9 @@ The **Files** tab in TopoMojo is where you upload ISO files to attach to virtual
 
 By default, the **Local** filter only displays ISOs available in the current workspace.
 
-When you upload an ISO file, TopoMojo creates a folder with *this* GUID--called out in green in screen print 1 below--in the folder name in the NFS datastore. TopoMojo puts your ISO in that folder. Only the current workspace, that is, *your* workspace has access to the ISO file.
+When you upload an ISO file, TopoMojo creates a folder with *this* GUID--called out in green in screenshot 1 below--in the folder name in the NFS datastore. TopoMojo puts your ISO in that folder. Only the current workspace, that is, *your* workspace has access to the ISO file.
 
-Screen print 1: GUID and Local filter applied
+screenshot 1: GUID and Local filter applied
 
 ![iso-drag](img/iso-drag.png)
 
@@ -346,7 +346,7 @@ Gamespaces in the table show the following information:
 - User who is interacting with (or *had* interacted with) the gamespace
 - Title of the *workspace* that deployed the *gamespace*
 
-The screen print below shows several active and inactive gamespaces (usernames redacted).
+The screenshot below shows several active and inactive gamespaces (usernames redacted).
 
 ![admin gamespaces](img/admin-gamespaces.png)
 
@@ -398,7 +398,7 @@ The *workspace identifier* is present here too. The workspace identifier matches
 
 The **Templates** tab is where you can view all of the templates that exist in TopoMojo.
 
-**Search:** Search for templates by workspace. Notice that you can apply filters here to further narrow down your search. In the screen print below, the filter is for linked VMs with a parent template of a VM called `kali-201901`.
+**Search:** Search for templates by workspace. Notice that you can apply filters here to further narrow down your search. In the screenshot below, the filter is for linked VMs with a parent template of a VM called `kali-201901`.
 
 ![templates filter](img/templates-filter.png)
 
@@ -442,7 +442,7 @@ This tab lists all VMs TopoMojo is tracking and the gamespaces they belong to, w
 - `pc5-ubuntu-server-2204-594` is the name of the VM.
 - `#d9b090c92728424781537c66b3ee2f4b` after the hash tag is the gamespace GUID.
 
-The **Machines** tab is helpful when you want to find all the VMs related to a gamespace (e.g., `PC6 Stock Topology v1` in the screen print above). You can copy the gamespace GUID and paste it into the **Search** field. Note that you cannot interact with the VMs from this tab.
+The **Machines** tab is helpful when you want to find all the VMs related to a gamespace (e.g., `PC6 Stock Topology v1` in the screenshot above). You can copy the gamespace GUID and paste it into the **Search** field. Note that you cannot interact with the VMs from this tab.
 
 #### "Orphaned" VMs
 

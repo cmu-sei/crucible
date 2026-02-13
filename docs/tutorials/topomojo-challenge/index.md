@@ -23,10 +23,10 @@ This tutorial assumes the following:
 2. Click **+New Workspace** to create an empty workspace for the challenge.
 3. Enter the workspace metadata. The list below describes some key settings. For additional detail, see the TopoMojo documentation, [Building a New Workspace](../../topomojo/index.md#building-a-new-workspace).
 
-   - **Title**: Enter a title that identifies the challenge (for example, "Network Traffic Analysis"). For the purposes of this tutorial, we'll enter: `TopoMojo Walkthrough`.
-   - **Description**: Enter a short description of the challenge (1–3 sentences). We'll enter: `A small example TopoMojo Walkthrough`.
-   - **Tags**: Add tags to make the challenge easier to find. Use a space-delimited list (for example, "cyber-defense-analysis incident-response"). Tags are typically hidden from TopoMojo participants unless a consuming application, such as Gameboard, looks for specific tags. We'll enter: `walkthrough`.
-   - **Audience**: Select the audience to control which users can view or play the challenge. For a complete list of the settings, see the TopoMojo documentation, [Settings](../../topomojo/index.md#settings).
+   - **Title:** Enter a title that identifies the challenge (for example, "Network Traffic Analysis"). For the purposes of this tutorial, we'll enter `TopoMojo Walkthrough`.
+   - **Description:** Enter a short description of the challenge (1–3 sentences). We'll enter `A small example TopoMojo Walkthrough`.
+   - **Tags:** Add tags to make the challenge easier to find. Use a space-delimited list (for example, "cyber-defense-analysis incident-response"). Tags are typically hidden from TopoMojo participants unless a consuming application, such as Gameboard, looks for specific tags. We'll enter `walkthrough`.
+   - **Audience:** Select the audience to control which users can view or play the challenge. We'll enter `everyone` because we want everyone to be able to deploy this challenge. For a complete list of the settings, see the TopoMojo documentation, [Settings](../../topomojo/index.md#settings).
 
 ## Step 2: Adding Virtual Machine Templates
 
@@ -175,7 +175,8 @@ Every good lab or challenge should include a document that gives participants cl
      ```text
      This is a TopoMojo Walkthrough.
 
-     Visit the Desktop of the provided Kali VM via the command line (use the command `cd ~/Desktop` from a terminal). Then run `./get-token.sh` to get the value of token1.
+     Visit the Desktop of the provided Kali VM via the command line (use the command `cd ~/Desktop` from a terminal).
+     Then run `./get-token.sh` to get the value of token1.
 
      Submit your answer in the question box.
      ```
@@ -206,7 +207,7 @@ At this point, the challenge includes a transform, guest info variable, instruct
      - Paste it into the answer field in TopoMojo.
      - **Submit** the answer. When you submit the correct answer, TopoMojo marks the challenge complete and automatically cleans up the gamespace.
 
-The screen print below shows the terminal in the gamespace after running `get-token.sh`. The script outputs a randomly generated value, confirming that the transform replaced the placeholder template syntax with an actual value at deployment time.
+The screenshot below shows the terminal in the gamespace after running `get-token.sh`. The script outputs a randomly generated value, confirming that the transform replaced the placeholder template syntax with an actual value at deployment time.
 
 ![The script get-token.sh in a gamespace terminal window](../../tutorials/img/gamespace-terminal-get-token.png)
 
@@ -223,11 +224,11 @@ As a more advanced example, you can add an additional transform. Still in our `T
 
      ![New transform called token2](../../tutorials/img/token2.png)
 
-3. Scroll down to the **Markdown** section just below **Transforms** section. This Markdown field is special: TopoMojo appends it to the end of the main challenge document when it deploys the gamespace. Unlike the main document section, this Markdown supports transform substitution, which lets you reference values such as `##token2##` directly in the instructions. You can use this area to add extra guidance or follow-on questions without revealing them before deployment. In this Markdown field, enter:
+3. Scroll down to the **Markdown** section just below **Transforms** section. This Markdown field is special: TopoMojo appends it to the end of the main challenge document when it deploys the gamespace. Unlike the main document section, this markdown supports transform substitution, which lets you reference values such as `##token2##` directly in the instructions. You can use this area to add extra guidance or follow-on questions without revealing them before deployment. In this **Markdown** field, enter:
 
     ![What to enter in the Markdown field](../../tutorials/img/markdown-token2.png)
 
-(The code fences are not necessary, but we included for formatting purposes.)
+(The code fences are not necessary, but we included them for formatting purposes.)
 
 ### Adding a New Question
 
@@ -238,7 +239,7 @@ After adding the transform, create a new question that asks for the value of `to
 3. For the **Example**, enter `100`.
 4. Click **Save**.
 
-Question 2 should look like the screen print below.
+Question 2 should look like the screenshot below.
 
 ![Question 2 with answer and example complete](../../tutorials/img/question2.png)
 
@@ -254,74 +255,78 @@ Submit `270` as the answer to Question 2: `What is the value of token2?`.
 
 ### Introducing Variants
 
-<!-- Start here on Monday morning. -->
+You can extend a challenge by introducing **variants**. Variants let you create small, controlled differences between deployments by changing values, questions, or instructions while keeping the overall structure and difficulty consistent.
 
-### Guest Settings
+!!! question "What is a variant?"
 
-Guest Settings pass information to deployed VMs using VMware `guestinfo` variables or the QEMU firmware configuration device on Proxmox. Expand a VM template's options to define guest settings using a `key=value` format. You can use transforms to insert randomized values.
+     A variant describes a different version of a challenge. Variants can include different ISO attachments, different virtual machines, and different questions and answers.
 
-!!! example
+First, you'll add a *variant* transform. Still in our `TopoMojo Walkthrough` workspace:
 
-    ```text
-    token1=##token1##
-    ipaddr=1.2.3.4
-    ```
+1. Go to the **Challenge** tab.
+2. Click **Add Transform**.
+3. Add a new transform type of `variant` and `variant`.
 
-VMs can use scripts to access guest settings using hypervisor-specific commands.
+Next, you'll enter the details for your new variant.
 
-!!! example "Querying VMware guestinfo variables"
+!!! caution
 
-    ```bash
-    vmware-toolsd --cmd "info-get guestinfo.<variable-name>"
-    ```
+     Variant indices use zero-based numbering. Variant 1 has an index of `0`.
 
-!!! example "Querying the QEMU firmware configuration device on Proxmox"
+1. Select **Variant 1**.
+2. Click **Details**.
+3. In the **Markdown** section, enter: `The variant 1 index is: ##variant##`. This markdown appends to the end of the challenge document, just like the Question 2 markdown you added earlier.
+4. Scroll down and click **Add Question**.
+5. Enter the following values:
+     - **Question:** `What is the variant index?`
+     - **Answer:** `##variant##`
+     - **Example:** `0`
+6. Click **Save**.
 
-    ```bash
-    sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.<variable-name>/raw
-    ```
+#### Adding a Second Variant
 
-### Template Replicas
+We'll add a second variant to show how the same challenge can change slightly between deployments while staying the same in structure and difficulty.
 
-You can configure **Replicas** for team-based challenges where multiple team members work simultaneously. Each replica starts with the same state, configuration, and guest settings. TopoMojo deploys the specified number of VM replicas in each gamespace and appends a `_#` suffix to running VM names (for example, `kali_1`, `kali_2`). As a best practice, set the replica count to `-1` so TopoMojo deploys one replica per team member. This prevents deploying more replicas than the team can use.
+1. Click **Add Variant**.
+2. Clone **Variant 1**.
+3. Don't change the first two questions unchanged. For Question 3, update the markdown to read: `The variant 2 index is: ##variant##`.
 
-??? tip "Template Best Practices"
+In practice, avoid telling participants which variant they receive because variants help discourage answer sharing.
 
-    - **Unlinking Templates:** Use linked templates whenever possible. Linked templates reduce backend storage use and provide a shared, consistent VM environment that users can become familiar with across challenges.
-    - **Use a Challenge Server:** Use a dedicated *challenge server* VM as the control point for the challenge. A challenge server can run startup scripts, host grading logic or websites, collect logs, and perform automation. This approach lets you maximize the use of linked templates by placing configuration, automation, and grading on a single unlinked VM. Carnegie Mellon University's Software Engineering Institute provides a reference challenge server on GitHub: [github.com/cmu-sei/Challenge-Server](https://github.com/cmu-sei/Challenge-Server).
-    - **Template Visibility:** Set templates as *visible* or *hidden*. Visible templates expose a UI console to users. Hidden templates do not expose a UI console but may remain accessible over the network. Hide templates that users should not access directly, such as attacker or backend systems.
-    - **Template Naming:** Use clean, descriptive names for templates. Avoid tags, IDs, or internal details in visible template names. Use unique or structured names for hidden templates to help administrators identify resources during troubleshooting.
-    - **Template Count:** Add VM templates only when required. Fewer templates reduce infrastructure usage and keep challenges easier to understand and maintain.
-    - **Clean Before Saving:** Clean templates before saving them. Remove command and browser history, delete logs, and remove development artifacts or files to prevent unintended hints or shortcuts.
+!!! example "Using Different Questions with Variants"
 
-## Step 3: Configuring Transforms
+     You can create variants by asking different but equivalent questions. For example, one variant might ask for the **SHA-1 hash** of a file, while another asks for the **SHA-256 hash** of the same file. The effort and difficulty stay the same, but the question and answer differ.
 
-The **Challenge** tab lets you configure transforms and challenge questions.
+Remember to **Save** your work.
 
-Transforms generate dynamic values, like tokens, that make each deployed challenge unique. TopoMojo creates randomized values for configured transforms when it deploys a gamespace. Using transforms increases challenge reusability by preventing users from relying on known answers and sharing solutions.
+#### Testing Variants by Playing the Challenge
 
-Most text fields on the Challenge tab support transform substitution using a double-pound notation (for example, `##transform-name##`). The **Markdown** and **Variant** sections let you add challenge content that also supports transforms, enabling dynamic challenge documents. Challenge questions and answers can include transforms to generate dynamic text and answers. For applying transforms in VM configuration, see the [Guest Settings](#guest-settings) section.
+To see how your variants behave, play the challenge again.
 
-## Step 4: Adding Challenge Questions
+1. Click the  **Play** tab.
+2. Leave **Variant** set to `0` to deploy a random variant.
+3. Click **Start** to play the challenge. TopoMojo deploys one of the variants and appends the variant-specific markdown to the end of the instructions. If you receive **Variant 2**, the index equals `1`.
+4. Enter `1` for the variant index question.
+5. Click **Submit** to submit your answer and confirm success.
 
-Also on the Challenge tab, add the questions that users must answer. Always configure an example answer for each question to show the expected answer format.
+You can also ask TopoMojo to deploy a specific variant.
 
-You can assign an optional **Weight** to each question to control how TopoMojo distributes points. By default, questions have a weight of `0`, which gives all questions an equal share of the total points. Use values from `0–100` to allocate a percentage of the total score (for example, a weight of `60` assigns 60% of the challenge points to that question).
+1. Click **Play** again.
+2. Enter `1` in the **Variant** field.
+3. Click **Start**.
 
-!!! warning "Question Weights"
+TopoMojo deploys **Variant 1**, and the variant index equals `0`.
 
-    If question weights do not add up to 100, the challenge may behave unexpectedly.
+For additional details, see [Variants](../../topomojo/index.md#variants) in the *TopoMojo Guide*.
 
-Each question uses a **Grader** type, which defines how the system evaluates answers. For additional details on supported grader types, see [Question Set](../../topomojo/index.md#question-set) in the *TopoMojo Guide*.
+## Virtual Machine Template Best Practices
 
-You can reference transform variables in question text and answers, as described in the [transforms section](#step-3-configuring-transforms). Transforms allow each challenge deployment to generate unique questions and answers.
-
-You can also use variants to randomize challenges in a more controlled way than transforms. Variants can define different documentation, VM attachments (such as ISOs), and question sets. When deploying a gamespace, TopoMojo randomly selects a variant. For additional details, see [Variants](../../topomojo/index.md#variants) in the *TopoMojo Guide*.
-
-Prefer transforms over variants. Variants increase development and testing effort because you must build and validate each variant. Use variants when:
-
-1. Challenge artifacts can't change dynamically through scripting or transforms.
-2. VM configurations must differ in ways that scripting at boot can't support.
+1. **Unlinking Templates:** Use linked templates whenever possible. Linked templates reduce backend storage use and provide a shared, consistent VM environment that users can become familiar with across challenges.
+2. **Use a Challenge Server:** Use a dedicated *challenge server* VM as the control point for the challenge. A challenge server can run startup scripts, host grading logic or websites, collect logs, and perform automation. This approach lets you maximize the use of linked templates by placing configuration, automation, and grading on a single unlinked VM. We provide a reference challenge server on GitHub: [github.com/cmu-sei/Challenge-Server](https://github.com/cmu-sei/Challenge-Server).
+3. **Template Visibility:** Set templates as *visible* or *hidden*. Visible templates expose a UI console to users. Hidden templates do not expose a UI console but may remain accessible over the network. Hide templates that users should not access directly, such as attacker or backend systems.
+4. **Template Naming:** Use clean, descriptive names for templates. Avoid tags, IDs, or internal details in visible template names. Use unique or structured names for hidden templates to help administrators identify resources during troubleshooting.
+5. **Template Count:** Add VM templates only when required. Fewer templates reduce infrastructure usage and keep challenges easier to understand and maintain.
+6. **Clean Before Saving:** Clean templates before saving them. Remove command and browser history, delete logs, and remove development artifacts or files to prevent unintended hints or shortcuts.
 
 ## Troubleshooting Common Issues
 
@@ -335,7 +340,7 @@ Prefer transforms over variants. Variants increase development and testing effor
 
 1. Remember that TopoMojo applies transform values at gamespace deploy time; they do not appear in workspaces.
 2. Confirm that you configured guest settings correctly and that variable names match exactly (case sensitive).
-3. Confirm that you use the [correct command for your hypervisor](#guest-settings).
+3. Confirm that you use the correct command for your hypervisor.
 
 ## Related Resources
 
