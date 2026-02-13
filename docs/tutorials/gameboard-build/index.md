@@ -132,19 +132,13 @@ For additional details on facilitating a game, see:
 
 ??? tip "Understanding Audience and Scope"
 
-     Audience and Scope are defined in TopoMojo.
+     Audience and Scope are defined in [TopoMojo](../../topomojo/index.md#settings).
 
-     - **Audience:** Audience is set on a challenge *workspace* and defines the group of users the challenge is intended for.
-     - **Scope:** Scope is set on a user and defines which audiences a user can access. A user can only deploy a challenge if the challenge's audience matches in that user's scope. If audience and scope don't match, the user can't launch the challenge.
+     **Audience:** Audience is set on a challenge *workspace* and defines the group of users the challenge is intended for.
 
-     Gameboard uses a dedicated TopoMojo user (called `gameboard-client`). That user, like any TopoMojo user, has a scope. Therefore:
+     **Scope:** Scope is set on a user and defines which audiences a user can access. A user can only deploy a challenge if the challenge's audience matches in that user's scope. If audience and scope don't match, the user can't launch the challenge.
 
-     - If the Gameboard user is scoped to `prescup`
-     - Then Gameboard can only deploy challenges with an audience of `prescup`
-
-     That scope controls what Gameboard is allowed to launch.
-
-     If you set the audience to `everyone`, any TopoMojo user (including the `gameboard-client` user) can deploy that challenge through the **Play** interface in TopoMojo and through a game in Gameboard.
+     Gameboard interacts with TopoMojo via TopoMojo user (commonly called `gameboard-client` or `gameboard-bot`).
 
 ### Players Can't Deploy Challenges
 
