@@ -11,6 +11,11 @@ ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
     PIP_CERT=/etc/ssl/certs/ca-certificates.crt \
     NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
+# Add new Yarn GPG key
+RUN mkdir -p /etc/apt/keyrings && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /etc/apt/keyrings/yarn.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
+
 # Install prerequisites
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -31,12 +36,12 @@ ARG VALE_VERSION=3.13.0
 RUN set -euo pipefail; \
     arch="$(uname -m)"; \
     case "$arch" in \
-      x86_64) VALE_ARCH=64-bit ;; \
-      aarch64|arm64) VALE_ARCH=ARM64 ;; \
-      *) echo "Unsupported arch: $arch" && exit 1 ;; \
+    x86_64) VALE_ARCH=64-bit ;; \
+    aarch64|arm64) VALE_ARCH=ARM64 ;; \
+    *) echo "Unsupported arch: $arch" && exit 1 ;; \
     esac; \
     curl -fsSL "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_${VALE_ARCH}.tar.gz" \
-      -o /tmp/vale.tgz && \
+    -o /tmp/vale.tgz && \
     tar -xzf /tmp/vale.tgz -C /tmp && \
     install -m 0755 /tmp/vale /usr/local/bin/vale && \
     rm -rf /tmp/vale /tmp/vale.tgz && \
