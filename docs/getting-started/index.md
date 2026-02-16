@@ -13,7 +13,7 @@
 
 We provide detailed guides for the following roles within the Crucible ecosystem.
 
-- **[Infrastructure Administrator](../roles/administrator/index.md)**: Infrastructure administrators keep Crucible platforms healthy, secure, and scalable. They provision environments, manage access, and monitor day-to-day operations.
-- **[Range Builder](../roles/range-builder/index.md)**: Range Builders design and deliver complete cyber ranges. They combine infrastructure, scenarios, and learner-facing content into cohesive exercises.
-- **[Instructor](../roles/instructor/index.md)**: Instructors lead and execute Crucible exercises and training sessions. They guide participants, evaluate performance, and ensure teams meet learning objectives.
-- **[Participant](../roles/participant/index.md)**: Participants engage in Crucible exercises to develop and demonstrate cyber defense skills. They interact with simulated environments and apply techniques in realistic scenarios.
+- **[Infrastructure Administrator](../roles/administrator/index.md):** Infrastructure administrators keep Crucible platforms healthy, secure, and scalable. They provision environments, manage access, and monitor day-to-day operations.
+- **[Range Builder](../roles/range-builder/index.md):** Range Builders design and deliver complete cyber ranges. They combine infrastructure, scenarios, and learner-facing content into cohesive exercises.
+- **[Instructor](../roles/instructor/index.md):** Instructors lead and execute Crucible exercises and training sessions. They guide participants, evaluate performance, and ensure teams meet learning objectives.
+- **[Participant](../roles/participant/index.md):** Participants engage in Crucible exercises to develop and demonstrate cyber defense skills. They interact with simulated environments and apply techniques in realistic scenarios.

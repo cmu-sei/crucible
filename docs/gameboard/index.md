@@ -84,7 +84,7 @@ To export a game package:
 
 To import (upload) a game package:
 
-1. Upload or drop an exported game package into the **drop zone** on the Games tab. The drop zone is high-lighted in the screen print below.
+1. Upload or drop an exported game package into the **drop zone** on the Games tab. The drop zone is high-lighted in the screenshot below.
 
 ![upload a package](img/dropzone.png)
 
@@ -294,7 +294,7 @@ If any registered players have requested a name change, you'll see a warning mes
 
 #### The Team/Player Window
 
-In the search results, select a team or a player. The team/player window displays information about that selection. The screen print below shows the **Player** window.
+In the search results, select a team or a player. The team/player window displays information about that selection. The screenshot below shows the **Player** window.
 
 ![team-player-window](img/team-player-window.png)
 
@@ -605,10 +605,10 @@ Gameboard uses a role-based permissions system to define what functions each rol
 
 There are five roles: **Admin**, **Director**, **Support**, **Tester**, and "participant" (i.e., no role). The four elevated roles have cumulative permissions: Testers have the least access; Support has more access than Testers; Directors have more than Support; and Admins have full access.
 
-- **Admin**: Full permissions to access all parts of the application and change user permissions.
-- **Director**: Tester and Support permissions, plus the ability to create/edit/delete games, manage game settings, deploy resources, manage team sessions and scores, and edit some site-wide settings (e.g., announcements, practice area).
-- **Support**: Tester permissions, plus the ability to view additional information about teams/games, manage enrolled players, view reports, and manage support tickets.
-- **Tester**: Can play games outside of the execution window and view hidden games for testing game functionality.
+- **Admin:** Full permissions to access all parts of the application and change user permissions.
+- **Director:** Tester and Support permissions, plus the ability to create/edit/delete games, manage game settings, deploy resources, manage team sessions and scores, and edit some site-wide settings (e.g., announcements, practice area).
+- **Support:** Tester permissions, plus the ability to view additional information about teams/games, manage enrolled players, view reports, and manage support tickets.
+- **Tester:** Can play games outside of the execution window and view hidden games for testing game functionality.
 
 If you're Support, Director, or Admin, you can go to **Admin**, **Permissions** in the top navigation to check your role and see what each role can do.
 
@@ -657,7 +657,7 @@ The table below outlines the permissions associated with different roles in the 
 
 Before players start a game or lab, they must *enroll* in the game lobby. After logging in, they select a game on the **Home** page, click **Enroll**, and confirm to start the session. The **Enroll** button appears only after they set a display name and sponsoring organization in their profile. The game's registration window must also be open, as defined in the Admin Game Settings.
 
-If a user has an elevated role, then the **Admin Enroll** button appears next to the **Enroll** button. See the screen print below.
+If a user has an elevated role, then the **Admin Enroll** button appears next to the **Enroll** button. See the screenshot below.
 
 **Admin Enroll** allows a user with an elevated role to bypass registration timing restrictions. It does *not* bypass display-name and sponsoring-organization requirements, so set those before gameplay. Use **Admin Enroll** for testing, troubleshooting, and customer support.
 
@@ -955,7 +955,7 @@ For a full treatment of Gameboard's Support feature, please see the [Getting In-
 
 When a Gameboard administrator enables the *feedback* feature, each player may submit **one** feedback response per game and/or per challenge. Every team member may provide individual feedback. Gameboard keeps the feedback form available at any time after a session starts so participants who quit early still have the opportunity to respond.
 
-The screen print below shows an example of a **challenge** feedback form as a player would see it.
+The screenshot below shows an example of a **challenge** feedback form as a player would see it.
 
 ![challenge form](img/challenge-feedback.png)
 
@@ -1175,15 +1175,15 @@ Each report shares common characteristics.
 
 #### Drilling down in Results
 
-In some places in the report results, you can "drill down" by clicking a link in the metrics. A modal window displays a more granular view within the same data. For example: in the Enrollment Report, in the Performance category, some data points are links. See *screen print 1* below. Clicking that link goes deeper into that element. See *screen print 2* below.
+In some places in the report results, you can "drill down" by clicking a link in the metrics. A modal window displays a more granular view within the same data. For example: in the Enrollment Report, in the Performance category, some data points are links. See *screenshot 1* below. Clicking that link goes deeper into that element. See *screenshot 2* below.
 
-*Screen print 1: Summary Table:*
+*screenshot 1: Summary Table:*
 
 ![score summary](img/score.png)
 
 Click **300** to view the detailed information that comprises score in the summary.
 
-*Screen print 2: Data breakdown:*
+*screenshot 2: Data breakdown:*
 
 ![score detailed](img/breakdown.png)
 
@@ -1202,7 +1202,7 @@ The **Challenges** report answers questions like these:
 
 The **Enrollment** report shows information about players enrolled in competitive-mode games on the Gameboard. You can filter this report to show enrollment numbers for each game. You can filter this report to only show information about challenges from specific games and seasons. You can also filter this report by Sponsor.
 
-The screen print below shows a summary of a typical game. The summary shows:
+The screenshot below shows a summary of a typical game. The summary shows:
 
 1. 1390 different players (people, "users", with an account in Gameboard) enrolled in our example game. The Department of Defense, the Leading Sponsor, leads enrollment with 1069 players enrolled.
 2. Those 1390 players created 1422 teams.
@@ -1212,7 +1212,7 @@ The screen print below shows a summary of a typical game. The summary shows:
 
 3. 25 different sponsors participated in this example game.
 
-*Screen print 3: Sample Enrollment report:*
+*screenshot 3: Sample Enrollment report:*
 
 ![sample enrollment](img/sample-enroll-report.png)
 
