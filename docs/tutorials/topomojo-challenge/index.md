@@ -128,7 +128,7 @@ We can now add a question that asks for the value of `token1`.
 
 1. Navigate to the **Question Set** section on the **Challenge tab**.
 2. In the **Question** field, enter `What is the value of token1?`
-3. In the **Answer** field, enter `##token1##`. We us the "double-pound" notation because we want to reference the transform value in the answer. This double-pound syntax performs variable replacement at grading time.
+3. In the **Answer** field, enter `##token1##`. We use the "double-pound" notation because we want to reference the transform value in the answer. This double-pound syntax performs variable replacement at grading time.
 4. For **Grader**, use the **Match** grading type so the participant must enter the value exactly as it appears.
 5. For **Example**, enter `abcd1234`. Because the transform generates an 8-character hexadecimal value, we want to show participants what the answer format should look like.
 6. Click **Save**.
