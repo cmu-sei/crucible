@@ -307,7 +307,7 @@ To see how your variants behave, play the challenge again.
 1. Click the  **Play** tab.
 2. Leave **Variant** set to `0` to deploy a random variant.
 3. Click **Start** to play the challenge. TopoMojo deploys one of the variants and appends the variant-specific markdown to the end of the instructions. If you receive **Variant 2**, the index equals `1`.
-4. Enter `1` for the variant index question.
+4. Enter `0` or `1` for the variant index question, depending on which variant you received.
 5. Click **Submit** to submit your answer and confirm success.
 
 You can also ask TopoMojo to deploy a specific variant.
