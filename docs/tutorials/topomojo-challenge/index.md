@@ -71,7 +71,7 @@ TopoMojo templates are starting-point virtual machines that you can customize. W
 
          ```bash
          #!/bin/bash
-         vmtoolsd --"info-get guestinfo.token"
+         vmtoolsd --"info-get guestinfo.token1"
          ```
 
 5. Make `get-token.sh` executable by running `chmod` from a terminal.
