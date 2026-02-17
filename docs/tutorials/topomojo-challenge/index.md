@@ -97,7 +97,7 @@ TopoMojo templates are starting-point virtual machines that you can customize. W
 
 We get `No value found` because we haven't configured the guest info variables yet.
 
-After unlinking, initializing, and deploying, and editing the VM, TopoMojo shows a **Save** icon for the template. Clicking **Save** creates a VM snapshot on the hypervisor. TopoMojo supports only one snapshot, and saving overwrites the previously saved state.
+After unlinking, initializing, deploying, and editing the VM, TopoMojo shows a **Save** icon for the template. Clicking **Save** creates a VM snapshot on the hypervisor. TopoMojo supports only one snapshot, and saving overwrites the previously saved state.
 
 ![TopoMojo save template](../img/save-template.png)
 
