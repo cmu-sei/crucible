@@ -290,7 +290,7 @@ We'll add a second variant to show how the same challenge can change slightly be
 
 1. Click **Add Variant**.
 2. Clone **Variant 1**.
-3. Don't change the first two questions unchanged. For Question 3, update the markdown to read: `The variant 2 index is: ##variant##`.
+3. Leave the first two questions unchanged. For Question 3, update the markdown to read: `The variant 2 index is: ##variant##`.
 
 In practice, avoid telling participants which variant they receive because variants help discourage answer sharing.
 
