@@ -190,7 +190,7 @@ Your lab document should look like this.
 
 !!! tip "Using a Cut Line"
 
-     TopoMoJo supports a special "cut line" using an HTML comment: `<!-- cut -->`. TopoMoJo shows document content above the cut line as a preview before users deploy the challenge and hides the remaining instructions until the challenge starts. Use a cut line to give participants an overview without revealing all of the details up front.
+     TopoMojo supports a special "cut line" using an HTML comment: `<!-- cut -->`. TopoMojo shows document content above the cut line as a preview before users deploy the challenge and hides the remaining instructions until the challenge starts. Use a cut line to give participants an overview without revealing all of the details up front.
 
      ![The cut line in a lab document](../../tutorials/img/cut-line.png)
 
