@@ -82,6 +82,7 @@ TopoMojo templates are starting-point virtual machines that you can customize. W
          ```bash
          cd ~/Desktop
          ```
+
      - Run the script:
 
          ```bash
