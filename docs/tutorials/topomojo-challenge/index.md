@@ -151,7 +151,7 @@ At this point, the behavior differs slightly depending on where TopoMojo deploys
 
 This replacement does not occur in a *workspace*. As a result, when *you* (the TopoMojo admin who is building the challenge) run the grading script (`./get-token.sh`) in a workspace, the script returns the literal value `##token1##`. This confirms that you've set up the guest info variable correctly. This expected behavior provides a valid way to test the challenge while working in a workspace.
 
-1. Opening a terminal in the VM (the one you just deployed).
+1. Open a terminal in the VM (the one you just deployed).
 2. Change to the directory that contains your script. For example:
 
      ```bash
