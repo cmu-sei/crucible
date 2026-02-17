@@ -67,9 +67,9 @@ Alloy ties the exercise components together and provides participants with a cen
 3. In the left navigation, select **Event Templates**, then click **Add New Event Template**.
 4. Next to the New Event Template, click the **Edit** icon to set a **Name**, **Event Template Description**, and **Duration Hours**.
 5. From the dropdown menus (or by pasting IDs), select the following:
-   - Player View Template
-   - Caster Directory
-   - Steamfitter Scenario Template
+    - Player View Template
+    - Caster Directory
+    - Steamfitter Scenario Template
 6. Click **Save** to apply your changes.
 
 ## Step 5: Launching and Validating
