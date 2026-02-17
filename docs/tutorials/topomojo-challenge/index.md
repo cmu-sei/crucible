@@ -117,7 +117,7 @@ If you recall, the script we wrote reads the value of a guest info variable name
 
 1. Navigate to the **Transforms** section of the challenge.
 2. Set the **Key** (name) to `token1`. The key is the name of the variable.
-3. Next to the **Value**, expand the tooltip (the **i**). The tooltip shows what kinds of values TopoMojo can generate. You can use values such as a game space ID, variant ID, hexadecimal or base64 strings, random integers, or universally unique identifiers. You can also constrain values, for example by generating exactly 12 hexadecimal characters (hex:12) or a number within a specific range (such as 99–999).
+3. Next to the **Value**, expand the tooltip (the **i**). The tooltip shows what kinds of values TopoMojo can generate. You can use values such as a gamespace ID, variant ID, hexadecimal or base64 strings, random integers, or universally unique identifiers. You can also constrain values, for example by generating exactly 12 hexadecimal characters (hex:12) or a number within a specific range (such as 99–999).
 4. Set the **Value** to `hex`. That generates 8 hexadecimal characters inside a variable called `token1`.
 
 ![Transform configuration with hex value added](../img/transform-value-hex.png)
@@ -199,7 +199,7 @@ Your lab document should look like this.
 At this point, the challenge includes a transform, guest info variable, instructions, and a question to answer. We're ready to "play" our challenge to test it.
 
 1. Click the **Play** tab. Notice that only the top portion of the document - everything above the cut line - is visible. As part of testing, you can adjust settings such as **Variant** (if the challenge supports variants, you can select a specific variant to deploy; selecting `0` chooses a random variant); **Max Attempts**, **Max Minutes** (i.e., challenge duration), and **Point Value**.  These controls exist only for developer testing. End users do not see this interface, and any changes made here do not persist if you switch tabs.
-2. Click **Start**. Once the game space finishes deploying, you can view the full challenge document.
+2. Click **Start**. Once the gamespace finishes deploying, you can view the full challenge document.
 3. Follow the lab instructions.
 
      - Launch the Kali VM.
