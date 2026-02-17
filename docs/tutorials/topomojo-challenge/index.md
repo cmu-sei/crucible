@@ -117,7 +117,7 @@ If you recall, the script we wrote reads the value of a guest info variable name
 
 1. Navigate to the **Transforms** section of the challenge.
 2. Set the **Key** (name) to `token1`. The key is the name of the variable.
-3. Next to the **Value**, expand the tool tip (the **i**). The tool tip what kind of value TopoMojo generates. You can use values such as a game space ID, variant ID, hexadecimal or base64 strings, random integers, or universally unique identifiers. You can also constrain values, for example by generating exactly 12 hexadecimal characters (hex:12) or a number within a specific range (such as 99–999).
+3. Next to the **Value**, expand the tooltip (the **i**). The tooltip shows what kinds of values TopoMojo can generate. You can use values such as a game space ID, variant ID, hexadecimal or base64 strings, random integers, or universally unique identifiers. You can also constrain values, for example by generating exactly 12 hexadecimal characters (hex:12) or a number within a specific range (such as 99–999).
 4. Set the **Value** to `hex`. That generates 8 hexadecimal characters inside a variable called `token1`.
 
 ![Transform configuration with hex value added](../img/transform-value-hex.png)
