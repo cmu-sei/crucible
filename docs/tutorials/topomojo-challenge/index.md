@@ -71,7 +71,7 @@ TopoMojo templates are starting-point virtual machines that you can customize. W
 
          ```bash
          #!/bin/bash
-         vmtoolsd --"info-get guestinfo.token"
+         vmtoolsd --"info-get guestinfo.token1"
          ```
 
 5. Make `get-token.sh` executable by running `chmod` from a terminal.
@@ -82,6 +82,7 @@ TopoMojo templates are starting-point virtual machines that you can customize. W
          ```bash
          cd ~/Desktop
          ```
+
      - Run the script:
 
          ```bash
@@ -96,7 +97,7 @@ TopoMojo templates are starting-point virtual machines that you can customize. W
 
 We get `No value found` because we haven't configured the guest info variables yet.
 
-After unlinking, initializing, and deploying, and editing the VM, TopoMojo shows a **Save** icon for the template. Clicking **Save** creates a VM snapshot on the hypervisor. TopoMojo supports only one snapshot, and saving overwrites the previously saved state.
+After unlinking, initializing, deploying, and editing the VM, TopoMojo shows a **Save** icon for the template. Clicking **Save** creates a VM snapshot on the hypervisor. TopoMojo supports only one snapshot, and saving overwrites the previously saved state.
 
 ![TopoMojo save template](../img/save-template.png)
 
@@ -116,7 +117,7 @@ If you recall, the script we wrote reads the value of a guest info variable name
 
 1. Navigate to the **Transforms** section of the challenge.
 2. Set the **Key** (name) to `token1`. The key is the name of the variable.
-3. Next to the **Value**, expand the tool tip (the **i**). The tool tip what kind of value TopoMojo generates. You can use values such as a game space ID, variant ID, hexadecimal or base64 strings, random integers, or universally unique identifiers. You can also constrain values, for example by generating exactly 12 hexadecimal characters (hex:12) or a number within a specific range (such as 99–999).
+3. Next to the **Value**, expand the tooltip (the **i**). The tooltip shows what kinds of values TopoMojo can generate. You can use values such as a gamespace ID, variant ID, hexadecimal or base64 strings, random integers, or universally unique identifiers. You can also constrain values, for example by generating exactly 12 hexadecimal characters (hex:12) or a number within a specific range (such as 99–999).
 4. Set the **Value** to `hex`. That generates 8 hexadecimal characters inside a variable called `token1`.
 
 ![Transform configuration with hex value added](../img/transform-value-hex.png)
@@ -127,7 +128,7 @@ We can now add a question that asks for the value of `token1`.
 
 1. Navigate to the **Question Set** section on the **Challenge tab**.
 2. In the **Question** field, enter `What is the value of token1?`
-3. In the **Answer** field, enter `##token1##`. We us the "double-pound" notation because we want to reference the transform value in the answer. This double-pound syntax performs variable replacement at grading time.
+3. In the **Answer** field, enter `##token1##`. We use the "double-pound" notation because we want to reference the transform value in the answer. This double-pound syntax performs variable replacement when deploying a *gamespace*.
 4. For **Grader**, use the **Match** grading type so the participant must enter the value exactly as it appears.
 5. For **Example**, enter `abcd1234`. Because the transform generates an 8-character hexadecimal value, we want to show participants what the answer format should look like.
 6. Click **Save**.
@@ -150,7 +151,7 @@ At this point, the behavior differs slightly depending on where TopoMojo deploys
 
 This replacement does not occur in a *workspace*. As a result, when *you* (the TopoMojo admin who is building the challenge) run the grading script (`./get-token.sh`) in a workspace, the script returns the literal value `##token1##`. This confirms that you've set up the guest info variable correctly. This expected behavior provides a valid way to test the challenge while working in a workspace.
 
-1. Opening a terminal in the VM (the one you just deployed).
+1. Open a terminal in the VM (the one you just deployed).
 2. Change to the directory that contains your script. For example:
 
      ```bash
@@ -189,7 +190,7 @@ Your lab document should look like this.
 
 !!! tip "Using a Cut Line"
 
-     TopoMoJo supports a special "cut line" using an HTML comment: `<!-- cut -->`. TopoMoJo shows document content above the cut line as a preview before users deploy the challenge and hides the remaining instructions until the challenge starts. Use a cut line to give participants an overview without revealing all of the details up front.
+     TopoMojo supports a special "cut line" using an HTML comment: `<!-- cut -->`. TopoMojo shows document content above the cut line as a preview before users deploy the challenge and hides the remaining instructions until the challenge starts. Use a cut line to give participants an overview without revealing all of the details up front.
 
      ![The cut line in a lab document](../../tutorials/img/cut-line.png)
 
@@ -198,7 +199,7 @@ Your lab document should look like this.
 At this point, the challenge includes a transform, guest info variable, instructions, and a question to answer. We're ready to "play" our challenge to test it.
 
 1. Click the **Play** tab. Notice that only the top portion of the document - everything above the cut line - is visible. As part of testing, you can adjust settings such as **Variant** (if the challenge supports variants, you can select a specific variant to deploy; selecting `0` chooses a random variant); **Max Attempts**, **Max Minutes** (i.e., challenge duration), and **Point Value**.  These controls exist only for developer testing. End users do not see this interface, and any changes made here do not persist if you switch tabs.
-2. Click **Start**. Once the game space finishes deploying, you can view the full challenge document.
+2. Click **Start**. Once the gamespace finishes deploying, you can view the full challenge document.
 3. Follow the lab instructions.
 
      - Launch the Kali VM.
@@ -289,7 +290,7 @@ We'll add a second variant to show how the same challenge can change slightly be
 
 1. Click **Add Variant**.
 2. Clone **Variant 1**.
-3. Don't change the first two questions unchanged. For Question 3, update the markdown to read: `The variant 2 index is: ##variant##`.
+3. Leave the first two questions unchanged. For Question 3, update the markdown to read: `The variant 2 index is: ##variant##`.
 
 In practice, avoid telling participants which variant they receive because variants help discourage answer sharing.
 
@@ -306,7 +307,7 @@ To see how your variants behave, play the challenge again.
 1. Click the  **Play** tab.
 2. Leave **Variant** set to `0` to deploy a random variant.
 3. Click **Start** to play the challenge. TopoMojo deploys one of the variants and appends the variant-specific markdown to the end of the instructions. If you receive **Variant 2**, the index equals `1`.
-4. Enter `1` for the variant index question.
+4. Enter `0` or `1` for the variant index question, depending on which variant you received.
 5. Click **Submit** to submit your answer and confirm success.
 
 You can also ask TopoMojo to deploy a specific variant.

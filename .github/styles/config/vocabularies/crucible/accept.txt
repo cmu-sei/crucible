@@ -108,3 +108,4 @@ systemd
 guestinfo
 Zscaler
 (?i)subtask(?:s)?
+tooltip
