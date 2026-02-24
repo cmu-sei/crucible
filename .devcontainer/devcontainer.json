@@ -4,7 +4,9 @@
 	"workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/workspaces/crucible-docs",
 	"runArgs": [
 		"--name",
-		"crucible-docs"
+		"crucible-docs",
+		"--env-file",
+		".devcontainer/devcontainer.env"
 	],
 	"build": {
 		// set build context to parent directory
@@ -19,6 +21,20 @@
 		},
 		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
+	"mounts": [
+		// Shell history
+		"source=crucible-docs-shell-history,target=/home/vscode/.history,type=volume",
+		// Claude volume
+		"source=crucible-docs-claude,target=/home/vscode/.claude,type=volume"
+	],
+	"containerEnv": {
+		"CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
+		"CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+		"CLAUDE_CODE_USE_BEDROCK": "1",
+		"AWS_REGION": "us-east-1",
+		"ANTHROPIC_DEFAULT_HAIKU_MODEL": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+		"ANTHROPIC_DEFAULT_SONNET_MODEL": "us.anthropic.claude-sonnet-4-6"
+	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -29,7 +45,8 @@
 				"GitHub.vscode-pull-request-github",
 				"shardulm94.trailing-spaces",
 				"chrischinchilla.vale-vscode",
-				"shd101wyy.markdown-preview-enhanced"
+				"shd101wyy.markdown-preview-enhanced",
+				"Anthropic.claude-code"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
@@ -48,5 +65,6 @@
 			"onAutoForward": "notify"
 		}
 	},
-	"postCreateCommand": "bash -l .devcontainer/postcreate.sh"
+	"postCreateCommand": "bash -l .devcontainer/postcreate.sh",
+	"postStartCommand": "bash -l .devcontainer/poststart.sh"
 }

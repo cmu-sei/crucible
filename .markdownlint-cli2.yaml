@@ -4,6 +4,7 @@
 
 ignores:
   - LICENSE.md
+  - CLAUDE.md
 
 config:
   # Do not allow headings to increase more than 1 level at a time

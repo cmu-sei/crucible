@@ -3,5 +3,7 @@ package.json
 settings.local.json
 site/
 
+.devcontainer/*.env
+
 # devcontainer certs
 .devcontainer/certs/*.crt
