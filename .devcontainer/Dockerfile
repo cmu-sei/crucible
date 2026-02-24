@@ -32,7 +32,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Vale
-ARG VALE_VERSION=3.13.0
+ARG VALE_VERSION=3.13.1
 RUN set -euo pipefail; \
     arch="$(uname -m)"; \
     case "$arch" in \
@@ -48,7 +48,7 @@ RUN set -euo pipefail; \
     vale --version
 
 # Install markdownlint-cli2
-RUN npm config -g set fund false && npm install -g markdownlint-cli2@0.19.0
+RUN npm config -g set fund false && npm install -g markdownlint-cli2@0.21.0
 
 WORKDIR /tmp
 COPY ../requirements.txt requirements.txt
