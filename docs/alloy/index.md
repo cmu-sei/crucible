@@ -34,6 +34,15 @@ Admins apply roles to users in the **Users** section of the **Administration** a
 
 ## Administrator Guide
 
+## Administration View
+
+Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
+
+Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
+
+![The Administration dropdown in the top right-corner](img/crucible-administration.png)
+
+
 When deploying the Alloy API, configure the `ResourceOwnerAuthorization` settings for a superadmin account so the Alloy API can make the necessary calls to the other APIs.
 
 ```json

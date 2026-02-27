@@ -53,6 +53,15 @@ Users who have the `ManageRoles` permission can create custom system roles in th
 
 ## Administrator Guide
 
+## Administration View
+
+Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
+
+Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
+
+![The Administration dropdown in the top right-corner](img/crucible-administration.png)
+
+
 Steamfitter is primarily an administrative tool. Content developers and "Range tech" types of admins manage templates and scenarios, while read-only users can observe assigned projects without making changes.
 
 ### Scenario Templates
@@ -215,18 +224,18 @@ The default History view shows task results for the current user sorted in rever
 
 This glossary defines key terms and concepts used in the Steamfitter application.
 
-**Delay:** set in seconds before the task executes.
+**Delay:** Set in seconds before the task executes.
 
-**Execute:** to carry out the task.
+**Execute:** To carry out the task.
 
-**Expiration:** when a task times out.
+**Expiration:** When a task times out.
 
-**Iteration:** an execution of a task given the task specification to iterate x number of times.
+**Iteration:** An execution of a task given the task specification to iterate x number of times.
 
-**Scenario:** groupings of predefined tasks that execute against a required view's VMs.
+**Scenario:** Groupings of predefined tasks that execute against a required view's VMs.
 
-**Scenario Template:** location for grouping predefined tasks; scenario templates create scenarios that can run on-demand.
+**Scenario Template:** Location for grouping predefined tasks; scenario templates create scenarios that can run on-demand.
 
-**StackStorm:** an open source application that can connect applications, services, and workflows.
+**StackStorm:** An open source application that can connect applications, services, and workflows.
 
-**Task:** an action or command that executes against one or more topology resources.
+**Task:** An action or command that executes against one or more topology resources.

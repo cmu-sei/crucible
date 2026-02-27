@@ -945,6 +945,15 @@ To remove MSEL information from the applications, follow these steps:
 
 ## Administrator Guide
 
+## Administration View
+
+Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
+
+Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
+
+![The Administration dropdown in the top right-corner](img/crucible-administration.png)
+
+
 ### Units
 
 The following image shows the Units Administration Page. Here, administrators can add, edit, and delete units. To use the Blueprint application, the administrator should assign a unit to desired users.

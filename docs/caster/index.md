@@ -2,19 +2,98 @@
 
 ## Overview
 
-**Caster** is the primary deployment component of the Crucible simulation framework. [Terraform](https://www.terraform.io/), an open-source Infrastructure-as-Code tool, underlies Caster.
+**Caster** is the deployment component of the Crucible framework. It uses [Terraform](https://www.terraform.io/), an open-source Infrastructure-as-Code tool, to define and apply infrastructure configurations.
 
-Caster provides a web interface that gives exercise developers a powerful and flexible way to create, share, and manage topology configurations.
+Caster provides a web interface where exercise developers create, share, and manage topology configurations.
 
-Initial versions of Caster focused on a web front-end for raw Terraform configurations and outputs. This gave advanced developers easier access to a powerful deployment tool. Targeted improvements to the experience for these users are coming in the future. Eventually, this system will underpin a more user-friendly interface that will allow the piecing together of configurations with less or no writing of Terraform code directly.
+Early versions of Caster exposed Terraform configurations and outputs directly through the UI and primarily supported advanced users. Ongoing development adds higher-level features that reduce the need to write Terraform manually while still allowing direct configuration when users need it.
 
-Caster gives experts the control they need, while also making it easy for beginners to use expert setups or create simple ones on their own.
+## Terraform Integration
 
-## Permissions and Roles
+For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html).
 
-### Permissions
+The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-sei/crucible/latest/docs) enables programmatic management of Crucible resources through Terraform configurations.
 
-Sets of *permissions* control access to features in Caster. Permissions can apply globally or per *Project*.
+## Administrator Guide
+
+### Administration View
+
+Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. It is where admins prepare and manage the environment so events run smoothly for participants.
+
+Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
+
+![The Administration dropdown in the top right-corner](img/crucible-administration.png)
+
+### Projects
+
+### Users
+
+Users appear in Caster after they authenticate through the Identity provider and open Player in a browser.
+
+The screen shot below shows the **Users** pane in Caster's Administration View.
+
+![Caster's Administration View, Users screen](img/caster-adm-users.png)
+
+To assign a new role to a user:
+
+In the user row, in the **Role** column, select a new role from the dropdown (**None**, **Observer**, **Content Developer**, or **Administrator**).
+
+### Modules
+
+In Caster, a *[module](https://www.terraform.io/docs/glossary.html#module)* is a Terraform construct. A module is a container for related resources used together. It lets you describe infrastructure at the architecture level instead of defining each individual object.
+
+A module packages one or more resources into a single block and exposes required or optional variables. For example:
+
+- A generic virtual machine module that exposes values such as `TeamId`, `Networks`, and `ExerciseId`.
+      - **TeamId:** Sets `guestinfo.teamId` in `extra_config`.
+      - **Networks:** Creates a Network Interface Card (NIC) for each specified network and assigns it to the specified network VLAN.
+      - **ExerciseId:** Appends the `exerciseId` to the name of the VM for use with on-demand exercises that require unique naming.
+
+- A domain controller module that requires values such as domain name, IP address, and administrator credentials.
+- A module that defines an entire Cyber Flag enclave.
+- A module that defines a configurable GreySpace environment.
+
+Caster supports modules stored as GitLab projects that are visible to the API GitLab token and contain at least one version. When a project is added or refreshed, all available versions appear in Caster.
+
+!!! note
+
+    The module inputs and outputs files must be JSON (`variables.tf.json` and `outputs.tf.json`).
+
+Caster can add or refresh modules in three ways:
+
+- Each module list request checks the configured **Terraform-Modules** group--the group ID is a Caster API setting--and subgroups for updates. Refresh the browser if a new module or version does not appear.
+- An administrator can force a full module update if Caster dates differ from GitLab.
+- An administrator can add or refresh a module directly using its GitLab project ID.
+
+While working on Caster Modules:
+
+- **Search:**
+- **Add/Update Modules:**
+- **Add/Update All from the repository:**
+- **Copy:**
+- **Versions:**
+- **Delete:**
+
+Selecting a module opens a form where you choose a version and enter the required variable values. After you select **Submit**, Caster generates the Terraform module block, which you can copy into the configuration file.
+
+### Workspaces
+
+### VLANs
+
+![Caster VLANs](img/caster-vlans.png)
+
+Caster manages VLAN IDs by creating pools of 4096 VLANs and dividing them into partitions. When a user requests a VLAN from a partition, Caster assigns an unused ID and marks it in use until the user releases it.
+
+A partition is either assigned to a project or configured as the system default. Users request VLAN IDs from their project partition or from the default partition.
+
+- VLANs can include tags for organization, and users can request a VLAN by tag
+- Users can request a specific VLAN ID within a partition
+- VLANs marked as reserved (including `0`, `1`, and `4095`, reserved by default) are never assigned
+- Entity update events restore SignalR functionality when modified properties are fixed
+
+### Roles and Permissions
+
+Sets of *permissions* control access to features in Caster. Permissions can apply globally or per **Project**.
 
 Examples of global permissions include:
 
@@ -26,11 +105,11 @@ Users with View or Manage permissions for an administration function (for exampl
 
 You can view all available permissions in the **Roles** section of the **Administration** area.
 
-### Roles
+#### Roles
 
 You apply permissions to *users* by grouping them into *roles*. Caster supports two types of roles: **System Roles** and **Project Roles**.
 
-#### System Roles
+##### System Roles
 
 Each user can have one *system role* that provides global permissions across all of Caster.
 
@@ -54,123 +133,55 @@ Available project roles:
 
 You can't create custom project roles.
 
-Admins assign roles to users in the **Users** section of the **Administration** area.
+### Groups
 
-### Terraform Integration
+Groups are collections of users that administrators assign roles to or add to projects as a single unit instead of managing users individually. Administrators use groups to simplify access management for teams. For example, an administrator can add a group such as **White Cell** to multiple projects, and any user placed into the matching group (**White Cell**) in the identity provider automatically gains the same project access in Caster. This allows administrators to manage group membership in one place while Caster applies the access across all of the applications.
 
-For more information on native Terraform constructs used in Caster, please refer to the [Terraform documentation](https://www.terraform.io/docs/index.html).
+Administrators can create new groups, search for and edit existing groups, and delete groups here. Administrators add users to groups manually or, if enabled in the environment, match them to group names from the Identity provider token.
 
-The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-sei/crucible/latest/docs) enables programmatic management of Crucible resources through Terraform configurations.
+#### Creating a New Group
 
-## Administrator Guide
+1. In the Caster Administration View, select **Groups**.
+2. Click the **+** sign to add a new group.
+3. Type in a **Name** and click **Save**.
+4. Expand the new group.
+5. Under **Users**, search for a specific user and click **Add** to place that user into the **Group Members** column.
 
-### Users
+#### Renaming an Existing Group
 
-![Caster users](img/caster-users.PNG)
+1. In the Caster Administration View, select **Groups**.
+2. Click the **pencil** icon and edit the group **Name**.
+3. Click **Save**.
 
-Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. **Permissions** apply to users and/or teams.
+#### Deleting a Group
 
-#### Assign Roles
-
-**Roles** are groups of permissions. Only a Superadmin can create roles and assign users and/or teams to them.
-
-#### Assign Permissions
-
-- **Superadmin:** Can edit anything in Caster; existing Superadmins grant this permission.
-- **Rangetech Admin:** Can create, manage, and import projects; manage groups; assign and remove users; and lock or unlock Caster files.
-- **Content Developer:** Can create projects and assign or remove users on the projects they created.
-- **Read-Only User:** Can view assigned projects but cannot edit code or run workspaces.
-
-A Superadmin creates the directory and assigns Rangetech Admin or Content Developer permissions to specific teams who can now edit that directory.
-
-!!! important
-
-    Only users who have the Superadmin permission can view the Administration screen and the Administration nav bar (Users, Modules, Workspaces).
-
-### Modules
-
-![Caster modules](img/caster-modules.PNG)
-
-[Modules](https://www.terraform.io/docs/glossary.html#module) are a Terraform construct:
-
-!!! info
-
-    A module is a container for multiple resources used together. Modules create lightweight abstractions, so you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
-
-Modules are very powerful and make complex configurations simpler and more easily shared and used. A module takes any Terraform configuration consisting of any number of resources and turns it into a single block, exposing required and/or optional variables. Some examples include:
-
-1. A generic virtual machine module that abstracts away commonly used parameters into variables such as:
-
-   - **TeamId:** sets `guestinfo.teamId` in `extra_config`.
-   - **Networks:** creates a Network Interface Card (NIC) for each specified network and assigns it to the specified network VLAN.
-   - **ExerciseId:** appends the `exerciseId` to the name of the VM for use with ODXs requiring unique naming.
-   - Other simplified variable names based on the target audience.
-
-2. A module to create a very specific type of virtual machine resource, such as a domain controller, that points to a known good VMware template/base disk and an Ansible playbook that requires variables such as:
-
-   - Domain Name
-   - IP Address
-   - DomainAdminUser
-   - DomainAdminPass
-
-3. A module to define an entire Cyber Flag enclave.
-4. A module to define a generic GreySpace that accepts variables to configure GreyBox, TopGen, etc.
-
-Modules give developers unlimited flexibility to package configurations into small, reusable units that clearly describe their purpose and required values.
-
-Caster makes it easier to search for and use modules when building a Terraform configuration.
-
-Caster supports modules created as GitLab projects that are visible to the GitLabToken defined in the API settings with at least one version defined. When adding/refreshing the project to Caster, Caster will show all versions.
-
-!!! note
-
-    Caster requires that the inputs file and the outputs file are written in JSON (that is, `variables.tf.json` and `outputs.tf.json`).
-
-There are three ways to add/refresh a module in Caster:
-
-- For every modules list request, Caster API checks for updated modules in the **Terraform-Modules** group (the group ID is a Caster API setting) or any of its subgroups. If you add a module or version, you may have to refresh your Caster UI browser to see the change.
-
-- Because the Caster UI uses its internal modified date to determine if there are any new changes, the Caster dates may get out of sync with the GitLab dates. In this case, an administrator can force an update of all of the modules.
-
-- An administrator can also individually add/refresh a module using its GitLab Project ID, whether or not it is underneath the Terraform-Modules group.
-
-When editing a file in the Caster UI, users can open a **Modules** sidebar to search through available modules.
-
-Upon selecting a Module, a form opens that allows the user to select the Version of the Module, and then complete the version-specific variables that the Module expects.
-
-Upon **Submit**, Caster generates the Terraform code to use the selected module with the selected variable values. The user can copy this code into a configuration file.
-
-### VLANs
-
-![Caster VLANs](img/caster-VLANs.PNG)
-
-Adds the ability to manage VLAN ids. Creates pools of 4096 VLANs and subdivides them into Partitions. A user can request a VLAN from a Partition and will receive an unused VLAN id, now marked as used until they release it. A Partition is either assigned to a Project, or is a system-wide default. Users request VLAN ids either from their Project's Partition or from the default.
-
-- VLANs can have tags for organizational purposes; users can request a VLAN by tag
-- Uses can request a VLAN by specific VLAN id within a Partition
-- VLANs marked as reserved (including 0, 1, and 4095, reserved by default) are never used
-- fixed modified properties in entity updated events to restore signalR functionality
+1. In the Caster Administration View, select **Groups**.
+2. Click the **trash can** icon then **Delete**.
 
 ## User Guide
 
+Administrators manage the environment, including projects, users, groups, permissions, modules, and running workspaces in the Administration area. Users access assigned projects, create and edit Terraform files, and deploy configurations to workspaces. This *User Guide* explains how you, the user, perform those tasks.
+
 ### Project
 
-The top-level construct in Caster is a *project*. The *project* is a way to organize and categorize similar environments for multiple files and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
+The top-level construct in Caster is a *project*. The project is a way to organize and categorize similar environments for multiple files and directories within Caster. The main screen of Caster displays a list of the projects available and allows a user to create a new one.
 
 A project can:
 
 - Categorize large events
 - House directories, workspaces, and subdirectories
 
-Users can add new projects, name projects, save projects, and also export projects. A project's landing page in Caster has a navigation panel for easy movement within the project's files, workspaces, and directories.
+Users can add new projects, rename projects, save projects, and also import and export projects. A project's landing page in Caster has a navigation panel for easy movement within the project's files, workspaces, and directories.
+
+#### Add Directory
+
+Add Directory lets you create a new directory at the same level as the above projects.
 
 #### Export Project
 
 Export Projects allows you to export the project as a zip file.
 
-#### Add Directory
-
-Add Directory lets you create a new directory at the same level as the above projects.
+#### Import Project
 
 ### Files
 
@@ -179,7 +190,7 @@ Add Directory lets you create a new directory at the same level as the above pro
 - `.tf` A configuration file that defines resources, variables, etc., in a Terraform configuration.
 - `.auto.tfvars` Contains the values used for variables defined in `.tf` files.
 
-!!! note
+!!! tip "Locking and Unlocking Files"
 
     When working with files in Caster, **CTRL+L** locks/unlocks a file to prevent others from editing that file simultaneously. When locked, the file icon appears as a dashed line. When unlocked, the file icon appears solid. Administrators can also lock files. A file is *administratively locked* to prevent anyone from changing that file. A lock icon in the top right corner of the file edit screen denotes that the file is administratively locked. **CTRL+S** saves a file.
 
@@ -357,20 +368,20 @@ Users can taint resources within the workspace view. A tainted resource will dis
 
 This glossary defines key terms and concepts used in the Caster application.
 
-**Designer:** a graphical user interface for creating and editing Terraform deployments through the use of modules.
+**Designer:** A graphical user interface for creating and editing Terraform deployments through the use of modules.
 
-**Directory:** the outline of a project and the modules it contains.
+**Directory:** The outline of a project and the modules it contains.
 
-**File:** text files to eventually put onto a file system and use with the Terraform command line tool.
+**File:** Text files to eventually put onto a file system and use with the Terraform command line tool.
 
-**Host:** consists of a name, datastore, and maximum number of virtual machines that it can support.
+**Host:** Consists of a name, datastore, and maximum number of virtual machines that it can support.
 
-**Module:** a container for multiple resources used together. Modules create lightweight abstractions, so you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
+**Module:** A container for multiple resources used together. Modules create lightweight abstractions, so you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
 
-**Project:** a way to organize and categorize similar environments for multiple workspaces and directories within Caster.
+**Project:** A way to organize and categorize similar environments for multiple workspaces and directories within Caster.
 
-**Terraform:** an open-source Infrastructure-as-Code tool.
+**Terraform:** An open-source Infrastructure-as-Code tool.
 
-**Topology:** the physical and logical arrangement of nodes and connections in a network.
+**Topology:** The physical and logical arrangement of nodes and connections in a network.
 
-**Workspace:** a specific instance of a deployed Terraform configuration.
+**Workspace:** A specific instance of a deployed Terraform configuration.
