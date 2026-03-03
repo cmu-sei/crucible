@@ -8,7 +8,7 @@ Think of Player as the front door to an event running on Crucible. Player:
 
 - Provides a platform for individual participants on a team to view content in an exercise.
 - Allows for quick navigation between various applications in the Crucible framework.
-- Lets administrators set what teams can see what applications.
+- Lets administrators control which applications each team can see.
 
 Player is *not* meant to:
 
@@ -16,9 +16,99 @@ Player is *not* meant to:
 - Provide any mechanisms for individual applications to communicate with each other.
 - Provide any default applications. However, an exercise can consume some common applications.
 
-## Permissions and Roles
+## Administrator Guide
 
-### Permissions
+### Administration View
+
+Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
+
+Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
+
+![The Administration dropdown in the top right-corner](img/crucible-administration.png)
+
+### Views
+
+**Views** is where Player users with appropriate permissions can add a new view and browse existing views. Follow the procedures below to create a new view in Player. These instructions assume that you have the appropriate permissions in Player to create a view.
+
+![Player Administration View with Views called out](img/player-admin-view.png)
+
+#### Add a New View Information
+
+1. Under Views, click **Add New View**.
+2. Add a **Name** and **Description**.
+3. In the Status dropdown, select **Active** or **Inactive**.
+      - **Active:** The view appears on users' homepages if they are on a team in the view.
+      - **Inactive:** The view does not appear on users' homepages.
+4. Select **Applications**.
+
+![New view info](img/new-view.png)
+
+#### Assign Application Templates
+
+Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template.
+
+![New view apps](img/new-view-apps.png)
+
+- **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. You can't apply these in another view; they are one-time use only.
+- **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The template contains the configuration settings and you can use the template many times.
+
+![Add new view, app template](img/new-view-app-template.png)
+
+#### Add Teams
+
+1. Click **Teams**.
+2. . Click **Add New Team**. You can add multiple teams to a view.
+
+     ![Add new view, new team](img/new-view-new-team.png)
+
+3. Enter a **Team Name**.
+4. Assign a **Role** to the team.
+5. Assign **Permissions** to the team. You can assign each team special permissions. You may want to have a team of "admin" types who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
+
+     ![Add new view, new team, and user](img/new-view-new-team-add-user.png)
+
+6. Click **User** to select users to add to the new team.
+     - **Search** for the user whom you want to add.
+     - Click **Add User** to move the user from All Users to Team Users.
+     - Under Team Users, you can assign a **Role** to the user at this time.
+     - Click **Done** when finished adding users to the team.
+
+#### Upload Files
+
+In this step, View admins upload a single file or multiple files simultaneously to a View which they can add as an application and attach to a team.
+
+![New view, add file](img/new-view-add-file.png)
+
+1. Click **Files**, click **Add New File** and select the file you want to upload.
+2. Select the **Team** that you want to access the file and click **Upload File**.
+3. The file appears. From here, you can: **Download** the file, **Delete** the file, **Copy Link** to the file, **Edit** the name of the file, and **Add as App** (add file as application).
+4. Click **Done** when finished adding or updating the view.
+
+### Users
+
+### Application Templates
+
+An app template contains the settings associated with an app added to a team's view. You can create an app template for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. Any view admin can use an app template when adding apps to a particular view. Think of app templates as helpers for configuring common Crucible apps.
+
+Follow the procedures below to create a new app template in Player. These instructions assume you have the appropriate permissions in Player to create a view.
+
+If you have not already done so, in the dropdown next to your username, select **View Administration**.
+
+![player new application template](img/player-new-application-template.png)
+
+1. Under the Administration nav panel, select **Application Templates**.
+2. Click **Add Application Template**.
+
+      - Enter a **Name** for the app template.
+      - Enter a **URL** for the app template.
+      - Enter the path for the icon.
+
+3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether iFrames supports the app. For example, the Mattermost chat doesn't support embedding, so users must open it in a separate browser tab.
+4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads. This is important for some apps that may require some initialization.
+
+### Roles and Permissions
+
+#### Permissions
 
 Sets of *permissions* control access to features in Player. Permissions can apply globally or per **View**.
 
@@ -34,11 +124,11 @@ You can view all available permissions in the **Roles** section of the **Adminis
 
 Player also supports custom permissions created through seed data or the API. Other Crucible applications, such as the VM API, can use these permissions. Examples include `UploadVmFiles` and `RevertVms`.
 
-### Roles
+#### Roles
 
 You apply permissions to *users* by grouping them into *roles*. Player supports two types of roles: **System Roles** and **Team Roles**.
 
-#### System Roles
+##### System Roles
 
 Each user can have one *system role* that provides global permissions across all of Player.
 
@@ -49,7 +139,7 @@ Default system roles:
 
 Users with the `ManageRoles` permission can create custom system roles in the **Roles** section of the **Administration** area.
 
-#### Team Roles
+##### Team Roles
 
 When you add a user to a team in a View, you assign a *team role* that defines what they can do within that specific team.
 
@@ -64,147 +154,6 @@ You can create custom team roles if you need different permission combinations.
 Admins assign roles to users in the **Users** section of the **Administration** area.
 
 Applications can use Player roles and permissions as needed. An administrator or an application with proper permissions can send notifications to individual users, teams, or the entire exercise.
-
-## Administrator Guide
-
-## Administration View
-
-Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
-
-Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
-
-![The Administration dropdown in the top right-corner](img/crucible-administration.png)
-
-
-![admin button](img/admin-button.png)
-
-A Player superadmin or view admin will see the **Administration navigation bar** on the left. If you have the appropriate permissions, here are the steps to switch to the administrator view in Player:
-
-1. In the top-right corner, click the dropdown next to your username.
-2. Click **Administration**.
-
-### Manage Views
-
-![admin view](img/admin-view.png)
-
-Views is where a Player view administrator adds a new view and browses existing views. Follow the procedures below to create a new view in Player. These instructions assume that you have the appropriate permissions in Player to create a view.
-
-If you have not already done so, in the dropdown next to your username, select **Administration**.
-
-#### Enter View Information
-
-![new view info](img/new-view-info.png)
-
-1. Under Views, click **Add New View**.
-2. Add a **Name** and **View Description**.
-3. In the Status dropdown, select **Active** or **Inactive**.
-      - `Active` means that the new view is available for use immediately.
-      - `Inactive` means that Alloy will clone the new view.
-4. Select **Applications**.
-
-#### Assign Application Templates
-
-![new view apps](img/new-view-apps.png)
-
-1. Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template.
-   - **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. You can't apply these in another view; they are one-time use only.
-   - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The template contains the configuration settings and you can use the template many times.
-
-    ![new view app template](img/new-view-app-template.png)
-
-2. Click **Teams**.
-
-#### Add Teams
-
-![new view new team](img/new-view-new-team.png)
-
-1. Click **Add New Team**. You can add multiple teams to a view.
-
-2. Enter a **Team Name**.
-
-3. Assign a **Role** to the team.
-
-4. Assign **Permissions** to the team. You can assign each team special permissions. You may want to have a team of "admins" who can troubleshoot views in addition to teams comprised of regular users who are participating in the simulation.
-
-    ![new view new team add user](img/new-view-new-team-add-user.png)
-
-5. Click **User** to select users to add to the new team.
-
-   - **Search** for the user whom you want to add.
-   - Click **Add User** to move the user from All Users to Team Users.
-   - Under Team Users, you can assign a **Role** to the user at this time.
-   - Click **Done** when finished adding users to the team.
-
-6. Assign applications to the new team.
-
-   - Next to the new team, click **Add Application**. Select an application from the list. These are the applications you added above. Each team you create gets a list of applications displayed in the Player application bar in the order defined here.
-
-#### Upload Files
-
-In this step, View Administrators upload a single file or multiple files simultaneously to a View which they can add as an application and attach to a team.
-
-![new view add file](img/new-view-add-file.png)
-
-1. Under Files, click **Choose File** and select the file you want to upload. The file appears under Staged Files because you have not uploaded it yet.
-2. Select the **Team(s)** that you want to access the file and click **Upload Staged File(s)**.
-3. The file appears under **Uploaded Files**. From here, you can: **Download** the file, **Delete** the file, **Copy Link** to the file, **Edit** the name and team of the file, and **Add File as Application**.
-4. After adding the file as an application you have to return to **Step 3 Teams** and add that application - the *newly* uploaded file - to a team just as you would add any new application.
-5. Click **Done** when finished adding or updating the view.
-
-### Configure Users
-
-Users are only available in Player after they have successfully authenticated via the Identity server and opened Player in their browser. You can assign users and/or teams any set of **Permissions**.
-
-#### Assign Roles
-
-A **Role** is a group of permissions. You assign roles to users and/or teams. Only a Superadmin can create roles.
-
-#### Assign Permissions
-
-- **Superadmin:** can edit anything in Player; existing Superadmins delegate this permission.
-- **View Admin:** can edit anything within a view they manage.
-
-A Superadmin creates the view and assigns View Admin permissions to specific teams who can now edit that view.
-
-!!! important
-
-    Only users who have the Superadmin permission can view the Administration screen and the Administration nav bar (Views, Users, Application Templates, Roles / Permissions).
-
-### Create Application Templates
-
-An app template contains the settings associated with an app added to a team's view. You can create an app template for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. Any view admin can use an app template when adding apps to a particular view. Think of app templates as helpers for configuring common Crucible apps.
-
-Follow the procedures below to create a new app template in Player. These instructions assume you have the appropriate permissions in Player to create a view.
-
-If you have not already done so, in the dropdown next to your username, select **View Administration**.
-
-![player new application template](img/player-new-application-template.png)
-
-1. Under the Administration nav panel, select **Application Templates**.
-2. Click **Add Application Template**.
-      - Enter a **Name** for the app template.
-      - Enter a **URL** for the app template.
-      - Enter the path for the icon.
-3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether iFrames supports the app. For example, the Mattermost chat doesn't support embedding, so users must open it in a separate browser tab.
-4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads. This is important for some apps that may require some initialization.
-
-### Define Roles and Permissions
-
-The Administration section of Player is where you assign users and/or teams a set of permissions.
-
-#### Define Roles
-
-Superadmins define roles as predefined sets of permissions to simplify administration. Assign users and/or teams a role.
-
-#### Define Permissions
-
-Player uses the following built-in permissions:
-
-- **Superadmin:** Can edit anything in Player and manage all other roles.
-- **View Admin:** Can edit anything within a view they administer.
-- **Content View User:** Can publish or update views through Terraform integration and control ISO/file upload toggles.
-- **Instructor:** Can revert VM snapshots inside Player when you enable the feature.
-- **User:** Can view Player views assigned directly to them.
 
 ### Subscriptions
 
@@ -260,9 +209,10 @@ Assuming you have View Administrator permissions in Player, add the map applicat
 
 ##### Creating a New Map
 
-![player-new-map](img/player-new-map.png)
-
 1. In the newly created Map application, in the right pane, select **New Map**.
+
+     ![player-new-map](img/player-new-map.png)
+
 2. Complete the following fields:
    - **Name:** the name of the map.
    - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.
@@ -347,7 +297,7 @@ The sort by team option rearranges all VMs in expansion panels based on the team
 
 ##### Filter by Powered State
 
-You cannot filter VMs by powered status. By clicking the ![vm-app-6](img/vm-app-6.png) dropdown, the user can select to display only the Powered On, Powered Off, or Suspended VMs.
+You can filter VMs by powered state. By clicking the ![vm-app-6](img/vm-app-6.png) dropdown, the user can select to display only the Powered On, Powered Off, or Suspended VMs.
 
 ![vm-app-7](img/vm-app-7.png)
 
@@ -500,9 +450,9 @@ The glossary below defines key terms and concepts used in the Player application
 
 **Notification:** A message sent to a specific user, team, or view from an Administrator or an app with permission.
 
-**Permission:** A key/value pair that any application can create and use if the system grants it permission. Administrators can assign permissions to users or teams. Some permissions such as `Superadmin` are "read-only". The system designates `ExerciseAdmin` and `Superadmin` as permanent permissions, which no one can edit or delete.
+**Permission:** Controls access to a specific feature or action in Player. Permissions can apply globally across all of Player or be scoped to a specific View. Built-in examples include `CreateViews`, `ViewViews`, and `ManageUsers`. Custom permissions can also be added through seed data or the API for use by other Crucible applications, such as `UploadVmFiles` and `RevertVms`.
 
-**Role:** A set of permissions grouped together and assigned to a user or team.
+**Role:** A bundle of permissions assigned to a user or team. Player supports two types: **System Roles**, which apply permissions globally across all of Player (e.g., Administrator, Content Developer), and **Team Roles**, which apply permissions to a user within a specific team in a View (e.g., View Admin, View Member, Observer). Custom roles of both types can be created for different permission combinations.
 
 **Team:** A group of logged-in users associated with a view. Teams can view a particular set of applications and have team-level roles/permissions.
 
