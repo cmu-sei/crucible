@@ -6,25 +6,27 @@ Administrators can customize the Crucible platform by adding applications that i
 
 ## Third-Party Integration Guide
 
-You need Crucible system admin permissions to add third-party applications to the Crucible Framework. Assuming you have the correct permissions, follow the steps below to integrate a third-party application to the Crucible Framework.
+These instructions assume you have the **Administrator** system role in Player. Follow the steps below to integrate a third-party application into the Crucible Framework.
 
-![Crucible View Admin OE](img/viewAdmin.png)
+In Player, in the dropdown next to your username, select **Administration**.
 
-1. Click your username in the top right corner of the screen.
-2. Select **Administration**.
-3. Click **Application Templates**.
-4. Click **Add Application Template**.
-5. Add the **Name** for the application.
-6. Add the **Url** of the application.
-7. Add an **icon path** to add the logo of the application.
-8. If you want to embed the application, check **Embeddable**.
-9. If you want the application to load in the background, check **Loaded in the Background**.
+![Crucible View Admin OE](img/new-app-template.png)
 
-After completing these steps, admins should refer to the *Crucible Admin Guides* to add the application to the desired set of users and/or teams.
+1. Under the Administration nav panel, select **Application Templates**.
+2. Click **Add a new Application Template**.
+
+      - Enter a **Name** for the app template.
+      - Enter a **URL** for the app template.
+      - Enter the path for the icon.
+
+3. Enable **Embeddable** if desired. **Embeddable** tells Player whether iFrames supports the app. For example, Mattermost doesn't support embedding, so users must open it in a separate browser tab.
+4. Enable **Load in background** if desired. **Load in background** tells Player to load the app in a hidden iFrame when Player loads. This is important for some apps that require initialization.
+
+After completing these steps, refer to the *Crucible Administrator Guides* in the [Core Application Guides](../landing/index.md) to add the application to the desired set of users and/or teams.
 
 ## Third-Party Applications
 
-We have already tested and used the following third-party applications within the Crucible Framework.
+We already tested and used the following third-party applications within the Crucible Framework.
 
 ### Mattermost
 
@@ -41,6 +43,12 @@ Moodle is a free and open-source learning management system. Schools, universiti
 ### Moodle Crucible Plugins
 
 These Moodle plugins connect Moodle to the Crucible apps like TopoMojo. The plugins allow users to find Crucible apps, launch labs, collaborate on quizzes linked to live lab environments, and manage learning plans without leaving Moodle. Each plugin has its own GitHub repository with installation and usage details.
+
+#### AI Placement Competency Plugin
+
+The **AI Placement Competency Plugin** helps instructors and course designers classify activity descriptions against a selected competency framework. It adds a **Classify Text** button to activity editing pages that sends the activity description to a configured AI provider, returns suggested competencies, and lets users apply them to the course or activity with one click. Requires a configured AI provider that supports text generation, such as Ollama or AWS Bedrock, and pre-existing competency frameworks in Moodle.
+
+🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-aiplacement_competency)
 
 #### Crucible Applications Landing Page Block
 
@@ -65,6 +73,12 @@ The **Group Quiz Plugin** lets students work together on the same quiz in real t
 The **Learning Plan Template Manager** is a plugin for Moodle that allows for the import, export, and automatic creation of learning plan templates from a competency framework. This plugin was specifically developed for work roles in the NIST NICE Cybersecurity Framework.
 
 🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-tool_lptmanager)
+
+#### Tag Manager Plugin
+
+The **Tag Manager Plugin** adds bulk tag management to Moodle. Administrators can import tags with optional descriptions from a CSV file and export tags from any collection to CSV for backup or migration. Existing tags are not overwritten, and duplicate tag names are skipped on import.
+
+🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-local_tagmanager)
 
 #### TopoMojo Plugin
 

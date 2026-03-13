@@ -53,6 +53,8 @@ Users who have the `ManageRoles` permission can create custom system roles in th
 
 ## Administrator Guide
 
+The *Steamfitter Administrator Guide* covers the configuration and management of the Steamfitter app. Administrators use the Administration View to manage users, assign roles and permissions, and maintain scenario templates. This guide walks through the key areas of the Administration View and the tools available for setting up and managing Steamfitter content.
+
 ## Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
@@ -60,7 +62,6 @@ Across the Crucible exercise applications, the **Administration View** is where 
 Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
 
 ![The Administration dropdown in the top right-corner](img/crucible-administration.png)
-
 
 Steamfitter is primarily an administrative tool. Content developers and "Range tech" types of admins manage templates and scenarios, while read-only users can observe assigned projects without making changes.
 

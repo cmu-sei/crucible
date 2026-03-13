@@ -16,7 +16,7 @@ This tutorial assumes the following:
 
 ## Step 1: Creating the Player View Template
 
-Create the Player View that participants will use during the exercise. Alloy clones this view for each event. For additional detail, see the Player documentation, [Manage Views](../../player/index.md#manage-views).
+Create the Player View that participants will use during the exercise. Alloy clones this view for each event. For additional detail, see the Player documentation, [Manage Views](../../player/index.md#views).
 
 1. Log into Player.
 2. In the upper-right corner, select your username, then **Administration**.
