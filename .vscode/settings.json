@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
+        "azuread",
         "Beeautiful",
+        "cloudinit",
         "Dionaea",
         "Gameboard",
         "gamespace",
@@ -22,9 +24,12 @@
         "sqlmap",
         "Suricata",
         "Tagcloud",
+        "terraformrc",
+        "tfvars",
         "Topo",
         "tsec",
         "Unsubmitted",
+        "Untaint",
         "Wireshark",
         "wwwroot"
     ]

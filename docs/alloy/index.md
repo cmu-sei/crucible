@@ -34,7 +34,16 @@ Admins apply roles to users in the **Users** section of the **Administration** a
 
 ## Administrator Guide
 
-When deploying the Alloy API, configure the `ResourceOwnerAuthorization` settings for a superadmin account so the Alloy API can make the necessary calls to the other APIs.
+## Administration View
+
+Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
+
+Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
+
+![The Administration dropdown in the top right-corner](img/crucible-administration.png)
+
+
+When deploying the Alloy API, configure the `ResourceOwnerAuthorization` settings for an account with the **Administrator** role or a role with **All** permissions. This allows the Alloy API to make the necessary calls to the other APIs.
 
 ```json
       "ResourceOwnerAuthorization": {
@@ -60,9 +69,9 @@ The default setting for the maximum number of active events per user is **two**.
 
 In Alloy, you use an *event template* to associate one or more of the individual Crucible applications, including a Player view, Caster directory, and Steamfitter scenario template. A user can launch a new event from the defined event template.
 
-Only an Alloy **superadmin** or **event admin** can create or modify event templates in the Alloy administrator user interface. A Player superadmin grants the underlying Player permissions that allow event admins to preview the Player view tied to an event template.
+Only a user with the **Administrator** role or a role with the `CreateEventTemplates` permission (such as **Content Developer**) can create or modify event templates in the Alloy Administration view. A Player **Administrator** grants the underlying Player permissions that allow Content Developers to preview the Player view tied to an event template.
 
-Once the event admin creates the event template, a user can launch the Alloy *event* from the template. The event is the actual running of a simulation.
+Once the Content Developer creates the event template, a user can launch the Alloy event from the template. The event is the actual running of a simulation.
 
 When a user launches an event from an event template, Alloy:
 
@@ -70,7 +79,7 @@ When a user launches an event from an event template, Alloy:
 - Creates a Caster workspace under the Caster directory specified in the event template
 - Creates and starts a Steamfitter session from the Steamfitter scenario specified in the event template
 
-Superadmins and event admins can view active, ended, and failed events in the Alloy administrator user interface.
+Users with the Administrator, Content Developer, or Observer role can view active, ended, and failed events in the Alloy administrator user interface.
 
 <!-- ### Events -->
 
@@ -91,9 +100,9 @@ The Alloy user interface as viewed by a user consists of two screens:
 
 Before creating an Alloy definition, the supporting roles complete the following in their respective Crucible apps:
 
-- Player view admin (or content view user) creates the *Player exercise*.
-- Caster content developer creates the *Caster directory*.
-- Steamfitter content developer creates the *Steamfitter scenario*.
+- Player Administrator or Content Developer creates the *Player exercise*.
+- Caster Content Developer creates the *Caster directory*.
+- Steamfitter Content Developer creates the *Steamfitter scenario*.
 
 All of these components are optional for a definition, so a definition can have any combination of the three components.
 

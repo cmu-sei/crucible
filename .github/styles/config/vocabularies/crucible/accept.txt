@@ -10,7 +10,7 @@ Gallery
 (?i)cyber
 \wGitHub\w
 Mattermost
-osTicket
+(?i)osticket
 (?i)cybersecurity
 OAuth
 GUID(?:'s|s)?

@@ -65,7 +65,7 @@ If pods are crash-looping:
 ## Application Availability
 
 - Alloy events stuck in a pending state often indicate Steamfitter or Caster API connectivity issues; verify service endpoints and network policies
-- Missing Player views reported by Range Builders commonly originate from misaligned permissions; confirm View Admin or Content View User access
+- Missing Player views reported by Range Builders commonly originate from misaligned permissions; confirm **View Admin** or **Content Developer** access
 - Instructors unable to launch labs should confirm event templates reference valid Player exercises, Caster directories, and Steamfitter scenarios
 
 ## Data Integrity

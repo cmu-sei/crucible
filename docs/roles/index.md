@@ -23,8 +23,8 @@ Your organization may have different names for similar roles. Each organization 
 In the *Core Application Guides* we provide detailed information on each application's permissions and roles:
 
 1. [Alloy Roles and Permissions](../alloy/index.md#permissions-and-roles)
-2. [Player Roles and Permissions](../player/index.md#permissions-and-roles)
-3. [Caster Roles and Permissions](../caster/index.md#permissions-and-roles)
+2. [Player Roles and Permissions](../player/index.md#roles-and-permissions)
+3. [Caster Roles and Permissions](../caster/index.md#roles-and-permissions)
 4. [Steamfitter Roles and Permissions](../steamfitter/index.md#permissions-and-roles)
 
 The table below maps each Crucible organizational role to its Alloy, Player, Caster, and Steamfitter permissions. Use it to see what each person can do in each application.
