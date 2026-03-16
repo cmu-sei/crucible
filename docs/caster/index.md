@@ -53,7 +53,7 @@ A module packages one or more resources into a single block and exposes required
 - A module that defines an entire Cyber Flag enclave.
 - A module that defines a configurable GreySpace environment.
 
-Caster supports modules stored as GitLab projects that are visible to the API GitLab token and contain at least one version. When a project is added or refreshed, all available versions appear in Caster.
+Caster supports modules stored as GitLab projects that are visible to the API GitLab token and contain at least one version. When you add or refresh a project, all available versions appear in Caster.
 
 !!! note
 
@@ -89,7 +89,7 @@ A partition is either assigned to a project or configured as the system default.
 - VLANs can include tags for organization, and users can request a VLAN by tag
 - Users can request a specific VLAN ID within a partition
 - VLANs marked as reserved (including `0`, `1`, and `4095`, reserved by default) are never assigned
-- Entity update events restore SignalR functionality when modified properties are fixed
+- Entity update events restore SignalR functionality when modified properties update
 
 ### Roles and Permissions
 
@@ -135,7 +135,7 @@ You can't create custom project roles.
 
 ### Groups
 
-Groups are collections of users that administrators assign roles to or add to projects as a single unit instead of managing users individually. Administrators use groups to simplify access management for teams. For example, an administrator can add a group such as **White Cell** to multiple projects, and any user placed into the matching group (**White Cell**) in the identity provider automatically gains the same project access in Caster. This allows administrators to manage group membership in one place while Caster applies the access across all of the applications.
+Groups are collections of users that administrators assign roles to or add to projects as a single unit instead of managing users individually. Administrators use groups to simplify access management for teams. For example, an administrator can add a group such as **White Cell** to multiple projects. Any user placed into the matching group in the identity provider automatically gains the same project access in Caster. This allows administrators to manage group membership in one place while Caster applies the access across all of the applications.
 
 Administrators can create new groups, search for and edit existing groups, and delete groups here. Administrators add users to groups manually or, if enabled in the environment, match them to group names from the Identity provider token.
 

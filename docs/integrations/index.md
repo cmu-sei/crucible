@@ -46,7 +46,7 @@ These Moodle plugins connect Moodle to the Crucible apps like TopoMojo. The plug
 
 #### AI Placement Competency Plugin
 
-The **AI Placement Competency Plugin** helps instructors and course designers classify activity descriptions against a selected competency framework. It adds a **Classify Text** button to activity editing pages that sends the activity description to a configured AI provider, returns suggested competencies, and lets users apply them to the course or activity with one click. Requires a configured AI provider that supports text generation, such as Ollama or AWS Bedrock, and pre-existing competency frameworks in Moodle.
+The **AI Placement Competency Plugin** helps instructors and course designers classify activity descriptions against a selected competency framework. It adds a **Classify Text** button to activity editing pages. The button sends the activity description to a configured AI provider, returns suggested competencies, and lets users apply them to the course or activity with one click. Requires a configured AI provider that supports text generation, such as Ollama or Amazon Web Services (AWS) Bedrock, and pre-existing competency frameworks in Moodle.
 
 🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-aiplacement_competency)
 
@@ -76,7 +76,7 @@ The **Learning Plan Template Manager** is a plugin for Moodle that allows for th
 
 #### Tag Manager Plugin
 
-The **Tag Manager Plugin** adds bulk tag management to Moodle. Administrators can import tags with optional descriptions from a CSV file and export tags from any collection to CSV for backup or migration. Existing tags are not overwritten, and duplicate tag names are skipped on import.
+The **Tag Manager Plugin** adds bulk tag management to Moodle. Administrators can import tags with optional descriptions from a CSV file and export tags from any collection to CSV for backup or migration. Existing tags are not overwritten, and the import skips duplicate tag names.
 
 🔗 [GitHub Repository](https://github.com/cmu-sei/moodle-local_tagmanager)
 

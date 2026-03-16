@@ -450,9 +450,9 @@ The glossary below defines key terms and concepts used in the Player application
 
 **Notification:** A message sent to a specific user, team, or view from an Administrator or an app with permission.
 
-**Permission:** Controls access to a specific feature or action in Player. Permissions can apply globally across all of Player or be scoped to a specific View. Built-in examples include `CreateViews`, `ViewViews`, and `ManageUsers`. Custom permissions can also be added through seed data or the API for use by other Crucible applications, such as `UploadVmFiles` and `RevertVms`.
+**Permission:** Controls access to a specific feature or action in Player. Permissions can apply globally across all of Player or apply to a specific View. Built-in examples include `CreateViews`, `ViewViews`, and `ManageUsers`. You can also add custom permissions through seed data or the API for use by other Crucible applications, such as `UploadVmFiles` and `RevertVms`.
 
-**Role:** A bundle of permissions assigned to a user or team. Player supports two types: **System Roles**, which apply permissions globally across all of Player (e.g., Administrator, Content Developer), and **Team Roles**, which apply permissions to a user within a specific team in a View (e.g., View Admin, View Member, Observer). Custom roles of both types can be created for different permission combinations.
+**Role:** A bundle of permissions assigned to a user or team. Player supports two types: **System Roles**, which apply permissions globally across all of Player (e.g., Administrator, Content Developer), and **Team Roles**, which apply permissions to a user within a specific team in a View (e.g., View Admin, View Member, Observer). You can create custom roles of both types for different permission combinations.
 
 **Team:** A group of logged-in users associated with a view. Teams can view a particular set of applications and have team-level roles/permissions.
 

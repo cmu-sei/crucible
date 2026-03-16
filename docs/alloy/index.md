@@ -43,7 +43,7 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 ![The Administration dropdown in the top right-corner](img/crucible-administration.png)
 
 
-When deploying the Alloy API, configure the `ResourceOwnerAuthorization` settings for an account with the **Administrator** role or a role with **All** permissions so the Alloy API can make the necessary calls to the other APIs.
+When deploying the Alloy API, configure the `ResourceOwnerAuthorization` settings for an account with the **Administrator** role or a role with **All** permissions. This allows the Alloy API to make the necessary calls to the other APIs.
 
 ```json
       "ResourceOwnerAuthorization": {
