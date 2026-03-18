@@ -37,9 +37,9 @@ Each resource (e.g., virtual machine, virtual network, etc.) associated with a w
 
 ### Labs and Challenges
 
-A _lab_ or _challenge_ is a TopoMojo workspace built to teach or test hands-on cybersecurity skills. _Labs_ are typically designed to be instructional with detailed documents that might resemble a full walkthrough. _Challenges_ are typically skills assessments with minimal instructions designed to test a user's skills or be used as part of a competition (e.g., Capture the Flag competition).
+A _lab_ or _challenge_ is a TopoMojo workspace built to teach or test hands-on cybersecurity skills. _Labs_ are typically designed to be instructional with detailed documents that might resemble a full walkthrough. _Challenges_ are typically skills assessments with minimal instructions designed to test a user's skills or for use in a competition (e.g., Capture the Flag competition).
 
-Labs and challenges can be deployed by 3rd party consumers of TopoMojo content, like [Gameboard](../gameboard/) and [Moodle](../integrations/index.md#moodle).
+3rd party consumers of TopoMojo content, like [Gameboard](../gameboard/) and [Moodle](../integrations/index.md#moodle), can deploy labs and challenges.
 
 ## Getting Started
 
@@ -49,7 +49,7 @@ Get the latest TopoMojo source code and its accompanying release notes from the 
 
 ### Installing
 
-TopoMojo is installed using the [Helm chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo). The TopoMojo chart contains two sub-charts: `topomojo-api` and `topomojo-ui` which are configured and deployed separately.
+Install TopoMojo using the [Helm chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo). The TopoMojo chart contains two sub-charts: `topomojo-api` and `topomojo-ui` which you configure and deploy using the main `topomojo` chart.
 
 !!! info
 
@@ -86,7 +86,7 @@ TopoMojo provides web-based consoles for interacting with virtual machines using
 - **Keyboard ( <i class="fa-regular fa-keyboard" aria-label="keyboard-icon" role="img"></i> ):** Send keystrokes to the VM (e.g., `ctrl + alt + del`).
 - **Clipboard ( <i class="fa-regular fa-copy" aria-label="clipboard-icon" role="img"></i> ):** Copy/paste with this VM by selecting text to copy out of the VM to your host or paste text from your host to the VM.
   ![vm console clipboard](img/console-forge-clipboard.png)
-- **Networks ( <i class="fa-solid fa-network-wired" aria-label="networks-icon" role="img"></i> ):** Change the networks a VMs network interface card is attached to.
+- **Networks ( <i class="fa-solid fa-network-wired" aria-label="networks-icon" role="img"></i> ):** Change the networks a VM's network interface card is on.
 - **Screenshot ( <i class="fa-solid fa-camera" aria-label="screenshot-icon" role="img"></i> ):** Take a screenshot of the VM. The screenshot is automatically copied to your host clipboard.
 - **Record (<span class="fa-stack" aria-label="record-icon" role="img" style="font-size: 0.75em;"><i class="fa-solid fa-expand fa-stack-2x"></i><i class="fa-solid fa-circle fa-stack-1x"></i></span>):** Record the VMs screen and save the recording to your computer.
 - **Fullscreen ( <i class="fa-solid fa-expand" aria-label="fullscreen-icon" role="img"></i> ):** Maximize the console's screen.
@@ -121,13 +121,21 @@ The Settings tab holds configuration metadata for your lab.
 
 **Collaboration:** To share your workspace with others, click **Generate invitation** and send the link to collaborators. TopoMojo shows Collaborators alongside the author. When a collaborator connects to your workspace, you'll see them `connected` in the top right corner of the workspace.
 
-**Clone:** Create a copy of your workspace. The cloned workspace VMs will be **linked** to the parent workspace's VMs. All other settings from the parent will be copied to the clone. TopoMojo appends `-CLONE` to the title of the new workspace, but you can change this title.
+**Clone:** Create a copy of your workspace. TopoMojo **links** the cloned workspace VMs to the parent workspace's VMs. The clone inherits all other settings from the parent. TopoMojo appends `-CLONE` to the title of the new workspace, but you can change this title.
 
 **Delete:** Delete the workspace.
 
 ### Templates
 
-The template selector allows you to add virtual machine templates to your workspace. Templates are "starting point" virtual machines that engineers can add to their workspace and customize as needed. A typical TopoMojo deployment might contain the following types of templates: base install operating systems with no additional software/configurations (these serve as a known-good starting point for customization), templates with customized configurations for a specific purpose (e.g., a web server that is already configured to serve content), and blank discs (allow engineers to install an operating system that isn't already available). Administrators can publish individual templates (e.g., a standalone base install of Kali Linux) or a template set that contains multiple VMs meant to be used as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, and a security monitoring suite).
+The template selector allows you to add virtual machine templates to your workspace. Templates are "starting point" virtual machines that engineers can add to their workspace and customize as needed.
+
+A typical TopoMojo deployment contains several types of templates.
+
+- Base operating system installs with no software or configurations serve as a known-good starting point for customization.
+- Purpose-built templates include preconfigured VMs (e.g., a web server configured to serve content).
+- Blank discs let engineers install an operating system not yet available as a template.
+
+Administrators can publish individual templates (e.g., a standalone base install of Kali Linux). They can also publish a "template set" of multiple VMs serving as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, etc.).
 
 #### Adding and Editing Templates
 
@@ -144,8 +152,8 @@ The list below explains the fields in the VM template.
 
 - **Name:** The **name** of the VM must be unique within the workspace and should be descriptive of the resource.
 - **Description:** A short description of the VM. It is best practice to include the credentials and purpose for the VM. The description is not visible to users playing the lab - it is only visible in the workspace editor.
-- **Networks:** A space-delimited list of networks on which the VM will have a network interface. These names should be the same for all systems in your lab that need to connect to the same network. TopoMojo will create the networks on the hypervisor when the VM/lab is deployed.
-- **Guest Settings:** Key-value pairs in the form of `key=value` to pass data into deployed VMs via [VMware guestinfo variables](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/tools/12-5-0/vmware-tools-administration-12-5-0/configuring-vmware-tools-components/using-vmware-tools-configuration-utility/view-virtual-machine-status-information/query-information-using-guestinfo-variable.html) or the [QEMU Firmware Configuration Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) for Proxmox. The _key_ is the name of the guest setting. For example, `var1=test` is a guest setting named "var1" with a value of "test". Guest settings values can be randomized using [TopoMojo Transforms](#transforms).
+- **Networks:** A space-delimited list of networks on which the VM will have a network interface. These names should be the same for all systems in your lab that need to connect to the same network. TopoMojo creates the networks on the hypervisor when it deploys the VM/lab.
+- **Guest Settings:** Key-value pairs in the form of `key=value` to pass data into deployed VMs via [VMware guestinfo variables](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/tools/12-5-0/vmware-tools-administration-12-5-0/configuring-vmware-tools-components/using-vmware-tools-configuration-utility/view-virtual-machine-status-information/query-information-using-guestinfo-variable.html) or the [QEMU Firmware Configuration Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) for Proxmox. The _key_ is the name of the guest setting. For example, `var1=test` is a guest setting named "var1" with a value of "test". You can randomize guest settings values using [TopoMojo Transforms](#transforms).
 
   When using VMware as a backing hypervisor, use [VMware Tools](https://helpmanual.io/help/vmtoolsd/), such as the `vmtoolsd` command from the [open-vm-tools package](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html), to access guest info variables from a VM.
 
@@ -157,7 +165,7 @@ The list below explains the fields in the VM template.
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.
 - **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine.
 - **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for backend systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access. _Note: These VMs may still be visible/accessible over the network - users just aren't able to click into a console via the lab interface._
-- **Linked:** _Unlinking_ creates a new a new clone of the template which you can save and customize. **Unlink** any virtual machine that will not use the default disk included with the template (i.e., the VM requires changes to be saved).
+- **Linked:** _Unlinking_ creates a new a new clone of the template which you can save and customize. **Unlink** any virtual machine that will not use the default disk included with the template (i.e., you need to save changes to the VM).
 - **Delete Template:** Deletes the template from the workspace.
 
 #### Refresh and Deploy
@@ -176,9 +184,9 @@ The deployed virtual machine displays the following additional icons from left t
 
 - **Console ( <i class="fa-solid fa-tv" aria-label="console-icon" role="img"></i> ):** Opens the console for the virtual machine.
 - **Stop/Start ( <i class="fa-solid fa-stop" aria-label="stop-icon" role="img"></i> / <i class="fa-solid fa-play" aria-label="play-icon" role="img"></i> ):** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state. Clicking **start** powers on the deployed VM.
-- **Revert ( <i class="fa-solid fa-backward-step" aria-label="revert-icon" role="img"></i> ):** Reverts the VM to its last saved state. You lose all changes made since the last commit. VMs can only be reverted back to their last saved state - there is no history of all previous saved states.
+- **Revert ( <i class="fa-solid fa-backward-step" aria-label="revert-icon" role="img"></i> ):** Reverts the VM to its last saved state. You lose all changes made since the last commit. TopoMojo can only revert VMs to their last saved state - there is no history of all previous saved states.
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes a running VM instance. Before you click **delete**, make sure you have saved any changes to the disk.
-- **Save ( <i class="fa-solid fa-save" aria-label="save-icon" role="img"></i> ):** Save any changes made to the VM. Sometimes, this is referred to as "taking a snapshot", though the technical implementation of this feature may not resemble a true "snapshot" on the hypervisor. The **save** icon is only available when you're using an unlinked disk, since you can't save changes to a linked disk. Clicking **save** removes the last saved state and creates a new one with all VM changes.
+- **Save ( <i class="fa-solid fa-save" aria-label="save-icon" role="img"></i> ):** Save any changes made to the VM. Sometimes called "taking a snapshot", though the technical implementation of this feature may not resemble a true "snapshot" on the hypervisor. The **save** icon is only available when you're using an unlinked disk, since you can't save changes to a linked disk. Clicking **save** removes the last saved state and creates a new one with all VM changes.
   ![save a vm template](img/templates-save.png)
 
 ## Lab Document
@@ -229,7 +237,7 @@ There is a detailed [Guest Settings](#template-field-definitions) portion of the
 
 ### Markdown
 
-The markdown you enter here gets appended to the gamespace document at deploy time. This section is useful for appending randomized documentation using transforms to the base lab document authored in the **Document** section. For example, if a system's password is randomized via a transform, you can document the randomly generated password in this section using the _double-pounder-key_ notation for transforms.
+The markdown you enter here gets appended to the gamespace document at deploy time. This section is useful for appending randomized documentation using transforms to the base lab document authored in the **Document** section. For example, if a transform randomizes a system's password, you can document the randomly generated password in this section using the _double-pounder-key_ notation for transforms.
 
 ### Variants
 
@@ -278,7 +286,7 @@ By default, the **Local** filter displays only ISOs available to the current wor
 
 ![GUID and local filter applied](img/iso-drag.png)
 
-When you remove the **Local** filter, you see ISOs in the global folder on the NFS data store. The global folder is named with a GUID of all zeros. These global ISOs are available to every workspace in TopoMojo and should be used for commonly reused ISOs, like operating system installers, to prevent re-uploading the same artifact in multiple workspace folders.
+When you remove the **Local** filter, you see ISOs in the global folder on the NFS data store. TopoMojo names the global folder with a GUID of all zeros. These global ISOs are available to every workspace in TopoMojo. Use them for commonly reused ISOs, like operating system installers, to prevent re-uploading the same artifact in multiple workspace folders.
 
 You can attach an ISO to a VM in the challenge workspace **Templates** tab. See the [Adding and editing templates](#adding-and-editing-templates) section of this guide. When you select an ISO here, TopoMojo attaches the ISO to the VM upon its deployment.
 
@@ -320,7 +328,7 @@ The **Janitor** service cleans up unused resources (e.g., a workspace VM that ha
 
 ### Gamespaces Tab
 
-The **Gamespaces** tab is where the admin can search for, and filter by, **active** and **inactive** gamespaces. By default, the search is for _active_ gamespaces. Green indicates _active_ gamespaces and gray indicates _inactive_ gamespaces. An _active_ gamespace is one where the player can still interact with VMs and answer questions. An _inactive_ gamespace is one that is completed (the player has answered all questions) or expired.
+The **Gamespaces** tab is where the admin can search for, and filter by, **active** and **inactive** gamespaces. By default, the search is for _active_ gamespaces. Green indicates _active_ gamespaces and gray indicates _inactive_ gamespaces. An _active_ gamespace is one where the player can still interact with VMs and answer questions. An _inactive_ gamespace is one the player has completed (answered all questions) or that has expired.
 
 **Refresh:** Refreshes your search.
 
@@ -351,11 +359,11 @@ The screenshot below shows several active and inactive gamespaces (usernames red
 
 #### Delete
 
-**Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes the gamespace and associated VMs. This results in the full gamespace record being deleted from TopoMojo's database.
+**Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes the gamespace and associated VMs. This deletes the full gamespace record from TopoMojo's database.
 
 ### Workspaces Tab
 
-The **Workspaces** tab is where the admin can search for workspaces. An admin can view every workspace using this menu, regardless of being invited as a collaborator. Admins and non-admins use the search feature in the left navigation pane to view workspaces where they are a collaborator. See [Finding a Space](#finding-a-space) for more details.
+The **Workspaces** tab is where the admin can search for workspaces. An admin can view every workspace using this menu, even without being a collaborator. Admins and non-admins use the search feature in the left navigation pane to view workspaces where they are a collaborator. See [Finding a Space](#finding-a-space) for more details.
 
 - **Create ( <i class="fa-solid fa-plus" aria-label="create-icon" role="img"></i> ):** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](#building-a-new-workspace).
 - **Upload Zip ( <i class="fa-solid fa-file" aria-label="file-icon" role="img"></i> ):** Upload a workspace export zip to import workspaces into TopoMojo.
@@ -369,7 +377,7 @@ The _workspace id_ is visible below the workspace title. The workspace identifie
 
 #### View (Expanded)
 
-**Template Limit:** Defines the number of VM templates that can be added to the workspace.
+**Template Limit:** Defines the number of VM templates you can add to the workspace.
 
 **Template Scope:** Limits a workspace to using templates that have the given scope.
 
@@ -429,7 +437,7 @@ The **Users** tab shows all TopoMojo users. You can create new users and assign 
 - **Admin:** Full administrative access to TopoMojo.
 - **Disabled:** No permissions in TopoMojo.
 
-Users that are building workspaces and using TopoMojo to troubleshoot deployed gamespaces should be granted the _Creator_ role.
+Grant the _Creator_ role to users who need to build workspaces and troubleshoot deployed gamespaces.
 
 #### Create a New User
 

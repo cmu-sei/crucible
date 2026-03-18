@@ -110,3 +110,4 @@ Zscaler
 (?i)subtask(?:s)?
 tooltip
 vmtoolsd
+(?i)preconfigure(?:s|d)
