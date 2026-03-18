@@ -151,7 +151,7 @@ The list below explains the fields in the VM template.
 
   ![using the vmtoolsd command](img/vmware-tools.png)
 
-  When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (fw_cfg) Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) with commands similar to the following, where `variable` is the key of the Guest Setting to read: `sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.variable/raw`
+  When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (`fw_cfg`) Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) with commands similar to the following, where `variable` is the key of the Guest Setting to read: `sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.variable/raw`
 
 - **Replicas:** Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a _gamespace_, set **Replicas** to "3". To deploy one copy of the VM template for each member of the team owning the gamespace, set **Replicas** to "-1".
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.
@@ -201,7 +201,7 @@ To insert an image into your document:
 
 To see how your instructions will look to players when they "play" your lab, click the **Preview** button. The first screen capture shows the Markdown editor. The second screen capture shows the document in preview mode.
 
-![topomojo's builtin markdown editor](img/markdown-editor.png)
+![TopoMojo's builtin markdown editor](img/markdown-editor.png)
 
 and
 
@@ -276,7 +276,7 @@ The **Files** tab in the TopoMojo workspace allows you to upload files from your
 
 By default, the **Local** filter displays only ISOs available to the current workspace. When you upload a local ISO file, TopoMojo creates a folder named by the workspace GUID--highlighted in green below--in the NFS datastore. Only the current workspace has access to local ISO files in the workspace-named folder.
 
-![guid and local filter applied](img/iso-drag.png)
+![GUID and local filter applied](img/iso-drag.png)
 
 When you remove the **Local** filter, you see ISOs in the global folder on the NFS data store. The global folder is named with a GUID of all zeros. These global ISOs are available to every workspace in TopoMojo and should be used for commonly reused ISOs, like operating system installers, to prevent re-uploading the same artifact in multiple workspace folders.
 

@@ -109,3 +109,4 @@ guestinfo
 Zscaler
 (?i)subtask(?:s)?
 tooltip
+vmtoolsd
