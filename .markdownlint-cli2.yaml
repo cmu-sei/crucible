@@ -24,8 +24,7 @@ config:
   # List item indentation requires 2 spaces
   MD007: true
 
-  # Triggered by lines that end with unexpected white space and
-  # too many unexpected line breaks
+  # Triggered by lines that end with trailing whitespace
   MD009: true
 
   # Allow hard tab characters
@@ -142,7 +141,7 @@ config:
   MD048:
     style: backtick
 
-  # Italics should be formatted with an underscore
+  # Italics should be formatted with one (1) asterisk
   MD049:
     style: asterisk
 

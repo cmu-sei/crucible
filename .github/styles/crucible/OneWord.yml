@@ -1,4 +1,4 @@
-# Description: Enforces the use of one/two-word words
+# Description: Enforces correct compound word forms (one word, two words, or hyphenated)
 extends: substitution
 message: "'%s' should be written as '%s'."
 level: error
