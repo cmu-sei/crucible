@@ -438,3 +438,5 @@ buy-in
 (?i)breakthrough
 (?i)breakdown
 (?i)building block
+vmtoolsd
+(?i)preconfigure(?:s|d)

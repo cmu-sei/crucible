@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCS_DIRECTORY=/workspaces/crucible-docs
+DOCS_DIRECTORY=./
 
 # --- Color codes ---
 RED='\033[0;31m'
