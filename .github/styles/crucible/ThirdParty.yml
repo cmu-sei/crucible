@@ -1,0 +1,20 @@
+# Enforces correct usage of "third-party" and "third party" and bans numeric forms.
+#
+# Rationale: Per the Chicago Manual of Style:
+#   - "third-party" (hyphenated) is the adjective form used before a noun:
+#     e.g., "a third-party application", "third-party integrations"
+#   - "third party" (no hyphen) is the noun form:
+#     e.g., "integrate with a third party"
+#   - Numeric forms ("3rd-party", "3rd party") are never correct in formal writing.
+#
+# This rule catches the numeric forms. Hyphenation context (noun vs. adjective)
+# is enforced by editorial review, as it requires grammatical context.
+extends: substitution
+message: "Use 'third-party' or 'third party' instead of '%s'. Never use numeric forms."
+ignorecase: true
+level: error
+action:
+  name: replace
+swap:
+  "3rd-party": "third-party"
+  "3rd party": "third party"

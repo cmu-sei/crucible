@@ -1,0 +1,20 @@
+# Enforces correct usage of "login" (noun/adjective) vs. "log in" (verb).
+#
+# Rationale: Per the Chicago Manual of Style:
+#   - "login" (one word) is the noun or adjective form:
+#     e.g., "the login page", "your login credentials", "at first login"
+#   - "log in" (two words) is the verb form:
+#     e.g., "log in to the system", "users log in with their credentials"
+#
+# This rule catches "login" used as a verb ("to login", "login to").
+# The inverse error ("log in page", "log in credentials") is enforced by editorial review,
+# as it requires grammatical context to detect reliably.
+extends: substitution
+message: "'%s' is incorrect. Use 'log in' as the verb form (e.g., 'log in to the system')."
+ignorecase: true
+level: error
+action:
+  name: replace
+swap:
+  "to login": "to log in"
+  "login to": "log in to"

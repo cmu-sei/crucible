@@ -1,15 +1,15 @@
 # ![An icon representing the Crucible application suite icon](assets/cruciblelogo.svg "Crucible Application Suite Icon"){: style="height:75px;width:75px"} Introducing Crucible
 
-**Crucible** is an open-source application framework for creating and managing virtual environments and events.
+**Crucible** is an open source application framework for creating and managing virtual environments and events.
 
 Since 2018, Crucible has enabled large-scale United States (US) Department of Defense (DoD) cyber exercises, the President's Cybersecurity Challenge Competition, and partner nation information sharing and training initiatives.
 
 ## Key Features
 
-- Open-source application framework built on Angular and .NET Core software frameworks
+- Open source application framework built on Angular and .NET Core software frameworks
 - Modular design - extensive application programming interfaces
 - Customizable, immersive, browser-based user interface
-- Flexible integration of powerful, third-party, open-source tools
+- Flexible integration of powerful, third-party, open source tools
 - Scenario-based cyber experimentation, exercises, and challenges
 - Model topologies, simulate user activity, script scenario events
 - Efficiency through automation
@@ -49,7 +49,7 @@ Crucible can also support more advanced needs commonly found within concept expe
 
 [![Player Logo](assets/player-logo.svg){: style="height:75px;width:75px"}](player/index.md) Crucible's [**Player**](player/index.md) application is the exerciser's window into the virtual environment. Player enables assignment of team membership as well as customization of a responsive, browser-based user interfaces using various integrated applications. A Crucible content developer can shape how integrated applications present scenario information, assessments, and virtual environments.
 
-#### Open-Source Integrations
+#### Open Source Integrations
 
 - **osTicket**, a support ticket system, manages cyber range service requests.
 - **Mattermost, Rocket.Chat, Nextcloud Talk** chat services.
@@ -61,7 +61,7 @@ Crucible can also support more advanced needs commonly found within concept expe
 
 Caster supports the design and deployment of virtual environments to a variety of hypervisors. Supported platforms include VMware vSphere ESXi, Microsoft Azure HyperV (public-cloud), Amazon Web Services Xen/Nitro (public-cloud), and Proxmox Virtual Environment KVM (open source).
 
-#### Open-Source Integrations
+#### Open Source Integrations
 
 - **Terraform/OpenTofu**, an "infrastructure-as-code" tool, enables scripted deployment of cyber infrastructure.
 - **GitLab**, a version control system and code-repository, stores Terraform/OpenTofu modules.
@@ -72,16 +72,16 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 [![Steamfitter Logo](assets/steamfitter-logo.svg){: style="height:75px;width:75px"}](steamfitter/index.md) Crucible's [**Steamfitter**](steamfitter/index.md) application enables the organization and execution of tasks on virtual machines.
 
-#### Open-Source Integrations
+#### Open Source Integrations
 
 - **StackStorm**, an event-driven automation platform, scripts scenario events and senses the virtual environment.
 - **Ansible**, a software provisioning, configuration management and application deployment tool, enables post-deployment provisioning of services to infrastructure.
 
 ### Animating Activity
 
-[![GHOSTS Logo](assets/ghosts_new.png){: style="height:75px;width:75px"}](https://cmu-sei.github.io/GHOSTS/) Crucible's [**GHOSTS**](https://cmu-sei.github.io/GHOSTS/) Non-Player Character (NPC) automation and orchestration framework deploys and shapes the activities of NPCs using GenAI.
+[![GHOSTS Logo](assets/ghosts_new.png){: style="height:75px;width:75px"}](https://cmu-sei.github.io/GHOSTS/) Crucible's [**GHOSTS**](https://cmu-sei.github.io/GHOSTS/) Non-Player Character (NPC) automation and orchestration framework deploys and shapes the activities of NPCs using generative AI.
 
-#### Open-Source Integrations
+#### Open Source Integrations
 
 - **Ollama**, a platform designed to run LLaMA, Mistral, and other open source large language models locally.
 
@@ -103,9 +103,9 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 ### Operational Deployment
 
-Crucible applications implement the OpenID Connect authentication protocol and integrate with **Keycloak**, an open-source identity authentication service.
+Crucible applications implement the OpenID Connect authentication protocol and integrate with **Keycloak**, an open source identity authentication service.
 
-Crucible teams deploy applications as **Docker** containers, which employ operating system level virtualization to isolate containers from each other. They rely on **Kubernetes**, a popular container-orchestration system, to provide container deployment, scaling, and management services. Teams use **Argo CD**, a popular open-source GitOps tool set, to perform Kubernetes workflow and cluster management.
+Crucible teams deploy applications as **Docker** containers, which employ operating system level virtualization to isolate containers from each other. They rely on **Kubernetes**, a popular container-orchestration system, to provide container deployment, scaling, and management services. Teams use **Argo CD**, a popular open source GitOps tool set, to perform Kubernetes workflow and cluster management.
 
 A pre-configured Crucible Appliance virtual machine is available for download.
 

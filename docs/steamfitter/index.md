@@ -8,14 +8,14 @@ In the Steamfitter UI, four major functional sections help you manage content:
 
 - **Scenario Templates:** Organize tasks into groups that you can reuse on demand.
 - **Scenarios:** Display all planned, running, and completed scenarios.
-- **Tasks:** Let users create and execute ad-hoc tasks.
+- **Tasks:** Let users create and execute ad hoc tasks.
 - **History:** Shows the results of all tasks executed by all users.
 
 ![Four functional areas of Steamfitter](img/4-functional-sections.png)
 
 ## StackStorm Integration
 
-Behind the scenes, Steamfitter uses [StackStorm](https://stackstorm.com/) to execute Steamfitter tasks. StackStorm is an open-source application that connects applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This ensures that no communication for the tasks run by StackStorm occurs over the network.
+Behind the scenes, Steamfitter uses [StackStorm](https://stackstorm.com/) to execute Steamfitter tasks. StackStorm is an open source application that connects applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This ensures that no communication for the tasks run by StackStorm occurs over the network.
 
 ## Permissions and Roles
 
@@ -204,7 +204,7 @@ A task can produce multiple results:
       - *UntilSuccess:* The task iterates until the command completes successfully.
       - *UntilFailure:* The task iterates until the command fails.
 
-- **Expiration Timeout:** The time in seconds where, in the absence of a response, the task expires (times out).
+- **Expiration Time-out:** The time in seconds where, in the absence of a response, the task expires (times out).
 
 ##### VM Selection
 

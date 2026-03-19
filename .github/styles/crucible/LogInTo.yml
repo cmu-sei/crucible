@@ -1,0 +1,14 @@
+# Enforces "log in to" (verb phrase + preposition) instead of "log into".
+#
+# Rationale: Per the Chicago Manual of Style, "log in" is a two-word verb phrase.
+# "Into" implies physical movement or transformation. When logging in to a system
+# or application, the correct construction is "log in to [system]" — keeping the
+# verb ("log in") and preposition ("to") separate.
+extends: substitution
+message: "Use 'log in to' instead of '%s'."
+ignorecase: true
+level: error
+action:
+  name: replace
+swap:
+  "log into": "log in to"

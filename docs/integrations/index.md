@@ -1,6 +1,6 @@
 # Third-Party Applications
 
-The Crucible Framework provides users with the necessary tools and resources for integrating open-source third-party applications with the platform's features and data. By leveraging open-source resources, users can save time and resources, and benefit from the expertise of the open-source community.
+The Crucible Framework provides users with the necessary tools and resources for integrating open source third-party applications with the platform's features and data. By leveraging open source resources, users can save time and resources, and benefit from the expertise of the open source community.
 
 Administrators can customize the Crucible platform by adding applications that integrate with the features needed for specific exercises. This flexibility allows them to tailor the platform to their organization's needs and use tools built for their training goals. As a result, the platform stays useful and relevant as user needs change over time.
 
@@ -30,13 +30,13 @@ We already tested and used the following third-party applications within the Cru
 
 ### Mattermost
 
-Mattermost is an open-source, self-hostable online chat service with file sharing, search, and integrations. It serves as an internal chat for organizations and companies.
+Mattermost is an open source, self-hostable online chat service with file sharing, search, and integrations. It serves as an internal chat for organizations and companies.
 
 🔗 [Mattermost Documentation](https://docs.mattermost.com) and [installation instructions](https://github.com/cmu-sei/helm-charts/tree/main/charts/mattermost-team-edition)
 
 ### Moodle
 
-Moodle is a free and open-source learning management system. Schools, universities, workplaces, and other sectors use Moodle for blended learning, distance education, flipped classrooms, and other online learning projects.
+Moodle is a free and open source learning management system. Schools, universities, workplaces, and other sectors use Moodle for blended learning, distance education, flipped classrooms, and other online learning projects.
 
 🔗 [Moodle Documentation](https://docs.moodle.org/501/en/Main_page) and [installation instructions](https://docs.moodle.org/501/en/Installation_quick_guide)
 
@@ -112,7 +112,7 @@ The **Crucible Plugin for osTicket** provides authentication against an OAuth2 I
 
 ### Rocket.Chat
 
-Rocket.Chat is a customizable open-source communications platform for organizations with high data protection standards. It enables real-time conversations between colleagues, other companies, or your customers across web, desktop, or mobile devices.
+Rocket.Chat is a customizable open source communications platform for organizations with high data protection standards. It enables real-time conversations between colleagues, other companies, or your customers across web, desktop, or mobile devices.
 
 🔗 [Rocket.Chat Documentation](https://docs.rocket.chat) and [installation instructions](https://github.com/RocketChat/helm-charts)
 

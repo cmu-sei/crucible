@@ -49,7 +49,7 @@ Under Applications, click **Add New Application**. Here, you can add a blank app
 
 ![New view apps](img/new-view-apps.png)
 
-- **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. You can't apply these in another view; they are one-time use only.
+- **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. You can't apply these in another view; they are onetime use only.
 - **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The template contains the configuration settings and you can use the template many times.
 
 ![Add new view, app template](img/new-view-app-template.png)
@@ -319,11 +319,11 @@ After data collection, a View Admin can download a CSV showing timestamps and VM
 
 #### Service Support Tickets
 
-osTicket (`osticket.com`) is a widely-used open-source support ticket system. You can configure and deploy it for an exercise to provide a built-in help desk where participants can submit help requests directly to event administrators.
+osTicket (`osticket.com`) is a widely-used open source support ticket system. You can configure and deploy it for an exercise to provide a built-in help desk where participants can submit help requests directly to event administrators.
 
 #### Chat
 
-Mattermost (`mattermost.com`) is an open-source messaging platform you can configure and deploy to provide an off-the-shelf chat system for users.
+Mattermost (`mattermost.com`) is an open source messaging platform you can configure and deploy to provide an off-the-shelf chat system for users.
 
 #### Notifications
 
@@ -387,7 +387,7 @@ These procedures assume you are in the Player VM Console app.
 
 !!! note
 
-    If the **Send File to VM** option is grayed out, you will have to enter the credentials used to log into the virtual machine. Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
+    If the **Send File to VM** option is grayed out, you will have to enter the credentials used to log in to the virtual machine. Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
 
 3. After entering your credentials, select the **Send File to VM** option (this should no longer appear grayed out).
 4. Select the file from your local machine that you want to upload.
