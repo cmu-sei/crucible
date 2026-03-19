@@ -99,6 +99,10 @@ Select a gamespace, then click **Start** to "play" the lab -- start by reading t
 
 ![gamespace end and invite](img/end-invite-timer.png)
 
+Users can **Favorite** a workspace or gamespace using the **Star ( <i class="fa-solid fa-star" aria-label="fullscreen-icon" role="img"></i> )** button next to the title. Favorites appear at the top of the list.
+
+![workspace favorite](img/favorite.png)
+
 ## Building a New Workspace
 
 To build a new TopoMojo workspace click **New Workspace** from the homepage. The workspace interface contains six tabs: Settings, Templates, Document, Challenge, Files, and Play.
@@ -153,7 +157,7 @@ The list below explains the fields in the VM template.
 - **Name:** The **name** of the VM must be unique within the workspace and should be descriptive of the resource.
 - **Description:** A short description of the VM. It is best practice to include the credentials and purpose for the VM. The description is not visible to users playing the lab - it is only visible in the workspace editor.
 - **Networks:** A space-delimited list of networks on which the VM will have a network interface. These names should be the same for all systems in your lab that need to connect to the same network. TopoMojo creates the networks on the hypervisor when it deploys the VM/lab.
-- **Guest Settings:** Key-value pairs in the form of `key=value` to pass data into deployed VMs via [VMware guestinfo variables](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/tools/12-5-0/vmware-tools-administration-12-5-0/configuring-vmware-tools-components/using-vmware-tools-configuration-utility/view-virtual-machine-status-information/query-information-using-guestinfo-variable.html) or the [QEMU Firmware Configuration Device](https://www.qemu.org/docs/master/specs/fw*cfg.html) for Proxmox. The *key_ is the name of the guest setting. For example, `var1=test` is a guest setting named "var1" with a value of "test". You can randomize guest settings values using [TopoMojo Transforms](#transforms).
+- **Guest Settings:** Key-value pairs in the form of `key=value` to pass data into deployed VMs via [VMware guestinfo variables](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/tools/12-5-0/vmware-tools-administration-12-5-0/configuring-vmware-tools-components/using-vmware-tools-configuration-utility/view-virtual-machine-status-information/query-information-using-guestinfo-variable.html) or the [QEMU Firmware Configuration Device](https://www.qemu.org/docs/master/specs/fw*cfg.html) for Proxmox. The *key* is the name of the guest setting. For example, `var1=test` is a guest setting named "var1" with a value of "test". You can randomize guest settings values using [TopoMojo Transforms](#transforms).
 
   When using VMware as a backing hypervisor, use [VMware Tools](https://helpmanual.io/help/vmtoolsd/), such as the `vmtoolsd` command from the [open-vm-tools package](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html), to access guest info variables from a VM.
 
@@ -328,7 +332,7 @@ The **Janitor** service cleans up unused resources (e.g., a workspace VM that ha
 
 ### Gamespaces Tab
 
-The **Gamespaces** tab is where the admin can search for, and filter by, **active** and **inactive** gamespaces. By default, the search is for *active* gamespaces. Green indicates *active* gamespaces and gray indicates *inactive* gamespaces. An *active* gamespace is one where the player can still interact with VMs and answer questions. An *inactive* gamespace is one the player has completed (answered all questions) or that has expired.
+The **Gamespaces** tab is where admins search for gamespaces. Use the table headers to sort results by ID, time remaining before expiration, and parent workspace. Use filters to show **active** and **inactive** gamespaces. By default, the search is for *active* gamespaces. Green indicates *active* gamespaces and gray indicates *inactive* gamespaces. An *active* gamespace is one where the player can still interact with VMs and answer questions. An *inactive* gamespace is one the player has completed (answered all questions) or that has expired.
 
 **Refresh:** Refreshes your search.
 
@@ -363,7 +367,9 @@ The screenshot below shows several active and inactive gamespaces (usernames red
 
 ### Workspaces Tab
 
-The **Workspaces** tab is where the admin can search for workspaces. An admin can view every workspace using this menu, even without being a collaborator. Admins and non-admins use the search feature in the left navigation pane to view workspaces where they are a collaborator. See [Finding a Space](#finding-a-space) for more details.
+The **Workspaces** tab is where the admin can search for workspaces. Use the table headers to sort results by title, created date, and last activity.
+
+An admin can view every workspace using this menu, even without being a collaborator. Admins and non-admins use the search feature in the left navigation pane to view workspaces where they are a collaborator. See [Finding a Space](#finding-a-space) for more details.
 
 - **Create ( <i class="fa-solid fa-plus" aria-label="create-icon" role="img"></i> ):** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](#building-a-new-workspace).
 - **Upload Zip ( <i class="fa-solid fa-file" aria-label="file-icon" role="img"></i> ):** Upload a workspace export zip to import workspaces into TopoMojo.
@@ -438,6 +444,8 @@ The **Users** tab shows all TopoMojo users. You can create new users and assign 
 - **Disabled:** No permissions in TopoMojo.
 
 Grant the *Creator* role to users who need to build workspaces and troubleshoot deployed gamespaces.
+
+An administrator can configure TopoMojo to inherit user roles from the Identity Provider (IdP). For example, an IdP administrator can add roles like *administrator*, *builder*, or a custom role then configure TopoMojo to map those IdP roles to TopoMojo roles. Inheriting roles reduces the need for redundant setup if you're already managing user roles on the identity provider across multiple Crucible apps. See the [Helm deployment documentation](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#authentication-oidc) for more information on how to configure this setting.
 
 #### Create a New User
 
