@@ -1,4 +1,4 @@
-# Description: Checks for double spacing and prompts to remove if found.
+# Description: Checks for double spacing or missing spaces after sentence-ending punctuation.
 extends: existence
 message: "'%s' should have one space."
 level: error
