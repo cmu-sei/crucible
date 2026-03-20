@@ -1,14 +1,5 @@
-Crucible
-TopoMojo
 Gameboard
-Alloy
-Blueprint
-Caster
-Steamfitter
-CITE
-Gallery
 (?i)cyber
-\wGitHub\w
 Mattermost
 (?i)osticket
 (?i)cybersecurity
@@ -29,22 +20,17 @@ vCenter
 ESXi
 guestinfo
 [Dd]atastore
-JSON
 (?i)yaml
 pgAdmin
 Keycloak
-StackStorm
-Rocket\.Chat
 Moodle
 Webmail
 Roundcube
 Proxmox
 (?i)intel
 (?i)varchar
-HTML
 (?i)scoresheet
 (?i)unenroll(?:s)?
-CSV
 (?i)rerank
 (?i)embeddable
 (?i)unselect(?:s)?
@@ -55,9 +41,7 @@ VSCode
 (?i)walkthroughs?
 (?i)misconfiguration(?:s)?
 (?i)repo
-(?i)time frame
 xlsx
-(?i)unlink(?:ing)?
 (?i)hostnames?
 Ansible
 NPC(?:s)?
@@ -67,7 +51,6 @@ PDF(?:s)?
 (?i)unpublish
 (?i)textbox(?:es)?
 ODX(?:'s|s)?
-(?i)workspace(?:'s|s)?
 (?i)namespace(?:s)?
 sublicense
 API(?:'s|s)?
@@ -75,11 +58,11 @@ Traefik
 (?i)templatized
 (?i)unpublishing
 (?i)unsubmitted
+(?i)unlink(?:ing)?
+(?i)workspace(?:'s|s)?
 (?i)dev container
 (?i)hotspot(?:s)?
 (?i)gridlines(?:s)?
-LLaMA
-Mistral
 Suricata
 subnet(?:'s|s)?
 IP(?:'s|s)?
@@ -108,332 +91,36 @@ Zscaler
 tooltip
 (?i)ad hoc
 hoc
-(?i)carry-over
-(?i)check-in
-(?i)check-out
-(?i)checkpoint
-(?i)clearinghouse
-(?i)coauthor
-co-chair
-(?i)codebase
-(?i)co-develop
 (?i)colormap
-(?i)commercial off-the-shelf
-(?i)coprocessor
-(?i)co-refinement
 (?i)coroutine
-(?i)cosponsor
-(?i)cost-benefit
-(?i)cost-effective
-(?i)cost-efficient
-(?i)counterproductive
-(?i)coarse-grained
-co-worker
-(?i)cross-assembler
-(?i)cross-reference
-CSNET
 (?i)cyber attack
 (?i)cyber research
 (?i)cybercrime
-(?i)cyberspace
-(?i)cycle time
-(?i)central processing unit
-(?i)chained list
-(?i)context-free
-(?i)context-sensitive
-(?i)continuous-form
-(?i)computer-aided
-(?i)computer-assisted
-(?i)computer-based
-(?i)computer-dependent
-(?i)data bank
-(?i)data file
-(?i)data-flow
-(?i)data flow
-(?i)data link
-(?i)dataset
-(?i)data types
-(?i)decision maker
-(?i)decision-making
-DevOps
-(?i)double-click
-(?i)downgrade
 (?i)downline
-(?i)download
-(?i)down select
-(?i)downtime
-DoD
-(?i)e-commerce
-(?i)email
-(?i)end-user
-(?i)far-reaching
-(?i)fault-tolerant
-(?i)filename
-(?i)file server
-(?i)fine-grained
-(?i)fine-tune
-(?i)firmware
-(?i)first-hand
-(?i)fixed-point
-(?i)flight-test
-(?i)flip chart
-(?i)floating-point
-(?i)flowchart
-(?i)follow-up
-(?i)forensics
-FrameMaker
-(?i)front-end
-(?i)front end
-FTP
-(?i)full-time
-(?i)generative AI
-(?i)give-and-take
-(?i)grassroots
-(?i)ground rules
-(?i)hand-coded
-(?i)handheld
-(?i)hand-off
-(?i)hands-on
-(?i)hard-copy
-(?i)hardwired
-(?i)high-level
-(?i)high-order
-(?i)high-priority
-(?i)hotline
-(?i)homepage
-(?i)in-depth
-(?i)in-house
-(?i)inline
-(?i)innermost
 (?i)interarrival
-(?i)interdependent
-Internet of Things
 (?i)interprocess
-(?i)interrelationship
 (?i)intext
-IoT
-(?i)internet
-JANET
-(?i)knowledge base
-(?i)knowledge-based
-(?i)labeled
-(?i)large-scale
-(?i)left-click
-(?i)left-hand
-(?i)leftover
-(?i)lifecycle
-(?i)lifelong
-(?i)life span
-(?i)lifetime
-(?i)linked list
-(?i)login
-(?i)logon
-(?i)logout
-(?i)long-range
-(?i)long-term
-(?i)low-level
-(?i)low-order
-(?i)low-priority
-(?i)lowercase
-(?i)macro-instruction
-(?i)macro-programming
-(?i)mailbox
-(?i)mainframe
 (?i)makefile
-(?i)marketplace
-(?i)meta-analysis
-(?i)metalanguage
 (?i)metamodel
-(?i)microcomputer
-(?i)microprocessor
 (?i)middleware
-(?i)mindset
-(?i)minicomputer
-MIPS
-(?i)misuse case
-MITRE
 (?i)mockup
 (?i)multiaddress
-(?i)multidimensional
-(?i)multifaceted
-(?i)multilevel
-(?i)multimedia
-(?i)multiprocessor
-(?i)multitasking
-(?i)near real time
-(?i)nonaccredited
-(?i)noncredit
-(?i)non-essential
-(?i)nonlinear
 (?i)nonlocal
-(?i)nonstop
-(?i)nontechnical
-(?i)nonzero
 (?i)non von Neumann
-(?i)object-oriented
-(?i)offline
-(?i)on-board
-(?i)one-dimensional
-(?i)onetime
-(?i)ongoing
-(?i)online
-(?i)on-site
-(?i)off-site
-(?i)open systems
-(?i)overuse
-(?i)overused
-PageMaker
-(?i)pathname
-(?i)pie chart
-(?i)plug-in
-(?i)policy maker
-(?i)post-deployment
-(?i)postmortem
-PostScript
-(?i)predefined
 (?i)predesign
-(?i)preexist
-(?i)preeminent
-(?i)preempt
-(?i)preemptive
 (?i)pre on-site
-(?i)preplan
-(?i)printout
-(?i)proactive
-(?i)programming in the large
-(?i)programming in the small
-(?i)proof of concept
 (?i)pseudocode
 (?i)pseudomachine
-(?i)random-access
-(?i)read-only
-(?i)real-time
-(?i)real-world
-(?i)red-line
-(?i)right-click
-(?i)right-hand
 (?i)rollout
-(?i)roadmap
-(?i)runtime
-(?i)scalable
-(?i)scalability
 (?i)scrollbar
-(?i)sea-state
-SIEM
-(?i)semicolon
-(?i)shortcut
-(?i)short-term
-(?i)shutdown
-(?i)side effect
-(?i)sign-off
-Six Sigma
-(?i)smartphone
-(?i)soft copy
-SofTech
-(?i)special-purpose
-(?i)spreadsheet
-(?i)stand-alone
-(?i)standby
-(?i)start-up
 (?i)statechart
-(?i)state-of-the-art
-(?i)state-of-the-practice
-(?i)steady-state
-(?i)stovepipe
-(?i)straightforward
-(?i)subcategory
 (?i)subfile
 (?i)subgoal
 (?i)sublevel
 (?i)subprocess
-(?i)subroutine
-(?i)subsystem
-(?i)system-of-systems
-(?i)teamwork
-TeleSoft
-(?i)testbed
-(?i)test case
-(?i)throughput
-(?i)timeline
-(?i)time-out
 (?i)timesaving
-(?i)time-sharing
-(?i)time-slicing
-(?i)timestamp
 (?i)titlebar
-(?i)toolbox
-(?i)toolkit
-(?i)tool set
-(?i)top-down
-(?i)top-level
-(?i)tradeoff
-(?i)trade space
-(?i)tree structure
-(?i)tree-structured
-(?i)troubleshoot
-(?i)troubleshooter
-(?i)turnaround
-(?i)under way
 (?i)uniprocessor
-UNIX
-(?i)up-front
-(?i)uppercase
-(?i)uppermost
-(?i)uptime
-(?i)up-to-date
-(?i)usable
-USENET
-(?i)user interface
-(?i)user ID
-(?i)user-friendly
-(?i)user-level
-(?i)videodisc
-(?i)videotape
-(?i)voicemail
-(?i)web
-(?i)website
-(?i)webpage
-(?i)well-defined
-(?i)widespread
-Wi-Fi
-(?i)wildcard
-(?i)wild card
-(?i)workaround
-(?i)workforce
-(?i)workplace
-(?i)workstation
-(?i)world view
-(?i)worldwide
-(?i)wraparound
-(?i)year-round
-(?i)zero-defect
-(?i)zero trust
-(?i)access time
-Ada-based
-(?i)AI engineering
-(?i)application shared data
-ARPANET
-(?i)backlog
-(?i)base address register
-(?i)baseline
-(?i)benchmark
-(?i)beta test
-(?i)bilateral
-(?i)bimonthly
-BITNET
-(?i)biweekly
-Boolean
-(?i)bootstrap
-back-end
-(?i)back end
-(?i)bottom-up
-(?i)bottom-level
-(?i)built-in
-bi-level
-buy-in
 (?i)breakpoint
-(?i)breakthrough
-(?i)breakdown
-(?i)building block
 vmtoolsd
 (?i)preconfigure(?:s|d)
