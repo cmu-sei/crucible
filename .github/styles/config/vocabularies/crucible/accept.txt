@@ -18,7 +18,6 @@ GUID(?:'s|s)?
 [Gg]amespace(?:s)?
 ISO(?:s)
 MSEL(?:'s|s)?
-[Hh]otspot(?:s)?
 (?i)config
 SEI(?:'s)
 (?i)VM(?:'s|s)?
@@ -59,7 +58,7 @@ VSCode
 (?i)time frame
 xlsx
 (?i)unlink(?:ing)?
-(?i)hostname
+(?i)hostnames?
 Ansible
 NPC(?:s)?
 Ollama
@@ -101,11 +100,9 @@ kubectl
 Nextcloud
 (?i)gameplay
 Playtest
-(?i)hostnames
 dnsmasq
 cron
 systemd
-guestinfo
 Zscaler
 (?i)subtask(?:s)?
 tooltip
