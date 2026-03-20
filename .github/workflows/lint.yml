@@ -16,6 +16,7 @@ jobs:
         with:
           fail_on_error: true
           reporter: github-check
+          files: all
           glob: '!CLAUDE.md'
 
       - uses: DavidAnson/markdownlint-cli2-action@v21
