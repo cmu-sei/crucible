@@ -1,0 +1,42 @@
+# Flags compound words whose correct form depends on grammatical context
+# (noun vs. adjective vs. verb).
+#
+# Unlike PreferredSpelling.yml, this rule does not auto-fix because the correct
+# replacement cannot be determined without knowing the word's role in the sentence.
+# The suggested forms are shown in the error message for the writer to choose from.
+extends: substitution
+message: "Use '%s' instead of '%s' — correct form depends on context per SEI Technical Communications guidance."
+ignorecase: true
+level: error
+swap:
+  "back-up": "backup (noun/adjective) or back up (verb)"
+  "backend": "back-end (adjective) or back end (noun)"
+  "break-down": "breakdown (noun) or break down (verb)"
+  "break-through": "breakthrough (noun) or break through (verb)"
+  "buyin": "buy-in (noun) or buy in (verb)"
+  "dataflow": "data-flow (adjective) or data flow (noun)"
+  "decisionmaking": "decision-making (adjective) or decision making (noun)"
+  "enduser": "end-user (adjective) or end user (noun)"
+  "followup": "follow-up (noun/adjective) or follow up (verb)"
+  "frontend": "front-end (adjective) or front end (noun)"
+  "fulltime": "full-time (adjective) or full time (noun)"
+  "handoff": "hand-off (noun) or hand off (verb)"
+  "hardcopy": "hard-copy (adjective) or hard copy (noun)"
+  "knowledge-base": "knowledge base (noun) or knowledge-based (adjective)"
+  "knowledgebase": "knowledge base (noun) or knowledge-based (adjective)"
+  "log-in": "login (noun) or log in (verb)"
+  "log-on": "logon (noun) or log on (verb)"
+  "log-out": "logout (noun) or log out (verb)"
+  "onboard": "on-board (adjective) or on board (prepositional phrase)"
+  "realtime": "real-time (adjective) or real time (noun)"
+  "redline": "red-line (verb)"
+  "shut-down": "shutdown (noun) or shut down (verb)"
+  "signoff": "sign-off (noun/adjective) or sign off (verb)"
+  "standalone": "stand-alone (adjective before noun) or stand alone (following noun or verb)"
+  "stand-by": "standby (noun/adjective) or stand by (verb)"
+  "startup": "start-up (noun/adjective) or start up (verb)"
+  "timesharing": "time-sharing (adjective) or time sharing (noun)"
+  "topdown": "top-down (adjective before noun) or top down (following noun)"
+  "walk-through": "walkthrough (noun) or walk through (verb)"
+  "wrap-around": "wraparound (noun/adjective) or wrap around (verb)"
+  "yearround": "year-round (adjective) or year round (following noun)"
