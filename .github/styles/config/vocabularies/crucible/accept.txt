@@ -73,3 +73,7 @@ tooltip
 hoc
 vmtoolsd
 (?i)preconfigure(?:s|d)
+zScaler
+Traefik
+(?i)codespaces?
+markdownlint
