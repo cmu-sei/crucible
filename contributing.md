@@ -4,10 +4,10 @@ If you are developing within the [Crucible Framework](https://github.com/cmu-sei
 
 ## Using GitHub Dev Containers
 
-The easiest way to contribute to the docs is to use **GitHub Dev Containers** to setup a development environment accessible through your browser. In that environment, you can create a new branch, make changes, preview changes, and create pull requests (PR) to the main repository.
+The easiest way to contribute to the docs is to use **GitHub Dev Containers** to set up a development environment accessible through your browser. In that environment, you can create a new branch, make changes, preview changes, and create pull requests (PR) to the main repository.
 
 1. On the main page of this repo, click the green **Code** button, **Codespaces** tab, then **Create codespace on main** button. This opens the new codespace on a new tab in your browser.
-2. Wait for the codespace to finish building. Once completed, you have an in-browser Visual Studio Code (VSCode) editor with a terminal open at the bottom. Watch the terminal for setup commands to finish running, and `pip3` will install several prerequisites. When finished, the terminal shows something like:
+2. Wait for the codespace to finish building. Once completed, you have an in-browser Visual Studio Code (VS Code) editor with a terminal open at the bottom. Watch the terminal for setup commands to finish running, and `pip3` will install several prerequisites. When finished, the terminal shows something like:
 
    ```bash
    [@your-username -> /workspaces/crucible (main)

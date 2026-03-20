@@ -13,7 +13,7 @@ RESET='\033[0m'
 # --- Vale Lint ---
 echo -e "\n${BLUE}${BOLD}## Linting ${DOCS_DIRECTORY} using Vale${RESET}\n"
 
-vale "$DOCS_DIRECTORY/docs" --config "$DOCS_DIRECTORY/.vale.ini"
+vale "$DOCS_DIRECTORY" --config "$DOCS_DIRECTORY/.vale.ini" --glob='!CLAUDE.md'
 vale_exit=$?
 
 # --- Markdownlint Lint ---
