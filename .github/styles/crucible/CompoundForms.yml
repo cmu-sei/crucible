@@ -9,6 +9,8 @@ message: "Use '%s' instead of '%s' — correct form depends on context per SEI T
 ignorecase: true
 level: error
 swap:
+  "3rd-party": "third-party (adjective) or third party (noun)"
+  "3rd party": "third-party (adjective) or third party (noun)"
   "back-up": "backup (noun/adjective) or back up (verb)"
   "backend": "back-end (adjective) or back end (noun)"
   "break-down": "breakdown (noun) or break down (verb)"

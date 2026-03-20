@@ -6,14 +6,12 @@
 # Note: Entries where the correct form depends on grammatical context (noun vs.
 # adjective vs. verb) are in CompoundForms.yml, which does not auto-fix.
 extends: substitution
-message: "Use '%s' instead of '%s' per SEI Technical Communications guidance."
+message: "Use '%s' instead of '%s'."
 ignorecase: true
 level: error
 action:
   name: replace
 swap:
-  "3rd-party": "third-party"
-  "3rd party": "third party"
   "ad-hoc": "ad hoc"
   "anti-virus": "antivirus"
   "bilevel": "bi-level"
