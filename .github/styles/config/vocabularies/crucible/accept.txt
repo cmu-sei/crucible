@@ -35,11 +35,8 @@ Proxmox
 (?i)embeddable
 (?i)unselect(?:s)?
 (?i)fullscreen
-(?i)codespace(?:s)?
 (?i)dev
-VS Code
 (?i)walkthroughs?
-(?i)misconfiguration(?:s)?
 (?i)repo
 xlsx
 (?i)hostnames?
@@ -52,75 +49,27 @@ PDF(?:s)?
 (?i)textbox(?:es)?
 ODX(?:'s|s)?
 (?i)namespace(?:s)?
-sublicense
 API(?:'s|s)?
-Traefik
 (?i)templatized
 (?i)unpublishing
 (?i)unsubmitted
 (?i)unlink(?:ing)?
 (?i)workspace(?:'s|s)?
-(?i)dev container
 (?i)hotspot(?:s)?
 (?i)gridlines(?:s)?
-Suricata
-subnet(?:'s|s)?
 IP(?:'s|s)?
 [Cc]alc
 [Ss]rc
-Kibana
-Dionaea
-Wireshark
-[Cc]allout(?:s)?
-markdownlint
-toolchain
-[Ss]uperadmin(?:s)?
-Rangetech
 nginx
 Reframe
 reusability
 kubectl
 Nextcloud
 (?i)gameplay
-Playtest
-dnsmasq
 cron
-systemd
-Zscaler
 (?i)subtask(?:s)?
 tooltip
 (?i)ad hoc
 hoc
-(?i)colormap
-(?i)coroutine
-(?i)cyber attack
-(?i)cyber research
-(?i)cybercrime
-(?i)downline
-(?i)interarrival
-(?i)interprocess
-(?i)intext
-(?i)makefile
-(?i)metamodel
-(?i)middleware
-(?i)mockup
-(?i)multiaddress
-(?i)nonlocal
-(?i)non von Neumann
-(?i)predesign
-(?i)pre on-site
-(?i)pseudocode
-(?i)pseudomachine
-(?i)rollout
-(?i)scrollbar
-(?i)statechart
-(?i)subfile
-(?i)subgoal
-(?i)sublevel
-(?i)subprocess
-(?i)timesaving
-(?i)titlebar
-(?i)uniprocessor
-(?i)breakpoint
 vmtoolsd
 (?i)preconfigure(?:s|d)
