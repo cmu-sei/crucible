@@ -18,7 +18,7 @@ This tutorial assumes the following:
 
 Create the Player View that participants will use during the exercise. Alloy clones this view for each event. For additional detail, see the Player documentation, [Manage Views](../../player/index.md#views).
 
-1. Log into Player.
+1. Log in to Player.
 2. In the upper-right corner, select your username, then **Administration**.
 3. From the left navigation, select **Views**.
 4. Click the **+** icon to add a new view.
@@ -31,7 +31,7 @@ Create the Player View that participants will use during the exercise. Alloy clo
 
 Create a Caster project and directory to store the Terraform infrastructure-as-code for the exercise topology. For additional detail, see the [Caster User Guide](../../caster/index.md#user-guide).
 
-1. Log into Caster.
+1. Log in to Caster.
 2. Click the **+** icon to create a new **Project**, then **Save**.
 3. From the left navigation, select **Add Directory** to add a directory containing your Terraform configuration (modules and variables).
 4. Make sure that the Terraform configuration is ready to run `plan` and `apply`.
@@ -48,7 +48,7 @@ Create a Caster project and directory to store the Terraform infrastructure-as-c
 
 (Optional) Create a **Scenario Template** to run tasks and injects during the event. For additional detail, see the Steamfitter documentation, [Scenario Templates](../../steamfitter/index.md#scenario-templates).
 
-1. Log into Steamfitter.
+1. Log in to Steamfitter.
 2. Select **Scenario Templates**, then click **Add Scenario Template**.
 3. Enter a **Name**, **Description**, and set the **Duration Hours**.
 4. Click **Save**.
@@ -62,7 +62,7 @@ Create a Caster project and directory to store the Terraform infrastructure-as-c
 
 Alloy ties the exercise components together and provides participants with a centralized location to engage in the exercise. For additional detail, see the Alloy documentation, [Deploy an Event/Exercise](../../alloy/index.md#deploy-an-eventexercise).
 
-1. Log into Alloy.
+1. Log in to Alloy.
 2. In the upper-right corner, select your username, then **Administration**.
 3. In the left navigation, select **Event Templates**, then click **Add New Event Template**.
 4. Next to the New Event Template, click the **Edit** icon to set a **Name**, **Event Template Description**, and **Duration Hours**.
@@ -74,7 +74,7 @@ Alloy ties the exercise components together and provides participants with a cen
 
 ## Step 5: Launching and Validating
 
-From the Alloy home page (you may have to exit the Alloy Administration screen):
+From the Alloy homepage (you may have to exit the Alloy Administration screen):
 
 1. Click **Open** next to the Event Template.
 2. In the Event screen, click  **Launch**.

@@ -177,7 +177,7 @@ Use the [Security and Compliance Checklist](../security/index.md) to verify:
 Follow your organization's incident response procedures. Key steps:
 
 1. Identify and contain the incident using Kubernetes tools
-2. Review application and audit logs for the timeframe
+2. Review application and audit logs for the time frame
 3. Use `kubectl` to isolate affected pods if needed
 4. Restore from backups if you detect a data integrity compromise
 5. Document findings and remediation steps

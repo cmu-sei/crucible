@@ -124,7 +124,7 @@ The Game Center header displays game metadata and settings, including the name, 
 
     When a game is hidden, a user with permissions that can view both hidden and visible games--such as Designer or Tester--will see the game card on the Home screen; however, the game card appears with an "eye-slash" icon to denote that it is hidden.
 
-**Feature:** Toggle *Normal* or *Featured*. When *Featured*, the game appears under Featured Games at the top of the Gameboard home page.
+**Feature:** Toggle *Normal* or *Featured*. When *Featured*, the game appears under Featured Games at the top of the Gameboard homepage.
 
 **Key:** A short, unique key distinguishing *this* event.
 
@@ -168,7 +168,7 @@ For a full treatment of how to design completion certificates, please see the [C
 
     The Admin Start feature bypasses the "ready to play" feature; that is, users assigned the `Admin` role can Admin Start regardless of whether all players have "readied up" or not.
 
-**Show On Homepage When In Practice Mode:** Toggle *Yes* to make the game's game card visible on the home page even when the game is in Practice mode.
+**Show On Homepage When In Practice Mode:** Toggle *Yes* to make the game's game card visible on the homepage even when the game is in Practice mode.
 
 **Engine Mode:** Choose between *Standard* and *External Host*. The vast majority of games use the Standard mode, where Gameboard submits answers to the game engine (usually TopoMojo) for grading. Choose External Host for specialized scenarios where players use an external client (e.g., a Unity game) to interact with the challenges.
 
@@ -200,7 +200,7 @@ These settings pertain to registration, execution, and general game and challeng
 
 ##### Registration
 
-Offering a different execution period from registration period is an option. This gives participants the opportunity to register for a period of time prior to round one of the competition getting underway. No need for a registration period for later rounds where a competitor would have had to qualify for the next round to even continue.
+Offering a different execution period from registration period is an option. This gives participants the opportunity to register for a period of time prior to round one of the competition getting under way. No need for a registration period for later rounds where a competitor would have had to qualify for the next round to even continue.
 
 **Access:** *None* means players can't register themselves for a game. An administrator must add players to the game or advance players from another game. *Open* means players can register themselves within the specified registration period.
 
@@ -655,7 +655,7 @@ The table below outlines the permissions associated with different roles in the 
 | Assign roles: Assign roles to other users                                                                                                  | **Yes** | No       | No      | No      |
 | Create users manually: Create and edit users manually (currently available only as an API call)                                            | **Yes** | No       | No      | No      |
 
-Before players start a game or lab, they must *enroll* in the game lobby. After logging in, they select a game on the **Home** page, click **Enroll**, and confirm to start the session. The **Enroll** button appears only after they set a display name and sponsoring organization in their profile. The game's registration window must also be open, as defined in the Admin Game Settings.
+Before players start a game or lab, they must *enroll* in the game lobby. After logging in, they select a game from the **Home** screen, click **Enroll**, and confirm to start the session. The **Enroll** button appears only after they set a display name and sponsoring organization in their profile. The game's registration window must also be open, as defined in the Admin Game Settings.
 
 If a user has an elevated role, then the **Admin Enroll** button appears next to the **Enroll** button. See the screenshot below.
 
@@ -1160,7 +1160,7 @@ The legacy reporting functionality is available at the bottom of the Reports scr
 Each report shares common characteristics.
 
 - **Filter controls:** Dedicated filter controls allow users to narrow down or restrict the data displayed on a report. For example, if you're interested in seeing enrollments from a given sponsor in the Enrollment Report, use the **Sponsors** filter to select the sponsor(s) you're interested in. If you don't select any values in a filter, the results include all data from that filter.
-- **Copy link to report:** When you run a report, the browser generates a link that reflects your current filter selections. Select the **clipboard icon** to copy the current report and share it with another Gameboard user. The user you are sharing with must log into Gameboard and have the appropriate Gameboard role. You can also copy the link in your browser's address bar and share.
+- **Copy link to report:** When you run a report, the browser generates a link that reflects your current filter selections. Select the **clipboard icon** to copy the current report and share it with another Gameboard user. The user you are sharing with must log in to Gameboard and have the appropriate Gameboard role. You can also copy the link in your browser's address bar and share.
 
 !!! tip
 

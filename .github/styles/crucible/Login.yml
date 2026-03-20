@@ -1,0 +1,23 @@
+# Enforces correct usage of "login" (noun/adjective) vs. "log in" (verb),
+# and "log in to" instead of "log into" or "login into".
+#
+# Rationale: Per the Chicago Manual of Style:
+#   - "login" (one word) is the noun or adjective form:
+#     e.g., "the login page", "your login credentials", "at first login"
+#   - "log in" (two words) is the verb form:
+#     e.g., "log in to the system", "users log in with their credentials"
+#   - "into" implies physical movement. The correct construction is
+#     "log in to [system]" — keeping the verb and preposition separate.
+#
+# This rule catches "login" used as a verb and "log into" / "login into".
+extends: substitution
+message: "'%s' is incorrect. Use 'log in to' as the verb form (e.g., 'log in to the system')."
+ignorecase: true
+level: error
+action:
+  name: replace
+swap:
+  "to login": "to log in"
+  "login to": "log in to"
+  "login into": "log in to"
+  "log into": "log in to"

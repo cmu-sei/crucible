@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Caster** is the deployment component of the Crucible framework. It uses [Terraform](https://www.terraform.io/), an open-source Infrastructure-as-Code tool, to define and apply infrastructure configurations.
+**Caster** is the deployment component of the Crucible framework. It uses [Terraform](https://www.terraform.io/), an open source Infrastructure-as-Code tool, to define and apply infrastructure configurations.
 
 Caster provides a web interface where exercise developers create, share, and manage topology configurations.
 
@@ -380,7 +380,7 @@ This glossary defines key terms and concepts used in the Caster application.
 
 **Project:** A way to organize and categorize similar environments for multiple workspaces and directories within Caster.
 
-**Terraform:** An open-source Infrastructure-as-Code tool.
+**Terraform:** An open source Infrastructure-as-Code tool.
 
 **Topology:** The physical and logical arrangement of nodes and connections in a network.
 

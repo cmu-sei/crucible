@@ -88,7 +88,7 @@ Crucible common modules are a set of Angular modules that are common between Cru
 
 ### Crucible Plugin for Moodle
 
-The Crucible plugin for Moodle is an activity plugin that allows Moodle users to access Crucible labs and exercises from the Moodle open-source learning management system. For more information, see:
+The Crucible plugin for Moodle is an activity plugin that allows Moodle users to access Crucible labs and exercises from the Moodle open source learning management system. For more information, see:
 
 - [Crucible plugin for Moodle Repository](https://github.com/cmu-sei/moodle-mod_crucible)
 
