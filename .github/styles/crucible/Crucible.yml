@@ -1,0 +1,40 @@
+# Enforces correct capitalization of Crucible application and product names.
+#
+# Correct forms:
+#   Crucible, Alloy, Blueprint, Caster, CITE, Gallery, Gameboard,
+#   Player, Steamfitter, TopoMojo
+#
+# Note: Some of these terms (e.g., "gallery", "caster") are also
+# common English words. This rule assumes they refer to Crucible products
+# in this documentation context. Suppress false positives with Vale's inline
+# disable comment if needed. "Player" is ignored because it is too commonly
+# used.
+extends: substitution
+message: "Capitalize the Crucible product name: use '%s' instead of '%s'."
+ignorecase: false
+level: error
+action:
+  name: replace
+swap:
+  # Crucible
+  "crucible": "Crucible"
+  # Alloy
+  "alloy": "Alloy"
+  # Blueprint
+  "blueprint": "Blueprint"
+  # Caster
+  "caster": "Caster"
+  # CITE — all-caps is correct; catch lowercase and title-case
+  "cite": "CITE"
+  "Cite": "CITE"
+  # Gallery
+  "gallery": "Gallery"
+  # Gameboard
+  "gameboard": "Gameboard"
+  # Steamfitter
+  "steamfitter": "Steamfitter"
+  # TopoMojo — catch lowercase, title-case, and spaced/hyphenated variants
+  "topomojo": "TopoMojo"
+  "Topomojo": "TopoMojo"
+  "topo mojo": "TopoMojo"
+  "topo-mojo": "TopoMojo"
