@@ -37,7 +37,7 @@ Proxmox
 (?i)fullscreen
 (?i)codespace(?:s)?
 (?i)dev
-VSCode
+VS Code
 (?i)walkthroughs?
 (?i)misconfiguration(?:s)?
 (?i)repo
