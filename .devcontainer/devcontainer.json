@@ -49,6 +49,11 @@
 				"Anthropic.claude-code"
 			],
 			"settings": {
+				"vale.valeCLI.config": "${workspaceFolder}/.vale.ini",
+				"vale.valeCLI.path": "/usr/local/bin/vale",
+				"vale.valeCLI.syncOnStartup": true,
+				"vale.enableSpellcheck": true,
+				"vale.readabilityProblemLocation": "both",
 				"editor.formatOnSave": true,
 				"editor.tabSize": 2,
 				"files.insertFinalNewline": true,
