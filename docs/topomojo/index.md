@@ -10,7 +10,7 @@ TopoMojo allows for the same functionality and connectivity that users would exp
 
 New topologies can be rapidly deployed using existing templates or built from the ground up with user-provided ISO's and VM specifications.
 
-TopoMojo uses a hypervisor in the backend to deploy virtual machines and configure virtual networks. Supported hypervisors are VMware vSphere and Proxmox.
+TopoMojo uses a hypervisor in the back-end to deploy virtual machines and configure virtual networks. Supported hypervisors are VMware vSphere and Proxmox.
 
 Go to the TopoMojo repository: [github.com/cmu-sei/TopoMojo](https://github.com/cmu-sei/TopoMojo).
 
@@ -39,7 +39,7 @@ Each resource (e.g., virtual machine, virtual network, etc.) associated with a w
 
 A *lab* or *challenge* is a TopoMojo workspace built to teach or test hands-on cybersecurity skills. *Labs* are typically designed to be instructional with detailed documents that might resemble a full walkthrough. *Challenges* are typically skills assessments with minimal instructions designed to test a user's skills or for use in a competition (e.g., Capture the Flag competition).
 
-3rd party consumers of TopoMojo content, like [Gameboard](../gameboard/) and [Moodle](../integrations/index.md#moodle), can deploy labs and challenges.
+Third-party consumers of TopoMojo content, like [Gameboard](../gameboard/) and [Moodle](../integrations/index.md#moodle), can deploy labs and challenges.
 
 ## Getting Started
 
@@ -139,7 +139,7 @@ A typical TopoMojo deployment contains several types of templates.
 - Purpose-built templates include preconfigured VMs (e.g., a web server configured to serve content).
 - Blank discs let engineers install an operating system not yet available as a template.
 
-Administrators can publish individual templates (e.g., a standalone base install of Kali Linux). They can also publish a "template set" of multiple VMs serving as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, etc.).
+Administrators can publish individual templates (e.g., a stand-alone base install of Kali Linux). They can also publish a "template set" of multiple VMs serving as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, etc.).
 
 #### Adding and Editing Templates
 
@@ -168,7 +168,7 @@ The list below explains the fields in the VM template.
 - **Replicas:** Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a *gamespace*, set **Replicas** to "3". To deploy one copy of the VM template for each member of the team owning the gamespace, set **Replicas** to "-1".
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.
 - **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine.
-- **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for backend systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access. *Note: These VMs may still be visible/accessible over the network - users just aren't able to click into a console via the lab interface.*
+- **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access. *Note: These VMs may still be visible/accessible over the network - users just aren't able to click into a console via the lab interface.*
 - **Linked:** *Unlinking* creates a new a new clone of the template which you can save and customize. **Unlink** any virtual machine that will not use the default disk included with the template (i.e., you need to save changes to the VM).
 - **Delete Template:** Deletes the template from the workspace.
 
@@ -213,7 +213,7 @@ To insert an image into your document:
 
 To see how your instructions will look to players when they "play" your lab, click the **Preview** button. The first screen capture shows the Markdown editor. The second screen capture shows the document in preview mode.
 
-![TopoMojo's builtin markdown editor](img/markdown-editor.png)
+![TopoMojo's built-in markdown editor](img/markdown-editor.png)
 
 and
 
