@@ -11,15 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install Vale
+      - name: Download Vale
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          VALE_VERSION=$(curl -s https://api.github.com/repos/errata-ai/vale/releases/latest | jq -r '.tag_name | ltrimstr("v")')
-          curl -sfL "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -o vale.tar.gz
+          gh release download --repo errata-ai/vale --pattern "vale_*_Linux_64-bit.tar.gz" -O vale.tar.gz
           tar -xzf vale.tar.gz vale
-          sudo mv vale /usr/local/bin/
 
       - name: Run Vale
-        run: vale .
+        run: ./vale .
 
       - uses: DavidAnson/markdownlint-cli2-action@v22
         with:
