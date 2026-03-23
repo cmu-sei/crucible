@@ -1,24 +1,36 @@
-name: Lint Docs
+name: Lint and Build Docs
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
+  workflow_call:
 
 jobs:
-  lint:
-    name: Lint markdown files using Vale and Markdownlint
+  lint-and-build:
+    name: Lint and build docs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
-      - uses: errata-ai/vale-action@v2
-        with:
-          fail_on_error: true
-          reporter: github-check
-          files: all
-          glob: '!CLAUDE.md'
+      - name: Install Vale
+        run: |
+          VALE_VERSION=$(curl -s https://api.github.com/repos/errata-ai/vale/releases/latest | jq -r '.tag_name | ltrimstr("v")')
+          curl -sfL "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -o vale.tar.gz
+          tar -xzf vale.tar.gz vale
+          sudo mv vale /usr/local/bin/
 
-      - uses: DavidAnson/markdownlint-cli2-action@v21
+      - name: Run Vale
+        run: vale .
+
+      - uses: DavidAnson/markdownlint-cli2-action@v22
         with:
           globs: "**/*.md"
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: 3.x
+
+      - name: Install mkdocs-material
+        run: pip install mkdocs-material
+
+      - name: Build docs
+        run: mkdocs build
