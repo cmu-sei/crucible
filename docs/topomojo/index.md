@@ -39,7 +39,7 @@ Each resource (e.g., virtual machine, virtual network, etc.) associated with a w
 
 A *lab* or *challenge* is a TopoMojo workspace built to teach or test hands-on cybersecurity skills. *Labs* are typically designed to be instructional with detailed documents that might resemble a full walkthrough. *Challenges* are typically skills assessments with minimal instructions designed to test a user's skills or for use in a competition (e.g., Capture the Flag competition).
 
-Third-party consumers of TopoMojo content, like [Gameboard](../gameboard/) and [Moodle](../integrations/index.md#moodle), can deploy labs and challenges.
+Third-party consumers of TopoMojo content, like [Gameboard](../gameboard/index.md) and [Moodle](../integrations/index.md#moodle), can deploy labs and challenges.
 
 ## Getting Started
 
@@ -306,7 +306,7 @@ The **Play** tab is where you can interact with your lab in the same way others 
 
 **Max Minutes:** The maximum number of minutes permitted to play before the gamespace expires.
 
-**Point Value:** Suggested number of points earned for successfully answering all questions. Consumers (e.g., [Gameboard](../gameboard/) and [Moodle](../integrations/index.md#moodle)) can request any point value when they deploy a gamespace.
+**Point Value:** Suggested number of points earned for successfully answering all questions. Consumers (e.g., [Gameboard](../gameboard/index.md) and [Moodle](../integrations/index.md#moodle)) can request any point value when they deploy a gamespace.
 
 **Start:** Starts the gamespace by deploying virtual machines, displaying the Markdown document, making challenge questions available, and starting the timer for the user that clicked **Start**.
 
