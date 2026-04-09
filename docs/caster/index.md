@@ -135,7 +135,7 @@ The screen shot below shows the **Workspaces** pane in Caster's Administration V
 
 ### VLANs
 
-![Caster Administration View, VLANs pane](img/caster-vlans.png)
+![Caster Administration View, VLANs pane](img/caster-adm-vlans.png)
 
 Caster manages VLAN IDs by creating pools of 4096 VLANs and dividing them into partitions. When a user requests a VLAN from a partition, Caster assigns an unused ID and marks it in use until the user releases it.
 
