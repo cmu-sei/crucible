@@ -25,7 +25,7 @@ Crucible confronts challenges faced by platform administrators and content devel
 - manual configurations lead to high-labor costs and excessive human error—limiting scalability and automation
 - proprietary range software leads to vendor lock-in and higher costs
 
-## INDIVIDUAL TRAINING
+## Individual Training
 
 Crucible can be a platform for individual practice or competition. These platforms tend to feature the following two applications:
 
