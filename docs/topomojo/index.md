@@ -27,11 +27,13 @@ Users play through a lab in a *gamespace*. Users get their own, isolated, read-o
 The "Isolation Tag" is a unique identifier TopoMojo uses to identify a workspace or gamespace. This ID uniquely identifies each workspace and gamespace in the TopoMojo database.
 
 - For a workspace: the *isolation tag* is the workspace id visible above the Workspace Title when viewing the workspace.
-  ![workspace isolation tag](img/iso-tag-ws.png)
+
+   ![workspace isolation tag](img/iso-tag-ws.png)
 
 - For a gamespace: the *isolation tag* is the gamespace id partially visible from the **Admin**, **Gamespaces** view and fully visible in the URL bar when viewing a VM console that belongs to a gamespace.
-  ![gamespace isolation tag](img/iso-tag-gs.png)
-  ![isolation tag url](img/iso-tag-url.png)
+
+   ![gamespace isolation tag](img/iso-tag-gs.png)
+   ![isolation tag url](img/iso-tag-url.png)
 
 Each resource (e.g., virtual machine, virtual network, etc.) associated with a workspace or gamespace will have the isolation tag appended to the resource name. For example: a VM named `challenge-sever` in the gamespace with id (isolation tag) `18048abc66f142e1804732082f4051d2`, has the name `challenge-server#18048abc66f142e1804732082f4051d2`. Appending the isolation tag to workspace/gamespace resources ensures environment isolation and unique resource naming.
 

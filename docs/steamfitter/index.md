@@ -121,7 +121,11 @@ In Steamfitter, on the **Scenarios** tab with a scenario open, click the **Task 
 
 ##### Points
 
-Tasks can optionally have *points* assigned to them. For example, one task may be worth 1 point, another worth 3 points, and a third 0 points. In the Player view, only tasks with points contribute to the score panel. Task points and the Player view scoring panel exist to support grading tasks and show their contribution to an overall score.
+Tasks can optionally have *points* assigned to them. For example, one task may be worth 1 point, another worth 3 points, and a third 0 points. In the Player view, only tasks with points contribute to the score panel. Task points and the Player view scoring panel exist to support grading tasks and show their contribution to an overall score. The manual tasks page URL looks something like this:
+
+ `steamfitter.your-domain.net/view/3933ac4f-de98-418a-be78-3dc06d3573ff`
+
+![Manual tasks page in Steamfitter](img/sf-manual-tasks.png)
 
 If no tasks in the scenario have points assigned, the score panel does not appear. In this case, the Player view displays only a list of tasks that users can run directly.
 
@@ -142,7 +146,11 @@ To prevent confusion, the system now displays an error message explaining that m
 
 To work around this issue, open the Tasks page using a scenario-based URL instead of a view-based URL.
 
-Instead of `/view/{viewId}` use `/scenario/{scenarioId}`. This URL tells Player exactly which scenario's tasks to display and avoids the conflict.
+Instead of `/view/{viewId}` use `/scenario/{scenarioId}`. For example:
+
+`steamfitter.your-domain.net/scenario/3933ac4f-de98-418a-be78-3dc06d3573ff`
+
+This URL tells Player exactly which scenario's tasks to display and avoids the conflict.
 
 !!! tip
 
