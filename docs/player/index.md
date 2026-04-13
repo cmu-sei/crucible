@@ -325,13 +325,18 @@ After data collection, a View Admin can download a CSV showing timestamps and VM
 
 ![vm-app-10](img/vm-app-10.png)
 
-#### Steamfitter Tasks
+#### Steamfitter Manual Tasks
 
-The **Steamfitter Tasks** application displays manually executable tasks for the current exercise. A View Admin adds it to a view as an application pointing to the Steamfitter scenario URL.
+The **Steamfitter Manual Tasks** application displays manually executable tasks for the current exercise. A View Admin adds it to a view as an application pointing to the Steamfitter manual task page URL using the view ID, for example:
+
+ `steamfitter.your-domain.net/view/3933ac4f-de98-418a-be78-3dc06d3573ff`
 
 The screenshot below shows the Steamfitter Tasks application in the Player Application Navigation Bar with the scoring panel in use.
 
 ![Steamfitter Tasks in the Player Application Navigation Bar with scoring panel](img/steam-tasks-in-nav.png)
+
+!!! info "See also"
+    For more information about creating Steamfitter manual tasks, see [Scenarios and Points](../steamfitter/index.md#points) in the *Steamfitter Guide*.
 
 When tasks in the scenario have points assigned, a scoring panel appears at the top showing your current score (for example, **Score: 0/100 (0%)**). The tasks table displays **Status**, **Score**, and **Task** columns. If no tasks have points assigned, the scoring panel does not appear and the page displays only the task list.
 
