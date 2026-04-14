@@ -16,7 +16,9 @@ For installation, refer to these GitHub repositories.
 
 ## Administrator Guide
 
-## Administration View
+Gallery administrators use the Administration View to manage users, collections, cards, articles, and exhibits.
+
+### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
 
@@ -25,29 +27,29 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 ![The Administration dropdown in the top right-corner](img/crucible-administration.png)
 
 
-### Users
+#### Users
 
 The following image shows the Users Administration Page. Here, administrators can add and delete users, and assign the necessary permissions to each user.
 
 The available permissions are:
 
-- [System Admin](#glossary): Permission that will grant a user all administration privileges on the Gallery application.
-- [Content Developer](#glossary): Permission to manage other Gallery admin pages except the Users admin page and their permissions.
+- [System Admin](#glossary): Grants a user all administration privileges on the Gallery application.
+- [Content Developer](#glossary): Can manage other Gallery admin pages except the Users admin page and their permissions.
 
 Most users won't have any permissions assigned in this application.
 
 ![Gallery Users Admin OE](img/galleryUsersAdmin.png)
 
-#### Add a User
+##### Add a User
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a user:
+If the exercise administrator grants the appropriate permissions, follow these steps to add a user:
 
 ![Add Gallery User OE](img/addGalleryUser-v2.png)
 
 1. Under the Users Administration View, click **Add User**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field     | Data Type | Description                               | Example                              |
 | --------- | --------- | ----------------------------------------- | ------------------------------------ |
@@ -57,7 +59,7 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 To save these settings, click **Save** and select the desired permissions to assign by checking the box next to the user.
 
-#### Edit User's Information
+##### Edit User's Information
 
 To edit a user, follow these steps:
 
@@ -67,7 +69,7 @@ To edit a user, follow these steps:
 4. The system opens the same edit component used when creating a new user.
 5. After making all necessary edits, click **Save**.
 
-#### Delete a User
+##### Delete a User
 
 To delete a user, follow these steps:
 
@@ -75,22 +77,22 @@ To delete a user, follow these steps:
 2. Navigate to the **Users** tab.
 3. Select the user to delete and click the **Trash Can** next to the user.
 
-### Collections
+#### Collections
 
 The following image shows the Collections Administration Page. Here, administrators can add, upload, download, copy, and delete [collections](#glossary). Assign articles here, in case multiple exercises are running at the same time.
 
 ![Collections Admin OE](img/collectionsAdmin-v2.png)
 
-#### Add a Collection
+##### Add a Collection
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a collection:
+If the exercise administrator grants the appropriate permissions, follow these steps to add a collection:
 
 ![Add Collection OE](img/addCollection-v2.png)
 
 1. Under the Collections Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field           | Data Type | Description                                                | Example                                         |
 | --------------- | --------- | ---------------------------------------------------------- | ----------------------------------------------- |
@@ -99,7 +101,7 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 To save these settings, click **Save**.
 
-#### Edit a Collection
+##### Edit a Collection
 
 To edit a collection, follow these steps:
 
@@ -109,7 +111,7 @@ To edit a collection, follow these steps:
 4. The system opens the same edit component used when creating a new collection.
 5. After making all necessary edits, click **Save**.
 
-#### Delete a Collection
+##### Delete a Collection
 
 To delete a collection, follow these steps:
 
@@ -117,48 +119,48 @@ To delete a collection, follow these steps:
 2. Navigate to the **Collections** tab.
 3. Select the collection you plan to delete and click the **Trash Can Icon** next to the collection.
 
-#### Upload a Collection
+##### Upload a Collection
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to upload a collection:
+If the exercise administrator grants the appropriate permissions, follow these steps to upload a collection:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
 3. Click the **Up Arrow** next to the **+**.
 4. Select the collection JSON file you want to upload.
 
-#### Download a Collection
+##### Download a Collection
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to download a collection:
+If the exercise administrator grants the appropriate permissions, follow these steps to download a collection:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
 3. Click the **Down Arrow** next to the collection and download the JSON file.
 4. Open your Downloads folder to confirm it finished downloading.
 
-#### Copy a Collection
+##### Copy a Collection
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to copy a collection:
+If the exercise administrator grants the appropriate permissions, follow these steps to copy a collection:
 
 1. Click the **Settings Cog**.
 2. Navigate to the **Collections** tab.
 3. Click **Copy** next to the collection and review the new entry that includes your username.
 
-### Cards
+#### Cards
 
 The following image shows the Cards Administration Page. Here, administrators can add and delete cards. Each card appears in the Gallery Wall and stores articles related to that card.
 
 ![Cards Admin OE](img/cardsAdmin.png)
 
-#### Add a Card
+##### Add a Card
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a card:
+If the exercise administrator grants the appropriate permissions, follow these steps to add a card:
 
 ![Add Card OE](img/addCard-v2.png)
 
 1. Under the Cards Administration View, click **Add Card**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field           | Data Type     | Description                                          | Example                                                             |
 | --------------- | ------------- | ---------------------------------------------------- | ------------------------------------------------------------------- |
@@ -168,7 +170,7 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 To save these settings, click **Save**.
 
-#### Edit a Card
+##### Edit a Card
 
 To edit a card, follow these steps:
 
@@ -178,7 +180,7 @@ To edit a card, follow these steps:
 4. The system opens the same edit component used when creating a new card.
 5. After making all necessary edits, click **Save**.
 
-#### Delete a Card
+##### Delete a Card
 
 To delete a card, follow these steps:
 
@@ -186,22 +188,22 @@ To delete a card, follow these steps:
 2. Navigate to the **Cards** tab.
 3. Select the card to delete and click the **Trash Can** next to the card.
 
-### Articles
+#### Articles
 
 The following image shows the Articles Administration Page. Here, administrators can add and delete articles. These articles provide supplemental information from different sources to keep the exercise going.
 
 ![Articles Admin OE](img/articlesAdmin.png)
 
-#### Add an Article
+##### Add an Article
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an article:
+If the exercise administrator grants the appropriate permissions, follow these steps to add an article:
 
 ![Add Article OE](img/addArticle-v2.png)
 
 1. Under the Article Administration View, click **Add Article**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field                   | Data Type     | Description                                                    | Example                                                                          |
 | ----------------------- | ------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------- |
@@ -220,7 +222,7 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 To save these settings, click **Save**.
 
-#### Edit an Article
+##### Edit an Article
 
 To edit an article, follow these steps:
 
@@ -230,7 +232,7 @@ To edit an article, follow these steps:
 4. The system opens the same edit component used when creating a new article.
 5. After making all necessary edits, click **Save**.
 
-#### Delete an Article
+##### Delete an Article
 
 To delete an article, follow these steps:
 
@@ -238,22 +240,22 @@ To delete an article, follow these steps:
 2. Navigate to the **Articles** tab.
 3. Select the article to delete and click the **Trash Can** next to the article.
 
-### Exhibits
+#### Exhibits
 
 The following image shows the Exhibits Administration Page. Here, administrators configure the actual exercise and run it based on the teams, collections, and articles they previously configured.
 
 ![Exhibits Admin OE](img/exhibitsAdmin-v3.png)
 
-#### Add an Exhibit
+##### Add an Exhibit
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an [exhibit](#glossary):
+If the exercise administrator grants the appropriate permissions, follow these steps to add an [exhibit](#glossary):
 
 ![Add Exhibit OE](img/addExhibit-v2.png)
 
 1. Under the Exhibit Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field              | Data Type | Description                          | Example                               |
 | ------------------ | --------- | ------------------------------------ | ------------------------------------- |
@@ -263,7 +265,7 @@ Assuming that the exercise administrator grants the user the appropriate permiss
 
 To save these settings, click **Save**.
 
-#### Edit an Exhibit
+##### Edit an Exhibit
 
 To edit an exhibit, follow these steps:
 
@@ -273,7 +275,7 @@ To edit an exhibit, follow these steps:
 4. The system opens the same edit component used when creating a new exhibit.
 5. After making all necessary edits, click **Save**.
 
-#### Delete an Exhibit
+##### Delete an Exhibit
 
 To delete an exhibit, follow these steps:
 
@@ -281,7 +283,7 @@ To delete an exhibit, follow these steps:
 2. Navigate to the **Exhibits** tab.
 3. Select the exhibit to delete and click the **Trash Can** next to the exhibit.
 
-#### Upload an Exhibit
+##### Upload an Exhibit
 
 To upload an exhibit, follow these steps:
 
@@ -294,7 +296,7 @@ To upload an exhibit, follow these steps:
 
     When you add a new exhibit, the system creates a new collection with the uploaded exhibit. To view the uploaded exhibit, navigate to the collection using the dropdown and select the collection with the same name as the file you uploaded.
 
-#### Download an Exhibit
+##### Download an Exhibit
 
 To download an exhibit, follow these steps:
 
@@ -303,7 +305,7 @@ To download an exhibit, follow these steps:
 3. Click the **Down Arrow** next to the exhibit and download the JSON file.
 4. Open your Downloads folder to confirm it finished downloading.
 
-#### Copy an Exhibit
+##### Copy an Exhibit
 
 To copy an exhibit, follow these steps:
 
@@ -311,13 +313,13 @@ To copy an exhibit, follow these steps:
 2. Navigate to the **Exhibits** tab.
 3. Click **Copy** next to the exhibit and review the new entry that includes your username.
 
-#### Configure an Exhibit
+##### Configure an Exhibit
 
-To configure an exhibit for an exercise, administrators will need to add Exhibit Teams, Card Teams, Article Teams, as well as assign the respective Observers (if desired). To do this, follow these steps:
+To configure an exhibit for an exercise, administrators add Exhibit Teams, Card Teams, and Article Teams, and assign Observers if desired. To do this, follow these steps:
 
 ![Configure Exhibit OE](img/configureExhibit-v2.png)
 
-#### Add a Team to an Exhibit
+##### Add a Team to an Exhibit
 
 To add a team to the Exhibit, follow these steps:
 
@@ -326,7 +328,7 @@ To add a team to the Exhibit, follow these steps:
 1. Click the **+** icon.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field          | Data Type | Description                                | Example                    |
 | -------------- | --------- | ------------------------------------------ | -------------------------- |
@@ -345,7 +347,7 @@ To configure a team, follow these steps:
 3. Under the **Team Users** tab, review the users who already belong to the team. To remove a user from the team, click **Remove**.
 4. If desired, check the **Observer** box to assign that role to the user during the exercise.
 
-#### Add a Team Card to an Exhibit
+##### Add a Team Card to an Exhibit
 
 To add a Team Card to the Exhibit, follow these steps:
 
@@ -354,7 +356,7 @@ To add a Team Card to the Exhibit, follow these steps:
 1. Click **+** on the Card Teams section.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field                     | Data Type     | Description                                                              | Example                          |
 | ------------------------- | ------------- | ------------------------------------------------------------------------ | -------------------------------- |
@@ -367,7 +369,7 @@ To add a Team Card to the Exhibit, follow these steps:
 
 To save these settings, click **Save**.
 
-#### Add an Article to a Team
+##### Add an Article to a Team
 
 To add an article to a team, follow these steps:
 
@@ -377,7 +379,7 @@ To add an article to a team, follow these steps:
 2. Under the **Exhibit Teams** tab, identify the teams without an article assignment. To add them to the Article Teams, click **Add**.
 3. Under the **Article Teams** tab, review the teams that already have assignments. To remove a team, click **Remove**.
 
-#### The Observer Role
+##### The Observer Role
 
 To assign the [Observer Role](#glossary) to a user:
 
@@ -559,7 +561,7 @@ By using this icon, users can toggle between the Gallery Wall and Gallery Archiv
 
 Users with the appropriate Content Developer permissions can add articles to the Gallery Archive throughout the course of exercise events.
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an article during an exercise:
+If the exercise administrator grants the appropriate permissions, follow these steps to add an article during an exercise:
 
 ![Add Articles Exercise OE](img/addArticleExercise.png)
 
@@ -608,7 +610,7 @@ This glossary defines key terms and concepts used in the Gallery application.
 
 **Collection**: A set of articles.
 
-**Content Developer Permission**: Will grant a user the ability to manage other Gallery administration pages, except the users administration page and their permissions.
+**Content Developer Permission**: Grants a user the ability to manage other Gallery administration pages, except the users administration page and their permissions.
 
 **Email Filter**: Information gathered from messages distributed by electronic means.
 
