@@ -11,7 +11,7 @@ For installation, refer to these GitHub repositories.
 - [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui)
 - [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api)
 
-### Blueprint Permissions
+## Blueprint Permissions
 
 To use Blueprint, a System Admin must assign Content Developer permissions to the user and add them to a team.
 
