@@ -23,11 +23,13 @@ There are three levels of permissions in Blueprint that affect the way a user in
 
 Most users will have the Content Developer permission, because it is the minimum required permission to create and collaborate with other teams on MSEL creation.
 
-Refer to this section [Administrator Guide](#administrator-guide) for more information on additional administrative actions.
+Refer to the [Administrator Guide](#administrator-guide) for more information on additional administrative actions.
 
 ## Administrator Guide
 
-## Administration View
+Blueprint administrators use the Administration View to manage users and units, and to configure organization, Gallery card, CITE action, and CITE role templates for content developers building MSELs.
+
+### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
 
@@ -36,13 +38,13 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 ![The Administration dropdown in the top right-corner](img/crucible-administration.png)
 
 
-### Units
+#### Units
 
 The following image shows the Units Administration Page. Here, administrators can add, edit, and delete units. To use the Blueprint application, the administrator should assign a unit to desired users.
 
 ![Blueprint Teams Admin OE](img/blueprintUnits-v2.png)
 
-#### Add a Unit
+##### Add a Unit
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a unit.
 
@@ -52,7 +54,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 2. Under the Units Administration View, click **+**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field          | Data Type | Description             | Example                    |
 | -------------- | --------- | ----------------------- | -------------------------- |
@@ -61,7 +63,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 After you've added all desired configurations, click **Save**.
 
-#### Edit a Unit
+##### Edit a Unit
 
 To edit a unit, follow these steps:
 
@@ -70,21 +72,21 @@ To edit a unit, follow these steps:
 3. The system opens the same edit component used when creating a new unit.
 4. Make your changes, then click **Save**.
 
-#### Delete a Unit
+##### Delete a Unit
 
 To delete a unit, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the Units Administration View, select the unit you want to delete and click the **Trash Can** next to it.
 
-#### Search for a Unit
+##### Search for a Unit
 
 To search for a specific unit, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the Units Administration View, click the **Search Bar** and type the name of the desired unit.
 
-#### Add/Remove Users from a Unit
+##### Add/Remove Users from a Unit
 
 To configure a unit for an exercise, administrators add users to their respective units. To do this, follow these steps.
 
@@ -94,7 +96,7 @@ To configure a unit for an exercise, administrators add users to their respectiv
 2. The **All Users** tab shows *unassigned* users. To add a user to the unit, click **Add User**.
 3. The **Unit Users** tab shows *assigned* users. To remove a user from the unit, click **Remove**.
 
-### Users
+#### Users
 
 The following image shows the Users Administration Page. Here, administrators can add and delete users. Additionally, administrators can assign the necessary permissions to each user.
 
@@ -105,7 +107,7 @@ The available permissions are:
 
 ![Blueprint Users Admin OE](img/blueprintUsersAdmin-v4.png)
 
-#### Add a User
+##### Add a User
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a user.
 
@@ -114,7 +116,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 1. Under the Users Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field         | Data Type | Description            | Example                              |
 | ------------- | --------- | ---------------------- | ------------------------------------ |
@@ -123,27 +125,27 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 Click the **Save** icon (a user with a **+** sign), then select the permissions you want to assign by checking the boxes next to the user's name.
 
-#### Delete a User
+##### Delete a User
 
 To delete a user, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the Users Administration View, select the user you want to delete and click the **Trash Can** next to the user.
 
-#### Search for a User
+##### Search for a User
 
 To search for a specific user, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the Users Administration View, click the **Search Bar** and type the name of the desired user.
 
-### Organization Templates
+#### Organization Templates
 
 The following image shows the Organization Templates Administration Page. Here, administrators can add and delete organization templates.
 
 ![Blueprint Organizations Admin OE](img/blueprintOrganizationsAdmin-v2.png)
 
-#### Add an Organization Template
+##### Add an Organization Template
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add an organization template.
 
@@ -152,7 +154,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 1. Under the Organizations Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field           | Data Type | Description                                                   | Example                                                                                                                                                                                                  |
 | --------------- | --------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -164,7 +166,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 After you've added all desired configurations, click **Save**.
 
-#### Edit an Organization Template
+##### Edit an Organization Template
 
 To edit an organization template, follow these steps:
 
@@ -173,27 +175,27 @@ To edit an organization template, follow these steps:
 3. The system opens the same edit form used when creating a new organization template.
 4. Make your changes, then click **Save**.
 
-#### Delete an Organization Template
+##### Delete an Organization Template
 
 To delete an organization template, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the Organizations Administration View, select the organization you want to delete and click the **Trash Can** next to the organization template.
 
-#### Search For an Organization Template
+##### Search For an Organization Template
 
 To search for a specific organization template, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the Organizations Administration View, click the **Search Bar** and type the name of the desired organization template.
 
-### Gallery Card Templates
+#### Gallery Card Templates
 
 The following image shows the Gallery Card Templates Administration Page. Here, administrators can add and delete Gallery card templates.
 
 ![Blueprint Cards Admin OE](img/blueprintCardsAdmin-v2.png)
 
-#### Add a Gallery Card Template
+##### Add a Gallery Card Template
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a Gallery card template.
 
@@ -202,7 +204,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 1. Under the Gallery Cards Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field                | Data Type | Description                                                   | Example                                     |
 | -------------------- | --------- | ------------------------------------------------------------- | ------------------------------------------- |
@@ -211,7 +213,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 After you've added all desired configurations, click **Save**.
 
-#### Edit a Gallery Card Template
+##### Edit a Gallery Card Template
 
 To edit a Gallery card template, follow these steps:
 
@@ -220,27 +222,27 @@ To edit a Gallery card template, follow these steps:
 3. The system opens the same edit component used when creating a new card template.
 4. Make your changes, then click **Save**.
 
-#### Delete a Gallery Card Template
+##### Delete a Gallery Card Template
 
 To delete an Gallery card template, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the Gallery Cards Administration View, select the card template you want to delete and click the **Trash Can** next to it.
 
-#### Search for a Gallery Card Template
+##### Search for a Gallery Card Template
 
 To search for a specific Gallery card template, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the Gallery Cards Administration View, click the **Search Bar** and type the name of the desired card template.
 
-### CITE Actions Templates
+#### CITE Actions Templates
 
 The following image shows the CITE Action Templates administration page. Here, administrators can add and delete CITE action templates.
 
 ![Blueprint Actions Admin OE](img/blueprintActionsAdmin-v2.png)
 
-#### Add a CITE Action Template
+##### Add a CITE Action Template
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE action template.
 
@@ -249,7 +251,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 1. Under the CITE Actions Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field                         | Data Type | Description                                                  | Example            |
 | ----------------------------- | --------- | ------------------------------------------------------------ | ------------------ |
@@ -257,7 +259,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 After you've added all desired configurations, click **Save**.
 
-#### Edit a CITE Action Template
+##### Edit a CITE Action Template
 
 To edit a CITE action template, follow these steps:
 
@@ -266,27 +268,27 @@ To edit a CITE action template, follow these steps:
 3. The system opens the same edit component used when creating a new action template.
 4. Make your changes, then click **Save**.
 
-#### Delete a CITE Action Template
+##### Delete a CITE Action Template
 
-To delete an CITE action template, follow these steps:
+To delete a CITE action template, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the CITE Actions Administration View, select the action template you want to delete and click the **Trash Can** next to it.
 
-#### Search for a CITE Action Template
+##### Search for a CITE Action Template
 
 To search for a specific CITE action template, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the CITE Actions Administration View, click the **Search Bar** and type the name of the desired action template.
 
-### CITE Roles Templates
+#### CITE Roles Templates
 
 The following image shows the CITE Roles Templates Administration Page. Here, administrators can add and delete CITE roles templates.
 
 ![Blueprint Roles Admin OE](img/blueprintRolesAdmin-v2.png)
 
-#### Add a CITE Role Template
+##### Add a CITE Role Template
 
 If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE role template.
 
@@ -295,7 +297,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 1. Under the CITE Roles Administration View, click **+**.
 2. Fill the fields as necessary following the Data Format Table specifications.
 
-#### Data Format Table
+##### Data Format Table
 
 | Field    | Data Type | Description      | Example  |
 | -------- | --------- | ---------------- | -------- |
@@ -303,7 +305,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 After you've added all desired configurations, click **Save**.
 
-#### Edit a CITE Role Template
+##### Edit a CITE Role Template
 
 To edit a CITE role template, follow these steps:
 
@@ -312,14 +314,14 @@ To edit a CITE role template, follow these steps:
 3. The system opens the same edit component used when creating a new role template.
 4. Make your changes, then click **Save**.
 
-#### Delete a CITE Role Template
+##### Delete a CITE Role Template
 
 To delete a CITE role template, follow these steps:
 
 1. Click the **Settings Cog** in the top-right corner of the screen.
 2. Under the CITE Roles Administration View, select the role template you want to delete and click the **Trash Can** next to it.
 
-#### Search For a CITE Role Template
+##### Search For a CITE Role Template
 
 To search for a specific CITE role template, follow these steps:
 
@@ -590,7 +592,7 @@ The available roles are:
 - **[`Observer`](#glossary):** When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
 - **[`Incrementer`](#glossary):** When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.
 - **[`Modifier`](#glossary):** When the MSEL owner has enabled CITE integration, this role allows a user to modify the team's score.
-- **[`Submitter`](#glossary):**When the MSEL owner has enabled integration, this role allows a user to submit the team's score.
+- **[`Submitter`](#glossary):** When the MSEL owner has enabled integration, this role allows a user to submit the team's score.
 
 #### Data Fields
 
