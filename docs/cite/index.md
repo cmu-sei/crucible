@@ -16,7 +16,7 @@ For installation, refer to these GitHub repositories.
 
 ## CITE Permissions
 
-In order to use CITE, an administrator assigns each user a scoring permission.
+To use CITE, an administrator assigns each user a scoring permission.
 
 There are three levels of permissions in CITE that shape how a team collaborates on and edits a score.
 
@@ -29,6 +29,566 @@ Most users hold modify-level permission; however, one or two users per team hold
 Additionally, participants who can submit scores on behalf of their team can also add suggested actions and participant roles to the CITE Dashboard.
 
 Refer to the [Actions to Consider](#actions-to-consider) section for more information.
+
+## Administrator Guide
+
+CITE administrators use the Administration View to manage users and configure evaluations, scoring models, scoring categories, actions, roles, and team types.
+
+### Administration View
+
+Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
+
+Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
+
+![The Administration dropdown in the top right-corner](img/crucible-administration.png)
+
+
+#### Evaluations
+
+The following image shows the Evaluations Administration Page. Here, administrators can add, edit, upload, download, copy, and delete [evaluations](#glossary).
+
+![Evaluations Admin OE](img/EvaluationsAdmin-v4.png)
+
+##### Add an Evaluation
+
+If the exercise administrator grants the appropriate permissions, follow these steps to add an Evaluation.
+
+![Add Evaluation OE](img/AddEvaluation-v5.png)
+
+1. Under the Evaluation Administration View, click **+**.
+2. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field                      | Data Type     | Description                                                           | Example                                                    |
+| -------------------------- | ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **Evaluation Description** | String        | Details, characteristics and information of the evaluation            | `NCISS Demonstration`                                      |
+| **Scoring Model**          | Dropdown Text | Scoring model to use in the evaluation                                | `CISA NCISS`                                               |
+| **Evaluation Status**      | Dropdown Text | Status of the evaluation after configuration                          | `Active`                                                   |
+| **Gallery Exhibit ID**     | GUID          | ID of the Gallery exhibit, if using Gallery during an exercise        | `81a623e3-faeb-4a56-8b4d-0d42f90b6829`                     |
+| **Current Move**           | Integer       | Current move of the evaluation                                        | `0`                                                        |
+| **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | `1/23/2024, 14:22:40`                                      |
+| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | `Ransomware attackers compromised the agency's network...` |
+
+To save these settings, click **Save**.
+
+##### Edit an Evaluation
+
+To edit an evaluation, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Select the evaluation to edit and click **Edit** next to the evaluation.
+4. The system opens the same edit component used when creating a new evaluation.
+5. After making all necessary edits, click **Save**.
+
+##### Delete an Evaluation
+
+To delete an evaluation, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Select the evaluation to delete and click the **Trash Can** next to the evaluation.
+
+##### Upload an Evaluation
+
+To upload an evaluation, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Click the **Up Arrow** next to the **+**.
+4. Select the evaluation JSON file to upload.
+
+##### Download an Evaluation
+
+To download an evaluation, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Click the **Down Arrow** next to the evaluation to download.
+4. Look for the JSON file in your Downloads folder.
+
+##### Copy an Evaluation
+
+To copy an evaluation, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Click **Copy** next to the evaluation to copy.
+4. Look for the evaluation name with the user's name.
+
+##### Configure an Evaluation
+
+To configure an evaluation to use for an exercise, administrators will need to add moves and teams to the evaluation. To do this, follow these steps:
+
+![Configure Evaluation OE](img/ConfigureEvaluations-v2.png)
+
+#### Moves
+
+![Moves OE](img/moves-v3.png)
+
+1. Click **+** on the Moves section.
+2. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field                     | Data Type | Description                                                     | Example                                 |
+| ------------------------- | --------- | --------------------------------------------------------------- | --------------------------------------- |
+| **Move Number**           | Integer   | Move number to add                                              | `0`                                     |
+| **Move Description**      | String    | Details, characteristics and information of the move            | `The exercise will begin at 0900 EST`   |
+| **Situation Date/Time**   | Datetime  | Situation date/time for the move                                | `1/23/2024, 14:30:21`                   |
+| **Situation Description** | Rich Text | Additional details, characteristics and information of the move | `The objectives of the exercise are...` |
+
+To save these settings, click **Save**.
+
+##### Edit a Move
+
+To edit a move, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Select the evaluation to edit and click the **Moves** tab.
+4. Select the move to edit and click **Edit** next to the move.
+5. The system opens the same edit component used when creating a new move.
+6. After making all necessary edits, click **Save**.
+
+##### Delete a Move
+
+To delete a move, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Select the evaluation to edit and click the **Moves** tab.
+4. Select the move to delete and click the **Trash Can** next to the move.
+
+#### Teams
+
+![Teams OE](img/teams-v3.png)
+
+1. Click **+** on the Teams section.
+2. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field               | Data Type     | Description                                                    | Example                    |
+| ------------------- | ------------- | -------------------------------------------------------------- | -------------------------- |
+| **Name**            | String        | Name for the team                                              | Carnegie Mellon University |
+| **Short Name**      | String        | Short name for the team, such as an acronym                    | CMU                        |
+| **Team Type**       | Dropdown Text | Select the type that applies to the team                       | Individual Organization    |
+| **Hide Scoresheet** | Boolean       | Select whether to hide CITE Scoresheet from that specific team | False                      |
+
+To save these settings, click **Save**.
+
+##### Edit a Team
+
+To edit a team, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Select the evaluation to edit and click the **Teams** tab.
+4. Select the team to edit and click **Edit** next to the team.
+5. The system opens the same edit component used when creating a new team.
+6. After making all necessary edits, click **Save**.
+
+##### Delete a Team
+
+To delete a team, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Evaluations** tab.
+3. Select the evaluation to edit and click the **Teams** tab.
+4. Select the team to delete and click the **Trash Can** next to the team.
+
+#### Observers
+
+To assign the [Observer Role](#glossary) to a user:
+
+1. Under **Evaluation Users**, search for the desired user.
+2. After you find the user, click **Add**.
+
+To remove the Observer Role from a user:
+
+1. Under **Observers**, search for the desired user.
+2. After you find the user, click **Remove**.
+
+#### Scoring Models
+
+The following image shows the [Scoring Models](#glossary) Administration Page. Here, administrators can add, edit, copy, download, upload, and delete scoring models.
+
+![Scoring Models Admin OE](img/scoringModelsAdmin-v3.png)
+
+##### Add a Scoring Model
+
+If the exercise administrator grants the appropriate permissions, follow these steps to add a Scoring Model.
+
+![Add Scoring Model OE](img/addScoringModel-v4.png)
+
+1. Under the Scoring Model Administration View, click **+**.
+2. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field                                         | Data Type     | Description                                                                        | Example               |
+| --------------------------------------------- | ------------- | ---------------------------------------------------------------------------------- | --------------------- |
+| **Scoring Model Description**                 | String        | Details, characteristics and information of the scoring model                      | `NCISS Scoring Model` |
+| **Scoring Model Status**                      | Dropdown Text | Status of the scoring model after configuration                                    | `Active`              |
+| **Calculation Equation**                      | Varchar       | Equation used to evaluate participant scores                                       | `{sum}`               |
+| **Use Individual User Scoring**               | Boolean       | Select this option to display the User score                                       | `False`               |
+| **Use Team Scoring**                          | Boolean       | Select this option to display the Team score                                       | `True`                |
+| **Use Official Scoring**                      | Boolean       | Select this option to display the Official score                                   | `False`               |
+| **Use Team Average Scoring**                  | Boolean       | Select this option to display the Team Average score                               | `False`               |
+| **Use Type Average Scoring**                  | Boolean       | Select this option to display the Type Average score                               | `False`               |
+| **Use Submit**                                | Boolean       | Setting to add Submit button to CITE Scoresheet                                    | `False`               |
+| **Hide Scores on Scoresheet**                 | Boolean       | Don't show scores on Scoresheet                                                    | `True`                |
+| **Display Comments as Textboxes**             | Boolean       | Provide a larger textbox on Scoresheet for lengthy responses                       | `True`                |
+| **Display Scoring Categories by Move Number** | Boolean       | Display different sets of scoring categories per move, instead of all at once      | `True`                |
+| **Show Past Situation Descriptions**          | Boolean       | Display situation descriptions from past moves in a list format                    | `True`                |
+| **Right Side Display**                        | Dropdown Text | Select what to display (Score Summary, Scoresheet, HTML Block, Embedded Url, None) | `Scoresheet`          |
+
+To save these settings, click **Save**.
+
+When adding a Scoring Model, an administrator adds a defined equation to calculate the submission score from the category scores, which can contain the following variables:
+
+- **{average}:** The average value of the Scoring Categories.
+- **{sum}:** The sum of the Scoring Categories.
+- **{count}:** The count of the Scoring Categories.
+- **{minPossible}:** The minimum possible value of the submission.
+- **{maxPossible}:** The maximum possible value of the submission.
+
+Aside from these variables, use **>** to set clipping values for the equation.
+
+- **Example:** 100 > equation > 20 will constrain the value of the submission between 100 and 20.
+
+##### Edit a Scoring Model
+
+To edit a scoring model, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Select the scoring model to edit and click **Edit** next to the scoring model.
+4. The system opens the same edit component used when creating a new scoring model.
+5. After making all necessary edits, click **Save**.
+
+##### Upload a Scoring Model
+
+To upload a scoring model, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Click the **Up Arrow** next to the **+**.
+4. Select the scoring model JSON file to upload.
+
+##### Download a Scoring Model
+
+To download a scoring model, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Click the **Down Arrow** next to the scoring model to download.
+4. Look for the JSON file in your Downloads folder.
+
+##### Copy a Scoring Model
+
+To copy a scoring model, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Click **Copy** next to the scoring model to copy.
+4. Look for the scoring model name with the user's name.
+
+##### Delete a Scoring Model
+
+To delete a scoring model, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Select the scoring model to delete and click the **Trash Can** next to the scoring model.
+
+#### Scoring Categories
+
+To configure a Scoring Model to use for an exercise, administrators will need to add [Scoring Categories](#glossary).
+
+Within a Scoring Model, an administrator can add one or more Scoring Categories. To do this, follow these steps:
+
+![Configure Scoring Model OE](img/configureScoringModel.png)
+
+##### Add Scoring Category
+
+![Scoring Categories OE](img/scoringCategories-v3.png)
+
+1. Click **+** on the Scoring Categories section.
+2. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field                             | Data Type     | Description                                                                                      | Example            |
+| --------------------------------- | ------------- | ------------------------------------------------------------------------------------------------ | ------------------ |
+| **Scoring Category Description**  | String        | Details, characteristics and information of the scoring category                                 | Information Impact |
+| **Display Order**                 | Integer       | Scoring category display order on CITE Scoresheet                                                | 1                  |
+| **First Move to Display**         | Integer       | Move number where the scoring category first appears                                             | 1                  |
+| **Last Move to Display**          | Integer       | Move number where the scoring category appears for the final time                                | 1                  |
+| **Calculation Equation**          | Varchar       | Equation used to evaluate participant's scores                                                   | {sum}              |
+| **Calculation Weight**            | Integer       | Weight of the score compared to other categories                                                 | 1                  |
+| **Scoring Option Selection Type** | Dropdown Text | Determine whether the scoring checkboxes show Single, Multiple, or None options                  | Single             |
+| **Modifier Selection Required**   | Boolean       | Select this option to require modifiers that supply alternate values                             | True               |
+
+To save these settings, click **Save**.
+
+A Scoring Category may have zero or more required or optional [Modifiers](#glossary). If there is no optional Modifier, the Scoring Category calculation uses a default value of 1.0.
+
+Additionally, a Scoring Category has an admin defined equation to calculate the submission score from the category scores and can contain the following variables:
+
+- **{sum}:** The sum of the selected Scoring Option values.
+- **{count}:** The count of the selected Scoring Option values.
+- **{min}:** The minimum of the selected Scoring Option values.
+- **{max}:** The maximum of the selected Scoring Option values.
+- **{modifier}:** The selected modifier value, which defaults to 1.
+
+Last but not least, a Scoring Category has a weight by which to multiply the score obtained from the entered equation.
+
+##### Edit a Scoring Category
+
+To edit a scoring category, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Select the scoring model to edit and click the **Scoring Categories** tab.
+4. Select the scoring category to edit and click **Edit** next to the scoring category.
+5. The system opens the same edit component used when creating a new scoring category.
+6. After making all necessary edits, click **Save**.
+
+##### Delete a Scoring Category
+
+To delete a scoring category, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Select the scoring model to edit and click the **Scoring Categories** tab.
+4. Select the scoring category to delete and click the **Trash Can** next to the scoring category.
+
+#### Scoring Options
+
+Within a Scoring Category, an administrator can add one or more [Scoring Options](#glossary). To do this, follow these steps:
+
+##### Add Scoring Options
+
+![Scoring Options OE](img/scoringOptions.png)
+
+1. Click **+** on the Scoring Options section.
+2. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field                          | Data Type | Description                                                         | Example   |
+| ------------------------------ | --------- | ------------------------------------------------------------------- | --------- |
+| **Scoring Option Description** | String    | Details, characteristics and information of the scoring option      | No Impact |
+| **Display Order**              | Integer   | Scoring option display order on CITE Scoresheet                     | 1         |
+| **Value**                      | Integer   | The scoring option's value for participant score                    | 0         |
+| **Is a Modifier**              | Boolean   | Select this option to treat the scoring option as a modifier        | True      |
+
+To save these settings, click **Save**.
+
+##### Edit a Scoring Option
+
+To edit a scoring option, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Select the scoring model to edit and click the **Scoring Categories** tab.
+4. Select the scoring category to edit and click the **Scoring Options** tab.
+5. Select the scoring option to edit and click **Edit** next to the scoring option.
+6. The system opens the same edit component used when creating a new scoring option.
+7. After making all necessary edits, click **Save**.
+
+##### Delete a Scoring Option
+
+To delete a scoring option, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Scoring Models** tab.
+3. Select the scoring model to edit and click the **Scoring Categories** tab.
+4. Select the scoring category to edit and click the **Scoring Options** tab.
+5. Select the scoring option to delete and click the **Trash Can** next to the scoring option.
+
+#### Actions
+
+The following image shows the Actions Administration Page. Here, administrators can add, edit, and delete actions.
+
+However, users who can submit scores on behalf of their team can also add suggested actions to the CITE Dashboard. The use of actions allows team members to customize their response by tracking tasks during the exercise. The system keeps these actions internal to the team and hides them from other participants.
+
+![Actions Admin OE](img/actionsAdmin-v2.png)
+
+##### Add an Action
+
+If the exercise administrator grants the appropriate permissions, follow these steps to add an Action.
+
+![Add Action OE](img/addAction-v3.png)
+
+1. Under the Actions Administration View, click the **Move** dropdown and select the desired move.
+2. Click the **Team** dropdown and select the desired team.
+3. Click **+** to add an Action.
+4. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field                  | Data Type | Description                                            | Example       |
+| ---------------------- | --------- | ------------------------------------------------------ | ------------- |
+| **Action Description** | String    | Details, characteristics and information of the action | Time to Score |
+
+To save these settings, click **Save**.
+
+##### Edit an Action
+
+To edit an action, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Actions** tab.
+3. Select the action to edit and click **Edit** next to the action.
+4. The system opens the same edit component used when creating a new action.
+5. After making all necessary edits, click **Save**.
+
+##### Delete an Action
+
+To delete an action, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Action** tab.
+3. Select the action to delete and click the **Trash Can** next to the action.
+
+#### Roles
+
+The following image shows the Roles Administration Page. Here, administrators can add, edit, and delete roles.
+
+However, users who can submit scores on behalf of their team can also add participant roles to the CITE Dashboard. The use of roles allows team members to customize their response by tracking their responsibilities during an exercise. These roles remain internal to the team and stay hidden from other participants.
+
+![Roles Admin OE](img/rolesAdmin-v2.png)
+
+##### Add a Role
+
+If the exercise administrator grants the appropriate permissions, follow these steps to add a Role:
+
+![Add Role OE](img/addRole-v3.png)
+
+1. Under the Roles Administration View, click the **Team** dropdown and select the desired team.
+2. Click **+** to add a Role.
+3. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field         | Data Type | Description      | Example   |
+| ------------- | --------- | ---------------- | --------- |
+| **Role Name** | String    | Name of the role | Team Lead |
+
+To save these settings, click **Save**.
+
+##### Edit a Role
+
+To edit a role, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Roles** tab.
+3. Select the role to edit and click **Edit** next to the role.
+4. The system opens the same edit component used when creating a new role.
+5. After making all necessary edits, click **Save**.
+
+##### Delete a Role
+
+To delete a role, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Roles** tab.
+3. Select the role to delete and click the **Trash Can** next to the role.
+
+#### Submissions
+
+The following image shows the Submissions Administration Page. Here, administrators can keep track of all score [submissions](#glossary) provided by the different teams during an exercise. This allows administrators to compare their scores with the official score, as well as keep track of which teams are on a good track and which are not.
+
+Additional functionalities include copying the entire score, as well as deleting a score submitted by a team.
+
+![Submissions Admin OE](img/submissionsAdmin-v2.png)
+
+#### Team Types
+
+The following image shows the [Team Types](#glossary) Administration Page. Here, administrators can create different types of teams to use during an exercise. This allows administrators to classify the different teams on the platform based on common characteristics and/or organizations.
+
+![Team Types Admin OE](img/teamTypesAdmin.png)
+
+##### Add a Team Type
+
+If the exercise administrator grants the appropriate permissions, follow these steps to add a Team Type:
+
+![Add Team Type OE](img/addTeamType.png)
+
+1. Under the Team Type Administration View, click **+**.
+2. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field                          | Data Type | Description                                                           | Example                 |
+| ------------------------------ | --------- | --------------------------------------------------------------------- | ----------------------- |
+| **TeamType Name**              | String    | Name of the team type                                                 | Individual Organization |
+| **Official Score Contributor** | Boolean   | Select this option for teams that contribute to CITE's official score | True                    |
+| **Show TeamType Average**      | Boolean   | Select this option to make the score average available to the team    | True                    |
+
+To save these settings, click **Save**.
+
+##### Edit a Team Type
+
+To edit a team type, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Team Types** tab.
+3. Select the team type to edit and click **Edit** next to the team type.
+4. The system opens the same edit component used when creating a new team type.
+5. After making all necessary edits, click **Save**.
+
+##### Delete a Team Type
+
+To delete a team type, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Team Types** tab.
+3. Select the team type to delete and click the **Trash Can** next to the team type.
+
+#### Users
+
+The following image shows the Users Administration page. Here, administrators can add and delete users, and assign the necessary permissions to each user.
+
+The available permissions are:
+
+- **System Admin:** Grants a user all administration privileges on the CITE application.
+- **Content Developer:** Can manage other CITE admin pages except the Users Admin page and their permissions.
+- **Can Submit:** Lets the user submit a score for the different moves during an exercise.
+- **Can Modify:** Lets the user modify a score for previous moves during an exercise.
+- **Can Increment Move:** Lets the user increment the current move during an exercise.
+
+![Users Admin OE](img/usersAdmin-v2.png)
+
+##### Add a User
+
+If the exercise administrator grants the appropriate permissions, follow these steps to add a user:
+
+![Add User OE](img/addUser-v2.png)
+
+1. Under the Users Administration View, click **+**.
+2. Fill the fields as necessary following the Data Format Table specifications.
+
+##### Data Format Table
+
+| Field         | Data Type | Description                        | Example                              |
+| ------------- | --------- | ---------------------------------- | ------------------------------------ |
+| **User ID**   | GUID      | User ID that identifies the user   | 81a623e3-faeb-4a56-8b4d-0d42f90b6829 |
+| **User Name** | string    | User name that identifies the user | user-1                               |
+
+To save these settings, click **Save** and select the desired permissions to assign by checking the boxes next to the user.
+
+##### Delete a User
+
+To delete a user, follow these steps:
+
+1. Click the **Settings Cog**.
+2. Navigate to the **Users** tab.
+3. Select the users to delete and click the **Trash Can** next to the user.
 
 ## User Guide
 
@@ -206,564 +766,6 @@ The [CITE Report](#glossary) recollects all user responses into a single printab
 The following image shows the CITE Report. Here, users can view and/or print their own copy.
 
 ![CITE Report OE](img/CITE-Report.png)
-
-## Administrator Guide
-
-## Administration View
-
-Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
-
-Accessing the Administration View is the same in all Crucible exercise applications: expand the dropdown next to your username in the top-right corner and select **Administration**.
-
-![The Administration dropdown in the top right-corner](img/crucible-administration.png)
-
-
-### Evaluations
-
-The following image shows the Evaluations Administration Page. Here, administrators can add, edit, upload, download, copy, and delete [evaluations](#glossary).
-
-![Evaluations Admin OE](img/EvaluationsAdmin-v4.png)
-
-#### Add an Evaluation
-
-If the exercise administrator grants the appropriate permissions, follow these steps to add an Evaluation.
-
-![Add Evaluation OE](img/AddEvaluation-v5.png)
-
-1. Under the Evaluation Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field                      | Data Type     | Description                                                           | Example                                                    |
-| -------------------------- | ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------- |
-| **Evaluation Description** | String        | Details, characteristics and information of the evaluation            | `NCISS Demonstration`                                      |
-| **Scoring Model**          | Dropdown Text | Scoring model to use in the evaluation                                | `CISA NCISS`                                               |
-| **Evaluation Status**      | Dropdown Text | Status of the evaluation after configuration                          | `Active`                                                   |
-| **Gallery Exhibit ID**     | GUID          | ID of the Gallery exhibit, if using Gallery during an exercise        | `81a623e3-faeb-4a56-8b4d-0d42f90b6829`                     |
-| **Current Move**           | Integer       | Current move of the evaluation                                        | `0`                                                        |
-| **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | `1/23/2024, 14:22:40`                                      |
-| **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | `Ransomware attackers compromised the agency's network...` |
-
-To save these settings, click **Save**.
-
-#### Edit an Evaluation
-
-To edit an evaluation, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to edit and click **Edit** next to the evaluation.
-4. The system opens the same edit component used when creating a new evaluation.
-5. After making all necessary edits, click **Save**.
-
-#### Delete an Evaluation
-
-To delete an evaluation, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to delete and click the **Trash Can** next to the evaluation.
-
-#### Upload an Evaluation
-
-To upload an evaluation, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Evaluations** tab.
-3. Click the **Up Arrow** next to the **+**.
-4. Select the evaluation JSON file to upload.
-
-#### Download an Evaluation
-
-To download an evaluation, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Evaluations** tab.
-3. Click the **Down Arrow** next to the evaluation to download.
-4. Look for the JSON file in your Downloads folder.
-
-#### Copy an Evaluation
-
-To copy an evaluation, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Evaluations** tab.
-3. Click **Copy** next to the evaluation to copy.
-4. Look for the evaluation name with the user's name.
-
-#### Configure an Evaluation
-
-To configure an evaluation to use for an exercise, administrators will need to add moves and teams to the evaluation. To do this, follow these steps:
-
-![Configure Evaluation OE](img/ConfigureEvaluations-v2.png)
-
-### Moves
-
-![Moves OE](img/moves-v3.png)
-
-1. Click **+** on the Moves section.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field                     | Data Type | Description                                                     | Example                                 |
-| ------------------------- | --------- | --------------------------------------------------------------- | --------------------------------------- |
-| **Move Number**           | Integer   | Move number to add                                              | `0`                                     |
-| **Move Description**      | String    | Details, characteristics and information of the move            | `The exercise will begin at 0900 EST`   |
-| **Situation Date/Time**   | Datetime  | Situation date/time for the move                                | `1/23/2024, 14:30:21`                   |
-| **Situation Description** | Rich Text | Additional details, characteristics and information of the move | `The objectives of the exercise are...` |
-
-To save these settings, click **Save**.
-
-#### Edit a Move
-
-To edit a move, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to edit and click the **Moves** tab.
-4. Select the move to edit and click **Edit** next to the move.
-5. The system opens the same edit component used when creating a new move.
-6. After making all necessary edits, click **Save**.
-
-#### Delete a Move
-
-To delete a move, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to edit and click the **Moves** tab.
-4. Select the move to delete and click the **Trash Can** next to the move.
-
-### Teams
-
-![Teams OE](img/teams-v3.png)
-
-1. Click **+** on the Teams section.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field               | Data Type     | Description                                                    | Example                    |
-| ------------------- | ------------- | -------------------------------------------------------------- | -------------------------- |
-| **Name**            | String        | Name for the team                                              | Carnegie Mellon University |
-| **Short Name**      | String        | Short name for the team, such as an acronym                    | CMU                        |
-| **Team Type**       | Dropdown Text | Select the type that applies to the team                       | Individual Organization    |
-| **Hide Scoresheet** | Boolean       | Select whether to hide CITE Scoresheet from that specific team | False                      |
-
-To save these settings, click **Save**.
-
-#### Edit a Team
-
-To edit a team, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to edit and click the **Teams** tab.
-4. Select the team to edit and click **Edit** next to the team.
-5. The system opens the same edit component used when creating a new team.
-6. After making all necessary edits, click **Save**.
-
-#### Delete a Team
-
-To delete a team, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Evaluations** tab.
-3. Select the evaluation to edit and click the **Teams** tab.
-4. Select the team to delete and click the **Trash Can** next to the team.
-
-### Observers
-
-To assign the [Observer Role](#glossary) to a user:
-
-1. Under **Evaluation Users**, search for the desired user.
-2. After you find the user, click **Add**.
-
-To remove the Observer Role from a user:
-
-1. Under **Observers**, search for the desired user.
-2. After you find the user, click **Remove**.
-
-### Scoring Models
-
-The following image shows the [Scoring Models](#glossary) Administration Page. Here, administrators can add, edit, copy, download, upload, and delete scoring models.
-
-![Scoring Models Admin OE](img/scoringModelsAdmin-v3.png)
-
-#### Add a Scoring Model
-
-If the exercise administrator grants the appropriate permissions, follow these steps to add a Scoring Model.
-
-![Add Scoring Model OE](img/addScoringModel-v4.png)
-
-1. Under the Scoring Model Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field                                         | Data Type     | Description                                                                        | Example               |
-| --------------------------------------------- | ------------- | ---------------------------------------------------------------------------------- | --------------------- |
-| **Scoring Model Description**                 | String        | Details, characteristics and information of the scoring model                      | `NCISS Scoring Model` |
-| **Scoring Model Status**                      | Dropdown Text | Status of the scoring model after configuration                                    | `Active`              |
-| **Calculation Equation**                      | Varchar       | Equation used to evaluate participant scores                                       | `{sum}`               |
-| **Use Individual User Scoring**               | Boolean       | Select this option to display the User score                                       | `False`               |
-| **Use Team Scoring**                          | Boolean       | Select this option to display the Team score                                       | `True`                |
-| **Use Official Scoring**                      | Boolean       | Select this option to display the Official score                                   | `False`               |
-| **Use Team Average Scoring**                  | Boolean       | Select this option to display the Team Average score                               | `False`               |
-| **Use Type Average Scoring**                  | Boolean       | Select this option to display the Type Average score                               | `False`               |
-| **Use Submit**                                | Boolean       | Setting to add Submit button to CITE Scoresheet                                    | `False`               |
-| **Hide Scores on Scoresheet**                 | Boolean       | Don't show scores on Scoresheet                                                    | `True`                |
-| **Display Comments as Textboxes**             | Boolean       | Provide a larger textbox on Scoresheet for lengthy responses                       | `True`                |
-| **Display Scoring Categories by Move Number** | Boolean       | Display different sets of scoring categories per move, instead of all at once      | `True`                |
-| **Show Past Situation Descriptions**          | Boolean       | Display situation descriptions from past moves in a list format                    | `True`                |
-| **Right Side Display**                        | Dropdown Text | Select what to display (Score Summary, Scoresheet, HTML Block, Embedded Url, None) | `Scoresheet`          |
-
-To save these settings, click **Save**.
-
-When adding a Scoring Model, an administrator adds a defined equation to calculate the submission score from the category scores, which can contain the following variables:
-
-- **{average}:** The average value of the Scoring Categories.
-- **{sum}:** The sum of the Scoring Categories.
-- **{count}:** The count of the Scoring Categories.
-- **{minPossible}:** The minimum possible value of the submission.
-- **{maxPossible}:** The maximum possible value of the submission.
-
-Aside from these variables, use **>** to set clipping values for the equation.
-
-- **Example:** 100 > equation > 20 will constrain the value of the submission between 100 and 20.
-
-#### Edit a Scoring Model
-
-To edit a scoring model, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to edit and click **Edit** next to the scoring model.
-4. The system opens the same edit component used when creating a new scoring model.
-5. After making all necessary edits, click **Save**.
-
-#### Upload a Scoring Model
-
-To upload a scoring model, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Scoring Models** tab.
-3. Click the **Up Arrow** next to the **+**.
-4. Select the scoring model JSON file to upload.
-
-#### Download a Scoring Model
-
-To download a scoring model, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Scoring Models** tab.
-3. Click the **Down Arrow** next to the scoring model to download.
-4. Look for the JSON file in your Downloads folder.
-
-#### Copy a Scoring Model
-
-To copy a scoring model, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Scoring Models** tab.
-3. Click **Copy** next to the scoring model to copy.
-4. Look for the scoring model name with the user's name.
-
-#### Delete a Scoring Model
-
-To delete a scoring model, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to delete and click the **Trash Can** next to the scoring model.
-
-### Scoring Categories
-
-To configure a Scoring Model to use for an exercise, administrators will need to add [Scoring Categories](#glossary).
-
-Within a Scoring Model, an administrator can add one or more Scoring Categories. To do this, follow these steps:
-
-![Configure Scoring Model OE](img/configureScoringModel.png)
-
-#### Add Scoring Category
-
-![Scoring Categories OE](img/scoringCategories-v3.png)
-
-1. Click **+** on the Scoring Categories section.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field                             | Data Type     | Description                                                                                      | Example            |
-| --------------------------------- | ------------- | ------------------------------------------------------------------------------------------------ | ------------------ |
-| **Scoring Category Description**  | String        | Details, characteristics and information of the scoring category                                 | Information Impact |
-| **Display Order**                 | Integer       | Scoring category display order on CITE Scoresheet                                                | 1                  |
-| **First Move to Display**         | Integer       | Move number where the scoring category first appears                                             | 1                  |
-| **Last Move to Display**          | Integer       | Move number where the scoring category appears for the final time                                | 1                  |
-| **Calculation Equation**          | Varchar       | Equation used to evaluate participant's scores                                                   | {sum}              |
-| **Calculation Weight**            | Integer       | Weight of the score compared to other categories                                                 | 1                  |
-| **Scoring Option Selection Type** | Dropdown Text | Determine whether the scoring checkboxes show Single, Multiple, or None options                  | Single             |
-| **Modifier Selection Required**   | Boolean       | Select this option to require modifiers that supply alternate values                             | True               |
-
-To save these settings, click **Save**.
-
-A Scoring Category may have zero or more required or optional [Modifiers](#glossary). If there is no optional Modifier, the Scoring Category calculation uses a default value of 1.0.
-
-Additionally, a Scoring Category has an admin defined equation to calculate the submission score from the category scores and can contain the following variables:
-
-- **{sum}:** The sum of the selected Scoring Option values.
-- **{count}:** The count of the selected Scoring Option values.
-- **{min}:** The minimum of the selected Scoring Option values.
-- **{max}:** The maximum of the selected Scoring Option values.
-- **{modifier}:** The selected modifier value, which defaults to 1.
-
-Last but not least, a Scoring Category has a weight by which to multiply the score obtained from the entered equation.
-
-#### Edit a Scoring Category
-
-To edit a scoring category, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to edit and click the **Scoring Categories** tab.
-4. Select the scoring category to edit and click **Edit** next to the scoring category.
-5. The system opens the same edit component used when creating a new scoring category.
-6. After making all necessary edits, click **Save**.
-
-#### Delete a Scoring Category
-
-To delete a scoring model, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to edit and click the **Scoring Categories** tab.
-4. Select the scoring category to delete and click the **Trash Can** next to the scoring category.
-
-### Scoring Options
-
-Within a Scoring Category, an administrator can add one or more [Scoring Options](#glossary). To do this, follow these steps:
-
-#### Add Scoring Options
-
-![Scoring Options OE](img/scoringOptions.png)
-
-1. Click **+** on the Scoring Options section.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field                          | Data Type | Description                                                         | Example   |
-| ------------------------------ | --------- | ------------------------------------------------------------------- | --------- |
-| **Scoring Option Description** | String    | Details, characteristics and information of the scoring option      | No Impact |
-| **Display Order**              | Integer   | Scoring option display order on CITE Scoresheet                     | 1         |
-| **Value**                      | Integer   | The scoring option's value for participant score                    | 0         |
-| **Is a Modifier**              | Boolean   | Select this option to treat the scoring option as a modifier        | True      |
-
-To save these settings, click **Save**.
-
-#### Edit a Scoring Option
-
-To edit a scoring option, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to edit and click the **Scoring Categories** tab.
-4. Select the scoring category to edit and click the **Scoring Options** tab.
-5. Select the scoring option to edit and click **Edit** next to the scoring option.
-6. The system opens the same edit component used when creating a new scoring option.
-7. After making all necessary edits, click **Save**.
-
-#### Delete a Scoring Option
-
-To delete a scoring option, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Scoring Models** tab.
-3. Select the scoring model to edit and click the **Scoring Categories** tab.
-4. Select the scoring category to edit and click the **Scoring Options** tab.
-5. Select the scoring option to delete and click the **Trash Can** next to the scoring option.
-
-### Actions
-
-The following image shows the Actions Administration Page. Here, administrators can add, edit, and delete actions.
-
-However, users who can submit scores on behalf of their team can also add suggested actions to the CITE Dashboard. The use of actions allows team members to customize their response by tracking tasks during the exercise. The system keeps these actions internal to the team and hides them from other participants.
-
-![Actions Admin OE](img/actionsAdmin-v2.png)
-
-#### Add an Action
-
-If the exercise administrator grants the appropriate permissions, follow these steps to add an Action.
-
-![Add Action OE](img/addAction-v3.png)
-
-1. Under the Actions Administration View, click the **Move** dropdown and select the desired move.
-2. Click the **Team** dropdown and select the desired team.
-3. Click **+** to add an Action.
-4. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field                  | Data Type | Description                                            | Example       |
-| ---------------------- | --------- | ------------------------------------------------------ | ------------- |
-| **Action Description** | String    | Details, characteristics and information of the action | Time to Score |
-
-To save these settings, click **Save**.
-
-#### Edit an Action
-
-To edit an action, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Actions** tab.
-3. Select the action to edit and click **Edit** next to the action.
-4. The system opens the same edit component used when creating a new action.
-5. After making all necessary edits, click **Save**.
-
-#### Delete an Action
-
-To delete an action, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Action** tab.
-3. Select the action to delete and click the **Trash Can** next to the action.
-
-### Roles
-
-The following image shows the Roles Administration Page. Here, administrators can add, edit, and delete roles.
-
-However, users who can submit scores on behalf of their team can also add participant roles to the CITE Dashboard. The use of roles allows team members to customize their response by tracking their responsibilities during an exercise. These roles remain internal to the team and stay hidden from other participants.
-
-![Roles Admin OE](img/rolesAdmin-v2.png)
-
-#### Add a Role
-
-If the exercise administrator grants the appropriate permissions, follow these steps to add a Role:
-
-![Add Role OE](img/addRole-v3.png)
-
-1. Under the Roles Administration View, click the **Team** dropdown and select the desired team.
-2. Click **+** to add a Role.
-3. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field         | Data Type | Description      | Example   |
-| ------------- | --------- | ---------------- | --------- |
-| **Role Name** | String    | Name of the role | Team Lead |
-
-To save these settings, click **Save**.
-
-#### Edit a Role
-
-To edit a role, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Roles** tab.
-3. Select the role to edit and click **Edit** next to the role.
-4. The system opens the same edit component used when creating a new role.
-5. After making all necessary edits, click **Save**.
-
-#### Delete a Role
-
-To delete a role, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Roles** tab.
-3. Select the role to delete and click the **Trash Can** next to the role.
-
-### Submissions
-
-The following image shows the Submissions Administration Page. Here, administrators can keep track of all score [submissions](#glossary) provided by the different teams during an exercise. This allows administrators to compare their scores with the official score, as well as keep track of which teams are on a good track and which are not.
-
-Additional functionalities include copying the entire score, as well as deleting a score submitted by a team.
-
-![Submissions Admin OE](img/submissionsAdmin-v2.png)
-
-### Team Types
-
-The following image shows the [Team Types](#glossary) Administration Page. Here, administrators can create different types of teams to use during an exercise. This allows administrators to classify the different teams on the platform based on common characteristics and/or organizations.
-
-![Team Types Admin OE](img/teamTypesAdmin.png)
-
-#### Add a Team Type
-
-If the exercise administrator grants the appropriate permissions, follow these steps to add a Team Type:
-
-![Add Team Type OE](img/addTeamType.png)
-
-1. Under the Team Type Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field                          | Data Type | Description                                                           | Example                 |
-| ------------------------------ | --------- | --------------------------------------------------------------------- | ----------------------- |
-| **TeamType Name**              | String    | Name of the team type                                                 | Individual Organization |
-| **Official Score Contributor** | Boolean   | Select this option for teams that contribute to CITE's official score | True                    |
-| **Show TeamType Average**      | Boolean   | Select this option to make the score average available to the team    | True                    |
-
-To save these settings, click **Save**.
-
-#### Edit a Team Type
-
-To edit a team type, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Team Types** tab.
-3. Select the team type to edit and click **Edit** next to the team type.
-4. The system opens the same edit component used when creating a new team type.
-5. After making all necessary edits, click **Save**.
-
-#### Delete a Team Type
-
-To delete a team type, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Team Types** tab.
-3. Select the team type to delete and click the **Trash Can** next to the team type.
-
-### Users
-
-The following image shows the *Users Administration* page. Here, administrators can add and delete users, and assign the necessary permissions to each user.
-
-The available permissions are:
-
-- **System Admin:** Permission that will grant a user all administration privileges on the CITE application.
-- **Content Developer:** Receives permission to manage other CITE admin pages except the Users Admin page and their permissions.
-- **Can Submit:** This permission lets the user submit a score for the different moves during an exercise.
-- **Can Modify:** This permission lets the user modify a score for previous moves during an exercise.
-- **Can Increment Move:** Grant this permission to allow the user to increment the current move during an exercise.
-
-![Users Admin OE](img/usersAdmin-v2.png)
-
-#### Add a User
-
-Assuming that the exercise administrator granted the user the appropriate permissions, follow these steps to add a User:
-
-![Add User OE](img/addUser-v2.png)
-
-1. Under the Users Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field         | Data Type | Description                        | Example                              |
-| ------------- | --------- | ---------------------------------- | ------------------------------------ |
-| **User ID**   | GUID      | User ID that identifies the user   | 81a623e3-faeb-4a56-8b4d-0d42f90b6829 |
-| **User Name** | string    | User name that identifies the user | user-1                               |
-
-To save these settings, click **Save** and select the desired permissions to assign by checking the boxes next to the user.
-
-#### Delete a User
-
-To delete a user, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Users** tab.
-3. Select the users to delete and click the **Trash Can** next to the user.
 
 ## Glossary
 
