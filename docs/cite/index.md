@@ -30,183 +30,6 @@ Additionally, participants who can submit scores on behalf of their team can als
 
 Refer to the [Actions to Consider](#actions-to-consider) section for more information.
 
-## User Guide
-
-### Moves
-
-In CITE, a move is a defined exercise period. During that period the system distributes events for users to discuss and assess the current incident severity.
-
-When in Dashboard view, users have two options for interacting with moves:
-
-- **Displayed Move:** Move currently shown on the screen. Here, users can see responses to previous moves and scores, but they cannot edit a response.
-- **Current Move:** Move that is currently active. In some cases the Displayed Move and the Current Move match. Here, users can edit the category of the move.
-
-### CITE Landing Page
-
-The CITE landing page provides a central approach to recompiling all evaluations that the user is a participant on into a single display.
-
-![CITE Landing Page OE](img/citeLandingPage-v2.png)
-
-#### Search for an Evaluation
-
-To search for an evaluation, follow these steps:
-
-1. Navigate to CITE's landing page.
-2. Click the Search Bar and add the name of the evaluation.
-
-### CITE Dashboard
-
-The CITE Dashboard shows exercise details like date and time, incident summary, a suggested list of actions for participants to consider taking, and suggested participant roles.
-
-The following image shows some important hotspots about the CITE Dashboard. Reference the number on the hotspot to learn more about this section.
-
-![CITE Dashboard OE](img/CITE-Dashboard-v3.png)
-
-#### Active Events & Moves
-
-##### Hotspot 1
-
-The name of the active event and the move number currently displayed.
-
-Once the user obtains Can Increment Move permission, the "Advance Move" button appears. This enables the user to advance CITE's current move, and go back and forth between moves using the arrows.
-
-![CITE Advance Move OE](img/advanceMoveButton.png)
-
-#### Situation Date & Time
-
-##### Hotspot 2
-
-The date and time of the situation displayed.
-
-#### Situation Description
-
-##### Hotspot 3
-
-Short description of the event. This section allows for the use of HTML elements, useful when receiving MSEL information from Blueprint.
-
-#### Actions to Consider
-
-##### Hotspot 4
-
-Users can see the different actions necessary to execute during the exercise. These actions are for everyone on the team and are "per move", changing at each move of the exercise.
-
-These actions guide users on an appropriate course of action during an exercise. However, these actions are not connected to the scoresheet.
-
-#### Roles
-
-##### Hotspot 5
-
-The roles give each team member a clear understanding of their responsibilities during the exercise. Roles are customizable per team, and the team members decide what role to assign to each user.
-
-#### Score Summary
-
-##### Hotspot 6
-
-Displays the various scores at the appropriate severity level for the displayed move. Here, scores are always visible.
-
-#### Team Selection
-
-##### Hotspot 7
-
-This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
-
-#### CITE Report Toggle
-
-##### Hotspot 8
-
-This feature redirects users to a printable version of the CITE report that recollects all user responses throughout the exercise.
-
-Refer to the [CITE Report](#cite-report) section for more information.
-
-#### Dashboard & Scoresheet Toggle
-
-##### Hotspot 9
-
-By using this icon, users can toggle between the CITE Dashboard and the CITE Scoresheet.
-
-### CITE Scoresheet
-
-The CITE Scoresheet compares participant scores to organization scores, group average scores, and the official score.
-
-The following image shows some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to learn more about this section.
-
-![CITE Scoresheet OE](img/CITE-Scoresheet-v3.png)
-
-#### Event Name
-
-##### Hotspot 1
-
-The name of the current event.
-
-#### Displayed Move
-
-##### Hotspot 2
-
-The move currently displayed on the screen. Clicking < displays previous moves. Clicking > displays the current move. Using Displayed Move, users can see responses to previous moves and scores, but the user cannot edit a previous response.
-
-#### Scoring Features
-
-##### Hotspot 3
-
-- **User:** This is the participant's personal score for their reference only. The user score will also appear under the Score Summary range.
-- **Team:** Toggling the Team icon displays how the team scored this move so far. This is the score that the team collaborates on and submits for the current move. This score compares to the official score. The Team score appears under the Score Summary range.
-- **Team Avg:** The average for all of the users on the team. The Team Avg appears under the Score Summary range for all moves except the current move.
-- **Group Avg:** The average for all of the teams in the user's group. Group Avg appears under the Score Summary range for all moves except the current move.
-- **Official:** The potential score; that is, how the incident would score in a real-life scenario. Official score appears under the Score Summary range for all moves except the current move.
-- **Submit:** Submits the score, indicating that the user scored the current move. Click Yes or No. If the user clicks Yes but changes their mind, click Reopen to edit the scoring.
-- **Clear:** Clears any selections the user has checked but does not clear comments entered. Selecting Clear returns to a score of 0.00.
-- **Preset:** Sets the user's selections to the previous move score to use as a starting point for the current move.
-
-#### Categories and Options
-
-##### Hotspot 4
-
-Categories are individually scored based upon the current move situation. For each category, select one or more relevant options. Selecting options assigns points to each category, which compile to create the move score as defined by the [scoring model](#glossary).
-
-#### Add, Edit, and Delete a Comment
-
-When scoring a move, the user can attach a comment (or multiple comments) to a category.
-
-- To add a comment, click ![Comment OE](img/comment.png). Enter the comment and click Save.
-- To edit an existing comment, click ![Edit OE](img/edit.png). Make any changes, then click Save.
-- To delete an existing comment, click ![Trash OE](img/trash.png). Click Yes to delete the comment.
-
-When finished scoring the categories and adding comments, click Submit to submit the scores.
-
-#### Score Summary
-
-##### Hotspot 5
-
-The Score Summary panel displays the various scores at the appropriate severity level for the displayed move, keeping the data visible at all times.
-
-#### Team Selection
-
-##### Hotspot 6
-
-This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When the administrator assigns an observer role, the user can see other teams' progress during the exercise as well as participate on their own team.
-
-#### CITE Report Toggle
-
-##### Hotspot 7
-
-This feature redirects users to a printable version of the CITE report that recollects all user responses throughout the exercise.
-
-Refer to the [CITE Report](#cite-report) section for more information.
-
-#### Dashboard & Scoresheet Toggle
-
-##### Hotspot 8
-
-By using this icon, users can toggle between the CITE Dashboard and the CITE Scoresheet.
-
-### CITE Report
-
-The [CITE Report](#glossary) recollects all user responses into a single printable page. Users can reference this for their records, and exercise administrators can obtain valuable exercise insights from it.
-
-The following image shows the CITE Report. Here, users can view and/or print their own copy.
-
-![CITE Report OE](img/CITE-Report.png)
-
 ## Administrator Guide
 
 ## Administration View
@@ -764,6 +587,183 @@ To delete a user, follow these steps:
 1. Click the **Settings Cog**.
 2. Navigate to the **Users** tab.
 3. Select the users to delete and click the **Trash Can** next to the user.
+
+## User Guide
+
+### Moves
+
+In CITE, a move is a defined exercise period. During that period the system distributes events for users to discuss and assess the current incident severity.
+
+When in Dashboard view, users have two options for interacting with moves:
+
+- **Displayed Move:** Move currently shown on the screen. Here, users can see responses to previous moves and scores, but they cannot edit a response.
+- **Current Move:** Move that is currently active. In some cases the Displayed Move and the Current Move match. Here, users can edit the category of the move.
+
+### CITE Landing Page
+
+The CITE landing page provides a central approach to recompiling all evaluations that the user is a participant on into a single display.
+
+![CITE Landing Page OE](img/citeLandingPage-v2.png)
+
+#### Search for an Evaluation
+
+To search for an evaluation, follow these steps:
+
+1. Navigate to CITE's landing page.
+2. Click the Search Bar and add the name of the evaluation.
+
+### CITE Dashboard
+
+The CITE Dashboard shows exercise details like date and time, incident summary, a suggested list of actions for participants to consider taking, and suggested participant roles.
+
+The following image shows some important hotspots about the CITE Dashboard. Reference the number on the hotspot to learn more about this section.
+
+![CITE Dashboard OE](img/CITE-Dashboard-v3.png)
+
+#### Active Events & Moves
+
+##### Hotspot 1
+
+The name of the active event and the move number currently displayed.
+
+Once the user obtains Can Increment Move permission, the "Advance Move" button appears. This enables the user to advance CITE's current move, and go back and forth between moves using the arrows.
+
+![CITE Advance Move OE](img/advanceMoveButton.png)
+
+#### Situation Date & Time
+
+##### Hotspot 2
+
+The date and time of the situation displayed.
+
+#### Situation Description
+
+##### Hotspot 3
+
+Short description of the event. This section allows for the use of HTML elements, useful when receiving MSEL information from Blueprint.
+
+#### Actions to Consider
+
+##### Hotspot 4
+
+Users can see the different actions necessary to execute during the exercise. These actions are for everyone on the team and are "per move", changing at each move of the exercise.
+
+These actions guide users on an appropriate course of action during an exercise. However, these actions are not connected to the scoresheet.
+
+#### Roles
+
+##### Hotspot 5
+
+The roles give each team member a clear understanding of their responsibilities during the exercise. Roles are customizable per team, and the team members decide what role to assign to each user.
+
+#### Score Summary
+
+##### Hotspot 6
+
+Displays the various scores at the appropriate severity level for the displayed move. Here, scores are always visible.
+
+#### Team Selection
+
+##### Hotspot 7
+
+This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
+
+#### CITE Report Toggle
+
+##### Hotspot 8
+
+This feature redirects users to a printable version of the CITE report that recollects all user responses throughout the exercise.
+
+Refer to the [CITE Report](#cite-report) section for more information.
+
+#### Dashboard & Scoresheet Toggle
+
+##### Hotspot 9
+
+By using this icon, users can toggle between the CITE Dashboard and the CITE Scoresheet.
+
+### CITE Scoresheet
+
+The CITE Scoresheet compares participant scores to organization scores, group average scores, and the official score.
+
+The following image shows some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to learn more about this section.
+
+![CITE Scoresheet OE](img/CITE-Scoresheet-v3.png)
+
+#### Event Name
+
+##### Hotspot 1
+
+The name of the current event.
+
+#### Displayed Move
+
+##### Hotspot 2
+
+The move currently displayed on the screen. Clicking < displays previous moves. Clicking > displays the current move. Using Displayed Move, users can see responses to previous moves and scores, but the user cannot edit a previous response.
+
+#### Scoring Features
+
+##### Hotspot 3
+
+- **User:** This is the participant's personal score for their reference only. The user score will also appear under the Score Summary range.
+- **Team:** Toggling the Team icon displays how the team scored this move so far. This is the score that the team collaborates on and submits for the current move. This score compares to the official score. The Team score appears under the Score Summary range.
+- **Team Avg:** The average for all of the users on the team. The Team Avg appears under the Score Summary range for all moves except the current move.
+- **Group Avg:** The average for all of the teams in the user's group. Group Avg appears under the Score Summary range for all moves except the current move.
+- **Official:** The potential score; that is, how the incident would score in a real-life scenario. Official score appears under the Score Summary range for all moves except the current move.
+- **Submit:** Submits the score, indicating that the user scored the current move. Click Yes or No. If the user clicks Yes but changes their mind, click Reopen to edit the scoring.
+- **Clear:** Clears any selections the user has checked but does not clear comments entered. Selecting Clear returns to a score of 0.00.
+- **Preset:** Sets the user's selections to the previous move score to use as a starting point for the current move.
+
+#### Categories and Options
+
+##### Hotspot 4
+
+Categories are individually scored based upon the current move situation. For each category, select one or more relevant options. Selecting options assigns points to each category, which compile to create the move score as defined by the [scoring model](#glossary).
+
+#### Add, Edit, and Delete a Comment
+
+When scoring a move, the user can attach a comment (or multiple comments) to a category.
+
+- To add a comment, click ![Comment OE](img/comment.png). Enter the comment and click Save.
+- To edit an existing comment, click ![Edit OE](img/edit.png). Make any changes, then click Save.
+- To delete an existing comment, click ![Trash OE](img/trash.png). Click Yes to delete the comment.
+
+When finished scoring the categories and adding comments, click Submit to submit the scores.
+
+#### Score Summary
+
+##### Hotspot 5
+
+The Score Summary panel displays the various scores at the appropriate severity level for the displayed move, keeping the data visible at all times.
+
+#### Team Selection
+
+##### Hotspot 6
+
+This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When the administrator assigns an observer role, the user can see other teams' progress during the exercise as well as participate on their own team.
+
+#### CITE Report Toggle
+
+##### Hotspot 7
+
+This feature redirects users to a printable version of the CITE report that recollects all user responses throughout the exercise.
+
+Refer to the [CITE Report](#cite-report) section for more information.
+
+#### Dashboard & Scoresheet Toggle
+
+##### Hotspot 8
+
+By using this icon, users can toggle between the CITE Dashboard and the CITE Scoresheet.
+
+### CITE Report
+
+The [CITE Report](#glossary) recollects all user responses into a single printable page. Users can reference this for their records, and exercise administrators can obtain valuable exercise insights from it.
+
+The following image shows the CITE Report. Here, users can view and/or print their own copy.
+
+![CITE Report OE](img/CITE-Report.png)
 
 ## Glossary
 
