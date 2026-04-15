@@ -18,6 +18,8 @@ Player is *not* meant to:
 
 ## Administrator Guide
 
+Player administrators use the Administration View to manage views, teams, applications, users, and roles.
+
 ### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.

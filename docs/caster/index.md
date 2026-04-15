@@ -16,6 +16,8 @@ The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-se
 
 ## Administrator Guide
 
+Caster administrators use the Administration View to manage users, roles, and VLANs.
+
 ### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. It is where admins prepare and manage the environment so events run smoothly for participants.
