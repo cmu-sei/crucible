@@ -34,7 +34,9 @@ Admins apply roles to users in the **Users** section of the **Administration** a
 
 ## Administrator Guide
 
-## Administration View
+Alloy administrators use the Administration View to manage users, roles, and event templates.
+
+### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
 
@@ -65,7 +67,7 @@ The default setting for the maximum number of active events per user is **two**.
       }
 ```
 
-### Manage Event Templates
+#### Manage Event Templates
 
 In Alloy, you use an *event template* to associate one or more of the individual Crucible applications, including a Player view, Caster directory, and Steamfitter scenario template. A user can launch a new event from the defined event template.
 

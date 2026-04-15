@@ -55,7 +55,7 @@ Users who have the `ManageRoles` permission can create custom system roles in th
 
 The *Steamfitter Administrator Guide* covers the configuration and management of the Steamfitter app. Administrators use the Administration View to manage users, assign roles and permissions, and maintain scenario templates. This guide walks through the key areas of the Administration View and the tools available for setting up and managing Steamfitter content.
 
-## Administration View
+### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
 
@@ -65,7 +65,7 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 
 Steamfitter is primarily an administrative tool. Content developers and "Range tech" types of admins manage templates and scenarios, while read-only users can observe assigned projects without making changes.
 
-### Scenario Templates
+#### Scenario Templates
 
 ![scenario template](img/scenario-templates.png)
 
@@ -75,7 +75,7 @@ After adding the new scenario template, you can **Create a Scenario**, **Copy** 
 
 Add tasks in the Scenario Templates screen by clicking the **+** icon. Complete the same task information as you did to create a new task.
 
-### Scenarios
+#### Scenarios
 
 ![scenarios](img/scenarios.png)
 
@@ -93,7 +93,7 @@ You can change the **Start** and **End** dates and times here.
 
     The scenario inherits the tasks you attached to the scenario template. If you edit them in the scenario, the changes apply only to that scenario. To update every scenario based on the template, edit the tasks in the scenario template.
 
-#### Stand-alone Tasks on the Scenario
+##### Stand-alone Tasks on the Scenario
 
 Steamfitter provides a stand-alone Tasks page that allows users without full Steamfitter permissions to run scenario tasks and view their results. You can access this page using either `scenario/{scenarioId}` or `/view/{viewId}`.
 
@@ -156,7 +156,7 @@ This URL tells Player exactly which scenario's tasks to display and avoids the c
 
 	Steamfitter lists tasks alphabetically by name. To control their display order, prefix task names with labels such as "Task 01," "Task 02," and so on.
 
-#### Starting a Scenario
+##### Starting a Scenario
 
 Start the scenario to execute its tasks.
 
@@ -168,11 +168,11 @@ When you start the scenario, Steamfitter marks it **Active** and adds a new **Ex
 
 After you execute tasks, the results display in the task details. Each task is expandable. You will see a result listed for every execution of the task.
 
-#### Ending a Scenario
+##### Ending a Scenario
 
 You can also end scenarios. After you start a scenario, the **Start Scenario** button changes to **End Scenario Now**.
 
-### Tasks
+#### Tasks
 
 A *task* is an action or command that executes against one or more topology resources (that is, a VM). Each task has a *result*. The result captures the output generated when the task runs against a single topology resource—such as one VM—and indicates success or failure. The output typically includes text describing the outcome.
 
@@ -183,7 +183,7 @@ A task can produce multiple results:
 - a task defined to run against one VM generates one result for each execution
 - a task defined to run against multiple VMs generates one result per VM each time the task runs. For example, a task that targets four VMs and runs three times yields 12 results.
 
-#### Adding a Task
+##### Adding a Task
 
 - **Name:** Describe what this task does.
 - **Description:** Provide additional details about the task.
@@ -219,13 +219,13 @@ A task can produce multiple results:
 - **VM Mask:** Steamfitter runs tasks against Player VMs that include the text you enter here.
 - **Choose Actual VMs:** Enable Choose Actual VMs to select specific VMs from the Player view.
 
-#### Task Menu and Dependent Tasks
+##### Task Menu and Dependent Tasks
 
 Clicking the Task Menu on the newly created task opens the context menu: **Edit**, **Copy**, **Cut**, **New**, **Delete**, and **Execute**. Selecting **New** here creates a new *dependent* task, which waits to run until the parent task meets its condition.
 
 You can copy and paste a task between scenario templates, scenarios, or other tasks.
 
-### History
+#### History
 
 The default History view shows task results for the current user sorted in reverse chronological order. However, you can also view history by **User**, **View**, and **VM**. Sorting and filtering are also available in the history results.
 
