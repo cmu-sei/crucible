@@ -67,7 +67,7 @@ The default setting for the maximum number of active events per user is **two**.
       }
 ```
 
-#### Manage Event Templates
+### Manage Event Templates
 
 In Alloy, you use an *event template* to associate one or more of the individual Crucible applications, including a Player view, Caster directory, and Steamfitter scenario template. A user can launch a new event from the defined event template.
 
