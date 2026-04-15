@@ -34,7 +34,7 @@ Admins apply roles to users in the **Users** section of the **Administration** a
 
 ## Administrator Guide
 
-Alloy administrators use the Administration View to manage users, roles, and event templates.
+Alloy administrators use the Administration View to manage users and roles, and use Event Templates to define and configure events that users can launch.
 
 ### Administration View
 
