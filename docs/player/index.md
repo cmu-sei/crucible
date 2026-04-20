@@ -118,6 +118,8 @@ In the dropdown next to your username, select **Administration**.
 
 ### Roles and Permissions
 
+Player controls access through a combination of permissions and roles. Permissions grant specific capabilities globally or per view; roles group permissions and apply them to users.
+
 #### Permissions
 
 Sets of *permissions* control access to features in Player. Permissions can apply globally or per **View**.
@@ -362,6 +364,8 @@ Receive and read notifications here.
 
 ## Player Tips
 
+The following tips help you get the most out of Player.
+
 ### Taking Advantage of Screen Real Estate
 
 Player and its component applications (as well as any third-party application linked through Player) can use any monitor setup. You can open any application in the application bar in a new window or tab by clicking the [>] button on the right side of the application card. You can also open virtual machine consoles in a new window or tab. This setup gives you flexibility in how you display information in Player. For example, you can view documentation or a lab guide on one monitor while using your virtual machine on another. You can use multiple windows with an ultra-wide monitor to see everything at once.
@@ -402,6 +406,8 @@ The procedures below show you how to remotely power a VM on or off from within t
 2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
 
 ### Uploading Files
+
+Player's VM Console app supports file transfers between your local machine and virtual machines.
 
 #### Upload from local to VM
 

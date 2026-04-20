@@ -16,6 +16,8 @@ Go to the TopoMojo repository: [github.com/cmu-sei/TopoMojo](https://github.com/
 
 ## TopoMojo Concepts
 
+Understanding the key concepts in TopoMojo helps you build and manage labs and challenges effectively.
+
 ### Workspace and Gamespace
 
 In a *workspace*, engineers add VMs, save updates, author guides, and configure questions/answers to turn the topology into a lab or challenge.
@@ -45,9 +47,7 @@ Third-party consumers of TopoMojo content, like [Gameboard](../gameboard/index.m
 
 ## Getting Started
 
-### What's New
-
-Get the latest TopoMojo source code and its accompanying release notes from the [GitHub repository](https://github.com/cmu-sei/TopoMojo).
+The following sections cover how to install TopoMojo and configure it for your environment.
 
 ### Installing
 
