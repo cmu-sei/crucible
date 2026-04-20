@@ -18,6 +18,8 @@ Player is *not* meant to:
 
 ## Administrator Guide
 
+Player administrators use the Administration View to manage views, teams, applications, users, and roles.
+
 ### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
@@ -115,6 +117,8 @@ In the dropdown next to your username, select **Administration**.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads. This is important for some apps that may require some initialization.
 
 ### Roles and Permissions
+
+Player controls access through a combination of permissions and roles. Permissions grant specific capabilities globally or per view; roles group permissions and apply them to users.
 
 #### Permissions
 
@@ -360,6 +364,8 @@ Receive and read notifications here.
 
 ## Player Tips
 
+The following tips help you get the most out of Player.
+
 ### Taking Advantage of Screen Real Estate
 
 Player and its component applications (as well as any third-party application linked through Player) can use any monitor setup. You can open any application in the application bar in a new window or tab by clicking the [>] button on the right side of the application card. You can also open virtual machine consoles in a new window or tab. This setup gives you flexibility in how you display information in Player. For example, you can view documentation or a lab guide on one monitor while using your virtual machine on another. You can use multiple windows with an ultra-wide monitor to see everything at once.
@@ -400,6 +406,8 @@ The procedures below show you how to remotely power a VM on or off from within t
 2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
 
 ### Uploading Files
+
+Player's VM Console app supports file transfers between your local machine and virtual machines.
 
 #### Upload from local to VM
 

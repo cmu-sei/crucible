@@ -592,6 +592,8 @@ To delete a user, follow these steps:
 
 ## User Guide
 
+Participants use the CITE Dashboard and Scoresheet to evaluate and score incidents during an exercise.
+
 ### Moves
 
 In CITE, a move is a defined exercise period. During that period the system distributes events for users to discuss and assess the current incident severity.

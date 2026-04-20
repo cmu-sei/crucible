@@ -5,6 +5,7 @@ site_url: https://cmu-sei.github.io/crucible/
 copyright: >
   Copyright &copy; 2025-2026 Carnegie Mellon University. All rights reserved.
 extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css
   - https://fonts.googleapis.com/icon?family=Material+Icons
   - stylesheets/extra.css
 theme:

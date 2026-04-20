@@ -330,6 +330,8 @@ To search for a specific CITE role template, follow these steps:
 
 ## User Guide
 
+Content developers use Blueprint to build and manage MSELs.
+
 ### Blueprint Landing Page
 
 The landing page of Blueprint provides a variety of interaction modalities for exercises, tailored according to the permissions assigned to each user. The functionalities available are as follows:

@@ -16,6 +16,8 @@ The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-se
 
 ## Administrator Guide
 
+Caster administrators use the Administration View to manage users, roles, and VLANs.
+
 ### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. It is where admins prepare and manage the environment so events run smoothly for participants.
@@ -214,7 +216,7 @@ Administrators can create new groups, search for and edit existing groups, and d
 
 ## User Guide
 
-Administrators manage the environment, including projects, users, groups, permissions, modules, and running workspaces in the Administration area. Users access assigned projects, create and edit Terraform files, and deploy configurations to workspaces. This *User Guide* explains how you, the user, perform those tasks.
+Users access assigned projects, create and edit Terraform files, and deploy configurations to workspaces.
 
 ### Project
 
@@ -233,9 +235,11 @@ Add Directory lets you create a new directory at the same level as the above pro
 
 #### Export Project
 
-Export Projects allows you to export the project as a zip file.
+Export Project lets you export the project as an archive file. Select the **Archive Type** (default: Zip), then click **Export**. Enable **Include Ids** to include directory IDs in the export.
 
 #### Import Project
+
+Import Project lets you import a project from a zip file. Click **Choose File** to select the zip file, then click **Import**. Enable **Preserve Ids** to append IDs to directory names during the import.
 
 ### Files
 
@@ -297,6 +301,8 @@ Designer provides a graphical user interface for creating and editing terraform 
 When you open a project, you can create a design and add modules backed by Git to that design. You can also create variables for use in the modules settings.
 
 ## Caster Tips
+
+The following tips help you get the most out of Caster.
 
 ### Crafting Terraform Code
 

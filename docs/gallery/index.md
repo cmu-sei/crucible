@@ -395,6 +395,8 @@ To remove the Observer Role from a user:
 
 ## User Guide
 
+Participants use the Gallery Wall and Archive to track and respond to exercise events.
+
 ### Gallery Landing Page
 
 The Gallery landing page provides a central approach to recompiling all collections and exhibits that the user is a participant on into a single display.

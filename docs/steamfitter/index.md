@@ -19,6 +19,8 @@ Behind the scenes, Steamfitter uses [StackStorm](https://stackstorm.com/) to exe
 
 ## Permissions and Roles
 
+Steamfitter controls access through a combination of permissions and roles. Permissions define what users can do; roles group permissions and apply them to users globally or per resource.
+
 ### Permissions
 
 Sets of *permissions* control access to features in Steamfitter. Permissions apply globally or per Scenario Template or Scenario.
@@ -53,7 +55,7 @@ Users who have the `ManageRoles` permission can create custom system roles in th
 
 ## Administrator Guide
 
-The *Steamfitter Administrator Guide* covers the configuration and management of the Steamfitter app. Administrators use the Administration View to manage users, assign roles and permissions, and maintain scenario templates. This guide walks through the key areas of the Administration View and the tools available for setting up and managing Steamfitter content.
+Steamfitter administrators use the Administration View to manage users, assign roles and permissions, and maintain scenario templates.
 
 ### Administration View
 
