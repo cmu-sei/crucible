@@ -28,6 +28,8 @@ Refer to the following documentation for application-specific permission details
 
 ## Platform Architecture
 
+The following sections describe the core components and supporting services that make up the Crucible platform.
+
 ### Core Components
 
 ```text

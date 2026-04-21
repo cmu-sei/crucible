@@ -114,6 +114,8 @@ The Game Center header displays game metadata and settings, including the name, 
 
 ### Gear Tab
 
+The Gear tab contains the core settings for your game, organized into the sections below.
+
 #### Metadata
 
 **Name:** The title of your game. Displayed in the game lobby and on the scoreboard.
@@ -215,6 +217,8 @@ Offering a different execution period from registration period is an option. Thi
 **Registration Markdown:** Using Markdown enter any information you would like players to see when they register for the game. For help with Markdown syntax, see this [Markdown Guide](https://www.markdownguide.org/).
 
 ### Challenges Tab
+
+Use the Challenges tab to add challenges from TopoMojo to your game.
 
 #### Search
 
@@ -558,6 +562,8 @@ A challenge remains current and not archived until the **Reset Session** button 
 
 ### Support Settings
 
+The Support Settings section configures the support experience for participants during the game.
+
 #### Greeting
 
 In the **Greeting** field, enter a message. Your message appears as a banner on the Support page to welcome players. Customize it to fit your needs. The field supports the use of Markdown formatting.
@@ -822,6 +828,8 @@ This section assumes that you already hold the Administrator role in Gameboard, 
 
 ## User Guide
 
+Participants use Gameboard to register for games, play challenges, track scores, and get support during competitions.
+
 ### The Profile Screen
 
 Participants access their *Profile* by browsing to the Gameboard's designated URL and logging in. By default, authenticated participants land in the Profile screen if they haven't registered for a game yet. Otherwise, click **Profile** in the top navigation.
@@ -829,6 +837,8 @@ Participants access their *Profile* by browsing to the Gameboard's designated UR
 ![profile link in nav](img/profile-profile.png)
 
 #### Profile Tab
+
+The Profile tab is where participants set their display name and manage their account settings.
 
 ##### Display Name
 
@@ -1059,6 +1069,8 @@ Gameboard administrators configure global Practice Area settings including: a pr
 The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist players and teams. Gameboard is a "one-stop shop" and you don't need outside apps or systems to track and measure issues reported by participants. Users who hold a role with the appropriate permissions can use the support feature to manage tickets.
 
 #### Support from the Participant Point-of-View
+
+Participants can create and track support tickets from within Gameboard.
 
 ##### Creating New Support Ticket
 

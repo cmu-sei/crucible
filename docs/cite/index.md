@@ -620,13 +620,10 @@ To search for an evaluation, follow these steps:
 
 The CITE Dashboard shows exercise details like date and time, incident summary, a suggested list of actions for participants to consider taking, and suggested participant roles.
 
-The following image shows some important hotspots about the CITE Dashboard. Reference the number on the hotspot to learn more about this section.
-
+<!-- TODO: Replace screenshot with version without numbered callout markers -->
 ![CITE Dashboard OE](img/CITE-Dashboard-v3.png)
 
 #### Active Events & Moves
-
-##### Hotspot 1
 
 The name of the active event and the move number currently displayed.
 
@@ -636,19 +633,13 @@ Once the user obtains Can Increment Move permission, the "Advance Move" button a
 
 #### Situation Date & Time
 
-##### Hotspot 2
-
 The date and time of the situation displayed.
 
 #### Situation Description
 
-##### Hotspot 3
-
 Short description of the event. This section allows for the use of HTML elements, useful when receiving MSEL information from Blueprint.
 
 #### Actions to Consider
-
-##### Hotspot 4
 
 Users can see the different actions necessary to execute during the exercise. These actions are for everyone on the team and are "per move", changing at each move of the exercise.
 
@@ -656,25 +647,17 @@ These actions guide users on an appropriate course of action during an exercise.
 
 #### Roles
 
-##### Hotspot 5
-
 The roles give each team member a clear understanding of their responsibilities during the exercise. Roles are customizable per team, and the team members decide what role to assign to each user.
 
 #### Score Summary
-
-##### Hotspot 6
 
 Displays the various scores at the appropriate severity level for the displayed move. Here, scores are always visible.
 
 #### Team Selection
 
-##### Hotspot 7
-
 This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
 
 #### CITE Report Toggle
-
-##### Hotspot 8
 
 This feature redirects users to a printable version of the CITE report that recollects all user responses throughout the exercise.
 
@@ -682,33 +665,24 @@ Refer to the [CITE Report](#cite-report) section for more information.
 
 #### Dashboard & Scoresheet Toggle
 
-##### Hotspot 9
-
 By using this icon, users can toggle between the CITE Dashboard and the CITE Scoresheet.
 
 ### CITE Scoresheet
 
 The CITE Scoresheet compares participant scores to organization scores, group average scores, and the official score.
 
-The following image shows some important hotspots about the CITE Scoresheet. Reference the number on the hotspot to learn more about this section.
-
+<!-- TODO: Replace screenshot with version without numbered callout markers -->
 ![CITE Scoresheet OE](img/CITE-Scoresheet-v3.png)
 
 #### Event Name
-
-##### Hotspot 1
 
 The name of the current event.
 
 #### Displayed Move
 
-##### Hotspot 2
-
 The move currently displayed on the screen. Clicking < displays previous moves. Clicking > displays the current move. Using Displayed Move, users can see responses to previous moves and scores, but the user cannot edit a previous response.
 
 #### Scoring Features
-
-##### Hotspot 3
 
 - **User:** This is the participant's personal score for their reference only. The user score will also appear under the Score Summary range.
 - **Team:** Toggling the Team icon displays how the team scored this move so far. This is the score that the team collaborates on and submits for the current move. This score compares to the official score. The Team score appears under the Score Summary range.
@@ -720,8 +694,6 @@ The move currently displayed on the screen. Clicking < displays previous moves. 
 - **Preset:** Sets the user's selections to the previous move score to use as a starting point for the current move.
 
 #### Categories and Options
-
-##### Hotspot 4
 
 Categories are individually scored based upon the current move situation. For each category, select one or more relevant options. Selecting options assigns points to each category, which compile to create the move score as defined by the [scoring model](#glossary).
 
@@ -737,27 +709,19 @@ When finished scoring the categories and adding comments, click Submit to submit
 
 #### Score Summary
 
-##### Hotspot 5
-
 The Score Summary panel displays the various scores at the appropriate severity level for the displayed move, keeping the data visible at all times.
 
 #### Team Selection
 
-##### Hotspot 6
-
 This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When the administrator assigns an observer role, the user can see other teams' progress during the exercise as well as participate on their own team.
 
 #### CITE Report Toggle
-
-##### Hotspot 7
 
 This feature redirects users to a printable version of the CITE report that recollects all user responses throughout the exercise.
 
 Refer to the [CITE Report](#cite-report) section for more information.
 
 #### Dashboard & Scoresheet Toggle
-
-##### Hotspot 8
 
 By using this icon, users can toggle between the CITE Dashboard and the CITE Scoresheet.
 

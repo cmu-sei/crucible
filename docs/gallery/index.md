@@ -422,49 +422,34 @@ The Gallery Wall is a dashboard with red, orange, yellow, and green status indic
 - **Yellow:** Indicates an affected status.
 - **Green:** Indicates an open status.
 
-The following image shows some important hotspots about the Gallery Wall. Reference the number on the hotspot to learn more about this section.
-
+<!-- TODO: Replace screenshot with version without numbered callout markers -->
 ![Gallery Wall OE](img/galleryWall-v2.png)
 
 #### Title
-
-##### Hotspot 1
 
 The title of the card.
 
 #### Description
 
-##### Hotspot 2
-
 A brief description of the event.
 
 #### Date Posted
-
-##### Hotspot 3
 
 The date and time the card was last updated.
 
 #### Unread Articles
 
-##### Hotspot 4
-
 The number of [articles](#glossary) left to read from the event.
 
 #### Details
-
-##### Hotspot 5
 
 Provides additional details beyond those provided in the Gallery Wall, including filtered articles related to the event.
 
 #### Team Selection
 
-##### Hotspot 6
-
 This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
 
 #### Wall & Archive Toggle
-
-##### Hotspot 7
 
 By using this icon, users can toggle between the Gallery Wall and Gallery Archive.
 
@@ -472,13 +457,10 @@ By using this icon, users can toggle between the Gallery Wall and Gallery Archiv
 
 The Gallery Archive is a collection of information that contains relevant reporting, intelligence, news, and social media data sources.
 
-The following image shows some important hotspots about the Gallery Archive. Reference the number on the hotspot to learn more about this section.
-
+<!-- TODO: Replace screenshot with version without numbered callout markers -->
 ![Gallery Archive OE](img/galleryArchive-v2.png)
 
 #### Add an Article
-
-##### Hotspot 1
 
 Users assigned the appropriate permissions can add articles to the Archive related to the exercise's current events.
 
@@ -486,27 +468,19 @@ To add an article, refer to the [Add Articles During an Exercise](#add-articles-
 
 #### Search
 
-##### Hotspot 2
-
 The archive contains all "move" data that teams have shared up to this point in the exercise. Users can search, sort, and filter information in the archive.
 
 To search the archive, enter the terms in the **Search the Archive** field. The search feature automatically narrows down the results.
 
 #### Cards Filter
 
-##### Hotspot 3
-
 Users can use this dropdown to further filter intelligence information. Users can sort the Gallery articles based on their card categories. This is useful for users who are searching for information from a specific category.
 
 #### Source Filters
 
-##### Hotspot 4
-
 These articles come from different categories of sources: [reporting](#glossary), [news](#glossary), [orders](#glossary), [phone](#glossary), [email](#glossary), [intel](#glossary), and [social media](#glossary). Users can select one or multiple filters to display only the cards that belong to those filter categorizations.
 
 #### Article Information
-
-##### Hotspot 5
 
 The Gallery Archive displays articles. Each article contains the Title, Source Type, Source Name, and Date Posted.
 
@@ -519,19 +493,13 @@ For the information included on the article:
 
 #### View
 
-##### Hotspot 6
-
 View the full article in a pop-up page or open the article in a new tab for better visualization.
 
 #### Read
 
-##### Hotspot 7
-
 After reading an article, mark it as read to keep track of new articles.
 
 #### Share
-
-##### Hotspot 8
 
 With this feature, users can share an article with others using a mail service.
 
@@ -543,19 +511,13 @@ To share an article with another team, click **Share**. In the **Share Article**
 
 #### More
 
-##### Hotspot 9
-
 When enabled, the system provides attached documents with additional information for users to access and read.
 
 #### Team Selection
 
-##### Hotspot 10
-
 This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
 
 #### Wall & Archive Toggle
-
-##### Hotspot 11
 
 By using this icon, users can toggle between the Gallery Wall and Gallery Archive.
 

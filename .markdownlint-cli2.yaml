@@ -5,6 +5,9 @@
 ignores:
   - LICENSE.md
 
+customRules:
+  - .github/linting/no-empty-sections.js
+
 config:
   # Do not allow headings to increase more than 1 level at a time
   MD001: true

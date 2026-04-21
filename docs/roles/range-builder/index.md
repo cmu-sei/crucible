@@ -52,6 +52,8 @@ Range structure varies based on training goals, audience, and available resource
 
 ## Best Practices
 
+The following sections cover recommended practices for infrastructure design, scenario design, and content development.
+
 ### Infrastructure Design
 
 - Use modular Terraform configurations

@@ -15,6 +15,8 @@ Steamfitter enables you to create dynamic, responsive scenarios that adapt to pa
 
 ## Scenario Architecture
 
+The following sections cover task grouping, trigger types, and scoring approaches for building Steamfitter scenarios.
+
 ### Task Grouping
 
 Organize activities into logical **phases**:
@@ -65,6 +67,8 @@ Organize activities into logical **phases**:
 
 ## Common Scenario Patterns
 
+The following sections show example task sequences for common exercise types.
+
 ### Incident Response Scenario
 
 | Phase             | Task                                                | Description                  | Trigger               | Notes                          |
@@ -95,6 +99,8 @@ Organize activities into logical **phases**:
 | **Advanced**     | Exploit Development      | Develop custom exploit   | After assessment | Advanced     | 50     | 1 hour     |
 
 ## Advanced Scenario Techniques
+
+The following sections cover evolving scenarios, branching logic, and other advanced patterns.
 
 ### Evolving Scenarios
 

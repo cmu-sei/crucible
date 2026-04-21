@@ -109,6 +109,8 @@ In TopoMojo, click **Save**. The changes we made to the VM, including the two fi
 
 ## Step 3: Configuring Transforms, Guest Settings, and Questions
 
+In Step 3, you configure transforms and guest settings to randomize the challenge token, then add the question participants must answer to complete the challenge.
+
 ### Adding a Transform
 
 If you recall, the script we wrote reads the value of a guest info variable named `token1`. You configure this variable in the **Transforms** section of the **Challenge** tab.
@@ -215,6 +217,8 @@ The screenshot below shows the terminal in the gamespace after running `get-toke
 At this point, you have a complete, working TopoMojo challenge and the tools to build on it!
 
 ## Beyond the Basics (Optional)
+
+The following optional sections show how to extend the challenge with additional transforms, variants, and more complex scoring.
 
 ### Adding an Additional Transform
 
@@ -330,6 +334,8 @@ For additional details, see [Variants](../../topomojo/index.md#variants) in the 
 6. **Clean Before Saving:** Clean templates before saving them. Remove command and browser history, delete logs, and remove development artifacts or files to prevent unintended hints or shortcuts.
 
 ## Troubleshooting Common Issues
+
+The following sections cover common problems you may encounter when building a TopoMojo challenge.
 
 ### VM Changes Don't Persist
 

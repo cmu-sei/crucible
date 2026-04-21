@@ -390,85 +390,70 @@ To end an event, follow these steps:
 
 ### MSEL Catalog
 
-The MSEL Catalog shows created MSELs. Here, users are able to select the desired MSEL to work on, as well as create or delete them.
+The MSEL Catalog shows created MSELs. Users can select a MSEL to work on, create a new one, and delete an existing one.
 
-The following image shows some important hotspots about the MSEL Catalog. Reference the number on the hotspot to learn more about this section.
-
+<!-- TODO: Replace screenshot with version without numbered callout markers -->
 ![Blueprint Dashboard OE](img/blueprintDashboard-v4.png)
 
 #### Add Blank MSEL
-
-##### Hotspot 1
 
 Blueprint lets users create a MSEL from scratch directly in the application. This removes the hassle of Excel and makes visualizing information easier.
 
 #### Upload an Existing MSEL
 
-##### Hotspot 2
-
-If creating a new MSEL from scratch is not desired, users can upload a pre-existing MSEL and continue editing it on the application by using this functionality. This is useful to share existing MSEL work without having to add the pieces of information to a blank MSEL one by one.
+Users can upload a pre-existing MSEL and continue editing it in the application. This is useful to share existing MSEL work without having to add information to a blank MSEL one by one.
 
 #### Filter Display
 
+Use the filter options to narrow down MSELs shown in the catalog.
+
 ##### Types
 
-###### Hotspot 3
-
-Users can apply this filter to narrow down MSELs presented on the dashboard based on their categorization. Selections available are: All Types, Templates, and Not Templates.
+Filter MSELs by categorization. Options are: All Types, Templates, and Not Templates.
 
 ##### Statuses
 
-###### Hotspot 4
-
-Users can apply this filter to narrow down MSELs presented on the dashboard based on their current status. Selections available are: All Statuses, Pending, Entered, Approved, and Completed.
+Filter MSELs by current status. Options are: All Statuses, Pending, Entered, Approved, and Completed.
 
 ##### Search
 
-##### Hotspot 5
-
-This functionality enables users to search for a specific MSEL, in case it is not presented at the top on the dashboard.
+Search for a specific MSEL by name.
 
 #### Load All MSELs
 
-##### Hotspot 6
-
-This functionality enables users with the proper administrative permissions to load and view all MSELs created.
+Users with the appropriate administrative permissions can load and view all MSELs created.
 
 #### Settings Cog
 
-##### Hotspot 7
-
-Users with the proper administrative permissions can use this feature to access Blueprint's administrative settings.
+Users with the appropriate administrative permissions can use the Settings Cog to access Blueprint's administrative settings.
 
 #### Manage MSEL
 
-##### Hotspot 8
+Click a MSEL card to open it. The following actions are available from the MSEL card.
 
 #### Download
 
-Users can download a copy of any MSEL for offline use using the Download feature. This is useful if they lack internet access, allowing them to work on the MSEL offline and upload changes later. However, offline work is not recommended as users will miss Blueprint's features and updates.
+Users can download a copy of any MSEL for offline use. Offline work is not recommended as users will miss Blueprint's features and updates.
 
 #### Upload
 
-With the Upload feature, users can update the information from the MSEL Card with the new uploaded information. This feature will modify all the existing information with the one found on the .xlsx file.
+The Upload feature updates the MSEL card with information from a new `.xlsx` file, replacing all existing content.
 
 !!! important
 
-    When engaging in the export and import process of MSELs from the Blueprint application, it is imperative to ensure that events and settings of the MSEL align with your particular preferences. It is worth noting that on occasion, during the import process of MSELs into the application, it may be necessary to reconfigure settings and specific fields.
+    When importing MSELs into Blueprint, verify that events and settings align with your preferences. Some fields may require reconfiguration after import.
 
 #### Delete
 
-The Delete feature lets users remove existing MSEL cards including all associated information.
+The Delete feature removes an existing MSEL card and all associated information.
 
 #### Copy
 
-The Copy feature lets users duplicate an existing MSEL Card and modify the copy instead of the original. This helps when unsure about new changes or starting from a known reference.
+The Copy feature duplicates an existing MSEL card. Use this to modify a copy instead of the original.
 
 #### MSEL Cards
 
-##### Hotspot 9
-
-Click a MSEL card to view its information. Users can also edit or update the existing information, and changes appear live for others without needing to share a new document.
+Click a MSEL card to view its information. Users can edit or update existing information, and changes appear live for all collaborators.
 
 ### MSEL Definition
 
