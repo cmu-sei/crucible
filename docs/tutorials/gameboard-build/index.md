@@ -124,6 +124,8 @@ For additional details on facilitating a game, see:
 
 ## Troubleshooting Common Issues
 
+The following sections cover common problems you may encounter when building a Gameboard game.
+
 ### Challenge Not Appearing in Search
 
 1. Verify that Gameboard can reach the TopoMojo API over the network.

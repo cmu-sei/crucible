@@ -27,6 +27,8 @@ Monitor participant progress throughout scenarios:
 
 ## Testing and Validation
 
+The following sections cover a scenario testing checklist and common issues to watch for before going live.
+
 ### Scenario Testing Checklist
 
 - All task dependencies resolve correctly
@@ -37,6 +39,8 @@ Monitor participant progress throughout scenarios:
 - Assessment points are fair and measurable
 
 ### Common Issues and Solutions
+
+The following sections describe common problems and how to address them.
 
 #### Timing Problems
 
