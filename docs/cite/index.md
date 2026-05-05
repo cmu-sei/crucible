@@ -76,7 +76,7 @@ To save these settings, click **Save**.
 
 To edit an evaluation, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Evaluations** tab.
 3. Select the evaluation to edit and click **Edit** next to the evaluation.
 4. The system opens the same edit component used when creating a new evaluation.
@@ -86,7 +86,7 @@ To edit an evaluation, follow these steps:
 
 To delete an evaluation, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Evaluations** tab.
 3. Select the evaluation to delete and click the **Trash Can** next to the evaluation.
 
@@ -94,7 +94,7 @@ To delete an evaluation, follow these steps:
 
 To upload an evaluation, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Evaluations** tab.
 3. Click the **Up Arrow** next to the **+**.
 4. Select the evaluation JSON file to upload.
@@ -103,7 +103,7 @@ To upload an evaluation, follow these steps:
 
 To download an evaluation, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Evaluations** tab.
 3. Click the **Down Arrow** next to the evaluation to download.
 4. Look for the JSON file in your Downloads folder.
@@ -112,7 +112,7 @@ To download an evaluation, follow these steps:
 
 To copy an evaluation, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Evaluations** tab.
 3. Click **Copy** next to the evaluation to copy.
 4. Look for the evaluation name with the user's name.
@@ -145,7 +145,7 @@ To save these settings, click **Save**.
 
 To edit a move, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Evaluations** tab.
 3. Select the evaluation to edit and click the **Moves** tab.
 4. Select the move to edit and click **Edit** next to the move.
@@ -156,7 +156,7 @@ To edit a move, follow these steps:
 
 To delete a move, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Evaluations** tab.
 3. Select the evaluation to edit and click the **Moves** tab.
 4. Select the move to delete and click the **Trash Can** next to the move.
@@ -183,7 +183,7 @@ To save these settings, click **Save**.
 
 To edit a team, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Evaluations** tab.
 3. Select the evaluation to edit and click the **Teams** tab.
 4. Select the team to edit and click **Edit** next to the team.
@@ -194,7 +194,7 @@ To edit a team, follow these steps:
 
 To delete a team, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Evaluations** tab.
 3. Select the evaluation to edit and click the **Teams** tab.
 4. Select the team to delete and click the **Trash Can** next to the team.
@@ -263,7 +263,7 @@ Aside from these variables, use **>** to set clipping values for the equation.
 
 To edit a scoring model, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Scoring Models** tab.
 3. Select the scoring model to edit and click **Edit** next to the scoring model.
 4. The system opens the same edit component used when creating a new scoring model.
@@ -273,7 +273,7 @@ To edit a scoring model, follow these steps:
 
 To upload a scoring model, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Scoring Models** tab.
 3. Click the **Up Arrow** next to the **+**.
 4. Select the scoring model JSON file to upload.
@@ -282,7 +282,7 @@ To upload a scoring model, follow these steps:
 
 To download a scoring model, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Scoring Models** tab.
 3. Click the **Down Arrow** next to the scoring model to download.
 4. Look for the JSON file in your Downloads folder.
@@ -291,7 +291,7 @@ To download a scoring model, follow these steps:
 
 To copy a scoring model, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Scoring Models** tab.
 3. Click **Copy** next to the scoring model to copy.
 4. Look for the scoring model name with the user's name.
@@ -300,7 +300,7 @@ To copy a scoring model, follow these steps:
 
 To delete a scoring model, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Scoring Models** tab.
 3. Select the scoring model to delete and click the **Trash Can** next to the scoring model.
 
@@ -350,7 +350,7 @@ Last but not least, a Scoring Category has a weight by which to multiply the sco
 
 To edit a scoring category, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Scoring Models** tab.
 3. Select the scoring model to edit and click the **Scoring Categories** tab.
 4. Select the scoring category to edit and click **Edit** next to the scoring category.
@@ -361,7 +361,7 @@ To edit a scoring category, follow these steps:
 
 To delete a scoring category, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Scoring Models** tab.
 3. Select the scoring model to edit and click the **Scoring Categories** tab.
 4. Select the scoring category to delete and click the **Trash Can** next to the scoring category.
@@ -392,7 +392,7 @@ To save these settings, click **Save**.
 
 To edit a scoring option, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Scoring Models** tab.
 3. Select the scoring model to edit and click the **Scoring Categories** tab.
 4. Select the scoring category to edit and click the **Scoring Options** tab.
@@ -404,7 +404,7 @@ To edit a scoring option, follow these steps:
 
 To delete a scoring option, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Scoring Models** tab.
 3. Select the scoring model to edit and click the **Scoring Categories** tab.
 4. Select the scoring category to edit and click the **Scoring Options** tab.
@@ -441,7 +441,7 @@ To save these settings, click **Save**.
 
 To edit an action, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Actions** tab.
 3. Select the action to edit and click **Edit** next to the action.
 4. The system opens the same edit component used when creating a new action.
@@ -451,7 +451,7 @@ To edit an action, follow these steps:
 
 To delete an action, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Action** tab.
 3. Select the action to delete and click the **Trash Can** next to the action.
 
@@ -485,7 +485,7 @@ To save these settings, click **Save**.
 
 To edit a role, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Roles** tab.
 3. Select the role to edit and click **Edit** next to the role.
 4. The system opens the same edit component used when creating a new role.
@@ -495,7 +495,7 @@ To edit a role, follow these steps:
 
 To delete a role, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Roles** tab.
 3. Select the role to delete and click the **Trash Can** next to the role.
 
@@ -536,7 +536,7 @@ To save these settings, click **Save**.
 
 To edit a team type, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Team Types** tab.
 3. Select the team type to edit and click **Edit** next to the team type.
 4. The system opens the same edit component used when creating a new team type.
@@ -546,7 +546,7 @@ To edit a team type, follow these steps:
 
 To delete a team type, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Team Types** tab.
 3. Select the team type to delete and click the **Trash Can** next to the team type.
 
@@ -586,7 +586,7 @@ To save these settings, click **Save** and select the desired permissions to ass
 
 To delete a user, follow these steps:
 
-1. Click the **Settings Cog**.
+1. Click the **Gear** icon.
 2. Navigate to the **Users** tab.
 3. Select the users to delete and click the **Trash Can** next to the user.
 

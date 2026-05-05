@@ -50,7 +50,7 @@ If the exercise administrator has granted the appropriate permissions, follow th
 
 ![Blueprint Add Team OE](img/blueprintAddUnit.png)
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the Units Administration View, click **+**.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
@@ -67,7 +67,7 @@ After you've added all desired configurations, click **Save**.
 
 To edit a unit, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under Units Administration View, select the unit you want to edit and click **Edit** next to it.
 3. The system opens the same edit component used when creating a new unit.
 4. Make your changes, then click **Save**.
@@ -76,14 +76,14 @@ To edit a unit, follow these steps:
 
 To delete a unit, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the Units Administration View, select the unit you want to delete and click the **Trash Can** next to it.
 
 ##### Search for a Unit
 
 To search for a specific unit, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the Units Administration View, click the **Search Bar** and type the name of the desired unit.
 
 ##### Add/Remove Users from a Unit
@@ -129,14 +129,14 @@ Click the **Save** icon (a user with a **+** sign), then select the permissions 
 
 To delete a user, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the Users Administration View, select the user you want to delete and click the **Trash Can** next to the user.
 
 ##### Search for a User
 
 To search for a specific user, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the Users Administration View, click the **Search Bar** and type the name of the desired user.
 
 #### Organization Templates
@@ -170,7 +170,7 @@ After you've added all desired configurations, click **Save**.
 
 To edit an organization template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under Organizations Administration View, select the organization you want to edit and click **Edit** next to the organization template.
 3. The system opens the same edit form used when creating a new organization template.
 4. Make your changes, then click **Save**.
@@ -179,14 +179,14 @@ To edit an organization template, follow these steps:
 
 To delete an organization template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the Organizations Administration View, select the organization you want to delete and click the **Trash Can** next to the organization template.
 
 ##### Search For an Organization Template
 
 To search for a specific organization template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the Organizations Administration View, click the **Search Bar** and type the name of the desired organization template.
 
 #### Gallery Card Templates
@@ -217,7 +217,7 @@ After you've added all desired configurations, click **Save**.
 
 To edit a Gallery card template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under Gallery Cards Administration View, select the card template you want to edit and click **Edit** next to it.
 3. The system opens the same edit component used when creating a new card template.
 4. Make your changes, then click **Save**.
@@ -226,14 +226,14 @@ To edit a Gallery card template, follow these steps:
 
 To delete an Gallery card template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the Gallery Cards Administration View, select the card template you want to delete and click the **Trash Can** next to it.
 
 ##### Search for a Gallery Card Template
 
 To search for a specific Gallery card template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the Gallery Cards Administration View, click the **Search Bar** and type the name of the desired card template.
 
 #### CITE Actions Templates
@@ -263,7 +263,7 @@ After you've added all desired configurations, click **Save**.
 
 To edit a CITE action template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under CITE Actions Administration View, select the action template you want to edit and click **Edit** next to it.
 3. The system opens the same edit component used when creating a new action template.
 4. Make your changes, then click **Save**.
@@ -272,14 +272,14 @@ To edit a CITE action template, follow these steps:
 
 To delete a CITE action template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the CITE Actions Administration View, select the action template you want to delete and click the **Trash Can** next to it.
 
 ##### Search for a CITE Action Template
 
 To search for a specific CITE action template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the CITE Actions Administration View, click the **Search Bar** and type the name of the desired action template.
 
 #### CITE Roles Templates
@@ -309,7 +309,7 @@ After you've added all desired configurations, click **Save**.
 
 To edit a CITE role template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under CITE Roles Administration View, select the role template you want to edit and click **Edit** next to it.
 3. The system opens the same edit component used when creating a new role template.
 4. Make your changes, then click **Save**.
@@ -318,14 +318,14 @@ To edit a CITE role template, follow these steps:
 
 To delete a CITE role template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the CITE Roles Administration View, select the role template you want to delete and click the **Trash Can** next to it.
 
 ##### Search For a CITE Role Template
 
 To search for a specific CITE role template, follow these steps:
 
-1. Click the **Settings Cog** in the top-right corner of the screen.
+1. Click the **Gear** icon in the top-right corner.
 2. Under the CITE Roles Administration View, click the **Search Bar** and type the name of the desired role template.
 
 ## User Guide
@@ -423,9 +423,9 @@ Search for a specific MSEL by name.
 
 Users with the appropriate administrative permissions can load and view all MSELs created.
 
-#### Settings Cog
+#### Gear
 
-Users with the appropriate administrative permissions can use the Settings Cog to access Blueprint's administrative settings.
+Users with the appropriate administrative permissions can use the **Gear** icon to access Blueprint's administrative settings.
 
 #### Manage MSEL
 

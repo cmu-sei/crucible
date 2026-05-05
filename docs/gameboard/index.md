@@ -692,7 +692,7 @@ After participants submit responses, you can no longer change the feedback templ
 This section assumes you hold a role with the appropriate permissions in Gameboard, already created a game, and have logged in.
 
 1. In the top navigation, select **Admin**.
-2. Select an existing game, then select the **Settings cog**. Under Metadata, see the Player Feedback section. Here you can select an existing feedback template and *add*, *preview*, *edit*, *copy*, and *delete* feedback templates.
+2. Select an existing game, then select the **Gear** icon. Under Metadata, see the Player Feedback section. Here you can select an existing feedback template and *add*, *preview*, *edit*, *copy*, and *delete* feedback templates.
 
 ![feedback template icons](img/feedback-temp-icons.png)
 
@@ -773,7 +773,7 @@ Game participants can view, share, and print certificates of completion as proof
 This topic assumes you hold a role with the appropriate permissions in Gameboard, already created a game, and have logged in.
 
 1. In the top navigation, select **Admin**.
-2. Select an existing game, then Select the **Settings cog**. Under Metadata, see the Completion Certificates section. Here you can select an existing certificate template and *add*, *preview*, *edit*, *copy*, and *delete* completion certificate templates.
+2. Select an existing game, then select the **Gear** icon. Under Metadata, see the Completion Certificates section. Here you can select an existing certificate template and *add*, *preview*, *edit*, *copy*, and *delete* completion certificate templates.
 
 ![certificate template icons](img/cert-temp-icons.png)
 
@@ -1019,7 +1019,7 @@ Follow the steps below to transfer text between your local machine (*out of game
 ##### Local to VM
 
 1. Copy text from your local machine.
-2. In the VM console, open **Tools** (cog icon) and paste into the **Clipboard**.
+2. In the VM console, open **Tools** (**gear** icon) and paste into the **Clipboard**.
 3. In the VM, select a destination and click **Paste**.
 
 ##### VM to Local
