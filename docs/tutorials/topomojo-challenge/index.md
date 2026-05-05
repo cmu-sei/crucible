@@ -206,7 +206,7 @@ At this point, the challenge includes a transform, guest info variable, instruct
 
      - Launch the Kali VM.
      - Run `get-token.sh` to retrieve the generated value.
-     - Copy it from the VM using the clipboard in the **Settings cog**.
+     - Copy it from the VM using the clipboard in the **Gear** icon.
      - Paste it into the answer field in TopoMojo.
      - **Submit** the answer. When you submit the correct answer, TopoMojo marks the challenge complete and automatically cleans up the gamespace.
 
