@@ -177,7 +177,7 @@ To add a card team:
 3. In **Card**, select the card to assign (for example, `Pitt Information Technology Sector`).
 4. In **Move**, enter the move number (for example, `1`).
 5. In **Inject**, enter the inject number (for example, `0`).
-6. Select **Is Shown On Wall** to display the card on the Gallery Wall for the team.
+6. To show the card on the Gallery Wall for the team, select **Is Shown On Wall**.
 7. Select **Can Post New Articles** to allow the team to add new articles to this card.
 8. Click **Save**.
 
@@ -317,164 +317,88 @@ Participants use the Gallery Wall and Archive to track and respond to exercise e
 
 ### Gallery Landing Page
 
-The Gallery landing page provides a central approach to recompiling all collections and exhibits that the user is a participant on into a single display.
+The Gallery landing page displays the exhibits the user is a participant in.
 
-![Gallery Landing Page OE](img/galleryLandingPage.png)
-
-First, users select a collection from the dropdown; then, they choose an exhibit from the displayed list.
+![Gallery landing page showing My Exhibits list](img/gallery-my-exhibits.png)
 
 #### Search for an Exhibit
 
 To search for an exhibit, follow these steps:
 
 1. Navigate to Gallery's landing page.
-2. Select a collection from the dropdown.
-3. Click the **Search Bar** and add the name of the creator of the exhibit.
+2. In the **Search** field, enter the name of the exhibit.
 
 ### Gallery Wall
 
-The Gallery Wall is a dashboard with red, orange, yellow, and green status indicators. Each of these cards has a specific set of actions, which helps users throughout the in-game exercise.
+The Gallery Wall displays cards with color-coded status indicators:
 
 - **Red:** Indicates a closed status.
 - **Orange:** Indicates a critical status.
 - **Yellow:** Indicates an affected status.
 - **Green:** Indicates an open status.
 
-<!-- TODO: Replace screenshot with version without numbered callout markers -->
-![Gallery Wall OE](img/galleryWall-v2.png)
+![Gallery Wall showing six color-coded cards with numbered callouts](img/gallery-wall.png)
 
-#### Title
-
-The title of the card.
-
-#### Description
-
-A brief description of the event.
-
-#### Date Posted
-
-The date and time the card was last updated.
-
-#### Unread Articles
-
-The number of [articles](#glossary) left to read from the event.
-
-#### Details
-
-Provides additional details beyond those provided in the Gallery Wall, including filtered articles related to the event.
-
-#### Team Selection
-
-This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
-
-#### Wall & Archive Toggle
-
-By using this icon, users can toggle between the Gallery Wall and Gallery Archive.
+1. **Title:** The title of the card.
+2. **Description:** A brief description of the event.
+3. **Date Posted:** The date and time the card was last updated.
+4. **Unread Articles:** The number of unread articles on the card.
+5. **Details:** Opens additional details and filtered articles for the card.
+6. **Team:** Displays the currently selected team. Users who are also observers can use this to switch between teams and view other teams' progress during the exercise.
+7. **Wall and Archive Toggle:** Toggles between the Gallery Wall and Gallery Archive.
+8. **Gear:** Opens the Administration View. See [Administration View](#administration-view).
 
 ### Gallery Archive
 
-The Gallery Archive is a collection of information that contains relevant reporting, intelligence, news, and social media data sources.
+The Gallery Archive is a collection of articles from reporting, intelligence, news, and social media sources. Articles accumulate throughout the exercise as moves progress. Each article displays its title, source type, source name, and date posted.
 
-<!-- TODO: Replace screenshot with version without numbered callout markers -->
-![Gallery Archive OE](img/galleryArchive-v2.png)
+![Gallery Archive showing articles with numbered callouts](img/gallery-archive.png)
 
-#### Add an Article
+1. **Add an Article:** Click **+** to add a new article to the Archive. See [Add Articles During an Exercise](#add-articles-during-an-exercise).
+2. **Search the Archive:** Enter terms to filter articles by keyword.
+3. **Cards Filter:** Filter articles by card category.
+4. **Source Filters:** Filter articles by source type (Intel, Reporting, Orders, News, Phone, or Email).
+5. **Team:** Displays the currently selected team. Users who are also observers can use this to switch between teams and view other teams' progress.
+6. **Wall and Archive Toggle:** Toggles between the Gallery Wall and Gallery Archive.
+7. **Gear:** Opens the Administration View. See [Administration View](#administration-view).
+8. **View:** Opens the full article in a pop-up or new tab.
+9. **Read:** Marks the article as read to track new content.
+10. **Share:** Shares the article with another team.
 
-Users assigned the appropriate permissions can add articles to the Archive related to the exercise's current events.
-
-To add an article, refer to the [Add Articles During an Exercise](#add-articles-during-an-exercise) section.
-
-#### Search
-
-The archive contains all "move" data that teams have shared up to this point in the exercise. Users can search, sort, and filter information in the archive.
-
-To search the archive, enter the terms in the **Search the Archive** field. The search feature automatically narrows down the results.
-
-#### Cards Filter
-
-Users can use this dropdown to further filter intelligence information. Users can sort the Gallery articles based on their card categories. This is useful for users who are searching for information from a specific category.
-
-#### Source Filters
-
-These articles come from different categories of sources: [reporting](#glossary), [news](#glossary), [orders](#glossary), [phone](#glossary), [email](#glossary), [intel](#glossary), and [social media](#glossary). Users can select one or multiple filters to display only the cards that belong to those filter categorizations.
-
-#### Article Information
-
-The Gallery Archive displays articles. Each article contains the Title, Source Type, Source Name, and Date Posted.
-
-For the information included on the article:
-
-- **Title:** The title of the intelligence report.
-- **Source Type:** The source of the intelligence report (News, Intel, Reporting, or Social Media).
-- **Source Name:** The specific person or agency who supplied the intelligence.
-- **Date Posted:** The date and timestamp when the intelligence report posted.
-
-#### View
-
-View the full article in a pop-up page or open the article in a new tab for better visualization.
-
-#### Read
-
-After reading an article, mark it as read to keep track of new articles.
-
-#### Share
-
-With this feature, users can share an article with others using a mail service.
-
-To share an article with another team, click **Share**. In the **Share Article** screen:
-
-1. Under **Share with...**, select a team.
-2. Under **Email Contents...**, make any edits to the Subject and Message of the article.
-3. Click **Share**.
-
-#### More
-
-When enabled, the system provides attached documents with additional information for users to access and read.
-
-#### Team Selection
-
-This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
-
-#### Wall & Archive Toggle
-
-By using this icon, users can toggle between the Gallery Wall and Gallery Archive.
+<!-- TODO: Clarify where Share sends the article — email? in-app notification? -->
 
 ### Add Articles During an Exercise
 
-Users with the appropriate Content Developer permissions can add articles to the Gallery Archive throughout the course of exercise events.
+Users with the appropriate Content Developer permissions can add articles to the Gallery Archive throughout the course of an exercise event. To add an article:
 
-If the exercise administrator grants the appropriate permissions, follow these steps to add an article during an exercise:
-
-![Add Articles Exercise OE](img/addArticleExercise.png)
-
-<!-- TODO: Verify procedure and replace screenshot -->
-1. On the Gallery Archive section, click **+** to add an article.
+1. On the Gallery Archive, in the top left corner, click **+** (**Add an Article** icon) to add an article.
 2. In **Name**, enter the article name (for example, `No cell phone connectivity`).
 3. In **Summary**, enter a short summary (for example, `No cell phone connectivity after pass of Hurricane Delta`).
-4. In **Description**, enter the full article content.
-5. In **Url for more info**, enter a URL for additional information if needed.
-6. Select **Open URL in new tab** to open the URL in a new tab.
+4. In **Description**, enter the full article content (for example, `Hurricane Delta made landfall as a Category 4 storm, destroying cell towers and disabling backup generators. An estimated 340,000 residents are without mobile service.`).
+5. In **URL**, enter a URL to provide a link to additional information (for example, `https://www.coastnews.com/hurricane-delta-cell-outages`).
+6. Select **Open URL in new tab** to open the URL in a new browser tab.
 7. In **Card**, select the card to categorize this article (for example, `Communications Sector`).
 8. In **Status**, select the article's status (for example, `Affected`).
 9. Click **Save**.
 
-After you create your article, the Gallery Archive displays it in the following way.
+![The Add Article for Selected Teams window with sample data added](img/gallery-add-article-for-selected-teams.png)
 
-![Article Created OE](img/createdArticle.png)
+After you create your article, the Gallery Archive displays it like this.
+
+![Newly created Gallery Article in the Archive](img/gallery-created-article.png)
 
 #### Edit an Article
 
 To edit an article, follow these steps:
 
-1. On the Gallery Archive section, select the article to edit and click **Edit** on the article's card.
-2. The system opens the same edit component used when creating a new article.
-3. After making all necessary edits, click **Save**.
+1. On the Gallery Archive, select the article to edit and click **Edit** on the article's card. The article opens in the same form used when creating an article.
+2. After making all necessary edits, click **Save**.
 
 #### Delete an Article
 
-To delete an article, follow these steps:
+To delete an article, follow this step:
 
-1. On the Gallery Archive section, select the article to delete and click the **Trash Can** on the article's card.
+1. On the Gallery Archive, select the article to delete and click **Delete** (the trash can icon) on the article's card.
 
 ## Glossary
 
