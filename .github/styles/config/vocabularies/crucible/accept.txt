@@ -83,3 +83,6 @@ markdownlint
 (?i)onboarding
 ATX
 (?i)call-?outs?
+CISA
+(?i)Facil
+HTML

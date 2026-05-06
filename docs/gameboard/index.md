@@ -1019,7 +1019,7 @@ Follow the steps below to transfer text between your local machine (*out of game
 ##### Local to VM
 
 1. Copy text from your local machine.
-2. In the VM console, open **Tools** (**gear** icon) and paste into the **Clipboard**.
+2. In the VM console, open **Tools** (**Gear** icon) and paste into the **Clipboard**.
 3. In the VM, select a destination and click **Paste**.
 
 ##### VM to Local

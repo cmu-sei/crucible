@@ -37,64 +37,160 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 
 ![The Administration dropdown in the top right-corner](img/crucible-administration.png)
 
-
 #### Units
 
-The following image shows the Units Administration Page. Here, administrators can add, edit, and delete units. To use the Blueprint application, the administrator should assign a unit to desired users.
+The Units page lists all the units in Blueprint. A unit is an organizational entity, such as a team, department, or agency, that groups users for exercise purposes. Administrators can add, edit, and delete units, and assign users to their respective units.
 
-![Blueprint Teams Admin OE](img/blueprintUnits-v2.png)
+![Blueprint Units administration page showing several units with edit and delete icons](img/bp-admin-units-page.png)
 
 ##### Add a Unit
 
-If the exercise administrator has granted the appropriate permissions, follow these steps to add a unit.
+1. Expand the dropdown next to your username in the top-right corner and select **Administration**.
+2. Under **Units**, click **+** (**Add Unit**).
+3. In **Name**, enter the unit name (for example, `Carnegie Mellon University`).
+4. In **Short Name**, enter a short name or acronym (for example, `CMU`).
+5. Click **Save**.
 
-![Blueprint Add Team OE](img/blueprintAddUnit.png)
+##### Edit, Delete, and Search for a Unit
 
-1. Click the **Gear** icon in the top-right corner.
-2. Under the Units Administration View, click **+**.
-3. Fill the fields as necessary following the Data Format Table specifications.
-
-##### Data Format Table
-
-| Field          | Data Type | Description             | Example                    |
-| -------------- | --------- | ----------------------- | -------------------------- |
-| **Name**       | String    | Name for the unit       | Carnegie Mellon University |
-| **Short Name** | String    | Short name for the unit | CMU                        |
-
-After you've added all desired configurations, click **Save**.
-
-##### Edit a Unit
-
-To edit a unit, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under Units Administration View, select the unit you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new unit.
-4. Make your changes, then click **Save**.
-
-##### Delete a Unit
-
-To delete a unit, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the Units Administration View, select the unit you want to delete and click the **Trash Can** next to it.
-
-##### Search for a Unit
-
-To search for a specific unit, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the Units Administration View, click the **Search Bar** and type the name of the desired unit.
+- **Edit:** Click **Edit** (pencil icon) next to the unit, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the unit.
+- **Search:** In the **Search** field, enter the name of the unit.
 
 ##### Add/Remove Users from a Unit
 
-To configure a unit for an exercise, administrators add users to their respective units. To do this, follow these steps.
+To add a user to a unit:
 
-![Configure Blueprint Teams OE](img/blueprintConfigureUnits-v2.png)
+1. Click the unit row to expand its configuration.
+2. Under **All Users**, find the user and click **Add User**.
 
-1. Select the unit you want to configure and click to expand its configuration details.
-2. The **All Users** tab shows *unassigned* users. To add a user to the unit, click **Add User**.
-3. The **Unit Users** tab shows *assigned* users. To remove a user from the unit, click **Remove**.
+To remove a user from a unit, under **Unit Users**, find the user and click **Remove**.
+
+![Blueprint Units page with unit expanded showing Users and Unit Members panels](img/bp-add-remove-users.png)
+
+#### Data Fields
+
+The Data Fields page lists all data field templates available for use in MSEL scenario events. Data fields define the columns that appear on a MSEL - similar to column headers in a spreadsheet. The **Info** and **Facil** checkboxes control whether the field displays for information events and facilitation events, respectively. Content developers can pull these templates into a MSEL from the [Data Fields](#data-fields-1) tab.
+
+##### Add a Data Field Template
+
+1. Under **Data Fields**, click **+** (**Add a template data field**).
+2. In **Name**, enter the field name (for example, `Delivery Method`).
+3. In **Data Type**, select the data type. Available types: Boolean, Card, Checkbox, Datetime, Double, HTML, Integer, Move, Organization, SourceType, Status, String, Team, TeamsMultiple, Url, User.
+4. Check **Use Option List** to provide a predefined list of selectable values for the field (for example, `Unused, Open, Closed, Critical, Affected`).
+5. Click **Save**.
+
+##### Edit, Delete, and Search for a Data Field Template
+
+- **Edit:** Click **Edit** (pencil icon) next to the field, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the field.
+- **Search:** In the **Search** field, enter the name of the data field template.
+
+#### Inject Types
+
+The Inject Types page lists all inject type templates available for use in MSELs. An inject type defines the structure and data fields for a category of scenario events.
+
+##### Add an Inject Type
+
+1. Under **Inject Types**, click **+** (**Add Inject Type**).
+2. In **Name**, enter the inject type name (for example, `Email`).
+3. In **Description**, enter a brief description (for example, `Email-based scenario events`).
+4. Click **Save**.
+
+##### Edit, Delete, and Search for an Inject Type
+
+- **Edit:** Click **Edit** (pencil icon) next to the inject type, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the inject type.
+- **Search:** In the **Search** field, enter the name of the inject type.
+
+#### Catalogs
+
+The Catalogs page lists all catalog templates available for use in MSELs. A catalog is a reusable collection of scenario events associated with a specific inject type.
+
+##### Add a Catalog
+
+1. Under **Catalogs**, click **+** (**Add Catalog**).
+2. In **Name**, enter the catalog name.
+3. In **Description**, enter a brief description.
+4. In **Inject Type**, select the inject type for this catalog.
+5. Check **Is a Public Catalog** to make the catalog available to all users.
+6. Under **Data Fields to Show on Inject List**, check the fields to display.
+7. Click **Save**.
+
+##### Edit, Delete, and Search for a Catalog
+
+- **Edit:** Click **Edit** (pencil icon) next to the catalog, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the catalog.
+- **Search:** In the **Search** field, enter the name of the catalog.
+
+#### Organizations
+
+The Organizations page lists all organization templates available for use in MSELs. An organization template defines a reusable entity  -  such as a government agency, company, or media outlet  -  that can be added to MSEL events. Content developers can pull these templates into a MSEL from the [Organizations](#organizations-1) tab.
+
+##### Add an Organization Template
+
+1. Under **Organizations**, click **+** (**Add Organization Template**).
+2. In **Long Name**, enter the full organization name (for example, `Cybersecurity and Infrastructure Security Agency`).
+3. In **Short Name**, enter a short name or acronym (for example, `CISA`).
+4. In **Summary**, enter a brief description (for example, `Security agency`).
+5. In **Email**, enter the organization's email address (for example, `john@cisa.gov`).
+6. In **Description**, enter the full organization description.
+7. Click **Save**.
+
+##### Edit, Delete, and Search for an Organization Template
+
+- **Edit:** Click **Edit** (pencil icon) next to the organization template, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the organization template.
+- **Search:** In the **Search** field, enter the name of the organization template.
+
+#### Gallery Cards
+
+The Gallery Cards page lists all Gallery card templates available for use in MSELs. A Gallery card template defines a reusable card category that can be pushed to Gallery during an exercise. Content developers can pull these templates into a MSEL from the [Gallery Cards](#gallery-cards-1) tab.
+
+##### Add a Gallery Card Template
+
+1. Under **Gallery Cards**, click **+** (**Add Gallery Card Template**).
+2. In **Name**, enter the card name (for example, `Information Technology Sector`).
+3. In **Card Description**, enter a brief description (for example, `Status of the Information Technology Sector`).
+4. Click **Save**.
+
+##### Edit, Delete, and Search for a Gallery Card Template
+
+- **Edit:** Click **Edit** (pencil icon) next to the card template, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the card template.
+- **Search:** In the **Search** field, enter the name of the card template.
+
+#### CITE Actions
+
+The CITE Actions page lists all CITE action templates available for use in MSELs. A CITE action template defines a reusable task that teams complete during an exercise. Content developers can pull these templates into a MSEL from the [CITE Actions](#cite-actions-1) tab.
+
+##### Add a CITE Action Template
+
+1. Under **CITE Actions**, click **+** (**Add CITE Action Template**).
+2. In **Description of the Action**, enter the action description (for example, `Score the incident`).
+3. Click **Save**.
+
+##### Edit, Delete, and Search for a CITE Action Template
+
+- **Edit:** Click **Edit** (pencil icon) next to the action template, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the action template.
+- **Search:** In the **Search** field, enter the name of the action template.
+
+#### CITE Duties
+
+The CITE Duties page lists all CITE duty templates available for use in MSELs. A CITE duty template defines a reusable role or responsibility assigned to team members during an exercise. Content developers can pull these templates into a MSEL from the [CITE Roles](#cite-roles) tab.
+
+##### Add a CITE Duty Template
+
+1. Under **CITE Duties**, click **+** (**Add CITE Duty Template**).
+2. In **Name**, enter the duty name (for example, `Reviewer`).
+3. Click **Save**.
+
+##### Edit, Delete, and Search for a CITE Duty Template
+
+- **Edit:** Click **Edit** (pencil icon) next to the duty template, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the duty template.
+- **Search:** In the **Search** field, enter the name of the duty template.
 
 #### Users
 
@@ -139,194 +235,13 @@ To search for a specific user, follow these steps:
 1. Click the **Gear** icon in the top-right corner.
 2. Under the Users Administration View, click the **Search Bar** and type the name of the desired user.
 
-#### Organization Templates
+#### Roles
 
-The following image shows the Organization Templates Administration Page. Here, administrators can add and delete organization templates.
+<!-- TODO: Document Roles administration page -->
 
-![Blueprint Organizations Admin OE](img/blueprintOrganizationsAdmin-v2.png)
+#### Groups
 
-##### Add an Organization Template
-
-If the exercise administrator has granted the appropriate permissions, follow these steps to add an organization template.
-
-![Blueprint Add Organization Template OE](img/blueprintAddOrgTemplate.png)
-
-1. Under the Organizations Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-##### Data Format Table
-
-| Field           | Data Type | Description                                                   | Example                                                                                                                                                                                                  |
-| --------------- | --------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Long Name**   | String    | Add the complete name for the organization                    | Cybersecurity and Infrastructure Security Agency                                                                                                                                                         |
-| **Short Name**  | String    | Add a short name for the organization, such as an acronym     | `CISA`                                                                                                                                                                                                   |
-| **Summary**     | String    | Organization's short summary                                  | Security agency                                                                                                                                                                                          |
-| **Email**       | String    | Organization's email contact                                  | `john@cisa.gov`                                                                                                                                                                                          |
-| **Description** | Rich Text | Information, details, and characteristics of the organization | The Cybersecurity and Infrastructure Security Agency (CISA) is an agency of the Department of Homeland Security (DHS) that is responsible for strengthening cybersecurity and infrastructure protection. |
-
-After you've added all desired configurations, click **Save**.
-
-##### Edit an Organization Template
-
-To edit an organization template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under Organizations Administration View, select the organization you want to edit and click **Edit** next to the organization template.
-3. The system opens the same edit form used when creating a new organization template.
-4. Make your changes, then click **Save**.
-
-##### Delete an Organization Template
-
-To delete an organization template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the Organizations Administration View, select the organization you want to delete and click the **Trash Can** next to the organization template.
-
-##### Search For an Organization Template
-
-To search for a specific organization template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the Organizations Administration View, click the **Search Bar** and type the name of the desired organization template.
-
-#### Gallery Card Templates
-
-The following image shows the Gallery Card Templates Administration Page. Here, administrators can add and delete Gallery card templates.
-
-![Blueprint Cards Admin OE](img/blueprintCardsAdmin-v2.png)
-
-##### Add a Gallery Card Template
-
-If the exercise administrator has granted the appropriate permissions, follow these steps to add a Gallery card template.
-
-![Blueprint Add Card Template OE](img/blueprintAddCardTemplate.png)
-
-1. Under the Gallery Cards Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-##### Data Format Table
-
-| Field                | Data Type | Description                                                   | Example                                     |
-| -------------------- | --------- | ------------------------------------------------------------- | ------------------------------------------- |
-| **Name**             | String    | Gallery card name                                             | Information Technology Sector               |
-| **Card Description** | String    | Information, details, and characteristics of the Gallery card | Status of the Information Technology Sector |
-
-After you've added all desired configurations, click **Save**.
-
-##### Edit a Gallery Card Template
-
-To edit a Gallery card template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under Gallery Cards Administration View, select the card template you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new card template.
-4. Make your changes, then click **Save**.
-
-##### Delete a Gallery Card Template
-
-To delete an Gallery card template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the Gallery Cards Administration View, select the card template you want to delete and click the **Trash Can** next to it.
-
-##### Search for a Gallery Card Template
-
-To search for a specific Gallery card template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the Gallery Cards Administration View, click the **Search Bar** and type the name of the desired card template.
-
-#### CITE Actions Templates
-
-The following image shows the CITE Action Templates administration page. Here, administrators can add and delete CITE action templates.
-
-![Blueprint Actions Admin OE](img/blueprintActionsAdmin-v2.png)
-
-##### Add a CITE Action Template
-
-If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE action template.
-
-![Blueprint CITE Action Template OE](img/AddCITEActionTemplate.png)
-
-1. Under the CITE Actions Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-##### Data Format Table
-
-| Field                         | Data Type | Description                                                  | Example            |
-| ----------------------------- | --------- | ------------------------------------------------------------ | ------------------ |
-| **Description of the Action** | String    | Information, details, and characteristics of the CITE action | Score the incident |
-
-After you've added all desired configurations, click **Save**.
-
-##### Edit a CITE Action Template
-
-To edit a CITE action template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under CITE Actions Administration View, select the action template you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new action template.
-4. Make your changes, then click **Save**.
-
-##### Delete a CITE Action Template
-
-To delete a CITE action template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the CITE Actions Administration View, select the action template you want to delete and click the **Trash Can** next to it.
-
-##### Search for a CITE Action Template
-
-To search for a specific CITE action template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the CITE Actions Administration View, click the **Search Bar** and type the name of the desired action template.
-
-#### CITE Roles Templates
-
-The following image shows the CITE Roles Templates Administration Page. Here, administrators can add and delete CITE roles templates.
-
-![Blueprint Roles Admin OE](img/blueprintRolesAdmin-v2.png)
-
-##### Add a CITE Role Template
-
-If the exercise administrator has granted the appropriate permissions, follow these steps to add a CITE role template.
-
-![Blueprint CITE Role Template OE](img/AddCITERoleTemplate.png)
-
-1. Under the CITE Roles Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-##### Data Format Table
-
-| Field    | Data Type | Description      | Example  |
-| -------- | --------- | ---------------- | -------- |
-| **Name** | String    | Name of the role | Reviewer |
-
-After you've added all desired configurations, click **Save**.
-
-##### Edit a CITE Role Template
-
-To edit a CITE role template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under CITE Roles Administration View, select the role template you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new role template.
-4. Make your changes, then click **Save**.
-
-##### Delete a CITE Role Template
-
-To delete a CITE role template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the CITE Roles Administration View, select the role template you want to delete and click the **Trash Can** next to it.
-
-##### Search For a CITE Role Template
-
-To search for a specific CITE role template, follow these steps:
-
-1. Click the **Gear** icon in the top-right corner.
-2. Under the CITE Roles Administration View, click the **Search Bar** and type the name of the desired role template.
+<!-- TODO: Document Groups administration page -->
 
 ## User Guide
 
