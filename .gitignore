@@ -8,3 +8,7 @@ site/
 
 # devcontainer certs
 .devcontainer/certs/*.crt
+
+# PDF book experiment
+gallery-pdf/
+gallery-book.pdf
