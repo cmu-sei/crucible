@@ -6,6 +6,8 @@ The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-se
 
 ## Best Practices
 
+The following sections cover recommended practices for organizing projects, directories, and Terraform configurations.
+
 ### Projects and Directories
 
 - **Projects:** Top-level organizational containers
@@ -208,6 +210,8 @@ Domain Controller Module
     ```
 
 ## Summary of Best Practices
+
+The following sections summarize key practices for configuration management, security, and performance.
 
 ### Configuration Management
 

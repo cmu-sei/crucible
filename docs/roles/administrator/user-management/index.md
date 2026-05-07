@@ -39,6 +39,8 @@ See the individual application permission documentation linked above for complet
 
 ## Managing User Accounts
 
+The following sections cover creating users, managing permissions, and managing teams.
+
 ### Creating Users
 
 Create and manage users through your identity provider (Keycloak or IdentityServer):
@@ -57,8 +59,6 @@ Grant permissions within Crucible applications as follows:
 3. Assign application-specific permissions according to the relevant permission documentation.
 4. Use application APIs to manage permissions in bulk, if needed.
 
-### Team Management
-
 ### Managing Teams
 
 The **Player** application supports team management for organizing users into collaborative groups during exercises:
@@ -69,6 +69,8 @@ The **Player** application supports team management for organizing users into co
 - Refer to the [Player Guide](../../../player/index.md) for detailed team management procedures.
 
 ## Security Considerations
+
+The following sections cover access control best practices and audit logging.
 
 ### Access Control Best Practices
 
@@ -89,6 +91,8 @@ Enable audit logging in each Crucible application to record:
 Configure audit log forwarding to your Security Information and Event Management (SIEM) system as described in the [Security and Compliance Checklist](../security/index.md).
 
 ## User Workflows by Role
+
+The following sections describe the typical permissions required for each Crucible user role.
 
 ### Range Builders
 

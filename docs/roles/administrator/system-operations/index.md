@@ -13,6 +13,8 @@ System operations for Crucible include:
 
 ## Monitoring and Alerting
 
+The following sections cover monitoring Kubernetes, application health, infrastructure, and logs.
+
 ### Monitoring Kubernetes
 
 Monitor Crucible using standard Kubernetes tools:
@@ -55,6 +57,8 @@ Track the following cluster metrics:
 
 ## Performing Maintenance
 
+The following sections cover updating applications, maintaining databases, and managing backups and recovery.
+
 ### Updating Applications
 
 Update Crucible applications using Helm:
@@ -85,6 +89,8 @@ Perform regular PostgreSQL maintenance:
 
 ### Managing Backups and Recovery
 
+The following sections cover backup strategies and recovery procedures.
+
 #### Backup Strategy
 
 - Databases: Schedule PostgreSQL backups using `pg_dump` or equivalent tools
@@ -100,6 +106,8 @@ Restore services as needed:
 - Application recovery using Helm and backed-up values files
 
 ## Managing Performance and Scale
+
+The following sections cover resource tuning and scaling Crucible applications.
 
 ### Managing Resources
 
@@ -129,6 +137,8 @@ Most Crucible services support horizontal scaling:
 Refer to the [Installation Guide](../../../install/index.md#postgresql-and-pgadmin) for minimum hardware requirements and scaling considerations.
 
 ## Troubleshooting Operations
+
+The following sections cover common issues and diagnostic commands.
 
 ### Addressing Common Issues
 
@@ -163,6 +173,8 @@ kubectl get events -A --sort-by='.lastTimestamp'
 
 ## Managing Security Operations
 
+The following sections cover security monitoring and incident response.
+
 ### Monitoring Security
 
 Use the [Security and Compliance Checklist](../security/index.md) to verify:
@@ -177,7 +189,7 @@ Use the [Security and Compliance Checklist](../security/index.md) to verify:
 Follow your organization's incident response procedures. Key steps:
 
 1. Identify and contain the incident using Kubernetes tools
-2. Review application and audit logs for the timeframe
+2. Review application and audit logs for the time frame
 3. Use `kubectl` to isolate affected pods if needed
 4. Restore from backups if you detect a data integrity compromise
 5. Document findings and remediation steps

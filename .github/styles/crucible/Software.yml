@@ -1,0 +1,36 @@
+# Enforces vendor-preferred spelling and capitalization for third-party software names.
+#
+# Each entry catches any capitalization of the software name and flags it if it does
+# not exactly match the vendor's preferred form.
+#
+# Note: lowercase-convention tools (nginx, markdownlint) are included so that
+# incorrectly capitalized forms like "Nginx" or "Markdownlint" are caught.
+extends: substitution
+message: "Use '%s' instead of '%s'."
+ignorecase: true
+level: error
+action:
+  name: replace
+swap:
+  "ansible": "Ansible"
+  "dionaea": "Dionaea"
+  "esxi": "ESXi"
+  "keycloak": "Keycloak"
+  "kibana": "Kibana"
+  "markdownlint": "markdownlint"
+  "moodle": "Moodle"
+  "nextcloud": "Nextcloud"
+  "nginx": "nginx"
+  "ollama": "Ollama"
+  "pgadmin": "pgAdmin"
+  "proxmox": "Proxmox"
+  "roundcube": "Roundcube"
+  "suricata": "Suricata"
+  "traefik": "Traefik"
+  "vcenter": "vCenter"
+  "vmware": "VMware"
+  "vs code": "VS Code"
+  "vscode": "VS Code"
+  "vsphere": "vSphere"
+  "wireshark": "Wireshark"
+  "zscaler": "Zscaler"

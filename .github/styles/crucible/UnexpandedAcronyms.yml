@@ -37,3 +37,7 @@ exceptions:
   - MIME
   - NIST
   - NICE
+  - CSV
+  - HTML
+  - JSON
+  - CITE

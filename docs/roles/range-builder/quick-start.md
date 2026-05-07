@@ -27,6 +27,8 @@ Before starting, confirm the following:
 
 ## Step 1: Create the Infrastructure (Caster) ~15 minutes
 
+In Step 1, you create the infrastructure in Caster: a project, a directory, and three Terraform files that define a 3-VM topology.
+
 ### Create a Project and Directory
 
 1. Navigate to Caster, **Projects**.
@@ -187,6 +189,8 @@ data "vsphere_virtual_machine" "template_monitor" {
 
 ## Step 2: Create Player View ~10 minutes
 
+In Step 2, you create a Player view with applications and teams to present the lab experience to participants.
+
 ### Create a New View
 
 1. Navigate to **Player**, **Administration**, **Views**.
@@ -198,6 +202,8 @@ data "vsphere_virtual_machine" "template_monitor" {
      - **Status:** Active
 
 ### Add Applications
+
+Add two applications to the view: one for VM access and one for the lab guide.
 
 #### VM List Application
 
@@ -232,6 +238,8 @@ data "vsphere_virtual_machine" "template_monitor" {
 5. Add users to the team using the search function.
 
 ## Step 3: Create Scenario (Steamfitter) ~20 minutes
+
+In Step 3, you define a Steamfitter scenario template with a sequence of manual and timed tasks.
 
 ### Create a Scenario Template
 
@@ -300,6 +308,8 @@ Task 5: Monitoring Alert (Timed)
 
 ## Step 4: Create Alloy Definition ~5 minutes
 
+In Step 4, you create an Alloy event definition that links the Player view, Caster directory, and Steamfitter scenario together.
+
 ### Create an Event Definition
 
 1. Navigate to **Alloy**, **Administration**, **Event Templates**.
@@ -321,6 +331,8 @@ Connect the range components to the event definition:
 
 ## Step 5: Test Deployment ~10 minutes
 
+In Step 5, you launch a test event end-to-end, validate each component, then end the event and confirm cleanup.
+
 ### Launch a Test Event
 
 1. In Alloy, locate your event definition.
@@ -333,6 +345,8 @@ Connect the range components to the event definition:
      - Player exercise clone
 
 ### Validate Components
+
+After launching, confirm that each component deployed successfully.
 
 #### Infrastructure
 
@@ -372,6 +386,8 @@ This quick start results in a basic penetration testing lab that includes:
 - Full exercise lifecycle management.
 
 ## Next Steps
+
+Now that you have a working lab, here are some ways to build on it.
 
 ### Enhance Infrastructure
 

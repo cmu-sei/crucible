@@ -18,6 +18,8 @@ The *Installation Guide* includes example configurations and links to the [k3s-i
 
 ## Understanding Deployment Architecture
 
+The following sections describe the core services and supporting infrastructure that make up a Crucible deployment.
+
 ### Core Services
 
 Crucible's architecture consists of:
@@ -32,6 +34,8 @@ See the [Infrastructure Administrator Guide](../index.md) for more information.
 
 ## Managing Configuration
 
+The following sections cover application configuration and Helm chart values.
+
 ### Configuring Applications
 
 Each Crucible application has specific configuration requirements documented in its GitHub repository:
@@ -44,6 +48,8 @@ Each Crucible application has specific configuration requirements documented in 
 Helm chart values for each application are available in the [helm-charts repository](https://github.com/cmu-sei/helm-charts).
 
 ## Scaling and Optimizing Performance
+
+The following sections cover horizontal and vertical scaling strategies and resource optimization.
 
 ### Planning for Scaling
 
@@ -60,6 +66,8 @@ Monitor resource utilization through:
 - Storage usage via Longhorn (if installed)
 
 ## Monitoring and Troubleshooting Deployments
+
+The following sections cover monitoring system health and resolving common deployment issues.
 
 ### Monitoring System Health
 

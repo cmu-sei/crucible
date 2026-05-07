@@ -6,6 +6,8 @@ An **Alloy** Definition brings together a Player View, a Caster Directory, and a
 
 ## Permissions and Roles
 
+Alloy controls access through a combination of permissions and roles. Permissions define what users can do; roles group permissions and apply them to users globally or per resource.
+
 ### Permissions
 
 Sets of *permissions* govern access to features of Alloy. Permissions can apply globally or per Event Template/Event. Examples of global permissions include:
@@ -34,7 +36,9 @@ Admins apply roles to users in the **Users** section of the **Administration** a
 
 ## Administrator Guide
 
-## Administration View
+Alloy administrators use the Administration View to manage users and roles, and use Event Templates to define and configure events that users can launch.
+
+### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
 
@@ -95,6 +99,8 @@ The Alloy user interface as viewed by a user consists of two screens:
     There is no error reporting when launching an event template or lab. If an error occurs, the user is returned to the Launch screen.
 
 ### Deploy an Event/Exercise
+
+This section covers how to create an Alloy definition and deploy an event or exercise, including the launch and end processes.
 
 #### How to Create an Alloy Definition
 

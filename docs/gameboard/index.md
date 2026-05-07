@@ -114,6 +114,8 @@ The Game Center header displays game metadata and settings, including the name, 
 
 ### Gear Tab
 
+The Gear tab contains the core settings for your game, organized into the sections below.
+
 #### Metadata
 
 **Name:** The title of your game. Displayed in the game lobby and on the scoreboard.
@@ -124,7 +126,7 @@ The Game Center header displays game metadata and settings, including the name, 
 
     When a game is hidden, a user with permissions that can view both hidden and visible games--such as Designer or Tester--will see the game card on the Home screen; however, the game card appears with an "eye-slash" icon to denote that it is hidden.
 
-**Feature:** Toggle *Normal* or *Featured*. When *Featured*, the game appears under Featured Games at the top of the Gameboard home page.
+**Feature:** Toggle *Normal* or *Featured*. When *Featured*, the game appears under Featured Games at the top of the Gameboard homepage.
 
 **Key:** A short, unique key distinguishing *this* event.
 
@@ -168,7 +170,7 @@ For a full treatment of how to design completion certificates, please see the [C
 
     The Admin Start feature bypasses the "ready to play" feature; that is, users assigned the `Admin` role can Admin Start regardless of whether all players have "readied up" or not.
 
-**Show On Homepage When In Practice Mode:** Toggle *Yes* to make the game's game card visible on the home page even when the game is in Practice mode.
+**Show On Homepage When In Practice Mode:** Toggle *Yes* to make the game's game card visible on the homepage even when the game is in Practice mode.
 
 **Engine Mode:** Choose between *Standard* and *External Host*. The vast majority of games use the Standard mode, where Gameboard submits answers to the game engine (usually TopoMojo) for grading. Choose External Host for specialized scenarios where players use an external client (e.g., a Unity game) to interact with the challenges.
 
@@ -200,7 +202,7 @@ These settings pertain to registration, execution, and general game and challeng
 
 ##### Registration
 
-Offering a different execution period from registration period is an option. This gives participants the opportunity to register for a period of time prior to round one of the competition getting underway. No need for a registration period for later rounds where a competitor would have had to qualify for the next round to even continue.
+Offering a different execution period from registration period is an option. This gives participants the opportunity to register for a period of time prior to round one of the competition getting under way. No need for a registration period for later rounds where a competitor would have had to qualify for the next round to even continue.
 
 **Access:** *None* means players can't register themselves for a game. An administrator must add players to the game or advance players from another game. *Open* means players can register themselves within the specified registration period.
 
@@ -215,6 +217,8 @@ Offering a different execution period from registration period is an option. Thi
 **Registration Markdown:** Using Markdown enter any information you would like players to see when they register for the game. For help with Markdown syntax, see this [Markdown Guide](https://www.markdownguide.org/).
 
 ### Challenges Tab
+
+Use the Challenges tab to add challenges from TopoMojo to your game.
 
 #### Search
 
@@ -558,6 +562,8 @@ A challenge remains current and not archived until the **Reset Session** button 
 
 ### Support Settings
 
+The Support Settings section configures the support experience for participants during the game.
+
 #### Greeting
 
 In the **Greeting** field, enter a message. Your message appears as a banner on the Support page to welcome players. Customize it to fit your needs. The field supports the use of Markdown formatting.
@@ -655,7 +661,7 @@ The table below outlines the permissions associated with different roles in the 
 | Assign roles: Assign roles to other users                                                                                                  | **Yes** | No       | No      | No      |
 | Create users manually: Create and edit users manually (currently available only as an API call)                                            | **Yes** | No       | No      | No      |
 
-Before players start a game or lab, they must *enroll* in the game lobby. After logging in, they select a game on the **Home** page, click **Enroll**, and confirm to start the session. The **Enroll** button appears only after they set a display name and sponsoring organization in their profile. The game's registration window must also be open, as defined in the Admin Game Settings.
+Before players start a game or lab, they must *enroll* in the game lobby. After logging in, they select a game from the **Home** screen, click **Enroll**, and confirm to start the session. The **Enroll** button appears only after they set a display name and sponsoring organization in their profile. The game's registration window must also be open, as defined in the Admin Game Settings.
 
 If a user has an elevated role, then the **Admin Enroll** button appears next to the **Enroll** button. See the screenshot below.
 
@@ -686,7 +692,7 @@ After participants submit responses, you can no longer change the feedback templ
 This section assumes you hold a role with the appropriate permissions in Gameboard, already created a game, and have logged in.
 
 1. In the top navigation, select **Admin**.
-2. Select an existing game, then select the **Settings cog**. Under Metadata, see the Player Feedback section. Here you can select an existing feedback template and *add*, *preview*, *edit*, *copy*, and *delete* feedback templates.
+2. Select an existing game, then select the **Gear** icon. Under Metadata, see the Player Feedback section. Here you can select an existing feedback template and *add*, *preview*, *edit*, *copy*, and *delete* feedback templates.
 
 ![feedback template icons](img/feedback-temp-icons.png)
 
@@ -767,7 +773,7 @@ Game participants can view, share, and print certificates of completion as proof
 This topic assumes you hold a role with the appropriate permissions in Gameboard, already created a game, and have logged in.
 
 1. In the top navigation, select **Admin**.
-2. Select an existing game, then Select the **Settings cog**. Under Metadata, see the Completion Certificates section. Here you can select an existing certificate template and *add*, *preview*, *edit*, *copy*, and *delete* completion certificate templates.
+2. Select an existing game, then select the **Gear** icon. Under Metadata, see the Completion Certificates section. Here you can select an existing certificate template and *add*, *preview*, *edit*, *copy*, and *delete* completion certificate templates.
 
 ![certificate template icons](img/cert-temp-icons.png)
 
@@ -822,6 +828,8 @@ This section assumes that you already hold the Administrator role in Gameboard, 
 
 ## User Guide
 
+Participants use Gameboard to register for games, play challenges, track scores, and get support during competitions.
+
 ### The Profile Screen
 
 Participants access their *Profile* by browsing to the Gameboard's designated URL and logging in. By default, authenticated participants land in the Profile screen if they haven't registered for a game yet. Otherwise, click **Profile** in the top navigation.
@@ -829,6 +837,8 @@ Participants access their *Profile* by browsing to the Gameboard's designated UR
 ![profile link in nav](img/profile-profile.png)
 
 #### Profile Tab
+
+The Profile tab is where participants set their display name and manage their account settings.
 
 ##### Display Name
 
@@ -1009,7 +1019,7 @@ Follow the steps below to transfer text between your local machine (*out of game
 ##### Local to VM
 
 1. Copy text from your local machine.
-2. In the VM console, open **Tools** (cog icon) and paste into the **Clipboard**.
+2. In the VM console, open **Tools** (**gear** icon) and paste into the **Clipboard**.
 3. In the VM, select a destination and click **Paste**.
 
 ##### VM to Local
@@ -1059,6 +1069,8 @@ Gameboard administrators configure global Practice Area settings including: a pr
 The Gameboard platform comes with a built-in customer support interface so that competition hosts and administrators can assist players and teams. Gameboard is a "one-stop shop" and you don't need outside apps or systems to track and measure issues reported by participants. Users who hold a role with the appropriate permissions can use the support feature to manage tickets.
 
 #### Support from the Participant Point-of-View
+
+Participants can create and track support tickets from within Gameboard.
 
 ##### Creating New Support Ticket
 
@@ -1160,7 +1172,7 @@ The legacy reporting functionality is available at the bottom of the Reports scr
 Each report shares common characteristics.
 
 - **Filter controls:** Dedicated filter controls allow users to narrow down or restrict the data displayed on a report. For example, if you're interested in seeing enrollments from a given sponsor in the Enrollment Report, use the **Sponsors** filter to select the sponsor(s) you're interested in. If you don't select any values in a filter, the results include all data from that filter.
-- **Copy link to report:** When you run a report, the browser generates a link that reflects your current filter selections. Select the **clipboard icon** to copy the current report and share it with another Gameboard user. The user you are sharing with must log into Gameboard and have the appropriate Gameboard role. You can also copy the link in your browser's address bar and share.
+- **Copy link to report:** When you run a report, the browser generates a link that reflects your current filter selections. Select the **clipboard icon** to copy the current report and share it with another Gameboard user. The user you are sharing with must log in to Gameboard and have the appropriate Gameboard role. You can also copy the link in your browser's address bar and share.
 
 !!! tip
 

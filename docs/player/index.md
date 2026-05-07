@@ -18,6 +18,8 @@ Player is *not* meant to:
 
 ## Administrator Guide
 
+Player administrators use the Administration View to manage views, teams, applications, users, and roles.
+
 ### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
@@ -45,19 +47,19 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 
 #### Assign Application Templates
 
-Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing app template.
+Under Applications, click **Add New Application**. Here, you can add a blank application or an application based upon an existing Application Template.
 
 ![New view apps](img/new-view-apps.png)
 
-- **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. You can't apply these in another view; they are one-time use only.
-- **Template:** You should have several application templates available to choose from. These are templates that you or another administrator have created to use over and over. The template contains the configuration settings and you can use the template many times.
+- **Blank Application:** Adding a blank application requires you to enter the configuration settings manually. You can't apply these in another view; they are onetime use only.
+- **Template:** You should have several Application Templates available to choose from. These are templates that you or another administrator have created to use over and over. The template contains the configuration settings and you can use the template many times.
 
-![Add new view, app template](img/new-view-app-template.png)
+![Add new view, Application Template](img/new-view-app-template.png)
 
 #### Add Teams
 
 1. Click **Teams**.
-2. . Click **Add New Team**. You can add multiple teams to a view.
+2. Click **Add New Team**. You can add multiple teams to a view.
 
      ![Add new view, new team](img/new-view-new-team.png)
 
@@ -86,27 +88,37 @@ In this step, View admins upload a single file or multiple files simultaneously 
 
 ### Users
 
+The **Users** pane in the Administration View displays all users who have logged in to Player. Use it to search for users and assign system roles.
+
+![Player Administration View, Users pane](img/player-adm-users.png)
+
+To assign a role to a user:
+
+In the user row, in the **Role** column, select a role from the dropdown (**None**, **Administrator**, **Content Developer**, or any custom roles configured for your environment. See [System Roles](#system-roles) for descriptions of roles in Player.
+
 ### Application Templates
 
-An app template contains the settings associated with an app added to a team's view. You can create an app template for common apps that are then added to a view. Default settings that are part of the app template can be overridden by a view admin if needed. Any view admin can use an app template when adding apps to a particular view. Think of app templates as helpers for configuring common Crucible apps.
+An Application Template contains the settings associated with an app added to a team's view. You can create an Application Template for common apps that are then added to a view. Default settings that are part of the Application Template can be overridden if needed. Any user with the **Administrator** or **Content Developer** role can use an Application Template when adding apps to a particular view. Think of Application Templates as helpers for configuring common Crucible apps.
 
-Follow the procedures below to create a new app template in Player. These instructions assume you have the appropriate permissions in Player to create a view.
+Follow the procedures below to create a new Application Template in Player. These instructions assume you have the appropriate permissions in Player to create a view.
 
-If you have not already done so, in the dropdown next to your username, select **View Administration**.
+In the dropdown next to your username, select **Administration**.
 
-![player new application template](img/player-new-application-template.png)
+![player new Application Template](img/player-new-application-template.png)
 
 1. Under the Administration nav panel, select **Application Templates**.
 2. Click **Add Application Template**.
 
-      - Enter a **Name** for the app template.
-      - Enter a **URL** for the app template.
+      - Enter a **Name** for the Application Template.
+      - Enter a **URL** for the Application Template.
       - Enter the path for the icon.
 
 3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether iFrames supports the app. For example, the Mattermost chat doesn't support embedding, so users must open it in a separate browser tab.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads. This is important for some apps that may require some initialization.
 
 ### Roles and Permissions
+
+Player controls access through a combination of permissions and roles. Permissions grant specific capabilities globally or per view; roles group permissions and apply them to users.
 
 #### Permissions
 
@@ -317,13 +329,30 @@ After data collection, a View Admin can download a CSV showing timestamps and VM
 
 ![vm-app-10](img/vm-app-10.png)
 
+#### Steamfitter Manual Tasks
+
+The **Steamfitter Manual Tasks** application displays manually executable tasks for the current exercise. A View Admin adds it to a view as an application pointing to the Steamfitter manual task page URL using the view ID, for example:
+
+ `steamfitter.your-domain.net/view/3933ac4f-de98-418a-be78-3dc06d3573ff`
+
+The screenshot below shows the Steamfitter Tasks application in the Player Application Navigation Bar with the scoring panel in use.
+
+![Steamfitter Tasks in the Player Application Navigation Bar with scoring panel](img/steam-tasks-in-nav.png)
+
+!!! info "See also"
+    For more information about creating Steamfitter manual tasks, see [Scenarios and Points](../steamfitter/index.md#points) in the *Steamfitter Guide*.
+
+When tasks in the scenario have points assigned, a scoring panel appears at the top showing your current score (for example, **Score: 0/100 (0%)**). The tasks table displays **Status**, **Score**, and **Task** columns. If no tasks have points assigned, the scoring panel does not appear and the page displays only the task list.
+
+To execute a task, click the play icon (►) next to the task name.
+
 #### Service Support Tickets
 
-osTicket (`osticket.com`) is a widely-used open-source support ticket system. You can configure and deploy it for an exercise to provide a built-in help desk where participants can submit help requests directly to event administrators.
+osTicket (`osticket.com`) is a widely-used open source support ticket system. You can configure and deploy it for an exercise to provide a built-in help desk where participants can submit help requests directly to event administrators.
 
 #### Chat
 
-Mattermost (`mattermost.com`) is an open-source messaging platform you can configure and deploy to provide an off-the-shelf chat system for users.
+Mattermost (`mattermost.com`) is an open source messaging platform you can configure and deploy to provide an off-the-shelf chat system for users.
 
 #### Notifications
 
@@ -334,6 +363,8 @@ Receive and read notifications here.
     If your browser allows notifications, you can receive Player notifications that way too.
 
 ## Player Tips
+
+The following tips help you get the most out of Player.
 
 ### Taking Advantage of Screen Real Estate
 
@@ -376,6 +407,8 @@ The procedures below show you how to remotely power a VM on or off from within t
 
 ### Uploading Files
 
+Player's VM Console app supports file transfers between your local machine and virtual machines.
+
 #### Upload from local to VM
 
 These procedures describe how to upload files from a local machine (an *out-of-game* computer) to a virtual machine in the Player VM Console app. You should use the **Send File to VM** option to upload small files.
@@ -387,7 +420,7 @@ These procedures assume you are in the Player VM Console app.
 
 !!! note
 
-    If the **Send File to VM** option is grayed out, you will have to enter the credentials used to log into the virtual machine. Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
+    If the **Send File to VM** option is grayed out, you will have to enter the credentials used to log in to the virtual machine. Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
 
 3. After entering your credentials, select the **Send File to VM** option (this should no longer appear grayed out).
 4. Select the file from your local machine that you want to upload.
@@ -442,11 +475,13 @@ The glossary below defines key terms and concepts used in the Player application
 
 **App:** A website a participant in a view can open within Player or in a separate browser tab. A common example of an app in Player is the Mattermost messaging platform.
 
-**App Template:** The settings associated with an app added to a team's View. You can create an app template for common apps in a view with default settings that an administrator can override if needed.
+**App Template:** The settings associated with an app added to a team's View. You can create an Application Template for common apps in a view with default settings that an administrator can override if needed.
 
-**Authentication:** Player uses IdentityServer 4 to authenticate users. Authentication gets a user into Player. However, to determine what a user can open and/or edit within Player, administrators need to set the required permissions within the Player Administration View under the Users Administrator tab.
+**Authentication:** Player uses [Keycloak](https://github.com/keycloak/keycloak) to authenticate users. Only authenticated users can access Player.
 
-**Focused Application Panel:** The focused app panel displays the selected application in an iFrame. The iFrame points to the URL specified by the application template. The application within the focused app panel is responsible for authentication and content. Player displays content but has no control of the application running within the focused app panel.
+**Authorization:** Player uses a system of permissions and roles to give users authorization to functionality within the application. Player checks permissions for each user before granting access to functionality. Administrators define roles in the Administration View, and each role can specify any or all permissions. An administrator can assign a user a role in the Administration View or in Keycloak. Any Keycloak roles that match the name of a role in Player grant the user that role in Player.
+
+**Focused Application Panel:** The focused app panel displays the selected application in an iFrame. The iFrame points to the URL specified by the Application Template. The application within the focused app panel is responsible for authentication and content. Player displays content but has no control of the application running within the focused app panel.
 
 **Notification:** A message sent to a specific user, team, or view from an Administrator or an app with permission.
 

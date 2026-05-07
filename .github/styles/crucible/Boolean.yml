@@ -1,0 +1,13 @@
+# Enforces capitalization of "Boolean".
+#
+# Rationale: "Boolean" is a proper adjective derived from the name of
+# mathematician George Boole. Per the SEI Spelling List and the Chicago
+# Manual of Style, it should always be capitalized.
+extends: substitution
+message: "Capitalize 'Boolean' — it's a proper adjective derived from George Boole's name."
+ignorecase: false
+level: error
+action:
+  name: replace
+swap:
+  "boolean": "Boolean"

@@ -6,7 +6,7 @@
 
 In the Gallery user interface, there are two major functional sections:
 
-- [Gallery Wall](#glossary): The dashboard that displays ["cards"](#glossary) to help participants visualize the incident.
+- [Gallery Wall](#glossary): The dashboard that displays [cards](#glossary) to help participants visualize the incident.
 - [Gallery Archive](#glossary): A collection of information that contains relevant reporting, intelligence, news, and social media.
 
 For installation, refer to these GitHub repositories.
@@ -14,216 +14,11 @@ For installation, refer to these GitHub repositories.
 - [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui)
 - [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
 
-## User Guide
-
-### Gallery Landing Page
-
-The Gallery landing page provides a central approach to recompiling all collections and exhibits that the user is a participant on into a single display.
-
-![Gallery Landing Page OE](img/galleryLandingPage.png)
-
-First, users select a collection from the dropdown; then, they choose an exhibit from the displayed list.
-
-#### Search for an Exhibit
-
-To search for an exhibit, follow these steps:
-
-1. Navigate to Gallery's landing page.
-2. Select a collection from the dropdown.
-3. Click the **Search Bar** and add the name of the creator of the exhibit.
-
-### Gallery Wall
-
-The Gallery Wall is a dashboard with red, orange, yellow, and green status indicators. Each of these cards has a specific set of actions, which helps users throughout the in-game exercise.
-
-- **Red:** Indicates a closed status.
-- **Orange:** Indicates a critical status.
-- **Yellow:** Indicates an affected status.
-- **Green:** Indicates an open status.
-
-The following image shows some important hotspots about the Gallery Wall. Reference the number on the hotspot to learn more about this section.
-
-![Gallery Wall OE](img/galleryWall-v2.png)
-
-#### Title
-
-##### Hotspot 1
-
-The title of the card.
-
-#### Description
-
-##### Hotspot 2
-
-A brief description of the event.
-
-#### Date Posted
-
-##### Hotspot 3
-
-The date and time the card was last updated.
-
-#### Unread Articles
-
-##### Hotspot 4
-
-The number of [articles](#glossary) left to read from the event.
-
-#### Details
-
-##### Hotspot 5
-
-Provides additional details beyond those provided in the Gallery Wall, including filtered articles related to the event.
-
-#### Team Selection
-
-##### Hotspot 6
-
-This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
-
-#### Wall & Archive Toggle
-
-##### Hotspot 7
-
-By using this icon, users can toggle between the Gallery Wall and Gallery Archive.
-
-### Gallery Archive
-
-The Gallery Archive is a collection of information that contains relevant reporting, intelligence, news, and social media data sources.
-
-The following image shows some important hotspots about the Gallery Archive. Reference the number on the hotspot to learn more about this section.
-
-![Gallery Archive OE](img/galleryArchive-v2.png)
-
-#### Add an Article
-
-##### Hotspot 1
-
-Users assigned the appropriate permissions can add articles to the Archive related to the exercise's current events.
-
-To add an article, refer to the [Add Articles During an Exercise](#add-articles-during-an-exercise) section.
-
-#### Search
-
-##### Hotspot 2
-
-The archive contains all "move" data that teams have shared up to this point in the exercise. Users can search, sort, and filter information in the archive.
-
-To search the archive, enter the terms in the **Search the Archive** field. The search feature automatically narrows down the results.
-
-#### Cards Filter
-
-##### Hotspot 3
-
-Users can use this dropdown to further filter intelligence information. Users can sort the Gallery articles based on their card categories. This is useful for users who are searching for information from a specific category.
-
-#### Source Filters
-
-##### Hotspot 4
-
-These articles come from different categories of sources: [reporting](#glossary), [news](#glossary), [orders](#glossary), [phone](#glossary), [email](#glossary), [intel](#glossary), and [social media](#glossary). Users can select one or multiple filters to display only the cards that belong to those filter categorizations.
-
-#### Article Information
-
-##### Hotspot 5
-
-The Gallery Archive displays articles. Each article contains the Title, Source Type, Source Name, and Date Posted.
-
-For the information included on the article:
-
-- **Title:** The title of the intelligence report.
-- **Source Type:** The source of the intelligence report (News, Intel, Reporting, or Social Media).
-- **Source Name:** The specific person or agency who supplied the intelligence.
-- **Date Posted:** The date and timestamp when the intelligence report posted.
-
-#### View
-
-##### Hotspot 6
-
-View the full article in a pop-up page or open the article in a new tab for better visualization.
-
-#### Read
-
-##### Hotspot 7
-
-After reading an article, mark it as read to keep track of new articles.
-
-#### Share
-
-##### Hotspot 8
-
-With this feature, users can share an article with others using a mail service.
-
-To share an article with another team, click **Share**. In the **Share Article** screen:
-
-1. Under **Share with...**, select a team.
-2. Under **Email Contents...**, make any edits to the Subject and Message of the article.
-3. Click **Share**.
-
-#### More
-
-##### Hotspot 9
-
-When enabled, the system provides attached documents with additional information for users to access and read.
-
-#### Team Selection
-
-##### Hotspot 10
-
-This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
-
-#### Wall & Archive Toggle
-
-##### Hotspot 11
-
-By using this icon, users can toggle between the Gallery Wall and Gallery Archive.
-
-### Add Articles During an Exercise
-
-Users with the appropriate Content Developer permissions can add articles to the Gallery Archive throughout the course of exercise events.
-
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an article during an exercise:
-
-![Add Articles Exercise OE](img/addArticleExercise.png)
-
-1. On the Gallery Archive section, click **+** to add an article.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field                   | Data Type     | Description                                                 | Example                                                                                 |
-| ----------------------- | ------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| **Name**                | String        | Name of the article                                         | No cell phone connectivity                                                              |
-| **Summary**             | String        | Short summary of the article                                | No cell phone connectivity after pass of Hurricane Delta                                |
-| **Description**         | Rich Text     | Description with characteristics and details of the article | In a world driven by constant connectivity, the sudden absence of cell phone signals... |
-| **Url for more info**   | String        | If additional details are necessary, provide the URL        | `www.bbcnews.com/hurricane-delta`                                                       |
-| **Open URL in new tab** | Boolean       | Select this option to open the URL in a new tab             | True                                                                                    |
-| **Card**                | Dropdown Text | Article's classification amongst Gallery cards              | Communications Sector                                                                   |
-| **Status**              | Dropdown Text | Status of how the article affects the exercise situation    | Affected                                                                                |
-
-To save these settings, click **Save**.
-
-After you create your article, the Gallery Archive displays it in the following way.
-
-![Article Created OE](img/createdArticle.png)
-
-#### Edit an Article
-
-To edit an article, follow these steps:
-
-1. On the Gallery Archive section, select the article to edit and click **Edit** on the article's card.
-2. The system opens the same edit component used when creating a new article.
-3. After making all necessary edits, click **Save**.
-
-#### Delete an Article
-
-To delete an article, follow these steps:
-
-1. On the Gallery Archive section, select the article to delete and click the **Trash Can** on the article's card.
-
 ## Administrator Guide
 
-## Administration View
+Gallery administrators use the Administration View to manage collections, exhibits, users, roles, and groups.
+
+### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. The Administration View is where admins prepare and manage the environment so events run smoothly for participants.
 
@@ -231,372 +26,379 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 
 ![The Administration dropdown in the top right-corner](img/crucible-administration.png)
 
-
-### Users
-
-The following image shows the Users Administration Page. Here, administrators can add and delete users, and assign the necessary permissions to each user.
-
-The available permissions are:
-
-- [System Admin](#glossary): Permission that will grant a user all administration privileges on the Gallery application.
-- [Content Developer](#glossary): Permission to manage other Gallery admin pages except the Users admin page and their permissions.
-
-Most users won't have any permissions assigned in this application.
-
-![Gallery Users Admin OE](img/galleryUsersAdmin.png)
-
-#### Add a User
-
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a user:
-
-![Add Gallery User OE](img/addGalleryUser-v2.png)
-
-1. Under the Users Administration View, click **Add User**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field     | Data Type | Description                               | Example                              |
-| --------- | --------- | ----------------------------------------- | ------------------------------------ |
-| **Name**  | String    | Name or username that identifies the user | user-1                               |
-| **ID**    | GUID      | Unique ID for the user                    | 9dd4e3d8-5098-4b0a-9216-697cda5553f8 |
-| **Email** | String    | User's email contact                      | `user@this.ws`                       |
-
-To save these settings, click **Save** and select the desired permissions to assign by checking the box next to the user.
-
-#### Edit User's Information
-
-To edit a user, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Users** tab.
-3. Select the user to edit and click **Edit** next to the user.
-4. The system opens the same edit component used when creating a new user.
-5. After making all necessary edits, click **Save**.
-
-#### Delete a User
-
-To delete a user, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Users** tab.
-3. Select the user to delete and click the **Trash Can** next to the user.
-
 ### Collections
 
-The following image shows the Collections Administration Page. Here, administrators can add, upload, download, copy, and delete [collections](#glossary). Assign articles here, in case multiple exercises are running at the same time.
+Collections are the top-level containers that group cards and articles for an exercise. The Collections page lists all available collections and provides access to their cards, articles, and memberships.
 
-![Collections Admin OE](img/collectionsAdmin-v2.png)
+![Administration View with Collections tab selected](img/gallery-admin-collections.png)
 
 #### Add a Collection
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a collection:
+![New Collection modal with Add Collection icon called out](img/gallery-new-collection.png)
 
-![Add Collection OE](img/addCollection-v2.png)
-
-1. Under the Collections Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field           | Data Type | Description                                                | Example                                         |
-| --------------- | --------- | ---------------------------------------------------------- | ----------------------------------------------- |
-| **Name**        | String    | Name of the collection                                     | Demonstration                                   |
-| **Description** | String    | Details, characteristics and information of the collection | This is a collection created for demo purposes. |
-
-To save these settings, click **Save**.
-
-#### Edit a Collection
-
-To edit a collection, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Collections** tab.
-3. Select the collection to edit and click **Edit** next to the collection.
-4. The system opens the same edit component used when creating a new collection.
-5. After making all necessary edits, click **Save**.
-
-#### Delete a Collection
-
-To delete a collection, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Collections** tab.
-3. Select the collection you plan to delete and click the **Trash Can Icon** next to the collection.
+1. Under the Collections Administration View, click **+** (**Add Collection**).
+2. In **Name**, enter the collection name (for example, `Demonstration`).
+3. In **Description**, enter a brief description (for example, `This is a collection created for demo purposes.`).
+4. Click **Save**.
 
 #### Upload a Collection
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to upload a collection:
+1. Click the **Upload** icon next to **+**.
+2. Select the collection JSON file to upload.
 
-1. Click the **Settings Cog**.
-2. Navigate to the **Collections** tab.
-3. Click the **Up Arrow** next to the **+**.
-4. Select the collection JSON file you want to upload.
+#### Edit, Copy, Download, and Delete a Collection
 
-#### Download a Collection
+- **Edit:** Click **Edit** (pencil icon) next to the collection, make the desired changes, and click **Save**.
+- **Copy:** Click the **Copy** icon next to the collection.
+- **Download:** Click the **Download** icon next to the collection.
+- **Delete:** Click the **Trash Can** next to the collection.
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to download a collection:
+#### Cards
 
-1. Click the **Settings Cog**.
-2. Navigate to the **Collections** tab.
-3. Click the **Down Arrow** next to the collection and download the JSON file.
-4. Open your Downloads folder to confirm it finished downloading.
+Cards group articles into categories and appear on the Gallery Wall. Configure cards within a collection.
 
-#### Copy a Collection
+![Collections page with Cards section expanded and Add Card called out](img/gallery-collections-cards.png)
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to copy a collection:
+##### Add a Card
 
-1. Click the **Settings Cog**.
-2. Navigate to the **Collections** tab.
-3. Click **Copy** next to the collection and review the new entry that includes your username.
+1. Locate and select a collection.
+2. Expand the **Cards** section, click **+** (**Add a Card**).
+3. In **Name**, enter the card name (for example, `Pitt Information Technology Sector`).
+4. In **Description**, enter a brief description (for example, `This card provides additional information related to the IT sector in Pittsburgh.`).
+5. Click **Save**.
 
-### Cards
+##### Edit and Delete a Card
 
-The following image shows the Cards Administration Page. Here, administrators can add and delete cards. Each card appears in the Gallery Wall and stores articles related to that card.
+- **Edit:** Click **Edit** (pencil icon) next to the card, make the desired changes, and click **Save**.
+- **Delete:** Click the **Trash Can** next to the card.
 
-![Cards Admin OE](img/cardsAdmin.png)
+#### Articles
 
-#### Add a Card
+Articles provide supplemental information from different sources. Configure articles within a collection and assign them to cards.
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add a card:
+![Collections page with Articles section expanded and Add an Article called out](img/gallery-collections-articles.png)
 
-![Add Card OE](img/addCard-v2.png)
+##### Add an Article
 
-1. Under the Cards Administration View, click **Add Card**.
-2. Fill the fields as necessary following the Data Format Table specifications.
+1. Expand the **Articles** section, click **+** (**Add an Article**).
+2. In **Name**, enter the article name (for example, `Power outage reported in downtown Pittsburgh`).
+3. In **Summary**, enter a short summary (for example, `Major power outage affecting Pittsburgh's central business district`).
+4. In **Description**, enter the full article content.
+5. In **Card**, select the card to categorize this article (for example, `Pitt Information Technology Sector`).
+6. In **Status**, select the article's status (for example, `Critical`).
+7. In **Source Type**, select the source type (for example, `News`).
+8. In **Source Name**, enter the source name (for example, `Pittsburgh Post-Gazette`).
+9. In **URL**, enter a URL for additional information if needed.
+10. Select **Open URL in new tab** to open the URL in a new tab.
+11. In **Move**, enter the move number (for example, `1`).
+12. In **Inject**, enter the inject number (for example, `1`).
+13. In **Posted Date / Time**, enter the article's date and time (for example, `04/23/2026, 13:01:00`).
+14. Click **Save**.
 
-#### Data Format Table
+##### Edit and Delete an Article
 
-| Field           | Data Type     | Description                                          | Example                                                             |
-| --------------- | ------------- | ---------------------------------------------------- | ------------------------------------------------------------------- |
-| **Name**        | String        | Name of the card                                     | Information Technology Sector                                       |
-| **Description** | String        | Details, characteristics and information of the card | This card provides additional information related to the IT sector. |
-| **Collection**  | Dropdown Text | Select the collection that this card belongs with    | Demonstration #1                                                    |
+- **Edit:** Click **Edit** (pencil icon) next to the article, make the desired changes, and click **Save**.
+- **Delete:** Click the **Trash Can** next to the article.
 
-To save these settings, click **Save**.
+#### Memberships
 
-#### Edit a Card
+Memberships control which users and groups have access to a collection and their assigned roles within it.
 
-To edit a card, follow these steps:
+To add a member:
 
-1. Click the **Settings Cog**.
-2. Navigate to the **Cards** tab.
-3. Select the card to edit and click **Edit** next to the card.
-4. The system opens the same edit component used when creating a new card.
-5. After making all necessary edits, click **Save**.
+1. Under **Users/Groups**, find the user or group and click **+** (**Add [User Name]**).
+2. In the **Role** dropdown next to the member under **Members**, select the desired role.
 
-#### Delete a Card
-
-To delete a card, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Cards** tab.
-3. Select the card to delete and click the **Trash Can** next to the card.
-
-### Articles
-
-The following image shows the Articles Administration Page. Here, administrators can add and delete articles. These articles provide supplemental information from different sources to keep the exercise going.
-
-![Articles Admin OE](img/articlesAdmin.png)
-
-#### Add an Article
-
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an article:
-
-![Add Article OE](img/addArticle-v2.png)
-
-1. Under the Article Administration View, click **Add Article**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field                   | Data Type     | Description                                                    | Example                                                                          |
-| ----------------------- | ------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **Name**                | String        | Name of the article                                            | Hurricane Delta has landed in Fort Myers                                         |
-| **Summary**             | String        | Short summary and details of the article                       | Hurricane Delta has caused major damages                                         |
-| **Description**         | Rich Text     | Details, characteristics and information of the article        | Hurricane Delta, Category 5 hurricane, has caused major damages in Fort Myers... |
-| **Card**                | Dropdown Text | Select the card with which to categorize this article          | Energy Sector                                                                    |
-| **Status**              | Dropdown Text | Select the article's status of how it affects the exercise     | Critical                                                                         |
-| **Source Type**         | Dropdown Text | Select the source or author type of the article                | Intel                                                                            |
-| **Source Name**         | String        | Name or author of the article                                  | `BBC News`                                                                       |
-| **URL for more info**   | String        | Provide the URL if participants need additional information    | `www.bbcnews.com/hurricane-delta`                                                |
-| **Open URL in new tab** | Boolean       | Choose this option to open the URL in a new tab                | True                                                                             |
-| **Move**                | Integer       | Record the move that includes this article                     | 1                                                                                |
-| **Inject**              | Integer       | Record the inject that includes this article                   | 1                                                                                |
-| **Posted Date/Time**    | Datetime      | Capture the date and time when you posted this article         | 08/02/2021, 15:12:49                                                             |
-
-To save these settings, click **Save**.
-
-#### Edit an Article
-
-To edit an article, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Articles** tab.
-3. Select the article to edit and click **Edit** next to the article.
-4. The system opens the same edit component used when creating a new article.
-5. After making all necessary edits, click **Save**.
-
-#### Delete an Article
-
-To delete an article, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Articles** tab.
-3. Select the article to delete and click the **Trash Can** next to the article.
+To remove a member, under **Members**, find the user or group and click **-**.
 
 ### Exhibits
 
-The following image shows the Exhibits Administration Page. Here, administrators configure the actual exercise and run it based on the teams, collections, and articles they previously configured.
+An exhibit is a scheduled instance of a collection. The Exhibits page lists exhibits within a selected collection and provides access to exhibit teams, card teams, article teams, observers, and memberships.
 
-![Exhibits Admin OE](img/exhibitsAdmin-v3.png)
+![Administration View with Exhibits tab selected](img/gallery-admin-exhibits.png)
 
 #### Add an Exhibit
 
-Assuming that the exercise administrator grants the user the appropriate permissions, follow these steps to add an [exhibit](#glossary):
+1. Under the Exhibit Administration View, click **+** (**Add Exhibit**).
+2. In **Name**, enter the exhibit name (for example, `Pittsburgh Cyber Exercise - Run 1`).
+3. In **Description**, enter a brief description (for example, `First run of the Pittsburgh Cyber Exercise.`).
+4. In **Current Move**, enter the starting move number (for example, `0`).
+5. In **Current Inject**, enter the starting inject number (for example, `0`).
+6. Optionally, in **Scenario ID**, enter the Steamfitter Scenario ID to link this exhibit to a Steamfitter scenario (for example, `7b3f9e2a-1c4d-4e8f-a5b6-d2c1e3f4a7b8`).
+7. Click **Save**.
 
-![Add Exhibit OE](img/addExhibit-v2.png)
+!!! note
 
-1. Under the Exhibit Administration View, click **+**.
-2. Fill the fields as necessary following the Data Format Table specifications.
-
-#### Data Format Table
-
-| Field              | Data Type | Description                          | Example                               |
-| ------------------ | --------- | ------------------------------------ | ------------------------------------- |
-| **Current Move**   | Integer   | Number of the current move           | 1                                     |
-| **Current Inject** | Integer   | Number of the inject within the move | 2                                     |
-| **Scenario ID**    | GUID      | ID value for the scenario            | Automatically generated by the system |
-
-To save these settings, click **Save**.
-
-#### Edit an Exhibit
-
-To edit an exhibit, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Exhibits** tab.
-3. Select the exhibit to edit and click **Edit** next to the exhibit.
-4. The system opens the same edit component used when creating a new exhibit.
-5. After making all necessary edits, click **Save**.
-
-#### Delete an Exhibit
-
-To delete an exhibit, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Exhibits** tab.
-3. Select the exhibit to delete and click the **Trash Can** next to the exhibit.
+    The system automatically generates the ID. If you leave **Scenario ID** blank, the system generates one automatically.
 
 #### Upload an Exhibit
 
-To upload an exhibit, follow these steps:
-
-1. Click the **Settings Cog**.
-2. Navigate to the **Exhibits** tab.
-3. Click the **Up Arrow** next to the **+**.
-4. Select the exhibit JSON file you want to upload.
+1. Click the **Upload** icon next to **+** (**Add Exhibit**).
+2. Select the exhibit JSON file to upload.
 
 !!! note
 
     When you add a new exhibit, the system creates a new collection with the uploaded exhibit. To view the uploaded exhibit, navigate to the collection using the dropdown and select the collection with the same name as the file you uploaded.
 
-#### Download an Exhibit
+#### Edit, Copy, Download, and Delete an Exhibit
 
-To download an exhibit, follow these steps:
+- **Edit:** Click **Edit** (pencil icon) next to the exhibit, make the desired changes, and click **Save**.
+- **Copy:** Click the **Copy** icon next to the exhibit.
+- **Download:** Click the **Download** icon next to the exhibit.
+- **Delete:** Click the **Trash Can** next to the exhibit.
 
-1. Click the **Settings Cog**.
-2. Navigate to the **Exhibits** tab.
-3. Click the **Down Arrow** next to the exhibit and download the JSON file.
-4. Open your Downloads folder to confirm it finished downloading.
+#### Exhibit Teams
 
-#### Copy an Exhibit
+Exhibit Teams are the teams that participate in an exhibit.
 
-To copy an exhibit, follow these steps:
+To add a team to an exhibit:
 
-1. Click the **Settings Cog**.
-2. Navigate to the **Exhibits** tab.
-3. Click **Copy** next to the exhibit and review the new entry that includes your username.
+1. Under the **Exhibit Teams** section, click **+** (**Add Team**).
+2. In **Name**, enter the full team name (for example, `Pittsburgh Cyber Team`).
+3. In **Short Name**, enter a short name or acronym (for example, `PCT`).
+4. In **Email**, enter the team's email address (for example, `pct@pittsburgh.gov`).
+5. Click **Save**.
 
-#### Configure an Exhibit
+To configure a team:
 
-To configure an exhibit for an exercise, administrators will need to add Exhibit Teams, Card Teams, Article Teams, as well as assign the respective Observers (if desired). To do this, follow these steps:
+1. Click the team row to expand its configuration.
+2. Under **All Users**, click **+** next to a user to add them to the team.
+3. Under **Team Users**, check the **Observer** box to assign the Observer role to a user.
+4. Under **Team Users**, click **-** next to a user to remove them from the team.
 
-![Configure Exhibit OE](img/configureExhibit-v2.png)
+#### Card Teams
 
-#### Add a Team to an Exhibit
+Card Teams assign Gallery cards to exhibit teams.
 
-To add a team to the Exhibit, follow these steps:
+To add a card team:
 
-![Add Teams Exhibit OE](img/addTeamsExhibit.png)
+1. Under the **Card Teams** section, click **+** (**Add Team**).
+2. In **Team**, select the team (for example, `Pittsburgh Cyber Team`).
+3. In **Card**, select the card to assign (for example, `Pitt Information Technology Sector`).
+4. In **Move**, enter the move number (for example, `1`).
+5. In **Inject**, enter the inject number (for example, `0`).
+6. To show the card on the Gallery Wall for the team, select **Is Shown On Wall**.
+7. Select **Can Post New Articles** to allow the team to add new articles to this card.
+8. Click **Save**.
 
-1. Click the **+** icon.
-2. Fill the fields as necessary following the Data Format Table specifications.
+#### Article Teams
 
-#### Data Format Table
+Article Teams assign articles to exhibit teams.
 
-| Field          | Data Type | Description                                | Example                    |
-| -------------- | --------- | ------------------------------------------ | -------------------------- |
-| **Name**       | String    | Full name of the team                      | Carnegie Mellon University |
-| **Short Name** | String    | Short name of the team, such as an acronym | CMU                        |
-| **Email**      | String    | Team's email contact                       | `sei@cmu.edu`              |
+![Article Teams panel showing Exhibit Teams and Article Teams side by side](img/gallery-article-teams.png)
 
-To save these settings, click **Save**.
+To add a team to an article:
 
-To configure a team, follow these steps:
+1. Click the article row to expand its team assignment.
+2. Under **Exhibit Teams**, click **+** (**Add team**) next to a team to assign them to the article.
+3. Under **Article Teams**, click **-** (**Remove team**) next to a team to remove the assignment.
 
-![Exhibit Teams OE](img/exhibitTeams-v2.png)
+#### Observers
 
-1. Select the team you want to configure and click it to expand its configuration details.
-2. Under the **All Users** tab, review the users who do not yet belong to the team. To add them to the team, click **Add User**.
-3. Under the **Team Users** tab, review the users who already belong to the team. To remove a user from the team, click **Remove**.
-4. If desired, check the **Observer** box to assign that role to the user during the exercise.
+Observers can monitor all teams during an exercise.
 
-#### Add a Team Card to an Exhibit
+To assign the Observer role to a user, under **Exhibit Users**, find the user and click **+**.
 
-To add a Team Card to the Exhibit, follow these steps:
+To remove the Observer role, under **Observers**, find the user and click **-**.
 
-![Card Teams OE](img/cardTeams-v2.png)
+!!! note
 
-1. Click **+** on the Card Teams section.
-2. Fill the fields as necessary following the Data Format Table specifications.
+    You can also assign the Observer role from the **Exhibit Teams** section by checking the **Observer** box next to a user in the **Team Users** panel.
 
-#### Data Format Table
+#### Memberships
 
-| Field                     | Data Type     | Description                                                              | Example                          |
-| ------------------------- | ------------- | ------------------------------------------------------------------------ | -------------------------------- |
-| **Team**                  | Dropdown Text | Choose the team that owns the card                                       | CMU - Carnegie Mellon University |
-| **Card**                  | Dropdown Text | Choose the Gallery card you want to assign                               | Communications Sector            |
-| **Move**                  | Integer       | Record the move that includes this card                                  | 1                                |
-| **Inject**                | Integer       | Record the inject that includes this card                                | 2                                |
-| **Show On Wall**          | Boolean       | Select this option to show the card on the Gallery Wall for the team     | True                             |
-| **Can Post New Articles** | Boolean       | Select this option to allow the team to add new articles to this card    | True                             |
+Memberships control which users and groups have access to an exhibit and their assigned roles within it.
 
-To save these settings, click **Save**.
+![Exhibits Memberships panel showing Users/Groups and Members side by side](img/gallery-exhibits-memberships.png)
 
-#### Add an Article to a Team
+To add a member:
 
-To add an article to a team, follow these steps:
+1. Under **Users/Groups**, find the user or group and click **+** (**Add [User Name]**).
+2. In the **Role** dropdown next to the member under **Members**, select the desired role.
 
-![Article Teams OE](img/articleTeams.png)
+To remove a member, under **Members**, find the user or group and click **-**.
 
-1. Select the **Card** you want to configure.
-2. Under the **Exhibit Teams** tab, identify the teams without an article assignment. To add them to the Article Teams, click **Add**.
-3. Under the **Article Teams** tab, review the teams that already have assignments. To remove a team, click **Remove**.
+### Users
 
-#### The Observer Role
+The Users page lists all Gallery users and their assigned roles.
 
-To assign the [Observer Role](#glossary) to a user:
+The available roles are:
 
-![Exhibit Observers OE](img/exhibitObservers.png)
+- **None Locally**: No Gallery-specific permissions assigned.
+- **Administrator**: Full administration privileges across all Gallery pages.
+- **Content Developer**: Can create collections and exhibits, and view roles and groups.
+- **Observer**: Can view collections, exhibits, users, roles, and groups.
 
-1. Under **Evaluation Users**, search for the desired user.
-2. After you find the user, click **Add**.
+Most users won't have any role assigned in this application.
 
-To remove the Observer Role from a user:
+![Administration View with Users tab selected](img/gallery-admin-users.png)
 
-1. Under **Observers**, search for the desired user.
-2. After you find the user, click **Remove**.
+#### Add a User
+
+Users with the **Manage Users** permission can add users. To add a user, follow these steps:
+
+![Gallery Add User inline form with User ID and User Name fields called out](img/gallery-add-user.png)
+
+1. Under the Users Administration View, click **+** (**Add User**).
+2. In **User ID**, enter the user's GUID (for example, `a3f8c2d1-4b7e-4f9a-8c33-2e1f6b5a9d0c`).
+3. In **User Name**, enter the user's name (for example, `Eddard Stark`).
+4. Click **Add this user**.
+5. In the **Role** dropdown next to the user, select the appropriate role.
+
+#### Change a User's Role
+
+In the **Role** dropdown next to the user, select the desired role.
+
+#### Delete a User
+
+To delete a user, click the **Trash Can** next to the user.
+
+### Roles
+
+The Roles page defines the permissions for application-level roles and collection and exhibit-specific roles. Gallery has three role scopes: **Roles** (application-wide), **Collection Roles**, and **Exhibit Roles**.
+
+![Roles page with Roles tab selected](img/gallery-admin-roles.png)
+
+#### Roles
+
+The **Roles** tab defines application-wide roles and their permissions. Gallery has three application-wide roles:
+
+- **Administrator**: Has all permissions.
+- **Content Developer**: Can create collections and exhibits, and view roles and groups.
+- **Observer**: Can view collections, exhibits, users, roles, and groups.
+
+Administrators can add custom roles using **+** and edit or delete existing roles using the pencil and trash can icons.
+
+#### Collection Roles
+
+Collection Roles control what users can do within a specific collection. The available collection roles are:
+
+- **Manager**: Full access to the collection.
+- **Member**: Can view and edit the collection.
+- **Observer**: Can view the collection.
+
+#### Exhibit Roles
+
+Exhibit Roles control what users can do within a specific exhibit. The available exhibit roles are:
+
+- **Manager**: Full access to the exhibit.
+- **Member**: Can view and edit the exhibit.
+- **Observer**: Can view the exhibit.
+
+### Groups
+
+Groups allow administrators to organize users for easier management.
+
+![Administration View with Groups tab selected and group expanded](img/gallery-admin-groups.png)
+
+#### Add a Group
+
+1. Click **+** (**Add New Group**).
+2. In **Name**, enter the group name.
+3. Click **Save**.
+
+#### Edit and Delete a Group
+
+- **Edit:** Click **Edit** (pencil icon) next to the group, make the desired changes, and click **Save**.
+- **Delete:** Click the **Trash Can** next to the group.
+
+#### Add and Remove Users in a Group
+
+To add a user to a group:
+
+1. Click the group row to expand its configuration.
+2. Under **Users**, find the user and click **+**.
+
+To remove a user from a group, under **Group Members**, find the user and click **-**.
+
+## User Guide
+
+Participants use the Gallery Wall and Archive to track and respond to exercise events.
+
+### Gallery Landing Page
+
+The Gallery landing page displays the exhibits the user is a participant in.
+
+![Gallery landing page showing My Exhibits list](img/gallery-my-exhibits.png)
+
+#### Search for an Exhibit
+
+To search for an exhibit, follow these steps:
+
+1. Navigate to Gallery's landing page.
+2. In the **Search** field, enter the name of the exhibit.
+
+### Gallery Wall
+
+The Gallery Wall displays cards with color-coded status indicators:
+
+- **Red:** Indicates a closed status.
+- **Orange:** Indicates a critical status.
+- **Yellow:** Indicates an affected status.
+- **Green:** Indicates an open status.
+
+![Gallery Wall showing six color-coded cards with numbered callouts](img/gallery-wall.png)
+
+1. **Title:** The title of the card.
+2. **Description:** A brief description of the event.
+3. **Date Posted:** The date and time the card was last updated.
+4. **Unread Articles:** The number of unread articles on the card.
+5. **Details:** Opens additional details and filtered articles for the card.
+6. **Team:** Displays the currently selected team. Users who are also observers can use this to switch between teams and view other teams' progress during the exercise.
+7. **Wall and Archive Toggle:** Toggles between the Gallery Wall and Gallery Archive.
+8. **Gear:** Opens the Administration View. See [Administration View](#administration-view).
+
+### Gallery Archive
+
+The Gallery Archive is a collection of articles from reporting, intelligence, news, and social media sources. Articles accumulate throughout the exercise as moves progress. Each article displays its title, source type, source name, and date posted.
+
+![Gallery Archive showing articles with numbered callouts](img/gallery-archive.png)
+
+1. **Add an Article:** Click **+** to add a new article to the Archive. See [Add Articles During an Exercise](#add-articles-during-an-exercise).
+2. **Search the Archive:** Enter terms to filter articles by keyword.
+3. **Cards Filter:** Filter articles by card category.
+4. **Source Filters:** Filter articles by source type (Intel, Reporting, Orders, News, Phone, or Email).
+5. **Team:** Displays the currently selected team. Users who are also observers can use this to switch between teams and view other teams' progress.
+6. **Wall and Archive Toggle:** Toggles between the Gallery Wall and Gallery Archive.
+7. **Gear:** Opens the Administration View. See [Administration View](#administration-view).
+8. **View:** Opens the full article in a pop-up or new tab.
+9. **Read:** Marks the article as read to track new content.
+10. **Share:** Shares the article with another team.
+
+<!-- TODO: Clarify where Share sends the article — email? in-app notification? -->
+
+### Add Articles During an Exercise
+
+Users with the appropriate Content Developer permissions can add articles to the Gallery Archive throughout the course of an exercise event. To add an article:
+
+1. On the Gallery Archive, in the top left corner, click **+** (**Add an Article** icon) to add an article.
+2. In **Name**, enter the article name (for example, `No cell phone connectivity`).
+3. In **Summary**, enter a short summary (for example, `No cell phone connectivity after pass of Hurricane Delta`).
+4. In **Description**, enter the full article content (for example, `Hurricane Delta made landfall as a Category 4 storm, destroying cell towers and disabling backup generators. An estimated 340,000 residents are without mobile service.`).
+5. In **URL**, enter a URL to provide a link to additional information (for example, `https://www.coastnews.com/hurricane-delta-cell-outages`).
+6. Select **Open URL in new tab** to open the URL in a new browser tab.
+7. In **Card**, select the card to categorize this article (for example, `Communications Sector`).
+8. In **Status**, select the article's status (for example, `Affected`).
+9. Click **Save**.
+
+![The Add Article for Selected Teams window with sample data added](img/gallery-add-article-for-selected-teams.png)
+
+After you create your article, the Gallery Archive displays it like this.
+
+![Newly created Gallery Article in the Archive](img/gallery-created-article.png)
+
+#### Edit an Article
+
+To edit an article, follow these steps:
+
+1. On the Gallery Archive, select the article to edit and click **Edit** on the article's card. The article opens in the same form used when creating an article.
+2. After making all necessary edits, click **Save**.
+
+#### Delete an Article
+
+To delete an article, follow this step:
+
+1. On the Gallery Archive, select the article to delete and click **Delete** (the trash can icon) on the article's card.
 
 ## Glossary
 
@@ -608,7 +410,7 @@ This glossary defines key terms and concepts used in the Gallery application.
 
 **Collection**: A set of articles.
 
-**Content Developer Permission**: Will grant a user the ability to manage other Gallery administration pages, except the users administration page and their permissions.
+**Content Developer Permission**: Grants a user the ability to create collections and exhibits, and view roles and groups.
 
 **Email Filter**: Information gathered from messages distributed by electronic means.
 
@@ -633,5 +435,3 @@ This glossary defines key terms and concepts used in the Gallery application.
 **Reporting Filter**: Information gathered from a document in an organized and objective way, without analysis or recommendations.
 
 **Social Media Filter**: Information acquired from multiple users on a social media platform.
-
-**System Admin Permission**: Grants a user all administration privileges on the Gallery application.

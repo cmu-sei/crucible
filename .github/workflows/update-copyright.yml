@@ -1,0 +1,44 @@
+name: Update Copyright Year
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  update-copyright:
+    # Do not run on commits made by github-actions[bot] to prevent looping
+    if: github.actor != 'github-actions[bot]'
+    name: Update copyright year to current year
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Update copyright year
+        id: update
+        run: |
+          CURRENT_YEAR=$(date +%Y)
+          # Find all markdown files with a stale copyright year
+          FILES=$(grep -rl "Copyright [0-9]\{4\}" --include="*.md" . | xargs grep -rL "Copyright $CURRENT_YEAR" 2>/dev/null || true)
+          if [ -z "$FILES" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No copyright years to update."
+          else
+            echo "$FILES" | xargs sed -i "s/Copyright [0-9]\{4\}/Copyright $CURRENT_YEAR/g"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Updated copyright year to $CURRENT_YEAR in: $FILES"
+          fi
+
+      - name: Commit updated copyright year
+        if: steps.update.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -u
+          git commit -m "Update copyright year to $(date +%Y)"
+          git push

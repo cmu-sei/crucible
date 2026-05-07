@@ -2,7 +2,7 @@
 
 This [dev container](https://containers.dev/) makes it easy to edit and test changes to the [Crucible documentation](https://cmu-sei.github.io/crucible/).
 
-For more information about dev containers, read the [documentation for using dev containers with VSCode](https://code.visualstudio.com/docs/devcontainers/containers), the documentation for the [VSCode Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), or the [dev containers homepage](https://containers.dev/).
+For more information about dev containers, read the [documentation for using dev containers with VS Code](https://code.visualstudio.com/docs/devcontainers/containers), the documentation for the [VS Code Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), or the [dev containers homepage](https://containers.dev/).
 
 ## Key Features
 
@@ -11,8 +11,8 @@ For more information about dev containers, read the [documentation for using dev
    2. [MkDocs](https://www.mkdocs.org/)
    3. [Vale](https://vale.sh/)
    4. [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
-2. Helpful VSCode extensions installed
-3. VSCode default settings configured to be helpful by allowing Vale and markdownlint-cli2 make updates to markdown files to automatically resolve a subset of linting errors that may arise
+2. Helpful VS Code extensions installed
+3. VS Code default settings configured to be helpful by allowing Vale and markdownlint-cli2 make updates to markdown files to automatically resolve a subset of linting errors that may arise
 
 ## Using the Container to Edit Documentation
 
@@ -34,4 +34,4 @@ The above `lint` command is an alias to the `/workspaces/crucible-docs/lint-docs
 
 Linting markdown files locally is helpful to understand what types of errors the repository's CI job might flag.
 
-The installed VSCode plugins for markdownlint and Vale will also highlight errors in the code editor.
+The installed VS Code plugins for markdownlint and Vale will also highlight errors in the code editor.

@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Caster** is the deployment component of the Crucible framework. It uses [Terraform](https://www.terraform.io/), an open-source Infrastructure-as-Code tool, to define and apply infrastructure configurations.
+**Caster** is the deployment component of the Crucible framework. It uses [Terraform](https://www.terraform.io/), an open source Infrastructure-as-Code tool, to define and apply infrastructure configurations.
 
 Caster provides a web interface where exercise developers create, share, and manage topology configurations.
 
@@ -16,6 +16,8 @@ The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-se
 
 ## Administrator Guide
 
+Caster administrators use the Administration View to manage users, roles, and VLANs.
+
 ### Administration View
 
 Across the Crucible exercise applications, the **Administration View** is where privileged users configure the platform and control access. It includes user and team management, role and permission assignment, and setup and maintenance of app-specific templates and content. It is where admins prepare and manage the environment so events run smoothly for participants.
@@ -26,6 +28,45 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 
 ### Projects
 
+The **Projects** pane in the Administration View displays all projects in the system. Administrators can search for projects, open them, rename them, and delete them.
+
+The screen shot below shows the **Projects** pane in Caster's Administration View.
+
+![Caster Administration View, Projects pane](img/caster-adm-projects.png)
+
+#### Add a New Project
+
+1. In the **Projects** pane, click **+**.
+2. Enter a **Name** and click **Save**.
+
+#### Search for a Project
+
+In the **Search Projects** field, type all or part of a project name.
+
+#### Edit an Existing Project
+
+Click the project name to open the **Users/Groups** and **Project Members** panes. From here, you can add users and groups to the project as members, assign their roles, and remove them.
+
+- To add a member, find the user or group in the **Users/Groups** pane and click **Add**.
+- To change a member's role, select a new role from the **Role** dropdown in the **Project Members** pane.
+- To remove a member, click **Remove** in the **Project Members** pane.
+
+For a description of each project role, see [Project Roles](#project-roles).
+
+#### Open a Project
+
+Click the **Open** icon to open the project in a new browser tab, where you can browse and manage the project's directories, workspaces, files, and designs.
+
+#### Rename a Project
+
+1. In the project row, click the **Pencil** icon.
+2. Edit the **Name** and click **Save**.
+
+#### Delete a Project
+
+1. In the project row, click the **trash can** icon.
+2. Confirm **Delete**.
+
 ### Users
 
 Users appear in Caster after they authenticate through the Identity provider and open Player in a browser.
@@ -34,9 +75,16 @@ The screen shot below shows the **Users** pane in Caster's Administration View.
 
 ![Caster's Administration View, Users screen](img/caster-adm-users.png)
 
-To assign a new role to a user:
+#### Add a New User
 
-In the user row, in the **Role** column, select a new role from the dropdown (**None**, **Observer**, **Content Developer**, or **Administrator**).
+1. In the **Users** pane, click **Add User**.
+2. In the **User ID** field, enter the user's ID.
+3. In the **User Name** field, enter the user's name.
+4. Click **Add this user** to save, or **Cancel** to discard.
+
+#### Assign a Role to a User
+
+In the user row, in the **Role** column, select a role from the dropdown (**None**, **Observer**, **Content Developer**, or **Administrator**). For a description of each role, see [System Roles](#system-roles).
 
 ### Modules
 
@@ -67,20 +115,29 @@ Caster can add or refresh modules in three ways:
 
 While working on Caster Modules:
 
-- **Search:**
-- **Add/Update Modules:**
-- **Add/Update All from the repository:**
-- **Copy:**
-- **Versions:**
-- **Delete:**
+- **Search:** Type all or part of a module name to filter the list.
+- **Add/Update Modules >>:** Enter a GitLab project ID in the **External Module ID** field and click **Add/Update Modules >>** to add or refresh a specific module. The ID must be a valid ID from the module repository.
+- **Add/Update All from the Repository:** Click the cloud icon to add or refresh all modules from the configured repository at once.
+- **Copy:** Click the copy icon to copy the module's ID to the clipboard.
+- **Versions:** Displays the number of versions available for the module in the git repository. A module must have at least one version before you can add it to a Design.
+- **Delete:** Click the trash can icon to delete a module.
 
 Selecting a module opens a form where you choose a version and enter the required variable values. After you select **Submit**, Caster generates the Terraform module block, which you can copy into the configuration file.
 
 ### Workspaces
 
+The **Workspaces** pane in the Administration View lets administrators monitor active runs and control workspace operations system-wide.
+
+The screen shot below shows the **Workspaces** pane in Caster's Administration View.
+
+![Caster Administration View, Workspaces pane](img/caster-adm-workspaces.png)
+
+- **Disable Workspace Operations:** Toggle to prevent workspace operations that require locking. Use this before restarting the `Caster.Api` service to avoid corrupting Terraform state. The setting resets when the API restarts.
+- **Active Runs:** Displays all currently running workspace operations. Use the **Search** field to filter by workspace. Columns include `createdAt`, `isDestroy`, `status`, and `workspaceId`.
+
 ### VLANs
 
-![Caster VLANs](img/caster-vlans.png)
+![Caster Administration View, VLANs pane](img/caster-adm-vlans.png)
 
 Caster manages VLAN IDs by creating pools of 4096 VLANs and dividing them into partitions. When a user requests a VLAN from a partition, Caster assigns an unused ID and marks it in use until the user releases it.
 
@@ -89,7 +146,6 @@ A partition is either assigned to a project or configured as the system default.
 - VLANs can include tags for organization, and users can request a VLAN by tag
 - Users can request a specific VLAN ID within a partition
 - VLANs marked as reserved (including `0`, `1`, and `4095`, reserved by default) are never assigned
-- Entity update events restore SignalR functionality when modified properties update
 
 ### Roles and Permissions
 
@@ -160,7 +216,7 @@ Administrators can create new groups, search for and edit existing groups, and d
 
 ## User Guide
 
-Administrators manage the environment, including projects, users, groups, permissions, modules, and running workspaces in the Administration area. Users access assigned projects, create and edit Terraform files, and deploy configurations to workspaces. This *User Guide* explains how you, the user, perform those tasks.
+Users access assigned projects, create and edit Terraform files, and deploy configurations to workspaces.
 
 ### Project
 
@@ -179,9 +235,11 @@ Add Directory lets you create a new directory at the same level as the above pro
 
 #### Export Project
 
-Export Projects allows you to export the project as a zip file.
+Export Project lets you export the project as an archive file. Select the **Archive Type** (default: Zip), then click **Export**. Enable **Include Ids** to include directory IDs in the export.
 
 #### Import Project
+
+Import Project lets you import a project from a zip file. Click **Choose File** to select the zip file, then click **Import**. Enable **Preserve Ids** to append IDs to directory names during the import.
 
 ### Files
 
@@ -243,6 +301,8 @@ Designer provides a graphical user interface for creating and editing terraform 
 When you open a project, you can create a design and add modules backed by Git to that design. You can also create variables for use in the modules settings.
 
 ## Caster Tips
+
+The following tips help you get the most out of Caster.
 
 ### Crafting Terraform Code
 
@@ -380,7 +440,7 @@ This glossary defines key terms and concepts used in the Caster application.
 
 **Project:** A way to organize and categorize similar environments for multiple workspaces and directories within Caster.
 
-**Terraform:** An open-source Infrastructure-as-Code tool.
+**Terraform:** An open source Infrastructure-as-Code tool.
 
 **Topology:** The physical and logical arrangement of nodes and connections in a network.
 

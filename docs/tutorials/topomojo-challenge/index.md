@@ -52,7 +52,7 @@ TopoMojo templates are starting-point virtual machines that you can customize. W
 
 *Unlinking* gives the VM its own independent copy, which is where you make edits and save changes. The **Initialize** button appears at the top of the page because TopoMojo knows it needs a new disk but *has not created it yet*.
 
-1. Click **Initialize**. Initializing tells VMware or Proxmox to create a new disk and copy the backend artifacts. Once initialized, the **Deploy** button becomes available.
+1. Click **Initialize**. Initializing tells VMware or Proxmox to create a new disk and copy the back-end artifacts. Once initialized, the **Deploy** button becomes available.
 2. Click **Deploy**. Deploying the VM creates it in the workspace, where you make and save all edits to the challenge.
 
      ![deploy](../img/deploy.png)
@@ -108,6 +108,8 @@ After unlinking, initializing, deploying, and editing the VM, TopoMojo shows a *
 In TopoMojo, click **Save**. The changes we made to the VM, including the two files we added to the Desktop, will persist the next time TopoMojo deploys the VM.
 
 ## Step 3: Configuring Transforms, Guest Settings, and Questions
+
+In Step 3, you configure transforms and guest settings to randomize the challenge token, then add the question participants must answer to complete the challenge.
 
 ### Adding a Transform
 
@@ -204,7 +206,7 @@ At this point, the challenge includes a transform, guest info variable, instruct
 
      - Launch the Kali VM.
      - Run `get-token.sh` to retrieve the generated value.
-     - Copy it from the VM using the clipboard in the **Settings cog**.
+     - Copy it from the VM using the clipboard in the **Gear** icon.
      - Paste it into the answer field in TopoMojo.
      - **Submit** the answer. When you submit the correct answer, TopoMojo marks the challenge complete and automatically cleans up the gamespace.
 
@@ -215,6 +217,8 @@ The screenshot below shows the terminal in the gamespace after running `get-toke
 At this point, you have a complete, working TopoMojo challenge and the tools to build on it!
 
 ## Beyond the Basics (Optional)
+
+The following optional sections show how to extend the challenge with additional transforms, variants, and more complex scoring.
 
 ### Adding an Additional Transform
 
@@ -322,14 +326,16 @@ For additional details, see [Variants](../../topomojo/index.md#variants) in the 
 
 ## Virtual Machine Template Best Practices
 
-1. **Unlinking Templates:** Use linked templates whenever possible. Linked templates reduce backend storage use and provide a shared, consistent VM environment that users can become familiar with across challenges.
-2. **Use a Challenge Server:** Use a dedicated *challenge server* VM as the control point for the challenge. A challenge server can run startup scripts, host grading logic or websites, collect logs, and perform automation. This approach lets you maximize the use of linked templates by placing configuration, automation, and grading on a single unlinked VM. We provide a reference challenge server on GitHub: [github.com/cmu-sei/Challenge-Server](https://github.com/cmu-sei/Challenge-Server).
-3. **Template Visibility:** Set templates as *visible* or *hidden*. Visible templates expose a UI console to users. Hidden templates do not expose a UI console but may remain accessible over the network. Hide templates that users should not access directly, such as attacker or backend systems.
+1. **Unlinking Templates:** Use linked templates whenever possible. Linked templates reduce back-end storage use and provide a shared, consistent VM environment that users can become familiar with across challenges.
+2. **Use a Challenge Server:** Use a dedicated *challenge server* VM as the control point for the challenge. A challenge server can run start-up scripts, host grading logic or websites, collect logs, and perform automation. This approach lets you maximize the use of linked templates by placing configuration, automation, and grading on a single unlinked VM. We provide a reference challenge server on GitHub: [github.com/cmu-sei/Challenge-Server](https://github.com/cmu-sei/Challenge-Server).
+3. **Template Visibility:** Set templates as *visible* or *hidden*. Visible templates expose a UI console to users. Hidden templates do not expose a UI console but may remain accessible over the network. Hide templates that users should not access directly, such as attacker or back-end systems.
 4. **Template Naming:** Use clean, descriptive names for templates. Avoid tags, IDs, or internal details in visible template names. Use unique or structured names for hidden templates to help administrators identify resources during troubleshooting.
 5. **Template Count:** Add VM templates only when required. Fewer templates reduce infrastructure usage and keep challenges easier to understand and maintain.
 6. **Clean Before Saving:** Clean templates before saving them. Remove command and browser history, delete logs, and remove development artifacts or files to prevent unintended hints or shortcuts.
 
 ## Troubleshooting Common Issues
+
+The following sections cover common problems you may encounter when building a TopoMojo challenge.
 
 ### VM Changes Don't Persist
 

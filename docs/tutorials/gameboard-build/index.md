@@ -35,9 +35,9 @@ This tutorial assumes the following:
 
 ### Configuring Game Metadata
 
-Click the **Settings Cog** in **Game Center** to configure the game. Start by configuring the game metadata. Descriptions of key settings appear below. For additional details on game metadata, see [Game Center Settings](../../gameboard/index.md#metadata) in the *Gameboard Administrator Guide*.
+Click the **Gear** icon in **Game Center** to configure the game. Start by configuring the game metadata. Descriptions of key settings appear below. For additional details on game metadata, see [Game Center Settings](../../gameboard/index.md#metadata) in the *Gameboard Administrator Guide*.
 
-- **Name:** Enter the game name that players see on the home page and in the game lobby. For the purposes of this tutorial, enter `Tutorial`.
+- **Name:** Enter the game name that players see on the homepage and in the game lobby. For the purposes of this tutorial, enter `Tutorial`.
 - **Card Image:** Select a graphic to visually identify the game. Use an image sized `750x1080`. Add text to appear on the card here too. In **Card Text Middle**, enter `tutorial`.
 - **Publish:** **Hidden** requires elevated permissions to view; **Visible** allows all users to see the game. We recommend keeping the game **Hidden** while you configure it.
 - **Featured:** Enable this to display the game at the top of the homepage.
@@ -123,6 +123,8 @@ For additional details on facilitating a game, see:
 - [Reports](../../gameboard/index.md#reports) in the *Gameboard User Guide*.
 
 ## Troubleshooting Common Issues
+
+The following sections cover common problems you may encounter when building a Gameboard game.
 
 ### Challenge Not Appearing in Search
 

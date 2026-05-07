@@ -1,0 +1,16 @@
+# Enforces correct usage of "setup" vs "set up".
+#
+# Rationale: Per the Chicago Manual of Style, "set up" (two words) is the verb
+# form ("you need to set up the environment") and "setup" (one word) is the noun
+# or adjective form ("the setup is complete", "a setup guide"). This rule catches
+# the most common error: using the one-word form as a verb.
+extends: substitution
+message: "Use 'set up' (two words) as a verb. Use 'setup' (one word) as a noun or adjective."
+ignorecase: true
+level: error
+action:
+  name: replace
+swap:
+  "to setup": "to set up"
+  "can setup": "can set up"
+  "will setup": "will set up"
