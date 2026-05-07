@@ -61,6 +61,9 @@ IP(?:'s|s)?
 [Cc]alc
 [Ss]rc
 nginx
+Grafana
+CRD(?:s)?
+CR(?:s)?
 Reframe
 reusability
 kubectl
