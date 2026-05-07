@@ -4,179 +4,134 @@
 
 - Kubernetes
   - For bare metal/lab installs, we recommend [K3s](https://docs.k3s.io/)
+- Helm
 - vCenter/Proxmox (for virtualization)
 
 ## Recommended
 
-- Helm
-- OAuth Provider: We use [IdentityServer](https://identityserver4.readthedocs.io/en/latest/) and [Keycloak](https://www.keycloak.org/documentation)
+- OAuth Provider: We typically use [Keycloak](https://www.keycloak.org/documentation)
 
 ## Crucible Applications and GitHub Pages
 
-- [Alloy API](https://github.com/cmu-sei/Alloy.Api)
-- [Alloy UI](https://github.com/cmu-sei/Alloy.ui)
-- [Caster API](https://github.com/cmu-sei/Caster.Api)
-- [Caster UI](https://github.com/cmu-sei/Caster.Ui)
-- [Player API](https://github.com/cmu-sei/Player.Api)
-- [Player Console UI](https://github.com/cmu-sei/Console.Ui)
-- [Player UI](https://github.com/cmu-sei/Player.Ui)
-- [Player VM API](https://github.com/cmu-sei/Vm.Api)
-- [Player VM UI](https://github.com/cmu-sei/Vm.Ui)
-- [Steamfitter API](https://github.com/cmu-sei/Steamfitter.Api)
-- [Steamfitter UI](https://github.com/cmu-sei/Steamfitter.Ui)
-- [CITE API](https://github.com/cmu-sei/CITE.Api)
-- [CITE UI](https://github.com/cmu-sei/CITE.Ui)
-- [Gallery API](https://github.com/cmu-sei/Gallery.Api)
-- [Gallery UI](https://github.com/cmu-sei/Gallery.Ui)
-- [Blueprint API](https://github.com/cmu-sei/Blueprint.Api)
-- [Blueprint UI](https://github.com/cmu-sei/Blueprint.Ui)
-
-## Crucible Terraform Provider
-
-- [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-sei/crucible/latest/docs)
+- Alloy [API](https://github.com/cmu-sei/Alloy.Api) / [UI](https://github.com/cmu-sei/Alloy.ui)
+- Blueprint [API](https://github.com/cmu-sei/Blueprint.Api) / [UI](https://github.com/cmu-sei/Blueprint.Ui)
+- Caster [API](https://github.com/cmu-sei/Caster.Api) / [UI](https://github.com/cmu-sei/Caster.Ui)
+- CITE [API](https://github.com/cmu-sei/CITE.Api) / [UI](https://github.com/cmu-sei/CITE.Ui)
+- Gallery [API](https://github.com/cmu-sei/Gallery.Api) / [UI](https://github.com/cmu-sei/Gallery.Ui)
+- Gameboard [API](https://github.com/cmu-sei/Gameboard) / [UI](https://github.com/cmu-sei/Gameboard-ui)
+- Player [API](https://github.com/cmu-sei/Player.Api) / [UI](https://github.com/cmu-sei/Player.Ui) / [Console UI](https://github.com/cmu-sei/Console.Ui)
+- Player [VM API](https://github.com/cmu-sei/Vm.Api) / [VM UI](https://github.com/cmu-sei/Vm.Ui)
+- Steamfitter [API](https://github.com/cmu-sei/Steamfitter.Api) / [UI](https://github.com/cmu-sei/Steamfitter.Ui)
+- TopoMojo [API](https://github.com/cmu-sei/TopoMojo) / [UI](https://github.com/cmu-sei/topomojo-ui)
 
 ## Crucible Helm Charts
 
-- [Alloy](https://github.com/cmu-sei/helm-charts/tree/main/charts/alloy)
-- [Caster](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster)
-- [Player](https://github.com/cmu-sei/helm-charts/tree/main/charts/player)
-- [Steamfitter](https://github.com/cmu-sei/helm-charts/tree/main/charts/steamfitter)
-- [CITE](https://github.com/cmu-sei/helm-charts/tree/main/charts/cite)
-- [Gallery](https://github.com/cmu-sei/helm-charts/tree/main/charts/gallery)
-- [Blueprint](https://github.com/cmu-sei/helm-charts/tree/main/charts/blueprint)
+All Crucible applications have Helm charts in the [SEI's Helm charts repository](https://github.com/cmu-sei/helm-charts). README files alongside each application's chart document the chart and the application's settings. Modify the settings using the values YAML file in your deployment.
 
-## Other Helm Charts
+To add the SEI's Helm charts repository:
 
-- [MetalLB](https://github.com/metallb/metallb)
-- [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
-- [Rancher](https://github.com/rancher/charts)
-- [Longhorn](https://github.com/longhorn/charts)
-- [StackStorm](https://github.com/StackStorm/stackstorm-k8s)
-- [RocketChat](https://github.com/RocketChat/helm-charts)
-- [Moodle](https://github.com/bitnami/charts/tree/main/bitnami/moodle)
-- [Webmail](https://github.com/cmu-sei/helm-charts/tree/main/charts/webmail)
-- [Keycloak](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
+```bash
+helm repo add sei https://helm.cmusei.dev/charts
+helm repo update
+```
 
-## Docker Images
+In addition to the application charts, there is a [Crucible Umbrella Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/crucible-apps) that includes all application charts and some third-party charts as dependent sub-charts. Using the Umbrella chart will deploy the full Crucible stack under one Crucible Helm deployment. More details on deployment using the Umbrella chart are in the [Umbrella Chart Deployment section](#example-umbrella-helm-chart-deployment).
 
-!!! note
+### Other Helm Charts
 
-    These images mean that there isn't a Helm repository being used to deploy these applications but are currently being used by us. To create a deployment, please view the Kubernetes deployment documentation.
+The Crucible stack relies on other open source services that vendor their own Helm charts.
 
-We primarily use these images in setting up a email server. The above Helm charts will pull the correct Docker images. This is completely optional but is what we use during certain exercises.
+- [Moodle](https://github.com/bitnami/charts/tree/main/bitnami/moodle) - open source Learning Management System (LMS) for online courses and training
+- [MetalLB](https://github.com/metallb/metallb) - Bare-metal load balancer for Kubernetes that assigns external IPs to services
+- [ingress-nginx](https://kubernetes.github.io/ingress-nginx/) - Ingress controller using nginx for routing external traffic to cluster services
+- [Rancher](https://github.com/rancher/charts) - Kubernetes cluster management and operations platform
+- [Longhorn](https://github.com/longhorn/charts) - Distributed block storage system for persistent volumes in Kubernetes
+- [StackStorm](https://github.com/StackStorm/stackstorm-k8s) - Event-driven automation and orchestration engine
+- [RocketChat](https://github.com/RocketChat/helm-charts) - open source team communication and messaging platform
+- [Webmail](https://github.com/cmu-sei/helm-charts/tree/main/charts/webmail) - Web-based email client for in-platform messaging
 
-- [ClamAV](https://hub.docker.com/r/clamav/clamav/)
-- [MISP](https://github.com/coolacid/docker-misp)
+## Kubernetes Operators
 
-## Infrastructure
+[Kubernetes Operators](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) are software extensions that use custom resources to manage applications and their components. Operators encode operational knowledge—like how to deploy, configure, and recover a stateful service—into a controller that runs inside the cluster. Crucible relies on the following operators to manage its database and identity provider:
 
-Not all applications require virtualization. Gallery, CITE, Blueprint, Player, and Steamfitter all can run without a hypervisor.
+- [Keycloak Operator](https://www.keycloak.org/operator/installation) - Manages Keycloak instances
+- [CloudNative-PG](https://cloudnative-pg.io/) - Manages PostgreSQL clusters
 
-You are able to run the full Crucible stack on minimal hardware. We usually run on four nodes: one server and three agents. Each node has around 100-250 GB of storage, 8 GB RAM, 2 Cores. This is mainly for Longhorn and StackStorm which takes a lot of resources even when limiting their availability. This is only what we recommend. As stated before, you can run this on one node outside of production. The only concern would be storage space.
+## Crucible Terraform Provider
 
-# Install Overview
+[Terraform providers](https://developer.hashicorp.com/terraform/language/providers) are plugins that allow Terraform to interact with APIs and services. The Crucible Terraform Provider exposes Crucible resources—such as exercises, users, and permissions—as Terraform-managed infrastructure, enabling repeatable, version-controlled deployments:
 
-## Certificates
+- [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-sei/crucible/latest/docs)
 
-This stack is very dependent on TLS. Please create certificates and add them as secrets into the cluster. Down below will create self-signed certificates for testing. If you are going to install this into production, you will have to change these.
+## Example Umbrella Helm Chart Deployment
 
-??? example
+A Crucible deployment using umbrella Helm charts consists of four Helm charts to orchestrate the entire stack. Review the documentation for each of these charts to determine how to configure the settings for your deployment.
 
-    ``` json
-    {
-      "names": [
-        {
-          "C": "US"
-        }
-      ],
-      "key": {
-        "algo": "rsa",
-        "size": 2048
-      },
-      "CN": "Foundry Appliance Host",
-      "hosts": ["$DOMAIN", "*.$DOMAIN"]
-    }
-    ```
+1. [`crucible-operators`](https://github.com/cmu-sei/helm-charts/tree/main/charts/crucible-operators) - Install Kubernetes Operators for Keycloak and PostgreSQL before deploying applications.
+2. [`crucible-infra`](https://github.com/cmu-sei/helm-charts/tree/main/charts/crucible-infra) - Install prerequisite infrastructure (e.g., an ingress controller, storage provider, etc.) before deploying applications.
+3. [`crucible-apps`](https://github.com/cmu-sei/helm-charts/tree/main/charts/crucible-apps) - Install all Crucible applications.
+4. [`crucible-monitoring`](https://github.com/cmu-sei/helm-charts/tree/main/charts/crucible-monitoring) - Install a Grafana logging, open telemetry, and metrics stack to monitor the Kubernetes cluster and Crucible applications.
 
-    ``` bash
-    cfssl gencert -initca certificates/root-ca.json | cfssljson -bare root-ca
-    cfssl gencert -ca certificates/root-ca.pem -ca-key certificates/root-ca-key.pem -config certificates/config.json \
-                -profile intca certificates/int-ca.json | cfssljson -bare int-ca
-    cfssl gencert -ca certificates/int-ca.pem -ca-key certificates/int-ca-key.pem -config certificates/config.json \
-                -profile server certificates/host.json | cfssljson -bare host
-    ```
+### Step 1: Install Operators
 
-    ``` bash
-    kubectl create secret tls appliance-cert --key certificates/host-key.pem --cert <( cat certificates/host.pem certificates/int-ca.pem ) --dry-run=client -o yaml | kubectl apply -f -
-    kubectl create secret generic appliance-root-ca --from-file=appliance-root-ca=certificates/root-ca.pem --dry-run=client -o yaml | kubectl apply -f -
-    ```
+Crucible uses Kubernetes operators for PostgreSQL and Keycloak. These are **cluster-scoped infrastructure** that install Custom Resource Definitions (CRDs) and watch all namespaces, so they deploy separately from the application charts. This provides privilege separation (cluster-admin for operators, namespace access for apps), independent upgrade cycles, and CRD safety.
 
-## Load Balancer
+The [`crucible-operators`](https://github.com/cmu-sei/helm-charts/tree/main/charts/crucible-operators) Helm chart installs both operators in a single release:
 
-If you're using a cloud provider for your Kubernetes cluster, you do not have to worry about supplying your own load balancer. If you are installing this on bare metal, which would be a majority of the time if you are testing the software, you will have to provide a load balancer. We recommend using MetalLB. The documentation will guide you on how to install this into your cluster.
+| Operator                                                             | Version        | Purpose                                                                                     |
+|----------------------------------------------------------------------|----------------|---------------------------------------------------------------------------------------------|
+| [Keycloak Operator](https://www.keycloak.org/operator/installation)  | 26.5.6         | Manages Keycloak instances via `Keycloak` and `KeycloakRealmImport` Custom Resources (CRs)  |
+| [CloudNative-PG](https://cloudnative-pg.io/)                         | 0.25.0 (chart) | Manages PostgreSQL clusters via `Cluster` CRs                                               |
 
-- [Helm Install MetalLB](https://metallb.universe.tf/installation/#installation-with-helm)
-- [Configuring MetalLB](https://metallb.universe.tf/configuration/)
+```bash
+helm install crucible-operators charts/crucible-operators --wait
+```
 
-??? example
+Verify both operators are running:
 
-    ``` bash
-    helm upgrade -i metallb metallb/metallb --namespace metallb-system --create-namespace
-    ```
+```bash
+kubectl get pods -l app.kubernetes.io/instance=crucible-operators
+```
 
-## Ingress
+!!! warning
+    When uninstalling, remove all CRs (Keycloak, KeycloakRealmImport, CloudNative-PG Cluster) **before** removing operators. Deleting CRDs removes all CRs cluster-wide.
 
-In order to access these services, you need to be able to communicate to the cluster. The easiest way to do this is to add `ingress-nginx` to your cluster. Before you install this, you have to have an active load balancer. Here's a one liner using Helm to install `ingress-nginx`:
+### Step 2: Deploy Infrastructure
 
-??? example
+The [`crucible-infra`](https://github.com/cmu-sei/helm-charts/tree/main/charts/crucible-infra) chart deploys:
 
-    ``` bash
-    helm upgrade -i nginx ingress-nginx/ingress-nginx --namespace nginx --create-namespace --set controller.watchIngressWithoutClass=true --set controller.kind=Deployment --set controller.ingressClassResource.name=nginx --set controller.ingressClassResource.default=true --set controller.ingressClass=nginx
-    ```
+1. CloudNative-PG PostgreSQL cluster - Primary database for all Crucible applications. Managed by the CloudNative-PG Operator [above](#step-1-install-operators).
+2. ingress-nginx - Routes external traffic to services within the cluster
+3. NFS storage provisioner - Provides dynamic NFS-backed persistent volumes for shared storage
+4. pgAdmin4 - Web-based PostgreSQL management interface
 
-## Rancher
+Configure or disable each of these services in the values file to match your deployment's needs.
 
-Rancher created K3s, but Rancher itself is a GUI that helps configure your Kubernetes cluster if you already use K3s. If you are not using K3s, please do not install this application. Rancher will also help you get to and configure Longhorn.
+```bash
+helm install crucible-infra charts/crucible-infra -f crucible-infra.values.yaml
+```
 
-??? example
+### Step 3: Deploy Applications
 
-    ``` bash
-    helm upgrade -i rancher rancher-stable/rancher --namespace cattle-system --create-namespace --set bootstrapPassword=$RANCHER_PASS --set replicas=1 --set auditLog.level=2 --set auditLog.destination=hostPath --set hostname=rancher.$DOMAIN --set ingress.tls.source=secret --set ingress.tls.secretName=name-of-certificate
-    ```
+The [`crucible-apps`](https://github.com/cmu-sei/helm-charts/tree/main/charts/crucible-apps) chart deploys all applications that are part of the [Crucible Framework](https://cmu-sei.github.io/crucible/landing/) as well as the following third-party applications:
 
-## Longhorn
+1. [Keycloak](https://www.keycloak.org/) - Identity provider for authenticating to the platform. Managed by the Keycloak Operator [above](#step-1-install-operators).
+2. [Moodle](https://moodle.org/) - open source LMS for online courses and training.
 
-Use Longhorn to manage, create, and back up persistent volumes (PVs) and persistent volume claims (PVCs). You do not have to install this but you will have to manage your own PVs and PVCs if you are not using a cloud provider.
+```bash
+helm install crucible-apps charts/crucible-apps -f crucible-apps.values.yaml
+```
 
-??? example
+### Step 4: Deploy Monitoring (optional)
 
-    ``` bash
-    helm upgrade -i longhorn longhorn/longhorn --namespace longhorn-system --create-namespace --set persistence.defaultClassReplicaCount=1 --wait
-    ```
+The [`crucible-monitoring`](https://github.com/cmu-sei/helm-charts/tree/main/charts/crucible-monitoring) chart deploys a Grafana logging, open telemetry, and metrics stack to monitor the Kubernetes cluster and Crucible applications. The stack includes:
 
-## PostgreSQL and pgAdmin
+1. [Grafana](https://grafana.com/oss/grafana/) - Observability dashboards for visualizing metrics, logs, and traces.
+2. [Prometheus](https://prometheus.io/) - Time-series metrics collection and alerting system.
+3. [Loki](https://grafana.com/oss/loki/) - Log aggregation system designed for efficient storage and querying.
+4. [Tempo](https://grafana.com/oss/tempo/) - Distributed tracing back end for end-to-end request tracking.
+5. [Grafana Alloy](https://grafana.com/docs/alloy/latest/) - OpenTelemetry collector for shipping metrics, logs, and traces.
 
-Majority of the applications above use PostgreSQL. We also use pgAdmin to help manage the database. This may differ if you're using a cloud provider.
-
-??? example
-
-    ``` bash
-    helm upgrade -i postgresql bitnami/postgresql --set global.storageClass=longhorn --set global.postgresql.auth.postgresPassword=$POSTGRES_PASS
-    ```
-
-[Here's the chart for pgAdmin that we use.](https://github.com/rowanruseler/helm-charts/blob/master/charts/pgadmin4/values.yaml)
-
-??? example
-
-    ``` bash
-    helm upgrade -i pgadmin runix/pgadmin4 -f -
-    ```
-
-## Crucible Installation
-
-All of the Crucible applications document their settings on the GitHub page, and you can modify them in the values YAML file on the corresponding Helm chart. Each application includes settings you must configure to enable communication. We have populated environment files and scripts that help guide you with this part of the installation. You can find them on these two GitHub pages:
-
-- [k3s-install](https://github.com/avershave/k3s-install)
-- [k3s-production](https://github.com/sei-noconnor/k3s-production)
-
-These contain the necessary values and setup procedures to install the entire Crucible stack. Visit the individual GitHub pages for more information on these settings.
+```bash
+helm install crucible-monitoring charts/crucible-monitoring -f crucible-monitoring.values.yaml
+```
