@@ -14,6 +14,16 @@ For installation, refer to these GitHub repositories.
 - [Gallery UI Repository](https://github.com/cmu-sei/Gallery.Ui)
 - [Gallery API Repository](https://github.com/cmu-sei/Gallery.Api)
 
+## Configuration
+
+Configure and deploy Gallery using the [Gallery Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/gallery). The Helm Chart README provides detailed instructions for all deployment settings.
+
+### Classification Banner
+
+Gallery UI supports an optional, customizable classification banner that displays persistently at the top of the application. The banner can show classification labels (such as "UNCLASSIFIED" or "SECRET"), maintenance messages, or any other persistent notification. Configure the banner through `HeaderBarSettings` in the Helm chart. See the [Classification Banner](https://github.com/cmu-sei/helm-charts/tree/main/charts/gallery#classification-banner) section of the Gallery Helm Chart README for configuration details.
+
+![Example classification banner with an example message](img/gallery-classification-banner-example.png)
+
 ## Administrator Guide
 
 Gallery administrators use the Administration View to manage collections, exhibits, users, roles, and groups.

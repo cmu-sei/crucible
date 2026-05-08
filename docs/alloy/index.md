@@ -4,6 +4,40 @@
 
 An **Alloy** Definition brings together a Player View, a Caster Directory, and a Steamfitter Scenario Template to create an event that is user-launchable. You can schedule an event to run for a set amount of time. Upon completion of the event, Alloy will clear up all related assets.
 
+## Configuration
+
+Configure and deploy Alloy using the [Alloy Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/alloy). The Helm Chart README provides detailed instructions for all deployment settings.
+
+### Resource Owner Authorization
+
+When deploying the Alloy API, configure the `ResourceOwnerAuthorization` settings for an account with the **Administrator** role or a role with **All** permissions. This allows the Alloy API to make the necessary calls to the other APIs.
+
+```json
+      "ResourceOwnerAuthorization": {
+        "Authority": "http://localhost:5000",
+        "ClientId": "alloy.api",
+        "ClientSecret": "",
+        "UserName": "",
+        "Password": "",
+        "Scope": "s3 s3-vm alloy steamfitter caster-api",
+        "TokenExpirationBufferSeconds": 900
+      },
+```
+
+The default setting for the maximum number of active events per user is **two**. However, you can change this in the `MaxEventsForBasicUser` setting.
+
+```json
+      "Resource": {
+        "MaxEventsForBasicUser": 2
+      }
+```
+
+### Classification Banner
+
+Alloy UI supports an optional, customizable classification banner that displays persistently at the top of the application. The banner can show classification labels (such as "UNCLASSIFIED" or "SECRET"), maintenance messages, or any other persistent notification. Configure the banner through `HeaderBarSettings` in the Helm chart. See the [Classification Banner](https://github.com/cmu-sei/helm-charts/tree/main/charts/alloy#classification-banner) section of the Alloy Helm Chart README for configuration details.
+
+![Example classification banner with an example message](img/alloy-classification-banner-example.png)
+
 ## Permissions and Roles
 
 Alloy controls access through a combination of permissions and roles. Permissions define what users can do; roles group permissions and apply them to users globally or per resource.
@@ -46,28 +80,6 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 
 ![The Administration dropdown in the top right-corner](img/crucible-administration.png)
 
-
-When deploying the Alloy API, configure the `ResourceOwnerAuthorization` settings for an account with the **Administrator** role or a role with **All** permissions. This allows the Alloy API to make the necessary calls to the other APIs.
-
-```json
-      "ResourceOwnerAuthorization": {
-        "Authority": "http://localhost:5000",
-        "ClientId": "alloy.api",
-        "ClientSecret": "",
-        "UserName": "",
-        "Password": "",
-        "Scope": "s3 s3-vm alloy steamfitter caster-api",
-        "TokenExpirationBufferSeconds": 900
-      },
-```
-
-The default setting for the maximum number of active events per user is **two**. However, you can change this in the `MaxEventsForBasicUser` setting.
-
-```json
-      "Resource": {
-        "MaxEventsForBasicUser": 2
-      }
-```
 
 ### Manage Event Templates
 

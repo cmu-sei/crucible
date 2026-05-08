@@ -17,6 +17,16 @@ In the Steamfitter UI, four major functional sections help you manage content:
 
 Behind the scenes, Steamfitter uses [StackStorm](https://stackstorm.com/) to execute Steamfitter tasks. StackStorm is an open source application that connects applications, services, and workflows. Steamfitter uses StackStorm to send commands to guest VMs via the vSphere Action Pack. This ensures that no communication for the tasks run by StackStorm occurs over the network.
 
+## Configuration
+
+Configure and deploy Steamfitter using the [Steamfitter Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/steamfitter). The Helm Chart README provides detailed instructions for all deployment settings.
+
+### Classification Banner
+
+Steamfitter UI supports an optional, customizable classification banner that displays persistently at the top of the application. The banner can show classification labels (such as "UNCLASSIFIED" or "SECRET"), maintenance messages, or any other persistent notification. Configure the banner through `HeaderBarSettings` in the Helm chart. See the [Classification Banner](https://github.com/cmu-sei/helm-charts/tree/main/charts/steamfitter#classification-banner) section of the Steamfitter Helm Chart README for configuration details.
+
+![Example classification banner with an example message](img/steamfitter-classification-banner-example.png)
+
 ## Permissions and Roles
 
 Steamfitter controls access through a combination of permissions and roles. Permissions define what users can do; roles group permissions and apply them to users globally or per resource.
