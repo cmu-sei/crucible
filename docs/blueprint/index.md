@@ -11,7 +11,15 @@ For installation, refer to these GitHub repositories.
 - [Blueprint UI Repository](https://github.com/cmu-sei/Blueprint.Ui)
 - [Blueprint API Repository](https://github.com/cmu-sei/Blueprint.Api)
 
-## Blueprint Permissions
+## Configuration
+
+Configure and deploy Blueprint using the [Blueprint Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/blueprint). The Helm Chart README provides detailed instructions for all deployment settings.
+
+### Classification Banner
+
+Blueprint UI supports an optional, customizable classification banner that displays persistently at the top of the application. The banner can show classification labels (such as "UNCLASSIFIED" or "SECRET"), maintenance messages, or any other persistent notification. Configure the banner through `HeaderBarSettings` in the Helm chart. See the [Classification Banner](https://github.com/cmu-sei/helm-charts/tree/main/charts/blueprint#classification-banner) section of the Blueprint Helm Chart README for configuration details.
+
+## Permissions and Roles
 
 To use Blueprint, a System Admin must assign Content Developer permissions to the user and add them to a team.
 

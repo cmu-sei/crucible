@@ -16,6 +16,67 @@ Player is *not* meant to:
 - Provide any mechanisms for individual applications to communicate with each other.
 - Provide any default applications. However, an exercise can consume some common applications.
 
+## Configuration
+
+Configure and deploy Player using the [Player Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/player). The Helm Chart README provides detailed instructions for all deployment settings.
+
+### Classification Banner
+
+Player UI supports an optional, customizable classification banner that displays persistently at the top of the application. The banner can show classification labels (such as "UNCLASSIFIED" or "SECRET"), maintenance messages, or any other persistent notification. Configure the banner through `HeaderBarSettings` in the Helm chart. See the [Classification Banner](https://github.com/cmu-sei/helm-charts/tree/main/charts/player#classification-banner) section of the Player Helm Chart README for configuration details.
+
+![Example classification banner with an example message](img/player-classification-banner-example.png)
+
+## Permissions and Roles
+
+Player controls access through a combination of permissions and roles. Permissions grant specific capabilities globally or per view; roles group permissions and apply them to users.
+
+### Permissions
+
+Sets of *permissions* control access to features in Player. Permissions can apply globally or per **View**.
+
+Examples of global permissions include:
+
+- `CreateViews`: Create new Views
+- `ViewViews`: View all Views and their Users and Groups
+- `ManageUsers`: Make changes to Users
+
+Users with View or Manage permissions for an administration function (for example, `ViewApplications` or `ManageWorkspaces`) can open the **Administration** area. However, they see only the sections they have permission to access in the sidebar menu.
+
+You can view all available permissions in the **Roles** section of the **Administration** area.
+
+Player also supports custom permissions created through seed data or the API. Other Crucible applications, such as the VM API, can use these permissions. Examples include `UploadVmFiles` and `RevertVms`.
+
+### Roles
+
+You apply permissions to *users* by grouping them into *roles*. Player supports two types of roles: **System Roles** and **Team Roles**.
+
+#### System Roles
+
+Each user can have one *system role* that provides global permissions across all of Player.
+
+Default system roles:
+
+- **Administrator:** All permissions within the system.
+- **Content Developer:** Has the `CreateViews` permission. Users with this role can create and manage their own Views, but cannot change global settings or other users' Views.
+
+Users with the `ManageRoles` permission can create custom system roles in the **Roles** section of the **Administration** area.
+
+#### Team Roles
+
+When you add a user to a team in a View, you assign a *team role* that defines what they can do within that specific team.
+
+Default team roles:
+
+- **View Admin:** Perform all View actions across all teams in the View, including managing user access. When someone creates a new View, they automatically become the View Admin for that View.
+- **View Member:** View and access all objects within the team.
+- **Observer:** View all objects within the View, but cannot make changes.
+
+You can create custom team roles if you need different permission combinations.
+
+Admins assign roles to users in the **Users** section of the **Administration** area.
+
+Applications can use Player roles and permissions as needed. An administrator or an application with proper permissions can send notifications to individual users, teams, or the entire exercise.
+
 ## Administrator Guide
 
 Player administrators use the Administration View to manage views, teams, applications, users, and roles.
@@ -115,57 +176,6 @@ In the dropdown next to your username, select **Administration**.
 
 3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether iFrames supports the app. For example, the Mattermost chat doesn't support embedding, so users must open it in a separate browser tab.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads. This is important for some apps that may require some initialization.
-
-### Roles and Permissions
-
-Player controls access through a combination of permissions and roles. Permissions grant specific capabilities globally or per view; roles group permissions and apply them to users.
-
-#### Permissions
-
-Sets of *permissions* control access to features in Player. Permissions can apply globally or per **View**.
-
-Examples of global permissions include:
-
-- `CreateViews`: Create new Views
-- `ViewViews`: View all Views and their Users and Groups
-- `ManageUsers`: Make changes to Users
-
-Users with View or Manage permissions for an administration function (for example, `ViewApplications` or `ManageWorkspaces`) can open the **Administration** area. However, they see only the sections they have permission to access in the sidebar menu.
-
-You can view all available permissions in the **Roles** section of the **Administration** area.
-
-Player also supports custom permissions created through seed data or the API. Other Crucible applications, such as the VM API, can use these permissions. Examples include `UploadVmFiles` and `RevertVms`.
-
-#### Roles
-
-You apply permissions to *users* by grouping them into *roles*. Player supports two types of roles: **System Roles** and **Team Roles**.
-
-##### System Roles
-
-Each user can have one *system role* that provides global permissions across all of Player.
-
-Default system roles:
-
-- **Administrator:** All permissions within the system.
-- **Content Developer:** Has the `CreateViews` permission. Users with this role can create and manage their own Views, but cannot change global settings or other users' Views.
-
-Users with the `ManageRoles` permission can create custom system roles in the **Roles** section of the **Administration** area.
-
-##### Team Roles
-
-When you add a user to a team in a View, you assign a *team role* that defines what they can do within that specific team.
-
-Default team roles:
-
-- **View Admin:** Perform all View actions across all teams in the View, including managing user access. When someone creates a new View, they automatically become the View Admin for that View.
-- **View Member:** View and access all objects within the team.
-- **Observer:** View all objects within the View, but cannot make changes.
-
-You can create custom team roles if you need different permission combinations.
-
-Admins assign roles to users in the **Users** section of the **Administration** area.
-
-Applications can use Player roles and permissions as needed. An administrator or an application with proper permissions can send notifications to individual users, teams, or the entire exercise.
 
 ### Subscriptions
 

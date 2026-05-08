@@ -14,6 +14,58 @@ For more information on native Terraform constructs used in Caster, please refer
 
 The [Crucible Terraform Provider](https://registry.terraform.io/providers/cmu-sei/crucible/latest/docs) enables programmatic management of Crucible resources through Terraform configurations.
 
+## Configuration
+
+Configure and deploy Caster using the [Caster Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster). The Helm Chart README provides detailed instructions for all deployment settings.
+
+### Classification Banner
+
+Caster UI supports an optional, customizable classification banner that displays persistently at the top of the application. The banner can show classification labels (such as "UNCLASSIFIED" or "SECRET"), maintenance messages, or any other persistent notification. Configure the banner through `HeaderBarSettings` in the Helm chart. See the [Classification Banner](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster#classification-banner) section of the Caster Helm Chart README for configuration details.
+
+![Example classification banner with an example message](img/caster-classification-banner-example.png)
+
+## Permissions and Roles
+
+Sets of *permissions* control access to features in Caster. Permissions can apply globally or per **Project**.
+
+Examples of global permissions include:
+
+- `CreateProjects`: Create new Projects
+- `ViewProjects`: View all Projects and their Users and Groups
+- `ManageUsers`: Make changes to Users
+
+Users with View or Manage permissions for an administration function (for example, `ViewVLANs` or `ManageWorkspaces`) can open the **Administration** area. However, they see only the sections they have permission to access in the sidebar menu.
+
+You can view all available permissions in the **Roles** section of the **Administration** area.
+
+### Roles
+
+You apply permissions to *users* by grouping them into *roles*. Caster supports two types of roles: **System Roles** and **Project Roles**.
+
+#### System Roles
+
+Each user can have one *system role* that provides global permissions across all of Caster.
+
+Default system roles:
+
+- **Administrator:** All permissions within the system.
+- **Content Developer:** Has the `CreateProjects` permission. Users with this role can create and manage their own Projects, but cannot change global settings or other users' Projects.
+- **Observer:** Has all view permissions. Users with this role can view everything in the system, but cannot make changes.
+
+Users with the `ManageRoles` permission can create custom system roles in the **Roles** section of the **Administration** area.
+
+### Project Roles
+
+When you add a user to a Project, you assign a *project role* that defines what they can do within that specific Project.
+
+Available project roles:
+
+- **Manager:** Perform all Project actions, including managing user access. When someone creates a new Project, they automatically become the Manager for that Project.
+- **Member:** View and edit all objects within the Project.
+- **Observer:** View all objects within the Project, but cannot make changes.
+
+You can't create custom project roles.
+
 ## Administrator Guide
 
 Caster administrators use the Administration View to manage users, roles, and VLANs.
@@ -146,48 +198,6 @@ A partition is either assigned to a project or configured as the system default.
 - VLANs can include tags for organization, and users can request a VLAN by tag
 - Users can request a specific VLAN ID within a partition
 - VLANs marked as reserved (including `0`, `1`, and `4095`, reserved by default) are never assigned
-
-### Roles and Permissions
-
-Sets of *permissions* control access to features in Caster. Permissions can apply globally or per **Project**.
-
-Examples of global permissions include:
-
-- `CreateProjects`: Create new Projects
-- `ViewProjects`: View all Projects and their Users and Groups
-- `ManageUsers`: Make changes to Users
-
-Users with View or Manage permissions for an administration function (for example, `ViewVLANs` or `ManageWorkspaces`) can open the **Administration** area. However, they see only the sections they have permission to access in the sidebar menu.
-
-You can view all available permissions in the **Roles** section of the **Administration** area.
-
-#### Roles
-
-You apply permissions to *users* by grouping them into *roles*. Caster supports two types of roles: **System Roles** and **Project Roles**.
-
-##### System Roles
-
-Each user can have one *system role* that provides global permissions across all of Caster.
-
-Default system roles:
-
-- **Administrator:** All permissions within the system.
-- **Content Developer:** Has the `CreateProjects` permission. Users with this role can create and manage their own Projects, but cannot change global settings or other users' Projects.
-- **Observer:** Has all view permissions. Users with this role can view everything in the system, but cannot make changes.
-
-Users with the `ManageRoles` permission can create custom system roles in the **Roles** section of the **Administration** area.
-
-#### Project Roles
-
-When you add a user to a Project, you assign a *project role* that defines what they can do within that specific Project.
-
-Available project roles:
-
-- **Manager:** Perform all Project actions, including managing user access. When someone creates a new Project, they automatically become the Manager for that Project.
-- **Member:** View and edit all objects within the Project.
-- **Observer:** View all objects within the Project, but cannot make changes.
-
-You can't create custom project roles.
 
 ### Groups
 

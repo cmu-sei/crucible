@@ -14,7 +14,17 @@ For installation, refer to these GitHub repositories.
 - [CITE UI Repository](https://github.com/cmu-sei/CITE.Ui)
 - [CITE API Repository](https://github.com/cmu-sei/CITE.Api)
 
-## CITE Permissions
+## Configuration
+
+Configure and deploy CITE using the [CITE Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/cite). The Helm Chart README provides detailed instructions for all deployment settings.
+
+### Classification Banner
+
+CITE UI supports an optional, customizable classification banner that displays persistently at the top of the application. The banner can show classification labels (such as "UNCLASSIFIED" or "SECRET"), maintenance messages, or any other persistent notification. Configure the banner through `HeaderBarSettings` in the Helm chart. See the [Classification Banner](https://github.com/cmu-sei/helm-charts/tree/main/charts/cite#classification-banner) section of the CITE Helm Chart README for configuration details.
+
+![Example classification banner with an example message](img/cite-classification-banner-example.png)
+
+## Permissions and Roles
 
 To use CITE, an administrator assigns each user a scoring permission.
 
