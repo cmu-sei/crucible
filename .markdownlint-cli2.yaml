@@ -4,6 +4,7 @@
 
 ignores:
   - LICENSE.md
+  - plans/**
 
 customRules:
   - .github/linting/no-empty-sections.js

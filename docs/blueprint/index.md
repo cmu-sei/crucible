@@ -255,27 +255,31 @@ To search for a specific user, follow these steps:
 
 Content developers use Blueprint to build and manage MSELs.
 
-### Blueprint Landing Page
+### Event Dashboard
 
-The landing page of Blueprint provides a variety of interaction modalities for exercises, tailored according to the permissions assigned to each user. The functionalities available are as follows:
+The **Event Dashboard** is Blueprint's homepage. It shows a card-based layout with up to three cards tailored to the current user's permissions. While data loads, an **Initializing Data** card is displayed with a progress spinner.
 
-![Blueprint Landing Page OE](img/blueprintLandingPage.png)
+![Blueprint Event Dashboard](img/blueprintLandingPage.png)
 
 #### Join an Event
 
-Users with an invitation or membership on a participating team can join an event already in progress. Users click **Join Event** to open a page that lists all ongoing events available to them. They select an event to proceed to Player, where they access exercise information and related applications.
+If the user has been invited to an active (deployed) MSEL, a **Join an Event** card is shown with the subtitle *Access In-Progress Events*. Clicking the card navigates to `/join`, which lists every MSEL the user is currently eligible to join. Selecting a MSEL proceeds to Player, where the user can access exercise information and related applications.
 
 #### Start an Event
 
-Users with an invitation to an exercise MSEL designated as a template can initiate the event and engage with the exercise.
-
-After users click **Start Event**, the system redirects them to a page listing all available events other users have invited them to. They should select a template to launch the event and proceed to Player, where they can access all exercise information and deployed applications.
+If the user has permission to launch template MSELs, a **Start an Event** card is shown with the subtitle *Launch New events*. Clicking the card navigates to `/launch` and lists the MSELs the user may launch. Selecting a template launches the event and proceeds to Player.
 
 #### Manage an Event
 
-Users with administrative roles, content developer permissions, or contributor designation on the MSEL can see this option. They can continue developing the current MSEL or create a new one.
+If the user has an administrator role, holds the `CreateMsels` permission, or is a contributor on any MSEL, a **Manage an Event** card is shown with the subtitle *Design and Plan Events*. Clicking the card navigates to `/build`, where the user can create, edit, delete, and open MSELs.
+
+If the user has no MSELs and no `CreateMsels` permission, the cards are replaced with a single **Nothing to see here!** card.
 
 ### Player Manage Event Page
+
+!!! note
+
+    Most invitation management now happens directly from the MSEL's [Invitations](#invitations) tab in Blueprint. The Player Manage Event application described below is still used by participants after a launched event is running, but MSEL owners typically create and manage invitations in Blueprint before launch.
 
 When a user starts an event (as described above), Blueprint adds a **Manage Event** application to the left side panel of the Player view. The Manage Event application lets the user change the event end time, end the event, and invite others to join.
 
@@ -315,16 +319,14 @@ To end an event, follow these steps:
 
 The MSEL Catalog shows created MSELs. Users can select a MSEL to work on, create a new one, and delete an existing one.
 
-<!-- TODO: Replace screenshot with version without numbered callout markers -->
-![Blueprint Dashboard OE](img/blueprintDashboard-v4.png)
+![Blueprint MSEL Catalog](img/blueprintDashboard-v4.png)
 
-#### Add Blank MSEL
+#### Create or Upload a MSEL
 
-Blueprint lets users create a MSEL from scratch directly in the application. This removes the hassle of Excel and makes visualizing information easier.
+Two actions are available in the MSEL list table header:
 
-#### Upload an Existing MSEL
-
-Users can upload a pre-existing MSEL and continue editing it in the application. This is useful to share existing MSEL work without having to add information to a blank MSEL one by one.
+- **Add blank MSEL** (**+** icon): creates a new MSEL with default settings. The new MSEL appears with status `Pending` and a description such as "Created from Default Settings by [username]".
+- **Upload a new MSEL from a file** (upload icon): opens a file chooser. Select an `.xlsx` file to create a new MSEL from its contents.
 
 #### Filter Display
 
@@ -336,47 +338,35 @@ Filter MSELs by categorization. Options are: All Types, Templates, and Not Templ
 
 ##### Statuses
 
-Filter MSELs by current status. Options are: All Statuses, Pending, Entered, Approved, and Completed.
+Filter MSELs by current status. Options are: `All Statuses`, `Pending`, `Entered`, `Approved`, `Deployed`, and `Completed`.
+
+!!! note
+
+    The filter dropdown uses `Completed` (past tense). The MSEL Status dropdown on the Config tab (see [Basic Information](#basic-information)) uses `Complete` and also exposes `Archived`. Both names refer to the same lifecycle state; the filter simply does not expose Archived MSELs by default.
 
 ##### Search
 
 Search for a specific MSEL by name.
 
-#### Load All MSELs
+The MSEL list header also exposes:
 
-Users with the appropriate administrative permissions can load and view all MSELs created.
+- **Show only MSELs I own or have access to** toggle (funnel icon with subtitle **All MSELs** / **My MSELs**): for admins, switches between viewing every MSEL and only MSELs the user owns or contributes to.
+- **Administration** gear: opens the Administration View (see [Administrator Guide](#administrator-guide)).
 
-#### Gear
+#### MSEL Row Actions
 
-Users with the appropriate administrative permissions can use the **Gear** icon to access Blueprint's administrative settings.
+Each MSEL row in the catalog exposes four icon buttons in the first column:
 
-#### Manage MSEL
+- **Download** (down-arrow icon): exports the MSEL as a `.xlsx` file.
+- **Upload .xlsx file to [MSEL name]** (up-arrow icon): replaces the MSEL's contents with data from the chosen file.
+- **Delete [MSEL name]** (trash can icon): permanently removes the MSEL and its associated data. Template MSELs cannot be deleted; the trash can is disabled for them.
+- **Copy [MSEL name]** (copy icon): duplicates the MSEL into a new, editable copy.
 
-Click a MSEL card to open it. The following actions are available from the MSEL card.
-
-#### Download
-
-Users can download a copy of any MSEL for offline use. Offline work is not recommended as users will miss Blueprint's features and updates.
-
-#### Upload
-
-The Upload feature updates the MSEL card with information from a new `.xlsx` file, replacing all existing content.
+Click the MSEL's name (a link in the Name column) to open it for editing.
 
 !!! important
 
     When importing MSELs into Blueprint, verify that events and settings align with your preferences. Some fields may require reconfiguration after import.
-
-#### Delete
-
-The Delete feature removes an existing MSEL card and all associated information.
-
-#### Copy
-
-The Copy feature duplicates an existing MSEL card. Use this to modify a copy instead of the original.
-
-#### MSEL Cards
-
-Click a MSEL card to view its information. Users can edit or update existing information, and changes appear live for all collaborators.
 
 ### MSEL Definition
 
@@ -396,22 +386,42 @@ To edit the MSEL's basic information and configuration, follow these steps:
 
 #### Data Format Table
 
-| Field                            | Data Type     | Description                                                                                          | Example                             |
-| -------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| **Name**                         | String        | Name of the MSEL                                                                                     | Hurricane Delta MSEL                |
-| **Description**                  | String        | Details and/or characteristics of the MSEL                                                           | Hurricane Delta Fort Myers Scenario |
-| **Start Date/Time**              | Datetime      | Start date/time of the MSEL                                                                          | 09/10/2024 20:00:00                 |
-| **End Date/Time**                | Datetime      | End date/time of the MSEL                                                                            | 10/10/2024 08:00:00                 |
-| **Is a Template**                | Boolean       | Designate if this MSEL should be a system template                                                   | True                                |
-| **Integrate Player**             | Boolean       | Add Player integration functionality to the MSEL                                                     | True                                |
-| **Integrate Gallery**            | Boolean       | Add Gallery integration functionality to the MSEL                                                    | True                                |
-| **Integrate CITE**               | Boolean       | Add CITE integration functionality to the MSEL                                                       | True                                |
-| **Select Scoring Model**         | Dropdown Text | Select a CITE Scoring Model                                                                          | `CISA NCISS`                        |
-| **Integrate Steamfitter**        | Boolean       | Add Steamfitter integration functionality to the MSEL                                                | False                               |
-| **MSEL Status**                  | Dropdown Text | Select MSEL status designation                                                                       | Active                              |
-| **Header Row Metadata (Height)** | Integer       | An integer value that defines the height of the header row when exporting this MSEL as an .xlsx file | 30                                  |
+| Field | Data Type | Description | Example |
+| --- | --- | --- | --- |
+| **Name** | String (max 70 characters) | Name of the MSEL | `Hurricane Delta MSEL` |
+| **Description** | String (max 600 characters) | Details and/or characteristics of the MSEL | `Hurricane Delta Fort Myers Scenario` |
+| **Is a Template** | Boolean | Marks this MSEL as a reusable template for creating new MSELs. Template MSELs cannot be deleted. | `True` |
+| **Set a Start Time** | Boolean | When checked, exposes a **Start Date / Time** picker and schedules a specific start moment for the MSEL. When unchecked, the MSEL is open-ended. | `True` |
+| **Start Date / Time** | Datetime | Start date/time of the MSEL (only visible when **Set a Start Time** is checked). | `09/10/2024 20:00:00` |
+| **Duration (d / h / m)** | Integer × 3 | End time relative to the start, expressed as days / hours / minutes. Click **+** to increment or type directly into each field. | `1 d 12 h 00 m` |
+| **Applications to Integrate** | Boolean checkboxes | Enable any of: Player, Gallery, CITE, Steamfitter. Enabling an integration activates additional MSEL sidebar tabs for that app. | Player: `True`, CITE: `True` |
+| **MSEL Status** | Dropdown | MSEL lifecycle state: `Pending`, `Entered`, `Approved`, `Deployed`, `Complete`, `Archived`. | `Approved` |
+| **Header Row Metadata (Height)** | Integer | Height of the header row when exporting this MSEL to `.xlsx`. | `30` |
+| **Difficulty Rating** | Dropdown | Metadata tag describing the exercise's difficulty. | (per framework) |
+| **Exercise Purpose** | Dropdown | Metadata tag describing why the exercise is being run. | (per framework) |
+| **Exercise Mode** | Dropdown | Metadata tag describing how the exercise is delivered. | (per framework) |
+| **Subject** | String | Free-text subject tags. | `incident response, network defense` |
+| **Keywords** | String | Searchable keyword tags. | `ransomware, financial services` |
+| **Date Created** | Date (read-only) | Date this MSEL was first saved. | `2026-05-08` |
+| **Created By** | String (read-only) | Name of the user who created this MSEL. | `Admin User` |
 
-To save these settings, click the **checkmark** at the top.
+To save Config-tab changes, click **Save Changes** at the top of the tab. **Cancel Changes** reverts unsaved edits. Both buttons are disabled until a change is made.
+
+#### Direct-Access URLs
+
+The Config tab exposes three copyable, shareable URLs. Each row shows a **Copy** (clipboard) button and a direct link.
+
+- **Exercise View URL** (`http://<host>/msel/{mselId}/view`): use this URL for direct read-only access to the Exercise MSEL (see [Exercise View](#exercise-view)).
+- **MSEL Starter URL** (`http://<host>/starter/?msel={mselId}`): use this URL for direct access to edit the Scenario Events list in starter mode.
+- **Assessor View URL** (`http://<host>/assess/?msel={mselId}`): use this URL for direct access to the Assessor View (see [Assessor View](#assessor-view)).
+
+#### Associating Competencies with a MSEL
+
+The Config tab includes a **Competencies** row that points the user at the MSEL's [Competencies](#competencies) tab, where a competency framework can be attached to the MSEL.
+
+#### Metadata
+
+The **Metadata** block on the Config tab captures non-functional descriptors that help with searching and filtering MSEL catalogs: **Difficulty Rating**, **Exercise Purpose**, **Exercise Mode**, **Subject** (free text), and **Keywords** (free text).
 
 #### Integrations
 
@@ -419,9 +429,9 @@ To save these settings, click the **checkmark** at the top.
 - **[CITE](#glossary):** Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL. To learn more about this integration, reference the [CITE](#cite) section.
 - **[Player](#glossary) & [Steamfitter](#glossary):** Blueprint will automate the adding of events specified on the MSEL, as well as configure exercise details in Player.
 
-#### Add Page
+#### MSEL Pages
 
-On this tab, users can add notes to the MSEL for team members with the appropriate permissions to work on and access.
+Beyond the **Config** section, the **Info** tab is a container for user-authored notes pages. Click **Add Page** on the Info tab to create a new page; each page can be restricted to elevated users or exposed to every MSEL user.
 
 ![Blueprint Notes Tab OE](img/blueprintNotes-v3.png)
 
@@ -472,6 +482,24 @@ The available roles are:
 - **[`Owner`](#glossary):** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g., Add Teams, Add Integrations, Events).
 - **[`Evaluator`](#glossary):** Manages the exercise, can advance moves, execute events, and check events as completed.
 - **[`Viewer`](#glossary):** Can view the MSEL, but can't edit it.
+
+#### Competencies
+
+On the **Competencies** tab, MSEL owners attach a competency framework (defined in the Administration Competencies page) and select which work roles, tasks, and specific knowledge, skills, and abilities apply to the MSEL. Selected competencies can then be associated with teams and scenario events, enabling assessment during the Assessor View.
+
+##### Select a Competency Framework
+
+1. Navigate to the **Competencies** tab.
+2. In **Competency Framework**, select a framework from the dropdown. If no frameworks appear, define one in the Administration Competencies page.
+
+##### Add Competencies to the MSEL
+
+1. Expand the **Add Competencies** region.
+2. Browse work roles and competencies from the selected framework and select the items that apply to this MSEL.
+
+##### View MSEL Competencies
+
+Expand the **MSEL Competencies** region to see the table of competencies associated with the MSEL. Columns include **ID**, **Type**, **Framework**, **Name**, **Teams**, and **Events**. Use the search box to filter by name.
 
 #### Teams
 
@@ -779,6 +807,20 @@ To search for a specific event, follow these steps:
 While the **Events** tab lets MSEL owners and content developers manage events, the **Exercise View** tab gives participants read-only access to track current and future events during an exercise.
 
 ![Blueprint Exercise View OE](img/blueprintExerciseView-v3.png)
+
+#### Assessor View
+
+The **Assessor View** tab gives Evaluators read-only access to the MSEL during a live exercise for the purpose of recording assessment outcomes. It is accessible directly via the **Assessor View URL** on the Config tab (`/assess/?msel={mselId}`).
+
+#### MSEL Playbook
+
+The **MSEL Playbook** tab presents scenario events in a printable, page-at-a-time layout intended for offline reference by exercise controllers.
+
+Each event page shows: **Execution Time** (absolute + offset), **Move**, **Group**, **Integration Target**, **Control Number**, **Simulated Time**, **Status**, **Summary**, **From Org**, **To Org**, **Card Id**, **Source Type**, **Source Name**, **Delivery Method**, and the **Description** with rendered rich-text content.
+
+Pagination controls (**Previous page**, **Next page**, **Items per page**) appear at the top; the default is one event per page. Visual indicators mark the transition between moves.
+
+Click **Print MSEL Playbook** to open the browser's print dialog with only the playbook content in the printable area.
 
 #### Invitations
 
@@ -1162,7 +1204,11 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **`Approver` Role:** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
 
+**Assessor View:** Read-only MSEL view used by Evaluators during an exercise to record assessment outcomes. Directly accessible via the Assessor View URL on the Config tab.
+
 **Blueprint**: Web application created to make the development of a MSEL and events easier.
+
+**Catalog:** A reusable, named collection of scenario events associated with a specific inject type. Catalogs are defined in Administration → Catalogs and can be pulled into MSELs.
 
 **CITE:** Web application that allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents.
 
@@ -1170,11 +1216,17 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **`CITE` Role:** Provide a set of responsibilities assigned to a user during an exercise.
 
+**Competency:** A work role, task, knowledge, skill, or ability that comes from a competency framework and can be attached to a MSEL, a team, or a scenario event.
+
+**Competency Framework:** A named collection of competencies (for example, NICE Framework) defined in Administration → Competencies and linked to a proficiency scale.
+
 **Content Developer Permission:** Can view, edit, create, and approve events on the MSEL.
 
 **Data Fields:** Structured components containing essential information about the event's characteristics, context, and implications.
 
 **`Editor` Role:** Can edit the events assigned to them by the MSEL owner, but not other events. They cannot delete events or create new events.
+
+**Event Dashboard:** Blueprint's homepage. Presents up to three cards (Join an Event, Start an Event, Manage an Event) tailored to the user's permissions.
 
 **Events**: Specific scenario events or messages within the scenario that prompt users to implement designated actions.
 
@@ -1186,7 +1238,11 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **Gallery Card:** The Gallery wall displays Gallery cards. Each Gallery card represents an article category. Cards show a background color based on the most recent article's status and the number of unread articles. Content developers define cards within each Gallery collection.
 
+**Group:** A named collection of users defined in Administration → Groups. Used for bulk permission management.
+
 **`Incrementer` Role:** When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.
+
+**Inject Type:** A named template describing the structure and data fields for a category of scenario events. Defined in Administration → Inject Types.
 
 **`Inviter` Role:** This role will allow a user to invite others to the MSEL event.
 
@@ -1197,6 +1253,8 @@ This glossary defines key terms and concepts used in the Blueprint application.
 **Moves:** A defined period of time during an exercise, where exercise organizers distribute a series of events for users to discuss and assess current incident severity.
 
 **MSEL:** (Master Scenario Events List) provides a timeline for all expected events, affiliated users and organizations during an exercise.
+
+**MSEL Playbook:** A printable, paginated view of a MSEL's scenario events intended for use by exercise controllers.
 
 **`Observer` Role:** When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
 
@@ -1209,6 +1267,8 @@ This glossary defines key terms and concepts used in the Blueprint application.
 **Player Apps:** List of applications accessible from the same Player view.
 
 **Player View:** These are the settings associated with building a view. You can edit, clone, and delete a view.
+
+**Proficiency Scale:** A reusable, named set of performance levels (for example, Novice, Intermediate, Advanced, Expert) attached to a competency framework.
 
 **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
 
