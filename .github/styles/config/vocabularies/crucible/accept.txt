@@ -86,3 +86,5 @@ ATX
 CISA
 (?i)Facil
 HTML
+(?i)allowlist(?:s|ing)?
+(?i)blocklist(?:s|ing)?
