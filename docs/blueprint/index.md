@@ -756,9 +756,8 @@ To edit the event's details, follow these steps:
 
 1. Navigate to the **Events** tab.
 2. Select the event you want to edit and click the **Hamburger** icon next to it.
-3. Click **Edit**.
-4. The system opens the same edit component used when creating a new event.
-5. Make your changes, then click **Save**.
+3. Click **Edit**. The system opens the same edit component used when creating a new event.
+4. Make your changes, then click **Save**.
 
 ##### Delete an Event
 
@@ -815,9 +814,8 @@ After you've added all desired configurations, click **Save**.
 To edit an invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
-2. Select the invitation you want to edit and click **Edit**.
-3. The system opens the same edit component used when creating a new invitation.
-4. Make your changes, then click **Save**.
+2. Select the invitation you want to edit and click **Edit**. The system opens the same edit component used when creating a new invitation.
+3. Make your changes, then click **Save**.
 
 ##### Delete an Invitation
 
@@ -902,9 +900,8 @@ After you've added all desired configurations, click **Save**.
 To edit the CITE Action's details, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
-2. Select the action you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new action.
-4. Make your changes, then click **Save**.
+2. Select the action you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new action.
+3. Make your changes, then click **Save**.
 
 ##### Delete a CITE Action
 
@@ -957,9 +954,8 @@ After you've added all desired configurations, click **Save**.
 To edit the CITE Role's details, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
-2. Select the role you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new role.
-4. Make your changes, then click **Save**.
+2. Select the role you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new role.
+3. Make your changes, then click **Save**.
 
 ##### Delete a CITE Role
 
@@ -1049,9 +1045,8 @@ After you've added all desired configurations, click **Save**.
 To edit a Gallery card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
-2. Select the card you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new card.
-4. Make your changes, then click **Save**.
+2. Select the card you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new card.
+3. Make your changes, then click **Save**.
 
 ##### Delete a Gallery Card
 
@@ -1116,9 +1111,8 @@ After you've added all desired configurations, click **Save**.
 To edit a Player app, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Select the app you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new app.
-4. Make your changes, then click **Save**.
+2. Select the app you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new app.
+3. Make your changes, then click **Save**.
 
 ##### Delete a Player App
 
