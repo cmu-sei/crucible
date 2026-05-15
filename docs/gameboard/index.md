@@ -1116,7 +1116,7 @@ Search by entering terms. Search covers ticket description, label, user, challen
 
 This section focuses on "support staff"—the people who resolve customer service and technical support issues during a game. In this documentation, "support staff" refers to users who hold the `Support` role or another role (such as `Admin` or `Director`) that permits them to edit support settings, manage tickets, and view tickets.
 
-##### Creating New support Ticket (Support Staff)
+##### Creating New Support Ticket (Support Staff)
 
 Support staff create tickets by following almost the same steps that participants use (see above). After support staff create a ticket, they have additional options to manage it.
 
@@ -1185,7 +1185,7 @@ Each report shares common characteristics.
 
 ![three-dot context menu](img/reports-3dot-context.png)
 
-#### Drilling down in Results
+#### Viewing Detailed Report Data
 
 In some places in the report results, you can "drill down" by clicking a link in the metrics. A modal window displays a more granular view within the same data. For example: in the Enrollment Report, in the Performance category, some data points are links. See *screenshot 1* below. Clicking that link goes deeper into that element. See *screenshot 2* below.
 

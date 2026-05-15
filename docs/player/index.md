@@ -389,7 +389,7 @@ The procedures below show you how to:
 
 Procedures assume you are in the Player VM Console app.
 
-#### From local to Player VM
+#### From Local to Player VM
 
 !!! info
 
@@ -401,7 +401,7 @@ Procedures assume you are in the Player VM Console app.
 4. Select where in the virtual machine you want the copied text to go (this can be a new file or an open application).
 5. At the top of the Player window, click **Paste**. This inserts the copied text into the virtual machine.
 
-#### From Player VM to local
+#### From Player VM to Local
 
 1. In the Player VM Console app, select the virtual machine that you want.
 2. On the virtual machine, select the text you would like to copy. Copy your text first to the virtual machine's clipboard (how you do this depends upon the application you're using).
@@ -419,7 +419,7 @@ The procedures below show you how to remotely power a VM on or off from within t
 
 Player's VM Console app supports file transfers between your local machine and virtual machines.
 
-#### Upload from local to VM
+#### Upload from Local to VM
 
 These procedures describe how to upload files from a local machine (an *out-of-game* computer) to a virtual machine in the Player VM Console app. You should use the **Send File to VM** option to upload small files.
 

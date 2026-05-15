@@ -558,7 +558,7 @@ To edit an existing Data Field, follow these steps:
 2. Select the data field you wish to edit and click **Edit** to make any changes to the existing configurations.
 3. After making all necessary changes, click the **checkmark** to save them.
 
-##### Search For a Data Field
+##### Search for a Data Field
 
 To search for a specific Data Field, follow these steps:
 
@@ -571,7 +571,7 @@ On this tab, users add all related [organizations](#glossary) (with their inform
 
 ![Blueprint Organizations Tab OE](img/blueprintOrganizations-v4.png)
 
-##### Add an Organization Card From Scratch
+##### Add an Organization Card from Scratch
 
 ![Blueprint Add Organization OE](img/blueprintAddOrganization-v2.png)
 
@@ -594,7 +594,7 @@ To add an Organization Card from scratch, follow these steps:
 
 After you've added all desired configurations, click **Save**.
 
-##### Add an Organization Card From Template
+##### Add an Organization Card from Template
 
 To create an organization from a template, follow these steps:
 
@@ -1060,7 +1060,7 @@ To delete a Gallery card, follow these steps:
 1. Navigate to the **Gallery Cards** tab.
 2. Select the card you want to delete and click the **Trash Can** next to it.
 
-##### Search For a Gallery Card
+##### Search for a Gallery Card
 
 To search for a specific card, follow these steps:
 
