@@ -74,7 +74,7 @@ Store images, icons, and media files in [docs/assets/](docs/assets/). Use relati
 
 ## Linting and Tooling
 
-Vale and Markdownlint are used to enforce style and formatting rules. All edits made should ensure that all linting checks pass. Fix linting errors that you introduce by editing the text, rather than defaulting to editing a linting rule. Only edit linting rules if absolutely necessary - any linting rule edits should be explained (why did the rule have to change instead of the edited text).
+Vale and markdownlint enforce style and formatting rules. All edits made should ensure that all linting checks pass. Fix linting errors that you introduce by editing the text, rather than defaulting to editing a linting rule. Only edit linting rules if absolutely necessary - explain any linting rule edits (why did the rule have to change instead of the edited text).
 
 ### Vale Prose Linting
 
