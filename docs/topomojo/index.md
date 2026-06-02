@@ -157,7 +157,7 @@ To add a template to your workspace:
 The list below explains the fields in the VM template.
 
 - **Name:** The **name** of the VM must be unique within the workspace and should be descriptive of the resource.
-- **Description:** A short description of the VM. It is best practice to include the credentials and purpose for the VM. The description is not visible to users playing the lab - it is only visible in the workspace editor.
+- **Description:** A short description of the VM. Include the credentials and purpose for the VM. The description is not visible to participants; it is only visible in the workspace editor.
 - **Networks:** A space-delimited list of networks on which the VM will have a network interface. These names should be the same for all systems in your lab that need to connect to the same network. TopoMojo creates the networks on the hypervisor when it deploys the VM/lab.
 - **Guest Settings:** Key-value pairs in the form of `key=value` to pass data into deployed VMs via [VMware guestinfo variables](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/tools/12-5-0/vmware-tools-administration-12-5-0/configuring-vmware-tools-components/using-vmware-tools-configuration-utility/view-virtual-machine-status-information/query-information-using-guestinfo-variable.html) or the [QEMU Firmware Configuration Device](https://www.qemu.org/docs/master/specs/fw*cfg.html) for Proxmox. The *key* is the name of the guest setting. For example, `var1=test` is a guest setting named "var1" with a value of "test". You can randomize guest settings values using [TopoMojo Transforms](#transforms).
 
@@ -165,13 +165,20 @@ The list below explains the fields in the VM template.
 
   ![using the vmtoolsd command](img/vmware-tools.png)
 
-  When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (`fw*cfg`) Device](https://www.qemu.org/docs/master/specs/fw*cfg.html) with commands similar to the following, where `variable` is the key of the Guest Setting to read: `sudo cat /sys/firmware/qemu*fw*cfg/by_name/opt/guestinfo.variable/raw`
+  When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (`fw_cfg`) Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) with a command similar to the following, where `variable` is the key of the guest setting to read:
+
+  ```bash
+  sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.variable/raw
+  ```
 
 - **Replicas:** Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a *gamespace*, set **Replicas** to "3". To deploy one copy of the VM template for each member of the team owning the gamespace, set **Replicas** to "-1".
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.
-- **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine.
-- **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access. *Note: These VMs may still be visible/accessible over the network - users just aren't able to click into a console via the lab interface.*
-- **Linked:** *Unlinking* creates a new a new clone of the template which you can save and customize. **Unlink** any virtual machine that will not use the default disk included with the template (i.e., you need to save changes to the VM).
+- **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine. Common use: attach an OS installer ISO for a blank disk template, or mount utilities during setup. See [Installing an Operating System from an ISO](../tutorials/topomojo-challenge/index.md#installing-an-operating-system-from-an-iso).
+- **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access.
+
+  !!! note
+      These VMs may still be accessible over the network; participants just cannot open a console via the lab interface.
+- **Linked:** *Unlinking* creates a new clone of the template which you can save and customize. **Unlink** any virtual machine that will not use the default disk included with the template (i.e., you need to save changes to the VM).
 - **Delete Template:** Deletes the template from the workspace.
 
 #### Refresh and Deploy
