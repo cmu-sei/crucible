@@ -143,6 +143,8 @@ A typical TopoMojo deployment contains several types of templates.
 
 Administrators can publish individual templates (e.g., a stand-alone base install of Kali Linux). They can also publish a "template set" of multiple VMs serving as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, etc.).
 
+TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are workspace-specific and only available within the workspace where the user created them. Administrators manage published templates from the [Templates Tab](#templates-tab) in the Administrator Guide.
+
 #### Adding and Editing Templates
 
 To add a template to your workspace:
