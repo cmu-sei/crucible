@@ -418,7 +418,35 @@ Filter for all templates from a workspace by clicking the *name* of the of the w
 
 #### Template Properties
 
-See [Template Field Definitions](#template-field-definitions) for details on template configuration.
+The **Templates** tab in the Administrator Guide displays template metadata and configuration. The **Detail** field contains the raw JSON configuration TopoMojo passes to the hypervisor when deploying the VM.
+
+!!! note
+    The Detail field hint text reads: "Advanced configuration. Keep valid JSON to avoid errors."
+
+##### Template Detail JSON
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `Id` | string | Unique identifier for the VM. Null by default. |
+| `Name` | string | Name of the VM. |
+| `TopoId` | string | Topology reference identifier. Null by default. |
+| `Cpu` | string | Processor specification in `sockets x cores` format (for example, `1x2`, `2x4`). Numeric values are not valid. |
+| `Guest` | string | Guest OS type. Null by default. |
+| `Source` | string | Source reference for the VM. Null by default. |
+| `Iso` | string | ISO image path. Format depends on hypervisor (for example, `local:iso/file.iso` for Proxmox, `[datastore] path.iso` for vSphere). |
+| `Floppy` | string | Floppy image path. Null by default. |
+| `Version` | string | Version identifier. Null by default. |
+| `IsolationTag` | string | Network isolation tag for security segmentation. Null by default. |
+| `HostAffinity` | Boolean | When `true`, pins the VM to a specific hypervisor host. Defaults to `false`. |
+| `UseUplinkSwitch` | Boolean | When `true`, connects the VM to the uplink network for external connectivity. Defaults to `false`. |
+| `Ram` | integer | Memory in whole gigabytes (for example, `1`, `2`, `4`). Fractional values are not supported and will cause a generic error. |
+| `VideoRam` | integer | Video memory in MB. Set to `0` to use the hypervisor default. |
+| `Adapters` | integer | Number of network adapters. |
+| `Delay` | integer | Start-up delay in seconds. Use to stagger VM start-up order. |
+| `AutoStart` | Boolean | When `true` (default), the VM starts automatically on gamespace deploy. |
+| `Eth` | array | Array of network interface objects. Each object contains: `Id` (integer), `Net` (string, network name), `Key` (string), `Type` (string, for example `e1000`), `Mac` (string), `Ip` (string), `Vlan` (integer, `0` = none). |
+| `Disks` | array | Array of disk objects. Each object contains: `Id` (integer), `Path` (string), `Source` (string), `Controller` (string, for example `lsilogic`), `Size` (integer, GB), `Status` (integer). |
+| `GuestSettings` | array | Guest configuration as an array of key-value objects (for example, `[{"Key": "token1", "Value": "##token1##"}]`). Null when not configured. |
 
 ### Machines Tab
 

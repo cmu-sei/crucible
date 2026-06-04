@@ -88,3 +88,4 @@ CISA
 HTML
 (?i)allowlist(?:s|ing)?
 (?i)blocklist(?:s|ing)?
+(?i)uplink(?:s)?
