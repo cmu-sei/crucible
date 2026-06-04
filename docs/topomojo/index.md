@@ -450,6 +450,16 @@ The **Templates** tab in the Administrator Guide displays template metadata and 
 | `Disks` | array | Array of disk objects. Each object contains: `Id` (integer), `Path` (string), `Source` (string), `Controller` (string, for example `lsilogic`), `Size` (integer, GB), `Status` (integer). |
 | `GuestSettings` | array | Guest configuration as an array of key-value objects (for example, `[{"Key": "token1", "Value": "##token1##"}]`). Null when not configured. |
 
+#### Common Template Errors
+
+| Error | Likely Cause | Solution |
+| --- | --- | --- |
+| Generic "Error" with no details | Invalid RAM value (decimal such as `0.5` or `1.5`) | Use a whole number integer: `1`, `2`, `4` |
+| Generic "Error" with no details | Invalid CPU format (numeric value such as `1` or `2`) | Use string format: `1x1`, `1x2` |
+| `invalid token value!` | Hypervisor authentication failed | Check `Pod__AccessToken` configuration |
+| HTTP 405 Method Not Allowed | Wrong endpoint for the operation | Use `POST /api/template-detail` for new templates |
+| HTTP 500 Internal Server Error | Hypervisor template not found | Verify the `Template` name matches the VM name on the hypervisor |
+
 ### Machines Tab
 
 This tab lists VMs TopoMojo is tracking for all workspaces and gamespaces.
