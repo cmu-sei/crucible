@@ -427,6 +427,11 @@ The **Templates** tab in the Administrator Guide displays template metadata and 
 
 ##### Template Detail JSON
 
+!!! warning "Common Configuration Mistakes"
+    - **RAM** must be a whole number integer (`1`, `2`, `4`). Decimal values such as `0.5` save without error but cause a generic "Error" at deploy time.
+    - **CPU** must be a string in `sockets x cores` format (`1x1`, `1x2`). Numeric values such as `1` or `2` cause the same generic error at deploy time.
+    - **Disks `Size`** must be an integer representing gigabytes (`10`, `20`). String values such as `"10G"` cause a JSON parse error at save time.
+
 | Field | Type | Description |
 | --- | --- | --- |
 | `Id` | string | Unique identifier for the VM. Null by default. |
