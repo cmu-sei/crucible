@@ -432,28 +432,62 @@ The **Templates** tab in the Administrator Guide displays template metadata and 
     - **CPU** must be a string in `sockets x cores` format (`1x1`, `1x2`). Numeric values such as `1` or `2` cause the same generic error at deploy time.
     - **Disks `Size`** must be an integer representing gigabytes (`10`, `20`). String values such as `"10G"` cause a JSON parse error at save time.
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `Id` | string | Unique identifier for the VM. Null by default. |
-| `Name` | string | Name of the VM. |
-| `TopoId` | string | Topology reference identifier. Null by default. |
-| `Cpu` | string | Processor specification in `sockets x cores` format (for example, `1x2`, `2x4`). Numeric values are not valid. |
-| `Guest` | string | Guest OS type. Null by default. |
-| `Source` | string | Source reference for the VM. Null by default. |
-| `Iso` | string | ISO image path. Format depends on hypervisor (for example, `local:iso/file.iso` for Proxmox, `[datastore] path.iso` for vSphere). |
-| `Floppy` | string | Floppy image path. Null by default. |
-| `Version` | string | Version identifier. Null by default. |
-| `IsolationTag` | string | Network isolation tag for security segmentation. Null by default. |
-| `HostAffinity` | Boolean | When `true`, pins the VM to a specific hypervisor host. Defaults to `false`. |
-| `UseUplinkSwitch` | Boolean | When `true`, connects the VM to the uplink network for external connectivity. Defaults to `false`. |
-| `Ram` | integer | Memory in whole gigabytes (for example, `1`, `2`, `4`). Fractional values are not supported and will cause a generic error. |
-| `VideoRam` | integer | Video memory in MB. Set to `0` to use the hypervisor default. |
-| `Adapters` | integer | Number of network adapters. |
-| `Delay` | integer | Start-up delay in seconds. Use to stagger VM start-up order. |
-| `AutoStart` | Boolean | When `true` (default), the VM starts automatically on gamespace deploy. |
-| `Eth` | array | Array of network interface objects. Each object contains: `Id` (integer), `Net` (string, network name), `Key` (string), `Type` (string, for example `e1000`), `Mac` (string), `Ip` (string), `Vlan` (integer, `0` = none). |
-| `Disks` | array | Array of disk objects. Each object contains: `Id` (integer), `Path` (string), `Source` (string), `Controller` (string, for example `lsilogic`), `Size` (integer, GB), `Status` (integer). |
-| `GuestSettings` | array | Guest configuration as an array of key-value objects (for example, `[{"Key": "token1", "Value": "##token1##"}]`). Null when not configured. |
+###### Top-Level Fields
+
+| Field | Type | Default | Example | Description |
+| --- | --- | --- | --- | --- |
+| `Id` | string | `null` | `null` | Internal identifier linking this spec to the template record. TopoMojo resolves the real template ID from the database, not this field. |
+| `Name` | string | `null` | `challenge-server` | The template's display name. Used to build the VM name and disk filenames at deploy time. |
+| `TopoId` | string | `null` | `a1b2c3d4-e5f6-7890-abcd-ef1234567890` | The workspace this template belongs to. `null` on a library template; set to the workspace GUID when linked to a workspace. |
+| `Cpu` | string | `1x2` | `1x2` | CPU layout as `sockets x cores-per-socket`. For example, `2x2` = 2 sockets × 2 cores = 4 virtual processors. |
+| `Guest` | string | `null` | `rhel7` | VMware guest OS identifier. A `Guest` suffix is auto-appended if missing. Tells the hypervisor which OS optimizations to use. `null` defaults to `other`. Not used by Proxmox. |
+| `Source` | string | `null` | `null` | Reference to a source template to clone disks from. Generally `null` at the template level; disk-level `Source` handles cloning. |
+| `Iso` | string | `null` | `local:iso/debian.iso` | ISO image path in datastore format (`[datastore] folder/file.iso`). `null` causes the hypervisor to substitute an empty ISO. |
+| `Floppy` | string | `null` | `null` | Floppy image path. Rarely used. vSphere only. |
+| `Version` | string | `null` | `vmx-10` | Forces a specific VMware virtual hardware version. `null` uses the platform default. Not used by Proxmox. |
+| `IsolationTag` | string | `null` | `null` | Runtime tag identifying the isolated deployment. `null` on the stored template; injected by TopoMojo at deploy time. |
+| `HostAffinity` | Boolean | `false` | `false` | When `true`, pins the VM to the same hypervisor host as the rest of its deployment. |
+| `UseUplinkSwitch` | Boolean | `false` | `false` | When `true`, attaches networks via a shared uplink switch for templates that must reach an external network. |
+| `Ram` | integer | `4` | `4` | Memory in gigabytes. Multiplied by 1024 to set MB on the VM. |
+| `VideoRam` | integer | `0` | `0` | Video memory in MB. `0` uses the hypervisor default. |
+| `Adapters` | integer | `1` | `1` | Number of network adapters. Should match the number of entries in `Eth`. |
+| `Delay` | integer | `0` | `0` | Boot delay in seconds before this VM powers on. The hypervisor enforces a minimum of 10 seconds when a delay applies. |
+| `AutoStart` | Boolean | `true` | `true` | When `true`, the VM powers on automatically when its deployment starts. |
+| `Eth` | array | One `e1000` adapter on `lan` | See `Eth[]` table | Array of network adapter definitions. |
+| `Disks` | array | One 10 GB `lsilogic` disk | See `Disks[]` table | Array of virtual disk definitions. |
+| `GuestSettings` | array | `null` | `[{"Key": "token1", "Value": "##token1##"}]` | Array of key/value pairs injected as VMware `guestinfo.*` properties. `null` when not configured. |
+| `Template` | string | `null` | `debian-template` | Proxmox only. The Proxmox source template name. `null` on vSphere templates. |
+| `ParentTemplate` | string | `null` | `null` | Proxmox only. The parent of the Proxmox source template. `null` on vSphere templates. |
+
+###### `Eth[]` - Network Adapter Entries
+
+| Field | Type | Default | Example | Description |
+| --- | --- | --- | --- | --- |
+| `Id` | integer | `0` | `0` | Index of the adapter within the VM (0-based). |
+| `Net` | string | `lan` | `lan` | Network name this adapter connects to. Combined with the `IsolationTag` at deploy time to create an isolated network per deployment. |
+| `Key` | string | `null` | `null` | Hypervisor-assigned network reference. `null` on the stored template; filled in at deploy time. |
+| `Type` | string | `e1000` | `e1000` | Virtual network interface controller hardware model: `e1000`, `e1000e`, `vmx3` (vmxnet3), or `pcnet32`. |
+| `Mac` | string | `null` | `null` | Media Access Control address. `null` means the hypervisor auto-assigns one. |
+| `Ip` | string | `null` | `null` | Informational IP annotation. Not used to configure the guest OS. |
+| `Vlan` | integer | `0` | `0` | Explicit VLAN ID. `0` means no fixed VLAN; TopoMojo manages isolation dynamically. |
+
+###### `Disks[]` - Virtual Disk Entries
+
+| Field | Type | Default | Example | Description |
+| --- | --- | --- | --- | --- |
+| `Id` | integer | `0` | `0` | Index of the disk within the VM (0-based). |
+| `Path` | string | Derived | `[ds] 00000000-0000-0000-0000-000000000000/blank-20g.vmdk` | Disk location in datastore format. Derived from the workspace and template IDs at deploy time. |
+| `Source` | string | Derived | `[ds] .../base-disk.vmdk` | Parent disk this disk originates from. Empty if no parent. |
+| `Controller` | string | `lsilogic` | `lsilogic` | Disk controller type: `lsilogic`, `lsilogic-sas`, `pvscsi`, `buslogic`, or `ide`. |
+| `Size` | integer | `10` | `10` | Disk size in gigabytes. |
+| `Status` | integer | `0` | `0` | Internal provisioning state flag. Always `0` in the stored detail. |
+
+###### `GuestSettings[]` - Guest Customization Entries
+
+| Field | Type | Example | Description |
+| --- | --- | --- | --- |
+| `Key` | string | `token1` | The `guestinfo.*` property name. Auto-prefixed with `guestinfo.` if omitted. Special keys: `firmware` (`efi` switches to Extensible Firmware Interface boot), `vhv.enable` (`true` enables nested virtualization), `iftag.*` (applied only when matching the `IsolationTag`). |
+| `Value` | string | `##token1##` | The value delivered for that property. |
 
 #### Common Template Errors
 
