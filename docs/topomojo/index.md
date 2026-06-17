@@ -442,7 +442,7 @@ The **Templates** tab in the Administrator Guide displays template metadata and 
 | `Cpu` | string | `1x2` | `1x2` | CPU layout as `sockets x cores-per-socket`. For example, `2x2` = 2 sockets × 2 cores = 4 virtual processors. |
 | `Guest` | string | `null` | `rhel7` | VMware guest OS identifier. A `Guest` suffix is auto-appended if missing. Tells the hypervisor which OS optimizations to use. `null` defaults to `other`. Not used by Proxmox. |
 | `Source` | string | `null` | `null` | Reference to a source template to clone disks from. Generally `null` at the template level; disk-level `Source` handles cloning. |
-| `Iso` | string | `null` | `local:iso/debian.iso` | ISO image path in datastore format (`[datastore] folder/file.iso`). `null` causes the hypervisor to substitute an empty ISO. |
+| `Iso` | string | `null` | `local:iso/debian.iso` | ISO image path. Format is hypervisor-specific: vSphere uses `[datastore] folder/file.iso`; Proxmox uses `local:iso/file.iso`. `null` causes the hypervisor to substitute an empty ISO. |
 | `Floppy` | string | `null` | `null` | Floppy image path. Rarely used. vSphere only. |
 | `Version` | string | `null` | `vmx-10` | Forces a specific VMware virtual hardware version. `null` uses the platform default. Not used by Proxmox. |
 | `IsolationTag` | string | `null` | `null` | Runtime tag identifying the isolated deployment. `null` on the stored template; injected by TopoMojo at deploy time. |
