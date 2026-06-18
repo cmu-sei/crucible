@@ -78,7 +78,7 @@ To remove a user from a unit, under **Unit Users**, find the user and click **Re
 
 #### Data Fields
 
-The Data Fields page lists all data field templates available for use in MSEL scenario events. Data fields define the columns that appear on a MSEL - similar to column headers in a spreadsheet. The **Info** and **Facil** checkboxes control whether the field displays for information events and facilitation events, respectively. Content developers can pull these templates into a MSEL from the [Data Fields](#data-fields-1) tab.
+The Data Fields page lists all data field templates available for use in MSEL scenario events. Data fields define the columns that appear on a MSEL - similar to column headers in a spreadsheet. The **Info** and **Facil** checkboxes control whether the field displays for information events and facilitation events, respectively. Content developers can pull these templates into a MSEL from the **Data Fields** tab.
 
 ##### Add a Data Field Template
 
@@ -133,7 +133,7 @@ The Catalogs page lists all catalog templates available for use in MSELs. A cata
 
 #### Organizations
 
-The Organizations page lists all organization templates available for use in MSELs. An organization template defines a reusable entity  -  such as a government agency, company, or media outlet  -  that can be added to MSEL events. Content developers can pull these templates into a MSEL from the [Organizations](#organizations-1) tab.
+The Organizations page lists all organization templates available for use in MSELs. An organization template defines a reusable entity  -  such as a government agency, company, or media outlet  -  that can be added to MSEL events. Content developers can pull these templates into a MSEL from the **Organizations** tab.
 
 ##### Add an Organization Template
 
@@ -153,7 +153,7 @@ The Organizations page lists all organization templates available for use in MSE
 
 #### Gallery Cards
 
-The Gallery Cards page lists all Gallery card templates available for use in MSELs. A Gallery card template defines a reusable card category that can be pushed to Gallery during an exercise. Content developers can pull these templates into a MSEL from the [Gallery Cards](#gallery-cards-1) tab.
+The Gallery Cards page lists all Gallery card templates available for use in MSELs. A Gallery card template defines a reusable card category that can be pushed to Gallery during an exercise. Content developers can pull these templates into a MSEL from the **Gallery Cards** tab.
 
 ##### Add a Gallery Card Template
 
@@ -170,7 +170,7 @@ The Gallery Cards page lists all Gallery card templates available for use in MSE
 
 #### CITE Actions
 
-The CITE Actions page lists all CITE action templates available for use in MSELs. A CITE action template defines a reusable task that teams complete during an exercise. Content developers can pull these templates into a MSEL from the [CITE Actions](#cite-actions-1) tab.
+The CITE Actions page lists all CITE action templates available for use in MSELs. A CITE action template defines a reusable task that teams complete during an exercise. Content developers can pull these templates into a MSEL from the **CITE Actions** tab.
 
 ##### Add a CITE Action Template
 

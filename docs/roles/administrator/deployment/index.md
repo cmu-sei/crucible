@@ -84,4 +84,4 @@ Refer to the [Troubleshooting Playbook](../troubleshooting/index.md) for procedu
 For deployment security considerations, see:
 
 - [Security and Compliance Checklist](../security/index.md): TLS configuration, network policies, audit logging
-- [Installation Guide SSL/TLS Section](../../../install/index.md#certificates): Certificate setup procedures
+- [Installation Guide](../../../install/index.md): Certificate setup procedures
