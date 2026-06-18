@@ -88,3 +88,11 @@ CISA
 HTML
 (?i)allowlist(?:s|ing)?
 (?i)blocklist(?:s|ing)?
+(?i)uplink(?:s)?
+HTTP(?:S)?
+(?i)lsilogic
+(?i)pvscsi
+(?i)buslogic
+(?i)pcnet\d*
+(?i)iftag
+(?i)vCPUs?
