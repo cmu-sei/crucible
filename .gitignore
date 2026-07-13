@@ -12,3 +12,6 @@ site/
 # PDF book experiment
 gallery-pdf/
 gallery-book.pdf
+
+# Update-docs planning artifacts
+plans/
