@@ -486,8 +486,22 @@ The **Templates** tab in the Administrator Guide displays template metadata and 
 
 | Field | Type | Example | Description |
 | --- | --- | --- | --- |
-| `Key` | string | `token1` | The `guestinfo.*` property name. Auto-prefixed with `guestinfo.` if omitted. Special keys: `firmware` (`efi` switches to Extensible Firmware Interface boot), `vhv.enable` (`true` enables nested virtualization), `iftag.*` (applied only when matching the `IsolationTag`). |
-| `Value` | string | `##token1##` | The value delivered for that property. |
+| `Key` | string | `token1` | Guest customization key. |
+| `Value` | string | `##token1##` | Value delivered for that key. |
+
+Special `Key` values:
+
+| Key | Value | Behavior |
+| --- | --- | --- |
+| `firmware` | `efi` | Boots the VM with Extensible Firmware Interface. |
+| `vhv.enable` | `true` | Enables nested virtualization. |
+| `iftag.*` | any string | Applies only when the prefix matches the VM `IsolationTag`. |
+| `guestinfo.metadata` | encoded cloud-init metadata | Provides cloud-init metadata for cloud-init enabled images. |
+| `guestinfo.metadata.encoding` | `base64` | Declares the encoding used for `guestinfo.metadata`. |
+| `guestinfo.userdata` | encoded cloud-init user data | Provides cloud-init user data for cloud-init enabled images. |
+| `guestinfo.userdata.encoding` | `base64` | Declares the encoding used for `guestinfo.userdata`. |
+| `guestinfo.network` | encoded cloud-init network config | Provides cloud-init network configuration for cloud-init enabled images. |
+| `guestinfo.network.encoding` | `base64` | Declares the encoding used for `guestinfo.network`. |
 
 #### Common Template Errors
 
