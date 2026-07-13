@@ -105,7 +105,7 @@ You can change the **Start** and **End** dates and times here.
 
     The scenario inherits the tasks you attached to the scenario template. If you edit them in the scenario, the changes apply only to that scenario. To update every scenario based on the template, edit the tasks in the scenario template.
 
-##### Stand-alone Tasks on the Scenario
+##### Stand-Alone Tasks on the Scenario
 
 Steamfitter provides a stand-alone Tasks page that allows users without full Steamfitter permissions to run scenario tasks and view their results. You can access this page using either `scenario/{scenarioId}` or `/view/{viewId}`.
 
@@ -148,7 +148,7 @@ If no tasks in the scenario have points assigned, the score panel does not appea
 
     In the Player view, in the left navigation pane, you can right-click the Task icon and open it in a new tab to view the full URL. This URL includes the Player view ID, which Steamfitter uses to look up and display the tasks associated with that view.
 
-##### What Happens When More Than One Scenario Uses the Same View?
+##### What Happens When More than One Scenario Uses the Same View?
 
 When more than one scenario shares the same Player view, Steamfitter can't determine which scenario's tasks to display. When this happens, the Tasks page appears blank because the system has no way to resolve the ambiguity.
 

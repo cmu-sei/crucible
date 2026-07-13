@@ -2,9 +2,26 @@
 
 ## Project Overview
 
-This is the documentation repository for Crucible. Crucible is an open source application framework developed by Carnegie Mellon University's Software Engineering Institute (SEI) for creating and managing virtual environments to support cybersecurity training, education, and exercises.
+This is the documentation repository for Crucible. Crucible is an open source application framework developed by Carnegie Mellon University's Software Engineering Institute (SEI). It supports cybersecurity training, education, and exercises by creating and managing virtual environments.
 
 The documentation site uses MkDocs with the Material theme and deploys to GitHub Pages at <https://cmu-sei.github.io/crucible/>.
+
+## Style Guide
+
+**IMPORTANT:** All documentation writing must follow the conventions in [style-guide.md](style-guide.md). Read it before drafting or editing content.
+
+The style guide covers voice and tone, page structure, headings, procedures, screenshots, formatting, lists, admonitions, glossaries, terminology, and the Oxford comma. Vale and markdownlint enforce many of these rules automatically, but the style guide is the source of truth for anything they cannot catch.
+
+Key conventions to keep in mind while writing:
+
+- Address the reader as "you." Use active voice and short sentences.
+- Do not use "please" in procedures. Lead with the action.
+- Use title case for all headings. Do not end headings with punctuation.
+- Bold UI element names. Italicize defined terms on first use. Use code formatting for filenames, paths, and field values.
+- Always use the Oxford comma.
+- Place screenshots after the step they illustrate, with descriptive alt text.
+
+When you write or edit prose in this repo, also apply these rules to any code comments, commit messages, and pull request descriptions you produce.
 
 ## Essential Commands
 
@@ -55,47 +72,32 @@ The `nav:` key in [mkdocs.yml](mkdocs.yml) defines site navigation. When adding 
 
 Store images, icons, and media files in [docs/assets/](docs/assets/). Use relative links when referencing assets from markdown files.
 
-## Writing and Style Guidelines
+## Linting and Tooling
+
+Vale and markdownlint enforce style and formatting rules. All edits made should ensure that all linting checks pass. Fix linting errors that you introduce by editing the text, rather than defaulting to editing a linting rule. Only edit linting rules if absolutely necessary - explain any linting rule edits (why did the rule have to change instead of the edited text).
 
 ### Vale Prose Linting
 
-Vale enforces writing style and terminology consistency. Configuration:
+Vale enforces the documented writing style and terminology rules.
 
-- **Config file**: [.vale.ini](.vale.ini)
-- **Custom styles**: [.github/styles/crucible/](.github/styles/crucible/)
-- **Vocabulary**: [.github/styles/config/vocabularies/crucible/accept.txt](.github/styles/config/vocabularies/crucible/accept.txt)
+- **Config file:** [.vale.ini](.vale.ini)
+- **Custom styles:** [.github/styles/crucible/](.github/styles/crucible/)
+- **Vocabulary:** [.github/styles/config/vocabularies/crucible/accept.txt](.github/styles/config/vocabularies/crucible/accept.txt)
 
-Key Vale rules to follow:
-
-- Use preferred terms (enforced in [PreferredTerms.yml](.github/styles/crucible/PreferredTerms.yml))
-- Provide alt text for all images ([AltText.yml](.github/styles/crucible/AltText.yml))
-- Use `click` not `click on` ([Click.yml](.github/styles/crucible/Click.yml))
-- Avoid passive voice where possible ([Passive.yml](.github/styles/crucible/Passive.yml))
-- Use smart quotes consistently ([SmartQuotes.yml](.github/styles/crucible/SmartQuotes.yml))
+To add a Crucible-specific term that Vale flags incorrectly, add it to the vocabulary file using the `(?i)` prefix for case-insensitive matching.
 
 ### Markdown Linting
 
-markdownlint-cli2 enforces markdown formatting standards. Configuration: [.markdownlint-cli2.yaml](.markdownlint-cli2.yaml)
-
-Key markdown rules:
-
-- Use ATX (hash-symbol) style headings (`#` characters)
-- Use dashes (`-`) for unordered lists
-- Surround headings with exactly 1 blank line above/below
-- Code blocks must specify a language (e.g., ` ```bash `)
-- Files must end with a newline
-- Use asterisks (`*`) for emphasis and bold
-- Tables must have leading/trailing pipe characters
-- No trailing whitespace
+markdownlint-cli2 enforces markdown formatting standards. Configuration: [.markdownlint-cli2.yaml](.markdownlint-cli2.yaml).
 
 ### Material for MkDocs Features
 
 This site uses Material for MkDocs extensions:
 
-- **Admonitions**: Use for call-outs (e.g., `!!! note`, `!!! warning`, `!!! abstract`)
-- **Code annotations**: Add numbered markers in code blocks
-- **Emoji**: Enabled via `:emoji_name:` syntax
-- **Syntax highlighting**: Specify language for all code blocks
+- **Admonitions:** Call-outs such as `!!! note`, `!!! warning`, and `!!! abstract`.
+- **Code annotations:** Numbered markers inside code blocks.
+- **Emoji:** Enabled via `:emoji_name:` syntax.
+- **Syntax highlighting:** Specify the language on every code block.
 
 Example admonition:
 
@@ -125,23 +127,23 @@ On pushes to `main` branch ([.github/workflows/deploy.yml](.github/workflows/dep
 
 ### Adding New Documentation
 
-1. Create markdown files in the appropriate [docs/](docs/) subdirectory
-2. Update [mkdocs.yml](mkdocs.yml) navigation if adding new sections
-3. Run `mkdocs serve` to preview changes locally
-4. Run `./lint-docs.sh` to check for linting errors before committing
-5. Fix any Vale or markdownlint errors
-6. Create a pull request (linting runs automatically in CI)
+1. Create markdown files in the appropriate [docs/](docs/) subdirectory.
+2. Update the `nav:` key in [mkdocs.yml](mkdocs.yml) if you add a new section.
+3. Run `mkdocs serve` to preview changes locally.
+4. Run `./lint-docs.sh` to check for linting errors before committing.
+5. Fix any Vale or markdownlint errors.
+6. Create a pull request. Linting runs automatically in CI.
 
 ### Modifying Existing Content
 
-1. Edit markdown files in [docs/](docs/)
-2. Preview with `mkdocs serve`
-3. Lint with `./lint-docs.sh`
-4. Commit and create pull request
+1. Edit the relevant markdown files in [docs/](docs/).
+2. Preview with `mkdocs serve`.
+3. Lint with `./lint-docs.sh`.
+4. Commit and create a pull request.
 
 ### Working with Custom Terminology
 
-If documenting new Crucible-specific terms that Vale flags incorrectly:
+If you document new Crucible-specific terms that Vale flags incorrectly:
 
-- Add accepted terms to [.github/styles/config/vocabularies/crucible/accept.txt](.github/styles/config/vocabularies/crucible/accept.txt)
-- VS Code spell checker custom words are in [.vscode/settings.json](.vscode/settings.json)
+- Add accepted terms to [.github/styles/config/vocabularies/crucible/accept.txt](.github/styles/config/vocabularies/crucible/accept.txt).
+- Add VS Code spell checker custom words to [.vscode/settings.json](.vscode/settings.json).

@@ -20,7 +20,7 @@ The following sections cover monitoring Kubernetes, application health, infrastr
 Monitor Crucible using standard Kubernetes tools:
 
 - **kubectl:** Command-line inspection and diagnostics (`kubectl get pods -A`, `kubectl describe pod <name>`, `kubectl logs <pod>`)
-- **Rancher** (if installed): Web-based cluster monitoring and management; see the [Installation Guide](../../../install/index.md#rancher)
+- **Rancher** (if installed): Web-based cluster monitoring and management; see the [Installation Guide](../../../install/index.md)
 - **Kubernetes Dashboard:** Optional web interface for cluster visibility
 
 ### Monitoring Application Health
@@ -46,7 +46,7 @@ Track the following cluster metrics:
 
 - CPU and memory utilization per node (`kubectl top nodes`)
 - Disk space on nodes
-- PostgreSQL performance and connection counts (via pgAdmin if installed per the [Installation Guide](../../../install/index.md#postgresql-and-pgadmin))
+- PostgreSQL performance and connection counts (via pgAdmin if installed per the [Installation Guide](../../../install/index.md))
 - Persistent storage usage (via Longhorn UI or Rancher, if installed)
 
 ### Managing Logs
@@ -134,7 +134,7 @@ Most Crucible services support horizontal scaling:
 - Kubernetes distributes load across replicas automatically
 - Scale PostgreSQL vertically by adjusting allocated resources
 
-Refer to the [Installation Guide](../../../install/index.md#postgresql-and-pgadmin) for minimum hardware requirements and scaling considerations.
+Refer to the [Installation Guide](../../../install/index.md) for minimum hardware requirements and scaling considerations.
 
 ## Troubleshooting Operations
 

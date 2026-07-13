@@ -78,7 +78,7 @@ To remove a user from a unit, under **Unit Users**, find the user and click **Re
 
 #### Data Fields
 
-The Data Fields page lists all data field templates available for use in MSEL scenario events. Data fields define the columns that appear on a MSEL - similar to column headers in a spreadsheet. The **Info** and **Facil** checkboxes control whether the field displays for information events and facilitation events, respectively. Content developers can pull these templates into a MSEL from the [Data Fields](#data-fields-1) tab.
+The Data Fields page lists all data field templates available for use in MSEL scenario events. Data fields define the columns that appear on a MSEL - similar to column headers in a spreadsheet. The **Info** and **Facil** checkboxes control whether the field displays for information events and facilitation events, respectively. Content developers can pull these templates into a MSEL from the **Data Fields** tab.
 
 ##### Add a Data Field Template
 
@@ -133,7 +133,7 @@ The Catalogs page lists all catalog templates available for use in MSELs. A cata
 
 #### Organizations
 
-The Organizations page lists all organization templates available for use in MSELs. An organization template defines a reusable entity  -  such as a government agency, company, or media outlet  -  that can be added to MSEL events. Content developers can pull these templates into a MSEL from the [Organizations](#organizations-1) tab.
+The Organizations page lists all organization templates available for use in MSELs. An organization template defines a reusable entity  -  such as a government agency, company, or media outlet  -  that can be added to MSEL events. Content developers can pull these templates into a MSEL from the **Organizations** tab.
 
 ##### Add an Organization Template
 
@@ -153,7 +153,7 @@ The Organizations page lists all organization templates available for use in MSE
 
 #### Gallery Cards
 
-The Gallery Cards page lists all Gallery card templates available for use in MSELs. A Gallery card template defines a reusable card category that can be pushed to Gallery during an exercise. Content developers can pull these templates into a MSEL from the [Gallery Cards](#gallery-cards-1) tab.
+The Gallery Cards page lists all Gallery card templates available for use in MSELs. A Gallery card template defines a reusable card category that can be pushed to Gallery during an exercise. Content developers can pull these templates into a MSEL from the **Gallery Cards** tab.
 
 ##### Add a Gallery Card Template
 
@@ -170,7 +170,7 @@ The Gallery Cards page lists all Gallery card templates available for use in MSE
 
 #### CITE Actions
 
-The CITE Actions page lists all CITE action templates available for use in MSELs. A CITE action template defines a reusable task that teams complete during an exercise. Content developers can pull these templates into a MSEL from the [CITE Actions](#cite-actions-1) tab.
+The CITE Actions page lists all CITE action templates available for use in MSELs. A CITE action template defines a reusable task that teams complete during an exercise. Content developers can pull these templates into a MSEL from the **CITE Actions** tab.
 
 ##### Add a CITE Action Template
 
@@ -586,7 +586,7 @@ To edit an existing Data Field, follow these steps:
 2. Select the data field you wish to edit and click **Edit** to make any changes to the existing configurations.
 3. After making all necessary changes, click the **checkmark** to save them.
 
-##### Search For a Data Field
+##### Search for a Data Field
 
 To search for a specific Data Field, follow these steps:
 
@@ -599,7 +599,7 @@ On this tab, users add all related [organizations](#glossary) (with their inform
 
 ![Blueprint Organizations Tab OE](img/blueprintOrganizations-v4.png)
 
-##### Add an Organization Card From Scratch
+##### Add an Organization Card from Scratch
 
 ![Blueprint Add Organization OE](img/blueprintAddOrganization-v2.png)
 
@@ -622,7 +622,7 @@ To add an Organization Card from scratch, follow these steps:
 
 After you've added all desired configurations, click **Save**.
 
-##### Add an Organization Card From Template
+##### Add an Organization Card from Template
 
 To create an organization from a template, follow these steps:
 
@@ -784,9 +784,8 @@ To edit the event's details, follow these steps:
 
 1. Navigate to the **Events** tab.
 2. Select the event you want to edit and click the **Hamburger** icon next to it.
-3. Click **Edit**.
-4. The system opens the same edit component used when creating a new event.
-5. Make your changes, then click **Save**.
+3. Click **Edit**. The system opens the same edit component used when creating a new event.
+4. Make your changes, then click **Save**.
 
 ##### Delete an Event
 
@@ -857,9 +856,8 @@ After you've added all desired configurations, click **Save**.
 To edit an invitation, follow these steps:
 
 1. Navigate to the **Invitations** tab.
-2. Select the invitation you want to edit and click **Edit**.
-3. The system opens the same edit component used when creating a new invitation.
-4. Make your changes, then click **Save**.
+2. Select the invitation you want to edit and click **Edit**. The system opens the same edit component used when creating a new invitation.
+3. Make your changes, then click **Save**.
 
 ##### Delete an Invitation
 
@@ -944,9 +942,8 @@ After you've added all desired configurations, click **Save**.
 To edit the CITE Action's details, follow these steps:
 
 1. Navigate to the **CITE Actions** tab.
-2. Select the action you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new action.
-4. Make your changes, then click **Save**.
+2. Select the action you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new action.
+3. Make your changes, then click **Save**.
 
 ##### Delete a CITE Action
 
@@ -999,9 +996,8 @@ After you've added all desired configurations, click **Save**.
 To edit the CITE Role's details, follow these steps:
 
 1. Navigate to the **CITE Roles** tab.
-2. Select the role you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new role.
-4. Make your changes, then click **Save**.
+2. Select the role you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new role.
+3. Make your changes, then click **Save**.
 
 ##### Delete a CITE Role
 
@@ -1091,9 +1087,8 @@ After you've added all desired configurations, click **Save**.
 To edit a Gallery card, follow these steps:
 
 1. Navigate to the **Gallery Cards** tab.
-2. Select the card you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new card.
-4. Make your changes, then click **Save**.
+2. Select the card you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new card.
+3. Make your changes, then click **Save**.
 
 ##### Delete a Gallery Card
 
@@ -1102,7 +1097,7 @@ To delete a Gallery card, follow these steps:
 1. Navigate to the **Gallery Cards** tab.
 2. Select the card you want to delete and click the **Trash Can** next to it.
 
-##### Search For a Gallery Card
+##### Search for a Gallery Card
 
 To search for a specific card, follow these steps:
 
@@ -1158,9 +1153,8 @@ After you've added all desired configurations, click **Save**.
 To edit a Player app, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Select the app you want to edit and click **Edit** next to it.
-3. The system opens the same edit component used when creating a new app.
-4. Make your changes, then click **Save**.
+2. Select the app you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new app.
+3. Make your changes, then click **Save**.
 
 ##### Delete a Player App
 

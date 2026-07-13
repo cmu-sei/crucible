@@ -10,6 +10,7 @@ This tutorial assumes the following:
 - You have the `Creator` role or greater in TopoMojo
 - You have a basic understanding of virtualization and networking concepts
 - You are familiar with supported hypervisors like VMware and Proxmox
+- You have access to a `kali` template in TopoMojo
 
 :blue_book: As you work through this tutorial, you may want to learn more about the Crucible applications or features. If so, refer to the [Related Resources](#related-resources) section below for additional detail and reference information.
 
@@ -31,6 +32,10 @@ This tutorial assumes the following:
 ## Step 2: Adding Virtual Machine Templates
 
 TopoMojo templates are starting-point virtual machines that you can customize. When a user deploys a gamespace, they receive read-only copies of all templates in the workspace from the template's last saved state. For full field descriptions and functions, see [Templates](../../topomojo/index.md#templates) in the TopoMojo Guide.
+
+!!! info "Building a VM from an ISO"
+
+    This tutorial uses an existing Kali template so you can focus on the challenge-building workflow. You can also build a VM by attaching an operating system ISO to a blank VM template. For that optional workflow, see [Installing an Operating System from an ISO](#installing-an-operating-system-from-an-iso).
 
 1. In your TopoMojo workspace, click the **Templates** tab.
 2. Click **+ Add Templates** to add VMs to your challenge. We'll search for, then add: `kali` from the PC6 Stock Topology.
@@ -200,7 +205,7 @@ Your lab document should look like this.
 
 At this point, the challenge includes a transform, guest info variable, instructions, and a question to answer. We're ready to "play" our challenge to test it.
 
-1. Click the **Play** tab. Notice that only the top portion of the document - everything above the cut line - is visible. As part of testing, you can adjust settings such as **Variant** (if the challenge supports variants, you can select a specific variant to deploy; selecting `0` chooses a random variant); **Max Attempts**, **Max Minutes** (i.e., challenge duration), and **Point Value**.  These controls exist only for developer testing. End users do not see this interface, and any changes made here do not persist if you switch tabs.
+1. Click the **Play** tab. Only the top portion of the document is visible; that is, the content above the cut line. You can adjust test settings such as **Variant** (select a specific variant to deploy, or select `0` for a random variant), **Max Attempts**, **Max Minutes** (that is, challenge duration), and **Point Value**. These controls exist only for developer testing. End users do not see this interface, and changes made here do not persist if you switch tabs.
 2. Click **Start**. Once the gamespace finishes deploying, you can view the full challenge document.
 3. Follow the lab instructions.
 
@@ -219,6 +224,43 @@ At this point, you have a complete, working TopoMojo challenge and the tools to 
 ## Beyond the Basics (Optional)
 
 The following optional sections show how to extend the challenge with additional transforms, variants, and more complex scoring.
+
+### Installing an Operating System from an ISO
+
+This tutorial uses an existing Kali template. You can also create a VM by attaching an operating system ISO to a blank VM template and installing the operating system from the VM console.
+
+Before you begin, download a legal operating system ISO. For testing, you can use a free Linux ISO such as Debian or Ubuntu.
+
+1. In the workspace, click the **Files** tab.
+2. Upload the operating system ISO file.
+
+    ![Files tab selected, ISO attached, progress bar showing status](../../tutorials/img/iso-file-progress.png)
+
+3. When the file upload is complete, click the **Templates** tab.
+4. Add or create a VM template that uses a blank disk.
+5. Click **Edit** next to the template.
+6. In the **ISO** field, select the uploaded ISO.
+
+    ![Uploaded ISO selected on Templates tab](../../tutorials/img/iso-selector.png)
+
+7. Configure the remaining template fields:
+    - **Name**: Enter a clear VM name, such as `tutorial debian`.
+    - **Description**: Add notes for developers, such as the operating system and credentials.
+    - **Networks**: Enter `lan`.
+    - **Linked/Unlinked**: Use an *unlinked* disk so you can save the installed operating system.
+
+<!-- 8. Click **Initialize**.
+9. Click **Deploy**.
+10. Click **Console**.
+11. Follow the operating system installer prompts.
+12. After installation finishes, shut down the VM from inside the operating system.
+13. In TopoMojo, click **Save**. -->
+
+The saved VM now contains the installed operating system and you can use it as a template for the challenge.
+
+!!! warning "Shut Down Before Saving"
+
+    Shut down the VM from inside the guest operating system before saving the template in TopoMojo. Saving while the VM is running can leave the disk in an inconsistent state.
 
 ### Adding an Additional Transform
 

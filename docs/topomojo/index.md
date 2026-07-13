@@ -143,6 +143,8 @@ A typical TopoMojo deployment contains several types of templates.
 
 Administrators can publish individual templates (e.g., a stand-alone base install of Kali Linux). They can also publish a "template set" of multiple VMs serving as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, etc.).
 
+TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are workspace-specific and only available within the workspace where the user created them. Administrators manage published templates from the [Templates Tab](#templates-tab) in the Administrator Guide.
+
 #### Adding and Editing Templates
 
 To add a template to your workspace:
@@ -157,7 +159,7 @@ To add a template to your workspace:
 The list below explains the fields in the VM template.
 
 - **Name:** The **name** of the VM must be unique within the workspace and should be descriptive of the resource.
-- **Description:** A short description of the VM. It is best practice to include the credentials and purpose for the VM. The description is not visible to users playing the lab - it is only visible in the workspace editor.
+- **Description:** A short description of the VM. Include the credentials and purpose for the VM. The description is not visible to participants; it is only visible in the workspace editor.
 - **Networks:** A space-delimited list of networks on which the VM will have a network interface. These names should be the same for all systems in your lab that need to connect to the same network. TopoMojo creates the networks on the hypervisor when it deploys the VM/lab.
 - **Guest Settings:** Key-value pairs in the form of `key=value` to pass data into deployed VMs via [VMware guestinfo variables](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/tools/12-5-0/vmware-tools-administration-12-5-0/configuring-vmware-tools-components/using-vmware-tools-configuration-utility/view-virtual-machine-status-information/query-information-using-guestinfo-variable.html) or the [QEMU Firmware Configuration Device](https://www.qemu.org/docs/master/specs/fw*cfg.html) for Proxmox. The *key* is the name of the guest setting. For example, `var1=test` is a guest setting named "var1" with a value of "test". You can randomize guest settings values using [TopoMojo Transforms](#transforms).
 
@@ -165,13 +167,20 @@ The list below explains the fields in the VM template.
 
   ![using the vmtoolsd command](img/vmware-tools.png)
 
-  When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (`fw*cfg`) Device](https://www.qemu.org/docs/master/specs/fw*cfg.html) with commands similar to the following, where `variable` is the key of the Guest Setting to read: `sudo cat /sys/firmware/qemu*fw*cfg/by_name/opt/guestinfo.variable/raw`
+  When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (`fw_cfg`) Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) with a command similar to the following, where `variable` is the key of the guest setting to read:
+
+  ```bash
+  sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.variable/raw
+  ```
 
 - **Replicas:** Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a *gamespace*, set **Replicas** to "3". To deploy one copy of the VM template for each member of the team owning the gamespace, set **Replicas** to "-1".
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.
-- **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine.
-- **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access. *Note: These VMs may still be visible/accessible over the network - users just aren't able to click into a console via the lab interface.*
-- **Linked:** *Unlinking* creates a new a new clone of the template which you can save and customize. **Unlink** any virtual machine that will not use the default disk included with the template (i.e., you need to save changes to the VM).
+- **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine. Common use: attach an OS installer ISO for a blank disk template, or mount utilities during setup. See [Installing an Operating System from an ISO](../tutorials/topomojo-challenge/index.md#installing-an-operating-system-from-an-iso).
+- **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access.
+
+  !!! note
+      These VMs may still be accessible over the network; participants just cannot open a console via the lab interface.
+- **Linked:** *Unlinking* creates a new clone of the template which you can save and customize. **Unlink** any virtual machine that will not use the default disk included with the template (i.e., you need to save changes to the VM).
 - **Delete Template:** Deletes the template from the workspace.
 
 #### Refresh and Deploy
@@ -411,7 +420,84 @@ Filter for all templates from a workspace by clicking the *name* of the of the w
 
 #### Template Properties
 
-See [Template Field Definitions](#template-field-definitions) for details on template configuration.
+The **Templates** tab in the Administrator Guide displays template metadata and configuration. The **Detail** field contains the raw JSON configuration TopoMojo passes to the hypervisor when deploying the VM.
+
+!!! note
+    The Detail field hint text reads: "Advanced configuration. Keep valid JSON to avoid errors."
+
+##### Template Detail JSON
+
+!!! warning "Common Configuration Mistakes"
+    - **RAM** must be a whole number integer (`1`, `2`, `4`). Decimal values such as `0.5` save without error but cause a generic "Error" at deploy time.
+    - **CPU** must be a string in `sockets x cores` format (`1x1`, `1x2`). Numeric values such as `1` or `2` cause the same generic error at deploy time.
+    - **Disks `Size`** must be an integer representing gigabytes (`10`, `20`). String values such as `"10G"` cause a JSON parse error at save time.
+
+###### Top-Level Fields
+
+| Field | Type | Default | Example | Description |
+| --- | --- | --- | --- | --- |
+| `Id` | string | `null` | `null` | Internal identifier linking this spec to the template record. TopoMojo resolves the real template ID from the database, not this field. |
+| `Name` | string | `null` | `challenge-server` | The template's display name. Used to build the VM name and disk filenames at deploy time. |
+| `TopoId` | string | `null` | `a1b2c3d4-e5f6-7890-abcd-ef1234567890` | The workspace this template belongs to. `null` on a library template; set to the workspace GUID when linked to a workspace. |
+| `Cpu` | string | `1x2` | `1x2` | CPU layout as `sockets x cores-per-socket`. For example, `2x2` = 2 sockets × 2 cores = 4 virtual processors. |
+| `Guest` | string | `null` | `rhel7` | VMware guest OS identifier. A `Guest` suffix is auto-appended if missing. Tells the hypervisor which OS optimizations to use. `null` defaults to `other`. Not used by Proxmox. |
+| `Source` | string | `null` | `null` | Reference to a source template to clone disks from. Generally `null` at the template level; disk-level `Source` handles cloning. |
+| `Iso` | string | `null` | `local:iso/debian.iso` | ISO image path. Format is hypervisor-specific: vSphere uses `[datastore] folder/file.iso`; Proxmox uses `local:iso/file.iso`. `null` causes the hypervisor to substitute an empty ISO. |
+| `Floppy` | string | `null` | `null` | Floppy image path. Rarely used. vSphere only. |
+| `Version` | string | `null` | `vmx-10` | Forces a specific VMware virtual hardware version. `null` uses the platform default. Not used by Proxmox. |
+| `IsolationTag` | string | `null` | `null` | Runtime tag identifying the isolated deployment. `null` on the stored template; injected by TopoMojo at deploy time. |
+| `HostAffinity` | Boolean | `false` | `false` | When `true`, pins the VM to the same hypervisor host as the rest of its deployment. |
+| `UseUplinkSwitch` | Boolean | `false` | `false` | When `true`, attaches networks via a shared uplink switch for templates that must reach an external network. |
+| `Ram` | integer | `4` | `4` | Memory in gigabytes. Multiplied by 1024 to set MB on the VM. |
+| `VideoRam` | integer | `0` | `0` | Video memory in MB. `0` uses the hypervisor default. |
+| `Adapters` | integer | `1` | `1` | Number of network adapters. Should match the number of entries in `Eth`. |
+| `Delay` | integer | `0` | `0` | Boot delay in seconds before this VM powers on. The hypervisor enforces a minimum of 10 seconds when a delay applies. |
+| `AutoStart` | Boolean | `true` | `true` | When `true`, the VM powers on automatically when its deployment starts. |
+| `Eth` | array | One `e1000` adapter on `lan` | See `Eth[]` table | Array of network adapter definitions. |
+| `Disks` | array | One 10 GB `lsilogic` disk | See `Disks[]` table | Array of virtual disk definitions. |
+| `GuestSettings` | array | `null` | `[{"Key": "token1", "Value": "##token1##"}]` | Array of key/value pairs injected as VMware `guestinfo.*` properties. `null` when not configured. |
+| `Template` | string | `null` | `debian-template` | Proxmox only. The Proxmox source template name. `null` on vSphere templates. |
+| `ParentTemplate` | string | `null` | `null` | Proxmox only. The parent of the Proxmox source template. `null` on vSphere templates. |
+
+###### `Eth[]` - Network Adapter Entries
+
+| Field | Type | Default | Example | Description |
+| --- | --- | --- | --- | --- |
+| `Id` | integer | `0` | `0` | Index of the adapter within the VM (0-based). |
+| `Net` | string | `lan` | `lan` | Network name this adapter connects to. Combined with the `IsolationTag` at deploy time to create an isolated network per deployment. |
+| `Key` | string | `null` | `null` | Hypervisor-assigned network reference. `null` on the stored template; filled in at deploy time. |
+| `Type` | string | `e1000` | `e1000` | Virtual network interface controller hardware model: `e1000`, `e1000e`, `vmx3` (vmxnet3), or `pcnet32`. |
+| `Mac` | string | `null` | `null` | Media Access Control address. `null` means the hypervisor auto-assigns one. |
+| `Ip` | string | `null` | `null` | Informational IP annotation. Not used to configure the guest OS. |
+| `Vlan` | integer | `0` | `0` | Explicit VLAN ID. `0` means no fixed VLAN; TopoMojo manages isolation dynamically. |
+
+###### `Disks[]` - Virtual Disk Entries
+
+| Field | Type | Default | Example | Description |
+| --- | --- | --- | --- | --- |
+| `Id` | integer | `0` | `0` | Index of the disk within the VM (0-based). |
+| `Path` | string | Derived | `[ds] 00000000-0000-0000-0000-000000000000/blank-20g.vmdk` | Disk location in datastore format. Derived from the workspace and template IDs at deploy time. |
+| `Source` | string | Derived | `[ds] .../base-disk.vmdk` | Parent disk this disk originates from. Empty if no parent. |
+| `Controller` | string | `lsilogic` | `lsilogic` | Disk controller type: `lsilogic`, `lsilogic-sas`, `pvscsi`, `buslogic`, or `ide`. |
+| `Size` | integer | `10` | `10` | Disk size in gigabytes. |
+| `Status` | integer | `0` | `0` | Internal provisioning state flag. Always `0` in the stored detail. |
+
+###### `GuestSettings[]` - Guest Customization Entries
+
+| Field | Type | Example | Description |
+| --- | --- | --- | --- |
+| `Key` | string | `token1` | The `guestinfo.*` property name. Auto-prefixed with `guestinfo.` if omitted. Special keys: `firmware` (`efi` switches to Extensible Firmware Interface boot), `vhv.enable` (`true` enables nested virtualization), `iftag.*` (applied only when matching the `IsolationTag`). |
+| `Value` | string | `##token1##` | The value delivered for that property. |
+
+#### Common Template Errors
+
+| Error | Likely Cause | Solution |
+| --- | --- | --- |
+| Generic "Error" with no details | Invalid RAM value (decimal such as `0.5` or `1.5`) | Use a whole number integer: `1`, `2`, `4` |
+| Generic "Error" with no details | Invalid CPU format (numeric value such as `1` or `2`) | Use string format: `1x1`, `1x2` |
+| `invalid token value!` | Hypervisor authentication failed | Check `Pod__AccessToken` configuration |
+| HTTP 405 Method Not Allowed | Wrong endpoint for the operation | Use `POST /api/template-detail` for new templates |
+| HTTP 500 Internal Server Error | Hypervisor template not found | Verify the `Template` name matches the VM name on the hypervisor |
 
 ### Machines Tab
 
