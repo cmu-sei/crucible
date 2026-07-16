@@ -495,7 +495,7 @@ Special `Key` values:
 | --- | --- | --- |
 | `firmware` | `efi` | Boots the VM with Extensible Firmware Interface. |
 | `vhv.enable` | `true` | Enables nested virtualization. |
-| `iftag.*` | any string | Applies only when the prefix matches the VM `IsolationTag`. |
+| `iftag.*` | any string | A setting that applies when the value contains the VM’s IsolationTag. For example: `iftag.example = abcd1234:value` is only applied if the VM's isolation tag is `abcd1234`. |
 | `guestinfo.metadata` | encoded cloud-init metadata | Provides cloud-init metadata for cloud-init enabled images. |
 | `guestinfo.metadata.encoding` | `base64` | Declares the encoding used for `guestinfo.metadata`. |
 | `guestinfo.userdata` | encoded cloud-init user data | Provides cloud-init user data for cloud-init enabled images. |
