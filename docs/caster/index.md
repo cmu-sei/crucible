@@ -24,6 +24,19 @@ Caster UI supports an optional, customizable classification banner that displays
 
 ![Example classification banner with an example message](img/caster-classification-banner-example.png)
 
+### Terraform Versions
+
+The **Terraform Version** dropdowns in Caster list only the versions installed in your instance. Which versions are available, and which one is the default for new workspaces, are deployment settings rather than UI settings:
+
+- **`Terraform:DefaultVersion`:** The version Caster assigns when neither the workspace nor any of its parent directories specifies one. Caster marks it `(Default)` in the dropdown.
+- **`Terraform:MaxParallelism`:** The highest value the **Parallelism** field accepts.
+
+Configure both through the [Caster Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster). To choose a version for a directory or a workspace, see [Directory Settings](#directory-settings) and [Workspace Settings](#workspace-settings).
+
+!!! note
+
+    The Crucible Terraform Provider requires Terraform 1.0 or later. Configurations that use it need a workspace set to a `1.x` version.
+
 ## Permissions and Roles
 
 Sets of *permissions* control access to features in Caster. Permissions can apply globally or per **Project**.
@@ -68,7 +81,7 @@ You can't create custom project roles.
 
 ## Administrator Guide
 
-Caster administrators use the Administration View to manage users, roles, and VLANs.
+Caster administrators use the Administration View to manage projects, workspaces, VLANs, modules, users, roles, and groups.
 
 ### Administration View
 
@@ -81,6 +94,8 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 ### Projects
 
 The **Projects** pane in the Administration View displays all projects in the system. Administrators can search for projects, open them, rename them, and delete them.
+
+The table lists each project's **Name**, **Description**, and **Created** date. Turn on **My Projects** to limit the list to projects you are a member of.
 
 The screen shot below shows the **Projects** pane in Caster's Administration View.
 
@@ -119,24 +134,39 @@ Click the **Open** icon to open the project in a new browser tab, where you can 
 1. In the project row, click the **trash can** icon.
 2. Confirm **Delete**.
 
-### Users
+### Workspaces
 
-Users appear in Caster after they authenticate through the Identity provider and open Player in a browser.
+The **Workspaces** pane in the Administration View lets administrators monitor active runs and control workspace operations system-wide.
 
-The screen shot below shows the **Users** pane in Caster's Administration View.
+The screen shot below shows the **Workspaces** pane in Caster's Administration View.
 
-![Caster's Administration View, Users screen](img/caster-adm-users.png)
+![Caster Administration View, Workspaces pane](img/caster-adm-workspaces.png)
 
-#### Add a New User
+- **Disable Workspace Operations:** Toggle to prevent workspace operations that require locking. Use this before restarting the `Caster.Api` service to avoid corrupting Terraform state. The setting resets when the API restarts.
+- **Active Runs:** Displays all currently running workspace operations. Use the **Search** field to filter by workspace. The table shows **Created At**, **Destroy**, **Status**, **Workspace ID**, and **Actions**.
 
-1. In the **Users** pane, click **Add User**.
-2. In the **User ID** field, enter the user's ID.
-3. In the **User Name** field, enter the user's name.
-4. Click **Add this user** to save, or **Cancel** to discard.
+### VLANs
 
-#### Assign a Role to a User
+![Caster Administration View, VLANs pane](img/caster-adm-vlans.png)
 
-In the user row, in the **Role** column, select a role from the dropdown (**None**, **Observer**, **Content Developer**, or **Administrator**). For a description of each role, see [System Roles](#system-roles).
+Caster manages VLAN IDs by creating pools of 4096 VLANs and dividing them into partitions. When a user requests a VLAN from a partition, Caster assigns an unused ID and marks it in use until the user releases it.
+
+A partition is either assigned to a project or configured as the system default. Users request VLAN IDs from their project partition or from the default partition.
+
+- VLANs can include tags for organization, and users can request a VLAN by tag
+- Users can request a specific VLAN ID within a partition
+- VLANs marked as reserved (including `0`, `1`, and `4095`, reserved by default) are never assigned
+
+The **VLANs** pane has two tabs:
+
+- **Pools:** Create and manage VLAN pools and the partitions within them.
+- **Projects:** Review which partition each project draws VLAN IDs from.
+
+#### Add a VLAN Pool
+
+1. In the **VLANs** pane, on the **Pools** tab, click **New Pool**.
+2. Enter a **Name** and click **Save**.
+3. Expand the new pool to add partitions to it.
 
 ### Modules
 
@@ -172,32 +202,44 @@ While working on Caster Modules:
 - **Add/Update All from the Repository:** Click the cloud icon to add or refresh all modules from the configured repository at once.
 - **Copy:** Click the copy icon to copy the module's ID to the clipboard.
 - **Versions:** Displays the number of versions available for the module in the git repository. A module must have at least one version before you can add it to a Design.
+- **Path:** Displays the module's path in the configured module repository.
+- **Date Loaded:** Displays when Caster last loaded the module from the repository. Compare this against GitLab to spot modules that need a refresh.
 - **Delete:** Click the trash can icon to delete a module.
 
 Selecting a module opens a form where you choose a version and enter the required variable values. After you select **Submit**, Caster generates the Terraform module block, which you can copy into the configuration file.
 
-### Workspaces
+### Users
 
-The **Workspaces** pane in the Administration View lets administrators monitor active runs and control workspace operations system-wide.
+Users appear in Caster after they authenticate through the Identity provider and open Caster in a browser.
 
-The screen shot below shows the **Workspaces** pane in Caster's Administration View.
+The screen shot below shows the **Users** pane in Caster's Administration View.
 
-![Caster Administration View, Workspaces pane](img/caster-adm-workspaces.png)
+![Caster's Administration View, Users screen](img/caster-adm-users.png)
 
-- **Disable Workspace Operations:** Toggle to prevent workspace operations that require locking. Use this before restarting the `Caster.Api` service to avoid corrupting Terraform state. The setting resets when the API restarts.
-- **Active Runs:** Displays all currently running workspace operations. Use the **Search** field to filter by workspace. Columns include `createdAt`, `isDestroy`, `status`, and `workspaceId`.
+#### Add a New User
 
-### VLANs
+1. In the **Users** pane, click **Add User**.
+2. Enter the user's **User ID** and **Name**.
+   - **Role:** (Optional) Select a system role for the user.
+3. Click **Create** to save, or **Cancel** to discard.
 
-![Caster Administration View, VLANs pane](img/caster-adm-vlans.png)
+#### Assign a Role to a User
 
-Caster manages VLAN IDs by creating pools of 4096 VLANs and dividing them into partitions. When a user requests a VLAN from a partition, Caster assigns an unused ID and marks it in use until the user releases it.
+In the user row, in the **Role** column, select a role from the dropdown (**None Locally**, **Observer**, **Content Developer**, or **Administrator**). For a description of each role, see [System Roles](#system-roles). **None Locally** means the user has no system role assigned in Caster. They can still receive permissions through a group or a project role.
 
-A partition is either assigned to a project or configured as the system default. Users request VLAN IDs from their project partition or from the default partition.
+### Roles
 
-- VLANs can include tags for organization, and users can request a VLAN by tag
-- Users can request a specific VLAN ID within a partition
-- VLANs marked as reserved (including `0`, `1`, and `4095`, reserved by default) are never assigned
+The **Roles** pane in the Administration View is where administrators review and build roles. It has two tabs:
+
+- **Roles:** System roles and the permissions assigned to each. The three default roles--**Administrator**, **Content Developer**, and **Observer**--appear here alongside any custom roles. For a description of each, see [System Roles](#system-roles).
+- **Project Roles:** The fixed set of project roles and their permissions. You can't add or edit project roles. For a description of each, see [Project Roles](#project-roles).
+
+#### Add a Custom System Role
+
+1. In the **Roles** pane, on the **Roles** tab, click **+**.
+2. Enter a **Name**.
+3. Select each permission the role grants. Selecting **All** grants every permission.
+4. Click **Save**.
 
 ### Groups
 
@@ -284,7 +326,34 @@ The workspace view displays all planned and applied runs. Runs shaded in red rep
 
 Users can `Plan`, `Destroy`, `Apply`, `Taint`, and `Reject` operations in real time in the workspace view.
 
-`Caster.Api` utilizes the Terraform binary in order to execute workspace operations. This binary is running inside of the `Caster.Api` service. *Restarting or stopping the `Caster.Api` container while a Terraform operation is in progress can lead to a corrupted state.*
+#### Workspace Settings
+
+Each workspace has its own Terraform settings. Caster applies them to every run in that workspace.
+
+1. In the project navigation panel, right-click the workspace and select **Edit**.
+2. Change any of the following:
+   - **Name:** 90 characters or fewer. Use only letters, numbers, `-`, `_`, and `.`.
+   - **Terraform Version:** The Terraform version this workspace runs. The dropdown lists every version installed in your Caster instance, newest first, with the instance default marked `(Default)`.
+   - **Parallelism:** Limits the number of concurrent Terraform operations. Defaults to `10` when empty. Only set this to troubleshoot provider errors.
+   - **Azure Threshold:** The number of consecutive failed destroys in an Azure workspace before Caster tries to recover by removing `azurerm_resource_group` children from the state.
+3. Click **Save**.
+
+!!! note
+
+    **Save** stays disabled until you change a value. Leave **Parallelism** and **Azure Threshold** empty to use your instance's defaults.
+
+The workspace view displays the workspace's current Terraform version next to the **Plan** and **Destroy** buttons.
+
+Creating a workspace prompts only for a name. Caster sets the new workspace's Terraform version, parallelism, and Azure threshold from its directory at that moment. See [Directory Settings](#directory-settings). To change them afterward, use **Edit**.
+
+#### Terraform Execution
+
+Caster runs Terraform in one of two modes, selected by the `Terraform:KubernetesJobs:Enabled` API setting:
+
+- **In-process (default):** `Caster.Api` runs a Terraform binary inside its own container. Each available version lives in its own directory under the configured binary path.
+- **Kubernetes jobs:** `Caster.Api` runs each operation as a Kubernetes job, using a Terraform container image tagged with the selected version.
+
+In either mode, *stopping or restarting `Caster.Api` while a Terraform operation is in progress can corrupt the Terraform state.*
 
 In order to avoid this, a System Administrator should follow these steps in the Caster UI before stopping the `Caster.Api` container:
 
@@ -300,9 +369,29 @@ The top-level construct within a project is a *directory*. A project can contain
 
 Directories can contain subdirectories to create a *hierarchy* of directories and the configuration files contained therein. When creating a run, the files in the workspace, the workspace's directory, ***and all parent directories*** merged and pass to Terraform as a single configuration. This eliminates redundancy when developing many environments that are similar or share a set of common variables or data across many configurations. For example, a large deployment might have a top-level directory defining global variables `vlan ids` and `team ids`, and subdirectories defining resources using those variables.
 
-Users can add, rename, delete, or export a directory from the navigation panel on a project's main Caster page.
+Right-click a directory in the navigation panel on a project's main Caster page to **Edit**, **Delete**, **Export**, or **Import** it. Renaming a directory is part of **Edit**. See [Directory Settings](#directory-settings).
 
 Peer directories (directories that fall outside a parent directory) are not included in a run.
+
+#### Directory Settings
+
+Directory settings are the defaults Caster hands to workspaces created in that directory.
+
+1. In the project navigation panel, right-click the directory and select **Edit**.
+2. Change any of the following:
+   - **Name:** Rename the directory.
+   - **Terraform Version:** The version Caster assigns to new workspaces created in this directory.
+   - **Parallelism:** Limits the number of concurrent Terraform operations. Caster sets this value on new workspaces created in this directory.
+   - **Azure Threshold:** The number of consecutive failed destroys in an Azure workspace before Caster tries to recover by removing `azurerm_resource_group` children from the state. Clear the **Enabled** checkbox to have workspaces ignore the threshold.
+3. Click **Save**.
+
+![Edit Directory dialog with the Name, Terraform Version, Parallelism, and Azure Threshold fields](img/caster-directory-edit.png)
+
+!!! note "Directory Settings Apply at Workspace Creation"
+
+    Caster reads directory settings only when it creates a workspace. It uses the nearest value set on the workspace's directory, then its parent directories in turn, and falls back to the version configured for your Caster instance. Changing a directory setting later does not change workspaces that already exist. Edit those workspaces directly. See [Workspace Settings](#workspace-settings).
+
+To set the Terraform version for a whole branch of a project, set it on the parent directory *before* creating the workspaces under it.
 
 ### Designs
 
@@ -448,7 +537,11 @@ This glossary defines key terms and concepts used in the Caster application.
 
 **Module:** A container for multiple resources used together. Modules create lightweight abstractions, so you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
 
+**Parallelism:** The number of concurrent operations Terraform performs during a run.
+
 **Project:** A way to organize and categorize similar environments for multiple workspaces and directories within Caster.
+
+**Run:** A specific instance of the Terraform plan and apply process for a workspace.
 
 **Terraform:** An open source Infrastructure-as-Code tool.
 
