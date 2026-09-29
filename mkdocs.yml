@@ -115,6 +115,9 @@ nav:
       - Building an On-Demand Exercise delivered via Moodle: tutorials/odx-moodle/index.md
       - Creating a TopoMojo Challenge: tutorials/topomojo-challenge/index.md
       - Creating a Game in Gameboard: tutorials/gameboard-build/index.md
+  - Learning Data (xAPI):
+      - Overview: xapi/index.md
+      - Statement Reference: xapi/statements.md
   - Third-Party Integrations: integrations/index.md
 
 repo_url: "https://github.com/cmu-sei/crucible"
