@@ -108,7 +108,15 @@ These verbs use the `https://crucible.sei.cmu.edu/xapi/verbs/` namespace because
 | Follow Started | `.../verbs/followed` | You start following another user's console. |
 | Follow Stopped | `.../verbs/unfollowed` | You stop following another user's console. |
 
-VM statements carry these extensions on the statement object's activity definition, under `https://crucible.sei.cmu.edu/xapi/extensions/`: `vm-id`, `vm-name`, `vm-type`, `vm-ip-addresses`, `team-ids`, `active-team-ids`, `iso-scope`, `followed-user-id`, and `followed-team-id`. Power statements also carry a `power-operation` extension, and network statements carry the adapter and network.
+VM statements carry these extensions on the statement object's activity definition, under `https://crucible.sei.cmu.edu/xapi/extensions/`: `vm-id`, `vm-name`, `vm-type`, `vm-ip-addresses`, `vm-team-ids`, `iso-scope`, `followed-user-id`, and `followed-team-id`. `vm-team-ids` is a sorted array holding the team IDs the VM belongs to. Power statements also carry a `power-operation` extension, and network statements carry the adapter and network.
+
+The team the actor worked as does not appear on the activity definition. A console activity ID is the same for every user of that VM, and an LRS may keep only the definition it received most recently. Actor specific data there would be whatever the last participant sent.
+
+Console statements carry the actor's team in `context.team` instead, as an identified group. Its `account.name` is the team ID, its `account.homePage` is the Player UI URL, its `name` is the team name, and its `member` holds the actor. Player API describes team groups the same way, so both applications name a team identically.
+
+`context.team` holds one group. When the actor works as more than one team, it names the team whose view appears on `registration`. The full set appears in `context.contextActivities.other` as `.../api/teams/{teamId}` activities.
+
+Statements written before this change carry `team-ids` as a comma joined string, and they carry the actor's teams in a comma joined `active-team-ids` extension on the definition. There is no migration, so queries that need the full history must read both shapes.
 
 ## Steamfitter
 
