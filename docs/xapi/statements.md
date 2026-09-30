@@ -50,7 +50,7 @@ CITE statements carry the Evaluation ID as the registration. Submissions, scorin
 
 A team's scoring selections represent that team's assessment of the incident. They are not a grade on the participant.
 
-Observer statements deliberately omit team context. An observer viewing another team's data is not a member of that team, so CITE suppresses the team group on `observed` statements.
+Observer statements still carry a team. On an `observed` statement, `context.team` names the team whose data the observer opened, and `member` is empty. The observer appears in `actor` alone. Read `member` as the subject of the group, not as the person who acted: when CITE assigns or removes a duty, it places the affected user in `member` rather than the observer.
 
 ## Gallery
 
@@ -72,7 +72,7 @@ Gallery statements carry the Exhibit ID as the registration. Exhibits, collectio
 | Article Marked Read | `https://w3id.org/xapi/dod-isd/verbs/read` | You mark an article read. |
 | Article Marked Unread | `http://id.tincanapi.com/verb/marked-unread` | You mark an article unread. |
 
-As in CITE, Gallery suppresses team context on `observed` statements.
+As in CITE, an `observed` statement names the observed team in `context.team` with an empty `member`.
 
 ## Player
 

@@ -40,7 +40,7 @@ Each application reads its own `XApiOptions` section. The options are consistent
 | `Password` | LRS basic-auth secret. |
 | `IssuerUrl` | Identity provider URL used as `actor.account.homePage`. |
 | `ApiUrl` | Base URL used to build activity IRIs for API resources. |
-| `UiUrl` | Base URL used to build activity IRIs for user-facing pages, and the team group's `account.homePage`. |
+| `UiUrl` | Base URL of the user-facing application. Used for the team group's `account.homePage`, and for `definition.moreInfo` where an application sets it. Activity IRIs come from `ApiUrl`, not from this option. |
 | `Platform` | Value written to `context.platform`. |
 | `EmailDomain` | Domain used to build the team group's `mbox`. |
 | `RetentionDays` | How long the application keeps processed statements in its local queue. |
@@ -51,7 +51,7 @@ Differences to expect:
 
 - Player API and Player VM API do not use `EmailDomain`.
 - Blueprint does not use `ProcessingDelaySeconds`.
-- Player VM API uses `PlayerApiUrl` to resolve the parent Player view, and does not use `UiUrl`.
+- Player VM API uses `PlayerApiUrl` to resolve the parent Player view, and calls its team `account.homePage` option `PlayerUiUrl` rather than `UiUrl`, because the UI this application serves is the VM UI. Give it the same value as Player API's `UiUrl`, or the two applications describe one team as two accounts and team reporting splits.
 
 Applications queue statements locally and send them with a background service, so an unreachable LRS delays delivery rather than failing the user's action.
 
