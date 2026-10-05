@@ -1134,7 +1134,7 @@ To add a Player app, follow these steps:
 | **Name**               | String    | Name of the application                              | Chat                                            |
 | **Url**                | String    | URL of the application                               | `roundcube.hamilton.treasury.gov`               |
 | **Icon Url**           | String    | URL of the application's icon                        | `roundcube.hamilton.treasury.gov/roundcube.png` |
-| **Embeddable**         | Boolean   | Select whether to embed the app in Player's iframe   | True                                            |
+| **Embeddable**         | Boolean   | Select whether to embed the app in Player's iFrame   | True                                            |
 | **Load in Background** | Boolean   | Select whether the app should load in the background | True                                            |
 
 ##### URL Parameters
