@@ -96,3 +96,6 @@ HTTP(?:S)?
 (?i)pcnet\d*
 (?i)iftag
 (?i)vCPUs?
+CITE(?:'s)
+[Ii]Frame(?:s)?
+(?i)mkdocs
