@@ -329,6 +329,26 @@ The **Right Side Display** dropdown lists the values below. The dropdown shows t
 
 The right-hand pane appears on the Dashboard only. The Submission Review and Aggregate Report views always use the full width.
 
+###### Right Side Display Examples
+
+**HtmlBlock** renders whatever an administrator entered in **Right Side HTML Block**, so headings, lists and emphasis all survive. Use it for material a team needs beside the scoresheet, such as reporting thresholds.
+
+![Right-hand pane set to HtmlBlock, showing a formatted reporting-threshold list](img/rightSideHtmlBlock-v1.png)
+
+**EmbeddedUrl** frames the page named in **Right Side URL**. The example below frames an external page to show the behavior.
+
+![Right-hand pane set to EmbeddedUrl, framing an external page](img/rightSideEmbeddedUrl-v1.png)
+
+A page that sends an `X-Frame-Options` or `frame-ancestors` header refusing to be framed renders as an empty pane, so confirm the page allows framing before an exercise.
+
+**Scoresheet** puts a second copy of the scoresheet in the pane, which lets a team score without leaving the Dashboard.
+
+![Right-hand pane set to Scoresheet, showing the first scoring category](img/rightSideScoresheet-v1.png)
+
+**None** removes the pane, and the Dashboard content fills the window.
+
+![Dashboard with Right Side Display set to None, showing no right-hand pane](img/rightSideNone-v1.png)
+
 When adding a Scoring Model, an administrator adds a defined equation to calculate the submission score from the category scores, which can contain the following variables:
 
 - **{average}:** The average value of the Scoring Categories.
@@ -429,6 +449,36 @@ CITE enforces **Single** on the server, so the previous selection clears even if
 !!! important "Discussion questions need Display Comments as Textboxes"
 
     A category set to **None** has nothing for a participant to click, so the only way to answer is the comment box. Enable **Display Comments as Textboxes** on the parent scoring model, which replaces the per-option comment buttons with a textbox under each option. Without it, a **None** category is read-only text.
+
+###### Scoring Option Selection Type Examples
+
+One scoring model can mix all three selection types. The model below pairs a discussion-question category with a set of scored categories named for the dimensions of the National Cyber Incident Scoring System (NCISS), and gives each category its own move.
+
+!!! note "The example values are illustrative"
+
+    The categories below borrow the NCISS dimension names to show how a real matrix is shaped, but the point values and weights are chosen to make the screenshots readable. Consult the published NCISS for authoritative values.
+
+![Scoring model with eight categories, one per move](img/scoringCategoriesNciss-v1.png)
+
+A **Single** category is a scoring matrix: each option carries the value that applies if the team selects it, and the category equation decides how that value reaches the score.
+
+![Scoring options for a Single category, with values from 0 to 100](img/scoringOptionsMatrix-v1.png)
+
+A **None** category holds the questions themselves. Each question is a scoring option with **Value** left at `0` and **Modifier** cleared, so answering changes nothing about the score.
+
+![Scoring options for a None category, each with a value of zero](img/scoringOptionsDiscussion-v1.png)
+
+On the scoresheet, a **Single** category shows one checkbox per option with its value in the right margin.
+
+![Scoresheet showing a Single category as a scoring matrix](img/scoresheetMatrix-v1.png)
+
+A **Multiple** category accepts any number of options at once, which suits a checklist of actions a team completed. Options flagged as modifiers stay single-select, and a negative value subtracts.
+
+![Scoresheet showing a Multiple category with modifier options](img/scoresheetMultiple-v1.png)
+
+A **None** category shows no checkboxes at all. The question text sits above a textbox, and the participant types the answer.
+
+![Scoresheet showing a None category as discussion questions with textboxes](img/scoresheetDiscussion-v1.png)
 
 A Scoring Category may have zero or more required or optional [Modifiers](#glossary). If there is no optional Modifier, the Scoring Category calculation uses a default value of 1.0.
 
@@ -830,6 +880,10 @@ Which of these appear depends on the scoring model. The User, Team, Team Avg, Gr
 #### Categories and Options
 
 Categories are individually scored based upon the current move situation. For each category, select one or more relevant options. Selecting options assigns points to each category, which compile to create the move score as defined by the [scoring model](#glossary).
+
+Each option normally shows its point value in the right margin. Enabling **Hide Option Values On Scoresheet** on the scoring model removes those numbers, so a team chooses on the wording alone and cannot work backward from the points. The score itself is unaffected.
+
+![Scoresheet with option values hidden, showing option text without point values](img/hideOptionValues-v1.png)
 
 #### Add, Edit, and Delete a Comment
 
