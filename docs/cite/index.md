@@ -641,7 +641,9 @@ To delete a duty, follow these steps:
 
 #### Submissions
 
-The following image shows the Submissions Administration Page. Here, administrators can keep track of all score [submissions](#glossary) provided by the different teams during an exercise. This allows administrators to compare their scores with the official score, as well as keep track of which teams are on a good track and which are not.
+The following image shows the Submissions Administration Page. Here, administrators can review every score [submission](#glossary) the teams entered during an exercise, and compare a team's score for a move against the official score for the same move.
+
+A gap between the two shows where a team read the incident differently from the exercise author. Treat it as material for the discussion that follows, not as a measure of how the team performed. CITE asks participants to assess the severity of an incident, and does not assess the participants themselves.
 
 Filter the list by **Evaluation**, by **Types**, which defaults to Official and Team, and by **Move**. The list shows Name, Type, Move, Score, and Status. Each row carries **Copy Submission ID to clipboard**, which copies the submission's ID, and **Delete Submission**.
 
