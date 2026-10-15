@@ -183,27 +183,32 @@ A module packages one or more resources into a single block and exposes required
 - A module that defines an entire Cyber Flag enclave.
 - A module that defines a configurable GreySpace environment.
 
-Caster supports modules stored as GitLab projects that are visible to the API GitLab token and contain at least one version. When you add or refresh a project, all available versions appear in Caster.
+Caster discovers modules from two kinds of source, configured in the Caster API settings. Either, both, or neither can be configured:
+
+- **Git module sources** (`Terraform:ModuleSources`): any git repository Caster can clone, such as GitLab, GitHub, Gitea, or Forgejo. Every git tag is a module version. A repository is either one module, or (with the `Subdirectories` layout) a set of modules, one per top-level directory. A tag such as `network-segment/v1.2.0` versions only that module.
+- **GitLab group** (legacy): every GitLab project in the configured **Terraform-Modules** group and its subgroups that is visible to the API GitLab token and has at least one version.
 
 !!! note
 
-    The module inputs and outputs files must be JSON (`variables.tf.json` and `outputs.tf.json`).
+    The module inputs and outputs files must be JSON (`variables.tf.json` and `outputs.tf.json`). Caster does not read modules written only in HCL. An optional `caster.json` sets a module's display name and description.
+
+Private repositories need git credentials both where Caster discovers modules and where Terraform runs, because `terraform init` downloads each module from its git address. When Terraform runs as Kubernetes jobs, the job pods need them too. See `docs/Modules.md` in the Caster.Api repository and the Caster Helm chart's `gitcredentials` value.
 
 Caster can add or refresh modules in three ways:
 
-- Each module list request checks the configured **Terraform-Modules** group--the group ID is a Caster API setting--and subgroups for updates. Refresh the browser if a new module or version does not appear.
-- An administrator can force a full module update if Caster dates differ from GitLab.
-- An administrator can add or refresh a module directly using its GitLab project ID.
+- Each module list request checks every source for new tags. Refresh the browser if a new module or version does not appear. If a source cannot be reached, Caster keeps showing the modules it already has and shows the source's error on the **Modules** page.
+- An administrator can update the modules from every source at once.
+- An administrator can add or refresh the modules of one source, or one module, by its ID. This re-reads it even if no tag changed.
 
 While working on Caster Modules:
 
 - **Search:** Type all or part of a module name to filter the list.
-- **Add/Update Modules >>:** Enter a GitLab project ID in the **External Module ID** field and click **Add/Update Modules >>** to add or refresh a specific module. The ID must be a valid ID from the module repository.
-- **Add/Update All from the Repository:** Click the cloud icon to add or refresh all modules from the configured repository at once.
+- **External Module ID:** Enter a module source name, a source name and subdirectory (`crucible-modules/network-segment`) for one module in it, or for a GitLab source, a GitLab project ID. Then click the **Add/Update the Modules from this source** icon to add or refresh it.
+- **Add/Update the Modules from every source:** Click the cloud icon to check every configured source at once.
 - **Copy:** Click the copy icon to copy the module's ID to the clipboard.
 - **Versions:** Displays the number of versions available for the module in the git repository. A module must have at least one version before you can add it to a Design.
-- **Path:** Displays the module's path in the configured module repository.
-- **Date Loaded:** Displays when Caster last loaded the module from the repository. Compare this against GitLab to spot modules that need a refresh.
+- **Path:** Displays the module's path. For a git module source, the path starts with the source name.
+- **Date Loaded:** Displays when Caster last loaded the module from the repository.
 - **Delete:** Click the trash can icon to delete a module.
 
 Selecting a module opens a form where you choose a version and enter the required variable values. After you select **Submit**, Caster generates the Terraform module block, which you can copy into the configuration file.
