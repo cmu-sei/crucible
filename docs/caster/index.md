@@ -185,14 +185,14 @@ A module packages one or more resources into a single block and exposes required
 
 Caster discovers modules from two kinds of source, configured in the Caster API settings. Either, both, or neither can be configured:
 
-- **Git module sources** (`Terraform:ModuleSources`): any git repository Caster can clone, such as GitLab, GitHub, Gitea, or Forgejo. Every git tag is a module version. A repository is either one module, or (with the `Subdirectories` layout) a set of modules, one per top-level directory. A tag such as `network-segment/v1.2.0` versions only that module.
+- **Git module sources** (`Terraform:ModuleSources`): any git repository Caster can clone, such as GitLab, GitHub, or a self-hosted git server. Every git tag is a module version. A repository is either one module, or (with the `Subdirectories` layout) a set of modules, one per top-level directory. A tag such as `network-segment/v1.2.0` versions only that module.
 - **GitLab group** (legacy): every GitLab project in the configured **Terraform-Modules** group and its subgroups that is visible to the API GitLab token and has at least one version.
 
 !!! note
 
     The module inputs and outputs files must be JSON (`variables.tf.json` and `outputs.tf.json`). Caster does not read modules written only in HCL. An optional `caster.json` sets a module's display name and description.
 
-Private repositories need git credentials both where Caster discovers modules and where Terraform runs, because `terraform init` downloads each module from its git address. When Terraform runs as Kubernetes jobs, the job pods need them too. See `docs/Modules.md` in the Caster.Api repository and the Caster Helm chart's `gitcredentials` value.
+Private repositories need git credentials both where Caster discovers modules and where Terraform runs, because `terraform init` downloads each module from its git address. When Terraform runs as Kubernetes jobs, the job pods need them too. See `docs/Modules.md` in the `Caster.Api` repository and the Caster Helm chart's `gitcredentials` value.
 
 Caster can add or refresh modules in three ways:
 
