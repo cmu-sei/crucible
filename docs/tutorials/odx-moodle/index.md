@@ -111,7 +111,7 @@ The next steps are to:
 3. Configure the plugin so Moodle knows how to reach the Crucible environment.
 4. Add a Crucible activity to a Moodle course.
 5. Point that activity at an existing Crucible exercise.
-6. Launch the exercise from the Moodle course (in an iframe) or in a new tab/window.
+6. Launch the exercise from the Moodle course (in an iFrame) or in a new tab/window.
 
 ## Related Resources
 
