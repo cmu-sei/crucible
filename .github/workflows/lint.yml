@@ -14,8 +14,9 @@ jobs:
       - name: Download Vale
         env:
           GH_TOKEN: ${{ github.token }}
+          VALE_VERSION: v3.24.0
         run: |
-          gh release download --repo errata-ai/vale --pattern "vale_*_Linux_64-bit.tar.gz" -O vale.tar.gz
+          gh release download "$VALE_VERSION" --repo errata-ai/vale --pattern "vale_*_Linux_64-bit.tar.gz" -O vale.tar.gz
           tar -xzf vale.tar.gz vale
 
       - name: Run Vale
