@@ -309,6 +309,8 @@ Import Project lets you import a project from a zip file. Click **Choose File** 
 
     When working with files in Caster, **CTRL+L** locks/unlocks a file to prevent others from editing that file simultaneously. When locked, the file icon appears as a dashed line. When unlocked, the file icon appears solid. Administrators can also lock files. A file is *administratively locked* to prevent anyone from changing that file. A lock icon in the top right corner of the file edit screen denotes that the file is administratively locked. **CTRL+S** saves a file.
 
+    When another user has a file open for editing, a red person-with-pencil icon appears in the top right corner of the file edit screen. Hover over it to see who has the file: **This file is being edited by** *name*. Project Managers, and users with the global `ManageProjects` permission, can release that user's lock: click the icon (**Force release the file from** *name*), then click **Force Release** in the confirmation. The other user loses any unsaved changes, so contact them first. Force release clears only the edit lock; it does not remove an administrative lock.
+
 See the official [Terraform Documentation](https://www.terraform.io/docs/index.html) for more details on supported file types and extensions. In the future, Caster may provide more guidance on allowed types and content of files.
 
 ### Workspaces
