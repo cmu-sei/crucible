@@ -163,25 +163,26 @@ The list below explains the fields in the VM template.
 - **Networks:** A space-delimited list of networks on which the VM will have a network interface. These names should be the same for all systems in your lab that need to connect to the same network. TopoMojo creates the networks on the hypervisor when it deploys the VM/lab.
 - **Guest Settings:** Key-value pairs in the form of `key=value` to pass data into deployed VMs via [VMware guestinfo variables](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/tools/12-5-0/vmware-tools-administration-12-5-0/configuring-vmware-tools-components/using-vmware-tools-configuration-utility/view-virtual-machine-status-information/query-information-using-guestinfo-variable.html) or the [QEMU Firmware Configuration Device](https://www.qemu.org/docs/master/specs/fw*cfg.html) for Proxmox. The *key* is the name of the guest setting. For example, `var1=test` is a guest setting named "var1" with a value of "test". You can randomize guest settings values using [TopoMojo Transforms](#transforms).
 
-  When using VMware as a backing hypervisor, use [VMware Tools](https://helpmanual.io/help/vmtoolsd/), such as the `vmtoolsd` command from the [open-vm-tools package](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html), to access guest info variables from a VM.
+    When using VMware as a backing hypervisor, use [VMware Tools](https://helpmanual.io/help/vmtoolsd/), such as the `vmtoolsd` command from the [open-vm-tools package](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html), to access guest info variables from a VM.
 
-  ![using the vmtoolsd command](img/vmware-tools.png)
+    ![using the vmtoolsd command](img/vmware-tools.png)
 
-  When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (`fw_cfg`) Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) with a command similar to the following, where `variable` is the key of the guest setting to read:
+    When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (`fw_cfg`) Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) with a command similar to the following, where `variable` is the key of the guest setting to read:
 
-  ```bash
-  sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.variable/raw
-  ```
+    ```bash
+    sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.variable/raw
+    ```
 
 - **Replicas:** Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a *gamespace*, set **Replicas** to "3". To deploy one copy of the VM template for each member of the team owning the gamespace, set **Replicas** to "-1".
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.
 - **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine. Common use: attach an OS installer ISO for a blank disk template, or mount utilities during setup. See [Installing an Operating System from an ISO](#installing-an-operating-system-from-an-iso).
 
-  To detach an ISO, click **Remove** in the **ISO** field. TopoMojo only reads this field when it deploys the VM, and TopoMojo locks the template while its VM exists. Delete the deployed VM first (after saving any changes you want to keep), remove the ISO, then deploy again.
+    To detach an ISO, click **Remove** in the **ISO** field. TopoMojo only reads this field when it deploys the VM, and TopoMojo locks the template while its VM exists. Delete the deployed VM first (after saving any changes you want to keep), remove the ISO, then deploy again.
 - **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access.
 
-  !!! note
-      These VMs may still be accessible over the network; participants just cannot open a console via the lab interface.
+    !!! note
+        These VMs may still be accessible over the network; participants just cannot open a console via the lab interface.
+
 - **Linked:** *Unlinking* creates a new clone of the template which you can save and customize. **Unlink** any virtual machine that will not use the default disk included with the template (i.e., you need to save changes to the VM).
 - **Delete Template:** Deletes the template from the workspace.
 
@@ -205,13 +206,13 @@ The deployed virtual machine displays the following additional icons from left t
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes a running VM instance. Before you click **delete**, make sure you have saved any changes to the disk.
 - **Save ( <i class="fa-solid fa-save" aria-label="save-icon" role="img"></i> ):** Save any changes made to the VM. Sometimes called "taking a snapshot", though the technical implementation of this feature may not resemble a true "snapshot" on the hypervisor. The **save** icon is only available when you're using an unlinked disk, since you can't save changes to a linked disk.
 
-  Saving replaces the previous saved state. TopoMojo keeps only one saved state per template, so after a save you can't return to the state before it.
+    Saving replaces the previous saved state. TopoMojo keeps only one saved state per template, so after a save you can't return to the state before it.
 
-  TopoMojo doesn't require a stopped VM, but saving a running VM is like pulling the power cord mid-write. Shut down from inside the guest operating system before you save, especially after installing software or an operating system.
+    TopoMojo doesn't require a stopped VM, but saving a running VM is like pulling the power cord mid-write. Shut down from inside the guest operating system before you save, especially after installing software or an operating system.
 
-  TopoMojo refuses to save a workspace VM while any gamespace launched from the workspace is still running.
+    TopoMojo refuses to save a workspace VM while any gamespace launched from the workspace is still running.
 
-  ![save a vm template](img/templates-save.png)
+    ![save a vm template](img/templates-save.png)
 
 #### Installing an Operating System from an ISO
 
