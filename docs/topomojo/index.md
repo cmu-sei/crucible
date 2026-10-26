@@ -618,9 +618,9 @@ To quickly identify orphaned VMs, search for "orphaned" in the Search field.
 
 ### Users Tab
 
-The **Users** tab shows all TopoMojo users. You can create new users and assign users permissions here. To search for a user, enter the term into the **Search** field or filter by *role* or *audience*. Recall from [workspace Settings](#settings) that *audience* is a list of clients who can launch the workspace as a gamespace.
+The **Users** tab shows all TopoMojo users. You can create new users and assign users permissions here. To search for a user, enter the term into the **Search** field or filter by role (**admins**, **observers**, **creators**, **builders**), by **service accounts**, or by *scope*. Recall from [workspace Settings](#settings) that *audience* is a list of clients who can launch the workspace as a gamespace.
 
-- **View ( <i class="fa-solid fa-list" aria-label="list-icon" role="img"></i> ):** Select **View** to see the properties for the user.
+- **View ( <i class="fa-solid fa-list" aria-label="list-icon" role="img"></i> ):** Select **View** to see the properties for the user. Users with a service account client ID are marked **Service Account**.
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes the user.
 
 #### Roles
@@ -636,6 +636,13 @@ Grant the *Creator* role to users who need to build workspaces and troubleshoot 
 
 An administrator can configure TopoMojo to inherit user roles from the Identity Provider (IdP). For example, an IdP administrator can add roles like *administrator*, *builder*, or a custom role then configure TopoMojo to map those IdP roles to TopoMojo roles. Inheriting roles reduces the need for redundant setup if you're already managing user roles on the identity provider across multiple Crucible apps. See the [Helm deployment documentation](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#authentication-oidc) for more information on how to configure this setting.
 
+TopoMojo reads IdP roles from these settings:
+
+- **`Oidc__UserRolesClaimPath`:** Where in the access token to find role values. The default is `realm_access.roles`, which fits Keycloak realm roles. Set it to the string `null` to turn off IdP roles.
+- **`Oidc__UserRolesClaimMap__<idp-role>`:** Maps an IdP role value to a TopoMojo role. For example, `Oidc__UserRolesClaimMap__builder = Builder` grants the Builder role to anyone whose token contains `builder`. The defaults map `administrator`, `builder`, `creator`, `observer`, and `user` to the matching TopoMojo roles. The IdP can't assign **Disabled**.
+
+A user's *effective role* is the strongest of their TopoMojo role and every role mapped from their IdP roles. When the two differ, the user's row shows an **Identity Role / Effective Role** badge. Click it to see both assigned roles and which one wins. Disabling a user in TopoMojo blocks them regardless of IdP roles.
+
 #### Create a New User
 
 - **Name:** Enter a new user name here.
@@ -644,7 +651,21 @@ An administrator can configure TopoMojo to inherit user roles from the Identity 
 - **Gamespace Limit:** The maximum number of concurrent active gamespaces allowed for this user.
 - **Gamespace Max Duration:** The maximum amount of minutes allowed for a gamespace.
 - **Gamespace Cleanup Grace time:** The number of minutes between gamespace expiration and when TopoMojo tears down the associated VMs.
+- **Service Account Client Id:** Lets an OAuth client authenticate as this user with the client credentials flow, for automation. TopoMojo matches it against the `client_id` claim in the access token; `Oidc__ServiceAccountClientIdClaimType` changes the claim name, and setting it to the string `null` turns service accounts off. Give service accounts the **Observer** role at most; TopoMojo shows a warning on administrators that have a client ID.
 - **Generate ApiKey:** Generate API keys for users to programmatically interact with the TopoMojo API without needing to log in interactively.
+
+For regular users, TopoMojo may update **Name** from the identity token at sign-in.
+
+TopoMojo creates users automatically the first time they sign in, with limits taken from these settings:
+
+| Setting | Default | Effect |
+| --- | --- | --- |
+| `Core__DefaultWorkspaceLimit` | `0` | Workspaces a new user can create. `0` means none; users with the **Creator** role or above aren't limited. |
+| `Core__DefaultTemplateLimit` | `3` | Template limit applied to each workspace created by a user below the **Creator** role. |
+| `Core__DefaultGamespaceLimit` | `0` | Concurrent gamespaces for a new user. `0` means unlimited. The sample `appsettings.conf` shows `2`; the built-in default is `0`. |
+| `Core__DefaultGamespaceMinutes` | `120` | Gamespace duration when neither the user's **Gamespace Max Duration** nor the workspace's **Duration** is set. |
+| `Core__ReplicaLimit` | `5` | Maximum **Replicas** value on a template. |
+| `Core__DefaultUserScope` | `everyone` | Scope added to every user. See [Settings](#settings). |
 
 ### Settings Tab
 
