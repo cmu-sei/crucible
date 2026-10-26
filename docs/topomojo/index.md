@@ -171,7 +171,7 @@ A typical TopoMojo deployment contains several types of templates.
 
 Administrators can publish individual templates (e.g., a stand-alone base install of Kali Linux). They can also publish a "template set" of multiple VMs serving as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, etc.).
 
-TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are workspace-specific and only available within the workspace where the user created them. Administrators manage published templates from the [Templates Tab](#templates-tab) in the Administrator Guide.
+TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are workspace-specific and only available within the workspace where the user created them. Only administrators can publish a template; see [Publishing a Template](#publishing-a-template) in the Administrator Guide.
 
 #### Adding and Editing Templates
 
@@ -210,23 +210,31 @@ The list below explains the fields in the VM template.
 - **Networks:** A space-delimited list of networks on which the VM will have a network interface. These names should be the same for all systems in your lab that need to connect to the same network. TopoMojo creates the networks on the hypervisor when it deploys the VM/lab.
 - **Guest Settings:** Key-value pairs in the form of `key=value` to pass data into deployed VMs via [VMware guestinfo variables](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/tools/12-5-0/vmware-tools-administration-12-5-0/configuring-vmware-tools-components/using-vmware-tools-configuration-utility/view-virtual-machine-status-information/query-information-using-guestinfo-variable.html) or the [QEMU Firmware Configuration Device](https://www.qemu.org/docs/master/specs/fw*cfg.html) for Proxmox. The *key* is the name of the guest setting. For example, `var1=test` is a guest setting named "var1" with a value of "test". You can randomize guest settings values using [TopoMojo Transforms](#transforms).
 
-  When using VMware as a backing hypervisor, use [VMware Tools](https://helpmanual.io/help/vmtoolsd/), such as the `vmtoolsd` command from the [open-vm-tools package](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html), to access guest info variables from a VM.
+    When using VMware as a backing hypervisor, use [VMware Tools](https://helpmanual.io/help/vmtoolsd/), such as the `vmtoolsd` command from the [open-vm-tools package](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html), to access guest info variables from a VM.
 
-  ![using the vmtoolsd command](img/vmware-tools.png)
+    ![using the vmtoolsd command](img/vmware-tools.png)
 
-  When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (`fw_cfg`) Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) with a command similar to the following, where `variable` is the key of the guest setting to read:
+    When using Proxmox as a backing hypervisor, use the [QEMU Firmware Configuration (`fw_cfg`) Device](https://www.qemu.org/docs/master/specs/fw_cfg.html) with a command similar to the following, where `variable` is the key of the guest setting to read:
 
-  ```bash
-  sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.variable/raw
-  ```
+    ```bash
+    sudo cat /sys/firmware/qemu_fw_cfg/by_name/opt/guestinfo.variable/raw
+    ```
 
 - **Replicas:** Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a *gamespace*, set **Replicas** to "3". To deploy one copy of the VM template for each member of the team owning the gamespace, set **Replicas** to "-1".
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.
-- **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine. Common use: attach an OS installer ISO for a blank disk template, or mount utilities during setup. See [Installing an Operating System from an ISO](../tutorials/topomojo-challenge/index.md#installing-an-operating-system-from-an-iso).
+- **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine. Common use: attach an OS installer ISO for a blank disk template, or mount utilities during setup. See [Installing an Operating System from an ISO](#installing-an-operating-system-from-an-iso).
+
+    To detach an ISO, click **Remove** in the **ISO** field. TopoMojo only reads this field when it deploys the VM, and TopoMojo locks the template while its VM exists. Delete the deployed VM first (after saving any changes you want to keep), remove the ISO, then deploy again.
+
+    !!! warning "Proxmox: removing the ISO doesn't clear the CD drive"
+
+        On Proxmox, a template with an empty **ISO** field doesn't get an empty CD drive. The deployed VM keeps whatever CD-ROM the underlying Proxmox template VM has, so clicking **Remove** doesn't detach an ISO that the Proxmox template already carries. To clear it, a Proxmox administrator sets the template VM's **CD/DVD Drive** to **Do not use any media** in Proxmox.
+
 - **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access.
 
-  !!! note
-      These VMs may still be accessible over the network; participants just cannot open a console via the lab interface.
+    !!! note
+        These VMs may still be accessible over the network; participants just cannot open a console via the lab interface.
+
 - **Linked:** *Unlinking* creates a new clone of the template which you can save and customize. **Unlink** any virtual machine that will not use the default disk included with the template (i.e., you need to save changes to the VM).
 - **Delete Template:** Deletes the template from the workspace.
 
@@ -247,10 +255,31 @@ The deployed virtual machine displays the following additional icons from left t
 
 - **Console ( <i class="fa-solid fa-tv" aria-label="console-icon" role="img"></i> ):** Opens the console for the virtual machine.
 - **Stop/Start ( <i class="fa-solid fa-stop" aria-label="stop-icon" role="img"></i> / <i class="fa-solid fa-play" aria-label="play-icon" role="img"></i> ):** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state. Clicking **start** powers on the deployed VM.
-- **Revert ( <i class="fa-solid fa-backward-step" aria-label="revert-icon" role="img"></i> ):** Reverts the VM to its last saved state. You lose all changes made since the last commit. TopoMojo can only revert VMs to their last saved state - there is no history of all previous saved states.
+- **Revert ( <i class="fa-solid fa-backward-step" aria-label="revert-icon" role="img"></i> ):** Reverts the VM to its last saved state. You lose all changes made since the last commit. TopoMojo can only revert VMs to their last saved state - there is no history of all previous saved states. **Revert** is only available on vSphere; TopoMojo doesn't support it on Proxmox, so the icon doesn't appear there. On Proxmox, delete the VM and deploy it again to return to the saved state.
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes a running VM instance. Before you click **delete**, make sure you have saved any changes to the disk.
-- **Save ( <i class="fa-solid fa-save" aria-label="save-icon" role="img"></i> ):** Save any changes made to the VM. Sometimes called "taking a snapshot", though the technical implementation of this feature may not resemble a true "snapshot" on the hypervisor. The **save** icon is only available when you're using an unlinked disk, since you can't save changes to a linked disk. Clicking **save** removes the last saved state and creates a new one with all VM changes.
-  ![save a vm template](img/templates-save.png)
+- **Save ( <i class="fa-solid fa-save" aria-label="save-icon" role="img"></i> ):** Save any changes made to the VM. Sometimes called "taking a snapshot", though the technical implementation of this feature may not resemble a true "snapshot" on the hypervisor. The **save** icon is only available when you're using an unlinked disk, since you can't save changes to a linked disk.
+
+    Saving replaces the previous saved state. TopoMojo keeps only one saved state per template, so after a save you can't return to the state before it.
+
+    TopoMojo doesn't require a stopped VM, but saving a running VM is like pulling the power cord mid-write. Shut down from inside the guest operating system before you save, especially after installing software or an operating system.
+
+    TopoMojo refuses to save a workspace VM while any gamespace launched from the workspace is still running.
+
+    ![save a vm template](img/templates-save.png)
+
+#### Installing an Operating System from an ISO
+
+To build a VM from an operating system installer, combine the steps above in this order:
+
+1. Upload the ISO on the [Files](#files) tab.
+2. Add a blank disk template on the **Templates** tab.
+3. **Unlink** the template so it gets its own disk.
+4. Select the ISO in the template's **ISO** field.
+5. **Initialize**, then **Deploy**, and install the operating system from the console.
+6. Shut down the VM from inside the guest and click **Save**.
+7. Delete the VM, click **Remove** in the **ISO** field, and deploy again to confirm the VM boots from its own disk.
+
+For the full walkthrough, see [Installing an Operating System from an ISO](../tutorials/topomojo-challenge/index.md#installing-an-operating-system-from-an-iso) in the *Creating a TopoMojo Challenge* tutorial.
 
 ## Lab Document
 
@@ -377,7 +406,18 @@ The **Files** tab in the TopoMojo workspace allows you to upload files from your
 
 !!! note
 
-    For ISO uploads to work, TopoMojo needs an NFS (Network File System) datastore presented to the hypervisor.
+    The **Files** tab only appears when the TopoMojo UI settings include `"enable_upload": true`. If you don't see it, ask your administrator to enable it.
+
+    TopoMojo stores uploads in one of two ways. By default, it writes them to `FileUpload__IsoRoot`, which must be a share the hypervisor also mounts, such as an NFS (Network File System) datastore. On Proxmox, that path must end in `/template/iso`. When `FileUpload__UseDatastoreApi` is `true`, TopoMojo uploads to hypervisor storage through the vSphere or Proxmox API instead, and no shared mount is needed.
+
+ISOs you upload on the **Files** tab are *local* to the workspace: only the workspace that holds them can attach them. Administrators manage *global* ISOs, which every workspace can use.
+
+Your TopoMojo administrator controls upload limits:
+
+- **Maximum file size:** `FileUpload__MaxFileBytes`. The default, `0`, means TopoMojo itself sets no limit, but a reverse proxy or ingress in front of TopoMojo may still cap the request size.
+- **Upload time-out:** `FileUpload__UploadTimeoutMinutes`, default `60`. This applies when TopoMojo forwards the uploaded file to hypervisor storage through the datastore API (`FileUpload__UseDatastoreApi`).
+
+If a large ISO fails to upload, ask your administrator to check these settings.
 
 By default, the **Local** filter displays only ISOs available to the current workspace. When you upload a local ISO file, TopoMojo creates a folder named by the workspace GUID--highlighted in green below--in the NFS datastore. Only the current workspace has access to local ISO files in the workspace-named folder.
 
@@ -479,7 +519,7 @@ The screenshot below shows several active and inactive gamespaces (usernames red
 - **Refresh ( <i class="fa-solid fa-arrows-rotate" aria-label="refresh-icon" role="img"></i> ):** Refresh the state of the VM from the hypervisor.
 - **Console ( <i class="fa-solid fa-tv" aria-label="console-icon" role="img"></i> ):** Opens the console for the virtual machine, allowing interaction.
 - **Stop/Start ( <i class="fa-solid fa-stop" aria-label="stop-icon" role="img"></i> / <i class="fa-solid fa-play" aria-label="play-icon" role="img"></i> ):** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state. Clicking **start** powers on the deployed VM.
-- **Revert ( <i class="fa-solid fa-backward-step" aria-label="revert-icon" role="img"></i> ):** Reverts the VM to its last saved state.
+- **Revert ( <i class="fa-solid fa-backward-step" aria-label="revert-icon" role="img"></i> ):** Reverts the VM to its last saved state. vSphere only; the icon doesn't appear on Proxmox.
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes a running VM instance.
 - **JSON ( <i class="fa-solid fa-code" aria-label="code-icon" role="img"></i> ):** Shows detailed information about the gamespace, including: answers to questions, variables associated with the challenge, submitted answers, challenge questions and expected answers, and if the participant answered questions correctly or incorrectly.
 - **Dispatcher ( <i class="fa-solid fa-keyboard" aria-label="keyboard-icon" role="img"></i> ) :** Used to issue commands to a VM from TopoMojo provided that the [TopoMojo agent program](https://github.com/cmu-sei/TopoMojo/tree/main/src/TopoMojo.Agent) is running on that VM. The VM requires an internet connection which allows the agent program to establish a connection with TopoMojo. `target` is the hostname of the VM that you want to run the command on. `command` is any command you wish to run. See TopoMojo's [GitHub repository](https://github.com/cmu-sei/TopoMojo/tree/main/src/TopoMojo.Agent) for more information on TopoMojo's agent.
@@ -628,6 +668,46 @@ Special `Key` values:
 | `guestinfo.userdata.encoding` | `base64` | Declares the encoding used for `guestinfo.userdata`. |
 | `guestinfo.network` | encoded cloud-init network config | Provides cloud-init network configuration for cloud-init enabled images. |
 | `guestinfo.network.encoding` | `base64` | Declares the encoding used for `guestinfo.network`. |
+
+#### Publishing a Template
+
+Every template starts *unpublished*. Unpublished templates are only available in the workspace that owns them. Workspace builders can't publish their own templates.
+
+To publish a template so other workspaces can add it from **Add Templates**:
+
+1. Save the template's final state in its workspace. See [Deployed VM Actions](#deployed-vm-actions).
+2. In the Administrator Guide, click the **Templates** tab and search for the template.
+3. Expand the template.
+4. Set **Published** to **Visible**. The toggle only appears on unlinked templates.
+5. Click **Save Settings**.
+
+Workspaces that add a published template get a *linked* copy that uses the published template's disk. To share a template with only some workspaces instead of all of them, leave it unpublished and enter one or more space-delimited tokens in **Audience**. A workspace can add the template when its template scope contains a matching token.
+
+#### Bringing In an Existing Disk
+
+You can build a template around a disk created outside TopoMojo, such as an exported appliance or a VM built by hand on the hypervisor.
+
+On **vSphere**:
+
+1. Copy the `.vmdk` disk to the datastore named by `Pod__DiskStore`, in a folder that isn't a workspace GUID. Stock disks conventionally go in the `00000000-0000-0000-0000-000000000000` folder. TopoMojo doesn't save over or delete disks outside a workspace's own folder.
+2. On the **Templates** tab, click **Create a new template**, or expand an existing template.
+3. In **Detail**, set the disk's `Path` to the disk's location relative to `Pod__DiskStore`. For example, if `Pod__DiskStore` is `[datastore1] topomojo` and the disk is at `[datastore1] topomojo/00000000-0000-0000-0000-000000000000/router.vmdk`, enter:
+
+    ```json
+    "Disks": [
+      {
+        "Path": "[ds] 00000000-0000-0000-0000-000000000000/router.vmdk",
+        "Controller": "lsilogic"
+      }
+    ]
+    ```
+
+    TopoMojo replaces the bracketed datastore name with the one in `Pod__DiskStore`, so `[ds]` works as a placeholder.
+
+4. Set `Cpu`, `Ram`, `Guest`, and the `Disks` `Controller` to match the disk. A wrong controller or guest type can keep the operating system from booting.
+5. Click **Save Settings**, then [publish the template](#publishing-a-template) if other workspaces need it.
+
+On **Proxmox**, TopoMojo deploys by cloning a Proxmox template VM rather than by disk path. Import the disk into a VM on Proxmox, convert that VM to a template, and set `Template` in **Detail** to the Proxmox template's name exactly.
 
 #### Common Template Errors
 
