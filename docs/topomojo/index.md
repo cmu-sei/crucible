@@ -327,6 +327,8 @@ The **Play** tab is where you can interact with your lab in the same way others 
 
 Access the **Admin Dashboard** by clicking **Admin** in the top right corner of the navigation bar. You need the `admin` role assigned to your user to see the **Admin** navigation option.
 
+The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Announcement, and Janitor tools described next.
+
 ### Hub Connections
 
 **Hub connections** informs TopoMojo admins about which users are currently logged into TopoMojo.
@@ -337,9 +339,24 @@ The **Announcement** feature allows TopoMojo admins to broadcast important messa
 
 ### Janitor
 
-The **Janitor** service cleans up unused resources (e.g., a workspace VM that has been idle for a long time) in TopoMojo.
+The **Janitor** service cleans up unused resources (e.g., a workspace VM that has been idle for a long time) in TopoMojo. It runs in the background on two schedules:
 
-**Cleanup Report:** Provides a log of the Janitor's activity.
+- About every minute, it ends gamespaces that have passed their expiration time plus their cleanup grace time, then deletes the VMs of ended gamespaces.
+- About every one to two hours, it runs a full cleanup pass over workspaces and workspace VMs.
+
+**Cleanup Report:** Runs the full cleanup pass immediately and lists what it found, with sortable **Reason**, **Name**, **Owner**, **VMs**, and **Last Activity** columns. Click a workspace name to open it. This button doesn't just show a log: if the Janitor isn't in dry-run mode, clicking it deletes the VMs it reports.
+
+The full cleanup pass reports three kinds of items, shown in the **Reason** column:
+
+- **IdleWorkspaceVms:** Workspaces whose VMs have been idle longer than `Core__Expirations__IdleWorkspaceVmsExpiration` (default `1d`). When dry run is off, the Janitor deletes these workspace VMs. Saved template disks aren't affected.
+- **UnpublishedWorkspace:** Unpublished workspaces idle longer than `Core__Expirations__UnpublishedWorkspaceTimeout` (default `1w`).
+- **InactiveWorkspace:** Published workspaces with no launches for longer than `Core__Expirations__InactiveWorkspaceExpiration` (default `1y`).
+
+`Core__Expirations__DryRun` defaults to `true`, which reports idle workspace VMs without deleting them. Set it to `false` to let the Janitor delete them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only, regardless of `DryRun`.
+
+!!! warning "Sample configuration key names"
+
+    The sample `appsettings.conf` in the TopoMojo repository lists `Core__Expirations__UnpublishedWorkspacesExpiration` and `Core__Expirations__InactiveWorkspacesExpiration`. TopoMojo ignores those names. Use `Core__Expirations__UnpublishedWorkspaceTimeout` and `Core__Expirations__InactiveWorkspaceExpiration`.
 
 ### Gamespaces Tab
 
