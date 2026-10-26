@@ -394,7 +394,7 @@ To edit the MSEL's basic information and configuration, follow these steps:
 | **Set a Start Time** | Boolean | When checked, exposes a **Start Date / Time** picker and schedules a specific start moment for the MSEL. When unchecked, the MSEL is open-ended. | `True` |
 | **Start Date / Time** | Datetime | Start date/time of the MSEL (only visible when **Set a Start Time** is checked). | `09/10/2024 20:00:00` |
 | **Duration (d / h / m)** | Integer × 3 | End time relative to the start, expressed as days / hours / minutes. Click **+** to increment or type directly into each field. | `1 d 12 h 00 m` |
-| **Applications to Integrate** | Boolean checkboxes | Enable any of: Player, Gallery, CITE, Steamfitter. Enabling an integration activates additional MSEL sidebar tabs for that app. | Player: `True`, CITE: `True` |
+| **Applications to Integrate** | Boolean checkboxes | Enable any of: Player, Gallery, CITE, Steamfitter, Caster. Enabling an integration activates additional MSEL sidebar tabs for that app. Caster requires Player. | Player: `True`, CITE: `True` |
 | **MSEL Status** | Dropdown | MSEL lifecycle state: `Pending`, `Entered`, `Approved`, `Deployed`, `Complete`, `Archived`. | `Approved` |
 | **Header Row Metadata (Height)** | Integer | Height of the header row when exporting this MSEL to `.xlsx`. | `30` |
 | **Difficulty Rating** | Dropdown | Metadata tag describing the exercise's difficulty. | (per framework) |
@@ -428,6 +428,7 @@ The **Metadata** block on the Config tab captures non-functional descriptors tha
 - **[Gallery](#glossary):** Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To learn more about this integration, reference the [Gallery](#gallery) section.
 - **[CITE](#glossary):** Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL. To learn more about this integration, reference the [CITE](#cite) section.
 - **[Player](#glossary) & [Steamfitter](#glossary):** Blueprint will automate the adding of events specified on the MSEL, as well as configure exercise details in Player.
+- **[Caster](#glossary):** Blueprint will deploy the MSEL's virtual machine topology from a Caster directory into a new Caster workspace, with the VMs added to the Player view and its teams. To learn more about this integration, reference the [Caster](#caster) section.
 
 #### MSEL Pages
 
@@ -809,7 +810,47 @@ While the **Events** tab lets MSEL owners and content developers manage events, 
 
 #### Assessor View
 
-The **Assessor View** tab gives Evaluators read-only access to the MSEL during a live exercise for the purpose of recording assessment outcomes. It is accessible directly via the **Assessor View URL** on the Config tab (`/assess/?msel={mselId}`).
+The **Assessor View** tab is where Evaluators watch a live exercise and rate the participating teams against the MSEL's competencies. Each scenario event shows the xAPI statements the exercise applications recorded for it, beside a competency assessment where the Evaluator rates each competency and submits the rating as an xAPI competency assertion. The MSEL's content is read-only here; the only values an Evaluator can change are **Checkbox** data fields.
+
+The Assessor View is also available outside the MSEL editor via the **Assessor View URL** on the Config tab (`/assess/?msel={mselId}`).
+
+##### Access
+
+| MSEL Role | Access |
+| --- | --- |
+| **Owner**, **Evaluator** | View the Assessor View and check or clear **Checkbox** data fields |
+| **Editor**, **Approver** | View the Assessor View |
+
+System Admins have full access to every MSEL's Assessor View. Users with no role on the MSEL see **Access Denied**.
+
+##### Choose What Assessors See
+
+The Assessor View shows only the columns the MSEL owner marks for it. If none are marked, it shows **No data fields are marked as assessor-visible.**
+
+To choose the Assessor View columns, follow these steps:
+
+1. Navigate to the **Data Fields** tab.
+2. Check the **Assessor View** column for each data field the assessors should see. The **Move**, **Group**, **Execution Time**, and **Integration Target** rows control those columns the same way.
+
+To give assessors competencies to rate, attach a framework and its competencies on the [Competencies](#competencies) tab, then associate them with teams and scenario events. The rating levels come from the framework's default proficiency scale.
+
+##### Review xAPI Evidence
+
+Events are grouped under their move and group. Click a move, group, or event row to expand it. Use **Expand All** (Ctrl+Shift+E) and **Collapse All** (Ctrl+Shift+C) in the header to open or close every row.
+
+An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Steamfitter, Player, or Gallery), and **Verb** filters, and click **Refresh xAPI statements** to load new ones.
+
+Click **Search Events** in the header to search the events and filter them by the values of their data fields.
+
+##### Submit a Competency Assessment
+
+The **Competency Assessment** panel on the right of an expanded row lists the competencies associated with that move, group, or event. To rate them, follow these steps:
+
+1. In **Assess Team**, select the team being assessed. Only teams associated with at least one of the listed competencies appear. When the evidence is filtered to a single team, that team is preselected.
+2. For each competency, select a **Rating** and optionally enter a **Comment**. Hover over the competency ID to see its name.
+3. Click **Submit assertion** to submit one rating, or **Submit All** to submit every rated competency.
+
+Each submitted rating is marked **Submitted**. Blueprint records it in the Learning Record Store (LRS) as an xAPI statement with the `asserted` verb, so xAPI must be configured for Blueprint.
 
 #### MSEL Playbook
 
@@ -1145,6 +1186,8 @@ You can add URL parameters to point to a specific CITE evaluation, Gallery exhib
 - **{galleryExhibitId}:** Add this variable to the URL to point to a specific Gallery exhibit.
 - **{steamFitterScenarioId}:** Add this variable to the URL to point to a specific Steamfitter scenario.
 - **{playerViewId}:** Add this variable to the URL to point to a specific Player view.
+- **{casterWorkspaceId}:** Add this variable to the URL to point to the Caster workspace the MSEL deployed.
+- **{vmUrl}:** Add this variable to the URL to point to the VM UI, for example `{vmUrl}/views/{playerViewId}`.
 
 After you've added all desired configurations, click **Save**.
 
@@ -1170,6 +1213,40 @@ To search for a specific app, follow these steps:
 1. Navigate to the **Player Apps** tab.
 2. Click the **Search Bar** and type the name of the desired app.
 
+#### Caster
+
+If enabled, Blueprint deploys the MSEL's virtual machine topology through [Caster](../caster/index.md). On push, Blueprint creates a workspace named `blueprint-{mselId}` in the chosen Caster directory, writes the Player view and team IDs into the workspace as Terraform variables, and plans and applies it. The VMs land in the MSEL's Player view, so the Caster integration requires the Player integration.
+
+##### Choose the Caster Directory
+
+The directory holds the Terraform template to deploy. To choose it, follow these steps:
+
+1. Navigate to the **Info** tab.
+2. Under **Applications to Integrate**, check **Player** and **Caster**.
+3. In **Directory**, select the Caster directory, listed as *project / directory*.
+4. Click **Save Changes**.
+
+The directory list comes from Caster, so the user choosing it needs access to Caster. Without it, Blueprint shows **Caster directories could not be loaded. You need access to Caster to choose one.**
+
+After a push, the **Workspace** row shows the workspace Blueprint created. Click **Open in Caster** to open the Caster project that holds it.
+
+##### Map Teams to the Template
+
+Blueprint writes each Player team's ID to a Terraform variable named after the team: lower case, with spaces turned into underscores. A template that names its team variables differently can still be used by mapping each MSEL team to one of the template's variables.
+
+To map a team, follow these steps:
+
+1. Navigate to the **Teams** tab. The **Topology Team** column shows each team's variable.
+2. Click **Edit** next to the team, then select the template variable in **Topology Team**. Select **By team name** to go back to the variable the team's name gives.
+
+Blueprint lists the string variables the template declares, except sensitive ones, ones the template already assigns, and the ones Blueprint writes itself: `view_id`, `user_id`, `username`, and the deprecated `exercise_id`.
+
+The Teams tab warns when a team is mapped to a variable the template no longer declares, and when a template variable has no MSEL team. A variable with no MSEL team and no default in the template fails the Caster plan. If two teams end up with the same variable, the push fails and names the teams.
+
+##### Give Participants the VMs
+
+Participants reach the deployed VMs through the VM UI. Add a [Player app](#add-a-player-app) whose URL uses `{vmUrl}`, for example `{vmUrl}/views/{playerViewId}`. Until the MSEL has one, the **Info** and **Player Apps** tabs warn that participants will not be able to reach the Caster VMs.
+
 #### Push Integrations
 
 After adding all of the MSEL information and performing all necessary configurations, you can push information from enabled integrations to their respective applications.
@@ -1180,6 +1257,8 @@ To push MSEL information to their respective applications, follow these steps:
 
 1. Navigate to the **Info** tab.
 2. Click **Push Integrations**.
+
+When Caster is enabled, Blueprint deploys the topology last, after the other integrations, because the Terraform apply can take a long time.
 
 #### Remove Integrations
 
@@ -1192,15 +1271,19 @@ To remove MSEL information from the applications, follow these steps:
 1. Navigate to the **Info** tab.
 2. Click **Remove Integrations**.
 
+When Caster is enabled, Blueprint destroys the Caster workspace first, while the Player view its VMs belong to still exists. If the destroy fails, Blueprint stops and keeps the other integrations, so **Remove Integrations** can be run again.
+
 ## Glossary
 
 This glossary defines key terms and concepts used in the Blueprint application.
 
 **`Approver` Role:** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
 
-**Assessor View:** Read-only MSEL view used by Evaluators during an exercise to record assessment outcomes. Directly accessible via the Assessor View URL on the Config tab.
+**Assessor View:** MSEL view used by Evaluators during an exercise to review xAPI evidence and submit competency ratings for teams. Directly accessible via the Assessor View URL on the Config tab.
 
 **Blueprint**: Web application created to make the development of a MSEL and events easier.
+
+**Caster:** Web application that deploys virtual machine topologies from Terraform templates organized in projects, directories, and workspaces.
 
 **Catalog:** A reusable, named collection of scenario events associated with a specific inject type. Catalogs are defined in Administration → Catalogs and can be pulled into MSELs.
 
