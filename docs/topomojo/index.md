@@ -319,7 +319,9 @@ The **Files** tab in the TopoMojo workspace allows you to upload files from your
 
 !!! note
 
-    For ISO uploads to work, TopoMojo needs an NFS (Network File System) datastore presented to the hypervisor.
+    The **Files** tab only appears when the TopoMojo UI settings include `"enable_upload": true`. If you don't see it, ask your administrator to enable it.
+
+    TopoMojo stores uploads in one of two ways. By default, it writes them to `FileUpload__IsoRoot`, which must be a share the hypervisor also mounts, such as an NFS (Network File System) datastore. On Proxmox, that path must end in `/template/iso`. When `FileUpload__UseDatastoreApi` is `true`, TopoMojo uploads to hypervisor storage through the vSphere or Proxmox API instead, and no shared mount is needed.
 
 ISOs you upload on the **Files** tab are *local* to the workspace: only the workspace that holds them can attach them. Administrators manage *global* ISOs, which every workspace can use.
 
