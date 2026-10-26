@@ -274,7 +274,7 @@ The template still has the installer ISO attached, so every VM deployed from it 
 3. In the **ISO** field, click **Remove**.
 4. Click **Deploy** and open the console to confirm the VM boots from its own disk.
 
-The saved VM now contains the installed operating system and you can use it as a template for the challenge.
+The saved VM now contains the installed operating system and you can use it as a template for the challenge. To make it available to other workspaces, an administrator must publish it; see [Publishing a Template](../../topomojo/index.md#publishing-a-template).
 
 ### Adding an Additional Transform
 

@@ -143,7 +143,7 @@ A typical TopoMojo deployment contains several types of templates.
 
 Administrators can publish individual templates (e.g., a stand-alone base install of Kali Linux). They can also publish a "template set" of multiple VMs serving as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, etc.).
 
-TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are workspace-specific and only available within the workspace where the user created them. Administrators manage published templates from the [Templates Tab](#templates-tab) in the Administrator Guide.
+TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are workspace-specific and only available within the workspace where the user created them. Only administrators can publish a template; see [Publishing a Template](#publishing-a-template) in the Administrator Guide.
 
 #### Adding and Editing Templates
 
@@ -534,6 +534,20 @@ Special `Key` values:
 | `guestinfo.userdata.encoding` | `base64` | Declares the encoding used for `guestinfo.userdata`. |
 | `guestinfo.network` | encoded cloud-init network config | Provides cloud-init network configuration for cloud-init enabled images. |
 | `guestinfo.network.encoding` | `base64` | Declares the encoding used for `guestinfo.network`. |
+
+#### Publishing a Template
+
+Every template starts *unpublished*. Unpublished templates are only available in the workspace that owns them. Workspace builders can't publish their own templates.
+
+To publish a template so other workspaces can add it from **Add Templates**:
+
+1. Save the template's final state in its workspace. See [Deployed VM Actions](#deployed-vm-actions).
+2. In the Administrator Guide, click the **Templates** tab and search for the template.
+3. Expand the template.
+4. Set **Published** to **Visible**. The toggle only appears on unlinked templates.
+5. Click **Save Settings**.
+
+Workspaces that add a published template get a *linked* copy that uses the published template's disk. To share a template with only some workspaces instead of all of them, leave it unpublished and enter one or more space-delimited tokens in **Audience**. A workspace can add the template when its template scope contains a matching token.
 
 #### Common Template Errors
 
