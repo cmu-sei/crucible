@@ -154,6 +154,25 @@ To add a template to your workspace:
 3. Click the **edit** icon to expand the template metadata and make changes. Making changes inside the VM requires [deploying the VM](#refresh-and-deploy).
    ![edit a vm template](img/templates-edit.png)
 
+#### Templates Tab Notices
+
+The **Templates** tab shows notices about the workspace's state:
+
+- **Idle VMs:** Any workspace VM left idle for a day may be deleted by the [Janitor](#janitor). Delete template VMs you aren't using.
+- **Running gamespaces:** When gamespaces launched from this workspace are still running, TopoMojo can't save changes to its VMs. The **Delete N Gamespaces** button ends them so you can save again. Use it with care; it ends other people's sessions too.
+- **Deployed template:** While a template's VM is deployed, the template's fields are read-only. Delete the VM to edit them.
+
+The **Template Manager (admin)** link opens the admin [Templates Tab](#templates-tab) filtered to this workspace; it only works for administrators. When you search **Add Templates**, a published *template set* shows **Add (N)**, where *N* is the number of templates it adds.
+
+#### Template Revisions
+
+When an administrator publishes a new revision of a template, the **Templates** tab offers to move your copy onto it:
+
+- **Change parent to *name*?** appears on a linked template. Click **Resolve** to relink it to the new revision. Your template then uses the new revision's disk.
+- **Manually updated to match *name*?** appears on an unlinked template that came from the same parent. Click **Resolve** to record the new revision as its parent. This doesn't change the template's own disk.
+
+TopoMojo only offers revisions that are published or whose **Audience** matches the workspace's template scope.
+
 #### Template Field Definitions
 
 The list below explains the fields in the VM template.
@@ -189,6 +208,7 @@ The list below explains the fields in the VM template.
 
 Once the template is in the appropriate state:
 
+- **Initialize ( <i class="fa-solid fa-gear" aria-label="initialize-icon" role="img"></i> ):** Creates the template's disk. Appears only on an unlinked template whose disk doesn't exist yet, such as right after you click **Unlink**. **Deploy** appears once initialization finishes.
 - **Refresh ( <i class="fa-solid fa-arrows-rotate" aria-label="refresh-icon" role="img"></i> ):** Refresh queries the state of the VM from the hypervisor. This is useful if you run a `shutdown` command in the VM and the TopoMojo UI icons haven't updated to reflect the powered-off state of the VM yet.
 - **Deploy ( <i class="fa-solid fa-bolt" aria-label="deploy-icon" role="img"></i> ):** Deploys that virtual machine into your workspace.
 
@@ -449,9 +469,22 @@ Filter for all templates from a workspace by clicking the *name* of the of the w
 
     Unlinked VMs are marked with the unlinked icon ( <i class="fa-solid fa-unlink" aria-label="unlink-icon" role="img"></i> ) and show the parent template name.
 
+The **Templates** tab also has these tools:
+
+- **Create:** Create a new template that isn't in any workspace.
+- **published:** Filter the list to published templates.
+- **parent[...]:** Click the parent name on a template to filter to templates derived from that parent. Click the filter to clear it.
+- **Workspace name:** Click a template's workspace to filter to that workspace's templates. Templates outside any workspace show **Stock Template**.
+- **Favorite:** Click the star next to a template to pin it to the top of the list.
+- **Clone:** Create an unlinked, unpublished copy of a template, with the original as its parent. If the name ends in a version such as `v1`, the copy is named `v2`; otherwise TopoMojo appends `-CLONE`. The copy keeps the original's **Detail**, including its disk paths. Once you publish the copy, workspace templates derived from the same parent see a [Resolve](#template-revisions) prompt.
+
+!!! warning "No isolation checking outside a workspace"
+
+    Templates you edit from this tab aren't inside a workspace, so TopoMojo doesn't apply its usual isolation checks.
+
 #### Template Properties
 
-The **Templates** tab in the Administrator Guide displays template metadata and configuration. The **Detail** field contains the raw JSON configuration TopoMojo passes to the hypervisor when deploying the VM.
+The **Templates** tab in the Administrator Guide displays template metadata and configuration. The **Detail** field contains the raw JSON configuration TopoMojo passes to the hypervisor when deploying the VM. Linked templates show the read-only **Parent Detail** instead, since they inherit their configuration from the parent.
 
 !!! note
     The Detail field hint text reads: "Advanced configuration. Keep valid JSON to avoid errors."
