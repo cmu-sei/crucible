@@ -307,6 +307,15 @@ You can attach an ISO to a VM in the challenge workspace **Templates** tab. See 
 
 You can also attach an ISO to a VM using the workspace **Challenge** tab's **Variant Detail** function. This "dynamic ISO attachment" gives you the ability to attach a variant-specific ISO file to a template. You *must* specify a target(s) here. See the [Variants](#variants) section of this guide.
 
+### Deleting an ISO
+
+To delete a local ISO, click **Delete** next to it in the ISO list and confirm. Any editor of the workspace can delete its local ISOs; only administrators can delete global ISOs, from the [Files Tab](#files-tab) in the Administrator Guide.
+
+Before deleting, TopoMojo checks whether anything uses the ISO. If nothing does, it deletes the file right away. Otherwise, the **Delete ISO** dialog lists the **Templates** and **Active Gamespaces** that use it:
+
+- **Active gamespaces:** You can't delete the ISO until those gamespaces end. Click **Close**.
+- **Templates only:** Deleting leaves those templates with a broken ISO reference. Click **Delete Anyway** to continue, or **Cancel**.
+
 ## Play
 
 The **Play** tab is where you can interact with your lab in the same way others will when they launch your content or "play" through your challenge. Play deploys a *gamespace*, a read-only copy of all virtual machines in the *workspace*. See more about *gamespaces* in the [Workspace and Gamespace](#workspace-and-gamespace) section.
@@ -529,6 +538,24 @@ Special `Key` values:
 | `invalid token value!` | Hypervisor authentication failed | Check `Pod__AccessToken` configuration |
 | HTTP 405 Method Not Allowed | Wrong endpoint for the operation | Use `POST /api/template-detail` for new templates |
 | HTTP 500 Internal Server Error | Hypervisor template not found | Verify the `Template` name matches the VM name on the hypervisor |
+
+### Files Tab
+
+The **Files** tab, titled **Global Files**, is where administrators upload *global* ISOs, which every workspace can attach. Uploading works the same way as the workspace [Files](#files) tab. As there, TopoMojo wraps non-ISO files in an ISO, and large files (over 1 GB) can take extra time to process after the upload finishes.
+
+The list shows every ISO in TopoMojo, global and local, with **Name** and **Workspace** columns:
+
+- **Workspace:** Shows a **Global** badge for global ISOs, or the owning workspace's name and ID for local ones. A **(deleted)** badge marks a local ISO whose workspace no longer exists. Use these to find and remove leftover files.
+- **Global Only:** Filter the list to global ISOs.
+- **Refresh:** Reload the list.
+- **Delete:** Delete any ISO, global or local. The same usage check applies as in [Deleting an ISO](#deleting-an-iso).
+
+How TopoMojo lays out ISO files depends on the hypervisor:
+
+- **vSphere:** Each workspace's local ISOs are in a folder named with the workspace GUID. Global ISOs are in the folder named with a GUID of all zeros.
+- **Proxmox:** Proxmox storage keeps all ISOs in one flat list. TopoMojo encodes the scope in the filename, as the workspace GUID (or the all-zeros GUID for global ISOs), then `Pod__IsoScopeSeparator` (default `__`), then the original filename. The separator may only contain letters, digits, `-`, `_`, and `.`. ISOs uploaded by older releases with `#` as the separator still work.
+
+For hypervisor storage settings, see [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) in the TopoMojo repository.
 
 ### Machines Tab
 
