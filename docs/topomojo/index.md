@@ -254,11 +254,31 @@ and
 
 The *Challenge* tab in the TopoMojo workspace is where engineers configure randomized challenge configuration (*transforms*) and questions for the lab/challenge.
 
+Unlike template fields, the Challenge tab doesn't save as you type. Click **Save** when you finish editing.
+
 ### Transforms
 
 **Transforms** allow you to define dynamic variables that TopoMojo generates at *gamespace* deploy time. Transforms are key/value pairs –- the **key** is the name of your transform and the **value** is the type of the transform. Expand the tooltip under the transforms text box to see details about the available transform data types. The screenshot below shows a transform named "token1" that will have a value of 8 random hexadecimal characters.
 
 ![configuring transforms](img/transforms.png)
+
+Values use the format `type:range`, where the range is optional:
+
+| Value | Result |
+| --- | --- |
+| `hex` | 8 random hexadecimal characters. `hex:12` yields 12. |
+| `b64` | 24 random base64 characters. `b64:16` yields 16. |
+| `int` | A random decimal number. `int:99-999` yields one between 99 and 999. |
+| `uid` | A random GUID. |
+| `list:one two three four` | One word picked at random from the list. |
+| `list:2:one two three four five` | Two words picked at random. Also creates indexed keys, `##key_1##` and `##key_2##`, for each word. |
+| `index:3:zero one two three four` | The word at that zero-based position; this example yields `three`. |
+| `ipv4:192.168.22.0/24` | A random IP address in the Classless Inter-Domain Routing (CIDR) range, such as `192.168.22.137`. |
+| `id` | The gamespace ID. |
+| `variant` | The gamespace's variant index. |
+| `app_url`, `topomojo_url` | TopoMojo's URL, without a path. |
+| `grader_url` | The grading endpoint URL. |
+| `api_key`, `grader_key` | The gamespace's API key, for grading scripts inside the lab. Never expose it to participants. |
 
 To access transforms in the challenge, use the referenced "*double-pounder-key* (`##key##`)" notation. When TopoMojo deploys a gamespace, the engine generates random values for all transforms, looks for double-pounder-keys, then replaces them with the randomly generated values for that deployment.
 
@@ -280,7 +300,21 @@ A *variant* describes a different version of a challenge. Variants can contain d
 
 Use the **Clone ( <i class="fa-solid fa-copy"  aria-label="copy-icon" role="img"></i> )** button to create a new variant that is a copy of an existing variant. This makes minor edits between variants easy to facilitate.
 
+Click **Show Variant Detail** to expand each variant's settings:
+
+- **Markdown:** Variant-specific text, appended to the challenge text for players who get this variant.
+- **ISO:** A variant-specific ISO **File** and the **Targets** (space-delimited template names) to attach it to. See [Files](#files).
+
 ### Question Set
+
+A variant can have more than one *question set*, for grouped tasks or a challenge that unlocks in stages. Each set has a name (shown to players; it defaults to "Question Set N"), optional **Markdown** with instructions for that set, and its own questions. Use the set's controls to move it up or down, clone it, or remove it, and click **Add Question Set** to add another.
+
+To make a set unlock only after players score enough on earlier ones, set its prerequisites:
+
+- **Prerequisite Total Weight:** The weight players must score across all challenge questions.
+- **Prerequisite Prev. Section Weight:** The weight players must score in the previous set.
+
+Enter both as fractions of the total score, from `0` to `1`. For example, `0.5` requires half the available points. TopoMojo compares them against normalized question weights, so a value such as `50` never unlocks the set. `0` means no prerequisite. The first set can't have prerequisites. Players see locked sets as a note listing what they must score to unlock the next one.
 
 **Move Up, Move Down, Remove:** Use these functions to position the question in the sequence of questions for that set or remove it.
 
