@@ -369,7 +369,7 @@ The full cleanup pass reports three kinds of items, shown in the **Reason** colu
 
 ### Gamespaces Tab
 
-The **Gamespaces** tab is where admins search for gamespaces. Use the table headers to sort results by ID, time remaining before expiration, and parent workspace. Use filters to show **active** and **inactive** gamespaces. By default, the search is for *active* gamespaces. Green indicates *active* gamespaces and gray indicates *inactive* gamespaces. An *active* gamespace is one where the player can still interact with VMs and answer questions. An *inactive* gamespace is one the player has completed (answered all questions) or that has expired.
+The **Gamespaces** tab is where admins search for gamespaces. **Search** matches the gamespace ID, the manager's name, or the workspace title. Use the table headers to sort results by **ID**, **Time Left**, **Created Date**, and **Manager / Workspace**. Use filters to show **active** and **inactive** gamespaces. By default, the search is for *active* gamespaces. Green indicates *active* gamespaces and gray indicates *inactive* gamespaces. An *active* gamespace is one where the player can still interact with VMs and answer questions. An *inactive* gamespace is one the player has completed (answered all questions) or that has expired.
 
 **Refresh:** Refreshes your search.
 
@@ -377,10 +377,14 @@ The **Gamespaces** tab is where admins search for gamespaces. Use the table head
 
 Gamespaces in the table show the following information:
 
-- Gamespace id (e.g. `e9416013`)
-- Time remaining (if active)
-- User who owns the gamespace
-- Title of the *workspace* that the *gamespace* corresponds to
+- **ID:** The first eight characters of the gamespace ID (e.g. `e9416013`).
+- **Time Left:** Time remaining, for active gamespaces.
+- **Created Date:** When the gamespace was created.
+- **Manager / Workspace:** The user who manages the gamespace, and the title of the *workspace* it was launched from.
+
+In the **active** view, click the star next to a gamespace to favorite it and pin it to the top of the list.
+
+When you view a gamespace that has ended but still has VMs on the hypervisor, an **Admin Notice** reports how many VMs remain, with links to the [Machines Tab](#machines-tab) and the **Gamespaces** tab where you can delete them.
 
 The screenshot below shows several active and inactive gamespaces (usernames redacted).
 
@@ -404,17 +408,18 @@ The screenshot below shows several active and inactive gamespaces (usernames red
 
 ### Workspaces Tab
 
-The **Workspaces** tab is where the admin can search for workspaces. Use the table headers to sort results by title, created date, and last activity.
+The **Workspaces** tab is where the admin can search for workspaces by name or ID. Use the table headers to sort results by **Workspace Name**, **Created Date**, and **Last Activity**. Click the star next to a workspace to favorite it and pin it to the top of the list.
 
 An admin can view every workspace using this menu, even without being a collaborator. Admins and non-admins use the search feature in the left navigation pane to view workspaces where they are a collaborator. See [Finding a Space](#finding-a-space) for more details.
 
-- **Create ( <i class="fa-solid fa-plus" aria-label="create-icon" role="img"></i> ):** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](#building-a-new-workspace).
-- **Upload Zip ( <i class="fa-solid fa-file" aria-label="file-icon" role="img"></i> ):** Upload a workspace export zip to import workspaces into TopoMojo.
-- **Download ( <i class="fa-solid fa-download" aria-label="download-icon" role="img"></i> ):** Download a zipped workspace export. Workspace exports can contain one or more workspaces. TopoMojo will automatically include additional dependent workspaces and templates for workspaces that contain linked resources.
+- **Create:** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](#building-a-new-workspace).
+- **UploadZip:** Upload a workspace export (`.zip` or `.json`) to import workspaces into TopoMojo. An **Upload Results** message lists what TopoMojo imported.
+- **Download:** Switches the list into selection mode. Check the workspaces to export, then click **Download (N)** to download a zipped export, or click **Cancel**. Workspace exports can contain one or more workspaces. TopoMojo will automatically include additional dependent workspaces and templates for workspaces that contain linked resources.
+- **Delete:** Delete a single workspace from its row.
 
 Selecting a workspace takes you the **Settings** tab of that workspace. For additional help on the **Settings** tab, see [Building a new workspace](#building-a-new-workspace).
 
-The *workspace id* is visible below the workspace title. The workspace identifier matches the directory name used to track the workspace in the database, store files on the file system, and track associated VMs. Click the ID to copy it to your clipboard.
+The *workspace id* is visible above the workspace title, labeled **Workspace ID**. The workspace identifier matches the directory name used to track the workspace in the database, store files on the file system, and track associated VMs. Click the ID to copy it to your clipboard.
 
 ![workspace identifier](img/wksp-iden.png)
 
@@ -559,17 +564,22 @@ For hypervisor storage settings, see [Using Proxmox with TopoMojo](https://githu
 
 ### Machines Tab
 
-This tab lists VMs TopoMojo is tracking for all workspaces and gamespaces.
+This tab lists VMs TopoMojo is tracking for all workspaces and gamespaces. The list is read-only; manage VMs from the [Gamespaces Tab](#gamespaces-tab) or [Workspaces Tab](#workspaces-tab).
 
 ![admin machine example](img/admin-machine.png)
 
-- `gamespace` indicates this VM belongs to a *gamespace*.
-- `pc5-ubuntu-server-2204-594` is the name of the VM.
-- `#d9b090c92728424781537c66b3ee2f4b` is the gamespace GUID appended to the VM name for ease of tracking.
+**Search** matches the VM name, the workspace or gamespace it belongs to, the host, or a pasted gamespace GUID. The tab shows at most 100 results; if it reaches that limit, refine the search term.
+
+Use the table headers to sort by:
+
+- **Machine Name:** The VM name.
+- **Gamespace / Group:** The workspace or gamespace the VM belongs to, linked so you can open it, with its GUID underneath. Click the GUID to copy it.
+- **State:** The VM's power state.
+- **Host:** The hypervisor host the VM runs on.
 
 #### "Orphaned" VMs
 
-VMs tagged with `**orphaned` are VMs that still exist but are not associated with a workspace or gamespace. VMs can become orphaned when there is an error or disconnection from the hypervisor during TopoMojo's cleanup process. Orphaned VMs should be manually removed from the hypervisor.
+VMs labeled **Orphaned** in the **Gamespace / Group** column are VMs that still exist but are not associated with a workspace or gamespace. VMs can become orphaned when there is an error or disconnection from the hypervisor during TopoMojo's cleanup process. Orphaned VMs should be manually removed from the hypervisor.
 
 To quickly identify orphaned VMs, search for "orphaned" in the Search field.
 
