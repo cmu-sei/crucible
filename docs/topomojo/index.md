@@ -648,7 +648,7 @@ The list shows every ISO in TopoMojo, global and local, with **Name** and **Work
 - **Workspace:** Shows a **Global** badge for global ISOs, or the owning workspace's name and ID for local ones. A **(deleted)** badge marks a local ISO whose workspace no longer exists. Use these to find and remove leftover files.
 - **Global Only:** Filter the list to global ISOs.
 - **Refresh:** Reload the list.
-- **Delete:** Delete any ISO, global or local. The same usage check applies as in [Deleting an ISO](#deleting-an-iso).
+- **Delete:** Delete any global or local ISO. The same usage check applies as in [Deleting an ISO](#deleting-an-iso).
 
 How TopoMojo lays out ISO files depends on the hypervisor:
 
