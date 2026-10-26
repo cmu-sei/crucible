@@ -93,9 +93,11 @@ TopoMojo provides web-based consoles for interacting with virtual machines using
 - **Record (<span class="fa-stack" aria-label="record-icon" role="img" style="font-size: 0.75em;"><i class="fa-solid fa-expand fa-stack-2x"></i><i class="fa-solid fa-circle fa-stack-1x"></i></span>):** Record the VMs screen and save the recording to your computer.
 - **Fullscreen ( <i class="fa-solid fa-expand" aria-label="fullscreen-icon" role="img"></i> ):** Maximize the console's screen.
 
+The console also shows the VM's state. When the VM is powered off, suspended, or unavailable, the console says so instead of showing a blank screen, and it shows progress while the VM starts or migrates. For a stopped VM, click **Power On** to start it from the console; the console connects once the VM is ready. If the connection drops, the console retries automatically.
+
 ## Finding a Space
 
-You can browse for existing TopoMojo workspaces and gamespaces using the **Search** field in left panel. Enter search terms then click **workspace** or **gamespace** to filter results. The **workspace** section shows workspaces where you are an editor. The **gamespace** section shows spaces that you have permission to deploy as a gamespace (more information on permissions)
+You can browse for existing TopoMojo workspaces and gamespaces using the **Search** field in left panel. Open the left panel from the menu button or by clicking **Find A Space** on the homepage. Click the pin to keep it open beside the page; unpinned, it closes when you click outside it. Enter search terms then click **workspace** or **gamespace** to filter results. The **workspace** section shows workspaces where you are an editor. The **gamespace** section shows spaces that you have permission to deploy as a gamespace (more information on permissions)
 
 Select a gamespace, then click **Start** to "play" the lab -- start by reading the instructions and launching a gamespace resource. You can invite others to play in your gamespace. Click **Invite** to copy an invitation link for sharing. When you're finished, click **End** to destroy your gamespace. The timer counts down how much time remains before the gamespace expires.
 
@@ -104,6 +106,17 @@ Select a gamespace, then click **Start** to "play" the lab -- start by reading t
 Users can **Favorite** a workspace or gamespace using the **Star ( <i class="fa-solid fa-star" aria-label="fullscreen-icon" role="img"></i> )** button next to the title. Favorites appear at the top of the list.
 
 ![workspace favorite](img/favorite.png)
+
+While playing, the **Gamespace Resources** list shows the gamespace's VMs. Use **Deploy** to create them and **Destroy** to delete them.
+
+The **About** page lists the UI and API versions and these keyboard shortcuts:
+
+| Key | Action |
+| --- | --- |
+| `Ctrl-O` | Open workspace |
+| `Ctrl-L` | Toggle left panel |
+| `Ctrl-H` | Navigate home |
+| `Ctrl-1` to `Ctrl-6` | Open the workspace **Settings**, **Templates**, **Document**, **Challenge**, **Files**, and **Play** tabs |
 
 ## Building a New Workspace
 
@@ -121,15 +134,19 @@ The Settings tab holds configuration metadata for your lab.
 
 **Authorship:** The names of the challenge authors.
 
-**Audience:** A space-delimited list of administrator-defined groups that have permission to deploy gamespaces from the workspace. Administrators define an *audience* with any name here. Users can deploy gamespaces from the workspace only if their *scope* matches one of the provided *audiences*. `Everyone` is the global audience that allows all users to deploy gamespaces from the workspace.
+**Audience:** A space-delimited list of administrator-defined groups that have permission to deploy gamespaces from the workspace. Administrators define an *audience* with any name here. Users can deploy gamespaces from the workspace only if their *scope* matches one of the provided *audiences*. `everyone` is the global audience that allows all users to deploy gamespaces from the workspace. Audience matching isn't case-sensitive.
+
+`everyone` works because TopoMojo adds `Core__DefaultUserScope` to every user's scope, and that setting defaults to `everyone`. The sample `appsettings.conf` in the TopoMojo repository sets it to `mojo`. If you copy that value, use `mojo` instead of `everyone` as the global audience.
 
 **Duration:** Recommended length of time, in minutes, that it takes to play through the challenge/lab.
 
-**Collaboration:** To share your workspace with others, click **Generate invitation** and send the link to collaborators. TopoMojo shows Collaborators alongside the author. When a collaborator connects to your workspace, you'll see them `connected` in the top right corner of the workspace.
+**Collaboration:** To share your workspace with others, click **Generate invitation** and send the link to collaborators. Generating a new link invalidates the previous one. Click **Remove** next to a collaborator to take away their access. TopoMojo shows Collaborators alongside the author. When a collaborator connects to your workspace, you'll see them `connected` in the top right corner of the workspace.
 
 **Clone:** Create a copy of your workspace. TopoMojo **links** the cloned workspace VMs to the parent workspace's VMs. The clone inherits all other settings from the parent. TopoMojo appends `-CLONE` to the title of the new workspace, but you can change this title.
 
 **Delete:** Delete the workspace.
+
+The top of the **Settings** tab shows the workspace's **Launch Count** and **Last Activity**. It also warns that inactive workspaces ("unpublished and idle" or "published and unused") may be deleted by the janitor. In the current release, the [Janitor](#janitor) only reports such workspaces; it doesn't delete them.
 
 ### Templates
 
@@ -380,7 +397,7 @@ The **Play** tab is where you can interact with your lab in the same way others 
 
 **Max Minutes:** The maximum number of minutes permitted to play before the gamespace expires.
 
-**Point Value:** Suggested number of points earned for successfully answering all questions. Consumers (e.g., [Gameboard](../gameboard/index.md) and [Moodle](../integrations/index.md#moodle)) can request any point value when they deploy a gamespace.
+**Points:** Suggested number of points earned for successfully answering all questions. Consumers (e.g., [Gameboard](../gameboard/index.md) and [Moodle](../integrations/index.md#moodle)) can request any point value when they deploy a gamespace.
 
 **Start:** Starts the gamespace by deploying virtual machines, displaying the Markdown document, making challenge questions available, and starting the timer for the user that clicked **Start**.
 
@@ -703,8 +720,8 @@ TopoMojo creates users automatically the first time they sign in, with limits ta
 
 ### Settings Tab
 
-Upload a custom background image to change TopoMojo's theme.
+Upload a custom background image to change TopoMojo's theme. Wide images usually work best. Click **Clear background** to return to the default. You can also set the background in configuration with `Ui__Branding__BackgroundImageUrl`.
 
 ### Log Tab
 
-The **Log** tab is useful from the admin point of view when trying to troubleshoot. The Log tab only shows errors here, not every log line.
+The **Log** tab is useful from the admin point of view when trying to troubleshoot. The Log tab only shows errors here, not every log line. Click an entry to expand its stack trace, and click it again to collapse it. Use the copy button to copy an entry, for example into a bug report.
