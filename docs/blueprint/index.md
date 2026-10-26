@@ -84,8 +84,8 @@ The Data Fields page lists all data field templates available for use in MSEL sc
 
 1. Under **Data Fields**, click **+** (**Add a template data field**).
 2. In **Name**, enter the field name (for example, `Delivery Method`).
-3. In **Data Type**, select the data type. Available types: Boolean, Card, Checkbox, Datetime, Double, HTML, Integer, Move, Organization, SourceType, Status, String, Team, TeamsMultiple, Url, User.
-4. Check **Use Option List** to provide a predefined list of selectable values for the field (for example, `Unused, Open, Closed, Critical, Affected`).
+3. In **Data Type**, select the data type. Available types: Boolean, Card, Checkbox, Competency, Datetime, Double, HTML, Integer, IpAddress, Move, Network, Organization, SourceType, Status, String, Team, TeamsMultiple, Url, User. See [Data Value Checks](#data-value-checks) for the values IpAddress, Network, and Datetime fields accept.
+4. Check **Use Option List** to provide a predefined list of selectable values for the field (for example, `Low, Medium, High`).
 5. Click **Save**.
 
 ##### Edit, Delete, and Search for a Data Field Template
@@ -257,23 +257,27 @@ Content developers use Blueprint to build and manage MSELs.
 
 ### Event Dashboard
 
-The **Event Dashboard** is Blueprint's homepage. It shows a card-based layout with up to three cards tailored to the current user's permissions. While data loads, an **Initializing Data** card is displayed with a progress spinner.
+The **Event Dashboard** is Blueprint's homepage. It shows a card for each thing the current user can do: **Join**, **Launch**, **Build**, and **Assess**. Each card shows how many events it applies to. While data loads, an **Initializing Data** card is displayed with a progress spinner.
 
-![Blueprint Event Dashboard](img/blueprintLandingPage.png)
+Below the mission cards, four cards describe what Blueprint does: **Collaborative Planning**, **Integrated Platform**, **Scenario Design**, and **Cyber Range Ready**. Click one to read more.
 
 #### Join an Event
 
-If the user has been invited to an active (deployed) MSEL, a **Join an Event** card is shown with the subtitle *Access In-Progress Events*. Clicking the card navigates to `/join`, which lists every MSEL the user is currently eligible to join. Selecting a MSEL proceeds to Player, where the user can access exercise information and related applications.
+The **Join** card (*Active Exercises*) counts the in-progress events the user can join. Click **Join Event** to go to `/join`, which shows a card for each of those events with its name and description. Click **Join** on a card to open the event in Player. **Join** is a link, so it can also be opened in a new tab. When there is nothing to join, the card shows **No active events available to join** and cannot be clicked.
 
 #### Start an Event
 
-If the user has permission to launch template MSELs, a **Start an Event** card is shown with the subtitle *Launch New events*. Clicking the card navigates to `/launch` and lists the MSELs the user may launch. Selecting a template launches the event and proceeds to Player.
+If the user can launch any template MSELs, the **Launch** card (*Initiate New Missions*) is shown. Click **Start Event** to go to `/launch` and choose a template to launch. Launching the event creates its teams in a new Player view and proceeds to Player.
 
 #### Manage an Event
 
-If the user has an administrator role, holds the `CreateMsels` permission, or is a contributor on any MSEL, a **Manage an Event** card is shown with the subtitle *Design and Plan Events*. Clicking the card navigates to `/build`, where the user can create, edit, delete, and open MSELs.
+If the user holds the `CreateMsels` permission or is a contributor on any MSEL, the **Build** card (*Design & Planning*) is shown. Click **Manage Events** to go to `/build`, where the user can create, edit, delete, and open MSELs.
 
-If the user has no MSELs and no `CreateMsels` permission, the cards are replaced with a single **Nothing to see here!** card.
+#### Assess an Event
+
+If the user is a System Admin or an Evaluator on any MSEL, the **Assess** card (*Evaluation & Scoring*) is shown, with the number of those MSELs that have scenario events. Evaluators open a MSEL's [Assessor View](#assessor-view) from its **Assessor View URL**.
+
+If the user can do none of these, a single **No Access** card is shown instead.
 
 ### Player Manage Event Page
 
@@ -326,7 +330,17 @@ The MSEL Catalog shows created MSELs. Users can select a MSEL to work on, create
 Two actions are available in the MSEL list table header:
 
 - **Add blank MSEL** (**+** icon): creates a new MSEL with default settings. The new MSEL appears with status `Pending` and a description such as "Created from Default Settings by [username]".
-- **Upload a new MSEL from a file** (upload icon): opens a file chooser. Select an `.xlsx` file to create a new MSEL from its contents.
+- **Upload a new MSEL from a file** (upload icon): choose **Upload xlsx file** or **Upload JSON file**, then select the file to create a new MSEL from its contents. A `.json` file is one exported with **Download JSON file** from a MSEL's row actions.
+
+##### JSON Import Report
+
+After a JSON upload, Blueprint shows a report for the imported MSEL:
+
+- **Imported:** the number of **Moves**, **Scenario Events**, **Cards**, **Teams**, **Data Fields**, and **Pages** created.
+- **Changed:** what Blueprint adjusted to fit this Blueprint, such as a new name when a MSEL with the file's name already exists, a CITE scoring model or team type linked by name, team members that could not be imported, and which integrations are on.
+- **Failed:** steps that could not be completed, such as checking the scoring model in CITE, with what to do before pushing.
+
+Click **Open MSEL** to open the new MSEL, or **Close** to stay on the MSEL list.
 
 #### Filter Display
 
@@ -357,7 +371,7 @@ The MSEL list header also exposes:
 
 Each MSEL row in the catalog exposes four icon buttons in the first column:
 
-- **Download** (down-arrow icon): exports the MSEL as a `.xlsx` file.
+- **Download** (down-arrow icon): choose **Download xlsx file** or **Download JSON file** to export the MSEL. A `.json` export can be uploaded again with **Upload JSON file**.
 - **Upload .xlsx file to [MSEL name]** (up-arrow icon): replaces the MSEL's contents with data from the chosen file.
 - **Delete [MSEL name]** (trash can icon): permanently removes the MSEL and its associated data. Template MSELs cannot be deleted; the trash can is disabled for them.
 - **Copy [MSEL name]** (copy icon): duplicates the MSEL into a new, editable copy.
@@ -395,7 +409,7 @@ To edit the MSEL's basic information and configuration, follow these steps:
 | **Start Date / Time** | Datetime | Start date/time of the MSEL (only visible when **Set a Start Time** is checked). | `09/10/2024 20:00:00` |
 | **Duration (d / h / m)** | Integer × 3 | End time relative to the start, expressed as days / hours / minutes. Click **+** to increment or type directly into each field. | `1 d 12 h 00 m` |
 | **Applications to Integrate** | Boolean checkboxes | Enable any of: Player, Gallery, CITE, Steamfitter, Caster. Enabling an integration activates additional MSEL sidebar tabs for that app. Caster requires Player. | Player: `True`, CITE: `True` |
-| **MSEL Status** | Dropdown | MSEL lifecycle state: `Pending`, `Entered`, `Approved`, `Deployed`, `Complete`, `Archived`. | `Approved` |
+| **MSEL Status** | Dropdown | MSEL lifecycle state: `Pending`, `Entered`, `Approved`, `Complete`, `Archived`. Blueprint sets `Pushing` and `Pulling` itself while it pushes or removes integrations, and `Deployed` once they are pushed; while the MSEL is in one of those, the dropdown is locked. | `Approved` |
 | **Header Row Metadata (Height)** | Integer | Height of the header row when exporting this MSEL to `.xlsx`. | `30` |
 | **Difficulty Rating** | Dropdown | Metadata tag describing the exercise's difficulty. | (per framework) |
 | **Exercise Purpose** | Dropdown | Metadata tag describing why the exercise is being run. | (per framework) |
@@ -562,15 +576,31 @@ To add a Data Field to the MSEL, follow these steps:
 | **Name**                                                   | String        | Name of the data field                                                                         | Description      |
 | **Data Type**                                              | Dropdown Text | Data type for the data field                                                                   | String           |
 | **Use Option List**                                        | Boolean       | Add options to select when adding an event                                                     | True             |
+| **Multi-select**                                           | Boolean       | With **Use Option List**, allow more than one option to be selected                            | False            |
 | **Display on the Events list**                             | Boolean       | Display this data field on the Events list tab                                                 | True             |
 | **Display on the Exercise View**                           | Boolean       | Display this data field on the Exercise View tab                                               | True             |
-| **Display on "Advanced" edit tab**                         | Boolean       | Display this data field on the data field edit component Advanced tab                          | True             |
+| **Information Data Field**                                 | Boolean       | Display this data field for information events                                                 | True             |
+| **Facilitation Data Field**                                | Boolean       | Display this data field for facilitation events                                                | True             |
+| **Display on "Default" edit tab**                          | Boolean       | Display this data field on the Default tab of the event edit dialog                            | True             |
+| **Assessor View**                                          | Boolean       | Display this data field on the [Assessor View](#assessor-view)                                 | True             |
 | **Display for Content Developers and MSEL Owners Only!!!** | Boolean       | Display this data field for users who are Content Developers or MSEL Owners only               | True             |
 | **Gallery Article Parameter**                              | Dropdown Text | If using the Gallery integration, select the Gallery parameter that aligns with the data field | Description      |
 | **Column Metadata (Width)**                                | Integer       | Width of the column when displayed                                                             | 30               |
 | **Cell Metadata (Color, Tint, Font-Weight)**               | String        | Column color and font style                                                                    | (Red, 20%, bold) |
 
 After you've added all desired configurations, click **Save**.
+
+##### Data Value Checks
+
+Blueprint checks the values typed into these data field types. A value chosen from an option list is not checked.
+
+| Data Type | Accepts | Example |
+| --- | --- | --- |
+| **IpAddress** | A single IPv4 or IPv6 address, without a prefix length | `192.0.2.10`, `2001:db8::10` |
+| **Network** | A network in Classless Inter-Domain Routing (CIDR) form, with no host bits set. Blueprint suggests the corrected network when host bits are set. | `10.1.0.0/24`, `2001:db8::/48` |
+| **Datetime** | A date and time chosen with the date picker | `09/10/2024 20:00:00` |
+
+An event with a value that fails its check shows the problem under the field and cannot be saved until it is fixed. A Datetime value that is not a date, such as the text left behind when a field's type is changed to Datetime, is shown as is and marked **Not a date and time**. IpAddress and Network columns sort by address rather than alphabetically.
 
 ##### Delete a Data Field
 
@@ -1096,6 +1126,8 @@ The MSEL owner should add these fields:
 | **Open in a New Tab** | Boolean       | Use this option to open the URL in a new tab                              | `True`                                        |
 
 After adding data fields, map each one to the appropriate Gallery field by selecting an option from the **Gallery Article Parameter** dropdown when adding or editing the field.
+
+On the Scenario Events tab, a field mapped to the **Status** parameter offers Gallery's article statuses as a dropdown of colors: `Gray`, `Green`, `Yellow`, `Orange`, and `Red`. These are the colors the article's card shows on the Gallery wall. Values from older MSELs that use Gallery's former status names show as the matching color.
 
 ##### Gallery Cards
 
