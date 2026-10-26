@@ -205,7 +205,7 @@ Your lab document should look like this.
 
 At this point, the challenge includes a transform, guest info variable, instructions, and a question to answer. We're ready to "play" our challenge to test it.
 
-1. Click the **Play** tab. Only the top portion of the document is visible; that is, the content above the cut line. You can adjust test settings such as **Variant** (select a specific variant to deploy, or select `0` for a random variant), **Max Attempts**, **Max Minutes** (that is, challenge duration), and **Point Value**. These controls exist only for developer testing. End users do not see this interface, and changes made here do not persist if you switch tabs.
+1. Click the **Play** tab. Only the top portion of the document is visible; that is, the content above the cut line. You can adjust test settings such as **Variant** (select a specific variant to deploy, or select `0` for a random variant), **Max Attempts**, **Max Minutes** (that is, challenge duration), and **Points**. These controls exist only for developer testing. End users do not see this interface, and changes made here do not persist if you switch tabs.
 2. Click **Start**. Once the gamespace finishes deploying, you can view the full challenge document.
 3. Follow the lab instructions.
 

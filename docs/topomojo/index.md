@@ -59,6 +59,12 @@ Install TopoMojo using the [Helm chart](https://github.com/cmu-sei/helm-charts/t
 
 **`TopoMojo values.yaml`:** Contains default configurations for the `api` and the `ui`. To deploy TopoMojo, configure the **`Values.yaml`** file according to your needs then `helm install`. More details on how to configure the values file is [available in the helm charts repository](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo).
 
+For hypervisor settings, see the TopoMojo repository: [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) covers network setup, ISO storage, guest settings, and High Availability (`Pod__EnableHA` and related settings), and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) covers vSphere.
+
+!!! warning "Proxmox certificate validation"
+
+    Recent TopoMojo releases honor `Pod__IgnoreCertificateErrors` for Proxmox; earlier releases ignored it there and accepted any certificate. The setting defaults to `false`, so a Proxmox server with a self-signed or otherwise untrusted certificate now fails to connect. Install a certificate the TopoMojo host trusts, or set `Pod__IgnoreCertificateErrors = true`.
+
 ### Persistent/Shared Networks
 
 We recommend having a persistent/shared network available to all TopoMojo workspaces/gamespaces. The administrator defines a persistent/shared network at the time they deploy the TopoMojo API.
@@ -73,6 +79,11 @@ Use the `Pod**Vlan**Reservations` environment variable to define the name of a p
 ![bridge-net vlan reservation](img/bridge-net.png)
 
 You can define more than one shared/persistent network by incrementing the variable name (`Pod**Vlan**Reservations**1**Id` and `Pod**Vlan**Reservations**1**Name`). To connect VMs to shared/persistent networks, users must have at least **Builder** permissions.
+
+Two settings relax those network restrictions:
+
+- **`Core__AllowUnprivilegedVmReconfigure`** (default `false`): Lets users below **Builder** move a VM's network adapter onto shared/persistent networks.
+- **`Core__AllowPrivilegedNetworkIsolationExemption`** (default `false`): On vSphere, lets **Builders** connect a VM to any hypervisor network, not only the workspace's networks and the shared/persistent networks.
 
 !!! note "A note about bridge-net"
 
@@ -93,9 +104,11 @@ TopoMojo provides web-based consoles for interacting with virtual machines using
 - **Record (<span class="fa-stack" aria-label="record-icon" role="img" style="font-size: 0.75em;"><i class="fa-solid fa-expand fa-stack-2x"></i><i class="fa-solid fa-circle fa-stack-1x"></i></span>):** Record the VMs screen and save the recording to your computer.
 - **Fullscreen ( <i class="fa-solid fa-expand" aria-label="fullscreen-icon" role="img"></i> ):** Maximize the console's screen.
 
+The console also shows the VM's state. When the VM is powered off, suspended, or unavailable, the console says so instead of showing a blank screen, and it shows progress while the VM starts or migrates. For a stopped VM, click **Power On** to start it from the console; the console connects once the VM is ready. If the connection drops, the console retries automatically.
+
 ## Finding a Space
 
-You can browse for existing TopoMojo workspaces and gamespaces using the **Search** field in left panel. Enter search terms then click **workspace** or **gamespace** to filter results. The **workspace** section shows workspaces where you are an editor. The **gamespace** section shows spaces that you have permission to deploy as a gamespace (more information on permissions)
+You can browse for existing TopoMojo workspaces and gamespaces using the **Search** field in left panel. Open the left panel from the menu button or by clicking **Find A Space** on the homepage. Click the pin to keep it open beside the page; unpinned, it closes when you click outside it. Enter search terms then click **workspace** or **gamespace** to filter results. The **workspace** section shows workspaces where you are an editor. The **gamespace** section shows spaces that you have permission to deploy as a gamespace (more information on permissions)
 
 Select a gamespace, then click **Start** to "play" the lab -- start by reading the instructions and launching a gamespace resource. You can invite others to play in your gamespace. Click **Invite** to copy an invitation link for sharing. When you're finished, click **End** to destroy your gamespace. The timer counts down how much time remains before the gamespace expires.
 
@@ -104,6 +117,17 @@ Select a gamespace, then click **Start** to "play" the lab -- start by reading t
 Users can **Favorite** a workspace or gamespace using the **Star ( <i class="fa-solid fa-star" aria-label="fullscreen-icon" role="img"></i> )** button next to the title. Favorites appear at the top of the list.
 
 ![workspace favorite](img/favorite.png)
+
+While playing, the **Gamespace Resources** list shows the gamespace's VMs. Use **Deploy** to create them and **Destroy** to delete them.
+
+The **About** page lists the UI and API versions and these keyboard shortcuts:
+
+| Key | Action |
+| --- | --- |
+| `Ctrl-O` | Open workspace |
+| `Ctrl-L` | Toggle left panel |
+| `Ctrl-H` | Navigate home |
+| `Ctrl-1` to `Ctrl-6` | Open the workspace **Settings**, **Templates**, **Document**, **Challenge**, **Files**, and **Play** tabs |
 
 ## Building a New Workspace
 
@@ -121,15 +145,19 @@ The Settings tab holds configuration metadata for your lab.
 
 **Authorship:** The names of the challenge authors.
 
-**Audience:** A space-delimited list of administrator-defined groups that have permission to deploy gamespaces from the workspace. Administrators define an *audience* with any name here. Users can deploy gamespaces from the workspace only if their *scope* matches one of the provided *audiences*. `Everyone` is the global audience that allows all users to deploy gamespaces from the workspace.
+**Audience:** A space-delimited list of administrator-defined groups that have permission to deploy gamespaces from the workspace. Administrators define an *audience* with any name here. Users can deploy gamespaces from the workspace only if their *scope* matches one of the provided *audiences*. `everyone` is the global audience that allows all users to deploy gamespaces from the workspace. Audience matching isn't case-sensitive.
+
+`everyone` works because TopoMojo adds `Core__DefaultUserScope` to every user's scope, and that setting defaults to `everyone`. The sample `appsettings.conf` in the TopoMojo repository sets it to `mojo`. If you copy that value, use `mojo` instead of `everyone` as the global audience.
 
 **Duration:** Recommended length of time, in minutes, that it takes to play through the challenge/lab.
 
-**Collaboration:** To share your workspace with others, click **Generate invitation** and send the link to collaborators. TopoMojo shows Collaborators alongside the author. When a collaborator connects to your workspace, you'll see them `connected` in the top right corner of the workspace.
+**Collaboration:** To share your workspace with others, click **Generate invitation** and send the link to collaborators. Generating a new link invalidates the previous one. Click **Remove** next to a collaborator to take away their access. TopoMojo shows Collaborators alongside the author. When a collaborator connects to your workspace, you'll see them `connected` in the top right corner of the workspace.
 
 **Clone:** Create a copy of your workspace. TopoMojo **links** the cloned workspace VMs to the parent workspace's VMs. The clone inherits all other settings from the parent. TopoMojo appends `-CLONE` to the title of the new workspace, but you can change this title.
 
 **Delete:** Delete the workspace.
+
+The top of the **Settings** tab shows the workspace's **Launch Count** and **Last Activity**. It also warns that inactive workspaces ("unpublished and idle" or "published and unused") may be deleted by the janitor. In the current release, the [Janitor](#janitor) only reports such workspaces; it doesn't delete them.
 
 ### Templates
 
@@ -153,6 +181,25 @@ To add a template to your workspace:
 2. Search for and add the templates you need for your topology.
 3. Click the **edit** icon to expand the template metadata and make changes. Making changes inside the VM requires [deploying the VM](#refresh-and-deploy).
    ![edit a vm template](img/templates-edit.png)
+
+#### Templates Tab Notices
+
+The **Templates** tab shows notices about the workspace's state:
+
+- **Idle VMs:** Any workspace VM left idle for a day may be deleted by the [Janitor](#janitor). Delete template VMs you aren't using.
+- **Running gamespaces:** When gamespaces launched from this workspace are still running, TopoMojo can't save changes to its VMs. The **Delete N Gamespaces** button ends them so you can save again. Use it with care; it ends other people's sessions too.
+- **Deployed template:** While a template's VM is deployed, the template's fields are read-only. Delete the VM to edit them.
+
+The **Template Manager (admin)** link opens the admin [Templates Tab](#templates-tab) filtered to this workspace; it only works for administrators. When you search **Add Templates**, a published *template set* shows **Add (N)**, where *N* is the number of templates it adds.
+
+#### Template Revisions
+
+When an administrator publishes a new revision of a template, the **Templates** tab offers to move your copy onto it:
+
+- **Change parent to *name*?** appears on a linked template. Click **Resolve** to relink it to the new revision. Your template then uses the new revision's disk.
+- **Manually updated to match *name*?** appears on an unlinked template that came from the same parent. Click **Resolve** to record the new revision as its parent. This doesn't change the template's own disk.
+
+TopoMojo only offers revisions that are published or whose **Audience** matches the workspace's template scope.
 
 #### Template Field Definitions
 
@@ -189,6 +236,7 @@ The list below explains the fields in the VM template.
 
 Once the template is in the appropriate state:
 
+- **Initialize ( <i class="fa-solid fa-gear" aria-label="initialize-icon" role="img"></i> ):** Creates the template's disk. Appears only on an unlinked template whose disk doesn't exist yet, such as right after you click **Unlink**. **Deploy** appears once initialization finishes.
 - **Refresh ( <i class="fa-solid fa-arrows-rotate" aria-label="refresh-icon" role="img"></i> ):** Refresh queries the state of the VM from the hypervisor. This is useful if you run a `shutdown` command in the VM and the TopoMojo UI icons haven't updated to reflect the powered-off state of the VM yet.
 - **Deploy ( <i class="fa-solid fa-bolt" aria-label="deploy-icon" role="img"></i> ):** Deploys that virtual machine into your workspace.
 
@@ -234,11 +282,31 @@ and
 
 The *Challenge* tab in the TopoMojo workspace is where engineers configure randomized challenge configuration (*transforms*) and questions for the lab/challenge.
 
+Unlike template fields, the Challenge tab doesn't save as you type. Click **Save** when you finish editing.
+
 ### Transforms
 
 **Transforms** allow you to define dynamic variables that TopoMojo generates at *gamespace* deploy time. Transforms are key/value pairs –- the **key** is the name of your transform and the **value** is the type of the transform. Expand the tooltip under the transforms text box to see details about the available transform data types. The screenshot below shows a transform named "token1" that will have a value of 8 random hexadecimal characters.
 
 ![configuring transforms](img/transforms.png)
+
+Values use the format `type:range`, where the range is optional:
+
+| Value | Result |
+| --- | --- |
+| `hex` | 8 random hexadecimal characters. `hex:12` yields 12. |
+| `b64` | 24 random base64 characters. `b64:16` yields 16. |
+| `int` | A random decimal number. `int:99-999` yields one between 99 and 999. |
+| `uid` | A random GUID. |
+| `list:one two three four` | One word picked at random from the list. |
+| `list:2:one two three four five` | Two words picked at random. Also creates indexed keys, `##key_1##` and `##key_2##`, for each word. |
+| `index:3:zero one two three four` | The word at that zero-based position; this example yields `three`. |
+| `ipv4:192.168.22.0/24` | A random IP address in the Classless Inter-Domain Routing (CIDR) range, such as `192.168.22.137`. |
+| `id` | The gamespace ID. |
+| `variant` | The gamespace's variant index. |
+| `app_url`, `topomojo_url` | TopoMojo's URL, without a path. |
+| `grader_url` | The grading endpoint URL. |
+| `api_key`, `grader_key` | The gamespace's API key, for grading scripts inside the lab. Never expose it to participants. |
 
 To access transforms in the challenge, use the referenced "*double-pounder-key* (`##key##`)" notation. When TopoMojo deploys a gamespace, the engine generates random values for all transforms, looks for double-pounder-keys, then replaces them with the randomly generated values for that deployment.
 
@@ -260,7 +328,21 @@ A *variant* describes a different version of a challenge. Variants can contain d
 
 Use the **Clone ( <i class="fa-solid fa-copy"  aria-label="copy-icon" role="img"></i> )** button to create a new variant that is a copy of an existing variant. This makes minor edits between variants easy to facilitate.
 
+Click **Show Variant Detail** to expand each variant's settings:
+
+- **Markdown:** Variant-specific text, appended to the challenge text for players who get this variant.
+- **ISO:** A variant-specific ISO **File** and the **Targets** (space-delimited template names) to attach it to. See [Files](#files).
+
 ### Question Set
+
+A variant can have more than one *question set*, for grouped tasks or a challenge that unlocks in stages. Each set has a name (shown to players; it defaults to "Question Set N"), optional **Markdown** with instructions for that set, and its own questions. Use the set's controls to move it up or down, clone it, or remove it, and click **Add Question Set** to add another.
+
+To make a set unlock only after players score enough on earlier ones, set its prerequisites:
+
+- **Prerequisite Total Weight:** The weight players must score across all challenge questions.
+- **Prerequisite Prev. Section Weight:** The weight players must score in the previous set.
+
+Enter both as fractions of the total score, from `0` to `1`. For example, `0.5` requires half the available points. TopoMojo compares them against normalized question weights, so a value such as `50` never unlocks the set. `0` means no prerequisite. The first set can't have prerequisites. Players see locked sets as a note listing what they must score to unlock the next one.
 
 **Move Up, Move Down, Remove:** Use these functions to position the question in the sequence of questions for that set or remove it.
 
@@ -307,6 +389,15 @@ You can attach an ISO to a VM in the challenge workspace **Templates** tab. See 
 
 You can also attach an ISO to a VM using the workspace **Challenge** tab's **Variant Detail** function. This "dynamic ISO attachment" gives you the ability to attach a variant-specific ISO file to a template. You *must* specify a target(s) here. See the [Variants](#variants) section of this guide.
 
+### Deleting an ISO
+
+To delete a local ISO, click **Delete** next to it in the ISO list and confirm. Any editor of the workspace can delete its local ISOs; only administrators can delete global ISOs, from the [Files Tab](#files-tab) in the Administrator Guide.
+
+Before deleting, TopoMojo checks whether anything uses the ISO. If nothing does, it deletes the file right away. Otherwise, the **Delete ISO** dialog lists the **Templates** and **Active Gamespaces** that use it:
+
+- **Active gamespaces:** You can't delete the ISO until those gamespaces end. Click **Close**.
+- **Templates only:** Deleting leaves those templates with a broken ISO reference. Click **Delete Anyway** to continue, or **Cancel**.
+
 ## Play
 
 The **Play** tab is where you can interact with your lab in the same way others will when they launch your content or "play" through your challenge. Play deploys a *gamespace*, a read-only copy of all virtual machines in the *workspace*. See more about *gamespaces* in the [Workspace and Gamespace](#workspace-and-gamespace) section.
@@ -317,7 +408,7 @@ The **Play** tab is where you can interact with your lab in the same way others 
 
 **Max Minutes:** The maximum number of minutes permitted to play before the gamespace expires.
 
-**Point Value:** Suggested number of points earned for successfully answering all questions. Consumers (e.g., [Gameboard](../gameboard/index.md) and [Moodle](../integrations/index.md#moodle)) can request any point value when they deploy a gamespace.
+**Points:** Suggested number of points earned for successfully answering all questions. Consumers (e.g., [Gameboard](../gameboard/index.md) and [Moodle](../integrations/index.md#moodle)) can request any point value when they deploy a gamespace.
 
 **Start:** Starts the gamespace by deploying virtual machines, displaying the Markdown document, making challenge questions available, and starting the timer for the user that clicked **Start**.
 
@@ -326,6 +417,8 @@ The **Play** tab is where you can interact with your lab in the same way others 
 ## Administrator Guide
 
 Access the **Admin Dashboard** by clicking **Admin** in the top right corner of the navigation bar. You need the `admin` role assigned to your user to see the **Admin** navigation option.
+
+The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Announcement, and Janitor tools described next.
 
 ### Hub Connections
 
@@ -337,13 +430,28 @@ The **Announcement** feature allows TopoMojo admins to broadcast important messa
 
 ### Janitor
 
-The **Janitor** service cleans up unused resources (e.g., a workspace VM that has been idle for a long time) in TopoMojo.
+The **Janitor** service cleans up unused resources (e.g., a workspace VM that has been idle for a long time) in TopoMojo. It runs in the background on two schedules:
 
-**Cleanup Report:** Provides a log of the Janitor's activity.
+- About every minute, it ends gamespaces that have passed their expiration time plus their cleanup grace time, then deletes the VMs of ended gamespaces.
+- About every one to two hours, it runs a full cleanup pass over workspaces and workspace VMs.
+
+**Cleanup Report:** Runs the full cleanup pass immediately and lists what it found, with sortable **Reason**, **Name**, **Owner**, **VMs**, and **Last Activity** columns. Click a workspace name to open it. This button doesn't just show a log: if the Janitor isn't in dry-run mode, clicking it deletes the VMs it reports.
+
+The full cleanup pass reports three kinds of items, shown in the **Reason** column:
+
+- **IdleWorkspaceVms:** Workspaces whose VMs have been idle longer than `Core__Expirations__IdleWorkspaceVmsExpiration` (default `1d`). When dry run is off, the Janitor deletes these workspace VMs. Saved template disks aren't affected.
+- **UnpublishedWorkspace:** Unpublished workspaces idle longer than `Core__Expirations__UnpublishedWorkspaceTimeout` (default `1w`).
+- **InactiveWorkspace:** Published workspaces with no launches for longer than `Core__Expirations__InactiveWorkspaceExpiration` (default `1y`).
+
+`Core__Expirations__DryRun` defaults to `true`, which reports idle workspace VMs without deleting them. Set it to `false` to let the Janitor delete them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only, regardless of `DryRun`.
+
+!!! warning "Sample configuration key names"
+
+    The sample `appsettings.conf` in the TopoMojo repository lists `Core__Expirations__UnpublishedWorkspacesExpiration` and `Core__Expirations__InactiveWorkspacesExpiration`. TopoMojo ignores those names. Use `Core__Expirations__UnpublishedWorkspaceTimeout` and `Core__Expirations__InactiveWorkspaceExpiration`.
 
 ### Gamespaces Tab
 
-The **Gamespaces** tab is where admins search for gamespaces. Use the table headers to sort results by ID, time remaining before expiration, and parent workspace. Use filters to show **active** and **inactive** gamespaces. By default, the search is for *active* gamespaces. Green indicates *active* gamespaces and gray indicates *inactive* gamespaces. An *active* gamespace is one where the player can still interact with VMs and answer questions. An *inactive* gamespace is one the player has completed (answered all questions) or that has expired.
+The **Gamespaces** tab is where admins search for gamespaces. **Search** matches the gamespace ID, the manager's name, or the workspace title. Use the table headers to sort results by **ID**, **Time Left**, **Created Date**, and **Manager / Workspace**. Use filters to show **active** and **inactive** gamespaces. By default, the search is for *active* gamespaces. Green indicates *active* gamespaces and gray indicates *inactive* gamespaces. An *active* gamespace is one where the player can still interact with VMs and answer questions. An *inactive* gamespace is one the player has completed (answered all questions) or that has expired.
 
 **Refresh:** Refreshes your search.
 
@@ -351,10 +459,14 @@ The **Gamespaces** tab is where admins search for gamespaces. Use the table head
 
 Gamespaces in the table show the following information:
 
-- Gamespace id (e.g. `e9416013`)
-- Time remaining (if active)
-- User who owns the gamespace
-- Title of the *workspace* that the *gamespace* corresponds to
+- **ID:** The first eight characters of the gamespace ID (e.g. `e9416013`).
+- **Time Left:** Time remaining, for active gamespaces.
+- **Created Date:** When the gamespace was created.
+- **Manager / Workspace:** The user who manages the gamespace, and the title of the *workspace* it was launched from.
+
+In the **active** view, click the star next to a gamespace to favorite it and pin it to the top of the list.
+
+When you view a gamespace that has ended but still has VMs on the hypervisor, an **Admin Notice** reports how many VMs remain, with links to the [Machines Tab](#machines-tab) and the **Gamespaces** tab where you can delete them.
 
 The screenshot below shows several active and inactive gamespaces (usernames redacted).
 
@@ -378,17 +490,18 @@ The screenshot below shows several active and inactive gamespaces (usernames red
 
 ### Workspaces Tab
 
-The **Workspaces** tab is where the admin can search for workspaces. Use the table headers to sort results by title, created date, and last activity.
+The **Workspaces** tab is where the admin can search for workspaces by name or ID. Use the table headers to sort results by **Workspace Name**, **Created Date**, and **Last Activity**. Click the star next to a workspace to favorite it and pin it to the top of the list.
 
 An admin can view every workspace using this menu, even without being a collaborator. Admins and non-admins use the search feature in the left navigation pane to view workspaces where they are a collaborator. See [Finding a Space](#finding-a-space) for more details.
 
-- **Create ( <i class="fa-solid fa-plus" aria-label="create-icon" role="img"></i> ):** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](#building-a-new-workspace).
-- **Upload Zip ( <i class="fa-solid fa-file" aria-label="file-icon" role="img"></i> ):** Upload a workspace export zip to import workspaces into TopoMojo.
-- **Download ( <i class="fa-solid fa-download" aria-label="download-icon" role="img"></i> ):** Download a zipped workspace export. Workspace exports can contain one or more workspaces. TopoMojo will automatically include additional dependent workspaces and templates for workspaces that contain linked resources.
+- **Create:** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](#building-a-new-workspace).
+- **UploadZip:** Upload a workspace export (`.zip` or `.json`) to import workspaces into TopoMojo. An **Upload Results** message lists what TopoMojo imported.
+- **Download:** Switches the list into selection mode. Check the workspaces to export, then click **Download (N)** to download a zipped export, or click **Cancel**. Workspace exports can contain one or more workspaces. TopoMojo will automatically include additional dependent workspaces and templates for workspaces that contain linked resources.
+- **Delete:** Delete a single workspace from its row.
 
 Selecting a workspace takes you the **Settings** tab of that workspace. For additional help on the **Settings** tab, see [Building a new workspace](#building-a-new-workspace).
 
-The *workspace id* is visible below the workspace title. The workspace identifier matches the directory name used to track the workspace in the database, store files on the file system, and track associated VMs. Click the ID to copy it to your clipboard.
+The *workspace id* is visible above the workspace title, labeled **Workspace ID**. The workspace identifier matches the directory name used to track the workspace in the database, store files on the file system, and track associated VMs. Click the ID to copy it to your clipboard.
 
 ![workspace identifier](img/wksp-iden.png)
 
@@ -418,9 +531,22 @@ Filter for all templates from a workspace by clicking the *name* of the of the w
 
     Unlinked VMs are marked with the unlinked icon ( <i class="fa-solid fa-unlink" aria-label="unlink-icon" role="img"></i> ) and show the parent template name.
 
+The **Templates** tab also has these tools:
+
+- **Create:** Create a new template that isn't in any workspace.
+- **published:** Filter the list to published templates.
+- **parent[...]:** Click the parent name on a template to filter to templates derived from that parent. Click the filter to clear it.
+- **Workspace name:** Click a template's workspace to filter to that workspace's templates. Templates outside any workspace show **Stock Template**.
+- **Favorite:** Click the star next to a template to pin it to the top of the list.
+- **Clone:** Create an unlinked, unpublished copy of a template, with the original as its parent. If the name ends in a version such as `v1`, the copy is named `v2`; otherwise TopoMojo appends `-CLONE`. The copy keeps the original's **Detail**, including its disk paths. Once you publish the copy, workspace templates derived from the same parent see a [Resolve](#template-revisions) prompt.
+
+!!! warning "No isolation checking outside a workspace"
+
+    Templates you edit from this tab aren't inside a workspace, so TopoMojo doesn't apply its usual isolation checks.
+
 #### Template Properties
 
-The **Templates** tab in the Administrator Guide displays template metadata and configuration. The **Detail** field contains the raw JSON configuration TopoMojo passes to the hypervisor when deploying the VM.
+The **Templates** tab in the Administrator Guide displays template metadata and configuration. The **Detail** field contains the raw JSON configuration TopoMojo passes to the hypervisor when deploying the VM. Linked templates show the read-only **Parent Detail** instead, since they inherit their configuration from the parent.
 
 !!! note
     The Detail field hint text reads: "Advanced configuration. Keep valid JSON to avoid errors."
@@ -513,27 +639,50 @@ Special `Key` values:
 | HTTP 405 Method Not Allowed | Wrong endpoint for the operation | Use `POST /api/template-detail` for new templates |
 | HTTP 500 Internal Server Error | Hypervisor template not found | Verify the `Template` name matches the VM name on the hypervisor |
 
+### Files Tab
+
+The **Files** tab, titled **Global Files**, is where administrators upload *global* ISOs, which every workspace can attach. Uploading works the same way as the workspace [Files](#files) tab. As there, TopoMojo wraps non-ISO files in an ISO, and large files (over 1 GB) can take extra time to process after the upload finishes.
+
+The list shows every ISO in TopoMojo, global and local, with **Name** and **Workspace** columns:
+
+- **Workspace:** Shows a **Global** badge for global ISOs, or the owning workspace's name and ID for local ones. A **(deleted)** badge marks a local ISO whose workspace no longer exists. Use these to find and remove leftover files.
+- **Global Only:** Filter the list to global ISOs.
+- **Refresh:** Reload the list.
+- **Delete:** Delete any global or local ISO. The same usage check applies as in [Deleting an ISO](#deleting-an-iso).
+
+How TopoMojo lays out ISO files depends on the hypervisor:
+
+- **vSphere:** Each workspace's local ISOs are in a folder named with the workspace GUID. Global ISOs are in the folder named with a GUID of all zeros.
+- **Proxmox:** Proxmox storage keeps all ISOs in one flat list. TopoMojo encodes the scope in the filename, as the workspace GUID (or the all-zeros GUID for global ISOs), then `Pod__IsoScopeSeparator` (default `__`), then the original filename. The separator may only contain letters, digits, `-`, `_`, and `.`. ISOs uploaded by older releases with `#` as the separator still work.
+
+For hypervisor storage settings, see [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) in the TopoMojo repository.
+
 ### Machines Tab
 
-This tab lists VMs TopoMojo is tracking for all workspaces and gamespaces.
+This tab lists VMs TopoMojo is tracking for all workspaces and gamespaces. The list is read-only; manage VMs from the [Gamespaces Tab](#gamespaces-tab) or [Workspaces Tab](#workspaces-tab).
 
 ![admin machine example](img/admin-machine.png)
 
-- `gamespace` indicates this VM belongs to a *gamespace*.
-- `pc5-ubuntu-server-2204-594` is the name of the VM.
-- `#d9b090c92728424781537c66b3ee2f4b` is the gamespace GUID appended to the VM name for ease of tracking.
+**Search** matches the VM name, the workspace or gamespace it belongs to, the host, or a pasted gamespace GUID. The tab shows at most 100 results; if it reaches that limit, refine the search term.
+
+Use the table headers to sort by:
+
+- **Machine Name:** The VM name.
+- **Gamespace / Group:** The workspace or gamespace the VM belongs to, linked so you can open it, with its GUID underneath. Click the GUID to copy it.
+- **State:** The VM's power state.
+- **Host:** The hypervisor host the VM runs on.
 
 #### "Orphaned" VMs
 
-VMs tagged with `**orphaned` are VMs that still exist but are not associated with a workspace or gamespace. VMs can become orphaned when there is an error or disconnection from the hypervisor during TopoMojo's cleanup process. Orphaned VMs should be manually removed from the hypervisor.
+VMs labeled **Orphaned** in the **Gamespace / Group** column are VMs that still exist but are not associated with a workspace or gamespace. VMs can become orphaned when there is an error or disconnection from the hypervisor during TopoMojo's cleanup process. Orphaned VMs should be manually removed from the hypervisor.
 
 To quickly identify orphaned VMs, search for "orphaned" in the Search field.
 
 ### Users Tab
 
-The **Users** tab shows all TopoMojo users. You can create new users and assign users permissions here. To search for a user, enter the term into the **Search** field or filter by *role* or *audience*. Recall from [workspace Settings](#settings) that *audience* is a list of clients who can launch the workspace as a gamespace.
+The **Users** tab shows all TopoMojo users. You can create new users and assign users permissions here. To search for a user, enter the term into the **Search** field or filter by role (**admins**, **observers**, **creators**, **builders**), by **service accounts**, or by *scope*. Recall from [workspace Settings](#settings) that *audience* is a list of clients who can launch the workspace as a gamespace.
 
-- **View ( <i class="fa-solid fa-list" aria-label="list-icon" role="img"></i> ):** Select **View** to see the properties for the user.
+- **View ( <i class="fa-solid fa-list" aria-label="list-icon" role="img"></i> ):** Select **View** to see the properties for the user. Users with a service account client ID are marked **Service Account**.
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes the user.
 
 #### Roles
@@ -549,6 +698,13 @@ Grant the *Creator* role to users who need to build workspaces and troubleshoot 
 
 An administrator can configure TopoMojo to inherit user roles from the Identity Provider (IdP). For example, an IdP administrator can add roles like *administrator*, *builder*, or a custom role then configure TopoMojo to map those IdP roles to TopoMojo roles. Inheriting roles reduces the need for redundant setup if you're already managing user roles on the identity provider across multiple Crucible apps. See the [Helm deployment documentation](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#authentication-oidc) for more information on how to configure this setting.
 
+TopoMojo reads IdP roles from these settings:
+
+- **`Oidc__UserRolesClaimPath`:** Where in the access token to find role values. The default is `realm_access.roles`, which fits Keycloak realm roles. Set it to the string `null` to turn off IdP roles.
+- **`Oidc__UserRolesClaimMap__<idp-role>`:** Maps an IdP role value to a TopoMojo role. For example, `Oidc__UserRolesClaimMap__builder = Builder` grants the Builder role to anyone whose token contains `builder`. The defaults map `administrator`, `builder`, `creator`, `observer`, and `user` to the matching TopoMojo roles. The IdP can't assign **Disabled**.
+
+A user's *effective role* is the strongest of their TopoMojo role and every role mapped from their IdP roles. When the two differ, the user's row shows an **Identity Role / Effective Role** badge. Click it to see both assigned roles and which one wins. Disabling a user in TopoMojo blocks them regardless of IdP roles.
+
 #### Create a New User
 
 - **Name:** Enter a new user name here.
@@ -557,12 +713,26 @@ An administrator can configure TopoMojo to inherit user roles from the Identity 
 - **Gamespace Limit:** The maximum number of concurrent active gamespaces allowed for this user.
 - **Gamespace Max Duration:** The maximum amount of minutes allowed for a gamespace.
 - **Gamespace Cleanup Grace time:** The number of minutes between gamespace expiration and when TopoMojo tears down the associated VMs.
+- **Service Account Client Id:** Lets an OAuth client authenticate as this user with the client credentials flow, for automation. TopoMojo matches it against the `client_id` claim in the access token; `Oidc__ServiceAccountClientIdClaimType` changes the claim name, and setting it to the string `null` turns service accounts off. Give service accounts the **Observer** role at most; TopoMojo shows a warning on administrators that have a client ID.
 - **Generate ApiKey:** Generate API keys for users to programmatically interact with the TopoMojo API without needing to log in interactively.
+
+For regular users, TopoMojo may update **Name** from the identity token at sign-in.
+
+TopoMojo creates users automatically the first time they sign in, with limits taken from these settings:
+
+| Setting | Default | Effect |
+| --- | --- | --- |
+| `Core__DefaultWorkspaceLimit` | `0` | Workspaces a new user can create. `0` means none; users with the **Creator** role or above aren't limited. |
+| `Core__DefaultTemplateLimit` | `3` | Template limit applied to each workspace created by a user below the **Creator** role. |
+| `Core__DefaultGamespaceLimit` | `0` | Concurrent gamespaces for a new user. `0` means unlimited. The sample `appsettings.conf` shows `2`; the built-in default is `0`. |
+| `Core__DefaultGamespaceMinutes` | `120` | Gamespace duration when neither the user's **Gamespace Max Duration** nor the workspace's **Duration** is set. |
+| `Core__ReplicaLimit` | `5` | Maximum **Replicas** value on a template. |
+| `Core__DefaultUserScope` | `everyone` | Scope added to every user. See [Settings](#settings). |
 
 ### Settings Tab
 
-Upload a custom background image to change TopoMojo's theme.
+Upload a custom background image to change TopoMojo's theme. Wide images usually work best. Click **Clear background** to return to the default. You can also set the background in configuration with `Ui__Branding__BackgroundImageUrl`.
 
 ### Log Tab
 
-The **Log** tab is useful from the admin point of view when trying to troubleshoot. The Log tab only shows errors here, not every log line.
+The **Log** tab is useful from the admin point of view when trying to troubleshoot. The Log tab only shows errors here, not every log line. Click an entry to expand its stack trace, and click it again to collapse it. Use the copy button to copy an entry, for example into a bug report.
