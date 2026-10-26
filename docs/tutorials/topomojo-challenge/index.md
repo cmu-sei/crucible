@@ -229,38 +229,52 @@ The following optional sections show how to extend the challenge with additional
 
 This tutorial uses an existing Kali template. You can also create a VM by attaching an operating system ISO to a blank VM template and installing the operating system from the VM console.
 
-Before you begin, download a legal operating system ISO. For testing, you can use a free Linux ISO such as Debian or Ubuntu.
+Before you begin, download a legal operating system ISO. For testing, you can use a free Linux ISO such as Debian or Ubuntu. Your administrator sets the largest file TopoMojo accepts; see [Files](../../topomojo/index.md#files).
+
+#### Upload the ISO
 
 1. In the workspace, click the **Files** tab.
-2. Upload the operating system ISO file.
+2. Upload the operating system ISO file. TopoMojo stores it as a local ISO, available only to this workspace.
 
     ![Files tab selected, ISO attached, progress bar showing status](../../tutorials/img/iso-file-progress.png)
 
-3. When the file upload is complete, click the **Templates** tab.
-4. Add or create a VM template that uses a blank disk.
-5. Click **Edit** next to the template.
-6. In the **ISO** field, select the uploaded ISO.
+#### Prepare a Blank Disk Template
+
+1. When the file upload is complete, click the **Templates** tab.
+2. Click **+ Add Templates** and add a template that uses a blank disk. Your administrator publishes blank disk templates; ask them if you don't see one.
+3. Click **Edit** next to the template.
+4. In the **Linked** field, click **Unlink**, then confirm. An unlinked template gets its own disk, so you can save the installed operating system.
+5. In the **ISO** field, select the uploaded ISO.
 
     ![Uploaded ISO selected on Templates tab](../../tutorials/img/iso-selector.png)
 
-7. Configure the remaining template fields:
-    - **Name**: Enter a clear VM name, such as `tutorial debian`.
+6. Configure the remaining template fields. TopoMojo saves template fields as you edit them.
+    - **Name**: Enter a clear VM name, such as `tutorial-debian`.
     - **Description**: Add notes for developers, such as the operating system and credentials.
     - **Networks**: Enter `lan`.
-    - **Linked/Unlinked**: Use an *unlinked* disk so you can save the installed operating system.
 
-<!-- 8. Click **Initialize**.
-9. Click **Deploy**.
-10. Click **Console**.
-11. Follow the operating system installer prompts.
-12. After installation finishes, shut down the VM from inside the operating system.
-13. In TopoMojo, click **Save**. -->
+#### Install the Operating System
 
-The saved VM now contains the installed operating system and you can use it as a template for the challenge.
+1. Click **Initialize**. TopoMojo creates the disk for the unlinked template. **Initialize** only appears on a template whose disk doesn't exist yet.
+2. When initialization finishes, click **Deploy**. The VM boots from the attached ISO.
+3. Click **Console** and follow the operating system installer prompts.
+4. After installation finishes, shut down the VM from inside the operating system.
+5. In TopoMojo, click **Save**. Wait for the save to complete.
 
 !!! warning "Shut Down Before Saving"
 
-    Shut down the VM from inside the guest operating system before saving the template in TopoMojo. Saving while the VM is running can leave the disk in an inconsistent state.
+    TopoMojo doesn't require the VM to be powered off before you click **Save**, but shut it down from inside the guest operating system first anyway. A save taken while the VM is running captures the disk mid-write, much like pulling the power cord.
+
+#### Detach the Installer ISO
+
+The template still has the installer ISO attached, so every VM deployed from it boots with the installer in the CD drive. Remove the ISO from the template after you save. TopoMojo locks the template while its VM exists, so delete the VM first.
+
+1. Click **Delete** and confirm. Deleting the VM discards only changes made since the last save; the saved disk remains.
+2. Click **Edit** next to the template.
+3. In the **ISO** field, click **Remove**.
+4. Click **Deploy** and open the console to confirm the VM boots from its own disk.
+
+The saved VM now contains the installed operating system and you can use it as a template for the challenge.
 
 ### Adding an Additional Transform
 

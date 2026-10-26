@@ -175,7 +175,7 @@ The list below explains the fields in the VM template.
 
 - **Replicas:** Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a *gamespace*, set **Replicas** to "3". To deploy one copy of the VM template for each member of the team owning the gamespace, set **Replicas** to "-1".
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.
-- **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine. Common use: attach an OS installer ISO for a blank disk template, or mount utilities during setup. See [Installing an Operating System from an ISO](../tutorials/topomojo-challenge/index.md#installing-an-operating-system-from-an-iso).
+- **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine. Common use: attach an OS installer ISO for a blank disk template, or mount utilities during setup. See [Installing an Operating System from an ISO](#installing-an-operating-system-from-an-iso).
 - **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access.
 
   !!! note
@@ -203,6 +203,20 @@ The deployed virtual machine displays the following additional icons from left t
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes a running VM instance. Before you click **delete**, make sure you have saved any changes to the disk.
 - **Save ( <i class="fa-solid fa-save" aria-label="save-icon" role="img"></i> ):** Save any changes made to the VM. Sometimes called "taking a snapshot", though the technical implementation of this feature may not resemble a true "snapshot" on the hypervisor. The **save** icon is only available when you're using an unlinked disk, since you can't save changes to a linked disk. Clicking **save** removes the last saved state and creates a new one with all VM changes.
   ![save a vm template](img/templates-save.png)
+
+#### Installing an Operating System from an ISO
+
+To build a VM from an operating system installer, combine the steps above in this order:
+
+1. Upload the ISO on the [Files](#files) tab.
+2. Add a blank disk template on the **Templates** tab.
+3. **Unlink** the template so it gets its own disk.
+4. Select the ISO in the template's **ISO** field.
+5. **Initialize**, then **Deploy**, and install the operating system from the console.
+6. Shut down the VM from inside the guest and click **Save**.
+7. Delete the VM, click **Remove** in the **ISO** field, and deploy again to confirm the VM boots from its own disk.
+
+For the full walkthrough, see [Installing an Operating System from an ISO](../tutorials/topomojo-challenge/index.md#installing-an-operating-system-from-an-iso) in the *Creating a TopoMojo Challenge* tutorial.
 
 ## Lab Document
 
