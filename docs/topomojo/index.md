@@ -549,6 +549,32 @@ To publish a template so other workspaces can add it from **Add Templates**:
 
 Workspaces that add a published template get a *linked* copy that uses the published template's disk. To share a template with only some workspaces instead of all of them, leave it unpublished and enter one or more space-delimited tokens in **Audience**. A workspace can add the template when its template scope contains a matching token.
 
+#### Bringing In an Existing Disk
+
+You can build a template around a disk created outside TopoMojo, such as an exported appliance or a VM built by hand on the hypervisor.
+
+On **vSphere**:
+
+1. Copy the `.vmdk` disk to the datastore named by `Pod__DiskStore`, in a folder that isn't a workspace GUID. Stock disks conventionally go in the `00000000-0000-0000-0000-000000000000` folder. TopoMojo doesn't save over or delete disks outside a workspace's own folder.
+2. On the **Templates** tab, click **Create a new template**, or expand an existing template.
+3. In **Detail**, set the disk's `Path` to the disk's location relative to `Pod__DiskStore`. For example, if `Pod__DiskStore` is `[datastore1] topomojo` and the disk is at `[datastore1] topomojo/00000000-0000-0000-0000-000000000000/router.vmdk`, enter:
+
+    ```json
+    "Disks": [
+      {
+        "Path": "[ds] 00000000-0000-0000-0000-000000000000/router.vmdk",
+        "Controller": "lsilogic"
+      }
+    ]
+    ```
+
+    TopoMojo replaces the bracketed datastore name with the one in `Pod__DiskStore`, so `[ds]` works as a placeholder.
+
+4. Set `Cpu`, `Ram`, `Guest`, and the `Disks` `Controller` to match the disk. A wrong controller or guest type can keep the operating system from booting.
+5. Click **Save Settings**, then [publish the template](#publishing-a-template) if other workspaces need it.
+
+On **Proxmox**, TopoMojo deploys by cloning a Proxmox template VM rather than by disk path. Import the disk into a VM on Proxmox, convert that VM to a template, and set `Template` in **Detail** to the Proxmox template's name exactly.
+
 #### Common Template Errors
 
 | Error | Likely Cause | Solution |
