@@ -95,6 +95,10 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 ### Assessing Performance
 
+[![Blueprint Logo](assets/blueprint-logo.png)](blueprint/index.md) Crucible's [**Blueprint**](blueprint/index.md) application enables assessment against competency frameworks. Attach a framework, such as the NICE Framework, to a MSEL. Then select the work roles, tasks, knowledge, skills, and abilities that apply and associate them with teams and scenario events. See [Competencies](blueprint/index.md#competencies).
+
+During a live exercise, Evaluators use the [Assessor View](blueprint/index.md#assessor-view) to record assessment outcomes against those competencies.
+
 ![SEER Logo](assets/seer-logo.svg){: style="height:75px;width:75px"} Crucible's **SEER** application enables assessment of team performance. During events, participants tackle mission-essential tasks and individual qualification requirements. Map performance assessments to training objectives to scenario events.
 
 ### Launching an On-Demand Exercise

@@ -84,8 +84,8 @@ The Data Fields page lists all data field templates available for use in MSEL sc
 
 1. Under **Data Fields**, click **+** (**Add a template data field**).
 2. In **Name**, enter the field name (for example, `Delivery Method`).
-3. In **Data Type**, select the data type. Available types: Boolean, Card, Checkbox, Datetime, Double, HTML, Integer, Move, Organization, SourceType, Status, String, Team, TeamsMultiple, Url, User.
-4. Check **Use Option List** to provide a predefined list of selectable values for the field (for example, `Unused, Open, Closed, Critical, Affected`).
+3. In **Data Type**, select the data type. Available types: Boolean, Card, Checkbox, Competency, Datetime, Double, HTML, Integer, IpAddress, Move, Network, Organization, SourceType, Status, String, Team, TeamsMultiple, Url, User. See [Data Value Checks](#data-value-checks) for the values IpAddress, Network, and Datetime fields accept.
+4. Check **Use Option List** to provide a predefined list of selectable values for the field (for example, `Low, Medium, High`).
 5. Click **Save**.
 
 ##### Edit, Delete, and Search for a Data Field Template
@@ -257,23 +257,27 @@ Content developers use Blueprint to build and manage MSELs.
 
 ### Event Dashboard
 
-The **Event Dashboard** is Blueprint's homepage. It shows a card-based layout with up to three cards tailored to the current user's permissions. While data loads, an **Initializing Data** card is displayed with a progress spinner.
+The **Event Dashboard** is Blueprint's homepage. It shows a card for each thing the current user can do: **Join**, **Launch**, **Build**, and **Assess**. Each card shows how many events it applies to. While data loads, an **Initializing Data** card is displayed with a progress spinner.
 
-![Blueprint Event Dashboard](img/blueprintLandingPage.png)
+Below the mission cards, four cards describe what Blueprint does: **Collaborative Planning**, **Integrated Platform**, **Scenario Design**, and **Cyber Range Ready**. Click one to read more.
 
 #### Join an Event
 
-If the user has been invited to an active (deployed) MSEL, a **Join an Event** card is shown with the subtitle *Access In-Progress Events*. Clicking the card navigates to `/join`, which lists every MSEL the user is currently eligible to join. Selecting a MSEL proceeds to Player, where the user can access exercise information and related applications.
+The **Join** card (*Active Exercises*) counts the in-progress events the user can join. Click **Join Event** to go to `/join`, which shows a card for each of those events with its name and description. Click **Join** on a card to open the event in Player. **Join** is a link, so it can also be opened in a new tab. When there is nothing to join, the card shows **No active events available to join** and cannot be clicked.
 
 #### Start an Event
 
-If the user has permission to launch template MSELs, a **Start an Event** card is shown with the subtitle *Launch New events*. Clicking the card navigates to `/launch` and lists the MSELs the user may launch. Selecting a template launches the event and proceeds to Player.
+If the user can launch any template MSELs, the **Launch** card (*Initiate New Missions*) is shown. Click **Start Event** to go to `/launch` and choose a template to launch. Launching the event creates its teams in a new Player view and proceeds to Player.
 
 #### Manage an Event
 
-If the user has an administrator role, holds the `CreateMsels` permission, or is a contributor on any MSEL, a **Manage an Event** card is shown with the subtitle *Design and Plan Events*. Clicking the card navigates to `/build`, where the user can create, edit, delete, and open MSELs.
+If the user holds the `CreateMsels` permission or is a contributor on any MSEL, the **Build** card (*Design & Planning*) is shown. Click **Manage Events** to go to `/build`, where the user can create, edit, delete, and open MSELs.
 
-If the user has no MSELs and no `CreateMsels` permission, the cards are replaced with a single **Nothing to see here!** card.
+#### Assess an Event
+
+If the user is a System Admin or an Evaluator on any MSEL, the **Assess** card (*Evaluation & Scoring*) is shown, with the number of those MSELs that have scenario events. Evaluators open a MSEL's [Assessor View](#assessor-view) from its **Assessor View URL**.
+
+If the user can do none of these, a single **No Access** card is shown instead.
 
 ### Player Manage Event Page
 
@@ -326,7 +330,17 @@ The MSEL Catalog shows created MSELs. Users can select a MSEL to work on, create
 Two actions are available in the MSEL list table header:
 
 - **Add blank MSEL** (**+** icon): creates a new MSEL with default settings. The new MSEL appears with status `Pending` and a description such as "Created from Default Settings by [username]".
-- **Upload a new MSEL from a file** (upload icon): opens a file chooser. Select an `.xlsx` file to create a new MSEL from its contents.
+- **Upload a new MSEL from a file** (upload icon): choose **Upload xlsx file** or **Upload JSON file**, then select the file to create a new MSEL from its contents. A `.json` file is one exported with **Download JSON file** from a MSEL's row actions.
+
+##### JSON Import Report
+
+After a JSON upload, Blueprint shows a report for the imported MSEL:
+
+- **Imported:** the number of **Moves**, **Scenario Events**, **Cards**, **Teams**, **Data Fields**, and **Pages** created.
+- **Changed:** what Blueprint adjusted to fit this Blueprint, such as a new name when a MSEL with the file's name already exists, a CITE scoring model or team type linked by name, team members that could not be imported, and which integrations are on.
+- **Failed:** steps that could not be completed, such as checking the scoring model in CITE, with what to do before pushing.
+
+Click **Open MSEL** to open the new MSEL, or **Close** to stay on the MSEL list.
 
 #### Filter Display
 
@@ -357,7 +371,7 @@ The MSEL list header also exposes:
 
 Each MSEL row in the catalog exposes four icon buttons in the first column:
 
-- **Download** (down-arrow icon): exports the MSEL as a `.xlsx` file.
+- **Download** (down-arrow icon): choose **Download xlsx file** or **Download JSON file** to export the MSEL. A `.json` export can be uploaded again with **Upload JSON file**.
 - **Upload .xlsx file to [MSEL name]** (up-arrow icon): replaces the MSEL's contents with data from the chosen file.
 - **Delete [MSEL name]** (trash can icon): permanently removes the MSEL and its associated data. Template MSELs cannot be deleted; the trash can is disabled for them.
 - **Copy [MSEL name]** (copy icon): duplicates the MSEL into a new, editable copy.
@@ -394,8 +408,8 @@ To edit the MSEL's basic information and configuration, follow these steps:
 | **Set a Start Time** | Boolean | When checked, exposes a **Start Date / Time** picker and schedules a specific start moment for the MSEL. When unchecked, the MSEL is open-ended. | `True` |
 | **Start Date / Time** | Datetime | Start date/time of the MSEL (only visible when **Set a Start Time** is checked). | `09/10/2024 20:00:00` |
 | **Duration (d / h / m)** | Integer × 3 | End time relative to the start, expressed as days / hours / minutes. Click **+** to increment or type directly into each field. | `1 d 12 h 00 m` |
-| **Applications to Integrate** | Boolean checkboxes | Enable any of: Player, Gallery, CITE, Steamfitter. Enabling an integration activates additional MSEL sidebar tabs for that app. | Player: `True`, CITE: `True` |
-| **MSEL Status** | Dropdown | MSEL lifecycle state: `Pending`, `Entered`, `Approved`, `Deployed`, `Complete`, `Archived`. | `Approved` |
+| **Applications to Integrate** | Boolean checkboxes | Enable any of: Player, Gallery, CITE, Steamfitter, Caster. Enabling an integration activates additional MSEL sidebar tabs for that app. Caster requires Player. | Player: `True`, CITE: `True` |
+| **MSEL Status** | Dropdown | MSEL lifecycle state: `Pending`, `Entered`, `Approved`, `Complete`, `Archived`. Blueprint sets `Pushing` and `Pulling` itself while it pushes or removes integrations, and `Deployed` once they are pushed; while the MSEL is in one of those, the dropdown is locked. | `Approved` |
 | **Header Row Metadata (Height)** | Integer | Height of the header row when exporting this MSEL to `.xlsx`. | `30` |
 | **Difficulty Rating** | Dropdown | Metadata tag describing the exercise's difficulty. | (per framework) |
 | **Exercise Purpose** | Dropdown | Metadata tag describing why the exercise is being run. | (per framework) |
@@ -428,6 +442,7 @@ The **Metadata** block on the Config tab captures non-functional descriptors tha
 - **[Gallery](#glossary):** Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To learn more about this integration, reference the [Gallery](#gallery) section.
 - **[CITE](#glossary):** Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL. To learn more about this integration, reference the [CITE](#cite) section.
 - **[Player](#glossary) & [Steamfitter](#glossary):** Blueprint will automate the adding of events specified on the MSEL, as well as configure exercise details in Player.
+- **[Caster](#glossary):** Blueprint will deploy the MSEL's virtual machine topology from a Caster directory into a new Caster workspace, with the VMs added to the Player view and its teams. To learn more about this integration, reference the [Caster](#caster) section.
 
 #### MSEL Pages
 
@@ -522,15 +537,7 @@ To remove a team from the MSEL, follow these steps:
 1. Navigate to the **Teams** tab.
 2. Select the team you want to remove and click the **-** button.
 
-Now that you've added the team to the MSEL, members can participate on the MSEL event based on each team member's assigned role.
-
-The available roles are:
-
-- **[`Inviter`](#glossary):** This role allows a user to invite others to the MSEL event.
-- **[`Observer`](#glossary):** When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
-- **[`Incrementer`](#glossary):** When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.
-- **[`Modifier`](#glossary):** When the MSEL owner has enabled CITE integration, this role allows a user to modify the team's score.
-- **[`Submitter`](#glossary):** When the MSEL owner has enabled integration, this role allows a user to submit the team's score.
+Click a team to expand its **Team Members**. Each member's **Type** is their [CITE team role](#cite-team-roles), which decides what they can do in CITE. Check **Open Invite** on a team to let any of its members invite others to it.
 
 #### Data Fields
 
@@ -561,15 +568,31 @@ To add a Data Field to the MSEL, follow these steps:
 | **Name**                                                   | String        | Name of the data field                                                                         | Description      |
 | **Data Type**                                              | Dropdown Text | Data type for the data field                                                                   | String           |
 | **Use Option List**                                        | Boolean       | Add options to select when adding an event                                                     | True             |
+| **Multi-select**                                           | Boolean       | With **Use Option List**, allow more than one option to be selected                            | False            |
 | **Display on the Events list**                             | Boolean       | Display this data field on the Events list tab                                                 | True             |
 | **Display on the Exercise View**                           | Boolean       | Display this data field on the Exercise View tab                                               | True             |
-| **Display on "Advanced" edit tab**                         | Boolean       | Display this data field on the data field edit component Advanced tab                          | True             |
+| **Information Data Field**                                 | Boolean       | Display this data field for information events                                                 | True             |
+| **Facilitation Data Field**                                | Boolean       | Display this data field for facilitation events                                                | True             |
+| **Display on "Default" edit tab**                          | Boolean       | Display this data field on the Default tab of the event edit dialog                            | True             |
+| **Assessor View**                                          | Boolean       | Display this data field on the [Assessor View](#assessor-view)                                 | True             |
 | **Display for Content Developers and MSEL Owners Only!!!** | Boolean       | Display this data field for users who are Content Developers or MSEL Owners only               | True             |
 | **Gallery Article Parameter**                              | Dropdown Text | If using the Gallery integration, select the Gallery parameter that aligns with the data field | Description      |
 | **Column Metadata (Width)**                                | Integer       | Width of the column when displayed                                                             | 30               |
 | **Cell Metadata (Color, Tint, Font-Weight)**               | String        | Column color and font style                                                                    | (Red, 20%, bold) |
 
 After you've added all desired configurations, click **Save**.
+
+##### Data Value Checks
+
+Blueprint checks the values typed into these data field types. A value chosen from an option list is not checked.
+
+| Data Type | Accepts | Example |
+| --- | --- | --- |
+| **IpAddress** | A single IPv4 or IPv6 address, without a prefix length | `192.0.2.10`, `2001:db8::10` |
+| **Network** | A network in Classless Inter-Domain Routing (CIDR) form, with no host bits set. Blueprint suggests the corrected network when host bits are set. | `10.1.0.0/24`, `2001:db8::/48` |
+| **Datetime** | A date and time chosen with the date picker | `09/10/2024 20:00:00` |
+
+An event with a value that fails its check shows the problem under the field and cannot be saved until it is fixed. A Datetime value that is not a date, such as the text left behind when a field's type is changed to Datetime, is shown as is and marked **Not a date and time**. IpAddress and Network columns sort by address rather than alphabetically.
 
 ##### Delete a Data Field
 
@@ -809,7 +832,47 @@ While the **Events** tab lets MSEL owners and content developers manage events, 
 
 #### Assessor View
 
-The **Assessor View** tab gives Evaluators read-only access to the MSEL during a live exercise for the purpose of recording assessment outcomes. It is accessible directly via the **Assessor View URL** on the Config tab (`/assess/?msel={mselId}`).
+The **Assessor View** tab is where Evaluators watch a live exercise and rate the participating teams against the MSEL's competencies. Each scenario event shows the xAPI statements the exercise applications recorded for it, beside a competency assessment where the Evaluator rates each competency and submits the rating as an xAPI competency assertion. The MSEL's content is read-only here; the only values an Evaluator can change are **Checkbox** data fields.
+
+The Assessor View is also available outside the MSEL editor via the **Assessor View URL** on the Config tab (`/assess/?msel={mselId}`).
+
+##### Access
+
+| MSEL Role | Access |
+| --- | --- |
+| **Owner**, **Evaluator** | View the Assessor View and check or clear **Checkbox** data fields |
+| **Editor**, **Approver** | View the Assessor View |
+
+System Admins have full access to every MSEL's Assessor View. Users with no role on the MSEL see **Access Denied**.
+
+##### Choose What Assessors See
+
+The Assessor View shows only the columns the MSEL owner marks for it. If none are marked, it shows **No data fields are marked as assessor-visible.**
+
+To choose the Assessor View columns, follow these steps:
+
+1. Navigate to the **Data Fields** tab.
+2. Check the **Assessor View** column for each data field the assessors should see. The **Move**, **Group**, **Execution Time**, and **Integration Target** rows control those columns the same way.
+
+To give assessors competencies to rate, attach a framework and its competencies on the [Competencies](#competencies) tab, then associate them with teams and scenario events. The rating levels come from the framework's default proficiency scale.
+
+##### Review xAPI Evidence
+
+Events are grouped under their move and group. Click a move, group, or event row to expand it. Use **Expand All** (Ctrl+Shift+E) and **Collapse All** (Ctrl+Shift+C) in the header to open or close every row.
+
+An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Steamfitter, Player, or Gallery), and **Verb** filters, and click **Refresh xAPI statements** to load new ones.
+
+Click **Search Events** in the header to search the events and filter them by the values of their data fields.
+
+##### Submit a Competency Assessment
+
+The **Competency Assessment** panel on the right of an expanded row lists the competencies associated with that move, group, or event. To rate them, follow these steps:
+
+1. In **Assess Team**, select the team being assessed. Only teams associated with at least one of the listed competencies appear. When the evidence is filtered to a single team, that team is preselected.
+2. For each competency, select a **Rating** and optionally enter a **Comment**. Hover over the competency ID to see its name.
+3. Click **Submit assertion** to submit one rating, or **Submit All** to submit every rated competency.
+
+Each submitted rating is marked **Submitted**. Blueprint records it in the Learning Record Store (LRS) as an xAPI statement with the `asserted` verb, so xAPI must be configured for Blueprint.
 
 #### MSEL Playbook
 
@@ -908,7 +971,26 @@ Next, assign roles to each member of the team. To do this, follow these steps:
 
 1. Navigate to the **Teams** tab.
 2. Select the desired team, and click it to expand its configurations.
-3. Assign the necessary roles to each team member.
+3. In each member's **Type** column, select their CITE team role.
+
+##### CITE Team Roles
+
+The **Type** list shows the team roles defined in CITE. Blueprint gives each member that role in CITE when it pushes the MSEL. CITE comes with these roles:
+
+| Role | Can do in CITE |
+| --- | --- |
+| **Owner** | View the team, answer, submit the team's score, and manage the team |
+| **Submitter** | View the team, answer, and submit the team's score |
+| **Contributor** | View the team and answer |
+| **Member** | View the team |
+
+A CITE administrator can add roles, such as one that can see or change the official score. Blueprint lists them once they exist.
+
+!!! warning
+
+    A member whose **Type** is **-- None --** gets no role in CITE. CITE then disables their answer boxes, so they cannot score. Give every participant a role before pushing: for example, **Submitter** for the team's recorder and **Contributor** for the others.
+
+    People who join a team through an [invitation](#invitations) after the push are added to the CITE team with no role. Give them a role in CITE before play.
 
 ##### CITE Actions
 
@@ -1056,6 +1138,8 @@ The MSEL owner should add these fields:
 
 After adding data fields, map each one to the appropriate Gallery field by selecting an option from the **Gallery Article Parameter** dropdown when adding or editing the field.
 
+On the Scenario Events tab, a field mapped to the **Status** parameter offers Gallery's article statuses as a dropdown of colors: `Gray`, `Green`, `Yellow`, `Orange`, and `Red`. These are the colors the article's card shows on the Gallery wall. Values from older MSELs that use Gallery's former status names show as the matching color.
+
 ##### Gallery Cards
 
 On this tab, the MSEL owner can add [Gallery Cards](#glossary) to push from Blueprint. These are the different cards in the Gallery Wall. You can also find articles related to that card here.
@@ -1145,6 +1229,8 @@ You can add URL parameters to point to a specific CITE evaluation, Gallery exhib
 - **{galleryExhibitId}:** Add this variable to the URL to point to a specific Gallery exhibit.
 - **{steamFitterScenarioId}:** Add this variable to the URL to point to a specific Steamfitter scenario.
 - **{playerViewId}:** Add this variable to the URL to point to a specific Player view.
+- **{casterWorkspaceId}:** Add this variable to the URL to point to the Caster workspace the MSEL deployed.
+- **{vmUrl}:** Add this variable to the URL to point to the VM UI, for example `{vmUrl}/views/{playerViewId}`.
 
 After you've added all desired configurations, click **Save**.
 
@@ -1170,6 +1256,40 @@ To search for a specific app, follow these steps:
 1. Navigate to the **Player Apps** tab.
 2. Click the **Search Bar** and type the name of the desired app.
 
+#### Caster
+
+If enabled, Blueprint deploys the MSEL's virtual machine topology through [Caster](../caster/index.md). On push, Blueprint creates a workspace named `blueprint-{mselId}` in the chosen Caster directory, writes the Player view and team IDs into the workspace as Terraform variables, and plans and applies it. The VMs land in the MSEL's Player view, so the Caster integration requires the Player integration.
+
+##### Choose the Caster Directory
+
+The directory holds the Terraform template to deploy. To choose it, follow these steps:
+
+1. Navigate to the **Info** tab.
+2. Under **Applications to Integrate**, check **Player** and **Caster**.
+3. In **Directory**, select the Caster directory, listed as *project / directory*.
+4. Click **Save Changes**.
+
+The directory list comes from Caster, so the user choosing it needs access to Caster. Without it, Blueprint shows **Caster directories could not be loaded. You need access to Caster to choose one.**
+
+After a push, the **Workspace** row shows the workspace Blueprint created. Click **Open in Caster** to open the Caster project that holds it.
+
+##### Map Teams to the Template
+
+Blueprint writes each Player team's ID to a Terraform variable named after the team: lower case, with spaces turned into underscores. A template that names its team variables differently can still be used by mapping each MSEL team to one of the template's variables.
+
+To map a team, follow these steps:
+
+1. Navigate to the **Teams** tab. The **Topology Team** column shows each team's variable.
+2. Click **Edit** next to the team, then select the template variable in **Topology Team**. Select **By team name** to go back to the variable the team's name gives.
+
+Blueprint lists the string variables the template declares, except sensitive ones, ones the template already assigns, and the ones Blueprint writes itself: `view_id`, `user_id`, `username`, and the deprecated `exercise_id`.
+
+The Teams tab warns when a team is mapped to a variable the template no longer declares, and when a template variable has no MSEL team. A variable with no MSEL team and no default in the template fails the Caster plan. If two teams end up with the same variable, the push fails and names the teams.
+
+##### Give Participants the VMs
+
+Participants reach the deployed VMs through the VM UI. Add a [Player app](#add-a-player-app) whose URL uses `{vmUrl}`, for example `{vmUrl}/views/{playerViewId}`. Until the MSEL has one, the **Info** and **Player Apps** tabs warn that participants will not be able to reach the Caster VMs.
+
 #### Push Integrations
 
 After adding all of the MSEL information and performing all necessary configurations, you can push information from enabled integrations to their respective applications.
@@ -1180,6 +1300,8 @@ To push MSEL information to their respective applications, follow these steps:
 
 1. Navigate to the **Info** tab.
 2. Click **Push Integrations**.
+
+When Caster is enabled, Blueprint deploys the topology last, after the other integrations, because the Terraform apply can take a long time.
 
 #### Remove Integrations
 
@@ -1192,21 +1314,27 @@ To remove MSEL information from the applications, follow these steps:
 1. Navigate to the **Info** tab.
 2. Click **Remove Integrations**.
 
+When Caster is enabled, Blueprint destroys the Caster workspace first, while the Player view its VMs belong to still exists. If the destroy fails, Blueprint stops and keeps the other integrations, so **Remove Integrations** can be run again.
+
 ## Glossary
 
 This glossary defines key terms and concepts used in the Blueprint application.
 
 **`Approver` Role:** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
 
-**Assessor View:** Read-only MSEL view used by Evaluators during an exercise to record assessment outcomes. Directly accessible via the Assessor View URL on the Config tab.
+**Assessor View:** MSEL view used by Evaluators during an exercise to review xAPI evidence and submit competency ratings for teams. Directly accessible via the Assessor View URL on the Config tab.
 
 **Blueprint**: Web application created to make the development of a MSEL and events easier.
+
+**Caster:** Web application that deploys virtual machine topologies from Terraform templates organized in projects, directories, and workspaces.
 
 **Catalog:** A reusable, named collection of scenario events associated with a specific inject type. Catalogs are defined in Administration → Catalogs and can be pulled into MSELs.
 
 **CITE:** Web application that allows multiple participants from different organizations to evaluate, score, and comment on cyber incidents.
 
 **CITE Action:** Series of steps to guide users on an appropriate course of action during an exercise.
+
+**CITE Team Role:** What a team member can do in CITE: Owner, Submitter, Contributor, Member, or a role a CITE administrator adds. Set in each member's **Type** on the Teams tab and given to them in CITE when the MSEL is pushed. See [CITE Team Roles](#cite-team-roles).
 
 **`CITE` Role:** Provide a set of responsibilities assigned to a user during an exercise.
 
@@ -1234,13 +1362,7 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **Group:** A named collection of users defined in Administration → Groups. Used for bulk permission management.
 
-**`Incrementer` Role:** When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.
-
 **Inject Type:** A named template describing the structure and data fields for a category of scenario events. Defined in Administration → Inject Types.
-
-**`Inviter` Role:** This role will allow a user to invite others to the MSEL event.
-
-**`Modifier` Role:** When the MSEL owner has enabled CITE integration, this role allows a user to modify the team's score.
 
 **Move Editor:** Can edit moves on the MSEL, as well as increment them during an exercise.
 
@@ -1249,8 +1371,6 @@ This glossary defines key terms and concepts used in the Blueprint application.
 **MSEL:** (Master Scenario Events List) provides a timeline for all expected events, affiliated users and organizations during an exercise.
 
 **MSEL Playbook:** A printable, paginated view of a MSEL's scenario events intended for use by exercise controllers.
-
-**`Observer` Role:** When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
 
 **Organizations:** Entities within an exercise with defined roles, responsibilities, and functions.
 
@@ -1265,8 +1385,6 @@ This glossary defines key terms and concepts used in the Blueprint application.
 **Proficiency Scale:** A reusable, named set of performance levels (for example, Novice, Intermediate, Advanced, Expert) attached to a competency framework.
 
 **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
-
-**`Submitter` Role:** When the MSEL owner has enabled CITE integration, this role allows a user to submit the team's score.
 
 **System Admin Permission:** Can add users to a team, as well as assign the required permissions.
 
