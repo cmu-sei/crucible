@@ -201,7 +201,14 @@ The deployed virtual machine displays the following additional icons from left t
 - **Stop/Start ( <i class="fa-solid fa-stop" aria-label="stop-icon" role="img"></i> / <i class="fa-solid fa-play" aria-label="play-icon" role="img"></i> ):** Power off/on the VM, but leaves the resource deployed on the hypervisor. Clicking **stop** results in the hypervisor showing a deployed VM in a powered-off state. Clicking **start** powers on the deployed VM.
 - **Revert ( <i class="fa-solid fa-backward-step" aria-label="revert-icon" role="img"></i> ):** Reverts the VM to its last saved state. You lose all changes made since the last commit. TopoMojo can only revert VMs to their last saved state - there is no history of all previous saved states.
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes a running VM instance. Before you click **delete**, make sure you have saved any changes to the disk.
-- **Save ( <i class="fa-solid fa-save" aria-label="save-icon" role="img"></i> ):** Save any changes made to the VM. Sometimes called "taking a snapshot", though the technical implementation of this feature may not resemble a true "snapshot" on the hypervisor. The **save** icon is only available when you're using an unlinked disk, since you can't save changes to a linked disk. Clicking **save** removes the last saved state and creates a new one with all VM changes.
+- **Save ( <i class="fa-solid fa-save" aria-label="save-icon" role="img"></i> ):** Save any changes made to the VM. Sometimes called "taking a snapshot", though the technical implementation of this feature may not resemble a true "snapshot" on the hypervisor. The **save** icon is only available when you're using an unlinked disk, since you can't save changes to a linked disk.
+
+  Saving replaces the previous saved state. TopoMojo keeps only one saved state per template, so after a save you can't return to the state before it.
+
+  TopoMojo doesn't require a stopped VM, but saving a running VM is like pulling the power cord mid-write. Shut down from inside the guest operating system before you save, especially after installing software or an operating system.
+
+  TopoMojo refuses to save a workspace VM while any gamespace launched from the workspace is still running.
+
   ![save a vm template](img/templates-save.png)
 
 #### Installing an Operating System from an ISO
