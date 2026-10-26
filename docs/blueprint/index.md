@@ -537,15 +537,7 @@ To remove a team from the MSEL, follow these steps:
 1. Navigate to the **Teams** tab.
 2. Select the team you want to remove and click the **-** button.
 
-Now that you've added the team to the MSEL, members can participate on the MSEL event based on each team member's assigned role.
-
-The available roles are:
-
-- **[`Inviter`](#glossary):** This role allows a user to invite others to the MSEL event.
-- **[`Observer`](#glossary):** When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
-- **[`Incrementer`](#glossary):** When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.
-- **[`Modifier`](#glossary):** When the MSEL owner has enabled CITE integration, this role allows a user to modify the team's score.
-- **[`Submitter`](#glossary):** When the MSEL owner has enabled integration, this role allows a user to submit the team's score.
+Click a team to expand its **Team Members**. Each member's **Type** is their [CITE team role](#cite-team-roles), which decides what they can do in CITE. Check **Open Invite** on a team to let any of its members invite others to it.
 
 #### Data Fields
 
@@ -979,7 +971,26 @@ Next, assign roles to each member of the team. To do this, follow these steps:
 
 1. Navigate to the **Teams** tab.
 2. Select the desired team, and click it to expand its configurations.
-3. Assign the necessary roles to each team member.
+3. In each member's **Type** column, select their CITE team role.
+
+##### CITE Team Roles
+
+The **Type** list shows the team roles defined in CITE. Blueprint gives each member that role in CITE when it pushes the MSEL. CITE comes with these roles:
+
+| Role | Can do in CITE |
+| --- | --- |
+| **Owner** | View the team, answer, submit the team's score, and manage the team |
+| **Submitter** | View the team, answer, and submit the team's score |
+| **Contributor** | View the team and answer |
+| **Member** | View the team |
+
+A CITE administrator can add roles, such as one that can see or change the official score. Blueprint lists them once they exist.
+
+!!! warning
+
+    A member whose **Type** is **-- None --** gets no role in CITE. CITE then disables their answer boxes, so they cannot score. Give every participant a role before pushing: for example, **Submitter** for the team's recorder and **Contributor** for the others.
+
+    People who join a team through an [invitation](#invitations) after the push are added to the CITE team with no role. Give them a role in CITE before play.
 
 ##### CITE Actions
 
@@ -1323,6 +1334,8 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **CITE Action:** Series of steps to guide users on an appropriate course of action during an exercise.
 
+**CITE Team Role:** What a team member can do in CITE: Owner, Submitter, Contributor, Member, or a role a CITE administrator adds. Set in each member's **Type** on the Teams tab and given to them in CITE when the MSEL is pushed. See [CITE Team Roles](#cite-team-roles).
+
 **`CITE` Role:** Provide a set of responsibilities assigned to a user during an exercise.
 
 **Competency:** A work role, task, knowledge, skill, or ability that comes from a competency framework and can be attached to a MSEL, a team, or a scenario event.
@@ -1349,13 +1362,7 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **Group:** A named collection of users defined in Administration → Groups. Used for bulk permission management.
 
-**`Incrementer` Role:** When the MSEL owner has enabled CITE integration, this role allows a user to advance the current move.
-
 **Inject Type:** A named template describing the structure and data fields for a category of scenario events. Defined in Administration → Inject Types.
-
-**`Inviter` Role:** This role will allow a user to invite others to the MSEL event.
-
-**`Modifier` Role:** When the MSEL owner has enabled CITE integration, this role allows a user to modify the team's score.
 
 **Move Editor:** Can edit moves on the MSEL, as well as increment them during an exercise.
 
@@ -1364,8 +1371,6 @@ This glossary defines key terms and concepts used in the Blueprint application.
 **MSEL:** (Master Scenario Events List) provides a timeline for all expected events, affiliated users and organizations during an exercise.
 
 **MSEL Playbook:** A printable, paginated view of a MSEL's scenario events intended for use by exercise controllers.
-
-**`Observer` Role:** When the MSEL owner has enabled Gallery or CITE integrations, this role allows a user to observe other team's progress on CITE and Gallery applications.
 
 **Organizations:** Entities within an exercise with defined roles, responsibilities, and functions.
 
@@ -1380,8 +1385,6 @@ This glossary defines key terms and concepts used in the Blueprint application.
 **Proficiency Scale:** A reusable, named set of performance levels (for example, Novice, Intermediate, Advanced, Expert) attached to a competency framework.
 
 **Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
-
-**`Submitter` Role:** When the MSEL owner has enabled CITE integration, this role allows a user to submit the team's score.
 
 **System Admin Permission:** Can add users to a team, as well as assign the required permissions.
 
