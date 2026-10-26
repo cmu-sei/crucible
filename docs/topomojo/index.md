@@ -311,6 +311,15 @@ The **Files** tab in the TopoMojo workspace allows you to upload files from your
 
     For ISO uploads to work, TopoMojo needs an NFS (Network File System) datastore presented to the hypervisor.
 
+ISOs you upload on the **Files** tab are *local* to the workspace: only the workspace that holds them can attach them. Administrators manage *global* ISOs, which every workspace can use.
+
+Your TopoMojo administrator controls upload limits:
+
+- **Maximum file size:** `FileUpload__MaxFileBytes`. The default, `0`, means TopoMojo itself sets no limit, but a reverse proxy or ingress in front of TopoMojo may still cap the request size.
+- **Upload time-out:** `FileUpload__UploadTimeoutMinutes`, default `60`. This applies when TopoMojo forwards the uploaded file to hypervisor storage through the datastore API (`FileUpload__UseDatastoreApi`).
+
+If a large ISO fails to upload, ask your administrator to check these settings.
+
 By default, the **Local** filter displays only ISOs available to the current workspace. When you upload a local ISO file, TopoMojo creates a folder named by the workspace GUID--highlighted in green below--in the NFS datastore. Only the current workspace has access to local ISO files in the workspace-named folder.
 
 ![GUID and local filter applied](img/iso-drag.png)
