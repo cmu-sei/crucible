@@ -59,6 +59,12 @@ Install TopoMojo using the [Helm chart](https://github.com/cmu-sei/helm-charts/t
 
 **`TopoMojo values.yaml`:** Contains default configurations for the `api` and the `ui`. To deploy TopoMojo, configure the **`Values.yaml`** file according to your needs then `helm install`. More details on how to configure the values file is [available in the helm charts repository](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo).
 
+For hypervisor settings, see the TopoMojo repository: [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) covers network setup, ISO storage, guest settings, and High Availability (`Pod__EnableHA` and related settings), and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) covers vSphere.
+
+!!! warning "Proxmox certificate validation"
+
+    Recent TopoMojo releases honor `Pod__IgnoreCertificateErrors` for Proxmox; earlier releases ignored it there and accepted any certificate. The setting defaults to `false`, so a Proxmox server with a self-signed or otherwise untrusted certificate now fails to connect. Install a certificate the TopoMojo host trusts, or set `Pod__IgnoreCertificateErrors = true`.
+
 ### Persistent/Shared Networks
 
 We recommend having a persistent/shared network available to all TopoMojo workspaces/gamespaces. The administrator defines a persistent/shared network at the time they deploy the TopoMojo API.
@@ -73,6 +79,11 @@ Use the `Pod**Vlan**Reservations` environment variable to define the name of a p
 ![bridge-net vlan reservation](img/bridge-net.png)
 
 You can define more than one shared/persistent network by incrementing the variable name (`Pod**Vlan**Reservations**1**Id` and `Pod**Vlan**Reservations**1**Name`). To connect VMs to shared/persistent networks, users must have at least **Builder** permissions.
+
+Two settings relax those network restrictions:
+
+- **`Core__AllowUnprivilegedVmReconfigure`** (default `false`): Lets users below **Builder** move a VM's network adapter onto shared/persistent networks.
+- **`Core__AllowPrivilegedNetworkIsolationExemption`** (default `false`): On vSphere, lets **Builders** connect a VM to any hypervisor network, not only the workspace's networks and the shared/persistent networks.
 
 !!! note "A note about bridge-net"
 
