@@ -274,6 +274,10 @@ The template still has the installer ISO attached, so every VM deployed from it 
 3. In the **ISO** field, click **Remove**.
 4. Click **Deploy** and open the console to confirm the VM boots from its own disk.
 
+!!! warning "Proxmox: removing the ISO doesn't clear the CD drive"
+
+    On Proxmox, an empty **ISO** field doesn't give the deployed VM an empty CD drive; it keeps whatever CD-ROM the underlying Proxmox template VM has. If the console in step 4 still shows the installer, ask a Proxmox administrator to set that template VM's **CD/DVD Drive** to **Do not use any media**.
+
 The saved VM now contains the installed operating system and you can use it as a template for the challenge. To make it available to other workspaces, an administrator must publish it; see [Publishing a Template](../../topomojo/index.md#publishing-a-template).
 
 ### Adding an Additional Transform

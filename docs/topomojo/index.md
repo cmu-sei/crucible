@@ -178,6 +178,11 @@ The list below explains the fields in the VM template.
 - **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine. Common use: attach an OS installer ISO for a blank disk template, or mount utilities during setup. See [Installing an Operating System from an ISO](#installing-an-operating-system-from-an-iso).
 
     To detach an ISO, click **Remove** in the **ISO** field. TopoMojo only reads this field when it deploys the VM, and TopoMojo locks the template while its VM exists. Delete the deployed VM first (after saving any changes you want to keep), remove the ISO, then deploy again.
+
+    !!! warning "Proxmox: removing the ISO doesn't clear the CD drive"
+
+        On Proxmox, a template with an empty **ISO** field doesn't get an empty CD drive. The deployed VM keeps whatever CD-ROM the underlying Proxmox template VM has, so clicking **Remove** doesn't detach an ISO that the Proxmox template already carries. To clear it, a Proxmox administrator sets the template VM's **CD/DVD Drive** to **Do not use any media** in Proxmox.
+
 - **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access.
 
     !!! note
