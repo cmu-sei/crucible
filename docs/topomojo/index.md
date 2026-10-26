@@ -176,6 +176,8 @@ The list below explains the fields in the VM template.
 - **Replicas:** Set this number to deploy copies of the same VM template. For example: to deploy three copies of a VM template when TopoMojo starts a *gamespace*, set **Replicas** to "3". To deploy one copy of the VM template for each member of the team owning the gamespace, set **Replicas** to "-1".
 - **Variant:** Specify that TopoMojo should deploy the VM template only for a particular variant. For example, if the Variant is "2", TopoMojo deploys the VM template only when it launches variant 2 of the challenge.
 - **ISO:** Use the ISO Selector to attach an ISO image to your virtual machine. Common use: attach an OS installer ISO for a blank disk template, or mount utilities during setup. See [Installing an Operating System from an ISO](#installing-an-operating-system-from-an-iso).
+
+  To detach an ISO, click **Remove** in the **ISO** field. TopoMojo only reads this field when it deploys the VM, and TopoMojo locks the template while its VM exists. Delete the deployed VM first (after saving any changes you want to keep), remove the ISO, then deploy again.
 - **Console Access:** Toggle **Hidden** to hide a specific VM from view while completing the lab. This is useful for back-end systems like a DHCP server that do not require user interaction or other systems where the user should not have direct console access.
 
   !!! note
