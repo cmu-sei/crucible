@@ -458,7 +458,7 @@ The **Play** tab is where you can interact with your lab in the same way others 
 
 Access the **Admin Dashboard** by clicking **Admin** in the top right corner of the navigation bar. You need the `admin` role assigned to your user to see the **Admin** navigation option.
 
-The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Announcement, and Janitor tools described next.
+The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Disks**, **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Announcement, and Janitor tools described next.
 
 ### Hub Connections
 
@@ -704,10 +704,12 @@ On **vSphere**:
 
     TopoMojo replaces the bracketed datastore name with the one in `Pod__DiskStore`, so `[ds]` works as a placeholder.
 
+    To check the path, find the disk on the [Disks Tab](#disks-tab) and click its name to copy it.
+
 4. Set `Cpu`, `Ram`, `Guest`, and the `Disks` `Controller` to match the disk. A wrong controller or guest type can keep the operating system from booting.
 5. Click **Save Settings**, then [publish the template](#publishing-a-template) if other workspaces need it.
 
-On **Proxmox**, TopoMojo deploys by cloning a Proxmox template VM rather than by disk path. Import the disk into a VM on Proxmox, convert that VM to a template, and set `Template` in **Detail** to the Proxmox template's name exactly.
+On **Proxmox**, TopoMojo deploys by cloning a Proxmox template VM rather than by disk path. Import the disk into a VM on Proxmox, convert that VM to a template, and set `Template` in **Detail** to the Proxmox template's name exactly. The [Disks Tab](#disks-tab) lists the Proxmox template VMs by name.
 
 #### Common Template Errors
 
@@ -736,6 +738,27 @@ How TopoMojo lays out ISO files depends on the hypervisor:
 - **Proxmox:** Proxmox storage keeps all ISOs in one flat list. TopoMojo encodes the scope in the filename, as the workspace GUID (or the all-zeros GUID for global ISOs), then `Pod__IsoScopeSeparator` (default `__`), then the original filename. The separator may only contain letters, digits, `-`, `_`, and `.`. ISOs uploaded by older releases with `#` as the separator still work.
 
 For hypervisor storage settings, see [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) in the TopoMojo repository.
+
+### Disks Tab
+
+The **Disks** tab lists what a template can deploy from, so you can find the value to put in a template's [Detail](#template-detail-json) without browsing the hypervisor. What it lists depends on the hypervisor:
+
+- **vSphere:** The tab's heading reads **Disks**, and the tab lists the VMDK disk files in the disk store. Each name is the path to enter as a `Disks[].Path` value, such as `[ds] 00000000-0000-0000-0000-000000000000/router.vmdk`. Disks of deployed VMs and the extent and snapshot files behind each disk (`-flat`, `-delta`, `-000001`, and similar) aren't listed.
+- **Proxmox:** The tab's heading reads **Template VMs**, and the tab lists the Proxmox template VMs a template can clone. Each name is the value to enter as `Template`. Copies tagged for deletion aren't listed.
+
+Click a name to copy it. The list has these columns:
+
+- **Name:** The value to enter in the template's Detail.
+- **Workspace:** Shows a **Global** badge for disks and template VMs every workspace can use. Otherwise shows the workspace the entry belongs to, with the template TopoMojo copied it for underneath. A **(deleted)** badge marks an entry whose workspace or template no longer exists.
+- **Modified** (vSphere) or **Created** (Proxmox): When the disk last changed, or when Proxmox created the template VM's disk.
+
+Use the controls above the list:
+
+- **Search:** Match the name, workspace, or template.
+- **Global Only:** Filter the list to global entries. This is on by default. Turn it off to see the copies TopoMojo makes in a workspace when you unlink a template.
+- **Refresh:** Reload the list.
+
+Click a column header to sort by it.
 
 ### Machines Tab
 
