@@ -528,9 +528,9 @@ If the exercise administrator grants the appropriate permissions, follow these s
 
 | Field                          | Data Type | Description                                                           | Example                 |
 | ------------------------------ | --------- | --------------------------------------------------------------------- | ----------------------- |
-| **TeamType Name**              | String    | Name of the team type                                                 | Individual Organization |
+| **Name**                       | String    | Name of the team type                                                 | Individual Organization |
 | **Official Score Contributor** | Boolean   | Select this option for teams that contribute to CITE's official score | True                    |
-| **Show TeamType Average**      | Boolean   | Select this option to make the score average available to the team    | True                    |
+| **Show Team Type Average**     | Boolean   | Select this option to make the score average available to the team    | True                    |
 
 To save these settings, click **Save**.
 
@@ -704,7 +704,7 @@ When scoring a move, the user can attach a comment (or multiple comments) to a c
 
 - To add a comment, click ![Comment OE](img/comment.png). Enter the comment and click Save.
 - To edit an existing comment, click ![Edit OE](img/edit.png). Make any changes, then click Save.
-- To delete an existing comment, click ![Trash OE](img/trash.png). Click Yes to delete the comment.
+- To delete an existing comment, click ![Trash OE](img/trash.png). Click **Delete** to delete the comment.
 
 When finished scoring the categories and adding comments, click Submit to submit the scores.
 
