@@ -259,7 +259,7 @@ Content developers use Blueprint to build and manage MSELs.
 
 The **Event Dashboard** is Blueprint's homepage. It shows a card for each thing the current user can do: **Join**, **Launch**, **Build**, and **Assess**. Each card shows how many events it applies to. While data loads, an **Initializing Data** card is displayed with a progress spinner.
 
-Below the mission cards, four cards describe what Blueprint does: **Collaborative Planning**, **Integrated Platform**, **Scenario Design**, and **Cyber Range Ready**. Click one to read more.
+Below the mission cards, three cards describe what Blueprint does: **Competency-Based Assessment**, **Collaborative Planning**, and **Cyber Range Exercises**. Click one to read more.
 
 #### Join an Event
 
