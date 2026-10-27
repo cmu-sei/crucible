@@ -263,7 +263,7 @@ Below the mission cards, three cards describe what Blueprint does: **Competency-
 
 #### Join an Event
 
-The **Join** card (*Active Exercises*) counts the in-progress events the user can join. Click **Join Event** to go to `/join`, which shows a card for each of those events with its name and description. Click **Join** on a card to open the event in Player. **Join** is a link, so it can also be opened in a new tab. When there is nothing to join, the card shows **No active events available to join** and cannot be clicked.
+The **Join** card (*Active Exercises*) counts the in-progress events the user can join. Click **Join Event** to go to `/join`, which shows a card for each of those events with its name and description. A name or description too long for the card ends in an ellipsis; hover over it, or tab to it, to see it in full. Click **Join** on a card to open the event in Player. **Join** is a link, so it can also be opened in a new tab. When there is nothing to join, the card shows **No active events available to join** and cannot be clicked.
 
 #### Start an Event
 
@@ -376,7 +376,7 @@ Each MSEL row in the catalog exposes four icon buttons in the first column:
 - **Delete [MSEL name]** (trash can icon): permanently removes the MSEL and its associated data. Template MSELs cannot be deleted; the trash can is disabled for them.
 - **Copy [MSEL name]** (copy icon): duplicates the MSEL into a new, editable copy.
 
-Click the MSEL's name (a link in the Name column) to open it for editing.
+Click the MSEL's name (a link in the Name column) to open it for editing. The Description column shows one line of each description; hover over a shortened one to see it in full.
 
 !!! important
 
