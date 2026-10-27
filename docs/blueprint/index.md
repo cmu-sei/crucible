@@ -550,6 +550,16 @@ There are two categories of Data Fields:
 - **[System Defined](#glossary):** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
 - **[User Defined](#glossary):** Added by the user on an as-needed basis.
 
+##### Who Can Change Data Fields
+
+| What | Who can change it |
+| --- | --- |
+| A user-defined data field and its option list | Users with EditMsels, the MSEL's Owner (including its creator), and its Editors |
+| The **Move**, **Group**, **Execution Time**, and **Integration Target** rows | Users with EditMsels and the MSEL's Owner, because they are MSEL settings |
+| **Make a template** from a data field | The above, with ManageDataFields as well |
+
+For everyone else, including users with the Approver role, the tab is read-only. An Approver still edits and approves scenario events.
+
 ##### Add a Data Field
 
 ![Blueprint Add Data Fields OE](img/blueprintAddDataField.png)
