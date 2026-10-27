@@ -458,7 +458,7 @@ The **Play** tab is where you can interact with your lab in the same way others 
 
 Access the **Admin Dashboard** by clicking **Admin** in the top right corner of the navigation bar. You need the `admin` role assigned to your user to see the **Admin** navigation option.
 
-The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Announcement, and Janitor tools described next.
+The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Disks**, **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Announcement, and Janitor tools described next.
 
 ### Hub Connections
 
