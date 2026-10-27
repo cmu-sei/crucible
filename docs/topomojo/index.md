@@ -153,6 +153,12 @@ The Settings tab holds configuration metadata for your lab.
 
 **Collaboration:** To share your workspace with others, click **Generate invitation** and send the link to collaborators. Generating a new link invalidates the previous one. Click **Remove** next to a collaborator to take away their access. TopoMojo shows Collaborators alongside the author. When a collaborator connects to your workspace, you'll see them `connected` in the top right corner of the workspace.
 
+**Export:** Click **Download** to save the workspace as a `.zip` file. Only workspace managers and administrators see **Export**. The user who creates a workspace is its *manager*, and collaborators who join through an invitation are editors.
+
+The file holds the workspace settings, templates, challenge, and lab document. It lists the disk files that the templates use, but it doesn't contain the disks themselves. An administrator can import the file into another TopoMojo with **UploadZip** on the admin [Workspaces Tab](#workspaces-tab).
+
+Your workspace might use a linked template that belongs to a workspace you don't manage. In that case, the file includes only that template from the other workspace, without its challenge, document, or other templates.
+
 **Clone:** Create a copy of your workspace. TopoMojo **links** the cloned workspace VMs to the parent workspace's VMs. The clone inherits all other settings from the parent. TopoMojo appends `-CLONE` to the title of the new workspace, but you can change this title.
 
 **Delete:** Delete the workspace.
@@ -536,7 +542,7 @@ An admin can view every workspace using this menu, even without being a collabor
 
 - **Create:** Create a new workspace from the Admin Workspaces panel. For additional help, see [Building a new workspace](#building-a-new-workspace).
 - **UploadZip:** Upload a workspace export (`.zip` or `.json`) to import workspaces into TopoMojo. An **Upload Results** message lists what TopoMojo imported.
-- **Download:** Switches the list into selection mode. Check the workspaces to export, then click **Download (N)** to download a zipped export, or click **Cancel**. Workspace exports can contain one or more workspaces. TopoMojo will automatically include additional dependent workspaces and templates for workspaces that contain linked resources.
+- **Download:** Switches the list into selection mode. Check the workspaces to export, then click **Download (N)** to download a zipped export, or click **Cancel**. Workspace exports can contain one or more workspaces. TopoMojo will automatically include additional dependent workspaces and templates for workspaces that contain linked resources. Workspace managers who aren't admins can download their own workspaces from the workspace [Settings](#settings) tab.
 - **Delete:** Delete a single workspace from its row.
 
 Selecting a workspace takes you the **Settings** tab of that workspace. For additional help on the **Settings** tab, see [Building a new workspace](#building-a-new-workspace).
