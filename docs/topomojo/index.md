@@ -155,7 +155,7 @@ The Settings tab holds configuration metadata for your lab.
 
 **Clone:** Create a copy of your workspace. TopoMojo **links** the cloned workspace VMs to the parent workspace's VMs. The clone inherits all other settings from the parent. TopoMojo appends `-CLONE` to the title of the new workspace, but you can change this title.
 
-**Delete:** Delete the workspace.
+**Delete:** Delete the workspace. Deleting a workspace also deletes its document and every image uploaded to it. If another workspace's document links to one of those images, that image stops loading there.
 
 The top of the **Settings** tab shows the workspace's **Launch Count** and **Last Activity**. It also warns that inactive workspaces ("unpublished and idle" or "published and unused") may be deleted by the janitor. In the current release, the [Janitor](#janitor) only reports such workspaces; it doesn't delete them.
 
@@ -473,17 +473,18 @@ The **Announcement** feature allows TopoMojo admins to broadcast important messa
 The **Janitor** service cleans up unused resources (e.g., a workspace VM that has been idle for a long time) in TopoMojo. It runs in the background on two schedules:
 
 - About every minute, it ends gamespaces that have passed their expiration time plus their cleanup grace time, then deletes the VMs of ended gamespaces.
-- About every one to two hours, it runs a full cleanup pass over workspaces and workspace VMs.
+- About every one to two hours, it runs a full cleanup pass over workspaces, workspace VMs, and orphaned workspace documents.
 
-**Cleanup Report:** Runs the full cleanup pass immediately and lists what it found, with sortable **Reason**, **Name**, **Owner**, **VMs**, and **Last Activity** columns. Click a workspace name to open it. This button doesn't just show a log: if the Janitor isn't in dry-run mode, clicking it deletes the VMs it reports.
+**Cleanup Report:** Runs the full cleanup pass immediately and lists what it found, with sortable **Reason**, **Name**, **Owner**, **VMs**, and **Last Activity** columns. Click a workspace name to open it. This button doesn't just show a log: if the Janitor isn't in dry-run mode, clicking it deletes the VMs and orphaned documents it reports.
 
-The full cleanup pass reports three kinds of items, shown in the **Reason** column:
+The full cleanup pass reports four kinds of items, shown in the **Reason** column:
 
 - **IdleWorkspaceVms:** Workspaces whose VMs have been idle longer than `Core__Expirations__IdleWorkspaceVmsExpiration` (default `1d`). When dry run is off, the Janitor deletes these workspace VMs. Saved template disks aren't affected.
 - **UnpublishedWorkspace:** Unpublished workspaces idle longer than `Core__Expirations__UnpublishedWorkspaceTimeout` (default `1w`).
 - **InactiveWorkspace:** Published workspaces with no launches for longer than `Core__Expirations__InactiveWorkspaceExpiration` (default `1y`).
+- **OrphanedDocument:** Documents and image folders in `FileUpload__DocRoot` that belong to a workspace that no longer exists. Workspaces deleted before TopoMojo started removing their documents left these files behind. **Name** lists the files found, named for the missing workspace's ID: `{id}.md`, `{id}/`, or both. **Last Activity** shows when they were last modified. The Janitor only considers files and folders named for a workspace ID and leaves everything else in `FileUpload__DocRoot` alone. When dry run is off, the Janitor deletes them.
 
-`Core__Expirations__DryRun` defaults to `true`, which reports idle workspace VMs without deleting them. Set it to `false` to let the Janitor delete them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only, regardless of `DryRun`.
+`Core__Expirations__DryRun` defaults to `true`, which reports idle workspace VMs and orphaned documents without deleting them. Set it to `false` to let the Janitor delete them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only, regardless of `DryRun`.
 
 !!! warning "Sample configuration key names"
 
