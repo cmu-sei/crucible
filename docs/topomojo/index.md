@@ -704,6 +704,21 @@ On **vSphere**:
 
     TopoMojo replaces the bracketed datastore name with the one in `Pod__DiskStore`, so `[ds]` works as a placeholder.
 
+    !!! warning "Hosted VMDK disks"
+        VMware Workstation, Fusion, VirtualBox, and Open Virtual Appliance (OVA) exports write *hosted* VMDK formats, such as `monolithicSparse` and `streamOptimized`. ESXi can't attach these disks where they sit. When a template uses a hosted disk directly, **Initialize** stops and the user sees "This template's disk is in a format the hypervisor can't use. Ask an administrator to convert it." The [Log Tab](#log-tab) names the disk and its format.
+
+        To convert the disk, set its `Source` to the uploaded file and its `Path` to a new file, then click **Initialize** again. TopoMojo copies the disk through vCenter, which converts it to a format ESXi can attach, so you don't need shell access to an ESXi host:
+
+        ```json
+        "Disks": [
+          {
+            "Source": "[ds] 00000000-0000-0000-0000-000000000000/router.vmdk",
+            "Path": "[ds] 00000000-0000-0000-0000-000000000000/router-esx.vmdk",
+            "Controller": "lsilogic"
+          }
+        ]
+        ```
+
 4. Set `Cpu`, `Ram`, `Guest`, and the `Disks` `Controller` to match the disk. A wrong controller or guest type can keep the operating system from booting.
 5. Click **Save Settings**, then [publish the template](#publishing-a-template) if other workspaces need it.
 
@@ -718,6 +733,7 @@ On **Proxmox**, TopoMojo deploys by cloning a Proxmox template VM rather than by
 | `invalid token value!` | Hypervisor authentication failed | Check `Pod__AccessToken` configuration |
 | HTTP 405 Method Not Allowed | Wrong endpoint for the operation | Use `POST /api/template-detail` for new templates |
 | HTTP 500 Internal Server Error | Hypervisor template not found | Verify the `Template` name matches the VM name on the hypervisor |
+| This template's disk is in a format the hypervisor can't use. Ask an administrator to convert it. | vSphere only. The disk is a hosted VMDK, exported by VMware Workstation, Fusion, VirtualBox, or an OVA. The [Log Tab](#log-tab) shows which disk. | Convert it through `Source` as described in [Bringing In an Existing Disk](#bringing-in-an-existing-disk) |
 
 ### Files Tab
 
