@@ -182,7 +182,7 @@ After you execute tasks, the results display in the task details. Each task is e
 
 ##### Ending a Scenario
 
-You can also end scenarios. After you start a scenario, the **Start Scenario** button changes to **End Scenario Now**.
+You can also end scenarios. After you start a scenario, its menu offers **End** in place of **Start**. Select **End**, then select **End** again in the **End Scenario** confirmation.
 
 #### Tasks
 
