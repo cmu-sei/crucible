@@ -904,13 +904,14 @@ To add a new invitation, follow these steps:
 
 ##### Data Format Table
 
-| Field                                                      | Data Type     | Description                                     | Example                              |
-| ---------------------------------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------ |
-| **Team**                                                   | Dropdown Text | Team tied to the invitation                     | SEI - Software Engineering Institute |
-| **Email Domain**                                           | String        | User's email domain                             | `@sei.cmu.edu`                       |
-| **Expiration Date/Time**                                   | Datetime      | Date and time when the invitation should expire | 04/15/2024 15:12:03                  |
-| **Maximum Number of Users Allowed to Use this Invitation** | Integer       | Number of users that can use the invitation     | 5                                    |
-| **Can Invite others to this Team**                         | Boolean       | Permission to add others to the team            | False                                |
+| Field                                                      | Data Type     | Description                                                                                                          | Example                              |
+| ---------------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| **Team**                                                   | Dropdown Text | Team tied to the invitation                                                                                          | SEI - Software Engineering Institute |
+| **Email Domain**                                           | String        | User's email domain                                                                                                  | `@sei.cmu.edu`                       |
+| **Expiration Date/Time**                                   | Datetime      | Date and time when the invitation should expire                                                                      | 04/15/2024 15:12:03                  |
+| **Maximum Number of Users Allowed to Use this Invitation** | Integer       | Number of users that can use the invitation                                                                          | 5                                    |
+| **Can Invite others to this Team**                         | Boolean       | Permission to add others to the team                                                                                 | False                                |
+| **CITE Team Role**                                         | Dropdown Text | With CITE, the [CITE team role](#cite-team-roles) people who join through this invitation get. Starts at **Member**. | Contributor                          |
 
 After you've added all desired configurations, click **Save**.
 
@@ -988,9 +989,9 @@ A CITE administrator can add roles, such as one that can see or change the offic
 
 !!! warning
 
-    A member whose **Type** is **-- None --** gets no role in CITE. CITE then disables their answer boxes, so they cannot score. Give every participant a role before pushing: for example, **Submitter** for the team's recorder and **Contributor** for the others.
+    A member whose **Type** is **-- None (Member in CITE) --** gets the **Member** role in CITE, which can view the team but not answer. Give every participant who scores a role before pushing: for example, **Submitter** for the team's recorder and **Contributor** for the others.
 
-    People who join a team through an [invitation](#invitations) after the push are added to the CITE team with no role. Give them a role in CITE before play.
+    People who join a team through an [invitation](#invitations) get the invitation's **CITE Team Role**, which starts at **Member**. Set it to **Contributor** or **Submitter** on invitations for participants who score; a separate invitation for recorders can give them **Submitter**.
 
 ##### CITE Actions
 
