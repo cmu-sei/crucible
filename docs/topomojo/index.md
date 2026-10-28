@@ -210,6 +210,8 @@ The list below explains the fields in the VM template.
 - **Networks:** A space-delimited list of networks on which the VM will have a network interface. These names should be the same for all systems in your lab that need to connect to the same network. TopoMojo creates the networks on the hypervisor when it deploys the VM/lab.
 - **Guest Settings:** Key-value pairs in the form of `key=value` to pass data into deployed VMs via [VMware guestinfo variables](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/tools/12-5-0/vmware-tools-administration-12-5-0/configuring-vmware-tools-components/using-vmware-tools-configuration-utility/view-virtual-machine-status-information/query-information-using-guestinfo-variable.html) or the [QEMU Firmware Configuration Device](https://www.qemu.org/docs/master/specs/fw*cfg.html) for Proxmox. The *key* is the name of the guest setting. For example, `var1=test` is a guest setting named "var1" with a value of "test". You can randomize guest settings values using [TopoMojo Transforms](#transforms).
 
+    Guest Settings don't set firmware or nested virtualization. An administrator sets those on the template; see [Template Properties](#template-properties).
+
     When using VMware as a backing hypervisor, use [VMware Tools](https://helpmanual.io/help/vmtoolsd/), such as the `vmtoolsd` command from the [open-vm-tools package](https://docs.vmware.com/en/VMware-Tools/12.3.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html), to access guest info variables from a VM.
 
     ![using the vmtoolsd command](img/vmware-tools.png)
@@ -589,7 +591,14 @@ The **Templates** tab also has these tools:
 The **Templates** tab in the Administrator Guide displays template metadata and configuration. The **Detail** field contains the raw JSON configuration TopoMojo passes to the hypervisor when deploying the VM. Linked templates show the read-only **Parent Detail** instead, since they inherit their configuration from the parent.
 
 !!! note
-    The Detail field hint text reads: "Advanced configuration. Keep valid JSON to avoid errors."
+    The Detail field hint text reads: "Advanced configuration. Keep valid JSON to avoid errors. Firmware and Nested Virtualization are disabled while it isn't valid JSON."
+
+Unlinked templates also have two vSphere-only controls above **Detail**. Each one writes its top-level Detail field, so you don't edit the JSON by hand:
+
+- **Firmware:** Basic Input/Output System (BIOS) or Extensible Firmware Interface (EFI), shown as **BIOS** and **EFI**. Windows 11 needs **EFI**. Match how the disk was installed: a disk installed under BIOS won't boot as EFI, and the reverse.
+- **Nested Virtualization:** Lets the VM run its own hypervisor, such as Hyper-V or Windows Subsystem for Linux (WSL) 2.
+
+Both controls show what the template deploys with today, including older templates that set these values as `GuestSettings` entries. Changing a control moves the value to the top-level field and removes the matching `GuestSettings` entry.
 
 ##### Template Detail JSON
 
@@ -619,6 +628,8 @@ The **Templates** tab in the Administrator Guide displays template metadata and 
 | `Adapters` | integer | `1` | `1` | Number of network adapters. Should match the number of entries in `Eth`. |
 | `Delay` | integer | `0` | `0` | Boot delay in seconds before this VM powers on. The hypervisor enforces a minimum of 10 seconds when a delay applies. |
 | `AutoStart` | Boolean | `true` | `true` | When `true`, the VM powers on automatically when its deployment starts. |
+| `Firmware` | string | Not present | `efi` | vSphere only. `bios` or `efi`. When not present, a `firmware` entry in `GuestSettings` applies, and otherwise vSphere uses BIOS. Set it with the **Firmware** control. A Proxmox VM keeps the firmware of the template it's cloned from. |
+| `NestedVirtualization` | Boolean | Not present | `true` | vSphere only. When `true`, exposes hardware-assisted virtualization to the guest. When not present, a `vhv.enable` entry in `GuestSettings` applies. Set it with the **Nested Virtualization** control. |
 | `Eth` | array | One `e1000` adapter on `lan` | See `Eth[]` table | Array of network adapter definitions. |
 | `Disks` | array | One 10 GB `lsilogic` disk | See `Disks[]` table | Array of virtual disk definitions. |
 | `GuestSettings` | array | `null` | `[{"Key": "token1", "Value": "##token1##"}]` | Array of key/value pairs injected as VMware `guestinfo.*` properties. `null` when not configured. |
@@ -659,8 +670,8 @@ Special `Key` values:
 
 | Key | Value | Behavior |
 | --- | --- | --- |
-| `firmware` | `efi` | Boots the VM with Extensible Firmware Interface. |
-| `vhv.enable` | `true` | Enables nested virtualization. |
+| `firmware` | `efi` | Legacy; use the top-level `Firmware` field. vSphere still honors it when `Firmware` isn't present. Only works as a Detail entry: typing `firmware=efi` in **Guest Settings** has no effect. |
+| `vhv.enable` | `true` | Legacy; use the top-level `NestedVirtualization` field. vSphere still honors it when `NestedVirtualization` isn't present. |
 | `iftag.*` | any string | A setting that applies when the value contains the VM's IsolationTag. For example: `iftag.example = abcd1234:value` is only applied if the VM's isolation tag is `abcd1234`. |
 | `guestinfo.metadata` | encoded cloud-init metadata | Provides cloud-init metadata for cloud-init enabled images. |
 | `guestinfo.metadata.encoding` | `base64` | Declares the encoding used for `guestinfo.metadata`. |
