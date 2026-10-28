@@ -872,7 +872,6 @@ TopoMojo creates users automatically the first time they sign in, with limits ta
 | `Core__DefaultGamespaceLimit` | `0` | Concurrent gamespaces for a new user. `0` means unlimited. The sample `appsettings.conf` shows `2`; the built-in default is `0`. |
 | `Core__DefaultGamespaceMinutes` | `120` | Gamespace duration when neither the user's **Gamespace Max Duration** nor the workspace's **Duration** is set. |
 | `Core__ReplicaLimit` | `5` | Maximum **Replicas** value on a template. |
-| `Core__DefaultUserScope` | `everyone` | Scope added to every user. See [Settings](#settings). |
 
 ### Settings Tab
 
