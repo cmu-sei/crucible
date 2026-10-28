@@ -863,15 +863,7 @@ A user's *effective role* is the strongest of their TopoMojo role and every role
 
 For regular users, TopoMojo may update **Name** from the identity token at sign-in.
 
-TopoMojo creates users automatically the first time they sign in, with limits taken from these settings:
-
-| Setting | Default | Effect |
-| --- | --- | --- |
-| `Core__DefaultWorkspaceLimit` | `0` | Workspaces a new user can create. `0` means none; users with the **Creator** role or above aren't limited. |
-| `Core__DefaultTemplateLimit` | `3` | Template limit applied to each workspace created by a user below the **Creator** role. |
-| `Core__DefaultGamespaceLimit` | `0` | Concurrent gamespaces for a new user. `0` means unlimited. The sample `appsettings.conf` shows `2`; the built-in default is `0`. |
-| `Core__DefaultGamespaceMinutes` | `120` | Gamespace duration when neither the user's **Gamespace Max Duration** nor the workspace's **Duration** is set. |
-| `Core__ReplicaLimit` | `5` | Maximum **Replicas** value on a template. |
+TopoMojo creates users automatically the first time they sign in. Administrators set the default limits for new users in TopoMojo's configuration; see the [TopoMojo Helm chart README](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo).
 
 ### Settings Tab
 
