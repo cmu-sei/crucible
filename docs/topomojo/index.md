@@ -65,7 +65,7 @@ A user can launch a workspace as a gamespace when either of these is true:
 
 Every user also has the default scope `everyone`, even when their **Scope** is empty. A workspace with an **Audience** of `everyone` is open to all users. A workspace with an empty **Audience** can only be launched by its collaborators.
 
-The same match decides which workspaces appear in a user's search results, and which gamespaces an **Observer** sees on the *Observe* tab. The observer list uses only the observer's own **Scope**, without the default `everyone`. To let an observer see gamespaces from `everyone` workspaces, add `everyone` to the observer's **Scope**.
+The same match decides which workspaces appear under the **gamespace** filter in the left panel, and which gamespaces an **Observer** sees on the *Observe* tab. The **workspace** filter doesn't use audience or scope; it only lists workspaces you collaborate on. The observer list uses only the observer's own **Scope**, without the default `everyone`. To let an observer see gamespaces from `everyone` workspaces, add `everyone` to the observer's **Scope**.
 
 To limit a workspace to one group of users:
 
@@ -199,7 +199,7 @@ The Settings tab holds configuration metadata for your lab.
 
 **Authorship:** The names of the challenge authors.
 
-**Audience:** A space-delimited list of groups that can launch the workspace as a gamespace. Users can launch it when their *scope* shares a token with the **Audience**. `everyone` is the global audience that allows all users to launch the workspace. Leave **Audience** empty to limit the workspace to its collaborators. A workspace with an **Audience** counts as *published* for the [Janitor](#janitor). See [Audience, Scope, and Publishing](#audience-scope-and-publishing).
+**Audience:** A space-delimited list of groups that can launch the workspace as a gamespace. Users can launch a gamespace when their *scope* shares a token with the workspace **Audience**. `everyone` is the global audience that allows all users to launch the workspace. Leave **Audience** empty to limit the workspace to its collaborators. A workspace with an **Audience** counts as *published* for the [Janitor](#janitor). See [Audience, Scope, and Publishing](#audience-scope-and-publishing).
 
 **Duration:** Recommended length of time, in minutes, that it takes to play through the challenge/lab.
 
