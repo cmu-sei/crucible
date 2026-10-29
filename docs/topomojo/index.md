@@ -113,11 +113,11 @@ Install TopoMojo using the [Helm chart](https://github.com/cmu-sei/helm-charts/t
 
 **`TopoMojo values.yaml`:** Contains default configurations for the `api` and the `ui`. To deploy TopoMojo, configure the **`Values.yaml`** file according to your needs then `helm install`. More details on how to configure the values file is [available in the helm charts repository](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo).
 
-For hypervisor settings, see the TopoMojo repository: [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) covers network setup, ISO storage, guest settings, and High Availability (`Pod__EnableHA` and related settings), and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) covers vSphere.
+For hypervisor settings, see the TopoMojo repository: [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) covers network setup, ISO storage, guest settings, and High Availability, and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) covers vSphere.
 
 !!! warning "Proxmox certificate validation"
 
-    Recent TopoMojo releases honor `Pod__IgnoreCertificateErrors` for Proxmox; earlier releases ignored it there and accepted any certificate. The setting defaults to `false`, so a Proxmox server with a self-signed or otherwise untrusted certificate now fails to connect. Install a certificate the TopoMojo host trusts, or set `Pod__IgnoreCertificateErrors = true`.
+    Recent TopoMojo releases check the Proxmox server's certificate; earlier releases accepted any certificate. A Proxmox server with a self-signed or otherwise untrusted certificate now fails to connect. Install a certificate the TopoMojo host trusts, or turn off certificate checking in TopoMojo's hypervisor settings. See [Proxmox Configuration](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#proxmox-configuration) in the Helm chart README.
 
 ### Persistent/Shared Networks
 
@@ -125,19 +125,18 @@ We recommend having a persistent/shared network available to all TopoMojo worksp
 
 For example, you could create a persistent/shared network that provides internet access to TopoMojo VMs connected to the network named `bridge-net`.
 
-Use the `Pod**Vlan**Reservations` environment variable to define the name of a persistent/shared network.
-
-- `Pod**Vlan**Reservations**0**Id:` defines the vlan Id (from the hypervisor) that corresponds to the shared/persistent network.
-- `Pod**Vlan**Reservations**0**Name:` defines the name of the persistent/shared network.
+Each persistent/shared network is a VLAN reservation in TopoMojo's hypervisor settings: the VLAN ID from the hypervisor, and the network name users see. See [vSphere Configuration](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#vsphere-configuration) in the Helm chart README.
 
 ![bridge-net vlan reservation](img/bridge-net.png)
 
-You can define more than one shared/persistent network by incrementing the variable name (`Pod**Vlan**Reservations**1**Id` and `Pod**Vlan**Reservations**1**Name`). To connect VMs to shared/persistent networks, users must have at least **Builder** permissions.
+An administrator can reserve more than one shared/persistent network. To connect VMs to shared/persistent networks, users must have at least **Builder** permissions.
 
-Two settings relax those network restrictions:
+Two optional settings, both off by default, relax those network restrictions:
 
-- **`Core__AllowUnprivilegedVmReconfigure`** (default `false`): Lets users below **Builder** move a VM's network adapter onto shared/persistent networks.
-- **`Core__AllowPrivilegedNetworkIsolationExemption`** (default `false`): On vSphere, lets **Builders** connect a VM to any hypervisor network, not only the workspace's networks and the shared/persistent networks.
+- One lets users below **Builder** move a VM's network adapter onto shared/persistent networks.
+- One lets **Builders** on vSphere connect a VM to any hypervisor network, not only the workspace's networks and the shared/persistent networks.
+
+See [Core Application Settings](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#core-application-settings) in the Helm chart README.
 
 !!! note "A note about bridge-net"
 
@@ -460,14 +459,14 @@ The **Files** tab in the TopoMojo workspace allows you to upload files from your
 
     The **Files** tab only appears when the TopoMojo UI settings include `"enable_upload": true`. If you don't see it, ask your administrator to enable it.
 
-    TopoMojo stores uploads in one of two ways. By default, it writes them to `FileUpload__IsoRoot`, which must be a share the hypervisor also mounts, such as an NFS (Network File System) datastore. On Proxmox, that path must end in `/template/iso`. When `FileUpload__UseDatastoreApi` is `true`, TopoMojo uploads to hypervisor storage through the vSphere or Proxmox API instead, and no shared mount is needed.
+    TopoMojo stores uploads in one of two ways. By default, it writes them to a folder that the hypervisor also mounts, such as an NFS (Network File System) datastore. On Proxmox, that path must end in `/template/iso`. Alternatively, TopoMojo can upload to hypervisor storage through the vSphere or Proxmox API, and no shared mount is needed. See [File Storage](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#file-storage) in the Helm chart README.
 
 ISOs you upload on the **Files** tab are *local* to the workspace: only the workspace that holds them can attach them. Administrators manage *global* ISOs, which every workspace can use.
 
 Your TopoMojo administrator controls upload limits:
 
-- **Maximum file size:** `FileUpload__MaxFileBytes`. The default, `0`, means TopoMojo itself sets no limit, but a reverse proxy or ingress in front of TopoMojo may still cap the request size.
-- **Upload time-out:** `FileUpload__UploadTimeoutMinutes`, default `60`. This applies when TopoMojo forwards the uploaded file to hypervisor storage through the datastore API (`FileUpload__UseDatastoreApi`).
+- **Maximum file size:** By default TopoMojo itself sets no limit, but a reverse proxy or ingress in front of TopoMojo may still cap the request size.
+- **Upload time-out:** Defaults to 60 minutes. This applies when TopoMojo uploads the file to hypervisor storage through the vSphere or Proxmox API.
 
 If a large ISO fails to upload, ask your administrator to check these settings.
 
@@ -531,15 +530,11 @@ The **Janitor** service cleans up unused resources (e.g., a workspace VM that ha
 
 The full cleanup pass reports three kinds of items, shown in the **Reason** column:
 
-- **IdleWorkspaceVms:** Workspaces whose VMs have been idle longer than `Core__Expirations__IdleWorkspaceVmsExpiration` (default `1d`). When dry run is off, the Janitor deletes these workspace VMs. Saved template disks aren't affected.
-- **UnpublishedWorkspace:** Unpublished workspaces (those with an empty **Audience**; see [What "Published" Means](#what-published-means)) idle longer than `Core__Expirations__UnpublishedWorkspaceTimeout` (default `1w`).
-- **InactiveWorkspace:** Published workspaces (those with an **Audience**) with no launches for longer than `Core__Expirations__InactiveWorkspaceExpiration` (default `1y`).
+- **IdleWorkspaceVms:** Workspaces whose VMs have been idle longer than a day. When dry run is off, the Janitor deletes these workspace VMs. Saved template disks aren't affected.
+- **UnpublishedWorkspace:** Unpublished workspaces idle longer than a week.
+- **InactiveWorkspace:** Published workspaces with no launches for longer than a year.
 
-`Core__Expirations__DryRun` defaults to `true`, which reports idle workspace VMs without deleting them. Set it to `false` to let the Janitor delete them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only, regardless of `DryRun`.
-
-!!! warning "Sample configuration key names"
-
-    The sample `appsettings.conf` in the TopoMojo repository lists `Core__Expirations__UnpublishedWorkspacesExpiration` and `Core__Expirations__InactiveWorkspacesExpiration`. TopoMojo ignores those names. Use `Core__Expirations__UnpublishedWorkspaceTimeout` and `Core__Expirations__InactiveWorkspaceExpiration`.
+By default the Janitor runs in dry-run mode, which reports idle workspace VMs without deleting them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only. An administrator can change dry-run mode and each time limit in TopoMojo's configuration; see [Core Application Settings](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#core-application-settings) in the Helm chart README.
 
 ### Gamespaces Tab
 
@@ -754,9 +749,9 @@ You can build a template around a disk created outside TopoMojo, such as an expo
 
 On **vSphere**:
 
-1. Copy the `.vmdk` disk to the datastore named by `Pod__DiskStore`, in a folder that isn't a workspace GUID. Stock disks conventionally go in the `00000000-0000-0000-0000-000000000000` folder. TopoMojo doesn't save over or delete disks outside a workspace's own folder.
+1. Copy the `.vmdk` disk to TopoMojo's disk datastore, in a folder that isn't a workspace GUID. Stock disks conventionally go in the `00000000-0000-0000-0000-000000000000` folder. TopoMojo doesn't save over or delete disks outside a workspace's own folder.
 2. On the **Templates** tab, click **Create a new template**, or expand an existing template.
-3. In **Detail**, set the disk's `Path` to the disk's location relative to `Pod__DiskStore`. For example, if `Pod__DiskStore` is `[datastore1] topomojo` and the disk is at `[datastore1] topomojo/00000000-0000-0000-0000-000000000000/router.vmdk`, enter:
+3. In **Detail**, set the disk's `Path` to the disk's location relative to the disk datastore. The disk datastore is part of TopoMojo's hypervisor settings; see [vSphere Configuration](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#vsphere-configuration) in the Helm chart README. For example, if the disk datastore is `[datastore1] topomojo` and the disk is at `[datastore1] topomojo/00000000-0000-0000-0000-000000000000/router.vmdk`, enter:
 
     ```json
     "Disks": [
@@ -767,7 +762,7 @@ On **vSphere**:
     ]
     ```
 
-    TopoMojo replaces the bracketed datastore name with the one in `Pod__DiskStore`, so `[ds]` works as a placeholder.
+    TopoMojo replaces the bracketed datastore name with the disk datastore's, so `[ds]` works as a placeholder.
 
 4. Set `Cpu`, `Ram`, `Guest`, and the `Disks` `Controller` to match the disk. A wrong controller or guest type can keep the operating system from booting.
 5. Click **Save Settings**, then [publish the template](#publishing-a-template) if other workspaces need it.
@@ -780,7 +775,7 @@ On **Proxmox**, TopoMojo deploys by cloning a Proxmox template VM rather than by
 | --- | --- | --- |
 | Generic "Error" with no details | Invalid RAM value (decimal such as `0.5` or `1.5`) | Use a whole number integer: `1`, `2`, `4` |
 | Generic "Error" with no details | Invalid CPU format (numeric value such as `1` or `2`) | Use string format: `1x1`, `1x2` |
-| `invalid token value!` | Hypervisor authentication failed | Check `Pod__AccessToken` configuration |
+| `invalid token value!` | Hypervisor authentication failed | Check the hypervisor access token in TopoMojo's configuration |
 | HTTP 405 Method Not Allowed | Wrong endpoint for the operation | Use `POST /api/template-detail` for new templates |
 | HTTP 500 Internal Server Error | Hypervisor template not found | Verify the `Template` name matches the VM name on the hypervisor |
 
@@ -798,7 +793,7 @@ The list shows every ISO in TopoMojo, global and local, with **Name** and **Work
 How TopoMojo lays out ISO files depends on the hypervisor:
 
 - **vSphere:** Each workspace's local ISOs are in a folder named with the workspace GUID. Global ISOs are in the folder named with a GUID of all zeros.
-- **Proxmox:** Proxmox storage keeps all ISOs in one flat list. TopoMojo encodes the scope in the filename, as the workspace GUID (or the all-zeros GUID for global ISOs), then `Pod__IsoScopeSeparator` (default `__`), then the original filename. The separator may only contain letters, digits, `-`, `_`, and `.`. ISOs uploaded by older releases with `#` as the separator still work.
+- **Proxmox:** Proxmox storage keeps all ISOs in one flat list. TopoMojo encodes the scope in the filename, as the workspace GUID (or the all-zeros GUID for global ISOs), then a separator (`__` by default), then the original filename. ISOs uploaded by older releases with `#` as the separator still work.
 
 For hypervisor storage settings, see [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) in the TopoMojo repository.
 
@@ -843,10 +838,7 @@ Grant the *Creator* role to users who need to build workspaces and troubleshoot 
 
 An administrator can configure TopoMojo to inherit user roles from the Identity Provider (IdP). For example, an IdP administrator can add roles like *administrator*, *builder*, or a custom role then configure TopoMojo to map those IdP roles to TopoMojo roles. Inheriting roles reduces the need for redundant setup if you're already managing user roles on the identity provider across multiple Crucible apps. See the [Helm deployment documentation](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#authentication-oidc) for more information on how to configure this setting.
 
-TopoMojo reads IdP roles from these settings:
-
-- **`Oidc__UserRolesClaimPath`:** Where in the access token to find role values. The default is `realm_access.roles`, which fits Keycloak realm roles. Set it to the string `null` to turn off IdP roles.
-- **`Oidc__UserRolesClaimMap__<idp-role>`:** Maps an IdP role value to a TopoMojo role. For example, `Oidc__UserRolesClaimMap__builder = Builder` grants the Builder role to anyone whose token contains `builder`. The defaults map `administrator`, `builder`, `creator`, `observer`, and `user` to the matching TopoMojo roles. The IdP can't assign **Disabled**.
+By default, TopoMojo reads Keycloak realm roles and maps the IdP roles `administrator`, `builder`, `creator`, `observer`, and `user` to the matching TopoMojo roles. The IdP can't assign **Disabled**.
 
 A user's *effective role* is the strongest of their TopoMojo role and every role mapped from their IdP roles. When the two differ, the user's row shows an **Identity Role / Effective Role** badge. Click it to see both assigned roles and which one wins. Disabling a user in TopoMojo blocks them regardless of IdP roles.
 
@@ -858,7 +850,7 @@ A user's *effective role* is the strongest of their TopoMojo role and every role
 - **Gamespace Limit:** The maximum number of concurrent active gamespaces allowed for this user.
 - **Gamespace Max Duration:** The maximum amount of minutes allowed for a gamespace.
 - **Gamespace Cleanup Grace time:** The number of minutes between gamespace expiration and when TopoMojo tears down the associated VMs.
-- **Service Account Client Id:** Lets an OAuth client authenticate as this user with the client credentials flow, for automation. TopoMojo matches it against the `client_id` claim in the access token; `Oidc__ServiceAccountClientIdClaimType` changes the claim name, and setting it to the string `null` turns service accounts off. Give service accounts the **Observer** role at most; TopoMojo shows a warning on administrators that have a client ID.
+- **Service Account Client Id:** Lets an OAuth client authenticate as this user with the client credentials flow, for automation. TopoMojo matches it against the `client_id` claim in the access token. An administrator can change the claim name, or turn off service accounts, in TopoMojo's identity settings. Give service accounts the **Observer** role at most; TopoMojo shows a warning on administrators that have a client ID.
 - **Generate ApiKey:** Generate API keys for users to programmatically interact with the TopoMojo API without needing to log in interactively.
 
 For regular users, TopoMojo may update **Name** from the identity token at sign-in.
@@ -867,7 +859,7 @@ TopoMojo creates users automatically the first time they sign in. Administrators
 
 ### Settings Tab
 
-Upload a custom background image to change TopoMojo's theme. Wide images usually work best. Click **Clear background** to return to the default. You can also set the background in configuration with `Ui__Branding__BackgroundImageUrl`.
+Upload a custom background image to change TopoMojo's theme. Wide images usually work best. Click **Clear background** to return to the default. An administrator can also set the background in TopoMojo's configuration; see [UI Branding](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#ui-branding) in the Helm chart README.
 
 ### Log Tab
 
