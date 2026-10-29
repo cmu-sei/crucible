@@ -19,6 +19,27 @@ Configure and deploy Blueprint using the [Blueprint Helm Chart](https://github.c
 
 Blueprint UI supports an optional, customizable classification banner that displays persistently at the top of the application. The banner can show classification labels (such as "UNCLASSIFIED" or "SECRET"), maintenance messages, or any other persistent notification. Configure the banner through `HeaderBarSettings` in the Helm chart. See the [Classification Banner](https://github.com/cmu-sei/helm-charts/tree/main/charts/blueprint#classification-banner) section of the Blueprint Helm Chart README for configuration details.
 
+### AI Drafting
+
+Blueprint can draft a MSEL, its Gallery articles, and its team and organization profiles with a model on Amazon Bedrock. AI drafting is off by default. Turn it on in the `Ai` settings of the Blueprint API:
+
+- **`Ai:Enabled`:** `true` turns on every AI feature.
+- **`Ai:Region`:** the Amazon Web Services (AWS) region of the Bedrock endpoint, such as `us-east-1`.
+- **`Ai:ModelId`:** the Bedrock model or inference profile ID that writes the drafts.
+- **`Ai:FallbackModelId`:** a second model to try once when the first declines a request. Leave it empty for no retry.
+- **`Ai:MaxTokens`:** the longest answer the model may write. The default is `64000`.
+- **`Ai:TimeoutSeconds`:** how long a request may run. The default is `600`.
+- **`Ai:MaxInjects`:** the most injects a draft may have. The default is `60`.
+- **`Ai:MaxCompetencies`:** the most competencies a draft may choose from. The default is `2500`.
+- **`Ai:ImageModelId`:** an optional Bedrock image model that makes news photos for Gallery articles, such as `stability.stable-image-core-v1:1`. Leave it empty for no photos.
+- **`Ai:ImageRegion`:** the AWS region of the image model. The default is `us-west-2`, because Bedrock offers the image models in fewer regions than the text models.
+
+The API uses the default AWS credential chain of its host. Caster uses the same `Ai` settings for its AI features.
+
+!!! note
+
+    The AI never changes a MSEL on its own. You review everything it writes, and nothing is saved until you confirm it.
+
 ## Permissions and Roles
 
 To use Blueprint, a System Admin must assign Content Developer permissions to the user and add them to a team.
@@ -342,6 +363,62 @@ After a JSON upload, Blueprint shows a report for the imported MSEL:
 
 Click **Open MSEL** to open the new MSEL, or **Close** to stay on the MSEL list.
 
+#### Draft a MSEL with AI
+
+When AI drafting is on, you can draft a whole MSEL from a description of the exercise. The draft follows an exercise design workflow: the scenario first, then the training objectives, then the moves and the injects that drive them. You need the `CreateMsels` permission.
+
+1. In the MSEL list table header, click **Draft MSEL with AI**.
+2. In **Template**, choose the template to draft from. The draft uses the template's columns, teams, organizations, Gallery cards, and integrations.
+3. Optionally, in **Competency frameworks**, choose the frameworks whose competencies the draft may assign. With none chosen, the draft uses the template's own competencies.
+4. In **Exercise description**, describe the audience, the scenario, the objectives, the organizations to simulate, and the competencies to exercise.
+5. Optionally, expand **Design choices (optional)** and answer the questions that change an exercise most. The draft decides any you leave open and says what it chose.
+    - **Format:** a discussion-based tabletop, a functional exercise with hands-on work in the range, or a hybrid.
+    - **CITE assessment:** how CITE assesses the teams. See [CITE Assessment Choices](#cite-assessment-choices). This appears only when the template uses CITE.
+    - **Number of moves**, **Length (minutes)**, and **Scenario time covered:** the pacing. The scenario time covered is how much story time the exercise spans, such as `three days`.
+    - **Last move is a leadership brief:** whether the exercise ends with a brief to leadership.
+    - **Participant structure:** how you organize participants, such as one combined staff or parallel national teams.
+    - **Add Team Profiles and Organization Profiles pages:** clear this to skip the profile pages.
+6. Click **Draft**. Drafting can take a minute or two.
+7. Review the draft. Blueprint shows:
+    - **Scenario and objectives:** the problem, the escalation ceiling, and each objective as a task, condition, and standard.
+    - **Moves:** each move's start on the exercise clock and its scenario time. Expand a move to see its purpose, situation, expected decisions, controller notes, and CITE questions.
+    - **Read-in:** a preview of what participants read before the first move. Click **Leave out the read-in** to drop it.
+    - **CITE tasks:** what each team must complete in each move, grouped by move and team. Click the **X** beside a task to remove it.
+    - **Teams and organizations**, **Gallery cards**, **Injects**, and **Competencies:** expand an inject to see its values, what participants should do, and the objective it serves. Click the **X** beside an inject or a competency to remove it.
+8. While you review, Blueprint writes each Gallery article as a document of its source type, and each team's and organization's profile with a logo. Click **Stop** to stop writing. Open an inject or a profile to see it as Gallery and Blueprint show it.
+9. Click **Create MSEL**. Click **Edit description** to change the description and draft again, or **Discard** to close without saving.
+
+Blueprint creates the MSEL and shows the [JSON Import Report](#json-import-report) for it.
+
+##### What Create MSEL Adds
+
+Besides the moves, teams, organizations, Gallery cards, and injects, creating a drafted MSEL adds:
+
+- **Two clocks:** each move has a scenario time, which can jump ahead between moves. Blueprint dates each Gallery article within its move's scenario time.
+- **An Expected Actions column:** what participants should do for each inject. It shows on the event list for controllers but not on the exercise view.
+- **Pages:**
+  - **Exercise Overview:** the objectives, teams and roles, schedule, and assessment. Every participant can see it.
+  - **[MSEL name] Read-In:** the read-in. Every participant can see it.
+  - **Facilitator Guide:** each move's purpose, expected decisions, controller notes, and questions; the expected action and objective of every inject; and the after-action review. Participants cannot see it.
+  - **Team Profiles** and **Organization Profiles:** each team's and organization's profile, unless you cleared the option.
+- **Player applications**, when the MSEL uses Player: **Read-In**, which opens the read-in page, and **Exercise Timeline**, which opens the live MSEL view, for every team.
+- **CITE**, when the MSEL uses CITE: each team gets one of CITE's built-in team types (**Official Score Contributor** for participant teams, **Other** for `EXCON`), the CITE tasks, and the scoring model you chose.
+- **Steamfitter**, when the MSEL uses Steamfitter: `STARTEX` and `ENDEX` rows, each with a Player notification to every participant.
+
+When you push the integrations, Gallery gets the drafted articles. Pages and articles sit on white paper with dark text, so they read the same in light and dark themes.
+
+##### CITE Assessment Choices
+
+- **Keep the template's scoring model:** offered, and chosen by default, when the template already links a scoring model.
+- **Questions by move:** the draft writes discussion questions for each move. Creating the MSEL creates the scoring model `[MSEL name] Questions by Move` in CITE: one category per move with the move's questions, comment boxes on, and scores hidden, and a final category for the after-action review.
+- **DoD CTT mission impact matrix:** teams score the mission impact of each move, following the Department of Defense Cyber Table Top (CTT) guide. Blueprint links the `DoD CTT Mission Impact Assessment` scoring model, and creates it in CITE if it is not there.
+- **DoD CTT likelihood matrix:** teams score each attack's cost and chance of success. Blueprint links the `DoD CTT Likelihood Assessment Matrix` scoring model, and creates it in CITE if it is not there.
+- **None:** no scoring model.
+
+!!! note
+
+    Creating a scoring model needs the `CreateScoringModels` permission in CITE. Without it, Blueprint still creates the MSEL, and the report asks you to choose a scoring model before you push.
+
 #### Filter Display
 
 Use the filter options to narrow down MSELs shown in the catalog.
@@ -385,6 +462,26 @@ Click the MSEL's name (a link in the Name column) to open it for editing.
 ### MSEL Definition
 
 After uploading or creating a MSEL, users can edit any information and add additional information to the MSEL. Users edit the same MSEL, instead of working on separate copies and sending edits to one person. This ensures everyone has the same version during the live scenario.
+
+#### Change a MSEL with AI
+
+When AI drafting is on, you can change a MSEL by describing what you want.
+
+1. At the top of the MSEL, click **Ask AI**.
+2. In **What should change?**, describe the change, such as `Split BLUE into a CERT team and a legal team`. You can also click one of the examples.
+3. Click **Ask**. The assistant proposes changes, or asks you a question.
+4. Clear the check box beside any change you do not want.
+5. Click **Apply** to make the checked changes. The button shows how many changes it applies.
+
+The assistant can add or edit teams, organizations, Gallery cards, moves and their scenario times, and injects, and add or remove competencies. It offers only the changes your MSEL role allows. It cannot delete injects or moves, or change data fields, integrations, users, or pages.
+
+To write one value with AI:
+
+1. Open a scenario event, and click **Write [field name] with AI** beside a text field.
+2. Describe what you want, and click **Write**.
+3. Click **Use this**, **Try again**, or **Discard**.
+
+To write a profile with a logo, edit a team or an organization, and click **Write the team's profile with AI** or **Write the organization's profile with AI**.
 
 #### Basic Information
 

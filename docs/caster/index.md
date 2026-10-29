@@ -37,6 +37,19 @@ Configure both through the [Caster Helm Chart](https://github.com/cmu-sei/helm-c
 
     The Crucible Terraform Provider requires Terraform 1.0 or later. Configurations that use it need a workspace set to a `1.x` version.
 
+### AI Drafting
+
+Caster can draft Terraform files and Designs with a model on Amazon Bedrock. AI drafting is off by default. Turn it on in the `Ai` settings of the Caster API, which match Blueprint's:
+
+- **`Ai:Enabled`:** `true` turns on every AI feature.
+- **`Ai:Region`:** the Amazon Web Services (AWS) region of the Bedrock endpoint, such as `us-east-1`.
+- **`Ai:ModelId`:** the Bedrock model or inference profile ID that writes the drafts.
+- **`Ai:FallbackModelId`:** a second model to try once when the first declines a request. Leave it empty for no retry.
+- **`Ai:MaxTokens`:** the longest answer the model may write. The default is `64000`.
+- **`Ai:TimeoutSeconds`:** how long a request may run. The default is `600`.
+
+The API uses the default AWS credential chain of its host. The AI never saves a file on its own: you review each file, and Caster saves only the files you keep.
+
 ## Permissions and Roles
 
 Sets of *permissions* control access to features in Caster. Permissions can apply globally or per **Project**.
@@ -313,6 +326,21 @@ Import Project lets you import a project from a zip file. Click **Choose File** 
 
 See the official [Terraform Documentation](https://www.terraform.io/docs/index.html) for more details on supported file types and extensions. In the future, Caster may provide more guidance on allowed types and content of files.
 
+#### Draft Terraform with AI
+
+When AI drafting is on, you can draft Terraform for a directory from a description. The draft sees the directory's files, its parent directories' files and Designs, and the module catalog. You need edit rights on the project.
+
+1. In the directory, click **Draft Terraform with AI**.
+2. In **Describe the infrastructure**, describe what the directory needs, such as `Add a Kali attacker VM on the red network, and a variable for its template`.
+3. Click **Draft**.
+4. Review each file. A file the draft replaces shows as a side-by-side comparison with the current file; a new file shows on its own. Read any warnings above the files, such as a variable declared in two files.
+5. Clear **Keep** beside any file you do not want. Click **Edit description** to reword the description and draft again.
+6. Click **Apply** to save the kept files together. The button shows how many files it saves.
+
+Caster saves all the kept files or none of them. If someone changed one of the files since the draft, or holds its lock, Caster says which file and saves nothing; draft again.
+
+To change one file, open it and click **Edit this file with AI**. Describe the change in **What should change?**, then review and apply as above. The draft can also add or change other files in the directory when the change needs them. Save or discard your own changes to the file first.
+
 ### Workspaces
 
 ![Caster workspaces](img/caster-workspaces.PNG)
@@ -405,6 +433,17 @@ To set the Terraform version for a whole branch of a project, set it on the pare
 Designer provides a graphical user interface for creating and editing terraform deployments through the use of modules.
 
 When you open a project, you can create a design and add modules backed by Git to that design. You can also create variables for use in the modules settings.
+
+#### Draft a Design with AI
+
+When AI drafting is on, you can draft a Design from a description, using Caster's modules.
+
+1. In the directory, click **Draft Design with AI**.
+2. In **Describe the environment**, describe the range to build. Choose the **Hypervisor** when more than one is available, and optionally enter a **Design name**.
+3. Click **Draft**.
+4. Review the **Design name**, any warnings, and each module's **Name** and variable values. Correct anything the draft got wrong.
+    - A value marked **(required)** that the draft left out becomes a placeholder. Replace placeholders before you enable the module.
+5. Click **Create Design**.
 
 ## Caster Tips
 
