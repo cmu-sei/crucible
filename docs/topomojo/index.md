@@ -45,6 +45,60 @@ A *lab* or *challenge* is a TopoMojo workspace built to teach or test hands-on c
 
 Third-party consumers of TopoMojo content, like [Gameboard](../gameboard/index.md) and [Moodle](../integrations/index.md#moodle), can deploy labs and challenges.
 
+### Audience, Scope, and Publishing
+
+TopoMojo controls who can launch a workspace, and which templates a workspace can add, by matching two lists of tokens against each other. A token is any word an administrator chooses, such as `cyber-cup` or `blue-team`. Separate tokens with spaces, commas, or semicolons. Two lists match when they share at least one token. Matching isn't case-sensitive.
+
+| Pair | Where It's Set | What It Controls |
+| --- | --- | --- |
+| User **Scope** and workspace **Audience** | **Scope**: Admin [Users Tab](#users-tab). **Audience**: workspace [Settings](#settings), or Admin [Workspaces Tab](#workspaces-tab) **View**. | Which users can find a workspace and launch it as a gamespace, and which gamespaces an observer can see. |
+| Workspace **Template Scope** and template **Audience** | **Template Scope**: Admin [Workspaces Tab](#workspaces-tab) **View**. **Audience**: Admin [Templates Tab](#template-properties). | Which unpublished templates a workspace can add from **Add Templates**. |
+
+Any collaborator can set a workspace's **Audience**. Only administrators can set a user's **Scope**, a workspace's **Template Scope**, or a template's **Audience**.
+
+#### Launching a Workspace
+
+A user can launch a workspace as a gamespace when either of these is true:
+
+- The user is a collaborator on the workspace.
+- The workspace **Audience** shares a token with the user's **Scope**.
+
+Every user also has the default scope `everyone`, even when their **Scope** is empty. A workspace with an **Audience** of `everyone` is open to all users. A workspace with an empty **Audience** can only be launched by its collaborators.
+
+The same match decides which workspaces appear under the **gamespace** filter in the left panel, and which gamespaces an **Observer** sees on the *Observe* tab. The **workspace** filter doesn't use audience or scope; it only lists workspaces you collaborate on. The observer list uses only the observer's own **Scope**, without the default `everyone`. To let an observer see gamespaces from `everyone` workspaces, add `everyone` to the observer's **Scope**.
+
+To limit a workspace to one group of users:
+
+1. Pick a token for the group, for example `cyber-cup`.
+2. In the Admin **Users** tab, add `cyber-cup` to each user's **Scope**.
+3. In the workspace **Settings** tab, set **Audience** to `cyber-cup`. To open the workspace to more than one group, list each token, for example `cyber-cup blue-team`.
+
+Users already in other groups keep their tokens. A user's **Scope** can hold several tokens, for example `cyber-cup blue-team`.
+
+#### Adding Templates to a Workspace
+
+**Add Templates** in a workspace lists a template when either of these is true:
+
+- The template is *published*. Published templates are available to every workspace. See [Publishing a Template](#publishing-a-template).
+- The template's **Audience** shares a token with the workspace's **Template Scope** or with the **Scope** of the user adding it.
+
+**Template Scope** doesn't limit published templates; it only adds unpublished templates with a matching **Audience**. Workspaces that builders create start with an empty **Template Scope**.
+
+To share a set of templates with some workspaces, but not all of them:
+
+1. Pick a token, for example `cyber-cup`.
+2. In the Admin **Templates** tab, expand each template, set **Audience** to `cyber-cup`, leave **Published** on **Hidden**, and click **Save Settings**.
+3. In the Admin **Workspaces** tab, click **View** on each workspace that needs the templates and set **Template Scope** to `cyber-cup`.
+
+Builders in those workspaces now see the templates in **Add Templates**. A user whose own **Scope** contains `cyber-cup` sees them in any workspace they edit.
+
+#### What "Published" Means
+
+*Published* means different things for templates and workspaces.
+
+- **Template:** A template is published when an administrator sets **Published** to **Visible** in the Admin **Templates** tab. Every template starts unpublished. A published template is available in every workspace's **Add Templates**.
+- **Workspace:** A workspace has no publish setting. TopoMojo treats a workspace as published when its **Audience** isn't empty. The [Janitor](#janitor) uses this to choose between the **UnpublishedWorkspace** and **InactiveWorkspace** reasons.
+
 ## Getting Started
 
 The following sections cover how to install TopoMojo and configure it for your environment.
@@ -144,9 +198,7 @@ The Settings tab holds configuration metadata for your lab.
 
 **Authorship:** The names of the challenge authors.
 
-**Audience:** A space-delimited list of administrator-defined groups that have permission to deploy gamespaces from the workspace. Administrators define an *audience* with any name here. Users can deploy gamespaces from the workspace only if their *scope* matches one of the provided *audiences*. `everyone` is the global audience that allows all users to deploy gamespaces from the workspace. Audience matching isn't case-sensitive.
-
-`everyone` works because TopoMojo adds `Core__DefaultUserScope` to every user's scope, and that setting defaults to `everyone`. The sample `appsettings.conf` in the TopoMojo repository sets it to `mojo`. If you copy that value, use `mojo` instead of `everyone` as the global audience.
+**Audience:** A space-delimited list of groups that can launch the workspace as a gamespace. Users can launch a gamespace when their *scope* shares a token with the workspace **Audience**. `everyone` is the global audience that allows all users to launch the workspace. Leave **Audience** empty to limit the workspace to its collaborators. A workspace with an **Audience** counts as *published* for the [Janitor](#janitor). See [Audience, Scope, and Publishing](#audience-scope-and-publishing).
 
 **Duration:** Recommended length of time, in minutes, that it takes to play through the challenge/lab.
 
@@ -170,7 +222,7 @@ A typical TopoMojo deployment contains several types of templates.
 
 Administrators can publish individual templates (e.g., a stand-alone base install of Kali Linux). They can also publish a "template set" of multiple VMs serving as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, etc.).
 
-TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are workspace-specific and only available within the workspace where the user created them. Only administrators can publish a template; see [Publishing a Template](#publishing-a-template) in the Administrator Guide.
+TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are only available within the workspace that owns them, unless an administrator shares them with other workspaces through the template's **Audience**. Only administrators can publish or share a template; see [Publishing a Template](#publishing-a-template) and [Audience, Scope, and Publishing](#audience-scope-and-publishing).
 
 #### Adding and Editing Templates
 
@@ -544,9 +596,9 @@ The *workspace id* is visible above the workspace title, labeled **Workspace ID*
 
 **Template Limit:** Defines the number of VM templates you can add to the workspace.
 
-**Template Scope:** Limits a workspace to using templates that have the given scope.
+**Template Scope:** Space-delimited tokens that let the workspace add unpublished templates whose **Audience** contains a matching token. Published templates are always available, whatever this is set to. See [Adding Templates to a Workspace](#adding-templates-to-a-workspace).
 
-**Audience:** Limits who can deploy a gamespace as a workspace.
+**Audience:** Space-delimited tokens that decide which users can launch the workspace as a gamespace. Same as **Audience** on the workspace [Settings](#settings) tab. See [Launching a Workspace](#launching-a-workspace).
 
 **VMs:** Refresh, deploy, view the console, start/stop, revert and delete from here. Functions are the same as [previously described](#view-expanded).
 
@@ -582,6 +634,19 @@ The **Templates** tab also has these tools:
 #### Template Properties
 
 The **Templates** tab in the Administrator Guide displays template metadata and configuration. The **Detail** field contains the raw JSON configuration TopoMojo passes to the hypervisor when deploying the VM. Linked templates show the read-only **Parent Detail** instead, since they inherit their configuration from the parent.
+
+Expand a template to edit these fields, then click **Save Settings**:
+
+- **Name:** A short, unique identifier for the VM template, up to 64 characters. TopoMojo uses it to build VM names and disk filenames.
+- **Published:** Toggle between **Hidden** and **Visible**. **Visible** makes the template available in every workspace's **Add Templates**. Only unlinked templates show this toggle. See [Publishing a Template](#publishing-a-template).
+- **Description:** Up to 255 characters. Include login credentials and what the VM is for.
+- **Audience:** Space-delimited tokens, up to 64 characters, that share an unpublished template with workspaces whose **Template Scope** has a matching token. See [Adding Templates to a Workspace](#adding-templates-to-a-workspace).
+- **Networks:** Space-delimited network names, up to 64 characters, such as `lan wan`. Same as **Networks** in [Template Field Definitions](#template-field-definitions).
+- **Guest Settings:** One `key=value` per line, up to 1024 characters. TopoMojo ignores lines that start with `#`. Same as **Guest Settings** in [Template Field Definitions](#template-field-definitions).
+- **Detail:** The template's JSON configuration. Only unlinked templates show this field. See [Template Detail JSON](#template-detail-json).
+- **Parent Detail:** Read-only. Shown on linked templates in place of **Detail**.
+
+Only administrators can see this form. Workspace builders edit a template's **Name**, **Description**, **Networks**, **Guest Settings**, **Replicas**, **Variant**, and **ISO** from the workspace's **Templates** tab, but can't change **Published**, **Audience**, or **Detail**.
 
 !!! note
     The Detail field hint text reads: "Advanced configuration. Keep valid JSON to avoid errors."
@@ -676,7 +741,7 @@ To publish a template so other workspaces can add it from **Add Templates**:
 4. Set **Published** to **Visible**. The toggle only appears on unlinked templates.
 5. Click **Save Settings**.
 
-Workspaces that add a published template get a *linked* copy that uses the published template's disk. To share a template with only some workspaces instead of all of them, leave it unpublished and enter one or more space-delimited tokens in **Audience**. A workspace can add the template when its template scope contains a matching token.
+Workspaces that add a published template get a *linked* copy that uses the published template's disk. To share a template with only some workspaces instead of all of them, leave it unpublished and use **Audience** and **Template Scope**. See [Adding Templates to a Workspace](#adding-templates-to-a-workspace).
 
 #### Bringing In an Existing Disk
 
@@ -755,7 +820,7 @@ To quickly identify orphaned VMs, search for "orphaned" in the Search field.
 
 ### Users Tab
 
-The **Users** tab shows all TopoMojo users. You can create new users and assign users permissions here. To search for a user, enter the term into the **Search** field or filter by role (**admins**, **observers**, **creators**, **builders**), by **service accounts**, or by *scope*. Recall from [workspace Settings](#settings) that *audience* is a list of clients who can launch the workspace as a gamespace.
+The **Users** tab shows all TopoMojo users. You can create new users and assign users permissions here. To search for a user, enter the term into the **Search** field or filter by role (**admins**, **observers**, **creators**, **builders**), by **service accounts**, or by *scope*. TopoMojo matches a user's *scope* against each workspace's *audience*; see [Audience, Scope, and Publishing](#audience-scope-and-publishing).
 
 - **View ( <i class="fa-solid fa-list" aria-label="list-icon" role="img"></i> ):** Select **View** to see the properties for the user. Users with a service account client ID are marked **Service Account**.
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes the user.
@@ -765,7 +830,7 @@ The **Users** tab shows all TopoMojo users. You can create new users and assign 
 - **User:** No extra permissions in TopoMojo. This is the TopoMojo default.
 - **Builder:** Can connect to [reserved networks](#persistentshared-networks) such as `bridge-net`.
 - **Creator:** Same permissions as *builder* with additional permissions to bypass building limits such as the number of owned workspaces and workspace template limits.
-- **Observer:** Allows a user to view and use the *Observe* tab for viewing gamespaces. The *scope* of the user (see below) limits access to gamespaces with a matching *audience*.
+- **Observer:** Allows a user to view and use the *Observe* tab for viewing gamespaces. The *scope* of the user (see below) limits the list to gamespaces whose workspace has a matching *audience*. See [Launching a Workspace](#launching-a-workspace).
 - **Admin:** Full administrative access to TopoMojo.
 - **Disabled:** No permissions in TopoMojo.
 
@@ -780,7 +845,7 @@ A user's *effective role* is the strongest of their TopoMojo role and every role
 #### Create a New User
 
 - **Name:** Enter a new user name here.
-- **Scope:** A space-delimited list of administrator-defined groups the user belongs to. Administrators can define a *scope* with any name here. A user's scope determines which workspaces they have permission to deploy gamespaces from. Users can only deploy a gamespace from a workspace if the user has a *scope* that matches an *audience* defined in the workspace. See also: [Building a new workspace](#building-a-new-workspace).
+- **Scope:** A space-delimited list of administrator-defined groups the user belongs to. Administrators can define a *scope* with any name here. A user can launch a workspace when their *scope* shares a token with the workspace's **Audience**, and can add unpublished templates whose **Audience** shares a token with their *scope*. See [Audience, Scope, and Publishing](#audience-scope-and-publishing).
 - **Workspace Limit:** The maximum number of workspaces this user can manage.
 - **Gamespace Limit:** The maximum number of concurrent active gamespaces allowed for this user.
 - **Gamespace Max Duration:** The maximum amount of minutes allowed for a gamespace.
@@ -790,16 +855,7 @@ A user's *effective role* is the strongest of their TopoMojo role and every role
 
 For regular users, TopoMojo may update **Name** from the identity token at sign-in.
 
-TopoMojo creates users automatically the first time they sign in, with limits taken from these settings:
-
-| Setting | Default | Effect |
-| --- | --- | --- |
-| `Core__DefaultWorkspaceLimit` | `0` | Workspaces a new user can create. `0` means none; users with the **Creator** role or above aren't limited. |
-| `Core__DefaultTemplateLimit` | `3` | Template limit applied to each workspace created by a user below the **Creator** role. |
-| `Core__DefaultGamespaceLimit` | `0` | Concurrent gamespaces for a new user. `0` means unlimited. The sample `appsettings.conf` shows `2`; the built-in default is `0`. |
-| `Core__DefaultGamespaceMinutes` | `120` | Gamespace duration when neither the user's **Gamespace Max Duration** nor the workspace's **Duration** is set. |
-| `Core__ReplicaLimit` | `5` | Maximum **Replicas** value on a template. |
-| `Core__DefaultUserScope` | `everyone` | Scope added to every user. See [Settings](#settings). |
+TopoMojo creates users automatically the first time they sign in. Administrators set the default limits for new users in TopoMojo's configuration; see the [TopoMojo Helm chart README](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo).
 
 ### Settings Tab
 
