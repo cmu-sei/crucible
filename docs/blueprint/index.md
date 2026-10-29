@@ -33,6 +33,7 @@ Blueprint can draft a MSEL, its Gallery articles, and its team and organization 
 - **`Ai:MaxCompetencies`:** the most competencies a draft may choose from. The default is `2500`.
 - **`Ai:ImageModelId`:** an optional Bedrock image model that makes news photos for Gallery articles, such as `stability.stable-image-core-v1:1`. Leave it empty for no photos.
 - **`Ai:ImageRegion`:** the AWS region of the image model. The default is `us-west-2`, because Bedrock offers the image models in fewer regions than the text models.
+- **`Ai:Prices`:** what each model costs, keyed by model ID, so Blueprint can estimate what building each MSEL cost. For each model, set `InputPerMillion`, `OutputPerMillion`, `CacheReadPerMillion`, and `CacheWritePerMillion` in US dollars per million tokens, and `PerImage` for an image model. Blueprint counts a model without a price in tokens only.
 
 The API uses the default AWS credential chain of its host. Caster uses the same `Ai` settings for its AI features.
 
@@ -474,6 +475,10 @@ When AI drafting is on, you can change a MSEL by describing what you want.
 5. Click **Apply** to make the checked changes. The button shows how many changes it applies.
 
 The assistant can add or edit teams, organizations, Gallery cards, moves and their scenario times, and injects, and add or remove competencies. It offers only the changes your MSEL role allows. It cannot delete injects or moves, or change data fields, integrations, users, or pages.
+
+##### AI Usage
+
+Blueprint records every call to an AI model made for a MSEL, including the calls that wrote its draft. The MSEL's owner, and users with the `ViewMsels` permission, see an **AI usage** table at the end of the **Config** section of the **Info** tab. It lists each step, such as **Draft MSEL with AI**, **Gallery articles**, **Ask AI**, and **News photos**, with its calls, input and output tokens, photos, and estimated cost. The estimate uses the prices in `Ai:Prices`. It includes calls the model declined, because the provider bills those too.
 
 To write one value with AI:
 
