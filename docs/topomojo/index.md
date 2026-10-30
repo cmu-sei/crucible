@@ -45,6 +45,60 @@ A *lab* or *challenge* is a TopoMojo workspace built to teach or test hands-on c
 
 Third-party consumers of TopoMojo content, like [Gameboard](../gameboard/index.md) and [Moodle](../integrations/index.md#moodle), can deploy labs and challenges.
 
+### Audience, Scope, and Publishing
+
+TopoMojo controls who can launch a workspace, and which templates a workspace can add, by matching two lists of tokens against each other. A token is any word an administrator chooses, such as `cyber-cup` or `blue-team`. Separate tokens with spaces, commas, or semicolons. Two lists match when they share at least one token. Matching isn't case-sensitive.
+
+| Pair | Where It's Set | What It Controls |
+| --- | --- | --- |
+| User **Scope** and workspace **Audience** | **Scope**: Admin [Users Tab](#users-tab). **Audience**: workspace [Settings](#settings), or Admin [Workspaces Tab](#workspaces-tab) **View**. | Which users can find a workspace and launch it as a gamespace, and which gamespaces an observer can see. |
+| Workspace **Template Scope** and template **Audience** | **Template Scope**: Admin [Workspaces Tab](#workspaces-tab) **View**. **Audience**: Admin [Templates Tab](#template-properties). | Which unpublished templates a workspace can add from **Add Templates**. |
+
+Any collaborator can set a workspace's **Audience**. Only administrators can set a user's **Scope**, a workspace's **Template Scope**, or a template's **Audience**.
+
+#### Launching a Workspace
+
+A user can launch a workspace as a gamespace when either of these is true:
+
+- The user is a collaborator on the workspace.
+- The workspace **Audience** shares a token with the user's **Scope**.
+
+Every user also has the default scope `everyone`, even when their **Scope** is empty. A workspace with an **Audience** of `everyone` is open to all users. A workspace with an empty **Audience** can only be launched by its collaborators.
+
+The same match decides which workspaces appear under the **gamespace** filter in the left panel, and which gamespaces an **Observer** sees on the *Observe* tab. The **workspace** filter doesn't use audience or scope; it only lists workspaces you collaborate on. The observer list uses only the observer's own **Scope**, without the default `everyone`. To let an observer see gamespaces from `everyone` workspaces, add `everyone` to the observer's **Scope**.
+
+To limit a workspace to one group of users:
+
+1. Pick a token for the group, for example `cyber-cup`.
+2. In the Admin **Users** tab, add `cyber-cup` to each user's **Scope**.
+3. In the workspace **Settings** tab, set **Audience** to `cyber-cup`. To open the workspace to more than one group, list each token, for example `cyber-cup blue-team`.
+
+Users already in other groups keep their tokens. A user's **Scope** can hold several tokens, for example `cyber-cup blue-team`.
+
+#### Adding Templates to a Workspace
+
+**Add Templates** in a workspace lists a template when either of these is true:
+
+- The template is *published*. Published templates are available to every workspace. See [Publishing a Template](#publishing-a-template).
+- The template's **Audience** shares a token with the workspace's **Template Scope** or with the **Scope** of the user adding it.
+
+**Template Scope** doesn't limit published templates; it only adds unpublished templates with a matching **Audience**. Workspaces that builders create start with an empty **Template Scope**.
+
+To share a set of templates with some workspaces, but not all of them:
+
+1. Pick a token, for example `cyber-cup`.
+2. In the Admin **Templates** tab, expand each template, set **Audience** to `cyber-cup`, leave **Published** on **Hidden**, and click **Save Settings**.
+3. In the Admin **Workspaces** tab, click **View** on each workspace that needs the templates and set **Template Scope** to `cyber-cup`.
+
+Builders in those workspaces now see the templates in **Add Templates**. A user whose own **Scope** contains `cyber-cup` sees them in any workspace they edit.
+
+#### What "Published" Means
+
+*Published* means different things for templates and workspaces.
+
+- **Template:** A template is published when an administrator sets **Published** to **Visible** in the Admin **Templates** tab. Every template starts unpublished. A published template is available in every workspace's **Add Templates**.
+- **Workspace:** A workspace has no publish setting. TopoMojo treats a workspace as published when its **Audience** isn't empty. The [Janitor](#janitor) uses this to choose between the **UnpublishedWorkspace** and **InactiveWorkspace** reasons.
+
 ## Getting Started
 
 The following sections cover how to install TopoMojo and configure it for your environment.
@@ -59,11 +113,11 @@ Install TopoMojo using the [Helm chart](https://github.com/cmu-sei/helm-charts/t
 
 **`TopoMojo values.yaml`:** Contains default configurations for the `api` and the `ui`. To deploy TopoMojo, configure the **`Values.yaml`** file according to your needs then `helm install`. More details on how to configure the values file is [available in the helm charts repository](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo).
 
-For hypervisor settings, see the TopoMojo repository: [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) covers network setup, ISO storage, guest settings, and High Availability (`Pod__EnableHA` and related settings), and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) covers vSphere.
+For hypervisor settings, see the TopoMojo repository: [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) covers network setup, ISO storage, guest settings, and High Availability, and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) covers vSphere.
 
 !!! warning "Proxmox certificate validation"
 
-    Recent TopoMojo releases honor `Pod__IgnoreCertificateErrors` for Proxmox; earlier releases ignored it there and accepted any certificate. The setting defaults to `false`, so a Proxmox server with a self-signed or otherwise untrusted certificate now fails to connect. Install a certificate the TopoMojo host trusts, or set `Pod__IgnoreCertificateErrors = true`.
+    Recent TopoMojo releases check the Proxmox server's certificate; earlier releases accepted any certificate. A Proxmox server with a self-signed or otherwise untrusted certificate now fails to connect. Install a certificate the TopoMojo host trusts, or turn off certificate checking in TopoMojo's hypervisor settings. See [Proxmox Configuration](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#proxmox-configuration) in the Helm chart README.
 
 ### Persistent/Shared Networks
 
@@ -71,19 +125,18 @@ We recommend having a persistent/shared network available to all TopoMojo worksp
 
 For example, you could create a persistent/shared network that provides internet access to TopoMojo VMs connected to the network named `bridge-net`.
 
-Use the `Pod**Vlan**Reservations` environment variable to define the name of a persistent/shared network.
-
-- `Pod**Vlan**Reservations**0**Id:` defines the vlan Id (from the hypervisor) that corresponds to the shared/persistent network.
-- `Pod**Vlan**Reservations**0**Name:` defines the name of the persistent/shared network.
+Each persistent/shared network is a VLAN reservation in TopoMojo's hypervisor settings: the VLAN ID from the hypervisor, and the network name users see. See [vSphere Configuration](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#vsphere-configuration) in the Helm chart README.
 
 ![bridge-net vlan reservation](img/bridge-net.png)
 
-You can define more than one shared/persistent network by incrementing the variable name (`Pod**Vlan**Reservations**1**Id` and `Pod**Vlan**Reservations**1**Name`). To connect VMs to shared/persistent networks, users must have at least **Builder** permissions.
+An administrator can reserve more than one shared/persistent network. To connect VMs to shared/persistent networks, users must have at least **Builder** permissions.
 
-Two settings relax those network restrictions:
+Two optional settings, both off by default, relax those network restrictions:
 
-- **`Core__AllowUnprivilegedVmReconfigure`** (default `false`): Lets users below **Builder** move a VM's network adapter onto shared/persistent networks.
-- **`Core__AllowPrivilegedNetworkIsolationExemption`** (default `false`): On vSphere, lets **Builders** connect a VM to any hypervisor network, not only the workspace's networks and the shared/persistent networks.
+- One lets users below **Builder** move a VM's network adapter onto shared/persistent networks.
+- One lets **Builders** on vSphere connect a VM to any hypervisor network, not only the workspace's networks and the shared/persistent networks.
+
+See [Core Application Settings](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#core-application-settings) in the Helm chart README.
 
 !!! note "A note about bridge-net"
 
@@ -145,9 +198,7 @@ The Settings tab holds configuration metadata for your lab.
 
 **Authorship:** The names of the challenge authors.
 
-**Audience:** A space-delimited list of administrator-defined groups that have permission to deploy gamespaces from the workspace. Administrators define an *audience* with any name here. Users can deploy gamespaces from the workspace only if their *scope* matches one of the provided *audiences*. `everyone` is the global audience that allows all users to deploy gamespaces from the workspace. Audience matching isn't case-sensitive.
-
-`everyone` works because TopoMojo adds `Core__DefaultUserScope` to every user's scope, and that setting defaults to `everyone`. The sample `appsettings.conf` in the TopoMojo repository sets it to `mojo`. If you copy that value, use `mojo` instead of `everyone` as the global audience.
+**Audience:** A space-delimited list of groups that can launch the workspace as a gamespace. Users can launch a gamespace when their *scope* shares a token with the workspace **Audience**. `everyone` is the global audience that allows all users to launch the workspace. Leave **Audience** empty to limit the workspace to its collaborators. A workspace with an **Audience** counts as *published* for the [Janitor](#janitor). See [Audience, Scope, and Publishing](#audience-scope-and-publishing).
 
 **Duration:** Recommended length of time, in minutes, that it takes to play through the challenge/lab.
 
@@ -171,7 +222,7 @@ A typical TopoMojo deployment contains several types of templates.
 
 Administrators can publish individual templates (e.g., a stand-alone base install of Kali Linux). They can also publish a "template set" of multiple VMs serving as a single "stock topology" (e.g., a full enterprise network with routers, firewalls, services, etc.).
 
-TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are workspace-specific and only available within the workspace where the user created them. Only administrators can publish a template; see [Publishing a Template](#publishing-a-template) in the Administrator Guide.
+TopoMojo templates are either *published* (stock) or *unpublished*. **Published** templates are available to all workspaces and appear in the **Add Templates** search across TopoMojo. **Unpublished** templates are only available within the workspace that owns them, unless an administrator shares them with other workspaces through the template's **Audience**. Only administrators can publish or share a template; see [Publishing a Template](#publishing-a-template) and [Audience, Scope, and Publishing](#audience-scope-and-publishing).
 
 #### Adding and Editing Templates
 
@@ -408,14 +459,14 @@ The **Files** tab in the TopoMojo workspace allows you to upload files from your
 
     The **Files** tab only appears when the TopoMojo UI settings include `"enable_upload": true`. If you don't see it, ask your administrator to enable it.
 
-    TopoMojo stores uploads in one of two ways. By default, it writes them to `FileUpload__IsoRoot`, which must be a share the hypervisor also mounts, such as an NFS (Network File System) datastore. On Proxmox, that path must end in `/template/iso`. When `FileUpload__UseDatastoreApi` is `true`, TopoMojo uploads to hypervisor storage through the vSphere or Proxmox API instead, and no shared mount is needed.
+    TopoMojo stores uploads in one of two ways. By default, it writes them to a folder that the hypervisor also mounts, such as an NFS (Network File System) datastore. On Proxmox, that path must end in `/template/iso`. Alternatively, TopoMojo can upload to hypervisor storage through the vSphere or Proxmox API, and no shared mount is needed. See [File Storage](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#file-storage) in the Helm chart README.
 
 ISOs you upload on the **Files** tab are *local* to the workspace: only the workspace that holds them can attach them. Administrators manage *global* ISOs, which every workspace can use.
 
 Your TopoMojo administrator controls upload limits:
 
-- **Maximum file size:** `FileUpload__MaxFileBytes`. The default, `0`, means TopoMojo itself sets no limit, but a reverse proxy or ingress in front of TopoMojo may still cap the request size.
-- **Upload time-out:** `FileUpload__UploadTimeoutMinutes`, default `60`. This applies when TopoMojo forwards the uploaded file to hypervisor storage through the datastore API (`FileUpload__UseDatastoreApi`).
+- **Maximum file size:** By default TopoMojo itself sets no limit, but a reverse proxy or ingress in front of TopoMojo may still cap the request size.
+- **Upload time-out:** Defaults to 60 minutes. This applies when TopoMojo uploads the file to hypervisor storage through the vSphere or Proxmox API.
 
 If a large ISO fails to upload, ask your administrator to check these settings.
 
@@ -479,15 +530,11 @@ The **Janitor** service cleans up unused resources (e.g., a workspace VM that ha
 
 The full cleanup pass reports three kinds of items, shown in the **Reason** column:
 
-- **IdleWorkspaceVms:** Workspaces whose VMs have been idle longer than `Core__Expirations__IdleWorkspaceVmsExpiration` (default `1d`). When dry run is off, the Janitor deletes these workspace VMs. Saved template disks aren't affected.
-- **UnpublishedWorkspace:** Unpublished workspaces idle longer than `Core__Expirations__UnpublishedWorkspaceTimeout` (default `1w`).
-- **InactiveWorkspace:** Published workspaces with no launches for longer than `Core__Expirations__InactiveWorkspaceExpiration` (default `1y`).
+- **IdleWorkspaceVms:** Workspaces whose VMs have been idle longer than a day. When dry run is off, the Janitor deletes these workspace VMs. Saved template disks aren't affected.
+- **UnpublishedWorkspace:** Unpublished workspaces idle longer than a week.
+- **InactiveWorkspace:** Published workspaces with no launches for longer than a year.
 
-`Core__Expirations__DryRun` defaults to `true`, which reports idle workspace VMs without deleting them. Set it to `false` to let the Janitor delete them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only, regardless of `DryRun`.
-
-!!! warning "Sample configuration key names"
-
-    The sample `appsettings.conf` in the TopoMojo repository lists `Core__Expirations__UnpublishedWorkspacesExpiration` and `Core__Expirations__InactiveWorkspacesExpiration`. TopoMojo ignores those names. Use `Core__Expirations__UnpublishedWorkspaceTimeout` and `Core__Expirations__InactiveWorkspaceExpiration`.
+By default the Janitor runs in dry-run mode, which reports idle workspace VMs without deleting them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only. An administrator can change dry-run mode and each time limit in TopoMojo's configuration; see [Core Application Settings](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#core-application-settings) in the Helm chart README.
 
 ### Gamespaces Tab
 
@@ -549,9 +596,9 @@ The *workspace id* is visible above the workspace title, labeled **Workspace ID*
 
 **Template Limit:** Defines the number of VM templates you can add to the workspace.
 
-**Template Scope:** Limits a workspace to using templates that have the given scope.
+**Template Scope:** Space-delimited tokens that let the workspace add unpublished templates whose **Audience** contains a matching token. Published templates are always available, whatever this is set to. See [Adding Templates to a Workspace](#adding-templates-to-a-workspace).
 
-**Audience:** Limits who can deploy a gamespace as a workspace.
+**Audience:** Space-delimited tokens that decide which users can launch the workspace as a gamespace. Same as **Audience** on the workspace [Settings](#settings) tab. See [Launching a Workspace](#launching-a-workspace).
 
 **VMs:** Refresh, deploy, view the console, start/stop, revert and delete from here. Functions are the same as [previously described](#view-expanded).
 
@@ -587,6 +634,19 @@ The **Templates** tab also has these tools:
 #### Template Properties
 
 The **Templates** tab in the Administrator Guide displays template metadata and configuration. The **Detail** field contains the raw JSON configuration TopoMojo passes to the hypervisor when deploying the VM. Linked templates show the read-only **Parent Detail** instead, since they inherit their configuration from the parent.
+
+Expand a template to edit these fields, then click **Save Settings**:
+
+- **Name:** A short, unique identifier for the VM template, up to 64 characters. TopoMojo uses it to build VM names and disk filenames.
+- **Published:** Toggle between **Hidden** and **Visible**. **Visible** makes the template available in every workspace's **Add Templates**. Only unlinked templates show this toggle. See [Publishing a Template](#publishing-a-template).
+- **Description:** Up to 255 characters. Include login credentials and what the VM is for.
+- **Audience:** Space-delimited tokens, up to 64 characters, that share an unpublished template with workspaces whose **Template Scope** has a matching token. See [Adding Templates to a Workspace](#adding-templates-to-a-workspace).
+- **Networks:** Space-delimited network names, up to 64 characters, such as `lan wan`. Same as **Networks** in [Template Field Definitions](#template-field-definitions).
+- **Guest Settings:** One `key=value` per line, up to 1024 characters. TopoMojo ignores lines that start with `#`. Same as **Guest Settings** in [Template Field Definitions](#template-field-definitions).
+- **Detail:** The template's JSON configuration. Only unlinked templates show this field. See [Template Detail JSON](#template-detail-json).
+- **Parent Detail:** Read-only. Shown on linked templates in place of **Detail**.
+
+Only administrators can see this form. Workspace builders edit a template's **Name**, **Description**, **Networks**, **Guest Settings**, **Replicas**, **Variant**, and **ISO** from the workspace's **Templates** tab, but can't change **Published**, **Audience**, or **Detail**.
 
 !!! note
     The Detail field hint text reads: "Advanced configuration. Keep valid JSON to avoid errors."
@@ -681,7 +741,7 @@ To publish a template so other workspaces can add it from **Add Templates**:
 4. Set **Published** to **Visible**. The toggle only appears on unlinked templates.
 5. Click **Save Settings**.
 
-Workspaces that add a published template get a *linked* copy that uses the published template's disk. To share a template with only some workspaces instead of all of them, leave it unpublished and enter one or more space-delimited tokens in **Audience**. A workspace can add the template when its template scope contains a matching token.
+Workspaces that add a published template get a *linked* copy that uses the published template's disk. To share a template with only some workspaces instead of all of them, leave it unpublished and use **Audience** and **Template Scope**. See [Adding Templates to a Workspace](#adding-templates-to-a-workspace).
 
 #### Bringing In an Existing Disk
 
@@ -689,9 +749,9 @@ You can build a template around a disk created outside TopoMojo, such as an expo
 
 On **vSphere**:
 
-1. Copy the `.vmdk` disk to the datastore named by `Pod__DiskStore`, in a folder that isn't a workspace GUID. Stock disks conventionally go in the `00000000-0000-0000-0000-000000000000` folder. TopoMojo doesn't save over or delete disks outside a workspace's own folder.
+1. Copy the `.vmdk` disk to TopoMojo's disk datastore, in a folder that isn't a workspace GUID. Stock disks conventionally go in the `00000000-0000-0000-0000-000000000000` folder. TopoMojo doesn't save over or delete disks outside a workspace's own folder.
 2. On the **Templates** tab, click **Create a new template**, or expand an existing template.
-3. In **Detail**, set the disk's `Path` to the disk's location relative to `Pod__DiskStore`. For example, if `Pod__DiskStore` is `[datastore1] topomojo` and the disk is at `[datastore1] topomojo/00000000-0000-0000-0000-000000000000/router.vmdk`, enter:
+3. In **Detail**, set the disk's `Path` to the disk's location relative to the disk datastore. The disk datastore is part of TopoMojo's hypervisor settings; see [vSphere Configuration](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#vsphere-configuration) in the Helm chart README. For example, if the disk datastore is `[datastore1] topomojo` and the disk is at `[datastore1] topomojo/00000000-0000-0000-0000-000000000000/router.vmdk`, enter:
 
     ```json
     "Disks": [
@@ -702,7 +762,7 @@ On **vSphere**:
     ]
     ```
 
-    TopoMojo replaces the bracketed datastore name with the one in `Pod__DiskStore`, so `[ds]` works as a placeholder.
+    TopoMojo replaces the bracketed datastore name with the disk datastore's, so `[ds]` works as a placeholder.
 
 4. Set `Cpu`, `Ram`, `Guest`, and the `Disks` `Controller` to match the disk. A wrong controller or guest type can keep the operating system from booting.
 5. Click **Save Settings**, then [publish the template](#publishing-a-template) if other workspaces need it.
@@ -715,7 +775,7 @@ On **Proxmox**, TopoMojo deploys by cloning a Proxmox template VM rather than by
 | --- | --- | --- |
 | Generic "Error" with no details | Invalid RAM value (decimal such as `0.5` or `1.5`) | Use a whole number integer: `1`, `2`, `4` |
 | Generic "Error" with no details | Invalid CPU format (numeric value such as `1` or `2`) | Use string format: `1x1`, `1x2` |
-| `invalid token value!` | Hypervisor authentication failed | Check `Pod__AccessToken` configuration |
+| `invalid token value!` | Hypervisor authentication failed | Check the hypervisor access token in TopoMojo's configuration |
 | HTTP 405 Method Not Allowed | Wrong endpoint for the operation | Use `POST /api/template-detail` for new templates |
 | HTTP 500 Internal Server Error | Hypervisor template not found | Verify the `Template` name matches the VM name on the hypervisor |
 
@@ -733,7 +793,7 @@ The list shows every ISO in TopoMojo, global and local, with **Name** and **Work
 How TopoMojo lays out ISO files depends on the hypervisor:
 
 - **vSphere:** Each workspace's local ISOs are in a folder named with the workspace GUID. Global ISOs are in the folder named with a GUID of all zeros.
-- **Proxmox:** Proxmox storage keeps all ISOs in one flat list. TopoMojo encodes the scope in the filename, as the workspace GUID (or the all-zeros GUID for global ISOs), then `Pod__IsoScopeSeparator` (default `__`), then the original filename. The separator may only contain letters, digits, `-`, `_`, and `.`. ISOs uploaded by older releases with `#` as the separator still work.
+- **Proxmox:** Proxmox storage keeps all ISOs in one flat list. TopoMojo encodes the scope in the filename, as the workspace GUID (or the all-zeros GUID for global ISOs), then a separator (`__` by default), then the original filename. ISOs uploaded by older releases with `#` as the separator still work.
 
 For hypervisor storage settings, see [Using Proxmox with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/Proxmox.md) and [Using vSphere with TopoMojo](https://github.com/cmu-sei/TopoMojo/blob/main/docs/vSphere.md) in the TopoMojo repository.
 
@@ -760,7 +820,7 @@ To quickly identify orphaned VMs, search for "orphaned" in the Search field.
 
 ### Users Tab
 
-The **Users** tab shows all TopoMojo users. You can create new users and assign users permissions here. To search for a user, enter the term into the **Search** field or filter by role (**admins**, **observers**, **creators**, **builders**), by **service accounts**, or by *scope*. Recall from [workspace Settings](#settings) that *audience* is a list of clients who can launch the workspace as a gamespace.
+The **Users** tab shows all TopoMojo users. You can create new users and assign users permissions here. To search for a user, enter the term into the **Search** field or filter by role (**admins**, **observers**, **creators**, **builders**), by **service accounts**, or by *scope*. TopoMojo matches a user's *scope* against each workspace's *audience*; see [Audience, Scope, and Publishing](#audience-scope-and-publishing).
 
 - **View ( <i class="fa-solid fa-list" aria-label="list-icon" role="img"></i> ):** Select **View** to see the properties for the user. Users with a service account client ID are marked **Service Account**.
 - **Delete ( <i class="fa-solid fa-trash" aria-label="delete-icon" role="img"></i> ):** Deletes the user.
@@ -770,7 +830,7 @@ The **Users** tab shows all TopoMojo users. You can create new users and assign 
 - **User:** No extra permissions in TopoMojo. This is the TopoMojo default.
 - **Builder:** Can connect to [reserved networks](#persistentshared-networks) such as `bridge-net`.
 - **Creator:** Same permissions as *builder* with additional permissions to bypass building limits such as the number of owned workspaces and workspace template limits.
-- **Observer:** Allows a user to view and use the *Observe* tab for viewing gamespaces. The *scope* of the user (see below) limits access to gamespaces with a matching *audience*.
+- **Observer:** Allows a user to view and use the *Observe* tab for viewing gamespaces. The *scope* of the user (see below) limits the list to gamespaces whose workspace has a matching *audience*. See [Launching a Workspace](#launching-a-workspace).
 - **Admin:** Full administrative access to TopoMojo.
 - **Disabled:** No permissions in TopoMojo.
 
@@ -778,40 +838,28 @@ Grant the *Creator* role to users who need to build workspaces and troubleshoot 
 
 An administrator can configure TopoMojo to inherit user roles from the Identity Provider (IdP). For example, an IdP administrator can add roles like *administrator*, *builder*, or a custom role then configure TopoMojo to map those IdP roles to TopoMojo roles. Inheriting roles reduces the need for redundant setup if you're already managing user roles on the identity provider across multiple Crucible apps. See the [Helm deployment documentation](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#authentication-oidc) for more information on how to configure this setting.
 
-TopoMojo reads IdP roles from these settings:
-
-- **`Oidc__UserRolesClaimPath`:** Where in the access token to find role values. The default is `realm_access.roles`, which fits Keycloak realm roles. Set it to the string `null` to turn off IdP roles.
-- **`Oidc__UserRolesClaimMap__<idp-role>`:** Maps an IdP role value to a TopoMojo role. For example, `Oidc__UserRolesClaimMap__builder = Builder` grants the Builder role to anyone whose token contains `builder`. The defaults map `administrator`, `builder`, `creator`, `observer`, and `user` to the matching TopoMojo roles. The IdP can't assign **Disabled**.
+By default, TopoMojo reads Keycloak realm roles and maps the IdP roles `administrator`, `builder`, `creator`, `observer`, and `user` to the matching TopoMojo roles. The IdP can't assign **Disabled**.
 
 A user's *effective role* is the strongest of their TopoMojo role and every role mapped from their IdP roles. When the two differ, the user's row shows an **Identity Role / Effective Role** badge. Click it to see both assigned roles and which one wins. Disabling a user in TopoMojo blocks them regardless of IdP roles.
 
 #### Create a New User
 
 - **Name:** Enter a new user name here.
-- **Scope:** A space-delimited list of administrator-defined groups the user belongs to. Administrators can define a *scope* with any name here. A user's scope determines which workspaces they have permission to deploy gamespaces from. Users can only deploy a gamespace from a workspace if the user has a *scope* that matches an *audience* defined in the workspace. See also: [Building a new workspace](#building-a-new-workspace).
+- **Scope:** A space-delimited list of administrator-defined groups the user belongs to. Administrators can define a *scope* with any name here. A user can launch a workspace when their *scope* shares a token with the workspace's **Audience**, and can add unpublished templates whose **Audience** shares a token with their *scope*. See [Audience, Scope, and Publishing](#audience-scope-and-publishing).
 - **Workspace Limit:** The maximum number of workspaces this user can manage.
 - **Gamespace Limit:** The maximum number of concurrent active gamespaces allowed for this user.
 - **Gamespace Max Duration:** The maximum amount of minutes allowed for a gamespace.
 - **Gamespace Cleanup Grace time:** The number of minutes between gamespace expiration and when TopoMojo tears down the associated VMs.
-- **Service Account Client Id:** Lets an OAuth client authenticate as this user with the client credentials flow, for automation. TopoMojo matches it against the `client_id` claim in the access token; `Oidc__ServiceAccountClientIdClaimType` changes the claim name, and setting it to the string `null` turns service accounts off. Give service accounts the **Observer** role at most; TopoMojo shows a warning on administrators that have a client ID.
+- **Service Account Client Id:** Lets an OAuth client authenticate as this user with the client credentials flow, for automation. TopoMojo matches it against the `client_id` claim in the access token. An administrator can change the claim name, or turn off service accounts, in TopoMojo's identity settings. Give service accounts the **Observer** role at most; TopoMojo shows a warning on administrators that have a client ID.
 - **Generate ApiKey:** Generate API keys for users to programmatically interact with the TopoMojo API without needing to log in interactively.
 
 For regular users, TopoMojo may update **Name** from the identity token at sign-in.
 
-TopoMojo creates users automatically the first time they sign in, with limits taken from these settings:
-
-| Setting | Default | Effect |
-| --- | --- | --- |
-| `Core__DefaultWorkspaceLimit` | `0` | Workspaces a new user can create. `0` means none; users with the **Creator** role or above aren't limited. |
-| `Core__DefaultTemplateLimit` | `3` | Template limit applied to each workspace created by a user below the **Creator** role. |
-| `Core__DefaultGamespaceLimit` | `0` | Concurrent gamespaces for a new user. `0` means unlimited. The sample `appsettings.conf` shows `2`; the built-in default is `0`. |
-| `Core__DefaultGamespaceMinutes` | `120` | Gamespace duration when neither the user's **Gamespace Max Duration** nor the workspace's **Duration** is set. |
-| `Core__ReplicaLimit` | `5` | Maximum **Replicas** value on a template. |
-| `Core__DefaultUserScope` | `everyone` | Scope added to every user. See [Settings](#settings). |
+TopoMojo creates users automatically the first time they sign in. Administrators set the default limits for new users in TopoMojo's configuration; see the [TopoMojo Helm chart README](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo).
 
 ### Settings Tab
 
-Upload a custom background image to change TopoMojo's theme. Wide images usually work best. Click **Clear background** to return to the default. You can also set the background in configuration with `Ui__Branding__BackgroundImageUrl`.
+Upload a custom background image to change TopoMojo's theme. Wide images usually work best. Click **Clear background** to return to the default. An administrator can also set the background in TopoMojo's configuration; see [UI Branding](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#ui-branding) in the Helm chart README.
 
 ### Log Tab
 
