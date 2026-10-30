@@ -423,7 +423,7 @@ Besides the moves, teams, organizations, Gallery cards, and injects, creating a 
   - **Facilitator Guide:** each move's purpose, expected decisions, controller notes, and questions; the expected action and objective of every inject; and the after-action review. Participants cannot see it.
   - **Team Profiles** and **Organization Profiles:** each team's and organization's profile, unless you cleared the option.
 - **Player applications**, when the MSEL uses Player: **CITE Dashboard**, **Gallery Wall**, **Gallery Archive**, **Read-In**, the profile pages, and **Exercise Timeline** for every team, and the Steamfitter applications for exercise control. The template's **Virtual Machines** application, and a map on it, stay only when the MSEL uses Caster and the format is functional or hybrid, because a tabletop's teams have no machines.
-- **CITE**, when the MSEL uses CITE: each team gets one of CITE's built-in team types (**Official Score Contributor** for participant teams, **Other** for `EXCON`), its CITE duties, the CITE tasks, and the scoring model you chose.
+- **CITE**, when the MSEL uses CITE: each team gets one of CITE's built-in team types (**Official Score Contributor** for participant teams, **Other** for `EXCON`), its CITE duties, the CITE tasks, and the scoring model you chose, authored into the MSEL.
 - **Steamfitter**, when the MSEL uses Steamfitter: `STARTEX` and `ENDEX` rows, each with a Player notification to every participant.
 - **Exercise control:** your units become contributors, you join the exercise control team, and you become a CITE facilitator and a Gallery observer, so exercise control can watch every team. Every team sees every Gallery card; exercise control can post to them.
 - **Catalog metadata:** the Institute of Electrical and Electronics Engineers (IEEE) 2881 fields on the **Info** tab: difficulty, purpose, mode, subject, keywords, and language.
@@ -435,15 +435,13 @@ When you push the integrations, Gallery gets the drafted articles. Pages and art
 ##### CITE Assessment Choices
 
 - **Keep the template's scoring model:** offered, and chosen by default, when the template already links a scoring model.
-- **Questions by move:** the draft writes discussion questions for each move. Creating the MSEL creates the scoring model `[MSEL name] Questions by Move` in CITE: one category per move with the move's questions, comment boxes on, and scores hidden, and a final category for the after-action review.
-- **DoD CTT mission impact matrix:** teams score the mission impact of each move, following the Department of Defense Cyber Table Top (CTT) guide. Blueprint links the `DoD CTT Mission Impact Assessment` scoring model, and creates it in CITE if it is not there.
-- **DoD CTT likelihood matrix:** teams score each attack's cost and chance of success. Blueprint links the `DoD CTT Likelihood Assessment Matrix` scoring model, and creates it in CITE if it is not there.
-- **CISA NCISS:** each move, teams score the incident with the Cybersecurity and Infrastructure Security Agency (CISA) National Cyber Incident Scoring System (NCISS): functional impact, observed activity, location of observed activity, actor characterization, information impact, how recoverable the systems are, cross-sector dependency, and potential impact. Blueprint links the `CISA NCISS` scoring model, and creates it in CITE if it is not there.
+- **Questions by move:** the draft writes discussion questions for each move. The MSEL gets its own scoring model, `[MSEL name] Questions by Move`: one category per move of play with the move's questions, comment boxes on, and scores hidden, and a final category in the hot wash for the after-action review.
+- **DoD CTT mission impact matrix:** teams score the mission impact of each move, following the Department of Defense Cyber Table Top (CTT) guide. The MSEL gets its own copy of the `DoD CTT Mission Impact Assessment` model.
+- **DoD CTT likelihood matrix:** teams score each attack's cost and chance of success. The MSEL gets its own copy of the `DoD CTT Likelihood Assessment Matrix` model, with the matrix beside the score sheet.
+- **CISA NCISS:** each move, teams score the incident with the Cybersecurity and Infrastructure Security Agency (CISA) National Cyber Incident Scoring System (NCISS): functional impact, observed activity, location of observed activity, actor characterization, information impact, how recoverable the systems are, cross-sector dependency, and potential impact. The MSEL gets its own copy of the `CISA NCISS` model.
 - **None:** no scoring model.
 
-!!! note
-
-    Creating a scoring model needs the `CreateScoringModels` permission in CITE. Without it, Blueprint still creates the MSEL, and the report asks you to choose a scoring model before you push.
+The model is authored in Blueprint, not created in CITE: review and edit it under the CITE settings on the **Info** tab, where **Author it in Blueprint** is selected. The push creates it in CITE for the evaluation, so a draft you discard leaves nothing in CITE. A template that authors its own model hands every MSEL drafted from it a copy, which the draft keeps.
 
 ##### Article Markings
 
