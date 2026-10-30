@@ -200,7 +200,7 @@ The CITE Duties page lists all CITE duty templates available for use in MSELs. A
 - **Delete:** Click **Delete** (trash can icon) next to the duty template.
 - **Search:** In the **Search** field, enter the name of the duty template.
 
-#### Player Application Templates
+#### Player Apps
 
 The Player Application Templates page lists the Player application templates Blueprint stores for use in MSELs. A Player application template defines a reusable application, such as the VM UI or a Gallery exhibit, with its URL, icon, and display settings. Content developers add a copy of a template to a MSEL from the [Player Apps](#player-apps) tab. Changing or deleting the template later doesn't change the MSELs that already have a copy.
 
@@ -208,8 +208,8 @@ Viewing this page requires the `ViewPlayerApplications` permission, and changing
 
 ##### Add a Player Application Template
 
-1. Under **Player Application Templates**, click **+** (**Add a template Player Application**).
-2. Fill in **Name**, **URL**, and **Icon URL**, and set **Embeddable** and **Load in Background**. The fields and URL variables are the same as for a [Player app](#add-a-player-app), for example `{vmUrl}/views/{playerViewId}{theme}`.
+1. Under **Player Apps**, click **+** (**Add a template Player Application**).
+2. Fill in **Name**, **URL** (required), and **Icon URL**, and set **Embeddable** and **Load in Background**. The fields and URL variables are the same as for a [Player app](#add-a-player-app), for example `{vmUrl}/views/{playerViewId}{theme}`.
 3. Click **Save**.
 
 ##### Edit, Delete, Upload, and Download Player Application Templates
@@ -1228,7 +1228,7 @@ To add a Player app, follow these steps:
 1. Navigate to the **Player Apps** tab.
 2. Click the **+** icon (**Add Player Application**).
 3. Choose **New Player Application**, or pick a template from the menu:
-    - Blueprint's own [Player application templates](#player-application-templates) come first.
+    - Blueprint's own [Player application templates](#player-apps) come first.
     - Player's application templates follow under **From Player**.
 4. Fill the fields as necessary following the Data Format Table specifications. When you pick a template, the fields start with the template's values; the MSEL gets its own copy, and the template doesn't change.
 
@@ -1237,7 +1237,7 @@ To add a Player app, follow these steps:
 | Field                  | Data Type | Description                                          | Example                                         |
 | ---------------------- | --------- | ---------------------------------------------------- | ----------------------------------------------- |
 | **Name**               | String    | Name of the application                              | Chat                                            |
-| **Url**                | String    | URL of the application                               | `roundcube.hamilton.treasury.gov`               |
+| **Url**                | String    | URL of the application (required)                    | `roundcube.hamilton.treasury.gov`               |
 | **Icon Url**           | String    | URL of the application's icon                        | `roundcube.hamilton.treasury.gov/roundcube.png` |
 | **Embeddable**         | Boolean   | Select whether to embed the app in Player's iFrame   | True                                            |
 | **Load in Background** | Boolean   | Select whether the app should load in the background | True                                            |
@@ -1257,7 +1257,7 @@ After you've added all desired configurations, click **Save**.
 
 ##### Make a Player App a Template
 
-Users with the `ManagePlayerApplications` permission can save a MSEL's Player app as a [Player application template](#player-application-templates):
+Users with the `ManagePlayerApplications` permission can save a MSEL's Player app as a [Player application template](#player-apps):
 
 1. Navigate to the **Player Apps** tab.
 2. Click **Make [app name] a template** next to the app.
