@@ -28,10 +28,10 @@ Caster UI supports an optional, customizable classification banner that displays
 
 The **Terraform Version** dropdowns in Caster list only the versions installed in your instance. Which versions are available, and which one is the default for new workspaces, are deployment settings rather than UI settings:
 
-- **`Terraform:DefaultVersion`:** The version Caster assigns when neither the workspace nor any of its parent directories specifies one. Caster marks it `(Default)` in the dropdown.
-- **`Terraform:MaxParallelism`:** The highest value the **Parallelism** field accepts.
+- **Default version:** The version Caster assigns when neither the workspace nor any of its parent directories specifies one. Caster marks it `(Default)` in the dropdown.
+- **Maximum parallelism:** The **Parallelism** field only accepts values below this limit.
 
-Configure both through the [Caster Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster). To choose a version for a directory or a workspace, see [Directory Settings](#directory-settings) and [Workspace Settings](#workspace-settings).
+Configure both through the [Caster Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster#terraform-configuration). To choose a version for a directory or a workspace, see [Directory Settings](#directory-settings) and [Workspace Settings](#workspace-settings).
 
 !!! note
 
@@ -185,7 +185,7 @@ A module packages one or more resources into a single block and exposes required
 
 Caster discovers modules from two kinds of source, configured in the Caster API settings. Either, both, or neither can be configured:
 
-- **Git module sources** (`Terraform:ModuleSources`): any git repository Caster can clone, such as GitLab, GitHub, or a self-hosted git server. Every git tag is a module version. A repository is either one module, or (with the `Subdirectories` layout) a set of modules, one per top-level directory. A tag such as `network-segment/v1.2.0` versions only that module.
+- **Git module sources** (see [Git Module Sources](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster#git-module-sources) in the Helm chart README): any git repository Caster can clone, such as GitLab, GitHub, or a self-hosted git server. Every git tag is a module version. A repository is either one module, or (with the `Subdirectories` layout) a set of modules, one per top-level directory. A tag such as `network-segment/v1.2.0` versions only that module.
 - **GitLab group** (legacy): every GitLab project in the configured **Terraform-Modules** group and its subgroups that is visible to the API GitLab token and has at least one version.
 
 !!! note
@@ -355,7 +355,7 @@ Creating a workspace prompts only for a name. Caster sets the new workspace's Te
 
 #### Terraform Execution
 
-Caster runs Terraform in one of two modes, selected by the `Terraform:KubernetesJobs:Enabled` API setting:
+Caster runs Terraform in one of two modes, selected in the Caster API settings (see [Kubernetes Jobs](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster#kubernetes-jobs) in the Helm chart README):
 
 - **In-process (default):** `Caster.Api` runs a Terraform binary inside its own container. Each available version lives in its own directory under the configured binary path.
 - **Kubernetes jobs:** `Caster.Api` runs each operation as a Kubernetes job, using a Terraform container image tagged with the selected version.
