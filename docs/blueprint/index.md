@@ -33,7 +33,20 @@ Blueprint can draft a MSEL, its Gallery articles, and its team and organization 
 - **`Ai:MaxCompetencies`:** the most competencies a draft may choose from. The default is `2500`.
 - **`Ai:ImageModelId`:** an optional Bedrock image model that makes news photos for Gallery articles, such as `stability.stable-image-core-v1:1`. Leave it empty for no photos.
 - **`Ai:ImageRegion`:** the AWS region of the image model. The default is `us-west-2`, because Bedrock offers the image models in fewer regions than the text models.
-- **`Ai:Prices`:** what each model costs, keyed by model ID, so Blueprint can estimate what building each MSEL cost. For each model, set `InputPerMillion`, `OutputPerMillion`, `CacheReadPerMillion`, and `CacheWritePerMillion` in US dollars per million tokens, and `PerImage` for an image model. Blueprint counts a model without a price in tokens only.
+- **`Ai:Prices`:** what each model costs, keyed by model ID, so Blueprint can estimate what building each MSEL cost. For each model, set `InputPerMillion`, `OutputPerMillion`, `CacheReadPerMillion`, and `CacheWritePerMillion` in US dollars per million tokens, and `PerImage` for an image model. Blueprint counts a model without a price in tokens only. As an environment variable, write the model ID with underscores for its dots and hyphens, such as `Ai__Prices__us_anthropic_claude_sonnet_5_5__InputPerMillion`.
+- **`Ai:Effort`:** how hard the model thinks before it answers: `low`, `medium`, `high`, `xhigh`, or `max`. Leave it empty for the model's own default. Lower is faster and spends fewer tokens.
+- **`Ai:Strict`:** `true`, the default, constrains each answer to its schema on Bedrock, so an answer cannot come back as markup or broken JSON.
+- **`Ai:Parallel`:** how many of a drafted MSEL's rows, articles, and profiles the browser writes at once. The default is `6`.
+- **`Ai:Models`:** a provider, model, and effort for each AI task, where it differs from the defaults above. The tasks are `design`, `injects`, `rows`, `article`, `profile`, `value` (Write with AI), `assist` (Ask AI), and `draft`. Each task takes `Provider`, `ModelId`, `FallbackModelId`, `Region`, `BaseUrl`, `ApiKey`, `MaxTokens`, `Effort`, and `Strict`. Blueprint ships `injects` at `medium` effort and `rows`, `article`, and `profile` at `low`, because the outline specifies them closely.
+
+The provider is `Bedrock`, the default, or `OpenAI`, which is any endpoint that offers the OpenAI chat completions API: the OpenAI API, or a server such as vLLM or Ollama that runs a local model. For `OpenAI`, set `BaseUrl`, such as `https://api.openai.com/v1`, `ApiKey`, and `ModelId`. A local model usually needs a smaller `MaxTokens`, such as `16000`. For example, to write the Gallery articles with a cheaper Bedrock model and the profiles with a local one:
+
+```json
+"Models": {
+  "article": { "ModelId": "us.anthropic.claude-haiku-5-5" },
+  "profile": { "Provider": "OpenAI", "BaseUrl": "https://models.example.com/v1", "ApiKey": "...", "ModelId": "gpt-oss-120b", "MaxTokens": 16000 }
+}
+```
 
 The API uses the default AWS credential chain of its host. Caster uses the same `Ai` settings for its AI features.
 
@@ -368,33 +381,40 @@ Click **Open MSEL** to open the new MSEL, or **Close** to stay on the MSEL list.
 
 When AI drafting is on, you can draft a whole MSEL from a description of the exercise. The draft follows an exercise design workflow: the scenario first, then the training objectives, then the moves and the injects that drive them. You need the `CreateMsels` permission.
 
+Drafting has two steps. First the model writes the design, with a few questions for you. You review and change the design, answer the questions, and click **Create MSEL**. Blueprint creates the MSEL at once and then writes the injects, Gallery articles, and profiles into it, step by step, while you watch on the MSEL's page.
+
 1. In the MSEL list table header, click **Draft MSEL with AI**.
-2. In **Template**, choose the template to draft from. The draft uses the template's columns, teams, organizations, Gallery cards, and integrations.
+2. In **Template**, choose the template to draft from. The draft uses the template's columns, teams, organizations, Gallery cards, and integrations. With several templates, **Crucible MSEL** is chosen to start with.
 3. Optionally, in **Competency frameworks**, choose the frameworks whose competencies the draft may assign. With none chosen, the draft uses the template's own competencies.
 4. In **Exercise description**, describe the audience, the scenario, the objectives, the organizations to simulate, and the competencies to exercise.
 5. Optionally, expand **Design choices (optional)** and answer the questions that change an exercise most. The draft decides any you leave open and says what it chose.
     - **Format:** a discussion-based tabletop, a functional exercise with hands-on work in the range, or a hybrid.
     - **CITE assessment:** how CITE assesses the teams. See [CITE Assessment Choices](#cite-assessment-choices). This appears only when the template uses CITE.
+    - **Gallery cards:** how the articles are grouped on the Gallery wall: by source or thread, by organization, by critical infrastructure sector, by country, or by network segment and key cyber terrain. This appears only when the template uses Gallery.
     - **Number of moves**, **Length (minutes)**, and **Scenario time covered:** the pacing. The scenario time covered is how much story time the exercise spans, such as `three days`.
+    - **Doors open before STARTEX (minutes):** how long the pre-exercise move runs, for participants who arrive early. The default is `15`.
     - **Last move is a leadership brief:** whether the exercise ends with a brief to leadership.
     - **Participant structure:** how you organize participants, such as one combined staff or parallel national teams.
+    - **Article marking:** the banner on every Gallery article. See [Article Markings](#article-markings). This appears only when the template uses Gallery.
     - **Add Team Profiles and Organization Profiles pages:** clear this to skip the profile pages.
-6. Click **Draft**. Drafting can take a minute or two.
-7. Review the draft. Blueprint shows:
-    - **Scenario and objectives:** the problem, the escalation ceiling, and each objective as a task, condition, and standard.
-    - **Moves:** each move's start on the exercise clock and its scenario time. Expand a move to see its purpose, situation, expected decisions, controller notes, and CITE questions.
-    - **Read-in:** a preview of what participants read before the first move. Click **Leave out the read-in** to drop it.
-    - **CITE tasks:** what each team must complete in each move, grouped by move and team. Click the **X** beside a task to remove it.
-    - **Teams and organizations**, **Gallery cards**, **Injects**, and **Competencies:** expand an inject to see its values, what participants should do, and the objective it serves. Click the **X** beside an inject or a competency to remove it.
-8. While you review, Blueprint writes each Gallery article as a document of its source type, and each team's and organization's profile with a logo. Click **Stop** to stop writing. Open an inject or a profile to see it as Gallery and Blueprint show it.
-9. Click **Create MSEL**. Click **Edit description** to change the description and draft again, or **Discard** to close without saving.
+6. Click **Draft**. Writing the design takes a minute or two. The dialog shows what the model has written so far and how long it has run. Click **Stop** to abandon it; your description stays.
+7. Review the design in its tabs:
+    - **Questions:** up to five questions whose answers change the exercise, each with a suggested answer and why it matters. Change any answer you disagree with; click **Use it** to put a suggestion back. The injects are written to your answers.
+    - **Design:** the name, description, problem, premise, escalation ceiling, and the objectives as task, condition, and standard. The **Check before creating** list shows anything Blueprint corrected or the model assumed.
+    - **Moves:** each move's start on the exercise clock, its scenario time, title, and purpose.
+    - **Teams and organizations:** each one's short name, name, and description. For a CITE template, each team's **CITE duties**, which members pick from in CITE. Click the **X** to remove one.
+    - **Gallery cards:** the cards on the Gallery wall.
+8. Click **Create MSEL**. Click **Edit description** to change the description and draft again, or **Discard** to close without saving.
 
-Blueprint creates the MSEL and shows the [JSON Import Report](#json-import-report) for it.
+Blueprint creates the MSEL and opens it. A banner at the top of the MSEL's page shows each step as it is written: the outline of the injects, CITE tasks, and read-in, with the injects counted as the model writes them; then the text of each inject, each Gallery article, and each profile, several at once; then the pages, Player applications, and CITE. Everything is saved as it is written, so you can work on the MSEL, or leave it, while it builds. Click **Cancel** to stop.
+
+A MSEL whose build stopped, after **Cancel**, an error, or a closed tab, shows **This MSEL is still being drafted with AI** on its page with what is left, and offers **Continue drafting**, which picks up from the last saved step, **Finish without them**, which skips the articles and profiles still to write, and **Discard draft**, which deletes the MSEL.
 
 ##### What Create MSEL Adds
 
 Besides the moves, teams, organizations, Gallery cards, and injects, creating a drafted MSEL adds:
 
+- **A pre-exercise move and a hot wash:** move 0 opens when the doors open and holds the read-in, so participants who arrive early have somewhere to wait. `STARTEX` opens move 1, the first move of play, and `ENDEX` opens the last move, the after-action hot wash. When the MSEL uses Steamfitter, each is a Steamfitter task that changes the move in CITE and Gallery.
 - **Two clocks:** each move has a scenario time, which can jump ahead between moves. Blueprint dates each Gallery article within its move's scenario time.
 - **An Expected Actions column:** what participants should do for each inject. It shows on the event list for controllers but not on the exercise view.
 - **Pages:**
@@ -402,9 +422,13 @@ Besides the moves, teams, organizations, Gallery cards, and injects, creating a 
   - **[MSEL name] Read-In:** the read-in. Every participant can see it.
   - **Facilitator Guide:** each move's purpose, expected decisions, controller notes, and questions; the expected action and objective of every inject; and the after-action review. Participants cannot see it.
   - **Team Profiles** and **Organization Profiles:** each team's and organization's profile, unless you cleared the option.
-- **Player applications**, when the MSEL uses Player: **Read-In**, which opens the read-in page, and **Exercise Timeline**, which opens the live MSEL view, for every team.
-- **CITE**, when the MSEL uses CITE: each team gets one of CITE's built-in team types (**Official Score Contributor** for participant teams, **Other** for `EXCON`), the CITE tasks, and the scoring model you chose.
+- **Player applications**, when the MSEL uses Player: **CITE Dashboard**, **Gallery Wall**, **Gallery Archive**, **Read-In**, the profile pages, and **Exercise Timeline** for every team, and the Steamfitter applications for exercise control. The template's **Virtual Machines** application, and a map on it, stay only when the MSEL uses Caster and the format is functional or hybrid, because a tabletop's teams have no machines.
+- **CITE**, when the MSEL uses CITE: each team gets one of CITE's built-in team types (**Official Score Contributor** for participant teams, **Other** for `EXCON`), its CITE duties, the CITE tasks, and the scoring model you chose.
 - **Steamfitter**, when the MSEL uses Steamfitter: `STARTEX` and `ENDEX` rows, each with a Player notification to every participant.
+- **Exercise control:** your units become contributors, you join the exercise control team, and you become a CITE facilitator and a Gallery observer, so exercise control can watch every team. Every team sees every Gallery card; exercise control can post to them.
+- **Catalog metadata:** the Institute of Electrical and Electronics Engineers (IEEE) 2881 fields on the **Info** tab: difficulty, purpose, mode, subject, keywords, and language.
+- **A picture:** when the server has an image model, the MSEL gets a picture made from its scenario.
+- **Article markings:** the banner you chose on every Gallery article. See [Article Markings](#article-markings).
 
 When you push the integrations, Gallery gets the drafted articles. Pages and articles sit on white paper with dark text, so they read the same in light and dark themes.
 
@@ -414,11 +438,23 @@ When you push the integrations, Gallery gets the drafted articles. Pages and art
 - **Questions by move:** the draft writes discussion questions for each move. Creating the MSEL creates the scoring model `[MSEL name] Questions by Move` in CITE: one category per move with the move's questions, comment boxes on, and scores hidden, and a final category for the after-action review.
 - **DoD CTT mission impact matrix:** teams score the mission impact of each move, following the Department of Defense Cyber Table Top (CTT) guide. Blueprint links the `DoD CTT Mission Impact Assessment` scoring model, and creates it in CITE if it is not there.
 - **DoD CTT likelihood matrix:** teams score each attack's cost and chance of success. Blueprint links the `DoD CTT Likelihood Assessment Matrix` scoring model, and creates it in CITE if it is not there.
+- **CISA NCISS:** each move, teams score the incident with the Cybersecurity and Infrastructure Security Agency (CISA) National Cyber Incident Scoring System (NCISS): functional impact, observed activity, location of observed activity, actor characterization, information impact, how recoverable the systems are, cross-sector dependency, and potential impact. Blueprint links the `CISA NCISS` scoring model, and creates it in CITE if it is not there.
 - **None:** no scoring model.
 
 !!! note
 
     Creating a scoring model needs the `CreateScoringModels` permission in CITE. Without it, Blueprint still creates the MSEL, and the report asks you to choose a scoring model before you push.
+
+##### Article Markings
+
+Blueprint puts a marking banner on every Gallery article it writes, so the marking is exact and the same on every article. Choose it in **Design choices** when drafting, or on the **Info** tab under the Gallery settings as **Article marking**:
+
+- **Exercise banner:** the default: `EXERCISE · EXERCISE · EXERCISE` with the exercise name and `FICTIONAL SCENARIO`.
+- **TLP:** a Traffic Light Protocol (TLP) marking at the top, in the level's color: `CLEAR`, `GREEN`, `AMBER`, `AMBER+STRICT`, or `RED`.
+- **Classification banner:** your own text, such as `UNCLASSIFIED // FOR EXERCISE USE ONLY`, at the top and bottom, in the color of the level it names.
+- **None:** no banner.
+
+Articles already written keep their banner until Write with AI rewrites them.
 
 #### Filter Display
 
@@ -478,7 +514,7 @@ The assistant can add or edit teams, organizations, Gallery cards, moves and the
 
 ##### AI Usage
 
-Blueprint records every call to an AI model made for a MSEL, including the calls that wrote its draft. The MSEL's owner, and users with the `ViewMsels` permission, see an **AI usage** table at the end of the **Config** section of the **Info** tab. It lists each step, such as **Draft MSEL with AI**, **Gallery articles**, **Ask AI**, and **News photos**, with its calls, input and output tokens, photos, and estimated cost. The estimate uses the prices in `Ai:Prices`. It includes calls the model declined, because the provider bills those too.
+Blueprint records every call to an AI model made for a MSEL, including the calls that wrote its draft. The MSEL's owner, and users with the `ViewMsels` permission, see an **AI usage** table at the end of the **Config** section of the **Info** tab. It lists each step, such as **Design**, **Inject outline, CITE tasks and read-in**, **Inject text**, **Gallery articles**, **Ask AI**, and **News photos**, with its calls, input and output tokens, photos, and estimated cost. The estimate uses the prices in `Ai:Prices`; it totals the calls whose models have a price and names the models that have none. It includes calls the model declined, because the provider bills those too.
 
 To write one value with AI:
 
