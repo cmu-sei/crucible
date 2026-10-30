@@ -1227,8 +1227,8 @@ To add a Player app, follow these steps:
 | Field                  | Data Type | Description                                          | Example                                         |
 | ---------------------- | --------- | ---------------------------------------------------- | ----------------------------------------------- |
 | **Name**               | String    | Name of the application                              | Chat                                            |
-| **Url**                | String    | URL of the application                               | `roundcube.hamilton.treasury.gov`               |
-| **Icon Url**           | String    | URL of the application's icon                        | `roundcube.hamilton.treasury.gov/roundcube.png` |
+| **Url**                | String    | URL of the application                               | `{vmUrl}/views/{playerViewId}`                  |
+| **Icon Url**           | String    | URL of the application's icon                        | `{galleryUrl}/assets/img/archive-blue.png`      |
 | **Embeddable**         | Boolean   | Select whether to embed the app in Player's iFrame   | True                                            |
 | **Load in Background** | Boolean   | Select whether the app should load in the background | True                                            |
 
