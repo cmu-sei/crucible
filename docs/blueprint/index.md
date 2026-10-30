@@ -330,7 +330,7 @@ The MSEL Catalog shows created MSELs. Users can select a MSEL to work on, create
 Two actions are available in the MSEL list table header:
 
 - **Add blank MSEL** (**+** icon): creates a new MSEL with default settings. The new MSEL appears with status `Pending` and a description such as "Created from Default Settings by [username]".
-- **Upload a new MSEL from a file** (upload icon): choose **Upload xlsx file** or **Upload JSON file**, then select the file to create a new MSEL from its contents. A `.json` file is one exported with **Download JSON file** from a MSEL's row actions.
+- **Upload a new MSEL from a file** (upload icon): choose **Upload xlsx file** or **Upload JSON file**, then select the file to create a new MSEL from its contents. A `.json` file is one exported with **Download JSON file** from a MSEL's row actions. Blueprint refuses a file that isn't valid JSON or isn't a Blueprint MSEL, and creates nothing.
 
 ##### JSON Import Report
 
