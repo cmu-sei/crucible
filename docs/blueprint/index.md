@@ -35,7 +35,7 @@ Refer to the [Administrator Guide](#administrator-guide) for more information on
 
 ## Administrator Guide
 
-Blueprint administrators use the Administration View to manage users and units, and to configure organization, Gallery card, CITE action, and CITE role templates for content developers building MSELs.
+Blueprint administrators use the Administration View to manage users and units, and to configure organization, Gallery card, CITE action, CITE role, and Player application templates for content developers building MSELs.
 
 ### Administration View
 
@@ -199,6 +199,25 @@ The CITE Duties page lists all CITE duty templates available for use in MSELs. A
 - **Edit:** Click **Edit** (pencil icon) next to the duty template, make the desired changes, and click **Save**.
 - **Delete:** Click **Delete** (trash can icon) next to the duty template.
 - **Search:** In the **Search** field, enter the name of the duty template.
+
+#### Player Apps
+
+The Player Application Templates page lists the Player application templates Blueprint stores for use in MSELs. A Player application template defines a reusable application, such as the VM UI or a Gallery exhibit, with its URL, icon, and display settings. Content developers add a copy of a template to a MSEL from the [Player Apps](#player-apps) tab. Changing or deleting the template later doesn't change the MSELs that already have a copy.
+
+Viewing this page requires the `ViewPlayerApplications` permission, and changing templates requires `ManagePlayerApplications`.
+
+##### Add a Player Application Template
+
+1. Under **Player Apps**, click **+** (**Add a template Player Application**).
+2. Fill in **Name**, **URL** (required), and **Icon URL**, and set **Embeddable** and **Load in Background**. The fields and URL variables are the same as for a [Player app](#add-a-player-app), for example `{vmUrl}/views/{playerViewId}{theme}`.
+3. Click **Save**.
+
+##### Edit, Delete, Upload, and Download Player Application Templates
+
+- **Edit:** Click **Edit** (pencil icon) next to the template, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the template, then click **Yes**.
+- **Upload:** Click **Upload Player Application templates from JSON** and choose a file downloaded from this page. Every application in the file becomes a new template.
+- **Download:** Click **Download Player Application templates as JSON**, select the templates, and download them as `player-application-templates.json`.
 
 #### Users
 
@@ -1207,17 +1226,19 @@ On the [Player Apps](#glossary) tab, the MSEL owner can add configurations to pu
 To add a Player app, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Click the **+** icon.
-3. Select an app template from the provided list.
-4. Fill the fields as necessary following the Data Format Table specifications.
+2. Click the **+** icon (**Add Player Application**).
+3. Choose **New Player Application**, or pick a template from the menu:
+    - Blueprint's own [Player application templates](#player-apps) come first.
+    - Player's application templates follow under **From Player**.
+4. Fill the fields as necessary following the Data Format Table specifications. When you pick a template, the fields start with the template's values; the MSEL gets its own copy, and the template doesn't change.
 
 ##### Data Format Table
 
 | Field                  | Data Type | Description                                          | Example                                         |
 | ---------------------- | --------- | ---------------------------------------------------- | ----------------------------------------------- |
 | **Name**               | String    | Name of the application                              | Chat                                            |
-| **Url**                | String    | URL of the application                               | `roundcube.hamilton.treasury.gov`               |
-| **Icon Url**           | String    | URL of the application's icon                        | `roundcube.hamilton.treasury.gov/roundcube.png` |
+| **Url**                | String    | URL of the application (required)                    | `{vmUrl}/views/{playerViewId}`                  |
+| **Icon Url**           | String    | URL of the application's icon                        | `{galleryUrl}/assets/img/archive-blue.png`      |
 | **Embeddable**         | Boolean   | Select whether to embed the app in Player's iFrame   | True                                            |
 | **Load in Background** | Boolean   | Select whether the app should load in the background | True                                            |
 
@@ -1233,6 +1254,14 @@ You can add URL parameters to point to a specific CITE evaluation, Gallery exhib
 - **{vmUrl}:** Add this variable to the URL to point to the VM UI, for example `{vmUrl}/views/{playerViewId}`.
 
 After you've added all desired configurations, click **Save**.
+
+##### Make a Player App a Template
+
+Users with the `ManagePlayerApplications` permission can save a MSEL's Player app as a [Player application template](#player-apps):
+
+1. Navigate to the **Player Apps** tab.
+2. Click **Make [app name] a template** next to the app.
+3. Change the fields as necessary, then click **Save**.
 
 ##### Edit a Player App
 
