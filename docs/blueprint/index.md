@@ -434,7 +434,7 @@ When you push the integrations, Gallery gets the drafted articles. Pages and art
 
 ##### CITE Assessment Choices
 
-- **Keep the template's scoring model:** offered, and chosen by default, when the template already links a scoring model.
+- **Keep the template's scoring model:** offered, and chosen by default, when the template already links a CITE scoring model or authors its own. The seeded **Crucible MSEL** template authors `CISA NCISS`, so a MSEL drafted from it scores with that model unless you choose otherwise.
 - **Questions by move:** the draft writes discussion questions for each move. The MSEL gets its own scoring model, `[MSEL name] Questions by Move`: one category per move of play with the move's questions, comment boxes on, and scores hidden, and a final category in the hot wash for the after-action review.
 - **DoD CTT mission impact matrix:** teams score the mission impact of each move, following the Department of Defense Cyber Table Top (CTT) guide. The MSEL gets its own copy of the `DoD CTT Mission Impact Assessment` model.
 - **DoD CTT likelihood matrix:** teams score each attack's cost and chance of success. The MSEL gets its own copy of the `DoD CTT Likelihood Assessment Matrix` model, with the matrix beside the score sheet.
