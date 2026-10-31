@@ -407,7 +407,7 @@ Drafting has two steps. First the model writes the design, with a few questions 
     - **Gallery cards:** the cards on the Gallery wall.
 8. Click **Create MSEL**. Click **Edit description** to change the description and draft again, or **Discard** to close without saving.
 
-Blueprint creates the MSEL and opens it. A banner at the top of the MSEL's page shows each step as it is written: the outline of the injects, CITE tasks, and read-in, with the injects counted as the model writes them; then the text of each inject, each Gallery article, and each profile, several at once; then the pages, Player applications, and CITE. Everything is saved as it is written, so you can work on the MSEL, or leave it, while it builds. Click **Cancel** to stop.
+Blueprint creates the MSEL and opens it. A banner at the top of the MSEL's page shows each step as it is written: the outline of the injects, each move's situation briefing, CITE tasks, and read-in, with the injects counted as the model writes them; then the text of each inject, each Gallery article, and each profile, several at once; then the pages, Player applications, CITE, and the catalog metadata. Everything is saved as it is written, so you can work on the MSEL, or leave it, while it builds. Click **Cancel** to stop.
 
 A MSEL whose build stopped, after **Cancel**, an error, or a closed tab, shows **This MSEL is still being drafted with AI** on its page with what is left, and offers **Continue drafting**, which picks up from the last saved step, **Finish without them**, which skips the articles and profiles still to write, and **Discard draft**, which deletes the MSEL.
 
@@ -427,7 +427,7 @@ Besides the moves, teams, organizations, Gallery cards, and injects, creating a 
 - **CITE**, when the MSEL uses CITE: each team gets one of CITE's built-in team types (**Official Score Contributor** for participant teams, **Other** for `EXCON`), its CITE duties, the CITE tasks, and the scoring model you chose, authored into the MSEL.
 - **Steamfitter**, when the MSEL uses Steamfitter: `STARTEX` and `ENDEX` rows, each with a Player notification to every participant.
 - **Exercise control:** your units become contributors, you join the exercise control team, and you become a CITE facilitator and a Gallery observer, so exercise control can watch every team. Every team sees every Gallery card; exercise control can post to them.
-- **Catalog metadata:** the Institute of Electrical and Electronics Engineers (IEEE) 2881 fields on the **Info** tab: difficulty, purpose, mode, subject, keywords, and language.
+- **Catalog metadata:** the Institute of Electrical and Electronics Engineers (IEEE) 2881 fields on the **Info** tab: difficulty, purpose, mode, subject, keywords, and language, written last, from the finished MSEL.
 - **A picture:** when the server has an image model, the MSEL gets a picture made from its scenario.
 - **Article markings:** the banner you chose on every Gallery article. See [Article Markings](#article-markings).
 
