@@ -390,6 +390,7 @@ Drafting has two steps. First the model writes the design, with a few questions 
 5. Optionally, expand **Design choices (optional)** and answer the questions that change an exercise most. The draft decides any you leave open and says what it chose.
     - **Format:** a discussion-based tabletop, a functional exercise with hands-on work in the range, or a hybrid.
     - **CITE assessment:** how CITE assesses the teams. See [CITE Assessment Choices](#cite-assessment-choices). This appears only when the template uses CITE.
+    - **Critical infrastructure sectors:** the CISA sectors the exercise covers, from the 16. With none chosen, the draft decides and says what it chose.
     - **Gallery cards:** how the articles are grouped on the Gallery wall: by source or thread, by organization, by critical infrastructure sector, by country, or by network segment and key cyber terrain. This appears only when the template uses Gallery.
     - **Number of moves**, **Length (minutes)**, and **Scenario time covered:** the pacing. The scenario time covered is how much story time the exercise spans, such as `three days`.
     - **Doors open before STARTEX (minutes):** how long the pre-exercise move runs, for participants who arrive early. The default is `15`.
@@ -400,9 +401,9 @@ Drafting has two steps. First the model writes the design, with a few questions 
 6. Click **Draft**. Writing the design takes a minute or two. The dialog shows what the model has written so far and how long it has run. Click **Stop** to abandon it; your description stays.
 7. Review the design in its tabs:
     - **Questions:** up to five questions whose answers change the exercise, each with a suggested answer and why it matters. Change any answer you disagree with; click **Use it** to put a suggestion back. The injects are written to your answers.
-    - **Design:** the name, description, problem, premise, escalation ceiling, and the objectives as task, condition, and standard. The **Check before creating** list shows anything Blueprint corrected or the model assumed.
+    - **Design:** the name, description, problem, premise, escalation ceiling, the critical infrastructure sectors the scenario touches, and the objectives as task, condition, and standard. The **Check before creating** list shows anything Blueprint corrected or the model assumed.
     - **Moves:** each move's start on the exercise clock, its scenario time, title, and purpose.
-    - **Teams and organizations:** each one's short name, name, and description. For a CITE template, each team's **CITE duties**, which members pick from in CITE. Click the **X** to remove one.
+    - **Teams and organizations:** each one's short name, name, and description. Each organization also has its sector (or none, for a news outlet or the adversary), size (**Small** under 100 people, **Medium** to 999, **Large** to 9,999, **Enterprise** 10,000 or more), industry, and country, which keep its staff, systems, and reach in scale across the articles. For a CITE template, each team's **CITE duties**, which members pick from in CITE. Click the **X** to remove one.
     - **Gallery cards:** the cards on the Gallery wall.
 8. Click **Create MSEL**. Click **Edit description** to change the description and draft again, or **Discard** to close without saving.
 
