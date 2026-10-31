@@ -830,6 +830,35 @@ While the **Events** tab lets MSEL owners and content developers manage events, 
 
 ![Blueprint Exercise View OE](img/blueprintExerciseView-v3.png)
 
+#### Gallery Wall
+
+The **Gallery Wall** tab appears when the MSEL's **Gallery** integration is on. It previews the wall Gallery shows a team at the end of a move. The preview uses the same field mapping as the Gallery push, so you can catch a mapping mistake before you push. The tab is read-only: nothing on it changes the MSEL or Gallery.
+
+Two selectors sit above the wall:
+
+- **Team**: the MSEL team whose wall to preview. The tab opens on the first team.
+- **Move**: the move the exercise has reached. The preview shows every article in that move or an earlier one. The tab opens on the first move.
+
+The wall is a grid of tiles, one per Gallery card the chosen team sees. A team sees a card when its **Is Shown** box is checked on the **Gallery Cards** tab. Each tile shows the card's name and description. It also shows a colored strip and a date from the card's newest article, and how many of the team's articles the card holds by the chosen move. A card with no articles still appears and reads **No articles posted**.
+
+Click a tile to list its articles, newest first. Each article shows what Gallery will show:
+
+- The article name and the status chip, in the color Gallery uses for that status.
+- **From Org** and **To Org**.
+- Source type, source name, and the date posted, in your local time with the time zone.
+- The summary, the description rendered as HTML, and the link when there is one.
+
+Articles are scenario events whose integration target includes Gallery. Their data fields feed the article through the **Integration** column on the **Data Fields** tab. The wall reads a field by the Gallery parameter assigned to it, not by its name. A team gets an article when the **To Org** value names the team's short name or `ALL`. Some articles the team gets land on no tile: no card is chosen, the card is not one of the MSEL's cards, or the team does not see the card. The wall lists them below the tiles under **Not on** the team's **wall**, each with its reason.
+
+Any article field the push cannot fill shows a muted placeholder instead of a blank:
+
+- `— no Summary field —`: no data field has that Gallery parameter.
+- `— Name not set —`: the assigned field is empty on that event.
+- `— Card not found —`: the card no longer exists.
+- `— Date Posted is not a date —`: the value does not parse as a date.
+
+A note under the tab title counts the articles affected, so you know how much to fix before pushing. **URL** and **Open In New Tab** are optional: a blank one shows its placeholder but does not count.
+
 #### Assessor View
 
 The **Assessor View** tab is where Evaluators watch a live exercise and rate the participating teams against the MSEL's competencies. Each scenario event shows the xAPI statements the exercise applications recorded for it, beside a competency assessment where the Evaluator rates each competency and submits the rating as an xAPI competency assertion. The MSEL's content is read-only here; the only values an Evaluator can change are **Checkbox** data fields.
