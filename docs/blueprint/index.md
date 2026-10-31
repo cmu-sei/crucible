@@ -170,7 +170,7 @@ The Gallery Cards page lists all Gallery card templates available for use in MSE
 
 #### CITE Actions
 
-The CITE Actions page lists all CITE action templates available for use in MSELs. A CITE action template defines a reusable task that teams complete during an exercise. Content developers can pull these templates into a MSEL from the **CITE Actions** tab.
+The CITE Actions page lists all CITE action templates available for use in MSELs. A CITE action template defines a reusable task that teams complete during an exercise. Content developers can pull these templates into a MSEL from the **Actions** tab.
 
 ##### Add a CITE Action Template
 
@@ -186,7 +186,7 @@ The CITE Actions page lists all CITE action templates available for use in MSELs
 
 #### CITE Duties
 
-The CITE Duties page lists all CITE duty templates available for use in MSELs. A CITE duty template defines a reusable role or responsibility assigned to team members during an exercise. Content developers can pull these templates into a MSEL from the [CITE Roles](#cite-roles) tab.
+The CITE Duties page lists all CITE duty templates available for use in MSELs. A CITE duty template defines a reusable role or responsibility assigned to team members during an exercise. Content developers can pull these templates into a MSEL from the [Duties](#duties) tab.
 
 ##### Add a CITE Duty Template
 
@@ -440,7 +440,7 @@ The **Metadata** block on the Config tab captures non-functional descriptors tha
 #### Integrations
 
 - **[Gallery](#glossary):** Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To learn more about this integration, reference the [Gallery](#gallery) section.
-- **[CITE](#glossary):** Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL. To learn more about this integration, reference the [CITE](#cite) section.
+- **[CITE](#glossary):** Blueprint will add the evaluation, built from the MSEL's [scoring model](#scoring-model), with the moves, actions, roles, teams, and users specified on the MSEL. To learn more about this integration, reference the [CITE](#cite) section.
 - **[Player](#glossary) & [Steamfitter](#glossary):** Blueprint will automate the adding of events specified on the MSEL, as well as configure exercise details in Player.
 - **[Caster](#glossary):** Blueprint will deploy the MSEL's virtual machine topology from a Caster directory into a new Caster workspace, with the VMs added to the Player view and its teams. To learn more about this integration, reference the [Caster](#caster) section.
 
@@ -992,7 +992,7 @@ A CITE administrator can add roles, such as one that can see or change the offic
 
     People who join a team through an [invitation](#invitations) after the push are added to the CITE team with no role. Give them a role in CITE before play.
 
-##### CITE Actions
+##### Actions
 
 On this tab, the MSEL owner can add [CITE Actions](#glossary) to push from Blueprint. These actions allow team members to customize their response by tracking tasks during the exercise.
 
@@ -1004,7 +1004,7 @@ On this tab, the MSEL owner can add [CITE Actions](#glossary) to push from Bluep
 
 To add a CITE Action, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
@@ -1023,7 +1023,7 @@ After you've added all desired configurations, click **Save**.
 
 To edit the CITE Action's details, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. Select the action you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new action.
 3. Make your changes, then click **Save**.
 
@@ -1031,24 +1031,49 @@ To edit the CITE Action's details, follow these steps:
 
 To delete a CITE Action, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. Select the action you want to delete and click the **Trash Can** next to it.
 
 ##### Filter Actions by Team
 
 To filter CITE Actions by teams, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. On the **Team** dropdown, select the desired team to filter by.
 
 ##### Search for an Action
 
 To search for a specific action, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. Click the **Search Bar** and type the name of the desired action.
 
-##### CITE Roles
+##### Scoring Model
+
+The **Scoring Model** tab chooses the scoring model the CITE evaluation is built from when the integrations are pushed. The push needs one: **Push Integrations** stays disabled while the MSEL has neither linked nor authored a scoring model. The **Config** tab summarizes the choice under **CITE** and offers **Open the Scoring Model tab**.
+
+Choose how the MSEL gets its scoring model:
+
+- **Link a CITE scoring model:** choose one of the scoring models already defined in CITE under **CITE Scoring Model**, then click the **Save Changes** icon. The link is saved on the MSEL, like the settings on the **Config** tab. A user with the EditMsels permission or the MSEL `Editor` role can change the link.
+- **Author it in Blueprint:** write the scoring model in Blueprint, so the exercise is configured in one place. Pick what to start from under **Start From** and click **Create Scoring Model**. A user with the EditMsels permission or the MSEL `Owner` role can author a model or switch between linking and authoring.
+
+The model can start from a preset, or from a copy of a CITE model. Two presets follow the Department of Defense Cyber Table Top (CTT) assessments, and one the Cybersecurity and Infrastructure Security Agency (CISA) National Cyber Incident Scoring System (NCISS):
+
+| Start From | What it makes |
+| --- | --- |
+| **Questions by Move** | Discussion questions for each move, answered in comment boxes, then an after-action review on the last move |
+| **DoD CTT Mission Impact Assessment** | Mission capability, time to recover, system availability, and data integrity, scored each move |
+| **DoD CTT Likelihood Assessment Matrix** | Attack cost plus attack success, with the likelihood matrix beside the scoresheet |
+| **CISA NCISS** | The National Cyber Incident Scoring System: eight weighted factors scored from 0 to 100 |
+| **Copy a CITE scoring model** | A copy of the chosen CITE scoring model to edit in Blueprint; the CITE scoring model itself is not changed |
+
+The model then opens in the editor on the tab. The left side holds the model's settings, such as **Scoring Model Description**, **Calculation Equation**, the scoring checkboxes, and **Right Side Display**, followed by its **Scoring Categories**. Each category names the moves it is shown in, when **Use Different Scoring Categories by Move Number** is checked, and lists its scoring options or, for a category whose **Scoring Option Selection Type** is **None**, its questions. **Add Category**, **Add Option**, and **Add Question** add rows, and the arrows reorder them. The right side, **What a Team Sees**, previews the scoresheet a team gets; **Preview Move** picks the move to preview. Click **Save** to store the edits or **Discard** to drop them. A warning lists the categories that have no questions or options yet, because they would reach CITE with nothing to answer.
+
+**Replace With** and **Replace Scoring Model** start over from another preset or CITE model; the current categories and options are discarded after a confirmation. Switching back to **Link a CITE scoring model** deletes the model authored in Blueprint, also after a confirmation.
+
+When the integrations are pushed, Blueprint creates the authored scoring model in CITE and builds the evaluation from it. The evaluation keeps its own copy of the scoring model, and the model Blueprint created is removed, so CITE's list of scoring models is unchanged. The **Scoring Model** tab is then read-only until **Remove Integrations**, which deletes the evaluation and its copy of the scoring model. The model authored in Blueprint stays with the MSEL, ready for the next push.
+
+##### Duties
 
 On this tab, the MSEL owner can add [CITE Roles](#glossary) to push from Blueprint. These roles allow team members to customize their response by tracking their responsibilities during an exercise.
 
@@ -1060,7 +1085,7 @@ On this tab, the MSEL owner can add [CITE Roles](#glossary) to push from Bluepri
 
 To add a CITE role, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
@@ -1077,7 +1102,7 @@ After you've added all desired configurations, click **Save**.
 
 To edit the CITE Role's details, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. Select the role you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new role.
 3. Make your changes, then click **Save**.
 
@@ -1085,21 +1110,21 @@ To edit the CITE Role's details, follow these steps:
 
 To delete a CITE Role, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. Select the role you want to delete and click the **Trash Can** next to it.
 
 ##### Filter Roles by Team
 
 To filter Roles by team, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. On the **Team** dropdown, select the desired team to filter by.
 
 ##### Search for a Role
 
 To search for a specific role, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. Click the **Search Bar** and type the name of the desired role.
 
 #### Gallery
