@@ -992,6 +992,31 @@ A CITE administrator can add roles, such as one that can see or change the offic
 
     People who join a team through an [invitation](#invitations) after the push are added to the CITE team with no role. Give them a role in CITE before play.
 
+##### Scoring Model
+
+The **Scoring Model** tab chooses the scoring model the CITE evaluation is built from when the integrations are pushed. The push needs one: **Push Integrations** stays disabled while the MSEL has neither linked nor authored a scoring model. The **Config** tab summarizes the choice under **CITE** and offers **Open the Scoring Model tab**.
+
+Choose how the MSEL gets its scoring model:
+
+- **Link a CITE scoring model:** choose one of the scoring models already defined in CITE under **CITE Scoring Model**, then click the **Save Changes** icon. The link is saved on the MSEL, like the settings on the **Config** tab. A user with the EditMsels permission or the MSEL `Editor` role can change the link.
+- **Author it in Blueprint:** write the scoring model in Blueprint, so the exercise is configured in one place. Pick what to start from under **Start From** and click **Create Scoring Model**. A user with the EditMsels permission or the MSEL `Owner` role can author a model or switch between linking and authoring.
+
+The model can start from a preset, or from a copy of a CITE model. Two presets follow the Department of Defense Cyber Table Top (CTT) assessments, and one the Cybersecurity and Infrastructure Security Agency (CISA) National Cyber Incident Scoring System (NCISS):
+
+| Start From | What it makes |
+| --- | --- |
+| **Questions by Move** | Discussion questions for each move, answered in comment boxes, then an after-action review on the last move |
+| **DoD CTT Mission Impact Assessment** | Mission capability, time to recover, system availability, and data integrity, scored each move |
+| **DoD CTT Likelihood Assessment Matrix** | Attack cost plus attack success, with the likelihood matrix beside the scoresheet |
+| **CISA NCISS** | The National Cyber Incident Scoring System: eight weighted factors scored from 0 to 100 |
+| **Copy a CITE scoring model** | A copy of the chosen CITE scoring model to edit in Blueprint; the CITE scoring model itself is not changed |
+
+The model then opens in the editor on the tab. The left side holds the model's settings, such as **Scoring Model Description**, **Calculation Equation**, the scoring checkboxes, and **Right Side Display**, followed by its **Scoring Categories**. Hover a checkbox, or either **Scoring Model** choice above the editor, for a tooltip that says what it does for a team filling in the scoresheet in CITE. Each category names the moves it is shown in, when **Use Different Scoring Categories by Move Number** is checked, and lists its scoring options or, for a category whose **Scoring Option Selection Type** is **None**, its questions. **Add Category**, **Add Option**, and **Add Question** add rows, and the arrows reorder them. The right side, **What a Team Sees**, previews the scoresheet a team gets; **Preview Move** picks the move to preview. Click **Save** to store the edits or **Discard** to drop them. A warning lists the categories that have no questions or options yet, because they would reach CITE with nothing to answer.
+
+**Replace With** and **Replace Scoring Model** start over from another preset or CITE model; the current categories and options are discarded after a confirmation. Switching back to **Link a CITE scoring model** deletes the model authored in Blueprint, also after a confirmation.
+
+When the integrations are pushed, Blueprint creates the authored scoring model in CITE and builds the evaluation from it. The evaluation keeps its own copy of the scoring model, and the model Blueprint created is removed, so CITE's list of scoring models is unchanged. The **Scoring Model** tab is then read-only until **Remove Integrations**, which deletes the evaluation and its copy of the scoring model. The model authored in Blueprint stays with the MSEL, ready for the next push.
+
 ##### Actions
 
 On this tab, the MSEL owner can add [CITE Actions](#glossary) to push from Blueprint. These actions allow team members to customize their response by tracking tasks during the exercise.
@@ -1047,31 +1072,6 @@ To search for a specific action, follow these steps:
 
 1. Navigate to the **Actions** tab.
 2. Click the **Search Bar** and type the name of the desired action.
-
-##### Scoring Model
-
-The **Scoring Model** tab chooses the scoring model the CITE evaluation is built from when the integrations are pushed. The push needs one: **Push Integrations** stays disabled while the MSEL has neither linked nor authored a scoring model. The **Config** tab summarizes the choice under **CITE** and offers **Open the Scoring Model tab**.
-
-Choose how the MSEL gets its scoring model:
-
-- **Link a CITE scoring model:** choose one of the scoring models already defined in CITE under **CITE Scoring Model**, then click the **Save Changes** icon. The link is saved on the MSEL, like the settings on the **Config** tab. A user with the EditMsels permission or the MSEL `Editor` role can change the link.
-- **Author it in Blueprint:** write the scoring model in Blueprint, so the exercise is configured in one place. Pick what to start from under **Start From** and click **Create Scoring Model**. A user with the EditMsels permission or the MSEL `Owner` role can author a model or switch between linking and authoring.
-
-The model can start from a preset, or from a copy of a CITE model. Two presets follow the Department of Defense Cyber Table Top (CTT) assessments, and one the Cybersecurity and Infrastructure Security Agency (CISA) National Cyber Incident Scoring System (NCISS):
-
-| Start From | What it makes |
-| --- | --- |
-| **Questions by Move** | Discussion questions for each move, answered in comment boxes, then an after-action review on the last move |
-| **DoD CTT Mission Impact Assessment** | Mission capability, time to recover, system availability, and data integrity, scored each move |
-| **DoD CTT Likelihood Assessment Matrix** | Attack cost plus attack success, with the likelihood matrix beside the scoresheet |
-| **CISA NCISS** | The National Cyber Incident Scoring System: eight weighted factors scored from 0 to 100 |
-| **Copy a CITE scoring model** | A copy of the chosen CITE scoring model to edit in Blueprint; the CITE scoring model itself is not changed |
-
-The model then opens in the editor on the tab. The left side holds the model's settings, such as **Scoring Model Description**, **Calculation Equation**, the scoring checkboxes, and **Right Side Display**, followed by its **Scoring Categories**. Hover a checkbox, or either **Scoring Model** choice above the editor, for a tooltip that says what it does for a team filling in the scoresheet in CITE. Each category names the moves it is shown in, when **Use Different Scoring Categories by Move Number** is checked, and lists its scoring options or, for a category whose **Scoring Option Selection Type** is **None**, its questions. **Add Category**, **Add Option**, and **Add Question** add rows, and the arrows reorder them. The right side, **What a Team Sees**, previews the scoresheet a team gets; **Preview Move** picks the move to preview. Click **Save** to store the edits or **Discard** to drop them. A warning lists the categories that have no questions or options yet, because they would reach CITE with nothing to answer.
-
-**Replace With** and **Replace Scoring Model** start over from another preset or CITE model; the current categories and options are discarded after a confirmation. Switching back to **Link a CITE scoring model** deletes the model authored in Blueprint, also after a confirmation.
-
-When the integrations are pushed, Blueprint creates the authored scoring model in CITE and builds the evaluation from it. The evaluation keeps its own copy of the scoring model, and the model Blueprint created is removed, so CITE's list of scoring models is unchanged. The **Scoring Model** tab is then read-only until **Remove Integrations**, which deletes the evaluation and its copy of the scoring model. The model authored in Blueprint stays with the MSEL, ready for the next push.
 
 ##### Duties
 
