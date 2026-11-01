@@ -517,7 +517,7 @@ Blueprint records every call to an AI model made for a MSEL, including the calls
 
 To write one value with AI:
 
-1. Open a scenario event, and click **Write [field name] with AI** beside a text field.
+1. Open a scenario event, and click **Write [field name] with AI** beside a long text field: an HTML column, or the Gallery **Summary**. Short fields such as the title, sender, and source have no button; they are quicker to type than to ask for.
 2. Describe what you want, and click **Write**.
 3. Click **Use this**, **Try again**, or **Discard**.
 
