@@ -453,6 +453,61 @@ These procedures describe how to upload files from a local machine to mount as a
 6. Click **Mount**. This process automatically mounts the file as a DVD Drive ISO.
 7. After you have mounted/used the ISO for file copy, right-click the DVD Drive ISO and select **Eject** to eject the ISO.
 
+### Use the Proxmox VM Console
+
+Proxmox VMs open in a console laid out like the vSphere console. The **gear icon** menu is on the left, toolbar buttons are in the center, and connected users are on the right. Most options work the same way. This section covers what the Proxmox console offers and where it differs.
+
+#### Console Options Menu
+
+Click the **gear icon** next to the VM name to open the console options. A read-only console shows only the options from **Fullscreen** through **Resolution**.
+
+| Option | What It Does |
+| --- | --- |
+| **Fullscreen** | Fills the screen with the console. |
+| **Open In New Tab** | Opens the console in its own browser tab. Appears only when the console is open inside Player. |
+| **Reconnect** | Reconnects the console to the VM. |
+| **Read Only** | Turns read-only mode on or off. Appears only if your permissions let you control the VM. While read-only mode is on, `(Read Only)` follows the VM name and the console ignores your keyboard and mouse. |
+| **Dark Theme** | Switches the console between dark and light themes. |
+| **Resolution**, **Scale to Fit** | Scales the VM display to fit the window. This is the default. |
+| **Resolution**, **Match Window Size** | Changes the VM's screen resolution to match the window. Unavailable when the VM's display adapter can't change resolution, and on a read-only console; hover over it to see why. If the VM doesn't change resolution, the console returns to **Scale to Fit** and displays `This VM didn't change resolution, so the console is scaling to fit instead.` |
+| **Power**, **Power On** | Starts the VM. |
+| **Power**, **Power Off** | Turns the VM off immediately without shutting down the guest OS. Asks you to confirm first. |
+| **Power**, **Reboot** | Asks the guest OS to restart through the Advanced Configuration and Power Interface (ACPI) or the QEMU guest agent. Asks you to confirm first. If the guest doesn't respond, the error message suggests **Power Off** instead. |
+| **Power**, **Shutdown OS** | Asks the guest OS to shut down, the same way as **Reboot**. Asks you to confirm first. If the guest doesn't respond, the error message suggests **Power Off** instead. |
+| **Snapshots** | Opens a list of the VM's snapshots. Select one to revert the VM to it. Requires the `RevertVms` permission. Unavailable when the VM has no snapshots. |
+| **Files**, **Send File To VM** | Choose one or more files, then enter the destination folder in the guest as an absolute path. Requires the `UploadVmFiles` permission. |
+| **Files**, **Download File From VM** | Enter the absolute path of a file in the guest. Your browser downloads it. Requires the `DownloadVmFiles` permission. |
+| **Files**, **Mount ISO** | Choose an ISO to mount in the VM's optical drive. |
+| **Keyboard**, **Send Ctrl-Alt-Del** | Sends Ctrl+Alt+Delete to the VM. |
+| **Keyboard**, **Send Text** | Types the text you enter into the VM as key presses. |
+| **Keyboard**, **Paste to Clipboard** | Places your local clipboard text on the VM's clipboard without typing it. |
+| **Network Cards** | Moves a network adapter to another network. Appears only if you have permission to change the VM's networks. |
+| **Clipboard**, **Copy** | Copies the last text copied inside the VM to your local clipboard. |
+| **Clipboard**, **Paste** | Types your local clipboard text into the VM as key presses. |
+
+#### Toolbar and Status
+
+- **Copy**, **Paste**, and **Ctrl-Alt-Del:** The toolbar buttons do the same as **Clipboard**, **Copy**; **Clipboard**, **Paste**; and **Keyboard**, **Send Ctrl-Alt-Del**. A read-only console doesn't show these buttons.
+- **Connected users:** The right side of the toolbar lists who has the console open, for example `Connected: alice, bob and 3 others`. Hover over it to see everyone.
+- **Task progress:** While a task runs on the VM, such as a power action or a revert, its name and progress appear next to the VM name. A task without a percentage shows `(in progress)`.
+
+#### Differences From the vSphere Console
+
+- **Files:** File transfers use the QEMU guest agent, so you don't enter VM credentials. **Send File To VM** accepts files up to 45 KB each. For larger files, use **Mount ISO** or the VM List's **Upload File**.
+- **Copy:** **Copy** returns only text you copied inside the VM after the console connected. It's unavailable when the VM doesn't have a Virtual Network Computing (VNC) clipboard; hover over it to see why. If nothing has arrived from the VM's clipboard, the error message says the guest needs `spice-vdagent` running.
+- **Resolution:** Instead of a list of fixed resolutions, the Proxmox console offers **Scale to Fit** and **Match Window Size**.
+
+#### What the VM Needs
+
+Some console features depend on how you build the VM template. Template authors can use this table to decide what to include.
+
+| Feature | Requirement |
+| --- | --- |
+| IP addresses in the VM List, **Send File To VM**, **Download File From VM** | QEMU guest agent installed and running in the guest, with the guest agent turned on in the VM's Proxmox options. When the agent isn't running, the file options are unavailable and their tooltip says `Requires the QEMU guest agent`. |
+| **Reboot** and **Shutdown OS** | Guest OS that handles ACPI power requests, or the QEMU guest agent. |
+| Clipboard **Copy** | `clipboard=vnc` in the VM's display (`vga`) setting, and `spice-vdagent` running in the guest. |
+| **Match Window Size** | A display adapter that supports resizing, such as `virtio-gpu`, with its driver installed in the guest. The default `std` Video Graphics Array (VGA) adapter can't resize. |
+
 ### Follow Another Player
 
 The **user follow** feature in Player allows you to virtually look over a participant's shoulder during a scenario. This is a useful feature when helping someone troubleshoot and for team members who are geographically separated. Observers can also use this feature when evaluating or watching teams perform during an event.
