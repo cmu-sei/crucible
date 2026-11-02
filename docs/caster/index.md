@@ -47,6 +47,8 @@ Caster can draft Terraform files and Designs with a model on Amazon Bedrock. AI 
 - **`Ai:FallbackModelId`:** a second model to try once when the first declines a request. Leave it empty for no retry.
 - **`Ai:MaxTokens`:** the longest answer the model may write. The default is `64000`.
 - **`Ai:TimeoutSeconds`:** how long a request may run. The default is `600`.
+- **`Ai:Models`:** a provider and model for each AI task, where it differs from the defaults above. The tasks are `design` (Draft Design with AI), `terraform` (Draft Terraform with AI), `brief` (Terraform from a scenario brief), and `assist` (Ask AI). Each task takes `Provider`, `ModelId`, `FallbackModelId`, `Region`, `BaseUrl`, `ApiKey`, `MaxTokens`, `Effort`, and `Strict`. `Strict` holds the answer to the task's schema on Bedrock; it is on for `assist` only by default.
+- **`Ai:Prices`:** what each model costs, keyed by model ID, so Caster can estimate what each project's AI use cost. For each model, set `InputPerMillion`, `OutputPerMillion`, `CacheReadPerMillion`, and `CacheWritePerMillion` in US dollars per million tokens. Caster counts a model without a price in tokens only. As an environment variable, write the model ID with underscores for its dots and hyphens, such as `Ai__Prices__us_anthropic_claude_sonnet_5_5__InputPerMillion`.
 
 The API uses the default AWS credential chain of its host. The AI never saves a file on its own: you review each file, and Caster saves only the files you keep.
 
@@ -310,6 +312,29 @@ Export Project lets you export the project as an archive file. Select the **Arch
 #### Import Project
 
 Import Project lets you import a project from a zip file. Click **Choose File** to select the zip file, then click **Import**. Enable **Preserve Ids** to append IDs to directory names during the import.
+
+#### Ask AI
+
+When AI drafting is on, you can change a directory's Terraform by describing what you want, in a panel that stays open beside your files and workspaces. You need edit rights on the project.
+
+1. At the top of the project, click **Ask AI**. The panel opens on the directory of the open tab, and on its workspace when the tab is a workspace.
+2. Check the **Directory**, and pick a **Workspace** to look at its runs only, or leave **All workspaces**.
+3. In **What should change?**, describe the change, such as `Add a variable for the VM template and use it in main.tf`. You can also click one of the examples.
+4. Click **Ask**. The assistant replies and proposes changes, or asks you a question.
+5. Click **Show changes** to compare an edited file with the current file, or **Show file** to read a new one. Clear the check box beside any change you do not want.
+6. Click **Apply** to make the checked changes. The button shows how many changes it applies, and the panel shows the result of each.
+
+The assistant sees the files of the directory and its parent directories, and the enabled Designs. It also sees each workspace's Terraform version and own files, and the output of the latest plan or apply when it failed. It can add a file to the directory, replace a file of the directory with new content, and set a workspace's Terraform version to one Caster has. Caster makes each change as if you made it by hand, with the same permission and lock rules. If someone saved a file after the proposal, or holds its lock, Caster says so and leaves that file as it is; ask again. The other changes still apply.
+
+To fix a failed run, ask `Fix the errors from the last plan or apply`. When the code is at fault, the assistant proposes the smallest fix. When the code is fine and the cause is elsewhere, the panel says **Not a code problem**, and the assistant names the cause. Examples are a module it cannot download, a provider credential, or a workspace Terraform version too old for the code, such as `Reserved argument name in module block` under Terraform 0.12. It proposes the fix Caster can make, such as a newer Terraform version for the workspace, and says what an administrator must fix outside Caster.
+
+The conversation stays on its directory until you pick another one or click **New conversation**. Each request includes the conversation so far, so you can follow up, such as `now do the same for the blue network`.
+
+The assistant cannot delete or rename files, change a parent directory's files, a workspace's own files, or a Design, or run a plan or apply.
+
+#### AI Usage
+
+Caster records every call to an AI model made for a project. Users who can view the project see an **AI usage** panel at the bottom of the navigation panel. It lists each task with its calls, input and output tokens, and estimated cost. The tasks are **Draft Design with AI**, **Draft or edit Terraform with AI**, **Terraform from a scenario brief**, and **Ask AI**. The estimate uses the prices in `Ai:Prices` and includes calls the model declined, because the provider bills those too. When a model has no price, a note above the table names it and says to add one under `Ai:Prices`, and its cost shows as **no price**.
 
 ### Files
 
