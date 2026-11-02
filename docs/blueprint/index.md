@@ -389,12 +389,10 @@ Drafting has two steps. First the model writes the design, with a few questions 
 4. In **Exercise description**, describe the audience, the scenario, the objectives, the organizations to simulate, and the competencies to exercise.
 5. Optionally, expand **Design choices (optional)** and answer the questions that change an exercise most. The draft decides any you leave open and says what it chose.
     - **Format:** a discussion-based tabletop, a functional exercise with hands-on work in the range, or a hybrid.
-    - **CITE assessment:** how CITE assesses the teams. See [CITE Assessment Choices](#cite-assessment-choices). This appears only when the template uses CITE.
+    - **CITE assessment:** how CITE assesses the teams. **Let the model choose**, the default, leaves it to the design step, which picks the one that fits the scenario and shows it on the **Design** tab. See [CITE Assessment Choices](#cite-assessment-choices). This appears only when the template uses CITE.
     - **Critical infrastructure sectors:** the CISA sectors the exercise covers, from the 16. With none chosen, the draft decides and says what it chose.
     - **Gallery cards:** how the articles are grouped on the Gallery wall: by source or thread, by organization, by critical infrastructure sector, by country, or by network segment and key cyber terrain. This appears only when the template uses Gallery.
     - **Number of moves**, **Length (minutes)**, and **Scenario time covered:** the pacing. The scenario time covered is how much story time the exercise spans, such as `three days`.
-    - **Doors open before STARTEX (minutes):** how long the pre-exercise move runs, for participants who arrive early. The default is `15`.
-    - **Last move is a leadership brief:** whether the exercise ends with a brief to leadership.
     - **Participant structure:** how you organize participants, such as one combined staff or parallel national teams.
     - **Article marking:** the banner on every Gallery article. See [Article Markings](#article-markings). This appears only when the template uses Gallery.
     - **Add Team Profiles and Organization Profiles pages:** clear this to skip the profile pages.
@@ -407,7 +405,7 @@ Drafting has two steps. First the model writes the design, with a few questions 
     - **Gallery cards:** the cards on the Gallery wall.
 8. Click **Create MSEL**. Click **Edit description** to change the description and draft again, or **Discard** to close without saving.
 
-Blueprint creates the MSEL and opens it. A banner at the top of the MSEL's page shows each step as it is written: the outline of the injects, each move's situation briefing, CITE tasks, and read-in, with the injects counted as the model writes them; then the text of each inject, each Gallery article, and each profile, several at once; then the pages, Player applications, CITE, and the catalog metadata. Everything is saved as it is written, so you can work on the MSEL, or leave it, while it builds. Click **Cancel** to stop.
+Blueprint creates the MSEL and opens it. A banner at the top of the MSEL's page shows each step as it is written: the outline of the injects, each move's situation briefing, CITE tasks, and read-in, with the injects counted against the design's plan as the model writes them; then the text of each inject, each Gallery article, and each profile, several at once; then the pages, Player applications, CITE, and the catalog metadata. Everything is saved as it is written, so you can work on the MSEL, or leave it, while it builds. Click **Cancel** to stop.
 
 A MSEL whose build stopped, after **Cancel**, an error, or a closed tab, shows **This MSEL is still being drafted with AI** on its page with what is left, and offers **Continue drafting**, which picks up from the last saved step, **Finish without them**, which skips the articles and profiles still to write, and **Discard draft**, which deletes the MSEL.
 
@@ -415,7 +413,7 @@ A MSEL whose build stopped, after **Cancel**, an error, or a closed tab, shows *
 
 Besides the moves, teams, organizations, Gallery cards, and injects, creating a drafted MSEL adds:
 
-- **A pre-exercise move and a hot wash:** move 0 opens when the doors open and holds the read-in, so participants who arrive early have somewhere to wait. `STARTEX` opens move 1, the first move of play, and `ENDEX` opens the last move, the after-action hot wash. When the MSEL uses Steamfitter, each is a Steamfitter task that changes the move in CITE and Gallery.
+- **A pre-exercise move and a hot wash:** move 0 opens fifteen minutes before `STARTEX` and holds the read-in, so participants who arrive early have somewhere to wait. `STARTEX` opens move 1, the first move of play, and `ENDEX` opens the last move, the after-action hot wash. When the MSEL uses Steamfitter, each is a Steamfitter task that changes the move in CITE and Gallery.
 - **Two clocks:** each move has a scenario time, which can jump ahead between moves. Blueprint dates each Gallery article within its move's scenario time.
 - **An Expected Actions column:** what participants should do for each inject. It shows on the event list for controllers but not on the exercise view.
 - **Pages:**
@@ -435,7 +433,8 @@ When you push the integrations, Gallery gets the drafted articles. Pages and art
 
 ##### CITE Assessment Choices
 
-- **Keep the template's scoring model:** offered, and chosen by default, when the template already links a CITE scoring model or authors its own. The seeded **Crucible MSEL** template authors `CISA NCISS`, so a MSEL drafted from it scores with that model unless you choose otherwise.
+- **Let the model choose:** the default. The design step picks one of the choices below for the scenario: questions by move for most tabletops, a Department of Defense (DoD) matrix where the exercise assesses mission impact or likelihood, `CISA NCISS` where teams score an incident, the template's own model where it has one and fits, or none. The **Design** tab shows the choice; choose another and draft again if it does not fit.
+- **Keep the template's scoring model:** offered when the template already links a CITE scoring model or authors its own. The seeded **Crucible MSEL** template authors `CISA NCISS`, so a MSEL drafted from it scores with that model unless you choose otherwise.
 - **Questions by move:** the draft writes discussion questions for each move. The MSEL gets its own scoring model, `[MSEL name] Questions by Move`: one category per move of play with the move's questions, comment boxes on, and scores hidden, and a final category in the hot wash for the after-action review.
 - **DoD CTT mission impact matrix:** teams score the mission impact of each move, following the Department of Defense Cyber Table Top (CTT) guide. The MSEL gets its own copy of the `DoD CTT Mission Impact Assessment` model.
 - **DoD CTT likelihood matrix:** teams score each attack's cost and chance of success. The MSEL gets its own copy of the `DoD CTT Likelihood Assessment Matrix` model, with the matrix beside the score sheet.
