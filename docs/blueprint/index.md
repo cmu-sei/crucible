@@ -508,7 +508,11 @@ When AI drafting is on, you can change a MSEL by describing what you want.
 4. Clear the check box beside any change you do not want.
 5. Click **Apply** to make the checked changes. The button shows how many changes it applies.
 
-The assistant can add or edit teams, organizations, Gallery cards, moves and their scenario times, and injects, and add or remove competencies. It offers only the changes your MSEL role allows. It cannot delete injects or moves, or change data fields, integrations, users, or pages.
+The assistant can add or edit teams, organizations, Gallery cards, moves and their scenario times, injects, and inject columns (data fields), and add or remove competencies. It offers only the changes your MSEL role allows: the owner, an editor, or a user with `EditMsels` can change columns.
+
+To give injects something no column holds, ask for it, such as `Add a Severity column with Low, Medium, and High and set it on every inject`. The assistant proposes the column, with its type, its choices, the Gallery article parameter it fills, and whether it shows on the **Exercise View** and the scenario event list, and fills it on the injects in the same set of changes. Columns are added before the injects, so one **Apply** does both. It can also rename a column, change its type or choices, or move it on or off a view. It leaves out a column whose name is taken, choices on a column that is not text, or a Gallery parameter another column already fills, and says why.
+
+It cannot delete injects, moves, or columns, or change integrations, users, or pages.
 
 ##### AI Usage
 
