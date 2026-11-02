@@ -84,7 +84,7 @@ The Data Fields page lists all data field templates available for use in MSEL sc
 
 1. Under **Data Fields**, click **+** (**Add a template data field**).
 2. In **Name**, enter the field name (for example, `Delivery Method`).
-3. In **Data Type**, select the data type. Available types: Boolean, Card, Checkbox, Competency, Datetime, Double, HTML, Integer, IpAddress, Move, Network, Organization, SourceType, Status, String, Team, TeamsMultiple, Url, User. See [Data Value Checks](#data-value-checks) for the values IpAddress, Network, and Datetime fields accept.
+3. In **Data Type**, select the data type. Available types: Attack Technique, Boolean, Card, Checkbox, Competency, Datetime, Defensive Technique, Double, HTML, Integer, IpAddress, Move, Network, Organization, SourceType, Status, String, Team, TeamsMultiple, Url, User. The **Attack Technique** and **Defensive Technique** types offer a MSEL's [technique pools](#techniques). See [Data Value Checks](#data-value-checks) for the values IpAddress, Network, and Datetime fields accept.
 4. Check **Use Option List** to provide a predefined list of selectable values for the field (for example, `Low, Medium, High`).
 5. Click **Save**.
 
@@ -199,6 +199,33 @@ The CITE Duties page lists all CITE duty templates available for use in MSELs. A
 - **Edit:** Click **Edit** (pencil icon) next to the duty template, make the desired changes, and click **Save**.
 - **Delete:** Click **Delete** (trash can icon) next to the duty template.
 - **Search:** In the **Search** field, enter the name of the duty template.
+
+#### Technique Frameworks
+
+The **Technique Frameworks** page (**Techniques** in the Administration sidebar) holds the technique framework releases MSELs pick techniques from: MITRE ATT&CK&reg;, MITRE ATLAS&trade;, and MITRE D3FEND&trade;. A release is reference data. An administrator imports it once, and a MSEL keeps the technique names and descriptions it was planned against until its owner upgrades it. Importing and deleting releases requires the **Manage Competency Frameworks** permission; any signed-in user can read them.
+
+##### Import a Release
+
+1. Download the release file:
+    - **MITRE ATT&CK**: a STIX bundle for any domain (`enterprise-attack.json`, `mobile-attack.json`, or `ics-attack.json`) from MITRE's `attack-stix-data` repository.
+    - **MITRE ATLAS**: `stix-atlas.json` from the `mitre-atlas/atlas-data` GitHub releases. It imports as a release of the `ATLAS` domain.
+    - **MITRE D3FEND**: the ontology, `d3fend.json`, from the D3FEND Ontology Resources page. It imports as a release of the `d3fend` domain, whose techniques are defensive.
+2. Click **Import a release file** (the upload icon) and choose the file. Blueprint reads the version from the file; fill in **Version** only for an older file that doesn't name one.
+
+Blueprint refuses a release that's already imported. Each row shows the release's **Name**, **Domain**, **Version**, release date, and its counts of **Tactics** and **Techniques**. The trash can deletes a release no MSEL uses; a release that any MSEL's techniques come from stays until those MSELs upgrade or clear them.
+
+##### Import ATT&CK Mappings
+
+MITRE D3FEND maps its defensive techniques to the ATT&CK techniques they counter. Import those mappings onto a D3FEND release so a MSEL's **Countered by** rows and **Suggested** defensive techniques have something to draw on:
+
+1. Download `d3fend-full-mappings.json` for the release's version from `https://d3fend.mitre.org/ontologies/d3fend/<version>/d3fend-full-mappings.json`, for example `.../d3fend/1.6.0/d3fend-full-mappings.json`. MITRE doesn't serve the path without a version. While a D3FEND release has no mappings, the page shows this link under the table.
+2. On the D3FEND release's row, click **Import ATT&CK mappings** and choose the file.
+
+The file holds one row per artifact path, repeated for every sub-technique that inherits it. Blueprint folds those rows into one mapping per pair of ATT&CK technique and D3FEND technique, weighted by how many distinct artifact paths link them. The import report counts the rows read, the mappings stored, the mappings skipped because this release lacks their D3FEND technique, and the ATT&CK techniques covered. The row then shows **N countermeasure mappings**. Importing again replaces the release's mappings, and deleting the release removes them.
+
+##### Attribution
+
+MITRE's terms of use require that its content carry a notice. The page, and every MSEL tab that shows techniques, credits The MITRE Corporation and names ATT&CK as a registered trademark. Once a release of ATLAS or D3FEND appears, the notice adds that framework's trademark sentence. The notice links the ATT&CK **Terms of Use** and the **D3FEND Terms of Use**.
 
 #### Users
 
@@ -515,6 +542,34 @@ On the **Competencies** tab, MSEL owners attach a competency framework (defined 
 ##### View MSEL Competencies
 
 Expand the **MSEL Competencies** region to see the table of competencies associated with the MSEL. Columns include **ID**, **Type**, **Framework**, **Name**, **Teams**, and **Events**. Use the search box to filter by name.
+
+#### Techniques
+
+On the **Techniques** tab, MSEL owners pool the techniques scenario events can name. **Attack Techniques** come from a MITRE ATT&CK&reg; or MITRE ATLAS&trade; release and **Defensive Techniques** from a MITRE D3FEND&trade; release. Each section has its own **Release** picker, its own pinned release, and its own **Upgrade**. Scenario events name pooled techniques through two data field types: an **Attack Technique** field offers the attack pool, and a **Defensive Technique** field offers the defensive pool.
+
+##### Add Techniques
+
+1. In the section's **Release** dropdown, pick a release. If none appears, an administrator imports them on the [Technique Frameworks](#technique-frameworks) page.
+2. Expand **Add Techniques**. Filter by **Tactic**, search by ID, name, or description, and clear **Sub-techniques** to list techniques only.
+3. Check a technique to add it to the pool, or clear it to remove it. Removing a technique that scenario events name asks for confirmation; the events keep the ID, but the pool no longer offers it.
+
+The **MSEL Techniques** region lists the pool with each technique's **ID**, **Name**, **Tactics**, and the number of **Events** that name it. Each ID links to the technique's page on MITRE's site.
+
+##### Release Pinning and Upgrade
+
+A section's pool pins itself to the release its first technique came from, and refuses techniques from another release of the same family until you upgrade it. To upgrade, pick the newer release in **Release** and click **Upgrade to &lt;version&gt;**. Blueprint matches techniques by ID, removes and lists any the new release no longer has, and leaves the ID on scenario events that name them. The attack and defensive pools pin and upgrade independently.
+
+##### Countered by Each Attack Technique
+
+Under each pooled attack technique, a **Countered by** row lists the D3FEND techniques MITRE maps against it. The mappings come from the D3FEND release the MSEL's defensive techniques pin, or else from the newest D3FEND release with ATT&CK mappings. Expand the row to see them grouped by D3FEND tactic in the matrix's order: Model, Harden, Detect, Isolate, Deceive, Evict, Restore. Within each tactic, the number of artifact paths that link the pair ranks them. Hover over a name for the rationale, such as "hardens Credential; T1003.005 accesses Encrypted Credential." Each tactic shows its top three with **Show all N** for the rest. Check a countermeasure to add it to **Defensive Techniques**; one already there appears checked. When D3FEND maps nothing to a sub-technique, the row shows its parent technique's countermeasures and says so with **(from T1003)**.
+
+An empty row says why: no D3FEND release exists, no ATT&CK mappings exist (**Import ATT&CK mappings** on the Technique Frameworks page), or D3FEND maps nothing to that technique.
+
+##### Attack Technique and Defensive Technique Data Fields
+
+Add a data field of type **Attack Technique** or **Defensive Technique** on the MSEL's Data Fields tab to let scenario events name pooled techniques. In an event, the field shows the chosen IDs as chips that link to MITRE's site. **Select techniques** offers the pool with a search box. An ID the pool no longer offers stays on the event, marked as not in the MSEL's techniques.
+
+When the event also has an **Attack Technique** value, a **Defensive Technique** field's list leads with a **Suggested** group: the pooled D3FEND techniques mapped against the event's attack techniques, strongest first. The rest of the pool follows under **Other techniques**. Only pooled techniques appear as suggestions; add more on the Techniques tab.
 
 #### Teams
 
@@ -1342,6 +1397,8 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **Competency Framework:** A named collection of competencies (for example, NICE Framework) defined in Administration → Competencies and linked to a proficiency scale.
 
+**Countermeasure:** A MITRE D3FEND technique that MITRE's mappings say counters an ATT&CK technique. Shown under a MSEL's pooled attack techniques as **Countered by**, and suggested first in an event's **Defensive Technique** field.
+
 **Content Developer Permission:** Can view, edit, create, and approve events on the MSEL.
 
 **Data Fields:** Structured components containing essential information about the event's characteristics, context, and implications.
@@ -1389,6 +1446,8 @@ This glossary defines key terms and concepts used in the Blueprint application.
 **System Admin Permission:** Can add users to a team, as well as assign the required permissions.
 
 **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
+
+**Technique Framework:** An imported release of MITRE ATT&CK, MITRE ATLAS, or MITRE D3FEND, defined in Administration → Technique Frameworks. A MSEL pools attack techniques from one release and defensive techniques from another, and scenario events name them in **Attack Technique** and **Defensive Technique** data fields.
 
 **User Defined Data Fields:** The user adds on an as-needed basis.
 

@@ -41,3 +41,8 @@ exceptions:
   - HTML
   - JSON
   - CITE
+  # MITRE's framework names are names, not acronyms to expand (ATT is the first word of ATT&CK).
+  - MITRE
+  - ATT
+  - ATLAS
+  - STIX
