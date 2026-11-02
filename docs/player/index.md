@@ -413,7 +413,7 @@ Procedures assume you are in the Player VM Console app.
 The procedures below show you how to remotely power a VM on or off from within the Player VM Console app. These procedures assume you are in the Player VM Console app.
 
 1. In the Player VM Console app, select the virtual machine that you want.
-2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
+2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to **Power On**, **Power Off**, **Reboot**, and **Shutdown OS**. **Shutdown OS** shuts down the guest operating system cleanly and needs VMware Tools running in the VM. Without VMware Tools, the console grays out the option.
 
 ### Uploading Files
 
@@ -421,18 +421,18 @@ Player's VM Console app supports file transfers between your local machine and v
 
 #### Upload from Local to VM
 
-These procedures describe how to upload files from a local machine (an *out-of-game* computer) to a virtual machine in the Player VM Console app. You should use the **Send File to VM** option to upload small files.
+These procedures describe how to upload files from a local machine (an *out-of-game* computer) to a virtual machine in the Player VM Console app. You should use the **Send File To VM** option to upload small files.
 
 These procedures assume you are in the Player VM Console app.
 
 1. In the Player VM Console app, in the VM List, launch the virtual machine that you want.
-2. On the VM tab, click the **gear icon**, and then select **Files**, **Send File to VM**.
+2. On the VM tab, click the **gear icon**, and then select **Files**, **Send File To VM**.
 
 !!! note
 
-    If the **Send File to VM** option is grayed out, you will have to enter the credentials used to log in to the virtual machine. Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
+    If the **Send File To VM** option is grayed out, you will have to enter the credentials used to log in to the virtual machine. Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
 
-3. After entering your credentials, select the **Send File to VM** option (this should no longer appear grayed out).
+3. After entering your credentials, select the **Send File To VM** option (this should no longer appear grayed out).
 4. Select the file from your local machine that you want to upload.
 5. Click **Open**. This will copy the file to the destination folder specified in the VM Send File Settings window.
 
@@ -443,7 +443,7 @@ These procedures describe how to upload files from a local machine to mount as a
 1. In the VM List screen, click **Upload File**.
 2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).
 3. Click **Open**.
-4. On the VM tab, click the **gear icon**, and then select **Files**, **Mount File to DVD**.
+4. On the VM tab, click the **gear icon**, and then select **Files**, **Mount ISO**.
 5. In the Search box that opens, look for and select the uploaded file that you want to mount.
 
     !!! note
