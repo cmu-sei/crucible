@@ -405,7 +405,7 @@ Drafting has two steps. First the model writes the design, with a few questions 
     - **Gallery cards:** the cards on the Gallery wall.
 8. Click **Create MSEL**. Click **Edit description** to change the description and draft again, or **Discard** to close without saving.
 
-Blueprint creates the MSEL and opens it. A banner at the top of the MSEL's page shows each step as it is written: the outline of the injects, each move's situation briefing, CITE tasks, and read-in, with the injects counted against the design's plan as the model writes them; then the text of each inject, each Gallery article, and each profile, several at once; then the pages, Player applications, CITE, and the catalog metadata. Everything is saved as it is written, so you can work on the MSEL, or leave it, while it builds. Click **Cancel** to stop.
+Blueprint creates the MSEL and opens it. A banner at the top of the MSEL's page shows each step as it is written: the outline of the injects, each move's situation briefing, CITE tasks, and read-in, with the move briefings counted as the model writes them, then the injects against the design's plan; then the text of each inject, each Gallery article, and each profile, several at once; then the pages, Player applications, CITE, and the catalog metadata. Everything is saved as it is written, so you can work on the MSEL, or leave it, while it builds. Click **Cancel** to stop.
 
 A MSEL whose build stopped, after **Cancel**, an error, or a closed tab, shows **This MSEL is still being drafted with AI** on its page with what is left, and offers **Continue drafting**, which picks up from the last saved step, **Finish without them**, which skips the articles and profiles still to write, and **Discard draft**, which deletes the MSEL.
 
@@ -522,7 +522,7 @@ To write one value with AI:
 
 To write a profile with a logo, edit a team or an organization, and click **Write the team's profile with AI** or **Write the organization's profile with AI**.
 
-To make the MSEL's picture with AI, click **Generate Image** or **Regenerate Image** beside the card image on the **Info** tab. The picture is made from the MSEL's scenario, or from its description when it was not drafted with AI, and replaces the one it has. Click the picture to see it at full size. A server without an image model (`Ai:ImageModelId`) says so.
+To make the MSEL's picture with AI, click **Generate Image** or **Regenerate Image** beside the card image on the **Info** tab, or click the picture itself to see it at full size. In the dialog, say what the picture should show or change, or leave the box empty; the picture is made from the MSEL's scenario, or from its description when it was not drafted with AI, plus what you asked for, and replaces the one it has. The same scenario asked again gives much the same picture, so say what should change. A server without an image model (`Ai:ImageModelId`) says so. The AI usage table lists these calls as **MSEL picture**, apart from the **News photos** written into articles.
 
 #### Basic Information
 
