@@ -401,7 +401,7 @@ Drafting has two steps. First the model writes the design, with a few questions 
     - **Questions:** up to five questions whose answers change the exercise, each with a suggested answer and why it matters. Change any answer you disagree with; click **Use it** to put a suggestion back. The injects are written to your answers.
     - **Design:** the name, description, problem, premise, escalation ceiling, the critical infrastructure sectors the scenario touches, and the objectives as task, condition, and standard. The **Check before creating** list shows anything Blueprint corrected or the model assumed.
     - **Moves:** each move's start on the exercise clock, its scenario time, title, and purpose.
-    - **Teams and organizations:** each one's short name, name, and description. Each organization also has its sector (or none, for a news outlet or the adversary), size (**Small** under 100 people, **Medium** to 999, **Large** to 9,999, **Enterprise** 10,000 or more), industry, and country, which keep its staff, systems, and reach in scale across the articles. For a CITE template, each team's **CITE duties**, which members pick from in CITE. Click the **X** to remove one.
+    - **Teams and organizations:** each one's short name, name, and description. Each organization also has labelled **Sector** (a CISA critical infrastructure sector, or none for a news outlet or the adversary), **Size** (**Small** under 100 people, **Medium** to 999, **Large** to 9,999, **Enterprise** 10,000 or more), **Industry** (what it does within its sector, such as a regional wastewater utility), and **Country**, each with a tooltip; they keep its staff, systems, and reach in scale across the articles. Each team shows its **Competencies** as chips, which you can remove or add from the chosen frameworks, and for a CITE template its **CITE duties** as chips, which members pick from in CITE; type a duty and press Enter to add one. Click the **X** to remove a team or organization.
     - **Gallery cards:** the cards on the Gallery wall.
 8. Click **Create MSEL**. Click **Edit description** to change the description and draft again, or **Discard** to close without saving.
 
@@ -426,7 +426,7 @@ Besides the moves, teams, organizations, Gallery cards, and injects, creating a 
 - **Steamfitter**, when the MSEL uses Steamfitter: `STARTEX` and `ENDEX` rows, each with a Player notification to every participant.
 - **Exercise control:** your units become contributors, you join the exercise control team, and you become a CITE facilitator and a Gallery observer, so exercise control can watch every team. Every team sees every Gallery card; exercise control can post to them.
 - **Catalog metadata:** the Institute of Electrical and Electronics Engineers (IEEE) 2881 fields on the **Info** tab: difficulty, purpose, mode, subject, keywords, and language, written last, from the finished MSEL.
-- **A picture:** when the server has an image model, the MSEL gets a picture made from its scenario.
+- **A picture:** when the server has an image model, the MSEL gets a picture made from its scenario. On the **Info** tab, click the picture to see it at full size, and click **Regenerate Image** for another; **Generate Image** makes one for a MSEL that has none.
 - **Article markings:** the banner you chose on every Gallery article. See [Article Markings](#article-markings).
 
 When you push the integrations, Gallery gets the drafted articles. Pages and articles sit on white paper with dark text, so they read the same in light and dark themes.
@@ -521,6 +521,8 @@ To write one value with AI:
 3. Click **Use this**, **Try again**, or **Discard**.
 
 To write a profile with a logo, edit a team or an organization, and click **Write the team's profile with AI** or **Write the organization's profile with AI**.
+
+To make the MSEL's picture with AI, click **Generate Image** or **Regenerate Image** beside the card image on the **Info** tab. The picture is made from the MSEL's scenario, or from its description when it was not drafted with AI, and replaces the one it has. Click the picture to see it at full size. A server without an image model (`Ai:ImageModelId`) says so.
 
 #### Basic Information
 
