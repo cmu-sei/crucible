@@ -512,7 +512,15 @@ The assistant can add or edit teams, organizations, Gallery cards, moves and the
 
 To give injects something no column holds, ask for it, such as `Add a Severity column with Low, Medium, and High and set it on every inject`. The assistant proposes the column, with its type, its choices, the Gallery article parameter it fills, and whether it shows on the **Exercise View** and the scenario event list, and fills it on the injects in the same set of changes. Columns are added before the injects, so one **Apply** does both. It can also rename a column, change its type or choices, or move it on or off a view. It leaves out a column whose name is taken, choices on a column that is not text, or a Gallery parameter another column already fills, and says why.
 
-It cannot delete injects, moves, or columns, or change integrations, users, or pages.
+It can also turn on an integration the MSEL does not use yet, with what the integration needs, such as `Use Gallery and CITE for this exercise`. The MSEL's owner, or a user with `EditMsels`, can do this:
+
+- **Gallery:** Blueprint adds the article columns, which the injects in the same changes can fill, and the assistant proposes the Gallery cards and the article values on the injects.
+- **CITE:** Blueprint gives the teams CITE team types, and authors the scoring model the assistant chose (DoD CTT mission impact, DoD CTT likelihood, or CISA NCISS) when the MSEL has none.
+- **Player, Steamfitter, and Caster:** turned on; finish setting them up on their tabs, such as the Caster directory on the **Info** tab.
+
+It cannot change the integrations of a MSEL that has been pushed until it is pulled.
+
+It cannot delete injects, moves, or columns, turn an integration off, or change users or pages.
 
 ##### AI Usage
 
