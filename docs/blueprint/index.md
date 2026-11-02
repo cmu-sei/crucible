@@ -209,7 +209,7 @@ The **Technique Frameworks** page (**Techniques** in the Administration sidebar)
 1. Download the release file:
     - **MITRE ATT&CK**: a STIX bundle for any domain (`enterprise-attack.json`, `mobile-attack.json`, or `ics-attack.json`) from MITRE's `attack-stix-data` repository.
     - **MITRE ATLAS**: `stix-atlas.json` from the `mitre-atlas/atlas-data` GitHub releases. It imports as a release of the `ATLAS` domain.
-    - **MITRE D3FEND**: the ontology, `d3fend.json`, from the D3FEND Ontology Resources page. It imports as a release of the `d3fend` domain, whose techniques are defensive.
+    - **MITRE D3FEND**: the ontology, `d3fend.json`, from the D3FEND Ontology Resources page. It imports as a defensive release of the `d3fend` domain, so its techniques go to a MSEL's **Defensive Techniques** pool.
 2. Click **Import a release file** (the upload icon) and choose the file. Blueprint reads the version from the file; fill in **Version** only for an older file that doesn't name one.
 
 Blueprint refuses a release that's already imported. Each row shows the release's **Name**, **Domain**, **Version**, release date, and its counts of **Tactics** and **Techniques**. The trash can deletes a release no MSEL uses; a release that any MSEL's techniques come from stays until those MSELs upgrade or clear them.
