@@ -648,6 +648,13 @@ The available roles are:
 - **[`Evaluator`](#glossary):** Manages the exercise, can advance moves, execute events, and check events as completed.
 - **[`Viewer`](#glossary):** Can view the MSEL, but can't edit it.
 
+Each contributor also has a **CITE Role** and a **Gallery Role**, which the push sends to CITE and Gallery. Blueprint fills them in where they are empty, so exercise control and assessors can watch every team:
+
+- A contributor added to the `EXCON` team gets **CITE Role** `Facilitator`, which sees every team and advances the moves, and **Gallery Role** `Observer`.
+- A contributor given the `Evaluator` role gets **CITE Role** `Observer`, which sees every team but changes nothing, and **Gallery Role** `Observer`.
+
+A role you set by hand stays, and you can change either on this tab at any time.
+
 #### Competencies
 
 On the **Competencies** tab, MSEL owners attach a competency framework (defined in the Administration Competencies page) and select which work roles, tasks, and specific knowledge, skills, and abilities apply to the MSEL. Selected competencies can then be associated with teams and scenario events, enabling assessment during the Assessor View.
