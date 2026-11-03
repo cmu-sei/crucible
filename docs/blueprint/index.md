@@ -1451,6 +1451,8 @@ You can add URL parameters to point to a specific CITE evaluation, Gallery exhib
 
 After you've added all desired configurations, click **Save**.
 
+Each team shows a view once in Player. Two apps show the same view when they open the same page, whatever their names. CITE opens on the dashboard when the URL names no `section`, and Gallery opens on the archive. Blueprint refuses to give a team an app it has, or another app for a view it has, and names the app the team has. When you push the integrations, a team that still has two apps for one view gets only the first in its order.
+
 ##### Edit a Player App
 
 To edit a Player app, follow these steps:
