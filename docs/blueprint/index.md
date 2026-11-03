@@ -449,6 +449,7 @@ Besides the moves, teams, organizations, Gallery cards, and injects, creating a 
 - **Catalog metadata:** the Institute of Electrical and Electronics Engineers (IEEE) 2881 fields on the **Info** tab: difficulty, purpose, mode, subject, keywords, and language, written last, from the finished MSEL.
 - **A picture:** when the server has an image model, the MSEL gets a picture made from its scenario. On the **Info** tab, click the picture to see it at full size, and click **Regenerate Image** for another; **Generate Image** makes one for a MSEL that has none.
 - **Article markings:** the banner you chose on every Gallery article. See [Article Markings](#article-markings).
+- **One set of scenario indicators:** the hosts, addresses, domains, file hashes, and senders every alert, report, email, and Cyber Threat Intelligence (CTI) event names, so participants can pivot from one to the next. When the template has **IP Address** and **Network** columns, each row's values come from the set. See [Scenario Indicators](#scenario-indicators).
 
 When you push the integrations, Gallery gets the drafted articles. Pages and articles sit on white paper with dark text, so they read the same in light and dark themes.
 
@@ -474,6 +475,25 @@ Blueprint puts a marking banner on every Gallery article it writes, so the marki
 - **None:** no banner.
 
 Articles already written keep their banner until Write with AI rewrites them.
+
+##### Scenario Indicators
+
+The outline of the injects includes one set of indicators for the whole scenario, which every row and Gallery article uses:
+
+- **The defenders' hosts:** each host's name, role, address, and network. When the MSEL uses Caster and has a Caster workspace, or its template has one, the hosts are the machines in the workspace's plan, by their names, so a report names a host the teams can reach. Blueprint uses the addresses and networks Caster gives for each machine and makes up private ones where Caster gives none. A machine with the **Attacker** role in Caster's topology view, or one only on an internet or red team network, is the adversary's. When Blueprint can't read the workspace, it makes up the hosts, the build goes on, and the warnings say why.
+- **Each organization's own domain**, for its people's email addresses and its website.
+- **The adversary's infrastructure:** command and control addresses and domains, files, phishing senders, and user agents, each with what it's for, and the threat actor's name.
+
+Every value is fictional and safe. Hosts have private addresses: `10.0.0.0/8`, `172.16.0.0/12`, or `192.168.0.0/16`. Adversary addresses come from the documentation ranges, `192.0.2.0/24`, `198.51.100.0/24`, and `203.0.113.0/24`, or from the range's own internet network. Every domain ends in `.example` or `.test`, and Blueprint makes up each file's hashes. Blueprint replaces any value the model wrote outside these, and the warnings list them.
+
+The model writes each row and article with only the indicators it names. Blueprint then checks what it wrote. Any IP address, network, domain, file hash, or email address that isn't in the set becomes a value of the same kind from the set, the same one each time. The MSEL's own organization and team email addresses stay. The build's warnings say how many values it replaced in each row or article, and which. Version numbers, times, phone numbers, network masks, and file names stay as written.
+
+The model writes two to four Intel articles as a CTI event, as a threat-sharing platform such as the Malware Information Sharing Platform (MISP) shows one:
+
+- **Event header:** the event ID, event info, date, threat level, analysis state, and distribution.
+- **Tags:** the TLP level when the article marking is TLP, the threat actor, and, as `mitre-attack-pattern` tags, the attack techniques of the inject and of the injects that share its indicators.
+- **Attributes:** a table of category, type, value, Intrusion Detection System (IDS) flag, and comment, from the indicator set only.
+- **Related events:** the other articles that share its indicators.
 
 #### Filter Display
 
