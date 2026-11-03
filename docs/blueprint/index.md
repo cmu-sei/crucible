@@ -533,7 +533,8 @@ To write one value with AI:
 
 1. Open a scenario event, and click **Write [field name] with AI** beside a long text field: an HTML column, or the Gallery **Summary**. Short fields such as the title, sender, and source have no button; they are quicker to type than to ask for.
 2. Describe what you want, and click **Write**.
-3. Click **Use this**, **Try again**, or **Discard**.
+3. Compare the **Current** and **Proposed** values side by side. A Gallery article is shrunk to fit its half of the dialog, so you see the whole page; in a narrow window the two are stacked.
+4. Click **Use this**, **Try again**, or **Discard**.
 
 To write a profile with a logo, edit a team or an organization, and click **Write the team's profile with AI** or **Write the organization's profile with AI**.
 
