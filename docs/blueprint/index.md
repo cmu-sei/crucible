@@ -486,7 +486,7 @@ The outline of the injects includes one set of indicators for the whole scenario
 
 Every value is fictional and safe. Hosts have private addresses: `10.0.0.0/8`, `172.16.0.0/12`, or `192.168.0.0/16`. Adversary addresses come from the documentation ranges, `192.0.2.0/24`, `198.51.100.0/24`, and `203.0.113.0/24`, or from the range's own internet network. Every domain ends in `.example` or `.test`, and Blueprint makes up each file's hashes. Blueprint replaces any value the model wrote outside these, and the warnings list them.
 
-The model writes each row and article with only the indicators it names. Blueprint then checks what it wrote. Any IP address, network, domain, file hash, or email address that isn't in the set becomes a value of the same kind from the set, the same one each time. The MSEL's own organization and team email addresses stay. The build's warnings say how many values it replaced in each row or article, and which. Version numbers, times, phone numbers, network masks, and file names stay as written.
+The model writes each row and article with only the indicators it names. Blueprint then checks what it wrote. Any IP address, network, domain, file hash, or email address not in the set becomes one of the same kind from the set, the same one each time. The MSEL's own organization and team email addresses stay. The build's warnings say how many values it replaced in each row or article, and which. Version numbers, times, phone numbers, network masks, and file names stay as written.
 
 The model writes two to four Intel articles as a CTI event, as a threat-sharing platform such as the Malware Information Sharing Platform (MISP) shows one:
 
