@@ -50,6 +50,24 @@ The provider is `Bedrock`, the default, or `OpenAI`, which is any endpoint that 
 
 The API uses the default AWS credential chain of its host. Caster uses the same `Ai` settings for its AI features.
 
+#### Audio and Video
+
+**Write with AI** can also voice an inject: read its article aloud, or make a voicemail, an intercepted call, a broadcast clip, or a news reel. These options appear only when the API has a speech provider in `Ai:Speech`:
+
+- **`Ai:Speech:Provider`:** `Polly` for Amazon Polly, or `OpenAI` for any server that offers the OpenAI `/v1/audio/speech` API, such as a local text-to-speech server on a network with no internet. Leave it empty, the default, for no audio.
+- **`Ai:Speech:Region`:** Polly's AWS region. The default is `us-east-1`. Polly uses the same default AWS credential chain as Bedrock, and those credentials need the `polly:SynthesizeSpeech` permission.
+- **`Ai:Speech:Engine`:** Polly's engine. The default is `neural`, the only engine with the newscaster style that broadcast and reel anchors read in.
+- **`Ai:Speech:BaseUrl`**, **`Ai:Speech:ApiKey`**, and **`Ai:Speech:Model`:** for `OpenAI`, the endpoint, such as `https://api.openai.com/v1`, its key, and the speech model, such as `tts-1`. This API returns no timings, so Blueprint estimates when each sentence and word starts from its length.
+- **`Ai:Speech:Voices`:** the voices a clip may use, each with a `Name`, a `Gender`, a `Label` such as `British English`, and `News` when it reads in the newscaster style. Leave it empty for Polly's English neural voices or OpenAI's six voices.
+- **`Ai:Speech:MaxCharacters`:** the most characters one clip may read aloud. The default is `6000`, about seven minutes.
+
+The text model writes the voicemail, call, broadcast, and reel scripts, so they also need `Ai:Enabled`. A reel without a photo of its own gets one from `Ai:ImageModelId` when it's set. Price what the speech provider voices in `Ai:Prices` with `PerMillionCharacters`, keyed `polly-neural` for Polly's neural voices or by the OpenAI model ID. For example:
+
+```json
+"Speech": { "Provider": "Polly", "Region": "us-east-1" },
+"Prices": { "polly-neural": { "PerMillionCharacters": 16 } }
+```
+
 !!! note
 
     The AI never changes a MSEL on its own. You review everything it writes, and nothing is saved until you confirm it.
@@ -527,7 +545,7 @@ It cannot delete injects, moves, or columns, turn an integration off, or change 
 
 ##### AI Usage
 
-Blueprint records every call to an AI model made for a MSEL, including the calls that wrote its draft. The MSEL's owner, and users with the `ViewMsels` permission, see an **AI usage** table at the end of the **Config** section of the **Info** tab. It lists each step, such as **Design**, **Inject outline, CITE tasks and read-in**, **Inject text**, **Gallery articles**, **Ask AI**, and **News photos**, with its calls, input and output tokens, photos, and estimated cost. The estimate uses the prices in `Ai:Prices`; it totals the calls whose models have a price and names the models that have none. It includes calls the model declined, because the provider bills those too. The table updates as the calls end, without a refresh.
+Blueprint records every call to an AI model made for a MSEL, including the calls that wrote its draft. The MSEL's owner, and users with the `ViewMsels` permission, see an **AI usage** table at the end of the **Config** section of the **Info** tab. It lists each step, such as **Design**, **Inject outline, CITE tasks and read-in**, **Inject text**, **Gallery articles**, **Ask AI**, and **News photos**, with its calls, input and output tokens, photos, and estimated cost. **Audio scripts** are the model's calls that wrote voicemails, calls, broadcasts, and reels. **Audio** counts each request to the speech provider. Once the provider voices anything, a **Characters voiced** column appears. Polly bills a clip twice, once for the audio and once for its timings, so the table counts both. The estimate uses the prices in `Ai:Prices`; it totals the calls whose models have a price and names the models that have none. It includes calls the model declined, because the provider bills those too. The table updates as the calls end, without a refresh.
 
 To write one value with AI:
 
@@ -535,6 +553,20 @@ To write one value with AI:
 2. Describe what you want, and click **Write**.
 3. Compare the **Current** and **Proposed** values side by side. A Gallery article is shrunk to fit its half of the dialog, so you see the whole page; in a narrow window the two are stacked.
 4. Click **Use this**, **Try again**, or **Discard**.
+
+To add audio or video to an inject, open **Write [field name] with AI** on its article field and choose from **What to do**:
+
+- **Add 'Listen to this article':** reads the article as written, headline first, and puts a **Listen to this article** player at the top, under the marking. No model writes anything. Each outlet, by its source name, always gets the same voice. The marking, small-print captions, and any transcript aren't read.
+- **Make a voicemail**, on a Phone inject: the sender's voicemail, 20 to 45 seconds, as if heard over a phone line.
+- **Make an intercepted call**, on an Intel inject: a call between two or more speakers, each in their own voice, as if heard over a phone line, with speaker-labeled captions.
+- **Make a news broadcast clip**, on a News inject: the outlet's 30 to 60 second spoken version of the story, its anchor in the outlet's voice, with any quoted official in their own.
+- **Make a news reel**, on a Social or News inject: a 15 to 30 second vertical video of the story for social media. The article's photo, or one made for it, pans behind the outlet's name and handle and a **BREAKING** headline. Captions burned into the video show a few words at a time, with the spoken word in yellow. The last three seconds are an end card. The reel comes with the post's text.
+
+For a voicemail, call, or broadcast, choose **Audio only**, **Still card video**, or **Waveform video** under **Format**. A video has closed captions and a title card: **VOICEMAIL**, **INTERCEPT**, or the outlet's name, under the MSEL's marking. A transcript follows each clip, in a **Transcript** section participants can expand.
+
+Write with AI shows the clip in the article, with its length and format. **Use this** puts it where the article's body starts. A reel belongs on a Social inject. To move one made on a News inject, click **Copy HTML**, then paste it into a field of the Social inject in the editor's HTML view.
+
+Your browser makes the video, so it takes a few seconds and needs a browser that can encode H.264 video, such as Chrome or Edge. A browser with no Advanced Audio Coding (AAC) encoder gives the video Opus audio. Older Safari plays Opus in MP4 without sound, so Blueprint keeps the MP3 player beside the video. In a browser that can't encode video, the clip is audio only.
 
 To write a profile with a logo, edit a team or an organization, and click **Write the team's profile with AI** or **Write the organization's profile with AI**.
 
