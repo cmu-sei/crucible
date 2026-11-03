@@ -359,6 +359,10 @@ After a JSON upload, Blueprint shows a report for the imported MSEL:
 - **Changed:** what Blueprint adjusted to fit this Blueprint, such as a new name when a MSEL with the file's name already exists, a CITE scoring model or team type linked by name, team members that could not be imported, and which integrations are on.
 - **Failed:** steps that could not be completed, such as checking the scoring model in CITE, with what to do before pushing.
 
+Competencies come across by code, not by ID, because each Blueprint gives its competencies its own IDs. The MSEL's and its teams' [competencies](#competencies) link to the competency in this Blueprint that has the same framework code and competency code; a file from an older Blueprint, which has no codes, keeps only the links to competencies this Blueprint already has. Blueprint drops a competency it does not have, and **Changed** says how many links it dropped and names any missing competency frameworks. To keep those competencies, import the frameworks in the Administration Competencies page, then add the competencies to the MSEL and its teams again. **Competency** data fields keep only the competencies the import kept; **Changed** counts the options and scenario event values it removed.
+
+If Blueprint can't save the file, it imports nothing and names what it refused, for example `The MSEL could not be imported because the file has the same row twice in card_teams (IX_card_teams_team_id_card_id). Nothing was imported.`
+
 Click **Open MSEL** to open the new MSEL, or **Close** to stay on the MSEL list.
 
 #### Filter Display
