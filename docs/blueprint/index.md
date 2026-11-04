@@ -1311,7 +1311,7 @@ The map appears under **Caster** on the **Info** tab when the MSEL uses Player a
 - **Refresh preview:** draws the preview again without sending anything to Player.
 - **Edit layout in Caster:** opens the workspace in Caster. Open its **Topology View** to move machines and networks and to give machines roles, then return to Blueprint and click **Update map**.
 
-Caster's topology view is the one place to edit the layout. Blueprint places machines and networks where they were saved in Caster's tree layout, or its force layout when nothing has a tree position. Anything never moved in Caster is placed by Blueprint: networks in a row, each with its machines below it, so the map can differ from what Caster draws for the same nodes until they are moved there.
+Caster's topology view is the one place to edit the layout. Blueprint places machines and networks where they were saved in Caster's tree layout, or its force layout when nothing has a tree position. When nothing has been moved in Caster, Blueprint draws a network diagram: each network is a bar across the map, ordered so that a machine on two networks sits between their bars, and each machine hangs under its network, with links that cross no other machine. When some nodes have been moved in Caster, the ones never moved are placed beside them: networks in a row, each with its machines below it. Either way, the map can differ from what Caster draws for nodes nobody moved.
 
 Changes made to the map in Player's map editor are overwritten by the next **Update map** or push. Other maps in the view are left alone.
 
