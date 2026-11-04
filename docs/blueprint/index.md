@@ -437,6 +437,7 @@ Besides the moves, teams, organizations, Gallery cards, and injects, creating a 
 - **Two clocks:** each move has a scenario time, which can jump ahead between moves. Blueprint dates each Gallery article within its move's scenario time.
 - **An Expected Actions column:** what participants should do for each inject. It shows on the event list for controllers but not on the exercise view.
 - **A Gallery status color on every row:** the model chooses each article's **Status** color as Gallery shows it on the wall: Gray for background or routine news, Green for good news or a problem resolved, Yellow for a developing situation, Orange for a serious one, and Red for a critical one. Rows that are not Gallery articles, and any row the model gives no color, are Gray.
+- **Source Type on the list:** the column that holds each inject's Gallery source type shows on the **Scenario Events** list and its default tab.
 - **Columns marked for each view**, when the template marks none: the title and Expected Actions show on Information and Facilitation rows; and the title, Expected Actions, competency, and recipient organization columns, with each row's move and time, show on the **Assessor View**.
 - **Pages:**
   - **Exercise Overview:** the objectives, teams and roles, schedule, and assessment. Every participant can see it.
