@@ -578,7 +578,7 @@ To write one value with AI:
 
 To add audio or video to an inject, open **Write [field name] with AI** on its article field and choose from **What to do**:
 
-- **Add 'Listen to this article':** reads the article as written, headline first, and puts a **Listen to this article** player at the top, under the marking. No model writes anything. Each outlet, by its source name, always gets the same voice. The marking, small-print captions, and any transcript aren't read.
+- **Add 'Listen to this article':** reads the article as written, headline first, and puts a **Listen to this article** player under the headline, as a news site does, or under the marking when the headline is not found. No model writes anything. Each outlet, by its source name, always gets the same voice. The marking, small-print captions, and any transcript aren't read.
 - **Make a voicemail**, on a Phone inject: the sender's voicemail, 20 to 45 seconds, as if heard over a phone line.
 - **Make an intercepted call**, on an Intel inject: a call between two or more speakers, each in their own voice, as if heard over a phone line, with speaker-labeled captions.
 - **Make a news broadcast clip**, on a News inject: the outlet's 30 to 60 second spoken version of the story, its anchor in the outlet's voice, with any quoted official in their own.
