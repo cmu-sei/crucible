@@ -312,11 +312,11 @@ Content developers use Blueprint to build and manage MSELs.
 
 The **Event Dashboard** is Blueprint's homepage. It shows a card for each thing the current user can do: **Join**, **Launch**, **Build**, and **Assess**. Each card shows how many events it applies to. While data loads, an **Initializing Data** card is displayed with a progress spinner.
 
-Below the mission cards, four cards describe what Blueprint does: **Collaborative Planning**, **Integrated Platform**, **Scenario Design**, and **Cyber Range Ready**. Click one to read more.
+Below the mission cards, three cards describe what Blueprint does: **Competency-Based Assessment**, **Collaborative Planning**, and **Hands-On and Tabletop Exercises**. Click one to read more.
 
 #### Join an Event
 
-The **Join** card (*Active Exercises*) counts the in-progress events the user can join. Click **Join Event** to go to `/join`, which shows a card for each of those events with its name and description. Click **Join** on a card to open the event in Player. **Join** is a link, so it can also be opened in a new tab. When there is nothing to join, the card shows **No active events available to join** and cannot be clicked.
+The **Join** card (*Active Exercises*) counts the in-progress events the user can join. Click **Join Event** to go to `/join`, which shows a card for each of those events with its name and description. A name or description too long for the card ends in an ellipsis; hover over it, or tab to it, to see it in full. Click **Join** on a card to open the event in Player. **Join** is a link, so it can also be opened in a new tab. When there is nothing to join, the card shows **No active events available to join** and cannot be clicked.
 
 #### Start an Event
 
@@ -328,7 +328,7 @@ If the user holds the `CreateMsels` permission or is a contributor on any MSEL, 
 
 #### Assess an Event
 
-If the user is a System Admin or an Evaluator on any MSEL, the **Assess** card (*Evaluation & Scoring*) is shown, with the number of those MSELs that have scenario events. Evaluators open a MSEL's [Assessor View](#assessor-view) from its **Assessor View URL**.
+If the user is a System Admin, or an Owner or Evaluator on any MSEL (a MSEL's creator counts as its Owner), the **Assess** card (*Evaluation & Scoring*) is shown, with the number of those MSELs that are running (`Deployed`). Click **Assess Events** to go to `/assess`, which shows a card for each running event the user can assess, with its name, description, and number of competencies. Click **Assess** on a card to open that event's [Assessor View](#assessor-view). An event with no competencies says **No competencies to assess** but still opens, because its Assessor View still shows the xAPI evidence and **Checkbox** data fields. When there is nothing to assess, the page shows **No running events available to assess**.
 
 If the user can do none of these, a single **No Access** card is shown instead.
 
@@ -383,7 +383,7 @@ The MSEL Catalog shows created MSELs. Users can select a MSEL to work on, create
 Two actions are available in the MSEL list table header:
 
 - **Add blank MSEL** (**+** icon): creates a new MSEL with default settings. The new MSEL appears with status `Pending` and a description such as "Created from Default Settings by [username]".
-- **Upload a new MSEL from a file** (upload icon): choose **Upload xlsx file** or **Upload JSON file**, then select the file to create a new MSEL from its contents. A `.json` file is one exported with **Download JSON file** from a MSEL's row actions.
+- **Upload a new MSEL from a file** (upload icon): choose **Upload xlsx file** or **Upload JSON file**, then select the file to create a new MSEL from its contents. A `.json` file is one exported with **Download JSON file** from a MSEL's row actions. Blueprint refuses a file that isn't valid JSON or isn't a Blueprint MSEL, and creates nothing.
 
 ##### JSON Import Report
 
@@ -531,7 +531,7 @@ Each MSEL row in the catalog exposes four icon buttons in the first column:
 - **Delete [MSEL name]** (trash can icon): permanently removes the MSEL and its associated data. Template MSELs cannot be deleted; the trash can is disabled for them.
 - **Copy [MSEL name]** (copy icon): duplicates the MSEL into a new, editable copy.
 
-Click the MSEL's name (a link in the Name column) to open it for editing.
+Click the MSEL's name (a link in the Name column) to open it for editing. The Description column shows one line of each description; hover over a shortened one to see it in full.
 
 !!! important
 
@@ -768,6 +768,16 @@ There are two categories of Data Fields:
 
 - **[System Defined](#glossary):** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
 - **[User Defined](#glossary):** Added by the user on an as-needed basis.
+
+##### Who Can Change Data Fields
+
+| What | Who can change it |
+| --- | --- |
+| A user-defined data field and its option list | Users with EditMsels, the MSEL's Owner (including its creator), and its Editors |
+| The **Move**, **Group**, **Execution Time**, and **Integration Target** rows | Users with EditMsels and the MSEL's Owner, because they are MSEL settings |
+| **Make a template** from a data field | The above, with ManageDataFields as well |
+
+For everyone else, including users with the Approver role, the tab is read-only. An Approver still edits and approves scenario events.
 
 ##### Add a Data Field
 
@@ -1062,11 +1072,11 @@ The Assessor View is also available outside the MSEL editor via the **Assessor V
 | **Owner**, **Evaluator** | View the Assessor View and check or clear **Checkbox** data fields |
 | **Editor**, **Approver** | View the Assessor View |
 
-System Admins have full access to every MSEL's Assessor View. Users with no role on the MSEL see **Access Denied**.
+A MSEL's creator counts as its Owner. System Admins have full access to every MSEL's Assessor View. Users with no role on the MSEL see **Access Denied**.
 
 ##### Choose What Assessors See
 
-The Assessor View shows only the columns the MSEL owner marks for it. If none are marked, it shows **No data fields are marked as assessor-visible.**
+The Assessor View shows only the columns the MSEL owner marks for it. If none are marked, it shows **No data fields are marked as assessor-visible.** On the Assessor View tab inside the MSEL, it points at the **Data Fields** tab. Opened from its **Assessor View URL**, it offers **Open Data Fields** to users who can change the data fields (EditMsels, the MSEL's creator, or an Owner or Editor), and tells anyone else to ask the MSEL owner.
 
 To choose the Assessor View columns, follow these steps:
 
@@ -1123,13 +1133,14 @@ To add a new invitation, follow these steps:
 
 ##### Data Format Table
 
-| Field                                                      | Data Type     | Description                                     | Example                              |
-| ---------------------------------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------ |
-| **Team**                                                   | Dropdown Text | Team tied to the invitation                     | SEI - Software Engineering Institute |
-| **Email Domain**                                           | String        | User's email domain                             | `@sei.cmu.edu`                       |
-| **Expiration Date/Time**                                   | Datetime      | Date and time when the invitation should expire | 04/15/2024 15:12:03                  |
-| **Maximum Number of Users Allowed to Use this Invitation** | Integer       | Number of users that can use the invitation     | 5                                    |
-| **Can Invite others to this Team**                         | Boolean       | Permission to add others to the team            | False                                |
+| Field                                                      | Data Type     | Description                                                                                                          | Example                              |
+| ---------------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| **Team**                                                   | Dropdown Text | Team tied to the invitation                                                                                          | SEI - Software Engineering Institute |
+| **Email Domain**                                           | String        | User's email domain                                                                                                  | `@sei.cmu.edu`                       |
+| **Expiration Date/Time**                                   | Datetime      | Date and time when the invitation should expire                                                                      | 04/15/2024 15:12:03                  |
+| **Maximum Number of Users Allowed to Use this Invitation** | Integer       | Number of users that can use the invitation                                                                          | 5                                    |
+| **Can Invite others to this Team**                         | Boolean       | Permission to add others to the team                                                                                 | False                                |
+| **CITE Team Role**                                         | Dropdown Text | With CITE, the [CITE team role](#cite-team-roles) people who join through this invitation get. Starts at **Member**. | Contributor                          |
 
 After you've added all desired configurations, click **Save**.
 
@@ -1207,9 +1218,9 @@ A CITE administrator can add roles, such as one that can see or change the offic
 
 !!! warning
 
-    A member whose **Type** is **-- None --** gets no role in CITE. CITE then disables their answer boxes, so they cannot score. Give every participant a role before pushing: for example, **Submitter** for the team's recorder and **Contributor** for the others.
+    A member whose **Type** is **-- None (Member in CITE) --** gets the **Member** role in CITE, which can view the team but not answer. Give every participant who scores a role before pushing: for example, **Submitter** for the team's recorder and **Contributor** for the others.
 
-    People who join a team through an [invitation](#invitations) after the push are added to the CITE team with no role. Give them a role in CITE before play.
+    People who join a team through an [invitation](#invitations) get the invitation's **CITE Team Role**, which starts at **Member**. Set it to **Contributor** or **Submitter** on invitations for participants who score; a separate invitation for recorders can give them **Submitter**.
 
 ##### CITE Actions
 
@@ -1435,8 +1446,8 @@ To add a Player app, follow these steps:
 | Field                  | Data Type | Description                                          | Example                                         |
 | ---------------------- | --------- | ---------------------------------------------------- | ----------------------------------------------- |
 | **Name**               | String    | Name of the application                              | Chat                                            |
-| **Url**                | String    | URL of the application                               | `roundcube.hamilton.treasury.gov`               |
-| **Icon Url**           | String    | URL of the application's icon                        | `roundcube.hamilton.treasury.gov/roundcube.png` |
+| **Url**                | String    | URL of the application                               | `{vmUrl}/views/{playerViewId}`                  |
+| **Icon Url**           | String    | URL of the application's icon                        | `{galleryUrl}/assets/img/archive-blue.png`      |
 | **Embeddable**         | Boolean   | Select whether to embed the app in Player's iFrame   | True                                            |
 | **Load in Background** | Boolean   | Select whether the app should load in the background | True                                            |
 
@@ -1511,6 +1522,22 @@ The Teams tab warns when a team is mapped to a variable the template no longer d
 
 Participants reach the deployed VMs through the VM UI. Add a [Player app](#add-a-player-app) whose URL uses `{vmUrl}`, for example `{vmUrl}/views/{playerViewId}`. Until the MSEL has one, the **Info** and **Player Apps** tabs warn that participants will not be able to reach the Caster VMs.
 
+##### Network Map
+
+Blueprint draws a network map of the Caster workspace and gives it to the Player view as a VM [map](../player/index.md#maps), so participants can open a VM's console by clicking it on the map. The map shows each network as a colored bar and each machine as a box joined to the networks it is on. A machine is labeled with its name in Player, the name its console shows; a machine with no Player record keeps its Caster name, is drawn dashed, and cannot be clicked. A role given to a machine in Caster, such as *Domain controller*, appears above its name.
+
+The map appears under **Caster** on the **Info** tab when the MSEL uses Player and Caster. Once the push has created the workspace, the MSEL owner sees a preview of the map, how many machines it shows, and which machines have no Player console.
+
+- **Update map:** draws the map again from the workspace's saved layout and writes it to the Player view, replacing the map an earlier update made. If the view has no Network Map app, Blueprint adds one, named **Network Map**, for the teams that can open the mapped machines and the view's Admin team, and adds it to the MSEL's **Player Apps** too. **Update map** needs the Player view, so it is available after a push.
+- **Refresh preview:** draws the preview again without sending anything to Player.
+- **Edit layout in Caster:** opens the workspace in Caster. Open its **Topology View** to move machines and networks and to give machines roles, then return to Blueprint and click **Update map**.
+
+Caster's topology view is the one place to edit the layout. Blueprint places machines and networks where they were saved in Caster's tree layout, or its force layout when nothing has a tree position. When nothing has been moved in Caster, Blueprint draws a network diagram: each network is a bar across the map, ordered so that a machine on two networks sits between their bars, and each machine hangs under its network, with links that cross no other machine. When some nodes have been moved in Caster, the ones never moved are placed beside them: networks in a row, each with its machines below it. Either way, the map can differ from what Caster draws for nodes nobody moved.
+
+Changes made to the map in Player's map editor are overwritten by the next **Update map** or push. Other maps in the view are left alone.
+
+Blueprint writes the map to the VM API set in its `ClientSettings:VmApiUrl` setting. When the setting is empty, the push makes no map and **Update map** says no VM API is configured.
+
 #### Push Integrations
 
 After adding all of the MSEL information and performing all necessary configurations, you can push information from enabled integrations to their respective applications.
@@ -1523,6 +1550,8 @@ To push MSEL information to their respective applications, follow these steps:
 2. Click **Push Integrations**.
 
 When Caster is enabled, Blueprint deploys the topology last, after the other integrations, because the Terraform apply can take a long time.
+
+After the apply, Blueprint makes the [network map](#network-map) in the Player view from the workspace's topology, and adds the Network Map app if the view has none. A workspace with no machines gets no map. If the map cannot be made, the push still finishes, and the status shows **Network map was not made in Player** with the reason; click **Update map** to try again.
 
 #### Remove Integrations
 
