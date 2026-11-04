@@ -40,4 +40,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build docs
-        run: mkdocs build
+        run: mkdocs build --strict
