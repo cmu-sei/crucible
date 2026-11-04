@@ -863,6 +863,18 @@ While the **Events** tab lets MSEL owners and content developers manage events, 
 
 ![Blueprint Exercise View OE](img/blueprintExerciseView-v3.png)
 
+##### What Participants See
+
+A participant is a member of one of the MSEL's teams who holds no role on the [Contributors](#contributors) tab. Blueprint sends a participant only what the Exercise View shows:
+
+- Events not hidden on the Exercise View
+- Data fields marked **Display on the Exercise View**
+- MSEL pages marked **All MSEL users can view this page**
+
+Participants don't receive the rest of the MSEL: hidden events, other data fields, organizations, CITE actions and duties, and Gallery cards. They also can't download the MSEL or copy it. Contributors and users with the `ViewMsels` permission see the whole MSEL.
+
+To keep an event from participants until its move, click the eye icon on its row of the **Events** tab (**Hide event on the Exercise View**). Click it again when the move starts to show the event to participants.
+
 #### Assessor View
 
 The **Assessor View** tab is where Evaluators watch a live exercise and rate the participating teams against the MSEL's competencies. Each scenario event shows the xAPI statements the exercise applications recorded for it, beside a competency assessment where the Evaluator rates each competency and submits the rating as an xAPI competency assertion. The MSEL's content is read-only here; the only values an Evaluator can change are **Checkbox** data fields.
