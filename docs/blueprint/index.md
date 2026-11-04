@@ -1301,6 +1301,22 @@ The Teams tab warns when a team is mapped to a variable the template no longer d
 
 Participants reach the deployed VMs through the VM UI. Add a [Player app](#add-a-player-app) whose URL uses `{vmUrl}`, for example `{vmUrl}/views/{playerViewId}`. Until the MSEL has one, the **Info** and **Player Apps** tabs warn that participants will not be able to reach the Caster VMs.
 
+##### Network Map
+
+Blueprint draws a network map of the Caster workspace and gives it to the Player view as a VM [map](../player/index.md#maps), so participants can open a VM's console by clicking it on the map. The map shows each network as a colored bar and each machine as a box joined to the networks it is on. A machine is labeled with its name in Player, the name its console shows; a machine with no Player record keeps its Caster name, is drawn dashed, and cannot be clicked. A role given to a machine in Caster, such as *Domain controller*, appears above its name.
+
+The map appears under **Caster** on the **Info** tab when the MSEL uses Player and Caster. Once the push has created the workspace, the MSEL owner sees a preview of the map, how many machines it shows, and which machines have no Player console.
+
+- **Update map:** draws the map again from the workspace's saved layout and writes it to the Player view, replacing the map an earlier update made. If the view has no Network Map app, Blueprint adds one, named **Network Map**, for the teams that can open the mapped machines and the view's Admin team, and adds it to the MSEL's **Player Apps** too. **Update map** needs the Player view, so it is available after a push.
+- **Refresh preview:** draws the preview again without sending anything to Player.
+- **Edit layout in Caster:** opens the workspace in Caster. Open its **Topology View** to move machines and networks and to give machines roles, then return to Blueprint and click **Update map**.
+
+Caster's topology view is the one place to edit the layout. Blueprint places machines and networks where they were saved in Caster's tree layout, or its force layout when nothing has a tree position. Anything never moved in Caster is placed by Blueprint: networks in a row, each with its machines below it, so the map can differ from what Caster draws for the same nodes until they are moved there.
+
+Changes made to the map in Player's map editor are overwritten by the next **Update map** or push. Other maps in the view are left alone.
+
+Blueprint writes the map to the VM API set in its `ClientSettings:VmApiUrl` setting. When the setting is empty, the push makes no map and **Update map** says no VM API is configured.
+
 #### Push Integrations
 
 After adding all of the MSEL information and performing all necessary configurations, you can push information from enabled integrations to their respective applications.
@@ -1313,6 +1329,8 @@ To push MSEL information to their respective applications, follow these steps:
 2. Click **Push Integrations**.
 
 When Caster is enabled, Blueprint deploys the topology last, after the other integrations, because the Terraform apply can take a long time.
+
+After the apply, Blueprint makes the [network map](#network-map) in the Player view from the workspace's topology, and adds the Network Map app if the view has none. A workspace with no machines gets no map. If the map cannot be made, the push still finishes, and the status shows **Network map was not made in Player** with the reason; click **Update map** to try again.
 
 #### Remove Integrations
 
