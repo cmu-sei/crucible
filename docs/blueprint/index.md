@@ -884,6 +884,26 @@ The **Competency Assessment** panel on the right of an expanded row lists the co
 
 Each submitted rating is marked **Submitted**. Blueprint records it in the Learning Record Store (LRS) as an xAPI statement with the `asserted` verb, so xAPI must be configured for Blueprint.
 
+##### Read Team Responses
+
+When the MSEL uses CITE, the **Team Responses** panel sits beside **Competency Assessment** in an expanded row that has competencies. It shows what the team selected in **Assess Team** answered on its CITE scoring model for that move. Group and event rows show the answers for their move. The panel is read-only.
+
+The panel shows the team's total score and the time of its last change. For each scoring category, it lists the selected options with their values, the team's comments, and the category score. When the scoring model uses them, the **Official** and **Team average** submissions follow the team's own. A team average says how many team members chose each option. The panel shows team answers only, never a single participant's answers.
+
+Click **Refresh xAPI statements** to reload the panel along with the evidence. Instead of answers, the panel can show one of these messages:
+
+| Message | Meaning |
+| --- | --- |
+| **Choose a team in Assess Team to see its CITE answers.** | No team is selected in **Assess Team**. |
+| **Team has not answered.** | The team has not selected an option or written a comment for the move. |
+| **This MSEL has not been pushed to CITE.** | Push the MSEL's integrations to create its CITE evaluation. |
+| **This team has no CITE team type, so it is not in CITE.** | The push only creates CITE teams for teams with a CITE team type. |
+| **No CITE move *N*. The move was added after the push.** | CITE has no move with this number. |
+| **CITE is on move *N*, so move *M* has not started.** | The CITE evaluation has not reached this move. |
+| **CITE refused Blueprint's service account.** or **CITE could not be reached.** | Blueprint reads CITE with its own service account, which must still own the evaluation. |
+
+The MSEL's Owners, Editors, and Evaluators can see the panel. So can users with the **Approver** role on the MSEL, and users with the ViewMsels permission.
+
 #### MSEL Playbook
 
 The **MSEL Playbook** tab presents scenario events in a printable, page-at-a-time layout intended for offline reference by exercise controllers.
