@@ -87,6 +87,38 @@ After adding the new scenario template, you can **Create a Scenario**, **Copy** 
 
 Add tasks in the Scenario Templates screen by clicking the **+** icon. Complete the same task information as you did to create a new task.
 
+##### Export Scenario Templates
+
+Export saves scenario templates to a `.json` file that you can import into this or another Steamfitter.
+
+1. In the scenario template list, select the checkbox of each scenario template to export. To export every template in the list, leave all checkboxes clear.
+2. Click **Export Scenario Templates** (file export icon). With a selection, the button shows how many templates you selected, such as **Export 2 Selected Scenario Templates**.
+3. Click **Export**.
+
+One template downloads as `<template name>.json`, holding a JSON object. Several download as `scenario-templates.json`, holding a JSON array. The file holds each template's name, description, and duration, its tasks with their subtasks, and its VM credentials.
+
+!!! warning
+
+    The file includes VM credential passwords. Store and share it as you would the passwords themselves.
+
+Memberships aren't exported. A task that selects VMs by ID keeps those IDs, which only match VMs in the environment you exported from.
+
+##### Import Scenario Templates
+
+Import creates scenario templates from a `.json` file written by **Export**, or from a `.zip` file that holds one. You need the `CreateScenarioTemplates` permission.
+
+1. Click **Import Scenario Templates** (file import icon).
+2. Click **Choose File** and select the `.json` or `.zip` file.
+3. Click **Import**.
+
+Each imported template is a new scenario template with new IDs for it, its tasks, and its VM credentials. Import never changes an existing template. When a template with the same name already exists, Steamfitter appends a hyphen and your name, such as `Range Day 1 - Jane Smith`, the same name **Copy** gives.
+
+After the import, Steamfitter lists:
+
+- **Imported:** each template created.
+- **Notes:** each template that Steamfitter renamed, and each task that selects VMs by ID. Check those tasks' VMs before you run them.
+- **The following could not be imported:** each template that Steamfitter didn't import, such as one whose subtasks form a loop, and why.
+
 #### Scenarios
 
 ![scenarios](img/scenarios.png)

@@ -97,6 +97,37 @@ When a user launches an event from an event template, Alloy:
 
 Users with the Administrator, Content Developer, or Observer role can view active, ended, and failed events in the Alloy administrator user interface.
 
+#### Export Event Templates
+
+Export saves event templates to a `.json` file that you can import into this or another Alloy.
+
+1. In the event template list, select the checkbox of each event template to export. To export every template in the list, leave all checkboxes clear.
+2. Click **Export Event Templates** (file export icon). With a selection, the button shows how many templates you selected, such as **Export 2 Selected Event Templates**.
+3. Click **Export**.
+
+One template downloads as `<template name>.json`, holding a JSON object. Several download as `event-templates.json`, holding a JSON array. The file holds each template's name, description, duration, **Use Dynamic Host**, and **Published** setting.
+
+The file doesn't copy the Player view, Caster directory, or Steamfitter scenario template. It records each one by ID and by its name at export time. Memberships aren't exported.
+
+#### Import Event Templates
+
+Import creates event templates from a `.json` file written by **Export**. It also reads a `.zip` file from an earlier version of export. You need the `CreateEventTemplates` permission.
+
+1. Click **Import Event Templates** (file import icon).
+2. Click **Choose File** and select the `.json` or `.zip` file.
+3. Enable **Match By Name** to use a Player view, Caster directory, or Steamfitter scenario template with the same name when Alloy can't find the one in the file by ID.
+4. Click **Import**.
+
+Each imported template is a new event template with a new ID. Import never changes an existing template. When a template with the same name already exists, Alloy appends a hyphen and your name, such as `Range Day 1 - Jane Smith`.
+
+Alloy keeps a Player view, Caster directory, or Steamfitter scenario template only when it exists in this environment and you can see it. Otherwise, Alloy clears the reference. A cleared Player view, Caster directory, or Steamfitter scenario template leaves a published template unpublished. Choose the missing reference in the event template, then publish it again.
+
+After the import, Alloy lists:
+
+- **Imported Event Templates:** the number of templates created.
+- **Imported with changes:** each template that Alloy renamed, matched by name, cleared a reference from, or unpublished, and why.
+- **The following errors occurred:** each template that wasn't imported, such as one without a name, and why.
+
 <!-- ### Events -->
 
 ## User Guide
