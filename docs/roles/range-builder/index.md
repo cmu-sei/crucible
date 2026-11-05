@@ -4,7 +4,7 @@ Range Builders create and deploy cyber ranges using Crucible platform components
 
 ## Overview
 
-This procedural guide provides step-by-step direction for building complete cyber ranges using the Crucible stack. Range Builders primarily use Alloy for event and team management, Caster for infrastructure deployment, Steamfitter for scenario automation, and Player for exercise delivery.
+This procedural guide provides step-by-step direction for building complete cyber ranges using the Crucible stack. Range Builders primarily use Alloy for event and team management, Caster for infrastructure deployment, Steamfitter for scenario automation, and Player for exercise delivery. For exercises driven by a Master Scenario Events List (MSEL), they also use Blueprint to author the MSEL. Gallery delivers incident information, and CITE collects each team's assessment of the incident.
 
 Refer to the following core application guides for detailed procedures:
 
@@ -12,6 +12,9 @@ Refer to the following core application guides for detailed procedures:
 - **[Caster Guide:](../../caster/index.md)** Infrastructure-as-code topology deployment
 - **[Steamfitter Guide:](../../steamfitter/index.md)** Automated scenario injection and task execution
 - **[Player Guide:](../../player/index.md)** Participant interface and exercise delivery
+- **[Blueprint Guide:](../../blueprint/index.md)** MSEL authoring and integration with Player, Gallery, CITE, Steamfitter, and Caster
+- **[Gallery Guide:](../../gallery/index.md)** Incident information delivered through cards and articles
+- **[CITE Guide:](../../cite/index.md)** Team assessment of incident severity, move by move
 
 ## Prerequisites
 
@@ -43,6 +46,12 @@ Range structure varies based on training goals, audience, and available resource
 - Timeline-driven event progression
 - Evidence discovery points
 - Collaborative investigation tools
+
+### Tabletop Exercise
+
+- MSEL in Blueprint that schedules injects by move
+- Incident reporting delivered on the Gallery Wall
+- Team assessments of incident severity in CITE
 
 ### Penetration Testing Lab
 
