@@ -4,6 +4,14 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: read
+
+# gh-deploy force-pushes the gh-pages branch; never run two at once.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   lint:
     uses: ./.github/workflows/lint.yml
@@ -11,8 +19,10 @@ jobs:
   build-and-deploy:
     needs: lint
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the release and push gh-pages
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Determine base release tag
         id: release_tag
@@ -20,13 +30,14 @@ jobs:
 
       - name: Compute release tag with index if needed
         id: tag_with_index
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
+        env:
+          BASE_TAG: ${{ steps.release_tag.outputs.value }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           result-encoding: string
           script: |
-            const baseTag = '${{ steps.release_tag.outputs.value }}';
-            const regex = new RegExp(`^${baseTag}(?:-(\\d+))?$`);
+            const baseTag = process.env.BASE_TAG;
+            const regex = new RegExp(`^${baseTag.replace(/\./g, '\\.')}(?:-(\\d+))?$`);
             const releases = await github.paginate(github.rest.repos.listReleases, {
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -52,22 +63,18 @@ jobs:
             core.setOutput('tag_name', tagName);
 
       - name: Create release
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ steps.tag_with_index.outputs.tag_name }}
-          release_name: ${{ steps.tag_with_index.outputs.tag_name }}
-          draft: false
-          prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.tag_with_index.outputs.tag_name }}
+        run: gh release create "$TAG" --title "$TAG" --target "$GITHUB_SHA" --generate-notes
 
       # Deploy to GH Pages
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: 3.x
 
-      - name: Install mkdocs-material
-        run: pip install mkdocs-material
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force --clean --verbose
