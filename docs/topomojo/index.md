@@ -509,7 +509,7 @@ The **Play** tab is where you can interact with your lab in the same way others 
 
 Access the **Admin Dashboard** by clicking **Admin** in the top right corner of the navigation bar. You need the `admin` role assigned to your user to see the **Admin** navigation option.
 
-The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Disks**, **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Announcement, and Janitor tools described next.
+The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Disks** (when it's turned on), **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Announcement, and Janitor tools described next.
 
 ### Hub Connections
 
@@ -801,7 +801,11 @@ For hypervisor storage settings, see [Using Proxmox with TopoMojo](https://githu
 
 ### Disks Tab
 
-The **Disks** tab lists what a template can deploy from, so you can find the value to put in a template's [Detail](#template-detail-json) without browsing the hypervisor. What it lists depends on the hypervisor:
+The **Disks** tab lists what a template can deploy from, so you can find the value to put in a template's [Detail](#template-detail-json) without browsing the hypervisor.
+
+The **Disks** tab is off by default, so it doesn't appear on the admin dashboard and the template **Detail** field doesn't link to it. An administrator turns it on in TopoMojo's configuration; see [Core Application Settings](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#core-application-settings) in the Helm chart README. On vSphere, the tab searches the whole disk store each time it loads.
+
+What it lists depends on the hypervisor:
 
 - **vSphere:** The tab's heading reads **Disks**, and the tab lists the VMDK disk files in the disk store. Each name is the path to enter as a `Disks[].Path` value, such as `[ds] 00000000-0000-0000-0000-000000000000/router.vmdk`. Disks of deployed VMs and the extent and snapshot files behind each disk (`-flat`, `-delta`, `-000001`, and similar) aren't listed.
 - **Proxmox:** The tab's heading reads **Template VMs**, and the tab lists the Proxmox template VMs a template can clone. Each name is the value to enter as `Template`. Copies tagged for deletion aren't listed.
