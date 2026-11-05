@@ -872,6 +872,16 @@ Events are grouped under their move and group. Click a move, group, or event row
 
 An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Steamfitter, Player, or Gallery), and **Verb** filters, and click **Refresh xAPI statements** to load new ones.
 
+Repeated statements collapse into one row. Choose how in **Group by**, beside the filters:
+
+- **Team** (the default): statements from the same platform, with the same verb, object, team, and result, share a row, whoever on the team made them. The actor reads as the first person and how many others, for example **Ann Analyst + 2 others**.
+- **User**: the same, but each user's statements get their own row.
+- **Off**: every statement is its own row.
+
+A grouped row shows the first and last times and a count such as **×5**. Click it to list its statements in time order, each with its own JSON and **Copy JSON**, and click it again to close the list. Competency assertions, CITE submissions and scores, and any statement with a score always keep their own row. Grouping covers only the statements the filters leave, and the browser remembers the **Group by** choice.
+
+When the MSEL hides participant names from assessors, the statements carry no names, so **Group by** offers only **Team** and **Off**, and a grouped row's actor reads **Team member**.
+
 Click **Search Events** in the header to search the events and filter them by the values of their data fields.
 
 ##### Submit a Competency Assessment
