@@ -42,10 +42,8 @@ updates:
     schedule:
       interval: weekly
     # Wait before taking new releases: hijacked versions are usually caught and pulled within days.
+    # The devcontainers ecosystem only supports default-days (no semver-*-days).
     cooldown:
       default-days: 5
-      semver-major-days: 30
-      semver-minor-days: 7
-      semver-patch-days: 3
     commit-message:
       prefix: chore(deps)
