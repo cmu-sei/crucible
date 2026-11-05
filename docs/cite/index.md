@@ -80,6 +80,8 @@ If the exercise administrator grants the appropriate permissions, follow these s
 | **Situation Date/Time**    | Datetime      | Evaluation situation date/time                                        | `1/23/2024, 14:22:40`                                      |
 | **Situation Description**  | Rich Text     | Additional details, characteristics and information of the evaluation | `Ransomware attackers compromised the agency's network...` |
 
+Select **Hide individual names from observers** to keep observers from seeing who answered or commented. The setting is off by default, and you can change it at any time, including after the evaluation starts. With it on, an observer or facilitator who isn't on a team sees that team's responses and comments, but not its members' own scores. CITE signs each of those comments **Team member**. The evaluation's owners, administrators who can view every evaluation, and the team's own members still see the names. Team rosters, duties, and roles stay visible, and the official score keeps its names.
+
 To save these settings, click **Save**.
 
 ##### Edit an Evaluation
@@ -657,6 +659,8 @@ Displays the various scores at the appropriate severity level for the displayed 
 #### Team Selection
 
 This feature enables a user who is part of a team, as well as an observer, to toggle back and forth between teams. When assigned an observer role, the user can see other teams' progress during the exercise, as well as participate on their own team.
+
+When the evaluation hides individual names from observers, an observer sees only the team on another team's responses. Comments show **Team member** instead of a name, and the members' own scores don't appear. On their own team, an observer still sees their teammates' names.
 
 #### CITE Report Toggle
 
