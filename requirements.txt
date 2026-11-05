@@ -1,4 +1,4 @@
-mkdocs-material
-Pygments
-pillow
-cairosvg
+mkdocs-material==9.8.0
+Pygments==2.21.0
+pillow==13.0.0
+cairosvg==2.9.1
