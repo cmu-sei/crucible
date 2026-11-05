@@ -81,6 +81,8 @@ Caster supports the design and deployment of virtual environments to a variety o
 
 [![GHOSTS Logo](assets/ghosts_new.png){: style="height:75px;width:75px"}](https://cmu-sei.github.io/GHOSTS/) Crucible's [**GHOSTS**](https://cmu-sei.github.io/GHOSTS/) Non-Player Character (NPC) automation and orchestration framework deploys and shapes the activities of NPCs using generative AI.
 
+[**Ranger**](https://github.com/cmu-sei/rangerai) AI infrastructure automates and orchestrates cyber range tasks. Describe the activity or threats you want in natural language, and Ranger proposes an exercise plan and calls range APIs to carry it out, such as launching GHOSTS NPCs.
+
 #### Open Source Integrations
 
 - **Ollama**, a platform designed to run LLaMA, Mistral, and other open source large language models locally.
