@@ -428,6 +428,7 @@ To edit the MSEL's basic information and configuration, follow these steps:
 | **Name** | String (max 70 characters) | Name of the MSEL | `Hurricane Delta MSEL` |
 | **Description** | String (max 600 characters) | Details and/or characteristics of the MSEL | `Hurricane Delta Fort Myers Scenario` |
 | **Is a Template** | Boolean | Marks this MSEL as a reusable template for creating new MSELs. Template MSELs cannot be deleted. | `True` |
+| **Hide individual names from assessors** | Boolean | Shows only the team on the xAPI statements in the [Assessor View](#assessor-view) to users with the **Editor**, **Approver**, or **Evaluator** role. The MSEL's Owners and System Admins still see the names, and the Learning Record Store (LRS) still records them. You can change it while the MSEL is deployed. | `True` |
 | **Set a Start Time** | Boolean | When checked, exposes a **Start Date / Time** picker and schedules a specific start moment for the MSEL. When unchecked, the MSEL is open-ended. | `True` |
 | **Start Date / Time** | Datetime | Start date/time of the MSEL (only visible when **Set a Start Time** is checked). | `09/10/2024 20:00:00` |
 | **Duration (d / h / m)** | Integer × 3 | End time relative to the start, expressed as days / hours / minutes. Click **+** to increment or type directly into each field. | `1 d 12 h 00 m` |
@@ -906,6 +907,8 @@ To give assessors competencies to rate, attach a framework and its competencies 
 Events are grouped under their move and group. Click a move, group, or event row to expand it. Use **Expand All** (Ctrl+Shift+E) and **Collapse All** (Ctrl+Shift+C) in the header to open or close every row.
 
 An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Steamfitter, Player, or Gallery), and **Verb** filters, and click **Refresh xAPI statements** to load new ones.
+
+When you check **Hide individual names from assessors** on the [Basic Information](#basic-information) tab, Blueprint leaves out who each statement is about for users with the **Editor**, **Approver**, or **Evaluator** role. The actor shows as **Team member**, and the team name stays, so assessors rate the team's work without seeing its members' names. The statement JSON doesn't have the names either. The assessor who submitted a rating keeps their name. The MSEL's Owners and System Admins still see every name, and the names stay in the LRS.
 
 Click **Search Events** in the header to search the events and filter them by the values of their data fields.
 
