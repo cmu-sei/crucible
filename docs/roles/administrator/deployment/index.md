@@ -41,7 +41,10 @@ The following sections cover application configuration and Helm chart values.
 Each Crucible application has specific configuration requirements documented in its GitHub repository:
 
 - [Alloy API Settings](https://github.com/cmu-sei/Alloy.Api)
+- [Blueprint API Settings](https://github.com/cmu-sei/Blueprint.Api)
 - [Caster API Settings](https://github.com/cmu-sei/Caster.Api)
+- [CITE API Settings](https://github.com/cmu-sei/CITE.Api)
+- [Gallery API Settings](https://github.com/cmu-sei/Gallery.Api)
 - [Player API Settings](https://github.com/cmu-sei/Player.Api)
 - [Steamfitter API Settings](https://github.com/cmu-sei/Steamfitter.Api)
 

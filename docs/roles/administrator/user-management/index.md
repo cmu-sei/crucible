@@ -26,6 +26,9 @@ Each Crucible application implements its own permission model. Infrastructure ad
 - **Player:** Review the [Player permissions documentation](https://github.com/cmu-sei/Player.Api/blob/main/docs/Permissions.md) for virtual environment access and team membership.
 - **Caster:** Review the [Caster permissions documentation](https://github.com/cmu-sei/Caster.Api/blob/development/docs/Permissions.md) for infrastructure design and deployment permissions.
 - **Steamfitter:** Review the [Steamfitter permissions documentation](https://github.com/cmu-sei/Steamfitter.Api/commit/d5515ce341b76bf4089639ecca7e87280d7f73df) for scenario task organization and execution roles.
+- **Blueprint:** Review the [Blueprint permissions documentation](https://github.com/cmu-sei/Blueprint.Api/blob/main/Blueprint.Api/docs/Permissions.md) for MSEL authoring and administration permissions.
+- **Gallery:** Review the [Gallery permissions documentation](https://github.com/cmu-sei/Gallery.Api/blob/main/Gallery.Api/docs/Permissions.md) for collection and exhibit permissions.
+- **CITE:** Review the [CITE permissions documentation](https://github.com/cmu-sei/CITE.Api/blob/main/Cite.Api/docs/Permissions.md) for scoring model and evaluation permissions.
 
 ### Common Permission Roles
 
@@ -101,6 +104,9 @@ Range Builders typically require permissions in the following applications:
 - **Caster:** Design and manage infrastructure topologies
 - **Steamfitter:** Create and manage scenario tasks
 - **Player:** View and test exercises
+- **Blueprint:** Author MSELs (Content Developer)
+- **Gallery:** Build collections and exhibits (Content Developer)
+- **CITE:** Build scoring models and evaluations (Content Developer)
 
 Refer to the [Range Builder Guide](../../range-builder/index.md) for detailed workflows.
 
@@ -111,6 +117,11 @@ Instructors primarily work within the following applications:
 - **Alloy:** Launch events and manage exercises
 - **Player:** Monitor participant progress
 - **Gameboard:** Manage competitions and scoring (if used)
+- **Blueprint:** Push MSELs and assess teams (Owner or Evaluator role on the MSEL)
+- **Gallery:** Advance exhibits and observe teams (Manager role on the exhibit, or an exhibit observer)
+- **CITE:** Advance moves and observe teams (Facilitator role on the evaluation)
+
+MSEL owners can set each contributor's **CITE Role** and **Gallery Role** on the MSEL's **Contributors** tab. Blueprint applies them when it pushes the MSEL.
 
 Refer to the [Instructor Guide](../../instructor/index.md) for detailed workflows.
 

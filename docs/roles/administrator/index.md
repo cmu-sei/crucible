@@ -25,6 +25,15 @@ Refer to the following documentation for application-specific permission details
 - [Player Permissions](https://github.com/cmu-sei/Player.Api/blob/main/docs/Permissions.md)
 - [Caster Permissions](https://github.com/cmu-sei/Caster.Api/blob/development/docs/Permissions.md)
 - [Steamfitter Permissions](https://github.com/cmu-sei/Steamfitter.Api/commit/d5515ce341b76bf4089639ecca7e87280d7f73df)
+- [Blueprint Permissions](https://github.com/cmu-sei/Blueprint.Api/blob/main/Blueprint.Api/docs/Permissions.md)
+- [Gallery Permissions](https://github.com/cmu-sei/Gallery.Api/blob/main/Gallery.Api/docs/Permissions.md)
+- [CITE Permissions](https://github.com/cmu-sei/CITE.Api/blob/main/Cite.Api/docs/Permissions.md)
+
+Blueprint, Gallery, and CITE each seed three system roles: **Administrator**, **Content Developer**, and **Observer**. **Administrator** holds every permission, and no one can edit it. Users with the `ManageRoles` permission can edit the other roles or add custom roles on the **Roles** page of the Administration View. Roles on a single MSEL, collection, exhibit, evaluation, scoring model, or team are separate from system roles. MSEL owners and content developers usually assign those.
+
+!!! note
+
+    Each of these applications can also take system roles from your identity provider. A role name in the user's token that exactly matches a role name in the application applies that role. Keycloak realm roles work by default. See each application's permissions documentation above for the `ClaimsTransformation` settings.
 
 ## Platform Architecture
 
