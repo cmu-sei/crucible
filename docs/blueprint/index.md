@@ -906,7 +906,7 @@ To give assessors competencies to rate, attach a framework and its competencies 
 
 Events are grouped under their move and group. Click a move, group, or event row to expand it. Use **Expand All** (Ctrl+Shift+E) and **Collapse All** (Ctrl+Shift+C) in the header to open or close every row.
 
-An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Steamfitter, Player, or Gallery), and **Verb** filters, and click **Refresh xAPI statements** to load new ones.
+An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Steamfitter, Player, or Gallery), and **Verb** filters, and click **Refresh evidence** to load new statements.
 
 When you check **Hide individual names from assessors** on the [Basic Information](#basic-information) tab, Blueprint leaves out who each statement is about for users with the **Editor**, **Approver**, or **Evaluator** role. The actor shows as **Team member**, and the team name stays, so assessors rate the team's work without seeing its members' names. The statement JSON doesn't have the names either. The assessor who submitted a rating keeps their name. The MSEL's Owners and System Admins still see every name, and the names stay in the LRS.
 
@@ -916,7 +916,7 @@ Click **Search Events** in the header to search the events and filter them by th
 
 The **Competency Assessment** panel on the right of an expanded row lists the competencies associated with that move, group, or event. To rate them, follow these steps:
 
-1. In **Assess Team**, select the team being assessed. Only teams associated with at least one of the listed competencies appear. When the evidence is filtered to a single team, that team is preselected.
+1. In **Assess Team**, select the team being assessed. Only teams associated with at least one of the listed competencies appear. When you filter the evidence to just one of those teams, **Assess Team** selects it, unless you already picked a team in **Assess Team**.
 2. For each competency, select a **Rating** and optionally enter a **Comment**. Hover over the competency ID to see its name.
 3. Click **Submit assertion** to submit one rating, or **Submit All** to submit every rated competency.
 
