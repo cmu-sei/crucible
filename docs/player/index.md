@@ -485,6 +485,8 @@ Click the **gear icon** next to the VM name to open the console options. A read-
 | **Clipboard**, **Copy** | Copies the last text copied inside the VM to your local clipboard. |
 | **Clipboard**, **Paste** | Types your local clipboard text into the VM as key presses. |
 
+**Send Text** and **Clipboard**, **Paste** type as if on a US keyboard. If the VM uses another keyboard layout, some characters arrive as different ones. For example, on a UK layout `@` arrives as `"`. To avoid this, use **Paste to Clipboard** on a VM that has a Virtual Network Computing (VNC) clipboard (see [What the VM Needs](#what-the-vm-needs)).
+
 #### Toolbar and Status
 
 - **Copy**, **Paste**, and **Ctrl-Alt-Del:** The toolbar buttons do the same as **Clipboard**, **Copy**; **Clipboard**, **Paste**; and **Keyboard**, **Send Ctrl-Alt-Del**. A read-only console doesn't show these buttons.
@@ -494,7 +496,7 @@ Click the **gear icon** next to the VM name to open the console options. A read-
 #### Differences From the vSphere Console
 
 - **Files:** File transfers use the QEMU guest agent, so you don't enter VM credentials. **Send File To VM** accepts files up to 45 KB each. For larger files, use **Mount ISO** or the VM List's **Upload File**.
-- **Copy:** **Copy** returns only text you copied inside the VM after the console connected. It's unavailable when the VM doesn't have a Virtual Network Computing (VNC) clipboard; hover over it to see why. If nothing has arrived from the VM's clipboard, the error message says the guest needs `spice-vdagent` running.
+- **Copy:** **Copy** returns only text you copied inside the VM after the console connected. It's unavailable when the VM doesn't have a VNC clipboard; hover over it to see why. If nothing has arrived from the VM's clipboard, the error message says the guest needs `spice-vdagent` running.
 - **Resolution:** Instead of a list of fixed resolutions, the Proxmox console offers **Scale to Fit** and **Match Window Size**.
 
 #### What the VM Needs
