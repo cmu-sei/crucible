@@ -1,0 +1,19 @@
+name: Dependabot auto-merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions: {}
+
+jobs:
+  automerge:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    uses: cmu-sei/Crucible-Github-Actions/.github/workflows/dependabot-auto-merge.yaml@dependabot-auto-merge-v1
+    permissions:
+      contents: write
+      pull-requests: write
+    with:
+      # The strict docs build is the whole product, so majors merge too once it
+      # passes; dependabot.yml holds back the updates that need a person.
+      update-types: all
