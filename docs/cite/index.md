@@ -251,6 +251,7 @@ If the exercise administrator grants the appropriate permissions, follow these s
 | **Display Scoring Categories by Move Number** | Boolean       | Display different sets of scoring categories per move, instead of all at once      | `True`                |
 | **Show Past Situation Descriptions**          | Boolean       | Display situation descriptions from past moves in a list format                    | `True`                |
 | **Right Side Display**                        | Dropdown Text | Select what to display (Score Summary, Scoresheet, HTML Block, Embedded Url, None) | `Scoresheet`          |
+| **Severity Levels**                           | List          | The levels that scores fall in; see [Severity Levels](#severity-levels)            | `Customize Levels`    |
 
 To save these settings, click **Save**.
 
@@ -265,6 +266,23 @@ When adding a Scoring Model, an administrator adds a defined equation to calcula
 Aside from these variables, use **>** to set clipping values for the equation.
 
 - **Example:** 100 > equation > 20 will constrain the value of the submission between 100 and 20.
+
+##### Severity Levels
+
+Severity levels are the bands the Score Summary and the Scoresheet place a score in, such as **Level 4 - Severe**. A score falls in the level with the highest **Minimum Score** at or below it, so the levels never overlap or leave gaps. A score below every minimum falls in the lowest level. The lowest level is Level 0.
+
+A new scoring model uses the default levels from the CISA National Cyber Incident Scoring System: Baseline (0), Low (35), Medium (50), High (65), Severe (75), and Emergency (90).
+
+To change the levels:
+
+1. In the scoring model's edit dialog, under **Severity Levels**, click **Customize Levels**. The default levels appear as editable rows.
+2. For each level, set the **Name**, **Minimum Score**, **Color**, and **Description**. The Score Summary shows the description under the level's name, and the color on the level's badge and the Scoresheet's score.
+3. Click **Add Level** to add a level, or the trash icon to remove one. Each level needs a different **Minimum Score**.
+4. Click **Save**.
+
+To go back to the default levels, click **Use Default Levels**, then click **Save**.
+
+Copying a scoring model, creating an evaluation from it, and downloading or uploading it keep its severity levels.
 
 ##### Edit a Scoring Model
 
@@ -652,7 +670,7 @@ The roles give each team member a clear understanding of their responsibilities 
 
 #### Score Summary
 
-Displays the various scores at the appropriate severity level for the displayed move. Here, scores are always visible.
+Displays the displayed move's scores under the severity level each falls in, using the scoring model's [severity levels](#severity-levels). A highlight marks the level holding the score shown on the Scoresheet. Here, scores are always visible.
 
 #### Team Selection
 
@@ -710,7 +728,7 @@ When finished scoring the categories and adding comments, click Submit to submit
 
 #### Score Summary
 
-The Score Summary panel displays the various scores at the appropriate severity level for the displayed move, keeping the data visible at all times.
+The Score Summary panel displays the displayed move's scores under the severity level each falls in, keeping the data visible at all times. The levels come from the scoring model; see [Severity Levels](#severity-levels).
 
 #### Team Selection
 
