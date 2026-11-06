@@ -93,9 +93,7 @@ Accessing the Administration View is the same in all Crucible exercise applicati
 
 ### Projects
 
-The **Projects** pane in the Administration View displays all projects in the system. Administrators can search for projects, open them, rename them, and delete them.
-
-The table lists each project's **Name**, **Description**, and **Created** date. Turn on **My Projects** to limit the list to projects you are a member of.
+The **Projects** pane in the Administration View lists every project in the system, sorted by name. Use **Search** to filter by name, description, or created date. Each project shows its **Name**, **Description**, and **Created** date and time in your time zone; click a column header to sort.
 
 The screen shot below shows the **Projects** pane in Caster's Administration View.
 
@@ -103,22 +101,20 @@ The screen shot below shows the **Projects** pane in Caster's Administration Vie
 
 #### Add a New Project
 
-1. In the **Projects** pane, click **+**.
-2. Enter a **Name** and click **Save**.
+1. In the **Projects** pane, click **Add New Project** (**+**) in the header of the first column.
+2. Enter a **Name** and, optionally, a **Description**, and click **Save**.
 
-#### Search for a Project
+Adding a project requires the `CreateProjects` permission.
 
-In the **Search Projects** field, type all or part of a project name.
+#### Manage Project Members
 
-#### Edit an Existing Project
+Click a project's row to open its **Users/Groups** and **Project Members** lists under it; click the row again to close them. From here, you can add users and groups to the project as members, assign their roles, and remove them.
 
-Click the project name to open the **Users/Groups** and **Project Members** panes. From here, you can add users and groups to the project as members, assign their roles, and remove them.
+- To add a member, find the user or group in the **Users/Groups** list and click **Add**.
+- To change a member's role, select a new role from the **Role** dropdown in the **Project Members** list.
+- To remove a member, click **Remove** in the **Project Members** list.
 
-- To add a member, find the user or group in the **Users/Groups** pane and click **Add**.
-- To change a member's role, select a new role from the **Role** dropdown in the **Project Members** pane.
-- To remove a member, click **Remove** in the **Project Members** pane.
-
-For a description of each project role, see [Project Roles](#project-roles).
+Changing members requires the `ManageProjects` permission, or the `ManageProject` permission on that project. For a description of each project role, see [Project Roles](#project-roles).
 
 #### Open a Project
 
@@ -126,13 +122,17 @@ Click the **Open** icon to open the project in a new browser tab, where you can 
 
 #### Rename a Project
 
-1. In the project row, click the **Pencil** icon.
-2. Edit the **Name** and click **Save**.
+1. In the project row, click the **Rename** icon.
+2. Edit the **Name** and **Description** and click **Save**.
 
 #### Delete a Project
 
-1. In the project row, click the **trash can** icon.
+1. In the project row, click the **Delete** icon.
 2. Confirm **Delete**.
+
+Caster doesn't delete a project that has deployed resources or pending runs, and says which. Destroy the resources, or wait for the runs to finish or reject them, then try again.
+
+Renaming and deleting a project require the `EditProjects` permission, or the `EditProject` permission on that project. Without it, the icons are shown disabled. Changes and errors appear in a message at the top of the page.
 
 ### Workspaces
 
