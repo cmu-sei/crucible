@@ -157,6 +157,75 @@ A partition is either assigned to a project or configured as the system default.
 - Users can request a specific VLAN ID within a partition
 - VLANs marked as reserved (including `0`, `1`, and `4095`, reserved by default) are never assigned
 
+Caster doesn't configure any hypervisor or switch. It only hands out VLAN numbers and tracks which are in use, so the same pool works for vSphere, Proxmox, software-defined network segments, or a physical switch. Your Terraform puts the number where that platform expects it.
+
+Caster prevents collisions only between Caster runs. TopoMojo, Player networks, and networks built by hand choose their own VLANs. Give a pool a range nothing else uses, or mark the VLANs that other systems use as reserved.
+
+#### Use a VLAN in Terraform
+
+Request a VLAN with the `crucible_vlan` resource from the [Crucible Terraform provider](https://registry.terraform.io/providers/cmu-sei/crucible/latest/docs/resources/vlan). Caster marks the VLAN in use when the run creates the resource, and releases it when the run destroys it.
+
+```hcl
+terraform {
+  required_providers {
+    crucible = {
+      source = "cmu-sei/crucible"
+    }
+  }
+}
+
+variable "project_id" {
+  description = "The Caster project whose partition supplies the VLAN"
+  type        = string
+}
+
+# A VLAN from the project's partition
+resource "crucible_vlan" "blue_net" {
+  project_id = var.project_id
+}
+```
+
+Where the VLAN comes from:
+
+- `project_id`: the partition assigned to that project. The project's ID is the last part of its address in Caster, `.../projects/<id>`.
+- `partition_id`: that partition. Copy the ID with the copy button on the partition in the **VLANs** pane.
+- Neither: the default partition. If no partition is the default, the request fails.
+
+To ask for a particular VLAN, add `tag` (a VLAN with that tag in the partition) or `vlan_id` (that number in the partition). The request fails if that VLAN is in use or isn't in the partition.
+
+Use `crucible_vlan.<name>.vlan_id` wherever your provider takes a VLAN ID:
+
+```hcl
+# vSphere: a distributed port group on that VLAN
+resource "vsphere_distributed_port_group" "blue_net" {
+  name                            = "blue-net"
+  distributed_virtual_switch_uuid = data.vsphere_distributed_virtual_switch.dvs.id
+  vlan_id                         = crucible_vlan.blue_net.vlan_id
+}
+
+# Proxmox (bpg/proxmox): a VM NIC tagged with that VLAN
+resource "proxmox_virtual_environment_vm" "workstation" {
+  # ...
+  network_device {
+    bridge  = "vmbr0"
+    vlan_id = crucible_vlan.blue_net.vlan_id
+  }
+}
+```
+
+With the `Telmate/proxmox` provider, set `tag = crucible_vlan.blue_net.vlan_id` in the VM's `network` block.
+
+#### Reserved and Tagged VLANs
+
+Caster hands out VLANs only from a partition, so where a VLAN sits decides what its settings do:
+
+| Setting | On a VLAN in a partition | On a VLAN not in any partition |
+| --- | --- | --- |
+| **Reserved** | Stays in the partition, but is never handed out | Is never handed out or added to a partition by count |
+| **Tag** | Lets Terraform request it with `tag` | Does nothing until the VLAN is moved into a partition |
+
+Adding VLANs to a partition by count takes the lowest-numbered free ones, not tagged ones. To put a tagged VLAN in a partition, select it in the pool's unassigned VLANs and reassign it.
+
 The **VLANs** pane has two tabs:
 
 - **Pools:** Create and manage VLAN pools and the partitions within them.
