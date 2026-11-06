@@ -549,6 +549,8 @@ When AI drafting is on, you can change a MSEL by describing what you want.
 
 The assistant can add or edit teams, organizations, Gallery cards, moves and their scenario times, injects, and inject columns (data fields), and add or remove competencies. It offers only the changes your MSEL role allows: the owner, an editor, or a user with `EditMsels` can change columns.
 
+An edit can also clear a column on an inject, such as `Clear the Source Type on the EXCON facilitation rows`. Only an Inject row with a **Source Type** goes to Gallery: an inject the assistant gives a **Source Type** gets the Gallery integration target, and a row whose **Source Type** it clears, or that isn't an Inject, loses it. The row's other integration targets stay.
+
 To give injects something no column holds, ask for it, such as `Add a Severity column with Low, Medium, and High and set it on every inject`. The assistant proposes the column, with its type, its choices, the Gallery article parameter it fills, and whether it shows on the **Exercise View** and the scenario event list, and fills it on the injects in the same set of changes. Columns are added before the injects, so one **Apply** does both. It can also rename a column, change its type or choices, or move it on or off a view. It leaves out a column whose name is taken, choices on a column that is not text, or a Gallery parameter another column already fills, and says why.
 
 It can also turn on an integration the MSEL does not use yet, with what the integration needs, such as `Use Gallery and CITE for this exercise`. The MSEL's owner, or a user with `EditMsels`, can do this:
