@@ -884,6 +884,20 @@ The **Competency Assessment** panel on the right of an expanded row lists the co
 
 Each submitted rating is marked **Submitted**. Blueprint records it in the Learning Record Store (LRS) as an xAPI statement with the `asserted` verb, so xAPI must be configured for Blueprint.
 
+##### Print an Assessment Report
+
+Click **Print Assessment Report** in the header to open the browser's print dialog with a summary of the exercise's purpose and results. The report reads the same xAPI statements as the Assessor View, so you don't need to expand any rows first.
+
+The report has these parts:
+
+- **Cover**: the MSEL image (or a band in the theme color), **Assessment Report**, the MSEL name, the exercise **Start** and **Duration**, the number of **Moves**, **Injects**, and **Teams**, the **Assessors**, and when it was **Printed**. Under **Purpose** are the MSEL description and each move's description.
+- **Results by objective**: shown when the MSEL has a data field whose name contains "objective". Each value of that field is a row, with the **Injects** that have it, how many were **Assessed**, and the ratings at each proficiency level, for all teams together.
+- **Results by competency**: the same columns for each competency the injects exercise, shown by its ID and name. Without an objective field, the report says the competencies measure the results.
+- **Results by team**: each team's **Injects assessed**, **Not assessed** count, and ratings at each level.
+- A page for each team: one table with the **Time**, **Inject**, and **Rating** of each inject the team was rated on, in time order. Each rating reads as the competency ID and level (for example, "T-1 Expert"), followed by the assessor's comment when there is one. Ratings for a whole move or group appear as "(whole move)" or "(whole group)". A **Not assessed** line names the injects with competencies the team could have been rated on.
+
+When a competency was rated more than once for the same team and inject, the report counts the latest rating. Ratings submitted without a team, or for a team no longer on the MSEL, print on a **No team** page.
+
 #### MSEL Playbook
 
 The **MSEL Playbook** tab presents scenario events in a printable, page-at-a-time layout intended for offline reference by exercise controllers.
