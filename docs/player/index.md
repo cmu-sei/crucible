@@ -201,6 +201,8 @@ When adding a Subscription, you must specify:
 
 The top bar displays the current *view name*, *team*, and the *menu select* dropdown (your username in the top right).
 
+When a view name or team name is too long to fit, the top bar shortens it. Hover over it to see the full name. On narrow screens, the menu select dropdown shows only its arrow. Hover over the arrow to see your username.
+
 Player fully supports users who are on multiple teams. Any such user, when logged in, can switch their team by using the *team* dropdown.
 
 ### Application Navigation Bar
