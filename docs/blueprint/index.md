@@ -412,7 +412,7 @@ Drafting has two steps. First the model writes the design, with a few questions 
     - **Gallery cards:** how the articles are grouped on the Gallery wall: by source or thread, by organization, by critical infrastructure sector, by country, or by network segment and key cyber terrain. This appears only when the template uses Gallery.
     - **Number of moves**, **Length (minutes)**, and **Scenario time covered:** the pacing. The scenario time covered is how much story time the exercise spans, such as `three days`.
     - **Participant structure:** how you organize participants, such as one combined staff or parallel national teams.
-    - **Article marking:** the banner on every Gallery article. See [Article Markings](#article-markings). This appears only when the template uses Gallery.
+    - **Article marking:** the banner on the MSEL's Gallery articles and pages. See [Article Markings](#article-markings). This appears only when the template uses Gallery.
     - **Add Team Profiles and Organization Profiles pages:** clear this to skip the profile pages.
 6. Click **Draft**. Writing the design takes a minute or two. The progress stays at the bottom of the dialog, showing what the model has written so far and how long it has run. Click **Stop** to discard the design; your description and choices stay, but what the model wrote before you stopped it is still billed. If the model's answer cannot be read as a design with moves and teams, the dialog says so and asks you to draft again; the answer differs each time.
 7. Review the design in its tabs:
@@ -471,14 +471,7 @@ The model is authored in Blueprint, not created in CITE: review and edit it unde
 
 ##### Article Markings
 
-Blueprint puts a marking banner on every Gallery article it writes, so the marking is exact and the same on every article. Choose it in **Design choices** when drafting, or on the **Info** tab under the Gallery settings as **Article marking**:
-
-- **Exercise banner:** the default: `EXERCISE · EXERCISE · EXERCISE` with the exercise name and `FICTIONAL SCENARIO`.
-- **TLP:** a Traffic Light Protocol (TLP) marking at the top, in the level's color: `CLEAR`, `GREEN`, `AMBER`, `AMBER+STRICT`, or `RED`.
-- **Classification banner:** your own text, such as `UNCLASSIFIED // FOR EXERCISE USE ONLY`, at the top and bottom, in the color of the level it names.
-- **None:** no banner.
-
-Articles already written keep their banner until Write with AI rewrites them.
+A drafted MSEL has the marking you choose in **Design choices** when drafting, saved as its **Marking** on the **Info** tab; see [Marking](#marking) for the banners. A draft starts with **Exercise banner**, unless you or the template choose another. Blueprint also puts the banner on each Gallery article as it writes it, so you see it while you review the MSEL, and the push puts the current **Marking** on every article it sends.
 
 ##### Scenario Indicators
 
