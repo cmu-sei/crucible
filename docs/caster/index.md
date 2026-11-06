@@ -142,8 +142,16 @@ The screen shot below shows the **Workspaces** pane in Caster's Administration V
 
 ![Caster Administration View, Workspaces pane](img/caster-adm-workspaces.png)
 
-- **Disable Workspace Operations:** Toggle to prevent workspace operations that require locking. Use this before restarting the `Caster.Api` service to avoid corrupting Terraform state. The setting resets when the API restarts.
-- **Active Runs:** Displays all currently running workspace operations. Use the **Search** field to filter by workspace. The table shows **Created At**, **Destroy**, **Status**, **Workspace ID**, and **Actions**.
+- **Disable Workspace Operations:** Toggle to stop Caster from planning, applying, destroying or rejecting runs, changing resources, and deleting workspaces. Use this before restarting the `Caster.Api` service to avoid corrupting Terraform state. While operations are disabled, a banner above the table says so. The setting resets when the API restarts. Only users with `ManageWorkspaces` can change it; for others the toggle is shown disabled.
+- **Active Runs:** Lists the runs that are queued, planning or applying in any workspace. A run leaves the list once it is planned, applied, rejected, or has failed. Use **Search** to filter the list. The table shows:
+  - **Workspace** and **Project:** where the run is.
+  - **Type:** **Plan** (change what the workspace deployed to match its files) or **Destroy** (remove everything the workspace deployed).
+  - **Status:** where the run is: queued (with its place in line), planning, waiting to apply, or applying. Point to a status for more detail.
+  - **Started By** and **Started:** who started the run, and when, in your time zone.
+- **Open:** Click the **Open** icon in a row to open that workspace in its project. The icon is disabled if you can't open the project.
+- **Run output:** Click a run's row to show its plan or apply output; click it again to hide it.
+
+Errors loading the runs or changing the setting appear in a message at the top of the page.
 
 ### VLANs
 
@@ -229,13 +237,24 @@ Adding VLANs to a partition by count takes the lowest-numbered free ones, not ta
 The **VLANs** pane has two tabs:
 
 - **Pools:** Create and manage VLAN pools and the partitions within them.
-- **Projects:** Review which partition each project draws VLAN IDs from.
+- **Projects:** Assign a partition to each project. A project's VLANs come from its assigned partition, or from the default partition if it has none. Click a column header to sort.
+
+On the **Pools** tab, each pool is a row showing its name, a **Default** mark if it holds the default partition, and its partition and VLAN counts. Click a pool's row to open its partitions below it; click it again to close them. Use the row's icons to rename or delete a pool. Point to any control or column header for a description.
+
+In an open pool:
+
+- Each partition's icons let you rename or delete it, make it the default partition (or stop using it as the default), and copy a `partition_id = "..."` line to paste into a `crucible_vlan` resource.
+- **Add VLANs** and **Remove VLANs** move the number of VLANs in the count field into or out of the partition. The count must be a whole number from 1 to 4096; the buttons stay disabled until it is.
+- The VLAN table shows each VLAN's number and tag, with **In Use** and **Reserved** checkboxes. Search by VLAN ID, a range of IDs, or a tag; separate several with commas (`10, 20-30, mytag`).
+- A line under the partitions says how many of the pool's VLANs aren't in any partition. Click **Show** to list them, for example to tag, reserve, or reassign one.
+
+Each change is confirmed, and any error shown, in a message at the top of the page.
 
 #### Add a VLAN Pool
 
-1. In the **VLANs** pane, on the **Pools** tab, click **New Pool**.
-2. Enter a **Name** and click **Save**.
-3. Expand the new pool to add partitions to it.
+1. In the **VLANs** pane, on the **Pools** tab, click **Add New Pool**. Caster creates the pool with its 4096 VLANs.
+2. Click the pool's **Rename** icon to give it a name.
+3. Click the pool's row to open it, then click **Add New Partition** to add a partition to it.
 
 ### Modules
 
@@ -263,22 +282,39 @@ Caster discovers modules from two kinds of source, configured in the Caster API 
 
 Private repositories need git credentials both where Caster discovers modules and where Terraform runs, because `terraform init` downloads each module from its git address. When Terraform runs as Kubernetes jobs, the job pods need them too. See `docs/Modules.md` in the `Caster.Api` repository and the Caster Helm chart's `gitcredentials` value.
 
-Caster can add or refresh modules in three ways:
+Modules come from their sources, so the **Modules** page refreshes them rather than adding them. To add a module, add it to a source's repository with a `variables.tf.json` and a version tag such as `v1.0.0`, then refresh that source. Opening the page checks every source for new tags.
 
-- Each module list request checks every source for new tags. Refresh the browser if a new module or version does not appear. If a source cannot be reached, Caster keeps showing the modules it already has and shows the source's error on the **Modules** page.
-- An administrator can update the modules from every source at once.
-- An administrator can add or refresh the modules of one source, or one module, by its ID. This re-reads it even if no tag changed.
+The **Module Sources** panel at the top lists each configured source with an icon and a line saying how its last read went:
 
-While working on Caster Modules:
+- **Read successfully:** when it was last updated.
+- **No Modules yet:** the source has no tagged modules.
+- **Needs attention:** for example, the source has tags but none holds a module. Its modules from earlier reads are still shown.
+- **Couldn't be read:** the error, such as a failed clone or a refused URL. Caster keeps showing the modules it already had from that source.
+- **Not read yet.**
 
-- **Search:** Type all or part of a module name to filter the list.
-- **External Module ID:** Enter a module source name, a source name and subdirectory (`crucible-modules/network-segment`) for one module in it, or for a GitLab source, a GitLab project ID. Then click the **Add/Update the Modules from this source** icon to add or refresh it.
-- **Add/Update the Modules from every source:** Click the cloud icon to check every configured source at once.
-- **Copy:** Click the copy icon to copy the module's ID to the clipboard.
-- **Versions:** Displays the number of versions available for the module in the git repository. A module must have at least one version before you can add it to a Design.
-- **Path:** Displays the module's path. For a git module source, the path starts with the source name.
-- **Date Loaded:** Displays when Caster last loaded the module from the repository.
-- **Delete:** Click the trash can icon to delete a module.
+The panel's header counts the sources that need attention, and the panel opens by itself when any do. In the panel:
+
+- **Refresh All Sources:** re-reads every source and every version, even if no tag changed. A message names any source that couldn't be read.
+- **Refresh:** re-reads one source.
+- **Add a GitLab Project:** for the GitLab source, adds or refreshes one project by its GitLab project ID.
+- **Copy repository URL:** copies the source's repository address, without credentials.
+
+Caster refuses a source whose URL contains a password, or a user name in an `http(s)` URL, and shows it as **Couldn't be read**. Put credentials in the git credential store instead (the Caster Helm chart's `gitcredentials` value).
+
+In the modules table:
+
+- **Search:** Type all or part of a module's name, description, path, or latest version to filter the list.
+- **Refresh:** Click a git module's refresh icon to re-read just that module. GitLab modules are refreshed from the GitLab source in **Module Sources**.
+- **Copy Terraform source:** Copies the latest version's `source` value for a Terraform `module` block.
+- **Description:** The module's description.
+- **Path:** The module's path. For a git module source, the path starts with the source name.
+- **Versions:** The number of versions available. A module must have at least one version before you can add it to a Design.
+- **Latest Version:** The module's highest version.
+- **Last Synced:** When Caster last re-read the module from its source, in your time zone.
+- **Not in source:** Marks a module that its source no longer contains. It is still listed and usable.
+- **Delete:** Shown only for a module marked **Not in source**, or a GitLab module. A module still in its source would come back on the next refresh. Delete a leftover once no Design uses it.
+
+Refreshing and deleting modules require the `ManageModules` permission. Without it, the page is read-only.
 
 Selecting a module opens a form where you choose a version and enter the required variable values. After you select **Submit**, Caster generates the Terraform module block, which you can copy into the configuration file.
 
