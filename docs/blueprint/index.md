@@ -896,11 +896,12 @@ Two print buttons appear next to the pagination controls. Each opens the browser
 
 - **Print Current Page** prints the events on the current page.
 - **Print All Events** prints the full playbook:
-  - A cover page with the MSEL image, or a band in the theme color when the MSEL has no image. Below it: the MSEL name and description; the start date and time, duration, number of moves and scenario events, and teams; the subject, educational level, and keywords when set; and a contents list of the MSEL pages and moves.
+  - A cover page with the MSEL image, or a band in the theme color when the MSEL has no image. Below it: the MSEL name and description; the start date and time, duration, number of moves and scenario events, and teams; the subject, educational level, and keywords when set; and a contents list of the sections that follow.
+  - **Competencies**, when the MSEL has any: its competencies grouped by framework, each with its ID number and name, then each team's competencies.
   - Each MSEL page marked for the playbook, on its own page.
   - Each move on a new page, starting with **Move** and its number, its description, the **Situation Date/Time**, and the **Situation** briefing in a shaded box. The move's events follow.
 
-Event tables don't split a row across pages. Every printed page has a footer with the MSEL name and the page number. The page number needs Chrome or Edge 131 or later.
+Audio and video don't print: each player prints as a line saying the clip plays in Gallery, and its transcript prints open. Event tables don't split a row across pages. Every printed page has a footer with the MSEL name and the page number. The page number needs Chrome or Edge 131 or later.
 
 #### Invitations
 
