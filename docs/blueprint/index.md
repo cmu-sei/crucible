@@ -1122,7 +1122,15 @@ Each event page shows: **Execution Time** (absolute + offset), **Move**, **Group
 
 Pagination controls (**Previous page**, **Next page**, **Items per page**) appear at the top; the default is one event per page. Visual indicators mark the transition between moves.
 
-Click **Print MSEL Playbook** to open the browser's print dialog with only the playbook content in the printable area.
+Two print buttons appear next to the pagination controls. Each opens the browser's print dialog with only the playbook content.
+
+- **Print Current Page** prints the events on the current page.
+- **Print All Events** prints the full playbook:
+  - A cover page with the MSEL image, or a band in the theme color when the MSEL has no image. Below it: the MSEL name and description; the start date and time, duration, number of moves and scenario events, and teams; the subject, educational level, and keywords when set; and a contents list of the MSEL pages and moves.
+  - Each MSEL page marked for the playbook, on its own page.
+  - Each move on a new page, starting with **Move** and its number, its description, the **Situation Date/Time**, and the **Situation** briefing in a shaded box. The move's events follow.
+
+Event tables don't split a row across pages. Every printed page has a footer with the MSEL name and the page number. The page number needs Chrome or Edge 131 or later.
 
 #### Invitations
 
