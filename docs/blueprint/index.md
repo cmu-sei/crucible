@@ -404,6 +404,9 @@ To edit the MSEL's basic information and configuration, follow these steps:
 | --- | --- | --- | --- |
 | **Name** | String (max 70 characters) | Name of the MSEL | `Hurricane Delta MSEL` |
 | **Description** | String (max 600 characters) | Details and/or characteristics of the MSEL | `Hurricane Delta Fort Myers Scenario` |
+| **Marking** | Dropdown | Banner on the MSEL's participant material: `None`, `Exercise banner`, `TLP` for a Traffic Light Protocol (TLP) level, or `Classification banner`. Defaults to `None`. See [Marking](#marking). | `TLP` |
+| **TLP level** | Dropdown | Shown when **Marking** is `TLP`: `TLP:CLEAR`, `TLP:GREEN`, `TLP:AMBER`, `TLP:AMBER+STRICT`, or `TLP:RED`. | `TLP:AMBER` |
+| **Classification banner** | String (max 120 characters) | Shown when **Marking** is `Classification banner`: the banner text, in your own words. Displays in uppercase. | `UNCLASSIFIED // FOR EXERCISE USE ONLY` |
 | **Is a Template** | Boolean | Marks this MSEL as a reusable template for creating new MSELs. Template MSELs cannot be deleted. | `True` |
 | **Set a Start Time** | Boolean | When checked, exposes a **Start Date / Time** picker and schedules a specific start moment for the MSEL. When unchecked, the MSEL is open-ended. | `True` |
 | **Start Date / Time** | Datetime | Start date/time of the MSEL (only visible when **Set a Start Time** is checked). | `09/10/2024 20:00:00` |
@@ -437,6 +440,19 @@ The Config tab includes a **Competencies** row that points the user at the MSEL'
 
 The **Metadata** block on the Config tab captures non-functional descriptors that help with searching and filtering MSEL catalogs: **Difficulty Rating**, **Exercise Purpose**, **Exercise Mode**, **Subject** (free text), and **Keywords** (free text).
 
+#### Marking
+
+The **Marking** setting puts a banner on the MSEL's participant material. It defaults to `None`, so a MSEL shows no banner until you choose one.
+
+- **Exercise banner:** `EXERCISE · EXERCISE · EXERCISE` on gold, with the MSEL name and `FICTIONAL SCENARIO`.
+- **TLP:** the chosen TLP level on black, in the level's color.
+- **Classification banner:** your text, in the color of the classification it names (for example, red for `SECRET`, purple for `CUI`).
+
+The banner shows in two places:
+
+- **Gallery articles:** Blueprint adds the banner to each article's body when it pushes the MSEL to Gallery. A banner already in the article is replaced; `None` removes it. The article text stored in the MSEL doesn't change. To change the banner on pushed articles, remove and push the integrations again.
+- **MSEL pages:** a page shows the banner at its top and bottom. Changes show the next time the page opens.
+
 #### Integrations
 
 - **[Gallery](#glossary):** Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To learn more about this integration, reference the [Gallery](#gallery) section.
@@ -446,7 +462,7 @@ The **Metadata** block on the Config tab captures non-functional descriptors tha
 
 #### MSEL Pages
 
-Beyond the **Config** section, the **Info** tab is a container for user-authored notes pages. Click **Add Page** on the Info tab to create a new page; each page can be restricted to elevated users or exposed to every MSEL user.
+Beyond the **Config** section, the **Info** tab is a container for user-authored notes pages. Click **Add Page** on the Info tab to create a new page; each page can be restricted to elevated users or exposed to every MSEL user. A page shows the MSEL's [Marking](#marking) banner at its top and bottom.
 
 ![Blueprint Notes Tab OE](img/blueprintNotes-v3.png)
 
