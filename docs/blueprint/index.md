@@ -290,7 +290,7 @@ If the user can launch any template MSELs, the **Launch** card (*Initiate New Mi
 
 #### Manage an Event
 
-If the user holds the `CreateMsels` permission or is a contributor on any MSEL, the **Build** card (*Design & Planning*) is shown. Click **Manage Events** to go to `/build`, where the user can create, edit, delete, and open MSELs.
+If the user holds the `CreateMsels` permission or holds a MSEL role on any MSEL (see [Contributors](#contributors)), the **Build** card (*Design & Planning*) is shown. Click **Manage Events** to go to `/build`, where the user can create, edit, delete, and open MSELs.
 
 #### Assess an Event
 
@@ -492,7 +492,7 @@ After you've made your changes, click the **checkmark** to save the page.
 
 #### Contributors
 
-On this tab, users can add and assign contributor teams, as well as their respective roles related to the creation and management of the MSEL. Assigned teams can view and edit the MSEL.
+On this tab, users can add contributor units and give each unit member their **MSEL Roles** for building and managing the MSEL. A member of a contributor unit sees the MSEL in the `/build` list, and can open it, only while they hold at least one MSEL role on it. The MSEL's creator always has access as its Owner.
 
 ![Blueprint Contributors Tab OE](img/blueprintAddContributors-v2.png)
 
@@ -504,6 +504,8 @@ To add a contributor unit to the MSEL, follow these steps:
 2. Click **Add a Contributor Unit**, then select the unit you want to add.
 3. After selecting the unit, click the **+** button.
 
+Adding a unit gives each of its members who has no role on the MSEL the **Viewer** role, so the whole unit can open the MSEL. Change their **MSEL Roles** to give them more.
+
 ##### Remove a Contributor
 
 To remove a contributor unit from the MSEL, follow these steps:
@@ -511,7 +513,9 @@ To remove a contributor unit from the MSEL, follow these steps:
 1. Navigate to the **Contributors** tab.
 2. Select the team you want to remove and click the **-** button.
 
-Now that you've added the unit to the MSEL, members can view and edit it based on each unit member's role.
+Removing a unit takes the MSEL away from its members. The roles they held stay recorded, and come back if you add the unit again.
+
+Now that you've added the unit to the MSEL, members can view and edit it based on each unit member's role. Removing a member's last role in **MSEL Roles** takes away their access to the MSEL on the `/build` page.
 
 The available roles are:
 
@@ -520,7 +524,9 @@ The available roles are:
 - **[`Move Editor`](#glossary):** Can edit moves on the MSEL, as well as increment them during an exercise.
 - **[`Owner`](#glossary):** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g., Add Teams, Add Integrations, Events).
 - **[`Evaluator`](#glossary):** Manages the exercise, can advance moves, execute events, and check events as completed.
-- **[`Viewer`](#glossary):** Can view the MSEL, but can't edit it.
+- **[`Viewer`](#glossary):** Can open the MSEL from the `/build` list and view it read-only, but can't edit it.
+
+A user on one of the MSEL's teams with no MSEL role is a participant. Once you push the MSEL, they see only the [Exercise View](#exercise-view).
 
 #### Competencies
 
