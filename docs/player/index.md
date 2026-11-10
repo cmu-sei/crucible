@@ -177,6 +177,21 @@ In the dropdown next to your username, select **Administration**.
 3. Enable **embeddable** if desired. Embeddable is a true/false attribute that tells Player whether iFrames supports the app. For example, the Mattermost chat doesn't support embedding, so users must open it in a separate browser tab.
 4. Enable **Load in background** if desired. Load in background is a true/false attribute that tells Player to load the app in a hidden iFrame when Player loads. This is important for some apps that may require some initialization.
 
+Each Application Template needs its own name. Player compares names without regard to case or extra spaces, so it refuses a new template, or a rename, that matches an existing name. Clicking **Add a new Application Template** again creates **New Template 2**, then **New Template 3**, and so on.
+
+Only users with the **ManageApplications** permission can add, import, edit, or delete Application Templates. Users with only **ViewApplications** see the templates read-only and can export them.
+
+#### Delete an Application Template
+
+1. Under the Administration nav panel, select **Application Templates**.
+2. Click the template's URL to expand its details.
+3. If any view still uses the template, select a template in **Move its applications to**. When the two templates share a name, the list shows each template's URL so you can tell them apart.
+4. Click **Delete Application Template**, then **Delete** to confirm.
+
+Player moves the applications to the chosen template and then deletes this one. If you didn't choose a template to move them to, Player keeps the template. It reports how many applications in how many views still use it.
+
+In a view's **Applications**, the **Application Template** dropdown shows the URL next to any templates that share a name.
+
 ### Subscriptions
 
 Subscriptions allow a Player administrator to configure client applications so that the Player API notifies them when supported actions occur. Also known as Webhooks, this allows for arbitrary applications to respond to actions taken in Player and configure themselves as necessary. This is commonly used for applications to support on-demand Player events in conjunction with Alloy. For example, the VM API supports subscribing to ViewCreated and ViewDeleted in Player.
