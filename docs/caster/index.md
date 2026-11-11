@@ -46,7 +46,7 @@ Terraform runs don't get the Caster API's environment variables unless the deplo
 
 Configure the secrets, and the variables every run inherits, through the [Caster Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster). The chart README explains how to move a deployment that relied on runs inheriting every variable.
 
-For the rules a set's entries follow, how runs get them, and the security model, see [Environment Sets](https://github.com/cmu-sei/Caster.Api/blob/main/docs/EnvironmentSets.md) in the Caster.Api repository.
+For the rules a set's entries follow, how runs get them, and the security model, see [Environment Sets](https://github.com/cmu-sei/Caster.Api/blob/main/docs/EnvironmentSets.md) in the Caster API repository.
 
 ### Infrastructure Connections
 
@@ -54,7 +54,7 @@ A *connection* is a hypervisor Caster reads from: a vSphere vCenter or a Proxmox
 
 Connections are deployment settings: add them through the [Caster Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster). Caster never shows a connection's address or credentials, and a connection's settings reach a run only through an Environment Set.
 
-For connection settings, see the Caster.Api repository: [Infrastructure Inventory](https://github.com/cmu-sei/Caster.Api/blob/main/docs/Inventory.md) covers each provider's settings, which objects Caster reads, and filtering them by location, name, ISO location, and datacenter.
+For connection settings, see the Caster API repository: [Infrastructure Inventory](https://github.com/cmu-sei/Caster.Api/blob/main/docs/Inventory.md) covers each provider's settings, which objects Caster reads, and filtering them by location, name, ISO location, and datacenter.
 
 ## Permissions and Roles
 
