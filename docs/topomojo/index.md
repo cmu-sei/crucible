@@ -299,6 +299,8 @@ Once the template is in the appropriate state:
 - **Refresh ( <i class="fa-solid fa-arrows-rotate" aria-label="refresh-icon" role="img"></i> ):** Refresh queries the state of the VM from the hypervisor. This is useful if you run a `shutdown` command in the VM and the TopoMojo UI icons haven't updated to reflect the powered-off state of the VM yet.
 - **Deploy ( <i class="fa-solid fa-bolt" aria-label="deploy-icon" role="img"></i> ):** Deploys that virtual machine into your workspace.
 
+Before a VM deploys, TopoMojo checks that the hypervisor has enough free memory for it. If it doesn't, what happens depends on how an administrator set up TopoMojo (see [Hypervisor Capacity](#hypervisor-capacity)): by default the VM deploys and a yellow alert says the hypervisor may not have room. TopoMojo can also refuse the deploy and show why. Administrators can always deploy a workspace VM; they see the warning instead.
+
 #### Deployed VM Actions
 
 The deployed virtual machine displays the following additional icons from left to right:
@@ -501,7 +503,11 @@ The **Play** tab is where you can interact with your lab in the same way others 
 
 **Points:** Suggested number of points earned for successfully answering all questions. Consumers (e.g., [Gameboard](../gameboard/index.md) and [Moodle](../integrations/index.md#moodle)) can request any point value when they deploy a gamespace.
 
+Above these options, the **Play** tab estimates how many more gamespaces of this workspace fit on the hypervisor, for example "12 more gamespaces fit". Next to the number it shows what limits it (hypervisor memory or the resource pool limit), the free memory left after headroom, and how much memory one gamespace uses. If a template's replicas follow the player count, a **Players per gamespace** box appears so you can size the estimate for a team. Click **Refresh** for a new estimate. If TopoMojo can't read the hypervisor, the tab says there's no estimate and offers **Retry**. The estimate doesn't reserve anything: other launches and other apps on the hypervisor use the same memory.
+
 **Start:** Starts the gamespace by deploying virtual machines, displaying the Markdown document, making challenge questions available, and starting the timer for the user that clicked **Start**.
+
+If the hypervisor may not have room for the gamespace, **Start** deploys it anyway and a yellow alert says so, or TopoMojo refuses to start it and shows what's short, depending on how an administrator set up TopoMojo. See [Hypervisor Capacity](#hypervisor-capacity).
 
 **Reset:** Destroys and resets the gamespace.
 
@@ -509,11 +515,31 @@ The **Play** tab is where you can interact with your lab in the same way others 
 
 Access the **Admin Dashboard** by clicking **Admin** in the top right corner of the navigation bar. You need the `admin` role assigned to your user to see the **Admin** navigation option.
 
-The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Announcement, and Janitor tools described next.
+The admin area has these tabs: **Dashboard**, **Gamespaces**, **Workspaces**, **Templates**, **Files**, **Machines**, **Users**, **Settings**, and **Log**. The **Dashboard** tab holds the Hub Connections, Hypervisor Capacity, Announcement, and Janitor tools described next.
 
 ### Hub Connections
 
 **Hub connections** informs TopoMojo admins about which users are currently logged into TopoMojo.
+
+### Hypervisor Capacity
+
+**Hypervisor Capacity** shows how much memory, CPU, and storage is in use on each host and store TopoMojo deploys to. Other apps that share the hypervisor count toward these figures. Hosts that are offline, disconnected, or in maintenance show as **Unavailable**. With a vSphere resource pool limit, the memory left under the limit appears below the tables. Click **Refresh** for new figures; TopoMojo reuses a hypervisor reading for 30 seconds by default.
+
+Each bar is green below the warning level, yellow at or over it, and red at or over the critical level. By default the warning level is 75% and the critical level is 90%. When any host's memory or any store's storage reaches the warning level, a banner at the top of the **Dashboard** lists them, critical ones first. The banner turns red when anything is critical. CPU doesn't trigger the banner, because hypervisors routinely give VMs more virtual processors than the host has.
+
+Before a gamespace or workspace VM deploys, TopoMojo checks that its VMs fit in the hypervisor's free memory. Free memory is what's left after holding back a share of each host's memory as headroom, 20% by default. The resource pool limit counts too, and with host affinity, all of a gamespace's VMs must fit on one host. TopoMojo also counts deploys that are still running, so several launches at once can't all claim the same room.
+
+TopoMojo's configuration sets what happens when a deploy doesn't fit:
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| `Core__CapacityCheck` | `Warn` | `Warn` deploys anyway and shows a warning. `Block` refuses the deploy and says what's short. `Off` skips the check. |
+| `Core__CapacityHeadroomPercent` | `20` | Share of each host's memory held back before it counts as free. |
+| `Core__CapacityCacheSeconds` | `30` | How long TopoMojo reuses a hypervisor reading. |
+| `Core__CapacityWarnPercent` | `75` | Memory or storage use that turns a bar yellow and adds a host or store to the banner. |
+| `Core__CapacityCriticalPercent` | `90` | Memory or storage use that turns a bar red and marks it critical in the banner. |
+
+With `Block`, TopoMojo refuses gamespace launches for everyone, including launches from Gameboard and other apps, because their API keys often belong to administrators. An administrator deploying a workspace VM sees the warning and the VM deploys. If TopoMojo can't read the hypervisor, the check never refuses a deploy.
 
 ### Announcement
 
