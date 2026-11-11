@@ -376,7 +376,7 @@ Each *entry* in a set has:
 - **Value source:**
   - **Secret:** One of the API's secrets, chosen by name.
   - **Plain value:** A value stored in Caster. Plain values are not secret: members of every project that gets the set can read them.
-  - **Infrastructure connection:** A field of a connection, such as its URL or API token, read when each run starts.
+  - **Connection:** A field of a connection, such as its URL or API token, read when each run starts.
 
 A variable name can come from only one set on a project. Caster refuses an assignment or edit that would give a project the same variable from two sets.
 
