@@ -44,7 +44,7 @@ Before Caster applies a run, it checks the run's size against the workspace's de
 - **Global limits:** `MaxMachines`, `MaxVcpu`, `MaxMemoryGiB`, and `MaxDiskGiB` cap what one workspace may have. Leave them empty for no limit. Each project and workspace can set lower limits of its own; see [Deployment Limits](#deployment-limits).
 - **CPU overcommit ratio:** `CpuOvercommitRatio`, `4` by default, is how many vCPUs a host may give its VMs for each core it has.
 - **Reserve:** `ReservePercent`, `10` by default, is the share of each host's memory and each datastore's free space that Caster never counts as room.
-- **Room check:** `RoomCheck` is `Warn` by default, so a run the hypervisors may not have room for applies once someone acknowledges the warning. Set it to `Block` to refuse such runs.
+- **Room check:** `RoomCheck` is `Warn` by default. A run the hypervisors may not have room for still applies, and its apply keeps the warning; Caster asks you to select **Apply anyway** first, while automated callers such as Alloy apply without being stopped. Set it to `Block` to refuse such runs.
 
 Caster reads the room from the infrastructure inventory: the hosts and datastores of every inventory connection. Without an inventory, Caster doesn't check room, and limits still apply.
 
@@ -605,7 +605,7 @@ Expanding a planned run shows its capacity check above the plan output:
 
 When a run takes the workspace over a limit, Caster refuses it: the check reads **Apply refused** and **Apply** stays disabled. Plan a smaller run, or ask an administrator to raise the limit.
 
-When the hypervisors may not have room, the check reads **Not enough room**. Select **Apply anyway** to enable **Apply**. If your administrator has set the room check to `Block`, Caster refuses the run instead.
+When the hypervisors may not have room, the check reads **Not enough room**. Select **Apply anyway** to enable **Apply**. The run's output then starts with the capacity warning, in yellow, so anyone reviewing the run sees it was applied without room. If your administrator has set the room check to `Block`, Caster refuses the run instead.
 
 !!! note
 
