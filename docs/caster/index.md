@@ -37,6 +37,17 @@ Configure both through the [Caster Helm Chart](https://github.com/cmu-sei/helm-c
 
     The Crucible Terraform Provider requires Terraform 1.0 or later. Configurations that use it need a workspace set to a `1.x` version.
 
+### Deployment Capacity
+
+Before Caster applies a run, it checks the run's size against the workspace's deployment limits and against the room left on the hypervisors. Configure both through the `Capacity` settings of the [Caster Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster):
+
+- **Global limits:** `MaxMachines`, `MaxVcpu`, `MaxMemoryGiB`, and `MaxDiskGiB` cap what one workspace may have. Leave them empty for no limit. Each project and workspace can set lower limits of its own; see [Deployment Limits](#deployment-limits).
+- **CPU overcommit ratio:** `CpuOvercommitRatio`, `4` by default, is how many vCPUs a host may give its VMs for each core it has.
+- **Reserve:** `ReservePercent`, `10` by default, is the share of each host's memory and each datastore's free space that Caster never counts as room.
+- **Room check:** `RoomCheck` is `Warn` by default, so a run the hypervisors may not have room for applies once someone acknowledges the warning. Set it to `Block` to refuse such runs.
+
+Caster reads the room from the infrastructure inventory: the hosts and datastores of every inventory connection. Without an inventory, Caster doesn't check room, and limits still apply.
+
 ## Permissions and Roles
 
 Sets of *permissions* control access to features in Caster. Permissions can apply globally or per **Project**.
@@ -133,6 +144,16 @@ Click the **Open** icon to open the project in a new browser tab, where you can 
 
 1. In the project row, click the **trash can** icon.
 2. Confirm **Delete**.
+
+#### Deployment Limits
+
+Administrators with the `EditProjects` system permission can cap what each workspace in a project deploys. A project's own managers can't change its limits.
+
+1. In the project row, click the **Gauge** icon.
+2. Enter any of **Max machines**, **Max vCPU**, **Max memory (GiB)**, and **Max disk (GiB)**. Leave a field empty for no limit.
+3. Click **Save**.
+
+Each workspace in the project gets the lowest of the project's limit, its own limit, and the global limit. To set a workspace's own limits, see [Workspace Settings](#workspace-settings).
 
 ### Workspaces
 
@@ -412,6 +433,7 @@ Each workspace has its own Terraform settings. Caster applies them to every run 
    - **Terraform Version:** The Terraform version this workspace runs. The dropdown lists every version installed in your Caster instance, newest first, with the instance default marked `(Default)`.
    - **Parallelism:** Limits the number of concurrent Terraform operations. Defaults to `10` when empty. Only set this to troubleshoot provider errors.
    - **Azure Threshold:** The number of consecutive failed destroys in an Azure workspace before Caster tries to recover by removing `azurerm_resource_group` children from the state.
+   - **Deployment limits:** Only for users with the `EditProjects` system permission. **Max machines**, **Max vCPU**, **Max memory (GiB)**, and **Max disk (GiB)** cap what this workspace may have. Leave a field empty for no limit here; the workspace still gets its project's and the global limits.
 3. Click **Save**.
 
 !!! note
@@ -571,6 +593,23 @@ This output always ends with a summary of the form `Plan: x to add, y to change,
 - Releases plan tools such as network resources and virtual machines into vCenter
 
 Within the workspace view users can see every run they have planned and applied.
+
+#### Capacity Check
+
+Expanding a planned run shows its capacity check above the plan output:
+
+- What the run adds: new machines, and the vCPU, memory, and disk of those and of the machines it grows.
+- The workspace's totals after the run, next to each limit and where that limit comes from (**workspace**, **project**, or **global**).
+- The room on each host and datastore the run uses, with what it needs and what is free. A machine the plan places on no host counts against all hosts of its hypervisor.
+- Notes on anything Caster couldn't check, such as a clone whose disk size comes from its template.
+
+When a run takes the workspace over a limit, Caster refuses it: the check reads **Apply refused** and **Apply** stays disabled. Plan a smaller run, or ask an administrator to raise the limit.
+
+When the hypervisors may not have room, the check reads **Not enough room**. Select **Apply anyway** to enable **Apply**. If your administrator has set the room check to `Block`, Caster refuses the run instead.
+
+!!! note
+
+    A run that shrinks a workspace, or destroys it, is never refused for a limit.
 
 #### Destroy
 

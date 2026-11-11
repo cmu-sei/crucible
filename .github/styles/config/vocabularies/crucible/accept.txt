@@ -99,3 +99,5 @@ HTTP(?:S)?
 CITE(?:'s)
 [Ii]Frame(?:s)?
 (?i)mkdocs
+(?i)datastores?
+(?i)overcommit
