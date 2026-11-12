@@ -868,6 +868,8 @@ To search for a specific event, follow these steps:
 
 While the **Events** tab lets MSEL owners and content developers manage events, the **Exercise View** tab gives participants read-only access to track current and future events during an exercise.
 
+The Exercise View shows the data fields marked **Display on the Exercise View**. The **Move**, **Group**, **Execution Time**, and **Integration Target** rows on the **Data Fields** tab control those columns the same way. **Integration Target** shows where the push sends each event, for example Gallery.
+
 ![Blueprint Exercise View OE](img/blueprintExerciseView-v3.png)
 
 ##### What Participants See
