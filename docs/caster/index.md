@@ -37,6 +37,25 @@ Configure both through the [Caster Helm Chart](https://github.com/cmu-sei/helm-c
 
     The Crucible Terraform Provider requires Terraform 1.0 or later. Configurations that use it need a workspace set to a `1.x` version.
 
+### Run Environment and Secrets
+
+Terraform runs don't get the Caster API's environment variables unless the deployment lists them. Provider credentials reach runs through [Environment Sets](#environment-sets) instead. The deployment gives the API each credential as an environment variable whose name marks it as a secret, by default one starting with `CASTER_SECRET_`. Administrators then decide which projects get it.
+
+- Caster never shows a secret's value, and masks secret values in run output.
+- A run whose secret is missing, or too short to mask safely, fails before Terraform starts.
+
+Configure the secrets, and the variables every run inherits, through the [Caster Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster). The chart README explains how to move a deployment that relied on runs inheriting every variable.
+
+For the rules a set's entries follow, how runs get them, and the security model, see [Environment Sets](https://github.com/cmu-sei/Caster.Api/blob/main/docs/EnvironmentSets.md) in the Caster API repository.
+
+### Infrastructure Connections
+
+A *connection* is a hypervisor Caster reads from: a vSphere vCenter or a Proxmox VE cluster. Caster lists each connection's VM templates, ISOs, networks, and datastores in the [Inventory panel](#inventory-panel) of the projects you assign it to. An Environment Set can read a connection's endpoint and credentials into a run, so you configure each credential once.
+
+Connections are deployment settings: add them through the [Caster Helm Chart](https://github.com/cmu-sei/helm-charts/tree/main/charts/caster). Caster never shows a connection's address or credentials, and a connection's settings reach a run only through an Environment Set.
+
+For connection settings, see the Caster API repository: [Infrastructure Inventory](https://github.com/cmu-sei/Caster.Api/blob/main/docs/Inventory.md) covers each provider's settings, which objects Caster reads, and filtering them by location, name, ISO location, and datacenter.
+
 ## Permissions and Roles
 
 Sets of *permissions* control access to features in Caster. Permissions can apply globally or per **Project**.
@@ -49,7 +68,19 @@ Examples of global permissions include:
 
 Users with View or Manage permissions for an administration function (for example, `ViewVLANs` or `ManageWorkspaces`) can open the **Administration** area. However, they see only the sections they have permission to access in the sidebar menu.
 
+These permissions control the infrastructure features:
+
+- `ViewInfrastructure`: View every connection and its inventory
+- `ManageInfrastructure`: Assign connections to projects and project groups, and create Environment Set entries that read a connection
+- `ViewEnvironmentSets`: View every Environment Set, never secret values
+- `ManageEnvironmentSets`: Create, edit, and delete Environment Sets, and assign them to projects and project groups
+- `ManageProjectGroups`: Create, edit, and delete project groups, and manage any group
+
 You can view all available permissions in the **Roles** section of the **Administration** area.
+
+!!! warning "Grant ManageProjectGroups With Care"
+
+    A holder of `ManageProjectGroups` can make themselves a manager of any group, and so reach every project in a group and the credentials its Environment Sets give. Grant it as carefully as `ManageEnvironmentSets`.
 
 ### Roles
 
@@ -81,7 +112,7 @@ You can't create custom project roles.
 
 ## Administrator Guide
 
-Caster administrators use the Administration View to manage projects, workspaces, VLANs, modules, users, roles, and groups.
+Caster administrators use the Administration View to manage projects, workspaces, VLANs, modules, users, roles, connections, Environment Sets, project groups, and groups.
 
 ### Administration View
 
@@ -151,7 +182,7 @@ The screen shot below shows the **Workspaces** pane in Caster's Administration V
 
 Caster manages VLAN IDs by creating pools of 4096 VLANs and dividing them into partitions. When a user requests a VLAN from a partition, Caster assigns an unused ID and marks it in use until the user releases it.
 
-A partition is either assigned to a project or configured as the system default. Users request VLAN IDs from their project partition or from the default partition.
+An administrator assigns a partition to a project or a [project group](#project-groups), or makes it the system default. A project's VLAN requests use its own partition, then its group's, then the default partition.
 
 - VLANs can include tags for organization, and users can request a VLAN by tag
 - Users can request a specific VLAN ID within a partition
@@ -315,6 +346,122 @@ The **Roles** pane in the Administration View is where administrators review and
 3. Select each permission the role grants. Selecting **All** grants every permission.
 4. Click **Save**.
 
+### Connections
+
+The **Connections** pane lists the infrastructure connections the deployment configures, with each one's hosts and storage use, and the projects and project groups that see it. Viewing it requires `ViewInfrastructure`.
+
+A connection's inventory appears in a project's **Inventory** panel only when the connection is assigned to the project or its project group. Assigning a connection gives the project its inventory, not its credentials; runs get credentials only from [Environment Sets](#environment-sets).
+
+#### Assign a Connection
+
+Assigning requires `ManageInfrastructure`.
+
+1. In the **Connections** pane, click **Assign** on the connection.
+2. On the **Projects** tab, select the projects that should see the connection, and clear the ones that shouldn't.
+   - Use **Search** to find a project.
+3. On the **Project Groups** tab, select or clear groups the same way.
+4. Click **Save**.
+
+To refresh a connection's inventory now rather than at its next scheduled read, click the **Refresh** icon on the connection.
+
+### Environment Sets
+
+An *Environment Set* is a named group of variables that Caster gives to every Terraform run in the projects you assign it to. Use sets to give projects provider credentials and settings without writing them in Terraform files.
+
+The **Environment Sets** pane has two tabs:
+
+- **Sets:** Every set, its entries, and the projects and project groups that get it.
+- **Secrets:** The secrets the deployment gives the API, whether each one is available, and the sets that use it. Caster never shows a secret's value.
+
+Each *entry* in a set has:
+
+- **Kind:** **Environment variable**, set in the run under its name, or **Terraform variable**, set as `TF_VAR_<name>`.
+- **Name:** The variable's name in the run.
+- **Value source:**
+  - **Secret:** One of the API's secrets, chosen by name.
+  - **Plain value:** A value stored in Caster. Plain values are not secret: members of every project that gets the set can read them.
+  - **Connection:** A field of a connection, such as its URL or API token, read when each run starts.
+
+A variable name can come from only one set on a project. Caster refuses an assignment or edit that would give a project the same variable from two sets.
+
+!!! note
+
+    A secret can't be a Terraform variable. Terraform saves variable values in plans and state, so give credentials to the provider as environment variables.
+
+#### Add an Environment Set
+
+1. In the **Environment Sets** pane, click **+**.
+2. Enter a **Name** and, optionally, a **Description**, then click **Save**.
+3. Expand the set and click **Add Entry**.
+4. Choose the **Kind**, enter the variable **Name**, choose the **Value source**, and supply the secret, value, or connection field.
+5. Click **Save**. Repeat for each entry.
+
+#### Create a Set From a Connection
+
+**Create Set from Connection** builds a set holding a Terraform provider's environment variables for one connection, read from the connection's settings. Creating one requires `ManageInfrastructure` as well as `ManageEnvironmentSets`.
+
+1. In the **Environment Sets** pane, click **Create Set from Connection**.
+2. Select the **Connection** and the **Terraform provider**.
+3. Optionally, enter a **Name**. Without one, Caster names the set after the connection and provider.
+4. Click **Create**.
+
+#### Assign an Environment Set
+
+1. Expand the set and click **Assign**.
+2. On the **Projects** tab, select the projects that should get the set, and clear the ones that shouldn't.
+3. On the **Project Groups** tab, select or clear groups the same way.
+4. Click **Save**. Caster checks every change together, and saves all of them or none.
+
+A set's variables reach every workspace in its projects at their next run.
+
+#### Copy an Environment Set
+
+1. In the set's row, click the **Copy** icon.
+2. Click **Copy** to confirm.
+
+Caster names the copy "*name* (copy)" and assigns it to no project.
+
+#### Edit Several Sets Together
+
+1. Select two or more sets with the checkboxes in the **Select** column.
+2. Click **Edit Selected**.
+3. For each variable, edit its value, delete it, or select **Add where missing** to add it to the selected sets that don't have it.
+   - When the sets give a variable different values, Caster asks for the value to add first.
+4. Click **Save**.
+
+#### Delete an Environment Set
+
+1. In the set's row, click the **trash can** icon.
+2. Review the projects that get the set, then click **Delete**.
+
+Those projects' next runs don't get the set's variables.
+
+### Project Groups
+
+A *project group* is a set of projects that share memberships, Environment Sets, connections, and a VLAN partition. What a group carries adds to what each project has of its own. A project belongs to at most one group.
+
+- **Memberships:** A user or group with a role in the project group has that role in every project of the group.
+- **Environment Sets:** Every project in the group gets the group's sets as well as its own.
+- **Connections:** Every project in the group sees the group's connections' inventory as well as its own.
+- **VLANs:** A project uses its own partition first, then its group's.
+
+Group managers don't need the Administration View. A group member whose role is **Manager**, or has the Manage Project permission, can open **Project Groups** from the dropdown next to their username.
+
+#### Add a Project Group
+
+1. In the **Project Groups** pane, click **Add Project Group**.
+2. Enter a **Name** and, optionally, a **Description**, then click **Save**.
+
+#### Manage a Project Group
+
+Click a group to expand it. Each tab saves on its own.
+
+- **Projects:** Select the projects to include, then click **Save**. A project already in another group moves out of it. Click **New Project in Group** to create a project inside the group.
+- **Memberships:** Add users and groups and choose their roles, as for a [project](#edit-an-existing-project).
+- **Environment Sets:** Select the sets the group's projects get. Requires `ManageEnvironmentSets`.
+- **Connections:** Select the connections whose inventory the group's projects see. Requires `ManageInfrastructure`.
+- **VLANs:** Choose the group's partition. Visible only with `ManageVLANs`.
+
 ### Groups
 
 Groups are collections of users that administrators assign roles to or add to projects as a single unit instead of managing users individually. Administrators use groups to simplify access management for teams. For example, an administrator can add a group such as **White Cell** to multiple projects. Any user placed into the matching group in the identity provider automatically gains the same project access in Caster. This allows administrators to manage group membership in one place while Caster applies the access across all of the applications.
@@ -366,6 +513,28 @@ Export Project lets you export the project as an archive file. Select the **Arch
 #### Import Project
 
 Import Project lets you import a project from a zip file. Click **Choose File** to select the zip file, then click **Import**. Enable **Preserve Ids** to append IDs to directory names during the import.
+
+### Inventory Panel
+
+The **Inventory** panel in a project's navigation lists what is on the hypervisors assigned to the project: VM templates, ISOs, networks, datastores, and vSphere content library items.
+
+- If the project has more than one connection, choose one from the connection list at the top of the panel.
+- Type in **Search inventory** to filter the list.
+- Click **Copy Terraform** on an item to copy a Terraform snippet that refers to it, or copy its name.
+- Click **Refresh inventory** to read the hypervisor again.
+
+If the panel lists nothing, ask an administrator to assign a connection to the project or its project group.
+
+### Environment
+
+Click **Environment** in a project's navigation to see what the project's runs get:
+
+- **Environment Sets:** The sets assigned to the project, each variable they set, and whether each secret is available. Caster never shows secret values.
+- **Connections:** The connections whose inventory the project's **Inventory** panel lists.
+
+Caster marks what the project gets through its project group "via group *name*".
+
+Administrators with `ManageEnvironmentSets` or `ManageInfrastructure` can click **Change Assignments** to add and remove the project's sets and connections in one save. When a chosen set reads a connection the project doesn't show yet, Caster offers to add the connection too. Change what comes through the group on the group itself.
 
 ### Files
 
@@ -603,19 +772,27 @@ Users can taint resources within the workspace view. A tainted resource will dis
 
 This glossary defines key terms and concepts used in the Caster application.
 
+**Connection:** A vSphere vCenter or Proxmox VE cluster that Caster reads inventory from, configured by the deployment.
+
 **Designer:** A graphical user interface for creating and editing Terraform deployments through the use of modules.
 
 **Directory:** The outline of a project and the modules it contains.
 
+**Environment Set:** A named group of variables, including secrets, that Caster gives to every Terraform run in the projects it is assigned to.
+
 **File:** Text files to eventually put onto a file system and use with the Terraform command line tool.
 
 **Host:** Consists of a name, datastore, and maximum number of virtual machines that it can support.
+
+**Inventory:** The VM templates, ISOs, networks, datastores, and content library items on a connection, listed in a project's **Inventory** panel.
 
 **Module:** A container for multiple resources used together. Modules create lightweight abstractions, so you can describe your infrastructure in terms of its architecture, rather than directly in terms of physical objects.
 
 **Parallelism:** The number of concurrent operations Terraform performs during a run.
 
 **Project:** A way to organize and categorize similar environments for multiple workspaces and directories within Caster.
+
+**Project Group:** A set of projects that share memberships, Environment Sets, connections, and a VLAN partition.
 
 **Run:** A specific instance of the Terraform plan and apply process for a workspace.
 
