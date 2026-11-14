@@ -44,7 +44,7 @@ Collections are the top-level containers that group cards and articles for an ex
 
 #### Add a Collection
 
-![New Collection modal with Add Collection icon called out](img/gallery-new-collection.png)
+![Add Collection dialog with Add Collection icon called out](img/gallery-new-collection.png)
 
 1. Under the Collections Administration View, click **+** (**Add Collection**).
 2. In **Name**, enter the collection name (for example, `Demonstration`).
@@ -59,7 +59,7 @@ Collections are the top-level containers that group cards and articles for an ex
 #### Edit, Copy, Download, and Delete a Collection
 
 - **Edit:** Click **Edit** (pencil icon) next to the collection, make the desired changes, and click **Save**.
-- **Copy:** Click the **Copy** icon next to the collection.
+- **Copy:** Click the **Copy** icon next to the collection. Gallery names the copy after you: `<collection name> - <your name>`.
 - **Download:** Click the **Download** icon next to the collection.
 - **Delete:** Click the **Trash Can** next to the collection.
 
@@ -72,7 +72,7 @@ Cards group articles into categories and appear on the Gallery Wall. Configure c
 ##### Add a Card
 
 1. Locate and select a collection.
-2. Expand the **Cards** section, click **+** (**Add a Card**).
+2. Expand the **Cards** section, click **+** (**Add Card**).
 3. In **Name**, enter the card name (for example, `Pitt Information Technology Sector`).
 4. In **Description**, enter a brief description (for example, `This card provides additional information related to the IT sector in Pittsburgh.`).
 5. Click **Save**.
@@ -148,12 +148,12 @@ An exhibit is a scheduled instance of a collection. The Exhibits page lists exhi
 
 !!! note
 
-    When you add a new exhibit, the system creates a new collection with the uploaded exhibit. To view the uploaded exhibit, navigate to the collection using the dropdown and select the collection with the same name as the file you uploaded.
+    When you add a new exhibit, the system creates a new collection with the uploaded exhibit. Gallery names both after you: `<collection name> - <your name>` and `<exhibit name> - <your name>`. To view the uploaded exhibit, select the new collection in the dropdown.
 
 #### Edit, Copy, Download, and Delete an Exhibit
 
 - **Edit:** Click **Edit** (pencil icon) next to the exhibit, make the desired changes, and click **Save**.
-- **Copy:** Click the **Copy** icon next to the exhibit.
+- **Copy:** Click the **Copy** icon next to the exhibit. Gallery adds the copy to the same collection and names it after you: `<exhibit name> - <your name>`.
 - **Download:** Click the **Download** icon next to the exhibit.
 - **Delete:** Click the **Trash Can** next to the exhibit.
 
