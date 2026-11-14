@@ -413,7 +413,7 @@ Procedures assume you are in the Player VM Console app.
 The procedures below show you how to remotely power a VM on or off from within the Player VM Console app. These procedures assume you are in the Player VM Console app.
 
 1. In the Player VM Console app, select the virtual machine that you want.
-2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to Power On, Power Off, and Reboot.
+2. On the VM tab, click the **gear icon**, then **Power**. You have the menu options to **Power On**, **Power Off**, **Reboot**, and **Shutdown OS**. **Shutdown OS** shuts down the guest operating system cleanly and needs VMware Tools running in the VM. Without VMware Tools, the console grays out the option.
 
 ### Uploading Files
 
@@ -421,18 +421,18 @@ Player's VM Console app supports file transfers between your local machine and v
 
 #### Upload from Local to VM
 
-These procedures describe how to upload files from a local machine (an *out-of-game* computer) to a virtual machine in the Player VM Console app. You should use the **Send File to VM** option to upload small files.
+These procedures describe how to upload files from a local machine (an *out-of-game* computer) to a virtual machine in the Player VM Console app. You should use the **Send File To VM** option to upload small files.
 
 These procedures assume you are in the Player VM Console app.
 
 1. In the Player VM Console app, in the VM List, launch the virtual machine that you want.
-2. On the VM tab, click the **gear icon**, and then select **Files**, **Send File to VM**.
+2. On the VM tab, click the **gear icon**, and then select **Files**, **Send File To VM**.
 
 !!! note
 
-    If the **Send File to VM** option is grayed out, you will have to enter the credentials used to log in to the virtual machine. Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
+    If the **Send File To VM** option is grayed out, you will have to enter the credentials used to log in to the virtual machine. Select **Enter VM Credentials**. In the VM Send File Settings window, enter the **Destination File Path**, **Username**, and **Password**. Then click **Done**. Any user registered for the exercise will have the virtual machine credentials.
 
-3. After entering your credentials, select the **Send File to VM** option (this should no longer appear grayed out).
+3. After entering your credentials, select the **Send File To VM** option (this should no longer appear grayed out).
 4. Select the file from your local machine that you want to upload.
 5. Click **Open**. This will copy the file to the destination folder specified in the VM Send File Settings window.
 
@@ -443,7 +443,7 @@ These procedures describe how to upload files from a local machine to mount as a
 1. In the VM List screen, click **Upload File**.
 2. On your local machine, select the file you want to upload (the upload may take some time depending upon the file size, so you will see a progress bar highlighting the upload progress).
 3. Click **Open**.
-4. On the VM tab, click the **gear icon**, and then select **Files**, **Mount File to DVD**.
+4. On the VM tab, click the **gear icon**, and then select **Files**, **Mount ISO**.
 5. In the Search box that opens, look for and select the uploaded file that you want to mount.
 
     !!! note
@@ -452,6 +452,63 @@ These procedures describe how to upload files from a local machine to mount as a
 
 6. Click **Mount**. This process automatically mounts the file as a DVD Drive ISO.
 7. After you have mounted/used the ISO for file copy, right-click the DVD Drive ISO and select **Eject** to eject the ISO.
+
+### Use the Proxmox VM Console
+
+Proxmox VMs open in a console laid out like the vSphere console. The **gear icon** menu is on the left, toolbar buttons are in the center, and connected users are on the right. Most options work the same way. This section covers what the Proxmox console offers and where it differs.
+
+#### Console Options Menu
+
+Click the **gear icon** next to the VM name to open the console options. A read-only console shows only the options from **Fullscreen** through **Resolution**.
+
+| Option | What It Does |
+| --- | --- |
+| **Fullscreen** | Fills the screen with the console. |
+| **Open In New Tab** | Opens the console in its own browser tab. Appears only when the console is open inside Player. |
+| **Reconnect** | Reconnects the console to the VM. |
+| **Read Only** | Turns read-only mode on or off. Appears only if your permissions let you control the VM. While read-only mode is on, `(Read Only)` follows the VM name and the console ignores your keyboard and mouse. |
+| **Dark Theme** | Switches the console between dark and light themes. |
+| **Resolution**, **Scale to Fit** | Scales the VM display to fit the window. This is the default. |
+| **Resolution**, **Match Window Size** | Changes the VM's screen resolution to match the window. Unavailable when the VM's display adapter can't change resolution, and on a read-only console; hover over it to see why. If the VM doesn't change resolution, the console returns to **Scale to Fit** and displays `This VM didn't change resolution, so the console is scaling to fit instead.` |
+| **Power**, **Power On** | Starts the VM. |
+| **Power**, **Power Off** | Turns the VM off immediately without shutting down the guest OS. Asks you to confirm first. |
+| **Power**, **Reboot** | Asks the guest OS to restart through the Advanced Configuration and Power Interface (ACPI) or the QEMU guest agent. Asks you to confirm first. If the guest doesn't respond, the error message suggests **Power Off** instead. |
+| **Power**, **Shutdown OS** | Asks the guest OS to shut down, the same way as **Reboot**. Asks you to confirm first. If the guest doesn't respond, the error message suggests **Power Off** instead. |
+| **Snapshots** | Opens a list of the VM's snapshots. Select one to revert the VM to it. Requires the `RevertVms` permission. Unavailable when the VM has no snapshots. |
+| **Files**, **Send File To VM** | Choose one or more files, then enter the destination folder in the guest as an absolute path. Requires the `UploadVmFiles` permission. |
+| **Files**, **Download File From VM** | Enter the absolute path of a file in the guest. Your browser downloads it. Requires the `DownloadVmFiles` permission. |
+| **Files**, **Mount ISO** | Choose an ISO to mount in the VM's optical drive. |
+| **Keyboard**, **Send Ctrl-Alt-Del** | Sends Ctrl+Alt+Delete to the VM. |
+| **Keyboard**, **Send Text** | Types the text you enter into the VM as key presses. |
+| **Keyboard**, **Paste to Clipboard** | Places your local clipboard text on the VM's clipboard without typing it. |
+| **Network Cards** | Moves a network adapter to another network. Appears only if you have permission to change the VM's networks. |
+| **Clipboard**, **Copy** | Copies the last text copied inside the VM to your local clipboard. |
+| **Clipboard**, **Paste** | Types your local clipboard text into the VM as key presses. |
+
+**Send Text** and **Clipboard**, **Paste** type as if on a US keyboard. If the VM uses another keyboard layout, some characters arrive as different ones. For example, on a UK layout `@` arrives as `"`. To avoid this, use **Paste to Clipboard** on a VM that has a Virtual Network Computing (VNC) clipboard (see [What the VM Needs](#what-the-vm-needs)).
+
+#### Toolbar and Status
+
+- **Copy**, **Paste**, and **Ctrl-Alt-Del:** The toolbar buttons do the same as **Clipboard**, **Copy**; **Clipboard**, **Paste**; and **Keyboard**, **Send Ctrl-Alt-Del**. A read-only console doesn't show these buttons.
+- **Connected users:** The right side of the toolbar lists who has the console open, for example `Connected: alice, bob and 3 others`. Hover over it to see everyone.
+- **Task progress:** While a task runs on the VM, such as a power action or a revert, its name and progress appear next to the VM name. A task without a percentage shows `(in progress)`.
+
+#### Differences From the vSphere Console
+
+- **Files:** File transfers use the QEMU guest agent, so you don't enter VM credentials. **Send File To VM** accepts files up to 45 KB each. For larger files, use **Mount ISO** or the VM List's **Upload File**.
+- **Copy:** **Copy** returns only text you copied inside the VM after the console connected. It's unavailable when the VM doesn't have a VNC clipboard; hover over it to see why. If nothing has arrived from the VM's clipboard, the error message says the guest needs `spice-vdagent` running.
+- **Resolution:** Instead of a list of fixed resolutions, the Proxmox console offers **Scale to Fit** and **Match Window Size**.
+
+#### What the VM Needs
+
+Some console features depend on how you build the VM template. Template authors can use this table to decide what to include.
+
+| Feature | Requirement |
+| --- | --- |
+| IP addresses in the VM List, **Send File To VM**, **Download File From VM** | QEMU guest agent installed and running in the guest, with the guest agent turned on in the VM's Proxmox options. When the agent isn't running, the file options are unavailable and their tooltip says `Requires the QEMU guest agent`. |
+| **Reboot** and **Shutdown OS** | Guest OS that handles ACPI power requests, or the QEMU guest agent. |
+| Clipboard **Copy** | `clipboard=vnc` in the VM's display (`vga`) setting, and `spice-vdagent` running in the guest. |
+| **Match Window Size** | A display adapter that supports resizing, such as `virtio-gpu`, with its driver installed in the guest. The default `std` Video Graphics Array (VGA) adapter can't resize. |
 
 ### Follow Another Player
 
