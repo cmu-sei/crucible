@@ -32,6 +32,10 @@ The default setting for the maximum number of active events per user is **two**.
       }
 ```
 
+### Player Access for Caster's Terraform Provider
+
+When Alloy launches an event, it copies the event template's Player view. The copy keeps the view's teams but not their members, so the account that Caster's Terraform provider signs in as can't add virtual machines to it. You can configure Alloy to add that account to each copy's admin team, which limits the account's access to the event's view. You can also name a Player team role, and Alloy uses the team with that role instead. If a view has no matching team, the launch fails. Without this setting, the provider account needs the `ManageViews` and `ViewVms` system permissions in Player, which apply to every view. See [Player Access for Caster's Terraform Provider](https://github.com/cmu-sei/helm-charts/tree/main/charts/alloy#player-access-for-casters-terraform-provider) in the Alloy Helm Chart README for the settings.
+
 ### Classification Banner
 
 Alloy UI supports an optional, customizable classification banner that displays persistently at the top of the application. The banner can show classification labels (such as "UNCLASSIFIED" or "SECRET"), maintenance messages, or any other persistent notification. Configure the banner through `HeaderBarSettings` in the Helm chart. See the [Classification Banner](https://github.com/cmu-sei/helm-charts/tree/main/charts/alloy#classification-banner) section of the Alloy Helm Chart README for configuration details.
