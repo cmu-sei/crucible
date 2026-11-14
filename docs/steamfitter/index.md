@@ -210,6 +210,15 @@ Start the scenario to execute its tasks.
 
 When you start the scenario, Steamfitter marks it **Active** and adds a new **Execute** option to the Task context menu.
 
+Steamfitter ends an active scenario when its end time passes. If you start a scenario more than a minute after its planned start, Steamfitter shows how much of its planned runtime remains and asks how to start it:
+
+- **Start and keep** moves the start to now and the end so that the scenario runs its full planned length.
+- **Start, end at** keeps the planned end, so the scenario runs only for the remaining time.
+
+If the planned end has already passed, Steamfitter offers only **Start and keep** and **Cancel**, because the scenario would otherwise end within a minute. **Start and keep** needs permission to edit the scenario. Without it, ask someone who can edit the scenario to move its end.
+
+On-demand scenarios, scenarios with no end, and scenarios started on time show the usual confirmation.
+
 After you execute tasks, the results display in the task details. Each task is expandable. You will see a result listed for every execution of the task.
 
 ##### Ending a Scenario
