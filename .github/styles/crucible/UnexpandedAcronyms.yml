@@ -46,3 +46,9 @@ exceptions:
   - ATT
   - ATLAS
   - STIX
+  # CAPEC is a framework name like the others; CWE, OWASP and WASC are the catalogues its patterns cite by those names.
+  - CAPEC
+  - CWE
+  - OWASP
+  - WASC
+  - SQL
