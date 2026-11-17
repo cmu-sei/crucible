@@ -202,13 +202,14 @@ The CITE Duties page lists all CITE duty templates available for use in MSELs. A
 
 #### Technique Frameworks
 
-The **Technique Frameworks** page (**Techniques** in the Administration sidebar) holds the technique framework releases MSELs pick techniques from: MITRE ATT&CK&reg;, MITRE ATLAS&trade;, and MITRE D3FEND&trade;. A release is reference data. An administrator imports it once, and a MSEL keeps the technique names and descriptions it was planned against until its owner upgrades it. Importing and deleting releases requires the **Manage Competency Frameworks** permission; any signed-in user can read them.
+The **Technique Frameworks** page (**Techniques** in the Administration sidebar) holds the technique framework releases MSELs pick techniques from: MITRE ATT&CK&reg;, MITRE ATLAS&trade;, MITRE CAPEC&trade;, and MITRE D3FEND&trade;. A release is reference data. An administrator imports it once, and a MSEL keeps the technique names and descriptions it was planned against until its owner upgrades it. Importing and deleting releases requires the **Manage Competency Frameworks** permission; any signed-in user can read them.
 
 ##### Import a Release
 
 1. Download the release file:
     - **MITRE ATT&CK**: a STIX bundle for any domain (`enterprise-attack.json`, `mobile-attack.json`, or `ics-attack.json`) from MITRE's `attack-stix-data` repository.
     - **MITRE ATLAS**: `stix-atlas.json` from the `mitre-atlas/atlas-data` GitHub releases. It imports as a release of the `ATLAS` domain.
+    - **MITRE CAPEC**: `stix-capec.json` from the `capec/2.1` folder of MITRE's `cti` repository on GitHub. It imports as a release of the `capec` domain. CAPEC has no tactics, so its **Tactics** count is its categories: the broad patterns, such as Injection or Brute Force, that the specific attack patterns sit under. Deprecated and obsolete patterns aren't imported.
     - **MITRE D3FEND**: the ontology, `d3fend.json`, from the D3FEND Ontology Resources page. It imports as a defensive release of the `d3fend` domain, so its techniques go to a MSEL's **Defensive Techniques** pool.
 2. Click **Import a release file** (the upload icon) and choose the file. Blueprint reads the version from the file; fill in **Version** only for an older file that doesn't name one.
 
@@ -225,7 +226,7 @@ The file holds one row per artifact path, repeated for every sub-technique that 
 
 ##### Attribution
 
-MITRE's terms of use require that its content carry a notice. The page, and every MSEL tab that shows techniques, credits The MITRE Corporation and names ATT&CK as a registered trademark. Once a release of ATLAS or D3FEND appears, the notice adds that framework's trademark sentence. The notice links the ATT&CK **Terms of Use** and the **D3FEND Terms of Use**.
+MITRE's terms of use require that its content carry a notice. The page, and every MSEL tab that shows techniques, credits The MITRE Corporation and names ATT&CK as a registered trademark. Once a release of ATLAS, CAPEC, or D3FEND appears, the notice adds that framework's trademark sentence. The notice links the ATT&CK **Terms of Use**, and the **CAPEC Terms of Use** or **D3FEND Terms of Use** when one of those releases appears.
 
 #### Users
 
@@ -545,15 +546,17 @@ Expand the **MSEL Competencies** region to see the table of competencies associa
 
 #### Techniques
 
-On the **Techniques** tab, MSEL owners pool the techniques scenario events can name. **Attack Techniques** come from a MITRE ATT&CK&reg; or MITRE ATLAS&trade; release and **Defensive Techniques** from a MITRE D3FEND&trade; release. Each section has its own **Release** picker, its own pinned release, and its own **Upgrade**. Scenario events name pooled techniques through two data field types: an **Attack Technique** field offers the attack pool, and a **Defensive Technique** field offers the defensive pool.
+On the **Techniques** tab, MSEL owners pool the techniques scenario events can name. **Attack Techniques** come from a MITRE ATT&CK&reg;, MITRE ATLAS&trade;, or MITRE CAPEC&trade; release and **Defensive Techniques** from a MITRE D3FEND&trade; release. Each section has its own **Release** picker, its own pinned release, and its own **Upgrade**. Scenario events name pooled techniques through two data field types: an **Attack Technique** field offers the attack pool, and a **Defensive Technique** field offers the defensive pool.
 
 ##### Add Techniques
 
 1. In the section's **Release** dropdown, pick a release. If none appears, an administrator imports them on the [Technique Frameworks](#technique-frameworks) page.
-2. Expand **Add Techniques**. Filter by **Tactic**, search by ID, name, or description, and clear **Sub-techniques** to list techniques only.
+2. Expand **Add Techniques**. Filter by **Tactic** (**Category** for CAPEC), search by ID, name, or description, and clear **Sub-techniques** to list techniques only. For a CAPEC release, the search also matches the CWE IDs a pattern cites, so searching `CWE-89` finds the SQL injection patterns.
 3. Check a technique to add it to the pool, or clear it to remove it. Removing a technique that scenario events name asks for confirmation; the events keep the ID, but the pool no longer offers it.
 
 The **MSEL Techniques** region lists the pool with each technique's **ID**, **Name**, **Tactics**, and the number of **Events** that name it. Each ID links to the technique's page on MITRE's site.
+
+A CAPEC release also lists each pattern's **Domains** of attack (Software, Hardware, and so on) where ATT&CK lists platforms. It adds a **Weaknesses** column that links each CWE ID to its page on cwe.mitre.org, and a **See also** column that links the pattern's OWASP and WASC pages.
 
 ##### Release Pinning and Upgrade
 
@@ -1447,7 +1450,7 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
 
-**Technique Framework:** An imported release of MITRE ATT&CK, MITRE ATLAS, or MITRE D3FEND, defined in Administration → Technique Frameworks. A MSEL pools attack techniques from one release and defensive techniques from another, and scenario events name them in **Attack Technique** and **Defensive Technique** data fields.
+**Technique Framework:** An imported release of MITRE ATT&CK, MITRE ATLAS, MITRE CAPEC, or MITRE D3FEND, defined in Administration → Technique Frameworks. A MSEL pools attack techniques from one release and defensive techniques from another, and scenario events name them in **Attack Technique** and **Defensive Technique** data fields.
 
 **User Defined Data Fields:** The user adds on an as-needed basis.
 
