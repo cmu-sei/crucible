@@ -207,6 +207,8 @@ Player fully supports users who are on multiple teams. Any such user, when logge
 
 In the view, the navigation bar on the left contains applications.
 
+The navigation bar updates on its own. When an administrator adds, removes, renames, or reorders your team's applications, or edits an Application Template they use, the change appears without reloading the page. The open application stays open unless an administrator removes it; then Player opens the first application, or a blank page if none remain.
+
 #### Documentation
 
 Any documents or files (PDF, PNG, etc.) that the web can serve set up as an application for viewing. This is particularly helpful for displaying instructions, intel, maps, and other information.
