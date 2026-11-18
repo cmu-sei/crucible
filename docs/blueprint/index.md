@@ -561,7 +561,11 @@ It can also turn on an integration the MSEL does not use yet, with what the inte
 
 It cannot change the integrations of a MSEL that has been pushed until it is pulled.
 
-It cannot delete injects, moves, or columns, turn an integration off, or change users or pages.
+It can also add techniques to the MSEL's **Techniques** tab and tag injects with them, such as `Map the attacker injects to techniques`. The assistant sees the technique releases Blueprint has and the MSEL's techniques, and proposes each technique by its ID. Blueprint takes it from the release the MSEL already uses for that domain, or from the newest release, and leaves out an ID that release doesn't have. Only the MSEL's owner, or a user with `ManageMsels`, can add techniques. An **Attack Technique** or **Defensive Technique** column keeps only IDs of the MSEL's techniques of that kind; the assistant leaves out any other ID and says so.
+
+If a text column already names techniques, such as `T1566.001 Phishing: Spearphishing Attachment; T1204.002 User Execution`, ask to make it a technique column, such as `Make ATT&CK Technique an Attack Technique column`. Blueprint reads the ID at the start of each item, adds those techniques to the MSEL, and keeps only the IDs. The proposed change says how many techniques it found and which IDs it could not find; those are dropped.
+
+It cannot delete injects, moves, columns, or techniques, turn an integration off, or change users.
 
 ##### AI Usage
 
