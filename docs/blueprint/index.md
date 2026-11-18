@@ -226,18 +226,18 @@ The file holds one row per artifact path, repeated for every sub-technique that 
 
 ##### Edit a Release's Notice
 
-A release from a publisher other than MITRE carries no notice until you give it one. To edit it, click the pencil on the release's row and fill in the **Edit Notice** dialog:
+A release's **Source** and **Notice** come from the file it was imported from, so Blueprint shows only what the publisher's file says. A release with no notice in its file, such as MITRE ATLAS, or one from another publisher, carries none until you give it one. The files give no terms of use address, so a release has no **Terms of Use** link until you add one. To edit a release's notice, click the pencil on its row and fill in the **Edit Notice** dialog:
 
 - **Source**: who publishes the release.
 - **Source URL**: the publisher's website, an `http` or `https` address.
 - **Notice**: the copyright and trademark text the publisher's terms ask for. Put each sentence group on its own line.
 - **Terms URL**: the publisher's terms of use, an `http` or `https` address.
 
-Leave a field blank to clear it. The notice appears under the release's techniques straight away. Only these four fields change: the release's techniques, version, and every MSEL's pool stay as they were. A MITRE release keeps the notice it was imported with, and the dialog has no way to reset it to a newer wording; import the newer release instead.
+Leave a field blank to clear it. The notice appears with the release's techniques straight away. Only these four fields change: the release's techniques, version, and every MSEL's pool stay as they were. A release keeps the notice it was imported with, and the dialog has no way to reset it; import the newer release instead.
 
 ##### Attribution
 
-MITRE's terms of use require that its content carry a notice. Each release carries its own: its **Source**, a **Notice** (a copyright line and a trademark line), and a link to its **Terms of Use**, which Blueprint fills in when it imports a MITRE release. The page, and every MSEL tab that shows techniques, build their notice from the releases on screen. The copyright line names the year of the release, and a line that several releases share appears once. The ATT&CK trademark sentence shows only when an ATT&CK release is listed, and each of ATLAS, CAPEC, and D3FEND adds its own sentence and **Terms of Use** link the same way. A release that carries no notice shows none.
+A publisher's terms of use may require that its content carry a notice. Each release carries its own: its **Source**, a **Notice**, and a link to its **Terms of Use**. Blueprint takes the source and notice from the imported file: the statement that MITRE's ATT&CK and CAPEC bundles carry, and the comment of the D3FEND ontology. It writes none of its own wording. On the **Technique Frameworks** page, click a release's row to open its notice under the row. On a MSEL's **Techniques** tab, each pinned release's notice shows under its row, above its techniques. A release that carries no notice shows a line saying so.
 
 #### Users
 
