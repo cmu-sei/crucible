@@ -746,6 +746,12 @@ To add a move, follow these steps:
 
 After you've added all desired configurations, click **Save**.
 
+##### How Events Belong to Moves
+
+Each scenario event belongs to the last move whose **Start Date/Time** it has reached. The event list, the Assessor View, the xlsx export, and the Gallery and Steamfitter push all use this rule.
+
+Give each move a later start time than the move before it. If two moves share a start time, Blueprint shows the warning **The moves are not in ascending start time order!** and puts the events at that time in the higher-numbered move. For a move 0 that sets the scene before STARTEX, start it before move 1. For example, start move 0 at 09:00 and move 1 (STARTEX) at 09:45. Gallery then shows move 1's articles only when the exhibit reaches move 1.
+
 ##### Edit a Move
 
 To edit the move's details, follow these steps:
