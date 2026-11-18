@@ -237,7 +237,7 @@ Assuming you have View Administrator permissions in Player, add the map applicat
 
 2. Complete the following fields:
    - **Name:** the name of the map.
-   - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team.
+   - **Select Image:** from the dropdown, select an image. The images you see here are images that have been previously uploaded to the view by the View Admin and assigned to a team. The list shows `.png`, `.jpg`, `.jpeg`, `.gif`, and `.svg` files. An `.svg` file must be self-contained: the map does not load images, fonts, or styles that the file links to.
    - **External Image URL:** enter the URL of an external image if the view has no image attached or if you want to use a different image than what is available.
    - **Teams:** only the teams selected here will see the new map. You can select more than one team.
 3. Click **Submit**. The image of the new map appears in the right pane.

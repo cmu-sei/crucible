@@ -15,30 +15,41 @@ jobs:
       issues: write
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Parse issue form
-        uses: stefanbuck/github-issue-parser@v3
-        id: issue-parser
+      - name: Set labels from the issue form
+        uses: actions/github-script@v9
         with:
-          template-path: .github/ISSUE_TEMPLATE/1-documentation-update.yml
+          script: |
+            // Sections of .github/ISSUE_TEMPLATE/1-documentation-update.yml, keyed by
+            // the checkbox group's label, and the options that map to a repo label of
+            // the same name. Other options ("General Docs Update - Not Application
+            // Specific", "Other") get no label.
+            const sections = {
+              'Application': ['Alloy', 'Blueprint', 'Caster', 'CITE', 'Gallery', 'Gameboard', 'Player', 'Steamfitter', 'TopoMojo'],
+              'Type of Update': ['New Feature', 'Correction', 'Enhancement'],
+            };
 
-      - name: Set labels based on application field
-        uses: redhat-plumbers-in-action/advanced-issue-labeler@v3
-        with:
-          issue-form: ${{ steps.issue-parser.outputs.jsonString }}
-          section: application
-          block-list: |
-            None
-            General Docs Update - Not Application Specific
-          token: ${{ secrets.GITHUB_TOKEN }}
+            // An issue form renders each field as "### <label>" followed by its
+            // value; a checkbox group's value is "- [X] <option>" / "- [ ] <option>".
+            const body = context.payload.issue.body ?? '';
+            const labels = new Set();
+            for (const part of body.split(/^###\s+/m).slice(1)) {
+              const [heading, ...lines] = part.split(/\r?\n/);
+              const allowed = sections[heading.trim()];
+              if (!allowed) continue;
+              for (const line of lines) {
+                const match = /^\s*-\s+\[[xX]\]\s+(.+?)\s*$/.exec(line);
+                if (match && allowed.includes(match[1])) labels.add(match[1]);
+              }
+            }
 
-      - name: Set labels based on update_type field
-        uses: redhat-plumbers-in-action/advanced-issue-labeler@v3
-        with:
-          issue-form: ${{ steps.issue-parser.outputs.jsonString }}
-          section: update_type
-          block-list: |
-            None
-            Other
-          token: ${{ secrets.GITHUB_TOKEN }}
+            if (labels.size === 0) {
+              core.info('No labels to add.');
+              return;
+            }
+            core.info(`Adding labels: ${[...labels].join(', ')}`);
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: [...labels],
+            });

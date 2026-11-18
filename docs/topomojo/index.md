@@ -206,7 +206,7 @@ The Settings tab holds configuration metadata for your lab.
 
 **Clone:** Create a copy of your workspace. TopoMojo **links** the cloned workspace VMs to the parent workspace's VMs. The clone inherits all other settings from the parent. TopoMojo appends `-CLONE` to the title of the new workspace, but you can change this title.
 
-**Delete:** Delete the workspace.
+**Delete:** Delete the workspace. Deleting a workspace also deletes its document and every image uploaded to it. If another workspace's document links to one of those images, that image stops loading there.
 
 The top of the **Settings** tab shows the workspace's **Launch Count** and **Last Activity**. It also warns that inactive workspaces ("unpublished and idle" or "published and unused") may be deleted by the janitor. In the current release, the [Janitor](#janitor) only reports such workspaces; it doesn't delete them.
 
@@ -524,17 +524,18 @@ The **Announcement** feature allows TopoMojo admins to broadcast important messa
 The **Janitor** service cleans up unused resources (e.g., a workspace VM that has been idle for a long time) in TopoMojo. It runs in the background on two schedules:
 
 - About every minute, it ends gamespaces that have passed their expiration time plus their cleanup grace time, then deletes the VMs of ended gamespaces.
-- About every one to two hours, it runs a full cleanup pass over workspaces and workspace VMs.
+- About every one to two hours, it runs a full cleanup pass over workspaces, workspace VMs, and orphaned workspace documents.
 
-**Cleanup Report:** Runs the full cleanup pass immediately and lists what it found, with sortable **Reason**, **Name**, **Owner**, **VMs**, and **Last Activity** columns. Click a workspace name to open it. This button doesn't just show a log: if the Janitor isn't in dry-run mode, clicking it deletes the VMs it reports.
+**Cleanup Report:** Runs the full cleanup pass immediately and lists what it found, with sortable **Reason**, **Name**, **Owner**, **VMs**, and **Last Activity** columns. Click a workspace name to open it. This button doesn't just show a log: if the Janitor isn't in dry-run mode, clicking it deletes the VMs and orphaned documents it reports.
 
-The full cleanup pass reports three kinds of items, shown in the **Reason** column:
+The full cleanup pass reports four kinds of items, shown in the **Reason** column:
 
 - **IdleWorkspaceVms:** Workspaces whose VMs have been idle longer than a day. When dry run is off, the Janitor deletes these workspace VMs. Saved template disks aren't affected.
 - **UnpublishedWorkspace:** Unpublished workspaces idle longer than a week.
 - **InactiveWorkspace:** Published workspaces with no launches for longer than a year.
+- **OrphanedDocument:** Documents and image folders in TopoMojo's document folder that belong to a workspace that no longer exists. Workspaces deleted before TopoMojo started removing their documents left these files behind. **Name** lists the files found, named for the missing workspace's ID: `{id}.md`, `{id}/`, or both. **Last Activity** shows when they were last modified. The Janitor only considers files and folders named for a workspace ID and leaves everything else in the document folder alone. When dry run is off, the Janitor deletes them.
 
-By default the Janitor runs in dry-run mode, which reports idle workspace VMs without deleting them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only. An administrator can change dry-run mode and each time limit in TopoMojo's configuration; see [Core Application Settings](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#core-application-settings) in the Helm chart README.
+By default the Janitor runs in dry-run mode, which reports idle workspace VMs and orphaned documents without deleting them. The Janitor never deletes workspaces themselves: the two workspace reasons are always report-only. An administrator can change dry-run mode and each time limit in TopoMojo's configuration; see [Core Application Settings](https://github.com/cmu-sei/helm-charts/tree/main/charts/topomojo#core-application-settings) in the Helm chart README.
 
 ### Gamespaces Tab
 
@@ -625,7 +626,8 @@ The **Templates** tab also has these tools:
 - **parent[...]:** Click the parent name on a template to filter to templates derived from that parent. Click the filter to clear it.
 - **Workspace name:** Click a template's workspace to filter to that workspace's templates. Templates outside any workspace show **Stock Template**.
 - **Favorite:** Click the star next to a template to pin it to the top of the list.
-- **Clone:** Create an unlinked, unpublished copy of a template, with the original as its parent. If the name ends in a version such as `v1`, the copy is named `v2`; otherwise TopoMojo appends `-CLONE`. The copy keeps the original's **Detail**, including its disk paths. Once you publish the copy, workspace templates derived from the same parent see a [Resolve](#template-revisions) prompt.
+- **Clone:** Create an unlinked, unpublished copy of a template, with the original as its parent. If the name ends in a version such as `v1`, TopoMojo names the copy `v2`; otherwise it appends `-CLONE`. The copy gets its own disk, which TopoMojo copies from the original's when you click **Initialize** on the copy. On vSphere, each disk's `Path` points to a new file, and its `Source` points to the original's disk. On Proxmox, `Template` names a new template VM, and `ParentTemplate` names the original's. **Initialize** holds the request open until the copy finishes. If you reload the page during that, **Initialize** reappears, but clicking it again fails with an **InvalidOperation** error because the copy is already in progress or finished. Wait for the copy to finish, then reload. Administrators can see the reason on the **Log** tab. Saving the copy never changes the original. Once you publish the copy, workspace templates derived from the same parent see a [Resolve](#template-revisions) prompt.
+- **Delete:** Delete a template. TopoMojo also deletes the template's disk, but only a disk the template owns. A disk in a workspace's folder (vSphere), or a template VM named by the template's ID (Proxmox), belongs to that template. A stock template's disk or Proxmox template VM stays on the hypervisor, since other templates may clone from it.
 
 !!! warning "No isolation checking outside a workspace"
 
@@ -764,6 +766,21 @@ On **vSphere**:
 
     TopoMojo replaces the bracketed datastore name with the disk datastore's, so `[ds]` works as a placeholder.
 
+    !!! warning "Hosted VMDK disks"
+        VMware Workstation, Fusion, VirtualBox, and Open Virtual Appliance (OVA) exports write *hosted* VMDK formats, such as `monolithicSparse` and `streamOptimized`. ESXi can't attach these disks where they sit. When a template uses a hosted disk directly, **Initialize** stops and the user sees "This template's disk is in a format the hypervisor can't use. Ask an administrator to convert it." The [Log Tab](#log-tab) names the disk and its format.
+
+        To convert the disk, set its `Source` to the uploaded file and its `Path` to a new file, then click **Initialize** again. TopoMojo copies the disk through vCenter, which converts it to a format ESXi can attach, so you don't need shell access to an ESXi host:
+
+        ```json
+        "Disks": [
+          {
+            "Source": "[ds] 00000000-0000-0000-0000-000000000000/router.vmdk",
+            "Path": "[ds] 00000000-0000-0000-0000-000000000000/router-esx.vmdk",
+            "Controller": "lsilogic"
+          }
+        ]
+        ```
+
 4. Set `Cpu`, `Ram`, `Guest`, and the `Disks` `Controller` to match the disk. A wrong controller or guest type can keep the operating system from booting.
 5. Click **Save Settings**, then [publish the template](#publishing-a-template) if other workspaces need it.
 
@@ -778,6 +795,7 @@ On **Proxmox**, TopoMojo deploys by cloning a Proxmox template VM rather than by
 | `invalid token value!` | Hypervisor authentication failed | Check the hypervisor access token in TopoMojo's configuration |
 | HTTP 405 Method Not Allowed | Wrong endpoint for the operation | Use `POST /api/template-detail` for new templates |
 | HTTP 500 Internal Server Error | Hypervisor template not found | Verify the `Template` name matches the VM name on the hypervisor |
+| This template's disk is in a format the hypervisor can't use. Ask an administrator to convert it. | vSphere only. The disk is a hosted VMDK, exported by VMware Workstation, Fusion, VirtualBox, or an OVA. The [Log Tab](#log-tab) shows which disk. | Convert it through `Source` as described in [Bringing In an Existing Disk](#bringing-in-an-existing-disk) |
 
 ### Files Tab
 
