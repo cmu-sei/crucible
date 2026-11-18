@@ -233,11 +233,11 @@ A release's **Source** and **Notice** come from the file it was imported from, s
 - **Notice**: the copyright and trademark text the publisher's terms ask for. Put each sentence group on its own line.
 - **Terms URL**: the publisher's terms of use, an `http` or `https` address.
 
-Leave a field blank to clear it. The notice appears with the release's techniques straight away. Only these four fields change: the release's techniques, version, and every MSEL's pool stay as they were. A release keeps the notice it was imported with, and the dialog has no way to reset it; import the newer release instead.
+Leave a field blank to clear it. The change shows in the release's **Copyright & terms** dialog straight away. Only these four fields change: the release's techniques, version, and every MSEL's pool stay as they were. A release keeps the notice it was imported with, and the dialog has no way to reset it; import the newer release instead.
 
 ##### Attribution
 
-A publisher's terms of use may require that its content carry a notice. Each release carries its own: its **Source**, a **Notice**, and a link to its **Terms of Use**. Blueprint takes the source and notice from the imported file: the statement that MITRE's ATT&CK and CAPEC bundles carry, and the comment of the D3FEND ontology. It writes none of its own wording. On the **Technique Frameworks** page, click a release's row to open its notice under the row. On a MSEL's **Techniques** tab, each pinned release's notice shows under its row, above its techniques. A release that carries no notice shows a line saying so.
+A publisher's terms of use may require that its content carry a notice. Each release carries its own: its **Source**, a **Notice**, and a link to its **Terms of Use**. Blueprint takes the source and notice from the imported file: the statement that MITRE's ATT&CK and CAPEC bundles carry, and the comment of the D3FEND ontology. It writes none of its own wording. Each release shows a **Copyright & terms** link that opens a dialog with its source, its full notice, a **Terms of Use** link and a link to the publisher's website, when the release carries them. On the **Technique Frameworks** page, click a release's row to show its link under the row. On a MSEL's **Techniques** tab, each pinned release has the link under its row, above its techniques. A release that carries no notice, terms link or source link shows no link, and on the **Technique Frameworks** page a line says so.
 
 #### Users
 
