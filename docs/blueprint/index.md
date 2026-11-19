@@ -245,8 +245,9 @@ The dialog has these fields:
     - For a STIX bundle, `stix` also names the object types and properties a publisher adds to STIX, since Blueprint assumes none: `tacticType` and `tacticShortNameProperty` (both required when techniques are grouped by tactics), `matrixType` and `matrixTacticRefsProperty` (the object listing the tactics in order, and its property that lists them), `collectionType` and `collectionVersionProperty` (the object naming the release and its version), `domainsProperty`, `platformsProperty`, `deprecatedProperty`, and `subTechniqueRelationship` (the relationship type from a sub-technique to its technique).
     - `mappings`: for a framework whose releases take a mappings file, the file's variable names and the relation it reads as, such as `countered by`.
     - `groupLabel` and `tacticOrder`: what the releases call their groups, and the order tactics are shown in.
-    - `techniqueUrlTemplate`, `tacticUrlTemplate`, and `weaknessUrlTemplate`: page addresses for files that give none, with `{id}` for an id.
-    - `sourceUrl` and `termsUrl`: the publisher's website and terms of use, given to a release whose file names none.
+    - `techniqueUrlTemplate` and `tacticUrlTemplate`: page addresses for techniques and tactics whose file gives none. `{id}` is the technique's or tactic's ID, such as `D3-CH`, and `{sourceId}` is its ID in the file: the STIX ID, or the ontology node's ID, such as `d3f:CredentialHardening`.
+    - `weaknessUrlTemplate`: a weakness's page. `{fullId}` is the weakness ID as given, such as `CWE-89`, and `{id}` is the part after its letters-and-hyphen prefix, such as `89`.
+    - `sourceUrl` and `termsUrl`: the publisher's website and terms of use, given to each release imported as this framework.
     - `downloadHint` and `downloadUrl`: where to get the release files, shown when no release is imported.
 
 ##### Import a Release
@@ -271,7 +272,7 @@ Blueprint folds the file's rows into one mapping per pair of source technique an
 
 ##### Edit a Release
 
-A release's **Source** and **Notice** come from the file it was imported from, so Blueprint shows only what the publisher's file says. A release with no notice in its file, such as MITRE ATLAS, or one from another publisher, carries none until you give it one. A release takes its **Terms of Use** link and website from its file, or else from its framework's definition. To edit a release, click the pencil on its row and fill in the **Edit Release** dialog:
+A release's **Source** and **Notice** come from the file it was imported from, so Blueprint shows only what the publisher's file says. A release with no notice in its file, such as MITRE ATLAS, or one from another publisher, carries none until you give it one. A release takes its **Terms of Use** link and website from its framework's definition; you can change them on the release. To edit a release, click the pencil on its row and fill in the **Edit Release** dialog:
 
 - **Framework**: the framework definition the release belongs to, or **No framework**.
 - **Source**: who publishes the release.
