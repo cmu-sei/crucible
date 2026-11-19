@@ -84,7 +84,7 @@ The Data Fields page lists all data field templates available for use in MSEL sc
 
 1. Under **Data Fields**, click **+** (**Add a template data field**).
 2. In **Name**, enter the field name (for example, `Delivery Method`).
-3. In **Data Type**, select the data type. Available types: Boolean, Card, Checkbox, Competency, Datetime, Double, HTML, Integer, IpAddress, Move, Network, Organization, SourceType, Status, String, Team, TeamsMultiple, Url, User. See [Data Value Checks](#data-value-checks) for the values IpAddress, Network, and Datetime fields accept.
+3. In **Data Type**, select the data type. Available types: Attack Technique, Boolean, Card, Checkbox, Competency, Datetime, Defensive Technique, Double, HTML, Integer, IpAddress, Move, Network, Organization, SourceType, Status, String, Team, TeamsMultiple, Url, User. The **Attack Technique** and **Defensive Technique** types offer a MSEL's [technique pools](#techniques). See [Data Value Checks](#data-value-checks) for the values IpAddress, Network, and Datetime fields accept.
 4. Check **Use Option List** to provide a predefined list of selectable values for the field (for example, `Low, Medium, High`).
 5. Click **Save**.
 
@@ -218,6 +218,73 @@ Viewing this page requires the `ViewPlayerApplications` permission, and changing
 - **Delete:** Click **Delete** (trash can icon) next to the template, then click **Yes**.
 - **Upload:** Click **Upload Player Application templates from JSON** and choose a file downloaded from this page. Every application in the file becomes a new template.
 - **Download:** Click **Download Player Application templates as JSON**, select the templates, and download them as `player-application-templates.json`.
+
+#### Technique Frameworks
+
+The **Technique Frameworks** page (**Techniques** in the Administration sidebar) holds the technique frameworks and their releases that MSELs pick techniques from, such as MITRE ATT&CK&reg;, MITRE ATLAS&trade;, MITRE CAPEC&trade;, and MITRE D3FEND&trade;. Blueprint ships no frameworks and knows none by name: an administrator defines each one, then imports its release files. Defining frameworks and importing, editing, and deleting releases requires the **Manage Competency Frameworks** permission; any signed-in user can read them.
+
+##### Define a Framework
+
+A framework definition tells Blueprint how to recognize a release file, how to read it, and what to show with its content. The **Frameworks** table at the top of the page lists each definition's **Name**, **Domain**, **Family**, **File Format**, and number of **Releases**.
+
+- **Add:** Click **Add a technique framework** (the plus icon) and fill in the dialog.
+- **Import:** Click **Import technique framework definitions** (the upload icon) and choose a JSON file another installation exported. A file can hold one definition or a list of them.
+- **Export:** Click the download icon on a framework's row to save its definition as JSON.
+- **Edit:** Click the pencil on a framework's row. Releases already imported keep their techniques, and what they show from the framework, such as links and tactic order, follows the edit. A framework with releases can't change its domain or family.
+- **Delete:** Click the trash can. The framework's releases keep their techniques and show **No framework**.
+
+The dialog has these fields:
+
+- **Name** and **Description**.
+- **Domain**: the domain its releases are filed under, such as `enterprise-attack` or `capec`. Each framework needs its own domain, and a MSEL pins one release per domain.
+- **Family**: **Attack** or **Defensive**. Attack techniques go to a MSEL's **Attack Techniques** pool and defensive ones to its **Defensive Techniques** pool.
+- **File Format**: **STIX bundle** or **JSON-LD ontology**, the two formats Blueprint reads.
+- **Settings (JSON)**: everything else, as an exported definition holds it:
+    - `match`: the conditions a file must meet to be a release of this framework. For a STIX bundle: `stixDomain` (the domain its techniques name in the `stix` setting `domainsProperty`), `referenceSource` and `idPrefix` (the source and id of its techniques' own external reference), or `collectionName` (the name of its object of the `stix` setting `collectionType`). For a JSON-LD ontology: `property` (a property its nodes carry) or `ontologyTitleContains`. Every condition given must hold, and at least one is required.
+    - `stix` or `jsonLd`: how to read the file, such as the reference source that carries ids, whether techniques are grouped by tactics or by a pattern hierarchy, statuses to skip, or the ontology's id property, technique class, tactic type, and the `publisherProperty` and `noticeProperty` its release's **Source** and **Notice** are read from.
+    - For a STIX bundle, `stix` also names the object types and properties a publisher adds to STIX, since Blueprint assumes none: `tacticType` and `tacticShortNameProperty` (both required when techniques are grouped by tactics), `matrixType` and `matrixTacticRefsProperty` (the object listing the tactics in order, and its property that lists them), `collectionType` and `collectionVersionProperty` (the object naming the release and its version), `domainsProperty`, `platformsProperty`, `deprecatedProperty`, and `subTechniqueRelationship` (the relationship type from a sub-technique to its technique).
+    - `mappings`: for a framework whose releases take a mappings file, the file's variable names and the relation it reads as, such as `countered by`.
+    - `groupLabel` and `tacticOrder`: what the releases call their groups, and the order tactics are shown in.
+    - `techniqueUrlTemplate` and `tacticUrlTemplate`: page addresses for techniques and tactics whose file gives none. `{id}` is the technique's or tactic's ID, such as `D3-CH`, and `{sourceId}` is its ID in the file: the STIX ID, or the ontology node's ID, such as `d3f:CredentialHardening`.
+    - `weaknessUrlTemplate`: a weakness's page. `{fullId}` is the weakness ID as given, such as `CWE-89`, and `{id}` is the part after its letters-and-hyphen prefix, such as `89`.
+    - `sourceUrl` and `termsUrl`: the publisher's website and terms of use, given to each release imported as this framework.
+    - `downloadHint` and `downloadUrl`: where to get the release files, shown when no release is imported.
+
+##### Import a Release
+
+1. Download the release file named in the framework's download hint. With no release imported, the page lists each framework's hint and link.
+2. Click **Import a release file** (the upload icon) and choose the file. Blueprint reads the version from the file; fill in **Version** only for a file that doesn't name one.
+
+Blueprint reads the file as the framework whose match conditions it meets. A file no framework matches is refused with "No technique framework matches this file. Add or import a framework definition first." When more than one framework matches, the import names them; pick one in **Read As** and import again.
+
+Blueprint refuses a release that's already imported: uploading the same file, or the same domain and version, a second time answers that the release has already been imported and changes nothing. Each row shows the release's **Name**, **Framework**, **Domain**, **Version**, release date, and its counts of **Tactics** and **Techniques**. The trash can deletes a release no MSEL uses; a release that any MSEL's techniques come from stays until those MSELs upgrade or clear them.
+
+A release imported before its framework was defined shows **No framework**. Give it one in its edit dialog, under **Framework**, which offers the frameworks of the release's domain and family.
+
+##### Import Mappings
+
+A framework whose definition has `mappings` takes a mappings file on each release, such as the D3FEND mappings between defensive techniques and the ATT&CK techniques they counter. A MSEL's mapping rows and **Suggested** defensive techniques draw on them.
+
+1. Download the mappings file for the release's version. While a release has none, the page shows the framework's hint and the address for that version under the table.
+2. On the release's row, click **Import mappings** and choose the file.
+
+Blueprint folds the file's rows into one mapping per pair of source technique and release technique, weighted by how many distinct paths link them. The import report counts the rows read, the mappings stored, the mappings skipped because this release lacks their technique, and the source techniques covered. The row then shows **N mappings**. Importing again replaces the release's mappings, and deleting the release removes them.
+
+##### Edit a Release
+
+A release's **Source** and **Notice** come from the file it was imported from, so Blueprint shows only what the publisher's file says. A release with no notice in its file, such as MITRE ATLAS, or one from another publisher, carries none until you give it one. A release takes its **Terms of Use** link and website from its framework's definition; you can change them on the release. To edit a release, click the pencil on its row and fill in the **Edit Release** dialog:
+
+- **Framework**: the framework definition the release belongs to, or **No framework**.
+- **Source**: who publishes the release.
+- **Source URL**: the publisher's website, an `http` or `https` address.
+- **Notice**: the copyright and trademark text the publisher's terms ask for. Put each sentence group on its own line.
+- **Terms URL**: the publisher's terms of use, an `http` or `https` address.
+
+Leave a field blank to clear it. The change shows in the release's **Copyright & terms** dialog straight away. Only these fields change: the release's techniques, version, and every MSEL's pool stay as they were. A release keeps the notice it was imported with, and the dialog has no way to reset it; import the newer release instead.
+
+##### Attribution
+
+A publisher's terms of use may require that its content carry a notice. Each release carries its own: its **Source**, a **Notice**, and a link to its **Terms of Use**. Blueprint takes the source and notice from the imported file, such as the statement MITRE's ATT&CK and CAPEC bundles carry, or the comment of the D3FEND ontology. It writes none of its own wording. Each release shows a **Copyright & terms** link that opens a dialog with its source, its full notice, a **Terms of Use** link and a link to the publisher's website, when the release carries them. On the **Technique Frameworks** page, click a release's row to show its link under the row. On a MSEL's **Techniques** tab, each pinned release has the link under its row, above its techniques. A release that carries no notice, terms link or source link shows no link, and on the **Technique Frameworks** page a line says so.
 
 #### Users
 
@@ -545,6 +612,36 @@ On the **Competencies** tab, MSEL owners attach a competency framework (defined 
 ##### View MSEL Competencies
 
 Expand the **MSEL Competencies** region to see the table of competencies associated with the MSEL. Columns include **ID**, **Type**, **Framework**, **Name**, **Teams**, and **Events**. Use the search box to filter by name.
+
+#### Techniques
+
+On the **Techniques** tab, MSEL owners pool the techniques scenario events can name. **Attack Techniques** come from a MITRE ATT&CK&reg;, MITRE ATLAS&trade;, or MITRE CAPEC&trade; release and **Defensive Techniques** from a MITRE D3FEND&trade; release. Each section has its own **Release** picker, and each domain in the pool has its own pinned release and its own **Upgrade**. Scenario events name pooled techniques through two data field types: an **Attack Technique** field offers the attack pool, and a **Defensive Technique** field offers the defensive pool.
+
+##### Add Techniques
+
+1. In the section's **Release** dropdown, pick a release. If none appears, an administrator imports them on the [Technique Frameworks](#technique-frameworks) page.
+2. Expand **Add Techniques**. Filter by **Tactic** (**Category** for CAPEC), search by ID, name, or description, and clear **Sub-techniques** to list techniques only. For a CAPEC release, the search also matches the CWE IDs a pattern cites, so searching `CWE-89` finds the SQL injection patterns.
+3. Check a technique to add it to the pool, or clear it to remove it. Removing a technique that scenario events name asks for confirmation; the events keep the ID, but the pool no longer offers it.
+
+The **MSEL Techniques** region lists the pool with each technique's **ID**, **Name**, **Tactics**, and the number of **Events** that name it. Each ID links to the technique's page, when the file or its framework gives one.
+
+A CAPEC release also lists each pattern's **Domains** of attack (Software, Hardware, and so on) where ATT&CK lists platforms. It adds a **Weaknesses** column that links each CWE ID to the page its framework's weakness template gives, and a **See also** column that links the pattern's OWASP and WASC pages.
+
+##### Release Pinning and Upgrade
+
+A MSEL's pool pins each domain to the release its first technique of that domain came from. A MSEL can hold techniques of several domains at once, for example `enterprise-attack`, `capec`, and `d3fend`, so a MSEL can plan T1190 Exploit Public-Facing Application beside CAPEC-66 SQL Injection. Blueprint refuses a technique from another release of a domain the MSEL already holds until you upgrade that domain, and the message names it. The **MSEL Techniques** region lists one row per domain in use with its pinned release. To upgrade, pick a newer release of that domain in **Release**; its row then offers **Upgrade &lt;domain&gt; to &lt;version&gt;**. Blueprint matches techniques by ID, removes and lists any the new release no longer has, and leaves the ID on scenario events that name them. Other domains keep their releases. When a pool holds more than one domain, each technique shows its domain beside its ID, because the same ID can mean different techniques in ATT&CK Enterprise and ATT&CK Mobile.
+
+##### Mappings of Each Attack Technique
+
+Under each pooled attack technique, a row lists the defensive techniques a release's mappings join to it, under the relation the release's framework names, such as **Countered by** for D3FEND. The mappings come from the defensive release the MSEL's defensive techniques pin, or else from the newest defensive release with mappings. Expand the row to see them grouped by tactic in the order the framework gives, such as Model, Harden, Detect, Isolate, Deceive, Evict, Restore for D3FEND. Within each tactic, the number of artifact paths that link the pair ranks them. Hover over a name for the rationale, such as "hardens Credential; T1003.005 accesses Encrypted Credential." Each tactic shows its top three with **Show all N** for the rest. Check a countermeasure to add it to **Defensive Techniques**; one already there appears checked. When D3FEND maps nothing to a sub-technique, the row shows its parent technique's countermeasures and says so with **(from T1003)**.
+
+An empty row says why: no defensive release exists, no mappings exist (**Import mappings** on the Technique Frameworks page), or the release maps nothing to that technique.
+
+##### Attack Technique and Defensive Technique Data Fields
+
+Add a data field of type **Attack Technique** or **Defensive Technique** on the MSEL's Data Fields tab to let scenario events name pooled techniques. In an event, the field shows the chosen IDs as chips that link to each technique's page, as its framework's definition gives it. **Select techniques** offers the pool with a search box. An ID the pool no longer offers stays on the event, marked as not in the MSEL's techniques.
+
+When the event also has an **Attack Technique** value, a **Defensive Technique** field's list leads with a **Suggested** group: the pooled defensive techniques whose release's mappings counter the event's attack techniques, strongest first. The rest of the pool follows under **Other techniques**. Only pooled techniques appear as suggestions; add more on the Techniques tab.
 
 #### Teams
 
@@ -1462,6 +1559,8 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **Competency Framework:** A named collection of competencies (for example, NICE Framework) defined in Administration → Competencies and linked to a proficiency scale.
 
+**Countermeasure:** A MITRE D3FEND technique that MITRE's mappings say counters an ATT&CK technique. Shown under a MSEL's pooled attack techniques as **Countered by**, and suggested first in an event's **Defensive Technique** field.
+
 **Content Developer Permission:** Can view, edit, create, and approve events on the MSEL.
 
 **Data Fields:** Structured components containing essential information about the event's characteristics, context, and implications.
@@ -1509,6 +1608,8 @@ This glossary defines key terms and concepts used in the Blueprint application.
 **System Admin Permission:** Can add users to a team, as well as assign the required permissions.
 
 **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
+
+**Technique Framework:** A definition of a framework such as MITRE ATT&CK, MITRE ATLAS, MITRE CAPEC, or MITRE D3FEND, and the releases imported with it, in Administration → Technique Frameworks. Blueprint ships no definitions. A MSEL pins one release of each framework domain it uses, and scenario events name them in **Attack Technique** and **Defensive Technique** data fields.
 
 **User Defined Data Fields:** The user adds on an as-needed basis.
 
