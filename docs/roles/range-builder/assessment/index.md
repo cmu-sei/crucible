@@ -45,7 +45,7 @@ Blueprint records each rating in the Learning Record Store (LRS), so an administ
 
 !!! note
 
-    CITE doesn't grade participants. Teams compare their answers to the official score to discuss how they judged the incident. Use the [CITE Report](../../../cite/index.md#cite-report) and the **Submissions** page in CITE's Administration View to support the debrief.
+    CITE doesn't grade participants. When the scoring model shows the official score, teams can compare their answers to it to discuss how they judged the incident. Use the [CITE Report](../../../cite/index.md#cite-report) and the **Submissions** page in CITE's Administration View to support the debrief.
 
 ## Testing and Validation
 

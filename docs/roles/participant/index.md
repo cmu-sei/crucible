@@ -32,9 +32,9 @@ You will typically:
 
 ## Assessing Incidents in CITE
 
-CITE asks your team to judge how severe the incident is at each move. It doesn't grade you. For earlier moves, the Scoresheet shows your team's answer next to the group average and the official score so you can discuss the differences.
+CITE asks your team to judge how severe the incident is at each move. It doesn't grade you. Depending on how your instructor set up the scoring model, the Scoresheet can show your team's answer for earlier moves next to the group average and the official score so you can discuss the differences.
 
-- Answer the categories on the CITE Scoresheet as a team. A member with the **Submitter** or **Owner** team role submits the team's answer.
+- Answer the categories on the CITE Scoresheet as a team. If the Scoresheet has a **Submit** button, a member with the **Submitter** or **Owner** team role submits the team's answer.
 - Use the arrows next to the move number to review earlier moves. You can edit only the current move.
 - Review the **Actions** and **Duties** on the CITE Dashboard to see what your team should consider during the move.
 

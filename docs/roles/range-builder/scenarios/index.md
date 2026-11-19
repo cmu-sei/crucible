@@ -136,11 +136,12 @@ Steamfitter runs tasks against virtual machines. When the scenario is a timeline
 A typical build order:
 
 1. Decide where the scoring model comes from: an existing model in CITE, or one you author in Blueprint on the MSEL's **Scoring Model** tab.
-2. In Blueprint, create or upload the MSEL, then define its moves and scenario events.
+2. In Blueprint, create or upload the MSEL.
 3. On the MSEL's **Info** tab, under **Applications to Integrate**, select the applications the exercise uses. For CITE, the **Scoring Model** tab then links or authors the scoring model.
-4. Configure the tabs each integration adds, such as **Gallery Cards** for Gallery and **Actions** and **Duties** for CITE.
-5. On the **Teams** tab, add the teams and their members. For CITE, give each member who answers a CITE team role, such as **Contributor** or **Submitter**.
-6. On the **Contributors** tab, give instructors and evaluators their MSEL roles, and their **CITE Role** and **Gallery Role** when those integrations are on.
+4. On the **Teams** tab, add the teams and their members. For CITE, give each member who answers a CITE team role, such as **Contributor** or **Submitter**. Add teams before the next steps, because scenario events and the CITE and Gallery items are set per team.
+5. Define the MSEL's moves and scenario events.
+6. Configure the tabs each integration adds, such as **Gallery Cards** for Gallery and **Actions** and **Duties** for CITE.
+7. On the **Contributors** tab, give instructors and evaluators their MSEL roles, and their **CITE Role** and **Gallery Role** when those integrations are on.
 
 CITE doesn't grade participants. See [Assessment in MSEL-Based Exercises](../assessment/index.md#assessment-in-msel-based-exercises).
 
