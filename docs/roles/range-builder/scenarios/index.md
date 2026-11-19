@@ -142,9 +142,7 @@ A typical build order:
 5. On the **Teams** tab, add the teams and their members. For CITE, give each member who answers a CITE team role, such as **Contributor** or **Submitter**.
 6. On the **Contributors** tab, give instructors and evaluators their MSEL roles, and their **CITE Role** and **Gallery Role** when those integrations are on.
 
-!!! note
-
-    CITE collects each team's assessment of the incident's severity. It doesn't grade participants. Compare team answers to the official score to start a discussion, not to rank teams.
+CITE doesn't grade participants. See [Assessment in MSEL-Based Exercises](../assessment/index.md#assessment-in-msel-based-exercises).
 
 ## Best Practices
 
