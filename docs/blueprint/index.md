@@ -35,7 +35,7 @@ Refer to the [Administrator Guide](#administrator-guide) for more information on
 
 ## Administrator Guide
 
-Blueprint administrators use the Administration View to manage users and units, and to configure organization, Gallery card, CITE action, and CITE role templates for content developers building MSELs.
+Blueprint administrators use the Administration View to manage users and units, and to configure organization, Gallery card, CITE action, CITE role, and Player application templates for content developers building MSELs.
 
 ### Administration View
 
@@ -170,7 +170,7 @@ The Gallery Cards page lists all Gallery card templates available for use in MSE
 
 #### CITE Actions
 
-The CITE Actions page lists all CITE action templates available for use in MSELs. A CITE action template defines a reusable task that teams complete during an exercise. Content developers can pull these templates into a MSEL from the **CITE Actions** tab.
+The CITE Actions page lists all CITE action templates available for use in MSELs. A CITE action template defines a reusable task that teams complete during an exercise. Content developers can pull these templates into a MSEL from the **Actions** tab.
 
 ##### Add a CITE Action Template
 
@@ -186,7 +186,7 @@ The CITE Actions page lists all CITE action templates available for use in MSELs
 
 #### CITE Duties
 
-The CITE Duties page lists all CITE duty templates available for use in MSELs. A CITE duty template defines a reusable role or responsibility assigned to team members during an exercise. Content developers can pull these templates into a MSEL from the [CITE Roles](#cite-roles) tab.
+The CITE Duties page lists all CITE duty templates available for use in MSELs. A CITE duty template defines a reusable role or responsibility assigned to team members during an exercise. Content developers can pull these templates into a MSEL from the [Duties](#duties) tab.
 
 ##### Add a CITE Duty Template
 
@@ -199,6 +199,25 @@ The CITE Duties page lists all CITE duty templates available for use in MSELs. A
 - **Edit:** Click **Edit** (pencil icon) next to the duty template, make the desired changes, and click **Save**.
 - **Delete:** Click **Delete** (trash can icon) next to the duty template.
 - **Search:** In the **Search** field, enter the name of the duty template.
+
+#### Player Apps
+
+The Player Application Templates page lists the Player application templates Blueprint stores for use in MSELs. A Player application template defines a reusable application, such as the VM UI or a Gallery exhibit, with its URL, icon, and display settings. Content developers add a copy of a template to a MSEL from the [Player Apps](#player-apps) tab. Changing or deleting the template later doesn't change the MSELs that already have a copy.
+
+Viewing this page requires the `ViewPlayerApplications` permission, and changing templates requires `ManagePlayerApplications`.
+
+##### Add a Player Application Template
+
+1. Under **Player Apps**, click **+** (**Add a template Player Application**).
+2. Fill in **Name**, **URL** (required), and **Icon URL**, and set **Embeddable** and **Load in Background**. The fields and URL variables are the same as for a [Player app](#add-a-player-app), for example `{vmUrl}/views/{playerViewId}{theme}`.
+3. Click **Save**.
+
+##### Edit, Delete, Upload, and Download Player Application Templates
+
+- **Edit:** Click **Edit** (pencil icon) next to the template, make the desired changes, and click **Save**.
+- **Delete:** Click **Delete** (trash can icon) next to the template, then click **Yes**.
+- **Upload:** Click **Upload Player Application templates from JSON** and choose a file downloaded from this page. Every application in the file becomes a new template.
+- **Download:** Click **Download Player Application templates as JSON**, select the templates, and download them as `player-application-templates.json`.
 
 #### Users
 
@@ -271,7 +290,7 @@ If the user can launch any template MSELs, the **Launch** card (*Initiate New Mi
 
 #### Manage an Event
 
-If the user holds the `CreateMsels` permission or is a contributor on any MSEL, the **Build** card (*Design & Planning*) is shown. Click **Manage Events** to go to `/build`, where the user can create, edit, delete, and open MSELs.
+If the user holds the `CreateMsels` permission or holds a MSEL role on any MSEL (see [Contributors](#contributors)), the **Build** card (*Design & Planning*) is shown. Click **Manage Events** to go to `/build`, where the user can create, edit, delete, and open MSELs.
 
 #### Assess an Event
 
@@ -340,6 +359,10 @@ After a JSON upload, Blueprint shows a report for the imported MSEL:
 - **Changed:** what Blueprint adjusted to fit this Blueprint, such as a new name when a MSEL with the file's name already exists, a CITE scoring model or team type linked by name, team members that could not be imported, and which integrations are on.
 - **Failed:** steps that could not be completed, such as checking the scoring model in CITE, with what to do before pushing.
 
+Competencies come across by code, not by ID, because each Blueprint gives its competencies its own IDs. The MSEL's and its teams' [competencies](#competencies) link to the competency in this Blueprint that has the same framework code and competency code; a file from an older Blueprint, which has no codes, keeps only the links to competencies this Blueprint already has. Blueprint drops a competency it does not have, and **Changed** says how many links it dropped and names any missing competency frameworks. To keep those competencies, import the frameworks in the Administration Competencies page, then add the competencies to the MSEL and its teams again. **Competency** data fields keep only the competencies the import kept; **Changed** counts the options and scenario event values it removed.
+
+If Blueprint can't save the file, it imports nothing and names what it refused, for example `The MSEL could not be imported because the file has the same row twice in card_teams (IX_card_teams_team_id_card_id). Nothing was imported.`
+
 Click **Open MSEL** to open the new MSEL, or **Close** to stay on the MSEL list.
 
 #### Filter Display
@@ -405,6 +428,7 @@ To edit the MSEL's basic information and configuration, follow these steps:
 | **Name** | String (max 70 characters) | Name of the MSEL | `Hurricane Delta MSEL` |
 | **Description** | String (max 600 characters) | Details and/or characteristics of the MSEL | `Hurricane Delta Fort Myers Scenario` |
 | **Is a Template** | Boolean | Marks this MSEL as a reusable template for creating new MSELs. Template MSELs cannot be deleted. | `True` |
+| **Hide individual names from assessors** | Boolean | Shows only the team on the xAPI statements in the [Assessor View](#assessor-view) to users with the **Editor**, **Approver**, or **Evaluator** role. The MSEL's Owners and System Admins still see the names, and the Learning Record Store (LRS) still records them. You can change it while the MSEL is deployed. | `True` |
 | **Set a Start Time** | Boolean | When checked, exposes a **Start Date / Time** picker and schedules a specific start moment for the MSEL. When unchecked, the MSEL is open-ended. | `True` |
 | **Start Date / Time** | Datetime | Start date/time of the MSEL (only visible when **Set a Start Time** is checked). | `09/10/2024 20:00:00` |
 | **Duration (d / h / m)** | Integer × 3 | End time relative to the start, expressed as days / hours / minutes. Click **+** to increment or type directly into each field. | `1 d 12 h 00 m` |
@@ -440,7 +464,7 @@ The **Metadata** block on the Config tab captures non-functional descriptors tha
 #### Integrations
 
 - **[Gallery](#glossary):** Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To learn more about this integration, reference the [Gallery](#gallery) section.
-- **[CITE](#glossary):** Blueprint will add the evaluation, moves, actions, roles, teams, and users specified on the MSEL. To learn more about this integration, reference the [CITE](#cite) section.
+- **[CITE](#glossary):** Blueprint will add the evaluation, built from the MSEL's [scoring model](#scoring-model), with the moves, actions, roles, teams, and users specified on the MSEL. To learn more about this integration, reference the [CITE](#cite) section.
 - **[Player](#glossary) & [Steamfitter](#glossary):** Blueprint will automate the adding of events specified on the MSEL, as well as configure exercise details in Player.
 - **[Caster](#glossary):** Blueprint will deploy the MSEL's virtual machine topology from a Caster directory into a new Caster workspace, with the VMs added to the Player view and its teams. To learn more about this integration, reference the [Caster](#caster) section.
 
@@ -468,7 +492,7 @@ After you've made your changes, click the **checkmark** to save the page.
 
 #### Contributors
 
-On this tab, users can add and assign contributor teams, as well as their respective roles related to the creation and management of the MSEL. Assigned teams can view and edit the MSEL.
+On this tab, users can add contributor units and give each unit member their **MSEL Roles** for building and managing the MSEL. A member of a contributor unit sees the MSEL in the `/build` list, and can open it, only while they hold at least one MSEL role on it. The MSEL's creator always has access as its Owner.
 
 ![Blueprint Contributors Tab OE](img/blueprintAddContributors-v2.png)
 
@@ -480,6 +504,8 @@ To add a contributor unit to the MSEL, follow these steps:
 2. Click **Add a Contributor Unit**, then select the unit you want to add.
 3. After selecting the unit, click the **+** button.
 
+Adding a unit gives each of its members who has no role on the MSEL the **Viewer** role, so the whole unit can open the MSEL. Change their **MSEL Roles** to give them more.
+
 ##### Remove a Contributor
 
 To remove a contributor unit from the MSEL, follow these steps:
@@ -487,7 +513,9 @@ To remove a contributor unit from the MSEL, follow these steps:
 1. Navigate to the **Contributors** tab.
 2. Select the team you want to remove and click the **-** button.
 
-Now that you've added the unit to the MSEL, members can view and edit it based on each unit member's role.
+Removing a unit takes the MSEL away from its members. The roles they held stay recorded, and come back if you add the unit again.
+
+Now that you've added the unit to the MSEL, members can view and edit it based on each unit member's role. Removing a member's last role in **MSEL Roles** takes away their access to the MSEL on the `/build` page.
 
 The available roles are:
 
@@ -496,7 +524,9 @@ The available roles are:
 - **[`Move Editor`](#glossary):** Can edit moves on the MSEL, as well as increment them during an exercise.
 - **[`Owner`](#glossary):** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g., Add Teams, Add Integrations, Events).
 - **[`Evaluator`](#glossary):** Manages the exercise, can advance moves, execute events, and check events as completed.
-- **[`Viewer`](#glossary):** Can view the MSEL, but can't edit it.
+- **[`Viewer`](#glossary):** Can open the MSEL from the `/build` list and view it read-only, but can't edit it.
+
+A user on one of the MSEL's teams with no MSEL role is a participant. Once you push the MSEL, they see only the [Exercise View](#exercise-view).
 
 #### Competencies
 
@@ -840,6 +870,18 @@ While the **Events** tab lets MSEL owners and content developers manage events, 
 
 ![Blueprint Exercise View OE](img/blueprintExerciseView-v3.png)
 
+##### What Participants See
+
+A participant is a member of one of the MSEL's teams who holds no role on the [Contributors](#contributors) tab. Blueprint sends a participant only what the Exercise View shows:
+
+- Events not hidden on the Exercise View
+- Data fields marked **Display on the Exercise View**
+- MSEL pages marked **All MSEL users can view this page**
+
+Participants don't receive the rest of the MSEL: hidden events, other data fields, organizations, CITE actions and duties, and Gallery cards. They also can't download the MSEL or copy it. Contributors and users with the `ViewMsels` permission see the whole MSEL.
+
+To keep an event from participants until its move, click the eye icon on its row of the **Events** tab (**Hide event on the Exercise View**). Click it again when the move starts to show the event to participants.
+
 #### Assessor View
 
 The **Assessor View** tab is where Evaluators watch a live exercise and rate the participating teams against the MSEL's competencies. Each scenario event shows the xAPI statements the exercise applications recorded for it, beside a competency assessment where the Evaluator rates each competency and submits the rating as an xAPI competency assertion. The MSEL's content is read-only here; the only values an Evaluator can change are **Checkbox** data fields.
@@ -870,7 +912,19 @@ To give assessors competencies to rate, attach a framework and its competencies 
 
 Events are grouped under their move and group. Click a move, group, or event row to expand it. Use **Expand All** (Ctrl+Shift+E) and **Collapse All** (Ctrl+Shift+C) in the header to open or close every row.
 
-An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Steamfitter, Player, or Gallery), and **Verb** filters, and click **Refresh xAPI statements** to load new ones.
+An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Steamfitter, Player, or Gallery), and **Verb** filters, and click **Refresh evidence** to load new statements.
+
+When you check **Hide individual names from assessors** on the [Basic Information](#basic-information) tab, Blueprint leaves out who each statement is about for users with the **Editor**, **Approver**, or **Evaluator** role. The actor shows as **Team member**, and the team name stays, so assessors rate the team's work without seeing its members' names. The statement JSON doesn't have the names either. The assessor who submitted a rating keeps their name. The MSEL's Owners and System Admins still see every name, and the names stay in the LRS.
+
+Repeated statements collapse into one row. Choose how in **Group by**, beside the filters:
+
+- **Team** (the default): statements from the same platform, with the same verb, object, team, and result, share a row, whoever on the team made them. The actor reads as the first person and how many others, for example **Ann Analyst + 2 others**.
+- **User**: the same, but each user's statements get their own row.
+- **Off**: every statement is its own row.
+
+A grouped row shows the first and last times and a count such as **×5**. Click it to list its statements in time order, each with its own JSON and **Copy JSON**, and click it again to close the list. Competency assertions, CITE submissions and scores, and any statement with a score always keep their own row. Grouping covers only the statements the filters leave, and the browser remembers the **Group by** choice.
+
+When the MSEL hides participant names from assessors, the statements carry no names, so **Group by** offers only **Team** and **Off**, and a grouped row's actor reads **Team member**.
 
 Click **Search Events** in the header to search the events and filter them by the values of their data fields.
 
@@ -878,11 +932,31 @@ Click **Search Events** in the header to search the events and filter them by th
 
 The **Competency Assessment** panel on the right of an expanded row lists the competencies associated with that move, group, or event. To rate them, follow these steps:
 
-1. In **Assess Team**, select the team being assessed. Only teams associated with at least one of the listed competencies appear. When the evidence is filtered to a single team, that team is preselected.
+1. In **Assess Team**, select the team being assessed. Only teams associated with at least one of the listed competencies appear. When you filter the evidence to just one of those teams, **Assess Team** selects it, unless you already picked a team in **Assess Team**.
 2. For each competency, select a **Rating** and optionally enter a **Comment**. Hover over the competency ID to see its name.
 3. Click **Submit assertion** to submit one rating, or **Submit All** to submit every rated competency.
 
 Each submitted rating is marked **Submitted**. Blueprint records it in the Learning Record Store (LRS) as an xAPI statement with the `asserted` verb, so xAPI must be configured for Blueprint.
+
+##### Read Team Responses
+
+When the MSEL uses CITE, the **Team Responses** panel sits beside **Competency Assessment** in an expanded row that has competencies. It shows what the team selected in **Assess Team** answered on its CITE scoring model for that move. Group and event rows show the answers for their move. The panel is read-only.
+
+The panel shows the team's total score and the time of its last change. For each scoring category, it lists the selected options with their values, the team's comments, and the category score. When the scoring model uses them, the **Official** and **Team average** submissions follow the team's own. A team average says how many team members chose each option. The panel shows team answers only, never a single participant's answers.
+
+Click **Refresh xAPI statements** to reload the panel along with the evidence. Instead of answers, the panel can show one of these messages:
+
+| Message | Meaning |
+| --- | --- |
+| **Choose a team in Assess Team to see its CITE answers.** | No team is selected in **Assess Team**. |
+| **Team has not answered.** | The team has not selected an option or written a comment for the move. |
+| **This MSEL has not been pushed to CITE.** | Push the MSEL's integrations to create its CITE evaluation. |
+| **This team has no CITE team type, so it is not in CITE.** | The push only creates CITE teams for teams with a CITE team type. |
+| **No CITE move *N*. The move was added after the push.** | CITE has no move with this number. |
+| **CITE is on move *N*, so move *M* has not started.** | The CITE evaluation has not reached this move. |
+| **CITE refused Blueprint's service account.** or **CITE could not be reached.** | Blueprint reads CITE with its own service account, which must still own the evaluation. |
+
+The MSEL's Owners, Editors, and Evaluators can see the panel. So can users with the **Approver** role on the MSEL, and users with the ViewMsels permission.
 
 #### MSEL Playbook
 
@@ -1003,7 +1077,32 @@ A CITE administrator can add roles, such as one that can see or change the offic
 
     People who join a team through an [invitation](#invitations) get the invitation's **CITE Team Role**, which starts at **Member**. Set it to **Contributor** or **Submitter** on invitations for participants who score; a separate invitation for recorders can give them **Submitter**.
 
-##### CITE Actions
+##### Scoring Model
+
+The **Scoring Model** tab chooses the scoring model the CITE evaluation is built from when the integrations are pushed. The push needs one: **Push Integrations** stays disabled while the MSEL has neither linked nor authored a scoring model. The **Config** tab summarizes the choice under **CITE** and offers **Open the Scoring Model tab**.
+
+Choose how the MSEL gets its scoring model:
+
+- **Link a CITE scoring model:** choose one of the scoring models already defined in CITE under **CITE Scoring Model**, then click the **Save Changes** icon. The link is saved on the MSEL, like the settings on the **Config** tab. A user with the EditMsels permission or the MSEL `Editor` role can change the link.
+- **Author it in Blueprint:** write the scoring model in Blueprint, so the exercise is configured in one place. Pick what to start from under **Start From** and click **Create Scoring Model**. A user with the EditMsels permission or the MSEL `Owner` role can author a model or switch between linking and authoring.
+
+The model can start from a preset, or from a copy of a CITE model. Two presets follow the Department of Defense Cyber Table Top (CTT) assessments, and one the Cybersecurity and Infrastructure Security Agency (CISA) National Cyber Incident Scoring System (NCISS):
+
+| Start From | What it makes |
+| --- | --- |
+| **Questions by Move** | Discussion questions for each move, answered in comment boxes, then an after-action review on the last move |
+| **DoD CTT Mission Impact Assessment** | Mission capability, time to recover, system availability, and data integrity, scored each move |
+| **DoD CTT Likelihood Assessment Matrix** | Attack cost plus attack success, with the likelihood matrix beside the scoresheet |
+| **CISA NCISS** | The National Cyber Incident Scoring System: eight weighted factors scored from 0 to 100 |
+| **Copy a CITE scoring model** | A copy of the chosen CITE scoring model to edit in Blueprint; the CITE scoring model itself is not changed |
+
+The model then opens in the editor on the tab. The left side holds the model's settings, such as **Scoring Model Description**, **Calculation Equation**, the scoring checkboxes, and **Right Side Display**, followed by its **Scoring Categories**. Hover a checkbox, or either **Scoring Model** choice above the editor, for a tooltip that says what it does for a team filling in the scoresheet in CITE. Each category names the moves it is shown in, when **Use Different Scoring Categories by Move Number** is checked, and lists its scoring options or, for a category whose **Scoring Option Selection Type** is **None**, its questions. **Add Category**, **Add Option**, and **Add Question** add rows, and the arrows reorder them. The right side, **What a Team Sees**, previews the scoresheet a team gets; **Preview Move** picks the move to preview. Click **Save** to store the edits or **Discard** to drop them. A warning lists the categories that have no questions or options yet, because they would reach CITE with nothing to answer.
+
+**Replace With** and **Replace Scoring Model** start over from another preset or CITE model; the current categories and options are discarded after a confirmation. Switching back to **Link a CITE scoring model** deletes the model authored in Blueprint, also after a confirmation.
+
+When the integrations are pushed, Blueprint creates the authored scoring model in CITE and builds the evaluation from it. The evaluation keeps its own copy of the scoring model, and the model Blueprint created is removed, so CITE's list of scoring models is unchanged. The **Scoring Model** tab is then read-only until **Remove Integrations**, which deletes the evaluation and its copy of the scoring model. The model authored in Blueprint stays with the MSEL, ready for the next push.
+
+##### Actions
 
 On this tab, the MSEL owner can add [CITE Actions](#glossary) to push from Blueprint. These actions allow team members to customize their response by tracking tasks during the exercise.
 
@@ -1015,7 +1114,7 @@ On this tab, the MSEL owner can add [CITE Actions](#glossary) to push from Bluep
 
 To add a CITE Action, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
@@ -1034,7 +1133,7 @@ After you've added all desired configurations, click **Save**.
 
 To edit the CITE Action's details, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. Select the action you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new action.
 3. Make your changes, then click **Save**.
 
@@ -1042,24 +1141,24 @@ To edit the CITE Action's details, follow these steps:
 
 To delete a CITE Action, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. Select the action you want to delete and click the **Trash Can** next to it.
 
 ##### Filter Actions by Team
 
 To filter CITE Actions by teams, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. On the **Team** dropdown, select the desired team to filter by.
 
 ##### Search for an Action
 
 To search for a specific action, follow these steps:
 
-1. Navigate to the **CITE Actions** tab.
+1. Navigate to the **Actions** tab.
 2. Click the **Search Bar** and type the name of the desired action.
 
-##### CITE Roles
+##### Duties
 
 On this tab, the MSEL owner can add [CITE Roles](#glossary) to push from Blueprint. These roles allow team members to customize their response by tracking their responsibilities during an exercise.
 
@@ -1071,7 +1170,7 @@ On this tab, the MSEL owner can add [CITE Roles](#glossary) to push from Bluepri
 
 To add a CITE role, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. Click the **+** icon.
 3. Fill the fields as necessary following the Data Format Table specifications.
 
@@ -1088,7 +1187,7 @@ After you've added all desired configurations, click **Save**.
 
 To edit the CITE Role's details, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. Select the role you want to edit and click **Edit** next to it. The system opens the same edit component used when creating a new role.
 3. Make your changes, then click **Save**.
 
@@ -1096,21 +1195,21 @@ To edit the CITE Role's details, follow these steps:
 
 To delete a CITE Role, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. Select the role you want to delete and click the **Trash Can** next to it.
 
 ##### Filter Roles by Team
 
 To filter Roles by team, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. On the **Team** dropdown, select the desired team to filter by.
 
 ##### Search for a Role
 
 To search for a specific role, follow these steps:
 
-1. Navigate to the **CITE Roles** tab.
+1. Navigate to the **Duties** tab.
 2. Click the **Search Bar** and type the name of the desired role.
 
 #### Gallery
@@ -1218,16 +1317,18 @@ On the [Player Apps](#glossary) tab, the MSEL owner can add configurations to pu
 To add a Player app, follow these steps:
 
 1. Navigate to the **Player Apps** tab.
-2. Click the **+** icon.
-3. Select an app template from the provided list.
-4. Fill the fields as necessary following the Data Format Table specifications.
+2. Click the **+** icon (**Add Player Application**).
+3. Choose **New Player Application**, or pick a template from the menu:
+    - Blueprint's own [Player application templates](#player-apps) come first.
+    - Player's application templates follow under **From Player**.
+4. Fill the fields as necessary following the Data Format Table specifications. When you pick a template, the fields start with the template's values; the MSEL gets its own copy, and the template doesn't change.
 
 ##### Data Format Table
 
 | Field                  | Data Type | Description                                          | Example                                         |
 | ---------------------- | --------- | ---------------------------------------------------- | ----------------------------------------------- |
 | **Name**               | String    | Name of the application                              | Chat                                            |
-| **Url**                | String    | URL of the application                               | `{vmUrl}/views/{playerViewId}`                  |
+| **Url**                | String    | URL of the application (required)                    | `{vmUrl}/views/{playerViewId}`                  |
 | **Icon Url**           | String    | URL of the application's icon                        | `{galleryUrl}/assets/img/archive-blue.png`      |
 | **Embeddable**         | Boolean   | Select whether to embed the app in Player's iFrame   | True                                            |
 | **Load in Background** | Boolean   | Select whether the app should load in the background | True                                            |
@@ -1244,6 +1345,14 @@ You can add URL parameters to point to a specific CITE evaluation, Gallery exhib
 - **{vmUrl}:** Add this variable to the URL to point to the VM UI, for example `{vmUrl}/views/{playerViewId}`.
 
 After you've added all desired configurations, click **Save**.
+
+##### Make a Player App a Template
+
+Users with the `ManagePlayerApplications` permission can save a MSEL's Player app as a [Player application template](#player-apps):
+
+1. Navigate to the **Player Apps** tab.
+2. Click **Make [app name] a template** next to the app.
+3. Change the fields as necessary, then click **Save**.
 
 ##### Edit a Player App
 

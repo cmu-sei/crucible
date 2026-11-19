@@ -17,6 +17,8 @@ Datetime
 VMware
 vSphere
 vCenter
+(?i)datastores?
+(?i)datacenters?
 ESXi
 guestinfo
 [Dd]atastore
