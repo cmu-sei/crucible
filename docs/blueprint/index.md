@@ -241,7 +241,7 @@ The dialog has these fields:
 - **File Format**: **STIX bundle** or **JSON-LD ontology**, the two formats Blueprint reads.
 - **Settings (JSON)**: everything else, as an exported definition holds it:
     - `match`: the conditions a file must meet to be a release of this framework. For a STIX bundle: `stixDomain` (the domain its techniques name in the `stix` setting `domainsProperty`), `referenceSource` and `idPrefix` (the source and id of its techniques' own external reference), or `collectionName` (the name of its object of the `stix` setting `collectionType`). For a JSON-LD ontology: `property` (a property its nodes carry) or `ontologyTitleContains`. Every condition given must hold, and at least one is required.
-    - `stix` or `jsonLd`: how to read the file, such as the reference source that carries ids, whether techniques are grouped by tactics or by a pattern hierarchy, statuses to skip, or the ontology's id property, technique class, tactic type, publisher property, and notice property.
+    - `stix` or `jsonLd`: how to read the file, such as the reference source that carries ids, whether techniques are grouped by tactics or by a pattern hierarchy, statuses to skip, or the ontology's id property, technique class, tactic type, and the `publisherProperty` and `noticeProperty` its release's **Source** and **Notice** are read from.
     - For a STIX bundle, `stix` also names the object types and properties a publisher adds to STIX, since Blueprint assumes none: `tacticType` and `tacticShortNameProperty` (both required when techniques are grouped by tactics), `matrixType` and `matrixTacticRefsProperty` (the object listing the tactics in order, and its property that lists them), `collectionType` and `collectionVersionProperty` (the object naming the release and its version), `domainsProperty`, `platformsProperty`, `deprecatedProperty`, and `subTechniqueRelationship` (the relationship type from a sub-technique to its technique).
     - `mappings`: for a framework whose releases take a mappings file, the file's variable names and the relation it reads as, such as `countered by`.
     - `groupLabel` and `tacticOrder`: what the releases call their groups, and the order tactics are shown in.
@@ -638,9 +638,9 @@ An empty row says why: no defensive release exists, no mappings exist (**Import 
 
 ##### Attack Technique and Defensive Technique Data Fields
 
-Add a data field of type **Attack Technique** or **Defensive Technique** on the MSEL's Data Fields tab to let scenario events name pooled techniques. In an event, the field shows the chosen IDs as chips that link to MITRE's site. **Select techniques** offers the pool with a search box. An ID the pool no longer offers stays on the event, marked as not in the MSEL's techniques.
+Add a data field of type **Attack Technique** or **Defensive Technique** on the MSEL's Data Fields tab to let scenario events name pooled techniques. In an event, the field shows the chosen IDs as chips that link to each technique's page, as its framework's definition gives it. **Select techniques** offers the pool with a search box. An ID the pool no longer offers stays on the event, marked as not in the MSEL's techniques.
 
-When the event also has an **Attack Technique** value, a **Defensive Technique** field's list leads with a **Suggested** group: the pooled D3FEND techniques mapped against the event's attack techniques, strongest first. The rest of the pool follows under **Other techniques**. Only pooled techniques appear as suggestions; add more on the Techniques tab.
+When the event also has an **Attack Technique** value, a **Defensive Technique** field's list leads with a **Suggested** group: the pooled defensive techniques whose release's mappings counter the event's attack techniques, strongest first. The rest of the pool follows under **Other techniques**. Only pooled techniques appear as suggestions; add more on the Techniques tab.
 
 #### Teams
 
