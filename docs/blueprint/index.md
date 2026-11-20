@@ -900,11 +900,11 @@ Drag the tasks to change their order. A task's number on the tab is its place in
 | **Action** | Dropdown | What the task does. See [Actions](#actions-a-task-can-take). | `VM › Create a snapshot` |
 | **VM mask** | String | For VM actions: part of the VMs' names, or VM ids separated by commas. The task runs on every VM of the Player view that matches. | `web-01` |
 | *Action parameters* | Varies | The fields the action needs, such as the command and its arguments, or the notification text. Passwords, private keys, and HTTP headers are stored encrypted and never shown again: a stored one shows **•••• stored**, with **Replace** and **Clear**. | `powershell.exe` |
-| **Expected output** | String | The task succeeds when its output contains this text, ignoring case; empty always matches. An action that reports its own outcome decides instead: a Player notification that was sent succeeds, and an HTTP error status, a failed guest command, or a Secure Shell (SSH) command that exits nonzero fails. | `snapshot created` |
+| **Expected output** | String | For VM, Secure Shell (SSH), and HTTP actions: the task succeeds when its output contains this text, ignoring case; empty always matches. An HTTP error status, a failed guest command, or an SSH command that exits nonzero fails it whatever its output. The other actions decide for themselves: a Player notification, an email, and a CITE situation update succeed once sent, and setting the CITE move or the Gallery move and inject succeeds when the integration reaches it. | `snapshot created` |
 | **Trigger** | Dropdown | When the task runs. See [Triggers](#triggers). | `On success of` |
 | **Task** | Dropdown | With an **On … of** trigger, the task whose end starts this one, labeled by event and task | `Event 4 › 1. Power on WS-01` |
 | **Delay (s)** | Integer | Seconds to wait before running, once the task is triggered, by a Facilitator or participant too. A test runs at once. | `10` |
-| **Expiration (s)** | Integer | Seconds each iteration may run on each VM before it expires; 0 uses the deployment's default | `120` |
+| **Expiration (s)** | Integer | Seconds each iteration may run on each VM before it expires. 0 uses the deployment's default, and a value above the deployment's maximum (`Automation:MaxExpirationSeconds`, 3600 by default) is cut to it. | `120` |
 | **Iterations** | Integer | How many times to run the action | `1` |
 | **Interval (s)** | Integer | Seconds between iterations | `0` |
 | **Until** | Dropdown | Run the iterations a set number of times (**Count**), **Until success**, or **Until failure** | `Count` |
@@ -949,7 +949,7 @@ Test a task before the exercise, against one of your own Player views:
 3. Check **Also run the saved tasks chained after it** to run the tasks it triggers as well.
 4. Click **Run Test**. The results show each VM's status and output.
 
-VM, SSH, email, and HTTP actions run for real in a test, and the dialog warns when the view chosen is the one of the deployed exercise. The CITE and Gallery actions only describe what they would do in a test, before the push and after it; they change the exercise's evaluation and exhibit only when the exercise runs them. Tests are not part of the exercise's history or score, and Blueprint keeps the last tests of each task, 20 by default (`Automation:TestRunsKeptPerTask`).
+VM, SSH, email, HTTP, and Player notification actions run for real in a test (a notification goes to the Player view chosen), and the dialog warns when the view chosen is the one of the deployed exercise. The CITE and Gallery actions only describe what they would do in a test, before the push and after it; they change the exercise's evaluation and exhibit only when the exercise runs them. Tests are not part of the exercise's history or score, and Blueprint keeps the last tests of each task, 20 by default (`Automation:TestRunsKeptPerTask`).
 
 ##### Upgrading from Steamfitter
 
@@ -1104,7 +1104,7 @@ Click an event to see its tasks, with each one's trigger, newest status, VMs, an
 
 ##### Pause the Automation
 
-Click **Pause Automation** to hold the **At event time** tasks, and to stop participants from running tasks; the view says **Automation is paused**. A held task waits whether its time has come or it is between iterations. Tasks already running finish, and Facilitators can still run tasks, which still trigger the tasks that follow them, and start moves and groups.
+Click **Pause Automation** to hold the **At event time** tasks, and to stop participants from running tasks; the view says **Automation is paused**. A held task waits whether its time has come or it is between iterations. Only those tasks are held: tasks already running finish and still trigger the tasks that follow them, whoever started them, and Facilitators can still run tasks and start moves and groups.
 
 Click **Resume Automation** to start again. The held tasks run then. A task whose event time came during the pause runs too, unless that time passed more than a few minutes earlier; then it is recorded as skipped instead of running late.
 
