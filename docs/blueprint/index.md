@@ -1068,8 +1068,9 @@ The **Type** list shows the team roles defined in CITE. Blueprint gives each mem
 | **Submitter** | View the team, answer, and submit the team's score |
 | **Contributor** | View the team and answer |
 | **Member** | View the team |
+| **Official Scorer** | View the current official score and enter it |
 
-A CITE administrator can add roles, such as one that can see or change the official score. Blueprint lists them once they exist.
+A CITE administrator can add more roles. Blueprint lists them once they exist.
 
 !!! warning
 
