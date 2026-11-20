@@ -41,6 +41,8 @@ To prepare competency assessment, follow these steps:
 3. On the **Data Fields** tab, check the **Assess** column for each data field the evaluators should see.
 4. On the **Contributors** tab, give each evaluator the **Evaluator** role.
 
+A user with the **Official Scorer** CITE team role enters the official score. Assign that role as the member's CITE team role on Blueprint's **Teams** tab.
+
 Blueprint records each rating in the Learning Record Store (LRS), so an administrator must configure xAPI for Blueprint.
 
 !!! note

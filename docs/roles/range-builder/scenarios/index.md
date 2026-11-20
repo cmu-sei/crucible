@@ -141,7 +141,7 @@ A typical build order:
 4. On the **Teams** tab, add the teams and their members. For CITE, give each team a **CITE Team Type**, because the push only creates CITE teams that have one, and give each member who answers a [CITE team role](../../../blueprint/index.md#cite-team-roles), such as **Contributor** or **Submitter**. Add teams before the next steps, because scenario events and the CITE and Gallery items are set per team.
 5. Define the MSEL's moves and scenario events.
 6. Configure the tabs each integration adds, such as **Gallery Cards** for Gallery and **Actions** and **Duties** for CITE.
-7. On the **Contributors** tab, give instructors and evaluators their MSEL roles, and their **CITE Role** and **Gallery Role** when those integrations are on.
+7. On the **Contributors** tab, give instructors and evaluators their MSEL roles, and their **CITE Role**, **Gallery Role**, and **Steamfitter Role** when those integrations are on.
 
 CITE doesn't grade participants. See [Assessment in MSEL-Based Exercises](../assessment/index.md#assessment-in-msel-based-exercises).
 

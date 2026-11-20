@@ -36,6 +36,7 @@ CITE asks your team to judge how severe the incident is at each move. It doesn't
 
 - Answer the categories on the CITE Scoresheet as a team. If the Scoresheet has a **Submit** button, a member with the **Submitter** or **Owner** team role submits the team's answer.
 - Use the arrows next to the move number to review earlier moves. You can edit only the current move.
+- Teams see the official score for earlier moves. A person with the **Official Scorer** team role, not a participant, enters it.
 - Review the **Actions** and **Duties** on the CITE Dashboard to see what your team should consider during the move.
 
 ## Learning Best Practices

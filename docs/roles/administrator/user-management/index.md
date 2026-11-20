@@ -104,9 +104,9 @@ Range Builders typically require permissions in the following applications:
 - **Caster:** Design and manage infrastructure topologies
 - **Steamfitter:** Create and manage scenario tasks
 - **Player:** View and test exercises
-- **Blueprint:** Author MSELs (Content Developer)
-- **Gallery:** Build collections and exhibits (Content Developer)
-- **CITE:** Build scoring models and evaluations (Content Developer)
+- **Blueprint:** Create MSELs, and edit and push any MSEL (Content Developer)
+- **Gallery:** Create collections and exhibits, and manage and advance any exhibit (Content Developer)
+- **CITE:** Create and manage any scoring model or evaluation, including advancing moves (Content Developer)
 
 Refer to the [Range Builder Guide](../../range-builder/index.md) for detailed workflows.
 
@@ -119,9 +119,9 @@ Instructors primarily work within the following applications:
 - **Gameboard:** Manage competitions and scoring (if used)
 - **Blueprint:** Push MSELs and assess teams (Owner or Evaluator role on the MSEL)
 - **Gallery:** Advance exhibits and observe teams (Manager role on the exhibit, or an exhibit observer)
-- **CITE:** Advance moves and observe teams (Facilitator role on the evaluation)
+- **CITE:** Advance moves and observe teams (Facilitator role on the evaluation, or Advancer to only advance moves; the Official Scorer team role enters the official score)
 
-MSEL owners can set each contributor's **CITE Role** and **Gallery Role** on the MSEL's **Contributors** tab. Blueprint applies them when it pushes the MSEL.
+MSEL owners can set each contributor's **CITE Role**, **Gallery Role**, and **Steamfitter Role** (when Steamfitter integration is on) on the MSEL's **Contributors** tab. Blueprint applies them when it pushes the MSEL.
 
 Refer to the [Instructor Guide](../../instructor/index.md) for detailed workflows.
 
