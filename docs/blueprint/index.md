@@ -535,7 +535,7 @@ The available roles are:
 - **[`Evaluator`](#glossary):** Rates the teams against the MSEL's competencies on the [Assessor View](#assessor-view), and checks **Checkbox** data fields there.
 - **[`Viewer`](#glossary):** Can open the MSEL from the `/build` list and view it read-only, but can't edit it.
 
-A user on one of the MSEL's teams with no MSEL role is a participant. Once you push the MSEL, they see the [Exercise View](#exercise-view), and the [Tasks Page](#tasks-page) when the MSEL has tasks marked **Participants can run it**.
+A user on one of the MSEL's teams with no MSEL role is a participant. Once you push the MSEL, they see the [Exercise View](#exercise-view). They can also open the MSEL's [Tasks Page](#tasks-page), which you add to their Player view as an app, to run the tasks marked **Participants can run it**.
 
 #### Competencies
 
