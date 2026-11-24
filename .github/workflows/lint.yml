@@ -4,12 +4,15 @@ on:
   pull_request:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   lint-and-build:
     name: Lint and build docs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Download Vale
         env:
@@ -22,16 +25,19 @@ jobs:
       - name: Run Vale
         run: ./vale .
 
-      - uses: DavidAnson/markdownlint-cli2-action@v22
+      - uses: actions/setup-node@v7
         with:
-          globs: "**/*.md"
+          node-version: 24
 
-      - uses: actions/setup-python@v6
+      - name: Run markdownlint
+        run: npx --yes markdownlint-cli2@0.24.0 "**/*.md"
+
+      - uses: actions/setup-python@v7
         with:
           python-version: 3.x
 
-      - name: Install mkdocs-material
-        run: pip install mkdocs-material
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
       - name: Build docs
-        run: mkdocs build
+        run: mkdocs build --strict

@@ -4,6 +4,9 @@ on:
   pull_request:
     branches: ["main"]
 
+permissions:
+  contents: read
+
 jobs:
   update-copyright:
     # Do not run on commits made by github-actions[bot] to prevent looping
@@ -11,10 +14,10 @@ jobs:
     name: Update copyright year to current year
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # push the year update to the PR branch
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
