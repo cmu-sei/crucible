@@ -469,34 +469,39 @@ Click the **gear icon** next to the VM name to open the console options. A read-
 | **Read Only** | Turns read-only mode on or off. Appears only if your permissions let you control the VM. While read-only mode is on, `(Read Only)` follows the VM name and the console ignores your keyboard and mouse. |
 | **Dark Theme** | Switches the console between dark and light themes. |
 | **Resolution**, **Scale to Fit** | Scales the VM display to fit the window. This is the default. |
-| **Resolution**, **Match Window Size** | Changes the VM's screen resolution to match the window. Unavailable when the VM's display adapter can't change resolution, and on a read-only console; hover over it to see why. If the VM doesn't change resolution, the console returns to **Scale to Fit** and displays `This VM didn't change resolution, so the console is scaling to fit instead.` |
+| **Resolution**, **Match Window Size** | Changes the VM's screen resolution to match the window. Unavailable when the VM's display adapter can't change resolution (see [What the VM Needs](#what-the-vm-needs)), and on a read-only console; hover over it to see why. |
 | **Power**, **Power On** | Starts the VM. |
 | **Power**, **Power Off** | Turns the VM off immediately without shutting down the guest OS. Asks you to confirm first. |
 | **Power**, **Reboot** | Asks the guest OS to restart through the Advanced Configuration and Power Interface (ACPI) or the QEMU guest agent. Asks you to confirm first. If the guest doesn't respond, the error message suggests **Power Off** instead. |
 | **Power**, **Shutdown OS** | Asks the guest OS to shut down, the same way as **Reboot**. Asks you to confirm first. If the guest doesn't respond, the error message suggests **Power Off** instead. |
-| **Snapshots** | Opens a list of the VM's snapshots. Select one to revert the VM to it. Requires the `RevertVms` permission. Unavailable when the VM has no snapshots. |
-| **Files**, **Send File To VM** | Choose one or more files, then enter the destination folder in the guest as an absolute path. Requires the `UploadVmFiles` permission. |
+| **Snapshots** | Opens a list of the VM's snapshots, with the one the VM is running from marked as current. Select one to revert the VM to it. Requires the `RevertVms` permission. Unavailable when the VM has no snapshots. |
+| **Files**, **Send File To VM** | Choose one or more files, then enter the destination folder in the guest as an absolute path. Requires the `UploadVmFiles` permission. The console refuses a file over the size limit before sending it (see [Differences From the vSphere Console](#differences-from-the-vsphere-console)). |
 | **Files**, **Download File From VM** | Enter the absolute path of a file in the guest. Your browser downloads it. Requires the `DownloadVmFiles` permission. |
 | **Files**, **Mount ISO** | Choose an ISO to mount in the VM's optical drive. |
-| **Keyboard**, **Send Ctrl-Alt-Del** | Sends Ctrl+Alt+Delete to the VM. |
-| **Keyboard**, **Send Text** | Types the text you enter into the VM as key presses. |
-| **Keyboard**, **Paste to Clipboard** | Places your local clipboard text on the VM's clipboard without typing it. |
+| **Keyboard**, **Ctrl-Alt-Del** | Sends Ctrl+Alt+Delete to the VM. |
+| **Keyboard**, **Text** | Opens a window for text to type into the VM as key presses. Works on any VM, with no clipboard setup. |
+| **Clipboard**, **Copy** | Copies the last text copied inside the VM from the VM's clipboard to your local clipboard. |
+| **Clipboard**, **Paste** | Places your local clipboard text on the VM's clipboard without typing it. Then press Ctrl+V in the VM to paste it. |
 | **Network Cards** | Moves a network adapter to another network. Appears only if you have permission to change the VM's networks. |
-| **Clipboard**, **Copy** | Copies the last text copied inside the VM to your local clipboard. |
-| **Clipboard**, **Paste** | Types your local clipboard text into the VM as key presses. |
 
-**Send Text** and **Clipboard**, **Paste** type as if on a US keyboard. If the VM uses another keyboard layout, some characters arrive as different ones. For example, on a UK layout `@` arrives as `"`. To avoid this, use **Paste to Clipboard** on a VM that has a Virtual Network Computing (VNC) clipboard (see [What the VM Needs](#what-the-vm-needs)).
+**Clipboard**, **Copy** and **Clipboard**, **Paste** need a Virtual Network Computing (VNC) clipboard on the VM (see [What the VM Needs](#what-the-vm-needs)). Without one, both are unavailable; hover over them to see why. If your browser blocks access to your local clipboard, they say so instead of falling back to another method.
+
+**Keyboard**, **Text** types as if on a US keyboard. If the VM uses another keyboard layout, some characters arrive as different ones. For example, on a UK layout `@` arrives as `"`. To avoid this, use **Clipboard**, **Paste** on a VM that has a VNC clipboard.
 
 #### Toolbar and Status
 
-- **Copy**, **Paste**, and **Ctrl-Alt-Del:** The toolbar buttons do the same as **Clipboard**, **Copy**; **Clipboard**, **Paste**; and **Keyboard**, **Send Ctrl-Alt-Del**. A read-only console doesn't show these buttons.
+- **Copy:** Does the same as **Clipboard**, **Copy**. If your browser blocks writing to your local clipboard, the console shows the text so you can copy it by hand.
+- **Paste:** On a VM with a VNC clipboard, does the same as **Clipboard**, **Paste**. If your browser blocks reading your local clipboard, it opens the **Keyboard**, **Text** window instead. On a VM without a VNC clipboard, the button reads **Paste \*** and always opens the **Keyboard**, **Text** window, which types the text.
+- **Ctrl-Alt-Del:** Does the same as **Keyboard**, **Ctrl-Alt-Del**.
+- A read-only console doesn't show the **Copy**, **Paste**, and **Ctrl-Alt-Del** buttons. Hover over any button to see what it does or, when it's unavailable, why.
 - **Connected users:** The right side of the toolbar lists who has the console open, for example `Connected: alice, bob and 3 others`. Hover over it to see everyone.
 - **Task progress:** While a task runs on the VM, such as a power action or a revert, its name and progress appear next to the VM name. A task without a percentage shows `(in progress)`.
 
 #### Differences From the vSphere Console
 
-- **Files:** File transfers use the QEMU guest agent, so you don't enter VM credentials. **Send File To VM** accepts files up to 45 KB each. For larger files, use **Mount ISO** or the VM List's **Upload File**.
-- **Copy:** **Copy** returns only text you copied inside the VM after the console connected. It's unavailable when the VM doesn't have a VNC clipboard; hover over it to see why. If nothing has arrived from the VM's clipboard, the error message says the guest needs `spice-vdagent` running.
+- **Files:** File transfers use the QEMU guest agent, so you don't enter VM credentials. **Send File To VM** accepts files up to 45 KB each, or less if your administrator set a lower limit. For larger files, use **Mount ISO** or the VM List's **Upload File**.
+- **Copy:** **Copy** returns only text you copied inside the VM after the console connected. If nothing has arrived from the VM's clipboard, the error message says the guest needs `spice-vdagent` running.
+- **Paste:** **Clipboard**, **Paste** fills the VM's clipboard rather than typing, so you paste inside the VM yourself. The vSphere console's **Paste** types the text instead.
 - **Resolution:** Instead of a list of fixed resolutions, the Proxmox console offers **Scale to Fit** and **Match Window Size**.
 
 #### What the VM Needs
@@ -507,8 +512,8 @@ Some console features depend on how you build the VM template. Template authors 
 | --- | --- |
 | IP addresses in the VM List, **Send File To VM**, **Download File From VM** | QEMU guest agent installed and running in the guest, with the guest agent turned on in the VM's Proxmox options. When the agent isn't running, the file options are unavailable and their tooltip says `Requires the QEMU guest agent`. |
 | **Reboot** and **Shutdown OS** | Guest OS that handles ACPI power requests, or the QEMU guest agent. |
-| Clipboard **Copy** | `clipboard=vnc` in the VM's display (`vga`) setting, and `spice-vdagent` running in the guest. |
-| **Match Window Size** | A display adapter that supports resizing, such as `virtio-gpu`, with its driver installed in the guest. The default `std` Video Graphics Array (VGA) adapter can't resize. |
+| **Clipboard**, **Copy** and **Clipboard**, **Paste**, and the toolbar's **Copy** | `clipboard=vnc` in the VM's display (`vga`) setting, and `spice-vdagent` running in the guest. The console can't detect `spice-vdagent`. |
+| **Match Window Size** | The VM's display (`vga`) set to `virtio` or `virtio-gl`, with its driver installed in the guest. The default `std` Video Graphics Array (VGA) adapter and the others can't resize. |
 
 ### Follow Another Player
 
