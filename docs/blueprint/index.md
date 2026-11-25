@@ -4,7 +4,7 @@
 
 [**Blueprint**](#glossary) is a web app that helps users create a [Master Scenario Event List (MSEL)](#glossary) and [events](#glossary) more easily. It lets users choose and define simulated entities, attacks, time frames, and regulators affected by the scenario. Users can view, edit, create, and approve events in the MSEL using Blueprint.
 
-Blueprint makes it easier to build and view the MSEL compared to using an Excel spreadsheet. It also helps teams collaborate, even if they are from different teams. Blueprint can connect with Player, Gallery, CITE, and Steamfitter to help automate exercise setup.
+Blueprint makes it easier to build and view the MSEL compared to using an Excel spreadsheet. It also helps teams collaborate, even if they are from different teams. Blueprint can connect with Player, Gallery, CITE, and Caster to help automate exercise setup, and runs the MSEL's [automation tasks](#automation-tasks) during the exercise.
 
 For installation, refer to these GitHub repositories.
 
@@ -23,11 +23,11 @@ Blueprint UI supports an optional, customizable classification banner that displ
 
 To use Blueprint, a System Admin must assign Content Developer permissions to the user and add them to a team.
 
-There are three levels of permissions in Blueprint that affect the way a user interacts with the Blueprint application and collaborates on the MSEL creation.
+Two system permissions, and the Facilitator MSEL role, affect the way a user interacts with the Blueprint application and collaborates on the MSEL creation.
 
 - [System Admin](#glossary): Can add users to a team, as well as assign the required permissions to users. Additionally, users with this permission can view, edit, create, and approve events on the MSEL.
 - [Content Developer](#glossary): Can view, edit, create, and approve events on the MSEL.
-- [Facilitator](#glossary): Manages the exercise, can advance moves, execute events, and check events as completed.
+- [Facilitator](#glossary): A MSEL role, given on the [Contributors](#contributors) tab, that runs the exercise on the [Facilitator View](#facilitator-view): it starts moves and groups, runs automation tasks, and pauses automation.
 
 Most users will have the Content Developer permission, because it is the minimum required permission to create and collaborate with other teams on MSEL creation.
 
@@ -276,7 +276,7 @@ Content developers use Blueprint to build and manage MSELs.
 
 ### Event Dashboard
 
-The **Event Dashboard** is Blueprint's homepage. It shows a card for each thing the current user can do: **Join**, **Launch**, **Build**, and **Assess**. Each card shows how many events it applies to. While data loads, an **Initializing Data** card is displayed with a progress spinner.
+The **Event Dashboard** is Blueprint's homepage. It shows a card for each thing the current user can do: **Join**, **Launch**, **Build**, **Assess**, and **Facilitate**. Each card shows how many events it applies to. While data loads, an **Initializing Data** card is displayed with a progress spinner.
 
 Below the mission cards, three cards describe what Blueprint does: **Competency-Based Assessment**, **Collaborative Planning**, and **Hands-On and Tabletop Exercises**. Click one to read more.
 
@@ -295,6 +295,10 @@ If the user holds the `CreateMsels` permission or holds a MSEL role on any MSEL 
 #### Assess an Event
 
 If the user is a System Admin, or an Owner or Evaluator on any MSEL (a MSEL's creator counts as its Owner), the **Assess** card (*Evaluation & Scoring*) is shown, with the number of those MSELs that are running (`Deployed`). Click **Assess Events** to go to `/assess`, which shows a card for each running event the user can assess, with its name, description, and number of competencies. Click **Assess** on a card to open that event's [Assessor View](#assessor-view). An event with no competencies says **No competencies to assess** but still opens, because its Assessor View still shows the xAPI evidence and **Checkbox** data fields. When there is nothing to assess, the page shows **No running events available to assess**.
+
+#### Facilitate an Event
+
+The **Facilitate** card (*Moves & Automation*) shows the number of running (`Deployed`) MSELs whose Facilitator View the user can open: as an Owner, Facilitator, Editor, or Approver of the MSEL, or with the `ViewMsels` permission. The card is greyed out when there are none. Click **Facilitate Events** to go to `/facilitate`, which shows a card for each running exercise the user can facilitate. Click **Facilitate** on a card to open that exercise's [Facilitator View](#facilitator-view). When there is nothing to facilitate, the page shows **No running exercises available to facilitate**.
 
 If the user can do none of these, a single **No Access** card is shown instead.
 
@@ -432,7 +436,7 @@ To edit the MSEL's basic information and configuration, follow these steps:
 | **Set a Start Time** | Boolean | When checked, exposes a **Start Date / Time** picker and schedules a specific start moment for the MSEL. When unchecked, the MSEL is open-ended. | `True` |
 | **Start Date / Time** | Datetime | Start date/time of the MSEL (only visible when **Set a Start Time** is checked). | `09/10/2024 20:00:00` |
 | **Duration (d / h / m)** | Integer × 3 | End time relative to the start, expressed as days / hours / minutes. Click **+** to increment or type directly into each field. | `1 d 12 h 00 m` |
-| **Applications to Integrate** | Boolean checkboxes | Enable any of: Player, Gallery, CITE, Steamfitter, Caster. Enabling an integration activates additional MSEL sidebar tabs for that app. Caster requires Player. | Player: `True`, CITE: `True` |
+| **Applications to Integrate** | Boolean checkboxes | Enable any of: Player, Gallery, CITE, Caster. Enabling an integration activates additional MSEL sidebar tabs for that app. Caster requires Player. | Player: `True`, CITE: `True` |
 | **MSEL Status** | Dropdown | MSEL lifecycle state: `Pending`, `Entered`, `Approved`, `Complete`, `Archived`. Blueprint sets `Pushing` and `Pulling` itself while it pushes or removes integrations, and `Deployed` once they are pushed; while the MSEL is in one of those, the dropdown is locked. | `Approved` |
 | **Header Row Metadata (Height)** | Integer | Height of the header row when exporting this MSEL to `.xlsx`. | `30` |
 | **Difficulty Rating** | Dropdown | Metadata tag describing the exercise's difficulty. | (per framework) |
@@ -447,11 +451,13 @@ To save Config-tab changes, click **Save Changes** at the top of the tab. **Canc
 
 #### Direct-Access URLs
 
-The Config tab exposes three copyable, shareable URLs. Each row shows a **Copy** (clipboard) button and a direct link.
+The Config tab exposes five copyable, shareable URLs. Each row shows a **Copy** (clipboard) button and a direct link.
 
 - **Exercise View URL** (`http://<host>/msel/{mselId}/view`): use this URL for direct read-only access to the Exercise MSEL (see [Exercise View](#exercise-view)).
 - **MSEL Starter URL** (`http://<host>/starter/?msel={mselId}`): use this URL for direct access to edit the Scenario Events list in starter mode.
 - **Assessor View URL** (`http://<host>/assess/?msel={mselId}`): use this URL for direct access to the Assessor View (see [Assessor View](#assessor-view)).
+- **Facilitator View URL** (`http://<host>/facilitate/?msel={mselId}`): use this URL for direct access to the Facilitator View (see [Facilitator View](#facilitator-view)).
+- **Tasks Page URL** (`http://<host>/msel/{mselId}/tasks`): the page where participants run the tasks marked for them (see [Tasks Page](#tasks-page)).
 
 #### Associating Competencies with a MSEL
 
@@ -465,8 +471,10 @@ The **Metadata** block on the Config tab captures non-functional descriptors tha
 
 - **[Gallery](#glossary):** Blueprint will add the collections, exhibits, cards, articles, teams, and users specified on the MSEL. To learn more about this integration, reference the [Gallery](#gallery) section.
 - **[CITE](#glossary):** Blueprint will add the evaluation, built from the MSEL's [scoring model](#scoring-model), with the moves, actions, roles, teams, and users specified on the MSEL. To learn more about this integration, reference the [CITE](#cite) section.
-- **[Player](#glossary) & [Steamfitter](#glossary):** Blueprint will automate the adding of events specified on the MSEL, as well as configure exercise details in Player.
+- **[Player](#glossary):** Blueprint will create the Player view, with the teams, users, and applications specified on the MSEL. To learn more about this integration, reference the [Player](#player) section.
 - **[Caster](#glossary):** Blueprint will deploy the MSEL's virtual machine topology from a Caster directory into a new Caster workspace, with the VMs added to the Player view and its teams. To learn more about this integration, reference the [Caster](#caster) section.
+
+Blueprint no longer integrates with Steamfitter. It runs the MSEL's [automation tasks](#automation-tasks) itself.
 
 #### MSEL Pages
 
@@ -523,10 +531,11 @@ The available roles are:
 - **[`Approver`](#glossary):** Can view and edit the MSEL, and will have the added feature of approving a MSEL.
 - **[`Move Editor`](#glossary):** Can edit moves on the MSEL, as well as increment them during an exercise.
 - **[`Owner`](#glossary):** Owner of the MSEL, can view and edit the MSEL, as well as perform all of the functionalities that the MSEL provides (e.g., Add Teams, Add Integrations, Events).
-- **[`Evaluator`](#glossary):** Manages the exercise, can advance moves, execute events, and check events as completed.
+- **[`Facilitator`](#glossary):** Runs the exercise on the [Facilitator View](#facilitator-view): starts moves and groups, runs, cancels, and reruns automation tasks, and pauses automation. A Facilitator can view the MSEL but not edit it.
+- **[`Evaluator`](#glossary):** Rates the teams against the MSEL's competencies on the [Assessor View](#assessor-view), and checks **Checkbox** data fields there.
 - **[`Viewer`](#glossary):** Can open the MSEL from the `/build` list and view it read-only, but can't edit it.
 
-A user on one of the MSEL's teams with no MSEL role is a participant. Once you push the MSEL, they see only the [Exercise View](#exercise-view).
+A user on one of the MSEL's teams with no MSEL role is a participant. Once you push the MSEL, they see the [Exercise View](#exercise-view). They can also open the MSEL's [Tasks Page](#tasks-page), which you add to their Player view as an app, to run the tasks marked **Participants can run it**.
 
 #### Competencies
 
@@ -615,6 +624,7 @@ To add a Data Field to the MSEL, follow these steps:
 | **Facilitation Data Field**                                | Boolean       | Display this data field for facilitation events                                                | True             |
 | **Display on "Default" edit tab**                          | Boolean       | Display this data field on the Default tab of the event edit dialog                            | True             |
 | **Assessor View**                                          | Boolean       | Display this data field on the [Assessor View](#assessor-view)                                 | True             |
+| **Facilitator View**                                       | Boolean       | Display this data field on the [Facilitator View](#facilitator-view)                           | True             |
 | **Display for Content Developers and MSEL Owners Only!!!** | Boolean       | Display this data field for users who are Content Developers or MSEL Owners only               | True             |
 | **Gallery Article Parameter**                              | Dropdown Text | If using the Gallery integration, select the Gallery parameter that aligns with the data field | Description      |
 | **Column Metadata (Width)**                                | Integer       | Width of the column when displayed                                                             | 30               |
@@ -864,6 +874,94 @@ To search for a specific event, follow these steps:
 1. Navigate to the **Events** tab.
 2. Click the **Search Bar** and type the name of the desired event.
 
+#### Automation Tasks
+
+An *automation task* is an action Blueprint runs during the exercise: a command on the exercise's VMs, a Player notification, a CITE or Gallery change, an email, or an HTTP request. A scenario event can have several tasks. They run when a Facilitator runs them, at the event's time, or after another task ends, and a facilitator follows them on the [Facilitator View](#facilitator-view).
+
+Once a MSEL has a task, the **Events** tab shows an **Automation** column with the number of tasks on each event and how its newest test went. Hover over it to see each task's trigger, or click it to edit the tasks.
+
+##### Add an Automation Task
+
+To add a task to an event, follow these steps:
+
+1. Navigate to the **Events** tab.
+2. Select the event and click the **Hamburger** icon next to it, then click **Edit**.
+3. Open the **Automation** tab and click **Add Task**.
+4. Fill the fields as necessary following the Data Format Table specifications.
+5. Click **Save**. The tasks are saved with the event.
+
+Drag the tasks to change their order. A task's number on the tab is its place in that order.
+
+##### Data Format Table
+
+| Field | Data Type | Description | Example |
+| --- | --- | --- | --- |
+| **Name** | String | Name of the task, shown on the Facilitator View and the Tasks page | `Snapshot web-01` |
+| **Action** | Dropdown | What the task does. See [Actions](#actions-a-task-can-take). | `VM › Create a snapshot` |
+| **VM mask** | String | For VM actions: part of the VMs' names, or VM ids separated by commas. The task runs on every VM of the Player view that matches. | `web-01` |
+| *Action parameters* | Varies | The fields the action needs, such as the command and its arguments, or the notification text. Passwords, private keys, and HTTP headers are stored encrypted and never shown again: a stored one shows **•••• stored**, with **Replace** and **Clear**. | `powershell.exe` |
+| **Expected output** | String | For VM, Secure Shell (SSH), and HTTP actions: the task succeeds when its output contains this text, ignoring case; empty always matches. An HTTP error status, a failed guest command, or an SSH command that exits nonzero fails it whatever its output. The other actions decide for themselves: a Player notification, an email, and a CITE situation update succeed once sent, and setting the CITE move or the Gallery move and inject succeeds when the integration reaches it. | `snapshot created` |
+| **Trigger** | Dropdown | When the task runs. See [Triggers](#triggers). | `On success of` |
+| **Task** | Dropdown | With an **On … of** trigger, the task whose end starts this one, labeled by event and task | `Event 4 › 1. Power on WS-01` |
+| **Delay (s)** | Integer | Seconds to wait before running, once the task is triggered, by a Facilitator or participant too. A test runs at once. | `10` |
+| **Expiration (s)** | Integer | Seconds each iteration may run on each VM before it expires. 0 uses the deployment's default, and a value above the deployment's maximum (`Automation:MaxExpirationSeconds`, 3600 by default) is cut to it. | `120` |
+| **Iterations** | Integer | How many times to run the action | `1` |
+| **Interval (s)** | Integer | Seconds between iterations | `0` |
+| **Until** | Dropdown | Run the iterations a set number of times (**Count**), **Until success**, or **Until failure** | `Count` |
+| **Score** | Integer | Points the task earns when it succeeds. See [Scoring](#scoring). | `10` |
+| **Enabled** | Boolean | Only an enabled task runs | `True` |
+| **Repeatable** | Boolean | A task that is not repeatable cannot run again once it has succeeded in the exercise | `False` |
+| **Participants can run it** | Boolean | Offer the task to the MSEL's teams on the [Tasks page](#tasks-page) | `False` |
+
+Copying a MSEL keeps its tasks' passwords, private keys, and HTTP headers only for a user who can edit the original: its Owner or an Editor, or a user with `EditMsels`. A MSEL launched from a template never keeps them, so its owner enters them again.
+
+##### Triggers
+
+| Trigger | The task runs |
+| --- | --- |
+| **Manual** | When a Facilitator runs it, or starts its event's move or group and keeps it selected |
+| **At event time** | At the MSEL's start time plus the event's time, plus the task's delay, while the MSEL is deployed and its automation is not paused |
+| **On success of** | When the chosen task succeeds |
+| **On failure of** | When the chosen task fails |
+| **On completion of** | When the chosen task succeeds or fails |
+| **On expiration of** | When the chosen task expires |
+
+A canceled task, or one that ended in an error, triggers nothing. A triggered task that is already running, or that has succeeded and is not repeatable, is recorded as skipped instead of running again. A task can follow a task of another event in the MSEL, but a chain cannot loop back on itself.
+
+##### Actions a Task Can Take
+
+| Category | Actions |
+| --- | --- |
+| **Blueprint** | Send a Player notification to the exercise's view, update the CITE situation, set the CITE move, set the Gallery move and inject |
+| **VM** | Power on, power off, create, revert to, or delete a snapshot, run a command in the guest (or start one without waiting for its output), read a file, write a text file, upload a file from the server |
+| **SSH** | Run a remote command, touch a file, remove files |
+| **Email** | Send an email |
+| **HTTP** | `GET`, `POST`, `PUT`, and `DELETE` requests |
+
+VM actions use the exercise's Player view, so they need the Player integration. The CITE and Gallery actions use the MSEL's evaluation and exhibit. The hosts SSH and HTTP tasks may reach, and the mail server email tasks use, are set when Blueprint is deployed; see the [Blueprint Helm Chart README](https://github.com/cmu-sei/helm-charts/tree/main/charts/blueprint).
+
+##### Test an Automation Task
+
+Test a task before the exercise, against one of your own Player views:
+
+1. On the event's **Automation** tab, click **Test Task**. To test an event's saved tasks from the **Events** tab instead, click the **Hamburger** icon next to the event and click **Test Automation…**.
+2. Choose the **Player view** to test against. For a VM action, the dialog lists the VMs of that view the mask matches.
+3. Check **Also run the saved tasks chained after it** to run the tasks it triggers as well.
+4. Click **Run Test**. The results show each VM's status and output.
+
+VM, SSH, email, HTTP, and Player notification actions run for real in a test (a notification goes to the Player view chosen), and the dialog warns when the view chosen is the one of the deployed exercise. The CITE and Gallery actions only describe what they would do in a test, before the push and after it; they change the exercise's evaluation and exhibit only when the exercise runs them. Tests are not part of the exercise's history or score, and Blueprint keeps the last tests of each task, 20 by default (`Automation:TestRunsKeptPerTask`).
+
+##### Upgrading from Steamfitter
+
+Blueprint used to push each event's Steamfitter task to a Steamfitter scenario. The upgrade turns each of those tasks into an automation task on its event, and so does importing an older MSEL file:
+
+- Only the tasks of events whose **Integration Target** included Steamfitter are enabled, since only those were pushed.
+- Within a group, each task runs on completion of the one before it, and the first one is **Manual**, as the push chained them.
+- A task participants could run in Steamfitter can still be run on the [Tasks page](#tasks-page).
+- HTTP headers in an imported file are dropped, because a MSEL file holds no secrets. Enter them again after the import.
+
+Remove the integrations of deployed MSELs before the upgrade, or their Steamfitter scenarios are left behind.
+
 #### Exercise View
 
 While the **Events** tab lets MSEL owners and content developers manage events, the **Exercise View** tab gives participants read-only access to track current and future events during an exercise.
@@ -912,7 +1010,7 @@ To give assessors competencies to rate, attach a framework and its competencies 
 
 Events are grouped under their move and group. Click a move, group, or event row to expand it. Use **Expand All** (Ctrl+Shift+E) and **Collapse All** (Ctrl+Shift+C) in the header to open or close every row.
 
-An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Steamfitter, Player, or Gallery), and **Verb** filters, and click **Refresh evidence** to load new statements.
+An expanded row shows **xAPI Evidence** on the left: the statements recorded for that move, group, or event, with their time, platform, actor, team, verb, and object. Click a statement to see its JSON, or click **Copy JSON** to copy it. Narrow the list with the **Team**, **Source** (Blueprint, CITE, Player, or Gallery), and **Verb** filters, and click **Refresh evidence** to load new statements.
 
 When you check **Hide individual names from assessors** on the [Basic Information](#basic-information) tab, Blueprint leaves out who each statement is about for users with the **Editor**, **Approver**, or **Evaluator** role. The actor shows as **Team member**, and the team name stays, so assessors rate the team's work without seeing its members' names. The statement JSON doesn't have the names either. The assessor who submitted a rating keeps their name. The MSEL's Owners and System Admins still see every name, and the names stay in the LRS.
 
@@ -957,6 +1055,73 @@ Click **Refresh xAPI statements** to reload the panel along with the evidence. I
 | **CITE refused Blueprint's service account.** or **CITE could not be reached.** | Blueprint reads CITE with its own service account, which must still own the evaluation. |
 
 The MSEL's Owners, Editors, and Evaluators can see the panel. So can users with the **Approver** role on the MSEL, and users with the ViewMsels permission.
+
+#### Facilitator View
+
+The **Facilitator View** tab is where Facilitators run a live exercise. It lists the MSEL's moves and groups, with the events and their automation tasks under them. From here a Facilitator starts each move and group, runs, cancels, and reruns tasks, and pauses the automation. The MSEL's content is read-only here.
+
+The Facilitator View is also available outside the MSEL editor, at `/facilitate/?msel={mselId}`, and from the **Facilitate** card on the [Event Dashboard](#facilitate-an-event). It updates live while it is open.
+
+##### Access
+
+| MSEL Role | Access |
+| --- | --- |
+| **Owner**, **Facilitator** | Follow the exercise, run tasks, start moves and groups, and pause the automation |
+| **Editor**, **Approver** | Follow the exercise |
+
+A MSEL's creator counts as its Owner. Users with the `ViewMsels` permission can follow any MSEL's Facilitator View, and users with `EditMsels` can also act on it; System Admins have both. The tab is hidden from everyone else, and its URL shows **Access Denied**. Evaluators use the [Assessor View](#assessor-view) instead. The actions are offered only while the MSEL is deployed.
+
+##### Choose What Facilitators See
+
+The summary at the top shows where the exercise is (the current move and group), how many tasks failed, are running, or are waiting, the score when tasks offer points, and when the next move is due. With **Only events with tasks** on, as it is at first, events without tasks are hidden; the move and group rows always show.
+
+To choose the Facilitator View columns, follow these steps:
+
+1. Navigate to the **Data Fields** tab.
+2. Check the **Facilitate** column for each data field the facilitators should see. The **Move**, **Group**, **Execution Time**, and **Integration Target** rows control those columns the same way.
+
+When no data field is marked **Facilitate**, the view still lists the events, with a note on how to add columns.
+
+##### Start a Move or Group
+
+Starting a move or group takes the place of the move and inject tasks Blueprint used to add to the Steamfitter scenario. Click **Start Move** on a move's row, or **Start Group** on a group's row. The dialog lists what starting it will do:
+
+- **Start Move** sets the CITE evaluation to the move, and the Gallery exhibit to the move and its first inject.
+- **Start Group** sets the Gallery exhibit to the move and that group's inject.
+- **Start Move** offers the enabled **Manual** tasks of every group in the move, and **Start Group** those of the group. They run one after another in their order. Clear the ones not to run.
+- A task that has succeeded and is not repeatable is not offered again. One that is already running is left out, and the dialog says so.
+
+Click **Start Move** or **Start Group** to confirm. The summary shows the new current move and group.
+
+##### Run and Follow Tasks
+
+Click an event to see its tasks, with each one's trigger, newest status, VMs, and output.
+
+- Click **Run** to run a task by hand. A task that is already running cannot be started again until its run ends.
+- Click **Cancel** to stop a task that is waiting or running.
+- Click **Rerun** to run a task again. A task that has succeeded and is not repeatable cannot be rerun.
+- Click **History** to open every run of the task in the exercise, with who or what started it, and each iteration's output on each VM.
+
+##### Pause the Automation
+
+Click **Pause Automation** to hold the **At event time** tasks, and to stop participants from running tasks; the view says **Automation is paused**. A held task waits whether its time has come or it is between iterations. Only those tasks are held: tasks already running finish and still trigger the tasks that follow them, whoever started them, and Facilitators can still run tasks and start moves and groups.
+
+Click **Resume Automation** to start again. The held tasks run then. A task whose event time came during the pause runs too, unless that time passed more than a few minutes earlier; then it is recorded as skipped instead of running late.
+
+##### Scoring
+
+A task that offers points earns them when its newest run in the exercise succeeds. The score the exercise can reach counts the best way each chain of tasks can go. For each task, that is its own points, plus the most its run can lead to:
+
+- the tasks it triggers on completion, plus the better of those on success and those on failure;
+- or the tasks it triggers on expiration, if they offer more.
+
+The Facilitator View and the Tasks page show the score, and each task run is recorded in the Learning Record Store as an xAPI `executed` statement with the points it earned.
+
+#### Tasks Page
+
+The Tasks page, at `/msel/{mselId}/tasks`, offers the members of the MSEL's teams the tasks marked **Participants can run it**, with each one's status and points and the exercise's score. To give participants the page, add it as a [Player app](#add-a-player-app) with the URL `{blueprintUrl}/msel/{blueprintMselId}/tasks`.
+
+Click a task's **Run** button, and confirm, to run it. The task runs as part of the exercise, and so do the tasks it triggers. A task cannot be run while the exercise's automation is paused, while it is already running, or again once it has succeeded, unless it is repeatable; the page says why. Before the MSEL is pushed, the page shows **The exercise is not running.**
 
 #### MSEL Playbook
 
@@ -1339,10 +1504,12 @@ You can add URL parameters to point to a specific CITE evaluation, Gallery exhib
 
 - **{citeEvaluationId}:** Add this variable to the URL to point to a specific CITE evaluation.
 - **{galleryExhibitId}:** Add this variable to the URL to point to a specific Gallery exhibit.
-- **{steamFitterScenarioId}:** Add this variable to the URL to point to a specific Steamfitter scenario.
 - **{playerViewId}:** Add this variable to the URL to point to a specific Player view.
 - **{casterWorkspaceId}:** Add this variable to the URL to point to the Caster workspace the MSEL deployed.
 - **{vmUrl}:** Add this variable to the URL to point to the VM UI, for example `{vmUrl}/views/{playerViewId}`.
+- **{blueprintUrl}** and **{blueprintMselId}:** Add these variables to point to Blueprint and the MSEL, for example `{blueprintUrl}/msel/{blueprintMselId}/tasks` for the participants' [Tasks page](#tasks-page).
+
+Blueprint no longer integrates with Steamfitter, so `{steamfitterUrl}` and `{steamfitterScenarioId}` are replaced with nothing. Replace a Player app that pointed at Steamfitter's task page with the Tasks page.
 
 After you've added all desired configurations, click **Save**.
 
@@ -1423,6 +1590,8 @@ To push MSEL information to their respective applications, follow these steps:
 
 When Caster is enabled, Blueprint deploys the topology last, after the other integrations, because the Terraform apply can take a long time.
 
+Pushing starts the exercise's automation: each push is a new deployment, with its own task history and score, and **At event time** tasks start running at their time.
+
 #### Remove Integrations
 
 If desired, the MSEL owner can remove MSEL information after the enabled integrations have pushed it to their respective applications.
@@ -1434,6 +1603,8 @@ To remove MSEL information from the applications, follow these steps:
 1. Navigate to the **Info** tab.
 2. Click **Remove Integrations**.
 
+Removing the integrations cancels the automation tasks that are still waiting or running. Their history stays on the MSEL.
+
 When Caster is enabled, Blueprint destroys the Caster workspace first, while the Player view its VMs belong to still exists. If the destroy fails, Blueprint stops and keeps the other integrations, so **Remove Integrations** can be run again.
 
 ## Glossary
@@ -1443,6 +1614,8 @@ This glossary defines key terms and concepts used in the Blueprint application.
 **`Approver` Role:** Can view and edit the MSEL, but will have the added feature of approving a MSEL.
 
 **Assessor View:** MSEL view used by Evaluators during an exercise to review xAPI evidence and submit competency ratings for teams. Directly accessible via the Assessor View URL on the Config tab.
+
+**Automation Task:** An action Blueprint runs during the exercise, such as a VM command, a Player notification, an email, or an HTTP request. A scenario event can have several, run by hand, at the event's time, or after another task.
 
 **Blueprint**: Web application created to make the development of a MSEL and events easier.
 
@@ -1468,13 +1641,17 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **`Editor` Role:** Can edit the events assigned to them by the MSEL owner, but not other events. They cannot delete events or create new events.
 
-**Event Dashboard:** Blueprint's homepage. Presents up to three cards (Join an Event, Start an Event, Manage an Event) tailored to the user's permissions.
+**Event Dashboard:** Blueprint's homepage. Presents a card for each thing the user can do (Join, Launch, Build, Assess, and Facilitate), tailored to the user's permissions.
 
 **Events**: Specific scenario events or messages within the scenario that prompt users to implement designated actions.
 
 **Exercises**: Structured and simulated activity designed to assess, train, or evaluate the capabilities, preparedness, and responses of individuals, teams, or organizations in dealing with various scenarios, especially emergencies or crises.
 
-**Evaluator Permission**: Manages the exercise, can advance moves, execute events, and check events as completed.
+**`Evaluator` Role**: Rates the teams against the MSEL's competencies on the Assessor View.
+
+**`Facilitator` Role**: Runs the exercise on the Facilitator View: starts moves and groups, runs automation tasks, and pauses automation.
+
+**Facilitator View:** MSEL view used by Facilitators during an exercise to start moves and groups and to run and follow the automation tasks. Directly accessible at `/facilitate/?msel={mselId}`.
 
 **Gallery:** Web application where participants receive incident information.
 
@@ -1504,11 +1681,11 @@ This glossary defines key terms and concepts used in the Blueprint application.
 
 **Proficiency Scale:** A reusable, named set of performance levels (for example, Novice, Intermediate, Advanced, Expert) attached to a competency framework.
 
-**Steamfitter:** Gives content developers the ability to create scenarios consisting of a series of scheduled tasks, manual tasks, and events which run against virtual machines during an event.
-
 **System Admin Permission:** Can add users to a team, as well as assign the required permissions.
 
 **System Defined Data Fields:** Added by default in MSEL creation, since data fields under this category are essential for MSEL features to work.
+
+**Tasks Page:** The page where participants run the automation tasks marked for them and see the exercise's score, at `/msel/{mselId}/tasks`.
 
 **User Defined Data Fields:** The user adds on an as-needed basis.
 
