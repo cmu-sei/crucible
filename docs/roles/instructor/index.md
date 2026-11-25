@@ -45,6 +45,17 @@ Your presence shapes the learning environment. Effective instructors observe, pr
 - Encourage teams to narrate their reasoning so others can follow their approach.
 - If the environment falters, turn downtime into teaching moments (incident response, contingency thinking).
 
+### Running a MSEL-Based Exercise
+
+When a Range Builder builds the exercise as a MSEL in [Blueprint](../../blueprint/index.md), you run it across Blueprint, Gallery, and CITE. Your MSEL owner assigns the roles you need on the MSEL's **Contributors** tab. See [Roles in the Crucible Ecosystem](../index.md#application-roles-and-permissions).
+
+- **Start the exercise:** Click **Start Event** on Blueprint's [Event Dashboard](../../blueprint/index.md#start-an-event) to launch from a template. For a MSEL you own, click **Push Integrations** on its **Info** tab instead. See [Push Integrations](../../blueprint/index.md#push-integrations).
+- **Follow the timeline:** Track current and upcoming events in the MSEL's **Exercise View**, or print the **MSEL Playbook** for offline reference.
+- **Advance moves:** Click **Advance Move** on the [CITE Dashboard](../../cite/index.md#cite-dashboard) and **Advance** on the [Gallery Wall](../../gallery/index.md#gallery-wall). These buttons appear only when the evaluation or exhibit has **Show Advance Button** selected and you have a role that can advance it.
+- **Observe teams:** As a CITE **Facilitator** or **Observer**, or a Gallery exhibit observer, use the team selector to view each team's progress.
+- **Assess competencies:** As a MSEL **Evaluator**, rate teams against the MSEL's competencies in the [Assessor View](../../blueprint/index.md#assessor-view).
+- **End the event:** For an event launched from a template, click **End Event** in Player's **Manage Event** application. See [Ending a Launched Event](../../blueprint/index.md#ending-a-launched-event).
+
 ## After the Exercise
 
 Reflection is where insight turns into understanding. Your debrief sets the tone for how participants process what they learned.
@@ -67,6 +78,7 @@ Reflection is where insight turns into understanding. Your debrief sets the tone
 - Emphasize growth over grading.
 - Use formative observations—what participants did and thought—to inform your next steps.
 - Encourage participants to document what they learned or would do differently next time.
+- In a MSEL-based exercise, open the [CITE Report](../../cite/index.md#cite-report) to walk through each team's answers move by move. CITE captures how teams judged the incident; it doesn't grade them.
 
 ## Supporting Learners
 

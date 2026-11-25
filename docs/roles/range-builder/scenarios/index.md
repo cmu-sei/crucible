@@ -1,6 +1,6 @@
 # Scenario Development
 
-This section covers reasoning, designing, and implementing automated cyber scenarios using Steamfitter's orchestration capabilities.
+This section covers reasoning, designing, and implementing automated cyber scenarios using Steamfitter's orchestration capabilities. For scenarios built in Blueprint, see [MSEL-Based Scenarios](#msel-based-scenarios).
 
 Steamfitter enables you to create dynamic, responsive scenarios that adapt to participant actions and progress through predetermined timelines. As a Range Builder, your goal is to combine **automation, decision points,** and **branching logic** to create engaging, realistic training experiences.
 
@@ -122,6 +122,28 @@ The following sections cover evolving scenarios, branching logic, and other adva
 | -------------------------------- | ------------------------------------ | ---- | ----------- | ----- | --------------------------------------------------------------- |
 | **Red Team: Network Compromise** | Red team compromises network segment | Red  | Manual      | —     | Network compromised                                             |
 | **Blue Team: Alert Generation**  | Alert triggered by Red activity      | Blue | Red success | 5 min | Alert sent to Security Information and Event Management (SIEM)  |
+
+## MSEL-Based Scenarios
+
+Steamfitter runs tasks against virtual machines. When the scenario is a timeline of injects that people read, discuss, and respond to, build it as a *Master Scenario Events List (MSEL)* in [Blueprint](../../../blueprint/index.md). Blueprint pushes the MSEL to the other applications, so you configure the exercise in one place.
+
+| Application | What You Build | Where to Start |
+| ----------- | -------------- | -------------- |
+| **Blueprint** | The MSEL: moves, scenario events, teams, contributors, and the applications to integrate | [MSEL Catalog](../../../blueprint/index.md#msel-catalog) |
+| **Gallery** | Cards on the Gallery Wall and the articles that scenario events deliver to them | [Gallery integration](../../../blueprint/index.md#gallery) in Blueprint, or [Collections](../../../gallery/index.md#collections) in Gallery |
+| **CITE** | The scoring model that teams use to assess incident severity, plus the actions and duties shown on the CITE Dashboard | [Scoring Models](../../../cite/index.md#scoring-models) in CITE, then [CITE integration](../../../blueprint/index.md#cite) in Blueprint |
+
+A typical build order:
+
+1. Decide where the scoring model comes from: an existing model in CITE, or one you author in Blueprint on the MSEL's **Scoring Model** tab.
+2. In Blueprint, create or upload the MSEL.
+3. On the MSEL's **Info** tab, under **Applications to Integrate**, select the applications the exercise uses. For CITE, the **Scoring Model** tab then links or authors the scoring model.
+4. On the **Teams** tab, add the teams and their members. For CITE, give each team a **CITE Team Type**, because the push only creates CITE teams that have one, and give each member who answers a [CITE team role](../../../blueprint/index.md#cite-team-roles), such as **Contributor** or **Submitter**. Add teams before the next steps, because scenario events and the CITE and Gallery items are set per team.
+5. Define the MSEL's moves and scenario events.
+6. Configure the tabs each integration adds, such as **Gallery Cards** for Gallery and **Actions** and **Duties** for CITE.
+7. On the **Contributors** tab, give instructors and evaluators their MSEL roles, and their **CITE Role**, **Gallery Role**, and **Steamfitter Role** when those integrations are on.
+
+CITE doesn't grade participants. See [Assessment in MSEL-Based Exercises](../assessment/index.md#assessment-in-msel-based-exercises).
 
 ## Best Practices
 
